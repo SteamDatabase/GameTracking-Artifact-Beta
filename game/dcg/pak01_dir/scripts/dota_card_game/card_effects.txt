@@ -1,0 +1,2703 @@
+"card_effects"
+{
+	//
+	// Valid properties:
+	//
+	// "particle_system" - The vpcf to create and attach.
+	// "apply_when_attribute_exists"  - The particle system will be created on a card when
+	// 									this attribute is set and will expire when the attribute is removed.
+	// "attach_type" -
+	//			"pattach_absorigin" / "pattach_absorigin_follow" - Create at the origin of the card. If _follow then attach and move when the card moves.
+	//			"pattach_customorigin" / "pattach_customorigin_follow" - Create at a custom origin specified by custom_origin_x/y/z. If _follow attach and move with the card.
+	//					"custom_origin_x"
+	//					"custom_origin_y"
+	//					"custom_origin_z"
+	//			"pattach_point" / "pattach_point_follow" - Create at the specified attach_point, if _follow then attach and move with the card.
+	//					"attach_point" - Name of the attachment point to use.
+	//			"pattach_worldorigin" - Create at the origin of the world.
+	//			"pattach_rootbone_follow" - Create and follow the root bone of the model.
+	//
+	// "destroy_immediately" - Set to 0 for effects that emit continuously; set to 1 for effects that emit once and need to be completely destroyed rather than simply stopped.
+	//
+
+	// (Events names from card_effects.h)
+
+	// Control point types
+	//
+	// 1 attach_origin_and_orientation
+	// 2 entity_origin
+	// 3 card_color
+	// 4 mouse_position
+	// 5 drag_origin
+	// 6 mouse_over_drag_target
+	// 7 card_type
+	//		DCG_CARD_TYPE_UNKNOWN=0,
+	//		DCG_CARD_TYPE_SPELL=1,
+	//		DCG_CARD_TYPE_CREEP=2,
+	//		DCG_CARD_TYPE_HERO=3,
+	//		DCG_CARD_TYPE_EQUIPMENT=4,
+	//		DCG_CARD_TYPE_IMPROVEMENT=5,
+	// 9 camera_orientation
+
+	//
+	//
+	// STATUS EFFECTS
+	//
+	
+	"stunned"
+	{
+		"particle_system"	"particles/card_effects/stunned/stunned.vpcf"
+		"apply_when_attribute_exists"	"stunned"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"1"
+	}
+
+	"disarmed"
+	{
+		"particle_system"	"particles/card_effects/status_effects/disarm/disarm.vpcf"
+		"apply_when_attribute_exists"	"disarmed"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"attack_bot"
+		"destroy_immediately"	"1"
+	}
+
+	"silenced"
+	{
+		"particle_system"	"particles/card_effects/status_effects/silence/silence.vpcf"
+		"apply_when_attribute_exists"	"silenced"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"1"
+	}
+
+	"deathshield"
+	{
+		"particle_system"	"particles/card_effects/status_effects/deathshield/deathshield.vpcf"
+		"apply_when_attribute_exists"	"deathshield"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"1"
+	}
+
+	"invulnerability"
+	{
+		"particle_system"	"particles/card_effects/status_effects/immunity/immunity.vpcf"
+		"apply_when_attribute_exists"	"invulnerability"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+	}
+
+	"willDieInCombat"
+	{
+		"particle_system"	"particles/card_effects/status_effects/card_dying_creep_top.vpcf"
+		"apply_when_attribute_exists"	"internal: guaranteed death"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_non_hero"		"1"
+		"not_in_inspect_view" "1"
+	}
+
+	"willDieInCombatHero"
+	{
+		"particle_system"	"particles/card_effects/status_effects/card_dying_hero_top.vpcf"
+		"apply_when_attribute_exists"	"internal: guaranteed death"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_hero"		"1"
+		"not_in_inspect_view" "1"
+	}
+
+	"mightDieInCombat"
+	{
+		"particle_system"	"particles/card_effects/status_effects/card_cheatdeath.vpcf"
+		"apply_when_attribute_exists"	"internal: uncertain death"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"not_in_inspect_view" "1"
+	}	
+	
+	"enemyCardHacked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_enemy_inhand_hacked_active.vpcf"
+		"apply_when_attribute_exists"	"numHacks"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_opponent"		"1"
+	}
+
+	"enemyCardLocked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_enemy_inhand_locked.vpcf"
+		"apply_when_attribute_exists"	"locked"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_opponent"		"1"
+	}
+	
+	"allyUnitHacked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_inhand_hacked_unit.vpcf"
+		"apply_when_attribute_exists"	"numHacks"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_player"		"1"
+		"only_unit"		"1"
+	}
+	
+	"allyNonunitHacked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_inhand_hacked_spell.vpcf"
+		"apply_when_attribute_exists"	"numHacks"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_player"		"1"
+		"only_non_unit"		"1"
+	}	
+	
+	"allyUnitLocked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_inhand_locked_unit.vpcf"
+		"apply_when_attribute_exists"	"locked"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_player"		"1"
+		"only_unit"		"1"
+	}
+	
+	"allyNonunitLocked"
+	{
+		"particle_system"	"particles/card_effects/inhand/affected/card_inhand_locked_spell.vpcf"
+		"apply_when_attribute_exists"	"locked"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"only_player"		"1"
+		"only_non_unit"		"1"
+	}			
+
+	//
+	// STATUS EFFECT ICONS
+	//	
+	
+	"stunned_icon"
+	{
+		"particle_system"   "particles/card_effects/status_effects/stun.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_STUNNED_MODIFICATION_GAINED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_STUNNED_MODIFICATION_LOST"	"1"
+		}
+
+	}
+
+	"silenced_icon"
+	{
+		"particle_system"   "particles/card_effects/status_effects/silence/silence.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_SILENCED_MODIFICATION_GAINED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_SILENCED_MODIFICATION_LOST"	"1"
+		}
+
+	}
+
+	"disarmed_icon"
+	{
+		"particle_system"   "particles/card_effects/status_effects/disarm/disarm.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_DISARMED_MODIFICATION_GAINED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_DISARMED_MODIFICATION_LOST"	"1"
+		}
+	}
+
+	"bounty_icon"
+	{
+		"particle_system"   "particles/card_effects/status_effects/bounty.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_BOUNTY_MODIFICATION_GAINED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_BOUNTY_MODIFICATION_LOST"	"1"
+		}			
+	}	
+
+	//////////// Cards in the player's hand ////////////
+
+	// State: Draggable card
+	"card_action_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_inhand_active.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED"	"1"
+			//"PE_MOUSE_BEGIN_CARD_DRAG"	"1"
+			//"PE_MOUSE_CLICK_PURCHASABLE_ITEM" "1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+		}
+	}
+	
+	"hacked_card_action_enabled"
+	{
+		"particle_system"  "particles/card_effects/inhand/affected/card_inhand_hacked_active.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_ACTION_ENABLED_HACKED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED"	"1"
+			//"PE_MOUSE_BEGIN_CARD_DRAG"	"1"
+			//"PE_MOUSE_CLICK_PURCHASABLE_ITEM" "1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+		}
+	}	
+
+
+
+	////// State: Mouse over card in the player's hand //////
+	"hover_card_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_inhand_mouseover.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_MOUSE_ENTER_CARD_DRAGGABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_MOUSE_EXIT_CARD_DRAGGABLE"		"1"
+			"PE_MOUSE_END_CARD_DRAG"	"1"
+			"PE_CARD_ACTION_DISABLED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+	}
+	
+	"hover_hacked_card_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/affected/card_inhand_hacked_mouseover.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_MOUSE_ENTER_CARD_DRAGGABLE_HACKED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_MOUSE_EXIT_CARD_DRAGGABLE"		"1"
+			"PE_MOUSE_END_CARD_DRAG"	"1"
+			"PE_CARD_ACTION_DISABLED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+	}	
+
+	
+	
+
+	////// State: HERO CARD is being dragged during the deployment phase. //////
+
+	"drag_card_hero_deployment"
+	{
+		"particle_system"   "particles/card_effects/inhand/cursor_inhand_drag.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_MOUSE_BEGIN_CARD_DRAG_HERO_DEPLOYMENT"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_MOUSE_END_CARD_DRAG"	"1"
+			"PE_MOUSE_END_CARD_DRAG_CROSSLANE"	"1"
+			"PE_CARD_TARGETED_END"	"1"
+		}
+
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+		}
+	}
+	
+	"hero_deployment"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_hero_deployment.vpcf"
+		"attach_type"		"pattach_point"
+		"attach_point"		"card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+		"create_events"
+		{
+			"PE_CARD_DEPLOYMENT" "1"
+		}
+
+	}	
+	
+
+	////// State: CARD is a viable target for a targeting action (be it drag or click) in progress. //////
+
+	"card_targeting_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_DRAG_TARGET_ENABLED"	"1"
+			"PE_CARD_CLICK_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+		}
+	}
+
+	"tower_targeting_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/tower_inhand_buff_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_TOWER_DRAG_TARGET_ENABLED"	"1"
+			"PE_TOWER_CLICK_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_DRAG_TARGET_DISABLED"	"1"
+			"PE_TOWER_CLICK_ACTION_DISABLED"	"1"
+		}
+	}
+
+	"creep_placement_enabled"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_DRAG_CREEP_PLACEMENT_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_CREEP_PLACEMENT_DISABLED"	"1"
+		}
+	}
+	
+		"flop_placement_enabled"
+	{
+		"particle_system"   "particles/card_effects/flop/card_flop_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_FLOP_PLACEMENT_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_FLOP_PLACEMENT_DISABLED"	"1"
+		}
+	}
+	
+
+	////// State: Dragged card is hovering over a viable target. //////
+
+	"card_drag_over_target"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_inhand_dragselect.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_DRAG_ENTER_TARGET"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_LEAVE_TARGET"	"1"
+			"PE_CARD_DRAG_LEAVE_TARGET_NOCAST"	"1"
+			"PE_CARD_CAST_CANCELLED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+			"PE_CARD_DEPLOYMENT"	"1"
+		}
+
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+		}
+	}
+
+	////// Event: Dragged card has been dragged OFF of a valid target. //////
+	// For playing a dissipation effect on drag off target.
+	// This event is necessary because endcaps on "card_drag_over_target" lose
+	// the ability to constrain to the path between drag origin and mouse position.
+
+	"card_drag_off_target"
+	{
+		"particle_system"   "particles/card_effects/inhand/cursor_inhand_drag.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_MOUSE_BEGIN_CARD_DRAG"				"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_CAST"				"1"
+			"PE_CARD_CAST_CANCELLED"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+		}
+	}
+
+	////// Event: Mouse (click targeting) or dragged card (drag targeting) is hovering over ME, a valid target card.
+
+	"tower_targeted"
+	{
+		"particle_system"   "particles/card_effects/inhand/tower_inhand_buff_placement_hover.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_TOWER_TARGETED_BEGIN"	"1"
+		}
+		"destroy_events"
+		{
+		}
+		"immediate_destroy_events"
+		{
+			"PE_TOWER_TARGETED_END"	"1"
+		}
+	}
+
+	"card_targeted"
+	{
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement_hover.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_TARGETED_BEGIN"	"1"
+			"PE_MOUSE_ENTER_CARD_HAS_ACTION" "1"
+		}
+		"destroy_events"
+		{
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_CAST"			"1"
+			"PE_CARD_TARGETED_END"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED" "1"
+		}
+	}
+
+	"card_target_modification_preview_positive_armor"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_hover_armor.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ARMOR_POSITIVE_HOVER"	"1"
+		}
+
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_CAST"			"1"
+			"PE_CARD_TARGETED_END"	"1"
+		}		
+	}
+	
+	"card_target_modification_preview_negative_armor"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_hover_armor.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ARMOR_NEGATIVE_HOVER"	"1"
+		}
+		
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_CAST"			"1"
+			"PE_CARD_TARGETED_END"	"1"
+		}
+	}	
+	
+	
+	
+	"card_target_modification_preview_positive_attack"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_hover_attack.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ATTACK_POSITIVE_HOVER"	"1"
+		}
+
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_TARGETED_END"	"1"
+			"PE_CARD_CAST"			"1"
+		}		
+	}
+	
+	"card_target_modification_preview_negative_attack"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_hover_attack.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ATTACK_NEGATIVE_HOVER"	"1"
+		}
+		
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_TARGETED_END"	"1"
+			"PE_CARD_CAST"			"1"
+
+		}
+	}
+	
+	
+	"card_target_modification_preview_positive_health"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_hover_health.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_HEALTH_POSITIVE_HOVER"	"1"
+		}
+
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_TARGETED_END"	"1"
+			"PE_CARD_CAST"			"1"
+		}		
+	}
+	
+	"card_target_modification_preview_negative_health"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_hover_health.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_HEALTH_NEGATIVE_HOVER"	"1"
+		}
+		
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_CAST"			"1"
+			"PE_CARD_TARGETED_END"	"1"
+		}
+	}
+	"card_target_modification_preview_regen"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_hover_regen.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_REGEN_HOVER"	"1"
+		}
+		
+		"immediate_destroy_events"
+		{
+			"PE_CARD_ACTION_DISABLED" "1"
+			"PE_CARD_CAST"			"1"
+			"PE_CARD_TARGETED_END"	"1"
+		}
+	}
+	"card_target_modification_preview_positive_armor_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement_armor.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ARMOR_POSITIVE_PLACEMENT"	"1"
+		}	
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"
+		}		
+	}
+	
+	"card_target_modification_preview_negative_armor_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_placement_armor.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ARMOR_NEGATIVE_PLACEMENT"	"1"
+		}
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}		
+	}	
+	
+	
+	
+	"card_target_modification_preview_positive_attack_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement_attack.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ATTACK_POSITIVE_PLACEMENT"	"1"
+		}	
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}			
+	}
+	
+	"card_target_modification_preview_negative_attack_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_placement_attack.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_ATTACK_NEGATIVE_PLACEMENT"	"1"
+		}
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}		
+	}
+	
+	
+	"card_target_modification_preview_positive_health_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement_health.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_HEALTH_POSITIVE_PLACEMENT"	"1"
+		}		
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}		
+	}
+	"card_target_modification_preview_regen_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement_regen.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_REGEN_PLACEMENT"	"1"
+		}		
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}		
+	}
+	"card_target_modification_preview_negative_health_placement"
+	{
+	
+		"particle_system"   "particles/card_effects/inhand/debuff/card_inhand_debuff_placement_health.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_HEALTH_NEGATIVE_PLACEMENT"	"1"
+		}
+		
+		"destroy_events"
+		{
+			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+			"PE_CARD_CAST"			"1"
+			"PE_TARGET_PREVIEW_PLACEMENT_HIDE" "1"			
+		}		
+	}	
+
+	"creep_placement_targeted"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_placement_hover.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_CREEP_PLACEMENT_TARGET_BEGIN"	"1"
+		}
+		"destroy_events"
+		{
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CREEP_PLACEMENT_TARGET_END"	"1"
+		}
+	}
+
+	////// Event: I, a valid target card of a targeting action (be it drag or click) have been
+	////// chosen, completing the targeting state) //////
+
+
+
+	"improvement_target_enabled"
+	{
+		"particle_system"   "particles/improvements/improvement_active.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "die_attach"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_DRAG_TARGET_ENABLED"	"1"
+			"PE_IMPROVEMENT_CLICK_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_DRAG_TARGET_DISABLED"	"1"
+			"PE_IMPROVEMENT_CLICK_ACTION_DISABLED"	"1"
+		}
+	}
+
+	"improvement_targeted"
+	{
+		"particle_system"   "particles/world_effects/strats/strat_targeted.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "die_attach"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_DRAG_ENTER_TARGET"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_DRAG_LEAVE_TARGET"	"1"
+		}
+	}
+
+	"improvement_target_chosen"
+	{
+		"particle_system"   "particles/world_effects/strats/strat_target_chosen.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "die_attach"
+		"destroy_immediately"      "0"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_TARGET_CHOSEN"	"1"
+		}
+	}
+
+	////// State: LANE is a viable target for a targeting action (be it drag or click) in progress. //////
+
+	"lane_drag_target_enabled"
+	{
+		"particle_system"   "particles/board/default/board_lane_active.vpcf"
+		"attach_type"       "attach_origin_and_orientation"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_LANE_TARGETING_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_LANE_TARGETING_DISABLED"	"1"
+		}
+	}
+
+	////// State: A viable LANE target has a targeting card (drag) or mouse (click) hovering over it. Note the "subject" of this is the lane, not the card! //////
+
+	"lane_targeted"
+	{
+		"particle_system"   "particles/board/default/board_lane_hover.vpcf"
+		"attach_type"       "attach_origin_and_orientation"
+		"destroy_immediately"      "0"
+		"play_endcap"				"1"
+
+		"create_events"
+		{
+			"PE_LANE_TARGETED_BEGIN"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_LANE_TARGETED_END"	"1"
+			"PE_LANE_DRAG_TARGET_DISABLED" "1"
+		}
+	}
+
+
+	////// Shop //////
+
+	////// Event: A card in the shop that can be purchased has been clicked (purchased) //////
+
+	"mouse_click_card_can_buy"
+	{
+		"particle_system"   "particles/shop/card_effects/shop_card_purchase.vpcf"
+		"attach_type"       "pattach_point"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "0"
+
+		"create_events"
+		{
+			"PE_MOUSE_CLICK_PURCHASABLE_ITEM"	"1"
+		}
+	}
+
+	// Not currently called from the code, but will probably still be useful some day
+	"card_damage_source_enabled"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview/card_damage_source_enabled.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"create_events"
+		{
+			"PE_CARD_DAMAGE_SOURCE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_DAMAGE_SOURCE_DISABLED"	"1"
+		}
+	}
+
+	"shop_table_idle"
+	{
+		"particle_system"   "particles/shop/box/box_ontable_idle.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"box_root"
+		"create_events"
+		{
+			"PE_SHOP_ON_TABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_SHOP_OFF_TABLE"		"1"
+		}
+	}
+	"shop_vignette"
+	{
+		"particle_system"   "particles/shop/box/box_idle_vignette.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"box_root"
+		"create_events"
+		{
+			"PE_SHOPPING_STARTED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_SHOPPING_ENDED"		"1"
+		}
+	}	
+	"shop_idle"
+	{
+		"particle_system"   "particles/shop/box/box_idle.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"box_root"
+		"create_events"
+		{
+			"PE_SHOP_OFF_TABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_SHOPPING_ENDED"		"1"
+
+		}
+	}
+	////// Cast events //////
+
+	// Generic, all-purpose cast effect on the card cast
+	"cast_generic"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_inhand_cast.vpcf"
+		"attach_type"		"pattach_point"
+		"attach_point"		"card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+		"create_events"
+		{
+			"PE_CARD_CAST" "1"
+		}
+	}
+
+	"ancient_killed"
+	{
+		"particle_system"   "particles/world_effects/tower/ancient_destruction.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_ANCIENT_KILLED"	"1"
+		}
+	}
+
+	"tower_killed"
+	{
+		"particle_system"   "particles/world_effects/tower/tower_destruction.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_TOWER_KILLED"	"1"
+		}
+	}
+
+	"tower_appear"
+	{
+		"particle_system"   "particles/card_effects/tutorial/tower_land.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		//"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_TOWER_APPEAR"	"1"
+		}
+	}
+
+	"unit_speaking"
+	{
+		"particle_system"   "particles/card_effects/audio/creep_generic_babble.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_UNIT_SPEAKING"	"1"
+		}
+	}
+
+	"coin_glow"
+	{
+		"particle_system"   "particles/world_effects/coin/coin_glow.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"1"
+		"create_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED_BRIGHT"	"1"
+			"PE_COIN_PRIORITY_DISABLED"			"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+		}
+	}
+	"coin_idle"
+	{
+		"particle_system"   "particles/board/coin/coin_idle.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED"	"1"
+			"PE_COIN_PRIORITY_ENABLED_BRIGHT"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_COIN_PRIORITY_DISABLED"			"1"
+		}		
+	}
+	"shop_coin_idle"
+	{
+		"particle_system"   "particles/shop/shop_coin_idle.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED_SHOP"	"1"
+			"PE_COIN_PRIORITY_ENABLED_BRIGHT_SHOP"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_COIN_PRIORITY_DISABLED"			"1"
+		}		
+	}
+	"coin_glow_bright"
+	{
+		"particle_system"   "particles/world_effects/coin/coin_glow_bright.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"create_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED_BRIGHT"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_COIN_PRIORITY_ENABLED"	"1"
+			"PE_COIN_PRIORITY_DISABLED"	"1"
+		}
+	}
+
+	"wide_lane_portal_ul"
+	{
+		"particle_system"        "particles/world_effects/table/card_portal_base_ul.vpcf"
+		"attach_type"            "pattach_absorigin"
+		"destroy_immediately"    "1"
+
+		"create_events"
+		{
+			"PE_WIDE_LANE_UL_PORTAL_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_WIDE_LANE_UL_PORTAL_DISABLED"	"1"
+		}
+	}
+
+	"wide_lane_portal_ur"
+	{
+		"particle_system"        "particles/world_effects/table/card_portal_base_ur.vpcf"
+		"attach_type"            "pattach_absorigin"
+		"destroy_immediately"    "1"
+
+		"create_events"
+		{
+			"PE_WIDE_LANE_UR_PORTAL_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_WIDE_LANE_UR_PORTAL_DISABLED"	"1"
+		}
+	}
+
+	"wide_lane_portal_bl"
+	{
+		"particle_system"        "particles/world_effects/table/card_portal_base_bl.vpcf"
+		"attach_type"            "pattach_absorigin"
+		"destroy_immediately"    "1"
+
+		"create_events"
+		{
+			"PE_WIDE_LANE_BL_PORTAL_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_WIDE_LANE_BL_PORTAL_DISABLED"	"1"
+		}
+	}
+
+	"wide_lane_portal_br"
+	{
+		"particle_system"        "particles/world_effects/table/card_portal_base_br.vpcf"
+		"attach_type"            "pattach_absorigin"
+		"destroy_immediately"    "1"
+
+		"create_events"
+		{
+			"PE_WIDE_LANE_BR_PORTAL_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_WIDE_LANE_BR_PORTAL_DISABLED"	"1"
+		}
+	}
+
+	"tutorial_highlight_generic"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"attach_entity"		"Default"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_GENERIC"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_top"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "center_top"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_TOP"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_attack"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_entity"		"Attack"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_ATTACK"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_armor"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_entity"		"Armor"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_ARMOR"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_health"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_entity"		"Health"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_HEALTH"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_mana"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "max_mana"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_MANA"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_current_mana"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "current_mana"
+		"attach_entity"		"Mana"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_CURRENT_MANA"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_goldcost"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "gold_cost"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_GOLDCOST"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_highlight_damage_preview"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_angled_perma.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_entity"		"DamagePreview"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_attack_ally_tower"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_tower_march_rev.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "center_top_reversed"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_ATTACK_ALLY_TOWER"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tutorial_attack_enemy_tower"
+	{
+		"particle_system"   "particles/card_effects/dev/dev_arrow_tower_march.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "center_top"
+		"destroy_immediately"      "1"
+
+		"create_events"
+		{
+			"PE_TUTORIAL_ATTACK_ENEMY_TOWER"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL"	"1"
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"2"
+			{
+				"type"	"entity_origin"
+			}
+			"3"
+			{
+				"type"	"card_color"
+			}
+			"4"
+			{
+				"type"	"mouse_position"
+			}
+			"5"
+			{
+				"type"	"drag_origin"
+			}
+			"6"
+			{
+				"type"	"mouse_over_drag_target"
+			}
+			"7"
+			{
+				"type"	"card_type"
+			}
+		}
+	}
+
+	"tower_damaged"
+	{
+		"particle_system"   "particles/card_effects/destruction/tower_damage.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_TOWER_DAMAGED"	"1"
+		}
+	}
+	
+	////// Special deployment creeps
+	"lane_affinity_spawned"
+	{
+		"particle_system"   "particles/card_effects/creeps/lane_affinity/lane_affinity_spawn.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_LANE_AFFINITY_UNIT_SPAWNED"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_LANE_AFFINITY_UNIT_DEPLOYED"	"1"
+		}
+	}
+	
+	"extra_deployment_spawned"
+	{
+		"particle_system"   "particles/card_effects/creeps/extra_deployment/extra_deployment_spawn.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_EXTRA_DEPLOYMENT_UNIT_SPAWNED"					"1"
+			"PE_EXTRA_DEPLOYMENT_UNIT_SPAWNED_PRELLEX"			"1"
+			"PE_EXTRA_DEPLOYMENT_UNIT_SPAWNED_BARRACKS"			"1"
+			"PE_EXTRA_DEPLOYMENT_UNIT_SPAWNED_VENOMANCER"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_EXTRA_DEPLOYMENT_UNIT_DEPLOYED"		"1"
+		}
+	}
+	
+	////// Ability readying
+	"ability_ready"
+	{
+		"particle_system"   "particles/card_effects/abilities/card_ability_ready.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_ABILITY_READY"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_NOT_READY"		"1"
+			"PE_ABILITY_ACTIVE"			"1"
+		}
+	}
+	"ability_active"
+	{
+		"particle_system"   "particles/card_effects/abilities/card_ability_active.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_ABILITY_ACTIVE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_NOT_READY"		"1"
+			"PE_ABILITY_READY"			"1"
+		}
+	}
+		"ability_hover"
+	{
+		"particle_system"   "particles/card_effects/abilities/card_ability_active_hover.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_ABILITY_HOVER"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_LEAVE"		"1"
+			"PE_ABILITY_NOT_READY"		"1"
+		}
+	}
+
+	"improvement_ability_hover"
+	{
+		"particle_system"   "particles/improvements/improvement_active_hover.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_HOVER"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_LEAVE"		"1"
+			"PE_IMPROVEMENT_NOT_READY"	"1"
+		}
+	}
+	"improvement_ability_ready"
+	{
+		"particle_system"   "particles/improvements/improvement_active_hover.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_HOVER"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_LEAVE"		"1"
+			"PE_IMPROVEMENT_NOT_READY"	"1"
+		}
+	}
+	"improvement_ability_active"
+	{
+		"particle_system"   "particles/improvements/improvement_active.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_ACTIVE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_READY"		"1"
+			"PE_IMPROVEMENT_NOT_READY"	"1"
+		}
+	}
+	"improvement_ability_ready"
+	{
+		"particle_system"   "particles/improvements/improvement_ready.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_READY"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_IMPROVEMENT_ACTIVE"		"1"
+			"PE_IMPROVEMENT_NOT_READY"	"1"
+		}
+	}
+	////// State: Choosing a target for an ability. //////
+	
+	"ability_targeting"
+	{
+		"particle_system"   "particles/card_effects/abilities/card_ability_active_hover.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_ABILITY_TARGETING_BEGIN"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_TARGETING_CANCELLED"	"1"
+			"PE_ABILITY_TARGETING_CAST"	"1"
+		}
+	}
+
+//	"ability_click_off_target"
+//	{
+//		"particle_system"   "particles/card_effects/abilities/cursor_ability_drag.vpcf"
+//		"attach_type"       "pattach_point_follow"
+//		"attach_point"             "die_attach"
+//		"destroy_immediately"	"0"
+//
+//		"create_events"
+//		{
+//			"PE_ABILITY_TARGETING_BEGIN"	"1"
+//			"PE_IMPROVEMENT_TARGETING_BEGIN" "1"
+//		}
+//		"destroy_events"
+//		{
+//			"PE_ABILITY_TARGETING_CANCELLED"	"1"
+//			"PE_ABILITY_TARGETING_CAST"	"1"
+//		}
+//		"control_points"
+//		{
+//			"1"
+//			{
+//				"type"	"attach_origin_and_orientation"
+//			}
+//			"2"
+//			{
+//				"type"	"mouse_over_drag_target"
+//			}
+//			"3"
+//			{
+//				"type"	"card_color"
+//			}
+//			"4"
+//			{
+//				"type"	"mouse_position"
+//			}
+//			"5"
+//			{
+//				"type"	"drag_origin"
+//			}
+//		}
+//	}
+
+	"ability_cast"
+	{
+		"particle_system"   "particles/card_effects/abilities/card_ability_activate.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_ABILITY_CAST"	"1"
+		}		
+		"destroy_events"
+		{
+			"PE_ABILITY_TARGETING_CAST"	"1"
+		}
+	}
+
+	"improvement_targeting"
+	{
+		"particle_system"   "particles/improvements/improvement_active_hover.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"die_attach"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_IMPROVEMENT_TARGETING_BEGIN"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_TARGETING_CANCELLED"	"1"
+			"PE_ABILITY_TARGETING_CAST"	"1"
+		}
+	}
+	////// State: Hovering over a viable target for ability. //////
+
+	"ability_hover_over_target"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/abilities/ability_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_ABILITY_ENTER_TARGET"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ABILITY_EXIT_TARGET"	"1"
+			"PE_ABILITY_TARGETING_CANCELLED"	"1"
+			"PE_ABILITY_TARGETING_CAST"	"1"
+		}
+	}
+
+	////// Combat Effects to be displayed when deploying a unit. //////
+
+	////// Cleave Opponent -------------------------------------------------------------------------------------------------------
+
+	"preview_card_combat_effect_cleave_opponent"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_ACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_opponent_left"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_flankleft_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_ACTIVE_LEFT_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_opponent_right"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_flankright_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_ACTIVE_RIGHT_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_opponent_inactive"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_inactive_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_INACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+
+	////// Cleave Local -------------------------------------------------------------------------------------------------------
+
+	"preview_card_combat_effect_cleave_local"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_LOCAL_ACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_local_left"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_flankleft_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_LOCAL_ACTIVE_LEFT_ENABLE"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_local_right"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_flankright_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_LOCAL_ACTIVE_RIGHT_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+	"preview_card_combat_effect_cleave_local_inactive"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/cleave_inactive_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_LOCAL_INACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}		
+	}
+
+	////// Siege -------------------------------------------------------------------------------------------------------
+
+	"preview_card_combat_effect_siege_opponent"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/siege_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_ACTIVE_ENABLE"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CREEP_PLACEMENT_TARGET_END" "1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+	"preview_card_combat_effect_siege_opponent_inactive"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/siege_inactive_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_INACTIVE_ENABLE"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CREEP_PLACEMENT_TARGET_END" "1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+	"preview_card_combat_effect_siege_local"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/siege_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_LOCAL_ACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CREEP_PLACEMENT_TARGET_END" "1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+	"preview_card_combat_effect_siege_local_inactive"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/siege_inactive_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_LOCAL_INACTIVE_ENABLE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_SIEGE_DISABLED"		"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CREEP_PLACEMENT_TARGET_END" "1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+
+	"preview_card_combat_effect_retaliate_opponent"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/retaliate_hover_over_target.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_RETALIATE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_RETALIATE_DISABLED"	"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+	"preview_card_combat_effect_retaliate_local"
+	{
+		"particle_system"   "particles/card_effects/basic_card_actions/preview_combat/retaliate_hover_over_target_local.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_RETALIATE_ENABLED_LOCAL"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_PREVIEW_CARD_COMBAT_EFFECT_RETALIATE_DISABLED"	"1"
+			"PE_CARD_ACTION_DISABLED" 			"1"
+			"PE_CARD_TARGETED_END"				"1"
+			"PE_CARD_CAST"					"1"
+		}
+	}
+
+	"tower_radiant_ambient"
+	{
+		"particle_system"	 "particles/board/radiant/tower_radiant_base_ambient.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TOWER_AMBIENT_RADIANT_CREATED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_AMBIENT_RADIANT_DESTROYED"	"1"
+		}
+	}
+
+	"tower_dire_ambient"
+	{
+		"particle_system"	 "particles/board/dire/tower_dire_base_ambient.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TOWER_AMBIENT_DIRE_CREATED"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_AMBIENT_DIRE_DESTROYED"	"1"
+		}
+	}
+
+	"tower_radiant_damaged_ambient"
+	{
+		"particle_system"	 "particles/board/radiant/tower_radiant_base_damaged.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TOWER_DAMAGED_AMBIENT_RADIANT_CREATED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_DAMAGED_AMBIENT_RADIANT_DESTROYED"	"1"
+		}
+	}
+
+	"tower_dire_damaged_ambient"
+	{
+		"particle_system"	 "particles/board/dire/tower_dire_base_damaged.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_TOWER_DAMAGED_AMBIENT_DIRE_CREATED"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_DAMAGED_AMBIENT_DIRE_DESTROYED"	"1"
+		}
+	}
+
+	"ancient_radiant_ambient"
+	{
+		"particle_system"	 "particles/board/radiant/ancient/ancient_radiant_ambient.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_ANCIENT_AMBIENT_RADIANT_CREATED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_ANCIENT_AMBIENT_RADIANT_DESTROYED"	"1"
+		}
+	}
+
+	"ancient_dire_ambient"
+	{
+		"particle_system"	 "particles/board/dire/ancient/ancient_dire_ambient.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"root"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_ANCIENT_AMBIENT_DIRE_CREATED"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_ANCIENT_AMBIENT_DIRE_DESTROYED"	"1"
+		}
+	}
+
+	// --------------------------------------------------------------------------------
+	// Inspection
+	// --------------------------------------------------------------------------------
+	"card_inspect_hover"
+	{
+		"particle_system"   "particles/card_effects/inspection/card_inspect_active.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_HOVER_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+		}
+	}
+
+	"card_inspect_begin_takeover_black"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_black.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_BLACK_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+
+	"card_inspect_begin_takeover_blue"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_blue.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_BLUE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+	"card_inspect_begin_takeover_green"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_green.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_GREEN_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+	"card_inspect_begin_takeover_red"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_red.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_RED_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+	"card_inspect_begin_takeover_gold"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_gold.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_GOLD_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+	"card_inspect_begin_takeover_neutral"
+	{
+		"particle_system"   "particles/screen/inspect/screen_inspect_neutral.vpcf"
+		"attach_type"		"pattach_point_follow"
+		"attach_point"		"card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_INSPECT_NEUTRAL_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_INSPECT_DISABLED"	"1"
+		}
+	}
+}

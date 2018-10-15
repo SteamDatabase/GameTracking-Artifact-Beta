@@ -1,0 +1,485 @@
+////////////////////////
+//**BLOODSEEKER - HERO//
+////////////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response bloodseeker_equip_weapon
+{
+	speak "bloodseeker_equip_generic_weapon_01" noscene 
+	speak "bloodseeker_equip_generic_weapon_02" noscene 
+	speak "bloodseeker_equip_generic_weapon_03" noscene 
+	speak "bloodseeker_equip_generic_weapon_04" noscene 
+	speak "bloodseeker_equip_generic_weapon_05" noscene 
+}
+
+Rule bloodseeker_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceWeapon
+	response bloodseeker_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response bloodseeker_equip_armor
+{
+	speak "bloodseeker_equip_generic_armor_01" noscene 
+	speak "bloodseeker_equip_generic_armor_02" noscene 
+	speak "bloodseeker_equip_generic_armor_03" noscene 
+	speak "bloodseeker_equip_generic_armor_04" noscene 
+	speak "bloodseeker_equip_generic_armor_05" noscene 
+}
+
+Rule bloodseeker_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceArmor
+	response bloodseeker_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response bloodseeker_equip_accessory
+{
+	speak "bloodseeker_equip_generic_accessory_01" noscene 
+	speak "bloodseeker_equip_generic_accessory_02" noscene 
+	speak "bloodseeker_equip_generic_accessory_03" noscene 
+	speak "bloodseeker_equip_generic_accessory_04" noscene 
+	speak "bloodseeker_equip_generic_accessory_05" noscene 
+}
+
+Rule bloodseeker_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceAccessory
+	response bloodseeker_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response bloodseeker_gain_attack
+{
+	speak "bloodseeker_permanent_attack_01" noscene 
+	speak "bloodseeker_permanent_attack_02" noscene 
+	speak "bloodseeker_permanent_attack_03" noscene 
+	speak "bloodseeker_permanent_attack_04" noscene 
+	speak "bloodseeker_permanent_attack_05" noscene 
+}
+
+Rule bloodseeker_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceSpell BuffsAttack
+	response bloodseeker_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response bloodseeker_gain_armor
+{
+	speak "bloodseeker_permanent_armor_01" noscene 
+	speak "bloodseeker_permanent_armor_02" noscene 
+	speak "bloodseeker_permanent_armor_03" noscene 
+	speak "bloodseeker_permanent_armor_04" noscene 
+	speak "bloodseeker_permanent_armor_05" noscene 
+}
+
+Rule bloodseeker_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceSpell BuffsArmor
+	response bloodseeker_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response bloodseeker_gain_health
+{
+	speak "bloodseeker_permanent_health_01" noscene 
+	speak "bloodseeker_permanent_health_02" noscene 
+	speak "bloodseeker_permanent_health_03" noscene 
+	speak "bloodseeker_permanent_health_04" noscene 
+	speak "bloodseeker_permanent_health_05" noscene 
+}
+
+Rule bloodseeker_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetBloodseeker IsSourceSpell BuffsHealth
+	response bloodseeker_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response bloodseeker_use_include
+{
+	speak "bloodseeker_use_include_01" noscene 
+	speak "bloodseeker_use_include_02" noscene 
+	speak "bloodseeker_use_include_03" noscene 
+}
+
+Rule bloodseeker_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceBloodRage ThisIsImportant
+	response bloodseeker_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response bloodseeker_gain_momentum_murder
+{ 
+	speak "bloodseeker_kill_rival_01" noscene 	
+	speak "bloodseeker_kill_rival_02" noscene 
+	speak "bloodseeker_kill_rival_03" noscene 
+	speak "bloodseeker_kill_rival_04" noscene 
+	speak "bloodseeker_kill_rival_05" noscene 
+	speak "bloodseeker_kill_rival_06" noscene 
+	speak "bloodseeker_kill_rival_07" noscene 
+	speak "bloodseeker_kill_rival_08" noscene
+	speak "bloodseeker_kill_rival_09" noscene 	
+	speak "bloodseeker_kill_rival_10" noscene 
+}
+
+Rule bloodseeker_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasBloodseeker LocalChangeMomentum_Pos IsNotCombat
+	response bloodseeker_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response bloodseeker_lane_taunt_generic
+{
+	speak "bloodseeker_taunt_generic_01" noscene 
+	speak "bloodseeker_taunt_generic_02" noscene 
+	speak "bloodseeker_taunt_generic_03" noscene 
+	speak "bloodseeker_taunt_generic_04" noscene 
+	speak "bloodseeker_taunt_generic_05" noscene 
+	speak "bloodseeker_taunt_generic_06" noscene 
+	speak "bloodseeker_taunt_generic_07" noscene 
+	speak "bloodseeker_taunt_generic_08" noscene 
+	speak "bloodseeker_taunt_generic_09" noscene 
+}
+
+Rule bloodseeker_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasBloodseeker IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response bloodseeker_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response bloodseeker_lane_buff_give_death_skull
+{
+	speak "bloodseeker_potential_kill_01"  noscene 
+	speak "bloodseeker_potential_kill_02"  noscene
+	speak "bloodseeker_potential_kill_03"  noscene 
+	speak "bloodseeker_potential_kill_04"  noscene 
+	speak "bloodseeker_potential_kill_05"  noscene
+}
+
+Rule bloodseeker_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasBloodseeker EnemyGainedDeathSkull IsTargetBloodseeker
+	response bloodseeker_lane_buff_give_death_skull
+}
+
+Response bloodseeker_lane_debuff_give_death_skull
+{
+	speak "bloodseeker_potential_kill_01"  noscene 
+	speak "bloodseeker_potential_kill_02"  noscene
+	speak "bloodseeker_potential_kill_03"  noscene 
+	speak "bloodseeker_potential_kill_04"  noscene 
+	speak "bloodseeker_potential_kill_05"  noscene
+}
+
+Rule bloodseeker_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasBloodseeker TargetHasDeathSkull IsBlockingBloodseeker
+	response bloodseeker_lane_debuff_give_death_skull
+}
+
+Response bloodseeker_lane_damage_give_death_skull
+{
+	speak "bloodseeker_potential_kill_01"  noscene 
+	speak "bloodseeker_potential_kill_02"  noscene
+	speak "bloodseeker_potential_kill_03"  noscene 
+	speak "bloodseeker_potential_kill_04"  noscene 
+	speak "bloodseeker_potential_kill_05"  noscene
+}
+
+Rule bloodseeker_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasBloodseeker TargetHasDeathSkull IsBlockingBloodseeker
+	response bloodseeker_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response bloodseeker_debuff_blocker
+{
+	speak "bloodseeker_debuff_enemy_01" noscene 
+	speak "bloodseeker_debuff_enemy_02" noscene 
+	speak "bloodseeker_debuff_enemy_03" noscene 
+	speak "bloodseeker_debuff_enemy_04" noscene 
+	speak "bloodseeker_debuff_enemy_05" noscene 
+	speak "bloodseeker_debuff_enemy_06" noscene 
+	speak "bloodseeker_debuff_enemy_07" noscene 
+	speak "bloodseeker_debuff_enemy_08" noscene 
+	speak "bloodseeker_debuff_enemy_09" noscene 
+	speak "bloodseeker_debuff_enemy_10" noscene 
+}
+
+Rule bloodseeker_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasBloodseeker IsBlockingBloodseeker
+	response bloodseeker_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response bloodseeker_buff_friend
+{
+	speak "bloodseeker_buff_ally_01" noscene 
+	speak "bloodseeker_buff_ally_02" noscene 
+	speak "bloodseeker_buff_ally_03" noscene 
+	speak "bloodseeker_buff_ally_04" noscene 
+	speak "bloodseeker_buff_ally_05" noscene 
+	speak "bloodseeker_buff_ally_06" noscene 
+	speak "bloodseeker_buff_ally_07" noscene 
+	speak "bloodseeker_buff_ally_08" noscene 
+	speak "bloodseeker_buff_ally_09" noscene 
+	speak "bloodseeker_buff_ally_10" noscene 
+ 
+}
+
+Rule bloodseeker_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasBloodseeker IsSourceBlack IsTargetNotBloodseeker
+	response bloodseeker_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_bloodseeker
+{
+	speak "bloodseeker_healed_01" noscene 
+	speak "bloodseeker_healed_02" noscene 
+	speak "bloodseeker_healed_03" noscene 
+	speak "bloodseeker_healed_04" noscene 
+	speak "bloodseeker_healed_05" noscene 
+}
+Rule heal_bloodseeker_rule
+{
+	criteria IsNotImp Heal IsTargetBloodseeker
+	response heal_bloodseeker
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE BLACK CARDS///
+/////////////////////////////
+
+Response bloodseeker_play_assured_destruction
+{
+	speak "bloodseeker_arrogant_04" noscene 
+}
+
+Rule bloodseeker_play_assured_destruction_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceAssuredDestruction ThisIsImportant
+	response bloodseeker_play_assured_destruction
+}
+
+Response bloodseeker_play_path_of_the_cunning
+{
+	speak "bloodseeker_angry_09" noscene 
+}
+
+Rule bloodseeker_play_path_of_the_cunning_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourcePathOfTheCunning ThisIsImportant
+	response bloodseeker_play_path_of_the_cunning
+}
+
+Response bloodseeker_play_the_tyler_estate
+{
+	speak "bloodseeker_debuff_enemy_08" noscene 
+}
+
+Rule bloodseeker_play_the_tyler_estate_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceTheTylerEstate ThisIsImportant
+	response bloodseeker_play_the_tyler_estate
+}
+
+Response bloodseeker_play_burn_it_all
+{
+	speak "bloodseeker_cast_spell_03" noscene 
+}
+
+Rule bloodseeker_play_burn_it_all_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceBurnItAll ThisIsImportant
+	response bloodseeker_play_burn_it_all
+}
+
+Response bloodseeker_play_trebuchets
+{
+
+	speak "bloodseeker_debuff_enemy_05" noscene 
+}
+
+Rule bloodseeker_play_trebuchets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceTrebuchets ThisIsImportant
+	response bloodseeker_play_trebuchets
+}
+
+Response bloodseeker_play_undisciplined_artillery
+{
+	speak "bloodseeker_debuff_enemy_08" noscene 
+}
+
+Rule bloodseeker_play_undisciplined_artillery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceUndisciplinedArtillery ThisIsImportant
+	response bloodseeker_play_undisciplined_artillery
+}
+
+Response bloodseeker_play_revtel_investments
+{
+	speak "bloodseeker_cast_spell_08" noscene 
+}
+
+Rule bloodseeker_play_revtel_investments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceRevtelInvestments ThisIsImportant
+	response bloodseeker_play_revtel_investments
+}
+
+Response bloodseeker_play_iron_fog_goldmine
+{
+	speak "bloodseeker_pleased_06" noscene 
+}
+
+Rule bloodseeker_play_iron_fog_goldmine_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceIronFogGoldmine ThisIsImportant
+	response bloodseeker_play_iron_fog_goldmine
+}
+
+Response bloodseeker_play_escape_route
+{
+	speak "bloodseeker_arrogant_01" noscene 
+}
+
+Rule bloodseeker_play_escape_route_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceEscapeRoute ThisIsImportant
+	response bloodseeker_play_escape_route
+}
+
+Response bloodseeker_play_assault_ladders
+{
+	speak "bloodseeker_angry_07" noscene 
+}
+
+Rule bloodseeker_play_assault_ladders_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceAssaultLadders ThisIsImportant
+	response bloodseeker_play_assault_ladders
+}
+
+Response bloodseeker_play_the_oath
+{
+	speak "bloodseeker_enigmatic_04" noscene 
+}
+
+Rule bloodseeker_play_the_oath_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceTheOath ThisIsImportant
+	response bloodseeker_play_the_oath
+}
+
+Response bloodseeker_play_keenfolk_turret
+{
+	speak "bloodseeker_enigmatic_06" noscene 
+}
+
+Rule bloodseeker_play_keenfolk_turret_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceKeenfolkTurret ThisIsImportant
+	response bloodseeker_play_keenfolk_turret
+}
+
+Response bloodseeker_play_steam_cannon
+{
+	speak "bloodseeker_angry_08" noscene 
+}
+
+Rule bloodseeker_play_steam_cannon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceSteamCannon ThisIsImportant
+	response bloodseeker_play_steam_cannon
+}
+
+Response bloodseeker_play_march_of_the_machines
+{
+	speak "bloodseeker_angry_09" noscene 
+}
+
+Rule bloodseeker_play_march_of_the_machines_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceMarchOfTheMachines ThisIsImportant
+	response bloodseeker_play_march_of_the_machines
+}
+
+Response bloodseeker_play_day_at_the_track
+{
+	speak "bloodseeker_pleased_02" noscene 
+}
+
+Rule bloodseeker_play_day_at_the_track_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBloodseeker IsSourceDayAtTheTrack ThisIsImportant
+	response bloodseeker_play_day_at_the_track
+}
+

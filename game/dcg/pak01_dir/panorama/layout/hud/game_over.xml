@@ -1,0 +1,107 @@
+<root>
+	<styles>
+	  <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+		<include src="s2r://panorama/styles/hud/game_over.vcss_c" />
+	</styles>
+
+  <snippets>
+    <snippet name="CardProgress">
+      <Panel class="CardProgressFrame">
+        <Panel class="CardIconFrame">
+          <Image id="CardIcon" src="s2r://panorama/images/card_elements/mini_portrait_death_skull_png.vtex"/>
+        </Panel>
+        <Panel class="ProgressFrame">
+          <Panel class="ProgressBarFrame">
+            <Panel class="ProgressBarBlock">
+              <Panel class="ProgressBar">
+                <Panel id="ProgressBarAlreadyCompleted"/>
+                <Panel id="ProgressBarUpdate"/>
+              </Panel>
+              <Panel class="ProgressText">
+                <Label text="{d:progress} / {d:total}"/>
+              </Panel>
+            </Panel>
+            <Label text="+{d:currentprogress}"/>
+          </Panel>
+          
+          <Panel class="AchievementText">
+            <Label text="{g:dcg_card_name:name}" html="true"/>
+          </Panel>
+        </Panel>
+      </Panel>
+    </snippet>
+  </snippets>
+  <Panel class="GameOverPanel">
+
+    <Panel id="BodyPanel" class="DashboardPanel" hittest ="true">
+
+      <Panel class="TitleCard">
+        <Label id="ResultLabel" text=""/>
+        <Button class="CollapseButton" onactivate="ToggleMatchResult()" />
+      </Panel>
+      <Panel class="BodyPanel">
+
+        <Panel class="SummaryBar">
+          <Label id="MatchLengthLabel" text="#DCG_ResultScreen_MatchLength"/>
+          <Panel class="PlayerSummary">
+            <Label class="PlayerResult" id="PlayerLabel0" text=""/>
+            <Label class="PlayerResult" id="PlayerLabel1" text=""/>
+          </Panel>
+        </Panel>
+        <Panel id="GameOverTabs">
+          <Button id="ProgressButton" class="TabOption ToggledOn" onactivate="$( '#StatTabBody' ).AddClass( 'Hide' ); $( '#RewardTabBody' ).RemoveClass( 'Hide' ); $( '#ProgressButton' ).AddClass( 'ToggledOn' ); $( '#StatsButton' ).RemoveClass( 'ToggledOn' );">
+            <Label text="#DCG_ResultScreen_TabAchievementProgress"/>
+          </Button>
+          <Label class="Separator" text="/"/>
+          <Button id="StatsButton" class="TabOption" onactivate="$( '#StatTabBody' ).RemoveClass( 'Hide' ); $( '#RewardTabBody' ).AddClass( 'Hide' ); $( '#ProgressButton' ).RemoveClass( 'ToggledOn' ); $( '#StatsButton' ).AddClass( 'ToggledOn' );">
+            <Label text="#DCG_ResultScreen_TabStats"/>
+          </Button>
+        </Panel>
+        <Panel id="StatTabBody" class="TabPanelBody Hide">
+          <Panel id="GraphHeader">
+            <Panel id="GraphSelectionGroup">
+              <DropDown id="GraphDropDown" dropdownbodyposition="100% 100%"/>
+              <Panel id="GraphTooltip" onmouseover="UIShowTextTooltip( Placeholder )" onmouseout="UIHideTextTooltip()">
+                <Label text="#DCG_ResultScreen_GraphTooltipButton"/>
+              </Panel>               
+            </Panel>
+            <ToggleButton id="ShowTimelineToggle" selected="false" onactivate="DCGPostMatchToggleTimeline()">
+              <Label text="#DCG_ResultScreen_Timeline"/>
+            </ToggleButton>
+          </Panel>
+          <Panel class="GraphTotalsGroup">
+            <Label id="PlayerTotalValue" class="TotalValueDisplay" text="#DCG_ResultScreen_PlayerTotal" html="true" />
+            <Label id="EnemyTotalValue" class="TotalValueDisplay" text="#DCG_ResultScreen_EnemyTotal" html="true" />
+          </Panel>
+          <Panel id="StatGraphBody">
+            <UICanvas id="StatGraphCanvas"/>
+            <Panel id="TimelineBody">
+              <!-- Dynamic contents -->
+            </Panel>
+          </Panel>
+
+          <Panel class="GraphSelectors">
+            <DropDown id="CardDropDown" dropdownbodyposition="100% 100%"/>
+            <ToggleButton id="HideIconsToggle" selected="true" onactivate="$( '#BodyPanel' ).ToggleClass( 'HideIcons' );">
+              <Label text="#DCG_ResultScreen_GraphIcons"/>
+            </ToggleButton>
+          </Panel>            
+          
+        </Panel>
+        <Panel id="RewardTabBody" class="TabPanelBody">
+          
+        </Panel>
+        <Panel class="FooterButtons">
+          <Button id="ReportBugButton" class="PanelButton" onactivate="DCGPostMatchFeedback()">
+            <Label text="#DCG_ResultScreen_Feedback" />
+          </Button>
+          <Button id="LeaveMatchButton" class="PanelButton" onactivate="QuitPostMatchGame()">
+            <Label text="{s:quitButtonText}" />
+          </Button>
+        </Panel>
+        
+      </Panel>
+    </Panel>
+  </Panel>
+</root>

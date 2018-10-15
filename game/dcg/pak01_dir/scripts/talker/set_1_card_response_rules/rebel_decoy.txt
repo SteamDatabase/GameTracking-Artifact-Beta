@@ -1,0 +1,191 @@
+//////////////////////////
+//**REBEL DECOY - CREEP///
+//////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_rebel_decoy_normal
+{
+	speak "rebel_decoy_summon_01" noscene 
+	speak "rebel_decoy_summon_02" noscene
+	speak "rebel_decoy_summon_03" noscene 
+}
+Rule summon_rebel_decoy_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy
+	response summon_rebel_decoy_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_rebel_decoy_enemy_ancient_exposed
+{
+	speak "rebel_decoy_ancient_attack_01" noscene
+	speak "rebel_decoy_ancient_attack_02" noscene
+}	
+Rule summon_rebel_decoy_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy IsEnemyAncientExposed
+	response summon_rebel_decoy_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_rebel_decoy_your_ancient_exposed
+{
+	speak "rebel_decoy_ancient_protect_01" noscene
+	speak "rebel_decoy_ancient_protect_02" noscene
+}	
+Rule summon_rebel_decoy_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy IsAllyAncientExposed
+	response summon_rebel_decoy_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_rebel_decoy_both_ancients_exposed
+{
+	speak "rebel_decoy_ancient_both_01" noscene
+	speak "rebel_decoy_ancient_both_02" noscene
+}	
+Rule summon_rebel_decoy_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_rebel_decoy_both_ancients_exposed
+}
+
+///////////////
+//use ability//
+///////////////
+
+Response rebel_decoy_use_ability
+{
+	speak "rebel_decoy_use_ability_01" noscene 
+	speak "rebel_decoy_use_ability_02" noscene 
+	speak "rebel_decoy_use_ability_03" noscene 
+
+
+}
+Rule rebel_decoy_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasRebelDecoy IsSourceDistract
+	response rebel_decoy_use_ability
+}
+
+
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_rebel_decoy_ally_rix
+{
+	speak "rebel_decoy_hero_friend_01" noscene 
+	speak "rebel_decoy_hero_friend_02" noscene 
+	speak "rebel_decoy_hero_friend_03" noscene 
+}
+Rule summon_rebel_decoy_ally_rix
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy AllyHasRix
+	response summon_rebel_decoy_ally_rix
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+
+Response summon_rebel_decoy_enemy_legion_commander
+{
+	speak "rebel_decoy_hero_rival_01" noscene 
+	speak "rebel_decoy_hero_rival_02" noscene 
+	speak "rebel_decoy_hero_rival_03" noscene 
+}
+Rule summon_rebel_decoy_enemy_legion_commander_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy EnemyHasLegionCommander
+	response summon_rebel_decoy_enemy_legion_commander
+}
+
+////////////////////////////
+//summon with faction ally//  - NOTE NOT LOOKED AT YET
+////////////////////////////
+
+Response summon_rebel_decoy_faction_ally
+{
+	speak "rebel_decoy_faction_ally_01" noscene
+	speak "rebel_decoy_faction_ally_02" noscene
+	speak "rebel_decoy_faction_ally_03" noscene
+}	
+Rule summon_rebel_decoy_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRebelDecoy IsFactionAllyInLane
+	response summon_rebel_decoy_faction_ally
+}
+
+
+////////////////
+//unique lines//
+////////////////
+
+Response rebel_decoy_use_ability_on_rix
+{
+	speak "rebel_decoy_unique_04" noscene 
+	speak "rebel_decoy_unique_05" noscene 
+	speak "rebel_decoy_unique_06" noscene 
+}
+Rule rebel_decoy_use_ability_on_rix_rule
+{
+	criteria IsNotImp UseAbility AllyHasRebelDecoy IsTarget2Rix IsSourceDistract
+	response rebel_decoy_use_ability_on_rix
+}
+
+Response rebel_decoy_use_ability_saved_by_rix
+{
+	speak "rebel_decoy_unique_07" noscene 
+}
+Rule rebel_decoy_use_ability_saved_by_rix_rule
+{
+	criteria IsNotImp ChangedTarget AllyHasRebelDecoy AllyHasRix AllyRebelDecoyLostDeathSkull
+	response rebel_decoy_use_ability_saved_by_rix
+}
+
+
+
+
+//////////
+//healed//
+//////////
+
+Response heal_rebel_decoy
+{
+	speak "rebel_decoy_healed_01" noscene 
+	speak "rebel_decoy_healed_02" noscene 
+	speak "rebel_decoy_healed_03" noscene 
+}
+Rule heal_rebel_decoy_rule
+{
+	criteria IsNotImp Heal IsTargetRebelDecoy
+	response heal_rebel_decoy
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

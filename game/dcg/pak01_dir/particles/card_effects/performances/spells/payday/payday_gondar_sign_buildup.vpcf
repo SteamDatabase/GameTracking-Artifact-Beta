@@ -1,0 +1,191 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_flConstantRadius = 0.100000
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_entityName = "self"
+				},
+			]
+			m_previewState = 
+			{
+				m_previewModel = "models/card/card.vmdl"
+				m_sequenceName = "card_local_idle"
+				m_hitboxSetName = "default"
+				m_materialGroupName = "blue"
+			}
+		},
+	]
+	m_nMaxParticles = 49
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_vecCP1Pos = 
+			[
+				-24.500000,
+				-26.000000,
+				5.000000,
+			]
+			m_nHeadLocation = 1
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RemapCPOrientationToRotations"
+			m_bUseQuat = true
+			m_vecRotation = 
+			[
+				90.000000,
+				0.000000,
+				90.000000,
+			]
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_SetToCP"
+			m_bOffsetLocal = true
+			m_vecOffset = 
+			[
+				0.250000,
+				0.000000,
+				-1.000000,
+			]
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.100000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_BasicMovement"
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_PositionLock"
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flEndScale = 0.100000
+		},
+		{
+			_class = "C_OP_SetToCP"
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 0.300000
+		},
+		{
+			_class = "C_OP_StopAfterCPDuration"
+			m_bDestroyImmediately = true
+			m_bDisableOperator = true
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderRopes"
+			m_flTessScale = 2.000000
+			m_flSelfIllumAmount = 0.500000
+			m_bAdditive = true
+			m_flOverbrightFactor = 4.000000
+			m_hTexture = resource:"materials/particle/beam_generic_2.vtex"
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_InitSkinnedPositionFromCPSnapshot"
+			m_nSnapshotControlPointNumber = 10
+		},
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				0.250000,
+				0.000000,
+				0.000000,
+			]
+			m_OffsetMax = 
+			[
+				0.250000,
+				0.000000,
+				0.000000,
+			]
+			m_nControlPointNumber = 3
+			m_bLocalCoords = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nInputMin = 20
+			m_nInputMax = 49
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.200000
+			m_bScaleInitialRange = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nInputMax = 20
+			m_bScaleInitialRange = true
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_ContinuousEmitter"
+			m_flEmissionDuration = 0.500000
+		},
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_bDisableOperator = true
+		},
+	]
+	m_flConstantLifespan = 0.500000
+	m_ConstantColor = 
+	[
+		255,
+		174,
+		34,
+		255,
+	]
+}

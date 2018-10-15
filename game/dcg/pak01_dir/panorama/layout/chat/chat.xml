@@ -1,0 +1,109 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/chat/chat.vcss_c" />
+		<include src="s2r://panorama/styles/chat/chat_colors.vcss_c" />
+	</styles>
+
+	<DCGChat hittest="false" defaultfocus="ChatInput">
+
+		<Panel class="ChatLeftPanel">
+			<Button id="ChatTotalMissed" class="ChatMissedMessages" onactivate="DCGChatMissedMessagesClicked()">
+				<Label class="ChatMissedMessagesCount" text="#DCG_Chat_MissedMessages" />
+			</Button>
+		</Panel>
+
+		<Panel class="ChatCorePanel" hittest="false">
+      <Panel id="ChatAndParticipants">
+        <Panel id="ChatMainPanel" hittest="false">
+          <Panel id="ChatTitlePanel">
+            <Label id="ChatTitle" text="#DCG_Chat_Title" />
+          </Panel>
+          <Panel id="ChatHelpPanel">
+
+            <Panel class="ChatHelpColumn">
+              <Label class="ChatHelpHeader" text="#DCG_ChatHelp_Targets" />
+              <Panel id="HelpTargetCommands">
+                <!-- filled out dynamically -->
+              </Panel>
+            </Panel>
+
+            <Panel class="ChatHelpColumn">
+              <Label class="ChatHelpHeader" text="#DCG_ChatHelp_Commands" />
+              <Panel id="HelpActionCommands">
+                <!-- filled out dynamically -->
+              </Panel>
+            </Panel>
+
+          </Panel>
+
+          <Panel id="ChatHeaderPanel">
+            <EdgeScroller id="ChatTabsPanel">
+              <!-- Contents created dynamically: -->
+              <!-- <DCGChatTab /> -->
+            </EdgeScroller>
+            <Panel id="ChatHeaderSpacer" />
+            <Button id="ChatMembersButton" class="ChatIconButton" onactivate="DCGChatToggleShowMembers();">
+              <Label text="#DCG_Chat_ChannelMemberCount"/>
+            </Button>
+          </Panel>
+
+          <Panel id="ChatLinesArea">
+            <Panel id="ChatChannelArea">
+              <Panel id="ChatLinesAndMask">
+                <DCGChatLinesContainer id="ChatLinesContainer">
+                  <Panel id="ChatLinesWrapper">
+                    <Panel id="ChatLinesPanel">
+                      <!-- Contents created dynamically: -->
+                      <!-- <Label class="ChatLine" /> -->
+                    </Panel>
+                  </Panel>
+                </DCGChatLinesContainer>
+                <Panel id="ChatLinesMask" hittest="false"/>
+              </Panel>
+            </Panel>
+            <Panel id="ChatLinesOverlay" hittest="false">
+              <Panel id="ChatTabOptions" hittest="false">
+                <Panel id="ChatTabOptionsContents">
+                  <ToggleButton id="ToggleTabGlobalButton" class="ToggleOptionButton" onmouseover="UIShowTextTooltip( #DCG_ChatTab_ToggleGlobal )" onmouseout="UIHideTextTooltip()" />
+                  <ToggleButton id="ToggleWhispersGlobalButton" class="ToggleOptionButton" onmouseover="UIShowTextTooltip( #DCG_ChatTab_ToggleWhispersGlobal )" onmouseout="UIHideTextTooltip()" />
+                  <ToggleButton id="ToggleTabSoundsButton" class="ToggleOptionButton" onmouseover="UIShowTextTooltip( #DCG_ChatTab_ToggleSounds )" onmouseout="UIHideTextTooltip()" />
+                  <Button id="CloseTabButton" class="CloseButton" onmouseout="UIHideTextTooltip()"  />
+                </Panel>
+              </Panel>
+            </Panel>
+          </Panel>
+
+          <Panel id="ChatControls">
+            <Label id="ChatTargetLabel" />
+            <TextEntry id="ChatInput" oninputsubmit="DCGChatTextSubmitted();" placeholder="#DCG_Chat_Placeholder" maxchars="1024" />
+            <Button id="ChatEmoticonButton" class="ChatIconButton" onactivate="DCGChatToggleEmoticonPicker()" />
+            <Button class="HelpButton" id="ChatTabHelpButton" onactivate="DCGChatToggleHelp()">
+              <Label text="?" />
+            </Button>
+          </Panel>
+
+        </Panel>
+
+        <Panel id="ParticipantArea">
+          <Panel id="ParticipantList">
+            <!-- Dynamic Contents -->
+          </Panel>
+          <Button id="LeaveChannelButton" onactivate="DCGLeaveCurrentChannel()">
+            <Label text="#DCG_Chat_LeaveButton" />
+          </Button>
+        </Panel>
+      </Panel>
+
+      <Panel id="ChatOverlayPanel" hittest="false">
+				<DCGChatAutocomplete id="ChatAutocompletePanel" />
+        <DCGEmoticonPicker id="ChatEmoticonPicker" />
+			</Panel>
+		</Panel>
+
+		<Panel id="ChatDialogVariablePanel" hittest="false" />
+		<Label id="ChatMessageTempLabel" hittest="false" />
+
+	</DCGChat>
+
+</root>

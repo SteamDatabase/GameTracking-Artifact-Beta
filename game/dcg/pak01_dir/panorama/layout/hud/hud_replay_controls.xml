@@ -1,0 +1,61 @@
+<root>
+<styles>
+	<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+	<include src="s2r://panorama/styles/hud/hud_replay_controls.vcss_c" />
+</styles>
+
+<snippets>
+	<snippet name="TurnRow">
+		<Panel class="Marker TurnRow">
+			<Panel id="Shop" class="JumpPoint"/>
+			<Panel id="Lane1" class="JumpPoint">
+				<Label class="LaneNumber" text="1"/>
+			</Panel>
+			<Panel id="Lane2" class="JumpPoint">
+				<Label class="LaneNumber" text="2"/>
+			</Panel>
+			<Panel id="Lane3" class="JumpPoint">
+				<Label class="LaneNumber" text="3"/>
+			</Panel>
+		</Panel>
+	</snippet>
+</snippets>
+
+<Panel class="ReplayControls">
+
+	<Panel class="BasicControls">
+		<Label text="#DCG_ReplayControls_Title"/>
+		<Panel class="MainContainer">
+
+			<Panel id="PauseButton" onactivate="ReplayActivatePauseButton()" />
+
+			<Panel id="PausedControls">
+				<Panel id="StepButton" class="ControlButton" onactivate="ReplayActivateStepButton()">
+					<Label text="#DCG_ReplayControls_Step"/>
+				</Panel>
+			</Panel>
+
+			<!--  -->
+
+			<Panel id="LiveControls">
+				<Panel id="TimeScaleButton" class="ControlButton" onactivate="ReplayActivateTimeScaleButton()">
+					<Label class="TimeScale" text="{s:timeScale}"/>
+				</Panel>
+
+				<Panel id="ToggleSpeedUpLongTurns" class="ControlButton" onactivate="ReplayToggleSpeedUpLongTurns()">
+					<Label class="TimeScale" text="{s:maxTurnLength}"/>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+	<Panel id="TimelineToggle" onactivate="ReplayToggleTimeline()">
+		<Label text=">"/>
+	</Panel>
+
+	<Panel id="Timeline">
+		<Panel id="Markers" />
+		<Panel id="MarkersCover" hittest="true" />
+	</Panel>
+</Panel>
+
+</root>

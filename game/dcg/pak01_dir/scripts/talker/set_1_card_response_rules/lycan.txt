@@ -1,0 +1,556 @@
+//////////////////
+//**LYCAN - HERO//
+//////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response lycan_equip_weapon
+{
+	speak "lycan_equip_generic_weapon_01" noscene 
+	speak "lycan_equip_generic_weapon_02" noscene 
+	speak "lycan_equip_generic_weapon_03" noscene 
+	speak "lycan_equip_generic_weapon_04" noscene 
+	speak "lycan_equip_generic_weapon_05" noscene 
+}
+
+Rule lycan_equip_weapon_rule
+{
+	criteria IsNotImp Buffed IsTargetLycan IsSourceWeapon
+	response lycan_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response lycan_equip_armor
+{
+	speak "lycan_equip_generic_armor_01" noscene 
+	speak "lycan_equip_generic_armor_02" noscene 
+	speak "lycan_equip_generic_armor_03" noscene 
+	speak "lycan_equip_generic_armor_04" noscene 
+	speak "lycan_equip_generic_armor_05" noscene 
+}
+
+Rule lycan_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLycan IsSourceArmor
+	response lycan_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response lycan_equip_accessory
+{
+	speak "lycan_equip_generic_accessory_01" noscene 
+	speak "lycan_equip_generic_accessory_02" noscene 
+	speak "lycan_equip_generic_accessory_03" noscene 
+	speak "lycan_equip_generic_accessory_04" noscene 
+	speak "lycan_equip_generic_accessory_05" noscene 
+}
+
+Rule lycan_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetLycan IsSourceAccessory
+	response lycan_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response lycan_gain_attack
+{
+	speak "lycan_permanent_attack_01" noscene 
+	speak "lycan_permanent_attack_02" noscene 
+	speak "lycan_permanent_attack_03" noscene 
+	speak "lycan_permanent_attack_04" noscene 
+	speak "lycan_permanent_attack_05" noscene 
+}
+
+Rule lycan_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetLycan IsSourceSpell BuffsAttack
+	response lycan_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response lycan_gain_armor
+{
+	speak "lycan_permanent_armor_01" noscene 
+	speak "lycan_permanent_armor_02" noscene 
+	speak "lycan_permanent_armor_03" noscene 
+	speak "lycan_permanent_armor_04" noscene 
+	speak "lycan_permanent_armor_05" noscene 
+}
+
+Rule lycan_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLycan IsSourceSpell BuffsArmor
+	response lycan_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response lycan_gain_health
+{
+	speak "lycan_permanent_health_01" noscene 
+	speak "lycan_permanent_health_02" noscene 
+	speak "lycan_permanent_health_03" noscene 
+	speak "lycan_permanent_health_04" noscene 
+	speak "lycan_permanent_health_05" noscene 
+}
+
+Rule lycan_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetLycan IsSourceSpell BuffsHealth
+	response lycan_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response lycan_use_include
+{
+	speak "lycan_use_include_01" noscene 
+	speak "lycan_use_include_02" noscene 
+	speak "lycan_use_include_03" noscene 
+}
+
+Rule lycan_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceSavageWolf
+	response lycan_use_include
+}
+
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response lycan_gain_momentum_murder
+{
+	speak "lycan_kill_rival_01" noscene 
+	speak "lycan_kill_rival_02" noscene 
+	speak "lycan_kill_rival_03" noscene 
+	speak "lycan_kill_rival_04" noscene 
+	speak "lycan_kill_rival_05" noscene 
+	speak "lycan_kill_rival_06" noscene 
+	speak "lycan_kill_rival_07" noscene 
+	speak "lycan_kill_rival_08" noscene
+	speak "lycan_kill_rival_09" noscene 	
+	speak "lycan_kill_rival_10" noscene 
+}
+
+Rule lycan_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasLycan LocalChangeMomentum_Pos IsNotCombat IsBlockingLycan
+	response lycan_gain_momentum_murder
+}
+
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response lycan_lane_taunt_generic
+{
+	speak "lycan_taunt_generic_01" noscene 
+	speak "lycan_taunt_generic_02" noscene 
+	speak "lycan_taunt_generic_03" noscene 
+	speak "lycan_taunt_generic_04" noscene 
+	speak "lycan_taunt_generic_05" noscene 
+	speak "lycan_taunt_generic_06" noscene 
+	speak "lycan_taunt_generic_07" noscene 
+	speak "lycan_taunt_generic_09" noscene 
+	speak "lycan_taunt_generic_09" noscene 
+	speak "lycan_taunt_generic_10" noscene 
+}
+
+Rule lycan_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response lycan_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response lycan_lane_buff_give_death_skull
+{
+	speak "lycan_potential_kill_01"  noscene 
+	speak "lycan_potential_kill_02"  noscene
+	speak "lycan_potential_kill_03"  noscene 
+	speak "lycan_potential_kill_04"  noscene 
+	speak "lycan_potential_kill_05"  noscene
+	speak "lycan_cast_spell_05"  noscene
+}
+
+Rule lycan_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLycan EnemyGainedDeathSkull IsTargetLycan
+	response lycan_lane_buff_give_death_skull
+}
+
+Response lycan_lane_debuff_give_death_skull
+{
+	speak "lycan_potential_kill_01"  noscene 
+	speak "lycan_potential_kill_02"  noscene
+	speak "lycan_potential_kill_03"  noscene 
+	speak "lycan_potential_kill_04"  noscene 
+	speak "lycan_potential_kill_05"  noscene	
+	speak "lycan_cast_spell_05"  noscene
+}
+
+Rule axe_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLycan TargetHasDeathSkull IsBlockingLycan
+	response lycan_lane_debuff_give_death_skull
+}
+
+Response lycan_lane_damage_give_death_skull
+{
+	speak "lycan_potential_kill_01"  noscene 
+	speak "lycan_potential_kill_02"  noscene
+	speak "lycan_potential_kill_03"  noscene 
+	speak "lycan_potential_kill_04"  noscene 
+	speak "lycan_potential_kill_05"  noscene
+	speak "lycan_cast_spell_05"  noscene
+}
+
+Rule lycan_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasLycan TargetHasDeathSkull IsBlockingLycan
+	response lycan_lane_damage_give_death_skull
+}
+
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response lycan_debuff_blocker
+{
+	speak "lycan_potential_save_02" noscene 
+	speak "lycan_potential_save_03" noscene 
+	speak "lycan_potential_save_04" noscene 
+	speak "lycan_potential_save_05" noscene 
+	speak "lycan_cast_spell_10" noscene 
+//	speak "lycan_debuff_enemy_01" noscene 
+//	speak "lycan_debuff_enemy_02" noscene 
+//	speak "lycan_debuff_enemy_03" noscene 
+//	speak "lycan_debuff_enemy_04" noscene 
+//	speak "lycan_debuff_enemy_05" noscene 
+//	speak "lycan_debuff_enemy_06" noscene 
+//	speak "lycan_debuff_enemy_07" noscene 
+//	speak "lycan_debuff_enemy_08" noscene 
+//	speak "lycan_debuff_enemy_09" noscene 
+//	speak "lycan_debuff_enemy_10" noscene 
+}
+
+Rule lycan_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLycan IsBlockingLycan
+	response lycan_debuff_blocker
+}
+
+//////////////////
+/////BUFF FRIEND//
+//////////////////
+
+Response lycan_buff_friend
+{
+	speak "lycan_cast_spell_02" noscene 
+	speak "lycan_cast_spell_03" noscene 
+	speak "lycan_unique_07" noscene 
+	speak "lycan_taunt_generic_10" noscene 
+//	speak "lycan_buff_ally_01" noscene 
+//	speak "lycan_buff_ally_02" noscene 
+//	speak "lycan_buff_ally_03" noscene 
+//	speak "lycan_buff_ally_04" noscene 
+//	speak "lycan_buff_ally_05" noscene 
+//	speak "lycan_buff_ally_06" noscene 
+//	speak "lycan_buff_ally_07" noscene 
+//	speak "lycan_buff_ally_08" noscene 
+//	speak "lycan_buff_ally_09" noscene 
+//	speak "lycan_buff_ally_10" noscene 
+}
+
+Rule lycan_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLycan IsSourceGreen IsTargetNotLycan IsSourceSpell
+	response lycan_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_lycan
+{
+	speak "lycan_healed_01" noscene 
+	speak "lycan_healed_02" noscene 
+	speak "lycan_healed_03" noscene 
+	speak "lycan_healed_04" noscene 
+	speak "lycan_healed_05" noscene 
+}
+Rule heal_lycan_rule
+{
+	criteria IsNotImp Heal IsTargetLycan
+	response heal_lycan
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response lycan_unearthed_secrets
+{
+	speak "lycan_unique_01" noscene 
+	speak "lycan_unique_02" noscene 
+	speak "lycan_unique_03" noscene 
+}
+
+Rule lycan_unearthed_secrets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceUnearthedSecrets
+	response lycan_unearthed_secrets
+}
+
+
+Response lycan_lane_ally_tower_damaged
+{
+	speak "lycan_unique_04" noscene 
+	speak "lycan_unique_05" noscene 
+	speak "lycan_unique_06" noscene 
+}
+
+Rule lycan_lane_ally_tower_damaged_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan IsAllyTowerAlive IsAllyTowerLessOrEqualTo10Health
+	matchonce
+	response lycan_lane_ally_tower_damaged
+}
+
+Response lycan_lane_enemy_tower_damaged
+{
+	speak "lycan_unique_07" noscene 
+	speak "lycan_unique_08" noscene 
+	speak "lycan_unique_09" noscene 
+}
+
+Rule lycan_lane_enemy_tower_damaged_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan IsAllyTowerAlive IsEnemyTowerLessOrEqualTo10Health
+	matchonce
+	response lycan_lane_enemy_tower_damaged
+}
+
+Response lycan_apotheosis_blade
+{
+	speak "lycan_unique_10" noscene 
+	speak "lycan_unique_11" noscene 
+}
+
+Rule lycan_apotheosis_blade_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceApotheosisBlade IsTargetLycan
+	matchonce
+	response lycan_apotheosis_blade
+}
+
+Response lycan_no_kill
+{
+	speak "lycan_unique_12" noscene 
+	speak "lycan_unique_13" noscene 
+	speak "lycan_unique_14" noscene 
+	speak "lycan_unique_07" noscene 
+	speak "lycan_unique_08" noscene 
+	speak "lycan_unique_09" noscene 
+}
+
+Rule lycan_no_kill_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan IsNoOpponentUnits
+	response lycan_no_kill
+}
+
+Response lycan_wolf_in_lane
+{
+	speak "lycan_unique_15" noscene 
+	speak "lycan_unique_16" noscene 
+}
+
+Rule lycan_wolf_in_lane_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan AllyHasSavageWolf
+	response lycan_wolf_in_lane
+}
+
+Response lycan_ababbon_in_lane
+{
+	speak "lycan_unique_17" noscene 
+}
+
+Rule lycan_ababbon_in_lane_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLycan AllyHasAbaddon
+	response lycan_ababbon_in_lane
+}
+
+Response lycan_dead_wolf
+{
+	speak "lycan_unique_18" noscene 
+	speak "lycan_unique_19" noscene 
+	speak "lycan_unique_20" noscene 
+}
+
+Rule lycan_dead_wolf_rule
+{
+	criteria IsNotImp DEATH IsTargetSavageWolf AllyHasLycan 
+	response lycan_dead_wolf
+}
+
+
+//////////////////////////
+//PRESS DECK EXPLORATION//
+//////////////////////////
+
+Response lycan_play_mist_of_avernus
+{
+	speak "lycan_unique_17" noscene 
+	speak "lycan_taunt_generic_02" noscene 
+	speak "lycan_taunt_generic_10" noscene 
+}
+
+Rule lycan_play_mist_of_avernus_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceMistOfAvernus
+	response lycan_play_mist_of_avernus
+}
+
+Response lycan_play_selemenes_favor
+{
+	speak "lycan_cast_spell_01" noscene 
+	speak "lycan_permanent_attack_03" noscene 
+	speak "lycan_cast_spell_01" noscene 
+}
+
+Rule lycan_play_selemenes_favor_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceSelemenesFavor
+	response lycan_play_selemenes_favor
+}
+
+Response lycan_play_path_of_the_dreamer
+{
+	speak "lycan_cast_spell_07" noscene 	
+	speak "lycan_permanent_armor_04" noscene 	
+	speak "lycan_potential_save_03" noscene 	
+	
+}
+
+Rule lycan_play_path_of_the_dreamer_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourcePathOfTheDreamer ThisIsImportant
+	response lycan_play_path_of_the_dreamer
+}
+
+Response lycan_play_homefield_advantage
+{
+	speak "lycan_cast_spell_08" noscene 	
+	speak "lycan_permanent_health_02" noscene 	
+	speak "lycan_permanent_armor_03" noscene 	
+	speak "lycan_unique_04" noscene 	
+	
+}
+
+Rule lycan_play_homefield_advantage_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceHomefieldAdvantage ThisIsImportant
+	response lycan_play_homefield_advantage
+}
+
+
+
+Response lycan_play_altar_of_the_mad_moon
+{
+	speak "lycan_cast_spell_09" noscene 	
+	speak "lycan_equip_generic_accessory_04" noscene 	
+	speak "lycan_taunt_generic_10" noscene 	
+	
+}
+
+Rule lycan_play_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceAltarOfTheMadMoon ThisIsImportant
+	response lycan_play_altar_of_the_mad_moon
+}
+
+Response lycan_play_cheating_death
+{
+	speak "lycan_cast_spell_06" noscene 	
+	speak "lycan_cast_spell_07" noscene 	
+	speak "lycan_potential_save_05" noscene 
+	speak "lycan_permanent_armor_02" noscene 
+	
+}
+
+Rule lycan_play_cheating_death_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceCheatingDeath ThisIsImportant
+	response lycan_play_cheating_death
+}
+
+Response lycan_play_verdant_refuge
+{
+	speak "lycan_cast_spell_09" noscene 	
+	speak "lycan_permanent_armor_04" noscene 	
+	speak "lycan_permanent_health_05" noscene 	
+	
+}
+
+Rule lycan_play_verdant_refuge_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceVerdantRefuge ThisIsImportant
+	response lycan_play_verdant_refuge
+}
+
+Response lycan_play_stars_align
+{
+	speak "lycan_cast_spell_04" noscene 	
+	speak "lycan_unique_08" noscene 	
+	speak "lycan_equip_generic_accessory_04" noscene 	
+	
+}
+
+Rule lycan_play_stars_align_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLycan IsSourceStarsAlign ThisIsImportant
+	response lycan_play_stars_align
+}
+

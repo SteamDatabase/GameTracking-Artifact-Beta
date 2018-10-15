@@ -1,0 +1,98 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popup_generic.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popup_load_deck.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_load_deck_carousel.vcss_c" />
+ </styles>
+
+	<snippets>
+		<snippet name="SparringMatch">
+			<Panel class="SparringMatchPanel">
+				<Panel class="DeckTypeContainer">
+					<Panel id="DeckTypesGroup">
+						<Panel id="DeckTypesList">
+							<!-- Dynamic Content -->
+						</Panel>
+					</Panel>
+					<Panel id="TimerDifficultyContainer">
+						<Panel id="TimerSelectorPanel">
+							<Label class="DropDownSelectorText" text="#DCG_PrivateLobby_TimerSelector" />
+							<Label id="AITimerLabel" text="{s:ai_timer_toggle}" onactivate="OnToggleAITimer()" />
+						</Panel>
+						<Panel id="DifficultySelectorPanel">
+							<Label class="DropDownSelectorText" text="#DCG_PlayAIGame_DifficultySelector" />
+							<DropDown id="DifficultySelector">
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Beginner" id="Beginner" />
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Vanilla" id="Vanilla" />
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Easy" id="Easy" />
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Normal" id="Normal" />
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Hard" id="Hard" />
+								<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Insane" id="Insane" />
+							</DropDown>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel id="DeckListContainer">
+					<Panel class="SelectRow" >
+						<Panel class="FilterControlGroup">
+							<Label class="FiltersTitle" text="#DCG_LoadDeck_Filter"/>
+							<Panel class="ColorFilterGroup">
+								<Panel id="ColorFilterRed" class="ColorFilter" onactivate="ToggleStyle(Activated); ToggleDeckFilterColor(Red)"/>
+								<Panel id="ColorFilterBlue" class="ColorFilter" onactivate="ToggleStyle(Activated); ToggleDeckFilterColor(Blue)"/>
+								<Panel id="ColorFilterBlack" class="ColorFilter" onactivate="ToggleStyle(Activated); ToggleDeckFilterColor(Black)"/>
+								<Panel id="ColorFilterGreen" class="ColorFilter" onactivate="ToggleStyle(Activated); ToggleDeckFilterColor(Green)"/>
+							</Panel>
+							<TextEntry id="DeckFilterName"/>
+							<Button id="ClearDeckFilterTextButton" onactivate="ClearDeckFilterText()">
+								<Label text="#DCG_XForClose"/>
+							</Button>
+							<Panel id="LastPlayedContainer">
+								<Label text="#DCG_PrivateLobby_LastPlayed" class="LastPlayedLabel" />
+								<Label class="LastPlayedLabel" text="{s:last_played_date}" />
+							</Panel>
+						</Panel>
+					</Panel>
+
+					<DelayLoadList id="DeckList" itemwidth="100%" itemheight="55px">
+						<!-- Dynamic Content -->
+					</DelayLoadList>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+	
+	<Panel class="PopupLoadDeck" popupbackground="dim" oncancel="UIPopupButtonClicked()">		
+		<Panel id="PopupContainer">
+			<Panel id="MainContentsPadding">
+				<Panel class="HeroDisplay">
+					<DCGScenePanel class="HeroImage" id="HeroImage0" scale_card="true" />
+					<DCGScenePanel class="HeroImage" id="HeroImage1" scale_card="true" />
+					<DCGScenePanel class="HeroImage" id="HeroImage2" scale_card="true" />
+					<DCGScenePanel class="HeroImage" id="HeroImage3" scale_card="true" />
+					<DCGScenePanel class="HeroImage" id="HeroImage4" scale_card="true" />
+				</Panel>
+				<Panel class="DeckTitleGroup">
+					<Label id="DeckTitle" text="{s:deckTitle}"/>
+					<Panel id="GauntletScoreContainer">
+						<Panel id="GauntletScore" class="GauntletMatchList">
+							<!-- Dynamically generated -->
+						</Panel>
+					</Panel>
+					<Panel class="SelectedDeckOptions">
+						<Label id="UnownedCards" text="#DCG_LoadDeck_DeckErrors" onactivate="LoadDeckPurchaseUnowned()"/>
+						<Label id="UnownedCardsBar" text="#DCG_LoadDeck_Bar"/>
+						<Label id="ValidationErrors" text="#DCG_LoadDeck_DeckErrors"/>
+						<Label id="ValidationErrorsBar" text="#DCG_LoadDeck_Bar"/>
+						<Label id="DeleteDeck" text="#DCG_LoadDeck_DeleteDeck" onactivate="DeleteSelectedDeck()"/>
+						<Label id="DeleteDeckBar" text="#DCG_LoadDeck_Bar"/>
+						<Label id="ShowDeckInfo" text="#DCG_LoadDeck_ShowDeckInfo" onactivate="LoadDeckShowDeckDetails()"/>
+					</Panel>
+				</Panel>
+				<Panel id="LowerBody" />
+			</Panel>
+			<Panel id="ButtonContainer" />
+		</Panel>
+	</Panel>
+</root>

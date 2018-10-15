@@ -1,0 +1,453 @@
+/////////////////////////
+//**MAGNUS - HERO////////
+/////////////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response magnus_equip_weapon
+{
+	speak "magnus_equip_generic_weapon_01" noscene 
+	speak "magnus_equip_generic_weapon_02" noscene 
+	speak "magnus_equip_generic_weapon_03" noscene 
+	speak "magnus_equip_generic_weapon_04" noscene 
+	speak "magnus_equip_generic_weapon_05" noscene 
+}
+
+Rule magnus_equip_weapon_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceWeapon
+	response magnus_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response magnus_equip_armor
+{
+	speak "magnus_equip_generic_armor_01" noscene 
+	speak "magnus_equip_generic_armor_02" noscene 
+	speak "magnus_equip_generic_armor_03" noscene 
+	speak "magnus_equip_generic_armor_04" noscene 
+	speak "magnus_equip_generic_armor_05" noscene 
+}
+
+Rule magnus_equip_armor_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceArmor
+	response magnus_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response magnus_equip_accessory
+{
+	speak "magnus_equip_generic_accessory_01" noscene 
+	speak "magnus_equip_generic_accessory_02" noscene 
+	speak "magnus_equip_generic_accessory_03" noscene 
+	speak "magnus_equip_generic_accessory_04" noscene 
+	speak "magnus_equip_generic_accessory_05" noscene 
+}
+
+Rule magnus_equip_accessory_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceAccessory
+	response magnus_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response magnus_gain_attack
+{
+	speak "magnus_permanent_attack_01" noscene 
+	speak "magnus_permanent_attack_02" noscene 
+	speak "magnus_permanent_attack_03" noscene 
+	speak "magnus_permanent_attack_04" noscene 
+	speak "magnus_permanent_attack_05" noscene 
+}
+
+Rule magnus_gain_attack_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceSpell BuffsAttack
+	response magnus_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response magnus_gain_armor
+{
+	speak "magnus_permanent_armor_01" noscene 
+	speak "magnus_permanent_armor_02" noscene 
+	speak "magnus_permanent_armor_03" noscene 
+	speak "magnus_permanent_armor_04" noscene 
+	speak "magnus_permanent_armor_05" noscene 
+}
+
+Rule magnus_gain_armor_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceSpell BuffsArmor
+	response magnus_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response magnus_gain_health
+{
+	speak "magnus_permanent_health_01" noscene 
+	speak "magnus_permanent_health_02" noscene 
+	speak "magnus_permanent_health_03" noscene 
+	speak "magnus_permanent_health_04" noscene 
+	speak "magnus_permanent_health_05" noscene 
+}
+
+Rule magnus_gain_health_rule
+{
+	criteria IsNotImp Buffed IsTargetMagnus IsSourceSpell BuffsHealth
+	response magnus_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response magnus_use_include
+{
+	speak "magnus_use_include_01" noscene 
+	speak "magnus_use_include_02" noscene 
+	speak "magnus_use_include_03" noscene 
+}
+
+Rule magnus_use_include_rule
+{
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower
+	response magnus_use_include
+}
+
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response magnus_gain_momentum_murder
+{ 
+	speak "magnus_kill_rival_01" noscene 	
+	speak "magnus_kill_rival_02" noscene 
+	speak "magnus_kill_rival_03" noscene 
+	speak "magnus_kill_rival_04" noscene 
+	speak "magnus_kill_rival_05" noscene 
+	speak "magnus_kill_rival_06" noscene 
+	speak "magnus_kill_rival_07" noscene 
+	speak "magnus_kill_rival_08" noscene
+	speak "magnus_kill_rival_09" noscene 	
+	speak "magnus_kill_rival_10" noscene 
+}
+
+Rule magnus_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasMagnus LocalChangeMomentum_Pos IsNotCombat IsBlockingMagnus
+	response magnus_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response magnus_lane_taunt_generic
+{
+	speak "magnus_taunt_generic_01" noscene 
+	speak "magnus_taunt_generic_02" noscene 
+	speak "magnus_taunt_generic_03" noscene 
+	speak "magnus_taunt_generic_04" noscene 
+	speak "magnus_taunt_generic_05" noscene 
+	speak "magnus_taunt_generic_06" noscene 
+	speak "magnus_taunt_generic_07" noscene 
+	speak "magnus_taunt_generic_08" noscene 
+	speak "magnus_taunt_generic_09" noscene 
+}
+
+Rule magnus_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasMagnus IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response magnus_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response magnus_lane_buff_give_death_skull
+{
+	speak "magnus_potential_kill_01"  noscene 
+	speak "magnus_potential_kill_02"  noscene
+	speak "magnus_potential_kill_03"  noscene 
+	speak "magnus_potential_kill_04"  noscene 
+	speak "magnus_potential_kill_05"  noscene
+}
+
+Rule magnus_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasMagnus EnemyGainedDeathSkull IsTargetMagnus
+	response magnus_lane_buff_give_death_skull
+}
+
+Response magnus_lane_debuff_give_death_skull
+{
+	speak "magnus_potential_kill_01"  noscene 
+	speak "magnus_potential_kill_02"  noscene
+	speak "magnus_potential_kill_03"  noscene 
+	speak "magnus_potential_kill_04"  noscene 
+	speak "magnus_potential_kill_05"  noscene
+}
+
+Rule magnus_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasMagnus TargetHasDeathSkull IsBlockingMagnus
+	response magnus_lane_debuff_give_death_skull
+}
+
+Response magnus_lane_damage_give_death_skull
+{
+	speak "magnus_potential_kill_01"  noscene 
+	speak "magnus_potential_kill_02"  noscene
+	speak "magnus_potential_kill_03"  noscene 
+	speak "magnus_potential_kill_04"  noscene 
+	speak "magnus_potential_kill_05"  noscene
+}
+
+Rule magnus_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasMagnus TargetHasDeathSkull IsBlockingMagnus
+	response magnus_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+//Response magnus_debuff_blocker
+//{
+//	speak "magnus_debuff_enemy_01" noscene 
+//	speak "magnus_debuff_enemy_02" noscene 
+//	speak "magnus_debuff_enemy_03" noscene 
+//	speak "magnus_debuff_enemy_04" noscene 
+//	speak "magnus_debuff_enemy_05" noscene 
+//	speak "magnus_debuff_enemy_06" noscene 
+//	speak "magnus_debuff_enemy_07" noscene 
+//	speak "magnus_debuff_enemy_08" noscene 
+//	speak "magnus_debuff_enemy_09" noscene 
+//	speak "magnus_debuff_enemy_10" noscene 
+//}
+//
+//Rule magnus_debuff_blocker_rule
+//{
+//	criteria IsNotImp  DEBUFFED EnemyHasMagnus IsBlockingMagnus
+//	response magnus_debuff_blocker
+//}
+//
+//////////////////
+/////BUFF FRIEND//
+//////////////////
+//
+//Response magnus_buff_friend
+//{
+//	speak "magnus_buff_ally_01" noscene 
+//	speak "magnus_buff_ally_02" noscene 
+//	speak "magnus_buff_ally_03" noscene 
+//	speak "magnus_buff_ally_04" noscene 
+//	speak "magnus_buff_ally_05" noscene 
+//	speak "magnus_buff_ally_06" noscene 
+//	speak "magnus_buff_ally_07" noscene 
+//	speak "magnus_buff_ally_08" noscene 
+//	speak "magnus_buff_ally_09" noscene 
+//	speak "magnus_buff_ally_10" noscene 
+// 
+//}
+//
+//Rule magnus_buff_friend_rule
+//{
+//	criteria IsNotImp  BUFFED AllyHasMagnus IsSourceGreen IsTargetNotMagnus
+//	response magnus_buff_friend
+//}
+
+//////////
+//healed//
+//////////
+
+Response heal_magnus
+{
+	speak "magnus_healed_01" noscene 
+	speak "magnus_healed_02" noscene 
+	speak "magnus_healed_03" noscene 
+	speak "magnus_healed_04" noscene 
+	speak "magnus_healed_05" noscene 
+}
+Rule heal_magnus_rule
+{
+	criteria IsNotImp Heal IsTargetMagnus
+	response heal_magnus
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response magnus_use_include_on_ursa
+{
+	speak "magnus_unique_01" noscene 
+	speak "magnus_unique_02" noscene 
+	speak "magnus_unique_03" noscene 
+}
+
+Rule magnus_use_include_on_ursa_rule
+{
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetUrsa
+	response magnus_use_include_on_ursa
+}
+
+
+Response magnus_use_include_on_sven
+{
+	speak "magnus_unique_04" noscene 
+	speak "magnus_unique_05" noscene 
+}
+
+Rule magnus_use_include_on_sven_rule
+{
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetSven
+	response magnus_use_include_on_sven
+}
+
+
+/////////////////////////////
+//PLAY SET ONE GREEN CARDS///
+/////////////////////////////
+
+Response magnus_play_unearthed_secrets
+{
+	speak "magnus_cast_spell_09" noscene 	
+	
+}
+
+Rule magnus_play_unearthed_secrets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceUnearthedSecrets ThisIsImportant
+	response magnus_play_unearthed_secrets
+}
+
+Response magnus_play_path_of_the_dreamer
+{
+	speak "magnus_cast_spell_09" noscene 	
+	
+}
+
+Rule magnus_play_path_of_the_dreamer_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourcePathOfTheDreamer ThisIsImportant
+	response magnus_play_path_of_the_dreamer
+}
+
+Response magnus_play_homefield_advantage
+{
+	speak "magnus_cast_spell_08" noscene 	
+	
+}
+
+Rule magnus_play_homefield_advantage_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceHomefieldAdvantage ThisIsImportant
+	response magnus_play_homefield_advantage
+}
+
+Response magnus_play_selemenes_favor
+{
+	speak "magnus_cast_spell_05" noscene 	
+	
+}
+
+Rule magnus_play_selemenes_favor_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceSelemenesFavor ThisIsImportant
+	response magnus_play_selemenes_favor
+}
+
+Response magnus_play_mist_of_avernus
+{
+	speak "magnus_cast_spell_08" noscene 	
+	
+}
+
+Rule magnus_play_mist_of_avernus_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceMistOfAvernus ThisIsImportant
+	response magnus_play_mist_of_avernus
+}
+
+Response magnus_play_altar_of_the_mad_moon
+{
+	speak "magnus_cast_spell_01" noscene 	
+	
+}
+
+Rule magnus_play_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceAltarOfTheMadMoon ThisIsImportant
+	response magnus_play_altar_of_the_mad_moon
+}
+
+Response magnus_play_cheating_death
+{
+	speak "magnus_cast_spell_04" noscene 	
+	
+}
+
+Rule magnus_play_cheating_death_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceCheatingDeath ThisIsImportant
+	response magnus_play_cheating_death
+}
+
+Response magnus_play_verdant_refuge
+{
+	speak "magnus_cast_spell_03" noscene 	
+	
+}
+
+Rule magnus_play_verdant_refuge_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceVerdantRefuge ThisIsImportant
+	response magnus_play_verdant_refuge
+}
+
+Response magnus_play_stars_align
+{
+	speak "magnus_cast_spell_02" noscene 	
+	
+}
+
+Rule magnus_play_stars_align_rule
+{
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceStarsAlign ThisIsImportant
+	response magnus_play_stars_align
+}
+

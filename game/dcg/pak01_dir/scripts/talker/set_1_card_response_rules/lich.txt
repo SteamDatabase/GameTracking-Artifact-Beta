@@ -1,0 +1,504 @@
+////////////////////
+//**LICH - HERO//
+///////////////////
+
+///////////////
+//USE ABILITY//
+///////////////
+
+Response lich_use_ability
+{
+	speak "lich_use_ability_01" noscene 
+	speak "lich_use_ability_02" noscene 
+	speak "lich_use_ability_03" noscene 
+	speak "lich_use_ability_04" noscene 
+	speak "lich_use_ability_05" noscene 
+}
+
+Rule lich_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasLich IsSourceSacrifice
+	response lich_use_ability
+}
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response lich_equip_weapon
+{
+	speak "lich_equip_generic_weapon_01" noscene 
+	speak "lich_equip_generic_weapon_02" noscene 
+	speak "lich_equip_generic_weapon_03" noscene 
+	speak "lich_equip_generic_weapon_04" noscene 
+	speak "lich_equip_generic_weapon_05" noscene 
+}
+
+Rule lich_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceWeapon
+	response lich_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response lich_equip_armor
+{
+	speak "lich_equip_generic_armor_01" noscene 
+	speak "lich_equip_generic_armor_02" noscene 
+	speak "lich_equip_generic_armor_03" noscene 
+	speak "lich_equip_generic_armor_04" noscene 
+	speak "lich_equip_generic_armor_05" noscene 
+}
+
+Rule lich_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceArmor
+	response lich_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response lich_equip_accessory
+{
+	speak "lich_equip_generic_accessory_01" noscene 
+	speak "lich_equip_generic_accessory_02" noscene 
+	speak "lich_equip_generic_accessory_03" noscene 
+	speak "lich_equip_generic_accessory_04" noscene 
+	speak "lich_equip_generic_accessory_05" noscene 
+}
+
+Rule lich_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceAccessory
+	response lich_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response lich_gain_attack
+{
+	speak "lich_permanent_attack_01" noscene 
+	speak "lich_permanent_attack_02" noscene 
+	speak "lich_permanent_attack_03" noscene 
+	speak "lich_permanent_attack_04" noscene 
+	speak "lich_permanent_attack_05" noscene 
+}
+
+Rule lich_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceSpell BuffsAttack
+	response lich_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response lich_gain_armor
+{
+	speak "lich_permanent_armor_01" noscene 
+	speak "lich_permanent_armor_02" noscene 
+	speak "lich_permanent_armor_03" noscene 
+	speak "lich_permanent_armor_04" noscene 
+	speak "lich_permanent_armor_05" noscene 
+}
+
+Rule lich_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceSpell BuffsArmor
+	response lich_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response lich_gain_health
+{
+	speak "lich_permanent_health_01" noscene 
+	speak "lich_permanent_health_02" noscene 
+	speak "lich_permanent_health_03" noscene 
+	speak "lich_permanent_health_04" noscene 
+	speak "lich_permanent_health_05" noscene 
+}
+
+Rule lich_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetLich IsSourceSpell BuffsHealth
+	response lich_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response lich_use_include
+{
+	speak "lich_use_include_01" noscene 
+	speak "lich_use_include_02" noscene 
+	speak "lich_use_include_03" noscene 
+}
+
+Rule lich_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceChainFrost ThisIsImportant
+	response lich_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response lich_gain_momentum_murder
+{ 
+	speak "lich_kill_rival_01" noscene 	
+	speak "lich_kill_rival_02" noscene 
+	speak "lich_kill_rival_03" noscene 
+	speak "lich_kill_rival_04" noscene 
+	speak "lich_kill_rival_05" noscene 
+	speak "lich_kill_rival_06" noscene 
+	speak "lich_kill_rival_07" noscene 
+	speak "lich_kill_rival_08" noscene
+	speak "lich_kill_rival_09" noscene 	
+	speak "lich_kill_rival_10" noscene 
+}
+
+Rule lich_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasLich LocalChangeMomentum_Pos IsNotCombat
+	response lich_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response lich_lane_taunt_generic
+{
+	speak "lich_taunt_generic_01" noscene 
+	speak "lich_taunt_generic_02" noscene 
+	speak "lich_taunt_generic_03" noscene 
+	speak "lich_taunt_generic_04" noscene 
+	speak "lich_taunt_generic_05" noscene 
+	speak "lich_taunt_generic_06" noscene 
+	speak "lich_taunt_generic_07" noscene 
+	speak "lich_taunt_generic_08" noscene 
+	speak "lich_taunt_generic_09" noscene 
+}
+
+Rule lich_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLich IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response lich_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response lich_lane_buff_give_death_skull
+{
+	speak "lich_potential_kill_01"  noscene 
+	speak "lich_potential_kill_02"  noscene
+	speak "lich_potential_kill_03"  noscene 
+	speak "lich_potential_kill_04"  noscene 
+	speak "lich_potential_kill_05"  noscene
+}
+
+Rule lich_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLich EnemyGainedDeathSkull IsTargetLich
+	response lich_lane_buff_give_death_skull
+}
+
+Response lich_lane_debuff_give_death_skull
+{
+	speak "lich_potential_kill_01"  noscene 
+	speak "lich_potential_kill_02"  noscene
+	speak "lich_potential_kill_03"  noscene 
+	speak "lich_potential_kill_04"  noscene 
+	speak "lich_potential_kill_05"  noscene
+}
+
+Rule lich_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLich TargetHasDeathSkull IsBlockingLich
+	response lich_lane_debuff_give_death_skull
+}
+
+Response lich_lane_damage_give_death_skull
+{
+	speak "lich_potential_kill_01"  noscene 
+	speak "lich_potential_kill_02"  noscene
+	speak "lich_potential_kill_03"  noscene 
+	speak "lich_potential_kill_04"  noscene 
+	speak "lich_potential_kill_05"  noscene
+}
+
+Rule lich_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasLich TargetHasDeathSkull IsBlockingLich
+	response lich_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response lich_debuff_blocker
+{
+	speak "lich_debuff_enemy_01" noscene 
+	speak "lich_debuff_enemy_02" noscene 
+	speak "lich_debuff_enemy_03" noscene 
+	speak "lich_debuff_enemy_04" noscene 
+	speak "lich_debuff_enemy_05" noscene 
+	speak "lich_debuff_enemy_06" noscene 
+	speak "lich_debuff_enemy_07" noscene 
+	speak "lich_debuff_enemy_08" noscene 
+	speak "lich_debuff_enemy_09" noscene 
+	speak "lich_debuff_enemy_10" noscene 
+}
+
+Rule lich_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLich IsBlockingLich
+	response lich_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response lich_buff_friend
+{
+	speak "lich_buff_ally_01" noscene 
+	speak "lich_buff_ally_02" noscene 
+	speak "lich_buff_ally_03" noscene 
+	speak "lich_buff_ally_04" noscene 
+	speak "lich_buff_ally_05" noscene 
+	speak "lich_buff_ally_06" noscene 
+	speak "lich_buff_ally_07" noscene 
+	speak "lich_buff_ally_08" noscene 
+	speak "lich_buff_ally_09" noscene 
+	speak "lich_buff_ally_10" noscene 
+ 
+}
+
+Rule lich_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLich IsSourceBlack IsTargetNotLich
+	response lich_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_lich
+{
+	speak "lich_healed_01" noscene 
+	speak "lich_healed_02" noscene 
+	speak "lich_healed_03" noscene 
+	speak "lich_healed_04" noscene 
+	speak "lich_healed_05" noscene 
+}
+Rule heal_lich_rule
+{
+	criteria IsNotImp Heal IsTargetLich
+	response heal_lich
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE BLACK CARDS///
+/////////////////////////////
+
+Response lich_play_assured_destruction
+{
+	speak "lich_cast_spell_06" noscene 
+}
+
+Rule lich_play_assured_destruction_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssuredDestruction ThisIsImportant
+	response lich_play_assured_destruction
+}
+
+Response lich_play_path_of_the_cunning
+{
+	speak "lich_cast_spell_04" noscene 
+}
+
+Rule lich_play_path_of_the_cunning_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourcePathOfTheCunning ThisIsImportant
+	response lich_play_path_of_the_cunning
+}
+
+Response lich_play_the_tyler_estate
+{
+	speak "lich_enigmatic_07" noscene 
+}
+
+Rule lich_play_the_tyler_estate_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheTylerEstate ThisIsImportant
+	response lich_play_the_tyler_estate
+}
+
+Response lich_play_burn_it_all
+{
+	speak "lich_arrogant_05" noscene 
+}
+
+Rule lich_play_burn_it_all_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceBurnItAll ThisIsImportant
+	response lich_play_burn_it_all
+}
+
+Response lich_play_trebuchets
+{
+
+	speak "lich_cast_spell_05" noscene 
+}
+
+Rule lich_play_trebuchets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTrebuchets ThisIsImportant
+	response lich_play_trebuchets
+}
+
+Response lich_play_undisciplined_artillery
+{
+	speak "lich_cast_spell_10" noscene 
+}
+
+Rule lich_play_undisciplined_artillery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceUndisciplinedArtillery ThisIsImportant
+	response lich_play_undisciplined_artillery
+}
+
+Response lich_play_revtel_investments
+{
+	speak "lich_pleased_01" noscene 
+}
+
+Rule lich_play_revtel_investments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceRevtelInvestments ThisIsImportant
+	response lich_play_revtel_investments
+}
+
+Response lich_play_iron_fog_goldmine
+{
+	speak "lich_pleased_02" noscene 
+}
+
+Rule lich_play_iron_fog_goldmine_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceIronFogGoldmine ThisIsImportant
+	response lich_play_iron_fog_goldmine
+}
+
+Response lich_play_escape_route
+{
+	speak "lich_arrogant_04" noscene 
+}
+
+Rule lich_play_escape_route_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceEscapeRoute ThisIsImportant
+	response lich_play_escape_route
+}
+
+Response lich_play_assault_ladders
+{
+	speak "lich_enigmatic_10" noscene 
+}
+
+Rule lich_play_assault_ladders_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssaultLadders ThisIsImportant
+	response lich_play_assault_ladders
+}
+
+Response lich_play_the_oath
+{
+	speak "lich_enigmatic_03" noscene 
+}
+
+Rule lich_play_the_oath_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheOath ThisIsImportant
+	response lich_play_the_oath
+}
+
+Response lich_play_keenfolk_turret
+{
+	speak "lich_angry_08" noscene 
+}
+
+Rule lich_play_keenfolk_turret_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceKeenfolkTurret ThisIsImportant
+	response lich_play_keenfolk_turret
+}
+
+Response lich_play_steam_cannon
+{
+	speak "lich_arrogant_08" noscene 
+}
+
+Rule lich_play_steam_cannon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceSteamCannon ThisIsImportant
+	response lich_play_steam_cannon
+}
+
+Response lich_play_march_of_the_machines
+{
+	speak "lich_angry_05" noscene 
+}
+
+Rule lich_play_march_of_the_machines_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceMarchOfTheMachines ThisIsImportant
+	response lich_play_march_of_the_machines
+}
+
+Response lich_play_day_at_the_track
+{
+	speak "lich_pleased_10" noscene 
+}
+
+Rule lich_play_day_at_the_track_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceDayAtTheTrack ThisIsImportant
+	response lich_play_day_at_the_track
+}
+

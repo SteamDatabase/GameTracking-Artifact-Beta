@@ -1,0 +1,42 @@
+<root>
+	<styles>
+	    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/hud/player_info.vcss_c" />
+  	</styles>
+
+	<Panel class="PlayerInfo" hittest="false">
+      <Panel class="PlayerInfoBG" />
+      <Panel class="ActingPlayerStartImage" />
+      <Panel class="PlayerInfoContents">
+        <Panel class="DisconnectedDisplay">
+          <Label id="DisconnectedLabel" text="#DCG_Disconnected"/>
+        </Panel>
+
+        <Panel class="GameClockContainer" onmouseover="UIShowTextTooltip( {s:matchClock} )" onmouseout="UIHideTextTooltip()">
+          <Image id="GameClockIcon" />
+          <Label id="GameClockCount" class="GameClockCount PlayerInfoNumber" text="#DCG_MatchClock" />
+        </Panel>
+
+      <Panel class="GoldContainer">
+        <Image id="GoldIcon"/>
+        <Label id="GoldCount" class="GoldCount PlayerInfoNumber" text="{i:availableGold}"/>
+				<Panel id="ShopDeedContainer" onactivate="" ondblclick="ShowShopDeedTakeover()">
+					<Image id="ShopDeedIcon" class="ShopDeedIcon PlayerInfoNumber"  />
+					<Label id="ShopDeedCount" class="ShopDeedCount PlayerInfoNumber" text="#DCG_PlayerInfo_ShopDeedCount" />
+				</Panel>
+      </Panel>
+
+      <Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
+
+      <Panel class="CardsInHandContainer" onactivate="SortCardsInHand()">
+          <Image id="CardsInHandIcon"/>
+          <Panel class="CardsInHandRadioButtonContainer">
+            <Panel id="SortByTime" class="CardsInHandRadioButton"/>
+            <Panel id="SortByMana" class="CardsInHandRadioButton"/>
+            <Panel id="SortByColor" class="CardsInHandRadioButton"/>
+          </Panel>
+        </Panel>
+      </Panel>
+	</Panel>
+
+</root>

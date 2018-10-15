@@ -1,0 +1,65 @@
+<root>
+	<styles>
+	  <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/card_collection/card_preview.vcss_c" />
+	</styles>
+
+	<snippets>
+		<snippet name="LoreContainerSnippet">
+			<Panel class="LoreContainer">
+				<Panel class="LoreTitleContainer">
+					<Label class="LoreTitle" text="#DCG_CardInfo_Lore"/>
+					<Button id="LoreButton" onactivate="DCGCardPreviewPlayLore()">
+						<Image class="PlayLoreIcon" src="s2r://panorama/images/catalogue/play_lore_icon_psd.vtex"/>
+					</Button>
+				</Panel>
+				<Label class="LoreText" text="{s:lore_text}" html="true"/>
+			</Panel>
+		</snippet>
+	</snippets>
+	
+	<DCGCardPreview oncancel="UIPopupButtonClicked()">
+			<Panel class="PreviewBackgroundContainer">
+				<Image id="PreviewBackgroundTop" src="s2r://panorama/images/catalogue/background_stage_top_psd.vtex"/>
+				<Panel id="PreviewBackgroundBottom" />
+
+				<Panel id="PreviewRegion">
+					<Panel class="PreviewTitleContainer">
+						<DCGSetIcon id="SetIcon"/>
+						<Label class="PreviewTitleLabel" text="{s:cardName}"/>
+						<Panel id="PreviewTitleRight">
+							<Panel class="PreviewOwnedContainer">
+								<Label class="PreviewOwnedLabel" text="#DCG_DeckBuilder_OwnedTitle"/>
+								<Label class="PreviewCountLabel" text="{i:numOwned}"/>
+							</Panel>
+							<Button id="CloseDialogButton" onactivate="UIPopupButtonClicked()" />
+						</Panel>
+					</Panel>
+
+
+
+					<Panel class="PreviewTypeContainer">
+						<Label class="PreviewTypeGlyphLabel" text="{s:cardTypeGlyph}" html="true"/>
+						<Label class="PreviewTypeLabel" text="{s:cardType}{s:cardSubType}"/>
+					</Panel>
+
+					<Panel id="SceneContainer">
+						<Panel id="IncludeCardHoverPanel" onmouseover="DCGCardPreviewCardHover(1)" onmouseout="DCGCardPreviewCardHover(0)" />
+						<DCGScenePanel id="PreviewCard" class="PreviewCardPanel" hittest="true" map="cardscenemap" />
+						<DCGScenePanel id="IncludeCard" class="IncludeCardPanel" hittest="true" map="cardscenemap" />
+					</Panel>
+
+					<Panel id="PreviewModifierList">
+            <Panel id="PreviewReferencedCards">
+              <!-- Dynamic Content -->
+            </Panel>
+            <Panel id="PreviewLore">
+            </Panel>
+            <Panel id="PreviewIllustratorCreditContainer">
+              <Label id="PreviewIllustratorCredit" text="#DCG_DeckBuilder_Illustrator" class="Hide"></Label>
+            </Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+  </DCGCardPreview>  
+</root>

@@ -1,0 +1,476 @@
+LimitedStage
+{
+	width: 100%;
+	height: 100%;
+
+	background-color: #000000FF;
+	
+	animation-name: FadeInPackOpening;
+	animation-duration: 0.75s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+}
+
+@keyframes 'GlowPulse'
+{
+    0%
+    {
+        box-shadow: #FFFF3333 -4px -4px 8px 8px;
+    }
+
+    50%
+    {
+        box-shadow: #FFFF33FF -4px -4px 8px 8px;
+    }
+
+    100%
+    {
+        box-shadow: #FFFF3333 -4px -4px 8px 8px;
+    }
+}
+
+@keyframes 'FadeInPackOpening'
+{
+    0%
+    {
+    	opacity: 0;
+    }
+
+
+    100%
+    {
+    	opacity: 1;
+    }
+}
+
+
+#MainBody
+{
+	width: 100%;
+	height: 100%;
+    flow-children: down;
+}
+
+#BodyHeader
+{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#BodyHeaderLeft
+{
+    horizontal-align: left;
+    flow-children: down;
+    margin-left: 20px;
+}
+
+#BodyHeaderRight
+{
+    horizontal-align: right;
+    flow-children: right;
+    vertical-align: center;
+    margin-right: 20px;
+}
+
+#WaitingForGC
+{
+	width: 100%;
+	height: 100%;
+    background-color: black;
+    opacity: 0.8;
+    visibility: collapse;
+}
+
+#WaitingForGC Label
+{
+    horizontal-align: center;
+    vertical-align: center;
+    font-size: 40px;
+}
+
+.waitingForGC #WaitingForGC
+{
+    visibility: visible;
+}
+
+#DynamicPackPanel 
+{
+	max-width: 100%;
+    height: 840px;
+    horizontal-align: center;
+    flow-children: right-wrap;
+    overflow: squish scroll;
+}
+
+
+#Title
+{
+    horizontal-align:left;
+    margin: 10px;
+    font-size:32px;
+}
+
+#ChooseTitle
+{
+    horizontal-align:center;
+    margin: 10px;
+    font-size:32px;
+    color: yellow;
+    opacity: 0;
+    visibility: collapse;
+}
+
+.hasSelections #ChooseTitle
+{
+    opacity: 1;
+}
+
+#NextStageGroup
+{
+    horizontal-align: left;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    flow-children: down;
+}
+
+#NextStage
+{
+    horizontal-align:center;
+    width: 300px;
+    height: 70px;
+}
+
+#QuitDraftStage
+{
+    horizontal-align:center;
+    margin-top: 60px;
+    min-width: 75px;
+    width: fit-children;
+    padding: 10px; 
+}
+
+#QuitPrompt
+{
+}
+
+.selectionComplete.validBudget #NextStage
+{
+    animation-name: GlowPulse;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+#Card
+{
+    width: 192px;
+    height: 336px;
+    margin: 10px;
+    horizontal-align: left;
+    vertical-align: top;
+}
+
+#Card.cardSelected
+{
+    box-shadow: #FFFF3333 -6px -6px 12px 12px;
+}
+
+#ToggleShowDeck
+{
+    margin-left: 10px;
+    width: 102px;
+    height: 60px;
+
+    opacity: 0.5;
+
+  	background-image: url("s2r://panorama/images/deck_builder/buttons/samplehand_png.vtex");
+    background-size: 65% 90%;
+    background-repeat: no-repeat;
+    background-position: right center;
+    vertical-align: bottom;
+    margin-bottom: 10px;
+}
+
+#ToggleShowDeck:hover
+{
+    opacity: 1.0;
+}
+
+.HideDeckView #ToggleShowDeck
+{
+    background-position: left center;
+}
+
+#DeckExpandCollapseArrow
+{
+    background-color: #446644;
+    vertical-align: center;
+    width: 32px;
+    height: 60px;
+
+    horizontal-align: left;
+    opacity-mask: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
+}
+
+.HideDeckView #DeckExpandCollapseArrow
+{
+    horizontal-align: right;
+    opacity-mask: url("s2r://panorama/images/control_icons/arrow_solid_left_png.vtex");
+}
+
+#DeckInfo
+{
+    border: 1px solid gray;
+    margin-bottom: 10px;
+    width: 705px;
+    height: 470px;
+    background-color: black;
+}
+
+#CurrentDeck
+{
+	vertical-align: bottom;
+	horizontal-align: right;
+    flow-children: left;
+	transform: translateX( 0px ) translateY( 0px );
+	opacity: 1.0;
+
+	transition-property: transform;
+	transition-duration: 0.45s;
+	transition-timing-function: ease-in;
+}
+
+.HideDeckView #CurrentDeck
+{
+  	transform: translateX( 690px ) translateY( 0px );
+
+    transition-property: transform;
+	transition-duration: 0.45s;
+	transition-timing-function: ease-in;
+}
+
+#NextStage .CloseButtonPanelTitle
+{
+    font-size: 30px;
+}
+
+.isLastGrant #GrantFinishLabel
+{
+    visibility: visible;
+}
+
+.isLastGrant #GrantNextLabel,
+#GrantFinishLabel,
+#OverBudget,
+.selectionComplete #ChoosePrompt,
+.selectionIncomplete #GrantFinishLabel,
+.selectionIncomplete #GrantNextLabel,
+.overBudget #GrantNextLabel
+{
+    visibility: collapse;
+}
+
+.selectionComplete.overBudget #OverBudget
+{
+    visibility: visible;
+}
+
+#ChoosePrompt
+{
+    color: gray;
+}
+
+#HeroList
+{
+    flow-children: down;
+    margin-right: -100px;
+}
+
+.HeroImage
+{
+    width: 65px;
+    height: 65px;
+    margin: 0px 10px 0px 10px;
+}
+
+.HeroImage.Red
+{
+    border: 4px solid cardColorRed;
+}
+.HeroImage.Green
+{
+    border: 4px solid cardColorGreen;
+}
+.HeroImage.Blue
+{
+    border: 4px solid cardColorBlue;
+}
+.HeroImage.Black
+{
+    border: 4px solid cardColorBlack;
+}
+
+#DraftStages
+{
+    horizontal-align: left;
+    flow-children: right-wrap;
+    border: 4px solid white;
+    padding: 4px 30px 4px 30px;
+    border-radius: 22px;
+}
+
+.GrantStageGroup
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    flow-children: left;
+}
+
+.GrantStageIcon
+{
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+}
+
+.stageCompleted
+{
+    opacity: 0.1;
+}
+
+.stageActive .GrantStageIcon
+{
+   wash-color: gold;
+}
+
+.GrantStageGroupSeparator
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    flow-children: right;
+}
+
+.GrantStageLabel
+{
+    vertical-align: center;
+    visibility: collapse;
+}
+
+.GrantStageSeparatorLabel
+{
+    vertical-align: center;
+}
+
+.stageActive .GrantStageLabel
+{
+    color: gold;
+}
+
+.GrantStageType1
+{
+    background-image: url("s2r://panorama/images/card/cardtype_hero_png.vtex");
+}
+
+.GrantStageType2
+{
+    background-image: url("s2r://panorama/images/card/cardtype_spell_psd.vtex");
+}
+
+.GrantStageType3
+{
+    background-image: url("s2r://panorama/images/card/cardtype_weapon_psd.vtex");
+}
+
+.GrantStageType4
+{
+    background-image: url("s2r://panorama/images/deck_builder/buttons/samplehand_png.vtex");
+}
+
+#StageMsg
+{
+    horizontal-align: center;
+    font-size: 18px;
+    opacity: 0;
+    height: 20px;
+}
+
+.HasStageMsg #StageMsg
+{
+    opacity: 1;
+}
+
+#currentBalance
+{
+    flow-children: right;
+    vertical-align: center;
+    margin-left: 20px;
+    visibility: collapse;
+}
+
+.currencyDraft #currentBalance
+{
+    visibility: visible;
+}
+
+#currentBalance .currencyIcon
+{
+    width: 60px;
+    height: 60px;
+    vertical-align: center;
+}
+
+.currencyIcon
+{
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    background-image:  url("s2r://panorama/images/tooltip_turn_coin_pass_png.vtex");
+}
+#currentBalance Label
+{
+    font-size: 40px;
+    margin-left: 10px;
+}
+
+.overBudget #currentBalance Label
+{
+    color: red;
+}
+
+.CardGroup
+{
+    flow-children: down;
+}
+
+.CurrencyValue.costPositive
+{
+    color: red;
+}
+
+.CurrencyValue.costNegative
+{
+    color: green;
+}
+
+.CurrencyGroup
+{
+    flow-children: right;
+    horizontal-align: center;
+}
+
+.CurrencyValue
+{
+    vertical-align: center;
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+LimitedStage .NotPickableBecauseMasquerade
+{
+    opacity: .10;
+}
+
+LimitedStage.ShowAIPicks .WouldBePickedByAI
+{
+	border: 2px solid red;
+}

@@ -1,0 +1,221 @@
+/////////////////////////////////////
+//**EMISSARY OF THE QUORUM - CREEP///
+/////////////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_emissary_normal
+{
+	speak "emissary_summon_01" noscene 
+	speak "emissary_summon_02" noscene
+	speak "emissary_summon_03" noscene 
+}
+Rule summon_emissary_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum
+	response summon_emissary_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_emissary_enemy_ancient_exposed
+{
+	speak "emissary_ancient_attack_01" noscene
+	speak "emissary_ancient_attack_02" noscene
+}	
+Rule summon_emissary_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum IsEnemyAncientExposed
+	response summon_emissary_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_emissary_your_ancient_exposed
+{
+	speak "emissary_ancient_protect_01" noscene
+	speak "emissary_ancient_protect_02" noscene
+}	
+Rule summon_emissary_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum IsAllyAncientExposed
+	response summon_emissary_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_emissary_both_ancients_exposed
+{
+	speak "emissary_ancient_both_01" noscene
+	speak "emissary_ancient_both_02" noscene
+}	
+Rule summon_emissary_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_emissary_both_ancients_exposed
+}
+
+///////////////
+//use ability//
+///////////////
+
+Response emissary_use_ability
+{
+	speak "emissary_use_ability_01" noscene 
+	speak "emissary_use_ability_02" noscene 
+	speak "emissary_use_ability_03" noscene 
+	speak "emissary_unique_01" noscene 
+	speak "emissary_unique_04" noscene 
+	speak "emissary_tower_destroy_05" noscene 
+	speak "emissary_tower_saved_02" noscene 
+	speak "emissary_tower_destroy_04" noscene 
+	speak "emissary_tower_saved_04" noscene 
+	speak "emissary_tower_saved_05" noscene 
+	speak "emissary_tower_destroy_02" noscene 
+}
+Rule emissary_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasEmissaryOfTheQuorum IsSourceMysteriousBenefactor
+	response emissary_use_ability
+}
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_emissary_ally_vanessa
+{
+	speak "emissary_hero_friend_01" noscene 
+	speak "emissary_hero_friend_02" noscene 
+	speak "emissary_unique_08" noscene 
+}
+Rule summon_emissary_ally_vanessa_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum AllyHasVanessa
+	response summon_emissary_ally_vanessa
+}
+
+Response summon_emissary_ally_crystal_maiden
+{
+	speak "emissary_hero_friend_03" noscene 
+}
+Rule summon_emissary_ally_crystal_maiden_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum AllyHasCrystalMaiden
+	response summon_emissary_ally_crystal_maiden
+}
+
+Response summon_emissary_ally_prellex
+{
+	speak "emissary_unique_05" noscene 
+}
+Rule summon_emissary_ally_prellex_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum AllyHasPrellex
+	response summon_emissary_ally_prellex
+}
+
+Response summon_emissary_ally_kanna
+{
+	speak "emissary_unique_06" noscene 
+}
+Rule summon_emissary_ally_kanna_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum AllyHasKanna
+	response summon_emissary_ally_kanna
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+Response summon_emissary_enemy_anti_mage
+{
+	speak "emissary_hero_rival_01" noscene 
+	speak "emissary_hero_rival_02" noscene 
+	speak "emissary_hero_rival_03" noscene 
+}
+Rule summon_emissary_enemy_anti_mage_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum EnemyHasAntiMage
+	response summon_emissary_enemy_anti_mage
+}
+
+////////////////
+//unique lines//
+////////////////
+
+
+
+
+
+
+Response summon_emissary_ally_kanna_and_prellex
+{
+	speak "emissary_unique_07" noscene 
+}
+Rule summon_emissary_ally_kanna_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum AllyHasKanna AllyHasPrellex
+	response summon_emissary_ally_kanna_and_prellex
+}
+
+Response emissary_use_ability_antimage
+{
+	speak "emissary_unique_02" noscene 
+}
+Rule emissary_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasEmissaryOfTheQuorum IsSourceMysteriousBenefactor AllyHasAntiMage
+	response emissary_use_ability_antimage
+}
+
+Response summon_emissary_block_tyler_estate_censor
+{
+	speak "emissary_unique_03" noscene 
+}
+Rule summon_emissary_block_tyler_estate_censor_rule
+{
+	criteria IsNotImp Summon IsTargetEmissaryOfTheQuorum IsBlockingTylerEstateCensor
+	response summon_emissary_block_tyler_estate_censor
+}
+
+
+
+
+
+//////////
+//healed//
+//////////
+
+Response heal_emissary
+{
+	speak "emissary_healed_01" noscene 
+	speak "emissary_healed_02" noscene 
+	speak "emissary_healed_03" noscene 
+}
+Rule heal_emissary_rule
+{
+	criteria IsNotImp Heal IsTargetEmissaryOfTheQuorum
+	response heal_emissary
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

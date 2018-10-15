@@ -1,0 +1,197 @@
+
+//====   PLAYER  BUFFS  ==============================================================================================
+//====================================================================================================================
+
+
+// note: as these are broad visual animations they use timers to make sure theyre not repeating too much if played quickly in succession ( 7 second delay )
+// note: these fire based on GENERALLY WINNING or LOSING GAME momentum as they are fun but can be visually noisy if seen too often.
+
+
+// WINNING MOMENTUM:
+
+Rule rule_imps_local_attackbuff_winning
+{
+	criteria Buffed BuffsAttack IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerAttackBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerAttackBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_attackbuff
+}
+
+Rule rule_imps_local_armorbuff_winning
+{
+	criteria Buffed BuffsArmor IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerArmorBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerArmorBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_local_armorbuff
+}
+
+
+Rule rule_imps_local_siegebuff_winning
+{
+	criteria Buffed BuffsSiege IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerSiegeBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerSiegeBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_local_siegebuff
+}
+
+
+Rule rule_imps_local_cleavebuff_winning
+{
+	criteria Buffed BuffsCleave IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerCleaveBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerCleaveBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_cleavebuff
+}
+
+
+Rule rule_imps_local_healbuff_winning
+{
+	
+	//note: HEAL is not the same as BUFFS HEALTH. HEAL restores health, buffsHealth ADDS to health's total so warrants animation a bit more
+	
+	criteria Buffed BuffsHealth IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerHealBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerHealBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_healbuff
+}
+
+Rule rule_imps_local_immunebuff_winning
+{
+	
+	// this isnt tied to momentum as immunity is pretty powerul and a less common form of buff
+	
+	criteria Buffed BuffsInvuln IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerImmuneBuff 
+	ApplyContext "NoRepeatForPlayerImmuneBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_immunebuff
+}
+
+
+
+
+
+// LOSING MOMENTUM:
+
+
+Rule rule_imps_local_attackbuff_losing
+{
+	criteria Buffed BuffsAttack IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerAttackBuff PlayerIsLosingGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerAttackBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_attackbuff
+}
+
+Rule rule_imps_local_armorbuff_losing
+{
+	criteria Buffed BuffsArmor IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerArmorBuff PlayerIsLosingGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerArmorBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_local_armorbuff
+}
+
+
+Rule rule_imps_local_siegebuff_losing
+{
+	criteria Buffed BuffsSiege IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerSiegeBuff PlayerIsLosingGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerSiegeBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_local_siegebuff
+}
+
+
+Rule rule_imps_local_cleavebuff_losing
+{
+	criteria Buffed BuffsCleave IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerCleaveBuff PlayerIsLosingGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerCleaveBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_cleavebuff
+}
+
+
+Rule rule_imps_local_healbuff_losing
+{
+	
+	//note: HEAL is not the same as BUFFS HEALTH. HEAL restores health, buffsHealth ADDS to health's total so warrants animation a bit more
+	
+	criteria Buffed BuffsHealth IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerHealBuff PlayerIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForPlayerHealBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_healbuff
+}
+
+
+Rule rule_imps_local_immunebuff_losing
+{
+	
+	// this isnt tied to momentum as immunity is pretty powerul and a less common form of buff
+	
+	criteria Buffed BuffsInvuln IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal NoRepeatForPlayerImmuneBuff 
+	ApplyContext "NoRepeatForPlayerImmuneBuff:1:7"
+	ApplyContextToWorld
+	
+	response imps_local_immunebuff
+}
+
+
+
+
+// retaliate
+// pierce
+// silence
+// stunned
+// disarmed
+// regenerate
+
+
+
+
+
+
+//====   OPPONENT  BUFFS  ============================================================================================
+//====================================================================================================================
+
+
+// note: opponent special buffs are setup just for when the opponent is winning so they work in part as a kind of taunt.
+// the player has the LOSING responses too mostly as visual encouragement if they are losing the game as buffs may seem more important that usual in that case.
+
+
+// WINNING MOMENTUM:
+
+Rule rule_imps_opponent_attackbuff_winning
+{
+	criteria Buffed BuffsAttack IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal NoRepeatForOpponentAttackBuff OpponentIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForOpponentAttackBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_opponent_attackbuff
+}
+
+Rule rule_imps_opponent_armorbuff_winning
+{
+	criteria Buffed BuffsArmor IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal NoRepeatForOpponentArmorBuff OpponentIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForOpponentArmorBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_opponent_armorbuff
+}
+
+
+Rule rule_imps_opponent_immunebuff_winning
+{
+	criteria Buffed BuffsInvuln IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal NoRepeatForOpponentImmuneBuff OpponentIsWinningGame IsGameRound4orMore
+	ApplyContext "NoRepeatForOpponentImmuneBuff:1:7"
+	ApplyContextToWorld	
+	
+	response imps_opponent_immunebuff
+}

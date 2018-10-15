@@ -1,0 +1,65 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popup_generic.vcss_c" />
+    <include src="s2r://panorama/styles/popups/popup_purchase_card_list.vcss_c" />
+ </styles>
+
+	<Panel class="PopupPanel Hidden" popupbackground="dim">
+    
+    <Label class="PopupTitle ShowOnSell" text="#DCG_PurchaseList_SellTitle" />
+    <Label class="PopupTitle ShowOnPurchaseCart" text="#DCG_PurchaseList_PurchaseCartTitle" />
+    <Label class="PopupTitle ShowOnPurchaseDeckList" text="#DCG_PurchaseList_PurchaseDeckListTitle" />
+
+    <Panel id="EmptyCartDisplay">
+      <Label id="EmptyCartLabel" text="#DCG_PurchaseList_EmptyCart"/>
+    </Panel>
+      
+    <Panel id="PurchaseBox">
+      <Panel id="PurchaseHeader">
+        <Label id="HeaderPurchase" class="PurchaseHeaderLabel ShowOnPurchase" text="#DCG_PurchaseList_HeaderPurchase"/>
+        <Label id="HeaderSell" class="PurchaseHeaderLabel ShowOnSell" text="#DCG_PurchaseList_HeaderSell"/>
+        <Label id="HeaderOwned" class="PurchaseHeaderLabel" text="#DCG_PurchaseList_HeaderOwned"/>
+        <Label id="HeaderCard" class="PurchaseHeaderLabel" text="#DCG_PurchaseList_HeaderCard"/>
+        <Label id="HeaderCost" class="PurchaseHeaderLabel" text="#DCG_PurchaseList_HeaderCost"/>
+      </Panel>
+
+      <Panel id="PurchasePreview">
+        <!-- Dynamic Content -->
+      </Panel>
+
+    </Panel>
+
+    <Panel class="ListFooter">
+      <Label id="CardCountLabel" class="PurchaseLabel" text="#DCG_PurchaseList_CardCount"/>
+      <Panel class="PurchaseRow">
+        <Label class="PurchaseLabel ShowOnPurchase" text="#DCG_PurchaseList_TotalPurchaseCost"/>
+        <Label class="PurchaseLabel ShowOnSell" text="#DCG_PurchaseList_TotalSellCost"/>
+        <DCGMarketPrice id="PurchaseCost"/>
+      </Panel>
+    </Panel>
+ 
+    <Panel class="ListFooter"> 
+      <ToggleButton id="PhantomCardToggle" onactivate="TogglePurchasePhantomCards()">
+        <Label text="#DCG_PurchaseList_PhantomCards"/>
+      </ToggleButton>
+      <Panel class="PurchaseRow ShowOnPurchase" id="AvailableBalance">
+        <Label class="PurchaseLabel" id="AvailableLabel" text="#DCG_CurrencyPurchase_Available"/>
+        <DCGPlayerCurrency id="CurrentBalance"/>
+      </Panel>
+    </Panel>
+    
+    <Panel id="ButtonContainer" class="PopupButtonRow">
+			<Button class="ButtonDark" id="CancelButton" onactivate="UIPopupButtonClicked()">
+				<Label class="ShowOnPurchaseDeckList" text="#Cancel"/>
+        <Label class="ShowOnCart" text="#DCG_Close"/>
+			</Button>
+      <Button class="ButtonDark" id="SubmitButton" onactivate="DCGPurchaseCardListConfirmed()">
+        <Label class="ShowOnPurchase" text="#DCG_PurchaseList_PurchaseButton"/>
+        <Label class="ShowOnSell" text="#DCG_PurchaseList_SellButton"/>
+      </Button>
+		</Panel>
+    
+	</Panel>
+</root>

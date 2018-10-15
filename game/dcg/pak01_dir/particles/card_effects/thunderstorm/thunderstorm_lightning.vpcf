@@ -1,0 +1,212 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 100
+	m_ConstantColor = 
+	[
+		184,
+		184,
+		84,
+		255,
+	]
+	m_nGroupID = 3
+	m_flMaxDrawDistance = 2000.000000
+	m_bShouldSort = false
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_bAdditive = true
+			m_nOrientationType = 3
+			m_flOverbrightFactor = 2.000000
+			m_hTexture = resource:"materials/particle/electrical_arc_white/electrical_arc_white.vtex"
+			m_flSelfIllumAmount = 1.000000
+			m_flDiffuseAmount = 0.000000
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_BasicMovement"
+			m_flOpStrengthMinScale = 0.000000
+			m_flOpTimeOffsetMax = 1.000000
+			m_fDrag = 0.050000
+		},
+		{
+			_class = "C_OP_Decay"
+			m_flOpStrengthMinScale = 0.000000
+			m_flOpTimeOffsetMax = 1.000000
+		},
+		{
+			_class = "C_OP_PositionLock"
+			m_bLockRot = true
+			m_nControlPointNumber = 1
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flBias = 0.650000
+			m_flEndScale = 2.000000
+			m_flStartScale = 0.000000
+			m_flEndTime = 0.175000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 2
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				34.000000,
+				0.000000,
+			]
+			m_nCP2 = 4
+			m_nCP3 = 4
+			m_nHeadLocation = 1
+			m_vecCP4Pos = 
+			[
+				0.000000,
+				54.000000,
+				0.000000,
+			]
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.125000
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+		},
+		{
+			_class = "C_OP_ColorInterpolate"
+			m_ColorFade = 
+			[
+				98,
+				46,
+				20,
+				255,
+			]
+			m_flFadeStartTime = 0.200000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RampScalarSpline"
+			m_RateMax = 10.000000
+			m_RateMin = -10.000000
+			m_nField = "4"
+		},
+		{
+			_class = "C_OP_PositionLock"
+			m_bLockRot = true
+			m_nControlPointNumber = 1
+		},
+		{
+			_class = "C_OP_RemapCPOrientationToRotations"
+			m_bUseQuat = true
+			m_vecRotation = 
+			[
+				90.000000,
+				0.000000,
+				90.000000,
+			]
+			m_nCP = 1
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flOpStrengthMinScale = 0.000000
+			m_flOpTimeOffsetMax = 1.000000
+			m_flRadiusMax = 32.000000
+			m_flRadiusMin = 32.000000
+		},
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_flOpStrengthMinScale = 0.000000
+			m_flOpTimeOffsetMax = 1.000000
+			m_fLifetimeMax = 2.500000
+			m_fLifetimeMin = 1.500000
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nInputMax = 32
+			m_nFieldOutput = "7"
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.000000
+			m_nInputMin = 4
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nInputMax = 2
+			m_bScaleInitialRange = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_flOutputMax = 0.500000
+			m_nFieldOutput = "4"
+			m_nInputMax = 32
+		},
+		{
+			_class = "C_INIT_VelocityRandom"
+			m_nControlPointNumber = 1
+			m_fSpeedMin = -30.000000
+			m_fSpeedMax = 30.000000
+			m_LocalCoordinateSystemSpeedMin = 
+			[
+				-100.000000,
+				0.000000,
+				0.000000,
+			]
+			m_LocalCoordinateSystemSpeedMax = 
+			[
+				100.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+		{
+			_class = "C_INIT_CreateFromCPs"
+			m_nIncrement = 0
+			m_nMinCP = 4
+		},
+		{
+			_class = "C_INIT_VelocityRandom"
+			m_LocalCoordinateSystemSpeedMin = 
+			[
+				-20.000000,
+				-100.000000,
+				0.000000,
+			]
+			m_LocalCoordinateSystemSpeedMax = 
+			[
+				20.000000,
+				-80.000000,
+				0.000000,
+			]
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_bDisableOperator = true
+			m_nParticlesToEmit = 10
+			m_nMaxEmittedPerFrame = 1
+		},
+		{
+			_class = "C_OP_ContinuousEmitter"
+			m_flEmissionDuration = 1.000000
+			m_flEmitRate = 20.000000
+		},
+	]
+	m_bScreenSpaceEffect = true
+	m_ConstantNormal = 
+	[
+		1.000000,
+		0.000000,
+		0.000000,
+	]
+}

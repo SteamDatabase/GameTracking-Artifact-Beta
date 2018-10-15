@@ -1,0 +1,389 @@
+PackOpening
+{
+	width: 100%;
+	height: 100%;
+
+	background-color: #000000FF;
+	
+	animation-name: FadeInPackOpening;
+	animation-duration: 0.75s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+}
+
+@keyframes 'FadeInPackOpening'
+{
+    0%
+    {
+    	opacity: 0;
+    }
+
+
+    100%
+    {
+    	opacity: 1;
+    }
+}
+
+#DynamicPackPanel 
+{
+	width: 100%;
+	height: 100%;
+}
+
+#OpenedCardsPanel
+{
+	flow-children: right;
+
+	width: 100%;
+	height: 100%;
+	
+	visibility: collapse;
+	background-color: #000000FF;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.DisplayCards #OpenedCardsPanel
+{
+	visibility: visible;
+	animation-name: FadeInPackOpening;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+}
+
+CardCollectionCard.CardPack
+{
+    horizontal-align: center;
+    vertical-align: center;
+    width: 300px;
+    height: 525px;
+}
+
+#CancelOpening
+{
+    horizontal-align: center;
+    vertical-align: bottom;
+    margin-bottom: 100px;
+}
+
+.OpenedPack #CancelOpening
+{
+    visibility: collapse;
+}
+
+.RightContainer
+{
+	horizontal-align: left;
+	vertical-align: center;
+	flow-children: down;
+}
+
+.TopRightContainer
+{
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: right;
+}
+
+.BottomRightContainer
+{
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: right;
+}
+
+.CommonRow
+{
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: right;
+}
+
+#OpenedCardList
+{
+    flow-children: down;
+    width: 100%;
+}
+
+.OpenedCardRow
+{
+    flow-children: right;
+    horizontal-align: center;
+}
+
+.OpenedCardsInteriorPanel
+{
+	horizontal-align: center;
+	flow-children: down;
+    margin-top: 90px;
+    width: 100%;
+}
+
+.ButtonContainer
+{
+    margin-top: 10px;
+    flow-children: right;
+    horizontal-align: center;
+}
+
+.CloseButtonPanel
+{
+	width: 300px;
+	height: 32px;
+	horizontal-align: center;
+	vertical-align: center;
+	
+	flow-children: down;
+	
+	border: 2px solid #AAAAAAFF;
+	
+  	background-color: #666666FF;
+	border-radius: 3%;
+	box-shadow: #00000066 -4px -4px 8px 8px;
+
+	margin: 25px;
+}
+
+.CloseButtonPanelTitle
+{
+	vertical-align: center;
+	horizontal-align: center;
+	text-shadow: 0px 0px 6px 3.0 #000000;
+}
+
+.CardPanel .ButtonDark
+{
+    min-width: 110px;
+    min-height: 28px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.CardPanel .ButtonDark Label
+{
+    font-size: 12px;
+    vertical-align: center;
+    flow-children: right;   
+}
+
+#OpenNextPackButton
+{
+	flow-children: down;
+}
+
+.CardPanelContents
+{
+    border-radius: 20px;
+    flow-children: down;    
+    padding:  0px 20px 5px 20px;
+    margin: 8px;
+}
+
+@keyframes 'RevealOpenedCardPanel'
+{
+    0%
+    {
+    	opacity: 0;
+    	blur: gaussian(3.0,3.0,1.0);
+		pre-transform-scale2d: 1.1;
+    }
+
+    100%
+    {
+    	opacity: 1;
+    	blur: gaussian(0.0,0.0,0.0);
+		pre-transform-scale2d: 1;
+    }
+}
+
+.CardPanel
+{
+    opacity: 0;
+}
+
+.CardPanel.CardRevealed
+{
+   	animation-name: RevealOpenedCardPanel;
+	animation-duration: 0.4s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;
+
+    opacity: 1;
+}
+
+.CardPanel .CardPanelLabel
+{
+    horizontal-align: center;
+    font-size: 20px;
+    margin: 4px;
+}
+
+.CardPanel .OwnedCountLabel
+{
+    vertical-align: center;
+    horizontal-align: left;
+    font-size: 18px;
+}
+
+.CardPanel .NewCardLabel
+{
+    vertical-align: center;
+    horizontal-align: right;
+    font-size: 18px;
+    color: black;
+    text-shadow: 0px 0px 6px 3.0 gold;
+}
+
+.CardFooter
+{
+    width: 100%;
+    height: 40px;
+}
+
+.CardFooter .ButtonDark
+{
+    horizontal-align: right;
+}
+
+.CardPanel.CardPanel_Common .CardPanelContents
+{
+    background-color: gradient( linear, 0% 100%, 0% 0%, from( #CD7F3207 ), to( #00000000 ) );
+	border: 1px solid #CD7F3222;
+}
+
+.CardPanel.CardPanel_Common .CardPanelLabel
+{
+    opacity: 0;
+}
+
+.CardPanel.CardPanel_Uncommon .CardPanelContents
+{
+    background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFFFFF05 ), to( #00000000 ) );
+	border: 1px solid silver;
+}
+
+.CardPanel.CardPanel_Uncommon .CardPanelLabel
+{
+    color: silver;
+}
+
+@keyframes 'RareBackgroundGlow'
+{
+    0% 
+    {
+        background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFD70007 ), to( #00000000 ) );
+    }
+    40% 
+    {
+        background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFD70017 ), to( #FFD70007 ) );
+    }
+    60% 
+    {
+        background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFD70017 ), to( #FFD70007 ) );
+    }
+    100% 
+    {
+        background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFD70007 ), to( #00000000 ) );
+    }
+}
+
+.CardPanel.CardPanel_Rare .CardPanelContents
+{
+   	animation-name: RareBackgroundGlow;
+	animation-duration: 2.0s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+
+    //background-color: gradient( linear, 0% 100%, 0% 0%, from( #FFD70007 ), to( #00000000 ) );
+	border: 1px solid gold;
+}
+
+.CardPanel.CardPanel_Rare .CardPanelLabel
+{
+    color: gold;
+}
+
+
+
+.CardPanel.CardRecycled
+{
+    opacity: 0.1;
+    saturation: 0.1;
+}
+.CardPanel.CardRecycled Button,
+.CardPanel.CardRecycled Label
+{
+    opacity: 0.0;
+}
+
+.CardPanel Button
+{
+    horizontal-align: center;
+}
+
+.CardPanel Button Label
+{
+    margin-top: 0px;
+}
+
+.CardPanel .ButtonDark .CurrencyIcon
+{
+    width: 14px;
+    height: 14px;
+}
+
+.ButtonDark DCGPlayerCurrency
+{
+    vertical-align: center;
+    horizontal-align: center;
+}
+
+#BackToCollection
+{
+    margin-right: 20px;
+}
+
+#PhantomDescription
+{
+    color: #DDDDDD;
+    vertical-align: top;
+    horizontal-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    border: 2px solid gray;
+    padding: 12px;
+    visibility: collapse;
+}
+
+.PhantomPacks #PhantomDescription
+{
+    visibility: visible;
+}
+
+#BackToCollection,
+#OpenNextPackButton
+{
+    visibility: collapse;
+}
+
+.PackOpeningCompleted #BackToCollection,
+.PackOpeningCompleted.HasRemainingPacks #OpenNextPackButton
+{
+    visibility: visible;
+}
+
+.ScrapCardToggle
+{
+    horizontal-align: right;
+}
+
+.CardPanel .CardScene
+{
+    width: 200px;
+    height: 350px;
+    horizontal-align: left;
+    vertical-align: top;
+}

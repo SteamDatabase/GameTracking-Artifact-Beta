@@ -1,0 +1,43 @@
+// TOWERS DESTROYED ==================================================================================================
+//====================================================================================================================
+
+
+// note: responses use above criterion to force the response to wait until after the camera move has finished ( set at 1 and 2 second in the responses )
+
+// opponent tower:
+
+
+Rule imps_local_opponent_tower_destroyed_player
+{
+	criteria Death IsTargetTower IsLocalImp IsTargetNotLocal ThisIsImportant
+	response imps_local_opponent_tower_destroyed_player_wait
+}
+
+Rule imps_local_IsChainingToOpponentTowerDestroyed
+{
+	criteria Special IsLocalImp IsChainingToPlayerOpponentTowerDestroyed ThisIsImportant    
+	response imps_local_positive_opponent_tower_destroyed_player
+}
+
+Rule imps_local_opponent_tower_destroyed_player_in_combat
+{
+	criteria Death IsCombat IsTargetTower IsLocalImp IsTargetNotLocal ThisIsImportant
+	response imps_local_positive_broad
+}
+
+
+
+// player tower:
+
+
+Rule rule_imps_defined_local_player_tower_destroyed_player
+{
+	criteria Death IsTargetTower IsLocalImp IsTargetLocal ThisIsImportant
+	response imps_local_player_tower_destroyed_player_wait
+}
+
+Rule imps_local_IsChainingToPlayerTowerDestroyed
+{
+	criteria Special IsLocalImp IsChainingToPlayerTowerDestroyed ThisIsImportant  
+	response imps_local_negative_tower_destroyed_player
+}

@@ -1,0 +1,36 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/base.vcss_c" />
+	  <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/ladder/dcg_db_ranked.vcss_c" />
+    <include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+	</styles>
+  <snippets>
+    <snippet name="RankEntry">
+      <Panel class="LadderRow">
+        <Panel class="FormArrow"/>
+        <Label class="RankNumber" text="{d:rank}."/>
+        <DCGAvatarImage id="AvatarImage" />
+        <DCGUserName id="Nickname" />
+        <Panel class="Rating" onmouseover="DCGShowTextTooltipInXML('#DCG_Gauntlet_TrophyScore')" onmouseout="DCGHideTextTooltip()">
+          <Label text="{d:rating}"/>
+          <Image src="s2r://panorama/images/dashboard/trophies/gauntlet_trophy_png.vtex"/>
+        </Panel>       
+      </Panel>
+    </snippet>
+  </snippets>
+	<Panel>
+    
+    <Panel id="LadderPanel" class="DashboardPanel">
+      <Label class="TitleCard Title" text="#DCG_DBRanked_Title"/>
+      <Panel id="Ranking" itemwidth="702px" itemheight="42px">
+      </Panel>
+    <Panel id="Buttons">
+       <Button id="MainMenu" class="PanelButton" onactivate="DCGToggleGauntletLeaderboardPanel()">
+        <Label text="#DCG_Close"/>
+      </Button>
+    </Panel>
+    </Panel>
+    
+  </Panel>
+</root>

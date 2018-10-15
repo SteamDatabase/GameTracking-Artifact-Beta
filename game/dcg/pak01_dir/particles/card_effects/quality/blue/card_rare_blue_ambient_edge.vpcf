@@ -1,0 +1,158 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nSnapshotControlPoint = 6
+	m_hSnapshot = resource:"particles/models/card/card_border.vsnap"
+	m_flConstantRadius = 1.200000
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_SnapshotRigidSkinToBones"
+		},
+		{
+			_class = "C_OP_OscillateScalar"
+			m_RateMax = 8.000000
+			m_FrequencyMax = 8.000000
+			m_nField = "3"
+			m_bProportional = false
+			m_bProportionalOp = false
+			m_flEndTime_min = 99999.000000
+			m_flEndTime_max = 99999.000000
+		},
+		{
+			_class = "C_OP_ClampScalar"
+			m_flOutputMin = 0.400000
+			m_flOutputMax = 1.200000
+		},
+		{
+			_class = "C_OP_EndCapTimedDecay"
+			m_flDecayTime = 0.400000
+		},
+		{
+			_class = "C_OP_LerpEndCapScalar"
+			m_nFieldOutput = "16"
+			m_flOutput = 0.000000
+			m_flLerpTime = 0.400000
+		},
+		{
+			_class = "C_OP_SpinUpdate"
+		},
+		{
+			_class = "C_OP_Noise"
+			m_nFieldOutput = "5"
+			m_flOutputMin = -1.000000
+			m_fl4NoiseScale = 0.400000
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.500000
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flEndTime = 0.500000
+			m_flStartScale = 0.000000
+			m_bEaseInAndOut = true
+			m_flBias = 0.100000
+		},
+		{
+			_class = "C_OP_PositionLock"
+			m_bLockRot = true
+		},
+		{
+			_class = "C_OP_RemapCPOrientationToRotations"
+			m_bUseQuat = true
+			m_vecRotation = 
+			[
+				90.000000,
+				0.000000,
+				90.000000,
+			]
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_nOrientationType = 3
+			m_flAnimationRate = 0.000000
+			m_bAdditive = true
+			m_hTexture = resource:"materials/particle/yellowflare2.vtex"
+			m_flSelfIllumAmount = 1.000000
+			m_bUseYawWithNormalAligned = true
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_InitSkinnedPositionFromCPSnapshot"
+			m_nSnapshotControlPointNumber = 6
+			m_bRigid = true
+			m_bRandom = true
+		},
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		{
+			_class = "C_INIT_RandomYawFlip"
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 128
+		},
+	]
+	m_nMaxParticles = 165
+	m_ConstantColor = 
+	[
+		0,
+		123,
+		255,
+		255,
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/card_effects/quality/blue/card_rare_blue_ambient_edge_mist.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/card_effects/quality/blue/card_rare_blue_ambient_edge_embers.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/card_effects/quality/blue/card_rare_blue_ambient_edge_glow.vpcf"
+		},
+	]
+	m_ConstantNormal = 
+	[
+		1.000000,
+		0.000000,
+		0.000000,
+	]
+}

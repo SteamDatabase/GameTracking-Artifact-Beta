@@ -1,0 +1,317 @@
+/*
+   Styles for the base tooltip.
+
+   This handles the arrows and background for a tooltip. Individual xml/css
+   files provide the contents for specific types of tooltips
+*/
+
+#Contents
+{
+		//background-color: black;
+   	background-color: gradient( linear, 0% 0%, 100% 0%, from( #25262a ), to( #111111 ) );
+    opacity: 1;
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin: 0px;
+    margin-left: 8px;
+    border-radius: 4px;
+    //border: 2px solid #4c4c4c;
+    //box-shadow: #00000066 4px 4px 8px 8px;
+}
+
+DCGTooltipTimer #Contents
+{
+    padding: 0px;
+}
+
+DCGTooltipCombatPreview #LeftArrow, DCGTooltipCombatPreview #RightArrow, DCGTooltipCardAttribute #LeftArrow, DCGTooltipCardAttribute #RightArrow 
+{
+	margin-bottom: 17px;
+}
+
+#LeftArrow, #RightArrow, #TopArrow, #BottomArrow
+{
+    visibility: collapse;
+    width: 12px;
+    height: 12px;
+    z-index: 1;
+    overflow: noclip;
+}
+
+#LeftArrowOutter, #LeftArrowInner, #RightArrowOutter, #RightArrowInner, #TopArrowOutter, #TopArrowInner, #BottomArrowOutter, #BottomArrowInner
+{
+    border-style: solid;
+}
+
+#LeftArrowOutter, #RightArrowOutter, #TopArrowOutter, #BottomArrowOutter
+{
+    border-width: 12px 12px 12px 12px;
+}
+
+#LeftArrowInner, #RightArrowInner, #TopArrowInner, #BottomArrowInner
+{
+    border-width: 11px 11px 11px 11px;
+}
+
+#LeftArrowOutter
+{
+    //border-color: transparent #4c4c4c transparent transparent;
+	margin-left: -10px;
+}
+
+#LeftArrowInner
+{
+    border-color: transparent #25262a transparent transparent;
+    margin-left: -8px;
+    margin-top: 1px;
+}
+
+#RightArrowOutter
+{
+    //border-color: transparent transparent transparent #4c4c4c;
+    margin-left: -2px;
+}
+
+#RightArrowInner
+{
+    border-color: transparent transparent transparent #111111;
+    margin-left: -2px;
+    margin-top: 1px;
+}
+
+#TopArrowOutter
+{
+    //border-color: transparent transparent #4c4c4c transparent;
+    margin-top: -10px;
+}
+
+#TopArrowInner
+{
+    border-color: transparent transparent #111111 transparent;
+    margin-top: -6px;
+    margin-left: 1px;
+}
+
+#BottomArrowOutter
+{
+    //border-color: #4c4c4c transparent transparent transparent;
+    margin-top: -2px;
+}
+
+#BottomArrowInner
+{
+    border-color: #111111 transparent transparent transparent;
+    margin-top: -4px;
+    margin-left: 1px;
+}
+
+#TopArrow, #BottomArrow
+{
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/* The code will automatically set these styles on the tooltip body, so we just need to adjust the visibility */
+.TooltipContainer.LeftArrowVisible #LeftArrow
+{
+    visibility: visible;
+}
+.TooltipContainer.RightArrowVisible #RightArrow
+{
+    visibility: visible;
+}
+.TooltipContainer.TopArrowVisible #TopArrow
+{
+    visibility: visible;
+}
+.TooltipContainer.BottomArrowVisible #BottomArrow
+{
+    visibility: visible;
+}
+
+.NoArrow.TooltipContainer.LeftArrowVisible #LeftArrow
+{
+    visibility: collapse;
+}
+.NoArrow.TooltipContainer.RightArrowVisible #RightArrow
+{
+    visibility: collapse;
+}
+.NoArrow.TooltipContainer.TopArrowVisible #TopArrow
+{
+    visibility: collapse;
+}
+.NoArrow.TooltipContainer.BottomArrowVisible #BottomArrow
+{
+    visibility: collapse;
+}
+
+/* When an arrow is visible, remove the margin from that side
+   and make sure the side is big enough that the arrow doesn't look silly */
+.TooltipContainer.LeftArrowVisible #Contents
+{
+    margin-left: 0px;
+    min-height: 40px;
+}
+.TooltipContainer.RightArrowVisible #Contents
+{
+    margin-right: 0px;
+    min-height: 40px;
+}
+.TooltipContainer.BottomArrowVisible #Contents
+{
+    margin-bottom: 0px;
+    min-width: 60px;
+}
+.TooltipContainer.TopArrowVisible #Contents
+{
+    margin-top: 0px;
+    min-width: 60px;
+}
+
+/* Flow the contents properly */
+.TooltipContainer
+{
+    flow-children: down;
+
+    opacity: 0.0;
+
+    transition-property: opacity, pre-transform-scale2d;
+    transition-duration: 0.175s, 0.25s;
+}
+
+.TooltipContainer.BottomLeftTooltip
+{
+	tooltip-position: left;
+}
+
+.TooltipContainer.BottomRightTooltip
+{
+	tooltip-position: right;
+}
+
+.TooltipContainer.TooltipVisible
+{
+    opacity: 1.0;
+    transition-delay: 0.0s;
+}
+
+.TooltipRow
+{
+    flow-children: right;
+}
+
+TooltipContents
+{
+	visibility: collapse;
+}
+
+.TooltipVisible TooltipContents
+{
+	visibility: visible;
+}
+
+.SettingsTooltip #Contents
+{
+	max-width: 584px;
+	min-width: 584px;
+	margin-top: 2px;
+}
+
+.SettingsTooltip #TopArrow
+{
+	width: 0px;
+	height: 0px;
+}
+
+.ShortTextTooltip #Contents
+{
+	background-color: #2d2d2d;
+	padding: 8px 10px 6px 10px;
+	border-radius: 0px;
+	border: 1px solid black;
+	box-shadow: fill #000000aa -4px -4px 8px 8px;
+}
+
+.ShortTextTooltip #RightArrow
+{
+	margin-left: -1px;
+}
+
+.ShortTextTooltip #LeftArrow
+{
+	margin-right: -1px;
+}
+
+.ShortTextTooltip #BottomArrow
+{
+	margin-top: -1px;
+}
+
+.ShortTextTooltip #TopArrow
+{
+	margin-bottom: -1px;
+}
+
+.PostGamePermanentBuffTooltip #Contents
+{
+	max-width: 350px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #2d2d2dfd ), to( #000000fd ) );
+}
+
+.FadeIn
+{
+	animation-name: FadeIn;
+	animation-duration: 0.35s;
+	animation-delay: 0s;
+	animation-timing-function: linear;
+	animation-iteration-count: 1;
+}
+
+@keyframes 'FadeIn'
+{
+	0%
+	{
+		opacity: 0;
+	}
+
+	100%
+	{
+		opacity:1;
+	}
+}
+
+DCGTooltipGlossary
+{
+	tooltip-body-position: 50% 50%;
+	tooltip-arrow-position: 40% 40%;
+}
+
+DCGTooltipAbilityPanel
+{
+	tooltip-position: left;
+}
+
+DCGTooltipCardFaceDownOpponentHand
+{
+	tooltip-position: bottom;
+	tooltip-body-position: 25% 25%;
+}
+
+DCGTooltipCardFaceDownOpponentHand.IsRevealed
+{
+	tooltip-position: right;
+	tooltip-body-position: 50% 50%;
+}
+
+#DCGLastCardTooltip #RightArrowInner
+{
+	   border-color: transparent transparent transparent #1f1f22;
+}
+
+#DCGLastCardTooltip.IsOpponent #RightArrowInner
+{
+	   border-color: transparent transparent transparent #44454a;
+}

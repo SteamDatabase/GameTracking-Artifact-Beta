@@ -1,0 +1,23 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/base.vcss_c" />
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/hud/dcg_hud_main.vcss_c" />
+	</styles>
+
+	<DCGHud class="WindowRoot" hittest="false">
+		<DCGGameRender id="GameRender" />
+		
+		<!-- Make sure these are at the bottom to get the z-order right -->
+		<DCGDashboardPopupManager id="HudPopupManager" onpopupsdismissed="SetInputFocus( Hud )" />
+
+		<ToastManager id="ToastManager" hittest="false" toastduration="5.0s" maxtoastsvisible="3" />
+ 
+		<!-- Note that z-order is set by .css.  The chat will move here, when the accept match popup is visible. -->
+		<DCGContextMenuManager id="ContextMenuManager" />
+		<DCGTooltipManager id="Tooltips" hittest="false" />
+    <DCGChatWheel id="ChatWheel" hittest="false" class="VisGroup_Top" />
+    <Label id="BuildNumber" text="#DCG_Dashboard_BuildVersion" />
+    <DCGMarketMiniIcon id="CardRenderMiniIcon"/>
+  </DCGHud>
+</root>

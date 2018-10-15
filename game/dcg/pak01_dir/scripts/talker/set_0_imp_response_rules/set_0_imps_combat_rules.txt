@@ -1,0 +1,218 @@
+
+// this file handles responses to UNIT DEATHS in COMBAT ONLY. 
+// for TOWER DEATH in combat see towers_rules.txt
+
+
+
+//====   PLAYER AND OPPONENT (COMBAT DRAWS)  =========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_combat_draw_win_small
+{
+	criteria Death IsLocalImp IsCombat LocalChangeMomentum_Pos OpponentChangeMomentum_Pos
+	
+	response imps_local_positive_whatever
+}
+
+Rule rule_imps_opponent_combat_draw_win_small
+{
+	criteria Death IsOpponentImp IsCombat LocalChangeMomentum_Pos OpponentChangeMomentum_Pos
+	
+	response imps_local_positive_whatever
+}
+
+Rule rule_imps_local_combat_draw_lose_small
+{
+	criteria Death IsCombat LocalChangeMomentum_Neg OpponentChangeMomentum_Neg
+	
+	response imps_local_positive_whatever
+}
+
+Rule rule_imps_opponent_combat_draw_lose_small
+{
+	criteria Death IsCombat IsOpponentImp LocalChangeMomentum_Neg OpponentChangeMomentum_Neg
+	
+	response imps_local_positive_whatever
+}
+
+Rule rule_imps_local_combat_draw_win_broad
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid
+	
+	response imps_local_positive_broad
+}
+
+Rule rule_imps_opponent_combat_draw_win_broad
+{
+	criteria Death IsCombat IsOpponentImp LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid
+	
+	response imps_opponent_positive_broad
+}
+
+
+Rule rule_imps_local_combat_draw_lose_broad
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid
+	
+	response imps_local_negative_small
+}
+
+Rule rule_imps_opponent_combat_draw_lose_broad
+{
+	criteria Death IsCombat IsOpponentImp LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid
+	
+	response imps_opponent_negative_small
+}
+
+
+Rule rule_imps_local_combat_draw_win_losing_game
+{
+	
+  // MOMENTUM: if the player is LOSING the overall game, their imp will react positivley to a winning draw
+	
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Pos OpponentChangeMomentum_Pos PlayerIsLosingGame IsGameRound4orMore
+	
+	response imps_local_positive_small
+}
+
+
+Rule rule_imps_local_combat_draw_lose_losing_game
+{
+	
+	// MOMENTUM: if the player is LOSING the overall game, their imp will react negativley to a losing draw
+	
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Neg OpponentChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore
+	
+	response imps_local_negative_small
+}
+
+
+
+//====   PLAYER (COMBAT MAJORITY WIN)  ===============================================================================
+//====================================================================================================================
+
+
+Rule rule_imps_local_positive_small_combat_win_creeps
+{
+	
+	// player imp will react to creep kills in combat
+	
+	criteria Death IsCombat IsLocalImp IsTargetCreep LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+	
+	response imps_local_positive_small
+}
+
+Rule rule_imps_local_positive_small_combat_win_heroes
+{
+	
+	// player imp will react to hero kills in combat
+	
+	criteria Death IsCombat IsLocalImp IsTargetHero LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+	
+	response imps_local_positive_broad
+}
+
+
+Rule rule_imps_local_positive_broad_combat_win_broad
+{
+	criteria Death IsCombat IsLocalImp IsTargetHero LocalChangeMomentum_PosMid OpponentChangeMomentum_NegMid
+	
+	response imps_local_positive_broad
+}
+
+Rule rule_imps_local_positive_broad_combat_win_losing_game
+{
+
+	// MOMENTUM: if the player is BADLY LOSING the overall game, ANY opponent kill in combat will play a broad response
+
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Pos OpponentChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore
+	
+	response imps_local_positive_broad
+}
+
+
+
+//====   PLAYER (COMBAT MAJORITY LOSE)  ==============================================================================   
+//====================================================================================================================
+
+Rule rule_imps_local_negative_small_combat_lose
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Neg OpponentChangeMomentum_Pos
+	
+	response imps_local_negative_small
+}
+
+Rule rule_imps_local_negative_broad_combat_lose
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_NegMid OpponentChangeMomentum_PosMid
+	
+	response imps_local_negative_broad
+}
+
+Rule rule_imps_local_negative_broad_combat_lose_losing_game
+{
+
+	// MOMENTUM: if the player is BADLY LOSING the overall game, ANY local kill in combat will play a broad response
+
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Neg OpponentChangeMomentum_Pos PlayerIsLosingGame IsGameRound4orMore
+	
+	response imps_local_negative_broad
+}
+
+
+
+//====   OPPONENT (COMBAT MAJORITY WIN)  =============================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_positive_small_combat_win
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_Pos LocalChangeMomentum_Neg
+	
+	response imps_opponent_positive_small
+}
+
+Rule rule_imps_opponent_positive_broad_combat_win
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_PosMid LocalChangeMomentum_NegMid
+	
+	response imps_opponent_positive_broad
+}
+
+Rule rule_imps_opponent_positive_broad_combat_win_losing_game
+{
+
+	// MOMENTUM: if the player is MOSTLY WINNING the overall game, ANY local kill in combat will play a broad response
+
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_PosMid LocalChangeMomentum_NegMid PlayerIsWinningGame IsGameRound4orMore
+	
+	response imps_opponent_positive_broad
+}
+
+
+//====   OPPONENT (COMBAT MAJORITY LOSE)  ============================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_negative_small_combat_lose
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_Neg LocalChangeMomentum_Pos
+	
+	response imps_opponent_negative_small
+}
+
+Rule rule_imps_opponent_negative_broad_combat_lose
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_NegMid LocalChangeMomentum_PosMid
+	
+	response imps_opponent_negative_small
+}
+
+
+Rule rule_imps_opponent_negative_broad_combat_lose_losing_game
+{
+
+	// MOMENTUM: if the player is MOSTLY WINNING the overall game, ANY opponent kill in combat will play a broad response
+
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_NegMid LocalChangeMomentum_PosMid PlayerIsWinningGame IsGameRound4orMore
+	
+	response imps_opponent_negative_broad
+}

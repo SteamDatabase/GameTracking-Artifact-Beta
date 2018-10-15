@@ -1,0 +1,535 @@
+@define textColorGold: #e9c35e;
+@define textColorCardsInHand: #cacaca;
+@define textColorGameClock: #cacaca;
+
+.IsDisconnected
+{
+    background-color: #CC0000AA;
+}
+
+.DisconnectedDisplay
+{
+    visibility: collapse;
+    vertical-align: center;
+}
+
+.IsDisconnected .DisconnectedDisplay
+{
+   visibility: visible;
+}
+
+#DisconnectedLabel
+{
+    text-transform: uppercase;
+    margin: 10px;
+    font-size: 24px;
+}
+
+
+.PlayerInfo
+{
+	flow-children: none;
+
+	width: 312px;
+
+	height: fit-children;
+
+	vertical-align: bottom;
+	horizontal-align: right;
+
+    visibility: visible;
+
+	transition-property: opacity;
+	transition-duration: 0.3s;
+	transition-delay: 0.1s;
+	background-blur: gaussian( 7 );
+	
+    opacity: 0;
+}
+
+.PlayerInfoBG
+{
+	width: 100%;
+	height: 100%;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_psd.vtex");
+}
+
+.PlayerInfoContents
+{
+	flow-children: right;
+	width: 100%;
+	height: fit-children;
+	padding-top: 12px;
+	padding-bottom: 4px;
+}
+
+.HasGameClock.PlayerInfo
+{
+	width: 424px;	
+}
+
+.PlayerInfo.IsActingPlayer .PlayerInfoBG
+{
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_psd.vtex");
+}
+
+.PlayerInfo.OpponentInfo.IsActingPlayer .PlayerInfoBG
+{
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_activeplayer_psd.vtex");
+}    
+
+.PlayerInfo.IsActingPlayer .PlayerInfoBG
+{
+	animation-name: acting-player-highlight;
+    animation-duration: 3.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;    
+}
+
+@keyframes 'acting-player-highlight'
+{
+	0%
+	{
+		opacity: 0.4;
+	}
+
+	50%
+	{
+		opacity: 1.0;
+	}
+
+	100%
+	{
+		opacity: 0.4;
+	}
+}              
+
+
+.ActingPlayerStartImage
+{
+	width: 100%;
+	height: 100%;
+	opacity: 0.0;
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_start_psd.vtex");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.PlayerInfo .ActingPlayerStartImage
+{
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_start_psd.vtex");
+}
+
+.PlayerInfo.OpponentInfo .ActingPlayerStartImage
+{
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_activeplayer_start_psd.vtex");
+}
+
+.PlayerInfo.IsActingPlayer .ActingPlayerStartImage
+{
+    animation-name: acting-player-start;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;    
+}
+
+@keyframes 'acting-player-start'
+{
+    0%
+    {
+        opacity: 0.0;
+    }
+    10%
+    {
+        opacity: 0.5;
+    }
+    20%
+    {
+        opacity: 1.0;
+    }
+
+    100%
+    {
+        opacity: 0.0;
+    }
+}
+
+.VSPhase8_Complete.PlayerInfo
+{
+    opacity: 1;
+}
+
+.OpponentInfo
+{
+	vertical-align: top;
+}
+
+.OpponentInfo .PlayerInfoBG
+{
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_psd.vtex");
+}
+
+.OpponentInfo .PlayerInfoContents
+{
+	flow-children: right;
+}
+
+
+.IconsContainer
+{
+	padding-top: 0px;
+  padding-bottom: 0px;
+  margin-right: 75px;
+}
+
+.IsHidden
+{
+	visibility: collapse;
+}
+
+.PlayerInfoNumber
+{
+
+	font-size: 28px;
+	font-family: RadianceM;
+	text-overflow: shrink;
+
+	vertical-align: center;
+
+	text-align: left;
+	margin-left: 6px;
+
+	text-shadow: 0px 0px 6px 2.0 black;
+}
+
+.GameClockContainer
+{
+	margin-left: 16px;
+	flow-children: right;
+	height: fit-children;
+	width: 102px;
+	vertical-align: center;
+    visibility: collapse;
+}
+
+.HasGameClock .GameClockContainer
+{
+    visibility: visible;
+}
+
+.GameClockIconContainer
+{
+	height: fit-children;
+	width: fit-children;
+//	vertical-align: center;
+}
+
+#GameClockIcon
+{
+	width: 22px;
+	height: 22px;
+
+	margin-bottom: 7px;
+
+	background-size: cover;
+	background-image: url("s2r://panorama/images/hud/gameclock_small_psd.vtex");
+
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+.GameClockCount
+{
+	color: textColorGameClock;
+    vertical-align: center;
+	horizontal-align: left;
+	margin-bottom: 1px;
+}
+
+.GameClockCount .LessThanOneMinute
+{
+	color: #ac0f0a;
+}
+
+.GameClockCount .LessThanThirtySeconds
+{
+    animation-name: count-pulse-time-critical;
+    animation-duration: 0.875s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;    
+}
+
+@keyframes 'count-pulse-time-critical'
+{
+    0%
+    {
+        color:#ac0f0a;
+    }
+
+	50%
+    {
+        color:#d98889;
+    }
+
+    100%
+    {
+        color:#ac0f0a;
+    }
+}
+
+.GoldContainer
+{
+	margin-left: 16px;
+	flow-children: right;
+	height: fit-children;
+	width: fit-children;
+	vertical-align: center;
+}
+
+.GoldIconContainer
+{
+	height: fit-children;
+	width: fit-children;
+//	vertical-align: center;
+}
+
+#GoldIcon
+{
+	width: 26px;
+	height: 26px;
+
+	margin-bottom: 8px;
+
+	background-size: cover;
+	background-image: url("s2r://panorama/images/hud/gold_small_psd.vtex");
+
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+.GoldCount
+{
+	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
+	//color: textColorGold;
+	
+	margin-left: 6px;
+	margin-bottom: 2px;
+
+    vertical-align: center;
+	horizontal-align: center;
+}
+
+#ShopDeedIcon
+{
+	width: 22px;
+	height: 24px;
+
+	margin-left: 5px;
+    margin-bottom: 8px;
+	background-image: url("s2r://panorama/images/hud/hud_shop_deed_icon_png.vtex");
+
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+#ShopDeedCount
+{
+	color: textColorGold;
+
+    font-size: 20px;
+    margin-bottom: 4px;
+
+    vertical-align: center;
+	horizontal-align: center;
+}
+
+
+.CardsInHandContainer
+{
+  margin-left: 16px;
+  margin-right: 17px;
+	flow-children: down;
+
+	margin-top: 0px;
+	margin-bottom: 0px;
+	horizontal-align: right;
+}
+
+.OpponentInfo .PlayerInfoContents .CardsInHandContainer
+{
+    visibility: collapse;
+}
+
+.CardsInHandRadioButtonContainer
+{
+	width: fit-children;
+	flow-children: right;
+}
+
+.OpponentInfo .CardsInHandRadioButtonContainer
+{
+	opacity: 0;
+}
+
+.CardsInHandRadioButton
+{
+	width: 8px;
+	height: 8px;
+	margin-right: 2px;
+	background-image: url("s2r://panorama/images/hud/hud_cards_in_hand_pip_png.vtex");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.CardsInHandRadioButton.Active
+{
+	background-image: url("s2r://panorama/images/hud/hud_cards_in_hand_pip_active_png.vtex");
+}
+
+#CardsInHandIcon
+{
+	width: 26px;
+	height: 26px;
+
+	padding-bottom: 4px;
+
+  background-image: url("s2r://panorama/images/hud/hud_cards_in_hand_icon_png.vtex");
+  background-size: cover;
+
+	vertical-align: center;
+}
+
+.CardsInHand
+{
+	color: textColorCardsInHand;
+}
+
+.LittleButton_Compact
+{
+	margin: 2px;
+	border: 1px solid #CCCCCCFF;
+	height: fit-children;
+	width: fit-children;
+	background-color: #44444444;
+}
+
+.LittleButton_Compact Label
+{
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+	color: #CCCCCCFF;
+	font-size: 12px;
+	font-family: platformfont;
+	letter-spacing: normal;
+	text-transform: uppercase;
+}
+
+.LittleButton_Compact:hover Label
+{
+	color: white;
+}
+
+.LittleButton_Compact:hover
+{
+	border: 1px solid #FFFFFFFF;
+	background-color: #44444444;
+}
+
+.LittleButton_Compact:active
+{
+	background-color: #23468aDD;
+}
+
+.LittleButton_Compact:active Label
+{
+	color: #FFFFFFFF;
+}
+
+@keyframes 'turn-pulse'
+{
+    0%
+    {
+	    border: 5px solid #00000000;
+    }
+
+	50%
+    {
+	    border: 5px solid #ffd800;
+    }
+
+    100%
+    {
+	    border: 5px solid #00000000;
+    }
+}
+
+@keyframes 'border-pulse'
+{
+    0%
+    {
+	    border: 3px solid #00000000;
+    }
+
+	50%
+    {
+	    border: 5px solid #a68d01FF;
+    }
+
+    100%
+    {
+	    border: 3px solid #00000000;
+    }
+}
+
+.TutorialHighlight
+{
+    animation-name: border-pulse;
+	animation-duration: 1.0s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.PersonaName
+{
+	width: fill-parent-flow (1.0);
+  height: 32px;
+
+	text-align: right;
+  text-overflow: ellipsis;
+
+	font-size: 22px;
+	color: #FFFFFFFF;
+	font-family: radiance;
+	//font-stretch: condensed;
+
+	horizontal-align: right;
+	vertical-align: center;
+}
+
+.PersonaName:hover
+{
+	text-decoration: none;
+}
+
+.MediaMode .OpponentInfo .PlayerInfoContents .PersonaName
+{
+	horizontal-align: right;
+    width: 230px;
+}
+
+.OpponentInfo .PlayerInfoContents .PersonaName
+{
+	horizontal-align: right;
+    width: 214px;
+    margin-right: 16px;
+}
+
+#ShopDeedContainer
+{
+	flow-children: right;
+	tooltip-position: top;
+}

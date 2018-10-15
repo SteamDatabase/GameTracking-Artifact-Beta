@@ -1,0 +1,227 @@
+//////////////////////////////////////
+//**INCARNATION OF SELEMENE - CREEP///
+//////////////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_inc_of_selemene_normal
+{
+	speak "inc_of_selemene_summon_01_proc" noscene 
+	speak "inc_of_selemene_summon_02_proc" noscene
+}
+Rule summon_inc_of_selemene_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene
+	response summon_inc_of_selemene_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_inc_of_selemene_enemy_ancient_exposed
+{
+	speak "inc_of_selemene_ancient_attack_01_proc" noscene
+	speak "inc_of_selemene_ancient_attack_02_proc" noscene
+	speak "inc_of_selemene_tower_destroy_03_proc" noscene
+	speak "inc_of_selemene_tower_destroy_04_proc" noscene
+}	
+Rule summon_inc_of_selemene_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene IsEnemyAncientExposed
+	response summon_inc_of_selemene_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_inc_of_selemene_your_ancient_exposed
+{
+	speak "inc_of_selemene_ancient_protect_01_proc" noscene
+	speak "inc_of_selemene_tower_destroy_01_proc" noscene
+	speak "inc_of_selemene_tower_saved_01_proc" noscene
+}	
+Rule summon_inc_of_selemene_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene IsAllyAncientExposed
+	response summon_inc_of_selemene_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_inc_of_selemene_both_ancients_exposed
+{
+	speak "inc_of_selemene_ancient_both_01_proc" noscene
+	speak "inc_of_selemene_ancient_both_02_proc" noscene
+	speak "inc_of_selemene_tower_saved_03_proc" noscene
+	speak "inc_of_selemene_tower_saved_05_proc" noscene
+}	
+Rule summon_inc_of_selemene_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_inc_of_selemene_both_ancients_exposed
+}
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_inc_of_selemene_ally_mirana
+{
+	speak "inc_of_selemene_hero_friend_01_proc" noscene 
+}
+Rule summon_inc_of_selemene_ally_mirana_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene AllyHasMirana
+	response summon_inc_of_selemene_ally_mirana
+}
+
+Response summon_inc_of_selemene_ally_luna
+{
+	speak "inc_of_selemene_hero_friend_02_proc" noscene 
+	speak "inc_of_selemene_hero_friend_03_proc" noscene 
+}
+Rule summon_inc_of_selemene_ally_luna_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene AllyHasLuna
+	response summon_inc_of_selemene_ally_luna
+}
+
+Response summon_inc_of_selemene_ally_centaur_warrunner
+{
+	speak "inc_of_selemene_unique_03_proc" noscene 
+}
+Rule summon_inc_of_selemene_ally_centaur_warrunner_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene AllyHasCentaurWarrunner IsSourceLocal
+	response summon_inc_of_selemene_ally_centaur_warrunner
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+Response summon_inc_of_selemene_enemy_centaur_warrunner
+{
+	speak "inc_of_selemene_hero_rival_01_proc" noscene
+	speak "inc_of_selemene_hero_rival_02_proc" noscene 
+	speak "inc_of_selemene_hero_rival_03_proc" noscene 
+}
+Rule summon_inc_of_selemene_enemy_centaur_warrunner_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene EnemyHasCentaurWarrunner
+	response summon_inc_of_selemene_enemy_centaur_warrunner
+}
+
+
+////////////////
+//unique lines//
+////////////////
+
+Response summon_inc_of_selemene_ally_mirana_and_luna
+{
+	speak "inc_of_selemene_unique_02_proc" noscene 
+}
+Rule summon_inc_of_selemene_ally_mirana_and_luna_rule
+{
+	criteria IsNotImp Summon IsTargetIncarnationOfSelemene AllyHasMirana AllyHasLuna
+	response summon_inc_of_selemene_ally_mirana_and_luna
+}
+
+
+
+Response inc_of_selemene_play_bolt_of_damocles
+{
+	speak "inc_of_selemene_unique_01_proc" noscene 
+	speak "inc_of_selemene_unique_04_proc" noscene 
+}
+Rule inc_of_selemene_play_bolt_of_damocles_rule
+{
+	criteria IsNotImp PlayCard  IsSourceBoltOfDamocles AllyHasIncarnationOfSelemene ThisIsImportant
+	response inc_of_selemene_play_bolt_of_damocles
+}
+
+Response inc_of_selemene_summon_turn_2
+{
+	speak "inc_of_selemene_unique_06_proc" noscene 
+}
+Rule inc_of_selemene_summon_turn_2_rule
+{
+	criteria IsNotImp Summon  IsTargetIncarnationOfSelemene IsMana4Round ThisIsImportant
+	response inc_of_selemene_summon_turn_2
+}
+
+Response inc_of_selemene_summon_turn_3
+{
+	speak "inc_of_selemene_unique_05_proc" noscene 
+}
+Rule inc_of_selemene_summon_turn_3_rule
+{
+	criteria IsNotImp Summon  IsTargetIncarnationOfSelemene IsMana5Round ThisIsImportant
+	response inc_of_selemene_summon_turn_3
+}
+	
+Response inc_of_selemene_summon_turn_4
+{
+	speak "inc_of_selemene_unique_07_proc" noscene 
+}
+Rule inc_of_selemene_summon_turn_4_rule
+{
+	criteria IsNotImp Summon  IsTargetIncarnationOfSelemene IsMana6Round ThisIsImportant
+	response inc_of_selemene_summon_turn_4
+}	
+	
+Response inc_of_selemene_summon_turn_5
+{
+	speak "inc_of_selemene_unique_07_proc" noscene 
+}
+Rule inc_of_selemene_summon_turn_5_rule
+{
+	criteria IsNotImp Summon  IsTargetIncarnationOfSelemene IsMana7Round ThisIsImportant
+	response inc_of_selemene_summon_turn_5
+}	
+
+Response inc_of_selemene_summon_turn_6
+{
+	speak "inc_of_selemene_unique_08_proc" noscene 
+}
+Rule inc_of_selemene_summon_turn_6_rule
+{
+	criteria IsNotImp Summon  IsTargetIncarnationOfSelemene IsMana8Round ThisIsImportant
+	response inc_of_selemene_summon_turn_6
+}	
+
+
+	
+//////////
+//healed//
+//////////
+
+Response heal_emissary_inc_of_selemene
+{
+	speak "inc_of_selemene_healed_01_proc" noscene 
+	speak "inc_of_selemene_healed_02_proc" noscene 
+	speak "inc_of_selemene_healed_03_proc" noscene 
+}
+Rule heal_emissary_inc_of_selemene_rule
+{
+	criteria IsNotImp Heal IsTargetIncarnationOfSelemene
+	response heal_emissary_inc_of_selemene
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

@@ -1,0 +1,174 @@
+<root>
+	<styles>
+	    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/hud/collection_filters.vcss_c" />
+	</styles>
+
+	<Panel class="FiltersBody">
+
+    <Panel class="CardFilterRow Collection Main Shop Heroes">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterText"/>
+      <Panel class="CardFiltersControls">
+        <TextEntry id="CardFiltersName"/>
+      </Panel>
+      <Button id="ClearCardFilterTextButton" onactivate="ClearCardFilterText()">
+        <Label text="#DCG_XForClose"/>
+      </Button>
+    </Panel>
+
+    <Panel class="CardFilterRow Collection">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterDeck"/>
+      <Panel class="CardFiltersControls" >
+        <RadioButton class="FilterButtonText" group="DeckTypeFilter" selected="true" onactivate="SetDeckTypeFilter( '' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="DeckTypeFilter" onactivate="SetDeckTypeFilter( 'Hero' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterDeckHero"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="DeckTypeFilter" onactivate="SetDeckTypeFilter( 'Main' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterDeckMain"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="DeckTypeFilter" onactivate="SetDeckTypeFilter( 'Item' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterDeckItem"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow AllCollection Main Heroes">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterColor"/>
+      <Panel class="CardFiltersControls">
+        <Button class="FilterButtonColor" id="RedColorFilter" onactivate="ToggleColorFilter( Red )"/>
+        <Button class="FilterButtonColor" id="GreenColorFilter" onactivate="ToggleColorFilter( Green )"/>
+        <Button class="FilterButtonColor" id="BlueColorFilter" onactivate="ToggleColorFilter( Blue )"/>
+        <Button class="FilterButtonColor" id="BlackColorFilter" onactivate="ToggleColorFilter( Black )"/>
+        <Button class="FilterButtonColor ContextualVisibility AllCollection" id="NeutralColorFilter" onactivate="ToggleColorFilter( Neutral )"/>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Main">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterType"/>
+      <Panel class="CardFiltersControls" >
+        <RadioButton class="FilterButtonText" group="MainTypeFilter" selected="true" onactivate="SetTypeFilter( '' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="MainTypeFilter" onactivate="SetTypeFilter( Creep )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipCreep )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonCreep"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="MainTypeFilter" onactivate="SetTypeFilter( Spell )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipSpell )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonSpell"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="MainTypeFilter" onactivate="SetTypeFilter( Improvement )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipImprovement )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonImprovement"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Shop">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterType"/>
+      <Panel class="CardFiltersControls" >
+        <RadioButton class="FilterButtonText" group="ShopTypeFilter" selected="true" onactivate="SetSubtypeFilter( '' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="ShopTypeFilter" onactivate="SetSubtypeFilter( Weapon )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipWeapon )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonWeapon"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="ShopTypeFilter" onactivate="SetSubtypeFilter( Armor )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipArmor )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonArmor"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="ShopTypeFilter" onactivate="SetSubtypeFilter( Accessory )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipAccessory )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonAccessory"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="ShopTypeFilter" onactivate="SetSubtypeFilter( Consumable )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipConsumable )" onmouseout="UIHideTextTooltip()">
+          <Panel class="FilterButtonIconImage FilterButtonConsumable"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Main">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterMana"/>
+      <Panel class="CardFiltersControls">
+        <RadioButton class="FilterButtonText" group="ManaFilter" selected="true" onactivate="SetManaFilter( 0, 0 )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 0, 1 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_1"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 2, 2 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_2"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 3, 3 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_3"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 4, 4 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_4"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 5, 5 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_5"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 6, 6 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_6"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 7, 7 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_7"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="ManaFilter" onactivate="SetManaFilter( 8, 100 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterMana_8"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Shop">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterCost"/>
+      <Panel class="CardFiltersControls">
+        <RadioButton class="FilterButtonText" group="CostFilter" selected="true" onactivate="SetCostFilter( 0, 0 )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 0, 4 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_1"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 5, 7 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_2"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 8, 11 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_3"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 12, 16 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_4"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 17, 22 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_5"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonText" group="CostFilter" onactivate="SetCostFilter( 23, 1000 )">
+          <Label class="CostFilterLabel" text="#DCG_DeckBuilder_FilterCost_6"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Collection Main Shop Heroes">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterRarity"/>
+      <Panel class="CardFiltersControls">
+        <RadioButton class="FilterButtonText" group="RarityFilter" selected="true" onactivate="SetRarityFilter( '' )">
+          <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" id="BasicRarityFilter" group="RarityFilter" onactivate="SetRarityFilter( Basic )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_RarityTooltipBasic)" onmouseout="UIHideTextTooltip()">
+          <DCGSetIcon setid="1"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="RarityFilter" onactivate="SetRarityFilter( Common )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_RarityTooltipCommon )" onmouseout="UIHideTextTooltip()">
+          <DCGSetIcon setid="1" rarity="Common"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="RarityFilter" onactivate="SetRarityFilter( Uncommon )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_RarityTooltipUncommon )" onmouseout="UIHideTextTooltip()">
+          <DCGSetIcon setid="1" rarity="Uncommon"/>
+        </RadioButton>
+        <RadioButton class="FilterButtonIcon" group="RarityFilter" onactivate="SetRarityFilter( Rare )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_RarityTooltipRare )" onmouseout="UIHideTextTooltip()">
+          <DCGSetIcon setid="1" rarity="Rare"/>
+        </RadioButton>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Collection Main Shop Heroes">
+      <Label class="CardFiltersLabel" text="#DCG_DeckBuilder_FilterAge"/>
+      <DropDown class="CardAgeDropDown" id="CardAgeFilter" dropdownbodyposition="100% 100%"/>
+    </Panel>
+
+  </Panel>
+</root>

@@ -1,0 +1,107 @@
+<root>
+	<styles>
+	  <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/card_collection/card_collection.vcss_c" />
+    <include src="s2r://panorama/styles/components/collection_filters.vcss_c" />
+	</styles>
+
+	<Panel>
+    <Panel id="MainBody" hittest="false">
+      
+      <Panel id="LeftPanel" hittest="false">
+        
+        <Panel class="SetGroup">
+          <Label class="LeftPanelTitle" text="#DCG_Collection_SetTitle"/>
+          <DropDown class="SelectDropDown" id="SetDropDown" dropdownbodyposition="100% 100%"/>
+          <Label class="OwnershipText" text="#DCG_Collection_OwnedCards"/>
+          <Label class="OwnershipText" text="#DCG_Collection_CompletedCards"/>
+          <Label class="OwnershipText" text="#DCG_Collection_CardCount"/>
+        </Panel>
+        
+        
+        <Panel class="CardTypeGroup">
+          <Label class="LeftPanelTitle" text="#DCG_Collection_CardType"/>
+          <Panel class="CardTypeButtonGroup">
+            <ToggleButton id="ShowOwnedCardsToggle" class="OwnershipToggle" selected="true" onactivate="DCGCollectionToggleCardType( 'Owned' )">
+              <Label text="#DCG_Collection_ShowOwnedCards"/>
+            </ToggleButton>
+            <ToggleButton id="ShowPhantomPackCardsToggle" class="OwnershipToggle" selected="false" onactivate="DCGCollectionToggleCardType( 'PhantomPack' )">
+              <Label text="#DCG_Collection_ShowPhantomPackCards"/>
+            </ToggleButton>
+            <ToggleButton id="ShowPhantomPoolCardsToggle" class="OwnershipToggle" selected="false" onactivate="DCGCollectionToggleCardType( 'PhantomPool' )">
+              <Label text="#DCG_Collection_ShowPhantomPoolCards"/>
+            </ToggleButton>
+          </Panel>
+        </Panel>
+        
+        <Panel class="FilterGroup">
+          <Label class="LeftPanelTitle" text="#DCG_Collection_FiltersTitle"/>
+          
+          <Panel class="OwnerDropDownGroup">
+            <Label class="CardFiltersLabel" text="#DCG_Collection_OwnedFilter"/>
+            <DropDown class="OwnerDropDown" id="OwnershipFilter" dropdownbodyposition="100% 100%"/>
+            <Panel id="OwnershipTooltip" onmouseover="UIShowTextTooltip( Placeholder )" onmouseout="UIHideTextTooltip()">
+              <Label text="?"/>
+            </Panel>
+          </Panel>
+          
+          <DCGCollectionFilters class="ModeCollection" id="CollectionFilters"/>        
+          <ToggleButton id="ShowIncludedCardsToggle" selected="true" onactivate="DCGCollectionToggleShowHeroIncludes()">
+            <Label text="#DCG_Collection_ShowInclude"/>
+          </ToggleButton>
+          <Label class="CardsMatchingFilter" text="#DCG_Collection_ShowingCount"/>          
+        </Panel>
+        
+        <Panel class="SortGroup">
+          <Label class="LeftPanelTitle" text="#DCG_Collection_SortTitle"/>
+         
+          <Panel class="CardFiltersControls" >
+            <RadioButton id="SortByNameButton" class="FilterButtonText" group="SortGroup" onactivate="DCGSetCollectionSort( 0 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortName"/>
+            </RadioButton>
+            <RadioButton id="SortByColorButton" class="FilterButtonText" group="SortGroup" selected="true" onactivate="DCGSetCollectionSort( 1 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortColor"/>
+            </RadioButton>
+            <RadioButton id="SortByCostButton" class="FilterButtonText" group="SortGroup" onactivate="DCGSetCollectionSort( 2 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortCost"/>
+            </RadioButton>
+            <RadioButton id="SortByTypeButton" class="FilterButtonText" group="SortGroup" onactivate="DCGSetCollectionSort( 3 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortType"/>
+            </RadioButton>
+            <RadioButton id="SortByOwnedButton" class="FilterButtonText" group="SortGroup" onactivate="DCGSetCollectionSort( 4 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortOwned"/>
+            </RadioButton>
+            <RadioButton id="SortByMarketPriceButton" class="FilterButtonText" group="SortGroup" onactivate="DCGSetCollectionSort( 5 )">
+              <Label class="TypeFilterLabel" text="#DCG_Collection_SortMarket"/>
+            </RadioButton>
+          </Panel>
+        </Panel>
+
+        <Panel class="CartGroup">
+          <Label class="LeftPanelTitle" text="#DCG_Collection_CartTitle"/>
+          <Panel class="CartButtonRow">
+            <DCGCartButton id="PurchaseCartButton" class="CartButton" cart="purchase"/>
+            <DCGCartButton id="SellCartButton" class="SellButton" cart="sell"/>
+          </Panel>
+        </Panel>          
+        
+        <Panel class="BottomControlRow">
+          <Button class="GeneralButton" id="SubmitFeedbackButton" onmouseover="UIShowTextTooltip( #DCG_UserFeedback_Tooltip )" onmouseout="UIHideTextTooltip()" onactivate="DCGShowSubmitFeedback( 'CardCollection', -1 );"/>
+          <Button class="ButtonDark" id="CloseCollection" onactivate="DCGCloseCollection()">
+            <Label text="#DCG_Close"/>
+          </Button>
+        </Panel>
+      </Panel>
+    
+      <Panel id="RightPanel" hittest="true">
+        <DelayLoadList id="CollectionList" itemwidth="100%" itemheight="390px">
+          <!-- Dynamic Content -->
+        </DelayLoadList>
+        <Panel id="NoCardsMatch">
+          <Label class="NoCardsMatchText" text="#DCG_Collection_NoCardsFilter"/>
+        </Panel>
+      </Panel>
+   
+    </Panel>
+  </Panel>  
+</root>

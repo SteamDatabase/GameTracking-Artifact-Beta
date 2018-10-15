@@ -1,0 +1,182 @@
+////////////////////////////
+//**REVTEL CONVOY - CREEP///
+////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_revtel_convoy
+{
+	speak "revtel_convoy_summon_01" noscene 
+	speak "revtel_convoy_summon_02" noscene
+	speak "revtel_convoy_summon_03" noscene 
+}
+Rule summon_revtel_convoy_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy
+	response summon_revtel_convoy
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_revtel_convoy_enemy_ancient_exposed
+{
+	speak "revtel_convoy_ancient_attack_01" noscene
+	speak "revtel_convoy_ancient_attack_02" noscene
+}	
+Rule summon_revtel_convoy_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy IsEnemyAncientExposed
+	response summon_revtel_convoy_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_revtel_convoy_your_ancient_exposed
+{
+	speak "revtel_convoy_ancient_protect_01" noscene
+	speak "revtel_convoy_ancient_protect_02" noscene
+}	
+Rule summon_revtel_convoy_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy IsAllyAncientExposed
+	response summon_revtel_convoy_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_revtel_convoy_both_ancients_exposed
+{
+	speak "revtel_convoy_ancient_both_01" noscene
+	speak "revtel_convoy_ancient_both_02" noscene
+}	
+Rule summon_revtel_convoy_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_revtel_convoy_both_ancients_exposed
+}
+
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_revtel_convoy_ally_bounty_hunter
+{
+	speak "revtel_convoy_hero_friend_01" noscene 
+	speak "revtel_convoy_hero_friend_02" noscene 
+	speak "revtel_convoy_hero_friend_03" noscene 
+}
+Rule summon_revtel_convoy_ally_bounty_hunter_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyHasBountyHunter
+	response summon_revtel_convoy_ally_bounty_hunter
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+Response summon_revtel_convoy_enemy_phantom_assassin
+{
+	speak "revtel_convoy_hero_rival_01" noscene 
+	speak "revtel_convoy_hero_rival_02" noscene 
+}
+Rule summon_revtel_convoy_enemy_phantom_assassin_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy EnemyHasPhantomAssassin
+	response summon_revtel_convoy_enemy_phantom_assassin
+}
+
+
+
+Response summon_revtel_convoy_enemy_bounty_hunter
+{
+	speak "revtel_convoy_hero_rival_03" noscene 
+}
+Rule summon_revtel_convoy_enemy_bounty_hunter_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy EnemyHasBountyHunter
+	response summon_revtel_convoy_enemy_bounty_hunter
+}
+
+////////////////
+//unique lines//
+////////////////
+
+Response revtel_convoy_summon_no_gold
+{
+	speak "revtel_convoy_unique_01" noscene 
+}
+Rule revtel_convoy_summon_no_gold_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyGoldIsLessThanOrEqualTo1 
+	response revtel_convoy_summon_no_gold
+}
+
+Response revtel_convoy_summon_20_gold
+{
+	speak "revtel_convoy_unique_02" noscene 
+}
+Rule revtel_convoy_summon_20_gold_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyGoldIsGreaterThanOrEqualTo20 
+	response revtel_convoy_summon_20_gold
+}
+
+Response revtel_convoy_summon_40_gold
+{
+	speak "revtel_convoy_unique_06" noscene 
+}
+Rule revtel_convoy_summon_40_gold_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyGoldIsGreaterThanOrEqualTo40 
+	response revtel_convoy_summon_40_gold
+}
+
+Response revtel_convoy_summon_with_goldmine
+{
+	speak "revtel_convoy_unique_03" noscene 
+	speak "revtel_convoy_unique_04" noscene 
+	speak "revtel_convoy_unique_05" noscene 
+}
+Rule revtel_convoy_summon_with_goldmine_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyHasIronFogGoldmine 
+	response revtel_convoy_summon_with_goldmine
+}
+
+Response revtel_convoy_summon_enemy_veiled_sisterhood
+{
+	speak "revtel_convoy_unique_07" noscene 
+	speak "revtel_convoy_unique_08" noscene 
+}
+Rule revtel_convoy_summon_enemy_veiled_sisterhood_rule
+{
+	criteria IsNotImp Summon IsTargetRevtelConvoy AllyHasIronFogGoldmine 
+	response revtel_convoy_summon_enemy_veiled_sisterhood
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_revtel_convoy
+{
+	speak "revtel_convoy_healed_01" noscene 
+	speak "revtel_convoy_healed_02" noscene 
+	speak "revtel_convoy_healed_03" noscene 
+}
+Rule heal_revtel_convoy_rule
+{
+	criteria IsNotImp Heal IsTargetRevtelConvoy
+	response heal_revtel_convoy
+}

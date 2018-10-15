@@ -1,0 +1,397 @@
+
+// contains custom rules to fire responses for specific cards in set 1
+
+
+
+
+// ANNIHILATION =======================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+
+// note: the death concept for some reason doesnt always remember the source card ID, so normal death check can fail if we try to check that it was annihilation that dealt the kills,
+// instead we force the death check to test for "AnnihilationIsHappening" which is set to be true for 10 seconds after the card is played
+
+
+// player:
+
+
+Rule rule_imps_set_1_annihilation_playcard_player
+{
+	criteria IsNotCombat PlayCard IsSourceAnnihilation IsLocalImp ThisIsImportant
+	ApplyContext "AnnihilationIsHappening:1:10"
+	ApplyContextToWorld	
+	
+	response imps_set_1_razzle_a_cower_player
+	response imps_set_1_razzle_a_hide_player
+}
+
+
+Rule rule_imps_local_annihilation_death_win
+{
+	criteria Death IsNotCombat IsLocalImp AnnihilationIsHappening LocalChangeMomentum_Pos OpponentChangeMomentum_Neg 
+	
+	response imps_local_positive_hero_death
+}
+
+
+Rule rule_imps_local_annihilation_death_lose
+{
+	criteria Death IsNotCombat IsLocalImp AnnihilationIsHappening LocalChangeMomentum_Neg OpponentChangeMomentum_Pos 
+	
+	response imps_local_negative_broad
+}
+
+
+
+// opponent:
+
+
+Rule rule_imps_set_1_annihilation_playcard_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceAnnihilation IsOpponentImp  ThisIsImportant
+	ApplyContext "AnnihilationIsHappening:1:10"
+	ApplyContextToWorld	
+	
+	response imps_set_1_razzle_a_cower_opponent
+}
+
+Rule rule_imps_opponent_annihilation_death_win
+{
+	criteria Death IsNotCombat IsOpponentImp AnnihilationIsHappening LocalChangeMomentum_Neg OpponentChangeMomentum_Pos 
+	
+	response imps_opponent_positive_broad
+}
+
+
+Rule rule_imps_opponent_annihilation_death_lose
+{
+	criteria Death IsNotCombat IsOpponentImp AnnihilationIsHappening LocalChangeMomentum_Pos OpponentChangeMomentum_Neg 
+	
+	response imps_opponent_negative_broad
+}
+
+
+
+
+// APOTHEOSIS BLADE ===================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player plays card:
+
+
+Rule rule_imps_set_1_apotheosis_blade_playcard_player
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceApotheosisBlade IsLocalImp 
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+
+Rule rule_imps_set_1_apotheosis_blade_activate_player
+{
+	criteria IsNotCombat UseAbility IsSourceLocal IsSourceApotheosisBladeAbility IsLocalImp ThisIsImportant 
+	
+	response imps_local_positive_broad
+}
+
+
+Rule rule_imps_set_1_apotheosis_blade_activate_player
+{
+	criteria IsNotCombat UseAbility IsSourceLocal IsSourceApotheosisBladeAbility IsOpponentImp ThisIsImportant 
+	
+	response imps_opponent_negative_broad
+}
+
+
+
+
+// opponent plays card:
+
+
+Rule rule_imps_set_1_apotheosis_blade_playcard_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceApotheosisBlade IsLocalImp 
+	
+	response imps_local_negative_broad
+}
+
+
+Rule rule_imps_set_1_apotheosis_blade_activate_opponent
+{
+	criteria IsNotCombat UseAbility IsSourceNotLocal IsSourceApotheosisBladeAbility IsOpponentImp ThisIsImportant 
+	
+	response imps_set_1_razzle_a_afraid_player
+}
+
+
+
+
+
+
+// COUP DE GRACE ======================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+
+// player plays card:
+
+Rule rule_imps_set_1_coup_de_grace_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceCoupDeGrace IsLocalImp 
+	ApplyContext "CoupDeGraceIsHappening:1:10"
+	ApplyContextToWorld		
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+
+Rule rule_imps_set_1_coup_de_grace_death
+{
+	criteria IsNotCombat Death CoupDeGraceIsHappening IsLocalImp LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+	
+	response imps_set_1_razzle_a_disgust_player
+}
+
+
+// opponent plays card:
+
+
+Rule rule_imps_set_1_coup_de_grace_playcard_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceCoupDeGrace IsLocalImp ThisIsImportant 
+	ApplyContext "CoupDeGraceIsHappening:1:10"
+	ApplyContextToWorld		
+	
+	response imps_set_1_razzle_a_afraid_player
+}
+
+
+// VISCOUS NASAL GOO ==================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player or opponent plays card:
+
+Rule rule_imps_set_1_viscous_nasal_goo
+{
+	criteria IsNotCombat DeBuffed IsLocalImp IsSourceViscousNasalGoo 
+	
+	response imps_set_1_razzle_a_disgust_player
+}
+
+
+
+// ECLIPSE ============================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player plays card:
+
+
+Rule rule_imps_local_set_1_eclipse_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceEclipse IsLocalImp 
+	ApplyContext "EclipseIsHappening:1:5"
+	ApplyContextToWorld		
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+
+Rule rule_imps_local_set_1_eclipse_death
+{
+	criteria IsNotCombat Death EclipseIsHappening IsLocalImp LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+	
+	response imps_local_positive_broad
+}
+
+
+Rule rule_imps_local_set_1_eclipse_playcard_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceEclipse IsOpponentImp 
+	ApplyContext "EclipseIsHappening:1:5"
+	ApplyContextToWorld		
+	
+	response imps_set_1_razzle_a_afraid_opponent
+}
+
+
+// opponent plays card:
+
+
+Rule rule_imps_opponent_set_1_eclipse_playcard_player
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceEclipse IsLocalImp ThisIsImportant 
+	ApplyContext "EclipseIsHappening:1:10"
+	ApplyContextToWorld		
+	
+	response imps_set_1_razzle_a_afraid_player
+}
+
+
+Rule rule_imps_opponent_set_1_eclipse_death_player
+{
+	criteria IsNotCombat Death EclipseIsHappening IsLocalImp LocalChangeMomentum_Neg OpponentChangeMomentum_Pos
+	
+	response imps_local_negative_broad
+}
+
+
+
+// DUEL ===============================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player or opponent plays card:
+
+
+Rule rule_imps_local_set_1_duel_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceDuel IsLocalImp 
+	
+	response imps_set_1_razzle_a_duel_player
+}
+
+
+// CHAIN FROST ========================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player plays card:
+
+Rule rule_imps_local_set_1_chain_frost_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceChainFrost IsLocalImp 
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+Rule rule_imps_local_set_1_chain_frost_playcard_opponent 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceChainFrost IsOpponentImp 
+	
+	response imps_set_1_razzle_a_afraid_opponent
+}
+
+
+// opponent plays card:
+
+
+Rule rule_imps_opponent_set_1_chain_frost_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceChainFrost IsLocalImp 
+	
+	response imps_set_1_razzle_a_afraid_player
+}
+
+
+Rule rule_imps_opponent_set_1_chain_frost_playcard_opponent 
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceChainFrost IsOpponentImp 
+	
+	response imps_set_1_razzle_a_excited_opponent
+}
+
+
+
+// MYSTIC FLARE =======================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player plays card:
+
+Rule rule_imps_local_set_1_mystic_flare_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceMysticFlare IsLocalImp 
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+Rule rule_imps_local_set_1_mystic_flare_playcard_opponent 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceMysticFlare IsOpponentImp 
+	
+	response imps_set_1_razzle_a_afraid_opponent
+}
+
+
+// opponent plays card:
+
+
+Rule rule_imps_opponent_set_1_mystic_flare_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceMysticFlare IsLocalImp 
+	
+	response imps_set_1_razzle_a_afraid_player
+}
+
+
+Rule rule_imps_opponent_set_1_mystic_flare_playcard_opponent 
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceMysticFlare IsOpponentImp 
+	
+	response imps_set_1_razzle_a_excited_opponent
+}
+
+
+
+// THUNDERGODS WRATH ==================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+Rule rule_imps_local_set_1_thundergods_wrath_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceThunderGodsWrath IsLocalImp 
+	
+	response imps_set_1_razzle_a_hide_player
+}
+
+// BOLT OF DAMOCLESE ==================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+Rule rule_imps_local_set_1_boltof_damoclese_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceBoltOfDamocles IsLocalImp 
+	
+	response imps_set_1_razzle_a_hide_player
+}
+
+
+// ECHO SLAM ==========================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+
+// player plays card:
+
+Rule rule_imps_local_set_1_echo_slam_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceEchoSlam IsLocalImp 
+	
+	response imps_set_1_razzle_a_positive_ground_shake_player
+}
+
+// opponent plays card
+
+Rule rule_imps_local_set_1_echo_slam_opponent 
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsSourceEchoSlam IsLocalImp 
+	
+	response imps_set_1_razzle_a_negative_ground_shake_player
+}
+
+
+
+// PRIMAL ROAR ========================================================================================================================================================================================================================================================================
+// ====================================================================================================================================================================================================================================================================================
+
+Rule rule_imps_local_set_1_primal_roar_playcard_player 
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourcePrimalRoar IsLocalImp 
+	
+	response imps_set_1_razzle_a_excited_player
+}
+
+
+// echo slam, fissure,ravage

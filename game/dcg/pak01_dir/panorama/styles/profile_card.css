@@ -1,0 +1,504 @@
+/* DCGProfileCard styles */
+
+@define backgroundGradient: gradient( linear, 0% 0%, 0% 100%, from( #ffffff02 ), to( #ffffff04 ) );
+@define backgroundGradientHover: gradient( linear, 0% 0%, 0% 100%, from( #ffffff06 ), to( #ffffff10) );
+@define backgroundGradientActive: gradient( linear, 0% 0%, 0% 100%, from( #ffffff04 ), to( #ffffff0f ) );
+
+DCGProfileCard
+{
+	width: 380px;
+	pre-transform-scale2d: 1;
+
+	transition-property: box-shadow;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;
+}
+
+DCGFriendPicker DCGProfileCard #UserName .PersonaName
+{
+	text-decoration: none;
+}
+
+DCGFriendPicker #ContentsMain:hover
+{
+	brightness: 2.5;
+}
+
+#ContentsMain:hover
+{
+	//box-shadow: fill #00000099 -4px -4px 8px 8px;
+	brightness: 1.4;
+}
+
+#HomeProfileContainer:hover #ContentsMain
+{
+	brightness: 1.4;
+}
+
+#MiniProfileContainer
+{
+	width: 100%;
+	flow-children: none;
+}
+
+#ContentsMain
+{
+	flow-children: down;
+	background-color: black;
+	width: 100%;
+	horizontal-align: right;
+	
+	border-top: 1px solid #3b404777;
+	border-right: 1px solid #00000088;
+	border-left: 1px solid #4c434677;
+	border-bottom: 1px solid #00000088;
+
+	padding: 14px;
+	background-image: url("s2r://panorama/images/dashboard/leftbar/profile_card_background_png.vtex");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 100% 256px;
+	
+	height: 95px;
+
+	box-shadow: fill #00000055 -2px -2px 6px 6px;
+
+	transition-property: box-shadow, brightness;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-in-out;
+}
+
+.HalloweenActive #ContentsMain
+{
+	wash-color: #61FFAA33;
+}
+
+#LeftColumn #ContentsMain
+{
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+#CardHeader
+{
+	height: 68px;
+	padding-left: 0px;	
+	flow-children: right;
+	width: 80%;
+	vertical-align: middle;
+}
+
+/* Specify DCGProfileCard so that this style doesn't conflict when we reuse profile_card.css in the profile page*/
+DCGProfileCard #AvatarImage
+{
+
+	width: 48px;
+	height: 48px;
+	border: 2px solid transparent;
+	margin-top:-2px;
+	margin-left:-2px;
+	margin: 3px;
+	horizontal-align: right;
+	transition-property: border;
+	transition-duration: 0.1s;
+	vertical-align: middle;
+	
+	box-shadow: #000000aa 0px 0px 5px 0px;
+}
+
+
+DCGProfileCard #AvatarImage Image
+{
+	//box-shadow: inset #000000aa 1.5px 1.5px 3px 3px;
+}
+
+DCGProfileCard #AvatarImage.HasCompendium Image
+{
+	box-shadow: inset #00000000 1.5px 1.5px 3px 3px;
+}
+
+
+.ProfileTextDetails
+{
+	flow-children: down;
+	vertical-align: middle;
+	margin-left: 10px;
+	//width: 100%;
+}
+
+#UserName
+{
+	visibility: visible;
+}
+
+#UserName Label
+{
+	font-weight: light;
+	font-size: 28px;
+	color: white;
+	white-space: nowrap;
+	margin-top: 2px;
+	margin-bottom: -6px;
+	height: fit-children;
+	text-shadow: 1px 1px 1px 1 black;
+}
+
+#UserName Label:hover
+{
+	text-decoration: none;
+}
+
+#UserNickname
+{
+	margin-top: -6px;
+	margin-right: 4px;
+}
+
+#UserNickname Label
+{
+	font-size: 16px;
+}
+
+#UserNickname Label .PersonaName
+{
+	color: #888888;
+	font-size: 16px;
+}
+
+#UserRichPresence
+{
+	margin-top: -6px;
+	text-shadow: 1px 1px 1px 1 black;
+}
+
+#UserRichPresence Label
+{
+	font-size: 16px;
+}
+
+
+#CardMain
+{
+	width: 100%;
+}
+
+.FixedSize #CardMain
+{
+	height: 152px;
+}
+
+#CardLoading
+{
+	horizontal-align: center;
+	vertical-align: middle;
+	margin: 10px 0px;
+
+	visibility: collapse;
+}
+
+#CardLoading .Spinner
+{
+	vertical-align: middle;
+}
+
+#CardContents
+{
+	width: 100%;
+	flow-children: down;
+}
+
+.Loading #CardContents
+{
+	visibility: collapse;
+}
+
+.Loading #CardLoading
+{
+	visibility: visible;
+}
+
+#BottomRow
+{
+	flow-children: right;
+	width: 100%;
+	margin-top: 15px;
+	visibility: collapse;
+}
+
+.StatsActive #BottomRow
+{
+	visibility: visible;
+}
+
+#StatItems
+{
+	flow-children: right;
+	vertical-align: middle;
+	width: fill-parent-flow( 1.0 );
+	height: 54px;
+	background-color: backgroundGradient;
+	box-shadow: #000000aa 0px 0px 5px 0px;
+	visibility: collapse;
+}
+
+.StatsActive #StatItems
+{
+	visibility: visible;
+}
+
+.Stat
+{
+	padding: 7px 5px 3px 5px;
+	width: fill-parent-flow( 1.0 );
+	flow-children: down;
+	horizontal-align: center;
+}
+
+#StatTitle, #PickNone Label
+{
+	width: 100%;
+	text-align: center;
+	horizontal-align: center;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: baseText;
+}
+
+#StatValue
+{
+	width: 100%;
+	text-align: center;
+	horizontal-align: center;
+}
+
+.StatDropdown
+{
+	height: 100%;
+	width: fill-parent-flow( 1.0 );
+	margin: 0px;
+	padding: 0px;
+	border: 0px solid transparent;
+	box-shadow: none;
+	background-color: none;
+	background-image: url("s2r://panorama/images/control_icons/arrow_dropdown_green_png.vtex");
+}
+
+.StatDropdown:hover
+{
+	background-color: none;
+}
+
+.StatDropdown .Stat
+{
+	width: 100%;
+}
+
+.StatDropdown:hover .Stat
+{
+	background-color: backgroundGradientHover;
+}
+
+.StatDropdown:active .Stat
+{
+	background-color: backgroundGradientActive;
+}
+
+.StatDropdown .Stat Label
+{
+	margin: 0px 29px 0px 0px;
+}
+
+.StatDropdownMenu
+{
+	width: 148px;
+}
+
+#PickNone
+{
+	width: 100%;
+	height: 100%;
+	background-color: backgroundGradient;
+}
+
+#PickNone:hover
+{
+	background-color: backgroundGradientHover;
+}
+
+.StatDropdown:active #PickNone
+{
+	background-color: backgroundGradientActive;
+}
+
+#PickNone Label
+{
+	vertical-align: middle;
+}
+
+.StatDropdownMenu #PickNone
+{
+	height: fit-children;
+}
+
+.StatDropdownMenu #PickNone Label
+{
+	padding: 7px 2px 4px 2px;
+	margin: 0px;
+	border: 0px;
+	border-bottom: 2px solid #00000066;
+}
+
+.StatDropdownMenu .Stat
+{   
+	width: 100%;
+	padding: 2px;
+	margin: 0px;
+	border-bottom: 2px solid #00000066;
+
+	transition-property: background-color;
+	transition-duration: 0.1s;
+}
+
+.StatDropdownMenu .Stat Label
+{
+	border: 0px;
+	padding: 0px;
+	background-color: none;
+}
+
+.StatDropdownMenu .Stat Label:hover
+{
+	border: 0px;
+	padding: 0px;
+
+	background-color: none;
+}
+
+.StatDropdownMenu .Stat #StatTitle
+{
+	margin-top: 3px;
+}
+
+.StatDropdownMenu .Stat:hover
+{
+	background-color: #ffffff06;
+}
+
+
+/* Slightly different style for stats displayed in the profile itself */
+#ProfileCardStats .Stat
+{
+	padding: 0px;
+}
+
+#ProfileCardStats .Stat #StatTitle
+{
+	font-size: 16px;
+	letter-spacing: 1px;
+	color: #666666;
+	text-transform: uppercase;
+}
+
+#ProfileCardStats .Stat #StatValue
+{
+	margin-top: -2px;
+	font-size: 36px;
+	color: white;
+}
+
+#CardOverlay
+{
+	opacity: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.TooltipContainer #ProfileCardTopSection
+{
+	flow-children: right;
+	width: 100%;
+}
+
+.DetailLabel
+{
+	color: #8A9087;
+	margin: 0px;
+	font-size: 12px;
+	margin-left: 8px;
+	margin-top: 2px;
+	text-transform: uppercase;
+	font-weight: thin;
+	letter-spacing: 1px;
+}
+
+.DetailValue
+{
+	color: white;
+	margin: 0px;
+	font-size: 14px;
+	margin-left: 2px;
+	margin-top: 2px;
+	text-align: center;
+	text-shadow: 0px 0px 5px 1.0 #ffffff55;
+}
+
+.ButtonBevel
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #1D2329 ), to( #2D373E ) );
+	min-height: 0px;
+	min-width: 0px;
+	width: 48%;
+	height: 20px;
+	margin-top: 11px;
+	border-top: 1px solid #2D373E;
+	border-left: 1px solid #2D373E;
+	border-right: 1px solid #2D373E;
+}
+
+.ButtonBevel Label
+{
+	font-size: 12px;
+	margin: 0px;
+	margin-top: -2px;
+	padding: 0px;
+}
+
+.FillerLine
+{
+	width: fill-parent-flow( 1.0 );
+	height: 1px;
+	vertical-align: middle;
+	background-color: #353a3e;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 0px;
+}
+
+.TooltipContainer .FillerLine,
+.PlayerMenuContents .FillerLine,
+.ProfileCardEventActive .FillerLine
+{
+	visibility: collapse;
+}
+
+.TooltipContainer .DetailValue,
+.PlayerMenuContents .DetailValue,
+.ProfileCardEventActive .DetailValue
+{
+	font-size: 24px;
+	margin-left: 6px;	
+	text-overflow: shrink;
+	width: 24px;
+}
+
+
+#ProfileCardImage
+{
+	height: 82px;
+	width: 131px;
+	horizontal-align: right;
+	margin-right: 20px;
+
+    visibility: collapse;
+}

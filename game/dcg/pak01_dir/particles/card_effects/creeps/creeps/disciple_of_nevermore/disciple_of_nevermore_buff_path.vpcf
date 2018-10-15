@@ -1,0 +1,265 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_nMaxParticles = 32
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_DistanceToCP"
+			m_flInputMin = 1.000000
+			m_flInputMax = 4.000000
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.100000
+			m_nStartCP = 4
+			m_bScaleInitialRange = true
+		},
+		{
+			_class = "C_OP_DistanceToCP"
+			m_nFieldOutput = "16"
+			m_flInputMin = 2.500000
+			m_flInputMax = 5.000000
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.000000
+			m_nStartCP = 4
+			m_bScaleInitialRange = true
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.200000
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 0.200000
+		},
+		{
+			_class = "C_OP_BasicMovement"
+			m_fDrag = 0.100000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_MaintainSequentialPath"
+			m_fMaxDistance = 0.400000
+			m_flNumToAssign = 16.000000
+			m_flCohesionStrength = 0.010000
+			m_PathParams = 
+			{
+				m_flMidPoint = 0.450000
+				m_vMidPointOffset = 
+				[
+					0.000000,
+					0.000000,
+					22.000000,
+				]
+				m_nEndControlPointNumber = 1
+			}
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_OscillateVector"
+			m_RateMin = 
+			[
+				-2.000000,
+				-2.000000,
+				-2.000000,
+			]
+			m_RateMax = 
+			[
+				2.000000,
+				2.000000,
+				2.000000,
+			]
+			m_FrequencyMax = 
+			[
+				2.000000,
+				2.000000,
+				2.000000,
+			]
+			m_bProportional = false
+			m_bProportionalOp = false
+			m_bOffset = true
+			m_flOscMult = 1.000000
+		},
+		{
+			_class = "C_OP_ColorInterpolate"
+			m_ColorFade = 
+			[
+				112,
+				228,
+				204,
+				255,
+			]
+			m_flFadeStartTime = 0.200000
+			m_bEaseInOut = false
+		},
+		{
+			_class = "C_OP_SetCPOrientationToPointAtCP"
+			m_nOutputCP = 4
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_CreateSequentialPath"
+			m_flNumToAssign = 16.000000
+			m_PathParams = 
+			{
+				m_vMidPointOffset = 
+				[
+					0.000000,
+					0.000000,
+					22.000000,
+				]
+				m_flMidPoint = 0.450000
+				m_nEndControlPointNumber = 1
+			}
+		},
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				0.000000,
+				-0.400000,
+				-0.400000,
+			]
+			m_OffsetMax = 
+			[
+				0.000000,
+				0.400000,
+				0.400000,
+			]
+			m_nControlPointNumber = 4
+			m_bLocalCoords = true
+		},
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 1.800000
+			m_flRadiusMax = 2.200000
+		},
+		{
+			_class = "C_INIT_RandomVector"
+			m_vecMax = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
+			m_nFieldOutput = "21"
+		},
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 180
+			m_nAlphaMax = 180
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nInputMax = 15
+			m_flOutputMin = 1.000000
+			m_bScaleInitialRange = true
+			m_flOutputMax = 0.200000
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 16
+		},
+	]
+	m_flConstantRadius = 2.500000
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 128
+			m_flTextureVWorldSize = 4.000000
+			m_nOrientationType = 2
+			m_flRadiusScale = 0.600000
+			m_flSelfIllumAmount = 1.000000
+			m_bLightenMode = true
+			m_flRefractAmount = 0.100000
+			m_nRefractBlurRadius = 4
+			m_flOverbrightFactor = 0.500000
+			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
+		},
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 128
+			m_flTextureVWorldSize = 4.000000
+			m_flSelfIllumAmount = 1.000000
+			m_bLightenMode = true
+			m_flRefractAmount = 0.100000
+			m_nRefractBlurRadius = 4
+			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
+			m_flOverbrightFactor = 0.500000
+			m_flRadiusScale = 0.600000
+		},
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 32
+			m_flTextureVWorldSize = 8.000000
+			m_flSelfIllumAmount = 0.500000
+			m_flRefractAmount = 0.100000
+			m_nRefractBlurRadius = 4
+			m_hTexture = resource:"materials/particle/beam_hotwhite_alpha.vtex"
+			m_flRadiusScale = 2.000000
+			m_flOverbrightFactor = 4.000000
+			m_nMaxTesselation = 32
+			m_bAdditive = true
+		},
+	]
+	m_ConstantColor = 
+	[
+		103,
+		235,
+		168,
+		255,
+	]
+	m_ForceGenerators = 
+	[
+		{
+			_class = "C_OP_TurbulenceForce"
+			m_flNoiseCoordScale1 = 0.600000
+			m_vecNoiseAmount0 = 
+			[
+				100.000000,
+				-100.000000,
+				100.000000,
+			]
+			m_vecNoiseAmount1 = 
+			[
+				-150.000000,
+				130.000000,
+				-88.000000,
+			]
+			m_bDisableOperator = true
+		},
+	]
+}

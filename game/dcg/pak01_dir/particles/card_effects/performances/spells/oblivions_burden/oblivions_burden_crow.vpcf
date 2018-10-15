@@ -1,0 +1,101 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_flConstantRadius = 0.050000
+	m_flConstantLifespan = 3.000000
+	m_nMaxParticles = 1
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_BasicMovement"
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_OrientTo2dDirection"
+			m_flRotOffset = 90.000000
+			m_nFieldOutput = "12"
+		},
+		{
+			_class = "C_OP_OscillateScalarSimple"
+			m_Rate = 0.200000
+			m_nField = "4"
+			m_flOscMult = 1.000000
+			m_nOpStrengthScaleSeed = 6524
+			m_flOpStrengthMinScale = 0.000000
+		},
+		{
+			_class = "C_OP_SetChildControlPoints"
+			m_nFirstControlPoint = 2
+			m_bSetOrientation = true
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderModels"
+			m_ModelList = 
+			[
+				{
+					m_model = resource:"models/card/card.vmdl"
+				},
+			]
+			m_bOrientZ = true
+			m_bAnimated = true
+			m_bScaleAnimationRate = true
+			m_hOverrideMaterial = resource:"materials/black_nomat.vmat"
+			m_flAnimationRate = 20.000000
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_CreateWithinSphere"
+			m_nControlPointNumber = 1
+		},
+		{
+			_class = "C_INIT_RandomTrailLength"
+			m_flMaxLength = 1.200000
+			m_flMinLength = 0.800000
+		},
+		{
+			_class = "C_INIT_RandomSecondSequence"
+			m_nSequenceMin = 2
+			m_nSequenceMax = 2
+		},
+		{
+			_class = "C_INIT_RandomScalar"
+			m_flMax = 1.000000
+			m_nFieldOutput = "8"
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 1
+			m_flStartTime = 0.100000
+		},
+	]
+	m_Constraints = 
+	[
+		{
+			_class = "C_OP_ConstrainDistanceToPath"
+			m_flMaxDistance0 = 0.000000
+			m_PathParameters = 
+			{
+				m_nStartControlPointNumber = 1
+				m_flBulge = 8.000000
+				m_flMidPoint = 0.750000
+			}
+			m_flTravelTime = 3.000000
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/card_effects/performances/spells/oblivions_burden/oblivions_burden_crow_trail.vpcf"
+		},
+	]
+}

@@ -1,0 +1,173 @@
+
+
+//====   PLAYER SUMMONS         ======================================================================================
+//====================================================================================================================
+
+
+// note: most of the generic responses that happen frequently are timed by NoRepeatForPlayerCommonResponses, but summon is not otherwise it triggers the card_swaps reaction as usually a summon will fire a change of target event 
+
+
+Rule rule_imps_local_positive_summon
+{
+	criteria Summon IsNotCombat IsLocalImp LocalChangeMomentum_Pos IsSourceLocal OpponentChangeMomentum_Neg 	
+	
+	response imps_local_positive_small
+	// using town portal goodbye wave as a random variant as it works as greeting too
+	response imps_local_play_card_town_portal_positive
+	response imps_do_nothing
+}
+
+Rule rule_imps_local_positive_summon_improvement
+{
+	criteria Summon IsNotCombat IsLocalImp LocalChangeMomentum_Pos IsSourceLocal OpponentChangeMomentum_Neg isTargetImprovement	
+	
+	response imps_local_positive_small_summon_improvement
+	response imps_do_nothing
+}
+
+
+Rule rule_imps_opponent_negative_summon
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceLocal LocalChangeMomentum_Pos OpponentChangeMomentum_Neg 		
+		
+	response imps_opponent_negative_small
+	response imps_do_nothing	
+}
+
+
+Rule rule_imps_opponent_negative_summon_multi_creep
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceLocal LocalChangeMomentum_PosMid OpponentChangeMomentum_Neg 
+	
+	response imps_opponent_negative_broad
+	response imps_do_nothing	
+}
+	
+
+//====   OPPONENT SUMMONS         ====================================================================================
+//====================================================================================================================
+
+
+Rule rule_imps_opponent_positive_summon
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceNotLocal OpponentChangeMomentum_Pos LocalChangeMomentum_Neg 
+		
+	response imps_opponent_positive_small
+	response imps_do_nothing	
+}
+
+
+Rule rule_imps_local_negative_summon
+{
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_Pos LocalChangeMomentum_Neg 
+		
+	response imps_local_negative_small
+	response imps_do_nothing	
+}
+
+
+
+Rule rule_imps_local_negative_summon_multi_creep
+{
+		
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_PosMid LocalChangeMomentum_NegMid
+		
+	response imps_local_negative_broad
+	response imps_do_nothing	
+
+}
+
+
+Rule rule_imps_local_negative_summon_losing_game
+{
+	
+  // MOMENTUM: if the player is BADLY LOSING the overall game, their imp will react negativley to a simple summon 
+	
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_Pos PlayerIsLosingGame IsGameRound4orMore 	
+		
+	response imps_local_negative_broad
+	response imps_do_nothing	
+
+}
+
+
+
+//====   PLAYER SUMMON INCREASE FOR MOMENTUM        ======================================================================================================================================================================================
+//========================================================================================================================================================================================================================================
+
+
+Rule rule_imps_local_positive_summon_increased_frequency
+{
+	criteria Summon IsNotCombat IsLocalImp LocalChangeMomentum_Pos IsSourceLocal OpponentChangeMomentum_Neg IsGameRound3orMore
+	
+	response imps_local_positive_small
+	// using town portal goodbye wave as a random variant as it works as greeting too
+	response imps_local_play_card_town_portal_positive
+}
+
+Rule rule_imps_local_positive_summon_improvement_increased_frequency
+{
+	criteria Summon IsNotCombat IsLocalImp LocalChangeMomentum_Pos IsSourceLocal OpponentChangeMomentum_Neg isTargetImprovement	IsGameRound3orMore
+	
+	response imps_local_positive_small_summon_improvement
+
+}
+
+
+Rule rule_imps_opponent_negative_summon_increased_frequency
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceLocal LocalChangeMomentum_Pos OpponentChangeMomentum_Neg	IsGameRound3orMore 		
+		
+	response imps_opponent_negative_small
+}
+
+
+Rule rule_imps_opponent_negative_summon_multi_creep_increased_frequency
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceLocal LocalChangeMomentum_PosMid OpponentChangeMomentum_Neg	IsGameRound3orMore 
+	
+	response imps_opponent_negative_broad
+}
+	
+
+//====   OPPONENT SUMMONS         ====================================================================================
+//====================================================================================================================
+
+
+Rule rule_imps_opponent_positive_summon_increased_frequency
+{
+	criteria Summon IsNotCombat IsOpponentImp IsSourceNotLocal OpponentChangeMomentum_Pos LocalChangeMomentum_Neg	IsGameRound3orMore 
+		
+	response imps_opponent_positive_small
+}
+
+
+Rule rule_imps_local_negative_summon_increased_frequency
+{
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_Pos LocalChangeMomentum_Neg	IsGameRound3orMore 
+		
+	response imps_local_negative_small
+}
+
+
+
+Rule rule_imps_local_negative_summon_multi_creep_increased_frequency
+{
+		
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_PosMid LocalChangeMomentum_NegMid	IsGameRound3orMore
+		
+	response imps_local_negative_broad
+
+}
+
+
+Rule rule_imps_local_negative_summon_losing_game_increased_frequency
+{
+	
+  // MOMENTUM: if the player is BADLY LOSING the overall game, their imp will react negativley to a simple summon 
+	
+	criteria Summon IsNotCombat IsLocalImp IsSourceNotLocal OpponentChangeMomentum_Pos PlayerIsLosingGame IsGameRound4orMore 	IsGameRound3orMore	
+		
+	response imps_local_negative_broad
+
+}

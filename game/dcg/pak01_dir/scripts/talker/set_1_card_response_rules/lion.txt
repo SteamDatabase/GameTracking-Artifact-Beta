@@ -1,0 +1,504 @@
+////////////////////
+//**LION - HERO//
+///////////////////
+
+///////////////
+//USE ABILITY//
+///////////////
+
+Response lion_use_ability
+{
+	speak "lion_use_ability_01" noscene 
+	speak "lion_use_ability_02" noscene 
+	speak "lion_use_ability_03" noscene 
+	speak "lion_use_ability_04" noscene 
+	speak "lion_use_ability_05" noscene 
+}
+
+Rule lion_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasLion IsSourceFingerOfDeath
+	response lion_use_ability
+}
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response lion_equip_weapon
+{
+	speak "lion_equip_generic_weapon_01" noscene 
+	speak "lion_equip_generic_weapon_02" noscene 
+	speak "lion_equip_generic_weapon_03" noscene 
+	speak "lion_equip_generic_weapon_04" noscene 
+	speak "lion_equip_generic_weapon_05" noscene 
+}
+
+Rule lion_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceWeapon
+	response lion_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response lion_equip_armor
+{
+	speak "lion_equip_generic_armor_01" noscene 
+	speak "lion_equip_generic_armor_02" noscene 
+	speak "lion_equip_generic_armor_03" noscene 
+	speak "lion_equip_generic_armor_04" noscene 
+	speak "lion_equip_generic_armor_05" noscene 
+}
+
+Rule lion_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceArmor
+	response lion_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response lion_equip_accessory
+{
+	speak "lion_equip_generic_accessory_01" noscene 
+	speak "lion_equip_generic_accessory_02" noscene 
+	speak "lion_equip_generic_accessory_03" noscene 
+	speak "lion_equip_generic_accessory_04" noscene 
+	speak "lion_equip_generic_accessory_05" noscene 
+}
+
+Rule lion_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceAccessory
+	response lion_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response lion_gain_attack
+{
+	speak "lion_permanent_attack_01" noscene 
+	speak "lion_permanent_attack_02" noscene 
+	speak "lion_permanent_attack_03" noscene 
+	speak "lion_permanent_attack_04" noscene 
+	speak "lion_permanent_attack_05" noscene 
+}
+
+Rule lion_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceSpell BuffsAttack
+	response lion_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response lion_gain_armor
+{
+	speak "lion_permanent_armor_01" noscene 
+	speak "lion_permanent_armor_02" noscene 
+	speak "lion_permanent_armor_03" noscene 
+	speak "lion_permanent_armor_04" noscene 
+	speak "lion_permanent_armor_05" noscene 
+}
+
+Rule lion_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceSpell BuffsArmor
+	response lion_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response lion_gain_health
+{
+	speak "lion_permanent_health_01" noscene 
+	speak "lion_permanent_health_02" noscene 
+	speak "lion_permanent_health_03" noscene 
+	speak "lion_permanent_health_04" noscene 
+	speak "lion_permanent_health_05" noscene 
+}
+
+Rule lion_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetLion IsSourceSpell BuffsHealth
+	response lion_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response lion_use_include
+{
+	speak "lion_use_include_01" noscene 
+	speak "lion_use_include_02" noscene 
+	speak "lion_use_include_03" noscene 
+}
+
+Rule lion_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceManaDrain ThisIsImportant
+	response lion_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response lion_gain_momentum_murder
+{ 
+	speak "lion_kill_rival_01" noscene 	
+	speak "lion_kill_rival_02" noscene 
+	speak "lion_kill_rival_03" noscene 
+	speak "lion_kill_rival_04" noscene 
+	speak "lion_kill_rival_05" noscene 
+	speak "lion_kill_rival_06" noscene 
+	speak "lion_kill_rival_07" noscene 
+	speak "lion_kill_rival_08" noscene
+	speak "lion_kill_rival_09" noscene 	
+	speak "lion_kill_rival_10" noscene 
+}
+
+Rule lion_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasLion LocalChangeMomentum_Pos IsNotCombat
+	response lion_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response lion_lane_taunt_generic
+{
+	speak "lion_taunt_generic_01" noscene 
+	speak "lion_taunt_generic_02" noscene 
+	speak "lion_taunt_generic_03" noscene 
+	speak "lion_taunt_generic_04" noscene 
+	speak "lion_taunt_generic_05" noscene 
+	speak "lion_taunt_generic_06" noscene 
+	speak "lion_taunt_generic_07" noscene 
+	speak "lion_taunt_generic_08" noscene 
+	speak "lion_taunt_generic_09" noscene 
+}
+
+Rule lion_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasLion IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response lion_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response lion_lane_buff_give_death_skull
+{
+	speak "lion_potential_kill_01"  noscene 
+	speak "lion_potential_kill_02"  noscene
+	speak "lion_potential_kill_03"  noscene 
+	speak "lion_potential_kill_04"  noscene 
+	speak "lion_potential_kill_05"  noscene
+}
+
+Rule lion_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLion EnemyGainedDeathSkull IsTargetLion
+	response lion_lane_buff_give_death_skull
+}
+
+Response lion_lane_debuff_give_death_skull
+{
+	speak "lion_potential_kill_01"  noscene 
+	speak "lion_potential_kill_02"  noscene
+	speak "lion_potential_kill_03"  noscene 
+	speak "lion_potential_kill_04"  noscene 
+	speak "lion_potential_kill_05"  noscene
+}
+
+Rule lion_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLion TargetHasDeathSkull IsBlockingLion
+	response lion_lane_debuff_give_death_skull
+}
+
+Response lion_lane_damage_give_death_skull
+{
+	speak "lion_potential_kill_01"  noscene 
+	speak "lion_potential_kill_02"  noscene
+	speak "lion_potential_kill_03"  noscene 
+	speak "lion_potential_kill_04"  noscene 
+	speak "lion_potential_kill_05"  noscene
+}
+
+Rule lion_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasLion TargetHasDeathSkull IsBlockingLion
+	response lion_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+//Response lion_debuff_blocker
+//{
+//	speak "lion_debuff_enemy_01" noscene 
+//	speak "lion_debuff_enemy_02" noscene 
+//	speak "lion_debuff_enemy_03" noscene 
+//	speak "lion_debuff_enemy_04" noscene 
+//	speak "lion_debuff_enemy_05" noscene 
+//	speak "lion_debuff_enemy_06" noscene 
+//	speak "lion_debuff_enemy_07" noscene 
+//	speak "lion_debuff_enemy_08" noscene 
+//	speak "lion_debuff_enemy_09" noscene 
+//	speak "lion_debuff_enemy_10" noscene 
+//}
+//
+//Rule lion_debuff_blocker_rule
+//{
+//	criteria IsNotImp  DEBUFFED EnemyHasLion IsBlockingLion
+//	response lion_debuff_blocker
+//}
+//
+//////////////////
+/////BUFF FRIEND//
+//////////////////
+//
+//Response lion_buff_friend
+//{
+//	speak "lion_buff_ally_01" noscene 
+//	speak "lion_buff_ally_02" noscene 
+//	speak "lion_buff_ally_03" noscene 
+//	speak "lion_buff_ally_04" noscene 
+//	speak "lion_buff_ally_05" noscene 
+//	speak "lion_buff_ally_06" noscene 
+//	speak "lion_buff_ally_07" noscene 
+//	speak "lion_buff_ally_08" noscene 
+//	speak "lion_buff_ally_09" noscene 
+//	speak "lion_buff_ally_10" noscene 
+// 
+//}
+//
+//Rule lion_buff_friend_rule
+//{
+//	criteria IsNotImp  BUFFED AllyHasLion IsSourceBlack IsTargetNotLion
+//	response lion_buff_friend
+//}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_lion
+{
+	speak "lion_healed_01" noscene 
+	speak "lion_healed_02" noscene 
+	speak "lion_healed_03" noscene 
+	speak "lion_healed_04" noscene 
+	speak "lion_healed_05" noscene 
+}
+Rule heal_lion_rule
+{
+	criteria IsNotImp Heal IsTargetLion
+	response heal_lion
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE BLACK CARDS///
+/////////////////////////////
+
+Response lion_play_assured_destruction
+{
+	speak "lion_permanent_attack_01" noscene 
+}
+
+Rule lion_play_assured_destruction_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceAssuredDestruction ThisIsImportant
+	response lion_play_assured_destruction
+}
+
+Response lion_play_path_of_the_cunning
+{
+	speak "lion_cast_spell_02" noscene 
+}
+
+Rule lion_play_path_of_the_cunning_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourcePathOfTheCunning ThisIsImportant
+	response lion_play_path_of_the_cunning
+}
+
+Response lion_play_the_tyler_estate
+{
+	speak "lion_cast_spell_10" noscene 
+}
+
+Rule lion_play_the_tyler_estate_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceTheTylerEstate ThisIsImportant
+	response lion_play_the_tyler_estate
+}
+
+Response lion_play_burn_it_all
+{
+	speak "lion_cast_spell_08" noscene 
+}
+
+Rule lion_play_burn_it_all_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceBurnItAll ThisIsImportant
+	response lion_play_burn_it_all
+}
+
+Response lion_play_trebuchets
+{
+
+	speak "lion_cast_spell_09" noscene 
+}
+
+Rule lion_play_trebuchets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceTrebuchets ThisIsImportant
+	response lion_play_trebuchets
+}
+
+Response lion_play_undisciplined_artillery
+{
+	speak "lion_cast_spell_03" noscene 
+}
+
+Rule lion_play_undisciplined_artillery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceUndisciplinedArtillery ThisIsImportant
+	response lion_play_undisciplined_artillery
+}
+
+Response lion_play_revtel_investments
+{
+	speak "lion_permanent_health_05" noscene 
+}
+
+Rule lion_play_revtel_investments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceRevtelInvestments ThisIsImportant
+	response lion_play_revtel_investments
+}
+
+Response lion_play_iron_fog_goldmine
+{
+	speak "lion_cast_spell_02" noscene 
+}
+
+Rule lion_play_iron_fog_goldmine_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceIronFogGoldmine ThisIsImportant
+	response lion_play_iron_fog_goldmine
+}
+
+Response lion_play_escape_route
+{
+	speak "lion_permanent_health_03" noscene 
+}
+
+Rule lion_play_escape_route_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceEscapeRoute ThisIsImportant
+	response lion_play_escape_route
+}
+
+Response lion_play_assault_ladders
+{
+	speak "lion_cast_spell_10" noscene 
+}
+
+Rule lion_play_assault_ladders_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceAssaultLadders ThisIsImportant
+	response lion_play_assault_ladders
+}
+
+Response lion_play_the_oath
+{
+	speak "lion_cast_spell_07" noscene 
+}
+
+Rule lion_play_the_oath_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceTheOath ThisIsImportant
+	response lion_play_the_oath
+}
+
+Response lion_play_keenfolk_turret
+{
+	speak "lion_cast_spell_01" noscene 
+}
+
+Rule lion_play_keenfolk_turret_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceKeenfolkTurret ThisIsImportant
+	response lion_play_keenfolk_turret
+}
+
+Response lion_play_steam_cannon
+{
+	speak "lion_cast_spell_03" noscene 
+}
+
+Rule lion_play_steam_cannon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceSteamCannon ThisIsImportant
+	response lion_play_steam_cannon
+}
+
+Response lion_play_march_of_the_machines
+{
+	speak "lion_cast_spell_08" noscene 
+}
+
+Rule lion_play_march_of_the_machines_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceMarchOfTheMachines ThisIsImportant
+	response lion_play_march_of_the_machines
+}
+
+Response lion_play_day_at_the_track
+{
+	speak "lion_permanent_armor_04" noscene 
+}
+
+Rule lion_play_day_at_the_track_rule
+{
+	criteria IsNotImp  PlayCard AllyHasLion IsSourceDayAtTheTrack ThisIsImportant
+	response lion_play_day_at_the_track
+}
+

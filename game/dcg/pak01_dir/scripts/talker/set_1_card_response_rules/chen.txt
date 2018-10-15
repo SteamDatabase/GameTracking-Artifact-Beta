@@ -1,0 +1,568 @@
+////////////////////////
+//**CHEN - HERO//
+////////////////////////
+
+///////////////
+//USE ABILITY//
+///////////////
+
+Response chen_use_ability
+{
+	speak "chen_use_ability_01" noscene 
+	speak "chen_use_ability_02" noscene 
+	speak "chen_use_ability_03" noscene 
+	speak "chen_use_ability_04" noscene 
+	speak "chen_use_ability_05" noscene 
+}
+
+Rule chen_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion
+	response chen_use_ability
+}
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response chen_equip_weapon
+{
+	speak "chen_equip_generic_weapon_01" noscene 
+	speak "chen_equip_generic_weapon_02" noscene 
+	speak "chen_equip_generic_weapon_03" noscene 
+	speak "chen_equip_generic_weapon_04" noscene 
+	speak "chen_equip_generic_weapon_05" noscene 
+}
+
+Rule chen_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceWeapon
+	response chen_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response chen_equip_armor
+{
+	speak "chen_equip_generic_armor_01" noscene 
+	speak "chen_equip_generic_armor_02" noscene 
+	speak "chen_equip_generic_armor_03" noscene 
+	speak "chen_equip_generic_armor_04" noscene 
+	speak "chen_equip_generic_armor_05" noscene 
+}
+
+Rule chen_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceArmor
+	response chen_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response chen_equip_accessory
+{
+	speak "chen_equip_generic_accessory_01" noscene 
+	speak "chen_equip_generic_accessory_02" noscene 
+	speak "chen_equip_generic_accessory_03" noscene 
+	speak "chen_equip_generic_accessory_04" noscene 
+	speak "chen_equip_generic_accessory_05" noscene 
+}
+
+Rule chen_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceAccessory
+	response chen_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response chen_gain_attack
+{
+	speak "chen_permanent_attack_01" noscene 
+	speak "chen_permanent_attack_02" noscene 
+	speak "chen_permanent_attack_03" noscene 
+	speak "chen_permanent_attack_04" noscene 
+	speak "chen_permanent_attack_05" noscene 
+}
+
+Rule chen_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceSpell BuffsAttack
+	response chen_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response chen_gain_armor
+{
+	speak "chen_permanent_armor_01" noscene 
+	speak "chen_permanent_armor_02" noscene 
+	speak "chen_permanent_armor_03" noscene 
+	speak "chen_permanent_armor_04" noscene 
+	speak "chen_permanent_armor_05" noscene 
+}
+
+Rule chen_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceSpell BuffsArmor
+	response chen_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response chen_gain_health
+{
+	speak "chen_permanent_health_01" noscene 
+	speak "chen_permanent_health_02" noscene 
+	speak "chen_permanent_health_03" noscene 
+	speak "chen_permanent_health_04" noscene 
+	speak "chen_permanent_health_05" noscene 
+}
+
+Rule chen_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetChen IsSourceSpell BuffsHealth
+	response chen_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response chen_use_include
+{
+	speak "chen_use_include_01" noscene 
+	speak "chen_use_include_02" noscene 
+	speak "chen_use_include_03" noscene 
+}
+
+Rule chen_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceHandOfGod ThisIsImportant
+	response chen_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response chen_gain_momentum_murder
+{ 
+	speak "chen_kill_rival_01" noscene 	
+	speak "chen_kill_rival_02" noscene 
+	speak "chen_kill_rival_03" noscene 
+	speak "chen_kill_rival_04" noscene 
+	speak "chen_kill_rival_05" noscene 
+	speak "chen_kill_rival_06" noscene 
+	speak "chen_kill_rival_07" noscene 
+	speak "chen_kill_rival_08" noscene
+	speak "chen_kill_rival_09" noscene 	
+	speak "chen_kill_rival_10" noscene 
+}
+
+Rule chen_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasChen LocalChangeMomentum_Pos IsNotCombat IsBlockingChen
+	response chen_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response chen_lane_taunt_generic
+{
+	speak "chen_taunt_generic_01" noscene 
+	speak "chen_taunt_generic_02" noscene 
+	speak "chen_taunt_generic_03" noscene 
+	speak "chen_taunt_generic_04" noscene 
+	speak "chen_taunt_generic_05" noscene 
+	speak "chen_taunt_generic_06" noscene 
+	speak "chen_taunt_generic_07" noscene 
+	speak "chen_taunt_generic_08" noscene 
+	speak "chen_taunt_generic_09" noscene 
+}
+
+Rule chen_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasChen IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response chen_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response chen_lane_buff_give_death_skull
+{
+	speak "chen_potential_kill_01"  noscene 
+	speak "chen_potential_kill_02"  noscene
+	speak "chen_potential_kill_03"  noscene 
+	speak "chen_potential_kill_04"  noscene 
+	speak "chen_potential_kill_05"  noscene
+}
+
+Rule chen_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasChen EnemyGainedDeathSkull IsTargetChen
+	response chen_lane_buff_give_death_skull
+}
+
+Response chen_lane_debuff_give_death_skull
+{
+	speak "chen_potential_kill_01"  noscene 
+	speak "chen_potential_kill_02"  noscene
+	speak "chen_potential_kill_03"  noscene 
+	speak "chen_potential_kill_04"  noscene 
+	speak "chen_potential_kill_05"  noscene
+}
+
+Rule chen_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasChen TargetHasDeathSkull IsBlockingChen
+	response chen_lane_debuff_give_death_skull
+}
+
+Response chen_lane_damage_give_death_skull
+{
+	speak "chen_potential_kill_01"  noscene 
+	speak "chen_potential_kill_02"  noscene
+	speak "chen_potential_kill_03"  noscene 
+	speak "chen_potential_kill_04"  noscene 
+	speak "chen_potential_kill_05"  noscene
+}
+
+Rule chen_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasChen TargetHasDeathSkull IsBlockingChen
+	response chen_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response chen_debuff_blocker
+{
+	speak "chen_debuff_enemy_01" noscene 
+	speak "chen_debuff_enemy_02" noscene 
+	speak "chen_debuff_enemy_03" noscene 
+	speak "chen_debuff_enemy_04" noscene 
+	speak "chen_debuff_enemy_05" noscene 
+	speak "chen_debuff_enemy_06" noscene 
+	speak "chen_debuff_enemy_07" noscene 
+	speak "chen_debuff_enemy_08" noscene 
+	speak "chen_debuff_enemy_09" noscene 
+	speak "chen_debuff_enemy_10" noscene 
+}
+
+Rule chen_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasChen IsBlockingChen
+	response chen_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response chen_buff_friend
+{
+	speak "chen_buff_ally_01" noscene 
+	speak "chen_buff_ally_02" noscene 
+	speak "chen_buff_ally_03" noscene 
+	speak "chen_buff_ally_04" noscene 
+	speak "chen_buff_ally_05" noscene 
+	speak "chen_buff_ally_06" noscene 
+	speak "chen_buff_ally_07" noscene 
+	speak "chen_buff_ally_08" noscene 
+	speak "chen_buff_ally_09" noscene 
+	speak "chen_buff_ally_10" noscene 
+ 
+}
+
+Rule chen_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasChen IsSourceGreen IsTargetNotChen
+	response chen_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_chen
+{
+	speak "chen_healed_01" noscene 
+	speak "chen_healed_02" noscene 
+	speak "chen_healed_03" noscene 
+	speak "chen_healed_04" noscene 
+	speak "chen_healed_05" noscene 
+}
+Rule heal_chen_rule
+{
+	criteria IsNotImp Heal IsTargetChen
+	response heal_chen
+}
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response chen_helm_of_the_dominator
+{
+	speak "chen_unique_01" noscene 
+	speak "chen_unique_02" noscene 
+	
+}
+
+Rule chen_helm_of_the_dominator_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsTargetChen IsSourceHelmOfTheDominator
+	response chen_helm_of_the_dominator
+}
+
+
+Response chen_holy_persuasion_ready
+{
+	speak "chen_unique_03" noscene
+	speak "chen_unique_04" noscene
+	speak "chen_unique_05" noscene
+}
+
+Rule chen_holy_persuasion_ready_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasChen AllyReadyHolyPersuasion
+	response chen_holy_persuasion_ready
+}	
+
+Response chen_use_ability_on_emissary
+{
+	speak "chen_unique_06" noscene 
+	speak "chen_unique_07" noscene 
+}
+
+Rule chen_use_ability_on_emissary_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetEmissaryOfTheQuorum
+	response chen_use_ability_on_emissary
+}
+
+Response chen_use_ability_on_red_mist_pillager
+{
+	speak "chen_unique_08" noscene 
+	speak "chen_unique_09" noscene 
+}
+
+Rule chen_use_ability_on_red_mist_pillager_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetRedMistPillager
+	response chen_use_ability_on_red_mist_pillager
+}
+
+Response chen_use_ability_on_thunderhide_alpha
+{
+	speak "chen_unique_10" noscene 
+	speak "chen_unique_11" noscene 
+}
+
+Rule chen_use_ability_on_thunderhide_alpha_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetThunderhideAlpha
+	response chen_use_ability_on_thunderhide_alpha
+}
+
+Response chen_use_ability_on_thunderhide_packmate
+{
+	speak "chen_unique_12" noscene 
+	speak "chen_unique_13" noscene 
+}
+
+Rule chen_use_ability_on_thunderhide_packmate_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetThunderhidePackmate
+	response chen_use_ability_on_thunderhide_packmate
+}
+
+Response chen_use_ability_on_incarnation_of_selemene
+{
+	speak "chen_unique_14" noscene 
+	speak "chen_unique_15" noscene 
+}
+
+Rule chen_use_ability_on_incarnation_of_selemene_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetIncarnationOfSelemene
+	response chen_use_ability_on_incarnation_of_selemene
+}
+
+Response chen_use_ability_on_loyal_boar
+{
+	speak "chen_unique_16" noscene 
+	speak "chen_unique_17" noscene 
+}
+
+Rule chen_use_ability_on_loyal_boar_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetLoyalBoar
+	response chen_use_ability_on_loyal_boar
+}
+
+Response chen_use_ability_on_stonehall_elite
+{
+	speak "chen_unique_18" noscene 
+	speak "chen_unique_19" noscene 
+}
+
+Rule chen_use_ability_on_stonehall_elite_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetStonehallElite
+	response chen_use_ability_on_stonehall_elite
+}
+
+Response chen_use_ability_on_roseleaf_druid
+{
+	speak "chen_unique_20" noscene 
+	
+}
+
+Rule chen_use_ability_on_roseleaf_druid_rule
+{
+	criteria IsNotImp UseAbility AllyHasChen IsSourceHolyPersuasion IsTargetRoseleafDruid
+	response chen_use_ability_on_roseleaf_druid
+}
+
+/////////////////////////////
+//PLAY SET ONE GREEN CARDS///
+/////////////////////////////
+
+Response chen_play_unearthed_secrets
+{
+	speak "chen_enigmatic_10" noscene 	
+	
+}
+
+Rule chen_play_unearthed_secrets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceUnearthedSecrets ThisIsImportant
+	response chen_play_unearthed_secrets
+}
+
+Response chen_play_path_of_the_dreamer
+{
+	speak "chen_buff_ally_06" noscene 	
+	
+}
+
+Rule chen_play_path_of_the_dreamer_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourcePathOfTheDreamer ThisIsImportant
+	response chen_play_path_of_the_dreamer
+}
+
+Response chen_play_homefield_advantage
+{
+	speak "chen_buff_ally_01" noscene 	
+	
+}
+
+Rule chen_play_homefield_advantage_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceHomefieldAdvantage ThisIsImportant
+	response chen_play_homefield_advantage
+}
+
+Response chen_play_selemenes_favor
+{
+	speak "chen_enigmatic_02" noscene 	
+	
+}
+
+Rule chen_play_selemenes_favor_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceSelemenesFavor ThisIsImportant
+	response chen_play_selemenes_favor
+}
+
+Response chen_play_mist_of_avernus
+{
+	speak "chen_debuff_enemy_05" noscene 	
+	speak "chen_enigmatic_08" noscene 	
+	
+}
+
+Rule chen_play_mist_of_avernus_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceMistOfAvernus ThisIsImportant
+	response chen_play_mist_of_avernus
+}
+
+Response chen_play_altar_of_the_mad_moon
+{
+	speak "chen_buff_ally_05" noscene 	
+	
+}
+
+Rule chen_play_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceAltarOfTheMadMoon ThisIsImportant
+	response chen_play_altar_of_the_mad_moon
+}
+
+Response chen_play_cheating_death
+{
+	speak "chen_enigmatic_05" noscene 	
+	speak "chen_cast_spell_04" noscene 	
+	
+}
+
+Rule chen_play_cheating_death_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceCheatingDeath ThisIsImportant
+	response chen_play_cheating_death
+}
+
+Response chen_play_verdant_refuge
+{
+	speak "chen_pleased_05" noscene 	
+	
+}
+
+Rule chen_play_verdant_refuge_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceVerdantRefuge ThisIsImportant
+	response chen_play_verdant_refuge
+}
+
+Response chen_play_stars_align
+{
+	speak "chen_cast_spell_02" noscene 	
+	
+}
+
+Rule chen_play_stars_align_rule
+{
+	criteria IsNotImp  PlayCard AllyHasChen IsSourceStarsAlign ThisIsImportant
+	response chen_play_stars_align
+}

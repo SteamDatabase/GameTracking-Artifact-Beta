@@ -1,0 +1,581 @@
+////////////////
+//**RIX - HERO//
+////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response rix_equip_weapon
+{
+	speak "rix_equip_generic_weapon_01" noscene 
+	speak "rix_equip_generic_weapon_02" noscene 
+	speak "rix_equip_generic_weapon_03" noscene 
+	speak "rix_equip_generic_weapon_04" noscene 
+	speak "rix_equip_generic_weapon_05" noscene 
+}
+
+Rule rix_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceWeapon
+	response rix_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response rix_equip_armor
+{
+	speak "rix_equip_generic_armor_01" noscene 
+	speak "rix_equip_generic_armor_03" noscene 
+	speak "rix_equip_generic_armor_04" noscene 
+	speak "rix_equip_generic_armor_05" noscene 
+}
+
+Rule rix_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceArmor
+	response rix_equip_armor
+}
+
+Response rix_equip_armor_enemy_lc
+{
+	speak "rix_permanent_armor_04" noscene 
+	speak "rix_permanent_armor_05" noscene 
+}
+
+Rule rix_equip_armor_enemy_lc_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceArmor EnemyHasLegionCommander
+	response rix_equip_armor_enemy_lc
+}
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response rix_equip_accessory
+{
+	speak "rix_equip_generic_accessory_01" noscene 
+	speak "rix_equip_generic_accessory_02" noscene 
+	speak "rix_equip_generic_accessory_03" noscene 
+	speak "rix_equip_generic_accessory_04" noscene 
+	speak "rix_equip_generic_accessory_05" noscene 
+}
+
+Rule rix_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceAccessory
+	response rix_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response rix_gain_attack
+{
+	speak "rix_permanent_attack_01" noscene 
+	speak "rix_permanent_attack_02" noscene 
+	speak "rix_permanent_attack_03" noscene 
+	speak "rix_permanent_attack_04" noscene 
+	speak "rix_permanent_attack_05" noscene 
+}
+
+Rule rix_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceSpell BuffsAttack
+	response rix_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response rix_gain_armor
+{
+	speak "rix_permanent_armor_01" noscene 
+	speak "rix_permanent_armor_02" noscene 
+	speak "rix_permanent_armor_03" noscene 
+	speak "rix_permanent_armor_04" noscene 
+	speak "rix_permanent_armor_05" noscene 
+	speak "rix_potential_save_01" noscene 
+	speak "rix_potential_save_03" noscene 
+	speak "rix_potential_save_01" noscene 
+	speak "rix_potential_save_03" noscene 
+}
+
+Rule rix_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceSpell BuffsArmor
+	response rix_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response rix_gain_health
+{
+	speak "rix_permanent_health_01" noscene 
+	speak "rix_permanent_health_02" noscene 
+	speak "rix_permanent_health_03" noscene 
+	speak "rix_permanent_health_04" noscene 
+	speak "rix_permanent_health_05" noscene 
+	speak "rix_potential_save_01" noscene 
+	speak "rix_potential_save_03" noscene 
+}
+
+Rule rix_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetRix IsSourceSpell BuffsHealth
+	response rix_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response rix_use_include
+{
+	speak "rix_use_include_01" noscene 
+	speak "rix_use_include_02" noscene 
+	speak "rix_use_include_03" noscene 
+}
+
+Rule rix_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceTruthToPower ThisIsImportant
+	response rix_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response rix_gain_momentum_murder
+{
+	speak "rix_kill_rival_01" noscene 
+	speak "rix_kill_rival_02" noscene 
+	speak "rix_kill_rival_03" noscene 
+	speak "rix_kill_rival_04" noscene 
+	speak "rix_kill_rival_05" noscene 
+	speak "rix_kill_rival_06" noscene 
+	speak "rix_kill_rival_07" noscene 
+	speak "rix_kill_rival_09" noscene 	
+	speak "rix_kill_rival_10" noscene 
+}
+
+Rule rix_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasRix LocalChangeMomentum_Pos IsNotCombat IsBlockingRix
+	response rix_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response rix_lane_taunt_generic
+{
+	speak "rix_taunt_generic_01" noscene 
+	speak "rix_taunt_generic_02" noscene 
+	speak "rix_taunt_generic_03" noscene 
+	speak "rix_taunt_generic_04" noscene 
+	speak "rix_taunt_generic_05" noscene 
+	speak "rix_taunt_generic_06" noscene 
+	speak "rix_taunt_generic_07" noscene 
+	speak "rix_taunt_generic_08" noscene 
+	speak "rix_taunt_generic_09" noscene 
+	speak "rix_taunt_generic_10" noscene 
+	speak "rix_cast_spell_09" noscene 
+}
+
+Rule rix_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response rix_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response rix_lane_buff_give_death_skull
+{
+	speak "rix_potential_kill_01"  noscene 
+	speak "rix_potential_kill_02"  noscene
+	speak "rix_potential_kill_03"  noscene 
+	speak "rix_potential_kill_04"  noscene 
+	speak "rix_potential_kill_05"  noscene
+	speak "rix_kill_rival_08" noscene 	
+}
+
+Rule rix_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasRix EnemyGainedDeathSkull IsTargetRix
+	response rix_lane_buff_give_death_skull
+}
+
+Response rix_lane_debuff_give_death_skull
+{
+	speak "rix_potential_kill_01"  noscene 
+	speak "rix_potential_kill_02"  noscene
+	speak "rix_potential_kill_03"  noscene 
+	speak "rix_potential_kill_04"  noscene 
+	speak "rix_potential_kill_05"  noscene
+	speak "rix_kill_rival_08" noscene 		
+}
+
+Rule rix_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasRix TargetHasDeathSkull IsBlockingRix
+	response rix_lane_debuff_give_death_skull
+}
+
+Response rix_lane_damage_give_death_skull
+{
+	speak "rix_potential_kill_01"  noscene 
+	speak "rix_potential_kill_02"  noscene
+	speak "rix_potential_kill_03"  noscene 
+	speak "rix_potential_kill_04"  noscene 
+	speak "rix_potential_kill_05"  noscene
+	speak "rix_kill_rival_08" noscene 	
+}
+
+Rule rix_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasRix TargetHasDeathSkull IsBlockingRix
+	response rix_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response rix_debuff_blocker
+{
+	speak "rix_cast_spell_08" noscene 
+	speak "rix_cast_spell_10" noscene 
+	speak "rix_cast_spell_05" noscene 
+	speak "rix_cast_spell_03" noscene 
+	speak "rix_cast_spell_02" noscene 
+//	speak "rix_debuff_enemy_01" noscene 
+//	speak "rix_debuff_enemy_02" noscene 
+//	speak "rix_debuff_enemy_03" noscene 
+//	speak "rix_debuff_enemy_04" noscene 
+//	speak "rix_debuff_enemy_05" noscene 
+//	speak "rix_debuff_enemy_06" noscene 
+//	speak "rix_debuff_enemy_07" noscene 
+//	speak "rix_debuff_enemy_08" noscene 
+//	speak "rix_debuff_enemy_09" noscene 
+//	speak "rix_debuff_enemy_10" noscene 
+}
+
+Rule rix_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasRix IsBlockingRix
+	response rix_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response rix_buff_friend
+{
+	speak "rix_potential_save_05" noscene 
+	speak "rix_equip_generic_armor_02" noscene 
+	speak "rix_permanent_attack_02" noscene 
+	speak "rix_permanent_attack_04" noscene 
+	speak "rix_cast_spell_03" noscene 
+//	speak "rix_buff_ally_01" noscene 
+//	speak "rix_buff_ally_02" noscene 
+//	speak "rix_buff_ally_03" noscene 
+//	speak "rix_buff_ally_04" noscene 
+//	speak "rix_buff_ally_05" noscene 
+//	speak "rix_buff_ally_06" noscene 
+//	speak "rix_buff_ally_07" noscene 
+//	speak "rix_buff_ally_08" noscene 
+//	speak "rix_buff_ally_09" noscene 
+//	speak "rix_buff_ally_10" noscene 
+ 
+}
+
+Rule rix_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasRix IsSourceGreen IsTargetNotRix
+	response rix_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_rix
+{
+	speak "rix_healed_01" noscene 
+	speak "rix_healed_02" noscene 
+	speak "rix_healed_03" noscene 
+	speak "rix_healed_04" noscene 
+	speak "rix_healed_05" noscene 
+}
+Rule heal_rix_rule
+{
+	criteria IsNotImp Heal IsTargetRix
+	response heal_rix
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response rix_act_of_defiance
+{
+	speak "rix_unique_01" noscene 
+	speak "rix_unique_02" noscene 
+	speak "rix_unique_03" noscene 
+}
+
+Rule rix_act_of_defiance_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceActOfDefiance
+	response rix_act_of_defiance
+}
+
+Response rix_start_with_rebels
+{
+	speak "rix_unique_04" noscene
+	speak "rix_unique_05" noscene 
+	speak "rix_unique_06" noscene 
+	speak "rix_potential_save_05" noscene 
+}
+
+Rule rix_start_with_rebels_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix AllyHasFactionMultVhoulRebellion
+	response rix_start_with_rebels
+}
+
+Response rix_lane_enemy_tresdin
+{
+	speak "rix_unique_07" noscene 
+	speak "rix_unique_08" noscene 
+	speak "rix_unique_09" noscene 
+}
+
+Rule rix_lane_enemy_tresdin_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix EnemyHasLegionCommander
+	matchonce
+	response rix_lane_enemy_tresdin
+}
+
+Response rix_start_with_sorla_vs_tresdin
+{
+	speak "rix_unique_10" noscene 
+	speak "rix_unique_11" noscene 
+	speak "rix_unique_12" noscene 
+}
+
+Rule rix_start_with_sorla_vs_tresdin_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix AllyHasSorlaKhan EnemyHasLegionCommander
+	response rix_start_with_sorla_vs_tresdin
+}
+
+Response rix_start_with_tresdin_vs_sorla
+{
+	speak "rix_unique_13" noscene 
+	speak "rix_unique_14" noscene 
+	speak "rix_unique_15" noscene 
+}
+
+Rule rix_start_with_tresdin_vs_sorla_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix AllyHasLegionCommander EnemyHasSorlaKhan
+	response rix_start_with_tresdin_vs_sorla
+}
+
+
+Response rix_use_include_on_legion_commander
+{
+	speak "rix_unique_16" noscene 
+	speak "rix_unique_17" noscene 
+}
+
+Rule rix_use_include_on_legion_commander_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceTruthToPower IsTargetLegionCommander  ThisIsImportant
+	response rix_use_include_on_legion_commander
+}
+
+Response rix_use_include_on_sorla_khan
+{
+	speak "rix_unique_18" noscene 
+	speak "rix_unique_19" noscene 
+}
+
+Rule rix_use_include_on_sorla_khan_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceTruthToPower IsTargetSorlaKhan  ThisIsImportant
+	response rix_use_include_on_sorla_khan
+}
+
+Response rix_start_with_the_oath
+{
+	speak "rix_unique_20" noscene 
+}
+
+Rule rix_start_with_the_oath_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasRix AllyHasTheOath ThisIsImportant
+	response rix_start_with_the_oath
+}
+
+
+/////////////////////////////
+//PLAY SET ONE GREEN CARDS///
+/////////////////////////////
+
+Response rix_play_mist_of_avernus
+{
+	speak "rix_cast_spell_03" noscene 
+	speak "rix_permanent_attack_04" noscene 
+	speak "rix_taunt_generic_10" noscene 
+}
+
+Rule rix_play_mist_of_avernus_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceMistOfAvernus
+	response rix_play_mist_of_avernus
+}
+
+
+Response rix_play_selemenes_favor
+{
+	speak "rix_permanent_attack_05" noscene 
+	speak "rix_taunt_generic_01" noscene 
+	speak "rix_taunt_generic_05" noscene 
+}
+
+Rule rix_play_selemenes_favor_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceSelemenesFavor
+	response rix_play_selemenes_favor
+}
+
+Response rix_play_unearthed_secrets
+{
+	speak "rix_cast_spell_01" noscene 	
+	speak "rix_potential_save_05" noscene 	
+	speak "rix_taunt_generic_07" noscene 	
+	
+}
+
+Rule rix_play_unearthed_secrets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceUnearthedSecrets ThisIsImportant
+	response rix_play_unearthed_secrets
+}
+
+Response rix_play_path_of_the_dreamer
+{
+	speak "rix_cast_spell_06" noscene 	
+	speak "rix_taunt_generic_09" noscene 	
+	speak "rix_taunt_generic_03" noscene 	
+	
+}
+
+Rule rix_play_path_of_the_dreamer_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourcePathOfTheDreamer ThisIsImportant
+	response rix_play_path_of_the_dreamer
+}
+
+Response rix_play_homefield_advantage
+{
+	speak "rix_cast_spell_04" noscene 	
+	speak "rix_taunt_generic_09" noscene 	
+	speak "rix_cast_spell_03" noscene 	
+	
+}
+
+Rule rix_play_homefield_advantage_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceHomefieldAdvantage ThisIsImportant
+	response rix_play_homefield_advantage
+}
+
+
+Response rix_play_altar_of_the_mad_moon
+{
+	speak "rix_cast_spell_07" noscene 	
+	speak "rix_taunt_generic_10" noscene 	
+	speak "rix_taunt_generic_04" noscene 	
+	speak "rix_taunt_generic_05" noscene 	
+	
+}
+
+Rule rix_play_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceAltarOfTheMadMoon ThisIsImportant
+	response rix_play_altar_of_the_mad_moon
+}
+
+Response rix_play_cheating_death
+{
+	speak "rix_cast_spell_02" noscene 	
+	speak "rix_permanent_health_03" noscene 	
+	speak "rix_permanent_health_05" noscene 	
+	
+}
+
+Rule rix_play_cheating_death_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceCheatingDeath ThisIsImportant
+	response rix_play_cheating_death
+}
+
+Response rix_play_verdant_refuge
+{
+	speak "rix_cast_spell_03" noscene 	
+	speak "rix_permanent_armor_03" noscene 	
+	speak "rix_permanent_armor_01" noscene 	
+	speak "rix_permanent_armor_02" noscene 	
+	
+}
+
+Rule rix_play_verdant_refuge_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceVerdantRefuge ThisIsImportant
+	response rix_play_verdant_refuge
+}
+
+Response rix_play_stars_align
+{
+	speak "rix_cast_spell_10" noscene 	
+	speak "rix_potential_kill_01" noscene 	
+	speak "rix_potential_kill_04" noscene 	
+	
+}
+
+Rule rix_play_stars_align_rule
+{
+	criteria IsNotImp  PlayCard AllyHasRix IsSourceStarsAlign ThisIsImportant
+	response rix_play_stars_align
+}
+
+

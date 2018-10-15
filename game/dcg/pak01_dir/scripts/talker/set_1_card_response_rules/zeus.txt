@@ -1,0 +1,581 @@
+/////////////////
+//**ZEUS - HERO//
+/////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response zeus_equip_weapon
+{
+	speak "zeus_equip_generic_weapon_01" noscene 
+	speak "zeus_equip_generic_weapon_02" noscene 
+	speak "zeus_equip_generic_weapon_03" noscene 
+	speak "zeus_equip_generic_weapon_04" noscene 
+	speak "zeus_equip_generic_weapon_05" noscene 
+}
+
+Rule zeus_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceWeapon
+	response zeus_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response zeus_equip_armor
+{
+	speak "zeus_equip_generic_armor_01" noscene 
+	speak "zeus_equip_generic_armor_02" noscene 
+	speak "zeus_equip_generic_armor_03" noscene 
+	speak "zeus_equip_generic_armor_04" noscene 
+	speak "zeus_equip_generic_armor_05" noscene 
+}
+
+Rule zeus_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceArmor
+	response zeus_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response zeus_equip_accessory
+{
+	speak "zeus_equip_generic_accessory_01" noscene 
+	speak "zeus_equip_generic_accessory_02" noscene 
+	speak "zeus_equip_generic_accessory_03" noscene 
+	speak "zeus_equip_generic_accessory_04" noscene 
+	speak "zeus_equip_generic_accessory_05" noscene 
+}
+
+Rule zeus_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceAccessory
+	response zeus_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response zeus_gain_attack
+{
+	speak "zeus_permanent_attack_01" noscene 
+	speak "zeus_permanent_attack_02" noscene 
+	speak "zeus_permanent_attack_03" noscene 
+	speak "zeus_permanent_attack_04" noscene 
+	speak "zeus_permanent_attack_05" noscene 
+}
+
+Rule zeus_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceSpell BuffsAttack
+	response zeus_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response zeus_gain_armor
+{
+	speak "zeus_permanent_armor_01" noscene 
+	speak "zeus_permanent_armor_02" noscene 
+	speak "zeus_permanent_armor_03" noscene 
+	speak "zeus_permanent_armor_04" noscene 
+	speak "zeus_permanent_armor_05" noscene 
+}
+
+Rule zeus_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceSpell BuffsArmor
+	response zeus_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response zeus_gain_health
+{
+	speak "zeus_permanent_health_01" noscene 
+	speak "zeus_permanent_health_02" noscene 
+	speak "zeus_permanent_health_03" noscene 
+	speak "zeus_permanent_health_04" noscene 
+	speak "zeus_permanent_health_05" noscene 
+}
+
+Rule zeus_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetZeus IsSourceSpell BuffsHealth
+	response zeus_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+
+
+Response zeus_use_include
+{
+	speak "zeus_use_include_01" noscene 
+	speak "zeus_use_include_02" noscene 
+	speak "zeus_use_include_03" noscene 
+}
+
+Rule zeus_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceThunderGodsWrath ThisIsImportant
+	response zeus_use_include
+}
+
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response zeus_gain_momentum_murder
+{
+	speak "zeus_kill_rival_01" noscene 
+	speak "zeus_kill_rival_02" noscene 
+	speak "zeus_kill_rival_03" noscene 
+	speak "zeus_kill_rival_04" noscene 
+	speak "zeus_kill_rival_05" noscene 
+	speak "zeus_kill_rival_06" noscene 
+	speak "zeus_kill_rival_07" noscene 
+	speak "zeus_kill_rival_08" noscene
+	speak "zeus_kill_rival_09" noscene 	
+	speak "zeus_kill_rival_10" noscene 
+}
+
+Rule zeus_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasZeus LocalChangeMomentum_Pos IsNotCombat
+	response zeus_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response zeus_lane_taunt_generic
+{
+	speak "zeus_taunt_generic_01" noscene 
+	speak "zeus_taunt_generic_02" noscene 
+	speak "zeus_taunt_generic_03" noscene 
+	speak "zeus_taunt_generic_04" noscene 
+	speak "zeus_taunt_generic_05" noscene 
+	speak "zeus_taunt_generic_06" noscene 
+	speak "zeus_taunt_generic_07" noscene 
+	speak "zeus_taunt_generic_08" noscene 
+	speak "zeus_taunt_generic_09" noscene 
+	speak "zeus_taunt_generic_10" noscene 
+}
+
+Rule zeus_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response zeus_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response zeus_lane_buff_give_death_skull
+{
+	speak "zeus_potential_kill_01"  noscene 
+	speak "zeus_potential_kill_02"  noscene
+	speak "zeus_potential_kill_03"  noscene 
+	speak "zeus_potential_kill_04"  noscene 
+	speak "zeus_potential_kill_05"  noscene
+}
+
+Rule zeus_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasZeus EnemyGainedDeathSkull IsTargetZeus
+	response zeus_lane_buff_give_death_skull
+}
+
+Response zeus_lane_debuff_give_death_skull
+{
+	speak "zeus_potential_kill_01"  noscene 
+	speak "zeus_potential_kill_02"  noscene
+	speak "zeus_potential_kill_03"  noscene 
+	speak "zeus_potential_kill_04"  noscene 
+	speak "zeus_potential_kill_05"  noscene
+}
+
+Rule zeus_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasZeus TargetHasDeathSkull IsBlockingZeus
+	response zeus_lane_debuff_give_death_skull
+}
+
+Response zeus_lane_damage_give_death_skull
+{
+	speak "zeus_potential_kill_01"  noscene 
+	speak "zeus_potential_kill_02"  noscene
+	speak "zeus_potential_kill_03"  noscene 
+	speak "zeus_potential_kill_04"  noscene 
+	speak "zeus_potential_kill_05"  noscene
+}
+
+Rule zeus_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasZeus TargetHasDeathSkull IsBlockingZeus
+	response zeus_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response zeus_debuff_blocker
+{
+	speak "zeus_debuff_enemy_01" noscene 
+	speak "zeus_debuff_enemy_02" noscene 
+	speak "zeus_debuff_enemy_03" noscene 
+	speak "zeus_debuff_enemy_04" noscene 
+	speak "zeus_debuff_enemy_05" noscene 
+	speak "zeus_debuff_enemy_06" noscene 
+	speak "zeus_debuff_enemy_07" noscene 
+	speak "zeus_debuff_enemy_08" noscene 
+	speak "zeus_debuff_enemy_09" noscene 
+	speak "zeus_debuff_enemy_10" noscene 
+}
+
+Rule zeus_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasZeus IsBlockingZeus
+	response zeus_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response zeus_buff_friend
+{
+	speak "zeus_buff_ally_01" noscene 
+	speak "zeus_buff_ally_02" noscene 
+	speak "zeus_buff_ally_03" noscene 
+	speak "zeus_buff_ally_04" noscene 
+	speak "zeus_buff_ally_05" noscene 
+	speak "zeus_buff_ally_06" noscene 
+	speak "zeus_buff_ally_07" noscene 
+	speak "zeus_buff_ally_08" noscene 
+	speak "zeus_buff_ally_09" noscene 
+	speak "zeus_buff_ally_10" noscene 
+ 
+}
+
+Rule zeus_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasZeus IsSourceBlue IsTargetNotZeus
+	response zeus_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_zeus
+{
+	speak "zeus_healed_01" noscene 
+	speak "zeus_healed_02" noscene 
+	speak "zeus_healed_03" noscene 
+	speak "zeus_healed_04" noscene 
+	speak "zeus_healed_05" noscene 
+}
+Rule heal_zeus_rule
+{
+	criteria IsNotImp Heal IsTargetZeus
+	response heal_zeus
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response zeus_lightning_strike
+{
+	speak "zeus_unique_01" noscene 
+	speak "zeus_unique_02" noscene 
+	speak "zeus_unique_03" noscene 
+}
+
+Rule zeus_lightning_strike_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceLightningStrike 
+	response zeus_lightning_strike
+}
+
+Response zeus_bolt_of_damocles
+{
+	speak "zeus_unique_04" noscene 
+	speak "zeus_unique_05" noscene 
+	speak "zeus_unique_06" noscene 
+}
+
+Rule zeus_bolt_of_damocles_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBoltOfDamocles 
+	response zeus_bolt_of_damocles
+}
+
+Response zeus_start_with_cm
+{
+	speak "zeus_unique_07" noscene 
+	speak "zeus_unique_08" noscene 
+	speak "zeus_unique_09" noscene 
+}
+
+Rule zeus_start_with_cm_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus AllyHasCrystalMaiden
+	response zeus_start_with_cm
+}
+
+Response zeus_lane_enemy_pa
+{
+	speak "zeus_unique_10" noscene 
+	speak "zeus_unique_11" noscene 
+}
+
+Rule zeus_lane_enemy_pa_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasPhantomAssassin
+	matchonce
+	response zeus_lane_enemy_pa
+}
+
+Response zeus_lane_enemy_bristleback
+{
+	speak "zeus_unique_12" noscene 
+}
+
+Rule zeus_lane_enemy_bristleback_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasBristleBack
+	matchonce
+	response zeus_lane_enemy_bristleback
+}
+
+Response zeus_start_with_luna
+{
+	speak "zeus_unique_13" noscene 
+	speak "zeus_unique_14" noscene 
+}
+
+Rule zeus_start_with_luna_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus AllyHasLuna
+	response zeus_start_with_luna
+}
+
+Response zeus_lane_enemy_axe
+{
+	speak "zeus_unique_15" noscene 
+	speak "zeus_unique_16" noscene 
+}
+
+Rule zeus_lane_enemy_axe_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasAxe
+	matchonce
+	response zeus_lane_enemy_axe
+}
+
+Response zeus_lane_enemy_sorla
+{
+	speak "zeus_unique_17" noscene 
+}
+
+Rule zeus_lane_enemy_sorla_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan
+	matchonce
+	response zeus_lane_enemy_sorla
+}
+
+Response zeus_lane_enemy_legion_commander
+{
+	speak "zeus_unique_18" noscene 
+	speak "zeus_unique_19" noscene 
+}
+
+Rule zeus_lane_enemy_legion_commander_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasLegionCommander
+	matchonce
+	response zeus_lane_enemy_legion_commander
+}
+
+Response zeus_lane_enemy_sorla_and_legion_commander
+{
+	speak "zeus_unique_20" noscene 
+}
+
+Rule zeus_lane_enemy_sorla_and_legion_commander_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan EnemyHasLegionCommander
+	matchonce
+	response zeus_lane_enemy_sorla_and_legion_commander
+}
+
+//////////////////////////
+//PRESS DECK EXPLORATION//
+//////////////////////////
+
+Response zeus_play_barracks
+{
+	speak "zeus_arrogant_07" noscene 		
+}
+
+Rule zeus_play_barracks_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBarracks ThisIsImportant
+	response zeus_play_barracks
+}
+
+Response zeus_play_fractured_timeline
+{
+	speak "zeus_enigmatic_01" noscene 	
+	
+}
+
+Rule zeus_play_fractured_timeline_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceFracturedTimeline ThisIsImportant
+	response zeus_play_fractured_timeline
+}
+
+Response zeus_play_path_of_the_wise
+{
+	speak "zeus_arrogant_03" noscene 	
+	
+}
+
+Rule zeus_play_path_of_the_wise_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourcePathOfTheWise ThisIsImportant
+	response zeus_play_path_of_the_wise
+}
+
+
+Response zeus_play_ignite
+{
+	speak "zeus_angry_09" noscene 	
+	
+}
+
+Rule zeus_play_ignite_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceIgnite ThisIsImportant
+	response zeus_play_ignite
+}
+
+Response zeus_play_howling_mind
+{
+	speak "zeus_enigmatic_03" noscene 	
+	
+}
+
+Rule zeus_play_howling_mind_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceHowlingMind ThisIsImportant
+	response zeus_play_howling_mind
+}
+
+Response zeus_play_aghanims_sanctum
+{
+	speak "zeus_enigmatic_06" noscene 	
+	
+}
+
+Rule zeus_play_aghanims_sanctum_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceAghanimsSanctum ThisIsImportant
+	response zeus_play_aghanims_sanctum
+}
+
+Response zeus_play_messenger_rookery
+{
+	speak "zeus_enigmatic_05" noscene 	
+	
+}
+
+Rule zeus_play_messenger_rookery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceMessengerRookery ThisIsImportant
+	response zeus_play_messenger_rookery
+}
+
+Response zeus_play_glyph_of_confusion
+{
+	speak "zeus_enigmatic_09" noscene 	
+	
+}
+
+Rule zeus_play_glyph_of_confusion_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceGlyphOfConfusion ThisIsImportant
+	response zeus_play_glyph_of_confusion
+}
+
+Response zeus_play_watchtower
+{
+	speak "zeus_enigmatic_01" noscene 	
+	
+}
+
+Rule zeus_play_watchtower_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceWatchtower ThisIsImportant
+	response zeus_play_watchtower
+}
+
+Response zeus_play_firestorm
+{
+	speak "zeus_angry_05" noscene 
+}
+
+Rule zeus_play_firestorm_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceFirestorm
+	response zeus_play_firestorm
+}
+
+Response zeus_play_annihilation
+{
+	speak "zeus_cast_spell_01" noscene 
+	speak "zeus_cast_spell_09" noscene 
+	speak "zeus_arrogant_05" noscene 
+	speak "zeus_arrogant_06" noscene 
+}
+
+Rule zeus_play_annihilation_rule
+{
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceAnnihilation
+	response zeus_play_annihilation
+}
+

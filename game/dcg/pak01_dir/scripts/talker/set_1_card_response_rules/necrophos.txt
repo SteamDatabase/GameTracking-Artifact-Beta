@@ -1,0 +1,485 @@
+//////////////////////
+//**NECROPHOS - HERO//
+//////////////////////
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response necrophos_equip_weapon
+{
+	speak "necrophos_equip_generic_weapon_01" noscene 
+	speak "necrophos_equip_generic_weapon_02" noscene 
+	speak "necrophos_equip_generic_weapon_03" noscene 
+	speak "necrophos_equip_generic_weapon_04" noscene 
+	speak "necrophos_equip_generic_weapon_05" noscene 
+}
+
+Rule necrophos_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceWeapon
+	response necrophos_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response necrophos_equip_armor
+{
+	speak "necrophos_equip_generic_armor_01" noscene 
+	speak "necrophos_equip_generic_armor_02" noscene 
+	speak "necrophos_equip_generic_armor_03" noscene 
+	speak "necrophos_equip_generic_armor_04" noscene 
+	speak "necrophos_equip_generic_armor_05" noscene 
+}
+
+Rule necrophos_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceArmor
+	response necrophos_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response necrophos_equip_accessory
+{
+	speak "necrophos_equip_generic_accessory_01" noscene 
+	speak "necrophos_equip_generic_accessory_02" noscene 
+	speak "necrophos_equip_generic_accessory_03" noscene 
+	speak "necrophos_equip_generic_accessory_04" noscene 
+	speak "necrophos_equip_generic_accessory_05" noscene 
+}
+
+Rule necrophos_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceAccessory
+	response necrophos_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response necrophos_gain_attack
+{
+	speak "necrophos_permanent_attack_01" noscene 
+	speak "necrophos_permanent_attack_02" noscene 
+	speak "necrophos_permanent_attack_03" noscene 
+	speak "necrophos_permanent_attack_04" noscene 
+	speak "necrophos_permanent_attack_05" noscene 
+}
+
+Rule necrophos_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceSpell BuffsAttack
+	response necrophos_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response necrophos_gain_armor
+{
+	speak "necrophos_permanent_armor_01" noscene 
+	speak "necrophos_permanent_armor_02" noscene 
+	speak "necrophos_permanent_armor_03" noscene 
+	speak "necrophos_permanent_armor_04" noscene 
+	speak "necrophos_permanent_armor_05" noscene 
+}
+
+Rule necrophos_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceSpell BuffsArmor
+	response necrophos_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response necrophos_gain_health
+{
+	speak "necrophos_permanent_health_01" noscene 
+	speak "necrophos_permanent_health_02" noscene 
+	speak "necrophos_permanent_health_03" noscene 
+	speak "necrophos_permanent_health_04" noscene 
+	speak "necrophos_permanent_health_05" noscene 
+}
+
+Rule necrophos_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetNecrophos IsSourceSpell BuffsHealth
+	response necrophos_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response necrophos_use_include
+{
+	speak "necrophos_use_include_01" noscene 
+	speak "necrophos_use_include_02" noscene 
+	speak "necrophos_use_include_03" noscene 
+}
+
+Rule necrophos_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceHeartStopperAura ThisIsImportant
+	response necrophos_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response necrophos_gain_momentum_murder
+{ 
+	speak "necrophos_kill_rival_01" noscene 	
+	speak "necrophos_kill_rival_02" noscene 
+	speak "necrophos_kill_rival_03" noscene 
+	speak "necrophos_kill_rival_04" noscene 
+	speak "necrophos_kill_rival_05" noscene 
+	speak "necrophos_kill_rival_06" noscene 
+	speak "necrophos_kill_rival_07" noscene 
+	speak "necrophos_kill_rival_08" noscene
+	speak "necrophos_kill_rival_09" noscene 	
+	speak "necrophos_kill_rival_10" noscene 
+}
+
+Rule necrophos_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasNecrophos LocalChangeMomentum_Pos IsNotCombat
+	response necrophos_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response necrophos_lane_taunt_generic
+{
+	speak "necrophos_taunt_generic_01" noscene 
+	speak "necrophos_taunt_generic_02" noscene 
+	speak "necrophos_taunt_generic_03" noscene 
+	speak "necrophos_taunt_generic_04" noscene 
+	speak "necrophos_taunt_generic_05" noscene 
+	speak "necrophos_taunt_generic_06" noscene 
+	speak "necrophos_taunt_generic_07" noscene 
+	speak "necrophos_taunt_generic_08" noscene 
+	speak "necrophos_taunt_generic_09" noscene 
+}
+
+Rule necrophos_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasNecrophos IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response necrophos_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response necrophos_lane_buff_give_death_skull
+{
+	speak "necrophos_potential_kill_01"  noscene 
+	speak "necrophos_potential_kill_02"  noscene
+	speak "necrophos_potential_kill_03"  noscene 
+	speak "necrophos_potential_kill_04"  noscene 
+	speak "necrophos_potential_kill_05"  noscene
+}
+
+Rule necrophos_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasNecrophos EnemyGainedDeathSkull IsTargetNecrophos
+	response necrophos_lane_buff_give_death_skull
+}
+
+Response necrophos_lane_debuff_give_death_skull
+{
+	speak "necrophos_potential_kill_01"  noscene 
+	speak "necrophos_potential_kill_02"  noscene
+	speak "necrophos_potential_kill_03"  noscene 
+	speak "necrophos_potential_kill_04"  noscene 
+	speak "necrophos_potential_kill_05"  noscene
+}
+
+Rule necrophos_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasNecrophos TargetHasDeathSkull IsBlockingNecrophos
+	response necrophos_lane_debuff_give_death_skull
+}
+
+Response necrophos_lane_damage_give_death_skull
+{
+	speak "necrophos_potential_kill_01"  noscene 
+	speak "necrophos_potential_kill_02"  noscene
+	speak "necrophos_potential_kill_03"  noscene 
+	speak "necrophos_potential_kill_04"  noscene 
+	speak "necrophos_potential_kill_05"  noscene
+}
+
+Rule necrophos_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasNecrophos TargetHasDeathSkull IsBlockingNecrophos
+	response necrophos_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response necrophos_debuff_blocker
+{
+	speak "necrophos_debuff_enemy_01" noscene 
+	speak "necrophos_debuff_enemy_02" noscene 
+	speak "necrophos_debuff_enemy_03" noscene 
+	speak "necrophos_debuff_enemy_04" noscene 
+	speak "necrophos_debuff_enemy_05" noscene 
+	speak "necrophos_debuff_enemy_06" noscene 
+	speak "necrophos_debuff_enemy_07" noscene 
+	speak "necrophos_debuff_enemy_08" noscene 
+	speak "necrophos_debuff_enemy_09" noscene 
+	speak "necrophos_debuff_enemy_10" noscene 
+}
+
+Rule necrophos_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasNecrophos IsBlockingNecrophos
+	response necrophos_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response necrophos_buff_friend
+{
+	speak "necrophos_buff_ally_01" noscene 
+	speak "necrophos_buff_ally_02" noscene 
+	speak "necrophos_buff_ally_03" noscene 
+	speak "necrophos_buff_ally_04" noscene 
+	speak "necrophos_buff_ally_05" noscene 
+	speak "necrophos_buff_ally_06" noscene 
+	speak "necrophos_buff_ally_07" noscene 
+	speak "necrophos_buff_ally_08" noscene 
+	speak "necrophos_buff_ally_09" noscene 
+	speak "necrophos_buff_ally_10" noscene 
+ 
+}
+
+Rule necrophos_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasNecrophos IsSourceBlack IsTargetNotNecrophos
+	response necrophos_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_necrophos
+{
+	speak "necrophos_healed_01" noscene 
+	speak "necrophos_healed_02" noscene 
+	speak "necrophos_healed_03" noscene 
+	speak "necrophos_healed_04" noscene 
+	speak "necrophos_healed_05" noscene 
+}
+Rule heal_necrophos_rule
+{
+	criteria IsNotImp Heal IsTargetNecrophos
+	response heal_necrophos
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE BLACK CARDS///
+/////////////////////////////
+
+Response necrophos_play_assured_destruction
+{
+	speak "necrophos_cast_spell_06" noscene 
+}
+
+Rule necrophos_play_assured_destruction_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssuredDestruction ThisIsImportant
+	response necrophos_play_assured_destruction
+}
+
+Response necrophos_play_path_of_the_cunning
+{
+	speak "necrophos_cast_spell_04" noscene 
+}
+
+Rule necrophos_play_path_of_the_cunning_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourcePathOfTheCunning ThisIsImportant
+	response necrophos_play_path_of_the_cunning
+}
+
+Response necrophos_play_the_tyler_estate
+{
+	speak "necrophos_cast_spell_01" noscene 
+}
+
+Rule necrophos_play_the_tyler_estate_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheTylerEstate ThisIsImportant
+	response necrophos_play_the_tyler_estate
+}
+
+Response necrophos_play_burn_it_all
+{
+	speak "necrophos_angry_04" noscene 
+}
+
+Rule necrophos_play_burn_it_all_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceBurnItAll ThisIsImportant
+	response necrophos_play_burn_it_all
+}
+
+Response necrophos_play_trebuchets
+{
+
+	speak "necrophos_angry_03" noscene 
+}
+
+Rule necrophos_play_trebuchets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTrebuchets ThisIsImportant
+	response necrophos_play_trebuchets
+}
+
+Response necrophos_play_undisciplined_artillery
+{
+	speak "necrophos_enigmatic_08" noscene 
+}
+
+Rule necrophos_play_undisciplined_artillery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceUndisciplinedArtillery ThisIsImportant
+	response necrophos_play_undisciplined_artillery
+}
+
+Response necrophos_play_revtel_investments
+{
+	speak "necrophos_enigmatic_03" noscene 
+}
+
+Rule necrophos_play_revtel_investments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceRevtelInvestments ThisIsImportant
+	response necrophos_play_revtel_investments
+}
+
+Response necrophos_play_iron_fog_goldmine
+{
+	speak "necrophos_arrogant_05" noscene 
+}
+
+Rule necrophos_play_iron_fog_goldmine_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceIronFogGoldmine ThisIsImportant
+	response necrophos_play_iron_fog_goldmine
+}
+
+Response necrophos_play_escape_route
+{
+	speak "necrophos_arrogant_05" noscene 
+}
+
+Rule necrophos_play_escape_route_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceEscapeRoute ThisIsImportant
+	response necrophos_play_escape_route
+}
+
+Response necrophos_play_assault_ladders
+{
+	speak "necrophos_arrogant_03" noscene 
+}
+
+Rule necrophos_play_assault_ladders_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssaultLadders ThisIsImportant
+	response necrophos_play_assault_ladders
+}
+
+Response necrophos_play_the_oath
+{
+	speak "necrophos_angry_08" noscene 
+}
+
+Rule necrophos_play_the_oath_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheOath ThisIsImportant
+	response necrophos_play_the_oath
+}
+
+Response necrophos_play_keenfolk_turret
+{
+	speak "necrophos_enigmatic_09" noscene 
+}
+
+Rule necrophos_play_keenfolk_turret_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceKeenfolkTurret ThisIsImportant
+	response necrophos_play_keenfolk_turret
+}
+
+Response necrophos_play_steam_cannon
+{
+	speak "necrophos_debuff_enemy_05" noscene 
+}
+
+Rule necrophos_play_steam_cannon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceSteamCannon ThisIsImportant
+	response necrophos_play_steam_cannon
+}
+
+Response necrophos_play_march_of_the_machines
+{
+	speak "necrophos_enigmatic_01" noscene 
+}
+
+Rule necrophos_play_march_of_the_machines_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceMarchOfTheMachines ThisIsImportant
+	response necrophos_play_march_of_the_machines
+}
+
+Response necrophos_play_day_at_the_track
+{
+	speak "necrophos_pleased_05" noscene 
+}
+
+Rule necrophos_play_day_at_the_track_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceDayAtTheTrack ThisIsImportant
+	response necrophos_play_day_at_the_track
+}
+

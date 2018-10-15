@@ -1,0 +1,166 @@
+
+// this file handles rules for NON-COMBAT HERO DEATH responses and responses to killing CREEPS. 
+
+
+
+
+//====   PLAYER DEATH  ===============================================================================================
+//====================================================================================================================
+
+
+// player:
+
+Rule rule_imps_local_negative_death
+{
+	criteria Death IsNotCombat IsLocalImp IsTargetHero IsTargetLocal LocalChangeMomentum_Neg NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			 
+	
+	response imps_local_negative_broad
+	
+	// second response here is a catch-all for playing an animation that only really works in context|visually as a positive reaction to a hero or multi creep death:
+	// (no content yet for opponent)
+	
+	// response imps_opponent_positive_hero_death
+}
+
+
+Rule rule_imps_local_negative_death_multi_creep
+{
+	
+	// usually single creep death gives no reaction, but multiple creep deaths will fire a response 
+	
+	criteria Death IsNotCombat IsLocalImp IsTargetCreep IsTargetLocal LocalChangeMomentum_NegMid NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_local_negative_broad
+}
+
+
+Rule rule_imps_local_negative_death_creep
+{
+	
+	// MOMENTUM: usually single creep death gives no reaction, unless the player is LOSING the overall game 
+	
+	criteria Death IsNotCombat IsLocalImp IsTargetCreep IsTargetLocal LocalChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			
+	response imps_local_negative_broad
+	
+}
+
+
+Rule rule_imps_local_positive_death_whatever
+{
+	
+	// MOMENTUM: if the player is winning overall, imp will play a 'whatever' animation when a local hero dies
+	
+	criteria Death IsNotCombat IsLocalImp IsTargetHero LocalChangeMomentum_Neg PlayerIsWinningGame IsGameRound4orMore NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_local_positive_whatever
+	
+}
+
+
+// opponent:
+
+Rule rule_imps_opponent_positive_death
+{
+	criteria Death IsNotCombat IsOpponentImp IsTargetHero IsTargetLocal LocalChangeMomentum_Neg NoRepeatForOpponentCommonResponses
+	ApplyContext "NoRepeatForOpponentCommonResponses:1:2"	
+	response imps_opponent_positive_small
+}
+
+
+// note: this one happens when the player kills one of his OWN units. The opponent imp will laugh and the player imp will act confused
+
+Rule rule_imps_opponent_positive_player_is_confused_death
+{
+	criteria Death IsNotCombat IsOpponentImp IsTargetHero IsTargetLocal IsActingPlayerLocal LocalChangeMomentum_Neg NoRepeatForOpponentCommonResponses
+	ApplyContext "NoRepeatForOpponentCommonResponses:1:2"
+	ApplyContextToWorld			
+}
+
+
+
+//====   OPPONENT DEATH  =============================================================================================
+//====================================================================================================================
+
+
+// player:
+
+
+Rule rule_imps_local_positive_death
+{
+	criteria Death IsNotCombat IsLocalImp IsTargetHero IsTargetNotLocal OpponentChangeMomentum_Neg NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_local_positive_broad
+	
+	// second response here is a catch-all for playing an animation that only really works in context|visually as a positive reaction to a hero death:
+	
+	response imps_local_positive_hero_death
+	
+}
+
+
+Rule rule_imps_local_positive_death_multi_creep
+{
+	criteria Death IsNotCombat IsLocalImp IsTargetCreep IsTargetNotLocal OpponentChangeMomentum_NegMid NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			 
+	
+	response imps_local_positive_broad
+	
+	// second response here is a catch-all for playing an animation that only really works in context|visually as a positive reaction to a hero or multi creep death:
+	
+	response imps_local_positive_hero_death
+	
+}
+
+
+Rule rule_imps_local_positive_death_creep
+{
+	
+	// MOMENTUM: usually single creep death gives no reaction, unless the player is LOSING the overall game 
+	
+	criteria Death IsNotCombat IsLocalImp IsTargetCreep IsTargetNotLocal OpponentChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore NoRepeatForPlayerCommonResponses
+	ApplyContext "NoRepeatForPlayerCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_local_positive_broad
+	
+	// second response here is a catch-all for playing an animation that only really works in context|visually as a positive reaction to a hero or multi creep death:
+	
+	response imps_local_positive_hero_death
+	
+}
+
+
+// opponent:
+
+Rule rule_imps_opponent_negative_death
+{
+	criteria Death IsNotCombat IsOpponentImp IsTargetHero IsTargetNotLocal OpponentChangeMomentum_Neg NoRepeatForOpponentCommonResponses
+	ApplyContext "NoRepeatForOpponentCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_opponent_negative_small
+}
+
+Rule rule_imps_opponent_positive_death_whatever
+{
+	
+	// MOMENTUM: if the opponent is winning overall, imp will play a 'whatever' animation when am opponent hero dies
+	
+	criteria Death IsNotCombat IsOpponentImp IsTargetNotLocal OpponentChangeMomentum_Neg OpponentIsWinningGame IsGameRound4orMore NoRepeatForOpponentCommonResponses
+	ApplyContext "NoRepeatForOpponentCommonResponses:1:2"
+	ApplyContextToWorld			
+	
+	response imps_opponent_positive_whatever
+	
+}

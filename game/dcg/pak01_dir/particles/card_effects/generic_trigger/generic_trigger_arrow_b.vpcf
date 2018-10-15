@@ -1,0 +1,129 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_flConstantRadius = 0.500000
+	m_nMaxParticles = 16
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.100000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 0.100000
+		},
+		{
+			_class = "C_OP_BasicMovement"
+		},
+		{
+			_class = "C_OP_SetChildControlPoints"
+			m_nFirstControlPoint = 1
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_flAnimationRate = 0.000000
+			m_bDisableZBuffering = true
+			m_hTexture = resource:"materials/particle/particle_whitebox.vtex"
+			m_OutlineColor = 
+			[
+				0,
+				0,
+				0,
+				255,
+			]
+			m_flOutlineStart0 = 0.000000
+			m_flOutlineStart1 = 1.000000
+			m_flOutlineEnd0 = 1.000000
+			m_flOutlineEnd1 = 2.000000
+			m_flSelfIllumAmount = 1.000000
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_CreateWithinBox"
+			m_vecMin = 
+			[
+				0.020000,
+				0.020000,
+				0.020000,
+			]
+			m_vecMax = 
+			[
+				0.020000,
+				0.020000,
+				0.020000,
+			]
+			m_bLocalSpace = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nFieldOutput = 1
+			m_nInputMax = 1
+			m_flOutputMin = 1.050000
+		},
+		{
+			_class = "C_INIT_RandomRotation"
+			m_flDegreesMin = 45.000000
+			m_flDegreesMax = 45.000000
+			m_bRandomlyFlipDirection = false
+		},
+		{
+			_class = "C_INIT_RemapCPtoVector"
+			m_nCPInput = 3
+			m_nFieldOutput = 6
+			m_vInputMax = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
+			m_vOutputMax = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 1
+		},
+	]
+	m_flConstantLifespan = 0.500000
+	m_Constraints = 
+	[
+		{
+			_class = "C_OP_ConstrainDistanceToPath"
+			m_flMaxDistance0 = 0.000000
+			m_PathParameters = 
+			{
+				m_nEndControlPointNumber = 1
+			}
+			m_flTravelTime = 0.500000
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/card_effects/generic_trigger/generic_trigger_line_b.vpcf"
+		},
+	]
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+		},
+	]
+}

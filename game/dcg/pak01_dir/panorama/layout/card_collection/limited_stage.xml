@@ -1,0 +1,64 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/card_collection/limited_stage.vcss_c" />
+	</styles>
+
+	<Panel>
+    
+    <Panel id="MainBody">
+
+      <Panel id="BodyHeader">
+        <Panel id="BodyHeaderLeft">
+          <Label id="Title" text="#DCG_Gauntlet_GrantTitle"/>
+          <Label id="ChooseTitle" text="#DCG_Gauntlet_GrantChoose"/>
+          <Panel id="DraftStages">
+            <!--Dynamic Contents-->
+          </Panel>
+        </Panel>
+        <Panel id="BodyHeaderRight">
+          <Panel class="ButtonDark" id="QuitDraftStage" onactivate="DCGConfirmAbandonLimitedStage()">
+            <Label id="QuitPrompt" class="CloseButtonPanelTitle" text="#DCG_XForClose"/>
+          </Panel>
+          <Panel id="currentBalance" class="CurrencyGroup">
+            <Panel class="currencyIcon"/>
+            <Label text="{d:currencyBalance}"/>
+          </Panel>
+        </Panel>
+      </Panel>
+
+      <Label id="StageMsg" text="{s:displayStageMsg}"/>
+      <Panel id="DynamicPackPanel">
+        <!--Dynamic Contents-->
+      </Panel>
+
+      <Panel id="NextStageGroup">
+        <Panel class="ButtonDark" id="NextStage" onactivate="DCGNextStage()">
+          <Label id="ChoosePrompt" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantChooseMore"/>
+          <Label id="OverBudget" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantOverBudget"/>
+          <Label id="GrantNextLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantNext"/>
+          <Label id="GrantFinishLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantFinish"/>
+        </Panel>
+      </Panel>
+      
+    </Panel>
+    
+    <Panel id="CurrentDeck">
+      <DCGDeckInfo id="DeckInfo" />
+      <Panel id="ToggleShowDeck" onactivate="DCGToggleCollapseGrantDeck()">
+        <Panel id="DeckExpandCollapseArrow" hittest="false"/>
+      </Panel>
+      <Panel id="HideShowDeck"/>
+      <Panel id="HeroList">
+          <!--Dynamic Contents-->
+      </Panel>    
+      
+    </Panel>
+    
+    <Panel id="WaitingForGC" hittest="true">
+      <Label text="#DCG_Gauntlet_GrantWaitForGC"/>
+    </Panel>
+    
+	</Panel>
+  
+</root>

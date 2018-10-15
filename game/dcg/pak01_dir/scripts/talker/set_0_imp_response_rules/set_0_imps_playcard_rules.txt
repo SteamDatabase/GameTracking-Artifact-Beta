@@ -1,0 +1,106 @@
+
+
+// these are the generic "imp watching action" rules when cards are initially played before resulting RRs fire.
+
+
+
+// ====  PLAYER PLAYS GENERIC CARD ======================================================================================================================
+// ======================================================================================================================================================
+
+
+// player:
+
+Rule rule_imps_local_generic_play_card_player
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsLocalImp  
+	response imps_local_play_card_generic_positive
+}
+
+Rule rule_imps_local_generic_play_ability_player
+{
+	criteria IsNotCombat UseAbility IsSourceLocal IsLocalImp  
+	response imps_local_play_card_generic_positive
+}
+
+// opponent:
+
+Rule rule_imps_local_generic_play_card_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsOpponentImp  
+	response imps_opponent_play_card_generic_negative
+}
+
+Rule rule_imps_local_generic_play_ability_opponent
+{
+	criteria IsNotCombat UseAbility IsSourceLocal IsOpponentImp  
+	response imps_opponent_play_card_generic_negative
+}
+
+
+// ====  OPPONENT PLAYS GENERIC CARD ====================================================================================================================
+// ======================================================================================================================================================
+
+
+// player:
+
+Rule rule_imps_opponent_generic_play_card_player
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsLocalImp  
+	response imps_local_play_card_generic_negative
+}
+
+Rule rule_imps_opponent_generic_play_ability_player
+{
+	criteria IsNotCombat UseAbility IsSourceNotLocal IsLocalImp  
+	response imps_local_play_card_generic_negative
+}
+
+// opponent:
+
+Rule rule_imps_opponent_generic_play_card_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceNotLocal IsOpponentImp  
+	response imps_opponent_play_card_generic_positive
+}
+
+Rule rule_imps_opponent_generic_play_ability_opponent
+{
+	criteria IsNotCombat UseAbility IsSourceNotLocal IsOpponentImp  
+	response imps_opponent_play_card_generic_positive
+}
+
+
+
+// ====  SPECIAL CASE PLAYCARD ==========================================================================================================================
+// ======================================================================================================================================================
+
+// note: this is needed so that when the player plays a card, if the imp is playing a 10 seconds remaining animation (that has weight :100), it will play a higher priority (:101) playcard animation in this case
+// this is needed overall as 'playcard' would otherwise stomp over the top of the tower death skull idles... because 10 seconds remainaing needs to be HIGHER priority that the death skull idles, normal play card cannot ALSO be higher priority that the death skull idles.
+
+
+Rule rule_imps_local_special_play_card_player
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsLocalImp isPlayer10SecondsRemainingCurrentlyActive 
+	response imps_local_play_card_special_positive
+}
+
+Rule rule_imps_local_special_play_ability_player
+{
+	criteria IsNotCombat UseAbility IsSourceLocal IsLocalImp isPlayer10SecondsRemainingCurrentlyActive
+	response imps_local_play_card_special_positive
+}
+
+
+// ====  CUSTOM NON-RAZZLE PLAYCARDS SET 0 ==============================================================================================================
+// ======================================================================================================================================================
+
+// player:
+
+// town portal:
+//===============
+
+Rule rule_imps_local_play_card_town_portal_player
+{
+	criteria IsNotCombat PlayCard IsSourceLocal IsSourceTownPortal IsLocalImp  
+	response imps_local_play_card_town_portal_positive
+}

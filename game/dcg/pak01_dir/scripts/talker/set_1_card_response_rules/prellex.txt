@@ -1,0 +1,473 @@
+/////////////////
+//**MEEPO - HERO//
+/////////////////
+
+///////////////
+//USE ABILITY//
+///////////////
+
+Response prellex_use_ability
+{
+	speak "prellex_use_ability_01" noscene 
+	speak "prellex_use_ability_02" noscene 
+	speak "prellex_use_ability_03" noscene 
+	speak "prellex_use_ability_04" noscene 
+	speak "prellex_use_ability_05" noscene 
+}
+
+Rule prellex_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasPrellex IsSourcePoof
+	response prellex_use_ability
+}
+
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response prellex_equip_weapon
+{
+	speak "prellex_equip_generic_weapon_01" noscene 
+	speak "prellex_equip_generic_weapon_02" noscene 
+	speak "prellex_equip_generic_weapon_03" noscene 
+	speak "prellex_equip_generic_weapon_04" noscene 
+	speak "prellex_equip_generic_weapon_05" noscene 
+}
+
+Rule prellex_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceWeapon
+	response prellex_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response prellex_equip_armor
+{
+	speak "prellex_equip_generic_armor_01" noscene 
+	speak "prellex_equip_generic_armor_02" noscene 
+	speak "prellex_equip_generic_armor_03" noscene 
+	speak "prellex_equip_generic_armor_04" noscene 
+	speak "prellex_equip_generic_armor_05" noscene 
+}
+
+Rule prellex_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceArmor
+	response prellex_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response prellex_equip_accessory
+{
+	speak "prellex_equip_generic_accessory_01" noscene 
+	speak "prellex_equip_generic_accessory_02" noscene 
+	speak "prellex_equip_generic_accessory_03" noscene 
+	speak "prellex_equip_generic_accessory_04" noscene 
+	speak "prellex_equip_generic_accessory_05" noscene 
+}
+
+Rule prellex_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceAccessory
+	response prellex_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response prellex_gain_attack
+{
+	speak "prellex_permanent_attack_01" noscene 
+	speak "prellex_permanent_attack_02" noscene 
+	speak "prellex_permanent_attack_03" noscene 
+	speak "prellex_permanent_attack_04" noscene 
+	speak "prellex_permanent_attack_05" noscene 
+}
+
+Rule prellex_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceSpell BuffsAttack
+	response prellex_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response prellex_gain_armor
+{
+	speak "prellex_permanent_armor_01" noscene 
+	speak "prellex_permanent_armor_02" noscene 
+	speak "prellex_permanent_armor_03" noscene 
+	speak "prellex_permanent_armor_04" noscene 
+	speak "prellex_permanent_armor_05" noscene 
+}
+
+Rule prellex_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceSpell BuffsArmor
+	response prellex_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response prellex_gain_health
+{
+	speak "prellex_permanent_health_01" noscene 
+	speak "prellex_permanent_health_02" noscene 
+	speak "prellex_permanent_health_03" noscene 
+	speak "prellex_permanent_health_04" noscene 
+	speak "prellex_permanent_health_05" noscene 
+}
+
+Rule prellex_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetPrellex IsSourceSpell BuffsHealth
+	response prellex_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response prellex_use_include
+{
+	speak "prellex_use_include_01" noscene 
+	speak "prellex_use_include_02" noscene 
+	speak "prellex_use_include_03" noscene 
+}
+
+Rule prellex_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceBarracks ThisIsImportant
+	response prellex_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response prellex_gain_momentum_murder
+{ 
+	speak "prellex_kill_rival_01" noscene 	
+	speak "prellex_kill_rival_02" noscene 
+	speak "prellex_kill_rival_03" noscene 
+	speak "prellex_kill_rival_04" noscene 
+	speak "prellex_kill_rival_05" noscene 
+	speak "prellex_kill_rival_06" noscene 
+	speak "prellex_kill_rival_07" noscene 
+	speak "prellex_kill_rival_08" noscene
+	speak "prellex_kill_rival_09" noscene 	
+	speak "prellex_kill_rival_10" noscene 
+}
+
+Rule prellex_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasPrellex LocalChangeMomentum_Pos IsNotCombat
+	response prellex_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response prellex_lane_taunt_generic
+{
+	speak "prellex_taunt_generic_01" noscene 
+	speak "prellex_taunt_generic_02" noscene 
+	speak "prellex_taunt_generic_03" noscene 
+	speak "prellex_taunt_generic_04" noscene 
+	speak "prellex_taunt_generic_05" noscene 
+	speak "prellex_taunt_generic_06" noscene 
+	speak "prellex_taunt_generic_07" noscene 
+	speak "prellex_taunt_generic_08" noscene 
+	speak "prellex_taunt_generic_09" noscene 
+}
+
+Rule prellex_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasPrellex IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response prellex_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response prellex_lane_buff_give_death_skull
+{
+	speak "prellex_potential_kill_01"  noscene 
+	speak "prellex_potential_kill_02"  noscene
+	speak "prellex_potential_kill_03"  noscene 
+	speak "prellex_potential_kill_04"  noscene 
+	speak "prellex_potential_kill_05"  noscene
+}
+
+Rule prellex_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasPrellex EnemyGainedDeathSkull IsTargetPrellex
+	response prellex_lane_buff_give_death_skull
+}
+
+Response prellex_lane_debuff_give_death_skull
+{
+	speak "prellex_potential_kill_01"  noscene 
+	speak "prellex_potential_kill_02"  noscene
+	speak "prellex_potential_kill_03"  noscene 
+	speak "prellex_potential_kill_04"  noscene 
+	speak "prellex_potential_kill_05"  noscene
+}
+
+Rule prellex_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasPrellex TargetHasDeathSkull IsBlockingPrellex
+	response prellex_lane_debuff_give_death_skull
+}
+
+Response prellex_lane_damage_give_death_skull
+{
+	speak "prellex_potential_kill_01"  noscene 
+	speak "prellex_potential_kill_02"  noscene
+	speak "prellex_potential_kill_03"  noscene 
+	speak "prellex_potential_kill_04"  noscene 
+	speak "prellex_potential_kill_05"  noscene
+}
+
+Rule prellex_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasPrellex TargetHasDeathSkull IsBlockingPrellex
+	response prellex_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+//Response prellex_debuff_blocker
+//{
+//	speak "prellex_debuff_enemy_01" noscene 
+//	speak "prellex_debuff_enemy_02" noscene 
+//	speak "prellex_debuff_enemy_03" noscene 
+//	speak "prellex_debuff_enemy_04" noscene 
+//	speak "prellex_debuff_enemy_05" noscene 
+//	speak "prellex_debuff_enemy_06" noscene 
+//	speak "prellex_debuff_enemy_07" noscene 
+//	speak "prellex_debuff_enemy_08" noscene 
+//	speak "prellex_debuff_enemy_09" noscene 
+//	speak "prellex_debuff_enemy_10" noscene 
+//}
+//
+//Rule prellex_debuff_blocker_rule
+//{
+//	criteria IsNotImp  DEBUFFED EnemyHasPrellex IsBlockingPrellex
+//	response prellex_debuff_blocker
+//}
+//
+//////////////////
+/////BUFF FRIEND//
+//////////////////
+//
+//Response prellex_buff_friend
+//{
+//	speak "prellex_buff_ally_01" noscene 
+//	speak "prellex_buff_ally_02" noscene 
+//	speak "prellex_buff_ally_03" noscene 
+//	speak "prellex_buff_ally_04" noscene 
+//	speak "prellex_buff_ally_05" noscene 
+//	speak "prellex_buff_ally_06" noscene 
+//	speak "prellex_buff_ally_07" noscene 
+//	speak "prellex_buff_ally_08" noscene 
+//	speak "prellex_buff_ally_09" noscene 
+//	speak "prellex_buff_ally_10" noscene 
+// 
+//}
+//
+//Rule prellex_buff_friend_rule
+//{
+//	criteria IsNotImp  BUFFED AllyHasPrellex IsSourceBlue IsTargetNotPrellex
+//	response prellex_buff_friend
+//}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_prellex
+{
+	speak "prellex_healed_01" noscene 
+	speak "prellex_healed_02" noscene 
+	speak "prellex_healed_03" noscene 
+	speak "prellex_healed_04" noscene 
+	speak "prellex_healed_05" noscene 
+}
+Rule heal_prellex_rule
+{
+	criteria IsNotImp Heal IsTargetPrellex
+	response heal_prellex
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response prellex_summon_creeps
+{
+	speak "prellex_unique_06" noscene 
+	speak "prellex_unique_07" noscene 
+	speak "prellex_unique_08" noscene 
+	speak "prellex_unique_09" noscene 
+}
+Rule prellex_summon_creeps_rule
+{
+	criteria IsNotImp Summon AllyHasPrellex IsTargetMeleeCreep
+	response prellex_summon_creeps
+}	
+
+
+////////////////////////////
+//PLAY SET ONE BLUE CARDS///
+////////////////////////////
+
+
+Response prellex_play_fractured_timeline
+{
+	speak "prellex_cast_spell_01" noscene 	
+	
+}
+
+Rule prellex_play_fractured_timeline_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFracturedTimeline ThisIsImportant
+	response prellex_play_fractured_timeline
+}
+
+Response prellex_play_path_of_the_wise
+{
+	speak "prellex_cast_spell_02" noscene 	
+	
+}
+
+Rule prellex_play_path_of_the_wise_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourcePathOfTheWise ThisIsImportant
+	response prellex_play_path_of_the_wise
+}
+
+Response prellex_play_firestorm
+{
+	speak "prellex_cast_spell_04" noscene 	
+	
+}
+
+Rule prellex_play_firestorm_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFirestorm ThisIsImportant
+	response prellex_play_firestorm
+}
+
+Response prellex_play_ignite
+{
+	speak "prellex_cast_spell_07" noscene 	
+	
+}
+
+Rule prellex_play_ignite_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceIgnite ThisIsImportant
+	response prellex_play_ignite
+}
+
+Response prellex_play_howling_mind
+{
+	speak "prellex_cast_spell_06" noscene 	
+	
+}
+
+Rule prellex_play_howling_mind_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceHowlingMind ThisIsImportant
+	response prellex_play_howling_mind
+}
+
+Response prellex_play_aghanims_sanctum
+{
+	speak "prellex_cast_spell_09" noscene 	
+	
+}
+
+Rule prellex_play_aghanims_sanctum_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAghanimsSanctum ThisIsImportant
+	response prellex_play_aghanims_sanctum
+}
+
+Response prellex_play_messenger_rookery
+{
+	speak "prellex_cast_spell_08" noscene 	
+	
+}
+
+Rule prellex_play_messenger_rookery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceMessengerRookery ThisIsImportant
+	response prellex_play_messenger_rookery
+}
+
+Response prellex_play_glyph_of_confusion
+{
+	speak "prellex_potential_save_03" noscene 	
+	
+}
+
+Rule prellex_play_glyph_of_confusion_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceGlyphOfConfusion ThisIsImportant
+	response prellex_play_glyph_of_confusion
+}
+
+Response prellex_play_watchtower
+{
+	speak "prellex_cast_spell_06" noscene 	
+	
+}
+
+Rule prellex_play_watchtower_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceWatchtower ThisIsImportant
+	response prellex_play_watchtower
+}
+
+Response prellex_play_annihilation
+{
+	speak "prellex_cast_spell_05" noscene 	
+	
+}
+
+Rule prellex_play_annihilation_rule
+{
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAnnihilation ThisIsImportant
+	response prellex_play_annihilation
+}
+

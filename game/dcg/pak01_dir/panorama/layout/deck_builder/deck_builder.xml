@@ -1,0 +1,373 @@
+<root>
+	<styles>
+	  <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/deck_builder/deck_builder.vcss_c" />
+	</styles>
+
+	<Panel>
+		<Panel hittest="true" id="Editor">
+			<Panel class="EditorPanel">
+        <Panel class="DeckContainer">
+          <Panel class="DeckTabsContainer">
+            <RadioButton class="DeckTabs First" id="DeckTabHeroes" group="DeckTabs" selected="true" onactivate="SetDeckFilter( Heroes )">
+              <Panel class="DeckTabLabelGroup">
+                <Panel id="HeroesDeckErrors">
+                  <Panel class="ValidationErrorIcon"/>
+                </Panel>
+                <Label text="#DCG_DeckBuilder_DeckTabHeroes"/>
+              </Panel>
+            </RadioButton>
+            <RadioButton class="DeckTabs" id="DeckTabMain" group="DeckTabs" onactivate="SetDeckFilter( Main )">
+              <Panel class="DeckTabLabelGroup">
+                <Panel id="MainDeckErrors">
+                  <Panel class="ValidationErrorIcon"/>
+                </Panel>
+                <Label text="#DCG_DeckBuilder_DeckTabMain"/>
+              </Panel>
+            </RadioButton>
+            <RadioButton class="DeckTabs" id="DeckTabShop" group="DeckTabs" onactivate="SetDeckFilter( Shop )">
+              <Panel class="DeckTabLabelGroup">
+                <Panel id="ShopDeckErrors">
+                  <Panel class="ValidationErrorIcon"/>
+                </Panel>
+                <Label text="#DCG_DeckBuilder_DeckTabItem"/>
+              </Panel>
+            </RadioButton>
+          </Panel>
+          <Panel class="DeckTabBody">
+            <Panel class="LibraryContainer">
+              <Panel class="LibraryControls">
+                <Panel class="DeckSectionTitle">
+                  <Label class="DeckSectionTitleLabel" id="CollectionTitle" text="#DCG_DeckBuilder_CollectionTitle"/>
+                  <Button id="ToggleFilterButton" onactivate="DeckBuilderToggleCollectionFilters()"/>
+                </Panel>                
+                <Panel class="CardFilters">
+                  
+                  <DCGCollectionFilters id="CollectionFilters"/>
+
+                  <Panel class="ToggleButtonOptionGroup">
+                    <ToggleButton id="PhantomCardToggle" onactivate="TogglePhantomCards()">
+                      <Label text="#DCG_DeckBuilder_ShowPhantomCards"/>
+                    </ToggleButton>
+                    <ToggleButton id="UnlimitedCollectionToggle" onactivate="ToggleUnlimitedCollection()">
+                      <Label text="#DCG_DeckBuilder_ShowUnownedCards"/>
+                    </ToggleButton>
+                  </Panel>
+
+                </Panel>
+              </Panel>
+              <Panel id="LibraryListing">
+                <!-- Dynamic Content-->
+              </Panel>
+              <Panel id="EmptyLibraryListing">
+                <Label text="#DCG_DeckBuilder_EmptyCollection"/>
+              </Panel>
+            </Panel>
+            <Panel class="DeckSeparator"/>
+            <Panel class="DeckGroup">
+              <Panel class="DeckHeaderGroup">
+                <Panel class="DeckHeader" id="HeroDeckHeader">
+                  <Panel class="DeckHeaderTitleRow">
+                    <Label class="DeckSectionTitleLabel" text="#DCG_DeckBuilder_DeckTitleHeroes"/>
+                  </Panel>  
+                  <Panel class="ToggleButtonOptionGroup" id="ToggleIncludeCardsGroup">
+                    <ToggleButton id="ShowIncludedCardsToggle" onactivate="DeckBuilderToggleShowHeroIncludes()">
+                      <Label text="#DCG_DeckBuilder_ShowIncludeCards"/>
+                    </ToggleButton>
+                  </Panel>                
+                </Panel>
+                <Panel class="DeckHeader" id="MainDeckHeader">
+                  <Panel class="DeckHeaderTitleRow">
+                    <Label class="DeckSectionTitleLabel" text="#DCG_DeckBuilder_DeckTitleMain"/>
+                    <Panel class="HeaderCardCountGroup">
+                      <Panel class="HeaderCardCountIcon" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_DeckCardsTooltip )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="HeaderCardCountValue" text="{i:cardCount}"/>
+                    </Panel>
+                  </Panel>
+                  <Panel class="DeckHeaderSortRow">
+                    <Panel class="SortDeckGroup">
+                      <Label class="SortLabel" text="#DCG_DeckBuilder_Sort"/>
+                      <RadioButton id="SortByMana" class="SortIconButton" group="SortMain" selected="true" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortMana )" onmouseout="UIHideTextTooltip()" onactivate="SortMainCards( mana )" />
+                      <RadioButton id="SortByColor" class="SortIconButton" group="SortMain" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortColor )" onmouseout="UIHideTextTooltip()" onactivate="SortMainCards( color )" />
+                      <RadioButton id="SortByType" class="SortIconButton" group="SortMain" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortType )" onmouseout="UIHideTextTooltip()" onactivate="SortMainCards( type )" />
+                    </Panel>
+                    <Panel class="HeaderTypeCountGroup">
+                      <Panel class="TypeCountIcon TypeCountIconCreep" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipCreep )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountCreep}"/>
+                      <Panel class="TypeCountIcon TypeCountIconImprovement" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipImprovement )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountImprovement}"/>
+                      <Panel class="TypeCountIcon TypeCountIconSpell" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipSpell )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountSpell}"/>
+                    </Panel>
+                  </Panel>
+                </Panel>
+                <Panel class="DeckHeader" id="ShopDeckHeader">
+                  <Panel class="DeckHeaderTitleRow">
+                    <Label class="DeckSectionTitleLabel" text="#DCG_DeckBuilder_DeckTitleItem"/>
+                    <Panel class="HeaderCardCountGroup">
+                      <Panel class="HeaderCardCountIcon" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_DeckCardsTooltip )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="HeaderCardCountValue" text="{i:itemCount}"/>
+                    </Panel>
+                  </Panel>
+                  <Panel class="DeckHeaderSortRow">
+                    <Panel class="SortDeckGroup">
+                      <Label class="SortLabel" text="#DCG_DeckBuilder_Sort"/>
+                      <RadioButton id="SortByCost" class="SortIconButton" group="SortItems" selected="true" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortGold )" onmouseout="UIHideTextTooltip()" onactivate="SortItemCards( gold )" />
+                      <RadioButton id="SortByItemType" class="SortIconButton" group="SortItems" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortType )" onmouseout="UIHideTextTooltip()" onactivate="SortItemCards( type )" />
+                    </Panel>
+                    <Panel class="HeaderTypeCountGroup">
+                      <Panel class="TypeCountIcon TypeCountIconWeapon" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipWeapon )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountWeapon}"/>
+                      <Panel class="TypeCountIcon TypeCountIconArmor" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipArmor )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountArmor}"/>
+                      <Panel class="TypeCountIcon TypeCountIconAccessory" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipAccessory )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountAccessory}"/>
+                      <Panel class="TypeCountIcon TypeCountIconConsumable" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipConsumable )" onmouseout="UIHideTextTooltip()" />
+                      <Label class="TypeCountLabel" text="{i:cardCountConsumable}"/>
+                    </Panel>
+                  </Panel>
+                </Panel>
+              </Panel>
+
+              <Panel id="HeroDeck">
+
+                <Panel class="HeroModeList" id="HeroListNormalMode">
+                  <Label class="HeroDeckTurnLabel" text="#DCG_DeckBuilder_Turn1Label"/>
+                  <Panel class="HeroSlotList" id="HeroListTurn1">
+                    <!--Dynamic content-->
+                  </Panel>
+                  <Label class="HeroDeckTurnLabel" text="#DCG_DeckBuilder_Turn2Label"/>
+                  <Panel class="HeroSlotList" id="HeroListTurn2">
+                    <!--Dynamic content-->
+                  </Panel>
+                  <Label class="HeroDeckTurnLabel" text="#DCG_DeckBuilder_Turn3Label"/>
+                  <Panel class="HeroSlotList" id="HeroListTurn3">
+                    <!--Dynamic content-->
+                  </Panel>
+                </Panel>
+
+                <Panel class="HeroModeList" id="HeroListPoolMode">
+                  <Panel class="HeroSlotList" id="PoolModeHeroList">
+                    <!--Dynamic content-->
+                  </Panel>
+                </Panel>
+              </Panel>
+
+              <Panel id="DeckListing">
+                <!--Dynamic content-->
+              </Panel>
+              
+            </Panel>
+          </Panel>
+        </Panel>
+        <Panel class="DeckInfoContainer">
+          <Panel class="RegionHeaderBordered">
+            <Button class="BlueButtonSmall" id="RegisterButton" onactivate="DCGDeckBuilderRegisterGauntlet()">
+              <Label text="#DCG_DeckBuilder_RegisterGauntlet"/>
+            </Button>
+            <Button class="BlueButtonSmall" id="SaveButton" onactivate="SaveDeck( 1 )">
+              <Label text="#DCG_DeckBuilder_Save"/>
+            </Button>
+            <Button class="BlueButtonSmall" id="SaveAsButton" onactivate="SaveDeckAs( 1 )">
+              <Label text="#DCG_DeckBuilder_SaveAs"/>
+            </Button>
+            <Button class="BlueButtonSmall" id="LoadDeckButton" onactivate="LoadDeck( 1 )">
+              <Label text="#DCG_DeckBuilder_Load"/>
+            </Button>
+            <Button class="BlueButtonSmall" onactivate="ResetDeck( 1 )">
+              <Label text="#DCG_DeckBuilder_Reset"/>
+            </Button>
+            <Button class="QuitEditor" onactivate="QuitEditor( 1 )">
+              <Label text="#DCG_XForClose"/>
+            </Button>
+          </Panel>
+					<Panel class="TopDeckRegion">
+            <Panel id="DeckNameRegion">
+              <Panel id="DeckNameRow">
+                <Label id="DeckName" text="#DCG_DeckBuilder_UnnamedDeck"/>
+              </Panel>
+            </Panel>
+						<Panel id="HeroRegion">
+							<Panel class="HeroSectionsContainer">
+								<Panel class="HeroTurnContainer Turn1">
+									<Panel class="HeroButtonContainer">
+                    <Panel class="HeroLineupPortrait">
+										  <Label class="HeroLineupPortraitLabel" text="#DCG_DeckBuilder_Turn1Value"/>
+                      <Panel class="HeroLineupPortraitImage" id="Hero1Portrait">
+                        <Image class="HeroLineupPortraitIcon" id="Hero1PortraitIcon"/>
+                        <Panel class="HeroLineupPortraitColor"/>
+                      </Panel>
+                    </Panel>
+                    <Panel class="HeroLineupPortrait">
+                      <Label class="HeroLineupPortraitLabel" text="#DCG_DeckBuilder_Turn1Value"/>
+                      <Panel class="HeroLineupPortraitImage" id="Hero2Portrait">
+                        <Image class="HeroLineupPortraitIcon" id="Hero2PortraitIcon"/>
+                        <Panel class="HeroLineupPortraitColor"/>
+                      </Panel>
+                    </Panel>
+                    <Panel class="HeroLineupPortrait">
+                      <Label class="HeroLineupPortraitLabel" text="#DCG_DeckBuilder_Turn1Value"/>
+                      <Panel class="HeroLineupPortraitImage" id="Hero3Portrait">
+                        <Image class="HeroLineupPortraitIcon" id="Hero3PortraitIcon"/>
+                        <Panel class="HeroLineupPortraitColor"/>
+                      </Panel>
+                    </Panel>
+									</Panel>
+									<Panel class="HeroTurnLabelContainer">
+										<Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn1Label"/>
+									</Panel>
+								</Panel>
+								<Panel class="HeroTurnContainer Turn2">
+									<Panel class="HeroButtonContainer">
+                    <Panel class="HeroLineupPortrait">
+                      <Label class="HeroLineupPortraitLabel" text="#DCG_DeckBuilder_Turn2Value"/>
+                      <Panel class="HeroLineupPortraitImage" id="Hero4Portrait">
+                        <Image class="HeroLineupPortraitIcon" id="Hero4PortraitIcon"/>
+                        <Panel class="HeroLineupPortraitColor"/>
+                      </Panel>
+                    </Panel>
+									</Panel>
+									<Panel class="HeroTurnLabelContainer">
+										<Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn2Label"/>
+									</Panel>
+								</Panel>
+								<Panel class="HeroTurnContainer Turn3">
+									<Panel class="HeroButtonContainer">
+                    <Panel class="HeroLineupPortrait">
+                      <Label class="HeroLineupPortraitLabel" text="#DCG_DeckBuilder_Turn3Value"/>
+                      <Panel class="HeroLineupPortraitImage" id="Hero5Portrait">
+                        <Image class="HeroLineupPortraitIcon" id="Hero5PortraitIcon"/>
+                        <Panel class="HeroLineupPortraitColor"/>
+                      </Panel>
+                    </Panel>
+									</Panel>
+									<Panel class="HeroTurnLabelContainer">
+										<Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn3Label"/>
+									</Panel>
+								</Panel>
+							</Panel>
+						</Panel>
+            
+					</Panel>
+					<Panel id="MainDeckRegion">						 
+            <Panel class="DeckStatsRegion">
+              <Panel class="HistogramsRegion">
+                <Panel class="HistogramFilters">
+                  <RadioButton class="FilterButtonText" group="HistogramFilter" selected="true" onactivate="SetHistogramFilter( '' )">
+                    <Label class="TypeFilterLabel" text="#DCG_DeckBuilder_FilterAll"/>
+                  </RadioButton>
+                  <RadioButton class="FilterButtonIcon" group="HistogramFilter" onactivate="SetHistogramFilter( 'Creep' )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipCreep )" onmouseout="UIHideTextTooltip()">
+                    <Panel class="FilterButtonIconImage FilterButtonCreep"/>
+                  </RadioButton>
+                  <RadioButton class="FilterButtonIcon" group="HistogramFilter" onactivate="SetHistogramFilter( 'Spell' )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipSpell )" onmouseout="UIHideTextTooltip()">
+                    <Panel class="FilterButtonIconImage FilterButtonSpell"/>
+                  </RadioButton>
+                  <RadioButton class="FilterButtonIcon" group="HistogramFilter" onactivate="SetHistogramFilter( 'Improvement' )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_TypeTooltipImprovement )" onmouseout="UIHideTextTooltip()">
+                    <Panel class="FilterButtonIconImage FilterButtonImprovement"/>
+                  </RadioButton>
+                </Panel>
+                <Panel class="HistogramsGroupRight">
+                  <Panel id="ManaCurveHistogram"/>
+                  <Panel id="CardColorHistogram"/>
+                </Panel>
+              </Panel>
+              <Panel class="CardCountsRegion">
+                <Panel class="ValidationSummary" id="ValidationContainer">
+                  <Panel class="ValidationErrorIcon"/>
+                  <Label class="ValidationText InvalidDeckTextError" text="#DCG_DeckBuilder_InvalidDeck"/>
+                </Panel>
+                <Panel class="ValidationSummary" id="ValidationContainerOwned" onactivate="DeckBuilderPurchaseUnownedCards()">
+                  <Panel class="OwnershipErrorIcon"/>
+                  <Label class="ValidationText InvalidDeckTextError" text="#DCG_DeckBuilder_MissingCards"/>
+                </Panel>
+                <Panel class="ValidationSummary" id="ValidationContainerTrialCards" onactivate="DeckBuilderPurchaseTrialCards()">
+                  <Panel class="OwnershipErrorIcon"/>
+                  <Label class="ValidationText InvalidDeckTextMisc" text="#DCG_DeckBuilder_PhantomCards"/>
+                </Panel>
+                <Label class="DeckStat" text="#DCG_DeckBuilder_MainDeckCount"/>
+                <Label class="DeckStat" text="#DCG_DeckBuilder_ItemDeckCount"/>
+                <Panel class="DeckStatsButtons">
+                  <Button class="GeneralButton" id="DeckInfoButton" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Tooltip_DeckInfo )" onmouseout="UIHideTextTooltip()" onactivate="DeckBuilderDeckInfo();"/>
+                  <Button class="GeneralButton" id="SampleHandButton" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SampleHand )" onmouseout="UIHideTextTooltip()" onactivate="DeckBuilderSampleHand();"/>
+                  <Button class="GeneralButton" id="EditTagsButton" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_EditTags )" onmouseout="UIHideTextTooltip()" onactivate="DeckBuilderEditTags();"/>
+                  <Button class="GeneralButton" id="PurchaseUnownedButton" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_PurchaseUnowned )" onmouseout="UIHideTextTooltip()" onactivate="DeckBuilderPurchaseUnownedCards();"/>
+                </Panel>                
+              </Panel>
+            </Panel>
+						<Panel class="PreviewRegion">
+              <Button id="SubmitFeedbackButton" onmouseover="UIShowTextTooltip( #DCG_UserFeedback_Tooltip )" onmouseout="UIHideTextTooltip()" onactivate="DCGShowSubmitFeedback( 'DeckBuilder', -1 );"/>
+              <Panel class="PreviewCardContainer">
+                <Panel id="PreviewCardGroup">
+							    <DeckBuilderCard id="PreviewCard"/>
+                  <Panel id="ReferencedCardContainer">
+                    <Button class="NavigateReferencedCard" id="PreviousReferencedCard" onactivate="ChangePreviewReferenceCard( 0 )"/>
+									  <Panel id="DeckBuilderCardContainer">
+										  <DeckBuilderCard id="IncludedPreviewCard"/>
+									  </Panel>
+                    <Button class="NavigateReferencedCard" id="NextReferencedCard" onactivate="ChangePreviewReferenceCard( 1 )"/>
+                  </Panel>
+                </Panel>
+                <Panel id="PreviewModifierList">
+                  <!-- Dynamic Content -->
+                </Panel>
+              </Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+
+			</Panel>
+		</Panel>
+    
+    
+    
+    <Panel id="DropTargetLayer" hittest="false">
+      <Panel class="FromLibraryDropTargets" hittest="false">
+        <Panel class="DropTargetColumn" id="FromLibraryAddDropTargets">
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget1" addtodeck="1">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add1_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add1"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget2" addtodeck="2">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add2_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add2"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget3" addtodeck="3">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add3_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add3"/>
+          </DeckBuilderDropTarget>
+        </Panel>
+      </Panel>
+      <Panel class="FromDeckDropTargets" hittest="false">
+        <Panel class="DropTargetColumn" id="FromDeckRemoveDropTargets">
+          <DeckBuilderDropTarget class="DropTarget RemoveDropTarget1" addtodeck="-1">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Remove1_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Remove1"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget RemoveDropTarget2" addtodeck="-2">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Remove2_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Remove2"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget RemoveDropTarget3" addtodeck="-3">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Remove3_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Remove3"/>
+          </DeckBuilderDropTarget>
+        </Panel>
+        <Panel class="DropTargetColumn" id="FromDeckAddDropTargets">
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget1" addtodeck="1">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add1_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add1"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget2" addtodeck="2">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add2_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add2"/>
+          </DeckBuilderDropTarget>
+          <DeckBuilderDropTarget class="DropTarget AddDropTarget3" addtodeck="3">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add3_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Add3"/>
+          </DeckBuilderDropTarget>
+        </Panel>
+      </Panel>
+    </Panel>
+    
+  </Panel>
+</root>

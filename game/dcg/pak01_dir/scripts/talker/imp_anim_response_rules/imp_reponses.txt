@@ -1,0 +1,1239 @@
+///////////////////////////////////////////////////////////
+//  IN GAME RESPONSE RULES FOR PLAYER AND OPPONENT IMPS  //
+///////////////////////////////////////////////////////////
+
+Criterion "AnnihilationIsHappening" "AnnihilationIsHappening" "1" weight 1000 required
+Criterion "IsChainingToPlayerWaitGameVictory"	"IsChainingToPlayerWaitGameVictory" ">0" required
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  RESPONSES
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// CUSTOM CARD RESPONSES PLAYER AND OPPONENT, BASE SET 0 ***********************************************************
+
+
+
+
+
+// CUSTOM CARD RESPONSES PLAYER AND OPPONENT, BASE SET 1 ***********************************************************
+
+Response imps_custom_set_1_silence_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_SILENCE_PLAYER"
+}
+
+Response imps_custom_set_1_bronze_legion_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_LEGION_SUMMON_PLAYER"
+}
+
+Response imps_custom_set_1_stun_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_STUN_PLAYER"
+}
+
+Response imps_custom_set_1_immunity_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_IMMUNE_PLAYER"
+}
+
+Response imps_custom_set_1_immunity_opponent
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_IMMUNE_OPPONENT"
+}
+
+Response imps_custom_set_1_disgust_player
+{
+	activity "ACT_DECK_IMP_REACT_SMALL_DISGUST_PLAYER"
+}
+
+Response imps_custom_set_1_hand_of_god_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_HANDOFGOD_PLAYER"
+}
+
+Response imps_custom_set_1_time_of_triumph_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_TIMEOFTRIUMPH_PLAYER"
+}
+
+Response imps_custom_set_1_coup_de_grace_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_COUPDEGRACE_PLAYER"
+}
+
+Response imps_annihilation_player
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_ANNIHILATION_INTRO_PLAYER"
+}
+
+Response imps_annihilation_opponent
+{
+	activity "ACT_DECK_IMP_CUSTOM_CARD_ANNIHILATION_INTRO_OPPONENT"
+}
+
+
+Response imps_generic_play_card_player
+{
+	activity "ACT_DECK_IMP_COMBAT" 
+}
+
+Response imps_generic_play_card_opponent
+{
+	activity "ACT_DECK_IMP_COMBAT_OPPONENT" 
+}
+
+
+Rule rule_imps_generic_play_card_player
+{
+	criteria IsNotCombat PlayCard  IsLocalImp  
+	response imps_generic_play_card_player
+}
+
+Rule rule_imps_generic_play_card_opponent
+{
+	criteria IsNotCombat PlayCard IsOpponentImp  
+	response imps_generic_play_card_opponent
+}
+
+
+Response imps_duel_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_EAT_POPCORN" 
+}
+
+
+Rule rule_imps_duel_player
+{
+	criteria IsNotCombat PlayCard IsSourceDuel  IsLocalImp  
+	response imps_duel_player
+}
+
+
+Response imps_eclipse_player
+{
+	activity "ACT_DECK_IMP_PLAYCARD_RAZZLE_A_POSITIVE_PLAYER" 
+}
+
+
+Rule rule_imps_eclipse_player
+{
+	criteria IsNotCombat PlayCard IsSourceEclipse IsLocalImp  
+	response imps_eclipse_player
+}
+
+
+Rule rule_imps_annihilation_player
+{
+	criteria IsNotCombat PlayCard IsSourceAnnihilation IsLocalImp  
+	ApplyContext "AnnihilationIsHappening:1:10"
+	ApplyContextToWorld
+	response imps_annihilation_player
+}
+
+Rule rule_imps_annihilation_opponent
+{
+	criteria IsNotCombat PlayCard IsSourceAnnihilation IsOpponentImp  
+	ApplyContext "AnnihilationIsHappening:1:10"
+	ApplyContextToWorld
+	response imps_annihilation_opponent
+}
+
+Rule rule_imps_local_annihilation_death
+{
+	criteria Death IsNotCombat IsLocalImp AnnihilationIsHappening 
+	response imps_local_happy_hero_death_constant
+}
+
+Rule rule_imps_opponent_annihilation_death
+{
+	criteria Death IsNotCombat IsOpponentImp AnnihilationIsHappening 
+	response imps_opponent_happy_hero_death_constant
+}
+
+
+// ===== PLAYER WINS GAME ================================================================================================
+
+Response imps_end_game_player_win_wait_player
+{
+	activity "ACT_DECK_IMP_REACT_WAIT_PLAYER" then self TLK_DCG_SPECIAL IsChainingToPlayerWaitGameVictory:1 4
+}
+
+Rule rule_imps_end_game_player_win_wait_player
+{
+	criteria Victory IsLocalImp  
+	response imps_end_game_player_win_wait_player
+}
+
+Response imps_end_game_player_win_player
+{
+	activity "ACT_DECK_IMP_REACT_VICTORY" 
+}
+
+Rule rule_imps_IsChainingToPlayerWaitGameVictory
+{
+	criteria Special IsChainingToPlayerWaitGameVictory   
+	response imps_end_game_player_win_player
+}
+
+// opponent =================================================
+
+Response imps_end_game_player_win_opponent
+{
+	activity "ACT_DECK_IMP_REACT_DEFEAT_OPPONENT" 
+}
+
+
+Rule rule_imps_end_game_player_win_opponent
+{
+	criteria Victory IsOpponentImp  
+	response imps_end_game_player_win_opponent
+}
+
+
+
+
+// ===== OPPONENT WINS GAME ================================================================================================
+
+
+Response imps_end_game_opponent_win_opponent
+{
+	activity "ACT_DECK_IMP_REACT_VICTORY_OPPONENT" 
+}
+
+
+Rule rule_imps_end_game_opponent_win_opponent
+{
+	criteria Defeat IsOpponentImp  
+	response imps_end_game_opponent_win_opponent
+}
+
+// player ================================================
+
+
+Response imps_end_game_opponent_win_player
+{
+	activity "ACT_DECK_IMP_REACT_DEFEAT" 
+}
+
+Rule rule_imps_end_game_opponent_win_player
+{
+	criteria Defeat IsLocalImp  
+	response imps_end_game_opponent_win_player
+}
+
+// ==========================================================================================================================
+
+
+
+
+// MORE DEFINED REACTIONS, BUT NOT CUSTOM CARDS *********************************************************************
+
+
+
+
+
+
+Response imps_defined_local_unhappy_no_local_units
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_OPEN_PLAYER"
+}
+
+Response imps_defined_local_happy_no_opposing_units
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_OPEN_OPPONENT"
+}
+
+Response imps_defined_local_unhappy_no_local_units_creep
+{
+	// the "CREEP" element is for playing a shorter version of the animation
+	// that doesnt need to accomodate the time for a hero card to play its 
+	// death animation.
+	
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_OPEN_PLAYER_CREEP"
+}
+
+Response imps_defined_local_happy_no_opposing_units_creep
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_OPEN_OPPONENT_CREEP"
+}
+
+
+// PLAYER TOWER DESTROYED =========================================================================================================================
+
+
+
+Response imps_defined_local_player_tower_destroyed_player_wait
+{
+	activity "ACT_DECK_IMP_REACT_WAIT_PLAYER" then self TLK_DCG_SPECIAL IsChainingToPlayerTowerDestroyed:1 2.1	
+}
+
+Response imps_defined_local_unhappy_tower_destroyed_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_LOW_HEALTH_PLAYER" then self TLK_DCG_SPECIAL IsChainingToBlinkReturnLocal:1 0.1	
+}
+
+criterion "IsChainingToPlayerTowerDestroyed"	"IsChainingToPlayerTowerDestroyed" ">0" required
+Rule IsChainingToPlayerTowerDestroyed
+{
+	criteria Special IsChainingToPlayerTowerDestroyed   
+	response imps_defined_local_unhappy_tower_destroyed_player
+}
+
+
+Rule rule_imps_defined_local_player_tower_destroyed_player
+{
+	criteria Death IsTargetTower IsLocalImp IsTargetLocal
+	response imps_defined_local_player_tower_destroyed_player_wait
+}
+
+
+
+// OPPONENT TOWER DESTROYED =========================================================================================================================
+
+
+Response imps_defined_local_opponent_tower_destroyed_player_wait
+{
+	activity "ACT_DECK_IMP_REACT_WAIT_PLAYER" then self TLK_DCG_SPECIAL IsChainingToOpponentTowerDestroyed:1 2.1	
+}
+
+Response imps_defined_local_happy_opponent_tower_destroyed_player
+{
+	activity "ACT_DECK_IMP_REACT_OPPONENT_TOWER_LOW_HEALTH_PLAYER" then self TLK_DCG_SPECIAL IsChainingToBlinkReturnLocal:1 0.1	
+}
+
+criterion "IsChainingToOpponentTowerDestroyed"	"IsChainingToOpponentTowerDestroyed" ">0" required
+Rule IsChainingToOpponentTowerDestroyed
+{
+	criteria Special IsChainingToOpponentTowerDestroyed   
+	response imps_defined_local_happy_opponent_tower_destroyed_player
+}
+
+
+Rule imps_defined_local_opponent_tower_destroyed_player
+{
+	criteria Death IsTargetTower IsLocalImp IsTargetNotLocal
+	response imps_defined_local_opponent_tower_destroyed_player_wait
+}
+
+
+
+
+//=================================================================================================================================================
+
+
+Rule rule_imps_IsChainingToPlayerWaitGameVictory
+{
+	criteria Special IsChainingToPlayerWaitGameVictory   
+	response imps_end_game_player_win_player
+}
+
+
+
+Response imps_defined_local_happy_opponent_tower_death_skull_player
+{
+	activity "ACT_DECK_IMP_REACT_OPPONENT_TOWER_LOW_HEALTH_PLAYER" then self TLK_DCG_SPECIAL IsChainingToBlinkReturnLocal:1 0.1	
+}
+
+
+Response imps_defined_local_unhappy_tower_death_skull_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_TOWER_LOW_HEALTH_PLAYER" then self TLK_DCG_SPECIAL IsChainingToBlinkReturnLocal:1 0.1
+}
+
+
+Response imps_defined_local_paused_intro_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_PAUSE_START" then self TLK_DCG_SPECIAL IsChainingToPlayerPauseLoop:1 0.0
+}
+
+Response imps_defined_local_paused_loop_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_PAUSE_LOOP" 
+}
+
+Response imps_defined_local_paused_end_player
+{
+	activity "ACT_DECK_IMP_REACT_PLAYER_PAUSE_END" 
+}
+
+
+
+// PLAYER DRIVEN INTERACTION WITH IMP: *********************************************************************************
+
+
+Response imps_defined_local_poked
+{
+	activity "ACT_DECK_IMP_POKED_PLAYER"
+}
+
+Response imps_defined_late_action
+{
+	//activity "ACT_DECK_IMP_TAUNT"
+}
+
+
+
+// UTILITY RESPONSES: ***********************************************************************************************
+
+// custom variable criterion:
+
+
+Response imps_do_nothing
+{
+  // 
+}
+
+Response imps_defined_blink_return_player
+{
+	activity "ACT_DECK_IMP_BLINK_RETURN_PLAYER"
+}
+
+
+
+// PLAYER'S IMP GENRIC RESPONSES: **********************************************************************************
+
+Response imps_local_happy_small_constant
+{
+	activity "ACT_DECK_IMP_REACT_SMALL_POSITIVE_PLAYER"
+}
+
+Response imps_local_unhappy_small_constant
+{
+	activity "ACT_DECK_IMP_REACT_SMALL_NEGATIVE_PLAYER"
+}
+
+
+Response imps_local_unhappy_hero_death_constant
+{
+	activity "ACT_DECK_IMP_REACT_HERO_DEATH_NEGATIVE_PLAYER"     
+}
+
+Response imps_players_turn_10_secs_remain_players_imp
+{
+	activity "ACT_DECK_IMP_10_SECS_REM_PLAYER_PLAYER"
+}
+
+Response imps_players_turn_0_secs_remain_players_imp
+{
+	activity "ACT_DECK_IMP_0_SECS_REM_PLAYER_PLAYER"
+}
+
+
+// OPPONENT'S IMP GENRIC RESPONSES: *********************************************************************************
+
+Response imps_opponent_happy_small_constant
+{
+	activity "ACT_DECK_IMP_REACT_SMALL_POSITIVE_OPPONENT" 
+}
+
+Response imps_opponent_unhappy_small_constant
+{
+	activity "ACT_DECK_IMP_REACT_SMALL_NEGATIVE_OPPONENT"
+}
+
+Response imps_opponent_unhappy_hero_death_constant
+{
+	activity "ACT_DECK_IMP_REACT_HERO_DEATH_NEGATIVE_OPPONENT"
+}
+
+Response imps_opponents_turn_10_secs_remain_opponents_imp
+{
+	activity "ACT_DECK_IMP_10_SECS_REM_OPPONENT_OPPONENT"
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  RULES:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//====   PLAYER DRIVEN INTERACTION RULES =============================================================================
+//====================================================================================================================
+
+Rule imps_defined_local_poked
+{
+	criteria Special IsPoke IsNotCombat IsLocalImp
+	response imps_defined_local_poked
+}
+
+Rule imps_defined_late_action
+{
+	criteria Special IsLateAction IsNotCombat IsLocalImp
+	response imps_defined_late_action
+}
+
+//Rule imps_defined_chat_friendly
+//{
+//	criteria Special IsChatWheel IsChatFriendly
+//	response imps_defined_chat_friendly
+//}
+//
+//
+//Rule imps_defined_chat_friendly_finisher
+//{
+//	criteria Special IsFollowupChatFriendlyFinisher
+//	response imps_defined_chat_friendly_finisher
+//}
+
+
+
+//====  SPECIAL UTILITY RULES       =================================================================================
+//====================================================================================================================
+
+
+criterion "IsChainingToBlinkReturnLocal"	"IsChainingToBlinkReturnLocal" ">0" required
+criterion "IsChainingToPlayerPauseLoop"	"IsChainingToPlayerPauseLoop" ">0" required
+
+
+
+
+Rule rule_imps_IsChainingToBlinkReturnLocal
+{
+	criteria Special IsChainingToBlinkReturnLocal   
+	response imps_defined_blink_return_player
+}
+
+
+Rule rule_imps_defined_local_paused_intro_player
+{
+	criteria Special IsPause IsLocalImp
+	response imps_defined_local_paused_intro_player
+}
+
+
+Rule rule_imps_defined_local_paused_loop_player
+{
+	criteria Special IsChainingToPlayerPauseLoop IsLocalImp  
+	response imps_defined_local_paused_loop_player
+}
+
+
+Rule rule_imps_defined_local_paused_end_player
+{
+	criteria Special IsUnpause IsLocalImp  
+	response imps_defined_local_paused_end_player
+}
+
+
+//====  CUSTOM CARD REACTIONS SET 0  =================================================================================
+//====================================================================================================================
+
+
+Rule rule_imps_local_happy_healing_salve_player_to_player
+{
+	criteria Heal IsNotCombat IsSourceHealingSalve IsLocalImp IsSourceLocal IsTargetLocal  
+	response imps_defined_local_healbuff_player
+}
+
+
+Rule rule_imps_local_happy_fountain_flask_player_to_player
+{
+	criteria Heal IsNotCombat IsSourceFountainFlask IsLocalImp IsSourceLocal IsTargetLocal  
+	response imps_defined_local_healbuff_player
+}
+
+
+
+//====  CUSTOM CARD REACTIONS SET 1  =================================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_gust_player_to_opponent
+{
+	criteria Debuffed IsNotCombat IsSourceGust IsLocalImp IsSourceLocal IsTargetNotLocal  
+	response imps_custom_set_1_silence_player
+}
+
+Rule rule_imps_local_happy_truth_to_power_player_to_opponent
+{
+	criteria Debuffed IsNotCombat IsSourceTruthToPower IsLocalImp IsSourceLocal IsTargetNotLocal 
+	response imps_custom_set_1_silence_player
+}
+
+Rule rule_imps_local_happy_legion_commander_player_to_opponent
+{
+	criteria Summon IsTargetLegionCommander IsLocalImp IsTargetLocal  
+	response imps_custom_set_1_bronze_legion_player
+}
+
+Rule rule_imps_local_happy_legionnaire_player_to_opponent
+{
+	criteria Summon IsTargetBronzeLegionnaire IsLocalImp IsTargetLocal  
+	response imps_custom_set_1_bronze_legion_player
+}
+
+Rule rule_imps_local_happy_legion_Standard_bearer_player_to_opponent
+{
+	criteria Summon IsTargetLegionStandardBearer IsLocalImp IsTargetLocal
+	response imps_custom_set_1_bronze_legion_player
+}
+
+Rule rule_imps_local_happy_caught_unprepared_player_to_opponent
+{
+	criteria Debuffed IsSourceCaughtUnprepared IsLocalImp IsSourceLocal IsTargetNotLocal 
+	response imps_custom_set_1_stun_player
+}
+
+Rule rule_imps_local_happy_divine_intervention_player_to_player
+{
+	criteria deBuffed IsSourceDivineIntervention IsLocalImp IsSourceLocal IsTargetLocal 
+	response imps_custom_set_1_immunity_player
+}
+
+
+Rule rule_imps_local_happy_divine_intervention_opponent_to_opponent
+{
+	criteria playcard IsSourceDivineIntervention IsOpponentImp IsSourceNotLocal IsTargetNotLocal 
+	response imps_custom_set_1_immunity_opponent
+}
+
+Rule rule_imps_local_happy_divine_purpose_player_to_player
+{
+	criteria playcard IsSourceDivinePurpose IsLocalImp IsSourceLocal IsTargetLocal 
+	response imps_custom_set_1_immunity_player
+}
+
+
+Rule rule_imps_local_happy_divine_purpose_opponent_to_opponent
+{
+	criteria playcard IsSourceDivinePurpose IsOpponentImp IsSourceNotLocal IsTargetNotLocal  
+	response imps_custom_set_1_immunity_player
+}
+
+
+Rule rule_imps_local_happy_nasal_goo_player_to_opponent
+{
+	criteria deBuffed IsSourceNasalGoo IsLocalImp IsSourceLocal IsTargetNotLocal 
+	response imps_custom_set_1_disgust_player
+}
+
+Rule rule_imps_local_happy_hand_of_god_player_to_player
+{
+	criteria Heal IsSourceHandOfGod IsLocalImp IsSourceLocal IsTargetLocal 
+	response imps_custom_set_1_hand_of_god_player
+}
+
+Rule rule_imps_local_happy_time_of_triumph_player_to_player
+{
+	criteria Buffed IsSourceTimeOfTriumph IsLocalImp IsSourceLocal IsTargetLocal 
+	response imps_custom_set_1_time_of_triumph_player
+}
+
+Rule rule_coup_de_grace_played
+{
+	criteria PlayCard IsSourceCoupDeGrace IsLocalImp IsSourceLocal
+	response imps_custom_set_1_coup_de_grace_player
+}
+
+
+//====   PLAYER TO PLAYER'S CARDS  (DAMAGE) ==========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_damage_player_to_player
+{
+	criteria Damage IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_damage_player_to_player
+{
+	criteria Damage IsNotCombat IsOpponentImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_opponent_happy_small_constant
+}
+
+
+
+//====   PLAYER TO OPPONENT'S CARDS (DAMAGE) =========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_damage_player_to_opponent
+{
+	criteria Damage IsNotCombat IsLocalImp IsSourceLocal IsTargetNotLocal IsTargetHero
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_damage_player_to_opponent
+{
+	criteria Damage IsNotCombat IsOpponentImp IsSourceLocal IsTargetNotLocal IsTargetHero 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TO OPPONENT'S CARDS (DAMAGE) =======================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_damage_opponent_to_opponent
+{
+	criteria Damage IsNotCombat IsLocalImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_damage_opponent_to_opponent
+{
+	criteria Damage IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TO PLAYER'S CARDS (DAMAGE) =========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_damage_opponent_to_player
+{
+	criteria Damage IsNotCombat IsLocalImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_damage_opponent_to_player
+{
+	criteria Damage IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_opponent_happy_small_constant
+}
+
+
+
+//====   PLAYER TO PLAYER'S CARDS (BUFFS) ============================================================================ 
+//====================================================================================================================
+
+Rule rule_imps_local_happy_buffed_player_to_player
+{
+	criteria Buffed IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_buffed_player_to_player
+{
+	criteria Buffed IsNotCombat IsOpponentImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_opponent_unhappy_small_constant 
+}
+
+
+
+
+
+//====   PLAYER TO PLAYER'S CARDS  (DEBUFFS) =========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_debuffed_player_to_player
+{
+	criteria Debuffed IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_debuffed_player_to_player
+{
+	criteria Debuffed IsNotCombat IsOpponentImp IsSourceLocal IsTargetLocal IsTargetHero
+	response imps_opponent_happy_small_constant
+}
+
+
+
+//====   PLAYER TO OPPONENT'S CARDS (BUFFS) ==========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_buffed_player_to_opponent
+{
+	criteria Buffed IsNotCombat IsLocalImp IsSourceLocal IsTargetNotLocal IsTargetHero
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_buffed_player_to_opponent
+{
+	criteria Buffed IsNotCombat IsOpponentImp IsSourceLocal IsTargetNotLocal IsTargetHero 
+	response imps_opponent_happy_small_constant
+}
+
+
+
+//====   PLAYER TO OPPONENT'S CARDS (DEBUFFS) ========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_debuffed_player_to_opponent
+{
+	criteria Debuffed IsNotCombat IsLocalImp IsSourceLocal IsTargetNotLocal IsTargetHero 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_debuffed_player_to_opponent
+{
+	criteria Debuffed IsNotCombat IsOpponentImp IsSourceLocal IsTargetNotLocal IsTargetHero
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TO OPPONENT'S CARDS (BUFFS) ========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_buffed_opponent_to_opponent
+{
+	criteria Buffed IsNotCombat IsLocalImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_buffed_opponent_to_opponent
+{
+	criteria Buffed IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_opponent_happy_small_constant
+}
+
+
+
+//====   OPPONENT TO OPPONENT'S CARDS (DEBUFFS) ======================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_debuffed_opponent_to_opponent
+{
+	criteria Debuffed IsNotCombat IsLocalImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_debuffed_opponent_to_opponent
+{
+	criteria Debuffed IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetNotLocal IsTargetHero 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TO PLAYER'S CARDS (BUFFS) ==========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_buffed_opponent_to_player
+{
+	criteria Buffed IsNotCombat IsLocalImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_buffed_opponent_to_player
+{
+	criteria Buffed IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TO PLAYER'S CARDS (DEBUFFS) =======================================================================
+//===================================================================================================================
+
+Rule rule_imps_local_unhappy_debuffed_opponent_to_player
+{
+	criteria Debuffed IsNotCombat IsLocalImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_happy_debuffed_opponent_to_player
+{
+	criteria Debuffed IsNotCombat IsOpponentImp IsSourceNotLocal IsTargetLocal IsTargetHero 
+	response imps_opponent_happy_small_constant
+}
+
+
+
+
+//====   PLAYER TO PLAYER'S CARDS  (HEAL) ============================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_heal_player_to_player
+{
+	criteria Buffed BuffsHealth IsNotCombat IsLocalImp IsSourceLocal IsTargetLocal 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_heal_player_to_player
+{
+	criteria Heal IsNotCombat IsOpponentImp IsSourceLocal IsTargetLocal 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+
+//====   PLAYER'S CARDS (HERO DEATH)  ================================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_death_hero_player
+{
+	criteria Death IsNotCombat IsLocalImp IsTargetHero IsTargetLocal LocalChangeMomentum_Neg 
+	response imps_local_unhappy_hero_death_constant
+}
+
+Rule rule_imps_opponent_happy_death_hero_player
+{
+	criteria Death IsNotCombat IsOpponentImp IsTargetHero IsTargetLocal LocalChangeMomentum_Neg 
+	response imps_opponent_happy_hero_death_constant
+}
+
+Rule imps_defined_local_unhappy_no_local_units
+{
+	criteria Death IsNotCombat IsTargetHero IsLocalImp IsNoLocalUnits IsOpponentUnits LocalChangeMomentum_Neg
+	response imps_defined_local_unhappy_no_local_units
+}
+
+Rule imps_defined_local_unhappy_no_local_units_creep
+{
+	criteria Death IsNotCombat IsLocalImp IsNoLocalUnits IsOpponentUnits LocalChangeMomentum_Neg
+	response imps_defined_local_unhappy_no_local_units_creep
+}
+
+//====   OPPONENT'S CARDS (HERO DEATH)  ==============================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_death_opponent
+{
+	criteria Death IsNotCombat IsLocalImp IsTargetHero IsTargetNotLocal OpponentChangeMomentum_Neg 
+	response imps_local_happy_hero_death_constant
+}
+
+Rule rule_imps_opponent_unhappy_death_opponent
+{
+	criteria Death IsNotCombat IsOpponentImp IsTargetHero IsTargetNotLocal OpponentChangeMomentum_Neg 
+	response imps_opponent_unhappy_hero_death_constant
+}
+
+
+Rule imps_defined_local_happy_no_opposing_units
+{
+	criteria Death IsNotCombat IsTargetHero IsLocalImp IsLocalUnits IsNoOpponentUnits OpponentChangeMomentum_Neg 
+	response imps_defined_local_happy_no_opposing_units 
+}
+
+Rule imps_defined_local_happy_no_opposing_units_creep
+{
+	criteria Death IsNotCombat IsLocalImp IsLocalUnits IsNoOpponentUnits OpponentChangeMomentum_Neg 
+	response imps_defined_local_happy_no_opposing_units_creep 
+}
+
+
+//====   PLAYER TURN (SUMMONS)  ======================================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_small_constant_summon_player
+{
+	criteria Summon IsNotCombat IsLocalImp LocalChangeMomentum_Pos 
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_small_constant_summon_player
+{
+	criteria Summon IsNotCombat IsOpponentImp LocalChangeMomentum_Pos 
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   OPPONENT TURN (SUMMONS)  ====================================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_happy_small_constant_summon_opponent
+{
+	criteria Summon IsNotCombat IsOpponentImp OpponentChangeMomentum_Pos 
+	response imps_opponent_happy_small_constant
+}
+
+Rule rule_imps_local_unhappy_small_constant_summon_opponent
+{
+	criteria Summon IsNotCombat IsLocalImp OpponentChangeMomentum_Pos 
+	response imps_local_unhappy_small_constant
+}
+
+
+
+//====   PLAYER (TOWER DAMAGE)  ======================================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_small_constant_damage_tower_player
+{
+	criteria Damage IsNotCombat IsSourceLocal IsTargetTower IsLocalImp  
+	response imps_local_happy_small_constant
+}
+
+
+Rule rule_imps_defined_local_happy_opponent_tower_death_skull_player_summon
+{
+	criteria Summon IsNotCombat OpponentTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+
+Rule rule_imps_defined_local_unhappy_tower_death_skull_player_summon
+{
+	criteria Summon IsNotCombat LocalTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+Rule rule_imps_defined_local_happy_opponent_tower_death_skull_player_damage
+{
+	criteria Damage IsNotCombat OpponentTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+
+Rule rule_imps_defined_local_unhappy_tower_death_skull_player_damage
+{
+	criteria Damage IsNotCombat LocalTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+Rule rule_imps_defined_local_happy_opponent_tower_death_skull_player_death
+{
+	criteria Death IsNotCombat OpponentTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+Rule rule_imps_defined_local_unhappy_tower_death_skull_player_death
+{
+	criteria Death IsNotCombat LocalTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+Rule rule_imps_defined_local_happy_opponent_tower_death_skull_player_buffed
+{
+	criteria Buffed IsNotCombat OpponentTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+
+Rule rule_imps_defined_local_unhappy_tower_death_skull_player_buffed
+{
+	criteria Buffed IsNotCombat LocalTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+Rule rule_imps_defined_local_happy_opponent_tower_death_skull_player_debuffed
+{
+	criteria DeBuffed IsNotCombat OpponentTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+
+Rule rule_imps_defined_local_unhappy_tower_death_skull_player_debuffed
+{
+	criteria DeBuffed IsNotCombat LocalTowerGainedDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+
+//====   OPPONENT (TOWER DAMAGE)  ====================================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_happy_small_constant_damage_tower_opponent
+{
+	criteria Damage IsNotCombat IsSourceNotLocal IsTargetTower IsOpponentImp  
+	response imps_opponent_happy_small_constant
+}
+
+
+
+
+
+//====   PLAYER AND OPPONENT (COMBAT DRAWS)  =========================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_constant_combat_draw_win_shared
+{
+	criteria Death IsCombat LocalChangeMomentum_Pos OpponentChangeMomentum_Pos
+	response imps_do_nothing
+}
+
+Rule rule_imps_local_constant_combat_draw_lose_shared
+{
+	criteria Death IsCombat LocalChangeMomentum_Neg OpponentChangeMomentum_Neg
+	response imps_do_nothing
+}
+
+Rule rule_imps_local_constant_combat_draw_win_big_shared_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid
+	response imps_local_happy_hero_death_constant
+}
+
+Rule rule_imps_opponent_constant_combat_draw_win_big_shared_opponent
+{
+	criteria Death IsCombat IsOpponentImp LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid
+	response imps_opponent_happy_hero_death_constant
+}
+
+
+Rule rule_imps_local_constant_combat_draw_lose_big_shared_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_constant_combat_draw_lose_big_shared_opponent
+{
+	criteria Death IsCombat IsOpponentImp LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+//====   PLAYER (COMBAT MAJORITY WIN)  ===============================================================================
+//====================================================================================================================
+
+Rule rule_imps_local_happy_small_constant_combat_win_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+	response imps_local_happy_small_constant
+}
+
+Rule rule_imps_local_happy_big_constant_combat_win_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_PosMid OpponentChangeMomentum_NegMid
+	response imps_local_happy_hero_death_constant
+}
+
+
+
+//====   PLAYER (COMBAT MAJORITY LOSE)  ==============================================================================   
+//====================================================================================================================
+
+Rule rule_imps_local_unhappy_small_constant_combat_lose_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_Neg OpponentChangeMomentum_Pos
+	response imps_local_unhappy_small_constant
+}
+
+Rule rule_imps_local_unhappy_big_constant_combat_lose_player
+{
+	criteria Death IsCombat IsLocalImp LocalChangeMomentum_NegMid OpponentChangeMomentum_PosMid
+	response imps_local_unhappy_hero_death_constant
+}
+
+
+
+//====   OPPONENT (COMBAT MAJORITY WIN)  =============================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_happy_small_constant_combat_win_opponent
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_Pos LocalChangeMomentum_Neg
+	response imps_opponent_happy_small_constant
+}
+
+Rule rule_imps_opponent_happy_big_constant_combat_win_opponent
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_PosMid LocalChangeMomentum_NegMid
+	response imps_opponent_happy_hero_death_constant
+}
+
+
+
+
+//====   OPPONENT (COMBAT MAJORITY LOSE)  ============================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponent_unhappy_small_constant_combat_lose_opponent
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_Neg LocalChangeMomentum_Pos
+	response imps_opponent_unhappy_small_constant
+}
+
+Rule rule_imps_opponent_unhappy_big_constant_combat_lose_opponent
+{
+	criteria Death IsCombat IsOpponentImp OpponentChangeMomentum_NegMid LocalChangeMomentum_PosMid
+	response imps_opponent_unhappy_small_constant
+}
+
+
+
+
+//====   PLAYER TURN (TIMER) =========================================================================================
+//====================================================================================================================
+
+Rule rule_imps_players_turn_10_secs_remain_player
+{
+	criteria Timer IsLocalImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsActingPlayerLocal IsActionPhase
+	response imps_players_turn_10_secs_remain_players_imp
+}
+
+Rule rule_imps_players_turn_0_secs_remain_players_imp
+{
+	criteria Timer IsLocalImp IsLoE2SecondsRemaining IsGoE0SecondsRemaining IsActingPlayerLocal IsActionPhase
+	response imps_players_turn_0_secs_remain_players_imp
+}
+
+
+//====   OPPONENT TURN (TIMER) =======================================================================================
+//====================================================================================================================
+
+Rule rule_imps_opponents_turn_10_secs_remain_opponent
+{
+	criteria Timer IsOpponentImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsNotActingPlayerLocal IsActionPhase
+	response imps_opponents_turn_10_secs_remain_opponents_imp
+}
+
+
+
+//====   START OF LANE BOARD STATE REACTIONS =========================================================================
+//====================================================================================================================
+
+
+
+
+Rule imps_defined_local_unhappy_lane_start_no_local_units
+{
+	criteria BeginSpellcasting IsLocalImp IsNoLocalUnits IsOpponentUnits
+	response imps_defined_local_unhappy_no_local_units_creep
+}
+
+Rule imps_defined_local_happy_lane_start_no_opponent_units
+{
+	criteria BeginSpellcasting IsLocalImp IsLocalUnits IsNoOpponentUnits
+	response imps_defined_local_happy_no_opposing_units_creep
+}
+
+Rule rule_imps_defined_local_lane_start_happy_opponent_tower_death_skull_player
+{
+	criteria BeginSpellcasting IsLocalImp IsOpponentTowerDeathSkull 
+	response imps_defined_local_happy_opponent_tower_death_skull_player
+}
+
+
+Rule rule_imps_defined_local_unhappy_lane_start_tower_death_skull_player
+{
+	criteria BeginSpellcasting IsLocalTowerDeathSkull IsLocalImp 
+	response imps_defined_local_unhappy_tower_death_skull_player
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Rule rule_imps_local_unhappy_death_creep_opponent_to_player
+//{
+//	criteria Death IsLocalImp IsTargetCreep OpponentChangeMomentum_Pos  
+//	response imps_local_unhappy_small_constant
+//}
+
+//Rule rule_imps_local_unhappy_death_enchantment_player_to_player
+//{
+//	criteria Death IsLocalImp IsTargetEnchantment OpponentChangeMomentum_Pos   
+//	response imps_local_unhappy_small_constant
+//}

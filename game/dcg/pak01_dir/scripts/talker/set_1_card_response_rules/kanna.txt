@@ -1,0 +1,490 @@
+//////////////////
+//**KANNA - HERO//
+//////////////////
+
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response kanna_equip_weapon
+{
+	speak "kanna_equip_generic_weapon_01" noscene 
+	speak "kanna_equip_generic_weapon_02" noscene 
+	speak "kanna_equip_generic_weapon_03" noscene 
+	speak "kanna_equip_generic_weapon_04" noscene 
+	speak "kanna_equip_generic_weapon_05" noscene 
+}
+
+Rule kanna_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceWeapon
+	response kanna_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response kanna_equip_armor
+{
+	speak "kanna_equip_generic_armor_01" noscene 
+	speak "kanna_equip_generic_armor_02" noscene 
+	speak "kanna_equip_generic_armor_03" noscene 
+	speak "kanna_equip_generic_armor_04" noscene 
+	speak "kanna_equip_generic_armor_05" noscene 
+}
+
+Rule kanna_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceArmor
+	response kanna_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response kanna_equip_accessory
+{
+	speak "kanna_equip_generic_accessory_01" noscene 
+	speak "kanna_equip_generic_accessory_02" noscene 
+	speak "kanna_equip_generic_accessory_03" noscene 
+	speak "kanna_equip_generic_accessory_04" noscene 
+	speak "kanna_equip_generic_accessory_05" noscene 
+}
+
+Rule kanna_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceAccessory
+	response kanna_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response kanna_gain_attack
+{
+	speak "kanna_permanent_attack_01" noscene 
+	speak "kanna_permanent_attack_02" noscene 
+	speak "kanna_permanent_attack_03" noscene 
+	speak "kanna_permanent_attack_04" noscene 
+	speak "kanna_permanent_attack_05" noscene 
+}
+
+Rule kanna_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceSpell BuffsAttack
+	response kanna_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response kanna_gain_armor
+{
+	speak "kanna_permanent_armor_01" noscene 
+	speak "kanna_permanent_armor_02" noscene 
+	speak "kanna_permanent_armor_03" noscene 
+	speak "kanna_permanent_armor_04" noscene 
+	speak "kanna_permanent_armor_05" noscene 
+}
+
+Rule kanna_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceSpell BuffsArmor
+	response kanna_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response kanna_gain_health
+{
+	speak "kanna_permanent_health_01" noscene 
+	speak "kanna_permanent_health_02" noscene 
+	speak "kanna_permanent_health_03" noscene 
+	speak "kanna_permanent_health_04" noscene 
+	speak "kanna_permanent_health_05" noscene 
+}
+
+Rule kanna_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetKanna IsSourceSpell BuffsHealth
+	response kanna_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response kanna_use_include
+{
+	speak "kanna_use_include_01" noscene 
+	speak "kanna_use_include_02" noscene 
+	speak "kanna_use_include_03" noscene 
+}
+
+Rule kanna_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourcePreyOnTheWeak ThisIsImportant
+	response kanna_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response kanna_gain_momentum_murder
+{ 
+	speak "kanna_kill_rival_01" noscene 	
+	speak "kanna_kill_rival_02" noscene 
+	speak "kanna_kill_rival_03" noscene 
+	speak "kanna_kill_rival_04" noscene 
+	speak "kanna_kill_rival_05" noscene 
+	speak "kanna_kill_rival_06" noscene 
+	speak "kanna_kill_rival_07" noscene 
+	speak "kanna_kill_rival_08" noscene
+	speak "kanna_kill_rival_09" noscene 	
+	speak "kanna_kill_rival_10" noscene 
+}
+
+Rule kanna_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasKanna LocalChangeMomentum_Pos IsNotCombat
+	response kanna_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response kanna_lane_taunt_generic
+{
+	speak "kanna_taunt_generic_01" noscene 
+	speak "kanna_taunt_generic_02" noscene 
+	speak "kanna_taunt_generic_03" noscene 
+	speak "kanna_taunt_generic_04" noscene 
+	speak "kanna_taunt_generic_05" noscene 
+	speak "kanna_taunt_generic_06" noscene 
+	speak "kanna_taunt_generic_07" noscene 
+	speak "kanna_taunt_generic_08" noscene 
+	speak "kanna_taunt_generic_09" noscene 
+}
+
+Rule kanna_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasKanna IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response kanna_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response kanna_lane_buff_give_death_skull
+{
+	speak "kanna_potential_kill_01"  noscene 
+	speak "kanna_potential_kill_02"  noscene
+	speak "kanna_potential_kill_03"  noscene 
+	speak "kanna_potential_kill_04"  noscene 
+	speak "kanna_potential_kill_05"  noscene
+}
+
+Rule kanna_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasKanna EnemyGainedDeathSkull IsTargetKanna
+	response kanna_lane_buff_give_death_skull
+}
+
+Response kanna_lane_debuff_give_death_skull
+{
+	speak "kanna_potential_kill_01"  noscene 
+	speak "kanna_potential_kill_02"  noscene
+	speak "kanna_potential_kill_03"  noscene 
+	speak "kanna_potential_kill_04"  noscene 
+	speak "kanna_potential_kill_05"  noscene
+}
+
+Rule kanna_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasKanna TargetHasDeathSkull IsBlockingKanna
+	response kanna_lane_debuff_give_death_skull
+}
+
+Response kanna_lane_damage_give_death_skull
+{
+	speak "kanna_potential_kill_01"  noscene 
+	speak "kanna_potential_kill_02"  noscene
+	speak "kanna_potential_kill_03"  noscene 
+	speak "kanna_potential_kill_04"  noscene 
+	speak "kanna_potential_kill_05"  noscene
+}
+
+Rule kanna_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasKanna TargetHasDeathSkull IsBlockingKanna
+	response kanna_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response kanna_debuff_blocker
+{
+	speak "kanna_debuff_enemy_01" noscene 
+	speak "kanna_debuff_enemy_02" noscene 
+	speak "kanna_debuff_enemy_03" noscene 
+	speak "kanna_debuff_enemy_04" noscene 
+	speak "kanna_debuff_enemy_05" noscene 
+	speak "kanna_debuff_enemy_06" noscene 
+	speak "kanna_debuff_enemy_07" noscene 
+	speak "kanna_debuff_enemy_08" noscene 
+	speak "kanna_debuff_enemy_09" noscene 
+	speak "kanna_debuff_enemy_10" noscene 
+}
+
+Rule kanna_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasKanna IsBlockingKanna
+	response kanna_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response kanna_buff_friend
+{
+	speak "kanna_buff_ally_01" noscene 
+	speak "kanna_buff_ally_02" noscene 
+	speak "kanna_buff_ally_03" noscene 
+	speak "kanna_buff_ally_04" noscene 
+	speak "kanna_buff_ally_05" noscene 
+	speak "kanna_buff_ally_06" noscene 
+	speak "kanna_buff_ally_07" noscene 
+	speak "kanna_buff_ally_08" noscene 
+	speak "kanna_buff_ally_09" noscene 
+	speak "kanna_buff_ally_10" noscene 
+ 
+}
+
+Rule kanna_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasKanna IsSourceBlue IsTargetNotKanna
+	response kanna_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_kanna
+{
+	speak "kanna_healed_01" noscene 
+	speak "kanna_healed_02" noscene 
+	speak "kanna_healed_03" noscene 
+	speak "kanna_healed_04" noscene 
+	speak "kanna_healed_05" noscene 
+}
+Rule heal_kanna_rule
+{
+	criteria IsNotImp Heal IsTargetKanna
+	response heal_kanna
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+Response kanna_summon_creeps
+{
+	speak "kanna_unique_07" noscene 
+	speak "kanna_unique_08" noscene 
+	speak "kanna_unique_09" noscene 
+	speak "kanna_unique_10" noscene 
+}
+Rule kanna_summon_creeps_rule
+{
+	criteria IsNotImp Summon AllyHasKanna IsTargetMeleeCreep
+	response kanna_summon_creeps
+}	
+
+Response kanna_diabolic_revelation
+{
+	speak "kanna_unique_11" noscene 
+	speak "kanna_unique_12" noscene 
+	speak "kanna_unique_13" noscene 
+}
+Rule kanna_diabolic_revelation_rule
+{
+	criteria IsNotImp PlayCard AllyHasKanna IsSourceDiabolicRevelation
+	response kanna_diabolic_revelation
+}	
+
+Response kanna_at_any_cost
+{
+	speak "kanna_unique_14" noscene 
+	speak "kanna_unique_15" noscene 
+}
+Rule kanna_at_any_cost_rule
+{
+	criteria IsNotImp PlayCard AllyHasKanna IsSourceAtAnyCost
+	response kanna_at_any_cost
+}	
+
+
+
+////////////////////////////
+//PLAY SET ONE BLUE CARDS///
+////////////////////////////
+
+Response kanna_play_barracks
+{
+	speak "kanna_arrogant_10" noscene 		
+}
+
+Rule kanna_play_barracks_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceBarracks ThisIsImportant
+	response kanna_play_barracks
+}
+
+Response kanna_play_fractured_timeline
+{
+	speak "kanna_enigmatic_09" noscene 	
+	
+}
+
+Rule kanna_play_fractured_timeline_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFracturedTimeline ThisIsImportant
+	response kanna_play_fractured_timeline
+}
+
+Response kanna_play_path_of_the_wise
+{
+	speak "kanna_arrogant_09" noscene 	
+	
+}
+
+Rule kanna_play_path_of_the_wise_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourcePathOfTheWise ThisIsImportant
+	response kanna_play_path_of_the_wise
+}
+
+Response kanna_play_firestorm
+{
+	speak "kanna_angry_03" noscene 	
+	
+}
+
+Rule kanna_play_firestorm_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFirestorm ThisIsImportant
+	response kanna_play_firestorm
+}
+
+Response kanna_play_ignite
+{
+	speak "kanna_multi_damage_large_08" noscene 	
+	
+}
+
+Rule kanna_play_ignite_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceIgnite ThisIsImportant
+	response kanna_play_ignite
+}
+
+Response kanna_play_howling_mind
+{
+	speak "kanna_enigmatic_05" noscene 	
+	
+}
+
+Rule kanna_play_howling_mind_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceHowlingMind ThisIsImportant
+	response kanna_play_howling_mind
+}
+
+Response kanna_play_aghanims_sanctum
+{
+	speak "kanna_arrogant_06" noscene 	
+	
+}
+
+Rule kanna_play_aghanims_sanctum_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAghanimsSanctum ThisIsImportant
+	response kanna_play_aghanims_sanctum
+}
+
+Response kanna_play_messenger_rookery
+{
+	speak "kanna_pleased_01" noscene 	
+	
+}
+
+Rule kanna_play_messenger_rookery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceMessengerRookery ThisIsImportant
+	response kanna_play_messenger_rookery
+}
+
+Response kanna_play_glyph_of_confusion
+{
+	speak "kanna_enigmatic_08" noscene 	
+	
+}
+
+Rule kanna_play_glyph_of_confusion_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceGlyphOfConfusion ThisIsImportant
+	response kanna_play_glyph_of_confusion
+}
+
+Response kanna_play_watchtower
+{
+	speak "kanna_pleased_03" noscene 	
+	
+}
+
+Rule kanna_play_watchtower_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceWatchtower ThisIsImportant
+	response kanna_play_watchtower
+}
+
+Response kanna_play_annihilation
+{
+	speak "kanna_multi_damage_large_10" noscene 	
+	speak "kanna_multi_damage_large_04" noscene 	
+	speak "kanna_multi_damage_large_03" noscene 	
+	
+}
+
+Rule kanna_play_annihilation_rule
+{
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAnnihilation ThisIsImportant
+	response kanna_play_annihilation
+}
+

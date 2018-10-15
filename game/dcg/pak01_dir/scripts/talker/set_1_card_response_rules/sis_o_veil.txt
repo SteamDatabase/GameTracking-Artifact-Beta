@@ -1,0 +1,221 @@
+/////////////////////////////////
+//**SISTER OF THE VEIL - CREEP///
+/////////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_sis_o_veil_normal
+{
+	speak "sis_o_veil_summon_01" noscene 
+	speak "sis_o_veil_summon_02" noscene
+	speak "sis_o_veil_summon_03" noscene 
+}
+Rule summon_sis_o_veil_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil
+	response summon_sis_o_veil_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_sis_o_veil_enemy_ancient_exposed
+{
+	speak "sis_o_veil_ancient_attack_01" noscene
+	speak "sis_o_veil_ancient_attack_02" noscene
+}	
+Rule summon_sis_o_veil_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil IsEnemyAncientExposed
+	response summon_sis_o_veil_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_sis_o_veil_your_ancient_exposed
+{
+	speak "sis_o_veil_ancient_protect_01" noscene
+	speak "sis_o_veil_ancient_protect_02" noscene
+}	
+Rule summon_sis_o_veil_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil IsAllyAncientExposed
+	response summon_sis_o_veil_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_sis_o_veil_both_ancients_exposed
+{
+	speak "sis_o_veil_ancient_both_01" noscene
+	speak "sis_o_veil_ancient_both_02" noscene
+}	
+Rule summon_sis_o_veil_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_sis_o_veil_both_ancients_exposed
+}
+
+///////////////
+//use ability//
+///////////////
+
+Response sis_o_veil_use_ability
+{
+	speak "sis_o_veil_use_ability_01" noscene 
+	speak "sis_o_veil_use_ability_02" noscene 
+	speak "sis_o_veil_use_ability_03" noscene 
+	speak "sis_o_veil_tower_destroy_02" noscene 
+	speak "sis_o_veil_tower_destroy_03" noscene 
+
+}
+Rule sis_o_veil_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasSisterOfTheVeil IsSourcePlot
+	response sis_o_veil_use_ability
+}
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_sis_o_veil_ally_phantom_assassin
+{
+	speak "sis_o_veil_hero_friend_01" noscene 
+	speak "sis_o_veil_hero_friend_03" noscene 
+}
+Rule summon_sis_o_veil_ally_phantom_assassin_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil AllyHasPhantomAssassin
+	response summon_sis_o_veil_ally_phantom_assassin
+}
+
+Response summon_sis_o_veil_ally_oracle
+{
+	speak "sis_o_veil_hero_friend_02" noscene 
+}
+Rule summon_sis_o_veil_ally_oracle_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil AllyHasOracle
+	response summon_sis_o_veil_ally_oracle
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+
+Response summon_sis_o_veil_enemy_phantom_assassin
+{
+	speak "sis_o_veil_hero_rival_01" noscene 
+	speak "sis_o_veil_hero_rival_02" noscene 
+	speak "sis_o_veil_hero_rival_03" noscene 
+}
+Rule summon_sis_o_veil_enemy_phantom_assassin_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil EnemyHasPhantomAssassin
+	response summon_sis_o_veil_enemy_phantom_assassin
+}
+
+////////////////////////////
+//summon with faction ally//
+////////////////////////////
+
+Response summon_sis_o_veil_faction_ally
+{
+	speak "sis_o_veil_faction_ally_01" noscene
+	speak "sis_o_veil_faction_ally_02" noscene
+	speak "sis_o_veil_faction_ally_03" noscene
+}	
+Rule summon_sis_o_veil_faction_ally_rule
+{
+	criteria IsNotImp Summon IsTargetSisterOfTheVeil IsFactionAllyInLane
+	response summon_sis_o_veil_faction_ally
+}
+
+////////////////
+//unique lines//
+////////////////
+
+Response sis_o_veil_use_ability_on_inc_of_selemene
+{
+	speak "sis_o_veil_unique_05" noscene 
+
+}
+Rule sis_o_veil_use_ability_on_inc_of_selemene_rule
+{
+	criteria IsNotImp UseAbility AllyHasSisterOfTheVeil IsSourcePlot IsTarget2IncarnationOfSelemene
+	response sis_o_veil_use_ability_on_inc_of_selemene
+}
+
+Response sis_o_veil_use_ability_on_martyr
+{
+	speak "sis_o_veil_unique_06" noscene 
+
+}
+Rule sis_o_veil_use_ability_on_martyr_rule
+{
+	criteria IsNotImp UseAbility AllyHasSisterOfTheVeil IsSourcePlot IsTarget2VhoulMartyr
+	response sis_o_veil_use_ability_on_martyr
+}
+
+Response sis_o_veil_use_ability_to_target_tower
+{
+	speak "sis_o_veil_tower_destroy_05" noscene 
+	speak "sis_o_veil_tower_saved_02" noscene 
+
+}
+Rule sis_o_veil_use_ability_to_target_tower_rule
+{
+	criteria IsNotImp UseAbility AllyHasSisterOfTheVeil IsSourcePlot IsTarget2Tower
+	response sis_o_veil_use_ability_to_target_tower
+}
+
+//Response sis_o_veil_use_ability_to_target_sister
+//{
+//	speak "sis_o_veil_hero_rival_02" noscene 
+//
+//}
+//Rule sis_o_veil_use_ability_to_target_sister_rule
+//{
+//	criteria IsNotImp UseAbility AllyHasSisterOfTheVeil IsSourcePlot IsFactionVeiledSisterhood
+//	response sis_o_veil_use_ability_to_target_sister
+//}
+
+
+//////////
+//healed//
+//////////
+
+
+Response heal_sis_o_veil
+
+{
+	speak "sis_o_veil_healed_01" noscene 
+	speak "sis_o_veil_healed_02" noscene 
+	speak "sis_o_veil_healed_03" noscene 
+}
+Rule heal_sis_o_veil_rule
+{
+	criteria IsNotImp Heal IsTargetSisterOfTheVeil
+	response heal_sis_o_veil
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

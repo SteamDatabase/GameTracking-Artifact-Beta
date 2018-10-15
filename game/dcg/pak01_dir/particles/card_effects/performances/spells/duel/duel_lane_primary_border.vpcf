@@ -1,0 +1,211 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 64
+	m_ConstantColor = 
+	[
+		251,
+		245,
+		188,
+		255,
+	]
+	m_nConstantSequenceNumber = 4
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderRopes"
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_nOrientationType = 3
+			m_hTexture = resource:"materials/particle/dcg/beams/beam_edge_06_half.vtex"
+			m_flTextureVWorldSize = 6.000000
+			m_nMaxTesselation = 32
+			m_nMinTesselation = 16
+			m_bDisableOperator = true
+			m_flTextureVScrollRate = 0.500000
+			m_flSelfIllumAmount = 1.000000
+			m_bAdditive = true
+		},
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 16
+			m_nMaxTesselation = 32
+			m_flTextureVWorldSize = 6.000000
+			m_flTextureVScrollRate = -2.000000
+			m_nOrientationType = 3
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_bLightenMode = true
+			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 16
+			m_nMaxTesselation = 32
+			m_flTextureVWorldSize = 4.000000
+			m_flTextureVScrollRate = 0.500000
+			m_nOrientationType = 2
+			m_flRadiusScale = 0.500000
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_bLightenMode = true
+			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 0.500000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_ColorInterpolate"
+			m_flFadeStartTime = 0.750000
+			m_ColorFade = 
+			[
+				193,
+				138,
+				29,
+				255,
+			]
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_Decay"
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RemapDirectionToCPToVector"
+			m_nFieldOutput = 21
+		},
+		{
+			_class = "C_OP_BasicMovement"
+		},
+		{
+			_class = "C_OP_OscillateVector"
+			m_RateMax = 
+			[
+				0.000000,
+				0.000000,
+				0.400000,
+			]
+			m_FrequencyMin = 
+			[
+				0.000000,
+				0.000000,
+				1.000000,
+			]
+			m_FrequencyMax = 
+			[
+				0.000000,
+				0.000000,
+				1.000000,
+			]
+			m_bProportional = false
+			m_bOffset = true
+			m_flEndTime_min = 99999.000000
+			m_flEndTime_max = 99999.000000
+		},
+		{
+			_class = "C_OP_OscillateScalar"
+			m_RateMax = 1.000000
+			m_FrequencyMax = 2.000000
+			m_nField = 3
+			m_bProportional = false
+			m_bProportionalOp = false
+			m_flEndTime_min = 999999.000000
+			m_flEndTime_max = 999999.000000
+			m_flOscMult = 1.000000
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RingWave"
+			m_flParticlesPerOrbit = 28.000000
+			m_bEvenDistribution = true
+			m_flInitialRadius = 8.000000
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_bScaleInitialRange = true
+			m_flOutputMax = 0.000000
+			m_flOutputMin = 1.000000
+			m_nFieldOutput = 7
+			m_nInputMax = 34
+			m_nInputMin = 28
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_bScaleInitialRange = true
+			m_nFieldOutput = 7
+			m_nInputMax = 5
+		},
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				0.000000,
+				0.000000,
+				1.500000,
+			]
+			m_OffsetMax = 
+			[
+				0.000000,
+				0.000000,
+				1.500000,
+			]
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 35
+		},
+	]
+	m_flConstantRadius = 3.000000
+	m_flConstantLifespan = 5.000000
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 7
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+}

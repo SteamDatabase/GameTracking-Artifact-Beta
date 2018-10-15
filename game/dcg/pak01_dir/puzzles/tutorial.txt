@@ -1,0 +1,1378 @@
+"tutorial"
+{
+	"name"				"#DCG_Puzzle_TutorialPart1_Title"
+	"description"		"#DCG_Puzzle_TutorialPart1_Desc"
+	"DefaultSelection"	"1"
+	"sections"
+	{
+		"part1"
+		{
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"DCGESwkuQJ4XYGBIt0BXFtBJwKhA4yBpQECQ7gB"
+				}
+				"deck_ai"
+				{
+					"use_deck"		"DCGEBO4XQEBLd0BAzADAQIBPgIHBYeRhogCTm0Bhz=="
+				}
+				"set1"							"1"
+				"num_lanes"						"1"
+				"initial_heroes"				"1"
+				"initial_heroes_ai"				"0"
+				"tower_health"					"0"
+				"ancient_health"				"10"
+				"store_enabled"					"0"
+				"deploy_heroes_enabled"			"0"
+				"creeps_first_turn"				"0"
+				"creeps_first_turn_ai"			"0"
+				"creeps_per_turn"				"0"
+				"creeps_per_turn_ai"			"0"
+				"cards_first_turn"				"1"
+				"cards_first_turn_ai"			"0"
+				"cards_per_turn"				"0"
+				"cards_per_turn_ai"				"0"
+				"no_shotclock"					"1"
+				"no_player_info_ai"				"1"
+				"no_player_info"				"1"
+				"no_vs_intro"					"1"
+				//"collapse_game_result"			"1"
+				"is_tutorial_glossary"			"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10313" //Take Aim
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 9.5"			"goto intro1"
+					//"> 0.4"						"music_clear"
+					//"> 0.4"						"music_queue DCGMusic.tut_01 161.0f"
+					"> 0.4"						"checklist_header #DCG_Puzzle_TutorialPart1_Title"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_Intro1Title 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_LanesTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_AncientTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_HeroesTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_CombatPreviewTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_SpellsTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_CombatTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TrainingPart1Complete"
+					"> 0.4"						"lock_hand"
+					"> 8.0"						"lock_camera"
+					"> 6.0"						"lock isPassCoin 1"
+					"> 6.0"						"hidechild CDCGTowerCombatPreviewEntity isTower 1"
+					"> 6.0"						"hidechild CDCGCardArmorEntity isHero 1"
+					"> 6.0"						"hidechild CDCGCardHealthEntity isHero 1"
+					"> 6.0"						"hidechild CDCGCardAttackEntity isHero 1"
+					"> 6.0"						"hidechild CDCGCardItemRackEntity isHero 1"
+					"> 6.0"						"hidechild CDCGCardCostEntity isSpell 1"
+					"> 6.0"						"hidechild CDCGTowerManaEntity isTower 1"
+					"> 6.0"						"hidechild CDCGTowerHealthEntity isTower 1"
+				}
+
+				"intro1"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_Intro1Title"
+					">"							"popup #DCG_Popup_Tutorial_Intro1Desc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"hidechild CDCGTowerCombatPreviewEntity isTower 1"
+					"on_message_dismissed 1.5"	"goto intro2"
+				}
+
+				"intro2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Intro2Desc 4.0"
+					">"							"soundevent core.soundscape_2d"
+					//"on_message_dismissed 1.5"	"goto movie_wait"
+					//">"							"play_movie file://{resources}/videos/tutorial_intro.webm"
+					//"> 0.3"						"checklist_hide"
+					"on_message_dismissed 1.5"	"goto lanes"
+				}
+
+				"movie_wait"
+				{
+					//"auto 2.0"			"goto lanes"	
+					"on_movie_stop 2.0"			"goto lanes"	
+				}
+
+				"lanes"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_LanesTitle"
+					">"							"popup #DCG_Popup_Tutorial_LanesDesc"
+					">"							"soundevent Tutorial_v1.lanes_01"
+					">"							"particleevent PE_LANE_TARGETING_ENABLED isLane 1 laneID 1"
+					"on_message_dismissed 1.5"	"goto ancient"
+					">"							"particleevent PE_LANE_TARGETING_DISABLED isLane 1"
+				}
+
+				"ancient"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_AncientTitle"
+					">"							"popup #DCG_Popup_Tutorial_AncientDesc"
+					">"							"soundevent Tutorial_v1.ancient_towers_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_HEALTH isTower 1 isDire 1"
+					">"							"showchild CDCGTowerHealthEntity isTower 1 isDire 1"
+					"on_message_dismissed 1.5"	"goto heroes"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 1"
+				}
+
+				"heroes"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_HeroesTitle"
+					">"							"popup #DCG_Popup_Tutorial_HeroesDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_HeroesDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_ATTACK isHero 1 zoneID Combat"
+					">"							"showchild CDCGCardAttackEntity isHero 1"
+					"on_message_dismissed 1.5"	"goto combat_preview"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1 zoneID Combat"
+				}
+
+				"combat_preview"
+				{
+					"auto"							"checklist_set #DCG_Popup_Tutorial_CombatPreviewTitle"
+					">"								"popup #DCG_Popup_Tutorial_CombatPreviewDesc 5.0"
+					">"								"soundevent DCG_VO.Popup_Tutorial_CombatPreviewDesc"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW isTower 1 isDire 1"
+					">"								"showchild CDCGTowerCombatPreviewEntity isTower 1 isDire 1"
+					"on_message_dismissed 1.5"		"goto damage_indicator"
+				}
+
+				"damage_indicator"
+				{
+					"auto"							"popup #DCG_Popup_Tutorial_DamageIndicatorDesc 5.0"
+					">"								"soundevent DCG_VO.Popup_Tutorial_DamageIndicatorDesc"
+					">"								"reset_accumulated_show_time"
+					"on_viewed_combat_preview"		"popup_unstall"
+					"on_stalled_message_dismissed 1.5"	"goto spells"
+					//"on_message_dismissed 1.5"		"goto spells"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 1"
+				}
+
+				"spells"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_SpellsTitle"
+					">"							"popup #DCG_Popup_Tutorial_SpellsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_SpellsDesc"
+					">"							"unlock_hand"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_TOP zoneID Hand"
+					"on_card_played 5.0"		"goto combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL zoneID Hand"
+				}
+
+				"combat"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_CombatTitle"
+					">"							"popup #DCG_Popup_Tutorial_CombatDesc"
+					">"							"soundevent Tutorial_v1.combat_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW isTower 1 isDire 1"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_ATTACK isHero 1 zoneID Combat"
+					">"							"unlock isPassCoin 1"
+					"on_victory 4.0"			"goto victory1"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 1"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1 zoneID Combat"
+				}
+
+				"victory1"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TrainingPart1Complete"
+					">"							"popup #DCG_Popup_Tutorial_VictorySimple1Desc"
+					">"							"soundevent Tutorial_v1.victory_simple_01"
+					"on_message_dismissed 2.0"	"load_section part2"
+				}
+			}
+		}
+
+		"part2"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart2_Title"
+			"description"	"#DCG_Puzzle_TutorialPart2_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"DCGESwkuQJ4XYGBIt0BXFtBJwKhA4yBpQECQ7gB"
+				}
+				"deck_ai"	
+				{
+					"use_deck"		"DCGEBO4XQEBLd0BAzADAQIBPgIHBYeRhogCTm0Bhz=="
+				}
+				"set1"							"1"
+				"num_lanes"						"1"
+				"initial_heroes"				"1"
+				"initial_heroes_ai"				"0"
+				"tower_health"					"15"
+				"ancient_health"				"20"
+				"store_enabled"					"0"
+				"deploy_heroes_enabled"			"0"
+				"creeps_first_turn"				"0"
+				"creeps_first_turn_ai"			"2"
+				"creeps_per_turn"				"0"
+				"creeps_per_turn_ai"			"0"
+				"cards_first_turn"				"0"
+				"cards_first_turn_ai"			"0"
+				"cards_per_turn"				"1"
+				"cards_per_turn_ai"				"0"
+				"pathing_force"					"Skip"
+				"force_combat_manager_rand_to_zero" "1"
+				"no_shotclock"					"1"
+				"no_player_info_ai"				"1"
+				"no_player_info"				"1"
+				"no_vs_intro"					"1"
+				//"collapse_game_result"			"1"
+				"is_tutorial_glossary"			"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10104" //Bronze Legionnaire
+				"draw"	"10203" //Phase Boots
+				"draw"	"10076" //Apprentice Armsmaster
+				"draw"	"10132" //Red Mist Pillager
+				"draw"	"10313" //Take Aim
+				"draw"	"10313" //Take Aim
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 9.5"			"goto towers"
+					//"> 0.4"						"music_clear"
+					//"> 0.4"						"music_queue DCGMusic.tut_01 161.0f"
+					"> 0.4"						"checklist_header #DCG_Puzzle_TutorialPart2_Title"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TowersTitle 7"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_OpposedPositionsTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_CreepsTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_EquipmentTitle 4"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TowerGuardsTitle 4"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_AbilitiesTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TrainingPart2Complete"
+					"> 0.4"						"lock_hand"
+					"> 8.0"						"lock_camera"
+					"> 6.0"						"lock isPassCoin 1"
+					"> 6.0"						"hidechild CDCGTowerManaEntity isTower 1"
+					"> 6.0"						"hidechild CDCGCardCostEntity isSpell 1"
+					"> 6.0"						"hidechild CDCGCardCostEntity isCreep 1"
+					"> 6.0"						"hidechild CDCGTowerHealthEntity isTower 1 isDire 0"
+					"> 6.0"						"hidechild CDCGTowerCombatPreviewEntity isTower 1 isDire 0"
+					"> 6.0"						"hidechild !entity isTower 1 isDire 0"
+					"> 6.0"						"hidechild !entity isTower 1 isDire 1"
+					"> 6.0"						"hidechild CDCGCardHealthEntity isCreature 1"
+					"> 6.0"						"hidechild CDCGCardCombatPreviewEntity isCreature 1"
+					"> 6.0"						"hidechild CDCGCardArmorEntity isHero 1"
+				}
+
+				"towers"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TowersTitle"
+					">"							"popup #DCG_Popup_Tutorial_TowersDesc"
+					">"							"soundevent Tutorial_v1.towers_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isTower 1 isDire 1"
+					">"							"hidechild CDCGTowerCombatPreviewEntity isTower 1 isDire 0"
+					">"							"hidechild CDCGCardCombatPreviewEntity isCreature 1"
+					//">"							"particleevent PE_TOWER_APPEAR isTower 1 isDire 1"
+					//"> 1.0"						"showchild !entity isTower 1 isDire 1"
+					"on_message_dismissed 1.5"	"goto creeps"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 1"
+				}
+
+				"creeps"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_CreepsDesc"
+					">"							"soundevent Tutorial_v1.creeps_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isCreep 1 zoneID Combat"
+					"on_message_dismissed 1.5"	"goto your_ancient"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isCreep 1 zoneID Combat"
+				}
+
+				"your_ancient"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_YourAncientDesc"
+					">"							"soundevent Tutorial_v1.your_ancient_01"
+					">"							"showchild CDCGTowerHealthEntity isTower 1 isDire 0"
+					">"							"showchild CDCGTowerCombatPreviewEntity isTower 1 isDire 0"
+					"on_message_dismissed 1.5"	"goto your_tower"
+				}
+
+				"your_tower"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_YourTowerDesc"
+					">"							"soundevent Tutorial_v1.your_defense_tower_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isTower 1 isDire 0"
+					//">"							"particleevent PE_TOWER_APPEAR isTower 1 isDire 0"
+					//"> 1.0"						"showchild !entity isTower 1 isDire 0"
+					"on_message_dismissed 1.5"	"goto winning_and_losing"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0"
+				}
+
+				"winning_and_losing"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_WinningAndLosingDesc"
+					">"							"soundevent Tutorial_v1.winning_and_losing_01"
+					"on_message_dismissed 1.5"	"goto health"
+				}
+
+				"health"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_HealthDesc"
+					">"							"soundevent Tutorial_v1.health_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_HEALTH isHero 1 zoneID Combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_HEALTH isCreep 1 zoneID Combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_HEALTH isTower 1"
+					">"							"showchild CDCGCardHealthEntity isCreature 1"
+					">"							"showchild CDCGCardCombatPreviewEntity isCreature 1"
+					">"							"showchild CDCGCardArmorEntity isHero 1"
+					"on_message_dismissed 1.5"	"goto engage_combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isCreature 1 zoneID Combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1"
+				}
+
+				"engage_combat"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_EngageCombatDesc"
+					">"							"soundevent Tutorial_v1.engage_combat_01"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane 8.0"			"goto opposed_positions"
+					">"							"lock isPassCoin 1"
+				}
+
+				"opposed_positions"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_OpposedPositionsTitle"
+					">"							"popup #DCG_Popup_Tutorial_OpposedPositionsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_OpposedPositionsDesc"
+					">"							"particleevent PE_TUTORIAL_ATTACK_ALLY_TOWER isCreep 1 zoneID Combat"
+					">"							"particleevent PE_TUTORIAL_ATTACK_ENEMY_TOWER isHero 1 zoneID Combat"
+					"on_message_dismissed 1.5"	"goto damage_indicator"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isCreep 1 zoneID Combat"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1 zoneID Combat"
+				}
+
+				"damage_indicator"
+				{
+					"auto"							"popup #DCG_Popup_Tutorial_DamageIndicator2Desc 5.0"
+					">"								"soundevent Tutorial_v1.damage_indicator_02"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW isTower 1 isDire 0"
+					">"								"reset_accumulated_show_time"
+					"on_viewed_combat_preview"		"popup_unstall"
+					"on_stalled_message_dismissed 1.5"	"goto summoning_creeps"
+					//"on_message_dismissed 1.5"		"goto summoning_creeps"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0"
+				}
+
+				"summoning_creeps"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_CreepsTitle"
+					">"							"popup #DCG_Popup_Tutorial_SummoningCreepsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_SummoningCreepsDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_TOP zoneID Hand"
+					">"							"unlock_hand"
+					"on_card_played 4.0"		"goto targets"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isCreep 1"
+					">"							"lock_hand"
+				}
+
+				"targets"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_TargetsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_TargetsDesc"
+					">"							"unlock isPassCoin 1"
+					">"							"rule creeps_per_turn_ai 1"
+					">"							"rule creep_list_ai 10095"
+					">"							"rule only_flop_across_from_heroes 1"
+					"on_next_lane 11.5"			"goto death_preview"
+					">"							"lock isPassCoin 1"
+				}
+
+				"death_preview"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_DeathPreviewDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_DeathPreviewDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isHero 1 zoneID Combat"
+					">"							"rule creeps_per_turn_ai 0"
+					">"							"rule pathing_force Any Path"
+					"on_message_dismissed 1.5"	"goto equipment"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1"
+				}
+
+				"equipment"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_EquipmentTitle"
+					">"							"popup #DCG_Popup_Tutorial_EquipmentDesc"
+					">"							"soundevent Tutorial_v1.equipment_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_TOP zoneID Hand"
+					">"							"unlock_hand"
+					"on_card_played 0.5"		"goto abilities_wait"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isItem 1"
+				}
+
+				"abilities_wait"
+				{
+					"auto 4.0"					"goto abilities"
+					"on_card_played"			"goto cooldowns"	// incase the use the ability before the next text box pops up
+				}
+
+				"abilities"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_AbilitiesDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_AbilitiesDesc"
+					"on_card_played 3.5"		"goto cooldowns"
+				}
+
+				"cooldowns"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_CooldownsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_CoolDownsDesc 2.5"
+					">"							"particleevent PE_TUTORIAL_ATTACK_ENEMY_TOWER isHero 1 zoneID Combat"
+					"on_message_dismissed 1.5"	"goto kill_the_tower"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1"
+				}
+
+				"kill_the_tower"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_KillTheTowerDesc"
+					">"							"soundevent Tutorial_v1.kill_the_tower_01"
+					">"							"unlock isPassCoin 1"
+					"on_cards_flop_start 1.0"	"goto tower_guard_deck"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					//">"							"particleevent PE_TUTORIAL_HIGHLIGHT_LEFT_BLOCKER zoneID Combat isCreep 1"
+				}
+
+				"tower_guard_deck"
+				{
+					"auto"							"checklist_set #DCG_Popup_Tutorial_TowerGuardsTitle"
+					">"								"popup #DCG_Popup_Tutorial_TowerGuardDeckDesc 5.0"
+					">"								"soundevent core.soundscape_2d"
+					">"								"rule pathing_force Skip"
+					">"								"concommand pause"
+					"on_message_dismissed 5.3"		"goto tower_guard_cards"
+					">"								"concommand unpause"
+				}
+
+				"tower_guard_cards"
+				{
+					"auto"							"popup #DCG_Popup_Tutorial_TowerGuardCardsDesc 5.0"
+					">"								"soundevent core.soundscape_2d"
+					"on_message_dismissed 1.5"		"goto tower_guards"
+					//">"								"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL zoneID Combat isCreep 1"
+				}
+
+				"tower_guards"
+				{
+					"auto"							"popup #DCG_Popup_Tutorial_TowerGuardsDesc 5.0"
+					">"								"soundevent core.soundscape_2d"
+					"on_message_dismissed 1.5"		"goto unopposed_positions"
+				}
+
+				"unopposed_positions"
+				{
+					"auto"							"popup #DCG_Popup_Tutorial_UnopposedPositionsDesc"
+					">"								"soundevent DCG_VO.Popup_Tutorial_UnopposedPositionsDesc"
+					">"								"unlock_hand"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW isTower 1 isDire 0"
+					">"								"particleevent PE_TUTORIAL_ATTACK_ALLY_TOWER zoneID Combat isCreep 1"
+					"on_card_played"				"unlock isPassCoin 1"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL zoneID Combat isCreep 1"
+					">"								"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0"
+					">"								"popup"
+					"on_next_lane 5.5"				"goto unit_abilities"
+					">"								"lock isPassCoin 1"
+				}
+
+				"unit_abilities"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_AbilitiesTitle"
+					">"							"popup #DCG_Popup_Tutorial_UnitAbilitiesDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_UnitAbilitiesDesc"
+					"on_card_played 4.5"		"goto passive_abilities"
+				}
+
+				"passive_abilities"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_PassiveAbilitiesDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_PassiveAbilitiesDesc"
+					">"							"unlock isPassCoin 1"
+					"on_tower_destroyed 3.5"	"goto exposed_ancient"
+					"> 1.0"						"hidechild CDCGTowerManaEntity isAncient 1"
+				}
+
+				"exposed_ancient"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ExposedAncientDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ExposedAncientDesc"
+					"on_victory 4.0"			"goto victory2"
+				}
+
+				"victory2"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TrainingPart2Complete"
+					">"							"popup #DCG_Popup_Tutorial_VictorySimple1Desc"
+					">"							"soundevent Tutorial_v1.victory_simple_01"
+					"on_message_dismissed 2.0"	"load_section part3"
+				}
+			}
+		}
+
+		"part3"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart3_Title"
+			"description"	"#DCG_Puzzle_TutorialPart3_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"DCGFR4kuQKJWAkIeF2BgSLdAVxbQScCoQOMgaUBAkO4AT=="
+				}
+				"deck_ai"
+				{
+					"use_deck"		"DCGEBO4XQEBLd0BAzADAQIBPgIHBYeRhogCTm0Bhz=="
+				}
+				"set1"							"1"
+				"initial_heroes_ai"				"0"
+				"heroes_initial_lane_random"	"0"
+				"tower_health"					"20"
+				"ancient_health"				"40"
+				"cards_first_turn"				"5"
+				"cards_first_turn_ai"			"0"
+				"cards_per_turn_ai"				"0"
+				"creeps_lanes_random"			"0"
+				"creeps_lanes_player_1each"		"1"
+				"store_enabled"					"0"
+				"no_shotclock"					"1"
+				"no_player_info_ai"				"1"
+				"no_player_info"				"1"
+				"no_vs_intro"					"1"
+				//"collapse_game_result"			"1"
+				"is_tutorial_glossary"			"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10104" //Bronze Legionnaire
+				"draw"	"10131" //Stonehall Elite
+				"draw"	"10312" //Strafing Run
+				"draw"	"10352" //Sabotage
+				"draw"	"10355" //Dimensional Portal
+				"draw"	"10313" //Take Aim
+				"draw"	"10411" //Cunning Plan
+				"draw"	"10132" //Red Mist Pillager
+				"draw"	"10411" //Cunning Plan
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 9.5"			"goto 3lanes"
+					//"> 0.4"						"music_clear"
+					//"> 0.4"						"music_queue DCGMusic.tut_01 161.0f"
+					"> 0.4"						"checklist_header #DCG_Puzzle_TutorialPart3_Title"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_3LanesTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ScoreboardTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ManaTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TowerGuardChanceTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_RoundsTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ColorsTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_DeploymentTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TowerGuardShuffleTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_DrawingCardsTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_VictoryConditionsTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TrainingPart3Complete"
+					"> 0.4"						"lock_hand"
+					"> 8.0"						"lock_camera"
+					"> 6.0"						"lock isPassCoin 1"
+					"> 6.0"						"hidechild CDCGTowerManaEntity isTower 1"
+					"> 6.0"						"hidechild CDCGCardCostEntity isSpell 1"
+					"> 6.0"						"hidechild CDCGCardCostEntity isCreep 1"
+				}
+
+				"3lanes"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_3LanesTitle"
+					">"							"popup #DCG_Popup_Tutorial_3LanesDesc"
+					">"							"soundevent Tutorial_v1.three_lanes_01"
+					">"							"rule creeps_lanes_random 1"
+					">"							"rule creeps_lanes_player_1each 0"
+					">"							"unlock_camera"
+					"on_zoom_out 2.0"			"goto strategic_view"
+					">"							"lock_camera"
+				}
+
+				"strategic_view"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_StrategicViewDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_StrategicViewDesc"
+					"on_message_dismissed 1.5"	"goto active_lane"
+				}
+
+				"active_lane"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ActiveLaneDesc"
+					">"							"soundevent Tutorial_v1.active_lane_01"
+					"on_message_dismissed 1.5"	"goto initial_deployment"
+				}
+
+				"initial_deployment"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ScoreboardTitle"
+					">"							"popup #DCG_Popup_Tutorial_InitialDeploymentDesc 3.0"
+					">"							"soundevent core.soundscape_2d"
+					"on_message_dismissed 1.5"	"goto scoreboard"
+				}
+
+				"scoreboard"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ScoreboardDesc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"unlock_camera"
+					"on_camera_lane1 2.5"		"goto mana"
+					">"							"lock_camera"
+				}
+
+				"mana"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ManaTitle"
+					">"							"popup #DCG_Popup_Tutorial_ManaDesc 5.0"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ManaDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_CURRENT_MANA isTower 1 isDire 0 laneID 1"
+					">"							"showchild CDCGTowerManaEntity isTower 1"
+					"on_message_dismissed 3.5"	"goto mana_cost"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0 laneID 1"
+				}
+
+				"mana_cost"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ManaCostDesc 5.0"
+					">"							"soundevent Tutorial_v1.mana_cost_01"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_MANA zoneID Hand cardID 10104"
+					">"							"showchild CDCGCardCostEntity isSpell 1"
+					">"							"showchild CDCGCardCostEntity isCreep 1"
+					"on_message_dismissed 1.5"	"goto tower_guard_chance"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL zoneID Hand cardID 10104"
+				}
+
+				"tower_guard_chance"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TowerGuardChanceTitle"
+					">"							"popup #DCG_Popup_Tutorial_TowerGuardChanceDesc 8.0"
+					">"							"soundevent core.soundscape_2d"
+					"on_message_dismissed 1.5"	"goto tower_guard_chance2"
+				}
+
+				"tower_guard_chance2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_TowerGuardChance2Desc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"rule pathing_force Any Path"
+					">"							"unlock_hand"
+					"on_card_played 6.0"		"goto mana_refresh"
+					">"							"lock_hand"
+				}
+
+				"mana_refresh"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_RoundsTitle"
+					">"							"popup #DCG_Popup_Tutorial_ManaRefreshDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ManaRefreshDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_CURRENT_MANA isTower 1 isDire 0 laneID 1"
+					">"							"rule pathing_force"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane 8.0"			"goto rounds"
+					">"							"unlock_camera"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0 laneID 1"
+					">"							"lock isPassCoin 1"
+				}
+
+				"rounds"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_RoundsDesc"
+					">"							"soundevent Tutorial_v1.rounds_01"
+					"on_message_dismissed 1.5"	"goto colors"
+				}
+
+				"colors"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ColorsTitle"
+					">"							"popup #DCG_Popup_Tutorial_ColorsDesc 5.0"
+					">"							"soundevent Tutorial_v1.colors_01"
+					"on_message_dismissed 1.5"	"goto playable_cards"
+				}
+
+				"playable_cards"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_PlayableCardsDesc"
+					">"							"soundevent Tutorial_v1.playable_cards_01"
+					"on_message_dismissed 1.5"	"goto freeform3"
+				}
+
+				"freeform3"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Freeform3Desc"
+					">"							"soundevent Tutorial_v1.playable_cards_02"
+					">"							"unlock_hand"
+					"on_card_played"			"goto freeform3_wait"
+				}
+
+				"freeform3_wait"
+				{
+					"on_card_played"			"goto freeform3_wait2"
+				}
+				
+				"freeform3_wait2"
+				{
+					"auto"						"checklist_hide" // hide the popup
+					">"							"lock_hand"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane"				"goto deployment_wait"
+				}
+
+				"deployment_wait"
+				{
+					"on_deploy_start 1.5"		"goto deployment"
+					">"							"lock cardID 10053"
+				}
+
+				"deployment"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_DeploymentTitle"
+					">"							"popup #DCG_Popup_Tutorial_DeploymentDesc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_TOP cardID 10053"			
+					"on_message_dismissed 1.5"	"goto lane_creeps"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL cardID 10053"
+				}
+
+				"lane_creeps"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_LaneCreepsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_LaneCreepsDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC zoneID Deployment"
+					"on_message_dismissed 1.5"	"goto position_shuffle"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL zoneID Deployment"
+				}
+
+				"position_shuffle"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_PositionShuffleDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_PositionShuffleDesc"
+					">"							"unlock cardID 10053"
+					"on_next_lane 14.5"			"goto tower_guard_shuffle"
+					">"							"lock isPassCoin 1"
+					"> 2.0"						"concommand host_timescale 0.65"
+					"> 8.5"						"concommand host_timescale 1.0"
+				}
+
+				"tower_guard_shuffle"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TowerGuardShuffleTitle"
+					">"							"popup #DCG_Popup_Tutorial_TowerGuardShuffleDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_TowerGuardShuffleDesc"
+					"on_message_dismissed 1.5"	"goto drawing_cards"
+				}
+
+				"drawing_cards"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_DrawingCardsTitle"
+					">"							"popup #DCG_Popup_Tutorial_DrawingCardsDesc"
+					">"							"soundevent Tutorial_v1.drawing_cards_01"
+					"on_message_dismissed 1.5"	"goto kill_a_tower"
+				}
+
+				"kill_a_tower"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_VictoryConditionsTitle"
+					">"							"popup #DCG_Popup_Tutorial_KillATowerDesc"
+					">"							"soundevent Tutorial_v1.kill_a_tower_01"
+					">"							"unlock_hand"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane"				"checklist_hide"
+					"on_tower_destroyed 1.5"	"goto victory_conditions"
+				}
+
+				"victory_conditions"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_VictoryConditionsDesc"
+					">"							"soundevent Tutorial_v1.victory_conditions_01"
+					"on_victory 4.0"			"goto victory3"
+				}
+
+				"victory3"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TrainingPart3Complete"
+					">"							"popup #DCG_Popup_Tutorial_Victory3Desc"
+					">"							"soundevent Tutorial_v1.victory_01"
+					"on_message_dismissed 2.0"	"load_section part4"
+				}
+			}
+		}
+
+		"part4"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart4_Title"
+			"description"	"#DCG_Puzzle_TutorialPart4_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"DCGFRAhuQIGm0YEf7oCTQpFVhVqAQoBAwcEBg4FCpJpAUYRX60B"
+				}
+				"deck_ai"
+				{
+					"use_deck"		"DCGFeRxuQKVCAIGuF0BAS3dAQMwAwECAT4CBwWHkYaIAk5tAYc="
+				}
+				"set1"							"1"
+				"cards_per_turn_ai"				"2" // Don't give AI extra cards in tutorial
+				"heroes_initial_lane_random"	"0"
+				"hero1_ai"						"10064" //Crystal Maiden
+				"hero2_ai"						"10070" //Ursa
+				"hero3_ai"						"10062" //Skywrath Mage
+				"tower_health"					"20"
+				"ancient_health"				"40"
+				"ai_pass_chance_multiplier"		"0"
+				"ai_action_choice_non_random"	"1"
+				"creeps_lanes_random"			"0"
+				"force_combat_manager_rand_to_zero" "1"
+				"no_shotclock"					"1"
+				"no_player_info_ai"				"1"
+				//"collapse_game_result"			"1"
+				"is_tutorial_glossary"			"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10334" //Stars Align
+				"draw"	"10311" //Act of Defiance
+				"draw"	"10150" //Path of the Cunning
+				"draw"	"10416" //Track
+				"draw"	"10092" //Rampaging Vandal
+				"draw"	"10079" //Apprentice Blacksmith
+				"draw"	"10270" //Grazing Shot
+				"draw"	"10410" //Slay
+				"draw"	"10192" //Vitality Rune
+				"draw"	"10107" //Vhoul Martyr
+				"draw"	"10102" //Thunderhide Packmate
+				"draw"	"10092" //Rampaging Vandal
+				"draw"	"10272" //Assassinate
+				"draw"	"10340" //Hand of God
+				"draw"	"10311" //Act of Defiance
+				"draw"	"10365" //Juke
+				"draw"	"10410" //Slay
+				"draw"	"10092" //Rampaging Vandal
+			}
+			"deck_order_ai"
+			{
+				"draw"	"10352" //Sabotage
+				"draw"	"10418" //Provoke
+				"draw"	"10312" //Strafing Run
+				"draw"	"10282" //Enrage
+				"draw"	"10350" //Sucker Punch
+				"draw"	"10366" //New Orders
+				"draw"	"10090" //Relentless Zombie
+				"draw"	"10350" //Sucker Punch
+				"draw"	"10342" //Pick A Fight
+				"draw"	"10366" //New Orders
+				"draw"	"10411" //Cunning Plan
+				"draw"	"10336" //Better Late than never
+				"draw"	"10319" //Diabolic Revelation
+				"draw"	"10342" //Pick A Fight
+				"draw"	"10411" //Cunning Plan
+				"draw"	"10366" //New Orders
+				"draw"	"10342" //Pick A Fight
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 11.5"			"goto final_lesson"
+					//"> 0.4"						"music_clear"
+					//"> 0.4"						"music_queue DCGMusic.tut_01 161.0f"
+					"> 0.4"						"checklist_header #DCG_Puzzle_TutorialPart4_Title"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TurnsTitle 5"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_LastCardTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ArmorTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ImprovementsTitle 4"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_HeroDeathTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_BountyTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_GlossaryTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_PermanenceTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ShoppingTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ItemsTitle 2"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_ActiveAbilitiesTitle"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_CrosslaneTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TrainingPart4Complete"
+					"> 0.4"						"lock_hand"
+					"> 6.0"						"lock isPassCoin 1"
+					"> 6.0"						"convar use_lookahead_ai 0"
+					"> 6.0"						"convar ai_delay 4.5"
+				}
+
+				"final_lesson"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TurnsTitle"
+					">"							"popup #DCG_Popup_Tutorial_FinalLessonDesc"
+					">"							"soundevent Tutorial_v1.final_lesson_01"
+					">"							"rule creeps_lanes_random 1"
+					"> 1.0"						"rule force_combat_manager_rand_to_zero 0"
+					"on_message_dismissed 1.5"	"goto turn_coin"
+					//"on_message_dismissed 1.5"	"goto victory4"
+				}
+
+				"turn_coin"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_TurnCoinDesc"
+					">"							"soundevent Tutorial_v1.turn_coin_01"
+					"on_message_dismissed 1.5"	"goto card_history"
+				}
+
+				"card_history"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_CardHistoryDesc"
+					">"							"soundevent Tutorial_v1.opponents_turn_01"
+					"on_message_dismissed 1.5"	"goto passing"
+				}
+
+				"passing"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_PassingDesc"
+					">"							"soundevent Tutorial_v1.passing_01"
+					"on_message_dismissed 1.5"	"goto turns"
+				}
+
+				"turns"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_TurnsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_TurnsDesc"
+					">"							"unlock_hand"
+					"on_card_played 7.0"		"goto last_card"
+					">"							"lock_hand"
+				}
+
+				"last_card"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_LastCardTitle"
+					">"							"popup #DCG_Popup_Tutorial_LastCardDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_LastCardDesc"
+					">"							"hudevent 0 highlight last_card"
+					">"							"rule ai_action_choice_non_random 0"
+					">"							"reset_accumulated_show_time"
+					"on_viewed_card_history 1.0"	"goto armor_wait2"
+					">"							"popup"
+					">"							"unlock_hand"
+					">"							"hudevent 0 unhighlight last_card"
+				}
+
+				"armor_wait2"
+				{
+					"on_card_played 8.0"		"goto armor"
+				}
+
+				"armor"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ArmorTitle"
+					">"							"popup #DCG_Popup_Tutorial_ArmorDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ArmorDesc"					
+					">"							"hudevent 0 highlight glossary"
+					"on_message_dismissed 1.5"	"goto armor2"
+				}
+
+				"armor2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Armor2Desc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_Armor2Desc"					
+					">"							"unlock isPassCoin 1"
+					"on_next_lane"				"goto scrolling_wait"
+				}
+
+				"scrolling_wait"
+				{
+					"auto"						"lock_hand"
+					">"							"lock isPassCoin 1"
+					">"							"hudevent 0 unhighlight glossary"
+					"on_camera_lane2 5.5"		"goto scrolling"
+					">"							"lock_camera"
+				}
+
+				"scrolling"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ImprovementsTitle"
+					">"							"popup #DCG_Popup_Tutorial_ScrollingDesc"
+					">"							"soundevent core.soundscape_2d" //DCG_VO.Popup_Tutorial_ScrollingDesc"
+					">"							"unlock_camera"
+					"on_camera_lane3 2.5"		"goto improvements"
+					">"							"lock_camera"
+				}
+
+				"improvements"
+				{
+					"auto"					"popup #DCG_Popup_Tutorial_ImprovementsDesc"
+					">"						"soundevent DCG_VO.Popup_Tutorial_EnchantmentsDesc"
+					">"						"particleevent PE_TUTORIAL_HIGHLIGHT_TOP zoneID Hand isImprovement 1"
+					">"						"lock zoneID Hand"
+					">"						"unlock zoneID Hand isImprovement 1"
+					">"							"unlock_hand"
+					"on_card_played 2.0"		"goto scrolling2"
+					">"							"lock_hand"
+					">"							"unlock zoneID Hand"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isImprovement 1"
+				}
+
+				"scrolling2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Scrolling2Desc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"unlock_camera"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isImprovement 1"
+					"on_camera_lane2 2.5"		"goto active_lane_mana"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isImprovement 1"
+				}
+
+				"active_lane_mana"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ActiveLaneManaDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ActiveLaneManaDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_CURRENT_MANA isTower 1 isDire 0 laneID 2"
+					"on_message_dismissed 1.5"	"goto hero_death"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 0 laneID 2"
+				}
+
+				"hero_death"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_HeroDeathTitle"
+					">"							"popup #DCG_Popup_Tutorial_HeroDeathDesc 7.0"
+					">"							"soundevent DCG_VO.Popup_Tutorial_HeroDeathDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC isHero 1 previewDeath 1 zoneID Combat cardID 10023"
+					"on_message_dismissed 1.5"	"goto hero_death2"
+				}
+
+				"hero_death2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_HeroDeath2Desc"
+					">"							"soundevent Tutorial_v1.hero_death_02"
+					"on_message_dismissed 1.5"	"goto fight_coin"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1 previewDeath 1 zoneID Combat"
+				}
+
+				"fight_coin"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_FightCoinDesc"
+					">"							"soundevent Tutorial_v1.active_lane_mana_02"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane 6.5"			"goto bounty"
+					">"							"lock isPassCoin 1"
+				}
+
+				"bounty"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_BountyTitle"
+					">"							"popup #DCG_Popup_Tutorial_BountyDesc"
+					">"							"soundevent Tutorial_v1.bounty_01"
+					"on_message_dismissed 1.5"	"goto bounty2"
+				}
+
+				"bounty2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Bounty2Desc"
+					">"							"soundevent Tutorial_v1.bounty_02"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GENERIC zoneID Combat isBlue 1"
+					">"							"unlock_hand"
+					"on_card_played 4.0"		"goto glossary"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isHero 1 isBlue 1"
+				}
+
+				"glossary"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_GlossaryTitle"
+					">"							"popup #DCG_Popup_Tutorial_GlossaryDesc"
+					">"							"soundevent core.soundscape_2d"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_DAMAGE_PREVIEW isTower 1 isDire 1 isLane 3"
+					">"							"reset_accumulated_show_time"
+					">"							"hudevent 0 highlight glossary"
+					//"on_viewed_combat_preview"	"popup_unstall"
+					//"on_stalled_message_dismissed 1.5"	"goto glossary2"
+					"on_message_dismissed 1.5"	"goto glossary2"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isTower 1 isDire 1 isLane 3"
+				}
+
+				"glossary2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Glossary2Desc 11.0"
+					">"							"soundevent DCG_VO.Popup_Tutorial_Glossary2Desc"
+					">"							"rule ai_pass_chance_multiplier 999000" // Force them to pass during the shopping phase
+					"on_message_dismissed 1.5"	"goto permanence"
+				}
+
+				"permanence"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_PermanenceTitle"
+					">"							"popup #DCG_Popup_Tutorial_PermanenceDesc"
+					">"							"soundevent Tutorial_v1.permanence_01"
+					">"							"hudevent 0 unhighlight glossary"
+					">"							"unlock isPassCoin 1"
+					"on_store_openned 9.5"		"goto shopping"
+					">"							"popup"
+					">"							"lock isPassCoin 1"
+					"> 7.0"						"lock zoneID Shop"
+				}
+
+				"shopping"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ShoppingTitle"
+					">"							"popup #DCG_Popup_Tutorial_ShoppingDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ShoppingDesc"
+					">"							"lock zoneID Shop"
+					"on_message_dismissed 1.5"	"goto item_deck"
+					">"							"rule ai_action_choice_non_random 1"
+				}
+
+				"item_deck"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_ItemDeckDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ItemDeckDesc"
+					"on_message_dismissed 1.5"	"goto items"
+				}
+
+				"items"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ItemsTitle"
+					">"							"popup #DCG_Popup_Tutorial_ItemsDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_ItemsDesc"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_GOLDCOST zoneID Shop isDrawnShopItem 1 isRevealed 1"
+					">"							"unlock zoneID Shop"
+					"on_card_drawn"				"goto playing_items_wait"
+					">"							"rule ai_pass_chance_multiplier 100" // back to normal pass chance
+				}
+
+				"playing_items_wait"
+				{
+					"auto"						"popup"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL isItem 1"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane 15.5"			"goto playing_items"
+					"> 12.0"					"lock_hand"
+					">"							"lock isPassCoin 1"
+				}
+
+				"playing_items"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_PlayingItemsDesc"
+					">"							"soundevent Tutorial_v1.playing_items_01"
+					"on_message_dismissed 1.5"	"goto active_abilities"
+					">"							"rule ai_action_choice_non_random 0"
+				}
+
+				"active_abilities"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_ActiveAbilitiesTitle"
+					">"							"popup #DCG_Popup_Tutorial_ActiveAbilitiesDesc"
+					">"							"soundevent Tutorial_v1.active_abilities_01"
+					"on_message_dismissed"		"goto crosslane_wait"
+				}
+
+				"crosslane_wait"
+				{
+					"auto"						"unlock isPassCoin 1"
+					">"							"unlock_hand"
+					"on_next_lane 6.5"			"goto crosslane_wait2"
+					">"							"rule ai_pass_chance_multiplier 999000" // Force them to pass while we're teaching in the next Round
+				}
+
+				"crosslane_wait2"
+				{
+					"on_next_lane 6.5"			"goto crosslane"
+					">"							"lock_hand"
+					">"							"lock isPassCoin 1"
+				}
+
+				"crosslane"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_CrosslaneTitle"
+					">"							"popup #DCG_Popup_Tutorial_CrosslaneDesc 5.0"
+					">"							"soundevent Tutorial_v1.crosslane_01"
+					">"							"rule ai_pass_chance_multiplier 300" // 3x chance to pass for the rest of the game
+					"on_message_dismissed 1.5"	"goto crosslane2"
+				}
+
+				"crosslane2"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_Crosslane2Desc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_Crosslane2Desc"
+					">"							"lock zoneID Hand"
+					">"							"unlock zoneID Hand isSpell 1"
+					">"							"unlock_hand"
+					"on_card_played 4.0"		"goto last_reminders"
+				}
+
+				"last_reminders"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_LastRemindersDesc"
+					">"							"soundevent Tutorial_v1.last_reminders_01"
+					"on_message_dismissed 1.5"	"goto victory4_wait"
+					">"							"unlock zoneID Hand"
+					">"							"checklist_hide"
+					">"							"unlock isPassCoin 1"
+					//">"							"convar use_lookahead_ai 1" // Harpreet's AI is too good!
+				}
+
+				"victory4_wait"
+				{
+					"on_victory 4.0"			"goto victory4"
+				}
+
+				"victory4"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TrainingPart4Complete"
+					">"							"popup #DCG_Popup_Tutorial_Victory4Desc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_Victory4Desc"
+					"> 10.0"					"goto first_ai_match"
+					"on_message_dismissed 1.5"	"goto first_ai_match"
+				}
+
+				"first_ai_match"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_FirstAIMatchDesc"
+					">"							"soundevent Tutorial_v1.first_ai_match_01"
+					"on_message_dismissed 2.0"	"load_section part5"
+				}
+			}
+		}
+
+		"part5"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart5_Title"
+			"description"	"#DCG_Puzzle_TutorialPart5_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"allow_random_decks"		"0"
+					"additional_decks"
+					{
+							"precon_red"
+							{
+								"name"			"#DCG_DeckDescription_Red_Name"
+								"description"	"#DCG_DeckDescription_Red"
+								"tags"			""			// Optional tags for this deck
+								"code"			"DCGFc4tuQIBGI9BOF0BAa3dAYqHl2sCBgICS6oCXZKGUD=="
+								"audio"			"DCG_VO.RedeemDeck_Description_4"
+							}
+							"precon_green"
+							{
+								"name"			"#DCG_DeckDescription_Green_Name"
+								"description"	"#DCG_DeckDescription_Green"
+								"tags"			""			// Optional tags for this deck
+								"code"			"DCGFTs+uAKDJwELQXhdAafdAVaFQZqiAYFiAQlFFakCpAI="
+								"audio"			"DCG_VO.RedeemDeck_Description_3"
+							}
+							"precon_blue"
+							{
+								"name"			"#DCG_DeckDescription_Blue_Name"
+								"description"	"#DCG_DeckDescription_Blue"
+								"tags"			""			// Optional tags for this deck
+								"code"			"DCGFaExuQIKSosBqrsCswNFRAYhAbICEoKWmYmBhj=="
+								"audio"			"DCG_VO.RedeemDeck_Description_2"
+							}
+							"precon_black"
+							{
+								"name"			"#DCG_DeckDescription_Black_Name"
+								"description"	"#DCG_DeckDescription_Black"
+								"tags"			""			// Optional tags for this deck
+								"code"			"DCGFTUnuQIYg0gBeF2l3QGPpQKXQZUMAgsMCmsCmrgBhT=="
+								"audio"			"DCG_VO.RedeemDeck_Description_1"
+							}
+					}
+				}
+				"deck_ai"
+				{
+					"use_deck"					"DCGFeRiuQIEGYMTeV0Bft0BmDABCBJBQy4BkpsIl5aEYwI="
+				}
+
+				"set1"							"1"
+				"cards_per_turn_ai"				"2"	// Don't give AI extra cards in tutorial
+				"shotclock_base_time"			"120"
+				"no_shotclock"					"1"
+				"no_player_info_ai"				"1"
+				"ai_beginner_difficulty"		"1"
+				"is_tutorial_glossary"			"1"
+			}
+			
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 9.5"			"goto red_and_black"
+					//"> 0.4"						"music_clear"
+					//"> 0.4"						"music_queue DCGMusic.tut_01 161.0f"
+					"> 0.4"						"checklist_header #DCG_Puzzle_TutorialPart5_Title"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_IncludedCardsTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_InitiativeTitle 3"
+					"> 0.4"						"checklist_add #DCG_Popup_Tutorial_TrainingPart5Complete 1"
+					"> 0.4"						"lock_hand"
+					"> 6.0"						"lock isPassCoin 1"
+					"> 6.0"						"convar ai_delay 4.5"
+				}
+
+				"red_and_black"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_IncludedCardsTitle"
+					">"							"popup #DCG_Popup_Tutorial_RedAndBlackDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_RedAndBlackDesc"
+					"on_message_dismissed 1.5"	"goto included_cards"
+				}
+
+				"included_cards"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_IncludedCardsDesc 5.0"
+					">"							"soundevent DCG_VO.Popup_Tutorial_IncludedCardsDesc"
+					"on_message_dismissed 1.5"	"goto coup_de_grace"
+				}
+
+				"coup_de_grace"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_CoupDeGraceDesc 5.0"
+					">"							"soundevent DCG_VO.Popup_Tutorial_CoupDeGraceDesc"
+					"on_message_dismissed 1.5"	"goto suppressing"
+				}
+
+				"suppressing"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_InitiativeTitle"
+					">"							"popup #DCG_Popup_Tutorial_SuppressingDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_SuppressingDesc"
+					"on_message_dismissed 1.5"	"goto initiative"
+				}
+
+				"initiative"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_InitiativeDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_InitiativeDesc"
+					"on_message_dismissed 1.5"	"goto taking_initiative"
+				}
+
+				"taking_initiative"
+				{
+					"auto"						"popup #DCG_Popup_Tutorial_TakingInitiativeDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_TakingInitiativeDesc"
+					"on_message_dismissed 1.5"	"goto end"
+					">"							"checklist_hide"
+					">"							"unlock_hand"
+					">"							"unlock isPassCoin 1"
+					">"							"rule no_shotclock 0"
+				}
+				
+				"end"
+				{
+					"on_victory 4.0"			"goto end2"
+					"on_failure 4.0"			"popup #DCG_Popup_Tutorial_FailureDesc"
+					"on_message_dismissed"		"load_section part5"
+				}
+
+				"end2"
+				{
+					"auto"						"checklist_set #DCG_Popup_Tutorial_TrainingPart5Complete"
+					">"							"popup #DCG_Popup_Tutorial_TrainingPart5CompleteDesc"
+					">"							"soundevent DCG_VO.Popup_Tutorial_TrainingPart5CompleteDesc"
+				}
+			}
+			
+		}
+	}
+}

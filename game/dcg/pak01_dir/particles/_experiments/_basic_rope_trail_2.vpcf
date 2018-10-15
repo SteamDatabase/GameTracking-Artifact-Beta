@@ -1,0 +1,175 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_flConstantRadius = 8.000000
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_BasicMovement"
+			m_Gravity = 
+			[
+				0.000000,
+				0.000000,
+				6.000000,
+			]
+		},
+		{
+			_class = "C_OP_FadeIn"
+			m_flFadeInTimeMin = 0.150000
+			m_flFadeInTimeMax = 0.150000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_FadeOut"
+			m_flFadeOutTimeMin = 0.800000
+			m_flFadeOutTimeMax = 0.800000
+			m_bEaseInAndOut = false
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flStartScale = 0.000000
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flEndScale = 0.100000
+			m_flStartTime = 0.100000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_DampenToCP"
+			m_flRange = 1.000000
+			m_flScale = 0.100000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_DistanceToCP"
+			m_nFieldOutput = 7
+			m_flInputMax = 24.000000
+			m_flOutputMin = 0.500000
+			m_flOutputMax = 0.000000
+			m_CollisionGroupName = "DEBRIS"
+		},
+		{
+			_class = "C_OP_AlphaDecay"
+			m_bDisableOperator = true
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 32
+			m_flTextureVWorldSize = 1.000000
+			m_flSelfIllumAmount = 1.000000
+			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
+			m_flFeatheringMaxDist = 2.000000
+			m_bUseScalarForTextureCoordinate = true
+			m_bLightenMode = true
+		},
+		{
+			_class = "C_OP_RenderRopes"
+			m_nMinTesselation = 32
+			m_flTextureVWorldSize = 2.000000
+			m_bUseScalarForTextureCoordinate = true
+			m_flRadiusScale = 1.200000
+			m_flSelfIllumAmount = 1.000000
+			m_bLightenMode = true
+			m_flRefractAmount = 0.100000
+			m_nRefractBlurRadius = 4
+			m_flOverbrightFactor = 2.000000
+			m_hTexture = resource:"materials/particle/beam_smoke_03.vtex"
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_CreateWithinSphere"
+			m_fSpeedMax = 2.000000
+			m_LocalCoordinateSystemSpeedMin = 
+			[
+				0.000000,
+				0.000000,
+				1.500000,
+			]
+			m_LocalCoordinateSystemSpeedMax = 
+			[
+				0.000000,
+				0.000000,
+				2.000000,
+			]
+		},
+		{
+			_class = "C_INIT_VelocityRandom"
+			m_LocalCoordinateSystemSpeedMin = 
+			[
+				-2.000000,
+				-2.000000,
+				5.000000,
+			]
+			m_LocalCoordinateSystemSpeedMax = 
+			[
+				2.000000,
+				2.000000,
+				6.000000,
+			]
+		},
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 64
+			m_nAlphaMax = 92
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_ContinuousEmitter"
+			m_flEmitRate = 4.000000
+		},
+	]
+	m_ForceGenerators = 
+	[
+		{
+			_class = "C_OP_RandomForce"
+			m_MinForce = 
+			[
+				-2.000000,
+				-2.000000,
+				-2.000000,
+			]
+			m_MaxForce = 
+			[
+				2.000000,
+				2.000000,
+				2.000000,
+			]
+		},
+		{
+			_class = "C_OP_TurbulenceForce"
+			m_flNoiseCoordScale1 = 0.500000
+			m_flNoiseCoordScale2 = 0.440000
+			m_vecNoiseAmount0 = 
+			[
+				1.000000,
+				1.000000,
+				6.000000,
+			]
+			m_vecNoiseAmount1 = 
+			[
+				-2.500000,
+				2.500000,
+				-3.000000,
+			]
+			m_vecNoiseAmount2 = 
+			[
+				1.500000,
+				-1.500000,
+				4.000000,
+			]
+		},
+	]
+	m_flConstantLifespan = 3.000000
+}

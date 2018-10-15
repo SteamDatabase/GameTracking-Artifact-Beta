@@ -1,0 +1,859 @@
+@define InitDuration: 0.55s;
+
+DCGDashboard
+{
+	horizontal-align: center;
+	vertical-align: center;
+
+	font-size: 32px;
+
+	width: 100%;
+	height: 100%;
+
+	overflow: clip;
+}
+
+DCGDashboard.InitialDisplay #EverythingThatIsntTheBackground
+{
+    opacity: 0;
+    transition-duration: 2.0s;
+    transition-delay: 0.45s;
+}
+
+#BackgroundVideo
+{
+	width: 100%;
+	height: 100%;
+}
+
+
+#DBVignettePanel
+{
+	height: 100%;
+	width: 100%;
+	background-image: url("s2r://panorama/images/backgrounds/dcg_db_main_vignette_psd.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+#EverythingThatIsntTheBackground
+{
+    height: 100%;
+	width: 100%;
+
+    transition-property: opacity, blur;
+	transition-duration: 1.3s;
+	transition-timing-function: ease-in;
+}
+
+.Idle #EverythingThatIsntTheBackground
+{
+    opacity: 0.0;
+    blur: gaussian( 5.0 );
+}
+
+/* --------------------------------------------------------------------------	*/
+/* Managers																																		*/
+/* --------------------------------------------------------------------------	*/
+DCGDashboardPopupManager
+{
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+/* Start of Left Panel with Profile Card, Friends, and Chat */
+
+#DBLeftPanel
+{
+	width: 500px;
+	height: 100%;
+	flow-children: down;
+}
+
+.MediaMode #DBLeftPanel
+{
+	visibility: collapse;
+}
+
+#ProfileCard
+{
+    width: 380px;
+}
+
+#FriendMenuContainer
+{
+	height: 540px;
+    width: 380px;
+}
+
+#Chat
+{
+	width: 100%;
+	vertical-align: bottom;
+	horizontal-align: left;
+	transform: translateX( 0px ) translateY( 0px );
+	opacity: 1.0;
+
+	transition-property: opacity, transform;
+	transition-duration: 0.45s;
+	transition-timing-function: ease-in;
+}
+
+.InDeckBuilder #Chat
+{
+    margin-bottom: 2px;
+    margin-right: 10px;
+    horizontal-align: right;
+}
+
+.InCatalogue #Chat
+{
+    visibility: collapse;
+}
+
+.InCollection #Chat,
+.InLobby #Chat
+{
+    visibility: collapse;
+}
+
+
+.InDeckBuilder #DBLeftPanel,
+.InCollection #DBLeftPanel,
+.InLobby #DBLeftPanel,
+{
+    visibility: collapse;
+}
+
+/* End of Left Panel */
+
+/* Main Menu Panel */
+
+#MainMenuPanel
+{
+	margin-right: 42px;
+	margin-bottom: 64px;
+	vertical-align: bottom;
+	horizontal-align: right;
+	flow-children: down;
+}
+
+.MediaMode #MainMenuPanel
+{
+	visibility: collapse;
+}
+
+.MainMenuLabelContainer
+{
+	flow-children: right;
+	horizontal-align: right;
+}
+
+.MainMenuLabelContainer:hover .MainMenuArrow
+{
+	opacity: 1;
+}
+
+.MainMenuLabelContainer.Activated
+{
+    sound: "ui.menu_quit";
+}
+
+.MainMenuArrow
+{
+	margin-right: 10px;
+	margin-top: -3px;
+	vertical-align: middle;
+	height: 28px;
+	width: 27px;
+	background-image: url("s2r://panorama/images/main_menu/main_menu_arrow_psd.vtex");
+	opacity: 0;
+	margin-bottom: 9px;
+
+	transition-property: opacity;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-out;
+}
+
+.MainMenuLabel
+{
+	font-size: 54px;
+	font-weight: light;
+	letter-spacing: 10px;
+  text-transform: uppercase;
+  transition-property: text-shadow;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-out;
+}
+
+.MainMenuLabelContainer:hover .MainMenuLabel
+{
+	text-shadow: 0px 0px 8px 4.0 #71ffff11;
+}
+
+.MainMenuLabel:active
+{
+	text-shadow: 0px 0px 20px 4.0 #71ffff25;
+}
+
+#PlayArtifactLabel
+{
+	text-align: right;
+	horizontal-align: right;
+	text-transform: uppercase;
+	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, #d0b891 ), color-stop( .3, #d0b891 ), color-stop( .8, #9d7f68 ), to( #9d7f68 ) );
+	letter-spacing: 4px;
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	text-shadow: 1px 1px 12px 12 #00000055;
+	visibility: collapse;
+}
+
+#ArtifactLogo
+{
+	background-image: url("s2r://panorama/images/main_menu/artifact_logo_psd.vtex");
+	width: 128px;
+	height: 128px;
+	background-size: cover;
+	margin-right: 64px;
+	margin-top: 80px;
+	vertical-align: top;
+	horizontal-align: right;
+}
+
+.MediaMode #ArtifactLogo
+{
+	visibility: collapse;
+}
+
+/* End of Main Menu Panel */
+
+
+/* Top Right Panel with Settings and Quit */
+
+#TopRightPanel
+{
+	horizontal-align: right;
+	margin-right: 30px;
+	margin-top: 32px;
+	flow-children: right;
+}
+
+.MediaMode #TopRightPanel
+{
+	visibility: collapse;
+}
+
+#DCGQuitButton
+{
+	background-image: url("s2r://panorama/images/control_icons/quit_psd.vtex");
+	margin-left: 6px;
+}
+#DCGQuitButton:hover
+{
+	wash-color: #ff6e41;
+}
+#DCGQuitButton.Activated
+{
+    sound: "ui.menu_quit";
+}
+
+.TopBarSmallButton
+{
+	width: 32px;
+	height: 32px;
+	margin-right: 60px;
+
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	wash-color: #666666;
+
+	transition-property: background-color, wash-color;
+	transition-delay: 0.0s;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+}
+
+.TopBarSmallButton:hover
+{
+	wash-color: #bd5e2daa;
+}
+
+.TopBarSmallButton:active
+{
+	background-position: 50% 55%;
+}
+
+#DCGSettingsButton
+{
+	margin: 0px;
+	width: 32px;
+	height: 32px;
+	vertical-align: middle;
+	background-image: url("s2r://panorama/images/control_icons/gear_png.vtex");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	wash-color: #666666;
+	margin-right: 8px;
+}
+#DCGSettingsButton:hover
+{
+	wash-color: #c9c9c9;
+}
+#DCGSettingsButton:active
+{
+	sound: "ui_settings_multi";
+}
+
+/* End of Top Right Panel */
+
+#BuildNumber
+{
+	horizontal-align: right;
+	margin-right: 64px;
+	margin-bottom: 20px;
+	vertical-align: bottom;
+	opacity: 0.1;
+}
+
+.MediaMode #BuildNumber
+{
+	visibility: collapse;
+}
+
+#MediaCover
+{
+    horizontal-align: center;
+    vertical-align: middle;
+
+    width: 100%;
+    height: 100%;
+
+    //background-image: url("s2r://panorama/images/dashboard/background/artifact_background_1_psd.vtex");
+    background-size: 100% 100%;
+
+    pre-transform-scale2d: 1;
+    visibility: collapse;
+    
+    z-index: 4999;
+}
+
+.MediaMode #MediaCover 
+{
+    visibility: visible;
+}
+
+#ArtifactLogoFlash
+{
+    width: 864px;
+    height: 776px;
+
+    horizontal-align: center;
+    transform: translatey(-163px);
+
+    background-image: url("s2r://panorama/images/dashboard/dashboard_logotypegold_png.vtex");
+    background-size: 100% 100%;
+
+    opacity: 0;
+}
+
+ #ArtifactLogoFlash.FlashLogo
+{
+    opacity: 0;
+    animation-name: flash-logo;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+
+@keyframes 'flash-logo'
+{
+    0%
+    {
+        opacity: 0;
+    }
+
+    50%
+    {
+        opacity: 1;
+    }
+
+    100%
+    {
+        opacity: 0;
+    }
+}
+
+.MediaMatchButtonGroup
+{
+    horizontal-align: center;
+    vertical-align: top;
+    flow-children: down;
+    margin-top: 370px;
+    margin-right: 750px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 2.15s;
+    transition-timing-function: ease-in-out;
+
+    border-radius: 100px;
+    background-color: #000000AA;
+}
+
+.MediaModePress .MediaMatchButtonGroup
+{
+    opacity: 1;
+}
+
+.MediaColorButtonGroup
+{
+    horizontal-align: center;
+    vertical-align: top;
+    flow-children: down;
+    margin-top: 190px;
+    margin-right: 750px;
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 2.15s;
+    transition-timing-function: ease-in-out;
+}
+
+
+.MediaModePress #MediaGauntletStatsGroup
+{
+    opacity:0;
+}
+
+.GameOver #MediaGauntletStatsGroup
+{
+    horizontal-align: center;
+    vertical-align: center;
+}
+#MediaGauntletStatsGroup
+{
+    horizontal-align: right;
+    vertical-align: bottom;
+    flow-children: down;
+    width: 620px;
+    height: 510px;
+    margin-right: 40px;
+    opacity: 1;
+
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+
+
+.DefaultLanguage .MediaMatchButtonGroup,
+.DefaultLanguage .MediaColorButtonGroup,
+{
+    opacity: 0;
+}
+
+.MediaDeckGroup
+{
+    flow-children: down;
+    horizontal-align: center;
+    vertical-align: bottom;
+    visibility: collapse;
+
+    //padding-bottom: 10px;
+}
+
+.MediaShowHeroes .MediaDeckGroup
+{
+    visibility: visible;
+}
+
+.HeroDisplay
+{
+    flow-children: right;
+    horizontal-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    //border: 1px solid black;
+}
+
+.HeroImage
+{
+    width: 170px;
+    height: 300px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-position: 50% 0%;
+    background-size: 100% 100%;
+}
+
+.MediaBannerGroup
+{
+    flow-children: right;
+    horizontal-align: center;
+
+    //padding-bottom: 10px;
+}
+.MediaModePress .MediaLanguageButtonGroup
+{
+    visibility:visible;
+}
+.MediaLanguageButtonGroup
+{
+    horizontal-align: center;
+    vertical-align: top;
+    flow-children: right;
+    transform: translatey(925px);
+    margin-right: 750px;
+    visibility:collapse;
+    transition-property: transform;
+    transition-duration: 1.4s;
+    transition-timing-function: ease-in-out;
+}
+
+.DefaultLanguage .MediaLanguageButtonGroup
+{
+    transform: translatey(450px);
+}
+
+.MediaMatchNameLabel
+{
+    color: white;
+    horizontal-align: center;
+    vertical-align: center;
+    font-weight: semi-bold;
+    font-size: 30px;
+    //text-transform: uppercase;
+    //text-shadow: 0px 0px 8px 1.0 #ffffc777;
+    //text-shadow: 0px 0px 6px 2.0 #87f9fd99;
+    //letter-spacing: 4px;
+}
+.GameOver .ThankYouForPlayingLabel
+{
+    visibility:visible;
+}
+.GameOver .MediaMatchWins,
+.GameOver .MediaMatchWinsLabel,
+.GameOver .MediaMatchButton
+{
+    visibility:collapse;
+}
+
+.ThankYouForPlayingLabel
+{
+    color: white;
+    horizontal-align: center;
+    vertical-align: center;
+    font-weight: semi-bold;
+    font-size: 100px;
+    text-transform: uppercase;
+    //text-shadow: 0px 0px 8px 1.0 #ffffc777;
+    text-shadow: 0px 0px 6px 2.0 #87f9fd99;
+    //letter-spacing: 4px;
+    text-align:center;
+    visibility:collapse;
+}
+.MediaMatchWinsLabel
+{
+    color: white;
+    font-weight: semi-bold;
+    font-size: 110px;
+    text-transform: uppercase;
+    //text-shadow: 0px 0px 8px 1.0 #ffffc777;
+    text-shadow: 0px 0px 6px 0.1 #87f9fd99 ;
+    //letter-spacing: 4px;
+    text-align:center;
+    letter-spacing: 8px;
+    width:100%;
+    margin-bottom:20px;
+}
+
+.MediaMatchWins
+{
+    color: white;
+    horizontal-align: center;
+    vertical-align: center;
+    margin-top: -100px;
+    margin-bottom: -50px;
+
+    font-weight: semi-bold;
+    font-size: 300px;
+    text-transform: uppercase;
+    //text-shadow: 0px 0px 8px 1.0 #ffffc777;
+    text-shadow: 0px 0px 6px 0.1 #87f9fd99;
+    //letter-spacing: 4px;
+}
+
+.InMenuState .MediaMatchButton
+{
+    opacity: 1;
+}
+
+.MediaMatchButton
+{
+    width: 700px;
+    height: 100%;
+    margin-top: -14px;
+    opacity: 0;
+
+    flow-children: down;
+
+    horizontal-align: center;
+
+    transform: scaleX(0.9) scaleY(0.9);
+    
+    transition-property: transform, text-shadow;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in;
+}
+
+.MediaMatchText
+{
+    horizontal-align: center;
+    vertical-align: center;
+    font-weight: semi-bold;
+    padding: 10px;
+    font-size: 46px;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 6px 1.0 #87f9fd99;
+    
+    letter-spacing: 4px;
+    transform: scaleX(0.92) scaleY(0.92);
+}
+
+
+.MediaMatchButton:hover .MediaMatchText
+{
+    transform: scaleX(0.92) scaleY(0.92);
+    animation-name: MediaGlowPulse;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.MediaMatchButton:hover Label
+{
+    text-shadow: 0px 0px 6px 2.0 #87f9fd99;
+}
+
+.InMenuState .MediaColorButton
+{
+    opacity: 1;
+}
+
+.MediaColorButton
+{
+    width: 200px;
+    height: 400px;
+    margin-top: 0px;
+    opacity: 0;
+
+    background-size: 100% 100%;
+
+    //saturation: 0.5;
+    wash-color: #888888;
+
+    transform: scaleX(0.7) scaleY(0.7);
+    
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in;
+}
+
+.MediaColorButton:hover 
+{
+    transform: scaleX(0.8) scaleY(0.8);
+}
+
+.MediaRedEnabled #MediaColorRed,
+.MediaGreenEnabled #MediaColorGreen,
+.MediaBlueEnabled #MediaColorBlue,
+.MediaBlackEnabled #MediaColorBlack
+{
+    //saturation: 1.0;
+    wash-color: #ffffff;
+    transform: scaleX(1.0) scaleY(1.0);
+}
+
+.MediaRedEnabled #MediaColorRed:hover,
+.MediaGreenEnabled #MediaColorGreen:hover,
+.MediaBlueEnabled #MediaColorBlue:hover,
+.MediaBlackEnabled #MediaColorBlack:hover
+{
+    //saturation: 1.0;
+    wash-color: #ffffff;
+    transform: scaleX(0.9) scaleY(0.9);
+}
+
+.InMenuState .MediaLanguageButton
+{
+    opacity: 1;
+}
+
+.MediaLanguageButton
+{
+    width: 150px;
+    height: 100px;
+    margin-top: 0px;
+    opacity: 0;
+
+    background-size: 100% 100%;
+
+    transform: scaleX(0.7) scaleY(0.7);
+    
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in;
+}
+
+.MediaLanguageButton:hover 
+{
+    transform: scaleX(0.8) scaleY(0.8);
+}
+
+#MediaLanguageSpanish,
+#MediaLanguageJapanese
+{
+    visibility: collapse;
+}
+
+.DefaultLanguage #MediaLanguageEnglish,
+.english #MediaLanguageEnglish,
+.russian #MediaLanguageRussian,
+.schinese #MediaLanguageSChinese,
+.tchinese #MediaLanguageTChinese,
+.spanish #MediaLanguageSpanish,
+.japanese #MediaLanguageJapanese
+{
+    animation-name: MediaGlowPulse;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes 'MediaGlowPulse'
+{
+    0%
+    {
+        transform: scaleX(0.92) scaleY(0.92);
+    }
+
+    50%
+    {
+        transform: scaleX(1.0) scaleY(1.0);
+    }
+
+    100%
+    {
+        transform: scaleX(0.92) scaleY(0.92);
+    }
+}
+
+.TournamentCanRegisterDeck #RegisterTournamentRoot,
+.TournamentNeedRegisterDeck #RegisterTournamentRoot,
+.TournamentMatchAvailable #TournamentMatchRoot,
+.TournamentAvailable #TournamentBracketRoot, 
+.HasLobby #AbandonMatchRoot,
+.HasLobby #ReconnectMatchRoot
+{
+    visibility: visible;
+}
+
+.HasLobby .HideInLobby,
+.HasPrivateLobby .HideInPrivateLobby
+{
+    visibility: collapse;
+}
+
+@keyframes 'MainMenuRootGlow'
+{
+    0%
+    {
+        text-shadow: 0px 0px 0px 1.0 #000000;
+    }
+    50%
+    {
+        text-shadow: 0px 0px 4px 4.0 #d4bc93;
+    }
+    100%
+    {
+        text-shadow: 0px 0px 0px 1.0 #000000;
+    }
+}
+
+
+.TournamentNeedRegisterDeck #RegisterTournamentRoot .MainMenuLabel,
+.TournamentMatchAvailable #TournamentMatchRoot .MainMenuLabel,
+.OpponentInUnranked #SparringMatchRoot .MainMenuLabel,
+.OpponentInRanked #GauntletRoot .MainMenuLabel,
+.HasLobby #ReconnectMatchRoot
+{
+    animation-name: MainMenuRootGlow;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+#InitialDisplayPanelLogo {
+    horizontal-align: center;
+    vertical-align: middle;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url("s2r://panorama/images/loadingscreens/loading_background_tga.vtex");
+    background-size: 100% 100%;
+
+    z-index: 5000;
+}
+
+.LoadCompleted #InitialDisplayPanelLogo
+{
+    opacity: 0;
+    animation-name: LogoFadeOut;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+
+.DefaultHidden
+{
+    visibility: collapse;
+}
+
+@keyframes 'LogoFadeOut'
+{
+    0%
+    {
+        opacity: 1;
+    }
+
+    100%
+    {
+        opacity: 0;
+    }
+}
+
+//PAX STUFF
+.AIMode .AIMatch
+{
+    visibility:visible;
+}
+.AIMatch
+{
+    visibility:collapse;
+}
+
+.AIMode .HumanMatch
+{
+    visibility:collapse;
+}

@@ -1,0 +1,428 @@
+////////////////////////
+//**DROW RANGER - HERO//
+////////////////////////
+
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response drow_ranger_equip_weapon
+{
+	speak "drow_ranger_equip_generic_weapon_01" noscene 
+	speak "drow_ranger_equip_generic_weapon_02" noscene 
+	speak "drow_ranger_equip_generic_weapon_03" noscene 
+	speak "drow_ranger_equip_generic_weapon_04" noscene 
+	speak "drow_ranger_equip_generic_weapon_05" noscene 
+}
+
+Rule drow_ranger_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceWeapon
+	response drow_ranger_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response drow_ranger_equip_armor
+{
+	speak "drow_ranger_equip_generic_armor_01" noscene 
+	speak "drow_ranger_equip_generic_armor_02" noscene 
+	speak "drow_ranger_equip_generic_armor_03" noscene 
+	speak "drow_ranger_equip_generic_armor_04" noscene 
+	speak "drow_ranger_equip_generic_armor_05" noscene 
+}
+
+Rule drow_ranger_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceArmor
+	response drow_ranger_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response drow_ranger_equip_accessory
+{
+	speak "drow_ranger_equip_generic_accessory_01" noscene 
+	speak "drow_ranger_equip_generic_accessory_02" noscene 
+	speak "drow_ranger_equip_generic_accessory_03" noscene 
+	speak "drow_ranger_equip_generic_accessory_04" noscene 
+	speak "drow_ranger_equip_generic_accessory_05" noscene 
+}
+
+Rule drow_ranger_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceAccessory
+	response drow_ranger_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response drow_ranger_gain_attack
+{
+	speak "drow_ranger_permanent_attack_01" noscene 
+	speak "drow_ranger_permanent_attack_02" noscene 
+	speak "drow_ranger_permanent_attack_03" noscene 
+	speak "drow_ranger_permanent_attack_04" noscene 
+	speak "drow_ranger_permanent_attack_05" noscene 
+}
+
+Rule drow_ranger_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceSpell BuffsAttack
+	response drow_ranger_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response drow_ranger_gain_armor
+{
+	speak "drow_ranger_permanent_armor_01" noscene 
+	speak "drow_ranger_permanent_armor_02" noscene 
+	speak "drow_ranger_permanent_armor_03" noscene 
+	speak "drow_ranger_permanent_armor_04" noscene 
+	speak "drow_ranger_permanent_armor_05" noscene 
+}
+
+Rule drow_ranger_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceSpell BuffsArmor
+	response drow_ranger_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response drow_ranger_gain_health
+{
+	speak "drow_ranger_permanent_health_01" noscene 
+	speak "drow_ranger_permanent_health_02" noscene 
+	speak "drow_ranger_permanent_health_03" noscene 
+	speak "drow_ranger_permanent_health_04" noscene 
+	speak "drow_ranger_permanent_health_05" noscene 
+}
+
+Rule drow_ranger_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetDrowRanger IsSourceSpell BuffsHealth
+	response drow_ranger_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response drow_ranger_use_include
+{
+	speak "drow_ranger_use_include_01" noscene 
+	speak "drow_ranger_use_include_02" noscene 
+	speak "drow_ranger_use_include_03" noscene 
+}
+
+Rule drow_ranger_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceGust ThisIsImportant
+	response drow_ranger_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response drow_ranger_gain_momentum_murder
+{ 
+	speak "drow_ranger_kill_rival_01" noscene 	
+	speak "drow_ranger_kill_rival_02" noscene 
+	speak "drow_ranger_kill_rival_03" noscene 
+	speak "drow_ranger_kill_rival_04" noscene 
+	speak "drow_ranger_kill_rival_05" noscene 
+	speak "drow_ranger_kill_rival_06" noscene 
+	speak "drow_ranger_kill_rival_07" noscene 
+	speak "drow_ranger_kill_rival_08" noscene
+	speak "drow_ranger_kill_rival_09" noscene 	
+	speak "drow_ranger_kill_rival_10" noscene 
+}
+
+Rule drow_ranger_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasDrowRanger LocalChangeMomentum_Pos IsNotCombat
+	response drow_ranger_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response drow_ranger_lane_taunt_generic
+{
+	speak "drow_ranger_taunt_generic_01" noscene 
+	speak "drow_ranger_taunt_generic_02" noscene 
+	speak "drow_ranger_taunt_generic_03" noscene 
+	speak "drow_ranger_taunt_generic_04" noscene 
+	speak "drow_ranger_taunt_generic_05" noscene 
+	speak "drow_ranger_taunt_generic_06" noscene 
+	speak "drow_ranger_taunt_generic_07" noscene 
+	speak "drow_ranger_taunt_generic_08" noscene 
+	speak "drow_ranger_taunt_generic_09" noscene 
+}
+
+Rule drow_ranger_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasDrowRanger IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response drow_ranger_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response drow_ranger_lane_buff_give_death_skull
+{
+	speak "drow_ranger_potential_kill_01"  noscene 
+	speak "drow_ranger_potential_kill_02"  noscene
+	speak "drow_ranger_potential_kill_03"  noscene 
+	speak "drow_ranger_potential_kill_04"  noscene 
+	speak "drow_ranger_potential_kill_05"  noscene
+}
+
+Rule drow_ranger_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasDrowRanger EnemyGainedDeathSkull IsTargetDrowRanger
+	response drow_ranger_lane_buff_give_death_skull
+}
+
+Response drow_ranger_lane_debuff_give_death_skull
+{
+	speak "drow_ranger_potential_kill_01"  noscene 
+	speak "drow_ranger_potential_kill_02"  noscene
+	speak "drow_ranger_potential_kill_03"  noscene 
+	speak "drow_ranger_potential_kill_04"  noscene 
+	speak "drow_ranger_potential_kill_05"  noscene
+}
+
+Rule drow_ranger_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasDrowRanger TargetHasDeathSkull IsBlockingDrowRanger
+	response drow_ranger_lane_debuff_give_death_skull
+}
+
+Response drow_ranger_lane_damage_give_death_skull
+{
+	speak "drow_ranger_potential_kill_01"  noscene 
+	speak "drow_ranger_potential_kill_02"  noscene
+	speak "drow_ranger_potential_kill_03"  noscene 
+	speak "drow_ranger_potential_kill_04"  noscene 
+	speak "drow_ranger_potential_kill_05"  noscene
+}
+
+Rule drow_ranger_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasDrowRanger TargetHasDeathSkull IsBlockingDrowRanger
+	response drow_ranger_lane_damage_give_death_skull
+}
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response drow_ranger_debuff_blocker
+{
+	speak "drow_ranger_debuff_enemy_01" noscene 
+	speak "drow_ranger_debuff_enemy_02" noscene 
+	speak "drow_ranger_debuff_enemy_03" noscene 
+	speak "drow_ranger_debuff_enemy_04" noscene 
+	speak "drow_ranger_debuff_enemy_05" noscene 
+	speak "drow_ranger_debuff_enemy_06" noscene 
+	speak "drow_ranger_debuff_enemy_07" noscene 
+	speak "drow_ranger_debuff_enemy_08" noscene 
+	speak "drow_ranger_debuff_enemy_09" noscene 
+	speak "drow_ranger_debuff_enemy_10" noscene 
+}
+
+Rule drow_ranger_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasDrowRanger IsBlockingDrowRanger
+	response drow_ranger_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response drow_ranger_buff_friend
+{
+	speak "drow_ranger_buff_ally_01" noscene 
+	speak "drow_ranger_buff_ally_02" noscene 
+	speak "drow_ranger_buff_ally_03" noscene 
+	speak "drow_ranger_buff_ally_04" noscene 
+	speak "drow_ranger_buff_ally_05" noscene 
+	speak "drow_ranger_buff_ally_06" noscene 
+	speak "drow_ranger_buff_ally_07" noscene 
+	speak "drow_ranger_buff_ally_08" noscene 
+	speak "drow_ranger_buff_ally_09" noscene 
+	speak "drow_ranger_buff_ally_10" noscene 
+ 
+}
+
+Rule drow_ranger_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasDrowRanger IsSourceGreen IsTargetNotDrowRanger
+	response drow_ranger_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_drow_ranger
+{
+	speak "drow_ranger_healed_01" noscene 
+	speak "drow_ranger_healed_02" noscene 
+	speak "drow_ranger_healed_03" noscene 
+	speak "drow_ranger_healed_04" noscene 
+	speak "drow_ranger_healed_05" noscene 
+}
+Rule heal_drow_ranger_rule
+{
+	criteria IsNotImp Heal IsTargetDrowRanger
+	response heal_drow_ranger
+}
+
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE GREEN CARDS///
+/////////////////////////////
+
+Response drow_ranger_play_unearthed_secrets
+{
+	speak "drow_ranger_cast_spell_01" noscene 	
+	
+}
+
+Rule drow_ranger_play_unearthed_secrets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceUnearthedSecrets ThisIsImportant
+	response drow_ranger_play_unearthed_secrets
+}
+
+Response drow_ranger_play_path_of_the_dreamer
+{
+	speak "drow_ranger_cast_spell_02" noscene 	
+	
+}
+
+Rule drow_ranger_play_path_of_the_dreamer_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourcePathOfTheDreamer ThisIsImportant
+	response drow_ranger_play_path_of_the_dreamer
+}
+
+Response drow_ranger_play_homefield_advantage
+{
+	speak "drow_ranger_cast_spell_05" noscene 	
+	
+}
+
+Rule drow_ranger_play_homefield_advantage_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceHomefieldAdvantage ThisIsImportant
+	response drow_ranger_play_homefield_advantage
+}
+
+Response drow_ranger_play_selemenes_favor
+{
+	speak "drow_ranger_cast_spell_08" noscene 	
+	
+}
+
+Rule drow_ranger_play_selemenes_favor_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceSelemenesFavor ThisIsImportant
+	response drow_ranger_play_selemenes_favor
+}
+
+Response drow_ranger_play_mist_of_avernus
+{
+	speak "drow_ranger_cast_spell_07" noscene 	
+	speak "drow_ranger_cast_spell_06" noscene 	
+	
+}
+
+Rule drow_ranger_play_mist_of_avernus_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceMistOfAvernus ThisIsImportant
+	response drow_ranger_play_mist_of_avernus
+}
+
+Response drow_ranger_play_altar_of_the_mad_moon
+{
+	speak "drow_ranger_cast_spell_05" noscene 	
+	
+}
+
+Rule drow_ranger_play_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceAltarOfTheMadMoon ThisIsImportant
+	response drow_ranger_play_altar_of_the_mad_moon
+}
+
+Response drow_ranger_play_cheating_death
+{
+	speak "drow_ranger_cast_spell_03" noscene 	
+	
+}
+
+Rule drow_ranger_play_cheating_death_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceCheatingDeath ThisIsImportant
+	response drow_ranger_play_cheating_death
+}
+
+Response drow_ranger_play_verdant_refuge
+{
+	speak "drow_ranger_cast_spell_04" noscene 	
+	
+}
+
+Rule drow_ranger_play_verdant_refuge_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceVerdantRefuge ThisIsImportant
+	response drow_ranger_play_verdant_refuge
+}
+
+Response drow_ranger_play_stars_align
+{
+	speak "drow_ranger_cast_spell_06" noscene 	
+	
+}
+
+Rule drow_ranger_play_stars_align_rule
+{
+	criteria IsNotImp  PlayCard AllyHasDrowRanger IsSourceStarsAlign ThisIsImportant
+	response drow_ranger_play_stars_align
+}

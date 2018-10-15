@@ -1,0 +1,227 @@
+/////////////////////////////////
+//**SAYTR MAGICIAN - CREEP///////
+/////////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_satyr_magician_normal
+{
+	speak "satyr_magician_summon_01" noscene 
+	speak "satyr_magician_summon_02" noscene
+	speak "satyr_magician_summon_03" noscene 
+}
+Rule summon_satyr_magician_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician
+	response summon_satyr_magician_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_satyr_magician_enemy_ancient_exposed
+{
+	speak "satyr_magician_ancient_attack_01" noscene
+	speak "satyr_magician_ancient_attack_02" noscene
+}	
+Rule summon_satyr_magician_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician IsEnemyAncientExposed
+	response summon_satyr_magician_enemy_ancient_exposed
+}
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_satyr_magician_your_ancient_exposed
+{
+	speak "satyr_magician_ancient_protect_01" noscene
+	speak "satyr_magician_ancient_protect_02" noscene
+}	
+Rule summon_satyr_magician_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician IsAllyAncientExposed
+	response summon_satyr_magician_your_ancient_exposed
+}
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_satyr_magician_both_ancients_exposed
+{
+	speak "satyr_magician_ancient_both_02" noscene
+}	
+Rule summon_satyr_magician_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_satyr_magician_both_ancients_exposed
+}
+
+
+///////////////
+//use ability//
+///////////////
+
+Response satyr_magician_use_ability
+{
+	speak "satyr_magician_use_ability_01" noscene 
+	speak "satyr_magician_use_ability_02" noscene 
+	speak "satyr_magician_use_ability_03" noscene 
+}
+Rule satyr_magician_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasSatyrMagician IsSourceSatyrMagicianAbility
+	response satyr_magician_use_ability
+}
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_satyr_magician_ally_rubick
+{
+	speak "satyr_magician_hero_friend_01" noscene 
+}
+Rule summon_satyr_magician_ally_rubick_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician AllyHasRubick
+	response summon_satyr_magician_ally_rubick
+}	
+
+Response summon_satyr_magician_ally_vanessa
+{
+	speak "satyr_magician_hero_friend_02" noscene 
+	speak "satyr_magician_hero_friend_03" noscene 
+}
+Rule summon_satyr_magician_ally_vanessa_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician AllyHasVanessa
+	response summon_satyr_magician_ally_vanessa	
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+
+Response summon_satyr_magician_shadow_fiend
+{
+	speak "satyr_magician_hero_rival_01" noscene 
+	speak "satyr_magician_hero_rival_02" noscene 
+}
+Rule summon_satyr_magician_shadow_fiend_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician EnemyHasShadowFiend
+	response summon_satyr_magician_shadow_fiend
+}
+
+Response summon_satyr_magician_anti_mage
+{
+	speak "satyr_magician_hero_rival_03" noscene 
+}
+Rule summon_satyr_magician_anti_mage_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician EnemyHasAntiMage
+	response summon_satyr_magician_anti_mage
+}
+
+Response summon_satyr_magician_rival_tyler_estate_censor
+{
+	speak "satyr_magician_unique_02" noscene 
+}
+Rule summon_satyr_magician_rival_tyler_estate_censor_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician EnemyHasTylerEstateCensor
+	response summon_satyr_magician_rival_tyler_estate_censor
+}
+
+////////////////
+//unique lines//
+////////////////
+
+Response summon_satyr_magician_play_aghanims_sanctum
+{
+	speak "satyr_magician_unique_01" noscene 
+}
+Rule summon_satyr_magician_play_aghanims_sanctum_rule
+{
+	criteria IsNotImp PlayCard AllyHasSatyrMagician IsSourceAghanimsSanctum
+	response summon_satyr_magician_play_aghanims_sanctum
+}
+
+
+Response summon_satyr_magician_ally_inc_of_selemene
+{
+	speak "satyr_magician_unique_08" noscene 
+}
+Rule summon_satyr_magician_ally_inc_of_selemene_rule
+{
+	criteria IsNotImp Summon IsTargetSatyrMagician AllyHasIncarnationOfSelemene
+	response summon_satyr_magician_ally_inc_of_selemene
+}	
+
+Response satyr_magician_play_bolt_of_damocles
+{
+	speak "satyr_magician_unique_03" noscene 
+}
+Rule satyr_magician_play_bolt_of_damocles_rule
+{
+	criteria IsNotImp PlayCard AllyHasSatyrMagician IsSourceBoltOfDamocles
+	response satyr_magician_play_bolt_of_damocles
+}
+
+//Response summon_satyr_magician_ally_satyr_magician
+//{
+//	speak "satyr_magician_unique_04" noscene
+//	speak "satyr_magician_unique_05" noscene 
+//}
+//Rule summon_satyr_magician_ally_satyr_magician_rule
+//{
+//	criteria IsNotImp Summon IsTargetSatyrMagician AllyHasSatyrMagician
+//	response summon_satyr_magician_ally_satyr_magician
+//}	
+
+Response summon_satyr_magician_use_aghanims_sanctum
+{
+	speak "satyr_magician_unique_06" noscene 
+}
+Rule summon_satyr_magician_use_aghanims_sanctum_rule
+{
+	criteria IsNotImp UseAbility AllyHasSatyrMagician AllyHasAghanimsSanctum IsSourceArcaneResearch
+	response summon_satyr_magician_use_aghanims_sanctum
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_satyr_magician
+
+{
+	speak "satyr_magician_healed_01" noscene 
+	speak "satyr_magician_healed_02" noscene 
+	speak "satyr_magician_healed_03" noscene 
+}
+Rule heal_satyr_magician_rule
+{
+	criteria IsNotImp Heal IsTargetSatyrMagician
+	response heal_satyr_magician
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

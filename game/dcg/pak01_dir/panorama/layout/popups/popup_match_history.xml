@@ -1,0 +1,82 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_match_history.vcss_c" />
+	</styles>
+  <snippets>
+    <snippet name="MatchHistoryRow">
+      <Panel class="BodyRow">
+        <Label class="BodyLabel" html ="true" text="{t:s:date}"/>
+        <Panel class="Player1">
+          <Label class="BodyLabel" html ="true" text="{g:dcg_persona_or_bot:player_1}"/>
+          <Panel class="DeckColors">
+            <Panel class="RedColor"/>
+            <Panel class="BlueColor"/>
+            <Panel class="GreenColor"/>
+            <Panel class="BlackColor"/>
+          </Panel>
+        </Panel>
+        <Panel class="Player2">
+          <Label class="BodyLabel" html ="true" text="{g:dcg_persona_or_bot:player_2}"/>
+          <Panel class="DeckColors">
+            <Panel class="RedColor"/>
+            <Panel class="BlueColor"/>
+            <Panel class="GreenColor"/>
+            <Panel class="BlackColor"/>
+          </Panel>
+        </Panel>
+        <Label class="BodyLabel" html ="true" text="{s:match_type}"/>
+        <Label class="BodyLabel" html ="true" text="{s:duration}"/>
+        <Label class="BodyLabel" html ="true" text="{d:turns}"/>
+        <Button id="BodyButton" class="BodyButton ReplayButton">
+          <Label class="ButtonLabel" text="#DCG_MatchHistory_WatchReplay"/>
+        </Button>
+        <Button id="Details" class="BodyButton">
+          <Label class="ButtonLabel" text="#DCG_MatchHistory_MatchDetails"/>
+        </Button>
+      </Panel>
+    </snippet>
+  </snippets>
+  <PopupMatchHistory class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked()">
+
+    <Panel class="MainPanel">
+
+      <Panel class="TitleBar">
+        <Label html="true" text="#DCG_MatchHistory_HistoryFor"/>
+      </Panel>
+      <Panel class="HorizontalBar"/>
+
+      <Panel id="BodyPanel" class="BodyPanel">
+        <Panel class="HeaderRow">
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_Date"/>
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_Player1"/>
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_Player2"/>
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_MatchType"/>
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_Duration"/>
+          <Label class="HeaderLabel" text="#DCG_MatchHistory_Turns"/>
+          <Label class="HeaderLabel ReplayLabel" text="#DCG_MatchHistory_Replay"/>          
+        </Panel>
+        <Panel id ="BodyRows">
+          
+        </Panel>
+
+
+        <Panel class="PopupButtonRow">
+          <Button class="PopupButton" onactivate="UIPopupButtonClicked()">
+            <Label text="#DCG_DeckSampleHand_Close" />
+          </Button>
+          <Label text="#DCG_MatchHistory_HideBotMatches" />
+          <ToggleButton  onactivate="$( '#BodyPanel' ).ToggleClass( 'NoBotMatch' );">
+            
+          </ToggleButton>
+           <Label text="#DCG_MatchHistory_HideShortMatches" />
+          <ToggleButton  onactivate="$( '#BodyPanel' ).ToggleClass( 'NoShortMatch' );">
+            
+          </ToggleButton>
+        </Panel>
+
+      </Panel>
+    </Panel>
+	</PopupMatchHistory>
+</root>

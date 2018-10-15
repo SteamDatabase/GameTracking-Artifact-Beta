@@ -1,0 +1,77 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_tournament_bracket.vcss_c" />
+	</styles>
+  
+  
+  <snippets>
+    <snippet name="SeriesPanel">
+      <Panel class="MatchPanel">
+        <Panel class="MatchColumns">
+          <Panel class="IntroColumn"/>
+          <Panel class="PlayerColumn">
+            <Panel class="PlayersMatchPanel">
+              <Panel class="Player Player1">
+                <Panel class="PlayerName">
+                  <DCGAvatarImage id="Player1Image"/>
+                  <Label id="Player1Name" html="true" text="{g:dcg_persona:b:player1}"/>
+                  <Label id="Player1Record" text="({d:wins1} - {d:losses1})"/>
+                  <Label id="Player1Bye" class="PlayerBye" text="#DCG_Tournament_Bye"/>
+                </Panel>
+                <Panel class="PlayerScore">
+                  <Label text="{d:player1wins}"/>
+                </Panel>
+              </Panel>
+              <Panel class="PlayerSwissScores">
+                <Label text="{d:player1wins} - {d:player2wins}"/>
+              </Panel>
+              <Panel class="Player Player2">
+                <Panel class="PlayerName">
+                  <DCGAvatarImage id="Player2Image"/>
+                  <Label id="Player2Record" text="({d:wins2} - {d:losses2})"/>
+                  <Label id="Player2Name" html="true" text="{g:dcg_persona:b:player2}"/>
+                  <Label id="Player2Bye" class="PlayerBye" text="#DCG_Tournament_Bye"/>
+                </Panel>
+                <Panel class="PlayerScore">
+                  <Label text="{d:player2wins}"/>
+                </Panel>
+              </Panel>
+            </Panel>
+            <Panel id="MatchList">
+              <!-- Dynamic Content -->
+            </Panel>
+          </Panel>
+          <Panel class="OutroColumn"/>
+        </Panel>
+      </Panel>
+    </snippet>
+  </snippets>
+
+
+  <PopupTournamentBracket class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked()">
+
+    <Panel class="MainPanel">
+
+      <Panel id="NoTournament">
+        <Label text="#DCG_DBTournament_NoTournament"/>
+      </Panel>
+      <Panel id="TournamentParent">
+        <Panel id="TournamentBackground" />
+        <Panel id="Tournament">
+          <Panel id="Tabs">
+          </Panel>
+          <Panel id="Brackets">
+          </Panel>
+        </Panel>
+      </Panel>
+            
+    </Panel>
+
+    <Button id="CloseButton" class="ButtonDark" onactivate="UIPopupButtonClicked()">
+      <Label text="#DCG_MatchDetails_Close" />
+    </Button>
+    
+	</PopupTournamentBracket>
+</root>

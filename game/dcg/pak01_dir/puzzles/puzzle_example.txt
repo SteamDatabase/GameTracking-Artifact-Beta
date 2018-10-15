@@ -1,0 +1,190 @@
+"puzzle_example"
+{
+	"name"		"See puzzles/puzzle_example.txt for WIP documentation!"
+	"description"	"#Localize_These_Please"
+	"sections"
+	{
+		"part1"
+		{
+			"rules"
+			{
+				// All rules and their default values
+				"deck_player"
+				{
+					"use_deck"					""		// Optional deck code that if specified will cause the player to play this deck. If specified, no prompt to select a deck will be presented
+					"allow_user_decks"			"1"		// Specify whether or not the user can submit custom built decks. If zero, they cannot and must use the additional decks listed below
+					"additional_decks"					// A list of additional decks to add to the deck selector that they can select
+					{
+						"sample_deck_1"
+						{
+							"name"				"A"		// The name to present for this deck in the selector
+							"description"		""		// Optional description for this deck
+							"tags"				""		// Optional tags for this deck
+							"code"				""		// The deck code for this deck
+						}
+					}
+
+					"validator"							// If you allow users to play custom decks, this can be specified to provide a custom deck validator to enforce the user selection of decks
+					{									
+					}
+				}
+				"deck_ai"
+				{
+					"use_deck"					""		// Optional deck code that if specified will cause the player to play this deck. If specified, no prompt to select a deck will be presented
+					"allow_user_decks"			"1"		// Specify whether or not the user can submit custom built decks. If zero, they cannot and must use the additional decks listed below
+					"additional_decks"					// A list of additional decks to add to the deck selector that they can select
+					{
+						"sample_deck_1"
+						{
+							"name"				"A"		// The name to present for this deck in the selector
+							"description"		""		// Optional description for this deck
+							"tags"				""		// Optional tags for this deck
+							"code"				""		// The deck code for this deck
+						}
+					}
+
+					"validator"							// If you allow users to play custom decks, this can be specified to provide a custom deck validator to enforce the user selection of decks
+					{									
+					}
+				}
+
+				"set1"							"1" // needed for the shop to work properly
+
+				"num_lanes"						"3"
+				"initial_heroes"				"3"
+				"initial_heroes_ai"				"3"
+				
+				"tower_health"					"40" // for all towers
+				"ancient_health"				"80" // for all ancients
+
+				"tower1_health"					"40" // override health for a specific tower
+				"tower2_health"					"40"
+				"tower3_health"					"40"
+				"tower1_health_ai"				"40"
+				"tower2_health_ai"				"40"
+				"tower3_health_ai"				"40"
+				"ancient1_health"				"40" // override health for a specific ancient
+				"ancient2_health"				"40"
+				"ancient3_health"				"40"
+				"ancient1_health_ai"			"40"
+				"ancient2_health_ai"			"40"
+				"ancient3_health_ai"			"40"
+
+				"store_enabled"					"1" // set to 0 to disable shopping
+				"initial_mana"					"3"
+				"initial_mana_ai"				"3"
+				"creeps_first_turn"				"1"
+				"creeps_first_turn_ai"			"1"
+				"creeps_per_turn"				"3"
+				"creeps_per_turn_ai"			"3"
+				"cards_first_turn"				"5"
+				"cards_first_turn_ai"			"5"
+				"cards_per_turn"				"2"
+				"cards_per_turn_ai"				"2"
+				"gold_per_turn_ai"				"0"
+				"mana_boost_per_turn_ai"		"0"
+
+				"creep_list"					"Melee Creep" // Comma separated list of possible automatic creeps at deployment, EX: "Centaur Raiding Party,Plague Ward"
+				"creep_list_ai"					"Melee Creep" // Comma separated list of possible automatic creeps at deployment, EX: "Centaur Raiding Party,Plague Ward"
+				"free_cards_per_turn"			"" // Comma separated list of cards to draw each turn EX: "Tower Archer,Tower Archer"
+				"free_cards_per_turn_ai"		""
+				"deploy_heroes_enabled"			"1" // set to 0 to never deploy more heroes
+
+				"gold_victory"					"0" // you can win by having this much gold in the bank
+				"units_victory"					"0"	// you can win by having this many units in all lanes
+				"kills_victory"					"0"	// you can win by killing this many units
+				"ai_pass_chance_multiplier"		"100" // multiplier on how likely the AI is to pass, set to 0 so they never pass
+				"creeps_lanes_player_1each"		"0" // automatically deployed creeps only do 1 per lane rather than doubling up
+				"creeps_lanes_random"			"1" // set to 0 and all the automatic creeps will bunch toward the left most lane
+				"heroes_initial_lane_random"	"1" // set to 0 and hero lane order will be 1,2,3 from deck instead of random
+				"hero1_player"					"0" // set to the cardID of a hero to cause that hero to start in lane 1
+				"hero2_player"					"0" // set to the cardID of a hero to cause that hero to start in lane 2
+				"hero3_player"					"0" // set to the cardID of a hero to cause that hero to start in lane 3
+				"hero1_ai"						"0" // set to the cardID of a hero to cause that hero to start in lane 1
+				"hero2_ai"						"0" // set to the cardID of a hero to cause that hero to start in lane 2
+				"hero3_ai"						"0" // set to the cardID of a hero to cause that hero to start in lane 3
+				"only_flop_across_from_heroes"	"0" // randomly deployed units will always land across from heroes
+				"no_shotclock"					"0" // hides the timer around the coin... probably will default this off for AI games, so don't worry about it
+				"shotclock_base_time"			"45" // time limit for each turn
+				"force_combat_manager_rand_to_zero" "0" // used in tutorial to force the order that cards flop
+				"ai_action_choice_non_random"	"0" // used in tutorial, ai plays their actions in hand order instead of random order
+				"defense_shield_force"			"" // used in tutorial to force defense shields... dangerous, don't use!
+			}
+			"sequences"
+			{
+				// Syntax
+				//"<event> <delay>"	"<action> <params>"
+
+				// You can change a rule mid game in a sequence like so:
+				"auto"							"rule creeps_per_turn_ai 2"
+
+				// Also activates when the event above activates
+				">"								"<action>"
+
+				// When they click ok on a popup (having this in a sqeuence causes the popup to have an ok button)
+				"on_message_dismissed"			"<action>"
+
+				// When they click ok on a popup (has an ok button that is disabled until prompt_unstall action is used)
+				"on_stalled_message_dismissed"	"<action>"
+
+				// When the coin is on your side
+				"on_prompt"						"<action>"
+
+				// Some more useful ones
+				"on_card_played"				"<action>"
+				"on_card_drawn"					"<action>"
+				"on_deploy_start"				"<action>"
+				"on_next_lane"					"<action>"
+				"on_store_openned"				"<action>"
+				"on_tower_destroyed"			"<action>"
+				"on_victory"					"<action>"
+				"on_failure"					"<action>"
+
+				// Less useful
+				"on_zoom_out"					"<action>"
+				"on_zoom_in"					"<action>"
+				"on_camera_scroll"				"<action>"
+				"on_camera_lane1"				"<action>"
+				"on_camera_lane2"				"<action>"
+				"on_camera_lane3"				"<action>"
+				"on_viewed_card_history"		"<action>"
+				"on_viewed_combat_preview"		"<action>"
+				"on_movie_start"				"<action>"
+				"on_movie_end"					"<action>"
+				"on_card_flopped"				"<action>"
+
+				// Here's some actions
+				">"	"<action>"
+
+				">"	"load_puzzle <name>"
+				">"	"load_section <name>"
+				">"	"quit"
+
+				">"	"rule <rulename> <value>"
+				">"	"convar <convarname> <value>"
+				">"	"concommand <concommand> <param1> <2> ..."
+				">"	"creat_carde <name>"
+
+				">"	"checklist_headder <text>" // sets the top title of the checklist
+				">"	"checklist_add <text> <count>" // adds a checklist section with option subsection count
+				">"	"checklist_set <text>" // sets this as the current section
+				">"	"checklist_hide" // hides the checklist ui element
+
+				">"	"popup <text> <time_till_button_enabled>"
+				">"	"popup_unstall"
+				">"	"soundevent <name>"
+				">"	"particleevent <name> <matchname1> <matchparam1> <2> <2>..."
+
+				// Tutorial stuff, not really useful
+				">"	"hudevent 0 <param> <param>"
+				">"	"showchild <matchname1> <matchparam1> <2> <2>..."
+				">"	"hidechild <matchname1> <matchparam1> <2> <2>..."
+				">"	"lock <matchname1> <matchparam1> <2> <2>..."
+				">"	"unlock <matchname1> <matchparam1> <2> <2>..."
+				">"	"lock_camera"
+				">"	"unlock_camera"
+				">"	"reset_accumulated_show_time"
+			}
+		}
+	}
+}

@@ -1,0 +1,78 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/settings.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_trophy.vcss_c" />
+	</styles>
+  <scripts>
+    <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
+  </scripts>
+  <script>
+    /* Called from C++ to start the progress animation */
+    function StartProgressAnimation( data )
+    {
+    $.Msg("Starting Progress ANimation!")
+    var seq = new RunSequentialActions();
+    var popup = $.GetContextPanel();
+    var progressbar = $('#TrophyProgress');
+    seq.actions.push( new AddClassAction( popup, 'ShowCongratulations' ));
+    seq.actions.push( new WaitAction( 0.5 ) );
+    seq.actions.push( new AddClassAction( popup, 'ShowTrophy' ));
+    seq.actions.push( new WaitAction( 0.5 ) );
+    seq.actions.push( new AddClassAction( popup, 'ShowLevel' ));
+    seq.actions.push( new WaitAction( 0.5 ) );
+    //If the interval of trophies at which we level up is higher than 1, then we need to show a progress bar.
+    if ( data.progress_interval > 1)
+    {
+    var iterations = parseInt(data.new_value / data.progress_interval ) - parseInt( data.old_value / data.progress_interval ) + 1;
+    $.Msg("Iterations " + iterations);
+    for (var i = 0; i < iterations; i++)
+      {
+        var remaining = data.progress_interval - (data.old_value % data.progress_interval);
+        $.Msg("Remaining " + remaining);
+        $.Msg("Diff " + data.new_value - data.old_value );
+      //It means that we will hit the end of this progress bar, so increase our level by one and max out our progress bar.
+        if ( data.new_value - data.old_value >= remaining)
+        {
+          var old_value = data.old_value;
+          var par = new RunParallelActions();
+	        par.actions.push( new AnimateDialogVariableIntAction( popup, 'local_progress', old_value % data.progress_interval, data.progress_interval, remaining * 0.1 ) );
+      	  par.actions.push( new AnimateProgressBarAction( progressbar, old_value % data.progress_interval, data.progress_interval, remaining * 0.1 ) );
+          par.actions.push( new AnimateDialogVariableIntAction( popup, 'trophy_level', old_value / data.progress_interval, old_value / data.progress_interval + 1, remaining * 0.1) );
+          seq.actions.push( par );
+          data.old_value = data.old_value + remaining;
+        }
+        //It means that we won't level up, in which case we only move the progress bar forward as much as we have to.
+        else
+        {
+          var par = new RunParallelActions();
+	        par.actions.push( new AnimateDialogVariableIntAction( popup, 'local_progress', data.old_value % data.progress_interval, data.new_value % data.progress_interval, (data.new_value - data.old_value) * 0.1) );
+      	  par.actions.push( new AnimateProgressBarAction( progressbar, data.old_value % data.progress_interval, data.new_value % data.progress_interval, (data.new_value - data.old_value) * 0.1 ) );
+          seq.actions.push( par );
+        }
+      }
+    }
+    //Otherwise we just show the number increasing, less fancy.
+    else
+    {
+      seq.actions.push( new AnimateDialogVariableIntAction( popup, 'trophy_level', data.old_value / data.progress_interval , data.new_value / data.progress_interval , 0.5 ) );
+    }
+    RunSingleAction( seq );
+    
+  }
+  </script>
+	<PopupTrophy class="Hidden PopupPanel"  popupbackground="dim" onpopupdisplayed="DCGPlayTrophySequence()" >
+    <Label class="Congratulations" text="#DCG_TrophyPopup_Congratulations"/>
+    <Label class="Trophy" text="#DCG_TrophyPopup_YourTrophyLeveledUp"/>
+    <Image id="TrophyImage" class="Trophy"/>
+    <Panel class="ProgressPanel Level">
+      <ProgressBar id="TrophyProgress" class="FillBar"/>
+      <Label class="ProgressLabel" text="{d:local_progress}/{d:threshold}"/>
+    </Panel>
+    <Label text="#DCG_TrophyPopup_TrophyLevel" class="Level"/>
+    <Button class="PopupButton ButtonBevel Level" onactivate="UIPopupButtonClicked();">
+      <Label text="#DCG_TrophyPopup_Dismiss"/>
+    </Button>
+  </PopupTrophy>
+</root>

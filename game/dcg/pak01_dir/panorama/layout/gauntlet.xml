@@ -1,0 +1,89 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/gauntlet.vcss_c" />
+	</styles>
+
+  <snippets>
+    <snippet name="GauntletMatch">
+      <Panel class="GauntletMatch GauntletUnplayed">
+        <Label text="{d:match_number}"/>
+      </Panel>
+    </snippet>
+  </snippets>
+
+  <DCGGauntlet>
+
+    <Panel class="GauntletTitle">
+      <Panel class="GauntletTitleContainer">
+        <Label text="#DCG_Gauntlet_Title" class="GauntletTitleLabel"/>
+      </Panel>
+      <Panel class="GauntletTitleIconContainer">
+        <Panel id="GauntletEditDeck" class="GauntletTitleButton" onmouseover="DCGShowTextTooltipInXML('#DCG_Gauntlet_EditDeck')" onmouseout="DCGHideTextTooltip()"/>
+        <Panel id="GauntletShowDeck" class="GauntletTitleButton"/>
+        <Label id="GauntletAbandon" class="GauntletTitleButton" text ="#DCG_XForClose" onmouseover="DCGShowTextTooltipInXML('#DCG_Gauntlet_AbandonRun')" onmouseout="DCGHideTextTooltip()" onactivate="DCGConfirmAbandonGauntlet()"/>
+        <Label id="GauntletHelp" class="GauntletTitleButton" text ="?" onmouseover="DCGShowTextTooltipInXML('#DCG_Gauntlet_Info')" onmouseout="DCGHideTextTooltip()" onactivate="TestMyThing()"/>
+      </Panel>
+    </Panel>
+
+    <Panel class="GauntletBody">
+
+      <Panel id="GauntletScorePanel">
+
+        <Panel id="GauntletTrophyPanel">
+          <Panel id="GauntletTrophyImg" />
+          <Panel id="GauntletTrophyScorePanel" onmouseover="DCGShowTextTooltipInXML('#DCG_Gauntlet_ShardsInfo')" onmouseout="DCGHideTextTooltip()">
+            <Label class="GauntletTrophyLevelLabel" text="#DCG_Gauntlet_TrophyLevel"/>
+            <Label class="GauntletTrophyLevel" text="{d:gauntlet_trophies}"/>
+            <Panel id="GauntletTrophyProgress">
+              <Panel id="GauntletTrophyProgressBG"/>
+              <Panel id="GauntletTrophyProgressFG"/>
+            </Panel>
+          </Panel>
+        </Panel>
+        <Button id="GauntletLeaderboardButton" class="ButtonDark" onactivate="DCGToggleGauntletLeaderboardPanel()">
+          <Label text="#DCG_Gauntlet_Leaderboard"/>
+        </Button>
+
+      </Panel>
+
+      <Panel id="GauntletInactive">
+        <Label class="GauntletInactiveStat" text="#DCG_Gauntlet_PerfectRuns"/>
+        <Label class="GauntletInactiveStat" text="#DCG_Gauntlet_GauntletRuns"/>
+        <Button class="ButtonDark" id="StartGauntlet" onactivate="DCGJoinGauntlet()">
+          <Label text="#DCG_Gauntlet_StartGauntlet" />
+        </Button>
+      </Panel>
+
+      <Panel id="GauntletActive">
+
+        <Panel id="GauntletMatches">
+          <Panel id="GauntletScore" class="GauntletMatchList">
+            <!-- Dynamically generated -->
+          </Panel>
+          <Panel id="GauntletWin" class="GauntletMatchList">
+            <!-- Dynamically generated -->
+          </Panel>
+          <Panel id="GauntletLoss" class="GauntletMatchList">
+            <!-- Dynamically generated -->
+          </Panel>
+        </Panel>
+        <Button class="TournamentActive ButtonDark" id="GauntletGrantStage"  onactivate="DCGGauntletClaimGrant()">
+          <Label  text="#DCG_Gauntlet_GrantStage"/>
+        </Button>
+        <Button class="TournamentActive ButtonDark" id="GauntletRegisterDeck"  onactivate="DCGGauntletRegisterDeck()">
+          <Label  text="#DCG_Gauntlet_RegisterDeck"/>
+        </Button>
+        <Button class="TournamentActive ButtonDark" id="FindNextGauntlet"  onactivate="DCGFindGauntletMatch()">
+          <Label  text="#DCG_Gauntlet_FindNextMatch"/>
+        </Button>
+        <Button class="ButtonDark" id="GauntletCollectRewards"  onactivate="DCGAbandonGauntlet()">
+          <Label  text="#DCG_Gauntlet_CollectRewards"/>
+        </Button>
+
+      </Panel>
+
+    </Panel>
+
+  </DCGGauntlet>
+</root>

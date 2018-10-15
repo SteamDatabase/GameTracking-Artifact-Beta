@@ -1,0 +1,68 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_manage_packs.vcss_c" />
+	</styles>
+
+	<PopupManagePacks class="PopupPanel Hidden" popupbackground="dim">
+
+    <Panel class="MainBody">
+      <Panel class="PackInfoAndPurchaseContainer">
+
+        <Panel class="FlowDown">
+            <Panel class="CardPocket" id="CardBackPocket">
+              <!-- Dynamic Content -->
+            </Panel>
+        </Panel>
+        <Panel class="FlowDown">
+          <Panel>
+            <Label class="CardSetDescription" id="CardSetDescription" text="#DCG_Card_Set1_Description"></Label>
+          </Panel>
+          <Panel class="CardPurchaseControls FlowDown">
+            <Panel class="FlowRight">
+              <Panel class="FlowDown PriceInfo">
+                <Label text="#DCG_ManagePacks_Price"></Label>
+                <Label id="PriceLabel" class="PricePerPackLabel" text="{g:dcg_price:Pack_Price}"></Label>
+              </Panel>
+              <Panel class="FlowDown PriceInfo">
+                <Label text="#DCG_ManagePacks_Quantity"></Label>
+                <Panel class="FlowRight">
+                  <Label id="PurchaseQuantityLabel" class="QuantityLabel" text="1"></Label>
+                  <Panel class="FlowDown">
+                    <Button class="ArrowUp" onactivate="IncreasePackPurchaseQuantity()">
+                    </Button>
+                    <Button class="ArrowDown" onactivate="DecreasePackPurchaseQuantity()">
+                    </Button>
+                  </Panel>
+                </Panel>
+              </Panel>
+              <Panel class="FlowDown PriceInfo">
+                <Label text="#DCG_ManagePacks_TotalPrice"></Label>
+                <Label id="TotalPriceLabel" class="TotalPriceLabel" text="{g:dcg_price:Total_Price}"></Label>
+              </Panel>
+            </Panel>
+            <Panel class="PurchaseOnSteam">
+              <Button class="ButtonDark" onactivate="PurchasePacks()">
+                <Label text="#DCG_ManagePacks_PurchaseOnSteam">
+                </Label>
+              </Button>
+            </Panel>
+          </Panel>
+          <Panel class="BottomButtons">
+            <Button class="ButtonDark" id="AboutPacksButton" onactivate="ShowPackInfoPopup()">
+              <Label text="#DCG_ManagePacks_AboutPacks"/>
+            </Button>
+            <Button class="ButtonDark" id="CancelButton" onactivate="UIPopupButtonClicked()">
+              <Label text="#DCG_Close"/>
+            </Button>
+          </Panel>
+        </Panel>
+
+      </Panel>
+
+
+    </Panel>
+		
+	</PopupManagePacks>
+</root>

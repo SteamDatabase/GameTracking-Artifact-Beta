@@ -1,0 +1,493 @@
+////////////////////
+//**TINKER - HERO//
+///////////////////
+
+///////////////
+//USE ABILITY//
+///////////////
+
+Response tinker_use_ability
+{
+	speak "tinker_use_ability_01" noscene 
+	speak "tinker_use_ability_02" noscene 
+	speak "tinker_use_ability_03" noscene 
+	speak "tinker_use_ability_04" noscene 
+	speak "tinker_use_ability_05" noscene 
+}
+
+Rule tinker_use_ability_rule
+{
+	criteria IsNotImp UseAbility AllyHasTinker IsSourceLaser
+	response tinker_use_ability
+}
+
+////////////////
+//EQUIP WEAPON//
+////////////////
+
+Response tinker_equip_weapon
+{
+	speak "tinker_equip_generic_weapon_01" noscene 
+	speak "tinker_equip_generic_weapon_02" noscene 
+	speak "tinker_equip_generic_weapon_03" noscene 
+	speak "tinker_equip_generic_weapon_04" noscene 
+	speak "tinker_equip_generic_weapon_05" noscene 
+}
+
+Rule tinker_equip_weapon_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceWeapon
+	response tinker_equip_weapon
+}
+
+
+////////////////
+//EQUIP ARMOR///
+////////////////
+
+Response tinker_equip_armor
+{
+	speak "tinker_equip_generic_armor_01" noscene 
+	speak "tinker_equip_generic_armor_02" noscene 
+	speak "tinker_equip_generic_armor_03" noscene 
+	speak "tinker_equip_generic_armor_04" noscene 
+	speak "tinker_equip_generic_armor_05" noscene 
+}
+
+Rule tinker_equip_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceArmor
+	response tinker_equip_armor
+}
+
+
+
+///////////////////
+//EQUIP ACCESSORY//
+///////////////////
+
+
+Response tinker_equip_accessory
+{
+	speak "tinker_equip_generic_accessory_01" noscene 
+	speak "tinker_equip_generic_accessory_02" noscene 
+	speak "tinker_equip_generic_accessory_03" noscene 
+	speak "tinker_equip_generic_accessory_04" noscene 
+	speak "tinker_equip_generic_accessory_05" noscene 
+}
+
+Rule tinker_equip_accessory_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceAccessory
+	response tinker_equip_accessory
+}
+
+
+////////////////
+///GAIN ATTACK//
+////////////////
+
+Response tinker_gain_attack
+{
+	speak "tinker_permanent_attack_01" noscene 
+	speak "tinker_permanent_attack_02" noscene 
+	speak "tinker_permanent_attack_03" noscene 
+	speak "tinker_permanent_attack_04" noscene 
+	speak "tinker_permanent_attack_05" noscene 
+}
+
+Rule tinker_gain_attack_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceSpell BuffsAttack
+	response tinker_gain_attack
+}
+
+
+////////////////
+///GAIN ARMOR///
+////////////////
+
+Response tinker_gain_armor
+{
+	speak "tinker_permanent_armor_01" noscene 
+	speak "tinker_permanent_armor_02" noscene 
+	speak "tinker_permanent_armor_03" noscene 
+	speak "tinker_permanent_armor_04" noscene 
+	speak "tinker_permanent_armor_05" noscene 
+}
+
+Rule tinker_gain_armor_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceSpell BuffsArmor
+	response tinker_gain_armor
+}
+
+
+////////////////
+///GAIN HEALTH//
+////////////////
+
+Response tinker_gain_health
+{
+	speak "tinker_permanent_health_01" noscene 
+	speak "tinker_permanent_health_02" noscene 
+	speak "tinker_permanent_health_03" noscene 
+	speak "tinker_permanent_health_04" noscene 
+	speak "tinker_permanent_health_05" noscene 
+}
+
+Rule tinker_gain_health_rule
+{
+	criteria IsNotImp  Buffed IsTargetTinker IsSourceSpell BuffsHealth
+	response tinker_gain_health
+}
+
+
+////////////////////
+//USE INCLUDE CARD//
+////////////////////
+
+Response tinker_use_include
+{
+	speak "tinker_use_include_01" noscene 
+	speak "tinker_use_include_02" noscene 
+	speak "tinker_use_include_03" noscene 
+}
+
+Rule tinker_use_include_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceMarchOfTheMachines ThisIsImportant
+	response tinker_use_include
+}
+
+///////////////////////////
+//GAIN MOMENTUM BY MURDER//
+///////////////////////////
+
+Response tinker_gain_momentum_murder
+{ 
+	speak "tinker_kill_rival_01" noscene 	
+	speak "tinker_kill_rival_02" noscene 
+	speak "tinker_kill_rival_03" noscene 
+	speak "tinker_kill_rival_04" noscene 
+	speak "tinker_kill_rival_05" noscene 
+	speak "tinker_kill_rival_06" noscene 
+	speak "tinker_kill_rival_07" noscene 
+	speak "tinker_kill_rival_08" noscene
+	speak "tinker_kill_rival_09" noscene 	
+	speak "tinker_kill_rival_10" noscene 
+}
+
+Rule tinker_gain_momentum_murder_rule
+{
+	criteria IsNotImp  Death EnemyHasTinker LocalChangeMomentum_Pos IsNotCombat
+	response tinker_gain_momentum_murder
+}
+
+////////////////////////////
+//BEGIN ANCIENT KILL TAUNT//
+////////////////////////////
+
+Response tinker_lane_taunt_generic
+{
+	speak "tinker_taunt_generic_01" noscene 
+	speak "tinker_taunt_generic_02" noscene 
+	speak "tinker_taunt_generic_03" noscene 
+	speak "tinker_taunt_generic_04" noscene 
+	speak "tinker_taunt_generic_05" noscene 
+	speak "tinker_taunt_generic_06" noscene 
+	speak "tinker_taunt_generic_07" noscene 
+	speak "tinker_taunt_generic_08" noscene 
+	speak "tinker_taunt_generic_09" noscene 
+}
+
+Rule tinker_lane_taunt_generic_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasTinker IsAllyTowerAlive IsEnemyAncientExposed
+	matchonce
+	response tinker_lane_taunt_generic
+}
+
+///////////////////////////
+//ENEMY GAINS DEATH SKULL//
+///////////////////////////
+
+Response tinker_lane_buff_give_death_skull
+{
+	speak "tinker_potential_kill_01"  noscene 
+	speak "tinker_potential_kill_02"  noscene
+	speak "tinker_potential_kill_03"  noscene 
+	speak "tinker_potential_kill_04"  noscene 
+	speak "tinker_potential_kill_05"  noscene
+}
+
+Rule tinker_lane_buff_give_death_skull_rule
+{
+	criteria IsNotImp  BUFFED AllyHasTinker EnemyGainedDeathSkull IsTargetTinker
+	response tinker_lane_buff_give_death_skull
+}
+
+Response tinker_lane_debuff_give_death_skull
+{
+	speak "tinker_potential_kill_01"  noscene 
+	speak "tinker_potential_kill_02"  noscene
+	speak "tinker_potential_kill_03"  noscene 
+	speak "tinker_potential_kill_04"  noscene 
+	speak "tinker_potential_kill_05"  noscene
+}
+
+Rule tinker_lane_debuff_give_death_skull_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasTinker TargetHasDeathSkull IsBlockingTinker
+	response tinker_lane_debuff_give_death_skull
+}
+
+Response tinker_lane_damage_give_death_skull
+{
+	speak "tinker_potential_kill_01"  noscene 
+	speak "tinker_potential_kill_02"  noscene
+	speak "tinker_potential_kill_03"  noscene 
+	speak "tinker_potential_kill_04"  noscene 
+	speak "tinker_potential_kill_05"  noscene
+}
+
+Rule tinker_lane_damage_give_death_skull_rule
+{
+	criteria IsNotImp  DAMAGE EnemyHasTinker TargetHasDeathSkull IsBlockingTinker
+	response tinker_lane_damage_give_death_skull
+}
+
+
+/////////////////////
+///DEBUFFED BLOCKER//
+/////////////////////
+
+Response tinker_debuff_blocker
+{
+	speak "tinker_debuff_enemy_01" noscene 
+	speak "tinker_debuff_enemy_02" noscene 
+	speak "tinker_debuff_enemy_03" noscene 
+	speak "tinker_debuff_enemy_04" noscene 
+	speak "tinker_debuff_enemy_05" noscene 
+	speak "tinker_debuff_enemy_06" noscene 
+	speak "tinker_debuff_enemy_07" noscene 
+	speak "tinker_debuff_enemy_08" noscene 
+	speak "tinker_debuff_enemy_09" noscene 
+	speak "tinker_debuff_enemy_10" noscene 
+}
+
+Rule tinker_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasTinker IsBlockingTinker
+	response tinker_debuff_blocker
+}
+
+////////////////
+///BUFF FRIEND//
+////////////////
+
+Response tinker_buff_friend
+{
+	speak "tinker_buff_ally_01" noscene 
+	speak "tinker_buff_ally_02" noscene 
+	speak "tinker_buff_ally_03" noscene 
+	speak "tinker_buff_ally_04" noscene 
+	speak "tinker_buff_ally_05" noscene 
+	speak "tinker_buff_ally_06" noscene 
+	speak "tinker_buff_ally_07" noscene 
+	speak "tinker_buff_ally_08" noscene 
+	speak "tinker_buff_ally_09" noscene 
+	speak "tinker_buff_ally_10" noscene 
+ 
+}
+
+Rule tinker_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasTinker IsSourceBlack IsTargetNotTinker
+	response tinker_buff_friend
+}
+
+
+//////////
+//healed//
+//////////
+
+Response heal_tinker
+{
+	speak "tinker_healed_01" noscene 
+	speak "tinker_healed_02" noscene 
+	speak "tinker_healed_03" noscene 
+	speak "tinker_healed_04" noscene 
+	speak "tinker_healed_05" noscene 
+}
+Rule heal_tinker_rule
+{
+	criteria IsNotImp Heal IsTargetTinker
+	response heal_tinker
+}
+
+
+
+/////////////////////////
+//HERO SPECIFIC UNIQUES//
+/////////////////////////
+
+/////////////////////////////
+//PLAY SET ONE BLACK CARDS///
+/////////////////////////////
+
+Response tinker_play_assured_destruction
+{
+	speak "tinker_debuff_enemy_04" noscene 
+}
+
+Rule tinker_play_assured_destruction_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssuredDestruction ThisIsImportant
+	response tinker_play_assured_destruction
+}
+
+Response tinker_play_path_of_the_cunning
+{
+	speak "tinker_arrogant_03" noscene 
+}
+
+Rule tinker_play_path_of_the_cunning_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourcePathOfTheCunning ThisIsImportant
+	response tinker_play_path_of_the_cunning
+}
+
+Response tinker_play_the_tyler_estate
+{
+	speak "tinker_cast_spell_04" noscene 
+}
+
+Rule tinker_play_the_tyler_estate_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheTylerEstate ThisIsImportant
+	response tinker_play_the_tyler_estate
+}
+
+Response tinker_play_burn_it_all
+{
+	speak "tinker_pleased_09" noscene 
+}
+
+Rule tinker_play_burn_it_all_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceBurnItAll ThisIsImportant
+	response tinker_play_burn_it_all
+}
+
+Response tinker_play_trebuchets
+{
+
+	speak "tinker_pleased_02" noscene 
+}
+
+Rule tinker_play_trebuchets_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTrebuchets ThisIsImportant
+	response tinker_play_trebuchets
+}
+
+Response tinker_play_undisciplined_artillery
+{
+	speak "tinker_arrogant_10" noscene 
+}
+
+Rule tinker_play_undisciplined_artillery_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceUndisciplinedArtillery ThisIsImportant
+	response tinker_play_undisciplined_artillery
+}
+
+Response tinker_play_revtel_investments
+{
+	speak "tinker_cast_spell_05" noscene 
+}
+
+Rule tinker_play_revtel_investments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceRevtelInvestments ThisIsImportant
+	response tinker_play_revtel_investments
+}
+
+Response tinker_play_iron_fog_goldmine
+{
+	speak "tinker_pleased_02" noscene 
+}
+
+Rule tinker_play_iron_fog_goldmine_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceIronFogGoldmine ThisIsImportant
+	response tinker_play_iron_fog_goldmine
+}
+
+Response tinker_play_escape_route
+{
+	speak "tinker_single_target_damage_06" noscene 
+}
+
+Rule tinker_play_escape_route_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceEscapeRoute ThisIsImportant
+	response tinker_play_escape_route
+}
+
+Response tinker_play_assault_ladders
+{
+	speak "tinker_arrogant_09" noscene 
+}
+
+Rule tinker_play_assault_ladders_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssaultLadders ThisIsImportant
+	response tinker_play_assault_ladders
+}
+
+Response tinker_play_the_oath
+{
+	speak "tinker_multi_damage_large_05" noscene 
+}
+
+Rule tinker_play_the_oath_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheOath ThisIsImportant
+	response tinker_play_the_oath
+}
+
+Response tinker_play_keenfolk_turret
+{
+	speak "tinker_cast_spell_10" noscene 
+}
+
+Rule tinker_play_keenfolk_turret_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceKeenfolkTurret ThisIsImportant
+	response tinker_play_keenfolk_turret
+}
+
+Response tinker_play_steam_cannon
+{
+	speak "tinker_enigmatic_04" noscene 
+}
+
+Rule tinker_play_steam_cannon_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceSteamCannon ThisIsImportant
+	response tinker_play_steam_cannon
+}
+
+Response tinker_play_day_at_the_track
+{
+	speak "tinker_pleased_02" noscene 
+}
+
+Rule tinker_play_day_at_the_track_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceDayAtTheTrack ThisIsImportant
+	response tinker_play_day_at_the_track
+}
+

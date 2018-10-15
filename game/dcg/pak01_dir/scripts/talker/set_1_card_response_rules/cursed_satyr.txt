@@ -1,0 +1,205 @@
+/////////////////////////////////
+//**CURSED SATYR - CREEP/////////
+/////////////////////////////////
+
+/////////////////
+//normal summon//
+/////////////////
+
+Response summon_cursed_satyr_normal
+{
+	speak "cursed_satyr_summon_01" noscene 
+	speak "cursed_satyr_summon_02" noscene
+	speak "cursed_satyr_summon_03" noscene 
+}
+Rule summon_cursed_satyr_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr
+	response summon_cursed_satyr_normal
+}
+
+/////////////////////////////////////
+//summon with exposed enemy ancient//
+/////////////////////////////////////
+
+Response summon_cursed_satyr_enemy_ancient_exposed
+{
+	speak "cursed_satyr_ancient_attack_01" noscene
+	speak "cursed_satyr_ancient_attack_02" noscene
+}	
+Rule summon_cursed_satyr_enemy_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr IsEnemyAncientExposed
+	response summon_cursed_satyr_enemy_ancient_exposed
+}	
+
+////////////////////////////////////
+//summon with your ancient exposed//	
+////////////////////////////////////
+
+Response summon_cursed_satyr_your_ancient_exposed
+{
+	speak "cursed_satyr_ancient_protect_01" noscene
+	speak "cursed_satyr_ancient_protect_02" noscene
+}	
+Rule summon_cursed_satyr_your_ancient_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr IsAllyAncientExposed
+	response summon_cursed_satyr_your_ancient_exposed
+}	
+
+/////////////////////////////////////
+//summon with both ancients exposed//
+/////////////////////////////////////
+
+Response summon_cursed_satyr_both_ancients_exposed
+{
+	speak "cursed_satyr_ancient_both_01" noscene
+	speak "cursed_satyr_ancient_both_02" noscene
+}	
+Rule summon_cursed_satyr_both_ancients_exposed_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr IsAllyAncientExposed IsEnemyAncientExposed
+	response summon_cursed_satyr_both_ancients_exposed
+}
+
+/////////////////////////////
+//summoned with allied hero//
+/////////////////////////////
+
+Response summon_cursed_satyr_ally_sven
+{
+	speak "cursed_satyr_hero_friend_01" noscene 
+	speak "cursed_satyr_hero_friend_02" noscene 
+}
+Rule summon_cursed_satyr_ally_sven_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasSven
+	response summon_cursed_satyr_ally_sven
+}
+
+Response summon_cursed_satyr_ally_axe
+{
+	speak "cursed_satyr_hero_friend_03" noscene 
+}
+Rule summon_cursed_satyr_ally_axe_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasAxe
+	response summon_cursed_satyr_ally_axe
+}
+
+/////////////////////////////////////////
+//summoned with rival in opposite lane///
+/////////////////////////////////////////
+
+////////////////
+//unique lines//
+////////////////
+
+Response summon_cursed_satyr_ally_vanessa
+{
+	speak "cursed_satyr_unique_01" noscene 
+}
+Rule summon_cursed_satyr_ally_vanessa_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasVanessa
+	response summon_cursed_satyr_ally_vanessa
+}
+
+Response summon_cursed_satyr_ally_enchantress
+{
+	speak "cursed_satyr_unique_02" noscene 
+}
+Rule summon_cursed_satyr_ally_enchantress_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasEnchantress
+	response summon_cursed_satyr_ally_enchantress
+}
+
+Response summon_cursed_satyr_ally_treant_protector
+{
+	speak "cursed_satyr_unique_03" noscene 
+}
+Rule summon_cursed_satyr_ally_enchantress_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasTreantProtector
+	response summon_cursed_satyr_ally_treant_protector
+}
+
+Response summon_cursed_satyr_into_lane_with_firestorm
+{
+	speak "cursed_satyr_unique_04" noscene 
+}
+Rule summon_cursed_satyr_into_lane_with_firestorm_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasFirestorm
+	response summon_cursed_satyr_into_lane_with_firestorm
+}
+
+Response summon_cursed_satyr_into_lane_with_verdant_refuge
+{
+	speak "cursed_satyr_unique_05" noscene 
+}
+Rule summon_cursed_satyr_into_lane_with_verdant_refuge_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasVerdantRefuge
+	response summon_cursed_satyr_into_lane_with_verdant_refuge
+}
+
+Response summon_cursed_satyr_into_lane_with_rumusque_faithful
+{
+	speak "cursed_satyr_unique_06" noscene 
+}
+Rule summon_cursed_satyr_into_lane_with_rumusque_faithful_rule
+{
+	criteria IsNotImp Summon IsTargetCursedSatyr AllyHasFactionRumusqueFaithful
+	response summon_cursed_satyr_into_lane_with_rumusque_faithful
+}
+
+Response summon_cursed_satyr_begin_lane_few_zombies
+{
+	speak "cursed_satyr_unique_07" noscene 
+}
+Rule summon_cursed_satyr_begin_lane_few_zombies_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCursedSatyr EnemyHasZombie FewOpponentUnits
+	response summon_cursed_satyr_begin_lane_few_zombies
+}
+
+Response summon_cursed_satyr_begin_lane_many_zombies
+{
+	speak "cursed_satyr_unique_08" noscene 
+}
+Rule summon_cursed_satyr_begin_lane_many_zombies_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCursedSatyr EnemyHasZombie ManyOpponentUnits
+	response summon_cursed_satyr_begin_lane_many_zombies
+}
+
+//////////
+//healed//
+//////////
+
+Response heal_cursed_satyr
+{
+	speak "cursed_satyr_healed_01" noscene 
+	speak "cursed_satyr_healed_02" noscene 
+	speak "cursed_satyr_healed_03" noscene 
+}
+Rule heal_cursed_satyr_rule
+{
+	criteria IsNotImp Heal IsTargetCursedSatyr
+	response heal_cursed_satyr
+}
+
+///////////////////
+//dies pre-combat//
+///////////////////
+
+//////////////////////////////////////////////
+//summoning puts death skull on enemy towner//
+//////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+//summoning removes death skull on enemy towner//
+/////////////////////////////////////////////////

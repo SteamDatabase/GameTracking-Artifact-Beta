@@ -1,0 +1,396 @@
+<root>
+  <styles>
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/catalogue/catalogue.vcss_c" />
+  </styles>
+
+  <snippets>
+        
+    <snippet name="CollectionCardRowSnippet">
+      <Panel class="CollectionViewRow">
+        <Panel id="CollectionViewCardRow">
+        </Panel>
+        <Panel id="CollectionViewStatsRow">
+          <Panel id="Stats1" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count1}/{i:card_total1}"/>
+          </Panel>
+          <Panel id="Stats2" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count2}/{i:card_total2}"/>
+          </Panel>
+          <Panel id="Stats3" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count3}/{i:card_total3}"/>
+          </Panel>
+          <Panel id="Stats4" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count4}/{i:card_total4}"/>
+          </Panel>
+          <Panel id="Stats5" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count5}/{i:card_total5}"/>
+          </Panel>
+          <Panel id="Stats6" class="CollectionViewStats">
+            <Label class="CardCount" text="{i:card_count6}/{i:card_total6}"/>
+          </Panel>
+        </Panel>
+      </Panel>
+    </snippet>
+  
+  </snippets>
+    
+  <Panel>
+    <Panel hittest="true" id="Editor">
+      <Panel class="TitlePanel">
+
+				<Panel id="MainMenuButton" onactivate="CatalogueExitCatalogue( 1 )" />
+			
+  <Panel class="DeckEditorTitleImage">
+  </Panel>
+			
+  <Label class="DeckEditorTitle" text="#DCG_DeckBuilder_DeckEditorTitleText"/>
+  <Panel id="TopBarRightButtons">
+    <Panel class="TopBarReturnToGame">
+       <Button id="ReturnToGameButton" class="TopBarSmallButton" onactivate="DCGReturnToGame();" />
+       <Button id="ReturnToPostGameButton" class="TopBarSmallButton" onactivate="DCGReturnToPostGame();" />
+    </Panel>
+    <Button id="DCGSettingsButton" class="ControlIconButton SettingsButton" onactivate="DCGSettings();" />
+    <Panel id="VerticalSeparator" />
+    <Panel id="NavigationControls">
+       <Button id="NavigateBackButton" onactivate="DCGNavigateBack()" />
+       <Button id="NavigateForwardButton" onactivate="DCGNavigateForward()" />
+    </Panel>
+       <Button id="DCGQuitButton" class="TopBarSmallButton" onactivate="DCGQuitGame();"  />										
+    </Panel>
+
+  </Panel>
+     <Panel class="EditorPanel">
+        <Panel class="DeckTabLeft">
+        </Panel>
+        <Panel class="DeckContainer">
+          <Panel class="DeckTabsContainer">
+          
+            <Panel class="LibraryControls">
+              <Label class="DeckSectionTitleLabel" id="CollectionTitle" text="#DCG_DeckBuilder_CollectionTitle"/>
+              <Panel class="CardFilters">
+                <DCGCatalogCollectionFilters id="CollectionFilters"/>
+              </Panel>
+            </Panel>
+          </Panel>
+          
+          <DelayLoadList id="CollectionList" itemwidth="100%" itemheight="390px">
+            <!-- Dynamic Content -->
+          </DelayLoadList>
+          
+          <Panel class="DeckTabBody">
+		  
+             <Panel id="PreviewBackground">
+               <Panel class="PreviewBackgroundContainer">
+
+                 <Panel id="PreviewRegion">	
+									 <DCGCardPreview id="CardPreviewContainer" removeclosebutton="true" />
+                  </Panel>
+              </Panel>
+            </Panel>
+			
+            <Panel class="DeckSeparator"/>
+            <Panel class="LibraryContainer">
+              <Panel id="LibraryListing">
+                <!-- Dynamic Content-->
+              </Panel>
+              <Panel id="EmptyLibraryListing">
+                <Label text="#DCG_DeckBuilder_EmptyCollection"/>
+              </Panel>
+            </Panel>
+          </Panel>
+          <Panel class="PackCardInfo">
+
+            <Panel class="PackActions">
+              <Button class="BlueButtonSmall" onactivate="CataloguePurchasePacks()">
+                <Label text="#DCG_Dashboard_BuyPacks"/>
+              </Button>
+            </Panel>
+            <Panel class="ToggleButtonOptionGroup">
+              <ToggleButton id="UnlimitedCollectionToggle" onactivate="CatalogueToggleUnlimitedCollection()">
+                <Label text="#DCG_DeckBuilder_ShowUnownedCards"/>
+              </ToggleButton>
+              <ToggleButton id="SellingExcessCopiesToggle" onactivate="CatalogueToggleShowOnlyExcessCardsForSelling()">
+                <Label text="#DCG_DeckBuilder_ShowOnlyExcessCardsForSelling"/>
+              </ToggleButton>
+              <ToggleButton id="CompleteSetForBuyingToggle" onactivate="CatalogueToggleShowOnlyCardsToCompleteSetForBuying()">
+                <Label text="#DCG_DeckBuilder_ShowOnlyCardsToCompleteSetForBuying"/>
+              </ToggleButton>
+            </Panel>
+            <Panel class="PackOwnershipInfo">
+              <RadioButton text="#DCG_CardInfo_Owned"></RadioButton>
+              <RadioButton text="#DCG_CardInfo_Surplus"></RadioButton>
+              <Label text="#DCG_CardInfo_CardsShownOutOfTotal"/>
+              <Label text="  72/240"/>
+            </Panel>
+          </Panel>
+        </Panel>
+
+        <Panel class="DeckBuilderContainer" id="DeckBuilderContainer">
+
+          <Panel class="DeckInfoTabsContainer">
+            <Panel class="DeckInfoTab BuildTab">
+              <Button onactivate="CatalogueBuildDeck()" class="HorizontalCenter VerticalCenter FullWidth" >
+                <Label class="DeckInfoTabLabel BuildTabText" text="#DCG_DeckBuilder_BuildDeck"/>
+              </Button>
+            </Panel>
+            <Panel class="DeckInfoTab BuyTab">
+              <Button onactivate="CatalogueBuyCards()" class="HorizontalCenter VerticalCenter FullWidth" >
+                <Label class="DeckInfoTabLabel BuyTabText" text="#DCG_DeckBuilder_BuyCards"/>
+              </Button>
+            </Panel>
+            <Panel class="DeckInfoTab SellTab">
+              <Button onactivate="CatalogueSellCards()" class="HorizontalCenter VerticalCenter FullWidth" >
+                <Label class="DeckInfoTabLabel SellTabText" text="#DCG_DeckBuilder_SellCards"/>
+              </Button>
+            </Panel>
+          </Panel>
+
+          <Panel id="BuiltDeckContainer" class="DeckInfoContainer">
+            <Panel class="TopDeckRegion">
+              <Panel id="DeckNameRegion">
+                <Panel id="DeckNameRow">
+                  <Label id="DeckName" text="#DCG_DeckBuilder_UnnamedDeck"/>                  
+                  <Panel class="DeckStatsButtons">
+                    <Button class="GeneralButton" id="SampleHandButton" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SampleHand )" onmouseout="UIHideTextTooltip()" onactivate="CatalogueSampleHand();"/>
+                  </Panel>
+                  <Panel class="ValidationSummary" id="ValidationContainer">
+                    <Panel class="ValidationErrorIcon"/>
+                    <Label class="ValidationText InvalidDeckTextError" text="{i:deckErrorCount}"/>
+                  </Panel>
+                  <Panel class="ValidationSummary" id="ValidationContainerOwned" onactivate="DeckBuilderPurchaseUnownedCards()">
+                    <Button class="SmallText" id="PurchaseUnowned" onactivate="CataloguePurchaseUnownedCardsInDeck()">
+                      <Panel class="OwnershipErrorIcon"/>
+                    </Button>
+                    <Label class="ValidationText InvalidDeckTextError" text="{i:deckUnownedCardsCount}"/>
+                  </Panel>
+                  <Panel class="ValidationSummary" id="ValidationContainerTrialCards" onactivate="DeckBuilderPurchaseUnownedCards()">
+                    <Button class="SmallText" id="PurchaseUnowned" onactivate="CataloguePurchaseUnownedCardsInDeck()">
+                      <Panel class="OwnershipErrorIcon"/>
+                    </Button>
+                    <Label class="ValidationText InvalidDeckTextError" text="{i:deckUnownedCardsCount}"/>
+                  </Panel>
+                </Panel>
+              </Panel>
+              
+              <Panel id="BuySellTitleRegion">
+                <Panel id="BuySellTitleRow">
+                  <Label class="BuySellTitleLabel" id="BuyTitleLabel" text="#DCG_DeckBuilder_BuyTitleLabel"/>
+                  <Label class="BuySellTitleLabel" id="SellTitleLabel" text="#DCG_DeckBuilder_SellTitleLabel"/>
+                </Panel>
+              </Panel>
+                  
+              <Panel id="HeroRegion">
+                <Panel class="HeroSectionsContainer">
+                  <Panel class="HeroTurnContainer Turn1">
+                      <Panel id="HeroLineupPortrait1" class="HeroLineupPortrait"> 
+                        <CatalogueHeroButton id="Hero1"></CatalogueHeroButton>
+                      </Panel>
+                      <Panel id="HeroLineupPortrait2" class="HeroLineupPortrait">
+                        <CatalogueHeroButton id="Hero2"></CatalogueHeroButton>
+                      </Panel>
+                      <Panel id="HeroLineupPortrait3" class="HeroLineupPortrait">
+                        <CatalogueHeroButton id="Hero3"></CatalogueHeroButton>
+                      </Panel>
+                  </Panel>
+                  <Panel class="HeroTurnLabelContainer">
+                    <Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn1Label"/>
+                  </Panel>
+                
+                  <Panel class="HeroTurnContainer Turn2">
+                    <Panel id="HeroLineupPortrait4" class="HeroLineupPortrait">
+					            <CatalogueHeroButton id="Hero4"></CatalogueHeroButton>
+                    </Panel>
+                    <Panel class="HeroTurnLabelContainer">
+                      <Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn2Label"/>
+                    </Panel>
+                  </Panel>
+                  <Panel class="HeroTurnContainer Turn3">
+                    <Panel id="HeroLineupPortrait5" class="HeroLineupPortrait">
+                      <CatalogueHeroButton id="Hero5"></CatalogueHeroButton>
+                    </Panel>
+                    <Panel class="HeroTurnLabelContainer">
+                      <Label class="HeroPortraitTurnLabel" text="#DCG_DeckBuilder_Turn3Label"/>
+                    </Panel>
+                  </Panel>
+                </Panel>
+              </Panel>
+            </Panel>
+          
+            <Panel id="MainDeckRegion">
+              <Panel class="DeckGroup">
+                <Panel id="DeckListing" class="DeckListing">
+                  <!--Dynamic content-->
+                </Panel>
+                <Panel id="CardPurchaseListing" class="DeckListing">
+                  <!--Dynamic content-->
+                </Panel>
+                <Panel id="CardSaleListing" class="DeckListing">
+                  <!--Dynamic content-->
+                </Panel>
+              </Panel>
+            </Panel>
+		  
+            <Panel class="RegionHeaderBordered">
+              <Button class="BlueButtonSmall" id="RegisterButton" onactivate="CatalogueRegisterGauntlet()">
+                <Label text="#DCG_DeckBuilder_RegisterGauntlet"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="SaveAsButton" onactivate="CatalogueSaveDeckAs( 1 )">
+                <Label text="#DCG_DeckBuilder_SaveAs"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="LoadDeckButton" onactivate="CatalogueLoadDeck( 1 )">
+                <Label text="#DCG_DeckBuilder_Load"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="ResetDeckButton" onactivate="CatalogueResetDeck( 1 )">
+                <Label text="#DCG_DeckBuilder_Reset"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="PurchaseCardsButton" onactivate="CataloguePurchaseCards()">
+                <Label text="#DCG_DeckBuilder_PurchaseCardsButton"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="SellCardsButton" onactivate="CatalogueSellListCards()">
+                <Label text="#DCG_DeckBuilder_SellCardsButton"/>
+              </Button>
+            </Panel>
+		  
+            <Panel class="DeckStatsRegion">
+              <Panel class="DetailedDeckStatsRegion">
+                <Panel class="HistogramFilters">
+                  <Panel class="MainDeckCardType" group="HistogramFilter" >
+                    <Label html="true" text="&#9640;"/>
+                    <Label class="MainDeckCardTypeStat" id="lblCreepCount" text="{i:creepCount}"/>
+                  </Panel>
+                  <Panel class="MainDeckCardType" group="HistogramFilter">
+                    <Label html="true" text="&#9642;"/>
+                    <Label class="MainDeckCardTypeStat" id="lblSpellCount" text="{i:spellCount}"/>
+                  </Panel>
+                  <Panel class="MainDeckCardType" group="HistogramFilter">
+                    <Label html="true" text="&#9641;"/>
+                    <Label class="MainDeckCardTypeStat" id="lblImprovementCount" text="{i:improvementCount}"/>
+                  </Panel>
+                </Panel>
+                <Panel class="HistogramsRegion">
+                  <Panel class="HistogramsGroupRight">
+                    <Panel id="ManaCurveHistogram"/>
+                    <Panel id="CardColorHistogram"/>
+                  </Panel>
+                </Panel>
+                <Panel class="CardCountsRegion">
+                  <Panel class="ItemDeckStats">
+                    <Panel class="ItemDeckStatsRow">
+                      <Panel class="ItemDeckStat">
+                        <Label html="true" text="&#9635;"/><Label id="lblWeaponCount" text="{i:weaponCount}"/>
+                      </Panel>
+                      <Panel class="ItemDeckStat">
+                         <Label html="true" text="&#9636;"/><Label id="lblArmorCount" text="{i:armorCount}"/>
+                      </Panel>
+                    </Panel>
+                    <Panel class="ItemDeckStats">
+                      <Panel class="ItemDeckStatsRow">
+                        <Panel class="ItemDeckStat">
+                           <Label html="true" text="&#9638;"/><Label id="lblConsumableCount" text="{i:consumableCount}"/>
+                        </Panel>
+                        <Panel class="ItemDeckStat">
+                           <Label html="true" text="&#9637;"/><Label id="lblAccessoryCount" text="{i:accessoryCount}"/>
+                        </Panel>
+                      </Panel>
+                    </Panel>
+                  </Panel>
+                  <Panel class="ValidationSummary" id="ValidationContainer">
+                    <Panel class="ValidationErrorIcon"/>
+                    <Label class="ValidationText InvalidDeckTextError" text="#DCG_DeckBuilder_InvalidDeck"/>
+                  </Panel>
+                  <Panel class="ValidationSummary" id="ValidationContainerOwned" onactivate="DeckBuilderPurchaseUnownedCards()">
+                    <Panel class="OwnershipErrorIcon"/>
+                    <Label class="ValidationText InvalidDeckTextError" text="#DCG_DeckBuilder_MissingCards"/>
+                  </Panel>
+                </Panel>
+              </Panel>
+              
+              <Panel class="DeckCardCountsRegion">
+                <Label class="DeckStat" text="#DCG_DeckBuilder_Cards"/>
+                <Label class="DeckStat" text="#DCG_DeckBuilder_Items"/>
+              </Panel>
+            </Panel>
+          
+            <Panel class="BuySellStatsRegion">
+              <Panel class="DetailedBuySellStatsRegion">
+                <Panel class="BuySellRarities">
+                  <Panel class="BuySellRarityType" group="HistogramFilter" >
+                    <Image class="RarityType RarityTypeCommon"/>
+                    <Label class="BuySellRarityTypeStat" text="×{i:commonCount}"/>
+                  </Panel>
+                  <Panel class="BuySellRarityType" group="HistogramFilter">
+                    <Image class="RarityType RarityTypeUncommon"/>
+                    <Label class="BuySellRarityTypeStat" text="×{i:uncommonCount}"/>
+                  </Panel>
+                  <Panel class="BuySellRarityType" group="HistogramFilter">
+                    <Image class="RarityType RarityTypeRare"/>
+                    <Label class="BuySellRarityTypeStat" text="×{i:rareCount}"/>
+                  </Panel>
+                </Panel>
+                <Panel class="BuySellTotals">
+                  <Label class="BuySellTotalsStat" text="#DCG_DeckBuilder_TotalCards"/>
+                  <Panel class="BuySellEstPrice">
+                    <Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_TotalEstPrice"/>
+                    <DCGMarketPrice id="PurchaseCost"/>
+                  </Panel>
+                </Panel>
+              </Panel>
+            </Panel>
+          
+          </Panel>
+        </Panel>
+      </Panel>
+    </Panel>
+
+    <Panel id="DropTargetLayer" hittest="false">
+      <Panel class="FromLibraryDropTargets" hittest="false">
+        <Panel class="DropTargetColumn" id="FromLibraryAddDropTargets">
+          <CCatalogueDropTarget class="DropTarget AddDropTarget1" addtodeck="1">
+            <Label class="DropSmallLabel" text="+1"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget AddDropTarget2" addtodeck="2">
+            <Label class="DropSmallLabel" text="+2"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget AddDropTarget3" addtodeck="3">
+            <Label class="DropSmallLabel" text="+3"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+        </Panel>
+      </Panel>
+      <Panel class="FromDeckDropTargets" hittest="false">
+        <Panel class="DropTargetColumn" id="FromDeckRemoveDropTargets">
+          <CCatalogueDropTarget class="DropTarget RemoveDropTarget1" addtodeck="-1">
+            <Label class="DropSmallLabel" text="-1"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget RemoveDropTarget2" addtodeck="-2">
+            <Label class="DropSmallLabel" text="-2"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget RemoveDropTarget3" addtodeck="-3">
+            <Label class="DropSmallLabel" text="-3"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+        </Panel>
+        <Panel class="DropTargetColumn" id="FromDeckAddDropTargets">
+          <CCatalogueDropTarget class="DropTarget AddDropTarget1" addtodeck="1">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add1_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget AddDropTarget2" addtodeck="2">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add2_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+          <CCatalogueDropTarget class="DropTarget AddDropTarget3" addtodeck="3">
+            <Label class="DropSmallLabel" text="#DCG_DeckBuilder_Add3_Cards"/>
+            <Label class="DropLargeLabel" text="#DCG_DeckBuilder_Cards"/>
+          </CCatalogueDropTarget>
+        </Panel>
+      </Panel>
+    </Panel>
+
+  </Panel>
+</root>

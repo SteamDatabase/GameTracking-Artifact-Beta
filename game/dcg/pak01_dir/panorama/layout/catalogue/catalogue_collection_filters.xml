@@ -1,0 +1,142 @@
+<root>
+	<styles>
+	    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/catalogue/catalogue_collection_filters.vcss_c" />
+	</styles>
+
+	<Panel class="FiltersBody">
+
+    <Panel class="ModeSwitch">
+      <Button class="ModeSwitchButton" id="LibraryMode" onactivate="SetViewModeFilter( Library )"/>
+      <Button class="ModeSwitchButton" id="CollectionMode" onactivate="SetViewModeFilter( Collection )"/>
+    </Panel>
+    
+
+
+    <Panel class="CardFilterRow Collection Main Shop Heroes Sort">
+      <Panel class="CardFiltersControls">
+        <Label class="FilterAreaTitle" text="#DCG_Collection_SortTitle" />
+        <Label id="lblSort" class="CurrentFilterIndicator"></Label>
+        <DropDown id="dropDownSortItems" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost" id="lblSortByItemCost"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+        </DropDown>
+        <DropDown id="dropDownSortHeroes" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+        </DropDown>
+        <DropDown id="dropDownSortMain" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+        </DropDown>
+        <DropDown id="dropDownSortAll" class="" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+        </DropDown>
+        <DropDown id="dropDownSortMarketItems" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost" id="lblSortByItemCost"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
+        </DropDown>
+        <DropDown id="dropDownSortMarketHeroes" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
+        </DropDown>
+        <DropDown id="dropDownSortMarketMain" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
+        </DropDown>
+        <DropDown id="dropDownSortMarketAll" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
+          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
+          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
+          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
+          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
+        </DropDown>
+      </Panel>
+    </Panel>
+   
+    <Panel class="CardFilterRow Collection Filters">
+      <Panel class="CardFiltersControls">
+        <Label class="FilterAreaTitle" text="#DCG_DeckBuilder_FilterRarity"></Label>
+        <Panel>
+          <Button class="FilterButton RarityText" id="FilterRarityBasic" onactivate="SetRarityFilter( Basic )"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityCommon" onactivate="SetRarityFilter( Common )"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityUncommon" onactivate="SetRarityFilter( Uncommon )"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityRare" onactivate="SetRarityFilter( Rare )"></Button>
+        </Panel>
+      </Panel>
+    </Panel>
+
+    <Panel id="ItemTypeFilters" class="CardFilterRow AllCollection Main Heroes ItemTypeFilters">
+      <Button class="HorizontalCenter FilterDeckTypeItem" onactivate="SetDeckTypeFilter( ItemDeck )">
+        <Label id="FilterDeckTypeItem"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckItem"></Label>
+      </Button>
+      <Panel class="ItemTypeFiltersControls">
+        <Button class="FilterButton" id="WeaponFilter" onactivate="SetItemDeckSubtypeFilter( Weapon )"/>
+        <Button class="FilterButton" id="ArmorFilter" onactivate="SetItemDeckSubtypeFilter( Armor )"/>
+        <Button class="FilterButton" id="AccessoryFilter" onactivate="SetItemDeckSubtypeFilter( Accessory )"/>
+        <Button class="FilterButton" id="ConsumableFilter" onactivate="SetItemDeckSubtypeFilter( Consumable )"/>
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown">
+      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( HeroDeck )">
+        <Label id="FilterDeckTypeHeroLabel"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckHero"></Label>
+      </Button>
+      <Panel class="CardFiltersControls">
+        <Panel class="FlowRight">
+          <Button class="FilterButton" id="FilterDeckTypeHero" onactivate="SetDeckTypeFilter( HeroDeck )">
+          </Button>
+        </Panel>
+      </Panel>
+    </Panel>
+    
+    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown">
+      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( MainDeck )">
+        <Label id="FilterDeckTypeMain"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckMain"></Label>
+      </Button>
+      <Panel class="CardFiltersControls">
+        <Panel class="FlowRight">
+          <Button class="FilterButton" id="FilterMainDeckSubtypeCreep" onactivate="SetMainDeckSubtypeFilter( Creep )">
+          </Button>
+          <Button class="FilterButton" id="FilterMainDeckSubtypeSpell" onactivate="SetMainDeckSubtypeFilter( Spell )">
+          </Button>
+          <Button class="FilterButton" id="FilterMainDeckSubtypeImprovement" onactivate="SetMainDeckSubtypeFilter( Improvement )">
+          </Button>
+        </Panel>
+      </Panel>
+    </Panel>
+
+    <Panel id="ColorFilters" class="CardFilterRow AllCollection Main Heroes ColorFilters">
+      <Label id="FilterDeckTypeColor"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterColor"></Label>
+      <Panel class="ColorFiltersControls">
+        <Button class="FilterButton" id="RedColorFilter" onactivate="ToggleColorFilter( Red )"/>
+        <Button class="FilterButton" id="GreenColorFilter" onactivate="ToggleColorFilter( Green )"/>
+        <Button class="FilterButton" id="BlueColorFilter" onactivate="ToggleColorFilter( Blue )"/>
+        <Button class="FilterButton" id="BlackColorFilter" onactivate="ToggleColorFilter( Black )"/>
+      </Panel>
+    </Panel>
+    
+    <Panel class="CardFilterRow Collection Main Shop Heroes Search">
+      <Panel class="CardFiltersControls">
+        <TextEntry id="CardFiltersName" placeholder="#DCG_Search"/>
+        <Image id="SearchIconId" class="SearchIcon"></Image>
+      </Panel>
+      <Button id="ClearCardFilterTextButton" onactivate="ClearCardFilterText()">
+        <Label text=""/>
+      </Button>
+    </Panel>
+    
+  </Panel>
+</root>

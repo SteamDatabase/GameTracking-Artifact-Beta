@@ -1,0 +1,436 @@
+@define laneHeight: 62px;
+
+.ScoreboardPanel
+{
+	flow-children: down;
+
+	opacity: 0;
+	transition-property: opacity;
+  transition-duration: 0.5s;
+	transition-timing-function: ease-in-out;
+
+	ui-scale: 84%;
+}
+
+.CardPlayStarted.ScoreboardPanel
+{
+    opacity: 1;
+}
+
+#InspectInfo
+{
+	width: 200px;
+	flow-children: right;
+	visibility: collapse;
+}
+#CombatPosition
+{
+	visibility: collapse;
+	background-color: #000000;
+	color: antiquewhite;	
+}
+#HideInspectCardButton
+{
+	horizontal-align: right;
+	visibility: collapse;
+}
+.Sticky #HideInspectCardButton
+{
+	visibility: visible;
+}
+#HideInspectLabel
+{
+	background-color: #000000;
+	color: red;
+	font-size: 20px;
+
+	border: 2px solid #FF0000;
+}
+
+#InspectCardPanel
+{
+	margin-top: 30px;
+}
+
+#DeathSkull
+{
+	width: 128px;
+	height: 128px;
+	margin-top: 40px;
+	horizontal-align: center;
+	
+	background-image: url("s2r://panorama/images/card_elements/death_skull_png.vtex");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 128px;
+	
+	visibility: collapse;
+	z-index: 3;
+}
+#DeathSkull.MightDieInCombat
+{
+	background-image: url("s2r://panorama/images/card_elements/death_skull_maybe_png.vtex");
+}
+#DeathSkull.WillLoseDeathShieldInCombat
+{
+	background-image: url("s2r://panorama/images/card_elements/death_skull_shield_png.vtex");
+}
+
+.Scoreboard
+{
+	flow-children: right;
+
+	width: fit-children;
+	height: 160px;
+
+    vertical-align: top;
+	horizontal-align: left;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #000000aa ), to( #00000044 ) );
+	background-blur: gaussian( 7 );
+	
+	background-image: url("s2r://panorama/images/hud/scoreboard_bg_semi_fade_psd.vtex");
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+
+
+@keyframes 'lane-blink'
+{
+    0%
+    {
+	    background-color: none;
+    }
+
+	50%
+    {
+	    background-color: red;
+    }
+
+    100%
+    {
+	    background-color: none;
+    }
+}
+
+@keyframes 'turn-pulse'
+{
+    0%
+    {
+	    border: 5px solid #00000000;
+    }
+
+	50%
+    {
+	    border: 5px solid #ffd800;
+    }
+
+    100%
+    {
+	    border: 5px solid #00000000;
+    }
+}
+
+.HUDRegion
+{
+	width: fit-children;
+
+	flow-children: down;
+}
+
+.FountainRegion
+{
+	padding-top: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.LaneRegion
+{
+    flow-children: none;
+	width: fit-children;
+}
+
+.LaneRegionContainer
+{
+	padding-top: 4px;
+	padding-left: 4px;
+	
+	height: 158px;
+
+    flow-children: down;
+}
+
+.LaneRegion.Casting
+{
+	animation-name: lane-blink;
+	animation-duration: 2.0s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+}
+
+.CombatLane .LaneRegionBackground
+{
+    width: 100%;
+    height: 100%;
+
+	background-image: url("s2r://panorama/images/hud/hud_lane_highlight_psd.vtex");
+
+	background-size: cover;
+
+	animation-name: CombatLaneHighlight;
+	animation-duration: 1.962s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.LaneRegion.InitiativeOpponent .LaneRegionBackground
+{
+    width: 100%;
+    height: 100%;
+}
+
+.LaneRegion.InitiativeLocal .LaneRegionBackground
+{
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes 'CombatLaneHighlight'
+{
+	0%
+	{
+		opacity: 1.0;
+	}
+
+
+	50%
+	{
+		opacity: 0.5;
+	}
+
+	80%
+	{
+		opacity: 0.8;
+	}
+}
+
+.CombatLane.HasCoin
+{
+	animation-name: turn-pulse;
+	animation-duration: 1.0s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+.LaneRow
+{
+	width: fit-children;
+	height: laneHeight;
+	flow-children: right;
+}
+
+.LaneRow.ActivePlayer
+{	
+}
+
+.OpponentDivider
+{
+	width: 100%;
+	height: 8px;
+
+	flow-children: none;
+
+	//background-color: lightcoral;
+}
+
+.LaneDivider
+{
+	width: 2px;
+	height: 100%;
+	//background-color: gradient( linear, 0% 0%, 0% 100%, from( #b7dbe544 ), to( #93663000 ) );
+	background-image: url("s2r://panorama/images/hud/scoreboard_divider_psd.vtex");
+	background-repeat: no-repeat;
+	opacity: 0.04;
+}
+
+.HeroRegion
+{
+	width: 100px;
+	flow-children: none;
+	
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.FountainHeroRegion
+{
+	horizontal-align: right;
+
+	height: laneHeight;
+	margin-left: 0px;
+	margin-right: 4px;
+}
+
+.TowerRegion
+{
+	width: 75px;
+
+	horizontal-align: left;
+	flow-children: down;
+}
+
+.TowerLane
+{
+	horizontal-align: right;
+}
+
+.TowerOpponent
+{
+	vertical-align: bottom;
+}
+
+.TowerLocal
+{
+	vertical-align: top;
+}
+
+.CreepDisplay
+{
+	width: 30px;
+	height: 42px;
+
+	flow-children: down;
+}
+
+.Opponent .CreepDisplay
+{
+	border: 2px;
+	vertical-align: bottom;
+}
+
+.CoinIndicator
+{
+	visibility: collapse;
+	width: 32px;
+	height: 6px;
+	vertical-align: center;
+
+	background-image: url("s2r://panorama/images/hud/hud_active_player_png.vtex");
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.CoinOpponent .CoinIndicator
+{
+	visibility: collapse;
+}
+
+.CoinLocal .CoinIndicator
+{
+	visibility: collapse;
+	transform: rotateZ( 180deg );
+}
+
+.InitiativeIndicator
+{
+	visibility: collapse;
+	width: 32px;
+	height: 6px;
+
+	vertical-align: center;
+
+	background-image: url("s2r://panorama/images/hud/hud_initiative_player_png.vtex");
+	background-position: center;
+	background-repeat: no-repeat;
+
+	transition-property: transform;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;
+}
+
+.InitiativeOpponent .InitiativeIndicator
+{
+	visibility: visible;
+}
+
+.InitiativeLocal .InitiativeIndicator
+{
+	visibility: visible;
+	transform: rotateZ( 180deg );
+}
+
+
+#PhaseName
+{
+	width: 100%;
+	height: 40px;
+	flow-children: none;
+	vertical-align: center;
+	text-align: center;
+	visibility: collapse;
+}
+
+#PhaseName.Lane1
+{
+	transform: translateX(-125px) translateY(-20%);
+}
+
+#PhaseName.Lane2
+{
+	transform: translateX(61px) translateY(-20%);
+}
+
+#PhaseName.Lane3
+{
+	transform: translateX(247px) translateY(-20%);
+}
+
+#PhaseName Label
+{
+	text-transform: uppercase;
+	horizontal-align: center;
+	vertical-align: center;
+	color: #dedede;
+	font-size: 16px;
+	text-align: center;
+	letter-spacing: 1px;
+	text-shadow: 2px 0px 6px 3.0 #1d303855;
+	//animation-name: pulse-phase-name;
+	//animation-duration: 1.99s;
+	//animation-timing-function: ease-in-out;
+	//animation-iteration-count: infinite;
+}
+
+@keyframes 'pulse-phase-name' {
+	0%		{text-shadow: 0 0 4px #49d8c955;}
+
+	50%		{text-shadow: 0 0 1px #49d8c955;}
+
+	100%	{text-shadow: 0 0 4px #49d8c955;}
+}
+
+#PhaseNameContainer
+{
+	text-align: center;
+	flow-children: right;
+	horizontal-align: center;
+	vertical-align: center;
+}
+
+.InitiativeLabel
+{
+	horizontal-align: center;
+	text-transform: uppercase;
+	color: #dedede;
+	font-size: 16px;
+	text-align: center;
+	letter-spacing: 1px;
+	text-shadow: 2px 0px 6px 3.0 #1d303855;
+}
+
+.InitiativeLabel.Player
+{
+	margin-top: -7px;
+}
