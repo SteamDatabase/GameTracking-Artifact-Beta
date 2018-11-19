@@ -2,6 +2,8 @@
 //**MEEPO - HERO//
 /////////////////
 
+WhitelistName "Whitelist Card 10004"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -332,6 +334,144 @@ Rule heal_meepo_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response meepo_ally_meepo
+{
+	speak "meepo_unique_01" noscene
+	speak "meepo_unique_02" noscene
+	speak "meepo_unique_03" noscene
+	speak "meepo_unique_04" noscene
+	speak "meepo_unique_05" noscene
+	speak "meepo_unique_11" noscene
+	speak "meepo_unique_12" noscene
+
+}
+
+Rule meepo_ally_meepo_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMultiMeepo AllyHasMeepo ThisIsImportant
+	response meepo_ally_meepo
+}	
+
+Response meepo_enemy_bounty_hunter
+{
+	speak "meepo_unique_06" noscene
+	speak "meepo_unique_07" noscene
+
+}
+
+Rule meepo_enemy_bounty_hunter_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo EnemyHasBountyHunter ThisIsImportant
+	matchonce
+	response meepo_enemy_bounty_hunter
+}	
+
+Response meepo_enemy_bounty_hunter_ally_meepo
+{
+	speak "meepo_unique_08" noscene
+
+}
+
+Rule meepo_enemy_bounty_hunter_ally_meepo_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo EnemyHasBountyHunter AllyHasMultiMeepo ThisIsImportant
+	matchonce
+	response meepo_enemy_bounty_hunter_ally_meepo
+}	
+
+Response meepo_enemy_ravenhook_blocks_meepo
+{
+	speak "meepo_unique_09" noscene
+	speak "meepo_unique_10" noscene
+
+}
+
+Rule meepo_enemy_ravenhook_blocks_meepo_rule
+{
+	criteria IsNotImp Summon EnemyHasMeepo IsTargetRavenhook IsBlockingMeepo ThisIsImportant
+	matchonce
+	response meepo_enemy_ravenhook_blocks_meepo
+}	
+
+Response meepo_ally_mazzie
+{
+	speak "meepo_unique_13" noscene
+	speak "meepo_unique_14" noscene
+}
+
+Rule meepo_ally_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasMazzie ThisIsImportant
+	matchonce
+	response meepo_ally_mazzie
+}	
+
+Response meepo_ally_legion_commander
+{
+	speak "meepo_unique_15" noscene
+
+}
+
+Rule meepo_ally_legion_commander_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasLegionCommander ThisIsImportant
+	matchonce
+	response meepo_ally_legion_commander
+}	
+
+Response meepo_ally_bounty_hunter
+{
+	speak "meepo_unique_16" noscene
+	speak "meepo_unique_17" noscene
+
+}
+
+Rule meepo_ally_bounty_hunter_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasBountyHunter ThisIsImportant
+	matchonce
+	response meepo_ally_bounty_hunter
+}	
+
+Response meepo_ally_enchantress
+{
+	speak "meepo_unique_18" noscene
+
+}
+
+Rule meepo_ally_enchantress_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasEnchantress ThisIsImportant
+	matchonce
+	response meepo_ally_enchantress
+}	
+
+Response meepo_ally_lich
+{
+	speak "meepo_unique_19" noscene
+
+}
+
+Rule meepo_ally_lich_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasLich AllyReadySacrifice ThisIsImportant
+	matchonce
+	response meepo_ally_lich
+}	
+
+Response meepo_ally_treant_protector
+{
+	speak "meepo_unique_20" noscene
+
+}
+
+Rule meepo_ally_treant_protector_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMeepo AllyHasTreantProtector ThisIsImportant
+	matchonce
+	response meepo_ally_treant_protector
+}	
+
 
 ////////////////////////////
 //PLAY SET ONE BLUE CARDS///
@@ -340,131 +480,184 @@ Rule heal_meepo_rule
 Response meepo_play_barracks
 {
 	speak "meepo_enigmatic_03" noscene 		
+	speak "meepo_debuff_enemy_09" noscene 		
+	speak "meepo_multi_damage_small_07" noscene 		
+	speak "meepo_multi_damage_small_09" noscene 		
+	speak "meepo_pleased_08" noscene 		
+	speak "meepo_arrogant_05" noscene 		
 }
 
 Rule meepo_play_barracks_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceBarracks ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceBarracks 
 	response meepo_play_barracks
 }
 
 Response meepo_play_fractured_timeline
 {
 	speak "meepo_angry_09" noscene 	
+	speak "meepo_debuff_enemy_02" noscene 	
+	speak "meepo_single_target_damage_06" noscene 	
+	speak "meepo_multi_damage_small_05" noscene 	
+	speak "meepo_enigmatic_04" noscene 	
+	speak "meepo_enigmatic_08" noscene 	
 	
 }
 
 Rule meepo_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceFracturedTimeline 
 	response meepo_play_fractured_timeline
 }
 
 Response meepo_play_path_of_the_wise
 {
 	speak "meepo_enigmatic_05" noscene 	
+	speak "meepo_debuff_enemy_05" noscene 	
+	speak "meepo_debuff_enemy_08" noscene 	
+	speak "meepo_multi_damage_small_01" noscene 	
+	speak "meepo_angry_06" noscene 	
+	speak "meepo_enigmatic_01" noscene 	
 	
 }
 
 Rule meepo_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourcePathOfTheWise 
 	response meepo_play_path_of_the_wise
 }
 
 Response meepo_play_firestorm
 {
 	speak "meepo_enigmatic_07" noscene 	
+	speak "meepo_single_target_damage_04" noscene 	
+	speak "meepo_multi_damage_small_10" noscene 	
+	speak "meepo_multi_damage_large_06" noscene 	
+	speak "meepo_multi_damage_large_07" noscene 	
+	speak "meepo_angry_03" noscene 	
 	
 }
 
 Rule meepo_play_firestorm_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceFirestorm ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceFirestorm 
 	response meepo_play_firestorm
 }
 
 Response meepo_play_ignite
 {
 	speak "meepo_single_target_damage_10" noscene 	
+	speak "meepo_single_target_damage_02" noscene 	
+	speak "meepo_single_target_damage_05" noscene 	
+	speak "meepo_multi_damage_small_08" noscene 	
+	speak "meepo_multi_damage_large_08" noscene 	
+	speak "meepo_angry_07" noscene 	
 	
 }
 
 Rule meepo_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceIgnite ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceIgnite 
 	response meepo_play_ignite
 }
 
 Response meepo_play_howling_mind
 {
 	speak "meepo_enigmatic_04" noscene 	
+	speak "meepo_concerned_01" noscene 	
+	speak "meepo_concerned_10" noscene 	
+	speak "meepo_arrogant_10" noscene 	
+	speak "meepo_enigmatic_06" noscene 	
+	speak "meepo_angry_08" noscene 	
 	
 }
 
 Rule meepo_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceHowlingMind 
 	response meepo_play_howling_mind
 }
 
 Response meepo_play_aghanims_sanctum
 {
 	speak "meepo_arrogant_01" noscene 	
+	speak "meepo_pleased_04" noscene 	
+	speak "meepo_pleased_05" noscene 	
+	speak "meepo_pleased_06" noscene 	
+	speak "meepo_enigmatic_02" noscene 	
+	speak "meepo_debuff_enemy_09" noscene 	
 	
 }
 
 Rule meepo_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceAghanimsSanctum 
 	response meepo_play_aghanims_sanctum
 }
 
 Response meepo_play_messenger_rookery
 {
 	speak "meepo_enigmatic_08" noscene 	
+	speak "meepo_buff_ally_02" noscene 	
+	speak "meepo_buff_ally_05" noscene 	
+	speak "meepo_buff_ally_09" noscene 	
+	speak "meepo_single_target_damage_01" noscene 	
+	speak "meepo_single_target_damage_09" noscene 	
 	
 }
 
 Rule meepo_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceMessengerRookery 
 	response meepo_play_messenger_rookery
 }
 
 Response meepo_play_glyph_of_confusion
 {
 	speak "meepo_arrogant_10" noscene 	
+	speak "meepo_debuff_enemy_04" noscene 	
+	speak "meepo_debuff_enemy_07" noscene 	
+	speak "meepo_multi_damage_small_04" noscene 	
+	speak "meepo_pleased_09" noscene 	
+	speak "meepo_angry_04" noscene 	
 	
 }
 
 Rule meepo_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceGlyphOfConfusion 
 	response meepo_play_glyph_of_confusion
 }
 
 Response meepo_play_watchtower
 {
 	speak "meepo_pleased_05" noscene 	
+	speak "meepo_multi_damage_small_03" noscene 	
+	speak "meepo_multi_damage_large_05" noscene 	
+	speak "meepo_pleased_03" noscene 	
+	speak "meepo_pleased_10" noscene 	
+	speak "meepo_multi_damage_large_08" noscene 	
 	
 }
 
 Rule meepo_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceWatchtower 
 	response meepo_play_watchtower
 }
 
 Response meepo_play_annihilation
 {
 	speak "meepo_multi_damage_large_01" noscene 	
+	speak "meepo_single_target_damage_07" noscene 	
+	speak "meepo_multi_damage_large_04" noscene 	
+	speak "meepo_angry_01" noscene 	
 	
 }
 
 Rule meepo_play_annihilation_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceAnnihilation ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMeepo IsSourceAnnihilation 
 	response meepo_play_annihilation
 }
 

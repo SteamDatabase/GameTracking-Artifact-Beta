@@ -10,9 +10,9 @@
 {
     margin-top: 20px;
     width: 100%;
-    border-bottom: 2px solid white;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
+    border-bottom: 1px solid #ffffff11;
+    //padding-bottom: 4px;
+    //margin-bottom: 4px;
 }
 
 .TitleBlock.FirstElement
@@ -23,8 +23,10 @@
 .TitleBlock Label
 {
     horizontal-align: left;
-    color: white;
+    color: uiNeutralGrey;
     font-size: 18px;
+	text-transform: uppercase;
+	margin-bottom: -5px;
 }
 
 .RemainingUnowned Label
@@ -39,17 +41,55 @@
 .DeckError
 {
     width: 100%;
-    margin-top: 2px;
+    margin-top: 6px;
     flow-children: right;
+}
+
+.DeckError Label
+{
+    text-overflow: shrink;
 }
 
 .DeckError .ErrorPip
 {
-    width: 4px;
-    height: 4px;
-    border: 1px solid white;
-    margin: 6px 8px 0px 4px;
-    vertical-align: top;
+    
+	margin-right: 8px;
+	margin-top: 2px;
+	margin-left: -2px;
+	
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	//background-color: green; 
+	background-repeat: no-repeat;
+	background-size: 21px 21px;
+	background-position: -2px -2px;
+    animation-name: ErrorPipAnimation;
+    animation-duration: 3s;
+    animation-delay: 0.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+	background-image: url("s2r://panorama/images/catalogue/deck_card_count_error_pip_bad_psd.vtex");
+}
+
+@keyframes 'ErrorPipAnimation'
+{
+    0%
+    {
+        box-shadow: #ff000033 -3px -3px 6px 6px; 
+		brightness: 1.2;
+    }
+    50%
+    {
+        box-shadow: #ff000000 -0px -0px 0px 0px; 
+		brightness: .3;
+    }
+	100%
+    {
+        box-shadow: #ff000033 -3px -3px 6px 6px; 
+		brightness: 1.2;
+    }
+  
 }
 
 .CardCountError
@@ -76,4 +116,11 @@
     vertical-align: center;
     margin-left: 4px;
     font-size: 18px;
+}
+
+.CardCountError .PriceLabel
+{
+    vertical-align: center;
+    margin-left: 4px;
+    margin-right: 4px;
 }

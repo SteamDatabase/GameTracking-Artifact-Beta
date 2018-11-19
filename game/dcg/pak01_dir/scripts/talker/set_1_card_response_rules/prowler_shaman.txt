@@ -2,6 +2,7 @@
 //**PROWLER SHAMAN - HERO//
 ////////////////////////
 
+WhitelistName "Whitelist Card 4000"
 
 ////////////////
 //EQUIP WEAPON//
@@ -281,7 +282,7 @@ Rule prowler_shaman_lane_damage_give_death_skull_rule
 //healed//
 //////////
 
-Response heal_sven
+Response heal_prowler
 {
 	speak "prowler_shaman_healed_01" noscene 
 	speak "prowler_shaman_healed_02" noscene 
@@ -292,13 +293,134 @@ Response heal_sven
 Rule heal_prowler_shaman_rule
 {
 	criteria IsNotImp Heal IsTargetProwlerShaman
-	response heal_sven
+	response heal_prowler
 }
 
 
 /////////////////////////
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
+
+Response prowler_shaman_ally_magnus
+{
+	speak "prowler_shaman_unique_01" noscene 	
+	speak "prowler_shaman_unique_02" noscene 	
+	speak "prowler_shaman_unique_03" noscene 	
+	speak "prowler_shaman_unique_06" noscene 	
+}
+
+Rule prowler_shaman_ally_magnus_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman AllyHasMagnus ThisIsImportant
+	response prowler_shaman_ally_magnus
+}
+
+Response prowler_shaman_ally_treant_protector
+{
+	speak "prowler_shaman_unique_04" noscene 	
+	speak "prowler_shaman_unique_05" noscene 	
+}
+
+Rule prowler_shaman_ally_treant_protector_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman AllyHasTreantProtector ThisIsImportant
+	matchonce
+	response prowler_shaman_ally_treant_protector
+}
+
+Response prowler_shaman_ally_enchantress
+{
+	speak "prowler_shaman_unique_07" noscene 	
+	
+}
+
+Rule prowler_shaman_ally_enchantress_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman AllyHasEnchantress ThisIsImportant
+	matchonce
+	response prowler_shaman_ally_enchantress
+}
+
+Response prowler_shaman_equip_shield_of_aquila
+{
+	speak "prowler_shaman_unique_08" noscene 
+	
+}
+
+Rule prowler_shaman_equip_shield_of_aquila_rule
+{
+	criteria IsNotImp  Buffed IsTargetProwlerShaman IsSourceShieldOfAquila
+	response prowler_shaman_equip_shield_of_aquila
+}
+
+Response prowler_shaman_equip_seraphim_shield
+{
+	speak "prowler_shaman_unique_09" noscene 
+	
+}
+
+Rule prowler_shaman_equip_seraphim_shield_rule
+{
+	criteria IsNotImp  Buffed IsTargetProwlerShaman IsSourceSeraphimShield
+	response prowler_shaman_equip_seraphim_shield
+}
+
+Response prowler_shaman_equip_horn_of_the_alpha
+{
+	speak "prowler_shaman_unique_10" noscene 
+	
+}
+
+Rule prowler_shaman_equip_horn_of_the_alpha_rule
+{
+	criteria IsNotImp  Buffed IsTargetProwlerShaman IsSourceHornOfTheAlpha
+	response prowler_shaman_equip_horn_of_the_alpha
+}
+
+Response prowler_shaman_enemy_marrowfell
+{
+	speak "prowler_shaman_unique_11" noscene 
+	speak "prowler_shaman_unique_12" noscene 
+	speak "prowler_shaman_unique_13" noscene 
+	
+}
+
+Rule prowler_shaman_enemy_marrowfell_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman EnemyHasFactionMarrowfellHunters
+	matchonce
+	response prowler_shaman_enemy_marrowfell
+}
+
+Response prowler_shaman_next_to_rebel_decoy
+{
+	speak "prowler_shaman_unique_14" noscene 
+	speak "prowler_shaman_unique_15" noscene 
+	speak "prowler_shaman_unique_16" noscene 
+	
+}
+
+Rule prowler_shaman_next_to_rebel_decoy_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman AllyHasRebelDecoy
+	matchonce
+	response prowler_shaman_next_to_rebel_decoy
+}
+
+Response prowler_shaman_ally_rix
+{
+	speak "prowler_shaman_unique_17" noscene 
+	speak "prowler_shaman_unique_18" noscene 
+	speak "prowler_shaman_unique_19" noscene 
+	speak "prowler_shaman_unique_20" noscene 
+}
+
+Rule prowler_shaman_ally_rix_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasProwlerShaman AllyHasRix
+	matchonce
+	response prowler_shaman_ally_rix
+}
 
 /////////////////////////////
 //PLAY SET ONE GREEN CARDS///
@@ -307,49 +429,56 @@ Rule heal_prowler_shaman_rule
 Response prowler_shaman_play_unearthed_secrets
 {
 	speak "prowler_shaman_enigmatic_08" noscene 	
+	speak "prowler_shaman_enigmatic_09" noscene 	
+	speak "prowler_shaman_cast_spell_08" noscene 	
 	
 }
 
 Rule prowler_shaman_play_unearthed_secrets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceUnearthedSecrets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceUnearthedSecrets 
 	response prowler_shaman_play_unearthed_secrets
 }
 
 Response prowler_shaman_play_path_of_the_dreamer
 {
 	speak "prowler_shaman_enigmatic_09" noscene 	
+	speak "prowler_shaman_enigmatic_06" noscene 	
+	speak "prowler_shaman_enigmatic_03" noscene 	
 	
 }
 
 Rule prowler_shaman_play_path_of_the_dreamer_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourcePathOfTheDreamer ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourcePathOfTheDreamer 
 	response prowler_shaman_play_path_of_the_dreamer
 }
 
 Response prowler_shaman_play_homefield_advantage
 {
 	speak "prowler_shaman_enigmatic_03" noscene 	
+	speak "prowler_shaman_enigmatic_07" noscene 	
+	speak "prowler_shaman_cast_spell_04" noscene 	
 	
 }
 
 Rule prowler_shaman_play_homefield_advantage_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceHomefieldAdvantage ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceHomefieldAdvantage 
 	response prowler_shaman_play_homefield_advantage
 }
 
 Response prowler_shaman_play_selemenes_favor
 {
 	speak "prowler_shaman_enigmatic_04" noscene 	
-	speak "prowler_shaman_enigmatic_06" noscene 	
+	speak "prowler_shaman_cast_spell_02" noscene 	
+	speak "prowler_shaman_cast_spell_07" noscene 	
 	
 }
 
 Rule prowler_shaman_play_selemenes_favor_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceSelemenesFavor ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceSelemenesFavor 
 	response prowler_shaman_play_selemenes_favor
 }
 
@@ -357,12 +486,13 @@ Response prowler_shaman_play_mist_of_avernus
 {
 	speak "prowler_shaman_cast_spell_06" noscene 	
 	speak "prowler_shaman_cast_spell_02" noscene 	
+	speak "prowler_shaman_angry_08" noscene 	
 	
 }
 
 Rule prowler_shaman_play_mist_of_avernus_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceMistOfAvernus ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceMistOfAvernus 
 	response prowler_shaman_play_mist_of_avernus
 }
 
@@ -370,37 +500,41 @@ Response prowler_shaman_play_altar_of_the_mad_moon
 {
 	speak "prowler_shaman_cast_spell_05" noscene 	
 	speak "prowler_shaman_buff_ally_03" noscene 	
+	speak "prowler_shaman_buff_ally_04" noscene 	
 	
 }
 
 Rule prowler_shaman_play_altar_of_the_mad_moon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceAltarOfTheMadMoon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceAltarOfTheMadMoon 
 	response prowler_shaman_play_altar_of_the_mad_moon
 }
 
 Response prowler_shaman_play_cheating_death
 {
-	speak "prowler_shaman_buff_ally_04" noscene 	
+	speak "prowler_shaman_buff_ally_06" noscene 	
 	speak "prowler_shaman_buff_ally_02" noscene 	
+	speak "prowler_shaman_buff_ally_05" noscene 
 	
 }
 
 Rule prowler_shaman_play_cheating_death_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceCheatingDeath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceCheatingDeath 
 	response prowler_shaman_play_cheating_death
 }
 
 Response prowler_shaman_play_verdant_refuge
 {
 	speak "prowler_shaman_buff_ally_07" noscene 	
+	speak "prowler_shaman_cast_spell_09" noscene 	
+	speak "prowler_shaman_cast_spell_01" noscene 	
 	
 }
 
 Rule prowler_shaman_play_verdant_refuge_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceVerdantRefuge ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceVerdantRefuge 
 	response prowler_shaman_play_verdant_refuge
 }
 
@@ -408,11 +542,12 @@ Response prowler_shaman_play_stars_align
 {
 	speak "prowler_shaman_arrogant_01" noscene 	
 	speak "prowler_shaman_arrogant_03" noscene 
+	speak "prowler_shaman_arrogant_04" noscene 
 	
 }
 
 Rule prowler_shaman_play_stars_align_rule
 {
-	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceStarsAlign ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasProwlerShaman IsSourceStarsAlign 
 	response prowler_shaman_play_stars_align
 }

@@ -1,0 +1,38 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    <include src="s2r://panorama/styles/bot_match.vcss_c" />
+    <include src="s2r://panorama/styles/play_shared.vcss_c" />
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+ </styles>
+
+	<DCGBotMatch hittest="false">
+		<Panel class="PlayBody ButtonsVisible">
+			<Label class="ContentsHeaderLabel" text="{s:contents_header}"/>
+			<Label class="ContentsLabel" text="#DCG_PlayAIGame_SelectYourDeck"/>
+			<DCGDeckLoader id="DeckLoaderPlayer" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseYourDeck )" SoundEventPrefix="DCG_UI.BotSolo" />
+		  	<Label class="ContentsLabel ExtraSpacingForLabel" text="#DCG_PlayAIGame_SelectAIDeck"/>
+			<DCGDeckLoader id="DeckLoaderAI" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseAIDeck )" SoundEventPrefix="DCG_UI.BotSolo_Rollover" />
+
+		  	<Panel id="TimerDifficultyContainer">
+				<Panel id="TimerSelectorPanel" onmouseover="UIShowTextTooltip( #DCG_PlayAIGame_ShotClock ) PlaySoundEffect( DCG_UI.BotSolo_Rollover_Timer )" onmouseout="UIHideTextTooltip()">
+					<ToggleButton id="AITimerToggleButton" onactivate="OnToggleAITimer()" allowtextselection="false">
+						<Label class="ContentsLabel" text="#DCG_PrivateLobby_TimerSelector" />
+					</ToggleButton>
+				</Panel>
+				<Panel id="DifficultySelectorPanel">
+					<Label class="DropDownSelectorText" text="#DCG_PlayAIGame_DifficultySelector" />
+					<DropDown id="DifficultySelector">
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Beginner" id="Beginner" />
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Vanilla" id="Vanilla" />
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Easy" id="Easy" />
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Normal" id="Normal" />
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Hard" id="Hard" />
+						<Label class="DifficultySelectorLabel" text="#DCG_PlayAIGame_Insane" id="Insane" />
+					</DropDown>
+				</Panel>
+			</Panel>
+		</Panel>
+		<CustomLayoutPanel id="ButtonContainer" layout="file://{resources}/layout/play_carousel_navigation_buttons.xml" />
+	</DCGBotMatch>
+</root>

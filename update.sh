@@ -5,7 +5,7 @@ cd "${0%/*}"
 
 echo "Processing Artifact..."
 
-#ProcessDepot ".so"
+ProcessDepot ".so"
 ProcessVPK
 
 while IFS= read -r -d '' file

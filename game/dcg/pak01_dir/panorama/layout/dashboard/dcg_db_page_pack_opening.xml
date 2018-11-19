@@ -1,0 +1,100 @@
+<root>
+  <styles>
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/dashboard/dcg_db_page_pack_opening.vcss_c" />
+    <include src="s2r://panorama/styles/card/card_set_rarity.vcss_c" />
+    <include src="s2r://panorama/styles/catalogue/catalogue.vcss_c" />
+  </styles>
+
+  <DCGPackOpeningPage class="DashboardPage">
+    <Panel id="PackOpeningBackground">
+      <Panel class="LetterBoxBlack TopLetterBox"/>
+      <Panel id="PackOpeningBackgroundImage"/>
+      <DCGScenePanel id="PackCardSceneBG" hittest="false" map="dcg_pack_opening_table_bg" camera="pack_mousemotion_camera" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>  
+      <Panel class="LetterBoxBlack BottomLetterBox"/>
+    </Panel> 
+    <DCGScenePanel id="PackCardScene" hittest="false" map="dcg_pack_opening_table" camera="pack_mousemotion_camera" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="true" yawmin="-10" yawmax="25" pitchmin="10" pitchmax="-20"/>
+      <Panel id="PackOpeningContainer">
+        <Panel id="CardSetLoreContainer">
+          <Panel id="CardSetLoreTitle"/>
+          <Label id="FeaturedEventNameLabel" class="FeaturedEventLabel TitleFont" text="#DCG_Gauntlet_Name_5" html="true" />
+          <Label id="CallToArmsDesc" class="CardSetLoreText" text ="#DCG_CallToArms_PackDesc" html="true"/>
+          <Button id="LoreButton" onactivate="DCGOnPlayLore()">
+            <Panel class="LoreVOButtonTextAndIconContainer">
+              <Label class="LoreButtonText" text="{s:lore_button_text}"/>
+              <Image class="PlayLoreIcon" src="s2r://panorama/images/catalogue/play_lore_icon_psd.vtex"/>
+            </Panel>
+          </Button>
+
+          <Panel id="CallToArmsComic1" class="ComicButton">
+            <Label text ="Comic 1 Image Button"/>
+          </Panel>
+          <Panel id="CallToArmsComic2" class="ComicButton">
+            <Label text ="Comic 2 Image Button"/>
+          </Panel>
+          
+          <DCGPurchaseBox id="PackPurchaseBox"/>
+        </Panel>
+        <Label id="NoPacksOwnedHint" class="HintClicked" text="#DCG_PackOpening_NoPacks"/>
+        
+
+        <Panel class="NPEContainer NPEVisible">          
+          <Label id="NPEWelcome" class="TrainingTitle" text="#DCG_NPE_Welcome"/>
+          <Panel class="NPEAfterOpenningContainer">
+            <Label id="NPETitle1" class="TrainingTitle NPEVisible1" text="#DCG_NPE_Starter1"/>
+            <Label id="NPEDeckDesc1" class="TrainingDescriptionText NPEVisible1" text ="#DCG_NPE_First_Deck_Desc"/>
+            <Label id="NPEDesc1" class="TrainingDescriptionText NPEVisible1" text ="#DCG_NPE_First_Match_Desc"/>
+            <Label id="NPETitle2" class="TrainingTitle NPEVisible2" text="#DCG_NPE_Starter2"/>
+            <Label id="NPEDeckDesc2" class="TrainingDescriptionText NPEVisible2" text ="#DCG_NPE_Second_Deck_Desc"/>
+            <Label id="NPEDesc2" class="TrainingDescriptionText NPEVisible2" text ="#DCG_NPE_Second_Match_Desc"/>
+            <Label id="NPETitle3" class="TrainingTitle NPEVisible3" text="#DCG_NPE_Training_Complete"/>
+            <Label id="NPEDesc3" class="TrainingDescriptionText NPEVisible3" text ="#DCG_NPE_Training_Complete_Desc"/>
+            <Button class="NPEButton NPEVisible1" onactivate="DCGAdvanceTutorialStart()">
+              <Panel hittest="false">
+                <Label text="#DCG_NPE_Begin_Training"/>
+              </Panel>
+            </Button>
+            <Button class="NPEButton NPEVisible2" onactivate="DCGAdvanceTutorialStart()">
+              <Panel hittest="false">
+                <Label text="#DCG_NPE_Begin_Training"/>
+              </Panel>
+            </Button>
+            <Button class="NPEButton NPEVisible3" onactivate="DCGAdvanceTutorialStart()">
+              <Panel hittest="false">
+                <Label text="#DCG_NPE_ClaimDecksAndPacks"/>
+              </Panel>
+            </Button>
+            <Label id="NPEMatchNum1" class="MatchNum NPEVisible1" text ="#DCG_NPE_First_Match"/>
+            <Label id="NPEMatchNum2" class="MatchNum NPEVisible2" text ="#DCG_NPE_Second_Match"/>
+          </Panel>
+        </Panel>
+      
+        <Panel id="PackCards" hittest="false">
+          <Panel id="PackRow1">
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 0 )" onactivate="DCGOnOpenedPackCardClicked( 0 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 1 )" onactivate="DCGOnOpenedPackCardClicked( 1 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 2 )" onactivate="DCGOnOpenedPackCardClicked( 2 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 3 )" onactivate="DCGOnOpenedPackCardClicked( 3 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 4 )" onactivate="DCGOnOpenedPackCardClicked( 4 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 5 )" onactivate="DCGOnOpenedPackCardClicked( 5 )"/>
+          </Panel>
+          <Panel id="PackRow2">
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 6 )" onactivate="DCGOnOpenedPackCardClicked( 6 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 7 )" onactivate="DCGOnOpenedPackCardClicked( 7 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 8 )" onactivate="DCGOnOpenedPackCardClicked( 8 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 9 )" onactivate="DCGOnOpenedPackCardClicked( 9 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 10 )" onactivate="DCGOnOpenedPackCardClicked( 10 )"/>
+            <Panel class="OpenedCard" onmouseover="DCGOnOpenedPackCardMouseOver( 11 )" onactivate="DCGOnOpenedPackCardClicked( 11 )"/>
+          </Panel>
+        </Panel>
+
+        <CustomLayoutPanel id="MainMenuButton" layout="file://{resources}/layout/main_menu_snippet.xml" onactivate="DCGConfirmSkipTutorial()" />
+      </Panel>
+      <Panel id="UnopenedPackClickRegion" hittest="true"/>
+      <Panel id="NoMorePackClickRegion" hittest="true" onactivate="RemoveStyle( NoPacksOwnedHint, HintClicked); AsyncEvent( 0.1, AddStyle( NoPacksOwnedHint, HintClicked ) );"/>
+      <Panel id="PostOpeningButtonContainer">
+        <TextButton id="DoneButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenPacksDone" onactivate="DCGOnOpenPacksDone()"/>
+        <TextButton id="NextPackButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenNextPack" onactivate="DCGOnOpenPacksNextPack()"/>
+      </Panel>      
+    </DCGPackOpeningPage>
+</root>

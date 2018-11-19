@@ -2,6 +2,8 @@
 //**MAGNUS - HERO////////
 /////////////////////////
 
+WhitelistName "Whitelist Card 10067"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -132,12 +134,11 @@ Response magnus_use_include
 {
 	speak "magnus_use_include_01" noscene 
 	speak "magnus_use_include_02" noscene 
-	speak "magnus_use_include_03" noscene 
 }
 
 Rule magnus_use_include_rule
 {
-	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower ThisIsImportant
 	response magnus_use_include
 }
 
@@ -321,7 +322,7 @@ Response magnus_use_include_on_ursa
 
 Rule magnus_use_include_on_ursa_rule
 {
-	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetUrsa
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetUrsa ThisIsImportant
 	response magnus_use_include_on_ursa
 }
 
@@ -334,9 +335,108 @@ Response magnus_use_include_on_sven
 
 Rule magnus_use_include_on_sven_rule
 {
-	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetSven
+	criteria IsNotImp PlayCard AllyHasMagnus IsSourceEmpower IsTargetSven ThisIsImportant
 	response magnus_use_include_on_sven
 }
+
+Response magnus_ally_treant_protector
+{
+	speak "magnus_unique_06" noscene
+	speak "magnus_unique_08" noscene
+	
+}
+
+Rule magnus_ally_treant_protector_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus AllyHasTreantProtector ThisIsImportant 
+	matchonce
+	response magnus_ally_treant_protector
+}	
+
+Response magnus_ally_treant_protector_and_vhoul
+{
+	speak "magnus_unique_07" noscene
+	
+}
+
+Rule magnus_ally_treant_protector_and_vhoul_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus AllyHasTreantProtector AllyHasFactionVhoulRebellion ThisIsImportant
+	matchonce
+	response magnus_ally_treant_protector_and_vhoul
+}	
+
+Response magnus_ally_rix
+{
+	speak "magnus_unique_09" noscene
+	speak "magnus_unique_10" noscene
+	speak "magnus_unique_11" noscene
+	
+}
+
+Rule magnus_ally_rix_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus AllyHasRix ThisIsImportant
+	matchonce
+	response magnus_ally_rix
+}	
+
+Response magnus_ally_legion_commander
+{
+	speak "magnus_unique_12" noscene
+	speak "magnus_unique_13" noscene
+	speak "magnus_unique_14" noscene
+	
+}
+
+Rule magnus_ally_legion_commander_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus AllyHasLegionCommander ThisIsImportant
+	matchonce
+	response magnus_ally_legion_commander
+}	
+
+Response magnus_ally_vhoul_rebellion
+{
+	speak "magnus_unique_15" noscene
+	speak "magnus_unique_16" noscene
+	speak "magnus_unique_17" noscene
+	
+}
+
+Rule magnus_ally_vhoul_rebellion_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus AllyHasFactionMultVhoulRebellion ThisIsImportant
+	matchonce
+	response magnus_ally_vhoul_rebellion
+}	
+
+Response magnus_enemy_red_mist
+{
+	speak "magnus_unique_18" noscene
+	speak "magnus_unique_19" noscene
+	
+}
+
+Rule magnus_enemy_red_mist_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus EnemyHasFactionMultRedMist ThisIsImportant
+	matchonce
+	response magnus_enemy_red_mist
+}	
+
+Response magnus_enemy_bronze_legion
+{
+	speak "magnus_unique_20" noscene
+	
+}
+
+Rule magnus_enemy_bronze_legion_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasMagnus EnemyHasFactionMultBronzeLegion ThisIsImportant
+	matchonce
+	response magnus_enemy_bronze_legion
+}	
 
 
 /////////////////////////////
@@ -346,108 +446,144 @@ Rule magnus_use_include_on_sven_rule
 Response magnus_play_unearthed_secrets
 {
 	speak "magnus_cast_spell_09" noscene 	
+	speak "magnus_equip_generic_weapon_03" noscene 	
+	speak "magnus_equip_generic_accessory_04" noscene 	
+	speak "magnus_permanent_health_01" noscene 	
+	speak "magnus_cast_spell_10" noscene 	
 	
 }
 
 Rule magnus_play_unearthed_secrets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceUnearthedSecrets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceUnearthedSecrets 
 	response magnus_play_unearthed_secrets
 }
 
 Response magnus_play_path_of_the_dreamer
 {
 	speak "magnus_cast_spell_09" noscene 	
+	speak "magnus_equip_generic_accessory_05" noscene 	
+	speak "magnus_taunt_generic_03" noscene 	
+	speak "magnus_permanent_armor_05" noscene 	
+	speak "magnus_equip_generic_accessory_04" noscene 	
 	
 }
 
 Rule magnus_play_path_of_the_dreamer_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourcePathOfTheDreamer ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourcePathOfTheDreamer 
 	response magnus_play_path_of_the_dreamer
 }
 
 Response magnus_play_homefield_advantage
 {
 	speak "magnus_cast_spell_08" noscene 	
+	speak "magnus_equip_generic_weapon_04" noscene 	
+	speak "magnus_equip_generic_armor_01" noscene 	
+	speak "magnus_potential_kill_04" noscene 	
+	speak "magnus_potential_save_01" noscene 	
 	
 }
 
 Rule magnus_play_homefield_advantage_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceHomefieldAdvantage ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceHomefieldAdvantage 
 	response magnus_play_homefield_advantage
 }
 
 Response magnus_play_selemenes_favor
 {
 	speak "magnus_cast_spell_05" noscene 	
+	speak "magnus_equip_generic_accessory_02" noscene 	
+	speak "magnus_healed_05" noscene 	
+	speak "magnus_permanent_health_01" noscene 	
+	speak "magnus_potential_kill_03" noscene 	
 	
 }
 
 Rule magnus_play_selemenes_favor_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceSelemenesFavor ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceSelemenesFavor 
 	response magnus_play_selemenes_favor
 }
 
 Response magnus_play_mist_of_avernus
 {
 	speak "magnus_cast_spell_08" noscene 	
+	speak "magnus_taunt_generic_01" noscene 	
+	speak "magnus_taunt_generic_02" noscene 	
+	speak "magnus_taunt_generic_07" noscene 	
+	speak "magnus_taunt_generic_10" noscene 	
 	
 }
 
 Rule magnus_play_mist_of_avernus_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceMistOfAvernus ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceMistOfAvernus 
 	response magnus_play_mist_of_avernus
 }
 
 Response magnus_play_altar_of_the_mad_moon
 {
 	speak "magnus_cast_spell_01" noscene 	
+	speak "magnus_taunt_generic_08" noscene 	
+	speak "magnus_taunt_generic_10" noscene 	
+	speak "magnus_taunt_generic_03" noscene 	
+	speak "magnus_potential_kill_01" noscene 	
 	
 }
 
 Rule magnus_play_altar_of_the_mad_moon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceAltarOfTheMadMoon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceAltarOfTheMadMoon 
 	response magnus_play_altar_of_the_mad_moon
 }
 
 Response magnus_play_cheating_death
 {
 	speak "magnus_cast_spell_04" noscene 	
+	speak "magnus_equip_generic_armor_04" noscene 	
+	speak "magnus_potential_save_02" noscene 	
+	speak "magnus_potential_kill_01" noscene 	
+	speak "magnus_permanent_health_02" noscene 	
 	
 }
 
 Rule magnus_play_cheating_death_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceCheatingDeath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceCheatingDeath 
 	response magnus_play_cheating_death
 }
 
 Response magnus_play_verdant_refuge
 {
 	speak "magnus_cast_spell_03" noscene 	
+	speak "magnus_potential_kill_05" noscene 	
+	speak "magnus_potential_save_03" noscene 	
+	speak "magnus_permanent_armor_03" noscene 	
+	speak "magnus_permanent_attack_02" noscene 	
 	
 }
 
 Rule magnus_play_verdant_refuge_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceVerdantRefuge ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceVerdantRefuge 
 	response magnus_play_verdant_refuge
 }
 
 Response magnus_play_stars_align
 {
 	speak "magnus_cast_spell_02" noscene 	
+	speak "magnus_permanent_attack_01" noscene 	
+	speak "magnus_permanent_attack_05" noscene 	
+	speak "magnus_permanent_armor_05" noscene 	
+	speak "magnus_permanent_health_04" noscene 	
 	
 }
 
 Rule magnus_play_stars_align_rule
 {
-	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceStarsAlign ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasMagnus IsSourceStarsAlign 
 	response magnus_play_stars_align
 }
 

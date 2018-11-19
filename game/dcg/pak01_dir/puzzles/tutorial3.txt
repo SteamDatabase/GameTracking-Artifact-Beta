@@ -1,0 +1,1014 @@
+"tutorial3"
+{
+	"name"				"#DCG_Puzzle_TutorialPart1_Title"
+	"description"		"#DCG_Puzzle_TutorialPart1_Desc"
+	"DefaultSelection"	"1"
+	"sections"
+	{
+
+		"part1"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart1_Title"
+			"description"	"#DCG_Puzzle_TutorialPart1_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"ADCJcURIH0De7sBKAGQeF1BQWbdAVhHRwFIMQIECG0CTgIfRlBCdQFSZWQvR3JlZW4gQnJhd2xlcg__"
+				}
+				"deck_ai"
+				{
+					"use_deck"		"ADCJRwSJX2Dc7wBEAN4XUFBcN0BQmQBQWABRCgBCgN0AWUBbQFDbwEISEJsdWUvQmxhY2sgQ29udHJvbA__"
+				}
+				"set1"									"1"
+				"cards_per_turn_ai"						"2" // Don't give AI extra cards in tutorial
+				"heroes_initial_lane_random"			"0"
+				"hero1_player"							"4003" //Keefe
+				"hero2_player"							"10054" //Sven
+				"hero3_player"							"4000" //Fahrvan
+				"hero1_ai"								"10059" //Necrophose
+				"hero2_ai"								"10062" //Skywrath Mage
+				"hero3_ai"								"4005" //Debbi
+				"pathing_force"							"Forward Path"
+				"secretshop_force"						"10223"
+				"creeps_lanes_random"					"0"
+				"creeps_lanes_player_1each"				"1"
+				"force_combat_manager_rand_to_zero"		"1"
+				"no_shotclock"							"1"
+				"no_player_info_ai"						"1"
+				//"collapse_game_result"					"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10104" //Bronze Legionnaire
+				"draw"	"10104" //Bronze Legionnaire
+				"draw"	"10311" //Arm the Rebellion
+				"draw"	"4002" //Prowler Vanguard
+				"draw"	"10119" //Selfish Cleric
+
+				"draw"	"10282" //Enrage
+				"draw"	"10330" //God's Strength
+
+				"draw"	"10366" //New Orders
+				"draw"	"10111" //Satyr Duelyst
+			}
+			"deck_order_ai"
+			{
+				"draw"	"10402" //Tower Barrage
+				"draw"	"10402" //Tower Barrage
+				"draw"	"10352" //Lightning Strike
+				"draw"	"10352" //Lightning Strike
+				"draw"	"10092" //Oglodi Vandal
+
+				"draw"	"10128" //Untested Grunt
+				"draw"	"10128" //Untested Grunt
+
+				"draw"	"4007" //No Accident
+				"draw"	"4007" //No Accident
+
+				"draw"	"10160" //Ignite
+				"draw"	"4007" //No Accident
+
+				"draw"	"10161" //Trebuchets
+				"draw"	"10129" //Assassin's Apprentice
+			}
+			"sequences"
+			{
+				"start"
+				{
+					//"on_next_lane 2.0"			"goto intro_text"
+					"on_next_lane 2.0"			"goto enter_lane1"
+					//"> 1.5"						"load_section part2" // skip ahead for testing!
+					//"> 1.5"						"goto dynamic_stuff" // skip ahead for testing!
+					//"> 0.4"						"convar scale_ai_difficulty 0.1"
+					"> 0.4"						"rule creeps_lanes_random 1"
+					"> 0.4"						"rule creeps_lanes_player_1each 0"
+					"> 0.4"						"rule force_combat_manager_rand_to_zero 0"
+					"> 0.4"						"lock_hand"
+
+					// Reset all the stuff we need to teach
+					"> 0.4"						"convar dcg_npe_teach_ancient 1"
+					"> 0.4"						"convar dcg_npe_teach_active_ability 1"
+					"> 0.4"						"convar dcg_npe_teach_active_ability_small 0"
+					"> 0.4"						"convar dcg_npe_teach_hand_scrolling 1"
+					"> 0.4"						"convar dcg_npe_teach_lane_scrolling 1"
+					"> 0.4"						"convar dcg_npe_teach_fountain 1"
+					"> 0.4"						"convar dcg_npe_teach_improvement_played 1"
+					"> 0.4"						"convar dcg_npe_teach_equipment_permanent 1"
+					"> 0.4"						"convar dcg_npe_teach_crosslane 1"
+					"> 0.4"						"convar dcg_npe_teach_cancel_action 1"
+				}
+
+				"intro_text"
+				{
+					"auto 2.0"					"npehelper #DCG_NPE_Intro01,0,0,0,n,c,c"
+					"> 4.5"						"popup_unstall"
+					"> 4.5"						"concommand pause"
+					"on_message_dismissed 1.5"	"goto enter_lane1"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+				}
+
+				"enter_lane1"
+				{
+					"on_camera_lane1 4.5"		"goto npe_lesson"
+					">"							"lock_hand"
+					">"							"lock_camera"
+					">"							"lock isPassCoin 1"
+				}
+
+				"npe_lesson"
+				{
+					"auto"						"npehelper #DCG_NPE_ZoomOut isLane 1"
+					">"							"unlock_camera"
+					"on_zoom_out 1.5"			"goto strategic_view"
+					">"							"npehelper remove isLane 1"
+					">"							"lock_camera"
+				}
+
+				"strategic_view"
+				{
+					"auto"						"npehelper #DCG_NPE_TowersEachLane,0,200,0,n,c"
+					">"							"particleevent PE_LANE_TARGETING_ENABLED isLane 1 laneID 1"
+					">"							"particleevent PE_LANE_TARGETING_ENABLED isLane 1 laneID 2"
+					">"							"particleevent PE_LANE_TARGETING_ENABLED isLane 1 laneID 3"
+					"> 3.0"						"npehelper #DCG_NPE_TheirTowers isTower 1 isDire 1 laneID 1"
+					"> 3.5"						"npehelper #DCG_NPE_TheirTowers isTower 1 isDire 1 laneID 2"
+					"> 4.0"						"npehelper #DCG_NPE_TheirTowers isTower 1 isDire 1 laneID 3"
+					"> 5.0"						"npehelper #DCG_NPE_YourTowers isTower 1 isDire 0 laneID 1"
+					"> 5.5"						"npehelper #DCG_NPE_YourTowers isTower 1 isDire 0 laneID 2"
+					"> 6.0"						"npehelper #DCG_NPE_YourTowers isTower 1 isDire 0 laneID 3"
+					"> 8.0"						"npehelper #DCG_NPE_ZoomIn isLane 1 laneID 1"
+					"> 8.0"						"unlock_camera"
+					"on_camera_lane1 1.5"		"goto tower_health"
+					">"							"lock_camera"
+					">"							"npehelper remove"
+					"> 0.5"						"particleevent PE_LANE_TARGETING_DISABLED isLane 1 laneID 1"
+					"> 0.5"						"particleevent PE_LANE_TARGETING_DISABLED isLane 1 laneID 2"
+					"> 0.5"						"particleevent PE_LANE_TARGETING_DISABLED isLane 1 laneID 3"
+				}
+
+				"tower_health"
+				{
+					"auto"						"npehelper #DCG_NPE_TowerHealth,3.6,0,0 isTower 1 isDire 1"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto destroy_any2"
+					">"							"npehelper remove isTower 1 isDire 1"
+				}
+
+				"destroy_any2"
+				{
+					"auto"						"npehelper #DCG_NPE_DestroyAny2 isTower 1 isDire 1"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto hero_color"
+					">"							"npehelper remove isTower 1 isDire 1"
+				}
+
+				"hero_color"
+				{
+					"auto"						"npehelper #DCG_NPE_HeroColor isHero 1 isRed 1 laneID 1"
+					"> 2.5"						"goto card_color"
+				}
+
+				"card_color"
+				{
+					"auto"						"npehelper #DCG_NPE_CardColor zoneID Hand cardID 10104 orderCardEnteredHand 6"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto play_creep"
+					">"							"npehelper remove isHero 1 isRed 1 laneID 1"
+					">"							"npehelper remove zoneID Hand cardID 10104"
+				}
+
+				"play_creep"
+				{
+					"auto"						"npehelper #DCG_NPE_PlayACreep zoneID Hand cardID 10104 orderCardEnteredHand 6"
+					">"							"unlock_hand"
+					"on_card_cast 2.5"			"goto attack_tower"
+					">"							"lock_hand"
+					">"							"npehelper remove cardID 10104"
+				}
+
+				"attack_tower"
+				{
+					"auto"						"npehelper #DCG_NPE_CreepHittingTower,6.3,1,0,l isTower 1 isDire 1"
+					"> 2.0"						"popup_unstall"
+					">"							"particleevent PE_TUTORIAL_ATTACK_ENEMY_TOWER cardID 10104 zoneID Combat"
+					"on_message_dismissed 1.0"	"goto combat"
+					">"							"npehelper remove isTower 1 isDire 1"
+					">"							"particleevent PE_TUTORIAL_HIGHLIGHT_REMOVE_ALL cardID 10104 zoneID Combat"
+				}
+
+				"combat"
+				{
+					"auto"						"npehelper #DCG_NPE_Combat,-0.4,1.4,0,l cardID 1006 ownerID 1 laneID 1"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto pass_coin"
+					">"							"npehelper remove cardID 1006 ownerID 1 laneID 1"
+				}
+
+				"pass_coin"
+				{
+					"auto"						"npehelper #DCG_NPE_Pass isPassCoin 1"
+					">"							"unlock isPassCoin 1"
+					"on_next_lane 11.0"			"goto last_action"
+					">"							"npehelper remove isPassCoin 1"
+					">"							"lock isPassCoin 1"
+					">"							"unlock_camera"
+					"> 5.0"						"lock_camera"
+					">"							"npehelper remove isPassCoin 1"
+				}
+
+				"last_action"
+				{
+					"auto"						"npehelper #DCG_NPE_LastAction,3.6,0,0 isTower 1 isDire 0 laneID 2"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto last_action2"
+					">"							"npehelper remove isTower 1 isDire 0 laneID 2"
+				}
+
+				"last_action2"
+				{
+					"auto"						"npehelper #DCG_NPE_LastAction2,-35,100,0,r,r"
+					"on_viewed_card_history 1.0"	"goto damage_preview"
+					">"							"npehelper remove"
+				}
+
+				"damage_preview"
+				{
+					"auto"						"npehelper #DCG_NPE_DamagePreview,3.2,-10.1,0,l isCreep 1 ownerID 1 laneID 2"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto death_preview"
+					">"							"npehelper remove isCreep 1 ownerID 1 laneID 2"
+				}
+
+				"death_preview"
+				{
+					"auto"						"npehelper #DCG_NPE_DeathPreview,-0.4,-4.3,0,r isCreep 1 ownerID 0 laneID 2"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto glowing_border"
+					">"							"npehelper remove isCreep 1 ownerID 0 laneID 2"
+				}
+
+				"glowing_border"
+				{
+					"auto"						"npehelper #DCG_NPE_GlowingBorder zoneID Hand cardID 10104"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 0.5"	"goto glowing_border2"
+					">"							"npehelper remove cardID 10104"
+				}
+
+				"glowing_border2"
+				{
+					"auto"						"npehelper #DCG_NPE_GlowingBorder2 zoneID Hand cardID 10104"
+					">"							"unlock_hand"
+					"on_card_cast 0.01"			"goto wait_for_lane3"
+					">"							"npehelper remove"
+				}
+
+				"wait_for_lane3"
+				{
+					"auto"						"unlock isPassCoin 1"
+					"on_next_lane 6.0"			"goto mana"
+					">"							"unlock_camera"
+					">"							"lock isPassCoin 1"
+					"> 3.0"						"lock_camera"
+				}
+
+				"mana"
+				{
+					"auto"						"npehelper #DCG_NPE_CurrentMana,-4.3,-0.7,0,r isTower 1 isDire 0 laneID 3"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto hero_color2"
+					">"							"npehelper remove isTower 1 isDire 0 laneID 3"
+				}
+
+				"hero_color2"
+				{
+					"auto"						"npehelper #DCG_NPE_HeroColor2 isHero 1 isGreen 1 laneID 3"
+					"> 2.5"						"goto card_color2"
+				}
+
+				"card_color2"
+				{
+					"auto"						"npehelper #DCG_NPE_CardCost,-3.2,0.0,0,d zoneID Hand cardID 10311"
+					"> 2.0"						"popup_unstall"
+					"> 2.0"						"unlock_camera"
+					"on_message_dismissed 1.0"	"goto no_actions"
+					">"							"npehelper remove isHero 1 isGreen 1 laneID 3"
+					">"							"npehelper remove zoneID Hand cardID 10311"
+				}
+
+				"no_actions"
+				{
+					"auto"						"npehelper #DCG_NPE_NoActions isPassCoin 1"
+					">"							"unlock isPassCoin 1"
+					"on_store_openned 6.0"		"goto gold"
+					">"							"lock isPassCoin 1"
+					">"							"npehelper remove isPassCoin 1"
+					"on_store_closed 0.01"		"goto deployment" //failsafe
+					">"							"npehelper #DCG_NPE_YourGold,-290,-45,0,d,r,b"
+					">"							"lock isPassCoin 1"
+				}
+
+				"gold"
+				{
+					"auto"						"npehelper #DCG_NPE_YourGold,-290,-45,0,d,r,b"
+					"> 4.0"						"npehelper #DCG_NPE_Inspection zoneID Shop isRandomShopItem 1 ownerID 1"
+					"> 4.0"						"unlock isPassCoin 1"
+					"on_store_closed 0.01"		"goto deployment"
+					">"							"npehelper remove"
+					">"							"lock isPassCoin 1"
+				}
+
+				"deployment"
+				{
+					"auto 6.0"					"npehelper #DCG_NPE_DeployHero cardID 10014"
+					"on_heroes_deployed 1.0"	"goto deployment_choice"
+					">"							"npehelper remove cardID 10014"
+				}
+
+				"deployment_choice"
+				{
+					"auto"						"npehelper #DCG_NPE_RememberColors cardID 10054"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 0.01"	"goto wait_next_round"
+					">"							"npehelper remove cardID 10054"
+				}
+
+				"wait_next_round"
+				{
+					"auto"						"unlock isPassCoin 1"
+					"on_next_lane 21.0"			"goto max_mana"
+					">"							"rule pathing_force"
+					">"							"rule secretshop_force"
+					">"							"lock_hand"
+					">"							"lock isPassCoin 1"
+				}
+
+				"max_mana"
+				{
+					"auto"						"npehelper #DCG_NPE_MaxMana,-4.3,-2.3,0,r isTower 1 isDire 0 laneID 1"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 0.1"	"goto type_icon"
+					">"							"npehelper remove isTower 1 isDire 0 laneID 1"
+				}
+
+				"type_icon"
+				{
+					"auto"						"npehelper #DCG_NPE_SpellIcon,-3.0,-1.2,0 zoneID Hand ownerID 1 cardID 10282"
+					"> 0.3"						"npehelper #DCG_NPE_SpellIcon,-3.0,-1.2,0 zoneID Hand ownerID 1 cardID 10330"
+					"> 0.6"						"npehelper #DCG_NPE_CreepIcon,-3.0,-1.2,0 zoneID Hand ownerID 1 cardID 4002"
+					"> 0.9"						"npehelper #DCG_NPE_CreepIcon,-3.0,-1.2,0 zoneID Hand ownerID 1 cardID 10119"
+					"> 1.2"						"npehelper #DCG_NPE_SpellIcon,-3.0,-1.2,0 zoneID Hand ownerID 1 cardID 10311"
+					"> 2.5"						"goto type_icon2"
+				}
+
+				"type_icon2"
+				{
+					"auto"						"npehelper #DCG_NPE_TypeIcons,0,-400,0,n,c,b"
+					"> 2.0"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"unlock_hand"
+					">"							"unlock isPassCoin 1"
+				}
+
+				"dynamic_stuff"
+				{
+					"auto"							"unlock isPassCoin 1"
+					">"								"unlock_hand"
+					">"								"unlock_camera"
+					"> 180.0"						"convar dcg_npe_teach_active_ability_small 1"
+
+					// These are conditional on these convars so they only happen once
+					"on_dire_tower_destroyed"		"goto ancient dcg_npe_teach_ancient"
+					"on_local_ability_ready"		"goto active_ability dcg_npe_teach_active_ability"
+					"on_local_ability_ready"		"goto active_ability_small dcg_npe_teach_active_ability_small"
+					"on_hand_scrollable"			"goto hand_scrolling dcg_npe_teach_hand_scrolling"
+					"on_lane_scrollable"			"goto lane_scrolling dcg_npe_teach_lane_scrolling"
+					"on_radient_hero_killed"		"goto fountain dcg_npe_teach_fountain"
+					"on_improvement_played"			"goto improvement_played dcg_npe_teach_improvement_played"
+					"on_equipment_card_ready"		"goto equipment_permanent dcg_npe_teach_equipment_permanent"
+					"on_local_crosslane_card_ready"	"goto crosslane dcg_npe_teach_crosslane"
+					"on_2_step_action"				"goto cancel_action dcg_npe_teach_cancel_action"
+
+					"on_victory"					"goto ending"
+					"on_failure"					"goto ending"
+				}
+
+				"ancient"
+				{
+					"auto 2.1"					"npehelper #DCG_NPE_Ancient isAncient 1 isDire 1"
+					"> 2.8"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"> 2.8"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto ancient2"
+					">"							"npehelper remove isAncient 1 isDire 1"
+					">"							"concommand unpause"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"ancient2"
+				{
+					"auto"						"npehelper #DCG_NPE_Ancient2 isAncient 1 isDire 1"
+					"> 1.2"						"popup_unstall"
+					"> 1.2"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isAncient 1 isDire 1"
+					">"							"concommand unpause"
+					">"							"convar dcg_npe_teach_ancient 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"active_ability"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 1"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 2"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 3"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_ability_used 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability 0" // Remember to not teach this again
+					">"							"convar dcg_npe_teach_active_ability_small 1"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability 0" // Remember to not teach this again
+					">"							"convar dcg_npe_teach_active_ability_small 1"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"active_ability_small"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 1"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 2"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 3"
+					"> 10.0"					"npehelper remove isActivatedAbility 1 ownerID 1"
+					"> 10.0"					"convar dcg_npe_teach_active_ability_small 0"
+					"> 10.5"					"goto dynamic_stuff"
+					"on_ability_used 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability_small 0"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"hand_scrolling"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_HandScrolling,0,-400,0,n,c,b"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"convar dcg_npe_teach_hand_scrolling 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"lane_scrolling"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_LaneScrolling,0,0,0,n,c,c"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"convar dcg_npe_teach_lane_scrolling 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"fountain"
+				{
+					"auto 3.0"					"npehelper #DCG_NPE_Fountain,75,115,0,l"
+					"> 4.0"						"popup_unstall"
+					"> 4.0"						"concommand pause"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto fountain2"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"fountain2"
+				{
+					"auto"						"npehelper #DCG_NPE_Fountain2,75,115,0,l"
+					"> 1.0"						"popup_unstall"
+					"> 1.0"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+					">"							"convar dcg_npe_teach_fountain 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"improvement_played"
+				{
+					"auto 0.2"					"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 1"
+					"> 0.2"						"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 2"
+					"> 0.2"						"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 3"
+					"> 1.2"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"> 0.8"						"lock_camera"
+					"on_message_dismissed 0.5"	"goto improvement_played2"
+					">"							"npehelper remove"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"improvement_played2"
+				{
+					"auto"						"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 1"
+					">"							"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 2"
+					">"							"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 3"
+					"> 1.2"						"popup_unstall"
+					"on_viewed_card_history 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					"> 0.1"						"unlock_camera"
+					"> 0.2"						"move_camera_to_active_lane"
+					">"							"convar dcg_npe_teach_improvement_played 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"equipment_permanent"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_EquipmentPermanent zoneID Hand isItem 1 isConsumable 0 ownerID 1"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto equipment_permanent2"
+					">"							"npehelper remove zoneID Hand isItem 1 isConsumable 0"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"equipment_permanent2"
+				{
+					"auto"						"npehelper #DCG_NPE_EquipmentPermanent2 zoneID Hand isItem 1 isConsumable 0 ownerID 1"
+					"> 3.0"						"popup_unstall"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove zoneID Hand isItem 1 isConsumable 0"
+					">"							"convar dcg_npe_teach_equipment_permanent 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"crosslane"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_CrosslaneCard,-3.0,0.0,0 zoneID Hand isCrosslane 1 ownerID 1"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto crosslane2"
+					">"							"npehelper remove isCrosslane 1 ownerID 1"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"crosslane2"
+				{
+					"auto"						"npehelper #DCG_NPE_CrosslaneCard2 zoneID Hand isCrosslane 1 ownerID 1"
+					">"							"unlock_hand"
+					"on_card_cast 0.1"			"goto dynamic_stuff"
+					">"							"npehelper remove isCrosslane 1 ownerID 1"
+					">"							"convar dcg_npe_teach_crosslane 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"cancel_action"
+				{
+					"auto"						"npehelper #DCG_NPE_CancelAction isPassCoin 1"
+					"on_card_played 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isPassCoin 1"
+					">"							"convar dcg_npe_teach_cancel_action 0" // Remember to not teach this again
+					"on_action_cancelled 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isPassCoin 1"
+					">"							"convar dcg_npe_teach_cancel_action 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"ending"
+				{
+					"auto"							"concommand dcg_new_player 2"
+					">"								"concommand host_writeconfig"
+					">"								"npehelper remove"
+
+					// Outro doesn't work because the hud hides
+					//"auto 1.0"					"npehelper #DCG_NPE_Outro01,0,0,0,n,c,c"
+					//"> 2.5"						"popup_unstall"
+					//"> 2.5"						"concommand pause"
+					//"on_message_dismissed 1.5"	"load_section part2"
+					//">"							"npehelper remove"
+					//">"							"concommand unpause"
+				}
+			}
+		}
+
+		"part2"
+		{
+			"name"			"#DCG_Puzzle_TutorialPart2_Title"
+			"description"	"#DCG_Puzzle_TutorialPart2_Desc"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"ADCJRwSJX2Dc7wBEAN4XUFBcN0BQmQBQWABRCgBCgN0AWUBbQFDbwEISEJsdWUvQmxhY2sgQ29udHJvbA__"
+				}
+				"deck_ai"
+				{
+					"use_deck"		"ADCJcURIH0De7sBKAGQeF1BQWbdAVhHRwFIMQIECG0CTgIfRlBCdQFSZWQvR3JlZW4gQnJhd2xlcg__"
+				}
+				"set1"									"1"
+				"cards_per_turn_ai"						"2" // Don't give AI extra cards in tutorial
+				
+				"hero1_player"							"10059" //Necrophose
+				"hero2_player"							"10062" //Skywrath Mage
+				"hero3_player"							"4005" //Debbi
+				"hero1_ai"								"4000" //Fahrvan
+				"hero2_ai"								"10054" //Sven
+				"hero3_ai"								"4003" //Keefe
+				"no_shotclock"							"1"
+				//"collapse_game_result"					"1"
+			}
+			"deck_order_player"
+			{
+				"draw"	"10160" //Ignite
+				"draw"	"10355" //Dimensional Portal
+				"draw"	"10355" //Dimensional Portal
+				"draw"	"10128" //Untested Grunt
+				"draw"	"10092" //Oglodi Vandal
+
+				"draw"	"10165" //Iron Fog Goldmine
+				"draw"	"10307" //Foresight
+
+				"draw"	"10160" //Ignite
+				"draw"	"10063" //Mystic Flare
+
+				"draw"	"10063" //Mystic Flare
+				"draw"	"10165" //Iron Fog Goldmine
+			}
+			"deck_order_ai"
+			{
+				"draw"	"10127" //Ogre Conscript
+				"draw"	"10330" //God's Strength
+				"draw"	"10330" //God's Strength
+				"draw"	"10297" //Defensive Stance
+				"draw"	"10297" //Defensive Stance
+
+				"draw"	"10366" //New Orders
+				"draw"	"10113" //Hellbear Crippler
+
+				"draw"	"10366" //New Orders
+				"draw"	"10113" //Hellbear Crippler
+			}
+			"sequences"
+			{
+				"start"
+				{
+					//"on_next_lane 2.0"			"goto intro_text"
+					"on_next_lane 2.0"			"goto enter_lane1"
+					//"> 0.4"						"convar scale_ai_difficulty 0.1"
+
+					// Reset a few things to reteach
+					"> 0.4"						"convar dcg_npe_teach_active_ability 1"
+					"> 0.4"						"convar dcg_npe_teach_active_ability_small 0"
+					"> 0.4"						"convar dcg_npe_teach_hand_scrolling 1"
+					"> 0.4"						"convar dcg_npe_teach_lane_scrolling 1"
+					"> 0.4"						"convar dcg_npe_teach_improvement_played 1"
+					"> 0.4"						"convar dcg_npe_teach_crosslane 1"
+				}
+
+				"intro_text"
+				{
+					"auto 2.0"					"npehelper #DCG_NPE_Intro02,0,0,0,n,c,c"
+					"> 4.5"						"popup_unstall"
+					"> 4.5"						"concommand pause"
+					"on_message_dismissed 1.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+				}
+
+				"enter_lane1"
+				{
+					"on_camera_lane1 4.5"		"goto remember_this_stuff"
+					">"							"lock_hand"
+					">"							"lock_camera"
+					">"							"lock isPassCoin 1"
+				}
+
+				"remember_this_stuff"
+				{
+					"auto 2.0"					"npehelper #DCG_NPE_RememberThisStuff,0,0,0,n,c,c"
+					"> 4.5"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto remember_this_stuff2"
+					">"							"npehelper remove"
+				}
+
+				"remember_this_stuff2"
+				{
+					"auto"						"npehelper #DCG_NPE_RememberThisStuff2,0,0,0,n,c,c"
+					"> 4.5"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto remember_this_stuff3"
+					">"							"npehelper remove"
+				}
+
+				"remember_this_stuff3"
+				{
+					"auto"						"npehelper #DCG_NPE_RememberThisStuff3,0,0,0,n,c,c"
+					"> 4.5"						"popup_unstall"
+					"on_message_dismissed 1.0"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"unlock isPassCoin 1"
+					">"							"unlock_hand"
+					">"							"unlock_camera"
+				}
+
+				"dynamic_stuff"
+				{
+					"auto"							"unlock isPassCoin 1"
+					">"								"unlock_hand"
+					">"								"unlock_camera"
+					"> 180.0"						"convar dcg_npe_teach_active_ability_small 1"
+
+					// These are conditional on these convars so they only happen once
+					"on_dire_tower_destroyed"		"goto ancient dcg_npe_teach_ancient"
+					"on_local_ability_ready"		"goto active_ability dcg_npe_teach_active_ability"
+					"on_local_ability_ready"		"goto active_ability_small dcg_npe_teach_active_ability_small"
+					"on_hand_scrollable"			"goto hand_scrolling dcg_npe_teach_hand_scrolling"
+					"on_lane_scrollable"			"goto lane_scrolling dcg_npe_teach_lane_scrolling"
+					"on_radient_hero_killed"		"goto fountain dcg_npe_teach_fountain"
+					"on_improvement_played"			"goto improvement_played dcg_npe_teach_improvement_played"
+					"on_equipment_card_ready"		"goto equipment_permanent dcg_npe_teach_equipment_permanent"
+					"on_local_crosslane_card_ready"	"goto crosslane dcg_npe_teach_crosslane"
+					"on_2_step_action"				"goto cancel_action dcg_npe_teach_cancel_action"
+
+					"on_victory"					"goto ending"
+					"on_failure"					"goto ending"
+				}
+
+				"ancient"
+				{
+					"auto 2.1"					"npehelper #DCG_NPE_Ancient isAncient 1 isDire 1"
+					"> 2.8"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"> 2.8"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto ancient2"
+					">"							"npehelper remove isAncient 1 isDire 1"
+					">"							"concommand unpause"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"ancient2"
+				{
+					"auto"						"npehelper #DCG_NPE_Ancient2 isAncient 1 isDire 1"
+					"> 1.2"						"popup_unstall"
+					"> 1.2"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isAncient 1 isDire 1"
+					">"							"concommand unpause"
+					">"							"convar dcg_npe_teach_ancient 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"active_ability"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 1"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 2"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbility,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 3"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_ability_used 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability 0" // Remember to not teach this again
+					">"							"convar dcg_npe_teach_active_ability_small 1"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability 0" // Remember to not teach this again
+					">"							"convar dcg_npe_teach_active_ability_small 1"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"active_ability_small"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 1"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 2"
+					"> 1.5"						"npehelper #DCG_NPE_ActiveAbilityReady,0,4.5,0 isActivatedAbility 1 ownerID 1 currentCooldown 0 laneID 3"
+					"> 10.0"					"npehelper remove isActivatedAbility 1 ownerID 1"
+					"> 10.0"					"convar dcg_npe_teach_active_ability_small 0"
+					"> 10.5"					"goto dynamic_stuff"
+					"on_ability_used 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isActivatedAbility 1 ownerID 1"
+					">"							"convar dcg_npe_teach_active_ability_small 0"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"hand_scrolling"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_HandScrolling,0,-400,0,n,c,b"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"convar dcg_npe_teach_hand_scrolling 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"lane_scrolling"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_LaneScrolling,0,0,0,n,c,c"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"convar dcg_npe_teach_lane_scrolling 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"fountain"
+				{
+					"auto 3.0"					"npehelper #DCG_NPE_Fountain,75,115,0,l"
+					"> 4.0"						"popup_unstall"
+					"> 4.0"						"concommand pause"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto fountain2"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"fountain2"
+				{
+					"auto"						"npehelper #DCG_NPE_Fountain2,75,115,0,l"
+					"> 1.0"						"popup_unstall"
+					"> 1.0"						"concommand pause"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					">"							"concommand unpause"
+					">"							"convar dcg_npe_teach_fountain 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"improvement_played"
+				{
+					"auto 0.2"					"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 1"
+					"> 0.2"						"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 2"
+					"> 0.2"						"npehelper #DCG_NPE_ImprovementPlayed isImprovement 1 zoneID Improvements laneID 3"
+					"> 1.2"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"> 0.8"						"lock_camera"
+					"on_message_dismissed 0.5"	"goto improvement_played2"
+					">"							"npehelper remove"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"improvement_played2"
+				{
+					"auto"						"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 1"
+					">"							"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 2"
+					">"							"npehelper #DCG_NPE_ImprovementPlayed2 isImprovement 1 zoneID Improvements laneID 3"
+					"> 1.2"						"popup_unstall"
+					"on_viewed_card_history 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove"
+					"> 0.1"						"unlock_camera"
+					"> 0.2"						"move_camera_to_active_lane"
+					">"							"convar dcg_npe_teach_improvement_played 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"equipment_permanent"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_EquipmentPermanent zoneID Hand isItem 1 isConsumable 0 ownerID 1"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto equipment_permanent2"
+					">"							"npehelper remove zoneID Hand isItem 1 isConsumable 0"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"equipment_permanent2"
+				{
+					"auto"						"npehelper #DCG_NPE_EquipmentPermanent2 zoneID Hand isItem 1 isConsumable 0 ownerID 1"
+					"> 3.0"						"popup_unstall"
+					"on_message_dismissed 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove zoneID Hand isItem 1 isConsumable 0"
+					">"							"convar dcg_npe_teach_equipment_permanent 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"crosslane"
+				{
+					"auto 1.5"					"npehelper #DCG_NPE_CrosslaneCard,-3.0,0.0,0 zoneID Hand isCrosslane 1 ownerID 1"
+					"> 3.5"						"popup_unstall"
+					">"							"lock isPassCoin 1"
+					">"							"lock_hand"
+					"on_message_dismissed 0.5"	"goto crosslane2"
+					">"							"npehelper remove isCrosslane 1 ownerID 1"
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"crosslane2"
+				{
+					"auto"						"npehelper #DCG_NPE_CrosslaneCard2 zoneID Hand isCrosslane 1 ownerID 1"
+					">"							"unlock_hand"
+					"on_card_cast 0.1"			"goto dynamic_stuff"
+					">"							"npehelper remove isCrosslane 1 ownerID 1"
+					">"							"convar dcg_npe_teach_crosslane 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"cancel_action"
+				{
+					"auto"						"npehelper #DCG_NPE_CancelAction isPassCoin 1"
+					"on_card_played 0.5"		"goto dynamic_stuff"
+					">"							"npehelper remove isPassCoin 1"
+					">"							"convar dcg_npe_teach_cancel_action 0" // Remember to not teach this again
+					"on_action_cancelled 0.5"	"goto dynamic_stuff"
+					">"							"npehelper remove isPassCoin 1"
+					">"							"convar dcg_npe_teach_cancel_action 0" // Remember to not teach this again
+
+					"on_victory"				"goto ending"
+					"on_failure"				"goto ending"
+				}
+
+				"ending"
+				{
+					"auto"							"concommand dcg_new_player 3"
+					">"								"concommand host_writeconfig"
+					">"								"npehelper remove"
+
+					// Outro doesn't work because the hud hides
+					//"auto 1.0"					"npehelper #DCG_NPE_Outro01,0,0,0,n,c,c"
+					//"> 2.5"						"popup_unstall"
+					//"> 2.5"						"concommand pause"
+					//"on_message_dismissed 1.5"	"load_section part2"
+					//">"							"npehelper remove"
+					//">"							"concommand unpause"
+				}
+			}
+		}
+
+	}
+}

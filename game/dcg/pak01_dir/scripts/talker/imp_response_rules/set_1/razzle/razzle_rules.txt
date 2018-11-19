@@ -1,0 +1,6009 @@
+// rule naming conv: card category/card name/core concept/player context/variant or chain info
+// var naming conv: player context/variable type/card category/card name/variant or chain info/player context
+// p_var = player centric variable //
+// o_var = opponent centric variable //
+// Pp = "player plays" //
+// Pr = "player reacts" //
+// Op = "opponent plays" //
+// Or = "opponent reacts" //
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ANNIHILATION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: annihilation: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAnnihilation
+
+    Response imps_razzle_annihilation_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAnnihilation Death isTargetNotLocal
+
+    // sharing responses:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAnnihilation
+
+    Response imps_razzle_annihilation_Pp_Or
+
+}
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Pp_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAnnihilation Death isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: annihilation: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAnnihilation
+
+    Response imps_razzle_annihilation_Op_Pr
+
+}
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Op_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAnnihilation Death isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAnnihilation
+
+    Response imps_razzle_annihilation_Op_Or
+
+}
+
+Rule rule_imps_razzle_annihilation_PLAYCARD_Op_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAnnihilation Death isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  APHOTIC_SHIELD
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: aphotic_shield: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAphoticShield IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Pp_Pr_buff_opponent
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAphoticShield Buffed IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Pp_Pr_buffed_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAphoticShield Buffed IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAphoticShield IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: aphotic_shield: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAphoticShield IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_aphotic_shield_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAphoticShield IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  APOTHEOSIS_BLADE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: apotheosis_blade: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_apotheosis_blade_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceApotheosisBlade IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_apotheosis_blade_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceApotheosisBlade IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: apotheosis_blade: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_apotheosis_blade_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceApotheosisBlade IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_apotheosis_blade_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceApotheosisBlade IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ARCANE_ASSAULT
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: arcane_assault: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_arcane_assault_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceArcaneAssault IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_arcane_assault_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceArcaneAssault IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: arcane_assault: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_arcane_assault_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceArcaneAssault IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_arcane_assault_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceArcaneAssault IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ASSASSINATE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: assassinate: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAssassinate IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAssassinate Death LocalChangeMomentum_Pos OpponentChangeMomentum_Neg isTargetNotLocal
+
+    // sharing responses:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAssassinate IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Pp_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAssassinate Death LocalChangeMomentum_Pos OpponentChangeMomentum_Neg isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: assassinate: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAssassinate IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Op_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAssassinate Death LocalChangeMomentum_Neg OpponentChangeMomentum_Pos isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAssassinate IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+Rule rule_imps_razzle_assassinate_PLAYCARD_Op_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAssassinate Death LocalChangeMomentum_Neg OpponentChangeMomentum_Pos isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ASSURED_DESTRUCTION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: assured_destruction: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assured_destruction_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAssuredDestruction IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_assured_destruction_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_assured_destruction_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_assured_destruction_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_assured_destruction_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assured_destruction_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAssuredDestruction IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: assured_destruction: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assured_destruction_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAssuredDestruction IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_assured_destruction_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAssuredDestruction IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ASTRAL_IMPRISONMENT
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: astral_imprisonment: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_astral_imprisonment_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAstralImprisonment IsSourceLocal
+
+    Response imps_razzle_astral_imprisonment_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_astral_imprisonment_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAstralImprisonment IsSourceLocal
+
+    Response imps_razzle_astral_imprisonment_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: astral_imprisonment: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_astral_imprisonment_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAstralImprisonment IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_astral_imprisonment_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAstralImprisonment IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  AT_ANY_COST
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: at_any_cost: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAtAnyCost IsTargetNotLocal
+
+    Response imps_razzle_at_any_cost_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAtAnyCost Death isTargetNotLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAtAnyCost IsTargetNotLocal
+
+    Response imps_razzle_at_any_cost_Pp_Or
+
+}
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Pp_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAtAnyCost Death isTargetNotLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: at_any_cost: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceAtAnyCost IsTargetLocal
+
+    Response imps_razzle_at_any_cost_Op_Pr
+
+}
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Op_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceAtAnyCost Death isTargetLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceAtAnyCost IsTargetLocal
+
+    Response imps_razzle_at_any_cost_Op_Or
+
+}
+
+Rule rule_imps_razzle_at_any_cost_PLAYCARD_Op_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceAtAnyCost Death isTargetLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  BERSERKERS_CALL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: berserkers_call: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_berserkers_call_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBerserkersCall IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_berserkers_call_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBerserkersCall IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: berserkers_call: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_berserkers_call_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBerserkersCall IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_berserkers_call_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBerserkersCall IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  BLOOD_RAGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: blood_rage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_blood_rage_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBloodRage IsSourceLocal
+
+    Response imps_razzle_blood_rage_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_blood_rage_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBloodRage IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: blood_rage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_blood_rage_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBloodRage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_blood_rage_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBloodRage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  BOLT_OF_DAMOCLES
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: bolt_of_damocles: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBoltOfDamocles IsSourceLocal
+
+    ApplyContext "p_var_override_razzle_bolt_of_damocles_force_react_to_damage_Pp_Pr:1:5"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Pp_Pr_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsLocalImp p_var_override_razzle_bolt_of_damocles_force_react_to_damage_Pp_Pr
+
+    Response imps_razzle_bolt_of_damocles_Pp_Pr_force_react_to_damage
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBoltOfDamocles IsSourceLocal
+
+    ApplyContext "o_var_override_razzle_bolt_of_damocles_force_react_to_damage_Pp_Or:1:5"
+    ApplyContextToWorld
+
+    Response imps_razzle_bolt_of_damocles_Pp_Or
+
+}
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Pp_Or_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsOpponentImp o_var_override_razzle_bolt_of_damocles_force_react_to_damage_Pp_Or
+
+    Response imps_razzle_bolt_of_damocles_Pp_Or_force_react_to_damage
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: bolt_of_damocles: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceBoltOfDamocles IsSourceNotLocal
+
+    ApplyContext "p_var_override_razzle_bolt_of_damocles_force_react_to_damage_Op_Pr:1:5"
+    ApplyContextToWorld
+
+    Response imps_razzle_bolt_of_damocles_Op_Pr
+
+}
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Op_Pr_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsLocalImp p_var_override_razzle_bolt_of_damocles_force_react_to_damage_Op_Pr
+
+    Response imps_razzle_bolt_of_damocles_Op_Pr_force_react_to_damage
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceBoltOfDamocles IsSourceNotLocal
+
+    ApplyContext "o_var_override_razzle_bolt_of_damocles_force_react_to_damage_Op_Or:1:5"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+Rule rule_imps_razzle_bolt_of_damocles_PLAYCARD_Op_Or_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsOpponentImp o_var_override_razzle_bolt_of_damocles_force_react_to_damage_Op_Or
+
+    Response imps_razzle_bolt_of_damocles_Op_Or_force_react_to_damage
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  BORROWED_TIME
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: borrowed_time: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_borrowed_time_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceBorrowedTime IsTargetLocal
+
+    Response imps_razzle_borrowed_time_Pp_Pr
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: borrowed_time: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_borrowed_time_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceBorrowedTime IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_borrowed_time_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceBorrowedTime IsTargetNotLocal
+
+    Response imps_razzle_borrowed_time_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CAUGHT_UNPREPARED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: caught_unprepared: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_caught_unprepared_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCaughtUnprepared IsTargetNotLocal
+
+    Response imps_razzle_caught_unprepared_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_caught_unprepared_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCaughtUnprepared IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: caught_unprepared: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_caught_unprepared_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCaughtUnprepared IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_caught_unprepared_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCaughtUnprepared IsTargetLocal
+
+    Response imps_razzle_caught_unprepared_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CHAIN_FROST
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: chain_frost: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_chain_frost_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceChainFrost IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_chain_frost_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceChainFrost IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: chain_frost: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_chain_frost_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceChainFrost IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_chain_frost_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceChainFrost IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CHEATING_DEATH
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: cheating_death: Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cheating_death_SUMMON_Pp_Pr
+{
+
+    Criteria Summon IsNotCombat IsActionPhase IsLocalImp IsSourceCheatingDeath IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_cheating_death_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_cheating_death_SUMMON_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_cheating_death_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_cheating_death_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cheating_death_SUMMON_Pp_Or
+{
+
+    Criteria Summon IsNotCombat IsActionPhase IsOpponentImp IsSourceCheatingDeath IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: cheating_death: Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cheating_death_SUMMON_Op_Pr
+{
+
+    Criteria Summon IsNotCombat IsActionPhase IsLocalImp IsSourceCheatingDeath IsSourceNotLocal
+
+    Response imps_razzle_cheating_death_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cheating_death_SUMMON_Op_Or
+{
+
+    Criteria Summon IsNotCombat IsActionPhase IsOpponentImp IsSourceCheatingDeath IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CLEAR_THE_DECK
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: clear_the_deck: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_clear_the_deck_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceClearTheDeck IsSourceLocal
+
+    Response imps_razzle_clear_the_deck_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_clear_the_deck_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceClearTheDeck IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: clear_the_deck: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_clear_the_deck_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceClearTheDeck IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_clear_the_deck_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceClearTheDeck IsSourceNotLocal
+
+    Response imps_razzle_clear_the_deck_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CLOAK_OF_ENDLESS_CARNAGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: cloak_of_endless_carnage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cloak_of_endless_carnage_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCloakOfEndlessCarnage IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_cloak_of_endless_carnage_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_cloak_of_endless_carnage_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_cloak_of_endless_carnage_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_cloak_of_endless_carnage_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cloak_of_endless_carnage_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCloakOfEndlessCarnage IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: cloak_of_endless_carnage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cloak_of_endless_carnage_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCloakOfEndlessCarnage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_cloak_of_endless_carnage_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCloakOfEndlessCarnage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  CORROSIVE_MIST
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: corrosive_mist: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCorrosiveMist IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceCorrosiveMist Death isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCorrosiveMist IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Pp_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceCorrosiveMist Death isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: corrosive_mist: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCorrosiveMist IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Op_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceCorrosiveMist Death isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCorrosiveMist IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+Rule rule_imps_razzle_corrosive_mist_PLAYCARD_Op_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceCorrosiveMist Death isTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  COUP_DE_GRACE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: coup_de_grace: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCoupDeGrace IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceCoupDeGrace Death LocalChangeMomentum_Pos OpponentChangeMomentum_Neg isTargetNotLocal
+
+    // response has chain:
+    Response imps_razzle_coup_de_grace_Pp_Pr_death_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Pp_Pr_death_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_coup_de_grace_Pp_Pr_death_check IsLocalImp
+
+    Response imps_razzle_coup_de_grace_Pp_Pr_death_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCoupDeGrace IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: coup_de_grace: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceCoupDeGrace IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_coup_de_grace_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceCoupDeGrace IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DIABOLIC_REVELATION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: diabolic_revelation: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_diabolic_revelation_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDiabolicRevelation IsSourceLocal
+
+    Response imps_razzle_diabolic_revelation_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_diabolic_revelation_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDiabolicRevelation IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: diabolic_revelation: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_diabolic_revelation_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDiabolicRevelation IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_diabolic_revelation_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDiabolicRevelation IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DIRTY_DEEDS
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: dirty_deeds: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_dirty_deeds_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDirtyDeeds IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_dirty_deeds_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDirtyDeeds IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: dirty_deeds: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_dirty_deeds_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDirtyDeeds IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_dirty_deeds_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDirtyDeeds IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DIVINE_INTERVENTION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: divine_intervention: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_intervention_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDivineIntervention IsSourceLocal
+
+    Response imps_razzle_divine_intervention_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_intervention_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDivineIntervention IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: divine_intervention: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_intervention_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDivineIntervention IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_intervention_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDivineIntervention IsSourceNotLocal
+
+    Response imps_razzle_divine_intervention_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DIVINE_PURPOSE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: divine_purpose: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_purpose_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDivinePurpose IsTargetLocal
+
+    Response imps_razzle_divine_purpose_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_purpose_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDivinePurpose IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: divine_purpose: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_purpose_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDivinePurpose IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_divine_purpose_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDivinePurpose IsTargetNotLocal
+
+    Response imps_razzle_divine_purpose_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DOUBLE_EDGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: double_edge: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_double_edge_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDoubleEdge IsTargetLocal
+
+    Response imps_razzle_double_edge_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_double_edge_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDoubleEdge IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: double_edge: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_double_edge_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDoubleEdge IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_double_edge_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDoubleEdge IsTargetNotLocal
+
+    Response imps_razzle_double_edge_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  DUEL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: duel: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_duel_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDuel IsSourceLocal
+
+    Response imps_razzle_duel_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_duel_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDuel IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: duel: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_duel_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceDuel IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_duel_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceDuel IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ECHO_SLAM
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: echo_slam: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_echo_slam_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceEchoSlam IsSourceLocal
+
+    Response imps_razzle_echo_slam_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_echo_slam_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceEchoSlam IsSourceLocal
+
+    Response imps_razzle_echo_slam_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: echo_slam: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_echo_slam_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceEchoSlam IsSourceNotLocal
+
+    // response has chain:
+    Response imps_razzle_echo_slam_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_echo_slam_PLAYCARD_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_echo_slam_Op_Pr_ IsLocalImp
+
+    Response imps_razzle_echo_slam_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_echo_slam_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceEchoSlam IsSourceNotLocal
+
+    Response imps_razzle_echo_slam_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ECLIPSE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: eclipse: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_eclipse_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceEclipse IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_eclipse_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceEclipse IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: eclipse: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_eclipse_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceEclipse IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_eclipse_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceEclipse IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  EMISSARY_OF_THE_QUORUM
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: emissary_of_the_quorum: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceEmissaryOfTheQuorum IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Pp_Pr_buff_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceEmissaryOfTheQuorum Buffed IsTargetLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceEmissaryOfTheQuorum IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: emissary_of_the_quorum: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceEmissaryOfTheQuorum IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Op_Pr_buff_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceEmissaryOfTheQuorum IsSourceNotLocal Buffed  IsTargetNotLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_emissary_of_the_quorum_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceEmissaryOfTheQuorum IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ESCAPE_ROUTE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: escape_route: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_escape_route_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceEscapeRoute IsSourceLocal
+
+    Response imps_razzle_escape_route_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_escape_route_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceEscapeRoute IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: escape_route: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_escape_route_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceEscapeRoute IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_escape_route_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceEscapeRoute IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  FINGER_OF_DEATH
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: finger_of_death: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_finger_of_death_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceFingerOfDeath IsTargetNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_finger_of_death_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceFingerOfDeath IsTargetNotLocal
+
+    Response imps_razzle_finger_of_death_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: finger_of_death: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_finger_of_death_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceFingerOfDeath IsTargetLocal
+
+    Response imps_razzle_finger_of_death_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_finger_of_death_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceFingerOfDeath IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  FISSURE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: fissure: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fissure_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceFissure IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_fissure_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_fissure_USEABILITY_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_fissure_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_fissure_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fissure_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceFissure IsSourceLocal
+
+    Response imps_razzle_fissure_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: fissure: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fissure_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceFissure IsSourceNotLocal
+
+    // response has chain:
+    Response imps_razzle_fissure_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_fissure_USEABILITY_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_fissure_Op_Pr_ IsLocalImp
+
+    Response imps_razzle_fissure_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fissure_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceFissure IsSourceNotLocal
+
+    Response imps_razzle_fissure_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  FOG_OF_WAR
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: fog_of_war: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fog_of_war_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFogOfWar IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fog_of_war_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFogOfWar IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: fog_of_war: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fog_of_war_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFogOfWar IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fog_of_war_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFogOfWar IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  FOUNTAIN_FLASK
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: fountain_flask: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fountain_flask_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFountainFlask IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_fountain_flask_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_fountain_flask_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_fountain_flask_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_fountain_flask_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fountain_flask_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFountainFlask IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: fountain_flask: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fountain_flask_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFountainFlask IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_fountain_flask_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFountainFlask IsTargetNotLocal
+
+    Response imps_razzle_fountain_flask_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  FRIENDLY_FIRE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: friendly_fire: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_friendly_fire_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFriendlyFire IsSourceLocal
+
+    Response imps_razzle_friendly_fire_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_friendly_fire_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFriendlyFire IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: friendly_fire: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_friendly_fire_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceFriendlyFire IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_friendly_fire_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceFriendlyFire IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  GLYPH_OF_CONFUSION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: glyph_of_confusion: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_glyph_of_confusion_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceGlyphOfConfusion IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_glyph_of_confusion_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_glyph_of_confusion_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_glyph_of_confusion_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_glyph_of_confusion_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_glyph_of_confusion_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceGlyphOfConfusion IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: glyph_of_confusion: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_glyph_of_confusion_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceGlyphOfConfusion IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_glyph_of_confusion_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceGlyphOfConfusion IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  GUST
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: gust: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_gust_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceGust IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_gust_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_gust_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_gust_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_gust_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_gust_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceGust IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: gust: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_gust_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceGust IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_gust_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceGust IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  HAND_OF_GOD
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: hand_of_god: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_hand_of_god_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceHandOfGod IsSourceLocal
+
+    Response imps_razzle_hand_of_god_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_hand_of_god_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceHandOfGod IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: hand_of_god: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_hand_of_god_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceHandOfGod IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_hand_of_god_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceHandOfGod IsSourceNotLocal
+
+    Response imps_razzle_hand_of_god_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  HEAD_SHOT
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: head_shot: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_head_shot_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceHeadShot IsTargetNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_head_shot_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceHeadShot IsTargetNotLocal
+
+    Response imps_razzle_head_shot_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: head_shot: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_head_shot_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceHeadShot IsTargetLocal
+
+    Response imps_razzle_head_shot_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_head_shot_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceHeadShot IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  HORN_OF_THE_ALPHA
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: horn_of_the_alpha: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceHornOfTheAlpha IsSourceLocal
+
+    Response imps_razzle_horn_of_the_alpha_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Pp_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceHornOfTheAlpha Summon IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_horn_of_the_alpha_Pp_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Pp_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_horn_of_the_alpha_Pp_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_horn_of_the_alpha_Pp_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceHornOfTheAlpha IsSourceLocal
+
+    Response imps_razzle_horn_of_the_alpha_Pp_Or
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Pp_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceHornOfTheAlpha Summon IsTargetLocal
+
+    Response imps_razzle_horn_of_the_alpha_Pp_Or_summon_check
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: horn_of_the_alpha: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceHornOfTheAlpha IsSourceNotLocal
+
+    Response imps_razzle_horn_of_the_alpha_Op_Pr
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Op_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceHornOfTheAlpha Summon IsTargetNotLocal
+
+    // response has chain:
+    Response imps_razzle_horn_of_the_alpha_Op_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Op_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_horn_of_the_alpha_Op_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_horn_of_the_alpha_Op_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceHornOfTheAlpha IsSourceNotLocal
+
+    Response imps_razzle_horn_of_the_alpha_Op_Or
+
+}
+
+Rule rule_imps_razzle_horn_of_the_alpha_USEABILITY_Op_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceHornOfTheAlpha Summon IsTargetNotLocal
+
+    Response imps_razzle_horn_of_the_alpha_Op_Or_summon_check
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  LIGHTNING_STRIKE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: lightning_strike: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceLightningStrike IsSourceLocal
+
+    ApplyContext "p_var_override_razzle_lightning_strike_force_react_to_damage_Pp_Pr:1:5"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Pp_Pr_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsLocalImp p_var_override_razzle_lightning_strike_force_react_to_damage_Pp_Pr
+
+    Response imps_razzle_lightning_strike_Pp_Pr_force_react_to_damage
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceLightningStrike IsSourceLocal
+
+    ApplyContext "o_var_override_razzle_lightning_strike_force_react_to_damage_Pp_Or:1:5"
+    ApplyContextToWorld
+
+    Response imps_razzle_lightning_strike_Pp_Or
+
+}
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Pp_Or_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsOpponentImp o_var_override_razzle_lightning_strike_force_react_to_damage_Pp_Or
+
+    Response imps_razzle_lightning_strike_Pp_Or_force_react_to_damage
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: lightning_strike: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceLightningStrike IsSourceNotLocal
+
+    ApplyContext "p_var_override_razzle_lightning_strike_force_react_to_damage_Op_Pr:1:5"
+    ApplyContextToWorld
+
+    Response imps_razzle_lightning_strike_Op_Pr
+
+}
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Op_Pr_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsLocalImp p_var_override_razzle_lightning_strike_force_react_to_damage_Op_Pr
+
+    Response imps_razzle_lightning_strike_Op_Pr_force_react_to_damage
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceLightningStrike IsSourceNotLocal
+
+    ApplyContext "o_var_override_razzle_lightning_strike_force_react_to_damage_Op_Or:1:5"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+Rule rule_imps_razzle_lightning_strike_PLAYCARD_Op_Or_override_force_react_to_damage
+{
+
+    Criteria Damage  ThisIsImportant IsOpponentImp o_var_override_razzle_lightning_strike_force_react_to_damage_Op_Or
+
+    Response imps_razzle_lightning_strike_Op_Or_force_react_to_damage
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  MERCENARY_EXILES
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: mercenary_exiles: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceMercenaryExiles IsSourceLocal  AllyGoldIsGreaterThanOrEqualTo20
+
+    // response has chain:
+    Response imps_razzle_mercenary_exiles_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_mercenary_exiles_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_mercenary_exiles_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Pp_Pr_low_money
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceMercenaryExiles IsSourceLocal  AllyGoldIsLessThanOrEqualTo1
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceMercenaryExiles IsSourceLocal  AllyGoldIsGreaterThanOrEqualTo20
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Pp_Or_low_money
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceMercenaryExiles IsSourceLocal  AllyGoldIsLessThanOrEqualTo1
+
+    Response imps_razzle_mercenary_exiles_Pp_Or_low_money
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: mercenary_exiles: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceMercenaryExiles IsSourceNotLocal  EnemyGoldIsGreaterThanOrEqualTo15
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mercenary_exiles_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceMercenaryExiles IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  MYSTIC_FLARE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: mystic_flare: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mystic_flare_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceMysticFlare IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mystic_flare_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceMysticFlare IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: mystic_flare: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mystic_flare_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceMysticFlare IsTargetLocal
+
+    Response imps_razzle_mystic_flare_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_mystic_flare_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceMysticFlare IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  NETHER_BLAST
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: nether_blast: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_nether_blast_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceNetherBlast IsSourceLocal
+
+    Response imps_razzle_nether_blast_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_nether_blast_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceNetherBlast IsSourceLocal
+
+    Response imps_razzle_nether_blast_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: nether_blast: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_nether_blast_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceNetherBlast IsSourceNotLocal
+
+    Response imps_razzle_nether_blast_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_nether_blast_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceNetherBlast IsSourceNotLocal
+
+    Response imps_razzle_nether_blast_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  OLD_TECHIE_VEST_ABILITY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: old_techie_vest_ability: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceOldTechieVestAbility IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_old_techie_vest_ability_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_old_techie_vest_ability_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_old_techie_vest_ability_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceOldTechieVestAbility IsTargetLocal
+
+    Response imps_razzle_old_techie_vest_ability_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: old_techie_vest_ability: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceOldTechieVestAbility IsTargetNotLocal
+
+    // response has chain:
+    Response imps_razzle_old_techie_vest_ability_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_old_techie_vest_ability_Op_Pr_ IsLocalImp
+
+    Response imps_razzle_old_techie_vest_ability_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_old_techie_vest_ability_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceOldTechieVestAbility IsTargetNotLocal
+
+    Response imps_razzle_old_techie_vest_ability_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PAYDAY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: payday: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_payday_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePayday IsSourceLocal  AllyGoldIsGreaterThanOrEqualTo20
+
+    // response has chain:
+    Response imps_razzle_payday_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_payday_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_payday_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_payday_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_razzle_payday_PLAYCARD_Pp_Pr_low_money
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePayday IsSourceLocal  AllyGoldIsLessThanOrEqualTo1
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_payday_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePayday IsSourceLocal  AllyGoldIsGreaterThanOrEqualTo20
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+Rule rule_imps_razzle_payday_PLAYCARD_Pp_Or_low_money
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePayday IsSourceLocal  AllyGoldIsLessThanOrEqualTo1
+
+    Response imps_razzle_payday_Pp_Or_low_money
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: payday: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_payday_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePayday IsSourceNotLocal  EnemyGoldIsGreaterThanOrEqualTo15
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_payday_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePayday IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PICK_A_FIGHT
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// uses priority 12 on response activity to make sure it stomps the changed target rules that will try to fire underneath
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: pick_a_fight: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_a_fight_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePickAFight IsTargetLocal
+
+    Response imps_razzle_pick_a_fight_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_a_fight_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePickAFight IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: pick_a_fight: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_a_fight_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePickAFight IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_a_fight_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePickAFight IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PICK_OFF
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: pick_off: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_off_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePickOff IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_off_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePickOff IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: pick_off: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_off_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePickOff IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_pick_off_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourcePickOff IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  POOF
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: poof: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_poof_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourcePoof IsSourceLocal
+
+    Response imps_razzle_poof_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_poof_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourcePoof IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: poof: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_poof_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourcePoof IsSourceNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_poof_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourcePoof IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PRIMAL_ROAR
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: primal_roar: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_primal_roar_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourcePrimalRoar IsTargetNotLocal
+
+    Response imps_razzle_primal_roar_Pp_Pr
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  RAVAGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: ravage: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ravage_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceRavage IsSourceLocal
+
+    Response imps_razzle_ravage_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ravage_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceRavage IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: ravage: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ravage_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceRavage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ravage_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceRavage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ROLLING_STORM
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: rolling_storm: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rolling_storm_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRollingStorm IsSourceLocal
+
+    Response imps_razzle_rolling_storm_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rolling_storm_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRollingStorm IsSourceLocal
+
+    Response imps_razzle_rolling_storm_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: rolling_storm: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rolling_storm_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRollingStorm IsSourceNotLocal
+
+    Response imps_razzle_rolling_storm_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rolling_storm_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRollingStorm IsSourceNotLocal
+
+    Response imps_razzle_rolling_storm_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ROUTED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: routed: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_routed_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRouted IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_routed_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRouted IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: routed: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_routed_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRouted IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_routed_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRouted IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  RUMUSQUE_BLESSING
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: rumusque_blessing: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rumusque_blessing_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRumusqueBlessing IsSourceLocal
+
+    // response has chain:
+    Response imps_razzle_rumusque_blessing_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_razzle_rumusque_blessing_PLAYCARD_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_rumusque_blessing_Pp_Pr_ IsLocalImp
+
+    Response imps_razzle_rumusque_blessing_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rumusque_blessing_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRumusqueBlessing IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: rumusque_blessing: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rumusque_blessing_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceRumusqueBlessing IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_rumusque_blessing_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceRumusqueBlessing IsSourceNotLocal
+
+    Response imps_razzle_rumusque_blessing_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  SLAY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: slay: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_slay_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSlay IsTargetNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_slay_PLAYCARD_Pp_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceSlay Death isTargetNotLocal
+
+    Response imps_razzle_slay_Pp_Pr_death_check
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_slay_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSlay IsTargetNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Or
+
+}
+
+Rule rule_imps_razzle_slay_PLAYCARD_Pp_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceSlay Death isTargetNotLocal
+
+    Response imps_razzle_slay_Pp_Or_death_check
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: slay: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_slay_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSlay IsTargetLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Op_Pr
+
+}
+
+Rule rule_imps_razzle_slay_PLAYCARD_Op_Pr_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceSlay Death isTargetLocal
+
+    Response imps_razzle_slay_Op_Pr_death_check
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_slay_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSlay IsTargetLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Op_Or
+
+}
+
+Rule rule_imps_razzle_slay_PLAYCARD_Op_Or_death_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceSlay Death isTargetLocal
+
+    Response imps_razzle_slay_Op_Or_death_check
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  SLIP_INTO_SHADOW
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: slip_into_shadow: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_slip_into_shadow_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSlipIntoShadow IsTargetLocal
+
+    Response imps_razzle_slip_into_shadow_Pp_Pr
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  SOW_VENOM
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// custom card because the summon is checking for the cardID IsTargetPlagueWard that is summoned by sow venom
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: sow_venom: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSowVenom IsSourceLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Pp_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetPlagueWard Summon IsTargetLocal
+
+    Response imps_razzle_sow_venom_Pp_Pr_summon_check
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSowVenom IsSourceLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Or
+
+}
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Pp_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetPlagueWard Summon isTargetLocal
+
+    Response imps_razzle_sow_venom_Pp_Or_summon_check
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: sow_venom: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSowVenom IsSourceNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Op_Pr
+
+}
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Op_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetPlagueWard Summon isTargetNotLocal
+
+    Response imps_razzle_sow_venom_Op_Pr_summon_check
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSowVenom IsSourceNotLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Op_Or
+
+}
+
+Rule rule_imps_razzle_sow_venom_PLAYCARD_Op_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetPlagueWard Summon isTargetNotLocal
+
+    Response imps_razzle_sow_venom_Op_Or_summon_check
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  STEAM_CANNON_ABILITY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: steam_cannon_ability: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_steam_cannon_ability_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceSteamCannonAbility IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_steam_cannon_ability_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceSteamCannonAbility IsSourceLocal
+
+    Response imps_razzle_steam_cannon_ability_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: steam_cannon_ability: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_steam_cannon_ability_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceSteamCannonAbility IsSourceNotLocal
+
+    Response imps_razzle_steam_cannon_ability_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_steam_cannon_ability_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceSteamCannonAbility IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  SUCKER_PUNCH
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: sucker_punch: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sucker_punch_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSuckerPunch IsTargetNotLocal
+
+    Response imps_razzle_sucker_punch_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sucker_punch_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSuckerPunch IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: sucker_punch: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sucker_punch_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceSuckerPunch IsTargetLocal
+
+    Response imps_razzle_sucker_punch_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_sucker_punch_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceSuckerPunch IsTargetLocal
+
+    Response imps_razzle_sucker_punch_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  THUNDERHIDE_ALPHA
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: thunderhide_alpha: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderhideAlpha IsSourceLocal
+
+    Response imps_razzle_thunderhide_alpha_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Pp_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetThunderhideAlpha Summon IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_thunderhide_alpha_Pp_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Pp_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_thunderhide_alpha_Pp_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_thunderhide_alpha_Pp_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderhideAlpha IsSourceLocal
+
+    Response imps_razzle_thunderhide_alpha_Pp_Or
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Pp_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetThunderhideAlpha Summon IsTargetLocal
+
+    Response imps_razzle_thunderhide_alpha_Pp_Or_summon_check
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: thunderhide_alpha: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderhideAlpha IsSourceNotLocal
+
+    Response imps_razzle_thunderhide_alpha_Op_Pr
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Op_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetThunderhideAlpha Summon IsTargetNotLocal
+
+    // response has chain:
+    Response imps_razzle_thunderhide_alpha_Op_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Op_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_thunderhide_alpha_Op_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_thunderhide_alpha_Op_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderhideAlpha IsSourceNotLocal
+
+    Response imps_razzle_thunderhide_alpha_Op_Or
+
+}
+
+Rule rule_imps_razzle_thunderhide_alpha_PLAYCARD_Op_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetThunderhideAlpha Summon IsTargetNotLocal
+
+    Response imps_razzle_thunderhide_alpha_Op_Or_summon_check
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  THUNDERHIDE_PACK
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: thunderhide_pack: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderhidePack IsSourceLocal
+
+    Response imps_razzle_thunderhide_pack_Pp_Pr
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Pp_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetThunderhidePack Summon IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_thunderhide_pack_Pp_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Pp_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_thunderhide_pack_Pp_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_thunderhide_pack_Pp_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderhidePack IsSourceLocal
+
+    Response imps_razzle_thunderhide_pack_Pp_Or
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Pp_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetThunderhidePack Summon IsTargetLocal
+
+    Response imps_razzle_thunderhide_pack_Pp_Or_summon_check
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: thunderhide_pack: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderhidePack IsSourceNotLocal
+
+    Response imps_razzle_thunderhide_pack_Op_Pr
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Op_Pr_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsTargetThunderhidePack Summon IsTargetNotLocal
+
+    // response has chain:
+    Response imps_razzle_thunderhide_pack_Op_Pr_summon_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Op_Pr_summon_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_thunderhide_pack_Op_Pr_summon_check IsLocalImp
+
+    Response imps_razzle_thunderhide_pack_Op_Pr_summon_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderhidePack IsSourceNotLocal
+
+    Response imps_razzle_thunderhide_pack_Op_Or
+
+}
+
+Rule rule_imps_razzle_thunderhide_pack_PLAYCARD_Op_Or_summon_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsTargetThunderhidePack Summon IsTargetNotLocal
+
+    Response imps_razzle_thunderhide_pack_Op_Or_summon_check
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  THUNDER_GODS_WRATH
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: thunder_gods_wrath: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunder_gods_wrath_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderGodsWrath IsSourceLocal
+
+    Response imps_razzle_thunder_gods_wrath_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunder_gods_wrath_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderGodsWrath IsSourceLocal
+
+    Response imps_razzle_thunder_gods_wrath_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: thunder_gods_wrath: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunder_gods_wrath_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceThunderGodsWrath IsSourceNotLocal
+
+    Response imps_razzle_thunder_gods_wrath_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_thunder_gods_wrath_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceThunderGodsWrath IsSourceNotLocal
+
+    Response imps_razzle_thunder_gods_wrath_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TIME_OF_TRIUMPH
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: time_of_triumph: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTimeOfTriumph IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Pp_Pr_buffed_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceTimeOfTriumph Buffed IsTargetLocal
+
+    // response has chain:
+    Response imps_razzle_time_of_triumph_Pp_Pr_buffed_check_chain_intro
+
+}
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Pp_Pr_buffed_check_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_razzle_time_of_triumph_Pp_Pr_buffed_check IsLocalImp
+
+    Response imps_razzle_time_of_triumph_Pp_Pr_buffed_check_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTimeOfTriumph IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Pp_Or_buffed_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceTimeOfTriumph Buffed IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: time_of_triumph: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTimeOfTriumph IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Op_Pr_buffed_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsLocalImp IsSourceTimeOfTriumph Buffed isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTimeOfTriumph IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+Rule rule_imps_razzle_time_of_triumph_PLAYCARD_Op_Or_buffed_check
+{
+
+    Criteria IsNotCombat IsActionPhase IsOpponentImp IsSourceTimeOfTriumph Buffed isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TOWER_BARRAGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_barrage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_tower_barrage_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTowerBarrage IsSourceLocal
+
+    // sharing response:
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_tower_barrage_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTowerBarrage IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_barrage: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_tower_barrage_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTowerBarrage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_tower_barrage_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTowerBarrage IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TOWN_PORTAL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: town_portal: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_town_portal_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTownPortal IsTargetLocal
+
+    Response imps_razzle_town_portal_Pp_Pr
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TRUTH_TO_POWER
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: truth_to_power: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_truth_to_power_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTruthToPower IsTargetNotLocal
+
+    Response imps_razzle_truth_to_power_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_truth_to_power_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTruthToPower IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: truth_to_power: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_truth_to_power_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceTruthToPower IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_truth_to_power_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceTruthToPower IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNSUPERVISED_ARTILLERY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unsupervised_artillery: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_unsupervised_artillery_USEABILITY_Pp_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceUnsupervisedArtillery IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_unsupervised_artillery_USEABILITY_Pp_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceUnsupervisedArtillery IsSourceLocal
+
+    Response imps_razzle_unsupervised_artillery_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unsupervised_artillery: UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_unsupervised_artillery_USEABILITY_Op_Pr
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceUnsupervisedArtillery IsSourceNotLocal
+
+    Response imps_razzle_unsupervised_artillery_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_unsupervised_artillery_USEABILITY_Op_Or
+{
+
+    Criteria UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceUnsupervisedArtillery IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  VENTRILOQUY
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// uses priority 12 on response activity to make sure it stomps the changed target rules that will try to fire underneath
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: ventriloquy: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ventriloquy_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceVentriloquy IsSourceLocal
+
+    Response imps_razzle_ventriloquy_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ventriloquy_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceVentriloquy IsSourceLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: ventriloquy: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ventriloquy_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceVentriloquy IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_ventriloquy_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceVentriloquy IsSourceNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  VISCOUS_NASAL_GOO
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: viscous_nasal_goo: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_viscous_nasal_goo_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceViscousNasalGoo IsTargetNotLocal
+
+    Response imps_razzle_viscous_nasal_goo_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_viscous_nasal_goo_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceViscousNasalGoo IsTargetNotLocal
+
+    Response imps_razzle_viscous_nasal_goo_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: viscous_nasal_goo: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_viscous_nasal_goo_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceViscousNasalGoo IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_viscous_nasal_goo_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceViscousNasalGoo IsTargetLocal
+
+    Response imps_razzle_viscous_nasal_goo_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  WHISPERS_OF_MADNESS
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: whispers_of_madness: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_whispers_of_madness_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceWhispersOfMadness IsTargetNotLocal
+
+    Response imps_razzle_whispers_of_madness_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_whispers_of_madness_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceWhispersOfMadness IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: whispers_of_madness: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_whispers_of_madness_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceWhispersOfMadness IsTargetLocal
+
+    Response imps_razzle_whispers_of_madness_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_whispers_of_madness_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceWhispersOfMadness IsTargetLocal
+
+    Response imps_razzle_whispers_of_madness_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  WINTERS_CURSE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: winters_curse: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_winters_curse_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceWintersCurse IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_plays_razzle
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_winters_curse_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceWintersCurse IsTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_gets_razzled
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: winters_curse: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_winters_curse_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceWintersCurse IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_player_player_gets_razzled
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_razzle_winters_curse_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceWintersCurse IsTargetLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_opponent_plays_razzle
+
+}

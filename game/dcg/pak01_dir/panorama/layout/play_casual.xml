@@ -1,0 +1,48 @@
+<root>
+	<styles>
+    	<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    	<include src="s2r://panorama/styles/play_casual.vcss_c" />
+    	<include src="s2r://panorama/styles/play_shared.vcss_c" />
+    	
+ 	</styles>
+
+ 	<DCGPlayCasual class="PrimaryCarouselPanel">
+		<Panel class="CarouselPanelContainer">
+			<Panel class="BlurBackgroundPanelOverlay" >
+				<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+			</Panel>
+			<Panel class="TopButtonNav">
+
+
+				<DCGPlayGameSelectButton id="OnlineMatchButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_GlobalMatchMaking ); DCGPlayCarouselSetContext( ePlayContextCasual_OnlineMatch, 0 )"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_GlobalMatchMaking )"
+					icon="s2r://panorama/images/main_menu/icon_online_match_psd.vtex"
+					buttontext="#DCG_LoadDeck_SparringMatch" />
+					
+				<DCGPlayGameSelectButton id="FreeConstructedButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_CasualConstructed ); DCGPlayCarouselSetContext( ePlayContextCasual_FreeConstructed, 0 )"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_CasualConstructed )"
+					buttontext="#DCG_LoadDeck_FreeConstructed" />
+					
+				<DCGPlayGameSelectButton id="FreeDraftButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGPlayCarouselSetContext( ePlayContextCasual_FreeDraft, 0 );"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_BotMatch )"
+					buttontext="#DCG_LoadDeck_FreeDraft" />
+			</Panel>
+
+			<Panel class="PlayContents" hittest="false">
+
+				<Panel id="OnlineMatchContainer" hittest="false">
+					<Panel class="ContainerSplashImage" hittest="false"/>
+					<DCGOnlineMatch id="OnlineMatchPanel"/>
+				</Panel>
+				<DCGGauntlet id="FreeConstructedGauntlet" />
+				<DCGGauntlet id="FreeDraftGauntlet" />
+			</Panel>
+		</Panel>
+	</DCGPlayCasual>
+</root>

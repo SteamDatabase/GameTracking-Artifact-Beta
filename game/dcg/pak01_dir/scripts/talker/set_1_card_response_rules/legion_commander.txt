@@ -2,6 +2,8 @@
 //**LEGION COMMANDER - HERO//
 /////////////////////////////
 
+WhitelistName "Whitelist Card 10069"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -127,8 +129,13 @@ Rule legion_commander_gain_health_rule
 ///DEBUFFED BLOCKER//
 /////////////////////
 
-//Response legion_commander_debuff_blocker
-//{
+Response legion_commander_debuff_blocker
+{
+	speak "legion_commander_cast_spell_04" noscene 
+	speak "legion_commander_cast_spell_07" noscene 
+	speak "legion_commander_cast_spell_03" noscene 
+	speak "legion_commander_potential_kill_02" noscene 
+	speak "legion_commander_taunt_generic_03" noscene 
 //	speak "legion_commander_debuff_enemy_01" noscene 
 //	speak "legion_commander_debuff_enemy_02" noscene 
 //	speak "legion_commander_debuff_enemy_03" noscene 
@@ -139,20 +146,25 @@ Rule legion_commander_gain_health_rule
 //	speak "legion_commander_debuff_enemy_08" noscene 
 //	speak "legion_commander_debuff_enemy_09" noscene 
 //	speak "legion_commander_debuff_enemy_10" noscene 
-//}
+}
 
-//Rule legion_commander_debuff_blocker_rule
-//{
-//	criteria IsNotImp  DEBUFFED EnemyHasLegionCommander IsBlockingLegionCommander
-//	response legion_commander_debuff_blocker
-//}
+Rule legion_commander_debuff_blocker_rule
+{
+	criteria IsNotImp  DEBUFFED EnemyHasLegionCommander IsBlockingLegionCommander
+	response legion_commander_debuff_blocker
+}
 
 ////////////////
 ///BUFF FRIEND//
 ////////////////
 
-//Response legion_commander_buff_friend
-//{
+Response legion_commander_buff_friend
+{
+	speak "legion_commander_cast_spell_08" noscene 
+	speak "legion_commander_cast_spell_09" noscene 
+	speak "legion_commander_cast_spell_10" noscene 
+	speak "legion_commander_taunt_generic_04" noscene 
+	speak "legion_commander_permanent_attack_01" noscene 
 //	speak "legion_commander_buff_ally_01" noscene 
 //	speak "legion_commander_buff_ally_02" noscene 
 //	speak "legion_commander_buff_ally_03" noscene 
@@ -163,14 +175,14 @@ Rule legion_commander_gain_health_rule
 //	speak "legion_commander_buff_ally_08" noscene 
 //	speak "legion_commander_buff_ally_09" noscene 
 //	speak "legion_commander_buff_ally_10" noscene 
-// 
-//}
-//
-//Rule legion_commander_buff_friend_rule
-//{
-//	criteria IsNotImp  BUFFED AllyHasLegionCommander IsSourceRed IsTargetNotLegionCommander
-//	response legion_commander_buff_friend
-//}
+ 
+}
+
+Rule legion_commander_buff_friend_rule
+{
+	criteria IsNotImp  BUFFED AllyHasLegionCommander IsSourceRed IsTargetNotLegionCommander
+	response legion_commander_buff_friend
+}
 
 
 
@@ -352,7 +364,7 @@ Response legion_commander_lane_enemy_rix
 
 Rule legion_commander_lane_enemy_rix_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander EnemyHasRix 
+	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander EnemyHasRix ThisIsImportant
 	matchonce
 	response legion_commander_lane_enemy_rix
 }
@@ -367,7 +379,7 @@ Response legion_commander_lane_enemy_sorla
 
 Rule legion_commander_lane_enemy_sorla_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander EnemyHasSorlaKhan 
+	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander EnemyHasSorlaKhan  ThisIsImportant
 	matchonce
 	response legion_commander_lane_enemy_sorla
 }
@@ -381,7 +393,7 @@ Response legion_commander_tresdins_standards
 
 Rule legion_commander_tresdins_standards_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTresdinsStandards IsTargetLegionCommander
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTresdinsStandards IsTargetLegionCommander ThisIsImportant
 	response legion_commander_tresdins_standards
 }
 
@@ -394,7 +406,7 @@ Response legion_commander_routed
 
 Rule legion_commander_routed_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceRouted IsTargetLegionCommander
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceRouted IsTargetLegionCommander ThisIsImportant
 	response legion_commander_routed
 }
 
@@ -406,7 +418,8 @@ Response legion_commander_start_with_rix
 
 Rule legion_commander_start_with_rix_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander AllyHasRix
+	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander AllyHasRix ThisIsImportant
+	matchonce
 	response legion_commander_start_with_rix
 }
 
@@ -419,7 +432,7 @@ Response legion_commander_trebuchets
 
 Rule legion_commander_trebuchets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTrebuchets
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTrebuchets 
 	response legion_commander_trebuchets
 }
 
@@ -432,7 +445,8 @@ Response legion_commander_no_kill
 
 Rule legion_commander_no_kill_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander IsNoOpponentUnits
+	criteria IsNotImp  BeginSpellcasting AllyHasLegionCommander IsNoOpponentUnits ThisIsImportant
+	matchonce
 	response legion_commander_no_kill
 }
 
@@ -452,7 +466,7 @@ Response legion_commander_play_path_of_the_bold
 
 Rule legion_commander_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourcePathOfTheBold 
 	response legion_commander_play_path_of_the_bold
 }
 
@@ -467,7 +481,7 @@ Response legion_commander_play_temple_of_war
 
 Rule legion_commander_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTempleOfWar 
 	response legion_commander_play_temple_of_war
 }
 
@@ -475,12 +489,13 @@ Response legion_commander_play_nether_ward
 {
 	speak "legion_commander_cast_spell_08" noscene 
 	speak "legion_commander_cast_spell_03" noscene
+	speak "legion_commander_potential_kill_01" noscene
 	
 }
 
 Rule legion_commander_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceNetherWard 
 	response legion_commander_play_nether_ward
 }
 
@@ -494,7 +509,7 @@ Response legion_commander_play_burning_oil
 
 Rule legion_commander_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceBurningOil 
 	response legion_commander_play_burning_oil
 }
 
@@ -502,12 +517,13 @@ Response legion_commander_play_grand_melee
 {
 	speak "legion_commander_cast_spell_07" noscene 
 	speak "legion_commander_cast_spell_04" noscene 
+	speak "legion_commander_taunt_generic_08" noscene 
 	
 }
 
 Rule legion_commander_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceGrandMelee 
 	response legion_commander_play_grand_melee
 }
 
@@ -515,26 +531,28 @@ Response legion_commander_play_steel_reinforcement
 {
 	speak "legion_commander_cast_spell_10" noscene 
 	speak "legion_commander_cast_spell_02" noscene 
+	speak "legion_commander_potential_kill_02" noscene 
 	
 	
 }
 
 Rule legion_commander_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceSteelReinforcement 
 	response legion_commander_play_steel_reinforcement
 }
 
 Response legion_commander_play_the_omexe_arena
 {
 	speak "legion_commander_potential_kill_01" noscene 
-	speak "legion_commander_multi_damage_small_08" noscene 
+	speak "legion_commander_healed_03" noscene 
+	speak "legion_commander_permanent_health_04" noscene 
 	
 }
 
 Rule legion_commander_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceTheOmexeArena 
 	response legion_commander_play_the_omexe_arena
 }
 
@@ -543,12 +561,13 @@ Response legion_commander_play_berserkers_call
 {
 	speak "legion_commander_cast_spell_05" noscene 
 	speak "legion_commander_cast_spell_06" noscene 
+	speak "legion_commander_taunt_generic_01" noscene 
 	
 }
 
 Rule legion_commander_play_berserkers_call_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceBerserkersCall ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceBerserkersCall 
 	response legion_commander_play_berserkers_call
 }
 
@@ -558,7 +577,7 @@ Response legion_commander_time_of_triumph
 {
 	speak "legion_commander_cast_spell_09" noscene 
 	speak "legion_commander_cast_spell_07" noscene 
-	speak "legion_commander_permanent_armor_04" noscene 
+	speak "legion_commander_taunt_generic_04" noscene 
 }
 
 Rule legion_commander_time_of_triumph_rule
@@ -570,11 +589,14 @@ Rule legion_commander_time_of_triumph_rule
 Response legion_commander_play_enough_magic
 {
 	speak "legion_commander_cast_spell_06" noscene 
+	speak "legion_commander_taunt_generic_05" noscene 
+	speak "legion_commander_cast_spell_05" noscene 
 	
 }
 
 Rule legion_commander_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLegionCommander IsSourceEnoughMagic 
 	response legion_commander_play_enough_magic
 }
+

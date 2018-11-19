@@ -1,759 +1,1087 @@
-.GameOverPanel
-{
-	text-align: center;
-	horizontal-align: center;
-	vertical-align: top;
-
-	flow-children: down;
-
-	width: 1400px;
-	padding-top: 50px;
-
-	color: #FFFFFFFF;
-}
-
-.DashboardPanel
-{
-    width: 100%;
-    height: fit-children;
-}
-
-.TitleCard
-{
-   	margin-bottom: 0px;
-    border: 3px solid gray;
-}
-
-.BodyPanel
-{
-	width: 100%;
-	flow-children: down;
-    margin: 10px 20px 20px 20px;
-}
-
-.PlayerResults
-{
-    flow-children: down;
-}
-
-.SummaryBar
-{
-    width: 100%;
-}
-
-.PlayerSummary
-{
-    horizontal-align: left;
-    flow-children: down;
-}
-
-.FooterButtons
-{
-    margin-top: 10px;
-    width: 100%;
-    flow-children: right;
-}
-
-#ReportBugButton
-{
-    horizontal-align: left;
-    margin: 0px;
-}
-
-#LeaveMatchButton
-{
-    background-color: #444466;
-    horizontal-align: right;
-    margin: 0px;
-}
-
-.CollapseResults .BodyPanel
-{
-    visibility: collapse;
-}
-
-#StatTabBody
-{
-    width: 100%;
-    flow-children: down;
-    border: 1px solid black;
-}
-
-.PlayerResult
-{
-    color: #ff0000;
-}
-
-.GraphTitle
-{
-    margin-top: 20px;
-}
-
-#StatGraphBody
-{
-    width: 100%;
-    height: 550px;
-    border: 1px solid gray;
-    horizontal-align: center;
-    margin: 0px 16px 0px 16px;
-}
-
-#StatGraphCanvas
-{
-    width: 100%;
-    height: 100%;    
-}
-
-#TimelineBody
-{
-    visibility: collapse;
-    width: 100%;
-    height: 100%;
-    flow-children: down;
-    overflow: clip scroll;
-}
-
-.TimelineView #TimelineBody
-{
-    visibility: visible;
-}
-.TimelineView #StatGraphCanvas
-{
-    visibility: collapse;
-}
-
-.TimelineTurnGroup
-{
-    width: 100%;
-    flow-children: right;
-    border-bottom: 4px solid black;
-    border-top: 4px solid black;
-}
-
-.TimelineLaneGroup
-{
-    min-height: 90px;
-    flow-children: down;
-    width: 33%;
-    height: 100%;
-    background-color: #222222;
-    //border-bottom: 2px solid black;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-}
-
-.TimelineLaneGroup.TallestLane
-{
-    height: fit-children;
-    min-height: 90px;
-}
-
-.TimelineLaneGroup.OddLane
-{
-    background-color: #1A1A1A;
-}
-
-.TimelineLanePlayerGroup
-{
-    width: 50%;
-    flow-children: down;
-    padding: 4px;
-}
-
-.TimelineGroupRow
-{
-    horizontal-align: center;
-    flow-children: down;
-}
-
-.TimelineCardGroup
-{
-    width: 110px;
-    horizontal-align: center;
-    flow-children: right;
-    border: 1px solid black;
-}
-
-.TimelineCardGroup.TimelineCardPlayer
-{
-    background-color: #003300;
-}
-
-.TimelineCardGroup.TimelineCardEnemy
-{
-    background-color: #330000;
-}
-
-.TimelineCardGroup Label
-{
-    margin-left: 4px;
-    vertical-align: center;
-    text-transform: none;
-    text-overflow: shrink;
-}
-
-.TimelineCardGroup Image
-{
-    width: 60px;
-    height: 60px;
-}
-
-.TimelineCardGroup.CardColor_Red Image
-{
-    border: 4px solid cardColorRed;
-}
-
-.TimelineCardGroup.CardColor_Black Image
-{
-    border: 4px solid cardColorBlack;
-}
-
-.TimelineCardGroup.CardColor_Green Image
-{
-    border: 4px solid cardColorGreen;
-}
-
-.TimelineCardGroup.CardColor_Blue Image
-{
-    border: 4px solid cardColorBlue;
-}
-
-.TimelineTurnHeader
-{
-    height: 100%;
-    width: 50px;
-    padding: 8px;
-    background-color: black;
-}
-
-.TimelineTurnBody
-{
-    width: fill-parent-flow( 1.0 );
-    flow-children: right;
-    border-right: 2px solid black;    
-}
-
-Label.TimelineTurnLabel
-{
-    horizontal-align: center;
-    vertical-align: center;
-    font-size: 50px;
-    color: gray;
-}
-
-.TimelineLanePlayersGroup
-{
-    flow-children: right;
-    width: 100%;
-}
-
-Label.TimelineLaneLabel
-{
-    color: white;
-    horizontal-align: center;
-    width: 100%;
-    vertical-align: center;
-    text-align: center;
-    padding: 4px;
-    font-size: 14px;
-    border: 1px solid #444444;
-
-}
-
-#ShowTimelineToggle
-{
-    visibility: collapse;
-    horizontal-align: right;
-    vertical-align: center;
-}
-
-.AllowTimeline #ShowTimelineToggle
-{
-    visibility: visible;
-}
-
-Label.XAxisLabel
-{
-	color: #6E7D87;
-    transform: translateX( -18px ) translateY( -12px );
-    font-size: 12px;
-    horizontal-align: left;
-    vertical-align: top;    
-}
-
-Label.YAxisLabel
-{
-    padding-right: 8px;
-	color: #6E7D87;
-    transform: translateY( -6px );
-    font-size: 12px;
-    text-align: right;
-    horizontal-align: left;
-}
-
-#MatchLengthLabel
-{
-    horizontal-align: right;
-    margin-bottom: 15px;
-}
-
-#GraphDropDown
-{    
-}
-
-.GraphTitleGroup 
-{
-    width: 100%;
-}
-
-.GraphTitleGroup
-{
-    vertical-align: center;
-}
-
-DropDownMenu .GraphValuesGroup
-{
-    horizontal-align: right;
-    margin-right: 10px;
-    flow-children: right;
-    vertical-align: center;    
-    border: 1px solid gray;
-    padding: 2px;
-}
-
-DropDown .GraphValuesGroup
-{
-    visibility: collapse;
-}
-
-DropDownMenu .GraphValuesGroup Label
-{
-    padding: 0px 0px 0px 0px;
-    width: fit-children;
-    height: fit-children;
-    border: 0px solid black;
-    background-color: #00000000;
-}
-
-DropDownMenu .GraphValuesGroup Label.ValueSeparator
-{
-    padding: 0px 4px 0px 4px;
-}
-
-DropDownMenu .GraphValuesGroup Label.PlayerValue
-{
-    min-width: 40px;
-    color: #44FF44;
-    text-align: right;
-}
-
-DropDownMenu .GraphValuesGroup Label.EnemyValue
-{
-    min-width: 40px;
-    color: #FF4444;
-    text-align: left;
-}
-
-#GraphDropDown,
-#GraphDropDownDropDownMenu
-{
-    width: 400px;
-}
-
-#CardDropDown
-{
-    width: 500px;
-    height: 50px;
-    visibility: collapse;
-    horizontal-align: left;
-    vertical-align: center;
-}
-
-#CardDropDownDropDownMenu
-{
-    width: 500px;
-}
-.AllowCardStats #CardDropDown 
-{
-    visibility: visible;
-}
-
-.CardDropDownAll 
-{
-    height: 40px;
-    width: 100%;
-}
-
-.CardDropDownOption
-{
-    height: 50px;
-    width: 100%;
-}
-
-.CardDropDownOption Image
-{
-    width: 45px;
-    height: 45px;
-    z-index: 1;
-    vertical-align: center;
-    padding-left: 4px;
-}
-
-.CardDropDownAll Label
-{
-    height: 100%;
-}
-
-.CardDropDownOption Label
-{
-    height: 100%;
-    text-align: left;
-    padding: 10px 0px 0px 60px;
-}
-
-.CardDropDownOption
-{
-    width: 100%;
-    height: 40px;
-}
-
-#CardDropDownDropDownMenu .CardDropDownOption
-{
-    border-bottom: 1px solid #00000066;
-}
-
-#CardDropDownDropDownMenu .CardDropDownOption:hover
-{
-    background-color: #585E62;
-}
-
-.CardDropDownOption DCGCardName
-{
-    vertical-align: center;
-    padding-left: 53px;
-    font-size: 20px;
-}
-
-#GraphHeader
-{
-    width: 100%;
-    padding: 16px;
-}
-
-#GraphSelectionGroup 
-{
-    flow-children: right;
-    horizontal-align: left;
-}
-
-#GraphTooltip
-{
-    width: 30px;
-    height: 30px;
-    vertical-align: center;
-    margin-left: 10px;
-    border: 2px solid gray;
-    opacity: 0;
-}
-
-#GraphTooltip Label
-{
-    horizontal-align: center;
-    vertical-align: center;
-    font-size: 23px;
-}
-
-.HasGraphTooltip #GraphTooltip
-{
-    opacity: 1;
-}
-
-.CollapseButton
-{
-    width: 25px;
-    height: 25px;
-    horizontal-align: right;
-    vertical-align: center;
-    margin-right: 15px;
-
-    background-image: url("s2r://panorama/images/control_icons/expand_collapse_png.vtex");
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-    background-size: 100% 100%;
-
-    transition-property: transform;
-    transition-duration: .2s;
-    opacity: 0.5;
-}
-
-.CollapseButton:hover
-{
-    opacity: 1.0;
-}
-
-.CollapseResults .CollapseButton
-{
-   	transform: rotateZ( -180deg );
-}
-
-.PriorityIcon
-{
-    opacity: 0.1;
-    horizontal-align: center;
-    width: 8px;
-    height: 8px;
-    background-image: url("s2r://panorama/images/control_icons/expand_collapse_png.vtex");
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-    background-size: 100% 100%;
-    wash-color: gray;
-}
-
-.PriorityIcon.HasPriority
-{
-    opacity: 1.0;
-}
-
-.EnemyIcons .PriorityIcon
-{
-   	transform: rotateZ( -180deg );
-}
-
-.PlayerIcons .PriorityIcon.HasPriority
-{
-    wash-color: green;
-}
-.EnemyIcons .PriorityIcon.HasPriority
-{
-    wash-color: red;
-}
-
-.PlayerIcons .TowerIcon
-{
-    wash-color: green;
-}
-.EnemyIcons .TowerIcon
-{
-    wash-color: red;
-}
-
-.TowerIcon
-{
-    horizontal-align: center;
-    width: 24px;
-    height: 24px;
-
-    background-image: url("s2r://panorama/images/hud/hud_tower_png.vtex");
-	background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.TowerIcon.IsAncient
-{
-    background-image: url("s2r://panorama/images/hud/hud_ancient_png.vtex");
-}
-
-.HeroIcon
-{
-    horizontal-align: center;
-    width: 24px;
-    height: 24px;
-}
-
-.GraphIconLane
-{
-}
-
-.GraphIconLane:hover
-{
-    background-color: #FFFFFF11;
-}
-
-.HideIcons .GraphIconStrip
-{
-    visibility: collapse;
-}    
-
-.GraphIconStrip
-{
-    width: 100%;
-    flow-children: down;
-}
-
-.PlayerIcons
-{
-    vertical-align: top;
-    margin-top: 3px;
-}
-
-.EnemyIcons
-{
-    vertical-align: bottom;
-    margin-bottom: 5px;
-}
-
-.GraphSelectors
-{
-    padding: 16px;
-    width: 100%;
-}
-
-#HideIconsToggle
-{
-    horizontal-align: right;
-    vertical-align: top;
-}
-
-.TimelineView #HideIconsToggle
-{
-    visibility: collapse;
-}
-
-.GraphTotalsGroup
-{
-    width: 100%;
-    padding: 0px 16px 8px 16px;
-}
-
-.TotalValueDisplay
-{
-    font-size: 24px;
-}
-
-#PlayerTotalValue
-{
-    horizontal-align: left;
-    color: #44FF44;
-}
-
-#EnemyTotalValue
-{
-    horizontal-align: right;
-    color: #FF4444;
-}
-
-#GameOverTabs
-{
-    flow-children: right;
-}
-#RewardTabBody .Hide
-{
-    visibility:collapse;
-}
-#RewardTabBody
-{
-    flow-children: right-wrap;
-    margin-top: 20px;
-    horizontal-align: center;
-
-}
-.CardProgressFrame
-{
-    flow-children:right;
-    margin: 20px 15px 20px 15px;
-}
-.CardProgressFrame.Completed
-{
-    animation-name: update-glow;
-	animation-duration: 3s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 2;  
-}
-#CardIcon
-{
-    width:48px;
-    height:48px;
-    margin-right: 10px;
-}
-.ProgressFrame
-{
-    flow-children:down;
-}
-.ProgressBarFrame
-{
-    flow-children:right;
-}
-.ProgressBar
-{
-    border: 1px solid white;
-    width:200px;
-    height: 20px;
-    margin-right:5px;
-    flow-children:right;
-}
-#ProgressBarAlreadyCompleted
-{
-    background-color:darkslategrey;
-   
-}
-
-.ProgressText
-{
-    horizontal-align: center;
-}
-#ProgressBarUpdate
-{
-    animation-name: update-glow;
-	animation-duration: 1.5s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: infinite; 
-
-    transition-property: width;
-    transition-duration: .5s;
-}
-@keyframes 'update-glow'
-{
-    0%
-    {
-	    background-color: #005500;		
-    }
-
-    50% 
-    {
-        background-color: #009900;
-    }
+@define TitleYOffset: 280px; 
+
+#GameOverVideo, #GameOverVideoResult, #GameOverVideoLoop
+{
+    width:100%;
+    height:100%;
+}
+#GameOverPanel
+{
+    width:100%;
+    height:100%;
+    background-color:transparent;
+    opacity:1;
+}
+@keyframes 'FadeOpacityIn'
+{
+	0%
+	{
+		opacity: 0;
+	}
+	100%
+	{
+		opacity: 1;
+	}
+}
+    @keyframes 'FadeOpacityInFast'
+{
+	0%
+	{
+		opacity: 0;
+	}
+	90%
+	{
+		opacity: 0;
+	}
     100%
-    {
-	    background-color:#005500;
-    }
+	{
+		opacity: 1;
+	}
 }
-
-#GameOverTabs Label
+#GameEndReason
 {
-    font-size: 20px;
+    width:100%;
+    z-index:999;
 }
-
-.TabOption
+.EndReason
 {
-    margin-bottom: 10px;
-}
-
-.TabOption Label
-{
+    margin-top:540px;
+    horizontal-align:center;
+    font-weight:light;
+    font-size:28px;
+	letter-spacing: 10px;
     text-transform: uppercase;
-    font-size: 18px;
-    color: #BBBBBB;
-}
-
-.TabOption.ToggledOn Label
-{
-    color: white;
-    text-decoration:underline;
-}
-
-.TabOption Label:hover
-{
-    text-shadow: 0px 0px 12px 10.0 #ffffff02;
-}
-
-//Hiding the achievements for now
-#RewardTabBody,
-#ProgressButton,
-#GameOverTabs
-{
+	color: white;
+	opacity: .5;
+    text-shadow: 0px 0px 5px 5.0 #9400D311;
     visibility:collapse;
+	//temp
+	
+  	animation-name: EndReasonFadeIn;
+    animation-duration: 5s;
+	animation-timing-function: ease-out;
+	animation-iteration-count: 1;    
+	
 }
-#StatTabBody.Hide
+
+@keyframes 'EndReasonFadeIn'
+{
+	0%
+	{
+		opacity: 0;
+		pre-transform-scale2d: 0.925;
+		text-shadow: 0px 0px 15px 7.0 #9400D325;
+	}
+	
+	35%
+	{
+		opacity: 0;
+		pre-transform-scale2d: 0.925;
+		text-shadow: 0px 0px 15px 7.0 #9400D325;
+	}
+    
+	100%
+	{
+		opacity: .5;
+		pre-transform-scale2d: 1;
+		text-shadow: 0px 0px 5px 5.0 #9400D311;
+	}
+}
+
+
+
+.PlayerConceded #LabelYouConceded,
+.OpponentConceded #LabelOpponentConceded,
+.PlayerKilledTwoTowers #LabelYourTowersDestroyed,
+.OpponentKilledTwoTowers #LabelOpponentTowersDestroyed,
+.IsDraw #LabelBothPlayersTowersDestroyed,
+.PlayerInvalidDeck #LabelYourDeckInvalid,
+.OpponentInvalidDeck #LabelOpponentDeckInvalid,
+.PlayerTimedOut #LabelYourTimeUp,
+.OpponentTimedOut #LabelOpponentTimeUp,
+.PlayerInactive #LabelYouInactive,
+.OpponentInactive #LabelOpponentInactive,
+.PlayerDisconnectedTooLong #LabelYouDisconnectedTooLong,
+.OpponentDisconnectedTooLong #LabelOpponentDisconnectedTooLong,
+.CombatTooFull #LabelCombatTooFull
+
 {
     visibility:visible;
+}
+
+
+
+#GameOverPanel.GameOverAnimate
+{
+    animation-name: FadeOpacityIn;
+	animation-duration: 2s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+    //background-image: url('file://{images}/backgrounds/end_game_clean.png');
+}
+
+#MenuOptions
+{
+    horizontal-align:center;    
+	width:100%;
+    vertical-align:bottom;
+    margin-bottom:160px;
+    animation-name: FadeOpacityInFast;
+	animation-duration: 5s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+    z-index:999;
+    flow-children:down;
+}
+
+.MenuButton
+{
+    horizontal-align:center;    	
+}
+
+
+#MenuOptions Label
+{
+	font-weight: light;
+    font-size:35px;
+	letter-spacing: 8px;
+    text-transform: uppercase;
+	color: #86709b;
+    text-shadow: 0px 0px 2px 2.0 #9400D311;
+	opacity: .85;
+	
+    transition-property: text-shadow, opacity, color;
+	transition-duration: .25s;	
+	transition-timing-function: ease-in;
+}
+
+#GameOverVideo
+{
+     z-index: 5;
+     transition-property:opacity;
+     transition-duration:0.5s;
+}
+#GameOverVideoResult
+{
+     z-index:4;
+     transition-property:opacity;
+     transition-duration:0.5s;
+}
+.IntroOver #GameOverVideo
+{
+    opacity:0;
+}
+
+
+.ResultOver #GameOverVideoResult
+{
+    opacity:0;
+}
+
+
+#ViewDeck
+{
+    visibility:visible;
+}
+#Rematch, #FindNextMatch, #ReturnToLobby
+{
+    visibility:collapse;
+}
+.GauntletMatch #FindNextMatch
+{
+    visibility:visible;
+}
+.SparringMatch #FindNextMatch
+{
+    visibility:visible;
+}
+.AIMatch #Rematch
+{
+    visibility:visible;
+}
+.PuzzleMatch #ViewDeck
+{
+    visibility: collapse;
+}
+
+.CannotContinueGauntlet #FindNextMatch
+{
+	visibility: collapse;
+}
+
+#Rematch:hover Label,
+#ReturnToLobby:hover Label,
+#ViewDeck:hover Label,
+#BackToMenu:hover Label,
+#FindNextMatch:hover Label
+{
+	color: #f6f2fa;
+	opacity: 1;
+    text-shadow: 0px 0px 6px 2.0 #b87dd150;
+}
+
+#Rematch:active Label,
+#ReturnToLobby:active Label,
+#ViewDeck:active Label,
+#BackToMenu:active Label
+{
+	color: #f6f2fa90;
+	opacity: 1;
+    text-shadow: 0px 0px 9px 2.0 #b87dd135;
+	transform: translateY(1px);
+}
+
+#AncientDestroyed,
+#TowersDestroyed,
+#Conceded,
+#MatchClockExpired,
+#CombatTooFull,
+#ForfeitInvalidDeck,
+#ExcessiveInactivity
+{
+    visibility:collapse;
+}
+
+.VictoryText
+{
+	margin-top: 40px;
+	font-weight: light;
+    font-size:162px;
+    animation-duration: 4s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+    transition-property: 1;
+	transition-duration: 4s;	
+	transition-timing-function: ease-in;
+    text-shadow: 0px 0px 8px 4.0 #9400D311;
+    z-index:10;
+}
+
+@keyframes 'Victory1Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	45%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	48%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	51%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	53%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+ @keyframes 'Victory2Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	55%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	58%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	61%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	63%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory3Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	48%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	51%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	54%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	56%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory4Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	37%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	40%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	43%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	45%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory5Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	52%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	55%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	58%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	60%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory6Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	32%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	35%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	38%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	40%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory7Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	42%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	45%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	48%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	50%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+
+@keyframes 'Victory8Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	29%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	32%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	35%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	37%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+
+@keyframes 'Victory9Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	38%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	41%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	44%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	46%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+
+@keyframes 'Victory10Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	41%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	44%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	47%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	49%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory11Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	51%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	54%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	57%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	59%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+
+@keyframes 'Victory12Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	20%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	23%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	26%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	28%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory13Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	33%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	36%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	39%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	41%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+@keyframes 'Victory14Anim'
+{
+	0%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	57%
+	{
+		opacity: 0.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	60%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 1.0 #df9cdd;
+	}
+	
+	63%
+	{
+		opacity: .8;
+        color:white;
+		text-shadow: 0px 0px 6px 3.0 #8a407d;
+	}
+	
+	65%
+	{
+		opacity: 0.05;
+        color:#a376da;
+		text-shadow: 0px 0px 8px 4.0 #a376da;
+	}	
+
+	100%
+	{
+		opacity: 1.0;
+        color:white;
+		text-shadow: 0px 0px 4px 2.0 #9400D311;
+	}
+}
+
+#Victory1
+{
+    animation-name: Victory1Anim;
+}
+#Victory2
+{
+    animation-name: Victory2Anim;
+}
+#Victory3
+{
+    animation-name: Victory3Anim;
+}
+#Victory4
+{
+    animation-name: Victory4Anim;
+}
+#Victory5
+{
+    animation-name: Victory5Anim;
+}
+#Victory6
+{
+    animation-name: Victory6Anim;
+}
+#Victory7
+{
+    animation-name: Victory7Anim;
+}
+#Victory8
+{
+    animation-name: Victory8Anim;
+}
+#Victory9
+{
+    animation-name: Victory9Anim;
+}
+#Victory10
+{
+    animation-name: Victory10Anim;
+}
+#Victory11
+{
+    animation-name: Victory11Anim;
+}
+#Victory12
+{
+    animation-name: Victory12Anim;
+}
+#Victory13
+{
+    animation-name: Victory13Anim;
+}
+#Victory14
+{
+    animation-name: Victory14Anim;
+}
+@keyframes 'ZoomIn'
+{
+	0%
+	{
+		pre-transform-scale2d: 0.8;
+	}
+    
+	100%
+	{
+		pre-transform-scale2d: 1;
+	}
+}
+
+#OutcomeWrapper
+{
+    width: 100%;
+    height: 100%;
+  	animation-name: ZoomIn;
+    animation-duration: 4s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;    
+    z-index:999;
+}
+
+
+
+.EvenLeft1
+{
+    transform: translateX( -20px );  	
+}
+.EvenLeft2
+{
+    transform: translateX( -60px );
+}
+.EvenLeft3
+{
+    transform: translateX( -100px );
+}
+.EvenLeft4
+{
+    transform: translateX( -140px );
+}
+.EvenLeft5
+{
+    transform: translateX( -180px );
+}
+.EvenLeft6
+{
+    transform: translateX( -220px );
+}
+.EvenLeft7
+{
+    transform: translateX( -260px );
+}
+.EvenRight1
+{
+    transform: translateX( 20px );  	
+}
+.EvenRight2
+{
+    transform: translateX( 60px );
+}
+.EvenRight3
+{
+    transform: translateX( 100px );
+}
+.EvenRight4
+{
+    transform: translateX( 140px );
+}
+.EvenRight5
+{
+    transform: translateX( 180px );
+}
+.EvenRight6
+{
+    transform: translateX( 220px );
+}
+.EvenRight7
+{
+    transform: translateX( 260px );
+}
+.OddLeft1
+{
+    transform: translateX( -40px );  	
+}
+.OddLeft2
+{
+    transform: translateX( -80px );
+}
+.OddLeft3
+{
+    transform: translateX( -120px );
+}
+.OddLeft4
+{
+    transform: translateX( -160px );
+}
+.OddLeft5
+{
+    transform: translateX( -200px );
+}
+.OddLeft6
+{
+    transform: translateX( -240px );
+}
+.OddLeft7
+{
+    transform: translateX( -280px );
+}
+.OddRight1
+{
+    transform: translateX( 40px );  	
+}
+.OddRight2
+{
+    transform: translateX( 80px );
+}
+.OddRight3
+{
+    transform: translateX( 120px );
+}
+.OddRight4
+{
+    transform: translateX( 160px );
+}
+.OddRight5
+{
+    transform: translateX( 200px );
+}
+.OddRight6
+{
+    transform: translateX( 240px );
+}
+.OddRight7
+{
+    transform: translateX( 280px );
 }

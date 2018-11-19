@@ -13,50 +13,32 @@
     
 
 
-    <Panel class="CardFilterRow Collection Main Shop Heroes Sort">
-      <Panel class="CardFiltersControls">
-        <Label class="FilterAreaTitle" text="#DCG_Collection_SortTitle" />
-        <Label id="lblSort" class="CurrentFilterIndicator"></Label>
-        <DropDown id="dropDownSortItems" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByCost" id="lblSortByItemCost"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
-        </DropDown>
-        <DropDown id="dropDownSortHeroes" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-        </DropDown>
-        <DropDown id="dropDownSortMain" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
-          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
-        </DropDown>
+    <Panel class="CardFilterRow Collection Main Shop Heroes Sort CardSortControls DeckSummaryDoubleLine">
+      <Panel id="SortByControls" class="CardFiltersControls">
+        <Label class="FilterAreaTitle" text="#DCG_Collection_SortTitle" id="sortByText"/>
+        <Panel id="SortByDropDownContainer">
+			<Label id="lblSort" class="CurrentFilterIndicator"></Label>
+			<Panel id="DropDownArrow" />
+		</Panel>
         <DropDown id="dropDownSortAll" class="" oninputsubmit="OnSortDropDownChanged()">
           <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
           <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
           <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
           <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
-        </DropDown>
-        <DropDown id="dropDownSortMarketItems" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByCost" id="lblSortByItemCost"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
           <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
         </DropDown>
-        <DropDown id="dropDownSortMarketHeroes" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
-        </DropDown>
-        <DropDown id="dropDownSortMarketMain" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
-          <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
-          <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
-          <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
-          <Label text="#DCG_DeckBuilder_SortByType" id="lblSortByType"/>
-          <Label text="#DCG_DeckBuilder_SortByPrice" id="lblSortByPrice"/>
-        </DropDown>
-        <DropDown id="dropDownSortMarketAll" class="HideElement" oninputsubmit="OnSortDropDownChanged()">
+      </Panel>
+    </Panel>
+
+    <Panel class="CardFilterRow Collection Main Shop Heroes Sort CardFilterControls DeckSummarySingleLine">
+      <Panel class="CardFiltersControls">
+         
+        <Label class="FilterAreaTitle" text="#DCG_Collection_FilterTitle" />
+		<Panel id="SortByDropDownContainer">
+			<Label id="lblSort" class="CurrentFilterIndicator"></Label>
+			<Panel id="DropDownArrow" />
+		</Panel>
+        <DropDown id="dropDownSortAll" class="" oninputsubmit="OnSortDropDownChanged()">
           <Label text="#DCG_DeckBuilder_SortByCost"  id="lblSortByManaCost"/>
           <Label text="#DCG_DeckBuilder_SortByColor" id="lblSortByColor"/>
           <Label text="#DCG_DeckBuilder_SortByName" id="lblSortByName"/>
@@ -65,71 +47,111 @@
         </DropDown>
       </Panel>
     </Panel>
-   
-    <Panel class="CardFilterRow Collection Filters">
+
+    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown HeroFilter DeckSummarySingleLine">
+      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( HeroDeck )">
+        <Label id="FilterDeckTypeHeroLabel"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckHero" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Hero); CataloguePlaySound(DCG_DB.sort_rollover)" onmouseout="UIHideTextTooltip()"></Label>
+      </Button>
       <Panel class="CardFiltersControls">
-        <Label class="FilterAreaTitle" text="#DCG_DeckBuilder_FilterRarity"></Label>
-        <Panel>
-          <Button class="FilterButton RarityText" id="FilterRarityBasic" onactivate="SetRarityFilter( Basic )"></Button>
-          <Button class="FilterButton RarityText" id="FilterRarityCommon" onactivate="SetRarityFilter( Common )"></Button>
-          <Button class="FilterButton RarityText" id="FilterRarityUncommon" onactivate="SetRarityFilter( Uncommon )"></Button>
-          <Button class="FilterButton RarityText" id="FilterRarityRare" onactivate="SetRarityFilter( Rare )"></Button>
+        <Panel class="FlowRight">
+          <Button class="FilterButton" id="FilterDeckTypeHero" onactivate="SetDeckTypeFilter( HeroDeck )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Hero)" onmouseout="UIHideTextTooltip()">
+		  <Label class="FilterButtonGlyph" html="true" text="&#9639;"/>
+          </Button>
+        </Panel>
+      </Panel>
+    </Panel>
+    
+    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown MainFilter DeckSummarySingleLine">
+      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( MainDeck )">
+        <Label id="FilterDeckTypeMain"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckMain" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main); CataloguePlaySound(DCG_DB.sort_rollover)" onmouseout="UIHideTextTooltip()"></Label>
+      </Button>
+      <Panel class="CardFiltersControls">
+        <Panel class="FlowRight">
+          <Button class="FilterButton" id="FilterMainDeckSubtypeCreep" onactivate="SetMainDeckSubtypeFilter( Creep )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Creep)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9640;"/>
+		  </Button>
+          <Button class="FilterButton" id="FilterMainDeckSubtypeSpell" onactivate="SetMainDeckSubtypeFilter( Spell )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Spell)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9642;"/>
+		  </Button>
+          <Button class="FilterButton" id="FilterMainDeckSubtypeImprovement" onactivate="SetMainDeckSubtypeFilter( Improvement )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Improvement)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9641;"/>
+		  </Button>
         </Panel>
       </Panel>
     </Panel>
 
-    <Panel id="ItemTypeFilters" class="CardFilterRow AllCollection Main Heroes ItemTypeFilters">
+    <Panel id="ItemTypeFilters" class="CardFilterRow AllCollection Main Heroes ItemTypeFilters DeckSummarySingleLine">
       <Button class="HorizontalCenter FilterDeckTypeItem" onactivate="SetDeckTypeFilter( ItemDeck )">
-        <Label id="FilterDeckTypeItem"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckItem"></Label>
+        <Label id="FilterDeckTypeItem"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckItem" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Items); CataloguePlaySound(DCG_DB.sort_rollover)" onmouseout="UIHideTextTooltip()"></Label>
       </Button>
       <Panel class="ItemTypeFiltersControls">
-        <Button class="FilterButton" id="WeaponFilter" onactivate="SetItemDeckSubtypeFilter( Weapon )"/>
-        <Button class="FilterButton" id="ArmorFilter" onactivate="SetItemDeckSubtypeFilter( Armor )"/>
-        <Button class="FilterButton" id="AccessoryFilter" onactivate="SetItemDeckSubtypeFilter( Accessory )"/>
-        <Button class="FilterButton" id="ConsumableFilter" onactivate="SetItemDeckSubtypeFilter( Consumable )"/>
+        <Button class="FilterButton" id="WeaponFilter" onactivate="SetItemDeckSubtypeFilter( Weapon )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Items_Weapon)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9635;"/>
+		</Button>
+        <Button class="FilterButton" id="ArmorFilter" onactivate="SetItemDeckSubtypeFilter( Armor )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Items_Armor)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9636;"/>
+		</Button>
+        <Button class="FilterButton" id="AccessoryFilter" onactivate="SetItemDeckSubtypeFilter( Accessory )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Items_Accessory)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9637;"/>
+		</Button>
+        <Button class="FilterButton" id="ConsumableFilter" onactivate="SetItemDeckSubtypeFilter( Consumable )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Items_Consumable)" onmouseout="UIHideTextTooltip()">
+			<Label class="FilterButtonGlyph" html="true" text="&#9638;"/>
+		</Button>
       </Panel>
     </Panel>
 
-    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown">
-      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( HeroDeck )">
-        <Label id="FilterDeckTypeHeroLabel"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckHero"></Label>
-      </Button>
-      <Panel class="CardFiltersControls">
-        <Panel class="FlowRight">
-          <Button class="FilterButton" id="FilterDeckTypeHero" onactivate="SetDeckTypeFilter( HeroDeck )">
-          </Button>
-        </Panel>
-      </Panel>
-    </Panel>
     
-    <Panel class="CardFilterRow Collection CardTypeFiltersControls FlowDown">
-      <Button class="HorizontalCenter FilterDeckTypeMain" onactivate="SetDeckTypeFilter( MainDeck )">
-        <Label id="FilterDeckTypeMain"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterDeckMain"></Label>
-      </Button>
-      <Panel class="CardFiltersControls">
-        <Panel class="FlowRight">
-          <Button class="FilterButton" id="FilterMainDeckSubtypeCreep" onactivate="SetMainDeckSubtypeFilter( Creep )">
-          </Button>
-          <Button class="FilterButton" id="FilterMainDeckSubtypeSpell" onactivate="SetMainDeckSubtypeFilter( Spell )">
-          </Button>
-          <Button class="FilterButton" id="FilterMainDeckSubtypeImprovement" onactivate="SetMainDeckSubtypeFilter( Improvement )">
-          </Button>
-        </Panel>
-      </Panel>
-    </Panel>
-
-    <Panel id="ColorFilters" class="CardFilterRow AllCollection Main Heroes ColorFilters">
-      <Label id="FilterDeckTypeColor"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterColor"></Label>
+    <Panel id="ColorFilters" class="CardFilterRow AllCollection Main Heroes ColorFilters DeckSummarySingleLine">
+      <Button class="HorizontalCenter FilterTypeColor">
+		<Label id="FilterDeckTypeColor"  class="FilterButtonText" text="#DCG_Deckbuilder_FilterColor" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Color)" onmouseout="UIHideTextTooltip()"></Label>
+	  </Button>
       <Panel class="ColorFiltersControls">
-        <Button class="FilterButton" id="RedColorFilter" onactivate="ToggleColorFilter( Red )"/>
-        <Button class="FilterButton" id="GreenColorFilter" onactivate="ToggleColorFilter( Green )"/>
-        <Button class="FilterButton" id="BlueColorFilter" onactivate="ToggleColorFilter( Blue )"/>
-        <Button class="FilterButton" id="BlackColorFilter" onactivate="ToggleColorFilter( Black )"/>
+        <Button class="FilterButton" id="RedColorFilter" onactivate="ToggleColorFilter( Red )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Color_Red)" onmouseout="UIHideTextTooltip()"/>
+        <Button class="FilterButton" id="GreenColorFilter" onactivate="ToggleColorFilter( Green )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Color_Green)" onmouseout="UIHideTextTooltip()"/>
+        <Button class="FilterButton" id="BlueColorFilter" onactivate="ToggleColorFilter( Blue )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Color_Blue)" onmouseout="UIHideTextTooltip()"/>
+        <Button class="FilterButton" id="BlackColorFilter" onactivate="ToggleColorFilter( Black )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Main_Color_Black)" onmouseout="UIHideTextTooltip()"/>
+      </Panel>
+    </Panel>
+
+
+    <Panel class="CardFilterRow Collection Filters RarityFilter DeckSummarySingleLine">
+      <Panel class="CardFiltersControls">
+		<Button class="HorizontalCenter FilterTypeRarity">
+			<Label class="FilterAreaTitle FilterButtonText" text="#DCG_DeckBuilder_FilterRarity" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Rarity)" onmouseout="UIHideTextTooltip()"></Label>
+		</Button>
+        <Panel>
+          <Button class="FilterButton RarityText" id="FilterRarityBasic" onactivate="SetRarityFilter( Basic )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Rarity_Basic)" onmouseout="UIHideTextTooltip()"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityCommon" onactivate="SetRarityFilter( Common )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Rarity_Common)" onmouseout="UIHideTextTooltip()"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityUncommon" onactivate="SetRarityFilter( Uncommon )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Rarity_Uncommon)" onmouseout="UIHideTextTooltip()"></Button>
+          <Button class="FilterButton RarityText" id="FilterRarityRare" onactivate="SetRarityFilter( Rare )" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_Filter_Rarity_Rare)" onmouseout="UIHideTextTooltip()"></Button>
+        </Panel>
       </Panel>
     </Panel>
     
-    <Panel class="CardFilterRow Collection Main Shop Heroes Search">
-      <Panel class="CardFiltersControls">
+    <Panel class="CardFilterRow FiltersBody UnownedCardsFilter DeckSummarySingleLine">
+      <Panel class="ToggleButtonOptionGroup">
+        <Panel class="FlowChildrenDown AllCardsForSellingToggle">
+          <Label text="#DCG_DeckBuilder_ShowOnlyExcessCardsForSelling"/>
+          <ToggleButton id="AllCardsForSellingToggle" onactivate="CatalogueToggleShowAllCardsForSelling()" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_ShowAllCardsForSellingTooltip)" onmouseout="UIHideTextTooltip()">
+          </ToggleButton>
+        </Panel>
+        <Panel class="FlowChildrenDown AllCardsForBuyingToggle">
+          <Label text="#DCG_DeckBuilder_ShowAllCardsForBuying"/>
+          <ToggleButton id="AllCardsForBuyingToggle" onactivate="CatalogueToggleShowAllCardsForBuying()" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_ShowAllCardsForBuyingTooltip)" onmouseout="UIHideTextTooltip()">
+          </ToggleButton>
+        </Panel>
+        <Panel class="FlowChildrenDown UnlimitedCollectionToggle">
+          <Label text="#DCG_DeckBuilder_ShowUnownedCards"/>
+          <ToggleButton id="UnlimitedCollectionToggle" onactivate="CatalogueToggleUnlimitedCollection()" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_AllowUnownedTooltip)" onmouseout="UIHideTextTooltip()">
+          </ToggleButton>
+        </Panel>
+      </Panel>
+      
+
+    </Panel>
+    
+    <Panel class="CardFilterRow Collection Main Shop Heroes Search DeckSummarySingleLine">
+      <Panel id="SearchContainer" class="CardFiltersControls">
         <TextEntry id="CardFiltersName" placeholder="#DCG_Search"/>
         <Image id="SearchIconId" class="SearchIcon"></Image>
       </Panel>

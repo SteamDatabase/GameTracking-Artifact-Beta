@@ -20,7 +20,6 @@ DCGInspectTakeover
     color:abilityGradient;
 	margin-top: 10px;
     font-size: 36px;
-	font-family: Goudy Trajan Medium;
 	letter-spacing: 5px;
     horizontal-align: left;
 	vertical-align: center;
@@ -65,12 +64,14 @@ DCGSetIcon
 	vertical-align: center;
 	horizontal-align: right;
 
-	width: 48px;
-	height: 48px;
+	width: 42px;
+	height: 42px;
 
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+
+	wash-color: #7c8e8e;
 
     margin-right: 25px;
     opacity: 1;
@@ -94,7 +95,7 @@ DCGSetIcon
    	opacity: 0.40;
 }
 
-.cardTypeText
+.cardTypeLineText
 {
     color: white;
 	font-size: 24px;
@@ -102,7 +103,7 @@ DCGSetIcon
     horizontal-align: center;
 }
 
-.cardAbilityName
+.cardTypeText
 {
     color: white;
 	font-size: 24px;
@@ -111,9 +112,12 @@ DCGSetIcon
     visibility: collapse;
 }
 
-.isActivatedAbilityOfHero .cardAbilityName
+.cardTypeTextDarker
 {
-    visibility: visible;
+    color: #9ca4a0;
+	font-size: 24px;
+	font-weight: light;
+    horizontal-align: center;
 }
 
 .cardTypeHighlighted
@@ -131,14 +135,6 @@ DCGSetIcon
     width: 100%;
 }
 
-.cardTypeDarker
-{
-    color: #9ca4a0;
-	font-size: 24px;
-	font-weight: light;
-    horizontal-align: center;
-}
-
 .wasNotIncluded .cardTypeHighlighted, .wasNotIncluded .cardTypeDarker 
 {
     visibility: collapse;
@@ -152,17 +148,12 @@ DCGSetIcon
     horizontal-align: center;
 }
 
-.hasNoSubType .cardSubTypeText
-{
-    visibility: collapse;
-}
-
 #modifiers
 {
     flow-children: right;
     horizontal-align: center;
-    margin-top: 122px;
-    height: 635px;
+    margin-top: 75px;
+    height: 682px;
 }
 
 .modifierHeader
@@ -283,6 +274,36 @@ DCGSetIcon
     opacity: 0;
 }
 
+.IsReasonActivatedAbility #cardReasonActivatedAbility
+{
+    visibility: visible;
+}
+
+.IsReasonIncluded #cardReasonIncluded
+{
+    visibility: visible;
+}
+
+.IsReasonReferenced #cardReasonReferenced
+{
+    visibility: visible;
+}
+
+.IsReasonEquipped #cardReasonEquipped
+{
+    visibility: visible;
+}
+
+.IsReasonHacking #cardReasonHacking
+{
+    visibility: visible;
+}
+
+.IsReasonAbilityOwner #cardReasonAbilityOwner
+{
+    visibility: visible;
+}
+
 .attributeValue
 {
     opacity: 1;
@@ -333,7 +354,6 @@ DCGSetIcon
 
 .middleSectionForeground
 {
-    flow-children: down;
     horizontal-align:center;
     height: 100%;
     width: 100%;
@@ -360,10 +380,10 @@ DCGSetIcon
 .attributePanel
 {
     flow-children:right;
-    height:72px;
     visibility:collapse;
+	margin-bottom: 28px;
     tooltip-body-position: 50% 100%;
-    tooltip-arrow-position: 100% 15%;
+    tooltip-arrow-position: 100% 25%;
 }
 
 .attributePanel Label
@@ -446,6 +466,11 @@ DCGSetIcon
     visibility:visible;
 }
 
+.HasRevealed #isRevealed
+{
+    visibility:visible;
+}
+
 .HasSiege #siege
 {
     visibility:visible;
@@ -462,6 +487,11 @@ DCGSetIcon
 }
 
 .IsNotTargetable #notTargetable
+{
+    visibility:visible;
+}
+
+.NumHacks #numHacks
 {
     visibility:visible;
 }
@@ -509,14 +539,19 @@ DCGSetIcon
 	background-image: url("s2r://panorama/images/hud/icon_effect_bounty_png.vtex");
 }
 
-#lockIcon
-{
-	background-image: url("s2r://panorama/images/hud/icon_effect_lock_png.vtex");
-}
-
 #cleaveIcon
 {
 	background-image: url("s2r://panorama/images/hud/icon_effect_cleave_png.vtex");
+}
+
+#hackIcon
+{
+	background-image: url("s2r://panorama/images/hud/icon_effect_hack_png.vtex");
+}
+
+#lockIcon
+{
+	background-image: url("s2r://panorama/images/hud/icon_effect_lock_png.vtex");
 }
 
 #siegeIcon
@@ -534,9 +569,14 @@ DCGSetIcon
 	background-image: url("s2r://panorama/images/hud/icon_effect_regeneration_png.vtex");
 }
 
+#revealedIcon
+{
+	background-image: url("s2r://panorama/images/hud/icon_effect_revealed_png.vtex");
+}
+
 #stunnedIcon
 {
-	background-image: url("s2r://panorama/images/hud/icon_effect_stunned.png" );
+	background-image: url("s2r://panorama/images/hud/icon_effect_stunned_png.vtex");
 }
 
 #silencedIcon
@@ -592,7 +632,8 @@ DCGSetIcon
 #CardTypeLine
 {
     margin-top: 16px;
-    flow-children: right;
+    flow-children: down;
+    vertical-align: bottom;
     horizontal-align: center;
 	font-size: 24px;
 	font-weight: light;

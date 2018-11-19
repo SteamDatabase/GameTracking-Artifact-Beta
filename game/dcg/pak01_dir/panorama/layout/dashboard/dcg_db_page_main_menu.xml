@@ -1,0 +1,62 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page_main_menu.vcss_c" />
+	</styles>
+
+	<DCGMainMenuPage class="DashboardPage" hittest="false">
+		<Panel id="MainMenuPanel">
+			<Panel id="EventPanel" onactivate="DCGStopEventSoundLoop() PlaySoundEffect( DCG_UI.MainMenu_Select_FeaturedEvent_Set01 ) DCGShowPlayFeaturedCarousel()"
+				onmouseover="DCGStartEventSoundLoop( DCG_UI.MainMenu_Rollover_FeaturedEvent_Set01_lp )"
+				onmouseout="DCGStopEventSoundLoop()" >
+					<Panel class="FeaturedEventGraphic" hittest="false"/>
+					<DCGScenePanel id="FeaturedEventGraphic_Scene_BG" camera="camera" map="scenes/mainmenu/events/mainmenu_event_parallax_calltoarms_mainmenu_bg" hittest="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="true" yawmin="0" yawmax="5" pitchmin="2" pitchmax="-3"/>
+					<DCGScenePanel id="FeaturedEventGraphic_Scene" camera="camera" map="scenes/mainmenu/events/mainmenu_event_parallax_calltoarms_mainmenu" hittest="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="true" yawmin="0" yawmax="5" pitchmin="2" pitchmax="-3"/>
+					<Panel class="FeaturedTop">
+						<Label class="FeaturedEventHeader" text="#DCG_MainMenu_FeaturedEvent"/>
+						<Label class="FeaturedEventTimer" text="#DCG_Gauntlet_Expiration"/>
+					</Panel>
+					<Panel class="FeaturedBottom">
+						<Panel id="FeaturedEventNameTitle">
+							<Label id="FeaturedEventNameLabel" class="FeaturedEventLabel TitleFont" text="{s:featured_event_name}" html="true" />
+						</Panel>
+						<Label class="FeaturedEventHeader MiniFont" html="true" text="#DCG_MainMenu_Event_CallToArms_MiniDesc" allowtextselection="false" />
+					</Panel>
+			</Panel>
+		
+			<Panel class="MainMenuLabelContainer HideInLobby" id="PlayRoot" onactivate="DCGShowPlayCarousel() PlaySoundEffect( DCG_UI.MainMenu_Select_Play )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Play )">
+				<Image id="BlurBackgroundRect2Image" src="panel-background://PlayRoot" />
+				<Panel id="BlurBackgroundRect2Overlay" />
+				<DCGScenePanel class="MainMenuHoverHighlight" camera="camera" map="scenes/mainmenu/mainmenu_button_highlight_texture" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>
+				<Label class="MainMenuLabel" text="#DCG_MainMenu_Play" allowtextselection="false" />
+			</Panel>
+
+			<Panel class="MainMenuLabelContainer MainMenuLabelContainerSmall HideInLobby" id="CollectionRoot" onactivate="DCGOpenDeckBuilder() PlaySoundEffect( DCG_UI.MainMenu_Select_Collection )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Collection )">
+				<Image id="BlurBackgroundRect2Image" src="panel-background://CollectionRoot" />
+				<Panel id="BlurBackgroundRect2Overlay" />
+				<DCGScenePanel class="MainMenuHoverHighlight" camera="camera" map="scenes/mainmenu/mainmenu_button_highlight_texture" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>
+				<Label class="MainMenuLabel MainMenuLabelSmall" text="#DCG_MainMenu_Collection" allowtextselection="false" />
+			</Panel>
+
+			<Panel class="MainMenuLabelContainer DefaultHidden" id="ReconnectMatchRoot" onactivate="DCGReconnectLobby()">
+				<Image id="BlurBackgroundRect2Image" src="panel-background://ReconnectMatchRoot" />
+				<Panel id="BlurBackgroundRect2Overlay" />
+				<Label class="MainMenuLabel" text="#DCG_MainMenu_Reconnect" allowtextselection="false" />
+			</Panel>
+
+			<Panel class="MainMenuLabelContainer MainMenuLabelContainerSmall DefaultHidden" id="AbandonMatchRoot" onactivate="DCGAbandonLobby()">
+				<Image id="BlurBackgroundRect2Image" src="panel-background://AbandonMatchRoot" />
+				<Panel id="BlurBackgroundRect2Overlay" />
+				<Label class="MainMenuLabel MainMenuLabelSmall" text="#DCG_MainMenu_AbandonMatch" allowtextselection="false" />
+			</Panel>
+			
+		</Panel>
+
+		<Label id="BuildNumber" text="#DCG_Dashboard_BuildVersion" />
+
+	
+
+	</DCGMainMenuPage>
+	
+</root>

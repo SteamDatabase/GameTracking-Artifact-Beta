@@ -1,52 +1,23 @@
 <root>
-	<styles>
-		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
-		<include src="s2r://panorama/styles/hud/hud_root.vcss_c" />
-	</styles>
+    <styles>
+      <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+      <include src="s2r://panorama/styles/hud/hud_root.vcss_c" />
+    </styles>
 
-	<snippets>
-		<snippet name="ChecklistTitle">
-      <Panel class="ChecklistTitle" hittest="false">
-        <Image id="ChecklistImageEmpty" class="ChecklistImageEmpty" src="s2r://panorama/images/dcg/buttons/check_empty_png.vtex"/>
-        <Image id="ChecklistImageChecked" class="ChecklistImageChecked" src="s2r://panorama/images/dcg/buttons/check_checked_png.vtex"/>
-				<Label id="ChecklistText" class="ChecklistText" text="" html="true"/>
-        <Label id="ChecklistPart" class="ChecklistPart" text="#DCG_Popup_Tutorial_Part" html="true"/>
-      </Panel>
-		</snippet>
-    <snippet name="ChecklistText">
-      <Panel class="ChecklistItem" hittest="false">
-        <Label id="ChecklistText" class="ChecklistText" text="" html="true" hittest="false"/>
-        <Panel class="ChecklistButtons" hittest="false">
-          <Button class="PopupButton" id="ChecklistButtonReplay" onactivate="ReplayTutorialButton()" hittest="true" hittestchildren="false">
-            <Label text="#DCG_Popup_Tutorial_Replay"/>
-          </Button>
-          <Button class="PopupButton" id="ChecklistButton" onactivate="ConfirmTutorialButton()" hittest="true" hittestchildren="false">
-            <Label text="#DCG_Popup_Tutorial_Continue"/>
-          </Button>
+    <snippets>
+      <snippet name="Venchatoquist">
+        <Panel class="VenchatoquistItem" hittest="false">
+          <Panel class="VenchatoquistBubble" hittest="false">
+            <Label id="VenchatoquistText" text="" html="true"/>
+            <TextEntry id="VenchatoquistTextEntry"/>
+          </Panel>
+          <Panel class="VenchatoquistArrow"/>
         </Panel>
-      </Panel>
-    </snippet>
-    <snippet name="Venchatoquist">
-      <Panel class="VenchatoquistItem" hittest="false">
-        <Panel class="VenchatoquistBubble" hittest="false">
-          <Label id="VenchatoquistText" text="" html="true"/>
-          <TextEntry id="VenchatoquistTextEntry"/>
-        </Panel>
-        <Panel class="VenchatoquistArrow"/>
-        <Panel class="VenchatoquistArrow2"/>
-      </Panel>
-    </snippet>
-	</snippets>
+      </snippet>
+    </snippets>
 
-	<Panel class="DCGHUDRoot" hittest="true">
-		<Panel id="Overlay" hittest="false"/>
-		<Panel id="Glossary" hittest="false" hittestchildren="false" html="true">
-		</Panel>
-		<Panel id="Checklist" html="true" hittest="false" hittestchildren="true">
-			<Label class="ChecklistHeader" text="{s:checklistTitle}" html="true" hittest="false"/>
-			<Panel id="ChecklistItemContainer" class="ChecklistItemContainer" hittest="false">
-			</Panel>
-		</Panel>
+    <Panel class="DCGHUDRoot" hittest="true">
+    <Panel id="Overlay" hittest="false"/>
     <Panel id="PhaseName" hittest="false" hittestchildren="false">
       <Panel id="PhaseNameBackground"/>
       <Panel id="PhaseNameContainer">
@@ -58,7 +29,9 @@
 			<Label id="PhaseInfoText" text="" html="true"/>
 		</Panel>
     <Panel id="Paused" hittest="false" hittestchildren="false">
-      <Label id="PausedText" text="" html="true"/>
+		<Panel id="PausedTextPanel" hittest="false" hittestchildren="false">
+			<Label id="PausedText" text="" html="true"/>
+		</Panel>
     </Panel>
     <Panel id="CardSortFlyout" hittest="false" hittestchildren="false">
       <Label id="CardSortFlyoutText" text="{s:sortedByMethod}"/>
@@ -67,17 +40,9 @@
       <Image id="SelectErrorFlyoutIcon" src="s2r://panorama/images/hud/icon_effect_unplayable_psd.vtex"/>
       <Label id="SelectErrorFlyoutText" text="{s:errorText}"/>
     </Panel>
-    <Panel id="HudChat" hittest="false">
-		  <DCGChat id="Chat" chatstyle="hud" />
-      <Panel id="ChatControls">
-        <Panel id="ToggleChatView" onactivate="DCGHUDToggleCollapseChat()">
-          <Panel id="ChatExpandCollapseArrow" hittest="false"/>
-        </Panel>
-      </Panel>
-    </Panel>
 		<Movie id="GlobalMoviePlayer" hittest="false" hittestchildren="true" controls="none" repeat="false" autoplay="off" />
     <Panel id="ShopItems" class="Maximized">
-      <Button id="ShopMinimizeItem" class="HUDButton" onactivate="DCGHUDToggleShopState()">
+      <Button id="ShopMinimizeItem" class="PopupButton" onactivate="DCGHUDToggleShopState()">
         <Label class="MaximizedText" text="#DCG_UI_Minimize" />
         <Label class="MinimizedText" text="#DCG_UI_Maximize" />
       </Button>
@@ -86,30 +51,39 @@
       <Label text="{d:countdown}"/>
     </Panel>
     <Panel id="HeroVSContainer" hittest="false" hittestchildren="false">
-			<Panel id="OpponentSwipe" class="VSSwipe"/>
-			<Panel id="OpponentSwipeShort" class="VSSwipe"/>
-			<Panel id="PlayerSwipe" class="VSSwipe"/>
-			<Panel id="PlayerSwipeShort" class="VSSwipe"/>
-      <Panel id="HeroVS" >
-        <Panel id="OpponentVS" class="FactionVS">
-          <Panel id="OpponentVSPlayer" class="VSPlayer">
-            <Image class="VSPlayerProfileImage" id="OpponentVSPlayerProfileImage"/>
-            <Label id="OpponentVSPlayerProfileName" text="{g:dcg_persona_or_bot:opponentAccountID}" html="true"/>
+      <Panel id="HeroVSFrame">
+  			<Panel id="OpponentSwipe" class="VSSwipe"/>
+  			<Panel id="OpponentSwipeShort" class="VSSwipe"/>
+  			<Panel id="PlayerSwipe" class="VSSwipe"/>
+  			<Panel id="PlayerSwipeShort" class="VSSwipe"/>
+        <Panel id="HeroVS" >
+          <Panel id="OpponentVS" class="FactionVS">
+            <Panel id="OpponentVSPlayer" class="VSPlayer">
+              <Image class="VSPlayerProfileImage" id="OpponentVSPlayerProfileImage"/>
+              <Label id="OpponentVSPlayerProfileName" text="{g:dcg_persona_or_bot:opponentAccountID}" html="true"/>
+              <Label id="OpponentVSPlayerProfileNameAnonymous" text="#DCG_Anonymous" html="true"/>
+            </Panel>
           </Panel>
-        </Panel>
-        <Panel class="VSCenter">
-          <Label class="VSLabel" text=""/>
-        </Panel>
-        <Panel id="LocalVS" class="FactionVS">
-          <Panel id="LocalVSPlayer" class="VSPlayer">
-            <Image class="VSPlayerProfileImage" id="PlayerVSPlayerProfileImage"/>
-            <Label id="LocalVSPlayerProfileName" text="{g:dcg_persona_or_bot:playerAccountID}" html="true"/>
+          <Panel class="VSCenter">
+            <Label class="VSLabel" text=""/>
+          </Panel>
+          <Panel id="LocalVS" class="FactionVS">
+            <Panel id="LocalVSPlayer" class="VSPlayer">
+              <Image class="VSPlayerProfileImage" id="PlayerVSPlayerProfileImage"/>
+              <Label id="LocalVSPlayerProfileName" text="{g:dcg_persona_or_bot:playerAccountID}" html="true"/>
+            </Panel>
           </Panel>
         </Panel>
       </Panel>
     </Panel>
 
-    <Button id="ScrollLeftButton" class="ScrollLaneButton SettingsButton" onactivate="DCGScrollLeft();" />
-    <Button id="ScrollRightButton" class="ScrollLaneButton SettingsButton" onactivate="DCGScrollRight();" />
+    <Button id="ScrollLeftButton" class="ScrollLaneButton SettingsButton" onactivate="DCGScrollLeft();">
+    <Panel id="ScrollLeftButtonOverlay"/>
+	</Button>
+	
+    <Button id="ScrollRightButton" class="ScrollLaneButton SettingsButton" onactivate="DCGScrollRight();">
+	<Panel id="ScrollRightButtonOverlay"/>
+	</Button>
+	
 	</Panel>
 </root>

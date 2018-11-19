@@ -1,0 +1,33 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/purchase_box.vcss_c" />
+	</styles>
+
+	<DCGPurchaseBox>
+        <Panel id="PackDetailsContents" onmouseout="DCGHidePackTooltip()">
+            <Panel class="PackDetailsRow">
+              <Panel id="PackIdentity">
+                <Label id="PackName" text="{g:dcg_item_name:set_pack_itemid}"/>
+                <Panel class="LeftRightFlow">
+                  <Panel id="MiniItemIcon" />
+                  <Label id="CurrentItemCount" class="BrightGrey" text="#DCG_Popup_Card_Pack_PackCount" />
+                </Panel>
+              </Panel>
+              <Panel id="PackImageContainer">
+                <Panel id="ItemImage"/>
+              </Panel>
+            </Panel>
+        
+            <Panel id="PackPurchaseRow" class="PackDetailsRow">
+              <DropDown id="QuantityDropDown" class="ColoredButton QuantityDropDown" oninputsubmit="DCGPurchaseQuantityDropDownChanged()"/>
+              <Button id="PackPurchaseButton" class="PurchaseButton ColoredButton" onactivate="DCGPurchaseItems()">
+                <Panel class="PurchaseButtonContents">
+                  <Label class="PurchaseLabel" text="#DCG_ManagePacks_PackOpeningBuyPack" />
+                  <Label class="PackPriceLabel" text="{s:total_price}" />
+                </Panel>
+              </Button>
+            </Panel>
+        </Panel>
+    </DCGPurchaseBox>
+</root>

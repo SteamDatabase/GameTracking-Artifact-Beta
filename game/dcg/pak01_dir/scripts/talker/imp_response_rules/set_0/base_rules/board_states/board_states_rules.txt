@@ -1,0 +1,2618 @@
+// rule naming conv: card category/card name/core concept/player context/variant or chain info
+// var naming conv: player context/variable type/card category/card name/variant or chain info/player context
+// p_var = player centric variable //
+// o_var = opponent centric variable //
+// Pp = "player plays" //
+// Pr = "player reacts" //
+// Op = "opponent plays" //
+// Or = "opponent reacts" //
+
+
+
+
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  //  BOTH_SIDES_NO_UNITS
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  
+//  //
+//  
+//  
+//  
+//  //-----------------------------------------------------------------------------
+//  // PLAYER PLAYS CARD: both_sides_no_units: PlayCard
+//  //-----------------------------------------------------------------------------
+//  
+//  
+//  // Player reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_board_states_both_sides_no_units_PLAYCARD_Pp_Pr
+//  {
+//  
+//      Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceLocal IsTargetNotLocal
+//  
+//      // sharing response:
+//      Response imps_shared_generic_player_player_plays_razzle
+//  
+//  }
+//  
+//  
+//  // Opponent reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_board_states_both_sides_no_units_PLAYCARD_Pp_Or
+//  {
+//  
+//      Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal IsTargetNotLocal
+//  
+//      // sharing response:
+//      Response imps_shared_generic_opponent_opponent_gets_razzled
+//  
+//  }
+//  
+//  
+//  //-----------------------------------------------------------------------------
+//  // OPPONENT PLAYS CARD: both_sides_no_units: PlayCard
+//  //-----------------------------------------------------------------------------
+//  
+//  
+//  // Player reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_board_states_both_sides_no_units_PLAYCARD_Op_Pr
+//  {
+//  
+//      Criteria PlayCard IsNotCombat IsActionPhase IsLocalImp IsSourceNotLocal IsTargetLocal
+//  
+//      // sharing response:
+//      Response imps_shared_generic_player_player_gets_razzled
+//  
+//  }
+//  
+//  
+//  // Opponent reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_board_states_both_sides_no_units_PLAYCARD_Op_Or
+//  {
+//  
+//      Criteria PlayCard IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal IsTargetLocal
+//  
+//      // sharing response:
+//      Response imps_shared_generic_opponent_opponent_plays_razzle
+//  
+//  }
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ONE_SIDE_NO_UNITS
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever plays the card, has no opposing units. We use the timer hold to go into the 'idle' section of the animation if we just recently played the big intro. we use playerIsLosingGame as a tag to be able to play the broader opponent animation when the player is losing and has no units.   NOTE: these mostly have higher priority weights than the associated timer triggered responses so that the triggers from death will take priority if timers from previous lanes are still running.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: one_side_no_units: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsNotWinningGame p_var_wait_one_side_no_opponent_units
+
+    ApplyContext "p_var_wait_one_side_no_opponent_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Pr_no_big_intro
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Pr_player_winning
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore p_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "p_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_player_winning
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Or_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_ IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Or_player_winning
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore o_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "o_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Pp_Or_player_winning_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_player_winning IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: one_side_no_units: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetHero PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_no_big_intro
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTargetHero
+
+    Response imps_board_states_one_side_no_units_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_last_kill_was_creep
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_last_kill_was_creep_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_last_kill_was_creep IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_player_losing_hero
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsTargetHero IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_hero
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Pr_player_losing_creep
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsLosingGame IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_creep
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Op_Or
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Or_player_losing
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsGameRound4orMore o_var_wait_one_side_no_units_player_losing
+
+    ApplyContext "o_var_wait_one_side_no_units_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_DEATH_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: one_side_no_units:   ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Pr
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsNotWinningGame p_var_wait_one_side_no_opponent_units
+
+    ApplyContext "p_var_wait_one_side_no_opponent_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Pr_no_big_intro
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Pr_player_winning
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore p_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "p_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_player_winning
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Or
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Or_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_ IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Or_player_winning
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore o_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "o_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Pp_Or_player_winning_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_player_winning IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: one_side_no_units:   ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetHero PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_no_big_intro
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTargetHero
+
+    Response imps_board_states_one_side_no_units_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_last_kill_was_creep
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_last_kill_was_creep_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_last_kill_was_creep IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_player_losing_hero
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsTargetHero IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_hero
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Pr_player_losing_creep
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsLosingGame IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_creep
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Or
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Op_Or
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Or_player_losing
+{
+
+    Criteria   ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsGameRound4orMore o_var_wait_one_side_no_units_player_losing
+
+    ApplyContext "o_var_wait_one_side_no_units_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDPOSITION_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: one_side_no_units:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsNotWinningGame p_var_wait_one_side_no_opponent_units
+
+    ApplyContext "p_var_wait_one_side_no_opponent_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Pr_no_big_intro
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Pr_player_winning
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore p_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "p_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_Pp_Pr_player_winning
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Or_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_ IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Or_player_winning
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsWinningGame IsGameRound4orMore o_var_wait_one_side_no_units_player_winning
+
+    ApplyContext "o_var_wait_one_side_no_units_player_winning:1:50"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Pp_Or_player_winning_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Pp_Or_player_winning IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Pp_Or_player_winning_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: one_side_no_units:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetHero PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_no_big_intro
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTargetHero
+
+    Response imps_board_states_one_side_no_units_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_last_kill_was_creep
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsNotLosingGame p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_last_kill_was_creep_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_Op_Pr_last_kill_was_creep IsLocalImp
+
+    Response imps_board_states_one_side_no_units_Op_Pr_last_kill_was_creep_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_player_losing_hero
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsTargetHero IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_hero
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Pr_player_losing_creep
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTargetCreep PlayerIsLosingGame IsGameRound4orMore
+
+    Response imps_board_states_one_side_no_units_Op_Pr_player_losing_creep
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull
+
+    Response imps_board_states_one_side_no_units_Op_Or
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Or_player_losing
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsGameRound4orMore o_var_wait_one_side_no_units_player_losing
+
+    ApplyContext "o_var_wait_one_side_no_units_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_CHANGEDTARGET_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_Op_Or_player_losing_chain_outro
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ONE_SIDE_NO_UNITS_TIMER
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever plays the card, has no opposing units. We use the timer hold to go into the 'idle' section of the animation if we just recently played the big intro. we use playerIsLosingGame as a tag to be able to play the broader opponent animation when the player is losing and has no units.   USES CUSTOM VARIABLE NAMES TO WORK WITH REGULAR NON TIMER RULES !! NOTE: the idle loops generally have a lower priority weight than the big intros to stop the idles stomping them.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: one_side_no_units_timer: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Pp_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTimeRemainingInLane PlayerIsNotWinningGame p_var_wait_one_side_no_opponent_units
+
+    ApplyContext "p_var_wait_one_side_no_opponent_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_timer_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_timer_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_timer_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Pp_Pr_no_big_intro
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane p_var_wait_one_side_no_opponent_units_timer_no_big_intro
+
+    ApplyContext "p_var_wait_one_side_no_opponent_units_timer_no_big_intro:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_timer_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Pp_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsNoOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTimeRemainingInLane o_var_wait_one_side_no_units_timer
+
+    ApplyContext "o_var_wait_one_side_no_units_timer:1:10"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_timer_Pp_Or_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Pp_Or_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_timer_Pp_Or_ IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_timer_Pp_Or_chain_outro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: one_side_no_units_timer: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTimeRemainingInLane p_var_wait_one_side_no_local_units
+
+    ApplyContext "p_var_wait_one_side_no_local_units:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_timer_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_one_side_no_units_timer_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_one_side_no_units_timer_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Pr_no_big_intro
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane p_var_wait_one_side_no_local_units_timer_no_big_intro
+
+    ApplyContext "p_var_wait_one_side_no_local_units_timer_no_big_intro:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_timer_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Pr_player_losing
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant IsTimeRemainingInLane PlayerIsLosingGame IsGameRound4orMore p_var_wait_one_side_no_units_timer_player_losing
+
+    ApplyContext "p_var_wait_one_side_no_units_timer_player_losing:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_timer_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane o_var_wait_one_side_no_units_timer
+
+    ApplyContext "o_var_wait_one_side_no_units_timer:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_one_side_no_units_timer_Op_Or
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Or_player_losing
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsNoLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull ThisIsSemiImportant PlayerIsLosingGame IsTimeRemainingInLane IsGameRound4orMore o_var_wait_one_side_no_units_player_losing
+
+    ApplyContext "o_var_wait_one_side_no_units_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_one_side_no_units_timer_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_one_side_no_units_timer_TIMER_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_one_side_no_units_timer_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_one_side_no_units_timer_Op_Or_player_losing_chain_outro
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TOWER_DEATH_SKULL_TIMER
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// context = whoever plays the card, their opponent has a tower death skull.   USES CUSTOM VARIABLE NAMES!   the 'has death skull' idles are set to 14 priority so normal reactions wont trigger unless skull removed.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_death_skull_timer: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Pp_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsTimeRemainingInLane NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant IsOpponentTowerDeathSkull p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_death_skull_timer_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_death_skull_timer_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_death_skull_timer_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Pp_Pr_no_big_intro
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp ThisIsImportant NoLocalTowerDeathSkull IsOpponentTowerDeathSkull p_var_wait_opp_tower_death_skull_timer_no_big_intro
+
+    ApplyContext "p_var_wait_opp_tower_death_skull_timer_no_big_intro:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_tower_death_skull_timer_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Pp_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsTimeRemainingInLane NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant IsOpponentTowerDeathSkull o_var_wait_opponent_tower_death_skull_timer
+
+    ApplyContext "o_var_wait_opponent_tower_death_skull_timer:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_tower_death_skull_timer_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_death_skull_timer: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Op_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsTimeRemainingInLane isLocalTowerDeathSkull ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:35"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_death_skull_timer_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_death_skull_timer_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_death_skull_timer_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Op_Pr_no_big_intro
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsTimeRemainingInLane isLocalTowerDeathSkull ThisIsImportant NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_tower_death_skull_timer_no_big_intro
+
+    ApplyContext "p_var_wait_tower_death_skull_timer_no_big_intro:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_tower_death_skull_timer_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Op_Pr_player_losing
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsTimeRemainingInLane isLocalTowerDeathSkull ThisIsImportant NoOpponentTowerDeathSkull PlayerIsLosingGame IsGameRound4orMore p_var_wait_tower_death_skull_timer_player_losing
+
+    ApplyContext "p_var_wait_tower_death_skull_timer_player_losing:1:10"
+    ApplyContextToWorld
+
+    Response imps_board_states_tower_death_skull_timer_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_death_skull_timer_TIMER_Op_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsTimeRemainingInLane isLocalTowerDeathSkull ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull
+
+    Response imps_board_states_tower_death_skull_timer_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TOWER_GAINED_DEATH_SKULL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// context = whoever plays the card, their opponent has a tower death skull. we have to use ThisIsImportant x 2 in the main big intro arg because we have to stomp number of units rules and also be able to stomp the no big intro for death skulls over the no big intro for lane unit numbers. NOTE: player has a high priority animation for when THEIR tower has a death skull that can only be broken by the removed death skull animation so buffs and damage etc fire no responses until the skull is removed.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Pp_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Pp_Pr_no_big_intro
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Pp_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Pr_no_big_intro
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Pr_player_losing
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Or_player_losing
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEATH_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Pp_Pr
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Pp_Pr_no_big_intro
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Pp_Or
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Pr
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Pr_no_big_intro
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Pr_player_losing
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Or
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Or_player_losing
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DAMAGE_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Pp_Pr
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Pp_Pr_no_big_intro
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Pp_Or
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Pr
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Pr_no_big_intro
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Pr_player_losing
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Or
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Or_player_losing
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_SUMMON_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Pp_Pr
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Pp_Pr_no_big_intro
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Pp_Or
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Pr
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Pr_no_big_intro
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Pr_player_losing
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Or
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Or_player_losing
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_BUFFED_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Pp_Pr
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Pp_Pr_no_big_intro
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Pp_Or
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Pr
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Pr_no_big_intro
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Pr_player_losing
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Or
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Or_player_losing
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_DEBUFFED_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Pp_Pr
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Pp_Pr_no_big_intro
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Pp_Or
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Pr
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Pr_no_big_intro
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Pr_player_losing
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Or
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Or_player_losing
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDPOSITION_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_gained_death_skull:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Pp_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant p_var_wait_opp_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_opp_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Pp_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Pp_Pr_no_big_intro
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Pr_no_big_intro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Pp_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp OpponentTowerInActiveLaneGainedDeathSkull NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant
+
+    Response imps_board_states_tower_gained_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_gained_death_skull:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame p_var_wait_local_tower_gained_death_skull
+
+    ApplyContext "p_var_wait_local_tower_gained_death_skull:1:45"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_gained_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Pr_no_big_intro
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_no_big_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Pr_player_losing
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsNotLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Or_player_losing
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame o_var_wait_tower_gained_death_skull_player_losing
+
+    ApplyContext "o_var_wait_tower_gained_death_skull_player_losing:1:60"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Or_player_losing_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_board_states_tower_gained_death_skull_Op_Or_player_losing IsOpponentImp
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_chain_outro
+
+}
+
+Rule rule_imps_board_states_tower_gained_death_skull_CHANGEDTARGET_Op_Or_player_losing_no_big_intro
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant LocalTowerInActiveLaneGainedDeathSkull NoOpponentTowerDeathSkull PlayerIsLosingGame
+
+    Response imps_board_states_tower_gained_death_skull_Op_Or_player_losing_no_big_intro
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TOWER_LOST_DEATH_SKULL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// context = whoever plays the card, their opponent REMOVED their tower death skull. we have to use ThisIsImportant x 2 in the main big intro arg because we have to stomp number of units rules and also be able to stomp the no big intro for death skulls over the no big intro for lane unit numbers
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEATH_Pp_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEATH_Pp_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEATH_Op_Pr
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEATH_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEATH_Op_Or
+{
+
+    Criteria Death  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DAMAGE_Pp_Pr
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DAMAGE_Pp_Or
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DAMAGE_Op_Pr
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_DAMAGE_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DAMAGE_Op_Or
+{
+
+    Criteria  Damage  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_SUMMON_Pp_Pr
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_SUMMON_Pp_Or
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_SUMMON_Op_Pr
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_SUMMON_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_SUMMON_Op_Or
+{
+
+    Criteria  Summon  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_BUFFED_Pp_Pr
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_BUFFED_Pp_Or
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_BUFFED_Op_Pr
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_BUFFED_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_BUFFED_Op_Or
+{
+
+    Criteria  Buffed  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEBUFFED_Pp_Pr
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEBUFFED_Pp_Or
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEBUFFED_Op_Pr
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEBUFFED_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_DEBUFFED_Op_Or
+{
+
+    Criteria  Debuffed  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDPOSITION_Pp_Pr
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDPOSITION_Pp_Or
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDPOSITION_Op_Pr
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDPOSITION_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDPOSITION_Op_Or
+{
+
+    Criteria  ChangedPosition  IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: tower_lost_death_skull:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDTARGET_Pp_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDTARGET_Pp_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp NoLocalTowerDeathSkull ThisIsImportant ThisIsImportant OpponentTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: tower_lost_death_skull:  ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDTARGET_Op_Pr
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsLocalImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull p_var_wait_tower_lost_death_skull
+
+    ApplyContext "p_var_wait_tower_lost_death_skull:1:6"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_intro
+
+}
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDTARGET_Op_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_board_states_tower_lost_death_skull_Op_Pr_ IsLocalImp
+
+    Response imps_board_states_tower_lost_death_skull_Op_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_board_states_tower_lost_death_skull_CHANGEDTARGET_Op_Or
+{
+
+    Criteria  ChangedTarget IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant ThisIsImportant NoOpponentTowerDeathSkull LocalTowerInActiveLaneLostDeathSkull
+
+    Response imps_board_states_tower_lost_death_skull_Op_Or
+
+}

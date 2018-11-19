@@ -38,6 +38,8 @@
 			Game				core
 			Mod					dcg
 			Write				dcg
+
+			LayeredGameRoot		"../game_otherplatforms/etc" [$MOBILE || $ETC_TEXTURES] //Some platforms do not support DXT compression. ETC is a well-supported alternative.
 		}
 	}
 
@@ -131,6 +133,12 @@
 	{
 		"Tools"			"Dota:Forward"
 		"EnvMapBake"	"Dota"
+	}
+
+	RenderSystem
+	{
+		"VulkanUseStreamingTextureManager"	"1"
+		"VulkanOnly"				"1"	[ $LINUX || $OSX ] // No OpenGL or D3D9/11 fallback on Linux or OSX, only Vulkan is supported.
 	}
 
 	SceneSystem

@@ -2,6 +2,8 @@
 //**ABADDON - HERO/////
 ///////////////////////
 
+WhitelistName "Whitelist Card 10016"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -202,7 +204,7 @@ Rule abaddon_gain_health_rule
 Response abaddon_use_include
 {
 	speak "abaddon_use_include_01" noscene 
-	speak "abaddon_use_include_02" noscene 
+	speak "abaddon_use_include_03" noscene 
 }
 
 Rule abaddon_use_include_rule
@@ -213,7 +215,7 @@ Rule abaddon_use_include_rule
 
 Response abaddon_use_include_on_self
 {
-	speak "abaddon_use_include_03" noscene 
+	speak "abaddon_use_include_02" noscene 
 }
 
 Rule abaddon_use_include_on_self_rule
@@ -296,6 +298,7 @@ Response abaddon_lane_debuff_give_death_skull
 	speak "abaddon_potential_kill_03"  noscene 
 	speak "abaddon_potential_kill_04"  noscene 
 	speak "abaddon_potential_kill_05"  noscene 
+	speak "abaddon_kill_rival_10"  noscene 
 }
 
 Rule abaddon_lane_debuff_give_death_skull_rule
@@ -311,6 +314,7 @@ Response abaddon_lane_damage_give_death_skull
 	speak "abaddon_potential_kill_03"  noscene 
 	speak "abaddon_potential_kill_04"  noscene 
 	speak "abaddon_potential_kill_05"  noscene 
+	speak "abaddon_kill_rival_10"  noscene 
 }
 
 Rule abaddon_lane_damage_give_death_skull_rule
@@ -354,22 +358,26 @@ Response abaddon_borowed_time_ready
 
 Rule abaddon_borowed_time_ready_rule
 {
-	criteria IsNotImp BeginSpellcasting AllyHasAbaddon AllyReadyBorrowedTime
+	criteria IsNotImp BeginSpellcasting AllyHasAbaddon AllyReadyBorrowedTime ThisIsImportant
 	response abaddon_borowed_time_ready
 }	
 
 
-Response abaddon_mist_of_avernus_in_lane
+Response abaddon_play_mist_of_avernus
 {
 	speak "abaddon_unique_04" noscene
 	speak "abaddon_unique_05" noscene
 	speak "abaddon_unique_06" noscene
+	speak "abaddon_unique_13" noscene 
+	speak "abaddon_unique_14" noscene 
+	speak "abaddon_unique_15" noscene 
+	speak "abaddon_unique_16" noscene 
 }
 
-Rule abaddon_mist_of_avernus_in_lane_rule
+Rule abaddon_play_mist_of_avernus_rule
 {
-	criteria IsNotImp Buffed AllyHasAbaddon AllyHasMistOfAvernus
-	response abaddon_mist_of_avernus_in_lane
+	criteria IsNotImp PlayCard AllyHasAbaddon IsSourceMistOfAvernus  ThisIsSuperImportant
+	response abaddon_play_mist_of_avernus
 }	
 
 Response abaddon_mist_of_avernus_in_lane_many_units
@@ -382,8 +390,8 @@ Response abaddon_mist_of_avernus_in_lane_many_units
 
 Rule abaddon_mist_of_avernus_in_lane_many_units_rule
 {
-	criteria IsNotImp Buffed AllyHasAbaddon AllyHasMistOfAvernus ManyLocalUnits
-	response abaddon_mist_of_avernus_in_lane
+	criteria IsNotImp PlayCard AllyHasAbaddon IsSourceMistOfAvernus AllyHasManyMeleeCreeps  ThisIsSuperImportant
+	response abaddon_mist_of_avernus_in_lane_many_units
 }	
 
 
@@ -395,7 +403,7 @@ Response abaddon_avernus_blessing
 
 Rule abaddon_avernus_blessing_rule
 {
-	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetAbaddon IsSourceAvernusBlessing
+	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetAbaddon IsSourceAvernusBlessing ThisIsImportant
 	response abaddon_avernus_blessing
 }
 
@@ -406,7 +414,8 @@ Response abaddon_avernus_blessing_on_cm
 
 Rule abaddon_avernus_blessing_on_cm_rule
 {
-	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetCrystalMaiden IsSourceAvernusBlessing
+	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetCrystalMaiden IsSourceAvernusBlessing ThisIsImportant
+	matchonce
 	response abaddon_avernus_blessing_on_cm
 }
 
@@ -417,20 +426,21 @@ Response abaddon_avernus_blessing_on_drow
 
 Rule abaddon_avernus_blessing_on_drow_rule
 {
-	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetDrowRanger IsSourceAvernusBlessing
+	criteria IsNotImp PlayCard AllyHasAbaddon IsTargetDrowRanger IsSourceAvernusBlessing ThisIsImportant
+	matchonce
 	response abaddon_avernus_blessing_on_drow
 }
 
-Response abaddon_mist_of_avernus
+Response abaddon_enemy_plays_mist_of_avernus
 {
-	speak "abaddon_unique_15" noscene 
-	speak "abaddon_unique_16" noscene 
+	speak "abaddon_unique_11" noscene 
+	speak "abaddon_unique_12" noscene 
 }
 
-Rule abaddon_mist_of_avernus_rule
+Rule abaddon_enemy_plays_mist_of_avernus_rule
 {
-	criteria IsNotImp PlayCard AllyHasAbaddon IsSourceMistOfAvernus
-	response abaddon_mist_of_avernus
+	criteria IsNotImp PlayCard EnemyHasAbaddon AllyHasNoAbaddon IsSourceMistOfAvernus ThisIsSuperImportant
+	response abaddon_enemy_plays_mist_of_avernus
 }
 
 
@@ -441,48 +451,60 @@ Rule abaddon_mist_of_avernus_rule
 Response abaddon_play_unearthed_secrets
 {
 	speak "abaddon_cast_spell_05" noscene 	
+	speak "abaddon_equip_generic_accessory_02" noscene 	
+	speak "abaddon_permanent_attack_05" noscene 	
+	speak "abaddon_taunt_generic_03" noscene 	
 	
 }
 
 Rule abaddon_play_unearthed_secrets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceUnearthedSecrets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceUnearthedSecrets 
 	response abaddon_play_unearthed_secrets
 }
 
 Response abaddon_play_path_of_the_dreamer
 {
 	speak "abaddon_cast_spell_01" noscene 	
+	speak "abaddon_equip_generic_armor_01" noscene 	
+	speak "abaddon_permanent_health_04" noscene 	
+	speak "abaddon_potential_save_01" noscene 	
 	
 }
 
 Rule abaddon_play_path_of_the_dreamer_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourcePathOfTheDreamer ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourcePathOfTheDreamer 
 	response abaddon_play_path_of_the_dreamer
 }
 
 Response abaddon_play_homefield_advantage
 {
 	speak "abaddon_cast_spell_07" noscene 	
+	speak "abaddon_equip_generic_accessory_03" noscene 	
+	speak "abaddon_permanent_attack_03" noscene 	
+	speak "abaddon_taunt_generic_10" noscene 	
 	
 }
 
 Rule abaddon_play_homefield_advantage_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceHomefieldAdvantage ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceHomefieldAdvantage 
 	response abaddon_play_homefield_advantage
 }
 
 Response abaddon_play_selemenes_favor
 {
 	speak "abaddon_cast_spell_09" noscene 	
+	speak "abaddon_equip_generic_armor_05" noscene 	
+	speak "abaddon_cast_spell_06" noscene 	
+	speak "abaddon_taunt_generic_06" noscene 	
 	
 }
 
 Rule abaddon_play_selemenes_favor_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceSelemenesFavor ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceSelemenesFavor 
 	response abaddon_play_selemenes_favor
 }
 
@@ -490,49 +512,61 @@ Rule abaddon_play_selemenes_favor_rule
 Response abaddon_play_altar_of_the_mad_moon
 {
 	speak "abaddon_cast_spell_06" noscene 	
+	speak "abaddon_cast_spell_04" noscene 	
+	speak "abaddon_cast_spell_03" noscene 	
+	speak "abaddon_cast_spell_08" noscene 	
+	speak "abaddon_cast_spell_10" noscene 	
 	
 }
 
 Rule abaddon_play_altar_of_the_mad_moon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceAltarOfTheMadMoon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceAltarOfTheMadMoon 
 	response abaddon_play_altar_of_the_mad_moon
 }
 
 Response abaddon_play_cheating_death
 {
-	speak "abaddon_cast_spell_02" noscene 	
-	speak "abaddon_cast_spell_04" noscene 	
+	speak "abaddon_potential_save_05" noscene 	
+	speak "abaddon_potential_save_04" noscene 	
+	speak "abaddon_potential_save_02" noscene 	
+	speak "abaddon_potential_save_03" noscene 	
 	
 }
 
 Rule abaddon_play_cheating_death_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceCheatingDeath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceCheatingDeath 
 	response abaddon_play_cheating_death
 }
 
 Response abaddon_play_verdant_refuge
 {
-	speak "abaddon_cast_spell_10" noscene 	
+	speak "abaddon_cast_spell_04" noscene 	
+	speak "abaddon_permanent_health_01" noscene 	
+	speak "abaddon_equip_generic_weapon_02" noscene 	
+	speak "abaddon_equip_generic_weapon_05" noscene 	
 	
 }
 
 Rule abaddon_play_verdant_refuge_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceVerdantRefuge ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceVerdantRefuge 
 	response abaddon_play_verdant_refuge
 }
 
 Response abaddon_play_stars_align
 {
 	speak "abaddon_cast_spell_07" noscene 	
+	speak "abaddon_cast_spell_09" noscene 	
+	speak "abaddon_equip_generic_accessory_04" noscene 	
+	speak "abaddon_equip_generic_accessory_03" noscene 	
 	
 }
 
 Rule abaddon_play_stars_align_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceStarsAlign ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAbaddon IsSourceStarsAlign 
 	response abaddon_play_stars_align
 }
 

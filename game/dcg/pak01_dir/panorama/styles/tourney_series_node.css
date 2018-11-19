@@ -1,0 +1,379 @@
+
+/* NOTE: height + y margins must match the tourney phase YDelta setting */
+DCGTourneySeriesNode
+{      
+	z-index: 1;             
+}
+
+DCGTourneySeriesNode.Centered
+{
+	transform: translateX(-104px) translateY(-48px);
+}
+
+DCGTourneySeriesNode.Centered.Bye
+{
+	transform: translateX(-104px) translateY(-15px);
+}
+
+.VerticalLayout
+{
+	flow-children: down;
+}
+
+.LiveContainer
+{
+	width: 100%;
+}
+
+.Live
+{
+	font-size: 15px;
+	text-transform: uppercase;
+	font-weight: thin;
+	height: 18px;
+	color: #5be2AfFF;
+	visibility: collapse;
+	text-overflow: shrink;
+}
+
+.VerticalLayout .Live
+{
+	horizontal-align: right;
+}
+
+.HorizontalLayout .Live
+{
+	margin-left: 6px;
+	width: 36px;
+	vertical-align: center;
+}
+
+.InProgress .Live
+{
+	visibility: visible;
+}
+
+.LiveSpacer
+{
+	height: 18px;
+}
+
+.Bye .LiveSpacer
+{
+	visibility: collapse;
+}
+
+.RowContainer
+{
+	vertical-align: center;
+	horizontal-align: center;	
+	flow-children: down;
+	background-color: #212230;
+	//background-color: gradient( linear, 0% 0%, 100% 0%, from( #212230 ), to( #212230 ) );
+	//border: 3px transparent #000000;
+	border-right: 1px solid #2d5467;
+}
+
+.InProgress .RowContainer
+{
+	border: 3px solid #000000;
+	box-shadow: #5bb2Afaa -4px -4px 8px 8px;
+}
+
+DCGTourneySeriesNode.NoPlayer
+{
+	visibility: collapse;
+}
+
+.PlayerRow
+{
+	flow-children: right;
+	padding: 2px;
+    width: 234px;
+}
+
+.LocalPlayer.PlayerRow
+{
+	//border-right: 8px solid white;
+	//border-top: 1px solid white;
+	border: 1px solid #bba280;
+}
+
+.AvatarImage
+{
+	vertical-align: center;
+	width: 24px;
+	height: 24px;
+}
+
+.NoPlayer .AvatarImage
+{
+	visibility: collapse;
+}
+
+.PlayerName
+{
+	vertical-align: center;
+	width: 150px;
+	font-size: 14px;
+	margin-left: 8px;
+	height: 19px;
+	text-shadow: .5px .5px 2px 2.0 #00000088;
+}
+
+.InMatchmaking .PlayerName
+{
+	color: #fde4b5;
+	
+	animation-name: SearchingAnimation;
+	animation-duration: 2.75s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+.NoPlayer .PlayerName
+{
+	visibility: collapse;
+}
+
+.Empty
+{
+	/* NOTE: Width = width of .PlayerName and .AvatarImage */
+	width: 180px;
+	height: 24px;
+	visibility: collapse;
+}
+
+.NoPlayer .Empty
+{
+	visibility: visible;
+}
+
+.GamesWonBox
+{
+	vertical-align: center;
+	horizontal-align: right;
+	margin: 1px;
+	width: 20px;
+	height: 20px;
+}
+
+.NotPlayed .GamesWonBox
+{
+	background-color: none;
+}
+
+.NotPlayed .GamesWon
+{
+	visibility: collapse;
+}
+
+.GamesWon
+{
+	vertical-align: center;
+	horizontal-align: center;
+	text-align: center;
+	font-size: 16px;
+	color: #C0C0C0;
+	margin-top: 1px;
+	text-shadow: .5px .5px 2px 2.0 #00000088;
+}
+
+/* Loser Logic */
+.Winner .PlayerName
+{
+	color: #e1e1dd;
+}
+
+.Winner
+{
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #3c3b52 ), to( #3f5f77 ) );
+	border-right: 1px solid #479cb9;
+}
+
+#RoundSeriesList  .Winner
+{
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #3c3b5233 ), to( #3f5f7766 ) );
+	border-right: 1px solid #479cb9;
+}
+
+
+.Tied .PlayerName
+{
+	wash-color: #A0A060;
+}
+
+.Loser .PlayerName
+{
+	color: uiStandardGrey;
+}
+
+.Loser .GamesWon
+{
+	color: uiStandardGrey;
+}
+
+/* Bye Logic */
+.Bye #Row1
+{
+	visibility: collapse;
+}
+
+.Bye .GamesWonBox
+{
+	background-color: none;
+}
+
+.Bye .GamesWon
+{
+	visibility: collapse;
+}
+
+/* Styling for horizontal version */
+.HorizontalLayout
+{
+	flow-children: right;
+	horizontal-align: center;
+}
+
+.Horizontal .RowContainer
+{
+	flow-children: right;
+	horizontal-align: center;
+}
+
+.Horizontal .GlowContainer
+{
+	width: 516px;
+	height: 42px;
+ 	border-radius: 4px;	
+}
+
+.ScoreBox
+{
+	vertical-align: center;
+	margin-right: 4px;
+	width: 20px;
+	height: 20px;
+}
+
+.Score
+{
+	vertical-align: center;
+	horizontal-align: center;
+	text-align: center;
+	font-size: 16px;
+	color: #C0C0C0;
+	margin-top: 1px;
+}
+
+.ResultsBox
+{
+	width: 70px;
+	margin-left: 4px;
+	margin-right: 4px;
+	vertical-align: center;
+}
+
+.ResultsLabel
+{
+	width: 100%;
+	text-align: center;
+	margin-bottom: -3px;
+	color: #e1e1dd;
+	text-shadow: .5px .5px 2px 2.0 #00000088;
+}
+
+.WonLostTied
+{
+}
+
+.ByeLabel
+{
+	visibility: collapse;
+}
+
+.Bye .WonLostTied
+{
+	visibility: collapse;
+}
+
+.Bye .ByeLabel
+{
+	visibility: visible;
+}
+
+.Bye .ScoreBox
+{
+	visibility: collapse;
+}
+
+.PlayerDeck
+{
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+  	background-repeat: no-repeat;
+		background-position: center;
+    background-image: url("s2r://panorama/images/tournaments/cards_small_psd.vtex");    
+    wash-color: #999;
+    margin-top: 3px;
+    margin-right: 6px;
+    margin-left: 4px;
+}
+
+.PlayerDeck:hover
+{
+    wash-color: white;
+}
+
+.NoDeck.PlayerDeck
+{
+    visibility: collapse;
+}
+
+#RoundSeriesList .PlayerRow
+{
+	width: 200px;
+}
+
+#RoundSeriesList .PlayerDeck
+{
+	    margin-left: -4px;
+}
+
+@keyframes 'SearchingAnimation'
+{
+	0%
+	{
+		text-shadow: 0px 0px 1px 0.5 #cc6c4e00;
+	}
+
+	50%
+	{
+				text-shadow: 0px 0px 5px 0.5 #cc6c4e;
+	}
+
+	100%
+	{
+		text-shadow: 0px 0px 1px 0.5 #cc6c4e00;
+	}
+}
+
+@keyframes 'LiveGameAnimation'
+{
+	0%
+	{
+		text-shadow: 0px 0px 1px 0.5 #0dfffc00;
+	}
+
+	50%
+	{
+				text-shadow: 0px 0px 5px 0.5 #0dfffc88;
+	}
+
+	100%
+	{
+		text-shadow: 0px 0px 1px 0.5 #0dfffc00;
+	}
+}

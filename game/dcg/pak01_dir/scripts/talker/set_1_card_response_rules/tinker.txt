@@ -2,6 +2,8 @@
 //**TINKER - HERO//
 ///////////////////
 
+WhitelistName "Whitelist Card 10025"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -332,6 +334,140 @@ Rule heal_tinker_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response tinker_laser_ready
+{
+	speak "tinker_unique_02" noscene
+	speak "tinker_unique_03" noscene
+	speak "tinker_unique_04" noscene
+}
+
+Rule tinker_laser_ready_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyReadyLaser ThisIsImportant
+	response tinker_laser_ready
+}	
+
+
+Response tinker_ally_sniper
+{
+	speak "tinker_unique_01" noscene
+	speak "tinker_unique_05" noscene
+	speak "tinker_unique_06" noscene
+}
+
+Rule tinker_laser_ready_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyHasSniper ThisIsImportant
+	matchonce
+	response tinker_laser_ready
+}	
+
+Response tinker_ally_mazzie
+{
+	speak "tinker_unique_07" noscene
+	speak "tinker_unique_08" noscene
+}
+
+Rule tinker_ally_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyHasMazzie ThisIsImportant
+	matchonce
+	response tinker_ally_mazzie
+}	
+
+Response tinker_ally_timbersaw
+{
+	speak "tinker_unique_09" noscene
+	speak "tinker_unique_10" noscene
+}
+
+Rule tinker_ally_timbersaw_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyHasTimbersaw ThisIsImportant
+	matchonce
+	response tinker_ally_timbersaw
+}	
+
+Response tinker_ally_timbersaw_and_sniper
+{
+	speak "tinker_unique_11" noscene
+	speak "tinker_unique_12" noscene
+}
+
+Rule tinker_ally_timbersaw_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyHasTimbersaw AllyHasSniper ThisIsImportant
+	matchonce
+	response tinker_ally_timbersaw
+}	
+
+Response tinker_ally_timbersaw_and_sniper_and_mazzie
+{
+	speak "tinker_unique_13" noscene
+	speak "tinker_unique_14" noscene
+}
+
+Rule tinker_ally_timbersaw_and_sniper_and_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker AllyHasTimbersaw AllyHasSniper AllyHasMazzie ThisIsImportant
+	matchonce
+	response tinker_ally_timbersaw_and_sniper_and_mazzie
+}	
+
+Response tinker_enemy_mazzie
+{
+	speak "tinker_unique_15" noscene
+	speak "tinker_unique_16" noscene
+	speak "tinker_unique_17" noscene
+}
+
+Rule tinker_enemy_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker EnemyHasMazzie ThisIsImportant
+	matchonce
+	response tinker_enemy_mazzie
+}	
+
+Response tinker_enemy_axe
+{
+	speak "tinker_unique_18" noscene
+	
+}
+
+Rule tinker_enemy_axe_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker EnemyHasAxe ThisIsImportant
+	matchonce
+	response tinker_enemy_axe
+}	
+
+Response tinker_enemy_sniper
+{
+	speak "tinker_unique_19" noscene
+	
+}
+
+Rule tinker_enemy_sniper_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker EnemyHasSniper ThisIsImportant
+	matchonce
+	response tinker_enemy_sniper
+}	
+
+Response tinker_enemy_timbersaw
+{
+	speak "tinker_unique_20" noscene
+	
+}
+
+Rule tinker_enemy_timbersaw_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTinker EnemyHasTimbersaw ThisIsImportant
+	matchonce
+	response tinker_enemy_timbersaw
+}	
+
+
 /////////////////////////////
 //PLAY SET ONE BLACK CARDS///
 /////////////////////////////
@@ -339,44 +475,52 @@ Rule heal_tinker_rule
 Response tinker_play_assured_destruction
 {
 	speak "tinker_debuff_enemy_04" noscene 
+	speak "tinker_single_target_damage_10" noscene 
+	speak "tinker_debuff_enemy_03" noscene 
 }
 
 Rule tinker_play_assured_destruction_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssuredDestruction ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssuredDestruction 
 	response tinker_play_assured_destruction
 }
 
 Response tinker_play_path_of_the_cunning
 {
 	speak "tinker_arrogant_03" noscene 
+	speak "tinker_cast_spell_10" noscene 
+	speak "tinker_cast_spell_06" noscene 
 }
 
 Rule tinker_play_path_of_the_cunning_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourcePathOfTheCunning ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourcePathOfTheCunning 
 	response tinker_play_path_of_the_cunning
 }
 
 Response tinker_play_the_tyler_estate
 {
 	speak "tinker_cast_spell_04" noscene 
+	speak "tinker_debuff_enemy_08" noscene 
+	speak "tinker_debuff_enemy_10" noscene 
 }
 
 Rule tinker_play_the_tyler_estate_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheTylerEstate ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheTylerEstate 
 	response tinker_play_the_tyler_estate
 }
 
 Response tinker_play_burn_it_all
 {
 	speak "tinker_pleased_09" noscene 
+	speak "tinker_debuff_enemy_05" noscene 
+	speak "tinker_debuff_enemy_04" noscene 
 }
 
 Rule tinker_play_burn_it_all_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceBurnItAll ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceBurnItAll 
 	response tinker_play_burn_it_all
 }
 
@@ -384,110 +528,130 @@ Response tinker_play_trebuchets
 {
 
 	speak "tinker_pleased_02" noscene 
+	speak "tinker_single_target_damage_02" noscene 
+	speak "tinker_arrogant_09" noscene 
 }
 
 Rule tinker_play_trebuchets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTrebuchets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTrebuchets 
 	response tinker_play_trebuchets
 }
 
 Response tinker_play_undisciplined_artillery
 {
 	speak "tinker_arrogant_10" noscene 
+	speak "tinker_arrogant_08" noscene 
+	speak "tinker_enigmatic_08" noscene 
 }
 
 Rule tinker_play_undisciplined_artillery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceUndisciplinedArtillery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceUndisciplinedArtillery 
 	response tinker_play_undisciplined_artillery
 }
 
 Response tinker_play_revtel_investments
 {
 	speak "tinker_cast_spell_05" noscene 
+	speak "tinker_cast_spell_04" noscene 
+	speak "tinker_cast_spell_03" noscene 
 }
 
 Rule tinker_play_revtel_investments_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceRevtelInvestments ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceRevtelInvestments 
 	response tinker_play_revtel_investments
 }
 
 Response tinker_play_iron_fog_goldmine
 {
 	speak "tinker_pleased_02" noscene 
+	speak "tinker_pleased_04" noscene 
+	speak "tinker_cast_spell_01" noscene 
 }
 
 Rule tinker_play_iron_fog_goldmine_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceIronFogGoldmine ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceIronFogGoldmine 
 	response tinker_play_iron_fog_goldmine
 }
 
 Response tinker_play_escape_route
 {
 	speak "tinker_single_target_damage_06" noscene 
+	speak "tinker_concerned_09" noscene 
+	speak "tinker_arrogant_03" noscene 
 }
 
 Rule tinker_play_escape_route_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceEscapeRoute ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceEscapeRoute 
 	response tinker_play_escape_route
 }
 
 Response tinker_play_assault_ladders
 {
 	speak "tinker_arrogant_09" noscene 
+	speak "tinker_enigmatic_06" noscene 
+	speak "tinker_enigmatic_05" noscene 
 }
 
 Rule tinker_play_assault_ladders_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssaultLadders ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceAssaultLadders 
 	response tinker_play_assault_ladders
 }
 
 Response tinker_play_the_oath
 {
 	speak "tinker_multi_damage_large_05" noscene 
+	speak "tinker_enigmatic_08" noscene 
+	speak "tinker_enigmatic_10" noscene 
 }
 
 Rule tinker_play_the_oath_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheOath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceTheOath 
 	response tinker_play_the_oath
 }
 
 Response tinker_play_keenfolk_turret
 {
 	speak "tinker_cast_spell_10" noscene 
+	speak "tinker_enigmatic_03" noscene 
+	speak "tinker_angry_08" noscene 
 }
 
 Rule tinker_play_keenfolk_turret_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceKeenfolkTurret ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceKeenfolkTurret 
 	response tinker_play_keenfolk_turret
 }
 
 Response tinker_play_steam_cannon
 {
 	speak "tinker_enigmatic_04" noscene 
+	speak "tinker_angry_07" noscene 
+	speak "tinker_enigmatic_05" noscene 
 }
 
 Rule tinker_play_steam_cannon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceSteamCannon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourceSteamCannon 
 	response tinker_play_steam_cannon
 }
 
-Response tinker_play_day_at_the_track
+Response tinker_play_payday
 {
 	speak "tinker_pleased_02" noscene 
+	speak "tinker_pleased_03" noscene 
+	speak "tinker_cast_spell_07" noscene 
 }
 
-Rule tinker_play_day_at_the_track_rule
+Rule tinker_play_payday_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTinker IsSourceDayAtTheTrack ThisIsImportant
-	response tinker_play_day_at_the_track
+	criteria IsNotImp  PlayCard AllyHasTinker IsSourcePayday 
+	response tinker_play_payday
 }
 

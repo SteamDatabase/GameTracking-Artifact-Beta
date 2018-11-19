@@ -1,0 +1,80 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_tourney_show_open_invite.vcss_c" />
+	</styles>
+
+	<DCGPopupTourneyShowOpenInvite class="PopupPanel Hidden" popupbackground="dim" hittest="true" oncancel="UIPopupButtonClicked()">
+
+		<Button class="CloseButton" onactivate="UIPopupButtonClicked()" />
+
+		<Panel class="Contents">
+			<Label id="TitleLabel" class="PopupTitle" text="#DCG_TourneyShowOpenInvite_Title" />
+			<Panel class="URLContainer" >
+        <Panel id="RevokeInvite" onactivate="DCGPopupTourneyRevokeOpenInvite()"/>
+				<Label class="URLTitle" text="#DCG_TourneyShowOpenInvite_URL" />
+				<Label class="URL" text="{s:url}" allowtextselection="true" acceptsinput="true" acceptsfocus="true" />
+				<Button class="CopyToClipboard ButtonBevel" onactivate="DCGPopupTourneyCopyURLToClipboard()">
+					<Label text="#DCG_TourneyShowOpenInvite_URL_CopyToClipboard"/>
+				</Button>
+			</Panel>
+			<Panel class="ConfigContainer">
+				<Panel class="SettingContainer">
+					<Panel class="LabelContainer Capabilities">
+						<Panel class="LabelSpacer" />
+						<Label text="#DCG_TourneyCreateOpenInvite_InvitationType" />
+					</Panel>
+					<Panel class="LabelContainer">
+						<Label class="SingleUse" text="#DCG_TourneyCreateOpenInvite_SingleUse" />
+						<Label class="InfiniteUse" text="#DCG_TourneyCreateOpenInvite_InfiniteUse" />
+					</Panel>
+				</Panel>
+				<Panel class="SettingContainer InfiniteUse">
+					<Panel class="LabelContainer">
+						<Panel class="LabelSpacer" />
+						<Label text="#DCG_TourneyShowOpenInvite_URL_TimesUsed" />
+					</Panel>
+					<Panel class="LabelContainer">
+						<Label class="CurrUses" text="{d:curr_uses}" />
+					</Panel>
+				</Panel>
+				<Panel class="SettingContainer SingleUse">
+					<Panel class="LabelContainer">
+						<Panel class="LabelSpacer" />
+						<Label text="#DCG_TourneyShowOpenInvite_URL_Status" />
+					</Panel>
+					<Panel class="LabelContainer">
+						<Label class="Rejected" text="#DCG_TourneyShowOpenInvite_URL_Rejected" />
+						<Label class="Accepted" text="#DCG_TourneyShowOpenInvite_URL_Accepted" />
+					</Panel>
+				</Panel>
+				<Panel class="SettingContainer">
+					<Panel class="LabelContainer Capabilities">
+						<Panel class="LabelSpacer" />
+						<Label text="#DCG_TourneyCreateOpenInvite_Rights" />
+					</Panel>
+					<Panel class="CapabilitiesContainer">
+						<Panel class="LabelContainer NoCapabilities" >
+							<Label text="#DCG_TourneyCreateOpenInvite_Rights_None"/>
+						</Panel>
+						<Panel class="LabelContainer Player" >
+							<Label text="#DCG_TourneyCreateOpenInvite_Rights_Player"/>
+						</Panel>
+						<Panel class="LabelContainer Spectator" >
+							<Label text="#DCG_TourneyCreateOpenInvite_Rights_Spectator"/>
+						</Panel>
+						<Panel class="LabelContainer Invite">
+							<Label text="#DCG_TourneyCreateOpenInvite_Rights_CanInvite" />
+						</Panel>
+						<Panel class="LabelContainer Admin">
+							<Label text="#DCG_TourneyCreateOpenInvite_Rights_Admin" />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+
+		</Panel>
+
+	</DCGPopupTourneyShowOpenInvite>
+</root>

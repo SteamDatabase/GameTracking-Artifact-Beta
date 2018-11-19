@@ -1,0 +1,27 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_select_player.vcss_c" />
+	</styles>
+
+	<DCGPopupSelectPlayer class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked( DCGPlayerSelected(0) )">
+
+		<Panel class="PopupFlowRight">
+			<Label id="TitleLabel" class="PopupTitle" text="{s:title}" />
+			<Button id="CancelButton" class="CloseButton" onactivate="UIPopupButtonClicked( DCGPlayerSelected(0) )"/>
+		</Panel>
+		<Panel class="MessagePanel" >
+			<Label id="MessageLabel" text="{s:message}" html="true" />		
+		</Panel>
+		<DropDown id="PlayerDropdown" dropdownbodyposition="100% 100%" />
+		<Panel id="ButtonContainer" class="PopupButtonRow">
+			<Panel class="AlignCenter">
+				<Button id="OKButton" class="PopupButton" onactivate="DCGSelectPlayerOkClicked()">
+					<Label text="#UI_OK"/>
+				</Button>
+			</Panel>
+		</Panel>
+
+	</DCGPopupSelectPlayer>
+</root>

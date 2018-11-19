@@ -1,0 +1,35 @@
+<root>
+	<styles>
+    	<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    	<include src="s2r://panorama/styles/play_solo.vcss_c" />
+    	<include src="s2r://panorama/styles/play_shared.vcss_c" />
+    	
+ 	</styles>
+
+ 	<DCGPlaySolo class="PrimaryCarouselPanel">
+		<Panel class="CarouselPanelContainer">
+			<Panel class="BlurBackgroundPanelOverlay" >
+				<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+			</Panel>
+			<Panel class="TopButtonNav">
+
+				<DCGPlayGameSelectButton id="AIMatchButton"
+					group="Solo"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGPlayCarouselSetContext( ePlayContextSolo_AIMatch, 0 );"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_BotMatch )"
+					icon="s2r://panorama/images/main_menu/icon_bot_match_psd.vtex"
+					buttontext="#DCG_LoadDeckSelect_AI" />
+
+				
+					
+			</Panel>
+
+			<Panel class="PlayContents" hittest="false">
+				<Panel id="AIMatchContainer" hittest="false">
+					<Panel class="ContainerSplashImage" hittest="false"/>
+					<DCGBotMatch id="BotMatchPanel"/>
+				</Panel>
+			</Panel>
+		</Panel>
+	</DCGPlaySolo>
+</root>

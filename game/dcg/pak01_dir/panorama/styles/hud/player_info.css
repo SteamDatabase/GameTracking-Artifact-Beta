@@ -7,6 +7,12 @@
     background-color: #CC0000AA;
 }
 
+.PlayerInfo.IsDisconnected
+{
+    z-index: 100;
+    opacity: 1;
+}
+
 .DisconnectedDisplay
 {
     visibility: collapse;
@@ -18,13 +24,37 @@
    visibility: visible;
 }
 
-#DisconnectedLabel
-{
-    text-transform: uppercase;
+#DisconnectedLabel {
     margin: 10px;
     font-size: 24px;
+    color: #ac0f0a;
 }
 
+@keyframes 'bad-red-pulsing'
+{
+	0%
+	{
+        color: #ac0f0a;
+	}
+
+	50%
+	{
+        color: #ffeeee;
+	}
+
+	100%
+	{
+        color: #ac0f0a;
+	}
+}              
+
+.IsActingPlayer #DisconnectedLabel
+{
+	animation-name: bad-red-pulsing;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;    
+}
 
 .PlayerInfo
 {
@@ -42,19 +72,59 @@
 	transition-property: opacity;
 	transition-duration: 0.3s;
 	transition-delay: 0.1s;
-	background-blur: gaussian( 7 );
 	
     opacity: 0;
+}
+
+#PlayerInfoBlurBackground
+{
+	width: 100%;
+	height: 100%;
+	blur: gaussian( 7 );
+	border-top-left-radius: 8px;
+}
+
+.LightingQuality0 #PlayerInfoBlurBackground, .LightingQuality1 #PlayerInfoBlurBackground
+{
+	background-color: #00000050;
+	
+	width: 100%;
+	height: 100%;
+	blur: gaussian( 0 );
+	border-top-left-radius: 8px;
+}
+
+.OpponentInfo #PlayerInfoBlurBackground
+{
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 8px;
 }
 
 .PlayerInfoBG
 {
 	width: 100%;
 	height: 100%;
-    background-size: 100% 100%;
-    background-position: center;
     background-repeat: no-repeat;
 	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_psd.vtex");
+	background-size: 100% 100%;
+}
+
+.PlayerInfoBGLayer2
+{
+	width: 100%;
+	height: 100%;
+	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_outline_psd.vtex");
+	visibility: collapse;
+}
+
+.OpponentInfo .PlayerInfoBGLayer2
+{
+	pre-transform-scale2d: 1, -1;
+}
+
+.IsActingPlayer .PlayerInfoBGLayer2
+{
+	visibility: visible;
 }
 
 .PlayerInfoContents
@@ -114,8 +184,7 @@
 	height: 100%;
 	opacity: 0.0;
 	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_start_psd.vtex");
-    background-size: 100% 100%;
-    background-position: center;
+	background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
@@ -178,7 +247,6 @@
 	flow-children: right;
 }
 
-
 .IconsContainer
 {
 	padding-top: 0px;
@@ -195,7 +263,6 @@
 {
 
 	font-size: 28px;
-	font-family: RadianceM;
 	text-overflow: shrink;
 
 	vertical-align: center;
@@ -214,6 +281,11 @@
 	width: 102px;
 	vertical-align: center;
     visibility: collapse;
+}
+
+.IsDisconnected .GameClockContainer
+{
+    margin-left: 0px;
 }
 
 .HasGameClock .GameClockContainer
@@ -242,12 +314,21 @@
 	horizontal-align: center;
 }
 
-.GameClockCount
+.IsDisconnected.IsInactive #GameClockIcon 
 {
-	color: textColorGameClock;
+    background-image: url("s2r://panorama/images/hud/disconnected_small_psd.vtex");
+}
+
+.IsInactive #GameClockIcon 
+{
+    background-image: url("s2r://panorama/images/hud/pause_small_psd.vtex"); 
+}
+
+.GameClockCount {
+    color: textColorGameClock;
     vertical-align: center;
-	horizontal-align: left;
-	margin-bottom: 1px;
+    horizontal-align: left;
+    margin-bottom: 1px;
 }
 
 .GameClockCount .LessThanOneMinute
@@ -261,6 +342,11 @@
     animation-duration: 0.875s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;    
+}
+
+.IsDisconnected .GameClockCount 
+{
+    color: #ac0f0a;
 }
 
 @keyframes 'count-pulse-time-critical'
@@ -323,13 +409,24 @@
 	horizontal-align: center;
 }
 
+#ShopDeedContainer
+{
+	margin-left: 16px;
+	flow-children: right;
+	tooltip-position: top;
+	height: fit-children;
+	width: fit-children;
+	vertical-align: center;
+}
+
 #ShopDeedIcon
 {
-	width: 22px;
-	height: 24px;
+	width: 26px;
+	height: 26px;
 
-	margin-left: 5px;
     margin-bottom: 8px;
+
+	background-size: cover;
 	background-image: url("s2r://panorama/images/hud/hud_shop_deed_icon_png.vtex");
 
 	vertical-align: center;
@@ -338,15 +435,13 @@
 
 #ShopDeedCount
 {
-	color: textColorGold;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
 
-    font-size: 20px;
-    margin-bottom: 4px;
+	margin-bottom: 2px;
 
     vertical-align: center;
 	horizontal-align: center;
 }
-
 
 .CardsInHandContainer
 {
@@ -357,6 +452,16 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 	horizontal-align: right;
+
+	transition-property: pre-transform-scale2d, brightness;
+	transition-duration: .06s, .1s;
+	transition-timing-function: ease-out;
+}
+
+.CardsInHandContainer:hover
+{
+	brightness: 1.3;
+	pre-transform-scale2d: 1.2;
 }
 
 .OpponentInfo .PlayerInfoContents .CardsInHandContainer
@@ -408,47 +513,6 @@
 	color: textColorCardsInHand;
 }
 
-.LittleButton_Compact
-{
-	margin: 2px;
-	border: 1px solid #CCCCCCFF;
-	height: fit-children;
-	width: fit-children;
-	background-color: #44444444;
-}
-
-.LittleButton_Compact Label
-{
-	text-align: center;
-	margin: 0px 0px 0px 0px;
-	color: #CCCCCCFF;
-	font-size: 12px;
-	font-family: platformfont;
-	letter-spacing: normal;
-	text-transform: uppercase;
-}
-
-.LittleButton_Compact:hover Label
-{
-	color: white;
-}
-
-.LittleButton_Compact:hover
-{
-	border: 1px solid #FFFFFFFF;
-	background-color: #44444444;
-}
-
-.LittleButton_Compact:active
-{
-	background-color: #23468aDD;
-}
-
-.LittleButton_Compact:active Label
-{
-	color: #FFFFFFFF;
-}
-
 @keyframes 'turn-pulse'
 {
     0%
@@ -493,6 +557,17 @@
 	animation-iteration-count: infinite;
 }
 
+.OpponentInfo.Anonymous #PlayerName,
+#AnonymousPlayerName
+{
+    visibility:collapse;
+}
+
+.OpponentInfo.Anonymous #AnonymousPlayerName
+{
+    visibility:visible;
+}
+
 .PersonaName
 {
 	width: fill-parent-flow (1.0);
@@ -503,7 +578,6 @@
 
 	font-size: 22px;
 	color: #FFFFFFFF;
-	font-family: radiance;
 	//font-stretch: condensed;
 
 	horizontal-align: right;
@@ -515,21 +589,44 @@
 	text-decoration: none;
 }
 
-.MediaMode .OpponentInfo .PlayerInfoContents .PersonaName
-{
-	horizontal-align: right;
-    width: 230px;
-}
-
 .OpponentInfo .PlayerInfoContents .PersonaName
 {
 	horizontal-align: right;
     width: 214px;
-    margin-right: 16px;
+    margin-right: 64px;
 }
 
-#ShopDeedContainer
+.IsDisconnected .PersonaName
 {
-	flow-children: right;
-	tooltip-position: top;
+    visibility: collapse;
+}
+
+.ShowESCMenuButton
+{
+	width: 24px;
+	height: 24px;
+	horizontal-align: right;
+	margin-top: 2px;
+	margin-right: 22px;
+	margin-left: 16px;
+	vertical-align: center;
+	visibility: collapse;
+   	background-image: url("s2r://panorama/images/control_icons/hamburger_png.vtex");
+	background-size: 16px 16px;
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+   	transition-property: pre-transform-scale2d, brightness;
+	transition-duration: .06s, .1s;
+	transition-timing-function: ease-out;
+}
+
+.ShowESCMenuButton:hover
+{
+	brightness: 1.3;
+	pre-transform-scale2d: 1.2;	
+}
+
+.OpponentInfo .ShowESCMenuButton
+{
+	visibility: visible;
 }

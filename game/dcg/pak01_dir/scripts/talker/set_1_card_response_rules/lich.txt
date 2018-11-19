@@ -2,6 +2,8 @@
 //**LICH - HERO//
 ///////////////////
 
+WhitelistName "Whitelist Card 10038"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -332,6 +334,137 @@ Rule heal_lich_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response lich_use_ability_on_vhoul_martyr
+{
+	speak "lich_unique_01" noscene 
+	speak "lich_unique_05" noscene 
+}
+
+Rule lich_use_ability_on_vhoul_martyr_rule
+{
+	criteria IsNotImp UseAbility AllyHasLich IsSourceSacrifice IsTargetVhoulMartyr ThisIsImportant
+	response lich_use_ability_on_vhoul_martyr
+}
+
+Response lich_use_ability_with_cheating_death
+{
+	speak "lich_unique_02" noscene 
+	speak "lich_unique_04" noscene 
+}
+
+Rule lich_use_ability_with_cheating_death_rule
+{
+	criteria IsNotImp UseAbility AllyHasLich IsSourceSacrifice AllyHasCheatingDeath ThisIsImportant
+	response lich_use_ability_with_cheating_death
+}
+
+Response lich_ally_quoidge_pitfighter
+{
+	speak "lich_unique_03" noscene
+}
+
+Rule lich_ally_quoidge_pitfighter_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich AllyHasPitFighterOfQuoidge ThisIsImportant
+	matchonce
+	response lich_ally_quoidge_pitfighter
+}
+
+Response lich_ally_lion
+{
+	speak "lich_unique_06" noscene
+	speak "lich_unique_07" noscene
+}
+
+Rule lich_ally_lion_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich AllyHasLion ThisIsImportant
+	matchonce
+	response lich_ally_lion
+}
+
+Response lich_use_ability_on_rix
+{
+	speak "lich_unique_08" noscene 
+	speak "lich_unique_09" noscene 
+	speak "lich_unique_10" noscene 
+}
+
+Rule lich_use_ability_on_rix_rule
+{
+	criteria IsNotImp UseAbility AllyHasLich IsSourceSacrifice IsTargetRix ThisIsImportant
+	matchonce
+	response lich_use_ability_on_rix
+}
+
+Response lich_ally_rix
+{
+	speak "lich_unique_11" noscene
+	speak "lich_unique_12" noscene
+	speak "lich_unique_13" noscene
+}
+
+Rule lich_ally_rix_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich AllyHasRix ThisIsImportant
+	matchonce
+	response lich_ally_rix
+}
+
+Response lich_ally_rix_play_the_oath
+{
+	speak "lich_unique_14" noscene
+}
+
+Rule lich_ally_rix_play_the_oath_rule
+{ 
+	criteria IsNotImp PlayCard AllyHasLich AllyHasRix IsSourceTheOath  ThisIsImportant
+	matchonce
+	response lich_ally_rix_play_the_oath
+}
+
+Response lich_ally_winter_wyvern
+{
+	speak "lich_unique_15" noscene
+	speak "lich_unique_16" noscene
+	speak "lich_unique_17" noscene
+}
+
+Rule lich_ally_winter_wyvern_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich AllyHasWinterWyvern ThisIsImportant
+	matchonce
+	response lich_ally_winter_wyvern
+}
+
+Response lich_enemy_axe
+{
+	speak "lich_unique_18" noscene
+
+}
+
+Rule lich_enemy_axe_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich EnemyHasAxe ThisIsImportant
+	matchonce
+	response lich_enemy_axe
+}
+
+Response lich_enemy_crystal_maiden
+{
+	speak "lich_unique_19" noscene
+	speak "lich_unique_20" noscene
+
+}
+
+Rule lich_enemy_crystal_maiden_rule
+{ 
+	criteria IsNotImp BeginSpellcasting AllyHasLich EnemyHasCrystalMaiden ThisIsImportant
+	matchonce
+	response lich_enemy_crystal_maiden
+}
+
+
 /////////////////////////////
 //PLAY SET ONE BLACK CARDS///
 /////////////////////////////
@@ -339,44 +472,52 @@ Rule heal_lich_rule
 Response lich_play_assured_destruction
 {
 	speak "lich_cast_spell_06" noscene 
+	speak "lich_cast_spell_05" noscene 
+	speak "lich_single_target_damage_06" noscene 
 }
 
 Rule lich_play_assured_destruction_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssuredDestruction ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssuredDestruction 
 	response lich_play_assured_destruction
 }
 
 Response lich_play_path_of_the_cunning
 {
 	speak "lich_cast_spell_04" noscene 
+	speak "lich_debuff_enemy_10" noscene 
+	speak "lich_buff_ally_01" noscene 
 }
 
 Rule lich_play_path_of_the_cunning_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourcePathOfTheCunning ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourcePathOfTheCunning 
 	response lich_play_path_of_the_cunning
 }
 
 Response lich_play_the_tyler_estate
 {
 	speak "lich_enigmatic_07" noscene 
+	speak "lich_debuff_enemy_03" noscene 
+	speak "lich_debuff_enemy_07" noscene 
 }
 
 Rule lich_play_the_tyler_estate_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheTylerEstate ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheTylerEstate 
 	response lich_play_the_tyler_estate
 }
 
 Response lich_play_burn_it_all
 {
 	speak "lich_arrogant_05" noscene 
+	speak "lich_cast_spell_03" noscene 
+	speak "lich_cast_spell_06" noscene 
 }
 
 Rule lich_play_burn_it_all_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceBurnItAll ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceBurnItAll 
 	response lich_play_burn_it_all
 }
 
@@ -384,121 +525,145 @@ Response lich_play_trebuchets
 {
 
 	speak "lich_cast_spell_05" noscene 
+	speak "lich_cast_spell_01" noscene 
+	speak "lich_multi_damage_small_08" noscene 
 }
 
 Rule lich_play_trebuchets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceTrebuchets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTrebuchets 
 	response lich_play_trebuchets
 }
 
 Response lich_play_undisciplined_artillery
 {
 	speak "lich_cast_spell_10" noscene 
+	speak "lich_multi_damage_small_10" noscene 
+	speak "lich_angry_09" noscene 
 }
 
 Rule lich_play_undisciplined_artillery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceUndisciplinedArtillery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceUndisciplinedArtillery 
 	response lich_play_undisciplined_artillery
 }
 
 Response lich_play_revtel_investments
 {
-	speak "lich_pleased_01" noscene 
+	speak "lich_pleased_01" noscene
+	speak "lich_pleased_02" noscene 
+	speak "lich_cast_spell_09" noscene 
+	
 }
 
 Rule lich_play_revtel_investments_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceRevtelInvestments ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceRevtelInvestments 
 	response lich_play_revtel_investments
 }
 
 Response lich_play_iron_fog_goldmine
 {
 	speak "lich_pleased_02" noscene 
+	speak "lich_cast_spell_10" noscene 
+	speak "lich_pleased_10" noscene 
 }
 
 Rule lich_play_iron_fog_goldmine_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceIronFogGoldmine ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceIronFogGoldmine 
 	response lich_play_iron_fog_goldmine
 }
 
 Response lich_play_escape_route
 {
 	speak "lich_arrogant_04" noscene 
+	speak "lich_enigmatic_07" noscene 
+	speak "lich_buff_ally_09" noscene 
 }
 
 Rule lich_play_escape_route_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceEscapeRoute ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceEscapeRoute 
 	response lich_play_escape_route
 }
 
 Response lich_play_assault_ladders
 {
 	speak "lich_enigmatic_10" noscene 
+	speak "lich_cast_spell_06" noscene 
+	speak "lich_buff_ally_06" noscene 
 }
 
 Rule lich_play_assault_ladders_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssaultLadders ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceAssaultLadders 
 	response lich_play_assault_ladders
 }
 
 Response lich_play_the_oath
 {
 	speak "lich_enigmatic_03" noscene 
+	speak "lich_cast_spell_04" noscene 
+	speak "lich_cast_spell_05" noscene 
 }
 
 Rule lich_play_the_oath_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheOath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceTheOath 
 	response lich_play_the_oath
 }
 
 Response lich_play_keenfolk_turret
 {
 	speak "lich_angry_08" noscene 
+	speak "lich_cast_spell_07" noscene 
+	speak "lich_cast_spell_08" noscene 
 }
 
 Rule lich_play_keenfolk_turret_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceKeenfolkTurret ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceKeenfolkTurret 
 	response lich_play_keenfolk_turret
 }
 
 Response lich_play_steam_cannon
 {
 	speak "lich_arrogant_08" noscene 
+	speak "lich_multi_damage_small_09" noscene 
+	speak "lich_multi_damage_large_01" noscene 
+	
 }
 
 Rule lich_play_steam_cannon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceSteamCannon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceSteamCannon 
 	response lich_play_steam_cannon
 }
 
 Response lich_play_march_of_the_machines
 {
 	speak "lich_angry_05" noscene 
+	speak "lich_multi_damage_small_07" noscene 
+	speak "lich_multi_damage_small_04" noscene 
 }
 
 Rule lich_play_march_of_the_machines_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceMarchOfTheMachines ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLich IsSourceMarchOfTheMachines 
 	response lich_play_march_of_the_machines
 }
 
-Response lich_play_day_at_the_track
+Response lich_play_payday
 {
 	speak "lich_pleased_10" noscene 
+	speak "lich_cast_spell_09" noscene 
+	speak "lich_pleased_01" noscene 
 }
 
-Rule lich_play_day_at_the_track_rule
+Rule lich_play_payday_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLich IsSourceDayAtTheTrack ThisIsImportant
-	response lich_play_day_at_the_track
+	criteria IsNotImp  PlayCard AllyHasLich IsSourcePayday 
+	response lich_play_payday
 }
 

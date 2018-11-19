@@ -2,6 +2,8 @@
 //**SORLA KHAN - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10058"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -320,9 +322,23 @@ Response sorla_khan_assured_destruction_enemy_legion_commander
 
 Rule sorla_khan_assured_destruction_enemy_legion_commander_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceAssuredDestruction EnemyHasLegionCommander
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceAssuredDestruction EnemyHasLegionCommander ThisIsImportant
+	matchonce
 	response sorla_khan_assured_destruction_enemy_legion_commander
 }
+
+Response sorla_khan_bitter_enemies_enemy_legion_commander
+{
+	speak "sorla_khan_unique_01" noscene 
+}
+
+Rule sorla_khan_bitter_enemies_enemy_legion_commander_rule
+{
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceBurnItAll EnemyHasLegionCommander ThisIsImportant
+	matchonce
+	response sorla_khan_bitter_enemies_enemy_legion_commander
+}
+
 
 Response sorla_khan_start_with_rix
 {
@@ -331,7 +347,7 @@ Response sorla_khan_start_with_rix
 
 Rule sorla_khan_start_with_rix_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasRix
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasRix ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_rix
 }
@@ -343,7 +359,7 @@ Response sorla_khan_start_with_enemy_rix
 
 Rule sorla_khan_start_with_enemy_rix_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasRix
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasRix ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_enemy_rix
 }
@@ -356,7 +372,8 @@ Response sorla_khan_start_with_red_mist
 
 Rule sorla_khan_start_with_red_mist_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan IsFactionAllyInLane
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasFactionMultRedMist ThisIsImportant
+	matchonce
 	response sorla_khan_start_with_red_mist
 }
 
@@ -369,7 +386,7 @@ Response sorla_khan_start_with_axe
 
 Rule sorla_khan_start_with_axe_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasAxe
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasAxe ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_axe
 }
@@ -383,7 +400,7 @@ Response sorla_khan_start_with_enemy_axe
 
 Rule sorla_khan_start_with_enemy_axe_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasAxe
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasAxe ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_enemy_axe
 }
@@ -395,7 +412,7 @@ Response sorla_khan_kills_axe
 
 Rule sorla_khan_kills_axe_rule
 {
-	criteria IsNotImp  Death EnemyHasSorlaKhan IsTargetAxe IsNotCombat
+	criteria IsNotImp  Death EnemyHasSorlaKhan IsTargetAxe IsNotCombat ThisIsImportant IsBlockingSorlaKhan
 	matchonce
 	response sorla_khan_kills_axe
 }
@@ -408,7 +425,7 @@ Response sorla_khan_start_with_enemy_legion_commander
 
 Rule sorla_khan_start_with_enemy_legion_commander_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasLegionCommander
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan EnemyHasLegionCommander ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_enemy_legion_commander
 }
@@ -420,7 +437,7 @@ Response sorla_khan_start_with_ally_legion_commander
 
 Rule sorla_khan_start_with_ally_legion_commander_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasLegionCommander
+	criteria IsNotImp  BeginSpellcasting AllyHasSorlaKhan AllyHasLegionCommander ThisIsImportant
 	matchonce
 	response sorla_khan_start_with_ally_legion_commander
 }
@@ -435,33 +452,39 @@ Rule sorla_khan_start_with_ally_legion_commander_rule
 Response sorla_khan_play_assured_destruction
 {
 	speak "sorla_khan_buff_ally_05" noscene 
+	speak "sorla_khan_cast_spell_02" noscene 
+	speak "sorla_khan_cast_spell_01" noscene 
 }
 
 Rule sorla_khan_play_assured_destruction_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceAssuredDestruction ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceAssuredDestruction 
 	response sorla_khan_play_assured_destruction
 }
 
 Response sorla_khan_play_path_of_the_cunning
 {
 	speak "sorla_khan_cast_spell_04" noscene 
+	speak "sorla_khan_buff_ally_04" noscene 
+	speak "sorla_khan_buff_ally_10" noscene 
 }
 
 Rule sorla_khan_play_path_of_the_cunning_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourcePathOfTheCunning ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourcePathOfTheCunning 
 	response sorla_khan_play_path_of_the_cunning
 }
 
 Response sorla_khan_play_the_tyler_estate
 {
 	speak "sorla_khan_cast_spell_07" noscene 
+	speak "sorla_khan_cast_spell_08" noscene 
+	speak "sorla_khan_enigmatic_01" noscene 
 }
 
 Rule sorla_khan_play_the_tyler_estate_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceTheTylerEstate ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceTheTylerEstate 
 	response sorla_khan_play_the_tyler_estate
 }
 
@@ -469,6 +492,7 @@ Response sorla_khan_burn_it_all
 {
 	speak "sorla_khan_unique_19" noscene 
 	speak "sorla_khan_unique_20" noscene 
+	speak "sorla_khan_arrogant_01" noscene 
 }
 
 Rule sorla_khan_burn_it_all_rule
@@ -496,44 +520,52 @@ Rule sorla_khan_trebuchets_rule
 Response sorla_khan_play_undisciplined_artillery
 {
 	speak "sorla_khan_cast_spell_09" noscene 
+	speak "sorla_khan_arrogant_08" noscene 
+	speak "sorla_khan_angry_10" noscene 
 }
 
 Rule sorla_khan_play_undisciplined_artillery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceUndisciplinedArtillery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceUndisciplinedArtillery 
 	response sorla_khan_play_undisciplined_artillery
 }
 
 Response sorla_khan_play_revtel_investments
 {
 	speak "sorla_khan_pleased_07" noscene 
+	speak "sorla_khan_enigmatic_09" noscene 
+	speak "sorla_khan_enigmatic_10" noscene 
 }
 
 Rule sorla_khan_play_revtel_investments_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceRevtelInvestments ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceRevtelInvestments 
 	response sorla_khan_play_revtel_investments
 }
 
 Response sorla_khan_play_iron_fog_goldmine
 {
 	speak "sorla_khan_pleased_02" noscene 
+	speak "sorla_khan_enigmatic_08" noscene 
+	speak "sorla_khan_enigmatic_02" noscene 
 }
 
 Rule sorla_khan_play_iron_fog_goldmine_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceIronFogGoldmine ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceIronFogGoldmine 
 	response sorla_khan_play_iron_fog_goldmine
 }
 
 Response sorla_khan_play_escape_route
 {
 	speak "sorla_khan_enigmatic_01" noscene 
+	speak "sorla_khan_concerned_07" noscene 
+	speak "sorla_khan_concerned_05" noscene 
 }
 
 Rule sorla_khan_play_escape_route_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceEscapeRoute ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceEscapeRoute 
 	response sorla_khan_play_escape_route
 }
 
@@ -541,55 +573,65 @@ Rule sorla_khan_play_escape_route_rule
 Response sorla_khan_play_the_oath
 {
 	speak "sorla_khan_enigmatic_04" noscene 
+	speak "sorla_khan_angry_08" noscene 
+	speak "sorla_khan_arrogant_06" noscene 
 }
 
 Rule sorla_khan_play_the_oath_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceTheOath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceTheOath 
 	response sorla_khan_play_the_oath
 }
 
 Response sorla_khan_play_keenfolk_turret
 {
 	speak "sorla_khan_angry_06" noscene 
+	speak "sorla_khan_multi_damage_large_09" noscene 
+	speak "sorla_khan_multi_damage_small_05" noscene 
 }
 
 Rule sorla_khan_play_keenfolk_turret_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceKeenfolkTurret ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceKeenfolkTurret 
 	response sorla_khan_play_keenfolk_turret
 }
 
 Response sorla_khan_play_steam_cannon
 {
 	speak "sorla_khan_angry_10" noscene 
+	speak "sorla_khan_single_target_damage_07" noscene 
+	speak "sorla_khan_single_target_damage_06" noscene 
 }
 
 Rule sorla_khan_play_steam_cannon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceSteamCannon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceSteamCannon 
 	response sorla_khan_play_steam_cannon
 }
 
 Response sorla_khan_play_march_of_the_machines
 {
 	speak "sorla_khan_angry_08" noscene 
+	speak "sorla_khan_multi_damage_small_04" noscene 
+	speak "sorla_khan_multi_damage_large_02" noscene 
 }
 
 Rule sorla_khan_play_march_of_the_machines_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceMarchOfTheMachines ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceMarchOfTheMachines 
 	response sorla_khan_play_march_of_the_machines
 }
 
-Response sorla_khan_play_day_at_the_track
+Response sorla_khan_play_payday
 {
 	speak "sorla_khan_cast_spell_05" noscene 
+	speak "sorla_khan_pleased_01" noscene 
+	speak "sorla_khan_pleased_03" noscene 
 }
 
-Rule sorla_khan_play_day_at_the_track_rule
+Rule sorla_khan_play_payday_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourceDayAtTheTrack ThisIsImportant
-	response sorla_khan_play_day_at_the_track
+	criteria IsNotImp  PlayCard AllyHasSorlaKhan IsSourcePayday 
+	response sorla_khan_play_payday
 }
 

@@ -1,0 +1,56 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/play_shared.vcss_c" />
+		<include src="s2r://panorama/styles/play_social.vcss_c" />
+	</styles>
+
+	<DCGPlaySocial class="PrimaryCarouselPanel">
+		<Panel class="CarouselPanelContainer">
+			<Panel class="BlurBackgroundPanelOverlay" >
+				<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+			</Panel>
+			<Panel class="TopButtonNav">
+				<DCGPlayGameSelectButton id="ChallengeGroupButton"
+					group="SocialPlay"
+					onactivate="DCGPlayCarouselSetContext( ePlayContextSocial_ChallengeGroup, 0 ) PlaySoundEffect( DCG_UI.SocialPlay_Select_OpenPlay )"
+					onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_OpenPlay )"
+					icon="s2r://panorama/images/main_menu/icon_looking_to_play_psd.vtex"
+					buttontext="#DCG_LoadDeckSelect_GroupMatch" />
+					
+					<DCGPlayGameSelectButton id="FriendsButton"
+					group="SocialPlay"
+					onactivate="DCGPlayCarouselSetContext( ePlayContextSocial_ChallengeFriend, 0 ) PlaySoundEffect( DCG_UI.SocialPlay_Select_ChallengeAFriend )"
+					onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_ChallengeAFriend )"
+					icon="s2r://panorama/images/main_menu/icon_friends_ingame_psd.vtex"
+					buttontext="#DCG_LoadDeckSelect_ChallengeFriend" />
+				
+				<DCGPlayGameSelectButton id="TourneyButton"
+					group="SocialPlay"
+					onactivate="DCGPlayCarouselSetContext( ePlayContextSocial_TourneyPicker, 0 ) PlaySoundEffect( DCG_UI.SocialPlay_Select_Tournament )"
+					onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_Tournament )"
+					icon="s2r://panorama/images/main_menu/icon_tournament_psd.vtex"
+					buttontext="#DCG_LoadDeckSelect_Tournament" />
+			</Panel>
+			
+			<Panel class="PlayContents" hittest="false">
+				<Panel id="ChallengeFriendsContainer" hittest="false">
+					<DCGChallengeFriend id="ChallengeFriend" />
+				</Panel>
+				<Panel id="PlayWithGroupContainer" hittest="false">
+					<DCGOpenPlay id="LookingToPlay"/>
+				</Panel>
+				<Panel id="TournamentContainer" hittest="false">
+					<DCGTourneyPicker id="TourneyPicker"/>
+				</Panel>
+				<Panel id="LobbyContainer" hittest="false">
+					<DCGPrivateLobby id="PrivateLobby"/>
+				</Panel>
+				<Panel id="TourneyStatusContainer" hittest="false">
+					<DCGTourneyStatus id="TourneyStatus"/>
+				</Panel>
+			</Panel>
+			
+		</Panel>
+	</DCGPlaySocial>
+</root>

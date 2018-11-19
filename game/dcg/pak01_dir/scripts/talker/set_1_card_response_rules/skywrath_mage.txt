@@ -2,6 +2,8 @@
 //**SKYWRATH MAGE - HERO//
 //////////////////////////
 
+WhitelistName "Whitelist Card 10062"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -109,7 +111,6 @@ Rule skywrath_mage_gain_attack_rule
 
 Response skywrath_mage_gain_armor
 {
-	speak "skywrath_mage_permanent_armor_01" noscene 
 	speak "skywrath_mage_permanent_armor_02" noscene 
 	speak "skywrath_mage_permanent_armor_03" noscene 
 	speak "skywrath_mage_permanent_armor_04" noscene 
@@ -302,7 +303,7 @@ Response skywrath_mage_buff_friend
 
 Rule skywrath_mage_buff_friend_rule
 {
-	criteria IsNotImp  BUFFED AllyHasOgreMagi IsSourceBlue IsTargetNotSkywrathMage
+	criteria IsNotImp  BUFFED AllyHasSkywrathMage IsSourceBlue IsTargetNotSkywrathMage
 	response skywrath_mage_buff_friend
 }
 
@@ -332,6 +333,112 @@ Rule heal_skywrath_mage_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response skywrath_mage_enemy_disciple_of_nevermore
+{
+	speak "skywrath_mage_unique_01" noscene
+	speak "skywrath_mage_unique_02" noscene
+	speak "skywrath_mage_unique_03" noscene
+
+}
+
+Rule skywrath_mage_enemy_disciple_of_nevermore_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage EnemyHasDiscipleOfNevermore ThisIsImportant
+	matchonce
+	response skywrath_mage_enemy_disciple_of_nevermore
+}	
+
+Response skywrath_mage_enemy_oath
+{
+	speak "skywrath_mage_unique_04" noscene
+	speak "skywrath_mage_unique_05" noscene
+	speak "skywrath_mage_unique_06" noscene
+
+}
+
+Rule skywrath_mage_enemy_oath_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage EnemyHasTheOath ThisIsImportant
+	matchonce
+	response skywrath_mage_enemy_oath
+}	
+
+Response skywrath_mage_ally_meepo
+{
+	speak "skywrath_mage_unique_07" noscene
+	speak "skywrath_mage_unique_08" noscene
+	speak "skywrath_mage_unique_09" noscene
+	speak "skywrath_mage_unique_10" noscene
+
+}
+
+Rule skywrath_mage_ally_meepo_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage AllyHasMeepo ThisIsImportant
+	matchonce
+	response skywrath_mage_ally_meepo
+}	
+
+Response skywrath_mage_ally_prellex
+{
+	speak "skywrath_mage_unique_11" noscene
+	speak "skywrath_mage_unique_12" noscene
+
+}
+
+Rule skywrath_mage_ally_prellex_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage AllyHasPrellex ThisIsImportant
+	matchonce
+	response skywrath_mage_ally_prellex
+}	
+
+Response skywrath_mage_ally_aghanims_sanctum
+{
+	speak "skywrath_mage_unique_13" noscene
+	speak "skywrath_mage_unique_14" noscene
+
+}
+
+Rule skywrath_mage_ally_aghanims_sanctum_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage AllyHasAghanimsSanctum ThisIsImportant
+	matchonce
+	response skywrath_mage_ally_aghanims_sanctum
+}	
+
+Response skywrath_mage_ally_satyr_magician
+{
+	speak "skywrath_mage_unique_15" noscene
+	speak "skywrath_mage_unique_16" noscene
+
+}
+
+Rule skywrath_mage_ally_satyr_magician_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage AllyHasSatyrMagician ThisIsImportant
+	matchonce
+	response skywrath_mage_ally_satyr_magician
+}	
+
+Response skywrath_mage_enemy_kanna
+{
+	speak "skywrath_mage_unique_17" noscene
+	speak "skywrath_mage_unique_18" noscene
+	speak "skywrath_mage_unique_19" noscene
+	speak "skywrath_mage_unique_20" noscene
+
+}
+
+Rule skywrath_mage_enemy_kanna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSkywrathMage EnemyHasKanna ThisIsImportant
+	matchonce
+	response skywrath_mage_enemy_kanna
+}	
+
+
+
 ////////////////////////////
 //PLAY SET ONE BLUE CARDS///
 ////////////////////////////
@@ -339,71 +446,101 @@ Rule heal_skywrath_mage_rule
 Response skywrath_mage_play_barracks
 {
 	speak "skywrath_mage_enigmatic_09" noscene 		
+	speak "skywrath_mage_buff_ally_07" noscene 		
+	speak "skywrath_mage_single_target_damage_08" noscene 		
+	speak "skywrath_mage_single_target_damage_10" noscene 		
+	speak "skywrath_mage_multi_damage_small_04" noscene 		
+	speak "skywrath_mage_enigmatic_01" noscene 		
 }
 
 Rule skywrath_mage_play_barracks_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceBarracks ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceBarracks 
 	response skywrath_mage_play_barracks
 }
 
 Response skywrath_mage_play_fractured_timeline
 {
 	speak "skywrath_mage_arrogant_02" noscene 	
+	speak "skywrath_mage_debuff_enemy_01" noscene 	
+	speak "skywrath_mage_single_target_damage_02" noscene 	
+	speak "skywrath_mage_single_target_damage_09" noscene 	
+	speak "skywrath_mage_angry_07" noscene 	
+	speak "skywrath_mage_arrogant_08" noscene 	
 	
 }
 
 Rule skywrath_mage_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceFracturedTimeline 
 	response skywrath_mage_play_fractured_timeline
 }
 
 Response skywrath_mage_play_path_of_the_wise
 {
 	speak "skywrath_mage_arrogant_02" noscene 	
+	speak "skywrath_mage_multi_damage_small_01" noscene 	
+	speak "skywrath_mage_multi_damage_small_10" noscene 	
+	speak "skywrath_mage_multi_damage_large_04" noscene 	
+	speak "skywrath_mage_angry_05" noscene 	
+	speak "skywrath_mage_arrogant_01" noscene 	
 	
 }
 
 Rule skywrath_mage_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourcePathOfTheWise 
 	response skywrath_mage_play_path_of_the_wise
 }
 
 Response skywrath_mage_play_firestorm
 {
 	speak "skywrath_mage_multi_damage_small_07" noscene 	
+	speak "skywrath_mage_single_target_damage_01" noscene 	
+	speak "skywrath_mage_multi_damage_small_02" noscene 	
+	speak "skywrath_mage_multi_damage_large_06" noscene 	
+	speak "skywrath_mage_multi_damage_large_07" noscene 	
+	speak "skywrath_mage_angry_09" noscene 	
 	
 }
 
 Rule skywrath_mage_play_firestorm_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceFirestorm ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceFirestorm 
 	response skywrath_mage_play_firestorm
 }
 
 Response skywrath_mage_play_ignite
 {
 	speak "skywrath_mage_multi_damage_small_01" noscene 	
+	speak "skywrath_mage_debuff_enemy_09" noscene 	
+	speak "skywrath_mage_angry_02" noscene 	
+	speak "skywrath_mage_angry_08" noscene 	
+	speak "skywrath_mage_angry_10" noscene 	
+	speak "skywrath_mage_arrogant_03" noscene 	
 	
 }
 
 Rule skywrath_mage_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceIgnite	ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceIgnite	
 	response skywrath_mage_play_ignite
 }
 
 Response skywrath_mage_play_howling_mind
 {
 	speak "skywrath_mage_enigmatic_08" noscene 	
+	speak "skywrath_mage_single_target_damage_06" noscene 	
+	speak "skywrath_mage_multi_damage_small_06" noscene 	
+	speak "skywrath_mage_multi_damage_large_09" noscene 	
+	speak "skywrath_mage_concerned_08" noscene 	
+	speak "skywrath_mage_enigmatic_07" noscene 	
 	
 }
 
 Rule skywrath_mage_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceHowlingMind 
 	response skywrath_mage_play_howling_mind
 }
 
@@ -411,48 +548,68 @@ Response skywrath_mage_play_aghanims_sanctum
 {
 	speak "skywrath_mage_unique_13" noscene 	
 	speak "skywrath_mage_unique_14" noscene 	
+	speak "skywrath_mage_buff_ally_05" noscene 	
+	speak "skywrath_mage_buff_ally_08" noscene 	
+	speak "skywrath_mage_pleased_10" noscene 	
+	speak "skywrath_mage_enigmatic_04" noscene 	
+	speak "skywrath_mage_enigmatic_09" noscene 	
 	
 }
 
 Rule skywrath_mage_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceAghanimsSanctum 
 	response skywrath_mage_play_aghanims_sanctum
 }
 
 Response skywrath_mage_play_messenger_rookery
 {
 	speak "skywrath_mage_buff_ally_10" noscene 	
+	speak "skywrath_mage_debuff_enemy_06" noscene 	
+	speak "skywrath_mage_arrogant_10" noscene 	
+	speak "skywrath_mage_enigmatic_05" noscene 	
+	speak "skywrath_mage_enigmatic_06" noscene 	
+	speak "skywrath_mage_angry_05" noscene 	
 	
 }
 
 Rule skywrath_mage_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceMessengerRookery 
 	response skywrath_mage_play_messenger_rookery
 }
 
 Response skywrath_mage_play_glyph_of_confusion
 {
 	speak "skywrath_mage_cast_spell_05" noscene 	
+	speak "skywrath_mage_debuff_enemy_02" noscene 	
+	speak "skywrath_mage_debuff_enemy_03" noscene 	
+	speak "skywrath_mage_debuff_enemy_07" noscene 	
+	speak "skywrath_mage_debuff_enemy_10" noscene 	
+	speak "skywrath_mage_multi_damage_small_03" noscene 	
 	
 }
 
 Rule skywrath_mage_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceGlyphOfConfusion 
 	response skywrath_mage_play_glyph_of_confusion
 }
 
 Response skywrath_mage_play_watchtower
 {
 	speak "skywrath_mage_cast_spell_10" noscene 	
+	speak "skywrath_mage_debuff_enemy_08" noscene 	
+	speak "skywrath_mage_single_target_damage_03" noscene 	
+	speak "skywrath_mage_angry_06" noscene 	
+	speak "skywrath_mage_multi_damage_large_09" noscene 	
+	speak "skywrath_mage_angry_08" noscene 	
 	
 }
 
 Rule skywrath_mage_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceWatchtower 
 	response skywrath_mage_play_watchtower
 }
 
@@ -461,12 +618,14 @@ Response skywrath_mage_play_annihilation
 	speak "skywrath_mage_multi_damage_large_02" noscene 	
 	speak "skywrath_mage_multi_damage_large_03" noscene 	
 	speak "skywrath_mage_concerned_08" noscene 	
+	speak "skywrath_mage_multi_damage_large_10" noscene 	
+	speak "skywrath_mage_angry_04" noscene 	
 	
 }
 
 Rule skywrath_mage_play_annihilation_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceAnnihilation ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSkywrathMage IsSourceAnnihilation 
 	response skywrath_mage_play_annihilation
 }
 

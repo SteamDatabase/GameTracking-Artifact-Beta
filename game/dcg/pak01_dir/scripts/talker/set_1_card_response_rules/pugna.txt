@@ -2,6 +2,8 @@
 //**PUGNA- HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10048"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -17,7 +19,7 @@ Response pugna_use_ability
 
 Rule pugna_use_ability_rule
 {
-	criteria IsNotImp UseAbility AllyHasPugna IsSourceNetherBlast
+	criteria IsNotImp DEATH EnemyHasPugna IsSourceNetherBlast IsTargetImprovement
 	response pugna_use_ability
 }
 
@@ -330,6 +332,167 @@ Rule heal_pugna_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response pugna_start_with_viper
+{
+	speak "pugna_unique_01" noscene 
+	speak "pugna_unique_02" noscene 
+	speak "pugna_unique_03" noscene 
+}
+
+Rule pugna_start_with_viper_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasPugna AllyHasViper ThisIsImportant
+	matchonce
+	response pugna_start_with_viper
+}
+
+Response pugna_start_with_enemy_viper
+{
+	speak "pugna_unique_04" noscene 
+	speak "pugna_unique_05" noscene 
+	speak "pugna_unique_06" noscene 
+}
+
+Rule pugna_start_with_enemy_viper_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasPugna EnemyHasViper ThisIsImportant
+	matchonce
+	response pugna_start_with_enemy_viper
+}
+
+
+
+Response pugna_start_with_enemy_kanna
+{
+	speak "pugna_unique_08" noscene 
+	speak "pugna_unique_09" noscene 
+	
+}
+
+Rule pugna_start_with_enemy_kanna_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasPugna EnemyHasKanna ThisIsImportant
+	matchonce
+	response pugna_start_with_enemy_kanna
+}
+
+Response pugna_start_with_prellex
+{
+	speak "pugna_unique_10" noscene 
+	
+}
+
+Rule pugna_start_with_prellex_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasPugna AllyHasPrellex ThisIsImportant
+	matchonce
+	response pugna_start_with_prellex
+}
+
+Response pugna_use_ability_on_barracks
+{
+	speak "pugna_unique_11" noscene 
+}
+
+Rule pugna_use_ability_on_barracks_rule
+{
+	criteria IsNotImp DEATH IsTargetBarracks EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_barracks
+}
+
+Response pugna_use_ability_on_cheating_death
+{
+	speak "pugna_unique_12" noscene 
+}
+
+Rule pugna_use_ability_on_cheating_death_rule
+{
+	criteria IsNotImp DEATH IsTargetCheatingDeath EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_cheating_death
+}
+
+Response pugna_use_ability_on_mist_of_avernus
+{
+	speak "pugna_unique_13" noscene 
+}
+
+Rule pugna_use_ability_on_mist_of_avernus_rule
+{
+	criteria IsNotImp DEATH IsTargetMistOfAvernus EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_mist_of_avernus
+}
+
+Response pugna_use_ability_on_homefield_advantage
+{
+	speak "pugna_unique_14" noscene 
+}
+
+Rule pugna_use_ability_on_homefield_advantage_rule
+{
+	criteria IsNotImp DEATH IsTargetHomefieldAdvantage EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_homefield_advantage
+}
+
+Response pugna_use_ability_on_aghanims_sanctum
+{
+	speak "pugna_unique_15" noscene 
+}
+
+Rule pugna_use_ability_on_aghanims_sanctum_rule
+{
+	criteria IsNotImp DEATH IsTargetAghanimsSanctum EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_aghanims_sanctum
+}
+
+Response pugna_use_ability_on_steam_cannon
+{
+	speak "pugna_unique_16" noscene 
+}
+
+Rule pugna_use_ability_on_steam_cannon_rule
+{
+	criteria IsNotImp DEATH IsTargetSteamCannon EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_steam_cannon
+}
+
+Response pugna_start_with_nether_wards
+{
+	speak "pugna_unique_17" noscene 
+	speak "pugna_unique_18" noscene 
+}
+
+Rule pugna_start_with_nether_wards_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPugna AllyHasNetherWard  ThisIsImportant
+	matchonce
+	response pugna_start_with_nether_wards
+}
+
+Response pugna_use_ability_on_nether_ward
+{
+	speak "pugna_unique_19" noscene 
+	speak "pugna_unique_20" noscene 
+}
+
+Rule pugna_use_ability_on_nether_ward_rule
+{
+	criteria IsNotImp DEATH IsTargetNetherWard EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_nether_ward
+}
+
+Response pugna_use_ability_on_tyler_estate
+{
+	speak "pugna_unique_21" noscene 
+	speak "pugna_unique_22" noscene 
+	speak "pugna_unique_23" noscene 
+}
+
+Rule pugna_use_ability_on_tyler_estate_rule
+{
+	criteria IsNotImp DEATH IsTargetTylerEstate EnemyHasPugna IsSourceNetherBlast IsTargetImprovement ThisIsImportant
+	response pugna_use_ability_on_tyler_estate
+}
+
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
 ///////////////////////////
@@ -338,6 +501,7 @@ Response pugna_play_path_of_the_bold
 {
 	speak "pugna_cast_spell_09" noscene 
 	speak "pugna_buff_ally_05" noscene 
+	speak "pugna_cast_spell_02" noscene 
 
 	
 	
@@ -354,6 +518,7 @@ Response pugna_play_temple_of_war
 {
 	speak "pugna_enigmatic_07" noscene 
 	speak "pugna_enigmatic_08" noscene 
+	speak "pugna_buff_ally_07" noscene 
 	
 }
 
@@ -368,6 +533,7 @@ Response pugna_play_burning_oil
 {
 	speak "pugna_enigmatic_03" noscene 
 	speak "pugna_cast_spell_06" noscene 
+	speak "pugna_single_target_damage_06" noscene 
 	
 }
 
@@ -381,6 +547,7 @@ Response pugna_play_grand_melee
 {
 	speak "pugna_angry_05" noscene 
 	speak "pugna_buff_ally_08" noscene 
+	speak "pugna_arrogant_08" noscene 
 	
 }
 
@@ -394,6 +561,7 @@ Response pugna_play_steel_reinforcement
 {
 	speak "pugna_angry_01" noscene 
 	speak "pugna_angry_02" noscene 
+	speak "pugna_enigmatic_01" noscene 
 	
 	
 }
@@ -408,6 +576,7 @@ Response pugna_play_the_omexe_arena
 {
 	speak "pugna_enigmatic_06" noscene 
 	speak "pugna_enigmatic_09" noscene 
+	speak "pugna_enigmatic_02" noscene 
 	
 }
 
@@ -464,6 +633,8 @@ Rule pugna_play_time_of_triumph_rule
 Response pugna_play_enough_magic
 {
 	speak "pugna_single_target_damage_10" noscene 
+	speak "pugna_angry_01" noscene 
+	speak "pugna_pleased_06" noscene 
 	
 }
 

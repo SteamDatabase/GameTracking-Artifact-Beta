@@ -4,61 +4,126 @@
     <include src="s2r://panorama/styles/card_collection/limited_stage.vcss_c" />
 	</styles>
 
-	<Panel>
-    
-    <Panel id="MainBody">
+	<LimitedStage class="DashboardPage" oncancel="DCGExitLimintedStage()">
+		<Panel id="MainBody">
 
       <Panel id="BodyHeader">
-        <Panel id="BodyHeaderLeft">
-          <Label id="Title" text="#DCG_Gauntlet_GrantTitle"/>
-          <Label id="ChooseTitle" text="#DCG_Gauntlet_GrantChoose"/>
-          <Panel id="DraftStages">
-            <!--Dynamic Contents-->
-          </Panel>
-        </Panel>
+				<Panel id="DraftTitle">
+          <Label id="DraftTitleLabel" text="#DCG_Gauntlet_DraftTitle" class="TitleFont" />
+          <Label id="DraftReplayTitleLabel" text="#DCG_Gauntlet_DraftReplayTitle" class="TitleFont" />
+					<Label id="DraftDescLabel" text="#DCG_Gauntlet_DraftTitleDesc" />
+				</Panel>
+				<Panel id="CardCountContainer">
+					<Label class="GrantStageCounter" text="{i:currentCard}" />
+					<Label class="GrantStageTotal" text="#DCG_Grant_CardProgressLabel" />
+				</Panel>
+
         <Panel id="BodyHeaderRight">
-          <Panel class="ButtonDark" id="QuitDraftStage" onactivate="DCGConfirmAbandonLimitedStage()">
-            <Label id="QuitPrompt" class="CloseButtonPanelTitle" text="#DCG_XForClose"/>
-          </Panel>
           <Panel id="currentBalance" class="CurrencyGroup">
             <Panel class="currencyIcon"/>
             <Label text="{d:currencyBalance}"/>
           </Panel>
         </Panel>
+				<Panel id="QuitDraftStage" onactivate="DCGExitLimintedStage()" />
       </Panel>
 
       <Label id="StageMsg" text="{s:displayStageMsg}"/>
-      <Panel id="DynamicPackPanel">
-        <!--Dynamic Contents-->
-      </Panel>
-
-      <Panel id="NextStageGroup">
-        <Panel class="ButtonDark" id="NextStage" onactivate="DCGNextStage()">
-          <Label id="ChoosePrompt" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantChooseMore"/>
-          <Label id="OverBudget" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantOverBudget"/>
-          <Label id="GrantNextLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantNext"/>
-          <Label id="GrantFinishLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantFinish"/>
-        </Panel>
-      </Panel>
-      
+			<Panel id="BodyContainer">
+				<Panel id="PacksAndInfoContainer">
+					<Panel id="DynamicPackPanel">
+						<DCGScenePanel id="Card0" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card1" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card2" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card3" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card4" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card5" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card6" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card7" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card8" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card9" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card10" class="CardScenePanel" antialias="true" />
+						<DCGScenePanel id="Card11" class="CardScenePanel" antialias="true" />
+					</Panel>
+					<Panel id="GrantStageContainer">
+						<Panel id="GrantStageCounterContainer">
+							<Label class="GrantStageCounter" text="{i:currentStage}" />
+							<Label class="GrantStageTotal" text="#DCG_Grant_ProgressLabel" />
+						</Panel>
+            <Panel id="PreviousStageGroup">
+              <Panel id="PreviousStage" onactivate="DCGPreviousStage()">
+                <Label id="PreviousLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_Previous"/>
+              </Panel>
+            </Panel>
+						<Panel id="ChosenCardsContainer">
+							<Panel id="ChosenCards0" class="ChosenCards">
+								<Label id="CardChoice0_1" class="CardChoices" html="true" acceptsfocus="true" />
+								<Label id="CardChoice0_2" class="CardChoices" html="true" acceptsfocus="true" />
+							</Panel>
+							<Panel class="CardChoicesDivider" />
+							<Panel id="ChosenCards1" class="ChosenCards">
+								<Label id="CardChoice1_1" class="CardChoices" html="true" acceptsfocus="true" />
+								<Label id="CardChoice1_2" class="CardChoices" html="true" acceptsfocus="true" />
+							</Panel>
+							<Panel class="CardChoicesDivider" />
+							<Panel id="ChosenCards2" class="ChosenCards">
+								<Label id="CardChoice2_1" class="CardChoices" html="true" acceptsfocus="true" />
+								<Label id="CardChoice2_2" class="CardChoices" html="true" acceptsfocus="true" />
+							</Panel>
+							<Panel class="CardChoicesDivider" />
+							<Panel id="ChosenCards3" class="ChosenCards">
+								<Label id="CardChoice3_1" class="CardChoices" html="true" acceptsfocus="true" />
+								<Label id="CardChoice3_2" class="CardChoices" html="true" acceptsfocus="true" />
+							</Panel>
+							<Panel class="CardChoicesDivider" />
+							<Panel id="ChosenCards4" class="ChosenCards">
+								<Label id="CardChoice4_1" class="CardChoices" html="true" acceptsfocus="true" />
+								<Label id="CardChoice4_2" class="CardChoices" html="true" acceptsfocus="true" />
+							</Panel>
+						</Panel>
+						
+						<Panel id="NextStageGroup">
+							<Panel id="NextStage" onactivate="DCGNextStage()">
+								<Label id="ChoosePrompt" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantChooseMore"/>
+								<Label id="OverBudget" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantOverBudget"/>
+								<Label id="GrantNextLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantNext"/>
+								<Label id="GrantFinishLabel" class="CloseButtonPanelTitle" text="#DCG_Gauntlet_GrantFinish"/>
+							</Panel>
+						</Panel>
+					</Panel>
+					<Panel id="HeroAndCardCountContainer">
+						<DCGDeckSummary id="DeckSummary" class="FlowRight" highlightherobuttonsonhover="true" />
+					</Panel>
+				</Panel>
+				<Panel id="DeckListContainer">
+					<Panel id="DeckListSortContainer">
+						<Label id="SortByLabel" class="SortByLabel" text="#DCG_Grant_SortBy" />
+						<Label id="SortingLabel" class="SortByLabel" text="{s:sortByText}" onactivate="LimitedStageToggleSortBy()" />
+					</Panel>
+					<DCGDeckList id="DeckList" class="DeckListBG" dblclickcardinfo="true" hideherocards="true" allowdragdrop="true" allowcarddrag="true" allowincludecarddrag="true" emptydeckstring="#DCG_Gauntlet_EmptyDeckString" hittest="false">
+						<!--Dynamic Contents-->
+					</DCGDeckList>
+					<DCGDeckList id="BenchDeckList" class="DeckListBG" dblclickcardinfo="true" hideherocards="true" allowdragdrop="true" allowcarddrag="true" allowincludecarddrag="true" emptydeckstring="#DCG_Gauntlet_TheBenchText">
+						<!--Dynamic Contents-->
+					</DCGDeckList>
+				</Panel>
+			</Panel>      
     </Panel>
     
-    <Panel id="CurrentDeck">
-      <DCGDeckInfo id="DeckInfo" />
+    <!--<Panel id="CurrentDeck">
       <Panel id="ToggleShowDeck" onactivate="DCGToggleCollapseGrantDeck()">
         <Panel id="DeckExpandCollapseArrow" hittest="false"/>
       </Panel>
       <Panel id="HideShowDeck"/>
       <Panel id="HeroList">
-          <!--Dynamic Contents-->
+          
       </Panel>    
       
-    </Panel>
+    </Panel> -->
     
-    <Panel id="WaitingForGC" hittest="true">
+    <Panel id="WaitingForGC">
       <Label text="#DCG_Gauntlet_GrantWaitForGC"/>
     </Panel>
     
-	</Panel>
+	</LimitedStage>
   
 </root>

@@ -1,0 +1,40 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_tourney_invite_players.vcss_c" />
+	</styles>
+
+	<DCGPopupTourneyInvitePlayers class="PopupPanel Hidden" popupbackground="blur" oncancel="UIPopupButtonClicked()">
+		<Panel class="TopContainer">
+			<Label id="TitleLabel" class="PopupTitleLeft" text="#DCG_TourneyInvitePlayers" />
+			<Button id="CloseLoadDeckButton" class="CloseButton" onactivate="UIPopupButtonClicked()"/>
+		</Panel>
+		<Panel class="MessagePanel" >
+			<Label id="MessageLabel" text="#DCG_TourneyInvitePlayers_Message" />
+		</Panel>
+		<DCGFriendPickerMultiselect id="PlayerPicker" class="PopupDialogListContainer" sort-by-status="false" />
+		<Panel class="ConfigContainer">
+		
+			<Panel class="SettingContainer Capabilities">
+				<Panel class="LabelContainer">
+					<Panel class="LabelSpacer" />
+					<Label text="#DCG_TourneyCreateOpenInvite_Rights" />
+				</Panel>
+				<Panel class="CapabilitiesContainer">
+					<ToggleButton class="CheckBox" id="Player" text="#DCG_TourneyCreateOpenInvite_Rights_Player" onactivate="DCGInviteCapabilitiesChanged()" />
+					<ToggleButton class="CheckBox" id="Spectator" text="#DCG_TourneyCreateOpenInvite_Rights_Spectator" onactivate="DCGInviteCapabilitiesChanged()" />
+					<ToggleButton class="CheckBox" id="Invite" text="#DCG_TourneyCreateOpenInvite_Rights_CanInvite" onactivate="DCGInviteCapabilitiesChanged()" />
+					<ToggleButton class="CheckBox" id="Admin" text="#DCG_TourneyCreateOpenInvite_Rights_Admin" onactivate="DCGInviteCapabilitiesChanged()" />
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="ButtonContainer" class="PopupButtonRow">
+			<Button id="OKButton" class="PopupButton" onactivate="DCGInvitePlayersOkClicked()">
+				<Label text="#DCG_TourneyInvitePlayers"/>
+			</Button>
+
+		</Panel>
+
+	</DCGPopupTourneyInvitePlayers>
+</root>

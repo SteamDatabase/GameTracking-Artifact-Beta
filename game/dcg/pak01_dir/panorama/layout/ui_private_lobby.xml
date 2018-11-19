@@ -1,0 +1,109 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
+    <include src="s2r://panorama/styles/ui_private_lobby.vcss_c" />
+    <include src="s2r://panorama/styles/play_shared.vcss_c" />
+    <include src="s2r://panorama/styles/play_carousel_navigation_buttons.vcss_c"/>
+  </styles>
+
+  <DCGPrivateLobby class="LobbyPage ShowBackButton" hittest="true" popupbackground="blur">    
+    <Panel id="MainDialog">
+      <Panel id="MainBody">
+        <Label class="PrivateLobbyTitle" html="true" text="#DCG_PrivateLobby_Title"/>
+        <Panel class="PlayersBox">       
+          <Panel id="Player1Controls" class="PlayerControls IsEmpty">
+            <Panel class="PlayerRow" >
+              <DCGAvatarImage id="AvatarImage" />
+              <DCGUserName id="AvatarName" />              
+            </Panel>
+            <Panel class="PlayerButtons">
+              <DCGDeckLoader id="DeckLoader" class="SelectDeckContainer" onmouseover="PlaySoundEffect( DCG_UI.PrivateLobby_Rollover_ChooseDeck )" SoundEventPrefix="DCG_UI.PrivateLobby_ChooseDeck"/>
+              <ToggleButton id="Ready" class="PlayerReadyButton">
+                <Label class="OptionLabel" text="#DCG_PrivateLobby_Ready"/>
+              </ToggleButton>
+              <Label class="PlayerReady" text="#DCG_PrivateLobby_Ready"/>
+              <Label class="PlayerNotReady" text="#DCG_PrivateLobby_NotReady"/>
+            </Panel>
+          </Panel>
+        
+          <Label id="VSLabel" text="#DCG_PrivateLobby_Vs"/>
+        
+          <Panel id="Player2Controls" class="PlayerControls">
+            <Panel class="PlayerRow" >
+              <DCGAvatarImage id="AvatarImage" />
+              <DCGUserName id="AvatarName" />
+              <Label id="InviteLabel" text="#DCG_PrivateLobby_InviteSent" />
+            </Panel>
+            <Panel class="PlayerButtons">
+              <DCGDeckLoader id="DeckLoader" class="SelectDeckContainer" onmouseover="PlaySoundEffect( DCG_UI.PrivateLobby_Rollover_ChooseDeck )" SoundEventPrefix="DCG_UI.PrivateLobby_ChooseDeck" />
+              <ToggleButton id="Ready" class="PlayerReadyButton">
+                <Label class="OptionLabel" text="#DCG_PrivateLobby_Ready"/>
+              </ToggleButton>
+              <Label class="PlayerReady" text="#DCG_PrivateLobby_Ready"/>
+              <Label class="PlayerNotReady" text="#DCG_PrivateLobby_NotReady"/>
+            </Panel>
+          </Panel>          
+        </Panel>
+        <Panel id="BottomLeftBox" class="TopBottomFlow">
+          <Panel id="ChatButton" class="LeftRightFlow" onactivate="PrivateLobbyChat()">
+            <Panel class="SocialIcon SteamChatIcon"/>
+            <Label text="#DCG_PlayerContextMenu_ChatWithPlayer" />
+          </Panel>
+          <Panel id="ShareDeckPanel">
+            <TextButton class="ShareDeck" text="#DCG_PrivateLobby_ShareDeck" onactivate="PrivateLobbyShareDeck()"/>
+            <Button class="ShareDeck HasDeck LeftRightFlow" onactivate="PrivateLobbyShareDeck()">
+              <Label text="#DCG_PrivateLobby_ShareDeck_DeckShared" />
+              <Label class="DeckName" text="{s:DeckName}" />          
+            </Button>
+          </Panel>
+        </Panel>
+        <Panel class="OptionsBox" >
+          <Panel id="OptionsBody">
+              <Panel class="OptionItem" id="Timer" onmouseover="PlaySoundEffect( DCG_UI.PrivateLobby_Rollover_Timer )">
+                <Label text="#DCG_PrivateLobby_Timer_Label" />
+                <DropDown class="SelectDropDown" id="TimerDropDown" dropdownbodyposition="100% 100%"/>
+              </Panel>
+              <Panel class="OptionItem" id="GameMode" onmouseover="PlaySoundEffect( DCG_UI.PrivateLobby_Rollover_GameMode )">
+                <Label text="#DCG_PrivateLobby_GameMode_Label" />
+                <DropDown class="SelectDropDown" id="GameModeDropDown" dropdownbodyposition="100% 100%"/>
+              </Panel>
+              <Panel class="OptionItem" id="ShowDecks" onmouseover="PlaySoundEffect( DCG_UI.PrivateLobby_Rollover_ShowDecks )">
+                <ToggleButton id="ShowDecksToggle" onactivate="PlaySoundEffect( DCG_UI.PrivateLobby_Select_ShowDecks ); PrivateLobbySetVisibleDecks()">
+                  <Label class="OptionLabel" text="#DCG_PrivateLobby_ShowDecks"/>
+                </ToggleButton>
+              </Panel>
+          </Panel>
+        </Panel>   
+
+      <Panel id="FindingMatchRow" onactivate="PrivateLobbyCancelFindMatch()" >
+        <Button id="LeaveButton" />
+        <Label class="FindingMatchLabel" text="#DCG_PrivateLobby_FindingMatch" />
+      </Panel>
+    </Panel>
+    <Panel class="BottomContainer" >
+      <Panel id="BottomContainerBackground" />
+      <Panel class="SelectGroup">
+          <Button id="LeaveLobbyButton" 
+            onmouseover="PlaySoundEffectIfPanelEnabled( DCG_UI.PrivateLobby_Rollover_Leave )"
+            onactivate="PlaySoundEffectIfPanelEnabled( DCG_UI.PrivateLobby_Select_Leave ); PrivateLobbyLeave()">
+              <Label text="#DCG_PrivateLobby_Leave"/>
+          </Button>
+          <Button id="NextSelectionButton" 
+            onmouseover="PlaySoundEffectIfPanelEnabled( DCG_UI.PrivateLobby_Rollover_FindMatch )"
+            onactivate="PlaySoundEffectIfPanelEnabled( DCG_UI.PrivateLobby_Select_FindMatch ); PrivateLobbyFindMatch()">
+            <Panel class="NextSelectionLabelContainer" >
+              <Label id="NextSelectionLabel" text="#DCG_PrivateLobby_StartGame"/>
+            </Panel>
+          </Button>
+        </Panel>
+      </Panel>
+      </Panel>
+
+    <Panel id="OnGCOperation" hittest="false">
+      <Label class="GCOperationText" text="{s:GCOperation}" hittest="false"/>
+    </Panel>
+  </DCGPrivateLobby>
+  
+</root>

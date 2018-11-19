@@ -2,6 +2,8 @@
 //**BRISTLEBACK - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10030"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -307,7 +309,7 @@ Rule bristleback_lane_damage_give_death_skull_rule
 //healed//
 //////////
 
-Response heal_sven
+Response heal_bristleback
 {
 	speak "bristleback_healed_01" noscene 
 	speak "bristleback_healed_02" noscene 
@@ -318,7 +320,7 @@ Response heal_sven
 Rule heal_bristleback_rule
 {
 	criteria IsNotImp Heal IsTargetBristleback
-	response heal_sven
+	response heal_bristleback
 }
 
 
@@ -327,49 +329,40 @@ Rule heal_bristleback_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
-Response bristleback_start_against_cm
+Response bristleback_turn1_death_skull_buffed
 {
 	speak "bristleback_unique_01" noscene 
 }
 
-Rule bristleback_start_against_cm_rule
+Rule bristleback_turn1_death_skull_buffed_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasBristleback IsBlockingCrystalMaiden
-	response bristleback_start_against_cm
+	criteria IsNotImp  BUFFED AllyHasBristleback EnemyGainedDeathSkull IsMana3Round ThisIsImportant
+	response bristleback_turn1_death_skull_buffed
 }
 
-Response bristleback_start_against_luna
+Response bristleback_turn1_death_skull_debuffed
 {
 	speak "bristleback_unique_01" noscene 
 }
 
-Rule bristleback_start_against_luna_rule
+Rule bristleback_turn1_death_skull_debuffed_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasBristleback IsBlockingLuna
-	response bristleback_start_against_luna
+	criteria IsNotImp  DEBUFFED EnemyHasBristleback IsBlockingBristleBack TargetHasDeathSkull IsMana3Round ThisIsImportant
+	response bristleback_turn1_death_skull_debuffed
 }
 
-Response bristleback_start_against_zeus
+Response bristleback_turn1_death_skull_change_target
 {
 	speak "bristleback_unique_01" noscene 
 }
 
-Rule bristleback_start_against_zeus_rule
+Rule bristleback_turn1_death_skull_change_target_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasBristleback IsBlockingZeus
-	response bristleback_start_against_zeus
+	criteria IsNotImp  ChangedTarget EnemyHasBristleback IsMana3Round ThisIsImportant
+	response bristleback_turn1_death_skull_change_target
 }
 
-Response bristleback_start_against_rix
-{
-	speak "bristleback_unique_01" noscene 
-}
 
-Rule bristleback_start_against_rix_rule
-{
-	criteria IsNotImp  BeginSpellcasting AllyHasBristleback IsBlockingRix
-	response bristleback_start_against_rix
-}
 
 Response bristleback_gain_armor_ability
 {
@@ -385,7 +378,7 @@ Response bristleback_gain_armor_ability
 
 Rule bristleback_gain_armor_ability_rule
 {
-	criteria IsNotImp  Buffed IsTargetBristleback IsSourceAbility BuffsArmor
+	criteria IsNotImp  Buffed IsTargetBristleback IsSourceAbility BuffsArmor ThisIsImportant
 	response bristleback_gain_armor_ability
 }
 
@@ -398,19 +391,8 @@ Response bristleback_berserkers_call
 
 Rule bristleback_berserkers_call_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceBerserkersCall IsTargetBristleback
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceBerserkersCall IsTargetBristleback ThisIsImportant
 	response bristleback_berserkers_call
-}
-
-Response bristleback_use_include_on_tusk
-{
-	speak "bristleback_unique_13" noscene 
-}
-
-Rule bristleback_use_include_on_tusk_rule
-{
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceViscousNasalGoo IsTargetTusk
-	response bristleback_use_include_on_tusk
 }
 
 Response bristleback_use_include_on_axe
@@ -420,7 +402,8 @@ Response bristleback_use_include_on_axe
 
 Rule bristleback_use_include_on_axe_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceViscousNasalGoo IsTargetAxe
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceViscousNasalGoo IsTargetAxe ThisIsImportant
+	matchonce
 	response bristleback_use_include_on_axe
 }
 
@@ -434,25 +417,10 @@ Response bristleback_duel
 
 Rule bristleback_duel_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceDuel IsTargetBristleback
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceDuel IsTargetBristleback ThisIsImportant
 	response bristleback_duel
 }
 
-Response bristleback_time_of_triumph
-{
-	speak "bristleback_cast_spell_06" noscene 
-}
-
-Rule bristleback_time_of_triumph_rule
-{
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTimeOfTriumph
-	response bristleback_time_of_triumph
-}
-
-
-//////////////////////////
-//PRESS DECK EXPLORATION//
-//////////////////////////
 
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
@@ -461,12 +429,14 @@ Rule bristleback_time_of_triumph_rule
 Response bristleback_play_path_of_the_bold
 {
 	speak "bristleback_cast_spell_03" noscene 	
+	speak "bristleback_cast_spell_05" noscene 	
+	speak "bristleback_taunt_generic_04" noscene 	
 	
 }
 
 Rule bristleback_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourcePathOfTheBold 
 	response bristleback_play_path_of_the_bold
 }
 
@@ -474,61 +444,70 @@ Rule bristleback_play_path_of_the_bold_rule
 Response bristleback_play_temple_of_war
 {
 	speak "bristleback_cast_spell_07" noscene 
+	speak "bristleback_potential_save_01" noscene 
+	speak "bristleback_cast_spell_02" noscene 
 	
 }
 
 Rule bristleback_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTempleOfWar 
 	response bristleback_play_temple_of_war
 }
 
 Response bristleback_play_nether_ward
 {
 	speak "bristleback_cast_spell_10" noscene 
+	speak "bristleback_cast_spell_08" noscene 
+	speak "bristleback_kill_rival_04" noscene 
 	
 }
 
 Rule bristleback_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceNetherWard 
 	response bristleback_play_nether_ward
 }
 
 Response bristleback_play_burning_oil
 {
 	speak "bristleback_cast_spell_02" noscene 
+	speak "bristleback_permanent_armor_01" noscene 
+	speak "bristleback_taunt_generic_08" noscene 
 	
 }
 
 Rule bristleback_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceBurningOil 
 	response bristleback_play_burning_oil
 }
 
 Response bristleback_play_grand_melee
 {
 	speak "bristleback_unique_11" noscene 
+	speak "bristleback_unique_10" noscene 
+	speak "bristleback_taunt_generic_01" noscene 
 	
 }
 
 Rule bristleback_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceGrandMelee 
 	response bristleback_play_grand_melee
 }
 
 Response bristleback_play_steel_reinforcement
 {
 	speak "bristleback_cast_spell_02" noscene 
-	
+	speak "bristleback_taunt_generic_10" noscene 
+	speak "bristleback_healed_05" noscene 
 	
 }
 
 Rule bristleback_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceSteelReinforcement 
 	response bristleback_play_steel_reinforcement
 }
 
@@ -536,12 +515,13 @@ Response bristleback_play_the_omexe_arena
 {
 	speak "bristleback_permanent_attack_04" noscene 
 	speak "bristleback_permanent_attack_05" noscene 
+	speak "bristleback_permanent_health_03" noscene 
 	
 }
 
 Rule bristleback_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTheOmexeArena 
 	response bristleback_play_the_omexe_arena
 }
 
@@ -549,11 +529,26 @@ Rule bristleback_play_the_omexe_arena_rule
 Response bristleback_play_enough_magic
 {
 	speak "bristleback_cast_spell_06" noscene 
+	speak "bristleback_cast_spell_04" noscene 
+	speak "bristleback_cast_spell_01" noscene 
 	
 }
 
 Rule bristleback_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceEnoughMagic 
 	response bristleback_play_enough_magic
+}
+
+Response bristleback_time_of_triumph
+{
+	speak "bristleback_cast_spell_06" noscene 
+	speak "bristleback_taunt_generic_07" noscene 
+	speak "bristleback_kill_rival_07" noscene 
+}
+
+Rule bristleback_time_of_triumph_rule
+{
+	criteria IsNotImp  PlayCard AllyHasBristleback IsSourceTimeOfTriumph
+	response bristleback_time_of_triumph
 }

@@ -1,0 +1,204 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/play_shared.vcss_c" />
+    <include src="s2r://panorama/styles/tourney_status.vcss_c" />
+	</styles>
+
+	<snippets>
+		
+		<snippet name="PhaseTab">
+			<Panel class="PhaseTab">
+				<Label class="TabSeparator" text="/" />
+				<TabButton id="Tab" group="tournament_tabs" text="{s:phase_name}" />
+				<Button id="DeletePhase" />
+			</Panel>
+		</snippet>
+
+		<snippet name="AddPhaseTab">
+			<Panel class="PhaseTab">
+				<Label class="TabSeparator" text="/" />
+				<Label text="#DCG_TourneyStatus_AddPhase" onactivate="DCGTourneyStatusAddPhase()" />
+				<Button id="AddPhase" onactivate="DCGTourneyStatusAddPhase()" />
+			</Panel>
+		</snippet>
+
+		<snippet name="PhaseContents">
+			<Panel class="PhaseContents" hittest="false">
+				<TabContents id="Contents" group="tournament_tabs" class="TournamentTabContents" >
+					<Panel id="PhaseContainer">
+						<!-- Filled in dynamically by code -->
+					</Panel>
+				</TabContents>
+			</Panel>
+		</snippet>
+
+		<snippet name="OverviewMember">
+			<Panel class="OverviewMember">
+        <Panel class="RightsGroup">
+          <Panel class="RightDisplay RightInvite" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Invite')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel class="RightDisplay RightSpectator" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Spectator')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel class="RightDisplay RightAdmin" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Admin')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel id="TicketPanel" class="RightDisplay RightTicket" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_NoTicket')" onmouseout="DCGHideTextTooltip()" onactivate="DCGPayEntryFee()" setacceptfocus="true" hittest="true"/>
+          <Panel class="RightDisplay RightPlayer" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Player')" onmouseout="DCGHideTextTooltip()"/>
+        </Panel>
+        <DCGAvatarImage id="OverviewMemberAvatarImage" />
+				<Label class="OverviewMemberName" text="{g:dcg_persona:member_account_id}" html="true" />
+				<Label id="OverviewMemberStatus" html="true" />
+        <Label id="OverviewMemberRank" text="{s:member_rank}"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="OverviewOpenInvite">
+			<Panel class="OverviewMember">
+        <Panel class="RightsGroup">
+          <Panel class="RightDisplay RightInvite" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Invite')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel class="RightDisplay RightSpectator" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Spectator')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel class="RightDisplay RightAdmin" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Admin')" onmouseout="DCGHideTextTooltip()"/>
+          <Panel class="RightDisplay RightTicket" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Ticket')" onmouseout="DCGHideTextTooltip()" />
+          <Panel class="RightDisplay RightPlayer" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Player')" onmouseout="DCGHideTextTooltip()"/>
+        </Panel>
+        <Panel id="OverviewMemberAvatarImage" />
+				<Label class="OverviewMemberName" text="#DCG_TourneyStatus_OpenInvite" />
+				<Label id="OpenInviteStatus" class="OverviewMemberStatus" text="#DCG_TourneyStatus_OpenInviteStatus" />
+			</Panel>
+		</snippet>
+
+		<snippet name="OverviewAdmin">
+			<Panel class="OverviewAdmin">
+				<Label text="{g:dcg_persona:admin_account_id}" html="true" />
+			</Panel>
+		</snippet>
+	
+	</snippets>
+
+	
+	<DCGTourneyStatus class="PopupLoadDeck">
+    <Image class="BlurBackgroundPanelImage" src="panel-background://{LayoutRoot}" />
+    <Panel class="BlurBackgroundPanelOverlay" >
+			<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+		</Panel>
+		<Panel class="MainBody">
+
+      <Panel class="TournamentHeader">
+		    <Label class="TournamentName" text="{s:tourney_name}" />
+        <Panel class="HeaderRight">
+    		  <Label class="OverviewCurrentPhase" text="{s:tourney_stage}" />
+          <Button class="TourneyIconButton" id="TourneyCloseTime" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyStatus_CloseTime')" onmouseout="DCGHideTextTooltip()"/>
+        </Panel>
+      </Panel>
+			
+			<Panel class="TournamentTabs">
+				<TabButton id="OverviewTab" group="tournament_tabs" text="#DCG_TourneyStatus_Overview" selected="true" />
+				<Panel id="PhaseTabs">
+					<!-- Filled in dynamically by code -->
+				</Panel>
+				<Panel id="TourneyCopyLinkButton" onactivate="DCGTourneyCopyTourneyCode()" onmouseover="DCGShowTextTooltipInXML('#DCG_Tourney_CopyTourneyCode')" onmouseout="DCGHideTextTooltip()">
+			 		<Button class="TourneyCopyIcon" />
+			    <Label class="TourneyID" text="{s:tourney_id}" />
+    	  </Panel>
+			</Panel>
+			
+			<Panel class="TournamentTabContentsContainer">
+
+				<TabContents id="OverviewTabContents" tabid="OverviewTab" group="tournament_tabs" class="TournamentTabContents" selected="true">
+
+          <Panel class="OverviewColumns">
+					  <Panel class="OverviewLeftColumn">
+
+						  <Panel class="OverviewSection DeckControls">
+							  <Label class="OverviewSectionTitle" text="#DCG_TourneyStatus_YourDeck" />
+							  <Panel class="OverviewSectionRule" />
+							  <Panel class="OverviewContents">
+                  <DCGDeckLoaderTourney id="DeckLoader" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_TO_Rollover_ChooseDeck )" SoundEventPrefix="DCG_UI.SocialPlay_TO"  />
+							  </Panel>
+				
+						  </Panel>
+
+						  <Panel class="OverviewSection">
+							  <Label class="OverviewSectionTitle" text="#DCG_TourneyStatus_Description" />
+							  <Panel class="OverviewSectionRule" />
+							  <Label id="OverviewStatusLabel" />
+							  <Label class="OverviewDescription" text="{s:tourney_description}" />  
+						  </Panel>
+
+
+					  </Panel>
+
+					  <Panel class="OverviewRightColumn">
+
+						  <Panel id="OverviewMemberListContainer">
+							  <Panel class="OverviewMemberListHeader">
+                  <Panel class="RightsGroup">
+                    <Label class="RightHeader RightInvite" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRightsHeader_Invite')" onmouseout="DCGHideTextTooltip()"/>
+                    <Label class="RightHeader RightSpectator" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRightsHeader_Spectator')" onmouseout="DCGHideTextTooltip()"/>
+                    <Label class="RightHeader RightAdmin" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRightsHeader_Admin')" onmouseout="DCGHideTextTooltip()"/>
+                    <Label class="RightHeader RightTicket" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRightsHeader_Ticket')" onmouseout="DCGHideTextTooltip()"/>
+                    <Label class="RightHeader RightPlayer" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRightsHeader_Player')" onmouseout="DCGHideTextTooltip()"/>
+                  </Panel>
+								  <Label class="OverviewMemberName" text="#DCG_TourneyStatus_Member" />
+								  <Label class="OverviewMemberStatus" text="#DCG_TourneyStatus_Status" />
+                  <Label class="OverviewMemberRank" text="#DCG_TourneyStatus_Rank" />
+							  </Panel>
+
+							  <Panel id="OverviewMemberList">
+								  <!-- Filled out with OverviewMember snippets -->
+							  </Panel>
+
+							  <Panel class="InviteControlsContents">
+								  <TextButton class="InvitePlayers BlueButtonSmall" text="#DCG_TourneyInvitePlayers" onactivate="DCGTourneyStatusInvitePlayers() PlaySoundEffect( DCG_UI.SocialPlay_TO_Select_InvitePlayers )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_TO_Rollover_InvitePlayers )" />
+								  <TextButton class="CreateOpenInvite BlueButtonSmall" text="#DCG_TourneyCreateOpenInvite" onactivate="DCGTourneyStatusCreateOpenInvite() PlaySoundEffect( DCG_UI.SocialPlay_TO_Select_CreateOpenInvite )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_TO_Rollover_CreateOpenInvite )" />
+							  </Panel>
+
+							  <Panel class="SeedingControlsContents">
+								  <TextButton class="SetSeeding ButtonBevel" text="#DCG_TourneyStatus_SetSeedings" onactivate="DCGTourneyStatusSeedPlayers()" />
+							  </Panel>
+
+
+						  </Panel>
+
+						  <Panel class="FillHeight" />
+						
+					  </Panel>
+          </Panel>
+          
+          <Panel class="OverviewFooter">
+
+            <Panel class="BottomLeftControls">
+              <Button id="TourneyChatRoomButton" onactivate="DCGTourneyStatusShowChatRoom()">
+            	  <Panel class="TourneyChatIcon" />
+                <Label class="TourneyChatLabel" text="#DCG_Tourney_ChatRoom"/>
+              </Button>
+            </Panel>
+            <Panel class="BottomCenterControls" >
+              <Button class="RequiredTicketButton" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyStatus_TicketsAvailable')" onmouseout="DCGHideTextTooltip()">
+                <Panel class="TicketImage" />
+                <Label class="TicketAmount" text="#DCG_TourneyStatus_AvailableTickets" />
+              </Button>
+              <Button id="EntryFeeButton" class="RequiredTicketButton" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyStatus_TicketsNeeded')" onmouseout="DCGHideTextTooltip()" onactivate ="DCGPayGlobalEntryFee()">                
+                <Panel class="RequiredTicketImage" />
+                <Label class="RequiredTicketAmount" text="#DCG_TourneyStatus_TournamentCost" />
+              </Button>
+            </Panel>
+            <Panel id="BottomRightControls">
+              <TextButton id="AbandonTourneyButton" class="NegativeButton" text="#DCG_TourneyStatus_AbandonTournament"/>
+							<TextButton id="LeaveTourneyButton" class="NegativeButton" text="#DCG_TourneyStatus_LeaveTournament"/>
+							<TextButton id="RejectInviteButton" class="NegativeButton" text="#DCG_TourneyStatus_RejectInvite"/>
+						</Panel>
+          </Panel>
+					
+				</TabContents>
+
+				<Panel id="PhaseContents" hittest="false">
+					<!-- Filled in dynamically by code -->
+				</Panel>
+
+			</Panel>
+			
+		</Panel>
+	
+		<CustomLayoutPanel id="ButtonContainer" layout="file://{resources}/layout/play_carousel_navigation_buttons.xml" />
+
+	</DCGTourneyStatus>
+</root>

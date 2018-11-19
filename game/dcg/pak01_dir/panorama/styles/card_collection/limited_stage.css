@@ -9,24 +9,9 @@ LimitedStage
 	animation-duration: 0.75s;
 	animation-timing-function: ease-in;
 	animation-iteration-count: 1;
-}
 
-@keyframes 'GlowPulse'
-{
-    0%
-    {
-        box-shadow: #FFFF3333 -4px -4px 8px 8px;
-    }
-
-    50%
-    {
-        box-shadow: #FFFF33FF -4px -4px 8px 8px;
-    }
-
-    100%
-    {
-        box-shadow: #FFFF3333 -4px -4px 8px 8px;
-    }
+	background-size: 100% 100%;
+    background-image:  url("s2r://panorama/images/draft/draft_bg_psd.vtex");
 }
 
 @keyframes 'FadeInPackOpening'
@@ -46,22 +31,29 @@ LimitedStage
 
 #MainBody
 {
-	width: 100%;
+	width: 1688px;
 	height: 100%;
     flow-children: down;
+	horizontal-align: center;
+}
+
+.AspectRatio16x10 #MainBody
+{
+	margin-top: 50px;
+}
+
+#BodyContainer
+{
+	flow-children: right;
+	height: 1200px;
+	width: 100%;
+	horizontal-align: center;
 }
 
 #BodyHeader
 {
     width: 100%;
-    margin-bottom: 10px;
-}
-
-#BodyHeaderLeft
-{
-    horizontal-align: left;
-    flow-children: down;
-    margin-left: 20px;
+		height: 92px;
 }
 
 #BodyHeaderRight
@@ -95,29 +87,59 @@ LimitedStage
 
 #DynamicPackPanel 
 {
-	max-width: 100%;
-    height: 840px;
-    horizontal-align: center;
+	width: 100%;
+    height: 700px;
+    horizontal-align: left;
     flow-children: right-wrap;
-    overflow: squish scroll;
 }
 
-
-#Title
+#PacksAndInfoContainer
 {
-    horizontal-align:left;
-    margin: 10px;
-    font-size:32px;
+	height: fit-children;
+	width: 1280px;
+	flow-children: down;
 }
 
-#ChooseTitle
+#GrantStageContainer
 {
-    horizontal-align:center;
-    margin: 10px;
-    font-size:32px;
-    color: yellow;
-    opacity: 0;
-    visibility: collapse;
+	flow-children: right;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#GrantStageCounterContainer
+{
+	flow-children: right;
+	margin-left: 12px;
+	min-width: 190px;
+}
+
+.GrantStageCounter
+{
+	font-size: 38px;
+	color: #d7d4ce;
+	font-weight: lighter;
+	letter-spacing: 3px;
+}
+
+.GrantStageTotal
+{
+	margin-top: 13px;
+	font-weight: lighter;
+	font-size: 24px;
+	color: #7c8e8e;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
+
+#CardCountContainer
+{
+	vertical-align: center;
+	horizontal-align: left;
+	flow-children: right;
+	margin-top: 52px;
+	margin-left: 1280px;
+	text-align: left;
 }
 
 .hasSelections #ChooseTitle
@@ -125,54 +147,84 @@ LimitedStage
     opacity: 1;
 }
 
-#NextStageGroup
+#PreviousStageGroup
 {
-    horizontal-align: left;
+    visibility:collapse;
+}
+.IsReplay #PreviousStageGroup
+{
+    visibility:visible;
+}
+
+.NotConnectedToGC #NextStageGroup
+{
+	visibility: collapse;
+}
+
+#NextStageGroup,
+#PreviousStageGroup
+{
+    horizontal-align: right;
     margin-left: 40px;
-    margin-bottom: 10px;
+	vertical-align: center;
     flow-children: down;
 }
 
-#NextStage
+#NextStage,
+#PreviousStage
 {
     horizontal-align:center;
-    width: 300px;
-    height: 70px;
+	vertical-align: center;
+}
+
+#NextStage Label,
+#PreviousStage Label
+{
+	text-transform: uppercase;
+	font-size: 26px;
+	letter-spacing: 5px;
+	margin-right: 22px;
 }
 
 #QuitDraftStage
 {
-    horizontal-align:center;
-    margin-top: 60px;
-    min-width: 75px;
-    width: fit-children;
-    padding: 10px; 
+	vertical-align: top;
+	horizontal-align: right;
+
+	width: 36px;
+	height: 36px;
+
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+
+	wash-color: #7c8e8e;
+
+    margin-top: 18px;
+    opacity: 0.7;
+    transition-property: opacity;
+	transition-duration: 0.4s;
+	background-image: url("s2r://panorama/images/catalogue/quit_icon_psd.vtex");
 }
 
-#QuitPrompt
+#QuitDraftStage:hover
 {
+	opacity: 1.3;
 }
 
-.selectionComplete.validBudget #NextStage
+DCGScenePanel.CardScenePanel
 {
-    animation-name: GlowPulse;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-duration: 2s;
-}
-
-#Card
-{
-    width: 192px;
-    height: 336px;
-    margin: 10px;
+    width: 194px;
+    height: 328px;
+    margin: 8px;
     horizontal-align: left;
     vertical-align: top;
+	visibility: collapse;
 }
 
-#Card.cardSelected
+DCGScenePanel.CardScenePanel.HasCardSet
 {
-    box-shadow: #FFFF3333 -6px -6px 12px 12px;
+	visibility: visible;
 }
 
 #ToggleShowDeck
@@ -249,9 +301,15 @@ LimitedStage
 	transition-timing-function: ease-in;
 }
 
-#NextStage .CloseButtonPanelTitle
+#NextStage .CloseButtonPanelTitle,
+#PreviousStage .CloseButtonPanelTitle
 {
-    font-size: 30px;
+    font-size: 38px;
+}
+
+.CloseButtonPanelTitle
+{
+
 }
 
 .isLastGrant #GrantFinishLabel
@@ -270,6 +328,38 @@ LimitedStage
     visibility: collapse;
 }
 
+@keyframes 'next_label_ready_animation' 
+{
+	0%		{	text-shadow: 0px 0px 8px 4.0 #71ffff11;}
+	50%		{	text-shadow: none;}
+	100%	{	text-shadow: 0px 0px 8px 4.0 #71ffff11;}
+}
+
+#NextStage #GrantNextLabel
+#PreviousStage #PreviousLabel
+{
+	animation-name: next_label_ready_animation;
+    animation-duration: 2s;
+    animation-delay: 0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+
+	letter-spacing: 8px;
+}
+
+#NextStage #GrantNextLabel:hover,
+#PreviousStage #PreviousLabel:hover
+{
+	animation-name: none;
+	text-shadow: 0px 0px 8px 4.0 #71ffff11;
+}
+
+#NextStage #GrantNextLabel:active,
+#PreviousStage #PreviousLabel:active
+{
+	text-shadow: 0px 0px 20px 4.0 #71ffff25;
+}
+
 .selectionComplete.overBudget #OverBudget
 {
     visibility: visible;
@@ -277,7 +367,7 @@ LimitedStage
 
 #ChoosePrompt
 {
-    color: gray;
+    color: #7c8e8e;
 }
 
 #HeroList
@@ -308,29 +398,6 @@ LimitedStage
 .HeroImage.Black
 {
     border: 4px solid cardColorBlack;
-}
-
-#DraftStages
-{
-    horizontal-align: left;
-    flow-children: right-wrap;
-    border: 4px solid white;
-    padding: 4px 30px 4px 30px;
-    border-radius: 22px;
-}
-
-.GrantStageGroup
-{
-    margin-left: 5px;
-    margin-right: 5px;
-    flow-children: left;
-}
-
-.GrantStageIcon
-{
-    width: 30px;
-    height: 30px;
-    background-size: 100% 100%;
 }
 
 .stageCompleted
@@ -390,13 +457,13 @@ LimitedStage
 {
     horizontal-align: center;
     font-size: 18px;
-    opacity: 0;
+	visibility: collapse;
     height: 20px;
 }
 
 .HasStageMsg #StageMsg
 {
-    opacity: 1;
+	visibility: visible;
 }
 
 #currentBalance
@@ -473,4 +540,234 @@ LimitedStage .NotPickableBecauseMasquerade
 LimitedStage.ShowAIPicks .WouldBePickedByAI
 {
 	border: 2px solid red;
+}
+
+#DraftTitle
+{
+	flow-children: down;
+	horizontal-align: left;
+	vertical-align: center;
+	margin-left: 14px;
+}
+
+#DraftReplayTitleLabel
+{
+    visibility:collapse;
+}
+.IsReplay #DraftReplayTitleLabel
+{
+    visibility:visible;
+}
+.IsReplay #DraftTitleLabel
+{
+    visibility:collapse;
+}
+#DraftTitleLabel,
+#DraftReplayTitleLabel
+{
+	font-size: 36px;
+	text-transform: uppercase;
+	color: abilityGradient;
+	letter-spacing: 6px;
+	font-weight: lighter;
+	margin-top: 24px;
+}
+
+#DraftDescLabel
+{
+	font-size: 22px;
+	text-transform: uppercase;
+	color: #7c8e8e;
+	letter-spacing: 3px;
+	font-weight: lighter;
+}
+
+#ControlInfoIcons
+{
+	flow-children: right;
+}
+
+#DeckListContainer
+{
+	margin-top: 16px;
+	height: 894px;
+	width: 408px;
+	background-color: none;
+	background-image:  url("s2r://panorama/images/draft/decklist_container_bg_psd.vtex");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	flow-children: down;
+	horizontal-align: right;
+	box-shadow: #00000055 -10px -10px 20px 20px;
+}
+
+#DeckListSortContainer
+{
+	height: 40px;
+	flow-children: right;
+	horizontal-align: left;
+	margin-left: 20px;
+	margin-top: 6px;
+}
+
+.SortByLabel
+{
+	vertical-align: center;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+#SortByLabel
+{
+	color: #7c8e8e;
+}
+
+.IsReplay #DeckList
+{
+	height: 818px;
+}
+
+#DeckList
+{
+	transition-property: height;
+	transition-duration: .23s;
+	transition-timing-function: ease-in;
+}
+
+#BenchDeckList
+{
+	transition-property: height;
+	transition-duration: .23s;
+	transition-timing-function: ease-in;
+	height: 23px;
+	vertical-align: bottom;
+		margin-bottom: 10px;
+	margin-top: 15px;
+	flow-children: none;
+}
+
+.IsReplay #BenchDeckList
+{
+	visibility: collapse;
+}
+
+#HeroAndCardCountContainer
+{
+	height: 148px;
+	width: 1232px;
+	margin-left: 12px;
+	margin-right: 32px;
+    background-image:  url("s2r://panorama/images/draft/draft_results_bg_psd.vtex");
+	flow-children: right;
+}
+
+.cardSelected
+{
+	opacity-mask: url("s2r://panorama/images/draft/card_selected_mask_psd.vtex");
+}
+
+DCGDeckList.DeckList
+{
+	width: 368px;
+	margin-left: 20px;
+	height: fill-parent-flow( 1.0 );
+}
+
+DCGDeckSummary
+{
+	margin-left: 20px;
+	width: 100%;
+}
+
+#ChosenCardsContainer
+{
+	width: fit-children;
+	height: fit-children;
+	vertical-align: center;
+	flow-children: right;
+	margin-left: 130px;
+}
+
+#ChosenCardsContent
+{
+	flow-children: right;
+}
+
+#PrevChoicesLabel
+{
+	margin-top: 6px;
+	horizontal-align: center;
+	color: #7c8e8e;
+}
+
+.ChosenCards
+{
+	vertical-align: center;
+	flow-children: right;
+	width: 78px;
+}
+
+.CardChoicesDivider
+{
+	height: 36px;
+	width: height-percentage( 5% );
+	background-image: url("s2r://panorama/images/deck_list_components/hero_turn_divider_png.vtex");
+	background-size: 100% 100%;
+	margin-right: 8px;
+	margin-left: 8px;
+}
+
+.CardChoices
+{
+	background-size: 100% 100%;
+	height: 30px;
+	width: 30px;
+	margin-right: 3px;
+	margin-left: 3px;
+	border-radius: 15px;
+	vertical-align: center;
+	text-align: center;
+	font-size: 26px;
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( white ), to( #c7c7c7 ) );
+	color: #36383b;
+	horizontal-align: center;
+}
+
+.CardChoices.CardNotChosenYet
+{
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #222327 ), to( #383839 ) );
+	box-shadow: none;
+}
+
+.CardChoices.IsHero
+{
+	height: 36px;
+	width: 36px;
+	border-radius: 18px;
+	font-size: 32px;
+}
+
+.CardChoices.Red
+{
+	box-shadow: #dfa0a0aa -2px -2px 4px 4px; 
+}
+
+.CardChoices.Blue
+{
+	box-shadow: #a4a0df88 -2px -2px 4px 4px; 
+}
+
+.CardChoices.Green
+{
+	box-shadow: #a0dfac44 -2px -2px 4px 4px; 
+}
+
+.CardChoices.Black
+{
+	box-shadow: #504d53bb -3px -3px 6px 6px; 
+}
+
+.CardChoices.Colorless
+{
+	box-shadow: #dfd1a044 -2px -2px 4px 4px; 
 }

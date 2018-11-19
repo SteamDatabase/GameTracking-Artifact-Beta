@@ -2,15 +2,25 @@
 	<styles>
 		<include src="s2r://panorama/styles/base.vcss_c" />
 		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
-    <include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
-    <include src="s2r://panorama/styles/dashboard/dcg_db_controlslibrary.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_controlslibrary.vcss_c" />
 	</styles>
 
 	<DCGControlsLibrary class="DashboardPage">
 
+		<Panel id="ZooTabs">
+			<TabButton id="ZooButtonsTab" group="controls_library_tabs" text="Buttons" selected="true" />
+			<Label class="ZooTabSeparator" text="/" />
+			<TabButton id="ZooTextTab" group="controls_library_tabs" text="Text" />
+			<Label class="ZooTabSeparator" text="/" />
+			<TabButton id="ZooControlsTab" group="controls_library_tabs" text="Controls" />
+			<Panel class="FillWidth" />
+			<Button class="CloseButton" onactivate="DCGShowMainMenuPage()" />
+		</Panel>
+
 		<Panel id="ZooTabContents">
 
-			<Panel id="ZooButtons" class="ZooTab TabVisible">
+			<TabContents id="ZooButtons" tabid="ZooButtonsTab" group="controls_library_tabs" class="ZooTab" selected="true">
 				<Panel class="Precache"/>
 				<Panel class="TopBottomFlow">
 					<Panel class="LeftRightFlow">
@@ -64,10 +74,10 @@
 								<RadioButton class="CarouselDot" group="Carousel" id="Carousel5" />
 							</Panel>
 
-<!--							<TextButton text="TooltipTest 1" onmouseover="UIShowCustomLayoutTooltip( TestTooltip, file://{resources}/layout/tooltips/tooltip_custom_test.xml )" onmouseout="UIHideCustomLayoutTooltip( TestTooltip )" />
+							<!--							<TextButton text="TooltipTest 1" onmouseover="UIShowCustomLayoutTooltip( TestTooltip, file://{resources}/layout/tooltips/tooltip_custom_test.xml )" onmouseout="UIHideCustomLayoutTooltip( TestTooltip )" />
 							<TextButton text="TooltipTest 2" onmouseover="UIShowCustomLayoutParametersTooltip( TestTooltip2, file://{resources}/layout/tooltips/tooltip_custom_test.xml, test=blah )" onmouseout="UIHideCustomLayoutTooltip( TestTooltip2 )" /> -->
 
-<!--							<TextButton class="ButtonBevel" text="Custom Popup" onactivate="UIShowCustomLayoutPopup( CustomPopupTest, file://{resources}/layout/popups/popup_report_player.xml )" />
+							<!--							<TextButton class="ButtonBevel" text="Custom Popup" onactivate="UIShowCustomLayoutPopup( CustomPopupTest, file://{resources}/layout/popups/popup_report_player.xml )" />
 							<TextButton class="ButtonBevel" text="Custom Popup (Params)" onactivate="UIShowCustomLayoutPopupParameters( CustomPopupTest, file://{resources}/layout/popups/popup_custom_test.xml, popupvalue=hello )" /> -->
 
 						</Panel>
@@ -119,8 +129,9 @@
 					</Panel>
 
 				</Panel>
-			</Panel>
-			<Panel id="ZooText" class="ZooTab">
+			</TabContents>
+
+			<TabContents id="ZooText" tabid="ZooTextTab" group="controls_library_tabs" class="ZooTab">
 				<Panel class="LeftRightFlow">
 					<Panel class="ZooGroup Wide">
 
@@ -297,29 +308,29 @@
 					</Panel>
 
 				</Panel>
-			</Panel>
+			</TabContents>
 
-			<Panel id="ZooControls" class="ZooTab">
+			<TabContents id="ZooControls" tabid="ZooControlsTab" group="controls_library_tabs" class="ZooTab">
 
-					<Panel class="ZooGroup Wide" id="ZooSliders">
-						<Panel class="TopBottomFlow">
-							<Label text="Progress Bar:" />
-							<ProgressBar id="ZooProgressBar" />
-							<Label text=" " />
-							<Label text="Dropdown Box:" />
-							<DropDown>
-								<Label text="Meow" id="entry1"/>
-								<Label text="Woof" id="entry2"/>
-								<Label text="Moo" id="entry3"/>
-								<Label text="Cheep" id="entry4"/>
-							</DropDown>
-						</Panel>
+				<Panel class="ZooGroup Wide" id="ZooSliders">
+					<Panel class="TopBottomFlow">
+						<Label text="Progress Bar:" />
+						<ProgressBar id="ZooProgressBar" />
+						<Label text=" " />
+						<Label text="Dropdown Box:" />
+						<DropDown>
+							<Label text="Meow" id="entry1"/>
+							<Label text="Woof" id="entry2"/>
+							<Label text="Moo" id="entry3"/>
+							<Label text="Cheep" id="entry4"/>
+						</DropDown>
+					</Panel>
 
-						<Panel class="TopBottomFlow">
-							<Label text="Sliders:" />
-							<Slider class="HorizontalSlider" direction="horizontal" />
-							<Slider direction="vertical" />
-						</Panel>
+					<Panel class="TopBottomFlow">
+						<Label text="Sliders:" />
+						<Slider class="HorizontalSlider" direction="horizontal" />
+						<Slider direction="vertical" />
+					</Panel>
 				</Panel>
 
 				<Panel class="LeftRightFlow">
@@ -328,9 +339,6 @@
 						<UICanvas id="ZooCanvas" />
 					</Panel>
 					<Panel id="ZooEmoticons" class="ZooGroup">
-						<AnimatedImageStrip src="s2r://panorama/images/emoticons/wolf_pup_png.vtex" frametime="50ms" defaultframe="20" />
-						<AnimatedImageStrip src="s2r://panorama/images/emoticons/drunk_png.vtex" frametime="100ms" />
-						<AnimatedImageStrip src="s2r://panorama/images/emoticons/cheeky_png.vtex" frametime="1000ms" defaultframe="1" animating="false" />
 						<DCGEmoticon emoticonid="1" />
 						<DCGEmoticon alias="blush" />
 						<DCGEmoticon alias="headshot" animating="false" />
@@ -347,14 +355,14 @@
 
 					<Panel id="ZooHTMLGroup" class="ZooGroup">
 						<Label text="HTML:" />
-						<HTML id="ZooHTML" url="http://www.dota2.com/reborn" />
+						<HTML id="ZooHTML" url="http://www.dota2.com/reborn" acceptsfocus="true" acceptsinput="true" />
 						<Button class="ButtonBevel">
 							<Label text=">> Full web browser" onactivate="DCGDisplayURL( 'http://www.dota2.com' );"/>
 						</Button>
 					</Panel>
 
 				</Panel>
-			</Panel>
+			</TabContents>
 		</Panel>
 
 	</DCGControlsLibrary>

@@ -2,101 +2,41 @@
 	<styles>
 		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
 		<include src="s2r://panorama/styles/deck_info.vcss_c" />
+		<include src="s2r://panorama/styles/catalogue/catalogue.vcss_c" />
 	</styles>
 
 	<Panel class="RootPanel">
-
 		<Panel id="DeckInfoCardsPanel">
-      
-			<Panel id="HeroCards" class="CardCategory" >
-        <Panel class="CategoryHeader">
-          <Label id="HeroCardsTitle" class="CardSectionTitle" text="#DCG_DeckInfo_HeroesTitle" />
-          <Panel class="SortButtonsGroup">
-            <Button class="SortIconButton" id="SortHeroesRarity" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortRarity )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Heroes','Rarity');"/>
-            <Button class="SortIconButton" id="SortHeroesColor" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortColor )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Heroes','Color');"/>
-            <Button class="SortIconButton" id="SortHeroesHeroTurn" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortHeroTurn )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Heroes','HeroTurn');"/>
-          </Panel>
-        </Panel>
-        <Panel class="HeroDisplay">
-          <Panel class="HeroPortrait" id="HeroPanel1_0" >
-            <Image class="HeroImage" id="HeroImage1_0" />
-            <Panel class="HeroColor"/>
-          </Panel>
-          <Panel class="HeroPortrait" id="HeroPanel1_1" >
-            <Image class="HeroImage" id="HeroImage1_1" />
-            <Panel class="HeroColor"/>
-          </Panel>
-          <Panel class="HeroPortrait" id="HeroPanel1_2" >
-            <Image class="HeroImage" id="HeroImage1_2" />
-            <Panel class="HeroColor"/>
-          </Panel>
-          <Panel class="HeroPortrait" id="HeroPanel2_0" >
-            <Image class="HeroImage" id="HeroImage2_0" />
-            <Panel class="HeroColor"/>
-          </Panel>
-          <Panel class="HeroPortrait" id="HeroPanel3_0" >
-            <Image class="HeroImage" id="HeroImage3_0" />
-            <Panel class="HeroColor"/>
-          </Panel>
-        </Panel>
-        <Panel class="CardsList" id="HeroCardsList">
-          <!-- Dynamic contents -->
-        </Panel>
-        <Panel class="CardGraphs">
-          <Panel id="CardColorHistogram">
-            <!-- Dynamic contents -->
-          </Panel>
-          <Panel id="CardColorDistribution">
-            <!-- Dynamic contents -->
-          </Panel>
-          <Label class="CardsOwnedLabel" text="#DCG_DeckInfo_CardsOwned" />
-        </Panel>
+			<Panel class="Column LeftColumn">
+				<Panel id="DeckNameRegion">
+					<Panel id="DeckNameRow">
+						<Label id="DeckName" text="{s:deck_name}"/>
+						<Panel id="ValidationErrorsContainer">
+							<Button class="OpenInDeckBuilderButton DeckListTopBarButton" onactivate="DCGDeckInfoOpenInDeckBuilder()" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_OpenDeckBuilder )" onmouseout="UIHideTextTooltip()" />
+							<Button class="CopyDeckCodeButton DeckListTopBarButton" onactivate="DCGDeckCopyDeckCode()" onmouseover="UIShowTextTooltip( #DCG_DeckLoader_CopyDeckCode )" onmouseout="UIHideTextTooltip()" />
+						</Panel>
+					</Panel>
+				</Panel>
+				<DCGDeckSummary id="DeckSummary" />
+				<Panel class="DeckListHeader">
+					<Label text="#DCG_DeckInfo_ItemsDeck" />
+				</Panel>
+				<Panel class="DeckListBG">
+					<DCGDeckList id="DeckListingItems" class="DeckListing" hideherocards="true" allowdragdrop="false" allowcarddrag="false" allowincludecarddrag="false" dblclickcardinfo="true">
+						<!--Dynamic content-->
+					</DCGDeckList>
+				</Panel>
 			</Panel>
-
-      <Panel class="CategorySeparator">
-        <Panel class="CategorySeparatorBar" />
-      </Panel>
-
-      <Panel id="ItemCards" class="CardCategory" >
-        <Panel class="CategoryHeader">
-          <Label id="ItemCardsTitle" class="CardSectionTitle" text="#DCG_DeckInfo_ItemsTitle" />
-          <Panel class="SortButtonsGroup">
-            <Button class="SortIconButton" id="SortItemsRarity" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortRarity )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Items','Rarity');"/>
-            <Button class="SortIconButton" id="SortItemsType" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortType )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Items','CardType');"/>
-            <Button class="SortIconButton" id="SortItemsCost" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortGold )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Items','Cost');"/>
-          </Panel>  
-        </Panel>
-        <Panel class="CardsList" id="ItemCardsList">
-          <!-- Dynamic contents -->
-        </Panel>
-        <Panel class="ButtonControls">
-          <Button class="GeneralButton" id="SampleHandButton" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SampleHand )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckSampleHand();"/>
-          <Button class="GeneralButton" id="CopyCodeButton" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_CopyDeckCode )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckCopyDeckCode();"/>
-          <Button class="GeneralButton" id="CopyTextButton" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_CopyDeckText )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckCopyDeckText();"/>
-          <Button class="GeneralButton" id="OpenDeckBuilder" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_OpenDeckBuilder )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoOpenInDeckBuilder();"/>
-          <Button class="GeneralButton" id="PurchaseUnownedButton" onmouseover="UIShowTextTooltip( #DCG_DeckBuilder_PurchaseUnowned )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckPurchaseUnowned();"/>
-        </Panel>
-      </Panel>
-
-      <Panel class="CategorySeparator">
-        <Panel class="CategorySeparatorBar" />
-      </Panel>
-      
-      <Panel id="OtherCards" class="CardCategory" >
-        <Panel class="CategoryHeader">
-          <Label id="OtherCardsTitle" class="CardSectionTitle" text="#DCG_DeckInfo_OtherTitle" />
-          <Panel class="SortButtonsGroup">
-            <Button class="SortIconButton" id="SortOtherRarity" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortRarity )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Other','Rarity');"/>
-            <Button class="SortIconButton" id="SortOtherColor" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortColor )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Other','Color');"/>
-            <Button class="SortIconButton" id="SortOtherType" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortType )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Other','CardType');"/>
-             <Button class="SortIconButton" id="SortOtherMana" onmouseover="UIShowTextTooltip( #DCG_DeckInfo_Tooltip_SortMana )" onmouseout="UIHideTextTooltip()" onactivate="DCGDeckInfoSortColumn('Other','Cost');"/>
-         </Panel>
-        </Panel>
-        <Panel class="CardsList" id="OtherCardsList">
-          <!-- Dynamic contents -->
-        </Panel>
-      </Panel>
-			
+			<Panel class="Column RightColumn">
+				<Panel class="DeckListHeader">
+					<Label text="#DCG_DeckInfo_MainDeck" />
+				</Panel>
+				<Panel class="DeckListBG">
+					<DCGDeckList id="DeckListing" class="DeckListing" hideherocards="true" allowdragdrop="false" allowcarddrag="false" allowincludecarddrag="false" dblclickcardinfo="true">
+						<!--Dynamic content-->
+					</DCGDeckList>
+				</Panel>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

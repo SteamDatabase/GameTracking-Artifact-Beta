@@ -2,6 +2,7 @@
 //**SVEN - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10054"
 
 ////////////////
 //EQUIP WEAPON//
@@ -188,7 +189,7 @@ Response sven_use_include
 
 Rule sven_use_include_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceGodsStrength ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceGodsStrength IsTargetSven ThisIsImportant
 	response sven_use_include
 }
 
@@ -311,6 +312,121 @@ Rule heal_sven_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response sven_enemy_melee_creeps
+{
+	speak "sven_unique_01" noscene
+	speak "sven_unique_02" noscene
+	speak "sven_unique_03" noscene
+
+}
+
+Rule sven_enemy_melee_creeps_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasManyMeleeCreeps ThisIsImportant
+	matchonce
+	response sven_enemy_melee_creeps
+}	
+
+Response sven_equip_blade_of_the_vigil
+{
+	speak "sven_unique_04" noscene
+	speak "sven_unique_05" noscene
+
+}
+
+Rule sven_equip_blade_of_the_vigil_rule
+{
+	criteria IsNotImp PlayCard AllyHasSven IsTargetSven IsSourceBladeOfTheVigil ThisIsImportant
+	response sven_equip_blade_of_the_vigil
+}	
+
+Response sven_targeted_by_empower
+{
+	speak "sven_unique_06" noscene
+	speak "sven_unique_07" noscene
+
+}
+
+Rule sven_targeted_by_empower_rule
+{
+	criteria IsNotImp PlayCard AllyHasSven IsTargetSven IsSourceEmpower ThisIsImportant
+	response sven_targeted_by_empower
+}	
+
+Response sven_enemy_kanna
+{
+	speak "sven_unique_08" noscene
+	speak "sven_unique_09" noscene
+	speak "sven_unique_10" noscene
+
+}
+
+Rule sven_enemy_kanna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasKanna ThisIsImportant
+	matchonce
+	response sven_enemy_kanna
+}	
+
+Response sven_enemy_prellex
+{
+	speak "sven_unique_11" noscene
+	speak "sven_unique_12" noscene
+	speak "sven_unique_13" noscene
+
+}
+
+Rule sven_enemy_prellex_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasPrellex ThisIsImportant
+	matchonce
+	response sven_enemy_prellex
+}	
+
+Response sven_enemy_venomancer
+{
+	speak "sven_unique_14" noscene
+	speak "sven_unique_15" noscene
+	speak "sven_unique_16" noscene
+
+}
+
+Rule sven_enemy_venomancer_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasVenomancer ThisIsImportant
+	matchonce
+	response sven_enemy_venomancer
+}	
+
+Response sven_enemy_red_mist_pillager
+{
+	speak "sven_unique_17" noscene
+	speak "sven_unique_18" noscene
+
+}
+
+Rule sven_enemy_red_mist_pillager_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasRedMistPillager ThisIsImportant
+	matchonce
+	response sven_enemy_red_mist_pillager
+}	
+
+Response sven_enemy_rebel_instigator
+{
+	speak "sven_unique_19" noscene
+	speak "sven_unique_20" noscene
+
+}
+
+Rule sven_enemy_rebel_instigator_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasSven EnemyHasRebelInstigator ThisIsImportant
+	matchonce
+	response sven_enemy_rebel_instigator
+}	
+
+
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
 ///////////////////////////
@@ -326,7 +442,7 @@ Response sven_play_path_of_the_bold
 
 Rule sven_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourcePathOfTheBold 
 	response sven_play_path_of_the_bold
 }
 
@@ -341,7 +457,7 @@ Response sven_play_temple_of_war
 
 Rule sven_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceTempleOfWar 
 	response sven_play_temple_of_war
 }
 
@@ -355,7 +471,7 @@ Response sven_play_nether_ward
 
 Rule sven_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceNetherWard 
 	response sven_play_nether_ward
 }
 
@@ -363,12 +479,13 @@ Response sven_play_burning_oil
 {
 	speak "sven_cast_spell_07" noscene 
 	speak "sven_cast_spell_02" noscene 
+	speak "sven_debuff_enemy_03" noscene 
 	
 }
 
 Rule sven_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceBurningOil 
 	response sven_play_burning_oil
 }
 
@@ -376,12 +493,13 @@ Response sven_play_grand_melee
 {
 	speak "sven_multi_damage_small_03" noscene 
 	speak "sven_multi_damage_small_05" noscene 
+	speak "sven_single_target_damage_01" noscene 
 	
 }
 
 Rule sven_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceGrandMelee 
 	response sven_play_grand_melee
 }
 
@@ -389,13 +507,14 @@ Response sven_play_steel_reinforcement
 {
 	speak "sven_pleased_08" noscene 
 	speak "sven_pleased_02" noscene 
+	speak "sven_buff_ally_10" noscene 
 	
 	
 }
 
 Rule sven_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceSteelReinforcement 
 	response sven_play_steel_reinforcement
 }
 
@@ -403,12 +522,13 @@ Response sven_play_the_omexe_arena
 {
 	speak "sven_arrogant_08" noscene 
 	speak "sven_arrogant_09" noscene 
+	speak "sven_arrogant_10" noscene 
 	
 }
 
 Rule sven_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceTheOmexeArena 
 	response sven_play_the_omexe_arena
 }
 
@@ -423,7 +543,7 @@ Response sven_play_berserkers_call
 
 Rule sven_play_berserkers_call_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceBerserkersCall ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceBerserkersCall 
 	response sven_play_berserkers_call
 }
 
@@ -437,7 +557,7 @@ Response sven_play_duel
 
 Rule sven_play_duel_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceDuel ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceDuel IsTargetSven
 	response sven_play_duel
 }
 
@@ -452,18 +572,21 @@ Response sven_play_time_of_triumph
 
 Rule sven_play_time_of_triumph_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceTimeOfTriumph ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceTimeOfTriumph 
 	response sven_play_time_of_triumph
 }
 
 Response sven_play_enough_magic
 {
 	speak "sven_multi_damage_large_09" noscene 
+	speak "sven_pleased_06" noscene 
+	speak "sven_single_target_damage_08" noscene 
 	
 }
 
 Rule sven_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasSven IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasSven IsSourceEnoughMagic 
 	response sven_play_enough_magic
 }
+

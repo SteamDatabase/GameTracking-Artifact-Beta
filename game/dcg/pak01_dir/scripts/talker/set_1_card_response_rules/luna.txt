@@ -2,6 +2,7 @@
 //**LUNA - HERO//
 /////////////////
 
+WhitelistName "Whitelist Card 10006"
 
 ////////////////
 //EQUIP WEAPON//
@@ -321,7 +322,7 @@ Response luna_blink_dagger
 
 Rule luna_blink_dagger_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceBlinkDagger IsTargetLuna
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceBlinkDagger IsTargetLuna ThisIsImportant
 	matchonce
 	response luna_blink_dagger
 }
@@ -333,7 +334,8 @@ Response luna_eclipse_with_selemene
 
 Rule luna_eclipse_with_selemene_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse AllyHasIncarnationOfSelemene
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse AllyHasIncarnationOfSelemene ThisIsImportant
+	matchonce
 	response luna_eclipse_with_selemene
 }
 
@@ -346,7 +348,7 @@ Response luna_eclipse_weak
 
 Rule luna_eclipse_weak_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse IsChargesLessOrEqualTo3
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse IsChargesLessOrEqualTo3 ThisIsImportant
 	response luna_eclipse_weak
 }
 
@@ -359,7 +361,7 @@ Response luna_eclipse_strong
 
 Rule luna_eclipse_strong_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse IsChargesGreaterOrEqualTo7
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceEclipse IsChargesGreaterOrEqualTo7 ThisIsImportant
 	response luna_eclipse_strong
 }
 
@@ -372,8 +374,7 @@ Response luna_kills_sorla_khan
 
 Rule luna_kills_sorla_khan_rule
 {
-	criteria IsNotImp  Death EnemyHasLuna IsTargetSorlaKhan IsNotCombat
-	matchonce
+	criteria IsNotImp  Death EnemyHasLuna IsTargetSorlaKhan IsNotCombat ThisIsImportant
 	response luna_kills_sorla_khan
 }
 
@@ -386,8 +387,7 @@ Response luna_kills_legion_commander
 
 Rule luna_kills_legion_commander_rule
 {
-	criteria IsNotImp  Death EnemyHasLuna IsTargetLegionCommander IsNotCombat
-	matchonce
+	criteria IsNotImp  Death EnemyHasLuna IsTargetLegionCommander IsNotCombat ThisIsImportant
 	response luna_kills_legion_commander
 }
 
@@ -401,8 +401,7 @@ Response luna_lucent_beam_kill
 
 Rule luna_lucent_beam_kill_rule
 {
-	criteria IsNotImp  Death EnemyHasLuna IsNotCombat IsPreActionPhase
-	matchonce
+	criteria IsNotImp  Death EnemyHasLuna IsNotCombat IsPreActionPhase ThisIsImportant
 	response luna_lucent_beam_kill
 }
 
@@ -414,131 +413,153 @@ Rule luna_lucent_beam_kill_rule
 Response luna_play_barracks
 {
 	speak "luna_cast_spell_06" noscene 		
+	speak "luna_cast_spell_07" noscene 		
+	speak "luna_taunt_generic_03" noscene 		
 }
 
 Rule luna_play_barracks_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceBarracks ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceBarracks 
 	response luna_play_barracks
 }
 
 Response luna_play_fractured_timeline
 {
 	speak "luna_cast_spell_04" noscene 	
+	speak "luna_cast_spell_03" noscene 	
+	speak "luna_permanent_attack_03" noscene 	
 	
 }
 
 Rule luna_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceFracturedTimeline 
 	response luna_play_fractured_timeline
 }
 
 Response luna_play_path_of_the_wise
 {
 	speak "luna_cast_spell_03" noscene 	
+	speak "luna_potential_kill_02" noscene 	
+	speak "luna_potential_kill_04" noscene 	
 	
 }
 
 Rule luna_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourcePathOfTheWise 
 	response luna_play_path_of_the_wise
 }
 
 Response luna_play_firestorm
 {
 	speak "luna_cast_spell_07" noscene 	
+	speak "luna_potential_kill_04" noscene 	
+	speak "luna_potential_kill_01" noscene 	
 	
 }
 
 Rule luna_play_firestorm_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceFirestorm ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceFirestorm 
 	response luna_play_firestorm
 }
 
 Response luna_play_ignite
 {
 	speak "luna_cast_spell_10" noscene 	
+	speak "luna_potential_kill_05" noscene 	
+	speak "luna_kill_rival_05" noscene 	
 	
 }
 
 Rule luna_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceIgnite ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceIgnite 
 	response luna_play_ignite
 }
 
 Response luna_play_howling_mind
 {
 	speak "luna_permanent_armor_05" noscene 	
+	speak "luna_cast_spell_07" noscene 	
+	speak "luna_cast_spell_02" noscene 	
 	
 }
 
 Rule luna_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceHowlingMind 
 	response luna_play_howling_mind
 }
 
 Response luna_play_aghanims_sanctum
 {
 	speak "luna_permanent_attack_05" noscene 	
+	speak "luna_permanent_attack_03" noscene 	
+	speak "luna_taunt_generic_02" noscene 	
 	
 }
 
 Rule luna_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceAghanimsSanctum 
 	response luna_play_aghanims_sanctum
 }
 
 Response luna_play_messenger_rookery
 {
 	speak "luna_cast_spell_04" noscene 	
+	speak "luna_taunt_generic_05" noscene 	
+	speak "luna_potential_kill_04" noscene 	
 	
 }
 
 Rule luna_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceMessengerRookery 
 	response luna_play_messenger_rookery
 }
 
 Response luna_play_glyph_of_confusion
 {
 	speak "luna_cast_spell_08" noscene 	
+	speak "luna_potential_save_01" noscene 	
+	speak "luna_potential_save_05" noscene 	
 	
 }
 
 Rule luna_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceGlyphOfConfusion 
 	response luna_play_glyph_of_confusion
 }
 
 Response luna_play_watchtower
 {
 	speak "luna_permanent_armor_03" noscene 	
+	speak "luna_taunt_generic_07" noscene 	
+	speak "luna_potential_save_04" noscene 	
 	
 }
 
 Rule luna_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceWatchtower 
 	response luna_play_watchtower
 }
 
 Response luna_play_annihilation
 {
 	speak "luna_cast_spell_02" noscene 	
+	speak "luna_kill_rival_06" noscene 	
+	speak "luna_cast_spell_01" noscene 	
 	
 }
 
 Rule luna_play_annihilation_rule
 {
-	criteria IsNotImp  PlayCard AllyHasLuna IsSourceAnnihilation ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasLuna IsSourceAnnihilation 
 	response luna_play_annihilation
 }
 

@@ -2,6 +2,8 @@
 //**AXE - HERO//
 ////////////////
 
+WhitelistName "Whitelist Card 10020"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -95,6 +97,7 @@ Response axe_gain_armor
 	speak "axe_permanent_armor_03" noscene 
 	speak "axe_permanent_armor_04" noscene 
 	speak "axe_permanent_armor_05" noscene 
+	
 }
 
 Rule axe_gain_armor_rule
@@ -115,6 +118,7 @@ Response axe_gain_health
 	speak "axe_permanent_health_03" noscene 
 	speak "axe_permanent_health_04" noscene 
 	speak "axe_permanent_health_05" noscene 
+	speak "axe_potential_save_01" noscene 
 }
 
 Rule axe_gain_health_rule
@@ -199,13 +203,12 @@ Response axe_gain_momentum_murder
 {
 	speak "axe_kill_rival_02" noscene 
 	speak "axe_kill_rival_03" noscene 
-	speak "axe_kill_rival_04" noscene 
 	speak "axe_kill_rival_05" noscene 
-	speak "axe_kill_rival_06" noscene 
 	speak "axe_kill_rival_07" noscene 
 	speak "axe_kill_rival_08" noscene
 	speak "axe_kill_rival_09" noscene 	
 	speak "axe_kill_rival_10" noscene 
+	speak "axe_taunt_generic_02" noscene 
 }
 
 Rule axe_gain_momentum_murder_rule
@@ -221,7 +224,7 @@ Rule axe_gain_momentum_murder_rule
 Response axe_lane_taunt_generic
 {
 	speak "axe_taunt_generic_01" noscene 
-	speak "axe_taunt_generic_02" noscene 
+	speak "axe_kill_rival_06" noscene 
 	speak "axe_taunt_generic_03" noscene 
 	speak "axe_taunt_generic_04" noscene 
 	speak "axe_taunt_generic_05" noscene 
@@ -315,6 +318,21 @@ Rule heal_axe_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response axe_enemy_thunderhide_alpha
+{
+	speak "axe_unique_01" noscene 
+	speak "axe_unique_02" noscene 
+	speak "axe_unique_03" noscene 
+}
+
+Rule axe_enemy_thunderhide_alpha_rule
+{
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe EnemyHasThunderhideAlpha ThisIsImportant
+	matchonce
+	response axe_enemy_thunderhide_alpha
+}
+
+
 Response axe_combat_training
 {
 	speak "axe_unique_04" noscene 
@@ -324,7 +342,7 @@ Response axe_combat_training
 
 Rule axe_combat_training_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceCombatTraining
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceCombatTraining IsTargetNotAxe ThisIsImportant
 	response axe_combat_training
 }
 
@@ -337,51 +355,36 @@ Response axe_lane_enemy_sorla
 
 Rule axe_lane_enemy_sorla_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe EnemyHasSorlaKhan 
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe EnemyHasSorlaKhan ThisIsImportant
 	matchonce
 	response axe_lane_enemy_sorla
 }
 
-Response axe_lane_blocking_red_mist1
+Response axe_enemy_red_mist_horde
 {
 	speak "axe_unique_10" noscene 
 	speak "axe_unique_11" noscene 
 	speak "axe_unique_12" noscene 
 }
 
-Rule axe_lane_blocking_red_mist1_rule
+Rule axe_enemy_red_mist_horde_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe IsBlockingRedMistPillager
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe EnemyHasNoSorlaKhan EnemyHasFactionRedMist  ThisIsImportant
 	matchonce
-	response axe_lane_blocking_red_mist1
+	response axe_enemy_red_mist_horde
 }
 
-Response axe_lane_blocking_red_mist2
+Response axe_beserkers_call_on_red_mist_horde
 {
-	speak "axe_unique_10" noscene 
-	speak "axe_unique_11" noscene 
-	speak "axe_unique_12" noscene 
+	speak "axe_unique_13" noscene 
+	speak "axe_unique_14" noscene 
 }
 
-Rule axe_lane_blocking_red_mist2_rule
-{
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe IsBlockingRampagingVandal
+Rule axe_beserkers_call_on_red_mist_horde_rule
+{	
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceBerserkersCall EnemyHasFactionMultRedMist ThisIsImportant
 	matchonce
-	response axe_lane_blocking_red_mist2
-}
-
-Response axe_lane_blocking_red_mist3
-{
-	speak "axe_unique_10" noscene 
-	speak "axe_unique_11" noscene 
-	speak "axe_unique_12" noscene 
-}
-
-Rule axe_lane_blocking_red_mist3_rule
-{
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe IsBlockingUntestedGrunt
-	matchonce
-	response axe_lane_blocking_red_mist3
+	response axe_beserkers_call_on_red_mist_horde
 }
 
 Response axe_blink_dagger
@@ -391,7 +394,7 @@ Response axe_blink_dagger
 
 Rule axe_blink_dagger_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceBlinkDagger IsTargetAxe
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceBlinkDagger IsTargetAxe ThisIsImportant
 	matchonce
 	response axe_blink_dagger
 }
@@ -403,54 +406,46 @@ Response axe_start_with_sorla
 
 Rule axe_start_with_sorla_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasSorlaKhan
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasSorlaKhan  ThisIsImportant
 	matchonce
 	response axe_start_with_sorla
 }
 
-Response axe_start_with_red_mist1
+Response axe_start_with_red_mist
 {
 	speak "axe_unique_17" noscene 
 }
 
-Rule axe_start_with_red_mist1_rule
+Rule axe_start_with_red_mist_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasRedMistPillager
-	response axe_start_with_red_mist1
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasFactionMultRedMist AllyHasNoSorlaKhan ThisIsImportant
+	matchonce
+	response axe_start_with_red_mist
 }
 
-Response axe_start_with_red_mist2
-{
-	speak "axe_unique_17" noscene 
-}
 
-Rule axe_start_with_red_mist2_rule
-{
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasRampagingVandal
-	response axe_start_with_red_mist2
-}
-
-Response axe_start_with_red_mist3
-{
-	speak "axe_unique_17" noscene 
-}
-
-Rule axe_start_with_red_mist3_rule
-{
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasUntestedGrunt
-	response axe_start_with_red_mist3
-}
-
-Response axe_start_with_tresdin_vs_sorla
+Response axe_start_with_tresdin_vs_red_mist
 {
 	speak "axe_unique_18" noscene 
 }
 
-Rule axe_start_with_tresdin_vs_sorla_rule
+Rule axe_start_with_tresdin_vs_red_mist_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasLegionCommander EnemyHasSorlaKhan
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe AllyHasLegionCommander EnemyHasFactionRedMist ThisIsImportant
 	matchonce
-	response axe_start_with_tresdin_vs_sorla
+	response axe_start_with_tresdin_vs_red_mist
+}
+
+Response axe_gets_weapon_low_health
+{
+	speak "axe_unique_19" noscene 
+}
+
+Rule axe_gets_weapon_low_health_rule
+{
+	criteria IsNotImp Buffed IsTargetAxe IsSourceWeapon TargetHealthLessThan3 ThisIsImportant
+	matchonce
+	response axe_gets_weapon_low_health
 }
 
 Response axe_no_kill
@@ -460,7 +455,7 @@ Response axe_no_kill
 
 Rule axe_no_kill_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasAxe IsNoOpponentUnits
+	criteria IsNotImp  BeginSpellcasting AllyHasAxe IsNoOpponentUnits ThisIsImportant
 	matchonce
 	response axe_no_kill
 }
@@ -472,15 +467,27 @@ Response axe_no_kill2
 
 Rule axe_no_kill2_rule
 {
-	criteria IsNotImp  BeginSpellcasting EnemyHasAxe IsNoLocalUnits
+	criteria IsNotImp  BeginSpellcasting EnemyHasAxe IsNoLocalUnits ThisIsImportant
 	matchonce
 	response axe_no_kill2
 }
 
 
-//////////////////////////
-//PRESS DECK EXPLORATION//
-//////////////////////////
+Response axe_buffed_armor_when_almost_dead
+{
+	speak "axe_potential_save_02" noscene 
+	speak "axe_potential_save_03" noscene 
+	speak "axe_potential_save_04" noscene 
+	speak "axe_potential_save_05" noscene 
+}
+
+Rule axe_buffed_armor_when_almost_dead_rule
+{
+	criteria IsNotImp Buffed IsTargetAxe IsSourceDefensiveStance BuffsArmor ThisIsImportant
+	response axe_buffed_armor_when_almost_dead
+}
+
+
 
 
 ///////////////////////////
@@ -491,13 +498,14 @@ Response axe_play_path_of_the_bold
 {
 	speak "axe_cast_spell_10" noscene 
 	speak "axe_cast_spell_07" noscene 
+	speak "axe_taunt_generic_08" noscene 
 	
 	
 }
 
 Rule axe_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourcePathOfTheBold 
 	response axe_play_path_of_the_bold
 }
 
@@ -505,74 +513,86 @@ Rule axe_play_path_of_the_bold_rule
 Response axe_play_temple_of_war
 {
 	speak "axe_permanent_attack_01" noscene 
+	speak "axe_cast_spell_01" noscene 
+	speak "axe_cast_spell_07" noscene 
 
 	
 }
 
 Rule axe_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceTempleOfWar 
 	response axe_play_temple_of_war
 }
 
 Response axe_play_nether_ward
 {
 	speak "axe_cast_spell_09" noscene 
+	speak "axe_cast_spell_06" noscene 
+	speak "axe_cast_spell_03" noscene 
 	
 }
 
 Rule axe_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceNetherWard 
 	response axe_play_nether_ward
 }
 
 Response axe_play_burning_oil
 {
 	speak "axe_permanent_armor_05" noscene 
+	speak "axe_cast_spell_02" noscene 
+	speak "axe_permanent_armor_05" noscene 
 	
 }
 
 Rule axe_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceBurningOil 
 	response axe_play_burning_oil
 }
 
 Response axe_play_grand_melee
 {
 	speak "axe_taunt_generic_04" noscene 
+	speak "axe_cast_spell_08" noscene 
+	speak "axe_taunt_generic_05" noscene 
 	
 }
 
 Rule axe_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceGrandMelee 
 	response axe_play_grand_melee
 }
 
 Response axe_play_steel_reinforcement
 {
 	speak "axe_permanent_health_04" noscene 
+	speak "axe_potential_save_01" noscene 
+	speak "axe_cast_spell_04" noscene 
 	
 	
 }
 
 Rule axe_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceSteelReinforcement 
 	response axe_play_steel_reinforcement
 }
 
 Response axe_play_the_omexe_arena
 {
 	speak "axe_permanent_health_03" noscene 
+	speak "axe_permanent_attack_01" noscene 
+	speak "axe_permanent_health_03" noscene 
 	
 }
 
 Rule axe_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceTheOmexeArena 
 	response axe_play_the_omexe_arena
 }
 
@@ -581,6 +601,7 @@ Response axe_play_duel
 {
 	speak "axe_cast_spell_07" noscene 
 	speak "axe_cast_spell_08" noscene 
+	speak "axe_cast_spell_05" noscene 
 }
 
 Rule axe_play_duel_rule
@@ -594,6 +615,8 @@ Response axe_time_of_triumph
 {
 	speak "axe_cast_spell_09" noscene 
 	speak "axe_cast_spell_10" noscene 
+	speak "axe_kill_rival_04" noscene 
+	
 }
 
 Rule axe_time_of_triumph_rule
@@ -605,11 +628,13 @@ Rule axe_time_of_triumph_rule
 Response axe_play_enough_magic
 {
 	speak "axe_cast_spell_07" noscene 
+	speak "axe_cast_spell_05" noscene 
+	speak "axe_cast_spell_01" noscene 
 	
 }
 
 Rule axe_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasAxe IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasAxe IsSourceEnoughMagic 
 	response axe_play_enough_magic
 }

@@ -2,6 +2,8 @@
 //**NECROPHOS - HERO//
 //////////////////////
 
+WhitelistName "Whitelist Card 10059"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -93,7 +95,6 @@ Response necrophos_gain_armor
 	speak "necrophos_permanent_armor_01" noscene 
 	speak "necrophos_permanent_armor_02" noscene 
 	speak "necrophos_permanent_armor_03" noscene 
-	speak "necrophos_permanent_armor_04" noscene 
 	speak "necrophos_permanent_armor_05" noscene 
 }
 
@@ -313,6 +314,138 @@ Rule heal_necrophos_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response necrophos_use_include_on_bloodseeker
+{
+	speak "necrophos_unique_01" noscene 
+	speak "necrophos_unique_02" noscene 
+}
+
+Rule necrophos_use_include_on_bloodseeker_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceHeartStopperAura IsTargetBloodseeker ThisIsImportant
+	response necrophos_use_include_on_bloodseeker
+}
+
+Response necrophos_use_include_on_sorla_khan
+{
+	speak "necrophos_unique_03" noscene 
+	speak "necrophos_unique_04" noscene 
+}
+
+Rule necrophos_use_include_on_sorla_khan_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceHeartStopperAura IsTargetSorlaKhan ThisIsImportant
+	response necrophos_use_include_on_sorla_khan
+}
+
+Response necrophos_use_include_enemy_bronze_legion
+{
+	speak "necrophos_unique_05" noscene 
+	speak "necrophos_unique_06" noscene 
+	speak "necrophos_unique_07" noscene 
+}
+
+Rule necrophos_use_include_enemy_bronze_legion_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsTargetNotNecrophos IsSourceHeartStopperAura EnemyHasFactionMultBronzeLegion ThisIsImportant
+	response necrophos_use_include_enemy_bronze_legion
+}
+
+Response necrophos_use_include_enemy_has_kanna
+{
+	speak "necrophos_unique_08" noscene 
+	speak "necrophos_unique_09" noscene 
+}
+
+Rule necrophos_use_include_enemy_has_kanna_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceHeartStopperAura EnemyHasKanna ThisIsImportant
+	response necrophos_use_include_enemy_has_kanna
+}
+
+Response necrophos_ally_rumusque_faithful
+{
+	speak "necrophos_unique_10" noscene
+	speak "necrophos_unique_12" noscene
+
+}
+
+Rule necrophos_ally_rumusque_faithful_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasNecrophos AllyHasFactionMultRumusqueFaithful ThisIsImportant
+	matchonce
+	response necrophos_ally_rumusque_faithful
+}	
+
+Response necrophos_ally_selfish_cleric
+{
+	speak "necrophos_unique_11" noscene
+
+}
+
+Rule necrophos_ally_selfish_cleric_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasNecrophos AllyHasSelfishCleric ThisIsImportant
+	matchonce
+	response necrophos_ally_selfish_cleric
+}	
+
+Response necrophos_enemy_rumusque_faithful
+{
+	speak "necrophos_unique_13" noscene
+	speak "necrophos_unique_14" noscene
+	speak "necrophos_unique_15" noscene
+
+}
+
+Rule necrophos_enemy_rumusque_faithful_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasNecrophos EnemyHasFactionRumusqueFaithful ThisIsImportant
+	matchonce
+	response necrophos_enemy_rumusque_faithful
+}	
+
+
+
+Response necrophos_use_include_on_self_with_cursed_satyr
+{
+	speak "necrophos_unique_16" noscene 
+	speak "necrophos_unique_17" noscene 
+}
+
+Rule necrophos_use_include_on_self_with_cursed_satyr_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceHeartStopperAura IsTargetNecrophos AllyHasCursedSatyr ThisIsImportant
+	response necrophos_use_include_on_self_with_cursed_satyr
+}
+
+Response necrophos_ally_tresdin_vs_vhoul_rebellion
+{
+	speak "necrophos_unique_18" noscene
+	speak "necrophos_unique_19" noscene
+
+}
+
+Rule necrophos_ally_tresdin_vs_vhoul_rebellion_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasNecrophos AllyHasLegionCommander EnemyHasFactionMultVhoulRebellion ThisIsImportant
+	matchonce
+	response necrophos_ally_tresdin_vs_vhoul_rebellion
+}	
+
+Response necrophos_equip_with_rumusque_vestments
+{
+	speak "necrophos_unique_20" noscene 
+}
+
+Rule necrophos_equip_with_rumusque_vestments_rule
+{
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceRumusqueVestments IsTargetNecrophos ThisIsImportant
+	response necrophos_equip_with_rumusque_vestments
+}
+
+
+
 /////////////////////////////
 //PLAY SET ONE BLACK CARDS///
 /////////////////////////////
@@ -320,44 +453,52 @@ Rule heal_necrophos_rule
 Response necrophos_play_assured_destruction
 {
 	speak "necrophos_cast_spell_06" noscene 
+	speak "necrophos_single_target_damage_04" noscene 
+	speak "necrophos_single_target_damage_07" noscene 
 }
 
 Rule necrophos_play_assured_destruction_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssuredDestruction ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssuredDestruction 
 	response necrophos_play_assured_destruction
 }
 
 Response necrophos_play_path_of_the_cunning
 {
 	speak "necrophos_cast_spell_04" noscene 
+	speak "necrophos_cast_spell_08" noscene 
+	speak "necrophos_cast_spell_07" noscene 
 }
 
 Rule necrophos_play_path_of_the_cunning_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourcePathOfTheCunning ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourcePathOfTheCunning 
 	response necrophos_play_path_of_the_cunning
 }
 
 Response necrophos_play_the_tyler_estate
 {
 	speak "necrophos_cast_spell_01" noscene 
+	speak "necrophos_debuff_enemy_01" noscene 
+	speak "necrophos_debuff_enemy_02" noscene 
 }
 
 Rule necrophos_play_the_tyler_estate_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheTylerEstate ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheTylerEstate 
 	response necrophos_play_the_tyler_estate
 }
 
 Response necrophos_play_burn_it_all
 {
 	speak "necrophos_angry_04" noscene 
+	speak "necrophos_single_target_damage_05" noscene 
+	speak "necrophos_angry_03" noscene 
 }
 
 Rule necrophos_play_burn_it_all_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceBurnItAll ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceBurnItAll 
 	response necrophos_play_burn_it_all
 }
 
@@ -365,121 +506,144 @@ Response necrophos_play_trebuchets
 {
 
 	speak "necrophos_angry_03" noscene 
+	speak "necrophos_angry_07" noscene 
+	speak "necrophos_angry_08" noscene 
 }
 
 Rule necrophos_play_trebuchets_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTrebuchets ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTrebuchets 
 	response necrophos_play_trebuchets
 }
 
 Response necrophos_play_undisciplined_artillery
 {
 	speak "necrophos_enigmatic_08" noscene 
+	speak "necrophos_enigmatic_09" noscene 
+	speak "necrophos_enigmatic_04" noscene 
 }
 
 Rule necrophos_play_undisciplined_artillery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceUndisciplinedArtillery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceUndisciplinedArtillery 
 	response necrophos_play_undisciplined_artillery
 }
 
 Response necrophos_play_revtel_investments
 {
 	speak "necrophos_enigmatic_03" noscene 
+	speak "necrophos_pleased_02" noscene 
+	speak "necrophos_pleased_05" noscene 
 }
 
 Rule necrophos_play_revtel_investments_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceRevtelInvestments ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceRevtelInvestments 
 	response necrophos_play_revtel_investments
 }
 
 Response necrophos_play_iron_fog_goldmine
 {
 	speak "necrophos_arrogant_05" noscene 
+	speak "necrophos_cast_spell_07" noscene 
+	speak "necrophos_buff_ally_06" noscene 
 }
 
 Rule necrophos_play_iron_fog_goldmine_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceIronFogGoldmine ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceIronFogGoldmine 
 	response necrophos_play_iron_fog_goldmine
 }
 
 Response necrophos_play_escape_route
 {
 	speak "necrophos_arrogant_05" noscene 
+	speak "necrophos_pleased_08" noscene 
+	speak "necrophos_pleased_09" noscene 
 }
 
 Rule necrophos_play_escape_route_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceEscapeRoute ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceEscapeRoute 
 	response necrophos_play_escape_route
 }
 
 Response necrophos_play_assault_ladders
 {
 	speak "necrophos_arrogant_03" noscene 
+	speak "necrophos_arrogant_07" noscene 
+	speak "necrophos_arrogant_02" noscene 
 }
 
 Rule necrophos_play_assault_ladders_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssaultLadders ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceAssaultLadders 
 	response necrophos_play_assault_ladders
 }
 
 Response necrophos_play_the_oath
 {
 	speak "necrophos_angry_08" noscene 
+	speak "necrophos_enigmatic_06" noscene 
+	speak "necrophos_enigmatic_05" noscene 
 }
 
 Rule necrophos_play_the_oath_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheOath ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceTheOath 
 	response necrophos_play_the_oath
 }
 
 Response necrophos_play_keenfolk_turret
 {
 	speak "necrophos_enigmatic_09" noscene 
+	speak "necrophos_angry_03" noscene 
+	speak "necrophos_angry_06" noscene 
 }
 
 Rule necrophos_play_keenfolk_turret_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceKeenfolkTurret ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceKeenfolkTurret 
 	response necrophos_play_keenfolk_turret
 }
 
 Response necrophos_play_steam_cannon
 {
 	speak "necrophos_debuff_enemy_05" noscene 
+	speak "necrophos_angry_09" noscene 
+	speak "necrophos_angry_08" noscene 
 }
 
 Rule necrophos_play_steam_cannon_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceSteamCannon ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceSteamCannon 
 	response necrophos_play_steam_cannon
 }
 
 Response necrophos_play_march_of_the_machines
 {
 	speak "necrophos_enigmatic_01" noscene 
+	speak "necrophos_multi_damage_small_01" noscene 
+	speak "necrophos_multi_damage_small_05" noscene 
 }
 
 Rule necrophos_play_march_of_the_machines_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceMarchOfTheMachines ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceMarchOfTheMachines 
 	response necrophos_play_march_of_the_machines
 }
 
-Response necrophos_play_day_at_the_track
+Response necrophos_play_payday
 {
 	speak "necrophos_pleased_05" noscene 
+	speak "necrophos_buff_ally_10" noscene 
+	speak "necrophos_buff_ally_02" noscene 
 }
 
-Rule necrophos_play_day_at_the_track_rule
+Rule necrophos_play_payday_rule
 {
-	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourceDayAtTheTrack ThisIsImportant
-	response necrophos_play_day_at_the_track
+	criteria IsNotImp  PlayCard AllyHasNecrophos IsSourcePayday 
+	response necrophos_play_payday
 }
+
 

@@ -5,103 +5,45 @@
 		<include src="s2r://panorama/styles/hud/game_over.vcss_c" />
 	</styles>
 
-  <snippets>
-    <snippet name="CardProgress">
-      <Panel class="CardProgressFrame">
-        <Panel class="CardIconFrame">
-          <Image id="CardIcon" src="s2r://panorama/images/card_elements/mini_portrait_death_skull_png.vtex"/>
-        </Panel>
-        <Panel class="ProgressFrame">
-          <Panel class="ProgressBarFrame">
-            <Panel class="ProgressBarBlock">
-              <Panel class="ProgressBar">
-                <Panel id="ProgressBarAlreadyCompleted"/>
-                <Panel id="ProgressBarUpdate"/>
-              </Panel>
-              <Panel class="ProgressText">
-                <Label text="{d:progress} / {d:total}"/>
-              </Panel>
-            </Panel>
-            <Label text="+{d:currentprogress}"/>
-          </Panel>
-          
-          <Panel class="AchievementText">
-            <Label text="{g:dcg_card_name:name}" html="true"/>
-          </Panel>
-        </Panel>
-      </Panel>
-    </snippet>
-  </snippets>
   <Panel class="GameOverPanel">
-
-    <Panel id="BodyPanel" class="DashboardPanel" hittest ="true">
-
-      <Panel class="TitleCard">
-        <Label id="ResultLabel" text=""/>
-        <Button class="CollapseButton" onactivate="ToggleMatchResult()" />
-      </Panel>
-      <Panel class="BodyPanel">
-
-        <Panel class="SummaryBar">
-          <Label id="MatchLengthLabel" text="#DCG_ResultScreen_MatchLength"/>
-          <Panel class="PlayerSummary">
-            <Label class="PlayerResult" id="PlayerLabel0" text=""/>
-            <Label class="PlayerResult" id="PlayerLabel1" text=""/>
-          </Panel>
-        </Panel>
-        <Panel id="GameOverTabs">
-          <Button id="ProgressButton" class="TabOption ToggledOn" onactivate="$( '#StatTabBody' ).AddClass( 'Hide' ); $( '#RewardTabBody' ).RemoveClass( 'Hide' ); $( '#ProgressButton' ).AddClass( 'ToggledOn' ); $( '#StatsButton' ).RemoveClass( 'ToggledOn' );">
-            <Label text="#DCG_ResultScreen_TabAchievementProgress"/>
-          </Button>
-          <Label class="Separator" text="/"/>
-          <Button id="StatsButton" class="TabOption" onactivate="$( '#StatTabBody' ).RemoveClass( 'Hide' ); $( '#RewardTabBody' ).AddClass( 'Hide' ); $( '#ProgressButton' ).RemoveClass( 'ToggledOn' ); $( '#StatsButton' ).AddClass( 'ToggledOn' );">
-            <Label text="#DCG_ResultScreen_TabStats"/>
-          </Button>
-        </Panel>
-        <Panel id="StatTabBody" class="TabPanelBody Hide">
-          <Panel id="GraphHeader">
-            <Panel id="GraphSelectionGroup">
-              <DropDown id="GraphDropDown" dropdownbodyposition="100% 100%"/>
-              <Panel id="GraphTooltip" onmouseover="UIShowTextTooltip( Placeholder )" onmouseout="UIHideTextTooltip()">
-                <Label text="#DCG_ResultScreen_GraphTooltipButton"/>
-              </Panel>               
-            </Panel>
-            <ToggleButton id="ShowTimelineToggle" selected="false" onactivate="DCGPostMatchToggleTimeline()">
-              <Label text="#DCG_ResultScreen_Timeline"/>
-            </ToggleButton>
-          </Panel>
-          <Panel class="GraphTotalsGroup">
-            <Label id="PlayerTotalValue" class="TotalValueDisplay" text="#DCG_ResultScreen_PlayerTotal" html="true" />
-            <Label id="EnemyTotalValue" class="TotalValueDisplay" text="#DCG_ResultScreen_EnemyTotal" html="true" />
-          </Panel>
-          <Panel id="StatGraphBody">
-            <UICanvas id="StatGraphCanvas"/>
-            <Panel id="TimelineBody">
-              <!-- Dynamic contents -->
-            </Panel>
-          </Panel>
-
-          <Panel class="GraphSelectors">
-            <DropDown id="CardDropDown" dropdownbodyposition="100% 100%"/>
-            <ToggleButton id="HideIconsToggle" selected="true" onactivate="$( '#BodyPanel' ).ToggleClass( 'HideIcons' );">
-              <Label text="#DCG_ResultScreen_GraphIcons"/>
-            </ToggleButton>
-          </Panel>            
-          
-        </Panel>
-        <Panel id="RewardTabBody" class="TabPanelBody">
-          
-        </Panel>
-        <Panel class="FooterButtons">
-          <Button id="ReportBugButton" class="PanelButton" onactivate="DCGPostMatchFeedback()">
-            <Label text="#DCG_ResultScreen_Feedback" />
-          </Button>
-          <Button id="LeaveMatchButton" class="PanelButton" onactivate="QuitPostMatchGame()">
-            <Label text="{s:quitButtonText}" />
-          </Button>
-        </Panel>
-        
-      </Panel>
+    <Movie id="GameOverVideo" src="file://{resources}/videos/main_menu/victory.webm" controls="none" repeat="false" autoplay="on" disableactivatepause="true" acceptsfocus="false" />
+    <Movie id="GameOverVideoLoop" src="file://{resources}/videos/main_menu/victory_loop.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" acceptsfocus="false" />
+    <Movie id="GameOverVideoResult" src="file://{resources}/videos/main_menu/endgame_tie.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" acceptsfocus="false" />
+    <Panel id="GameEndReason">
+      <Label class="EndReason" id="LabelYourTowersDestroyed" text="#DCG_ResultScreen_YourTowersDestroyed" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentTowersDestroyed" text="#DCG_ResultScreen_OpponentTowersDestroyed" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelBothPlayersTowersDestroyed" text="#DCG_ResultScreen_BothTowersDestroyed" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelYouConceded" text="#DCG_ResultScreen_YouConceded" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentConceded" text="#DCG_ResultScreen_OpponentConceded" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelYourDeckInvalid" text="#DCG_ResultScreen_YourDeckInvalid" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentDeckInvalid" text="#DCG_ResultScreen_OpponentDeckInvalid" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelCombatTooFull" text="#DCG_ResultScreen_CombatTooFull" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentTimeUp" text="#DCG_ResultScreen_OpponentTimeUp" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelYourTimeUp" text="#DCG_ResultScreen_YourTimeUp" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentInactive" text="#DCG_ResultScreen_OpponentInactive" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelYouInactive" text="#DCG_ResultScreen_YouInactive" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelOpponentDisconnectedTooLong" text="#DCG_ResultScreen_OpponentDisconnectedTooLong" allowtextselection="false"/>
+      <Label class="EndReason" id="LabelYouDisconnectedTooLong" text="#DCG_ResultScreen_YouDisconnectedTooLong" allowtextselection="false"/>
+    </Panel>
+    <Panel id="MenuOptions">
+      <Button id="Rematch" class="MenuButton" onactivate="DCGRematch()">
+        <Label text="#DCG_GameOver_Rematch" allowtextselection="false"/>
+      </Button>
+      <Button id="FindNextMatch" class="MenuButton" onactivate="DCGFindNextMatch()">
+        <Label text="#DCG_GameOver_FindNextMatch" allowtextselection="false"/>
+      </Button>
+      <Button id="ReturnToLobby" class="MenuButton" onactivate="ReturnToLobby()">
+        <Label text="#DCG_GameOver_ReturnToLobby" allowtextselection="false"/>
+      </Button>
+      <Button id="ViewDeck" class="MenuButton" onactivate="DCGShowOpponentsDeck()">
+        <Label text="#DCG_GameOver_ViewOpponentDeck" allowtextselection="false"/>
+      </Button>
+      <Button id="BackToMenu" class="MenuButton" onactivate="QuitPostMatchGame()">
+        <Label text="#DCG_GameOver_BackToMenu" allowtextselection="false"/>
+      </Button>
+    </Panel>
+      <Panel id="OutcomeWrapper" hittest="false">
+      
     </Panel>
   </Panel>
 </root>

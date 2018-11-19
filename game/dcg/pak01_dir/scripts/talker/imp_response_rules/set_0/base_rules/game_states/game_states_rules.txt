@@ -1,0 +1,786 @@
+// rule naming conv: card category/card name/core concept/player context/variant or chain info
+// var naming conv: player context/variable type/card category/card name/variant or chain info/player context
+// p_var = player centric variable //
+// o_var = opponent centric variable //
+// Pp = "player plays" //
+// Pr = "player reacts" //
+// Op = "opponent plays" //
+// Or = "opponent reacts" //
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  COMBAT_STALEMATE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These rules just use the PLAYER PLAYS responses, as combat stalemate is a singular idea that doesnt have a source or target context. The STALEMATE idea has win and lose variants because once both imps have units die, we show the response based on how many died and winning or losing contexts.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: combat_stalemate: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Pos IsCombat
+
+    Response imps_game_states_combat_stalemate_Pp_Pr
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr_draw_lose_small
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Neg OpponentChangeMomentum_Neg IsCombat
+
+    Response imps_game_states_combat_stalemate_Pp_Pr_draw_lose_small
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr_draw_lose_broad
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr_draw_win_broad
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr_draw_lose_player_losing_game
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Neg OpponentChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Pr_draw_win_player_losing_game
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Pos PlayerIsLosingGame IsGameRound4orMore IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Or
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Pos IsCombat
+
+    Response imps_game_states_combat_stalemate_Pp_Or
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Or_draw_lose_small
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant LocalChangeMomentum_Neg OpponentChangeMomentum_Neg IsCombat
+
+    Response imps_game_states_combat_stalemate_Pp_Or_draw_lose_small
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Or_draw_lose_broad
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant LocalChangeMomentum_NegMid OpponentChangeMomentum_NegMid IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+Rule rule_imps_game_states_combat_stalemate_DEATH_Pp_Or_draw_win_broad
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant LocalChangeMomentum_PosMid OpponentChangeMomentum_PosMid IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  COMBAT_WIN_LOSE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// the player context = whoever PLAYS the card is winning the combat overall. So generally they will be reacting to WINNING combat, and the opposite imp will be reacting to LOSING combat.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: combat_win_lose: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Pr
+{
+
+    Criteria Death IsLocalImp ThisIsImportant IsTargetHero LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsCombat
+
+    // sharing responses:
+    Response imps_shared_generic_player_broad_positive
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Pr_creep_kill
+{
+
+    Criteria Death IsLocalImp ThisIsImportant IsTargetCreep LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Pr_player_losing
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Neg PlayerIsLosingGame IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Pr_player_winning
+{
+
+    Criteria Death IsLocalImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsCombat PlayerIsWinningGame IsGameRound4orMore
+
+    Response imps_game_states_combat_win_lose_Pp_Pr_player_winning
+
+    // also sharing responses:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Or
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant IsTargetHero LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Pp_Or_opponent_winning
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsCombat
+
+    Response imps_game_states_combat_win_lose_Pp_Or_opponent_winning
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: combat_win_lose: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Op_Pr
+{
+
+    Criteria Death IsLocalImp ThisIsImportant IsTargetHero OpponentChangeMomentum_Pos LocalChangeMomentum_Neg IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Op_Pr_player_winning
+{
+
+    Criteria Death IsLocalImp ThisIsImportant OpponentChangeMomentum_Pos LocalChangeMomentum_Neg IsCombat
+
+    Response imps_game_states_combat_win_lose_Op_Pr_player_winning
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Op_Or
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant IsTargetHero OpponentChangeMomentum_Pos LocalChangeMomentum_Neg IsCombat
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Op_Or_creep_kill
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant OpponentChangeMomentum_Pos LocalChangeMomentum_Neg IsCombat IsTargetCreep
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+Rule rule_imps_game_states_combat_win_lose_DEATH_Op_Or_opponent_losing
+{
+
+    Criteria Death IsOpponentImp ThisIsImportant OpponentChangeMomentum_Pos LocalChangeMomentum_Neg IsCombat OpponentIsLosingGame IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PAUSE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: pause: Special
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Pr
+{
+
+    Criteria Special IsNotCombat IsActionPhase IsLocalImp ThisIsImportant IsPause
+
+    // response has chain:
+    Response imps_game_states_pause_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_game_states_pause_Pp_Pr_ IsLocalImp
+
+    Response imps_game_states_pause_Pp_Pr_chain_outro
+
+}
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Pr_pause_end
+{
+
+    Criteria Special IsNotCombat IsActionPhase IsLocalImp ThisIsImportant IsUnpause
+
+    Response imps_game_states_pause_Pp_Pr_pause_end
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Or
+{
+
+    Criteria Special IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant IsPause
+
+    // response has chain:
+    Response imps_game_states_pause_Pp_Or_chain_intro
+
+}
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Or_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant o_var_chains_game_states_pause_Pp_Or_ IsOpponentImp
+
+    Response imps_game_states_pause_Pp_Or_chain_outro
+
+}
+
+Rule rule_imps_game_states_pause_SPECIAL_Pp_Or_pause_end
+{
+
+    Criteria Special IsNotCombat IsActionPhase IsOpponentImp ThisIsImportant IsUnpause
+
+    Response imps_game_states_pause_Pp_Or_pause_end
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  PLAYCARD_GENERIC
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// note the activity weights are kept at the default 10, which means that responses to death buff etc can always override the playcard animation as its quite long to accomodate longer spells.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: playcard_generic: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_PLAYCARD_Pp_Pr
+{
+
+    Criteria PlayCard  IsNotCombat IsActionPhase IsLocalImp IsSourceLocal
+
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_PLAYCARD_Pp_Or
+{
+
+    Criteria PlayCard  IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal
+
+    Response imps_game_states_playcard_generic_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: playcard_generic: PlayCard
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_PLAYCARD_Op_Pr
+{
+
+    Criteria PlayCard  IsNotCombat IsActionPhase IsLocalImp IsSourceNotLocal
+
+    Response imps_game_states_playcard_generic_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_PLAYCARD_Op_Or
+{
+
+    Criteria PlayCard  IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal
+
+    Response imps_game_states_playcard_generic_Op_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: playcard_generic:  UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_USEABILITY_Pp_Pr
+{
+
+    Criteria  UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceLocal
+
+    Response imps_game_states_playcard_generic_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_USEABILITY_Pp_Or
+{
+
+    Criteria  UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal
+
+    Response imps_game_states_playcard_generic_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: playcard_generic:  UseAbility
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_USEABILITY_Op_Pr
+{
+
+    Criteria  UseAbility IsNotCombat IsActionPhase IsLocalImp IsSourceNotLocal
+
+    Response imps_game_states_playcard_generic_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_playcard_generic_USEABILITY_Op_Or
+{
+
+    Criteria  UseAbility IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal
+
+    Response imps_game_states_playcard_generic_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TEN_SEC_REMAINING
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: ten_sec_remaining: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_ten_sec_remaining_TIMER_Pp_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsActingPlayerLocal ThisIsImportant p_var_wait_ten_seconds_remaining
+
+    ApplyContext "p_var_wait_ten_seconds_remaining:1:11"
+    ApplyContextToWorld
+
+    Response imps_game_states_ten_sec_remaining_Pp_Pr
+
+}
+
+Rule rule_imps_game_states_ten_sec_remaining_TIMER_Pp_Pr_ran_out_of_time
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLoE2SecondsRemaining IsGoE0SecondsRemaining IsActingPlayerLocal ThisIsImportant p_var_wait_ten_seconds_remaining_ran_out_of_time
+
+    ApplyContext "p_var_wait_ten_seconds_remaining_ran_out_of_time:1:11"
+    ApplyContextToWorld
+
+    Response imps_game_states_ten_sec_remaining_Pp_Pr_ran_out_of_time
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_ten_sec_remaining_TIMER_Pp_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsActingPlayerLocal o_var_wait_ten_sec_remaining
+
+    ApplyContext "o_var_wait_ten_sec_remaining:1:25"
+    ApplyContextToWorld
+
+    Response imps_game_states_ten_sec_remaining_Pp_Or
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: ten_sec_remaining: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_ten_sec_remaining_TIMER_Op_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsNotActingPlayerLocal
+
+    Response imps_game_states_ten_sec_remaining_Op_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_ten_sec_remaining_TIMER_Op_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsNotActingPlayerLocal o_var_wait_ten_sec_remaining
+
+    ApplyContext "o_var_wait_ten_sec_remaining:1:5"
+    ApplyContextToWorld
+
+    Response imps_game_states_ten_sec_remaining_Op_Or
+
+}
+
+
+
+
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  //  TEN_SEC_REMAINING_EXITS
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  
+//  // TRY USING IS_LATE_ACTION instead of the custom variable
+//  
+//  
+//  
+//  //-----------------------------------------------------------------------------
+//  // PLAYER PLAYS CARD: ten_sec_remaining_exits: PlayCard
+//  //-----------------------------------------------------------------------------
+//  
+//  
+//  // Player reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_game_states_ten_sec_remaining_exits_PLAYCARD_Pp_Pr
+//  {
+//  
+//      Criteria PlayCard  IsNotCombat IsActionPhase IsLocalImp ThisIsImportant p_var_custom_ten_seconds_remaining_active
+//  
+//      Response imps_game_states_ten_sec_remaining_exits_Pp_Pr
+//  
+//  }
+//  
+//  
+//  //-----------------------------------------------------------------------------
+//  // PLAYER PLAYS CARD: ten_sec_remaining_exits:  UseAbility
+//  //-----------------------------------------------------------------------------
+//  
+//  
+//  // Player reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_game_states_ten_sec_remaining_exits_USEABILITY_Pp_Pr
+//  {
+//  
+//      Criteria  UseAbility IsNotCombat IsActionPhase IsLocalImp ThisIsImportant p_var_custom_ten_seconds_remaining_active
+//  
+//      Response imps_game_states_ten_sec_remaining_exits_Pp_Pr
+//  
+//  }
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  WIN_BUTTON
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// the player context here is: whoever plays the card, they have the blue button active. So player plays / player reacts is the players reaction to their own pass coin having turned blue.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: win_button: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_win_button_TIMER_Pp_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp  ThisIsImportant IsLocalVictoryCoin IsTimeRemainingInLane p_var_wait_win_button
+
+    ApplyContext "p_var_wait_win_button:1:15"
+    ApplyContextToWorld
+
+    // response has chain:
+    Response imps_game_states_win_button_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_game_states_win_button_TIMER_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_game_states_win_button_Pp_Pr_ IsLocalImp
+
+    Response imps_game_states_win_button_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_win_button_TIMER_Op_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp  ThisIsImportant IsTimeRemainingInLane IsOpponentVictoryCoin o_var_wait_win_button
+
+    ApplyContext "o_var_wait_win_button:1:15"
+    ApplyContextToWorld
+
+    Response imps_game_states_win_button_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  WIN_LOSE_IDLES
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever plays the card is winning or losing. This rule set doesnt need a reaction from the other imp, just the player context to trigger animation on the imp that is currently winning or losing.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: win_lose_idles: Timer
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_win_lose_idles_TIMER_Pp_Pr
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane PlayerIsWinningGame IsGameRound4orMore p_var_wait_win_lose_idles
+
+    ApplyContext "p_var_wait_win_lose_idles:1:60"
+    ApplyContextToWorld
+
+    Response imps_game_states_win_lose_idles_Pp_Pr
+
+}
+
+Rule rule_imps_game_states_win_lose_idles_TIMER_Pp_Pr_player_losing
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane PlayerIsLosingGame IsGameRound4orMore p_var_wait_win_lose_idles_player_losing
+
+    ApplyContext "p_var_wait_win_lose_idles_player_losing:1:60"
+    ApplyContextToWorld
+
+    Response imps_game_states_win_lose_idles_Pp_Pr_player_losing
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_game_states_win_lose_idles_TIMER_Op_Or
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane OpponentIsWinningGame IsGameRound4orMore o_var_wait_win_lose_idles
+
+    ApplyContext "o_var_wait_win_lose_idles:1:60"
+    ApplyContextToWorld
+
+    Response imps_game_states_win_lose_idles_Op_Or
+
+}
+
+Rule rule_imps_game_states_win_lose_idles_TIMER_Op_Or_opponent_losing
+{
+
+    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLocalUnits IsOpponentUnits NoLocalTowerDeathSkull NoOpponentTowerDeathSkull IsTimeRemainingInLane OpponentIsLosingGame IsGameRound4orMore o_var_wait_win_lose_idles_opponent_losing
+
+    ApplyContext "o_var_wait_win_lose_idles_opponent_losing:1:60"
+    ApplyContextToWorld
+
+    Response imps_game_states_win_lose_idles_Op_Or_opponent_losing
+
+}

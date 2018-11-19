@@ -1,166 +1,145 @@
 <root>
 	<styles>
-    <include src="s2r://panorama/styles/base.vcss_c" />
+		<include src="s2r://panorama/styles/base.vcss_c" />
 		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
 		<include src="s2r://panorama/styles/dashboard/dcg_db_main.vcss_c" />
 		<include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
- 	</styles>
-	
-	<DCGDashboard class="InitialDisplay NotOnTodayPage" hittest="false">
-		<Movie id="BackgroundVideo" src="file://{resources}/videos/main_menu/openingscreen.webm" controls="none" repeat="true" autoplay="onload" disableactivatepause="true" />
-		
-		<Panel id="InitialDisplayPanelLogo" hittest="true"/>
-		<Panel id="DBVignettePanel" />
-		<Panel id="TopRightPanel">
-			<Button id="DCGSettingsButton" class="ControlIconButton SettingsButton" onactivate="DCGSettings();" />
-			<Button id="DCGQuitButton" class="TopBarSmallButton" onactivate="DCGQuitGame();" onmouseover="AddStyle( TopBarQuitBackground, Hover )" onmouseout="RemoveStyle( TopBarQuitBackground, Hover )" />
-		</Panel>		
-    
-    <Panel id="ArtifactLogo" />
-		
-		<Panel id="EverythingThatIsntTheBackground">
-		  <Panel id="DBLeftPanel">
-			  <DCGProfileCard id="ProfileCard" />
-		    <Panel id="FriendMenuContainer" hittest="false">
-				  <DCGFriendMenu id="FriendMenu" />
-			  </Panel>
-			  <DCGChat id="Chat" expanded="1" chatstyle="dashboard" oncancel="SetInputFocus( Dashboard )" />
-		  </Panel>
+		<include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
+	</styles>
 
-      <DCGGauntlet id="Gauntlet"/>
-      <DCGGauntletLeaderboard id="GauntletLeaderboard"/>
-		  
-		  <Panel id="MainMenuPanel">
-        <Label id="PlayArtifactLabel" text="#DCG_MainMenu_Play" />
-        <Panel class="MainMenuLabelContainer DefaultHidden" id="TournamentBracketRoot" onactivate="DCGShowTournamentBracket()">
-          <Image class="MainMenuArrow" />
-          <Label class="MainMenuLabel" text="#DCG_MainMenu_TournamentBracket" allowtextselection="false" />
-        </Panel>
-        <Panel class="MainMenuLabelContainer DefaultHidden" id="RegisterTournamentRoot" onactivate="DCGRegisterTournamentDeck()">
-          <Image class="MainMenuArrow" />
-          <Label class="MainMenuLabel" text="#DCG_MainMenu_RegisterTournament" allowtextselection="false" />
-        </Panel>
-        <Panel class="MainMenuLabelContainer DefaultHidden HideInLobby" id="TournamentMatchRoot" onactivate="DCGSetSearchForOpponent( k_EDCGMatchMode_Tournament )">
-          <Image class="MainMenuArrow" />
-          <Label class="MainMenuLabel" text="#DCG_MainMenu_TournamentMatch" allowtextselection="false" />
-        </Panel>
-        <Panel class="MainMenuLabelContainer DefaultHidden" id="AbandonMatchRoot" onactivate="DCGAbandonLobby()">
-					<Image class="MainMenuArrow" />
-					<Label class="MainMenuLabel" text="#DCG_MainMenu_AbandonMatch" allowtextselection="false" />
-        </Panel>
-        <Panel class="MainMenuLabelContainer DefaultHidden" id="ReconnectMatchRoot" onactivate="DCGReconnectLobby()">
-					<Image class="MainMenuArrow" />
-					<Label class="MainMenuLabel" text="#DCG_MainMenu_Reconnect" allowtextselection="false" />
-        </Panel>
-        <Panel class="MainMenuLabelContainer HideInLobby HideInPrivateLobby" id="GauntletRoot" onactivate="DCGToggleGauntletPanel()">
-				  <Image class="MainMenuArrow" />
-				  <Label class="MainMenuLabel" text="#DCG_MainMenu_Gauntlet" allowtextselection="false" />
-			  </Panel>
-			  <Panel class="MainMenuLabelContainer HideInLobby HideInPrivateLobby" id="AIMatchRoot" onactivate="DCGShowAIGameOptions()">
-				  <Image class="MainMenuArrow" />
-				  <Label class="MainMenuLabel" text="#DCG_MainMenu_Play" allowtextselection="false" />
-			  </Panel>
-			  <Panel class="MainMenuLabelContainer" onactivate="DCGShowDeckBuilder()">
-				  <Image class="MainMenuArrow" />
-				  <Label class="MainMenuLabel" text="#DCG_MainMenu_DeckBuilder" allowtextselection="false" />
-			  </Panel>
-      </Panel>		
-		
-      <!-- Note that z-order is changed dynamically! -->
-      <Label id="BuildNumber" text="#DCG_Dashboard_BuildVersion" />
+	<DCGDashboard class="InitialDisplay" hittest="false">
+		<Movie id="BackgroundVideo" src="file://{resources}/videos/main_menu/openingscreen.webm" controls="none" repeat="true" autoplay="off" disableactivatepause="true" acceptsfocus="false" />
+		<DCGScenePanel id="RootBackgroundMap" camera="camera" map="scenes/background/dashboard_play_background_sky" hittest="false" require-composition-layer="true" particleonly="true" renderdeferred="true" deferredalpha="true" antialias="true"/>
+		<DCGScenePanel id="RootBackgroundMapLines" camera="camera" map="scenes/background/dashboard_play_background_sky_lines" hittest="false" require-composition-layer="true" particleonly="true" renderdeferred="true" deferredalpha="true" antialias="true"/>
+		<Movie id="ValveHeadTurn" src="file://{resources}/videos/main_menu/valve_headturn.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" />
+		<Panel id="DashboardForeground">
+			<Panel id="TopRightPanel" hittestchildren="true">
+				<Button id="DCGSettingsButton" class="ControlIconButton SettingsButton" onactivate="DCGSettings(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" hittest="true" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )"/>
+				<Panel class="Separator"/>
+				<Button id="DCGQuitButton" class="TopBarSmallButton" onactivate="PlaySoundEffect( DCG_UI.MainMenu_Select_Quit ) DCGQuitGame();" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Quit )"/>
+			</Panel>
 
-      <Panel id="MediaCover" hittest="true">
-        <Panel id="ArtifactLogoFlash"/>
-        <Panel class="MediaMatchButtonGroup">
+			<PageManager id="PageManager" hittest="false" />
+			<Panel id="ArtifactLogoFlash"/>
+		</Panel>
 
-          <!-- New Press Decks! -->          
-          <Button class="MediaMatchButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaMatch('ADCFWukuQJeCAsBOF0BAbbeAaEBl0GGVUtnAaYBlqwBewE')">
-            <Label text="#DCG_Dashboard_MediaMatch1"/>
-          </Button>
-          <Button class="MediaMatchButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaMatch('ADCFeE2uAIUpAFDArhdAafdAZC7AYKMZAFBOQG0AagBlaMBhz==')">
-            <Label text="#DCG_Dashboard_MediaMatch2"/>
-          </Button>
-        
-        </Panel>
-        <Panel class="MediaColorButtonGroup">
-          <Panel class="MediaBannerGroup">
-            <Button id="MediaColorRed" class="MediaColorButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaColorToggle( 1 )">
-              <Image src="s2r://panorama/images/main_menu/banner_red_psd.vtex" />
-            </Button>
-            <Button id="MediaColorGreen" class="MediaColorButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaColorToggle( 4 )">
-              <Image src="s2r://panorama/images/main_menu/banner_green_psd.vtex" />
-            </Button>
-            <Button id="MediaColorBlue" class="MediaColorButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaColorToggle( 2 )">
-              <Image src="s2r://panorama/images/main_menu/banner_blue_psd.vtex" />
-            </Button>
-            <Button id="MediaColorBlack" class="MediaColorButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaColorToggle( 3 )">
-              <Image src="s2r://panorama/images/main_menu/banner_black_psd.vtex" />
-            </Button>
-          </Panel>
-          
-          <Panel class="MediaDeckGroup">
-            
-            <Panel class="HeroDisplay">
-              <DCGScenePanel class="HeroImage" id="HeroImage0" scale_card="true" />
-              <DCGScenePanel class="HeroImage" id="HeroImage1" scale_card="true" />
-              <DCGScenePanel class="HeroImage" id="HeroImage2" scale_card="true" />
-              <DCGScenePanel class="HeroImage" id="HeroImage3" scale_card="true" />
-              <DCGScenePanel class="HeroImage" id="HeroImage4" scale_card="true" />
-            </Panel>
-          </Panel>
-        </Panel>
-        <Panel id="MediaGauntletStatsGroup">
-          <Label class="ThankYouForPlayingLabel" text="#DCG_Dashboard_ThankYouForPlaying"/>
-          <Button deckcode="ADCFc4tuQIBGI9BOF0BAa3dAYqHl2sCBgICS6oCXZKGUD==" class="PlayGame MediaMatchButton HumanMatch" onmouseover="DCGMediaMatchSound()" onactivate="DCGSetSearchForOpponentPax()">
-            <Label class="MediaMatchWinsLabel" text="#DCG_Dashboard_MediaMatch_Wins"/>
-            <Label class="MediaMatchWins" text="{i:PAXNumWins}"/>
-            <Label class="MediaMatchText" text="#DCG_Dashboard_MediaMatch_Fight"/>
-          </Button>
-          <Button deckcode="ADCFc4tuQIBGI9BOF0BAa3dAYqHl2sCBgICS6oCXZKGUD==" class="PlayGame MediaMatchButton AIMatch" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaMatch2()">
-            <Label class="MediaMatchWinsLabel" text="#DCG_Dashboard_MediaMatch_Wins"/>
-            <Label class="MediaMatchWins" text="{i:PAXNumWins}"/>
-            <Label class="MediaMatchText" text="#DCG_Dashboard_MediaMatch_FightAI"/>
-          </Button>
-          
-        </Panel>
-        <Panel class="MediaLanguageButtonGroup">
-          <Button id="MediaLanguageSpanish" class="MediaLanguageButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaLanguage( 'spanish' )">
-            <Image src="s2r://panorama/images/main_menu/language_spanish_png.vtex" />
-          </Button>
-          <Button id="MediaLanguageRussian" class="MediaLanguageButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaLanguage( 'russian' )">
-            <Image src="s2r://panorama/images/main_menu/language_russian_png.vtex" />
-          </Button>
-          <Button id="MediaLanguageEnglish" class="MediaLanguageButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaLanguage( 'english' )">
-            <Image src="s2r://panorama/images/main_menu/language_english_png.vtex" />
-          </Button>
-          <Button id="MediaLanguageSChinese" class="MediaLanguageButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaLanguage( 'schinese' )">
-            <Image src="s2r://panorama/images/main_menu/language_schinese_png.vtex" />
-          </Button>
-          <Button id="MediaLanguageJapanese" class="MediaLanguageButton" onmouseover="DCGMediaMatchSound()" onactivate="DCGMediaLanguage( 'japanese' )">
-            <Image src="s2r://panorama/images/main_menu/language_japanese_png.vtex" />
-          </Button>
-        </Panel>
-      </Panel>
-		
-      <Button id="FriendsButton" onactivate="DCGFriendsButtonClicked();" onmouseover="UIShowTextTooltip( #DCG_Friends_WindowTitle )" onmouseout="UIHideTextTooltip()">
-        <Panel id="FriendsButtonContents" />
-      </Button>    
-    </Panel>
-    
-    <!-- Make sure these are at the bottom to get the z-order right -->
-		<DCGDashboardPopupManager id="DashboardPopupManager" onpopupsdismissed="SetInputFocus( Dashboard )" />
+		<Panel id="BottomInfoContainer">
+			<Panel id="EconContainer" class="LeftRightFlow">
+				<Panel class="Separator"/>
+				<Panel id="Tickets" onactivate="DCGShowEconItemInfoPopup( 500 ) PlaySoundEffect( DCG_UI.MainMenu_Select )" onmouseover="UIShowTextTooltip( #DCG_EventTickets_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )"
+					onmouseout= "UIHideTextTooltip()">
+					<Panel id="TicketsIcon"/>
+					<Label id="TicketsCount" text="{d:event_tickets}" class="SocialNumberLabel"/>
+				</Panel>
+				<Panel id="CardPacks" onactivate="DCGShowOpenPacksPage() PlaySoundEffect( DCG_UI.MainMenu_Select )" onmouseover="UIShowTextTooltip( #DCG_UnopenedPacks_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()">
+					<Panel id="CardPacksIcon">
+						<DCGScenePanel id="UnopenedPacks" camera="camera" map="scenes/mainmenu/mainmenu_unopened_packs" hittest="false" require-composition-layer="true" light="model_light" particleonly="true"  renderdeferred="true" deferredalpha="false"  antialias="true"/>		
+					</Panel>
+					<Label id="CardPacksCount" text="{d:unopened_packs}" class="SocialNumberLabel"/>
+				</Panel>
+				<TextButton id="InitialClaimButton" class="ButtonBevel" text="#DCG_InitialGrant_Button" onactivate="DCGClaimInitialItems()"/>
+			</Panel>
+			<Panel class="LeftRightFlow MatchmakingIconContainer">
+				<Panel class="Separator"/>
+				<Panel id="FindingMatchPanel">
+					<Panel id="FindMatchContents">
+						<Button id="CancelButton" onactivate="CancelFindOpponent()"/>
+						<Label class="FindingMatchLabel" text="{s:finding_match_info}"/>
+					</Panel>
+				</Panel>
+				<Panel id="PrivateLobbyPanel" onactivate="DCGShowPlaySocialCarousel()">
+					<Label class="PrivateLobbyPrefix" text="#DCG_PrivateLobbyState_Prefix" />
+					<DCGAvatarImage id="PrivateLobbyOpponentImage" />
+					<DCGUserName id="PrivateLobbyOpponentName" />
+					<Label id="PrivateLobbyStatus" text="{s:LobbyOpponentState}" />
+				</Panel>
+			</Panel>
+		</Panel>
 
+		<!-- Make sure these are at the bottom to get the z-order right -->
+		<DCGDashboardPopupManager id="DashboardPopupManager" onpopupsdismissed="SetInputFocus( PageManager )" />
 		<ToastManager id="ToastManager" hittest="false" toastduration="5.0s" maxtoastsvisible="3" />
 
+		<!-- Note that z-order is set by .css.  The chat will move here, when the accept match popup is visible. -->
+		<DCGSocialOverlay id="SocialOverlay" />
 		<!-- Note that z-order is set by .css.  The chat will move here, when the accept match popup is visible. -->
 		<DCGContextMenuManager id="ContextMenuManager" />
 		<DCGTooltipManager id="Tooltips" hittest="false" />
 
+		<Panel id="TopBar" hittest="false">
+			<Panel id="TopBarGradient" hittest="false"/>
+			<Panel id="PlayTopBar_BG" hittest="false">
+				<DCGScenePanel id="TopBarFocusMap" camera="camera" map="scenes/mainmenu/mainmenu_focus" hittest="false" require-composition-layer="true" particleonly="true"/>
+			</Panel>
+
+			<Panel id="TopBarStatusBar">
+				<Panel id="TopBarStatusMessageContainer">
+					<Panel id="TopBarStatusSpinner" class="Spinner" />
+					<Label id="TopBarStatusMessage" class="Hidden" />
+				</Panel>
+			</Panel>
+
+			<Panel id="PlayTopBar" class="TopBarNavigation" hittest="false">
+				<Button class="MainMenuButton" onactivate="DCGShowMainMenuPage() PlaySoundEffect( DCG_UI.MainMenu_Select_ArtifactLogo )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_ArtifactLogo )">
+					<Panel class="MainMenuButtonGlow"/>
+				</Button>
+
+				<Button class="TopBarTab HideNoFeaturedEvent" id="Featured" onactivate="DCGShowPlayFeaturedCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Featured )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Featured )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayFeatured"/>
+				</Button>
+
+				<Button class="TopBarTab" id="Solo" onactivate="DCGShowPlaySoloCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySolo"/>
+				</Button>
+
+				<Button class="TopBarTab" id="Social" onactivate="DCGShowPlaySocialCarousel() PlaySoundEffect( DCG_UI.Shared_Select_SocialPlay )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_SocialPlay )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySocial"/>
+				</Button>
+
+				<Button class="TopBarTab" id="Casual" onactivate="DCGShowPlayCasualCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCasual"/>
+				</Button>
+
+				<Button class="TopBarTab HideNoCompetitive" id="Competitive" onactivate="DCGShowPlayCompetitiveCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Gauntlets )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Gauntlets )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCompetitive"/>
+				</Button>
+
+				<Button class="TopBarTab" id="Collection" onactivate="DCGOpenDeckBuilder()  CatalogueBuildDeck()  PlaySoundEffect( DCG_UI.Shared_Select_Collection )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Collection )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCollection"/>
+				</Button>
+			</Panel>
+
+			<Panel id="DraftTopBar" class="TopBarNavigation" hittest="false">
+				<Button class="MainMenuButton" onactivate="DCGShowMainMenuPage()" />
+			</Panel>
+
+		</Panel>
+		<Panel id="SecondaryBar" hittest="false">
+			<Panel id="SecondaryBarGradient" hittest="false"/>
+			
+
+			<Panel id="SecondaryBarContainer" class="SecondaryBarNavigation" hittest="false">
+
+				<Button class="SecondaryBarTab" id="Packs" onactivate="DCGShowOpenPacksPage()">
+					
+					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_Packs" />
+				</Button>
+				<Button class="SecondaryBarTab" id="BuildDeck" onactivate="DCGOpenDeckBuilder() CatalogueBuildDeck()">
+					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_BuildDeck" />
+				</Button>
+				<Button class="SecondaryBarTab" id="BuyCards" onactivate="DCGOpenDeckBuilder() CatalogueBuyCards()">
+					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_BuyCards" />
+				</Button>
+				<Button class="SecondaryBarTab" id="SellCards" onactivate="DCGOpenDeckBuilder() CatalogueSellCards()">
+					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_SellCards" />
+				</Button>
+
+			</Panel>
+		</Panel>
+
+		<DCGScenePanel id="MainMenuLogoMap" camera="camera" map="scenes/mainmenu/mainmenulogo" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+		<Panel id="MainLogoRootHitBox" onactivate="DCGShowPlayCarousel() PlaySoundEffect( DCG_UI.MainMenu_Select_ArtifactLogo )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_ArtifactLogo )" />
 		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
 		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
-    
-    <!-- Debug only visual aid -->
-		<Image id="DebugForegroundOverlay" hittest="false" />
-
 	</DCGDashboard>
 </root>

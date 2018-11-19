@@ -1,0 +1,48 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_tourney_set_seedings.vcss_c" />
+	</styles>
+
+	<snippets>
+
+		<snippet name="PlayerRow">		
+			<Panel class="PlayerRow" >
+				<Label class="Seed"	text="{d:seed}" />
+				<DCGAvatarImage class="AvatarImage" id="AvatarImage" />
+				<Label class="PlayerName" text="{g:dcg_persona:b:account_id}" html="true" />
+				<Panel class="DragTarget" /> 
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerGroup">			
+			<Panel class="PlayerGroup" >
+				<Label class="GroupTitle" text="#DCG_TourneySetSeedings_GroupTitle" />
+				<Label class="GroupPlayerCount" text="#DCG_TourneySetSeedings_GroupPlayerCount" />
+				<Panel class="GroupSeparator" />
+				<Panel id="PlayerList" >
+					<!-- Filled in dynamically by code -->
+				</Panel>
+			</Panel>
+		</snippet>
+			
+	</snippets>
+
+	<DCGPopupTourneySetSeedings class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked( )">
+		<Panel class="PopupFlowRight">
+			<Label id="TitleLabel" class="PopupTitle" text="#DCG_TourneySetSeedings_Title" />
+			<Button id="CancelButton" class="CloseButton" onactivate="UIPopupButtonClicked( )"/>
+		</Panel>
+		<Panel id="GroupList">
+			<!-- Filled in dynamically by code -->
+		</Panel>
+		<Label class="Instructions" text="#DCG_TourneySetSeedings_Instructions" />		
+		<Panel id="ButtonContainer" class="PopupButtonRow">
+			<Button id="OKButton" class="PopupButton" onactivate="DCGTourneySetSeedingsOkClicked()">
+				<Label text="#UI_OK"/>
+			</Button>
+		</Panel>
+
+	</DCGPopupTourneySetSeedings>
+</root>

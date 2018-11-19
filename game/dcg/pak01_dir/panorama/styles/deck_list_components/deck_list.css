@@ -1,0 +1,568 @@
+DCGDeckList
+{
+    flow-children: down;
+    z-index:1;
+	width: 300px;
+	//height: 23px;
+}
+
+#DeckListCardsContainer
+{
+	flow-children: down;
+	height: fit-children;
+	width: 100%;
+	z-index: 99;
+	overflow: squish scroll;
+
+}
+
+
+
+#PurchasedCards
+{
+	max-height: 700px;
+}
+
+.IsDeckListDropTarget
+{
+	animation-name: HeroLineupPortraitGlowAnimation;
+    animation-duration: 2s;
+    animation-delay: 0.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.CardDragHover #DeckListCardsContainer
+{
+    brightness: 2.0;
+}
+
+.DeckList.ShowingEmptyDeckLabel
+{
+	flow-children: none;
+}
+
+.DeckList VerticalScrollBar
+{
+    box-shadow: 0px 0px 0px 0px;
+    background-color: #000000bb;
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #d0bce908 ), to( #abe9f008) );
+	//margin-top: 9px;
+}
+
+
+.IngameDeckList.DeckList
+{
+	width: 300px;
+    height:850px;
+    transition-property: position;
+    transition-duration: 0.2s;
+	transition-timing-function: linear;
+    flow-children:down;
+    overflow: squish scroll;
+}
+
+
+.IngameDeckList.DeckList.LocalPlayerDeckList
+{
+    x:-300px;
+    y:134px;
+}
+.DeckList.OpponentDeckList
+{
+    x:300px;
+    y:134px;
+    margin-right: 0px;
+}
+.ShowEnemyDecklist .IngameDeckList.OpponentDeckList
+{
+    x:0px;
+}
+.ShowMyDecklist .IngameDeckList.LocalPlayerDeckList
+{
+    x:0px;
+}
+.LocalPlayerDeckList
+{
+    horizontal-align:left;
+}
+.FullInfoDeckList .Opponent
+{
+    visibility:collapse;
+}
+.OpponentDeckList
+{
+    horizontal-align:right;
+}
+.OpponentDeckList .Mine
+{
+    visibility:collapse;
+}
+
+VerticalScrollBar, HTMLVerticalScrollBar
+{
+	width: 10px;
+	margin: 0px, 6px, 0px 6px;
+	border-radius: 0px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	horizontal-align: right;
+	vertical-align: center;
+	transition-property: transform;
+}
+
+VerticalScrollBar .ScrollThumb, HTMLVerticalScrollBar .ScrollThumb
+{
+	width: 10px;
+	min-height: 32px;  /* need to get the scrollthumb to hit the bottom of the scrollbar */
+	background-color: #3e4446;
+	
+	border-top: 1px solid #aaaaaa09;
+	border-right: 0px solid #000000aa;
+	transition-property: position;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #3e4446 ), to( #33383a ) );
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #bdbce908 ), to( #abe9f008) );
+	transition-property: background-color, transform;
+	transition-duration: 0.1s;
+	transition-timing-function: linear;
+}
+
+VerticalScrollBar:hover .ScrollThumb, HTMLVerticalScrollBar:hover .ScrollThumb
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4b5355 ), to( #3e4446 ) );
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #bdbce916 ), to( #abe9f016) );
+}
+
+
+VerticalScrollBar:active .ScrollThumb, HTMLVerticalScrollBar:active .ScrollThumb
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4b5355 ), to( #4b5355 ) );
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #bdbce916 ), to( #abe9f016) );
+}
+
+HorizontalScrollBar, HTMLHorizontalScrollBar
+{
+	height: 12px;
+	margin: 0px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 0px;
+	horizontal-align: left;
+	vertical-align: bottom;
+	box-shadow: fill #00000055 0px -3px 3px 4px;
+
+}
+
+HorizontalScrollBar .ScrollThumb, HTMLHorizontalScrollBar .ScrollThumb
+{
+	height: 12px;
+	min-width: 32px;
+	border-top: 1px solid #aaaaaa22;
+	border-bottom: 1px solid #000000aa;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #3e4446 ), to( #33383a ) );
+	transition-property: background-color, transform;
+	transition-duration: 0.1s;
+	transition-timing-function: linear;
+}
+
+HorizontalScrollBar:hover .ScrollThumb, HTMLHorizontalScrollBar:hover .ScrollThumb
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4b5355 ), to( #3e4446 ) );
+}
+
+HorizontalScrollBar:active .ScrollThumb, HTMLHorizontalScrollBar:active .ScrollThumb
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4b5355 ), to( #4b5355 ) );
+}
+
+VerticalScrollBar,
+VerticalScrollBar .ScrollThumb,
+HorizontalScrollBar,
+HorizontalScrollBar .ScrollThumb
+HTMLHorizontalScrollBar,
+HTMLHorizontalScrollBar .ScrollThumb,
+HTMLVerticalScrollBar,
+HTMLVerticalScrollBar .ScrollThumb,
+{
+	/* The transition duration and timing function must match constants used in code:
+	 k_flScrollTransitionTime, k_flScrollTransitionFunc, so dont change without talking with a dev */
+	transition-duration: 0.20s;
+	transition-timing-function: ease-in-out;
+}
+
+VerticalScrollBar.MouseDown,
+VerticalScrollBar.MouseDown .ScrollThumb,
+HorizontalScrollBar.MouseDown,
+HorizontalScrollBar.MouseDown .ScrollThumb
+HTMLHorizontalScrollBar.MouseDown,
+HTMLHorizontalScrollBar.MouseDown .ScrollThumb,
+HTMLVerticalScrollBar.MouseDown,
+HTMLVerticalScrollBar.MouseDown .ScrollThumb,
+{
+	/* Disable the transition when the mouse is dragging the scroll thumb. Note that this must match
+	 when IUIScrollBar::IsMouseDown returns true, or else the content will be out of sync */
+	transition-duration: 0.0s;
+}
+
+#EmptyDeckListingLabel
+{   
+    text-transform: uppercase;
+	vertical-align: center;
+    horizontal-align: center;
+	text-align: center;
+    font-size: 16px;
+	font-weight: light;
+	//letter-spacing: 2px;
+	color: uiNeutralGrey;
+	padding: 16px;
+	transition-property: height;
+	transition-delay: 0.01s;
+	transition-duration: 0.23s;
+	visibility: collapse;
+	text-overflow: shrink;
+}
+
+.ShowingEmptyDeckLabel #EmptyDeckListingLabel
+{
+	visibility: visible;
+}
+
+.BenchListViewable #BenchDeckList #EmptyDeckListingLabel
+{
+	height: 204px;
+}
+
+#BenchDeckList #EmptyDeckListingLabel
+{
+	text-transform: none;
+	height: 0px;
+}
+
+.EmptyListTitle
+{
+	font-size: 24px;
+	color: white;
+	text-transform: uppercase;
+}
+
+.BenchDescription
+{
+	letter-spacing: 0px;
+}
+
+.LibraryContainer .IsDimmed, .IngameDeckList .IsDimmed
+{
+    brightness: .4;
+    //saturation: .8;
+    opacity: 1;
+	horizontal-align: right; 
+	//border: 3px solid black;
+	background-color: black; 
+}
+
+
+DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedCollection DeckListCardPanel.IsDimmed.Hidden, #LibraryListing.IsUnlimitedCollection DeckListCardPanel.Hidden.IsDimmed
+{
+	visibility: collapse;
+}
+
+.IsUnlimitedCollection DeckListCardPanel.IsDimmed, .IngameDeckList DeckListCardPanel.IsDimmed
+{
+	visibility: visible;
+}
+
+.HideHeroes DeckListCardPanel.IsHero
+{
+	visibility: collapse;
+}
+
+.HideIncludeCards DeckListCardPanel.IsIncludeCard
+{
+	visibility: collapse;
+}
+
+.OpponentDeckList DeckListCardPanel
+{
+	tooltip-position: left;
+}
+
+.IngameDeckList DeckListCardPanel
+{
+    width:300px;
+}
+
+.OpponentDeckList DeckListCardPanel
+{
+    horizontal-align:right;
+}
+
+#IngameDeckInfo
+{
+    flow-children:right;
+    width:500px;    
+	width: 100%;
+	//margin-right: 10px;
+	height: 30px;
+	background-size: 100% 100%;
+	border-bottom: 1px solid #00000030;
+	border-left: 1px solid #000000bb;
+	border-right: 1px solid #000000aa;
+	border-left: 0px solid #ffffff05; 
+    background-color: #51181855;
+    
+}
+
+.OpponentDeckList #IngameDeckInfo
+{
+    flow-children:left;
+}
+
+.CardsInDeck
+{
+    width:300px;
+    vertical-align:center;
+    text-align:center;
+}
+
+.CardSaleListingHeader
+{
+	visibility: collapse;
+	width: 100%;
+}
+
+.CardSaleListingHeader Label
+{
+	font-size: 16px;
+	horizontal-align: right; 
+	margin-right: 5px;
+	color: #cccccc88;
+}
+
+.CardSaleListingHeader
+{
+	visibility: collapse;
+	width: 100%;
+	
+	
+	background-color: #1d152e;
+	padding: 5px;
+	padding-bottom: 4px;
+	padding-top: 3px;
+	border-bottom: 1px solid #2f457433; 
+}
+
+.IsSellCardsMode #CardSaleListing .CardSaleListingHeader
+{
+	visibility: visible;
+}
+
+.CardPurchaseListingHeader
+{
+	visibility: collapse;
+	width: 100%;
+	
+	background-color: #0d241d;
+	background-color: #0a1c17;
+	box-shadow: inset #00000022 5px 10px 10px 10px;
+	padding: 5px;
+	padding-bottom: 4px;
+	padding-top: 3px;
+	border-bottom: 1px solid #153b3055; 
+}
+
+.CardPurchaseListingHeader Label
+{
+	font-size: 16px;
+	horizontal-align: right; 
+	margin-right: 5px;
+	color: uiNeutralGrey;
+}
+
+.IsPurchaseCardsMode #CardPurchaseListing .CardPurchaseListingHeader
+{
+	visibility: visible;
+}
+
+#BenchListToggle
+{
+	horizontal-align: center;
+	width: 44px;
+	height: 44px;
+
+	z-index: 20;
+	margin-bottom: -28px;
+
+	visibility: collapse;
+}
+
+#BenchDeckList #BenchListToggle
+{
+	visibility: visible;
+}
+
+.IsDraggingCard #BenchListToggleImage
+{
+	visibility: collapse;
+}
+
+#BenchListToggleImage
+{
+	width: 44px;
+	height: 44px;
+	background-size: 100% 100%;
+    background-image:  url("s2r://panorama/images/control_icons/arrow_dropdown_disabled_png.vtex");
+	margin-top: -12px;
+	wash-color: white;
+	brightness: 2.5;
+	transform: rotateX( 180deg );
+	opacity: 1.0;
+	transition-property: opacity;
+	transition-duration: 0.4s;
+}
+
+.BenchListViewable #BenchListToggleImage
+{
+	transform: rotateX( 0deg );
+	margin-top: -20px;
+}
+
+#BenchListToggleImage:hover
+{
+	opacity: 1.0;
+	brightness: 3.5;
+}
+
+.BenchListViewable #BenchDeckList
+{
+	height: 275px;
+}
+
+.BenchListViewable #BenchDeckList #DeckListCardsContainer
+{
+	overflow: squish scroll;
+}
+
+#BenchDeckList #DeckListCardsContainer
+{
+	overflow: squish;
+	margin-top: 15px;
+}
+
+#LibraryListing #DeckListCardsContainer
+{
+	border-bottom: 2px solid #8566b313;
+	margin-bottom: -1px;
+}
+
+.BlurBackgroundRect2ImageLibraryBackground
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 0px;
+	//margin-top: 29px;
+	blur: gaussian( 5 );
+	z-index: 1;
+	visibility: collapse;
+}
+
+.BlurBackgroundRect2OverlayLibraryBackground
+{
+	width: 100%;
+	height: 100%;
+	//margin-top: 29px;
+	visibility: collapse;
+}
+
+.InCatalogue .BlurBackgroundRect2OverlayLibraryBackground, .InCatalogue .BlurBackgroundRect2ImageLibraryBackground
+{
+	visibility: visible;
+}
+
+#DeckListCardsBlur
+{
+	flow-children: none;
+	height: fit-children;
+	width: 100%;
+	background-image:  url("s2r://panorama/images/draft/decklist_shadow_psd.vtex");
+	background-size: 100% 100%;
+}
+
+.BuildLibraryHeader,
+.BuyLibraryHeader,
+.SellLibraryHeader,
+.ExcessQtyLibraryHeader,
+.IsSellCardsMode.IsShowExcessMode .SellLibraryHeader
+{
+    visibility:collapse;
+}
+
+.IsBuildDecksMode .BuildLibraryHeader,
+.IsPurchaseCardsMode.IsInBuyToCompleteSetMode .BuyLibraryHeader,
+.IsSellCardsMode .SellLibraryHeader,
+.IsSellCardsMode.IsShowExcessMode .ExcessQtyLibraryHeader
+{
+	z-index: 10;
+    visibility: visible;
+}
+
+#LibraryListingHeader
+{
+	flow-children: none;
+	width: 100%;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #abe9f008 ), to( #d0bce908) );
+	height: 29px;
+	border-left: 1px solid #ffffff03;
+	border-top: 1px solid #ffffff04; 
+	background-image: url("s2r://panorama/images/catalogue/library_header_gradient_psd.vtex");
+	background-size: 99.5% 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	transform: translatex( 0px ) translateY( 0px );
+	transition-property: transform, opacity;
+	transition-duration: .2s;
+	z-index: 100;
+	opacity: 1; 
+	visibility: collapse;
+}
+
+#LibraryListing.ShowingEmptyDeckLabel #LibraryListingHeader, #LibraryListing.ShowingEmptyDeckLabel #DeckListCardsBlur
+{
+	visibility: collapse;
+}
+
+#LibraryListing.ShowingEmptyDeckLabel #EmptyDeckListingLabel
+{
+	margin-bottom: 180px;
+}
+
+#LibraryListing #LibraryListingHeader
+{
+	visibility: visible;
+}
+
+.IsPurchaseCardsMode #LibraryListingHeader
+{
+	transform: translatex( 0px ) translateY( 15px );
+	opacity: 0;
+	
+}
+
+.IsPurchaseCardsMode.IsInBuyToCompleteSetMode #LibraryListingHeader
+{
+	transform: translatex( 0px ) translateY( 0px );
+	opacity: 1;
+}
+
+#LibraryListingHeader Label
+{
+    font-size: 16px;
+	horizontal-align: right; 
+	margin-right: 9px;
+	color: #606e6fee;
+	margin-top: 3px;
+}
+
+#LibraryListing #DeckListCardsContainer
+{
+	 box-shadow: #00000066 -10px -10px 20px 20px;
+}

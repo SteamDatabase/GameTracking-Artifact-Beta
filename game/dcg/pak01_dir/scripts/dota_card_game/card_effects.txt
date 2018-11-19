@@ -31,12 +31,16 @@
 	// 5 drag_origin
 	// 6 mouse_over_drag_target
 	// 7 card_type
-	//		DCG_CARD_TYPE_UNKNOWN=0,
-	//		DCG_CARD_TYPE_SPELL=1,
-	//		DCG_CARD_TYPE_CREEP=2,
-	//		DCG_CARD_TYPE_HERO=3,
-	//		DCG_CARD_TYPE_EQUIPMENT=4,
-	//		DCG_CARD_TYPE_IMPROVEMENT=5,
+	//		kUnknown,
+	//		kHero,
+	//		kCreep,
+	//		kSpell,
+	//		kImprovement,
+	//		kItem,
+	//		kAbility,
+	//		kPassiveAbility,
+	//		kStronghold,
+	//		kPathing,
 	// 9 camera_orientation
 
 	//
@@ -44,6 +48,9 @@
 	// STATUS EFFECTS
 	//
 	
+//		"attach_type"       "pattach_point_follow"
+//		"attach_point"             "card_origin"
+
 	"stunned"
 	{
 		"particle_system"	"particles/card_effects/stunned/stunned.vpcf"
@@ -109,6 +116,7 @@
 		"destroy_immediately"	"0"
 		"only_hero"		"1"
 		"not_in_inspect_view" "1"
+		"not_in_fountain"		"1"
 	}
 
 	"mightDieInCombat"
@@ -423,6 +431,10 @@
 			{
 				"type"	"drag_origin"
 			}
+			"7"
+			{
+				"type"	"card_type"
+			}
 		}
 	}
 	
@@ -483,6 +495,78 @@
 		}
 	}
 
+	"tower_immunity_enabled"
+	{
+		"particle_system"   "particles/board/tower/immunity/tower_immunity.vpcf"
+		"attach_type"				"pattach_point_follow"
+		"attach_point"				"attach_root"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_TOWER_IMMUNITY_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_IMMUNITY_DISABLED"	"1"
+		}
+	}
+
+	"enemy_tower_immunity_enabled"
+	{
+		"particle_system"   "particles/board/tower/immunity/tower_immunity.vpcf"
+        "attach_type"				"pattach_point_follow"
+        "attach_point"              "attach_root_reversed"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_ENEMY_TOWER_IMMUNITY_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_IMMUNITY_DISABLED"	"1"
+		}
+	}
+
+	"tower_retaliate_enabled"
+	{
+		"particle_system"			"particles/board/tower/retaliate/tower_retaliate.vpcf"
+		"attach_type"				"pattach_point_follow"
+		"attach_point"				"attach_root"
+		"destroy_immediately"		"1"
+		"play_endcap"				"0"
+
+		"create_events"
+		{
+			"PE_TOWER_RETALIATE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_RETALIATE_DISABLED"	"1"
+		}
+	}
+
+	"enemy_tower_retaliate_enabled"
+	{
+		"particle_system"			"particles/board/tower/retaliate/tower_retaliate.vpcf"
+        "attach_type"				"pattach_point_follow"
+        "attach_point"              "attach_root_reversed"
+		"destroy_immediately"		"1"
+		"play_endcap"				"0"
+
+		"create_events"
+		{
+			"PE_ENEMY_TOWER_RETALIATE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_RETALIATE_DISABLED"	"1"
+		}
+	}
+
 	"creep_placement_enabled"
 	{
 		"particle_system"   "particles/card_effects/inhand/card_placement.vpcf"
@@ -494,10 +578,12 @@
 		"create_events"
 		{
 			"PE_CARD_DRAG_CREEP_PLACEMENT_ENABLED"	"1"
+			"PE_CARD_CLICK_ACTION_ON_PATHING_CARD_ENABLED"	"1"
 		}
 		"destroy_events"
 		{
 			"PE_CARD_DRAG_CREEP_PLACEMENT_DISABLED"	"1"
+			"PE_CARD_CLICK_ACTION_ON_PATHING_CARD_DISABLED"	"1"
 		}
 	}
 	
@@ -568,9 +654,31 @@
 			{
 				"type"	"drag_origin"
 			}
+			"7"
+			{
+				"type"	"card_type"
+			}
 		}
 	}
+	"draft_card_selected"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_inhand_dragselect.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"	"1"
+		"play_endcap"		"0"
 
+		"create_events"
+		{
+			"PE_DRAFT_CARD_SELECTED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_DRAFT_CARD_UNSELECTED"	"1"
+		}
+
+
+	}
 	////// Event: Dragged card has been dragged OFF of a valid target. //////
 	// For playing a dissipation effect on drag off target.
 	// This event is necessary because endcaps on "card_drag_over_target" lose
@@ -613,6 +721,10 @@
 			"5"
 			{
 				"type"	"drag_origin"
+			}
+			"7"
+			{
+				"type"	"card_type"
 			}
 		}
 	}
@@ -1226,32 +1338,7 @@
 		}
 	}
 
-	"coin_glow"
-	{
-		"particle_system"   "particles/world_effects/coin/coin_glow.vpcf"
-		"attach_type"		"attach_origin_and_orientation"
-		"destroy_immediately"	"1"
-		"create_events"
-		{
-			"PE_COIN_PRIORITY_ENABLED"	"1"
-		}
-		"destroy_events"
-		{
-			"PE_COIN_PRIORITY_ENABLED_BRIGHT"	"1"
-			"PE_COIN_PRIORITY_DISABLED"			"1"
-		}
-		"control_points"
-		{
-			"1"
-			{
-				"type"	"attach_origin_and_orientation"
-			}
-			"2"
-			{
-				"type"	"entity_origin"
-			}
-		}
-	}
+
 	"coin_idle"
 	{
 		"particle_system"   "particles/board/coin/coin_idle.vpcf"
@@ -1282,22 +1369,37 @@
 			"PE_COIN_PRIORITY_DISABLED"			"1"
 		}		
 	}
-	"coin_glow_bright"
+	"coin_hover"
 	{
-		"particle_system"   "particles/world_effects/coin/coin_glow_bright.vpcf"
-		"attach_type"		"attach_origin_and_orientation"
+		"particle_system"   "particles/board/coin/coin_mouseover.vpcf"
+		"attach_type"		"pattach_rootbone_follow"
 		"destroy_immediately"	"0"
-		"play_endcap"		"1"
 		"create_events"
 		{
-			"PE_COIN_PRIORITY_ENABLED_BRIGHT"	"1"
+			"PE_COIN_PRIORITY_HOVER"	"1"
 		}
 		"destroy_events"
 		{
-			"PE_COIN_PRIORITY_ENABLED"	"1"
-			"PE_COIN_PRIORITY_DISABLED"	"1"
-		}
+			"PE_COIN_PRIORITY_DISABLED"			"1"
+			"PE_COIN_PRIORITY_HOVER_DISABLED"	"1"
+		}		
 	}
+	"shop_coin_hover"
+	{
+		"particle_system"   "particles/shop/shop_coin_mouseover.vpcf"
+		"attach_type"		"pattach_rootbone_follow"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_COIN_PRIORITY_HOVER_SHOP"		"1"
+		}
+		"destroy_events"
+		{
+			"PE_COIN_PRIORITY_DISABLED"			"1"
+			"PE_COIN_PRIORITY_HOVER_SHOP_DISABLED"	"1"
+		}		
+	}
+
 
 	"wide_lane_portal_ul"
 	{
@@ -2571,32 +2673,6 @@
 	// --------------------------------------------------------------------------------
 	// Inspection
 	// --------------------------------------------------------------------------------
-	"card_inspect_hover"
-	{
-		"particle_system"   "particles/card_effects/inspection/card_inspect_active.vpcf"
-		"attach_type"		"pattach_point_follow"
-		"attach_point"		"card_origin"
-		"destroy_immediately"	"0"
-		"play_endcap"		"1"
-
-		"create_events"
-		{
-			"PE_CARD_INSPECT_HOVER_ENABLED"	"1"
-		}
-		"destroy_events"
-		{
-			"PE_CARD_INSPECT_DISABLED"	"1"
-		}
-
-		"control_points"
-		{
-			"1"
-			{
-				"type"	"attach_origin_and_orientation"
-			}
-		}
-	}
-
 	"card_inspect_begin_takeover_black"
 	{
 		"particle_system"   "particles/screen/inspect/screen_inspect_black.vpcf"

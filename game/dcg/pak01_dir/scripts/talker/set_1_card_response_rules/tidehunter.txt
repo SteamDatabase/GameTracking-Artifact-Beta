@@ -2,6 +2,8 @@
 //**TIDEHUNTER - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10024"
+
 ///////////////
 //USE ABILITY//
 ///////////////
@@ -200,7 +202,6 @@ Rule tidehunter_buff_friend_rule
 
 Response tidehunter_use_include
 {
-	speak "tidehunter_use_include_01" noscene 
 	speak "tidehunter_use_include_02" noscene 
 	speak "tidehunter_use_include_03" noscene 
 }
@@ -210,6 +211,19 @@ Rule tidehunter_use_include_rule
 	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceKrakenShell ThisIsImportant
 	response tidehunter_use_include
 }
+
+Response tidehunter_use_include_on_tidehunter
+{
+	speak "tidehunter_use_include_01" noscene 
+}
+
+Rule tidehunter_use_include_on_tidehunter_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceKrakenShell ThisIsImportant IsTargetTidehunter
+	matchonce
+	response tidehunter_use_include_on_tidehunter
+}
+
 
 ///////////////////////////
 //GAIN MOMENTUM BY MURDER//
@@ -332,6 +346,163 @@ Rule heal_tidehunter_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response tidehunter_ravage_ready
+{
+	speak "tidehunter_unique_01" noscene
+	speak "tidehunter_unique_02" noscene
+	speak "tidehunter_unique_03" noscene
+}
+
+Rule tidehunter_ravage_ready_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter AllyReadyRavage ThisIsImportant
+	response tidehunter_ravage_ready
+}	
+
+Response tidehunter_stands_alone
+{
+	speak "tidehunter_unique_04" noscene
+	speak "tidehunter_unique_05" noscene
+	speak "tidehunter_unique_06" noscene
+}
+
+Rule tidehunter_stands_alone_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter OneLocalUnits ThisIsImportant
+	matchonce
+	response tidehunter_stands_alone
+}	
+
+Response tidehunter_enemy_phantom_assassin
+{
+	speak "tidehunter_unique_07" noscene
+	speak "tidehunter_unique_08" noscene
+}
+
+Rule tidehunter_enemy_phantom_assassin_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter EnemyHasPhantomAssassin ThisIsImportant
+	matchonce
+	response tidehunter_enemy_phantom_assassin
+}	
+
+Response tidehunter_enemy_centaur_warrunner
+{
+	speak "tidehunter_unique_09" noscene
+	
+}
+
+Rule tidehunter_enemy_centaur_warrunner_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter EnemyHasCentaurWarrunner ThisIsImportant
+	matchonce
+	response tidehunter_enemy_centaur_warrunner
+}	
+
+Response tidehunter_enemy_bounty_hunter
+{
+	speak "tidehunter_unique_10" noscene
+	
+}
+
+Rule tidehunter_enemy_bounty_hunter_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter EnemyHasBountyHunter ThisIsImportant
+	matchonce
+	response tidehunter_enemy_bounty_hunter
+}	
+
+Response tidehunter_ally_enchantress
+{
+	speak "tidehunter_unique_11" noscene
+	
+}
+
+Rule tidehunter_ally_enchantress_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter AllyHasEnchantress ThisIsImportant
+	matchonce
+	response tidehunter_ally_enchantress
+}	
+
+Response tidehunter_ally_pugna
+{
+	speak "tidehunter_unique_12" noscene
+	
+}
+
+Rule tidehunter_ally_pugna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter AllyHasPugna ThisIsImportant
+	matchonce
+	response tidehunter_ally_pugna
+}	
+
+Response tidehunter_ally_axe
+{
+	speak "tidehunter_unique_13" noscene
+	
+}
+
+Rule tidehunter_ally_axe_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter AllyHasAxe ThisIsImportant
+	matchonce
+	response tidehunter_ally_axe
+}	
+
+
+Response tidehunter_enemy_mazzie
+{
+	speak "tidehunter_unique_14" noscene
+	
+}
+
+Rule tidehunter_enemy_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter EnemyHasMazzie ThisIsImportant
+	matchonce
+	response tidehunter_enemy_mazzie
+}	
+
+Response tidehunter_enemy_omniknight
+{
+	speak "tidehunter_unique_16" noscene
+	
+}
+
+Rule tidehunter_enemy_omniknight_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasTidehunter EnemyHasOmniknight ThisIsImportant
+	matchonce
+	response tidehunter_enemy_omniknight
+}	
+
+Response tidehunter_play_routed
+{
+	speak "tidehunter_unique_17" noscene 	
+	
+}
+
+Rule tidehunter_play_routed_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceRouted ThisIsImportant 
+	response tidehunter_play_routed
+}
+
+Response tidehunter_equip_blink_dagger
+{
+	speak "tidehunter_unique_20" noscene 	
+	
+}
+
+Rule tidehunter_equip_blink_dagger_rule
+{
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceBLinkDagger IsTargetTidehunter ThisIsImportant
+	response tidehunter_equip_blink_dagger
+}
+
+
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
 ///////////////////////////
@@ -339,12 +510,14 @@ Rule heal_tidehunter_rule
 Response tidehunter_play_path_of_the_bold
 {
 	speak "tidehunter_taunt_generic_04" noscene 	
+	speak "tidehunter_buff_ally_01" noscene 	
+	speak "tidehunter_buff_ally_09" noscene 	
 	
 }
 
 Rule tidehunter_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourcePathOfTheBold 
 	response tidehunter_play_path_of_the_bold
 }
 
@@ -352,37 +525,43 @@ Rule tidehunter_play_path_of_the_bold_rule
 Response tidehunter_play_temple_of_war
 {
 	speak "tidehunter_cast_spell_09" noscene
+	speak "tidehunter_arrogant_06" noscene
+	speak "tidehunter_arrogant_02" noscene
 	
 }
 
 Rule tidehunter_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTempleOfWar 
 	response tidehunter_play_temple_of_war
 }
 
 Response tidehunter_play_nether_ward
 {
 	speak "tidehunter_cast_spell_07" noscene 
+	speak "tidehunter_enigmatic_05" noscene 
+	speak "tidehunter_angry_02" noscene 
 	
 	
 }
 
 Rule tidehunter_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceNetherWard 
 	response tidehunter_play_nether_ward
 }
 
 Response tidehunter_play_burning_oil
 {
 	speak "tidehunter_permanent_health_05" noscene 
+	speak "tidehunter_arrogant_04" noscene 
+	speak "tidehunter_arrogant_09" noscene 
 	
 }
 
 Rule tidehunter_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceBurningOil 
 	response tidehunter_play_burning_oil
 }
 
@@ -390,48 +569,55 @@ Response tidehunter_play_grand_melee
 {
 	speak "tidehunter_cast_spell_03" noscene 
 	speak "tidehunter_permanent_health_03" noscene 
+	speak "tidehunter_arrogant_10" noscene 
 	
 }
 
 Rule tidehunter_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceGrandMelee 
 	response tidehunter_play_grand_melee
 }
 
 Response tidehunter_play_steel_reinforcement
 {
 	speak "tidehunter_cast_spell_04" noscene 
+	speak "tidehunter_pleased_01" noscene 
+	speak "tidehunter_pleased_03" noscene 
 	
 }
 
 Rule tidehunter_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceSteelReinforcement 
 	response tidehunter_play_steel_reinforcement
 }
 
 Response tidehunter_play_the_omexe_arena
 {
 	speak "tidehunter_permanent_attack_04" noscene 
+	speak "tidehunter_arrogant_03" noscene 
+	speak "tidehunter_multi_damage_large_09" noscene 
 	
 }
 
 Rule tidehunter_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTheOmexeArena 
 	response tidehunter_play_the_omexe_arena
 }
 
 Response tidehunter_play_duel
 {
 	speak "tidehunter_potential_kill_01" noscene 
+	speak "tidehunter_single_target_damage_01" noscene 
+	speak "tidehunter_single_target_damage_02" noscene 
 	
 }
 
 Rule tidehunter_play_duel_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceDuel ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceDuel IsTargetTidehunter
 	response tidehunter_play_duel
 }
 
@@ -453,23 +639,26 @@ Response tidehunter_play_time_of_triumph
 {
 	speak "tidehunter_unique_18" noscene 
 	speak "tidehunter_unique_19" noscene 
+	speak "tidehunter_arrogant_07" noscene 
 	
 }
 
 Rule tidehunter_play_time_of_triumph_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTimeOfTriumph ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceTimeOfTriumph 
 	response tidehunter_play_time_of_triumph
 }
 
 Response tidehunter_play_enough_magic
 {
 	speak "tidehunter_multi_damage_large_04" noscene 
+	speak "tidehunter_arrogant_08" noscene 
+	speak "tidehunter_enigmatic_10" noscene 
 	
 }
 
 Rule tidehunter_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasTidehunter IsSourceEnoughMagic 
 	response tidehunter_play_enough_magic
 }

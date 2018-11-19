@@ -1,26 +1,8 @@
 /////////////////
-//**MEEPO - HERO//
+//**PRELLEX - HERO//
 /////////////////
 
-///////////////
-//USE ABILITY//
-///////////////
-
-Response prellex_use_ability
-{
-	speak "prellex_use_ability_01" noscene 
-	speak "prellex_use_ability_02" noscene 
-	speak "prellex_use_ability_03" noscene 
-	speak "prellex_use_ability_04" noscene 
-	speak "prellex_use_ability_05" noscene 
-}
-
-Rule prellex_use_ability_rule
-{
-	criteria IsNotImp UseAbility AllyHasPrellex IsSourcePoof
-	response prellex_use_ability
-}
-
+WhitelistName "Whitelist Card 10053"
 
 ////////////////
 //EQUIP WEAPON//
@@ -332,6 +314,35 @@ Rule heal_prellex_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response prellex_start_with_creeps
+{
+	speak "prellex_unique_01" noscene
+	speak "prellex_unique_02" noscene
+	speak "prellex_unique_15" noscene
+
+}
+
+Rule prellex_start_with_creeps_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex AllyHasManyMeleeCreeps ThisIsImportant
+	response prellex_start_with_creeps
+}	
+
+Response prellex_enemy_kanna
+{
+	speak "prellex_unique_03" noscene
+	speak "prellex_unique_04" noscene
+	speak "prellex_unique_05" noscene
+
+}
+
+Rule prellex_enemy_kanna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex EnemyHasKanna ThisIsImportant
+	matchonce
+	response prellex_enemy_kanna
+}	
+
 Response prellex_summon_creeps
 {
 	speak "prellex_unique_06" noscene 
@@ -345,6 +356,78 @@ Rule prellex_summon_creeps_rule
 	response prellex_summon_creeps
 }	
 
+Response prellex_ally_kanna
+{
+	speak "prellex_unique_10" noscene
+	speak "prellex_unique_11" noscene
+	speak "prellex_unique_12" noscene
+
+}
+
+Rule prellex_ally_kanna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex AllyHasKanna ThisIsImportant
+	matchonce
+	response prellex_ally_kanna
+}	
+
+Response prellex_ally_emissary_of_the_quorum
+{
+	speak "prellex_unique_13" noscene
+	speak "prellex_unique_14" noscene
+
+}
+
+Rule prellex_ally_emissary_of_the_quorum_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex AllyHasEmissaryOfTheQuorum ThisIsImportant
+	matchonce
+	response prellex_ally_emissary_of_the_quorum
+}	
+
+Response prellex_ally_champion_of_the_ancient
+{
+	speak "prellex_unique_16" noscene
+	speak "prellex_unique_17" noscene
+
+}
+
+Rule prellex_ally_champion_of_the_ancient_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex AllyHasChampionOfTheAncient ThisIsImportant
+	matchonce
+	response prellex_ally_champion_of_the_ancient
+}	
+
+Response prellex_marked_for_death_by_kanna_buff
+{
+	speak "prellex_unique_18"  noscene 
+	
+}
+
+Rule prellex_marked_for_death_by_kanna_buff_rule
+{
+	criteria IsNotImp  BUFFED EnemyHasPrellex AllyHasKanna EnemyGainedDeathSkull IsBlockingPrellex IsTargetKanna ThisIsImportant
+	matchonce
+	response prellex_marked_for_death_by_kanna_buff
+}
+
+Response prellex_ally_altar_of_the_mad_moon
+{
+	speak "prellex_unique_19" noscene
+	speak "prellex_unique_20" noscene
+
+}
+
+Rule prellex_ally_altar_of_the_mad_moon_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasPrellex AllyHasAltarOfTheMadMoon ThisIsImportant
+	matchonce
+	response prellex_ally_altar_of_the_mad_moon
+}	
+
+
+
 
 ////////////////////////////
 //PLAY SET ONE BLUE CARDS///
@@ -354,120 +437,140 @@ Rule prellex_summon_creeps_rule
 Response prellex_play_fractured_timeline
 {
 	speak "prellex_cast_spell_01" noscene 	
+	speak "prellex_permanent_health_03" noscene 	
+	speak "prellex_potential_save_03" noscene 	
 	
 }
 
 Rule prellex_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFracturedTimeline 
 	response prellex_play_fractured_timeline
 }
 
 Response prellex_play_path_of_the_wise
 {
 	speak "prellex_cast_spell_02" noscene 	
+	speak "prellex_permanent_attack_04" noscene 	
+	speak "prellex_potential_kill_03" noscene 	
 	
 }
 
 Rule prellex_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourcePathOfTheWise 
 	response prellex_play_path_of_the_wise
 }
 
 Response prellex_play_firestorm
 {
 	speak "prellex_cast_spell_04" noscene 	
+	speak "prellex_potential_kill_04" noscene 	
+	speak "prellex_kill_rival_05" noscene 	
 	
 }
 
 Rule prellex_play_firestorm_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFirestorm ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceFirestorm 
 	response prellex_play_firestorm
 }
 
 Response prellex_play_ignite
 {
 	speak "prellex_cast_spell_07" noscene 	
+	speak "prellex_kill_rival_04" noscene 	
+	speak "prellex_kill_rival_08" noscene 	
 	
 }
 
 Rule prellex_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceIgnite ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceIgnite 
 	response prellex_play_ignite
 }
 
 Response prellex_play_howling_mind
 {
 	speak "prellex_cast_spell_06" noscene 	
+	speak "prellex_permanent_armor_03" noscene 	
+	speak "prellex_permanent_armor_04" noscene 	
 	
 }
 
 Rule prellex_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceHowlingMind 
 	response prellex_play_howling_mind
 }
 
 Response prellex_play_aghanims_sanctum
 {
 	speak "prellex_cast_spell_09" noscene 	
+	speak "prellex_cast_spell_01" noscene 	
+	speak "prellex_permanent_health_02" noscene 	
 	
 }
 
 Rule prellex_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAghanimsSanctum 
 	response prellex_play_aghanims_sanctum
 }
 
 Response prellex_play_messenger_rookery
 {
 	speak "prellex_cast_spell_08" noscene 	
+	speak "prellex_taunt_generic_05" noscene 	
+	speak "prellex_taunt_generic_06" noscene 	
 	
 }
 
 Rule prellex_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceMessengerRookery 
 	response prellex_play_messenger_rookery
 }
 
 Response prellex_play_glyph_of_confusion
 {
 	speak "prellex_potential_save_03" noscene 	
+	speak "prellex_taunt_generic_10" noscene 	
+	speak "prellex_potential_save_04" noscene 	
 	
 }
 
 Rule prellex_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceGlyphOfConfusion 
 	response prellex_play_glyph_of_confusion
 }
 
 Response prellex_play_watchtower
 {
 	speak "prellex_cast_spell_06" noscene 	
+	speak "prellex_kill_rival_03" noscene 	
+	speak "prellex_permanent_attack_05" noscene 	
 	
 }
 
 Rule prellex_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceWatchtower 
 	response prellex_play_watchtower
 }
 
 Response prellex_play_annihilation
 {
 	speak "prellex_cast_spell_05" noscene 	
+	speak "prellex_cast_spell_03" noscene 	
+	speak "prellex_cast_spell_07" noscene 	
 	
 }
 
 Rule prellex_play_annihilation_rule
 {
-	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAnnihilation ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasPrellex IsSourceAnnihilation 
 	response prellex_play_annihilation
 }
 

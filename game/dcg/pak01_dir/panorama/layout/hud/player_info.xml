@@ -5,28 +5,31 @@
   	</styles>
 
 	<Panel class="PlayerInfo" hittest="false">
+			<Image id="PlayerInfoBlurBackground" />
       <Panel class="PlayerInfoBG" />
       <Panel class="ActingPlayerStartImage" />
+      <Panel class="PlayerInfoBGLayer2" />
       <Panel class="PlayerInfoContents">
         <Panel class="DisconnectedDisplay">
           <Label id="DisconnectedLabel" text="#DCG_Disconnected"/>
         </Panel>
 
-        <Panel class="GameClockContainer" onmouseover="UIShowTextTooltip( {s:matchClock} )" onmouseout="UIHideTextTooltip()">
+        <Panel class="GameClockContainer">
           <Image id="GameClockIcon" />
-          <Label id="GameClockCount" class="GameClockCount PlayerInfoNumber" text="#DCG_MatchClock" />
+          <Label id="GameClockCount" class="GameClockCount PlayerInfoNumber MonoFont" text="#DCG_MatchClock" />
         </Panel>
 
       <Panel class="GoldContainer">
         <Image id="GoldIcon"/>
-        <Label id="GoldCount" class="GoldCount PlayerInfoNumber" text="{i:availableGold}"/>
-				<Panel id="ShopDeedContainer" onactivate="" ondblclick="ShowShopDeedTakeover()">
-					<Image id="ShopDeedIcon" class="ShopDeedIcon PlayerInfoNumber"  />
-					<Label id="ShopDeedCount" class="ShopDeedCount PlayerInfoNumber" text="#DCG_PlayerInfo_ShopDeedCount" />
-				</Panel>
+        <Label id="GoldCount" class="GoldCount PlayerInfoNumber MonoFont" text="{i:availableGold}"/>
+      </Panel>
+      <Panel id="ShopDeedContainer" onactivate="" ondblclick="ShowShopDeedTakeover()">
+        <Image id="ShopDeedIcon" class="ShopDeedIcon PlayerInfoNumber MonoFont"  />
+        <Label id="ShopDeedCount" class="ShopDeedCount PlayerInfoNumber MonoFont" text="#DCG_PlayerInfo_ShopDeedCount" />
       </Panel>
 
       <Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
+        <Label class="PersonaName" id="AnonymousPlayerName" text="#DCG_Anonymous" html="true"/>
 
       <Panel class="CardsInHandContainer" onactivate="SortCardsInHand()">
           <Image id="CardsInHandIcon"/>
@@ -37,6 +40,8 @@
           </Panel>
         </Panel>
       </Panel>
+
+      <Panel class="ShowESCMenuButton" onactivate="DCGToggleESCMenu()" />
 	</Panel>
 
 </root>

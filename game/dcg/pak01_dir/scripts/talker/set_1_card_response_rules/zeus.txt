@@ -2,6 +2,8 @@
 //**ZEUS - HERO//
 /////////////////
 
+WhitelistName "Whitelist Card 10065"
+
 ////////////////
 //EQUIP WEAPON//
 ////////////////
@@ -325,7 +327,7 @@ Response zeus_lightning_strike
 
 Rule zeus_lightning_strike_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceLightningStrike 
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceLightningStrike  ThisIsImportant
 	response zeus_lightning_strike
 }
 
@@ -338,7 +340,7 @@ Response zeus_bolt_of_damocles
 
 Rule zeus_bolt_of_damocles_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBoltOfDamocles 
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBoltOfDamocles  ThisIsImportant
 	response zeus_bolt_of_damocles
 }
 
@@ -351,7 +353,8 @@ Response zeus_start_with_cm
 
 Rule zeus_start_with_cm_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus AllyHasCrystalMaiden
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus AllyHasCrystalMaiden ThisIsImportant
+	matchonce
 	response zeus_start_with_cm
 }
 
@@ -363,7 +366,7 @@ Response zeus_lane_enemy_pa
 
 Rule zeus_lane_enemy_pa_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasPhantomAssassin
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasPhantomAssassin ThisIsImportant
 	matchonce
 	response zeus_lane_enemy_pa
 }
@@ -375,7 +378,7 @@ Response zeus_lane_enemy_bristleback
 
 Rule zeus_lane_enemy_bristleback_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasBristleBack
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasBristleBack ThisIsImportant 
 	matchonce
 	response zeus_lane_enemy_bristleback
 }
@@ -388,7 +391,7 @@ Response zeus_start_with_luna
 
 Rule zeus_start_with_luna_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus AllyHasLuna
+	criteria IsNotImp  PlayCard AllyHasZeus AllyHasLuna IsSourceSelemenesFavor ThisIsImportant
 	response zeus_start_with_luna
 }
 
@@ -400,7 +403,7 @@ Response zeus_lane_enemy_axe
 
 Rule zeus_lane_enemy_axe_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasAxe
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasAxe ThisIsImportant
 	matchonce
 	response zeus_lane_enemy_axe
 }
@@ -412,7 +415,7 @@ Response zeus_lane_enemy_sorla
 
 Rule zeus_lane_enemy_sorla_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan ThisIsImportant
 	matchonce
 	response zeus_lane_enemy_sorla
 }
@@ -425,7 +428,7 @@ Response zeus_lane_enemy_legion_commander
 
 Rule zeus_lane_enemy_legion_commander_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasLegionCommander
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasLegionCommander ThisIsImportant
 	matchonce
 	response zeus_lane_enemy_legion_commander
 }
@@ -437,7 +440,7 @@ Response zeus_lane_enemy_sorla_and_legion_commander
 
 Rule zeus_lane_enemy_sorla_and_legion_commander_rule
 {
-	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan EnemyHasLegionCommander
+	criteria IsNotImp  BeginSpellcasting AllyHasZeus EnemyHasSorlaKhan EnemyHasLegionCommander ThisIsImportant
 	matchonce
 	response zeus_lane_enemy_sorla_and_legion_commander
 }
@@ -449,35 +452,50 @@ Rule zeus_lane_enemy_sorla_and_legion_commander_rule
 Response zeus_play_barracks
 {
 	speak "zeus_arrogant_07" noscene 		
+	speak "zeus_buff_ally_04" noscene 		
+	speak "zeus_multi_damage_small_02" noscene 		
+	speak "zeus_arrogant_04" noscene 		
+	speak "zeus_arrogant_08" noscene 		
+	speak "zeus_enigmatic_08" noscene 		
 }
 
 Rule zeus_play_barracks_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBarracks ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceBarracks 
 	response zeus_play_barracks
 }
 
 Response zeus_play_fractured_timeline
 {
 	speak "zeus_enigmatic_01" noscene 	
+	speak "zeus_debuff_enemy_04" noscene 	
+	speak "zeus_debuff_enemy_09" noscene 	
+	speak "zeus_debuff_enemy_10" noscene 	
+	speak "zeus_pleased_08" noscene 	
+	speak "zeus_enigmatic_04" noscene 	
 	
 }
 
 Rule zeus_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceFracturedTimeline 
 	response zeus_play_fractured_timeline
 }
 
 Response zeus_play_path_of_the_wise
 {
 	speak "zeus_arrogant_03" noscene 	
+	speak "zeus_debuff_enemy_01" noscene 	
+	speak "zeus_single_target_damage_06" noscene 	
+	speak "zeus_multi_damage_small_05" noscene 	
+	speak "zeus_multi_damage_small_10" noscene 	
+	speak "zeus_multi_damage_large_09" noscene 	
 	
 }
 
 Rule zeus_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourcePathOfTheWise 
 	response zeus_play_path_of_the_wise
 }
 
@@ -485,78 +503,113 @@ Rule zeus_play_path_of_the_wise_rule
 Response zeus_play_ignite
 {
 	speak "zeus_angry_09" noscene 	
+	speak "zeus_debuff_enemy_07" noscene 	
+	speak "zeus_multi_damage_large_07" noscene 	
+	speak "zeus_angry_10" noscene 	
+	speak "zeus_arrogant_06" noscene 	
+	speak "zeus_angry_05" noscene 	
 	
 }
 
 Rule zeus_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceIgnite ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceIgnite 
 	response zeus_play_ignite
 }
 
 Response zeus_play_howling_mind
 {
 	speak "zeus_enigmatic_03" noscene 	
+	speak "zeus_multi_damage_large_05" noscene 	
+	speak "zeus_concerned_01" noscene 	
+	speak "zeus_enigmatic_05" noscene 	
+	speak "zeus_enigmatic_09" noscene 	
+	speak "zeus_enigmatic_10" noscene 	
 	
 }
 
 Rule zeus_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceHowlingMind 
 	response zeus_play_howling_mind
 }
 
 Response zeus_play_aghanims_sanctum
 {
 	speak "zeus_enigmatic_06" noscene 	
+	speak "zeus_buff_ally_01" noscene 	
+	speak "zeus_buff_ally_06" noscene 	
+	speak "zeus_debuff_enemy_06" noscene 	
+	speak "zeus_angry_08" noscene 	
+	speak "zeus_enigmatic_03" noscene 	
 	
 }
 
 Rule zeus_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceAghanimsSanctum 
 	response zeus_play_aghanims_sanctum
 }
 
 Response zeus_play_messenger_rookery
 {
 	speak "zeus_enigmatic_05" noscene 	
+	speak "zeus_debuff_enemy_08" noscene 	
+	speak "zeus_single_target_damage_08" noscene 	
+	speak "zeus_single_target_damage_10" noscene 	
+	speak "zeus_multi_damage_small_08" noscene 	
+	speak "zeus_debuff_enemy_04" noscene 	
 	
 }
 
 Rule zeus_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceMessengerRookery 
 	response zeus_play_messenger_rookery
 }
 
 Response zeus_play_glyph_of_confusion
 {
 	speak "zeus_enigmatic_09" noscene 	
+	speak "zeus_debuff_enemy_03" noscene 	
+	speak "zeus_multi_damage_small_06" noscene 	
+	speak "zeus_multi_damage_large_02" noscene 	
+	speak "zeus_pleased_03" noscene 	
+	speak "zeus_arrogant_10" noscene 	
 	
 }
 
 Rule zeus_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceGlyphOfConfusion 
 	response zeus_play_glyph_of_confusion
 }
 
 Response zeus_play_watchtower
 {
 	speak "zeus_enigmatic_01" noscene 	
+	speak "zeus_buff_ally_08" noscene 	
+	speak "zeus_buff_ally_10" noscene 	
+	speak "zeus_angry_01" noscene 	
+	speak "zeus_angry_02" noscene 	
+	speak "zeus_angry_04" noscene 	
 	
 }
 
 Rule zeus_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasZeus IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasZeus IsSourceWatchtower 
 	response zeus_play_watchtower
 }
 
 Response zeus_play_firestorm
 {
 	speak "zeus_angry_05" noscene 
+	speak "zeus_debuff_enemy_02" noscene 
+	speak "zeus_single_target_damage_09" noscene 
+	speak "zeus_multi_damage_small_09" noscene 
+	speak "zeus_multi_damage_large_08" noscene 
+	speak "zeus_angry_09" noscene 
 }
 
 Rule zeus_play_firestorm_rule
@@ -571,6 +624,9 @@ Response zeus_play_annihilation
 	speak "zeus_cast_spell_09" noscene 
 	speak "zeus_arrogant_05" noscene 
 	speak "zeus_arrogant_06" noscene 
+	speak "zeus_multi_damage_large_01" noscene 
+	speak "zeus_multi_damage_large_03" noscene 
+	speak "zeus_multi_damage_large_04" noscene 
 }
 
 Rule zeus_play_annihilation_rule

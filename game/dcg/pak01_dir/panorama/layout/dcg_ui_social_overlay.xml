@@ -1,0 +1,38 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
+
+ 	</styles>
+ 	<DCGSocialOverlay hittest="false">
+		<Panel id="NotificationsContainer" hittest="false">
+			<ToastManager id="NotificationsToastManager" toastduration="3s" maxtoastsvisible="10" maxtoastbehavior="deleteoldest" preservefadedtoasts="true" delaytime="0" addtoaststohead="false" hittest="false" />
+			
+		</Panel>
+		<Panel id="IconsContainer">
+			<Panel id="SteamChat" class="SocialButton" onmouseover="UIShowTextTooltip( #DCG_SteamChat_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()">
+				<Panel onactivate="DCGSteamChatButtonClicked() PlaySoundEffect( DCG_UI.MainMenu_Select )" oncontextmenu="DCGSteamChatContextMenu()"  class="SocialIcon SteamChatIcon">
+					<Panel class="SteamChatViolator">
+						<Label text="{d:unread_messages}" class="SteamChatCount"/>
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel id="SteamFriends" class="SocialButton" onmouseover="UIShowTextTooltip( #DCG_SteamFriends_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()" onactivate="DCGFriendsButtonClicked() PlaySoundEffect( DCG_UI.MainMenu_Select )" >
+				<Panel oncontextmenu="DCGFriendsContextMenu()" class="SocialIcon FriendsInGameIcon"/>
+				<Label id="SteamFriendsCount" text="{d:friends_in_artifact}" class="SocialNumberLabel MonoFont"/>
+			</Panel>
+			<Panel id="SteamLookingToPlay" onmouseover="UIShowTextTooltip( #DCG_LookingToPlay_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()" class="SocialButton" >
+				<Panel id="LookingToPlayContainer" onactivate="DCGShowOpenPlayPage() PlaySoundEffect( DCG_UI.MainMenu_Select )" class="SocialIcon LookingToPlayIcon">
+					<Panel id="LookingToPlayVisibilityButton">
+						<Panel id="LookingToPlayFrame1" class="LookingToPlayAnimation" hittest="false"/>
+						<Panel id="LookingToPlayFrame2" class="LookingToPlayAnimation" hittest="false"/>
+						<Panel id="LookingToPlayFrame3" class="LookingToPlayAnimation" hittest="false"/>
+					</Panel>
+				</Panel>				
+				<Label id="SteamLookingToPlayCount" text="{d:looking_to_play}" class="SocialNumberLabel MonoFont"/>
+			</Panel>
+		</Panel>
+
+
+	</DCGSocialOverlay>
+ </root>

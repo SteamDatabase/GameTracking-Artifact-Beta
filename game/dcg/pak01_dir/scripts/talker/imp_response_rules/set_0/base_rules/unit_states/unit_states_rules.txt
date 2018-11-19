@@ -1,0 +1,1352 @@
+// rule naming conv: card category/card name/core concept/player context/variant or chain info
+// var naming conv: player context/variable type/card category/card name/variant or chain info/player context
+// p_var = player centric variable //
+// o_var = opponent centric variable //
+// Pp = "player plays" //
+// Pr = "player reacts" //
+// Op = "opponent plays" //
+// Or = "opponent reacts" //
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_GENERIC
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever plays the card is buffing their own unit. These generic rules handle local and opponent imp buffing themselves, and the enemy, if special broad prop animations are not valid to play yet.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_generic: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsTargetLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Pr_player_buffs_opponent
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsSourceLocal IsTargetNotLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Pr_late_game
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsTargetLocal IsGameRound4orMore p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Or
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Or_player_buffs_opponent
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal IsTargetNotLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Pp_Or_late_game
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal IsGameRound4orMore o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_buffed_generic: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Pr
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Pr_opponent_buffs_player
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsSourceNotLocal IsTargetLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Pr_late_game
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Or
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Or_opponent_buffs_player
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal IsTargetLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_BUFFED_Op_Or_late_game
+{
+
+    Criteria Buffed  IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_generic:  Heal
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Pr
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsTargetLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Pr_player_buffs_opponent
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsSourceLocal IsTargetNotLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Pr_late_game
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsTargetLocal IsGameRound4orMore p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Or
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Or_player_buffs_opponent
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal IsTargetNotLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Pp_Or_late_game
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal IsGameRound4orMore o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_buffed_generic:  Heal
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Pr
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Pr_opponent_buffs_player
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsSourceNotLocal IsTargetLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Pr_late_game
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Or
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Or_opponent_buffs_player
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal IsTargetLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Or_late_game
+{
+
+    Criteria  Heal IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_ARMOR
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_armor: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsArmor PlayerIsWinningGame IsGameRound4orMore
+
+    // response has chain:
+    Response imps_unit_states_unit_buffed_special_armor_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_armor_Pp_Pr_ IsLocalImp
+
+    Response imps_unit_states_unit_buffed_special_armor_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsArmor OpponentIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_armor_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_ATTACK
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_attack: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsAttack  PlayerIsWinningGame IsGameRound4orMore
+
+    // response has chain:
+    Response imps_unit_states_unit_buffed_special_attack_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_attack_Pp_Pr_ IsLocalImp
+
+    Response imps_unit_states_unit_buffed_special_attack_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsAttack  OpponentIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_attack_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_CLEAVE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_cleave: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_cleave_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsCleave PlayerIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_cleave_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_cleave_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsCleave OpponentIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_cleave_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_HEAL
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_heal: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsHealth  PlayerIsWinningGame IsGameRound4orMore
+
+    // response has chain:
+    Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_heal_Pp_Pr_ IsLocalImp
+
+    Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsHealth OpponentIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_heal_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_IMMUNE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_immune: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsInvuln PlayerIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_immune_Pp_Pr
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsInvuln OpponentIsWinningGame IsGameRound4orMore
+
+    Response imps_unit_states_unit_buffed_special_immune_Op_Or
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_BUFFED_SPECIAL_SIEGE
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_buffed_special_siege: Buffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Pp_Pr
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsSiege PlayerIsWinningGame IsGameRound4orMore
+
+    // response has chain:
+    Response imps_unit_states_unit_buffed_special_siege_Pp_Pr_chain_intro
+
+}
+
+Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Pp_Pr_CHAIN_outro
+{
+
+    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_siege_Pp_Pr_ IsLocalImp
+
+    Response imps_unit_states_unit_buffed_special_siege_Pp_Pr_chain_outro
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Op_Or
+{
+
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsSiege OpponentIsWinningGame IsGameRound4orMore
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_CHANGED_POSITION
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = there is no local context as imps react equally (confused) to the change whether the change was local or opponent's side.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_changed_position: ChangedPosition
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_changed_position_CHANGEDPOSITION_Pp_Pr
+{
+
+    Criteria ChangedPosition IsNotCombat IsActionPhase IsLocalImp  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    Response imps_unit_states_unit_changed_position_Pp_Pr
+
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_CHANGED_TARGET
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = there is no local context as imps react equally (confused) to the change whether the change was local or opponent's side. Has a do nothing variant so make sure it doesnt play every time arrows change
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_changed_target: ChangedTarget
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_changed_target_CHANGEDTARGET_Pp_Pr
+{
+
+    Criteria ChangedTarget IsNotCombat IsActionPhase IsLocalImp  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    Response imps_unit_states_unit_changed_target_Pp_Pr
+
+    // also sharing responses:
+    Response imps_shared_generic_do_nothing
+    Response imps_shared_generic_do_nothing
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_DAMAGED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever PLAYS the card is giving the positive damage. These rules SHARE a lot of generic responses. Note the activity prioroties are set to 999 in GUI to remind they are NOT using the priority from there but instead the priority of 11 defined in the shared responses. IsActionPhase is removed from the rules so that improvements that fire at the start of round one still trigger damage responses.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_damaged: Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Pp_Pr
+{
+
+    Criteria Damage IsLocalImp IsTargetNotLocal IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Pp_Pr_late_game
+{
+
+    Criteria Damage IsLocalImp IsTargetNotLocal IsGameRound4orMore IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Pp_Or
+{
+
+    Criteria Damage IsOpponentImp IsTargetNotLocal IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Pp_Or_late_game
+{
+
+    Criteria Damage IsOpponentImp IsTargetNotLocal IsGameRound4orMore IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_damaged: Damage
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Op_Pr
+{
+
+    Criteria Damage IsLocalImp IsTargetLocal IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Op_Pr_late_game
+{
+
+    Criteria Damage IsLocalImp IsTargetLocal IsGameRound4orMore IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Op_Or
+{
+
+    Criteria Damage IsOpponentImp IsTargetLocal IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_damaged_DAMAGE_Op_Or_late_game
+{
+
+    Criteria Damage IsOpponentImp IsTargetLocal IsGameRound4orMore IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_DEBUFFED_GENERIC
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever plays the card is debuffing the enemy unit.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_debuffed_generic: Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Pr
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Pr_player_debuffs_player
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsSourceLocal IsTargetLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Pr_late_game
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal IsGameRound4orMore p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Or
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Or_player_debuffs_player
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsSourceLocal IsTargetLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Pp_Or_late_game
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal IsGameRound4orMore o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_debuffed_generic: Debuffed
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Pr
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal  p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_small_negative
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Pr_opponent_debuffs_opponent
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsTargetNotLocal p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Pr_late_game
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal IsGameRound4orMore p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Or
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal  o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_opponent_small_positive
+    Response imps_shared_generic_do_nothing
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Or_opponent_debuffs_opponent
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsSourceNotLocal IsTargetLocal o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_debuffed_generic_DEBUFFED_Op_Or_late_game
+{
+
+    Criteria Debuffed IsNotCombat IsActionPhase IsOpponentImp IsTargetLocal IsGameRound4orMore o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_DIES
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever PLAYS the card is getting the positive_hi_pri kill. These rules SHARE a lot of generic responses. Note the activity prioroties are set to 999 in GUI to remind they are NOT using the priority from there but instead the hi-pri priority of 12 defined in the shared responses. They are set to use hi_pri in case they need to interrupt the damage animation (which is weight 12).
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_dies: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_dies_DEATH_Pp_Pr
+{
+
+    Criteria Death IsLocalImp IsTargetNotLocal OpponentChangeMomentum_Neg IsTargetHero IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing responses:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+    Response imps_shared_custom_player_death_react_positive
+
+}
+
+Rule rule_imps_unit_states_unit_dies_DEATH_Pp_Pr_player_losing
+{
+
+    Criteria Death IsLocalImp IsTargetNotLocal OpponentChangeMomentum_Neg IsTargetCreep PlayerIsLosingGame IsGameRound4orMore IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_dies_DEATH_Pp_Or
+{
+
+    Criteria Death IsOpponentImp IsTargetNotLocal IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative_hi_pri
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_dies: Death
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_dies_DEATH_Op_Pr
+{
+
+    Criteria Death IsLocalImp IsTargetLocal IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_negative_hi_pri
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_dies_DEATH_Op_Or
+{
+
+    Criteria Death IsOpponentImp IsTargetLocal IsNotCombat o_var_1SecInOut
+
+    ApplyContext "o_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_positive_hi_pri
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_IMP_POKED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// this is a special case card to have the imps react when players click on their models in game
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_imp_poked: Special
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_imp_poked_SPECIAL_Pp_Pr
+{
+
+    Criteria Special IsLocalImp IsActionPhase IsPoke IsNotCombat p_var_1SecInOut
+
+    ApplyContext "p_var_1SecInOut:1:1"
+    ApplyContextToWorld
+
+    Response imps_unit_states_unit_imp_poked_Pp_Pr
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  UNIT_SUMMONED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// player context = whoever summons is summoning a unit into THEIR SIDE.
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: unit_summoned: Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Pp_Pr
+{
+
+    Criteria Summon IsLocalImp IsTargetLocal LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+
+    Response imps_unit_states_unit_summoned_Pp_Pr
+
+    // also sharing responses:
+    Response imps_shared_generic_player_small_positive
+    Response imps_set_shared_custom_player_summon_salute_var_Pp_Pr
+
+}
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Pp_Pr_multi_summon
+{
+
+    Criteria Summon IsLocalImp IsTargetLocal LocalChangeMomentum_PosMid OpponentChangeMomentum_Neg
+
+    // sharing response:
+    Response imps_shared_generic_player_broad_positive
+
+}
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Pp_Pr_improvement
+{
+
+    Criteria Summon IsLocalImp IsTargetLocal LocalChangeMomentum_Pos OpponentChangeMomentum_Neg IsTargetImprovement
+
+    Response imps_unit_states_unit_summoned_Pp_Pr_improvement
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Pp_Or
+{
+
+    Criteria Summon IsOpponentImp IsTargetLocal LocalChangeMomentum_Pos OpponentChangeMomentum_Neg
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_negative
+
+}
+
+
+//-----------------------------------------------------------------------------
+// OPPONENT PLAYS CARD: unit_summoned: Summon
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Op_Pr
+{
+
+    Criteria Summon IsLocalImp IsTargetNotLocal OpponentChangeMomentum_Pos OpponentChangeMomentum_Neg
+
+    // sharing response:
+    Response imps_shared_generic_player_small_negative
+
+}
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Op_Pr_multi_summon
+{
+
+    Criteria Summon IsLocalImp IsTargetNotLocal LocalChangeMomentum_Neg OpponentChangeMomentum_PosMid isTargetNotLocal
+
+    // sharing response:
+    Response imps_shared_generic_opponent_broad_negative
+
+}
+
+
+// Opponent reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Op_Or
+{
+
+    Criteria Summon IsOpponentImp IsTargetNotLocal OpponentChangeMomentum_Pos OpponentChangeMomentum_Neg
+
+    // sharing response:
+    Response imps_shared_generic_opponent_small_positive
+
+}
+
+Rule rule_imps_unit_states_unit_summoned_SUMMON_Op_Or_improvement
+{
+
+    Criteria Summon IsOpponentImp IsTargetNotLocal LocalChangeMomentum_Neg OpponentChangeMomentum_Pos IsTargetImprovement
+
+    Response imps_unit_states_unit_summoned_Op_Or_improvement
+
+}

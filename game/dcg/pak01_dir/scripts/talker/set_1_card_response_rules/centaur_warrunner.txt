@@ -2,6 +2,7 @@
 //**Centaur Warrunner - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 10021"
 
 ////////////////
 //EQUIP WEAPON//
@@ -293,7 +294,7 @@ Rule centaur_warrunner_lane_damage_give_death_skull_rule
 //healed//
 //////////
 
-Response heal_sven
+Response heal_centaur_warrunner
 {
 	speak "centaur_warrunner_healed_01" noscene 
 	speak "centaur_warrunner_healed_02" noscene 
@@ -304,12 +305,141 @@ Response heal_sven
 Rule heal_centaur_warrunner_rule
 {
 	criteria IsNotImp Heal IsTargetCentaurWarrunner
-	response heal_sven
+	response heal_centaur_warrunner
 }
 
 /////////////////////////
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
+
+Response centaur_warrunner_enemy_thunderhide_alpha
+{
+	speak "centaur_warrunner_unique_03" noscene
+	
+}
+
+Rule centaur_warrunner_enemy_thunderhide_alpha_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner EnemyHasThunderhideAlpha ThisIsImportant
+	matchonce
+	response centaur_warrunner_enemy_thunderhide_alpha
+}	
+
+Response centaur_warrunner_ally_mazzie
+{
+	speak "centaur_warrunner_unique_04" noscene
+	speak "centaur_warrunner_unique_13" noscene
+}
+
+Rule centaur_warrunner_ally_mazzie_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner AllyHasMazzie ThisIsImportant
+	matchonce
+	response centaur_warrunner_ally_mazzie
+}	
+
+Response centaur_warrunner_equip_horn_of_the_alpha
+{
+	speak "centaur_warrunner_unique_05" noscene 
+	speak "centaur_warrunner_arrogant_04" noscene 
+	
+}
+
+Rule centaur_warrunner_equip_horn_of_the_alpha_rule
+{
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsTargetCentaurWarrunner IsSourceHornOfTheAlpha ThisIsImportant
+	response centaur_warrunner_equip_horn_of_the_alpha
+}
+
+Response centaur_warrunner_ally_beastmaster
+{
+	speak "centaur_warrunner_unique_06" noscene
+	speak "centaur_warrunner_unique_07" noscene
+}
+
+Rule centaur_warrunner_ally_beastmaster_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner AllyHasBeastmaster ThisIsImportant
+	matchonce
+	response centaur_warrunner_ally_beastmaster
+}	
+
+Response centaur_warrunner_enemy_beastmaster
+{
+	speak "centaur_warrunner_unique_08" noscene
+	speak "centaur_warrunner_unique_09" noscene
+}
+
+Rule centaur_warrunner_enemy_beastmaster_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner EnemyHasBeastmaster ThisIsImportant 
+	matchonce
+	response centaur_warrunner_enemy_beastmaster
+}	
+
+Response centaur_warrunner_enemy_savage_wolf
+{
+	speak "centaur_warrunner_unique_10" noscene
+	speak "centaur_warrunner_unique_11" noscene
+}
+
+Rule centaur_warrunner_enemy_savage_wolf_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner EnemyHasSavageWolf ThisIsImportant 
+	matchonce
+	response centaur_warrunner_enemy_savage_wolf
+}	
+
+Response centaur_warrunner_ally_pugna
+{
+	speak "centaur_warrunner_unique_12" noscene
+}
+
+Rule centaur_warrunner_ally_pugna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner AllyHasPugna ThisIsImportant
+	matchonce
+	response centaur_warrunner_ally_pugna
+}	
+
+Response centaur_warrunner_ally_sniper
+{
+	speak "centaur_warrunner_unique_14" noscene
+}
+
+Rule centaur_warrunner_ally_sniper_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasCentaurWarrunner AllyHasSniper ThisIsImportant
+	matchonce
+	response centaur_warrunner_ally_sniper
+}	
+
+Response centaur_warrunner_spring_the_trap
+{
+	speak "centaur_warrunner_unique_15" noscene
+	speak "centaur_warrunner_unique_16" noscene
+	speak "centaur_warrunner_unique_17" noscene
+}
+
+Rule centaur_warrunner_spring_the_trap_rule
+{
+	criteria IsNotImp PlayCard AllyHasCentaurWarrunner IsSourceSpringTheTrap ThisIsImportant
+	response centaur_warrunner_spring_the_trap
+}
+
+Response centaur_warrunner_spring_the_trap_enemy_thunderhide_alpha
+{
+	speak "centaur_warrunner_unique_18" noscene
+	speak "centaur_warrunner_unique_19" noscene
+	speak "centaur_warrunner_unique_20" noscene
+}
+
+Rule centaur_warrunner_spring_the_trap_enemy_thunderhide_alpha_rule
+{
+	criteria IsNotImp PlayCard AllyHasCentaurWarrunner IsSourceSpringTheTrap EnemyHasThunderhideAlpha ThisIsImportant
+	response centaur_warrunner_spring_the_trap_enemy_thunderhide_alpha
+}
+
 
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
@@ -320,13 +450,15 @@ Response centaur_warrunner_play_path_of_the_bold
 	speak "centaur_warrunner_cast_spell_06" noscene 
 	speak "centaur_warrunner_cast_spell_03" noscene 
 	speak "centaur_warrunner_cast_spell_02" noscene 
+	speak "centaur_warrunner_buff_ally_01" noscene 
+	speak "centaur_warrunner_buff_ally_08" noscene 
 	
 	
 }
 
 Rule centaur_warrunner_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourcePathOfTheBold 
 	response centaur_warrunner_play_path_of_the_bold
 }
 
@@ -334,27 +466,34 @@ Rule centaur_warrunner_play_path_of_the_bold_rule
 Response centaur_warrunner_play_temple_of_war
 {
 	speak "centaur_warrunner_cast_spell_08" noscene 
+	speak "centaur_warrunner_enigmatic_04" noscene 
+	speak "centaur_warrunner_multi_damage_large_05" noscene 
+	speak "centaur_warrunner_single_target_damage_02" noscene 
+	speak "centaur_warrunner_multi_damage_small_04" noscene 
 
 	
 }
 
 Rule centaur_warrunner_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTempleOfWar 
 	response centaur_warrunner_play_temple_of_war
 }
 
 Response centaur_warrunner_play_nether_ward
 {
-	speak "centaur_warrunner_cast_spell_01" noscene 
+	speak "centaur_warrunner_multi_damage_small_08" noscene 
 	speak "centaur_warrunner_cast_spell_09" noscene
+	speak "centaur_warrunner_angry_10" noscene
+	speak "centaur_warrunner_buff_ally_06" noscene
+	speak "centaur_warrunner_multi_damage_large_02" noscene
 
 	
 }
 
 Rule centaur_warrunner_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceNetherWard 
 	response centaur_warrunner_play_nether_ward
 }
 
@@ -362,51 +501,64 @@ Response centaur_warrunner_play_burning_oil
 {
 	speak "centaur_warrunner_debuff_enemy_04" noscene 
 	speak "centaur_warrunner_debuff_enemy_05" noscene 
+	speak "centaur_warrunner_debuff_enemy_03" noscene 
+	speak "centaur_warrunner_buff_ally_03" noscene 
+	speak "centaur_warrunner_buff_ally_05" noscene 
 	
 }
 
 Rule centaur_warrunner_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceBurningOil 
 	response centaur_warrunner_play_burning_oil
 }
 
 Response centaur_warrunner_play_grand_melee
 {
 	speak "centaur_warrunner_cast_spell_07" noscene 
-	
+	speak "centaur_warrunner_multi_damage_small_01" noscene 
+	speak "centaur_warrunner_multi_damage_large_02" noscene 
+	speak "centaur_warrunner_buff_ally_09" noscene 
+	speak "centaur_warrunner_single_target_damage_05" noscene 
 	
 }
 
 Rule centaur_warrunner_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceGrandMelee 
 	response centaur_warrunner_play_grand_melee
 }
 
 Response centaur_warrunner_play_steel_reinforcement
 {
 	speak "centaur_warrunner_cast_spell_10" noscene 
+	speak "centaur_warrunner_pleased_06" noscene 
+	speak "centaur_warrunner_pleased_03" noscene 
+	speak "centaur_warrunner_multi_damage_small_05" noscene 
+	speak "centaur_warrunner_multi_damage_large_09" noscene 
 	
 	
 }
 
 Rule centaur_warrunner_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceSteelReinforcement 
 	response centaur_warrunner_play_steel_reinforcement
 }
 
 Response centaur_warrunner_play_the_omexe_arena
 {
-	speak "centaur_warrunner_buff_ally_04" noscene 
-	speak "centaur_warrunner_arrogant_10" noscene 
+	speak "centaur_warrunner_unique_01" noscene 
+	speak "centaur_warrunner_unique_02" noscene 
+	speak "centaur_warrunner_arrogant_02" noscene 
+	speak "centaur_warrunner_debuff_enemy_09" noscene 
+	speak "centaur_warrunner_pleased_10" noscene 
 	
 }
 
 Rule centaur_warrunner_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTheOmexeArena 
 	response centaur_warrunner_play_the_omexe_arena
 }
 
@@ -414,13 +566,16 @@ Rule centaur_warrunner_play_the_omexe_arena_rule
 Response centaur_warrunner_play_berserkers_call
 {
 	speak "centaur_warrunner_multi_damage_large_07" noscene 
-	speak "centaur_warrunner_multi_damage_large_01" noscene 
+	speak "centaur_warrunner_multi_damage_large_10" noscene 
+	speak "centaur_warrunner_multi_damage_small_06" noscene 
+	speak "centaur_warrunner_buff_ally_07" noscene 
+	speak "centaur_warrunner_arrogant_09" noscene 
 	
 }
 
 Rule centaur_warrunner_play_berserkers_call_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceBerserkersCall ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceBerserkersCall 
 	response centaur_warrunner_play_berserkers_call
 }
 
@@ -429,27 +584,51 @@ Response centaur_warrunner_play_duel
 	speak "centaur_warrunner_single_target_damage_06" noscene 
 	speak "centaur_warrunner_single_target_damage_10" noscene 
 	speak "centaur_warrunner_multi_damage_small_02" noscene 
+	speak "centaur_warrunner_single_target_damage_04" noscene 
+	speak "centaur_warrunner_angry_05" noscene 
 	
 }
 
 Rule centaur_warrunner_play_duel_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceDuel ThisIsImportant
+	criteria IsNotImp  PlayCard IsTargetCentaurWarrunner IsSourceDuel 
 	response centaur_warrunner_play_duel
 }
+
+
 
 
 Response centaur_warrunner_play_time_of_triumph
 {
 	speak "centaur_warrunner_enigmatic_07" noscene 
 	speak "centaur_warrunner_arrogant_03" noscene 
-	speak "centaur_warrunner_enigmatic_04" noscene 
+	speak "centaur_warrunner_arrogant_01" noscene 
+	speak "centaur_warrunner_angry_07" noscene 
+	speak "centaur_warrunner_angry_09" noscene 
 	
 }
 
 Rule centaur_warrunner_play_time_of_triumph_rule
 {
-	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTimeOfTriumph ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceTimeOfTriumph 
 	response centaur_warrunner_play_time_of_triumph
+}
+
+
+Response centaur_warrunner_play_enough_magic
+{
+	speak "centaur_warrunner_angry_01" noscene 
+	speak "centaur_warrunner_angry_02" noscene 
+	speak "centaur_warrunner_angry_03" noscene 
+	speak "centaur_warrunner_angry_04" noscene 
+	speak "centaur_warrunner_angry_06" noscene 
+	speak "centaur_warrunner_angry_08" noscene 
+	
+}
+
+Rule centaur_warrunner_play_enough_magic_rule
+{
+	criteria IsNotImp  PlayCard AllyHasCentaurWarrunner IsSourceEnoughMagic 
+	response centaur_warrunner_play_enough_magic
 }
 

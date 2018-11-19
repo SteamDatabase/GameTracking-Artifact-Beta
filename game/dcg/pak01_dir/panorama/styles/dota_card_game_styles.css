@@ -28,6 +28,10 @@
 @define textColorItemCost: #7b7c00;
 @define textColorFaction: orange;
 
+@define uiDarkGrey: #454f4f;
+@define uiStandardGrey: #7c8e8e;
+@define uiLightGrey: #bbc5ca;
+@define uiBrightGrey: #e1e1dd;
 @define uiNeutralGrey: #839595;
 
 @define rarityBasic: #5c5c5c;
@@ -40,9 +44,12 @@
 @define abilityBorderGreen: #779c3d;
 @define abilityBorderRed: #b42a23;
 
-@define loadDeckPopupDuration: 0.2s;
-
 @define abilityGradient: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, #d0b891 ), color-stop( .3, #d0b891 ), color-stop( .8, #9d7f68 ), to( #9d7f68 ) );
+
+@define backgroundGradient: gradient( linear, 0% 0%, 100% 0%, from( rgba(68, 107, 122, 0.678) ), to( rgba(64, 103, 109, 0) ) );
+@define backgroundGradientHover: gradient( linear, 0% 0%, 100% 0%, from( rgba(68, 107, 122, 0.4) ), to( rgba(73, 125, 146, 0) ) );
+@define backgroundGradientActive: gradient( linear, 0% 0%, 100% 0%, from( rgba(25, 41, 43, 0.678) ), to( rgba(33, 51, 54, 0) ) );
+
 
 /* ------------------------------------------------------------------------- */
 /*  Do we need these? Clean this up!                                         */
@@ -60,6 +67,8 @@
 @define dotaplaytimegradient: gradient( linear, 0% 0%, 0% 100%, from( #3db451 ), color-stop( 0.5, #beffc7), color-stop( 0.5, #91d69a), to( #3db451 ) );
 
 
+@define localplayergradient: gradient( linear, 0% 0%, 0% 100%, from( #BBCAEA18 ), color-stop( 0.5, #ffffff18), color-stop( 0.5, #D9DFEC18), to( #BBCAEA18 ) );
+
 /* ContextMenu - used in code -- dont rename */
 @define ContextMenuFadoutTime: 0.2s;
 
@@ -69,40 +78,39 @@
 @define mousepanningcursorsize: 64px;
 
 @define monospaceFont: Courier New,Courier;
-
-@define cardHeaderLarge: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
-@define cardHeaderSmall: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
-@define cardCondensed: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
-@define cardBodyText: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+@define cardHeaderLarge: Radiance,FZKai-Z03,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 
 /* ------------------------------------------------------------------------- */
 /*  Fonts                                                                    */
 /* ------------------------------------------------------------------------- */
-/* Default fonts */
-Label, TextEntry {
-  	font-family: Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
-}
-
-Panel
+Label, TextEntry 
 {
-	tooltip-body-position: 50% 50%;
+    font-family: Radiance,FZKai-Z03,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
-/* Default font, but with monospaced numbers for use in things like the scoreboard */
-Label.MonoNumbersFont, TextEntry.MonoNumbersFont {
-    font-family: monospaceFont;
-    //font-family: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+Label.TitleFont, TextEntry.TitleFont 
+{
+    font-family: Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
-/* Title Fonts */
-Label.TitleFont, TextEntry.TitleFont {
+Label.MonoFont, TextEntry.MonoFont 
+{
     font-family: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
-/* Monospaced fonts, used mostly for debugging */
-Label.MonoFont, TextEntry.MonoFont
+Label.CondensedFont, TextEntry.CondensedFont
 {
-	font-family: monospaceFont;
+    font-stretch: condensed;
+}
+
+Button Label
+{
+	text-overflow: shrink;
+}
+
+Panel 
+{
+    tooltip-body-position: 50% 50%;
 }
 
 @keyframes 'ProbablyUnlocalizedAnimation'
@@ -134,9 +142,67 @@ Label.ProbablyUnlocalizedText
 	animation-iteration-count: infinite;
 }
 
+.DeckSummaryDoubleLine
+{
+	background-image:  url("s2r://panorama/images/deck_list_components/bg_double_line_png.vtex");
+	background-repeat: no-repeat;
+	border-top: 1px solid  #3e4d5388;
+	padding-top: 3px;
+	padding-left: 8px;
+	min-height: 15px;
+}
+
+.DeckSummaryDoubleLineRight
+{
+	background-image:  url("s2r://panorama/images/deck_list_components/bg_double_line_png.vtex");
+	background-repeat: no-repeat;
+	border-top: 1px solid  #3e4d5300;
+	padding-top: 0px;
+	margin-top: -4px;
+	padding-left: 5px;
+	min-height: 15px;
+}
+
+
+.DeckSummarySingleLine
+{
+	background-image:  url("s2r://panorama/images/deck_list_components/bg_single_line_png.vtex");
+	background-repeat: no-repeat;
+	border-top: 1px solid  #3e4d5388;
+	padding-top: 3px;
+	padding-left: 9px;
+	min-height: 15px;
+	
+}
+
 /* ------------------------------------------------------------------------- */
 /*  Card Text Colorization                                                   */
 /* ------------------------------------------------------------------------- */
+
+.DarkGrey 
+{
+	color: uiDarkGrey;
+}
+
+.StandardGrey 
+{
+	color: uiStandardGrey;
+}
+
+.LightGrey 
+{
+	color: uiLightGrey;
+}
+
+.BrightGrey 
+{
+	color: uiBrightGrey;
+}
+
+.NeutralGrey 
+{
+	color: uiNeutralGrey;
+}
 
 .CardNameText {
     color: khaki;
@@ -234,21 +300,38 @@ Label
 }
 
 /* ------------------------------------------------------------------------- */
+/*  TextLink                                                                 */
+/* ------------------------------------------------------------------------- */
+
+.TextLink
+{
+	font-weight: Bold;
+}
+
+.TextLink:hover
+{
+	text-decoration: underline;
+}
+
+
+/* ------------------------------------------------------------------------- */
 /*  Text Entry                                                               */
 /* ------------------------------------------------------------------------- */
 
 TextEntry
 {
-	border: 1px solid baseBorder;
+	border: 1px solid black;
 	width: 352px;
 	height: 36px;
 
 	padding: 5px 7px 3px 7px;
 
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #111111FF ), to( #222222FF ) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #1C1F26 ), to( #20232C ) );
 
 	color: white;
 	font-size: 20px;
+
+	box-shadow: inset #00000066 3px 3px 6px 6px;
 
 	text-overflow: clip;
 	white-space: nowrap;
@@ -262,10 +345,12 @@ TextEntry #PlaceholderText
 	transition-duration: 0.2s;
 
 	color: #555555;
-	font-size: 12px;
+	font-size: 16px;
+	font-weight: lighter;
     vertical-align: center;
 	text-align: left;
 }
+
 
 TextEntry:focus #PlaceholderText, TextEntry.HasInput #PlaceholderText
 {
@@ -275,42 +360,54 @@ TextEntry:focus #PlaceholderText, TextEntry.HasInput #PlaceholderText
 .TextEntryIMECandidateRow
 {
 	flow-children: right;
-	background-color: #000000;
 }
 
 .TextEntryIMECandidateRowPrefix
 {
 	font-size: 20px;
-	font-weight: normal;
-	color:#FFFFFF;
-	background-color: #000000;
+	color: uiStandardGrey;
+	background-color: #00000099;
 	vertical-align: middle;
+	padding-left: 12px;
+	padding-right: 8px;
+	padding-top: 2px;
+	min-width: 36px;
+	height: 28px;
+	text-align: center;
 }
 
+.TextEntryIMECandidateRowSuffix.ProbablyUnlocalizedText,
 .TextEntryIMECandidateRowSuffix
 {
-	font-size: 25px;
-	font-weight: normal;
-	color:#FFFFFF;
-	background-color: #333333;
+    animation-name: none;
+	font-size: 22px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 2px;
+	height: 28px;
+	color: #e1e1dd ;
 	vertical-align: middle;
+	min-width: 80px;
 }
 
 .TextEntryIMECandidateRow.Highlight .TextEntryIMECandidateRowSuffix
 {
-	background-color: #4444FF;
+	background-color: backgroundGradient;
+}
+
+.TextEntryIMECandidateRow.Highlight .TextEntryIMECandidateRowPrefix
+{
+	background-color: #283740cc;
 }
 
 .TextEntryIMEReadingString
 {
-	font-size: 20px;
-	font-weight: normal;
+	font-size: 18px;
 	color: #DDDDDD;
-	background-color: #333333;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	padding: 5px;
-	border: 1px solid #FFFFFF;
+	//border: 1px solid #FFFFFF;
 }
 
 .TextEntryIMEReadingString.NoReadingString
@@ -321,9 +418,9 @@ TextEntry:focus #PlaceholderText, TextEntry.HasInput #PlaceholderText
 .TextEntryIMECandidateList
 {
 	color: #DDDDDD;
-	background-color: #333333;
+	background-color: #1f222e;
 	flow-children: down;
-	border: 1px solid #FFFFFF;
+	//border: 1px solid #FFFFFF;
 }
 
 TextEntryIMEControls
@@ -363,7 +460,6 @@ TextEntryAutocomplete > Label
 	background-color: #3d4448;
 
 	font-size: 18px;
-	font-weight: normal;
 	z-index: 0;
 	border-top: 1px solid #00000066;
 	border-bottom: 1px solid #00000066;
@@ -435,7 +531,7 @@ VerticalScrollBar .ScrollThumb, HTMLVerticalScrollBar .ScrollThumb
 {
 	width: 8px;
 	min-height: 32px;  // need to get the scrollthumb to hit the bottom of the scrollbar
-	background-color: #a2a28e;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4b5355 ), to( #4b5355 ) );
 	border-top: 1px solid #aaaaaa22;
 	border-right: 1px solid #000000aa;
 	transition-property: position;
@@ -613,7 +709,7 @@ a
 
 a:hover
 {
-	text-decoration: underline;
+	//text-decoration: underline;
 }
 
 b
@@ -646,9 +742,9 @@ h2
 	font-weight: bold;
 }
 
-pre
+pre 
 {
-	font-family: monospaceFont;
+    font-family: RadianceM,Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
 }
 
 .CarouselDot {
@@ -786,16 +882,16 @@ EdgeScrollBar.Vertical #MaxButton {
 //
 SimpleContextMenu .ContextMenuBody
 {
-	padding: 5px;
+	padding: 4px;
 
 	flow-children: down;
 	width: 200px;
 
 	opacity: 1.0;
 
-	background-color: #212828;
-	border: 2px solid black;
-	box-shadow: #000000 2px 2px 8px 0px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333742 ), color-stop( 0.005, #272b36 ), color-stop( .5, rgb(30, 33, 45) ), to( #252934 ) );
+	//border: 2px solid black;
+	box-shadow: fill #000000 2px 2px 4px;
 }
 
 SimpleContextMenu.Wider .ContextMenuBody
@@ -809,8 +905,9 @@ SimpleContextMenu .ContextMenuBody Button
 
 	padding: 6px 10px 6px 10px;
 	margin: 0px 0px;
-	border: 1px solid black;
-	background-color: #00000040;
+	//border: 1px solid black;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #abe9f004 ), to( #d0bce905) );
+	margin: 1px;
 
 	transition-property: background-color;
 	transition-duration: 0.2s;
@@ -823,7 +920,7 @@ SimpleContextMenu .ContextMenuBody Label
 
 SimpleContextMenu .ContextMenuBody Button:enabled:hover
 {
-	background-color: #00000080;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #abe9f014 ), to( #d0bce915) );
 }
 
 SimpleContextMenu .ContextMenuBody Button:enabled:hover Label
@@ -833,9 +930,17 @@ SimpleContextMenu .ContextMenuBody Button:enabled:hover Label
 
 SimpleContextMenu .ContextMenuBody Button:disabled Label
 {
-	color: #444444;
+	color: #4a5555;
 }
-
+				  
+SimpleContextMenu .ContextMenuSeparator
+{
+	width: 100%;
+	height: 1px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background-color: #909090;
+}
 
 //
 // Simple Convenience styles
@@ -914,6 +1019,13 @@ ToggleButton, DCGSettingsCheckbox
 	margin-top: 5px;
 }
 
+.UnownedCardsFilter ToggleButton
+{
+	padding: 0px 0px;	
+	margin-top: 0px;
+	flow-children: down;
+}
+
 ToggleButton .TickBox, DCGSettingsCheckbox .TickBox
 {
 	width: 18px;
@@ -929,18 +1041,34 @@ ToggleButton .TickBox, DCGSettingsCheckbox .TickBox
 
 }
 
+.UnownedCardsFilter .TickBox
+{
+	width: 22px;
+	height: 22px;	
+	vertical-align: top;
+	border: 0px solid #5e686966;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #abbbf015 ), to( #d0bce917) );
+}
+
 ToggleButton:selected .TickBox, DCGSettingsCheckbox:selected .TickBox
 {
+	//temp
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #e7f6f5 ), to( #a0d6d7 ) );
-	border: 3px solid #000000;
-	box-shadow: #5b62bf77 -4px -4px 8px 8px;
+	border: 1px solid white;
+	box-shadow: #5b62bf77 -4px -4px 16px 8px;
+}
 
+.UnownedCardsFilter ToggleButton:selected .TickBox
+{
+	border: 0px solid green;
+//	box-shadow: #5b62bf77 -4px -4px 8px 8px;
 }
 
 ToggleButton:hover .TickBox, DCGSettingsCheckbox:hover .TickBox
 {
 	//background-color: gradient( linear, 0% 0%, 0% 100%, from( #e7f6f5 ), to( #a0d6d7 ) );
-	border: 2px solid #697879;
+	box-shadow: #5b62bf -4px -4px 4px 8px;
+	border: 1px solid #FFFFFF88;
 }
 
 ToggleButton Label, DCGSettingsCheckbox Label
@@ -967,7 +1095,7 @@ ToggleButton:selected Label, DCGSettingsCheckbox:selected Label
 
 ToggleButton:disabled Label, DCGSettingsCheckbox:disabled Label
 {
-	color: #333333;
+	color: uiDarkGrey;
 }
 
 ToggleButton:disabled .TickBox, DCGSettingsCheckbox:disabled .TickBox
@@ -1305,18 +1433,18 @@ RadioButton:disabled Label
 
 .PopupButton
 {
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #5a6c75 ), to( #3d4a50 ) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #374a58 ), to( #393c4f ) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #677C89 ), color-stop( .06, #374a58 ), color-stop( .5, #394657 ), to( #393c4f ) );
 	border: 1px solid black;
+	border-radius: 2px;
 
-	margin: 8px;
-	//margin-left: 32px;
-	//margin-right: 32px;
 	min-width: 192px;
+    min-height:52px;
 	padding: 5px 10px 5px 10px;
-	border-top: 1px solid #ffffff44;
-	border-right: 1px solid #4e5b60;
-	border-left: 1px solid #4e5b60;
-	border-bottom: 1px solid #00000088;
+	border-top: 1px solid uiDarkGrey;
+	border-right: 0px solid uiStandardGrey;
+	border-left: 0px solid uiStandardGrey;
+	border-bottom: 0px solid uiStandardGrey;
 
 	transition-property: background-color, wash-color;
 	transition-delay: 0.0s;
@@ -1324,23 +1452,67 @@ RadioButton:disabled Label
 	transition-timing-function: linear;
 }
 
+
+#Button1
+{
+    horizontal-align: right;
+    width: fill-parent-flow(1);
+    min-width: 260px;
+    margin-left: 8px;
+}
+
+#Button0
+{
+    horizontal-align: left;
+    width: fill-parent-flow(1);
+    min-width: 260px;
+    margin-right: 8px;
+}
+
+SimpleContextMenu #Button1 
+{
+	margin-left: 1px;
+}
+
+SimpleContextMenu #Button0
+{
+		margin-right: 1px;
+}
+
 .PopupButton Label
 {
-	color: white;
-	font-size: 24px;
+	color: uiBrightGrey;
+	color: #97ACAD;
+	font-size: 26px;
 	horizontal-align: center;
 	vertical-align: middle;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	font-weight: lighter;
+	padding-top: 5px;
+	text-align: center;
+
+	transition-property: color;
+	transition-delay: 0.0s;
+	transition-duration: 0.1s;
+	transition-timing-function: linear;
+}
+
+.PopupButton:hover Label
+{
+	color: white;
 }
 
 .PopupButton:enabled:hover
 {
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #a9c8da ), to( #596b75 ) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgb(201, 230, 248) ), color-stop( .06, #a9c8da ), color-stop( .5, #778e9b ), to( #596b75 ) );
 }
 
 .PopupButton:disabled
 {
-	wash-color: #999999;
-	saturation: 0;
+	wash-color: uiStandardGrey;
+	saturation: 0.5;
 }
 
 .PopupButton:disabled Label
@@ -1357,11 +1529,12 @@ RadioButton:disabled Label
 {
 	border: 1px solid black;
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #272f33 ), to( #5a6c75 ) );
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #272f33 ), color-stop( .06, #272f33 ), color-stop( .5, #272f33 ), to( #5a6c75 ) );
 
 	border-top: 1px solid #00000088;
 	border-right: 1px solid #00000088;
 	border-left: 1px solid #00000088;
-	border-bottom: 1px solid #aaaaaa44;
+	border-bottom: 1px solid #00000088;
 }
 
 .PopupButton.Activated
@@ -1638,7 +1811,6 @@ RadioButton:disabled Label
 .PlayGameButton Label
 {
 	font-size: 24px;
-	font-weight: normal;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: #d5d7d7;
@@ -1823,8 +1995,7 @@ RadioButton:disabled Label
 .CloseButton:active
 {
     wash-color: white;
-    background-size: 20px 20px;
-    //pre-transform-scale2d: 0.8;
+    background-size: 26px 26px;
     sound: "ui_friends_slide_in";
 }
 
@@ -1882,7 +2053,7 @@ RadioButton:disabled Label
 
 #ContextMenuManager, #Tooltips
 {
-	z-index: 2;
+	z-index: 5;
 }
 
 .Arrow
@@ -2178,6 +2349,7 @@ DropDown Label
 	transition-property: color;
 	transition-duration: 0.15s;
 	transition-timing-function: linear;
+	text-overflow: shrink;
 }
 
 DropDown:focus Label
@@ -2200,7 +2372,7 @@ DropDownMenu
 	color: #e1e1e1;
 	font-size: 28px;
 	overflow: squish scroll;
-	z-index: 0;
+	z-index: 10000;
 	transform: translateY(-40px);
 	opacity: 0.0;
 
@@ -2224,7 +2396,6 @@ DropDownMenu Label
 	background-color: #3d4448;
 
 	font-size: 18px;
-	font-weight: normal;
 	z-index: 0;
 	border-top: 1px solid #00000066;
 	border-bottom: 1px solid #00000066;
@@ -2259,6 +2430,97 @@ DropDown.ThinDropDown
 .ThinDropDown Label
 {
 	font-size: 18px;
+}
+
+#dropDownSortAllDropDownMenu
+{
+	width: 130px;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #2e3048dd ), to( #343046dd) );
+	box-shadow: fill #000000cc -2px 2px 4px 4px;
+	margin-top: 3px;
+}
+
+#dropDownSortAllDropDownMenu #lblSortByPrice
+{
+    visibility: collapse;
+}
+
+#dropDownSortAllDropDownMenu.MarketPricesVisible #lblSortByPrice
+{
+    visibility: visible;
+}
+
+#dropDownSortAllDropDownMenu Label
+{
+	width: 100%;
+	padding: 6px 0px 3px 0px;
+	margin-top: 0px 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-left: 6px;
+	background-color: none;
+
+	color: #ffffff99;	
+
+	font-size: 15px;
+	z-index: 0;
+	border-top: 1px solid #00000066;
+	border-bottom: 1px solid #00000066;
+
+	transition-property: background-color;
+	transition-duration: 0.0s;
+	transition-timing-function: ease-in-out;
+	
+	font-weight: thin; 
+	text-transform: uppercase;
+}
+
+#dropDownSortAllDropDownMenu Label:hover
+{
+	brightness: 2;
+	//background-color: gradient( linear, 100% 0%, 0% 0%, from( #201f24 ), to( #343046) );
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #3f4266dd ), to( #3f3a56dd) );
+}
+
+#dropDownSortMarketAllDropDownMenu
+{
+	width: 130px;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #201f24dd ), to( #343046dd) );
+	box-shadow: fill #000000cc -2px 2px 4px 4px;
+	margin-top: 3px;
+}
+
+#dropDownSortMarketAllDropDownMenu Label
+{
+	width: 100%;
+	padding: 6px 0px 3px 0px;
+	margin-top: 0px 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-left: 6px;
+	background-color: none;
+
+	color: #ffffff99;
+	
+
+	font-size: 15px;
+	z-index: 0;
+	border-top: 1px solid #00000066;
+	border-bottom: 1px solid #00000066;
+
+	transition-property: background-color;
+	transition-duration: 0.0s;
+	transition-timing-function: ease-in-out;
+	
+	font-weight: thin; 
+	text-transform: uppercase;
+	
+}
+
+#dropDownSortMarketAllDropDownMenu Label:hover
+{
+	brightness: 2;
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #201f24 ), to( #343046) );
 }
 
 // AvatarImage
@@ -2508,13 +2770,394 @@ Slider.HorizontalSlider #SliderThumb:disabled, SlottedSlider.HorizontalSlider #S
 	transform: none;
 }
 
-DCGDashboardPopupManager #DimBackground
+DCGDashboardPopupManager .PopupPanel #DimBackground
 {
 	background-blur: gaussian( 7 );
-	background-color: #000000ee;
+	background-color: #000000dd;
+	visibility: visible;
 }
 
 DCGDashboardPopupManager #DimBackground.Hidden
 {
 	visibility: collapse;
+}
+
+/* Styles for the DragZoom Panel */
+DragZoom
+{
+	z-index: 2;
+	flow-children: down;
+}
+
+#DragZoomContentPanel
+{
+	vertical-align: middle;
+	horizontal-align: middle;
+	overflow: noclip;
+	z-index: 1;
+	transition-property: transform, position;
+	transition-delay: 0.0s;
+	transition-timing-function: ease-in-out;
+}
+
+.DragZoomFastTransition
+{
+	transition-duration: 0.0s;
+}
+
+.DragZoomSlowTransition
+{
+	transition-duration: 0.5s;
+}
+
+/* End of Styles for DragZoom Panel */
+
+
+.FillWidth
+{
+	width: fill-parent-flow( 1.0 );
+}
+.FillHeight
+{
+	height: fill-parent-flow( 1.0 );
+}
+
+.InfoIcon
+{
+	width: 18px;
+	height: 18px;
+	background-image: url("s2r://panorama/images/status_icons/information_psd.vtex");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-left: 6px;
+	margin-right: 6px;
+
+	tooltip-position: right;
+	tooltip-body-position: 50% 10%;
+	wash-color: #888888;
+	vertical-align: middle;
+
+	transition-property: wash-color;
+	transition-timing-function: ease-in-out;
+	transition-duration: 0.2s;
+
+}
+
+.Spinner 
+{
+	width: 28px;
+	height: 28px;
+	background-image: url("s2r://panorama/images/status_icons/loadingthrobber_round_psd.vtex");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: contain;
+	animation-name: SpinnerRotate;
+	animation-duration: 1.0s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes 'SpinnerRotate' {
+	0%
+	{
+		transform: rotateZ( 360deg );
+	}
+
+	50% 
+	{
+		transform: rotateZ( 180deg );
+	}
+
+	100% 
+	{
+		transform: rotateZ( 0deg );
+	}
+}
+
+@keyframes 'HeroLineupPortraitGlowAnimation'
+{
+    0%
+    {
+        box-shadow: #0dfffc 0px 0px 2px 0px;
+    }
+
+    50%
+    {
+        box-shadow: #0dfffc 0px 0px 6px 0px;
+    }
+
+    100%
+    {
+        box-shadow: #0dfffc 0px 0px 2px 0px;
+    }
+}
+
+.BlueButtonSmall
+{
+	margin-right: 4px;
+    background-color: #00000060;
+	height: 26px;
+	padding-left: 8px;
+	padding-right: 8px;
+	vertical-align: center;
+    min-width: 20%;
+}
+
+.SaveLoadClearButton
+{
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #34364b ), to( #2f3f4b ) );
+    margin-right: 2px;
+	margin-left: 2px;
+	height: 32px;
+	padding-left: 8px;
+	padding-right: 8px;
+	vertical-align: center;
+    min-width: 126px;
+	//width: 33%;
+
+    border-top: 1px solid #ffffff05;
+	border-left: 1px solid #ffffff05;
+	
+	transition-property: brightness;
+	transition-duration: .2s; 
+}
+
+.BlueButtonSmall Label,
+.SaveLoadClearButton Label
+{
+	text-align: center;
+	color: uiNeutralGrey;
+	font-size: 16px;
+	font-weight: light;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	horizontal-align: center;
+	vertical-align: center;
+	margin-top: 7px;
+	text-overflow: shrink; 
+	transition-property: brightness, text-shadow, color;
+	transition-duration: .2s; 
+}
+
+.Language_russian .BlueButtonSmall Label,
+.Language_russian .SaveLoadClearButton Label
+{
+	letter-spacing: 0px;
+}
+
+.BlueButtonSmall:disabled,
+.SaveLoadClearButton:disabled
+{
+    opacity: 0.2;
+}
+
+.BlueButtonSmall:enabled:hover Label,
+.SaveLoadClearButton:enabled:hover Label
+{
+    color: #ffffffaa;
+    text-shadow: 0px 0px 12px .5 #0dfffc88;
+}
+
+.BlueButtonSmall:enabled:hover,
+.SaveLoadClearButton:enabled:hover
+{
+	box-shadow: fill #00000044 0px 1px 15px 0px;
+	brightness: 2; 
+}
+
+.BlueButtonSmall:active,
+.SaveLoadClearButton:active
+{
+	box-shadow: fill #000000 0px 0px 10px 0px;
+}
+
+.BlueButtonSmall:active Label,
+.SaveLoadClearButton:active Label
+{
+	color: #ffffff70;
+	text-shadow: 0px 0px 2px .25 #0dfffc70;
+}
+
+.NoCompetitive .HideNoCompetitive
+{
+    visibility: collapse;
+}
+
+.NoFeaturedEvent .HideNoFeaturedEvent
+{
+	visibility: collapse;
+}
+
+.FlowChildrenDown
+{
+    flow-children: down;
+}
+
+
+.PlayHighlight.SceneLoaded
+{
+	width: 100%;
+	height: 100%;
+	transition-property: opacity, wash-color;
+	transition-duration: 0.21s;
+	transition-timing-function: ease-out;
+	opacity: 0;
+}
+
+#OnlineMatchPanel.DeckSelected .PlayHighlight.SceneLoaded,
+.PlayerDeckSelected.AIDeckSelected .PlayHighlight.SceneLoaded
+{
+	opacity: 1;
+}
+
+.DebugBorder
+{
+ 	border: 1px solid yellow;
+}
+
+DCGDeckList
+{
+	background-color: gradient( linear, 100% 0%, 100% 100%, from( #00000044 ), to( #00000011 ) );	
+	box-shadow: inset #00000088 20px 20px 40px 40px;
+	border-top: 4px solid #00000010;
+	border-right: 4px solid #a7cff107; 
+	border-bottom: 4px solid #a7cff108; 
+	border-left: 4px solid #00000007;
+}
+
+.PurchaseRow
+{
+	width: 100%;
+	height: fit-children;
+	flow-children: right;
+	opacity: 1;
+	max-height: 100%;
+	font-size: 20px;
+	padding: 4px;
+	tooltip-body-position: 100% 100%;
+	tooltip-arrow-position: 50% 50%;
+
+	transition-property: max-height;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.PurchaseButtonContents
+{
+	horizontal-align: center;
+	vertical-align: middle;
+	flow-children: right;
+}
+
+
+.PurchaseButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #60842c ), to( #40601d ));
+	border-right: 1px solid #00000085;
+
+	width: fill-parent-flow( 1.0 );
+
+	transition-property: background-color, border;
+	transition-duration: 0.15s;
+	transition-timing-function: linear; 
+}
+
+
+
+.QuantityDropDown
+{
+	width: 128px;
+	height: 44px;
+	margin-left: 0px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #47662b ), to( #2e4a17 ));
+	box-shadow: none;
+	padding: 0px 10px;
+	background-position: right 23px 44%;
+	background-size: 17px 17px;
+}
+
+.QuantityDropDown Label
+{
+	vertical-align: middle;
+	font-size: 18px;
+	margin: 0px 0px 0px 0px;
+    color: #ffffff;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.QuantityDropDown:enabled:hover
+{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #60842c ), to( #40601d ));
+}
+
+.PurchaseLabel
+{
+
+	horizontal-align: center;
+	vertical-align: middle;
+	text-align: left;
+	color: #ffffff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 20px;
+	margin-top: 4px;
+}
+
+.PackPriceLabel 
+{
+	text-align: right;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	min-width: 90px;
+	vertical-align: middle;
+}
+
+
+.ColoredButton
+{
+	border-top: 1px solid #ffffff11;
+	border-left: 1px solid #ffffff06;
+	border-right: 1px solid #00000044;
+	border-bottom: 1px solid #00000088;
+	height: 44px;
+}
+
+.ColoredButton.Hover:enabled, .ColoredButton:hover:enabled
+{
+	brightness: 1.5;
+}
+.ColoredButton:active
+{
+	brightness: 2.0;
+}
+
+.PackDetailsRow
+{
+	flow-children: right;
+	tooltip-position: left;
+}
+
+.GCStatusVisible .PackDetailsRow
+{
+	visibility: collapse;
+}
+
+
+.PurchaseItemName
+{
+	margin: 4px 4px 4px 4px;
+	horizontal-align: center;
+    vertical-align: top;
+    font-size: 24px;
+
+	letter-spacing: 1px;
+}
+
+.FillerWidth
+{
+	width: fill-parent-flow(1);
+	height: 100%;
 }

@@ -1,7 +1,8 @@
 ///////////////////////
-//**URSA - HERO//
+//**Keefe the Bold - HERO//
 ///////////////////////
 
+WhitelistName "Whitelist Card 4003"
 
 ////////////////
 //EQUIP WEAPON//
@@ -312,13 +313,120 @@ Rule heal_ogre_bruiser_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response ogre_bruiser_ally_ogre_magi
+{
+	speak "ogre_bruiser_unique_01" noscene
+	speak "ogre_bruiser_unique_02" noscene
+	speak "ogre_bruiser_unique_03" noscene
+
+}
+
+Rule ogre_bruiser_ally_ogre_magi_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasOgreMagi ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_ogre_magi
+}	
+
+Response ogre_bruiser_ally_ogre_conscript
+{
+	speak "ogre_bruiser_unique_04" noscene
+	speak "ogre_bruiser_unique_05" noscene
+	speak "ogre_bruiser_unique_06" noscene
+
+}
+
+Rule ogre_bruiser_ally_ogre_conscript_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasOgreConscript AllyHasNoLegionCommander ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_ogre_conscript
+}	
+
+Response ogre_bruiser_ally_ogre_corpse_tosser
+{
+	speak "ogre_bruiser_unique_07" noscene
+	speak "ogre_bruiser_unique_08" noscene
+	speak "ogre_bruiser_unique_09" noscene
+
+}
+
+Rule ogre_bruiser_ally_ogre_corpse_tosser_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasOgreCorpseTosser ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_ogre_corpse_tosser
+}	
+
+Response ogre_bruiser_enemy_quoidge_pitfighter
+{
+	speak "ogre_bruiser_unique_10" noscene
+	speak "ogre_bruiser_unique_11" noscene
+	speak "ogre_bruiser_unique_12" noscene
+}
+
+Rule ogre_bruiser_enemy_quoidge_pitfighter_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser EnemyHasPitFighterOfQuoidge ThisIsImportant
+	matchonce
+	response ogre_bruiser_enemy_quoidge_pitfighter
+}	
+
+Response ogre_bruiser_ally_crystal_maiden
+{
+	speak "ogre_bruiser_unique_13" noscene
+	speak "ogre_bruiser_unique_14" noscene
+
+}
+
+Rule ogre_bruiser_ally_crystal_maiden_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasCrystalMaiden ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_crystal_maiden
+}	
+
+Response ogre_bruiser_ally_prellex
+{
+	speak "ogre_bruiser_unique_15" noscene
+	speak "ogre_bruiser_unique_16" noscene
+	speak "ogre_bruiser_unique_17" noscene
+
+}
+
+Rule ogre_bruiser_ally_prellex_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasPrellex AllyHasNoKanna ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_prellex
+}	
+
+Response ogre_bruiser_ally_kanna
+{
+	speak "ogre_bruiser_unique_18" noscene
+	speak "ogre_bruiser_unique_19" noscene
+	speak "ogre_bruiser_unique_20" noscene
+
+}
+
+Rule ogre_bruiser_ally_kanna_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasOgreBruiser AllyHasKanna AllyHasNoPrellex ThisIsImportant
+	matchonce
+	response ogre_bruiser_ally_kanna
+}	
+
+
+
+
+
 ///////////////////////////
 //PLAY SET ONE RED CARDS///
 ///////////////////////////
 
 Response ogre_bruiser_play_path_of_the_bold
 {
-	speak "ogre_bruiser_cast_spell_10" noscene 
+	speak "ogre_bruiser_debuff_enemy_09" noscene 
 	speak "ogre_bruiser_buff_ally_03" noscene 
 	speak "ogre_bruiser_buff_ally_01" noscene 
 	
@@ -327,21 +435,22 @@ Response ogre_bruiser_play_path_of_the_bold
 
 Rule ogre_bruiser_play_path_of_the_bold_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourcePathOfTheBold ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourcePathOfTheBold 
 	response ogre_bruiser_play_path_of_the_bold
 }
 
 
 Response ogre_bruiser_play_temple_of_war
 {
-	speak "ogre_bruiser_arrogant_06" noscene 
-	speak "ogre_bruiser_arrogant_08" noscene 
+	speak "ogre_bruiser_buff_ally_06" noscene 
+	speak "ogre_bruiser_debuff_enemy_03" noscene 
+	speak "ogre_bruiser_multi_damage_small_04" noscene 
 	
 }
 
 Rule ogre_bruiser_play_temple_of_war_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTempleOfWar ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTempleOfWar 
 	response ogre_bruiser_play_temple_of_war
 }
 
@@ -349,66 +458,70 @@ Response ogre_bruiser_play_nether_ward
 {
 	speak "ogre_bruiser_cast_spell_01" noscene 
 	speak "ogre_bruiser_debuff_enemy_10" noscene
+	speak "ogre_bruiser_single_target_damage_03" noscene
 	
 }
 
 Rule ogre_bruiser_play_nether_ward_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceNetherWard ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceNetherWard 
 	response ogre_bruiser_play_nether_ward
 }
 
 Response ogre_bruiser_play_burning_oil
 {
-	speak "ogre_bruiser_arrogant_01" noscene 
-	speak "ogre_bruiser_multi_damage_small_02" noscene 
-	speak "ogre_bruiser_debuff_enemy_03" noscene 
+	speak "ogre_bruiser_angry_02" noscene 
+	speak "ogre_bruiser_concerned_06" noscene 
+	speak "ogre_bruiser_multi_damage_large_08" noscene 
 	
 }
 
 Rule ogre_bruiser_play_burning_oil_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceBurningOil ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceBurningOil 
 	response ogre_bruiser_play_burning_oil
 }
 
 Response ogre_bruiser_play_grand_melee
 {
+	speak "ogre_bruiser_multi_damage_large_01" noscene 
+	speak "ogre_bruiser_multi_damage_large_04" noscene 
 	speak "ogre_bruiser_multi_damage_small_03" noscene 
-	speak "ogre_bruiser_multi_damage_small_07" noscene 
 	
 }
 
 Rule ogre_bruiser_play_grand_melee_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceGrandMelee ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceGrandMelee 
 	response ogre_bruiser_play_grand_melee
 }
 
 Response ogre_bruiser_play_steel_reinforcement
 {
 	speak "ogre_bruiser_buff_ally_08" noscene 
-	speak "ogre_bruiser_buff_ally_09" noscene 
+	speak "ogre_bruiser_cast_spell_06" noscene 
+	speak "ogre_bruiser_pleased_08" noscene 
 	
 	
 }
 
 Rule ogre_bruiser_play_steel_reinforcement_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceSteelReinforcement ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceSteelReinforcement 
 	response ogre_bruiser_play_steel_reinforcement
 }
 
 Response ogre_bruiser_play_the_omexe_arena
 {
-	speak "ogre_bruiser_multi_damage_large_02" noscene 
-	speak "ogre_bruiser_multi_damage_small_08" noscene 
+	speak "ogre_bruiser_pleased_07" noscene 
+	speak "ogre_bruiser_angry_01" noscene 
+	speak "ogre_bruiser_angry_09" noscene 
 	
 }
 
 Rule ogre_bruiser_play_the_omexe_arena_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTheOmexeArena ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTheOmexeArena 
 	response ogre_bruiser_play_the_omexe_arena
 }
 
@@ -417,12 +530,13 @@ Response ogre_bruiser_play_berserkers_call
 {
 	speak "ogre_bruiser_multi_damage_large_05" noscene 
 	speak "ogre_bruiser_multi_damage_large_01" noscene 
+	speak "ogre_bruiser_angry_08" noscene 
 	
 }
 
 Rule ogre_bruiser_play_berserkers_call_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceBerserkersCall ThisIsImportant IsTargetOgreBruiser
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceBerserkersCall ThisIsImportant 
 	response ogre_bruiser_play_berserkers_call
 }
 
@@ -436,14 +550,14 @@ Response ogre_bruiser_play_duel
 
 Rule ogre_bruiser_play_duel_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceDuel ThisIsImportant IsTargetOgreBruiser
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceDuel  IsTargetOgreBruiser
 	response ogre_bruiser_play_duel
 }
 
 
 Response ogre_bruiser_play_time_of_triumph
 {
-	speak "ogre_bruiser_arrogant_02" noscene 
+	speak "ogre_bruiser_arrogant_05" noscene 
 	speak "ogre_bruiser_enigmatic_07" noscene 
 	speak "ogre_bruiser_enigmatic_08" noscene 
 	speak "ogre_bruiser_enigmatic_03" noscene 
@@ -453,18 +567,20 @@ Response ogre_bruiser_play_time_of_triumph
 
 Rule ogre_bruiser_play_time_of_triumph_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTimeOfTriumph ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceTimeOfTriumph 
 	response ogre_bruiser_play_time_of_triumph
 }
 
 Response ogre_bruiser_play_enough_magic
 {
 	speak "ogre_bruiser_multi_damage_large_10" noscene 
+	speak "ogre_bruiser_multi_damage_large_06" noscene 
+	speak "ogre_bruiser_multi_damage_large_07" noscene 
 	
 }
 
 Rule ogre_bruiser_play_enough_magic_rule
 {
-	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceEnoughMagic ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasOgreBruiser IsSourceEnoughMagic 
 	response ogre_bruiser_play_enough_magic
 }

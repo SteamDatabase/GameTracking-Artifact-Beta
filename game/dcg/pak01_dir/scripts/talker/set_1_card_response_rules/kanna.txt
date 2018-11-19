@@ -2,6 +2,7 @@
 //**KANNA - HERO//
 //////////////////
 
+WhitelistName "Whitelist Card 10031"
 
 ////////////////
 //EQUIP WEAPON//
@@ -313,6 +314,45 @@ Rule heal_kanna_rule
 //HERO SPECIFIC UNIQUES//
 /////////////////////////
 
+Response kanna_enemy_prellex
+{
+	speak "kanna_unique_01" noscene
+	speak "kanna_unique_02" noscene
+}
+
+Rule kanna_enemy_prellex_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna EnemyHasPrellex ThisIsImportant
+	matchonce
+	response kanna_enemy_prellex
+}	
+
+Response kanna_ally_prellex
+{
+	speak "kanna_unique_03" noscene
+	speak "kanna_unique_04" noscene
+}
+
+Rule kanna_ally_prellex_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasPrellex ThisIsImportant
+	matchonce
+	response kanna_ally_prellex
+}	
+
+Response kanna_ally_many_creeps
+{
+	speak "kanna_unique_05" noscene
+	speak "kanna_unique_06" noscene
+}
+
+Rule kanna_ally_many_creeps_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasManyMeleeCreeps ThisIsImportant
+	matchonce
+	response kanna_ally_many_creeps
+}	
+
 Response kanna_summon_creeps
 {
 	speak "kanna_unique_07" noscene 
@@ -322,7 +362,7 @@ Response kanna_summon_creeps
 }
 Rule kanna_summon_creeps_rule
 {
-	criteria IsNotImp Summon AllyHasKanna IsTargetMeleeCreep
+	criteria IsNotImp Summon AllyHasKanna IsTargetMeleeCreep ThisIsImportant
 	response kanna_summon_creeps
 }	
 
@@ -334,7 +374,7 @@ Response kanna_diabolic_revelation
 }
 Rule kanna_diabolic_revelation_rule
 {
-	criteria IsNotImp PlayCard AllyHasKanna IsSourceDiabolicRevelation
+	criteria IsNotImp PlayCard AllyHasKanna IsSourceDiabolicRevelation ThisIsImportant
 	response kanna_diabolic_revelation
 }	
 
@@ -342,13 +382,63 @@ Response kanna_at_any_cost
 {
 	speak "kanna_unique_14" noscene 
 	speak "kanna_unique_15" noscene 
+	speak "kanna_enigmatic_02" noscene 
 }
 Rule kanna_at_any_cost_rule
 {
-	criteria IsNotImp PlayCard AllyHasKanna IsSourceAtAnyCost
+	criteria IsNotImp PlayCard AllyHasKanna IsSourceAtAnyCost ThisIsImportant
 	response kanna_at_any_cost
 }	
 
+Response kanna_ally_lich
+{
+	speak "kanna_unique_16" noscene
+	speak "kanna_unique_18" noscene
+}
+
+Rule kanna_ally_lich_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasLich ThisIsImportant
+	matchonce
+	response kanna_ally_lich
+}	
+
+Response kanna_ally_cheating_death
+{
+	speak "kanna_unique_17" noscene
+
+}
+
+Rule kanna_ally_cheating_death_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasCheatingDeath ThisIsImportant
+	matchonce
+	response kanna_ally_cheating_death
+}	
+
+Response kanna_ally_drow_ranger
+{
+	speak "kanna_unique_19" noscene
+}
+
+Rule kanna_ally_drow_ranger_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasDrowRanger ThisIsImportant
+	matchonce
+	response kanna_ally_drow_ranger
+}	
+
+Response kanna_ally_emissary_of_the_quorum
+{
+	speak "kanna_unique_20" noscene
+}
+
+Rule kanna_ally_emissary_of_the_quorum_rule
+{
+	criteria IsNotImp BeginSpellcasting AllyHasKanna AllyHasEmissaryOfTheQuorum ThisIsImportant
+	matchonce
+	response kanna_ally_emissary_of_the_quorum
+}	
 
 
 ////////////////////////////
@@ -358,119 +448,169 @@ Rule kanna_at_any_cost_rule
 Response kanna_play_barracks
 {
 	speak "kanna_arrogant_10" noscene 		
+	speak "kanna_buff_ally_06" noscene 		
+	speak "kanna_single_target_damage_04" noscene 		
+	speak "kanna_multi_damage_large_07" noscene 		
+	speak "kanna_pleased_08" noscene 		
+	speak "kanna_enigmatic_09" noscene 		
 }
 
 Rule kanna_play_barracks_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceBarracks ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceBarracks 
 	response kanna_play_barracks
 }
 
 Response kanna_play_fractured_timeline
 {
 	speak "kanna_enigmatic_09" noscene 	
+	speak "kanna_debuff_enemy_02" noscene 	
+	speak "kanna_single_target_damage_02" noscene 	
+	speak "kanna_single_target_damage_08" noscene 	
+	speak "kanna_angry_09" noscene 	
+	speak "kanna_arrogant_07" noscene 	
 	
 }
 
 Rule kanna_play_fractured_timeline_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFracturedTimeline ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFracturedTimeline 
 	response kanna_play_fractured_timeline
 }
 
 Response kanna_play_path_of_the_wise
 {
 	speak "kanna_arrogant_09" noscene 	
+	speak "kanna_single_target_damage_05" noscene 	
+	speak "kanna_single_target_damage_07" noscene 	
+	speak "kanna_multi_damage_small_10" noscene 	
+	speak "kanna_pleased_03" noscene 	
+	speak "kanna_angry_08" noscene 	
 	
 }
 
 Rule kanna_play_path_of_the_wise_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourcePathOfTheWise ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourcePathOfTheWise 
 	response kanna_play_path_of_the_wise
 }
 
 Response kanna_play_firestorm
 {
 	speak "kanna_angry_03" noscene 	
+	speak "kanna_debuff_enemy_04" noscene 	
+	speak "kanna_debuff_enemy_10" noscene 	
+	speak "kanna_multi_damage_large_03" noscene 	
+	speak "kanna_angry_10" noscene 	
+	speak "kanna_enigmatic_04" noscene 	
 	
 }
 
 Rule kanna_play_firestorm_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFirestorm ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceFirestorm 
 	response kanna_play_firestorm
 }
 
 Response kanna_play_ignite
 {
 	speak "kanna_multi_damage_large_08" noscene 	
+	speak "kanna_single_target_damage_10" noscene 	
+	speak "kanna_multi_damage_small_08" noscene 	
+	speak "kanna_multi_damage_large_06" noscene 	
+	speak "kanna_angry_07" noscene 	
+	speak "kanna_enigmatic_08" noscene 	
 	
 }
 
 Rule kanna_play_ignite_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceIgnite ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceIgnite 
 	response kanna_play_ignite
 }
 
 Response kanna_play_howling_mind
 {
 	speak "kanna_enigmatic_05" noscene 	
+	speak "kanna_buff_ally_04" noscene 	
+	speak "kanna_multi_damage_small_06" noscene 	
+	speak "kanna_multi_damage_small_07" noscene 	
+	speak "kanna_concerned_03" noscene 	
+	speak "kanna_enigmatic_02" noscene 	
 	
 }
 
 Rule kanna_play_howling_mind_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceHowlingMind ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceHowlingMind 
 	response kanna_play_howling_mind
 }
 
 Response kanna_play_aghanims_sanctum
 {
 	speak "kanna_arrogant_06" noscene 	
+	speak "kanna_buff_ally_02" noscene 	
+	speak "kanna_buff_ally_08" noscene 	
+	speak "kanna_multi_damage_large_02" noscene 	
+	speak "kanna_arrogant_04" noscene 	
+	speak "kanna_enigmatic_07" noscene 	
 	
 }
 
 Rule kanna_play_aghanims_sanctum_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAghanimsSanctum ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAghanimsSanctum 
 	response kanna_play_aghanims_sanctum
 }
 
 Response kanna_play_messenger_rookery
 {
 	speak "kanna_pleased_01" noscene 	
+	speak "kanna_buff_ally_05" noscene 	
+	speak "kanna_buff_ally_09" noscene 	
+	speak "kanna_pleased_09" noscene 	
+	speak "kanna_enigmatic_01" noscene 	
+	speak "kanna_enigmatic_06" noscene 	
 	
 }
 
 Rule kanna_play_messenger_rookery_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceMessengerRookery ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceMessengerRookery 
 	response kanna_play_messenger_rookery
 }
 
 Response kanna_play_glyph_of_confusion
 {
 	speak "kanna_enigmatic_08" noscene 	
+	speak "kanna_buff_ally_07" noscene 	
+	speak "kanna_debuff_enemy_06" noscene 	
+	speak "kanna_single_target_damage_03" noscene 	
+	speak "kanna_multi_damage_large_05" noscene 	
+	speak "kanna_angry_03" noscene 	
 	
 }
 
 Rule kanna_play_glyph_of_confusion_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceGlyphOfConfusion ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceGlyphOfConfusion 
 	response kanna_play_glyph_of_confusion
 }
 
 Response kanna_play_watchtower
 {
 	speak "kanna_pleased_03" noscene 	
+	speak "kanna_pleased_05" noscene 	
+	speak "kanna_concerned_05" noscene 	
+	speak "kanna_angry_04" noscene 	
+	speak "kanna_arrogant_02" noscene 	
+	speak "kanna_enigmatic_05" noscene 	
 	
 }
 
 Rule kanna_play_watchtower_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceWatchtower ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceWatchtower 
 	response kanna_play_watchtower
 }
 
@@ -484,7 +624,7 @@ Response kanna_play_annihilation
 
 Rule kanna_play_annihilation_rule
 {
-	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAnnihilation ThisIsImportant
+	criteria IsNotImp  PlayCard AllyHasKanna IsSourceAnnihilation 
 	response kanna_play_annihilation
 }
 

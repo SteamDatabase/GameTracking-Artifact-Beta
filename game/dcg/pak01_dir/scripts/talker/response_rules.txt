@@ -22,12 +22,14 @@ criterion "Damage"				"Concept" "TLK_DCG_DAMAGE" required
 criterion "Heal" 				"Concept" "TLK_DCG_HEAL" required
 criterion "Debuffed"			"Concept" "TLK_DCG_DEBUFFED" required
 criterion "Buffed"				"Concept" "TLK_DCG_BUFFED" required
+criterion "ChangedPosition"		"Concept" "TLK_DCG_MOVE" required
 criterion "Summon" 				"Concept" "TLK_DCG_SUMMON" required
 criterion "Death"				"Concept" "TLK_DCG_DEATH" required
 criterion "Defeat"				"Concept" "TLK_DCG_DEFEAT" required
 criterion "Victory"				"Concept" "TLK_DCG_VICTORY" required
 criterion "ThisIsImportant"	 	"concept" ">=0" weight 9001 required
-
+criterion "ThisIsSemiImportant"	 	"concept" ">=0" weight 5000 required
+criterion "ThisIsSuperImportant"	 	"concept" ">=0" weight 9500 required
 
 //Special Event Data
 criterion "IsPoke" 				"special" "1" required //SPEAK_SPECIAL_POKE
@@ -46,11 +48,6 @@ criterion "IsChatUpset"		"lineid" "4" required
 criterion "IsChatThinking"	"lineid" "5" required
 criterion "IsChatReminder"	"lineid" "6" required
 criterion "IsChatFriendly"	"lineid" "7" required
-
-//Lane related Criteria
-criterion "IsLane1"		"lane"	"1"	required
-criterion "IsLane2"		"lane"	"2"	required
-criterion "IsLane3"		"lane"	"3"	required
 
 //Momentum related criteria
 
@@ -145,6 +142,12 @@ criterion "LocalTowerGainedDeathSkull"		"gained_deathskull_local_tower"		">0"  r
 criterion "LocalTowerLostDeathSkull"		"lost_deathskull_local_tower"		">0"  required
 criterion "OpponentTowerGainedDeathSkull"	"gained_deathskull_opponent_tower"	">0"  required
 criterion "OpponentTowerLostDeathSkull"		"lost_deathskull_opponent_tower"	">0"  required
+
+criterion "LocalTowerInActiveLaneGainedDeathSkull"		"gained_deathskull_local_tower_active_lane"			">0"  required
+criterion "LocalTowerInActiveLaneLostDeathSkull"		"lost_deathskull_local_tower_active_lane"			">0"  required
+criterion "OpponentTowerInActiveLaneGainedDeathSkull"	"gained_deathskull_opponent_tower_active_lane"		">0"  required
+criterion "OpponentTowerInActiveLaneLostDeathSkull"		"lost_deathskull_opponent_tower_active_lane"		">0"  required
+
 criterion "AllyTowerGainedDeathSkull"		"gained_deathskull_ally_tower"		">0" required
 criterion "AllyTowerLostDeathSkull"			"lost_deathskull_ally_tower"		">0" required
 criterion "EnemyTowerGainedDeathSkull"		"gained_deathskull_enemy_tower"		">0" required
@@ -159,14 +162,16 @@ criterion "AllyLostDeathSkull"				"allydeathskullschange"				"<0" weight 5 requi
 criterion "EnemyGainedDeathSkull"			"enemydeathskullschange"			">0" weight 5 required
 criterion "EnemyLostDeathSkull"				"enemydeathskullschange"			"<0" weight 5 required
 
-criterion "AllyAxeGainedDeathSkull"			"gained_deathskull_ally_10020"		">0" required
-criterion "AllyAxeLostDeathSkull"			"lost_deathskull_ally_10020"		">0" required
-criterion "EnemyAxeGainedDeathSkull"		"gained_deathskull_enemy_10020"		">0" required
-criterion "EnemyAxeLostDeathSkull"			"lost_deathskull_enemy_10020"		">0" required
-criterion "AllyRixGainedDeathSkull"			"gained_deathskull_ally_10026"		">0" required
-criterion "AllyRixLostDeathSkull"			"lost_deathskull_ally_10026"		">0" required
-criterion "AllyRebelDecoyGainedDeathSkull"	"gained_deathskull_ally_10080"		">0" required
-criterion "AllyRebelDecoyLostDeathSkull"	"lost_deathskull_ally_10080"		">0" required
+criterion "AllyAxeGainedDeathSkull"						"gained_deathskull_ally_10020"		">0" required
+criterion "AllyAxeLostDeathSkull"						"lost_deathskull_ally_10020"		">0" required
+criterion "EnemyAxeGainedDeathSkull"					"gained_deathskull_enemy_10020"		">0" required
+criterion "EnemyAxeLostDeathSkull"						"lost_deathskull_enemy_10020"		">0" required
+criterion "AllyRixGainedDeathSkull"						"gained_deathskull_ally_10026"		">0" required
+criterion "AllyRixLostDeathSkull"						"lost_deathskull_ally_10026"		">0" required
+criterion "AllyRebelDecoyGainedDeathSkull"				"gained_deathskull_ally_10080"		">0" required
+criterion "AllyRebelDecoyLostDeathSkull"				"lost_deathskull_ally_10080"		">0" required
+criterion "AllyLoyalBeastLostDeathSkull"				"lost_deathskull_ally_10136"		">0" required
+criterion "EnemyLegionCommanderGainedDeathSkull"		"gained_deathskull_enemy_10069"		">0" required
 
 
 
@@ -248,6 +253,8 @@ criterion "ManyLocalUnits"		"numlocalunits"			">6" weight 1000 required
 criterion "SomeLocalUnits"		"numlocalunits"			">4" weight 1000 required
 criterion "ManyOpponentUnits"	"numopponentunits"		">6" weight 1000 required
 criterion "FewOpponentUnits"	"numopponentunits"		"<3" weight 1000 required
+criterion "OneLocalUnits"		"numlocalunits"			"1" weight 1000 required
+
 
 criterion "IsNoTargets"			"numtargets"			"0" required
 criterion "Is1Target"			"numtargets"			"1" required
@@ -255,10 +262,10 @@ criterion "Is2Targets"			"numtargets"			"2" required
 criterion "Is3Targets"			"numtargets"			"3" required
 criterion "IsManyTargets"		"numtargets"			">3" required
 
-criterion "IsSourceLocal"		"sourcelocallyowned"	"!=0" required
-criterion "IsSourceNotLocal"	"sourcelocallyowned"	"!=1" required
-criterion "IsTargetLocal"		"targetlocallyowned"	"!=0" required
-criterion "IsTargetNotLocal"	"targetlocallyowned"	"!=1" required
+criterion "IsSourceLocal"		"sourcelocallyowned"	"1" required
+criterion "IsSourceNotLocal"	"sourcelocallyowned"	"0" required
+criterion "IsTargetLocal"		"targetlocallyowned"	"1" required
+criterion "IsTargetNotLocal"	"targetlocallyowned"	"0" required
 
 criterion "IsSourceRed"			"sourcecolor"			"1" required
 criterion "IsSourceBlue"		"sourcecolor"			"2" required
@@ -321,12 +328,24 @@ criterion "IsSourceFountainFlask"		"sourcecardid"	"3004" weight 2000 required
 criterion "IsSourceHealingSalve"		"sourcecardid"	"3003" weight 2000 required
 criterion "IsSourceBlinkDagger"			"sourcecardid"	"10206" weight 2000 required
 criterion "IsSourceAssassinsVeil"		"sourcecardid"	"10202" weight 2000 required
-criterion "IsSourceApotheosisBlade"		"sourcecardid"	"10263" weight 2000 required
+criterion "IsSourceApotheosisBlade"		"sourcecardid"	"10541" weight 2000 required
 criterion "IsSourceTownPortal"			"sourcecardid"	"3006" weight 2000 required
 criterion "IsSourceCloakOfEndlessCarnage"			"sourcecardid"	"10231" weight 2000 required
+criterion "IsSourceJasperDaggers"		"sourcecardid"	"10256" weight 2000 required
+criterion "IsSourceHelmOfTheDominator"	"sourcecardid"	"10224" weight 2000 required
+criterion "IsSourceShieldOfAquila"		"sourcecardid"	"10243" weight 2000 required
+criterion "IsSourceSeraphimShield"		"sourcecardid"	"10232" weight 2000 required
+criterion "IsSourceHornOfTheAlpha"		"sourcecardid"	"10260" weight 2000 required
+criterion "IsSourcePoachingKnife"		"sourcecardid"	"10234" weight 2000 required
+criterion "IsSourceKeenfolkMusket"		"sourcecardid"	"10218" weight 2000 required
+criterion "IsSourceRumusqueVestments" 	"sourcecardid"	"10217" weight 2000 required
+criterion "IsSourceWingfallHammer" 		"sourcecardid"	"10226" weight 2000 required
+criterion "IsSourceBladeOfTheVigil" 	"sourcecardid"	"10212" weight 2000 required
+criterion "IsSourceBookOfTheDead" 		"sourcecardid"	"10235" weight 2000 required
 
 
 criterion "IsSourceGust"				"sourcecardid"	"10339" weight 2000 required
+criterion "IsSourceUnsupervisedArtillery"				"sourcecardid"	"10162" weight 2000 required
 criterion "IsSourceCaughtUnprepared"	"sourcecardid"	"10396" weight 2000 required
 criterion "IsSourceDivineIntervention"	"sourcecardid"	"10338" weight 2000 required
 criterion "IsSourceDivinePurpose"		"sourcecardid"	"10378" weight 2000 required
@@ -362,8 +381,9 @@ criterion "IsSourceIntimidation"		"sourcecardid"	"10379" weight 2000 required
 criterion "IsSourceCleansingRite"		"sourcecardid"	"10382" weight 2000 required
 criterion "IsSourceStealStrength"		"sourcecardid"	"10403" weight 2000 required
 criterion "IsSourceStarsAlign"			"sourcecardid"	"10334" weight 2000 required
-
-
+criterion "IsSourceConflaguration"			"sourcecardid"	"10157" weight 2000 required
+criterion "IsSourceMercenaryExiles"			"sourcecardid"	"10456" weight 2000 required
+criterion "IsSourceEmissaryOfTheQuorum"			"sourcecardid"	"10457" weight 2000 required
 
 criterion "IsSourceNasalGoo"			"sourcecardid"	"10419" weight 2000 required
 criterion "IsSourceTimeOfTriumph"		"sourcecardid"	"10425" weight 2000 required
@@ -452,6 +472,8 @@ criterion "IsSourceIgnite"				"sourcecardid"	"10160" weight 2000 required
 criterion "IsSourceBattlefieldControl"	"sourcecardid"	"4010" weight 2000 required
 criterion "IsSourceDividedWeStand"		"sourcecardid"	"10005" weight 2000 required
 criterion "IsSourceSowVenom"			"sourcecardid"	"10002" weight 2000 required
+criterion "IsTargetSowVenom"			"targetcardid"	"10002" weight 2000 required
+criterion "IsSourceOldTechieVestAbility"			"sourcecardid"	"10476" weight 2000 required
 
 
 criterion "IsSourceManaDrain"			"sourcecardid"	"10275" weight 2000 required
@@ -462,21 +484,21 @@ criterion "IsSourceAssuredDestruction"	"sourcecardid"	"10141" weight 2000 requir
 criterion "IsSourceTrebuchets"			"sourcecardid"	"10161" weight 2000 required
 criterion "IsSourceBurnItAll"			"sourcecardid"	"10156" weight 2000 required
 criterion "IsSourceSlay"				"sourcecardid"	"10410" weight 2000 required
-criterion "IsSourceDayAtTheTrack"		"sourcecardid"	"10322" weight 2000 required
-criterion "IsSourceSteamCannon"			"sourcecardid"	"10468" weight 2000 required
-criterion "IsSourceSteamCannonAbility"	"sourcecardid"	"10185" weight 2000 required
+criterion "IsSourcePayday"				"sourcecardid"	"10322" weight 2000 required
+criterion "IsSourceSteamCannon"			"sourcecardid"	"10185" weight 2000 required
+criterion "IsSourceSteamCannonAbility"	"sourcecardid"	"10468" weight 2000 required
 criterion "IsSourceChainFrost"			"sourcecardid"	"10318" weight 2000 required
 criterion "IsSourcePathOfTheCunning"	"sourcecardid"	"10150" weight 2000 required
 criterion "IsSourceUndisciplinedArtillery"	"sourcecardid"	"10162" weight 2000 required
 criterion "IsSourceRevtelInvestments"	"sourcecardid"	"10164" weight 2000 required
 criterion "IsSourceIronFogGoldmine"		"sourcecardid"	"10165" weight 2000 required
 criterion "IsSourceTheTylerEstate"		"sourcecardid"	"10154" weight 2000 required
-criterion "IsSourceEscapeRoute"			"sourcecardid"	"10176" weight 2000 required
+criterion "IsSourceEscapeRoute"			"sourcecardid"	"10465" weight 2000 required
 criterion "IsSourceKeenfolkTurret"		"sourcecardid"	"10184" weight 2000 required
 criterion "IsSourceLodestoneDemolition"	"sourcecardid"	"10268" weight 2000 required
 criterion "IsSourceGrazingShot"			"sourcecardid"	"10270" weight 2000 required
 criterion "IsSourceAssassinate"			"sourcecardid"	"10272" weight 2000 required
-criterion "IsSourcehipFire"				"sourcecardid"	"10273" weight 2000 required
+criterion "IsSourceHipFire"				"sourcecardid"	"10273" weight 2000 required
 criterion "IsSourceHeartstopperAura"	"sourcecardid"	"10274" weight 2000 required
 criterion "IsSourceBloodRage"			"sourcecardid"	"10289" weight 2000 required
 criterion "IsSourceMarchOfTheMachines"	"sourcecardid"	"10291" weight 2000 required
@@ -495,6 +517,10 @@ criterion "IsSourceTrack"				"sourcecardid"	"10416" weight 2000 required
 criterion "IsSourceBallLightning"		"sourcecardid"	"10538" weight 2000 required
 criterion "IsSourceNoAccident"			"sourcecardid"	"4007" weight 2000 required
 criterion "IsSourceWintersCurse"		"sourcecardid"	"10011" weight 2000 required
+criterion "IsSourceThunderhideAlpha"		"sourcecardid"	"10108" weight 2000 required
+criterion "IsSourceNyctashasGuard"		"sourcecardid"	"10262" weight 2000 required
+criterion "IsSourceThunderhidePack"		"sourcecardid"	"10102" weight 2000 required
+criterion "IsTargetThunderhidePack"		"targetcardid"	"10102" weight 2000 required
 
 //Card Charges Related Criteria
 criterion "IsChargesLessOrEqualTo3"				"sourcecharges"		"<=3" weight 5 required
@@ -547,7 +573,7 @@ criterion "IsTargetTylerEstateCensor"			"targetcardid"	"10078" required
 criterion "IsTargetSmeevilBlacksmith"			"targetcardid"	"10079" required
 criterion "IsTargetRebelDecoy"					"targetcardid"	"10080" required
 criterion "IsTargetCentaurHuntsman"				"targetcardid"	"10082" required
-criterion "IsTargetFleshGraftedMonstrosity"		"targetcardid"	"10083" required
+criterion "IsTargetPitFighterOfQuoidge"		"targetcardid"	"10083" required
 criterion "IsTargetRebelInstigator"				"targetcardid"	"10084" required
 criterion "IsTargetAssassinsShadow"				"targetcardid"	"10085" required
 criterion "IsTargetDiscipleOfNevermore"			"targetcardid"	"10086" required
@@ -589,21 +615,8 @@ criterion "IsTargetSatyrMagician"				"targetcardid"	"10137" required
 criterion "IsTargetTrollSoothsayer"				"targetcardid"	"10138" required
 criterion "IsTargetMeleeCreep"					"targetcardid"	"1006" 	required
 criterion "IsTargetProwlerVanguard"				"targetcardid"	"4002" 	required
+criterion "IsTargetCatapult"					"targetcardid"	"10310" required
 
-
-//Set 04 Creeps
-criterion "IsTargetCatapult"					"targetcardid"	"10081" required
-criterion "IsTargetCommittedRebel"				"targetcardid"	"10135" required
-criterion "IsTargetHealingWard"					"targetcardid"	"10279" required
-criterion "IsTargetIceWall"						"targetcardid"	"10284" required
-criterion "IsTargetLancerIllusion"				"targetcardid"	"10073" required
-criterion "IsTargetSinEaters"					"targetcardid"	"10088" required
-criterion "IsTargetFistOfTheAllSeeingOne"		"targetcardid"	"10105" required
-criterion "IsTargetOverconfidentSoldier"		"targetcardid"	"10109" required
-criterion "IsTargetSpiritSwordsman"				"targetcardid"	"10110" required
-criterion "IsTargetRoseleafVanguard"			"targetcardid"	"10121" required
-criterion "IsTargetInfernalAlly"				"targetcardid"	"10126" required
-criterion "IsTargetAlabasterDrake"				"targetcardid"	"10130" required
 
 //Set 01 ability criteria
 criterion "IsSourceHeadShot"					"sourcecardid"	"10446" required
@@ -668,7 +681,7 @@ criterion "AllyReadyRavage"						"ability_cooldown_ally_10434" "<1" required
 criterion "AllyReadyLaser"						"ability_cooldown_ally_10435" "<1" required
 criterion "AllyReadyCallOfTheWildBoar"			"ability_cooldown_ally_10437" "<1" required
 criterion "AllyReadyFissure"					"ability_cooldown_ally_10438" "<1" required
-criterion "AllyReadyDarkRitual"					"ability_cooldown_ally_14400" "<1" required
+criterion "AllyReadySacrifice"					"ability_cooldown_ally_10440" "<1" required
 criterion "AllyReadyPurification"				"ability_cooldown_ally_10443" "<1" required
 criterion "AllyReadyNetherBlast"				"ability_cooldown_ally_10444" "<1" required
 criterion "AllyReadyFingerOfDeath"				"ability_cooldown_ally_10449" "<1" required
@@ -867,7 +880,7 @@ criterion "IsTarget2TylerEstateCensor"			"target2cardid"	"10078" required
 criterion "IsTarget2SmeevilBlacksmith"			"target2cardid"	"10079" required
 criterion "IsTarget2RebelDecoy"					"target2cardid"	"10080" required
 criterion "IsTarget2CentaurHuntsman"			"target2cardid"	"10082" required
-criterion "IsTarget2FleshGraftedMonstrosity"	"target2cardid"	"10083" required
+criterion "IsTarget2PitFighterOfQuoidge"	"target2cardid"	"10083" required
 criterion "IsTarget2RebelInstigator"			"target2cardid"	"10084" required
 criterion "IsTarget2AssassinsShadow"			"target2cardid"	"10085" required
 criterion "IsTarget2DiscipleOfNevermore"		"target2cardid"	"10086" required
@@ -962,24 +975,15 @@ criterion "IsTarget2OgreBruiser"				"target2cardid"	"4003" required
 
 
 
-//Set 04 unit target criteria hero
-criterion "IsTargetAlchemist"					"targetcardid"	"10015" required
-criterion "IsTargetShadowFiend"					"targetcardid"	"10061" required
-criterion "IsTargetDeathProphet"				"targetcardid"	"10012" required
-criterion "IsTargetAntiMage"					"targetcardid"	"10019" required
-criterion "IsTargetDazzle"						"targetcardid"	"10027" required
-criterion "IsTargetTiny"						"targetcardid"	"10034" required
-criterion "IsTargetMirana"						"targetcardid"	"10041" required
-criterion "IsTargetNagaSiren"					"targetcardid"	"10042" required
-criterion "IsTargetOracle"						"targetcardid"	"10045" required
-criterion "IsTargetRubick"						"targetcardid"	"10049" required
-criterion "IsTargetSpiritBreaker"				"targetcardid"	"10051" required
-criterion "IsTargetVanessa"						"targetcardid"	"10055" required
-criterion "IsTargetVengefulSpirit"				"targetcardid"	"10057" required
-criterion "IsTargetJuggernaut"					"targetcardid"	"10066" required
-criterion "IsTargetTusk"						"targetcardid"	"10071" required
-criterion "IsTargetPhantomLancer"				"targetcardid"	"10072" required
+criterion "AllyHasRedHeroes"					"present_lane_red_heroes_ally"		">0" required
+criterion "AllyHasBlueHeroes"					"present_lane_blue_heroes_ally"		">0" required
+criterion "AllyHasBlackHeroes"					"present_lane_black_heroes_ally"	">0" required
+criterion "AllyHasGreenHeroes"					"present_lane_green_heroes_ally"	">0" required
 
+criterion "EnemyHasRedHeroes"					"present_lane_red_heroes_enemy"		">0" required
+criterion "EnemyHasBlueHeroes"					"present_lane_blue_heroes_enemy"	">0" required
+criterion "EnemyHasBlackHeroes"					"present_lane_black_heroes_enemy"	">0" required
+criterion "EnemyHasGreenHeroes"					"present_lane_green_heroes_enemy"	">0" required
 
 //Base Set player unit presence heroes 
 criterion "AllyHasVenomancer"					"present_lane_ally_10001"	">0" required
@@ -1031,23 +1035,14 @@ criterion "AllyHasProwlerShaman"				"present_lane_ally_4000" 	">0" required
 criterion "AllyHasKoboldSaboteur"				"present_lane_ally_4005" 	">0" required
 criterion "AllyHasOgreBruiser"					"present_lane_ally_4003" 	">0" required
 
-//Set 04 player unit presence heroes
-criterion "AllyHasAlchemist"					"present_lane_ally_10015" ">0" required
-criterion "AllyHasShadowFiend"					"present_lane_ally_10061" ">0" required
-criterion "AllyHasDeathProphet"					"present_lane_ally_10012" ">0" required
-criterion "AllyHasAntiMage"						"present_lane_ally_10019" ">0" required
-criterion "AllyHasDazzle"						"present_lane_ally_10027" ">0" required
-criterion "AllyHasTiny"							"present_lane_ally_10034" ">0" required
-criterion "AllyHasMirana"						"present_lane_ally_10041" ">0" required
-criterion "AllyHasNagaSiren"					"present_lane_ally_10042" ">0" required
-criterion "AllyHasOracle"						"present_lane_ally_10045" ">0" required
-criterion "AllyHasRubick"						"present_lane_ally_10049" ">0" required
-criterion "AllyHasSpiritBreaker"				"present_lane_ally_10051" ">0" required
-criterion "AllyHasVanessa"						"present_lane_ally_10055" ">0" required
-criterion "AllyHasVengefulSpirit"				"present_lane_ally_10057" ">0" required
-criterion "AllyHasJuggernaut"					"present_lane_ally_10066" ">0" required
-criterion "AllyHasTusk"							"present_lane_ally_10071" ">0" required
-criterion "AllyHasPhantomLancer"				"present_lane_ally_10072" ">0" required
+criterion "AllyHasMultiMeepo"					"present_lane_ally_10004"	">1" required
+
+//Base Set player unit NO presence heroes 
+criterion "AllyHasNoSorlaKhan"					"present_lane_ally_10058"	"!=1" required
+criterion "AllyHasNoAbaddon"					"present_lane_ally_10016"	"!=1" required
+criterion "AllyHasNoLegionCommander"			"present_lane_ally_10069"	"!=1" required
+criterion "AllyHasNoKanna"						"present_lane_ally_10031"	"!=1" required
+criterion "AllyHasNoPrellex"					"present_lane_ally_10053"	"!=1" required
 
 
 //Base Set player unit presence creeps
@@ -1058,7 +1053,7 @@ criterion "AllyHasTylerEstateCensor"			"present_lane_ally_10078"	">0" required
 criterion "AllyHasSmeevilBlacksmith"			"present_lane_ally_10079"	">0" required
 criterion "AllyHasRebelDecoy"					"present_lane_ally_10080"	">0" required
 criterion "AllyHasCentaurHuntsman"				"present_lane_ally_10082"	">0" required
-criterion "AllyHasFleshGraftedMonstrosity"		"present_lane_ally_10083"	">0" required
+criterion "AllyHasPitFighterOfQuoidge"			"present_lane_ally_10083"	">0" required
 criterion "AllyHasRebelInstigator"				"present_lane_ally_10084"	">0" required
 criterion "AllyHasAssassinsShadow"				"present_lane_ally_10085"	">0" required
 criterion "AllyHasDiscipleOfNevermore"			"present_lane_ally_10086"	">0" required
@@ -1099,20 +1094,18 @@ criterion "AllyHasLoyalBoar"					"present_lane_ally_10136"	">0" required
 criterion "AllyHasSatyrMagician"				"present_lane_ally_10137"	">0" required
 criterion "AllyHasTrollSoothsayer"				"present_lane_ally_10138"	">0" required
 criterion "AllyHasMeleeCreep"					"present_lane_ally_1006"	">0" required
+criterion "AllyHasCatapult"						"present_lane_ally_10310" ">0" required
 
-//Set 04 player unit presence creeps
-criterion "AllyHasCatapult"						"present_lane_ally_10081" ">0" required
-criterion "AllyHasCommittedRebel"				"present_lane_ally_10135" ">0" required
-criterion "AllyHasHealingWard"					"present_lane_ally_10279" ">0" required
-criterion "AllyHasIceWall"						"present_lane_ally_10284" ">0" required
-criterion "AllyHasLancerIllusion"				"present_lane_ally_10073" ">0" required
-criterion "AllyHasSinEaters"					"present_lane_ally_10088" ">0" required
-criterion "AllyHasFistOfTheAllSeeingOne"		"present_lane_ally_10105" ">0" required
-criterion "AllyHasOverconfidentSoldier"			"present_lane_ally_10109" ">0" required
-criterion "AllyHasSpiritSwordsman"				"present_lane_ally_10110" ">0" required
-criterion "AllyHasRoseleafVanguard"				"present_lane_ally_10121" ">0" required
-criterion "AllyHasInfernalAlly"					"present_lane_ally_10126" ">0" required
-criterion "AllyHasAlabasterDrake"				"present_lane_ally_10130" ">0" required
+criterion "AllyHasManyMeleeCreeps"				"present_lane_ally_1006"	">4" required
+criterion "AllyHasSomePlagueWards"				"present_lane_ally_10003"	">1" required
+criterion "AllyHasSomeRedMistPillagers"	 		"present_lane_ally_10132"	">2" required
+
+
+//Base Set player unit NO presence creeps 
+criterion "AllyHasNoMeleeCreeps"					"present_lane_ally_1006"	"!=1" required
+criterion "AllyHasNoPlagueWards"					"present_lane_ally_10003"	"!=1" required
+
+
 
 //Base Set player has imporvement in lane
 criterion "AllyHasAssuredDestruction"			"present_lane_ally_10141" ">0" required
@@ -1207,24 +1200,6 @@ criterion "EnemyHasKoboldSaboteur"				"present_lane_enemy_4005" 	">0" required
 criterion "EnemyHasOgreBruiser"					"present_lane_enemy_4003" 	">0" required
 
 
-//Set 04 enemy unit presence heroes
-criterion "EnemyHasAlchemist"					"present_lane_enemy_10015"  ">0" required
-criterion "EnemyHasShadowFiend"					"present_lane_enemy_10061"  ">0" required
-criterion "EnemyHasDeathProphet"				"present_lane_enemy_10012"  ">0" required
-criterion "EnemyHasAntiMage"					"present_lane_enemy_10019"  ">0" required
-criterion "EnemyHasDazzle"						"present_lane_enemy_10027"  ">0" required
-criterion "EnemyHasTiny"						"present_lane_enemy_10034"  ">0" required
-criterion "EnemyHasMirana"						"present_lane_enemy_10041"  ">0" required
-criterion "EnemyHasNagaSiren"					"present_lane_enemy_10042"  ">0" required
-criterion "EnemyHasOracle"						"present_lane_enemy_10045"  ">0" required
-criterion "EnemyHasRubick"						"present_lane_enemy_10049"  ">0" required
-criterion "EnemyHasSpiritBreaker"				"present_lane_enemy_10051"  ">0" required
-criterion "EnemyHasVanessa"						"present_lane_enemy_10055"  ">0" required
-criterion "EnemyHasVengefulSpirit"				"present_lane_enemy_10057"  ">0" required
-criterion "EnemyHasJuggernaut"					"present_lane_enemy_10066"  ">0" required
-criterion "EnemyHasTusk"						"present_lane_enemy_10071"  ">0" required
-criterion "EnemyHasPhantomLancer"				"present_lane_enemy_10072"  ">0" required
-
 //Base Set enemy unit presence creeps
 criterion "EnemyHasPlagueWard"					"present_lane_enemy_10003"	">0" required
 criterion "EnemyHasSmeevilArmsmaster"			"present_lane_enemy_10076"	">0" required
@@ -1233,7 +1208,7 @@ criterion "EnemyHasTylerEstateCensor"			"present_lane_enemy_10078"	">0" required
 criterion "EnemyHasSmeevilBlacksmith"			"present_lane_enemy_10079"	">0" required
 criterion "EnemyHasRebelDecoy"					"present_lane_enemy_10080"	">0" required
 criterion "EnemyHasCentaurHuntsman"				"present_lane_enemy_10082"	">0" required
-criterion "EnemyHasFleshGraftedMonstrosity"		"present_lane_enemy_10083"	">0" required
+criterion "EnemyHasPitFighterOfQuoidge"			"present_lane_enemy_10083"	">0" required
 criterion "EnemyHasRebelInstigator"				"present_lane_enemy_10084"	">0" required
 criterion "EnemyHasAssassinsShadow"				"present_lane_enemy_10085"	">0" required
 criterion "EnemyHasDiscipleOfNevermore"			"present_lane_enemy_10086"	">0" required
@@ -1273,20 +1248,12 @@ criterion "EnemyHasRoseleafRejuvinator"			"present_lane_enemy_10134"	">0" requir
 criterion "EnemyHasLoyalBoar"					"present_lane_enemy_10136"	">0" required
 criterion "EnemyHasSatyrMagician"				"present_lane_enemy_10137"	">0" required
 criterion "EnemyHasTrollSoothsayer"				"present_lane_enemy_10138"	">0" required
+criterion "EnemyHasCatapult"					"present_lane_enemy_10310" ">0" required
 
-//Set 04 enemy unit presence creeps
-criterion "EnemyHasCatapult"					"present_lane_enemy_10081" ">0" required
-criterion "EnemyHasCommittedRebel"				"present_lane_enemy_10135" ">0" required
-criterion "EnemyHasHealingWard"					"present_lane_enemy_10279" ">0" required
-criterion "EnemyHasIceWall"						"present_lane_enemy_10284" ">0" required
-criterion "EnemyHasLancerIllusion"				"present_lane_enemy_10073" ">0" required
-criterion "EnemyHasSinEaters"					"present_lane_enemy_10088" ">0" required
-criterion "EnemyHasFistOfTheAllSeeingOne"		"present_lane_enemy_10105" ">0" required
-criterion "EnemyHasOverconfidentSoldier"		"present_lane_enemy_10109" ">0" required
-criterion "EnemyHasSpiritSwordsman"				"present_lane_enemy_10110" ">0" required
-criterion "EnemyHasRoseleafVanguard"			"present_lane_enemy_10121" ">0" required
-criterion "EnemyHasInfernalAlly"				"present_lane_enemy_10126" ">0" required
-criterion "EnemyHasAlabasterDrake"				"present_lane_enemy_10130" ">0" required
+criterion "EnemyHasManyMeleeCreeps"				"present_lane_enemy_1006"	">4" required
+
+criterion "EnemyHasSomePlagueWards"				"present_lane_enemy_10003"	">1" required
+
 
 //Base Set Enemey has imporvement in lane
 criterion "enemyHasAssuredDestruction"			"present_lane_enemy_10141" ">0" required
@@ -1332,6 +1299,7 @@ criterion "enemyHasMarchOfTheMachines"			"present_lane_enemy_10291" ">0" require
 
 //Base Set enemy unit lack of presence heroes 
 criterion "EnemyHasNoRix"						"present_lane_enemy_10026"	"!=1" required
+criterion "EnemyHasNoSorlaKhan"					"present_lane_enemy_10058"	"!=1" required
 
 
 
@@ -1387,24 +1355,6 @@ criterion "IsBlockingKoboldSaboteur"			"is_blocking_4005"	"1" required
 criterion "IsBlockingDarkTrollChieften"			"is_blocking_4008"	"1" required
 
 
-//Set 04 unit blocking heroes
-criterion "IsBlockingAlchemist"					"is_blocking_10015"  "1" required
-criterion "IsBlockingShadowFiend"				"is_blocking_10061"  "1" required
-criterion "IsBlockingDeathProphet"				"is_blocking_10012"  "1" required
-criterion "IsBlockingAntiMage"					"is_blocking_10019"  "1" required
-criterion "IsBlockingDazzle"					"is_blocking_10027"  "1" required
-criterion "IsBlockingTiny"						"is_blocking_10034"  "1" required
-criterion "IsBlockingMirana"					"is_blocking_10041"  "1" required
-criterion "IsBlockingNagaSiren"					"is_blocking_10042"  "1" required
-criterion "IsBlockingOracle"					"is_blocking_10045"  "1" required
-criterion "IsBlockingRubick"					"is_blocking_10049"  "1" required
-criterion "IsBlockingSpiritBreaker"				"is_blocking_10051"  "1" required
-criterion "IsBlockingVanessa"					"is_blocking_10055"  "1" required
-criterion "IsBlockingVengefulSpirit"			"is_blocking_10057"  "1" required
-criterion "IsBlockingJuggernaut"				"is_blocking_10066"  "1" required
-criterion "IsBlockingTusk"						"is_blocking_10071"  "1" required
-criterion "IsBlockingPhantomLancer"				"is_blocking_10072"  "1" required
-
 //Base Set unit blocking creeps
 criterion "IsBlockingPlagueWard"				"is_blocking_10003"	"1" required
 criterion "IsBlockingSmeevilArmsmaster"			"is_blocking_10076"	"1" required
@@ -1413,7 +1363,7 @@ criterion "IsBlockingTylerEstateCensor"			"is_blocking_10078"	"1" required
 criterion "IsBlockingSmeevilBlacksmith"			"is_blocking_10079"	"1" required
 criterion "IsBlockingRebelDecoy"				"is_blocking_10080"	"1" required
 criterion "IsBlockingCentaurHuntsman"			"is_blocking_10082"	"1" required
-criterion "IsBlockingFleshGraftedMonstrosity"	"is_blocking_10083"	"1" required
+criterion "IsBlockingPitFighterOfQuoidge"	"is_blocking_10083"	"1" required
 criterion "IsBlockingRebelInstigator"			"is_blocking_10084"	"1" required
 criterion "IsBlockingAssassinsShadow"			"is_blocking_10085"	"1" required
 criterion "IsBlockingDiscipleOfNevermore"		"is_blocking_10086"	"1" required
@@ -1454,166 +1404,151 @@ criterion "IsBlockingSatyrMagician"				"is_blocking_10137"	"1" required
 criterion "IsBlockingTrollSoothsayer"			"is_blocking_10138"	"1" required
 criterion "IsBlockingMeleeCreep"				"is_blocking_1006"	"1" required
 criterion "IsBlockingSkeleton"					"is_blocking_1009"	"1" weight 2 required
+criterion "IsBlockingCatapult"					"is_blocking_10310" "1" required
 
 
-//Set 04 unit blocking creeps
-criterion "IsBlockingCatapult"					"is_blocking_10081" "1" required
-criterion "IsBlockingCommittedRebel"			"is_blocking_10135" "1" required
-criterion "IsBlockingHealingWard"				"is_blocking_10279" "1" required
-criterion "IsBlockingIceWall"					"is_blocking_10284" "1" required
-criterion "IsBlockingLancerIllusion"			"is_blocking_10073" "1" required
-criterion "IsBlockingSinEaters"					"is_blocking_10088" "1" required
-criterion "IsBlockingFistOfTheAllSeeingOne"		"is_blocking_10105" "1" required
-criterion "IsBlockingOverconfidentSoldier"		"is_blocking_10109" "1" required
-criterion "IsBlockingSpiritSwordsman"			"is_blocking_10110" "1" required
-criterion "IsBlockingRoseleafVanguard"			"is_blocking_10121" "1" required
-criterion "IsBlockingInfernalAlly"				"is_blocking_10126" "1" required
-criterion "IsBlockingAlabasterDrake"			"is_blocking_10130" "1" required
 
 //Base Set unit next to heroes 
-criterion "IsNextToVenomancer"					"is_adjacent_to_10001"	"1" required
-criterion "IsNextToMeepo"						"is_adjacent_to_10004"	"1" required
-criterion "IsNextToLuna"						"is_adjacent_to_10006"	"1" required
-criterion "IsNextToWinterWyvern"				"is_adjacent_to_10010"	"1" required
-criterion "IsNextToLycan"						"is_adjacent_to_10014"	"1" required
-criterion "IsNextToAbaddon"						"is_adjacent_to_10016"	"1" required
-criterion "IsNextToChen"						"is_adjacent_to_10017"	"1" required
-criterion "IsNextToBloodseeker"					"is_adjacent_to_10018"	"1" required
-criterion "IsNextToAxe"							"is_adjacent_to_10020"	"1" required
-criterion "IsNextToCentaurWarrunner"			"is_adjacent_to_10021"	"1" required
-criterion "IsNextToTimbersaw"					"is_adjacent_to_10022"	"1" required
-criterion "IsNextToBountyHunter"				"is_adjacent_to_10023"	"1" required
-criterion "IsNextToTidehunter"					"is_adjacent_to_10024"	"1" required
-criterion "IsNextToTinker"						"is_adjacent_to_10025"	"1" required
-criterion "IsNextToRix"							"is_adjacent_to_10026"	"1" required
-criterion "IsNextToViper"						"is_adjacent_to_10028"	"1" required
-criterion "IsNextToBeastmaster"					"is_adjacent_to_10029"	"1" required
-criterion "IsNextToBristleback"					"is_adjacent_to_10030"	"1" required
-criterion "IsNextToKanna"						"is_adjacent_to_10031"	"1" required
-criterion "IsNextToDrowRanger"					"is_adjacent_to_10032"	"1" required
-criterion "IsNextToEarthshaker"					"is_adjacent_to_10033"	"1" required
-criterion "IsNextToEnchantress"					"is_adjacent_to_10036"	"1" required
-criterion "IsNextToLich"						"is_adjacent_to_10038"	"1" required
-criterion "IsNextToOgreMagi"					"is_adjacent_to_10043"	"1" required
-criterion "IsNextToOmniknight"					"is_adjacent_to_10044"	"1" required
-criterion "IsNextToOutworldDevourer"			"is_adjacent_to_10046"	"1" required
-criterion "IsNextToPhantomAssassin"				"is_adjacent_to_10047"	"1" required
-criterion "IsNextToPugna"						"is_adjacent_to_10048"	"1" required
-criterion "IsNextToSniper"						"is_adjacent_to_10050"	"1" required
-criterion "IsNextToMazzie"						"is_adjacent_to_10052"	"1" required
-criterion "IsNextToPrellex"						"is_adjacent_to_10053"	"1" required
-criterion "IsNextToSven"						"is_adjacent_to_10054"	"1" required
-criterion "IsNextToTreantProtector"				"is_adjacent_to_10056"	"1" required
-criterion "IsNextToSorlaKhan"					"is_adjacent_to_10058"	"1" required
-criterion "IsNextToNecrophos"					"is_adjacent_to_10059"	"1" required
-criterion "IsNextToLion"						"is_adjacent_to_10060"	"1" required
-criterion "IsNextToSkywrathMage"				"is_adjacent_to_10062"	"1" required
-criterion "IsNextToCrystalMaiden"				"is_adjacent_to_10064"	"1" required
-criterion "IsNextToZeus"						"is_adjacent_to_10065"	"1" required
-criterion "IsNextToMagnus"						"is_adjacent_to_10067"	"1" required
-criterion "IsNextToDarkSeer"					"is_adjacent_to_10068"	"1" required
-criterion "IsNextToLegionCommander"				"is_adjacent_to_10069"	"1" required
-criterion "IsNextToUrsa"						"is_adjacent_to_10070"	"1" required
-criterion "IsNextToStormSpirit"					"is_adjacent_to_10536"	"1" required
+criterion "IsNextToVenomancer"					"is_adjacent_to_10001"	"1" weight 2 required
+criterion "IsNextToMeepo"						"is_adjacent_to_10004"	"1" weight 2 required
+criterion "IsNextToLuna"						"is_adjacent_to_10006"	"1" weight 2 required
+criterion "IsNextToWinterWyvern"				"is_adjacent_to_10010"	"1" weight 2 required
+criterion "IsNextToLycan"						"is_adjacent_to_10014"	"1" weight 2 required
+criterion "IsNextToAbaddon"						"is_adjacent_to_10016"	"1" weight 2 required
+criterion "IsNextToChen"						"is_adjacent_to_10017"	"1" weight 2 required
+criterion "IsNextToBloodseeker"					"is_adjacent_to_10018"	"1" weight 2 required
+criterion "IsNextToAxe"							"is_adjacent_to_10020"	"1" weight 2 required
+criterion "IsNextToCentaurWarrunner"			"is_adjacent_to_10021"	"1" weight 2 required
+criterion "IsNextToTimbersaw"					"is_adjacent_to_10022"	"1" weight 2 required
+criterion "IsNextToBountyHunter"				"is_adjacent_to_10023"	"1" weight 2 required
+criterion "IsNextToTidehunter"					"is_adjacent_to_10024"	"1" weight 2 required
+criterion "IsNextToTinker"						"is_adjacent_to_10025"	"1" weight 2 required
+criterion "IsNextToRix"							"is_adjacent_to_10026"	"1" weight 2 required
+criterion "IsNextToViper"						"is_adjacent_to_10028"	"1" weight 2 required
+criterion "IsNextToBeastmaster"					"is_adjacent_to_10029"	"1" weight 2 required
+criterion "IsNextToBristleback"					"is_adjacent_to_10030"	"1" weight 2 required
+criterion "IsNextToKanna"						"is_adjacent_to_10031"	"1" weight 2 required
+criterion "IsNextToDrowRanger"					"is_adjacent_to_10032"	"1" weight 2 required
+criterion "IsNextToEarthshaker"					"is_adjacent_to_10033"	"1" weight 2 required
+criterion "IsNextToEnchantress"					"is_adjacent_to_10036"	"1" weight 2 required
+criterion "IsNextToLich"						"is_adjacent_to_10038"	"1" weight 2 required
+criterion "IsNextToOgreMagi"					"is_adjacent_to_10043"	"1" weight 2 required
+criterion "IsNextToOmniknight"					"is_adjacent_to_10044"	"1" weight 2 required
+criterion "IsNextToOutworldDevourer"			"is_adjacent_to_10046"	"1" weight 2 required
+criterion "IsNextToPhantomAssassin"				"is_adjacent_to_10047"	"1" weight 2 required
+criterion "IsNextToPugna"						"is_adjacent_to_10048"	"1" weight 2 required
+criterion "IsNextToSniper"						"is_adjacent_to_10050"	"1" weight 2 required
+criterion "IsNextToMazzie"						"is_adjacent_to_10052"	"1" weight 2 required
+criterion "IsNextToPrellex"						"is_adjacent_to_10053"	"1" weight 2 required
+criterion "IsNextToSven"						"is_adjacent_to_10054"	"1" weight 2 required
+criterion "IsNextToTreantProtector"				"is_adjacent_to_10056"	"1" weight 2 required
+criterion "IsNextToSorlaKhan"					"is_adjacent_to_10058"	"1" weight 2 required
+criterion "IsNextToNecrophos"					"is_adjacent_to_10059"	"1" weight 2 required
+criterion "IsNextToLion"						"is_adjacent_to_10060"	"1" weight 2 required
+criterion "IsNextToSkywrathMage"				"is_adjacent_to_10062"	"1" weight 2 required
+criterion "IsNextToCrystalMaiden"				"is_adjacent_to_10064"	"1" weight 2 required
+criterion "IsNextToZeus"						"is_adjacent_to_10065"	"1" weight 2 required
+criterion "IsNextToMagnus"						"is_adjacent_to_10067"	"1" weight 2 required
+criterion "IsNextToDarkSeer"					"is_adjacent_to_10068"	"1" weight 2 required
+criterion "IsNextToLegionCommander"				"is_adjacent_to_10069"	"1" weight 2 required
+criterion "IsNextToUrsa"						"is_adjacent_to_10070"	"1" weight 2 required
+criterion "IsNextToStormSpirit"					"is_adjacent_to_10536"	"1" weight 2 required
 
-//Set 04 unit next to heroes
-criterion "IsNextToAlchemist"					"is_adjacent_to_10015"  "1" required
-criterion "IsNextToShadowFiend"					"is_adjacent_to_10061"  "1" required
-criterion "IsNextToDeathProphet"				"is_adjacent_to_10012"  "1" required
-criterion "IsNextToAntiMage"					"is_adjacent_to_10019"  "1" required
-criterion "IsNextToDazzle"						"is_adjacent_to_10027"  "1" required
-criterion "IsNextToTiny"						"is_adjacent_to_10034"  "1" required
-criterion "IsNextToMirana"						"is_adjacent_to_10041"  "1" required
-criterion "IsNextToNagaSiren"					"is_adjacent_to_10042"  "1" required
-criterion "IsNextToOracle"						"is_adjacent_to_10045"  "1" required
-criterion "IsNextToRubick"						"is_adjacent_to_10049"  "1" required
-criterion "IsNextToSpiritBreaker"				"is_adjacent_to_10051"  "1" required
-criterion "IsNextToVanessa"						"is_adjacent_to_10055"  "1" required
-criterion "IsNextToVengefulSpirit"				"is_adjacent_to_10057"  "1" required
-criterion "IsNextToJuggernaut"					"is_adjacent_to_10066"  "1" required
-criterion "IsNextToTusk"						"is_adjacent_to_10071"  "1" required
-criterion "IsNextToPhantomLancer"				"is_adjacent_to_10072"  "1" required
 
 //Base Set unit next to creeps
-criterion "IsNextToPlagueWard"					"is_adjacent_to_10003"	"1" required
-criterion "IsNextToSmeevilArmsmaster"			"is_adjacent_to_10076"	"1" required
-criterion "IsNextToSisterOfTheVeil"				"is_adjacent_to_10077"	"1" required
-criterion "IsNextToTylerEstateCensor"			"is_adjacent_to_10078"	"1" required
-criterion "IsNextToSmeevilBlacksmith"			"is_adjacent_to_10079"	"1" required
-criterion "IsNextToRebelDecoy"					"is_adjacent_to_10080"	"1" required
-criterion "IsNextToCentaurHuntsman"				"is_adjacent_to_10082"	"1" required
-criterion "IsNextToFleshGraftedMonstrosity"		"is_adjacent_to_10083"	"1" required
-criterion "IsNextToRebelInstigator"				"is_adjacent_to_10084"	"1" required
-criterion "IsNextToAssassinsShadow"				"is_adjacent_to_10085"	"1" required
-criterion "IsNextToDiscipleOfNevermore"			"is_adjacent_to_10086"	"1" required
-criterion "IsNextToLegionStandardBearer"		"is_adjacent_to_10087"	"1" required
-criterion "IsNextToRelentlessZombie"			"is_adjacent_to_10090"	"1" required
-criterion "IsNextToRevtelConvoy"				"is_adjacent_to_10091"	"1" required
-criterion "IsNextToRampagingVandal"				"is_adjacent_to_10092"	"1" required
-criterion "IsNextToHoundOfWar"					"is_adjacent_to_10093"	"1" required
-criterion "IsNextToMercenaryExiles"				"is_adjacent_to_10094"	"1" required
-criterion "IsNextToBloodGolem" 					"is_adjacent_to_10095"	"1" required
-criterion "IsNextToEmissaryOfTheQuorum" 		"is_adjacent_to_10096"	"1" required
-criterion "IsNextToMarrowfellBrawler"			"is_adjacent_to_10097"	"1" required
-criterion "IsNextToThunderhidePackmate"			"is_adjacent_to_10102"	"1" required
-criterion "IsNextToOgreCorpseTosser"			"is_adjacent_to_10103"	"1" required
-criterion "IsNextToBronzeLegionnaire" 			"is_adjacent_to_10104"	"1" required
-criterion "IsNextToIncarnationOfSelemene" 		"is_adjacent_to_10106"	"1" required
-criterion "IsNextToVhoulMartyr"					"is_adjacent_to_10107"	"1" required
-criterion "IsNextToThunderhideAlpha"			"is_adjacent_to_10108"	"1" required
-criterion "IsNextToSatyrDuelist"				"is_adjacent_to_10111"	"1" required
-criterion "IsNextToSavageWolf"					"is_adjacent_to_10112"	"1" required
-criterion "IsNextToRampagingHellbear"			"is_adjacent_to_10113"	"1" required
-criterion "IsNextToCursedSatyr"					"is_adjacent_to_10114"	"1" required
-criterion "IsNextToRavenhook"					"is_adjacent_to_10115"	"1" required
-criterion "IsNextToRavenousMass"				"is_adjacent_to_10116"	"1" required
-criterion "IsNextToRoseleafDruid"				"is_adjacent_to_10117"	"1" required
-criterion "IsNextToHellbearCrippler"			"is_adjacent_to_10118"	"1" required
-criterion "IsNextToSelfishCleric"				"is_adjacent_to_10119"	"1" required
-criterion "IsNextToRoseleafWall"				"is_adjacent_to_10120"	"1" required
-criterion "IsNextToSkeleton"					"is_adjacent_to_10120"	"1" required
-criterion "IsNextToOgreConscript"				"is_adjacent_to_10127"	"1" required
-criterion "IsNextToUntestedGrunt"				"is_adjacent_to_10128"	"1" required
-criterion "IsNextToAssassinsApprentice"			"is_adjacent_to_10129"	"1" required
-criterion "IsNextToStonehallElite"				"is_adjacent_to_10131"	"1" required
-criterion "IsNextToRedMistPillager"				"is_adjacent_to_10132"	"1" required
-criterion "IsNextToChampionOfTheAncient"		"is_adjacent_to_10133"	"1" required
-criterion "IsNextToRoseleafRejuvinator"			"is_adjacent_to_10134"	"1" required
-criterion "IsNextToLoyalBoar"					"is_adjacent_to_10136"	"1" required
-criterion "IsNextToSatyrMagician"				"is_adjacent_to_10137"	"1" required
-criterion "IsNextToTrollSoothsayer"				"is_adjacent_to_10138"	"1" required
+criterion "IsNextToPlagueWard"					"is_adjacent_to_10003"	"1" weight 2 required
+criterion "IsNextToSmeevilArmsmaster"			"is_adjacent_to_10076"	"1" weight 2 required
+criterion "IsNextToSisterOfTheVeil"				"is_adjacent_to_10077"	"1" weight 2 required
+criterion "IsNextToTylerEstateCensor"			"is_adjacent_to_10078"	"1" weight 2 required
+criterion "IsNextToSmeevilBlacksmith"			"is_adjacent_to_10079"	"1" weight 2 required
+criterion "IsNextToRebelDecoy"					"is_adjacent_to_10080"	"1" weight 2 required
+criterion "IsNextToCentaurHuntsman"				"is_adjacent_to_10082"	"1" weight 2 required
+criterion "IsNextToPitFighterOfQuoidge"		"is_adjacent_to_10083"	"1" weight 2 required
+criterion "IsNextToRebelInstigator"				"is_adjacent_to_10084"	"1" weight 2 required
+criterion "IsNextToAssassinsShadow"				"is_adjacent_to_10085"	"1" weight 2 required
+criterion "IsNextToDiscipleOfNevermore"			"is_adjacent_to_10086"	"1" weight 2 required
+criterion "IsNextToLegionStandardBearer"		"is_adjacent_to_10087"	"1" weight 2 required
+criterion "IsNextToRelentlessZombie"			"is_adjacent_to_10090"	"1" weight 2 required
+criterion "IsNextToRevtelConvoy"				"is_adjacent_to_10091"	"1" weight 2 required
+criterion "IsNextToRampagingVandal"				"is_adjacent_to_10092"	"1" weight 2 required
+criterion "IsNextToHoundOfWar"					"is_adjacent_to_10093"	"1" weight 2 required
+criterion "IsNextToMercenaryExiles"				"is_adjacent_to_10094"	"1" weight 2 required
+criterion "IsNextToBloodGolem" 					"is_adjacent_to_10095"	"1" weight 2 required
+criterion "IsNextToEmissaryOfTheQuorum" 		"is_adjacent_to_10096"	"1" weight 2 required
+criterion "IsNextToMarrowfellBrawler"			"is_adjacent_to_10097"	"1" weight 2 required
+criterion "IsNextToThunderhidePackmate"			"is_adjacent_to_10102"	"1" weight 2 required
+criterion "IsNextToOgreCorpseTosser"			"is_adjacent_to_10103"	"1" weight 2 required
+criterion "IsNextToBronzeLegionnaire" 			"is_adjacent_to_10104"	"1" weight 2 required
+criterion "IsNextToIncarnationOfSelemene" 		"is_adjacent_to_10106"	"1" weight 2 required
+criterion "IsNextToVhoulMartyr"					"is_adjacent_to_10107"	"1" weight 2 required
+criterion "IsNextToThunderhideAlpha"			"is_adjacent_to_10108"	"1" weight 2 required
+criterion "IsNextToSatyrDuelist"				"is_adjacent_to_10111"	"1" weight 2 required
+criterion "IsNextToSavageWolf"					"is_adjacent_to_10112"	"1" weight 2 required
+criterion "IsNextToRampagingHellbear"			"is_adjacent_to_10113"	"1" weight 2 required
+criterion "IsNextToCursedSatyr"					"is_adjacent_to_10114"	"1" weight 2 required
+criterion "IsNextToRavenhook"					"is_adjacent_to_10115"	"1" weight 2 required
+criterion "IsNextToRavenousMass"				"is_adjacent_to_10116"	"1" weight 2 required
+criterion "IsNextToRoseleafDruid"				"is_adjacent_to_10117"	"1" weight 2 required
+criterion "IsNextToHellbearCrippler"			"is_adjacent_to_10118"	"1" weight 2 required
+criterion "IsNextToSelfishCleric"				"is_adjacent_to_10119"	"1" weight 2 required
+criterion "IsNextToRoseleafWall"				"is_adjacent_to_10120"	"1" weight 2 required
+criterion "IsNextToSkeleton"					"is_adjacent_to_10120"	"1" weight 2 required
+criterion "IsNextToOgreConscript"				"is_adjacent_to_10127"	"1" weight 2 required
+criterion "IsNextToUntestedGrunt"				"is_adjacent_to_10128"	"1" weight 2 required
+criterion "IsNextToAssassinsApprentice"			"is_adjacent_to_10129"	"1" weight 2 required
+criterion "IsNextToStonehallElite"				"is_adjacent_to_10131"	"1" weight 2 required
+criterion "IsNextToRedMistPillager"				"is_adjacent_to_10132"	"1" weight 2 required
+criterion "IsNextToChampionOfTheAncient"		"is_adjacent_to_10133"	"1" weight 2 required
+criterion "IsNextToRoseleafRejuvinator"			"is_adjacent_to_10134"	"1" weight 2 required
+criterion "IsNextToLoyalBoar"					"is_adjacent_to_10136"	"1" weight 2 required
+criterion "IsNextToSatyrMagician"				"is_adjacent_to_10137"	"1" weight 2 required
+criterion "IsNextToTrollSoothsayer"				"is_adjacent_to_10138"	"1" weight 2 required
+criterion "IsNextToCatapult"					"is_adjacent_to_10310" "1" required
 
-//Set 04 unit next to creeps
-criterion "IsNextToCatapult"					"is_adjacent_to_10081" "1" required
-criterion "IsNextToCommittedRebel"				"is_adjacent_to_10135" "1" required
-criterion "IsNextToHealingWard"					"is_adjacent_to_10279" "1" required
-criterion "IsNextToIceWall"						"is_adjacent_to_10284" "1" required
-criterion "IsNextToLancerIllusion"				"is_adjacent_to_10073" "1" required
-criterion "IsNextToSinEaters"					"is_adjacent_to_10088" "1" required
-criterion "IsNextToFistOfTheAllSeeingOne"		"is_adjacent_to_10105" "1" required
-criterion "IsNextToOverconfidentSoldier"		"is_adjacent_to_10109" "1" required
-criterion "IsNextToSpiritSwordsman"				"is_adjacent_to_10110" "1" required
-criterion "IsNextToRoseleafVanguard"			"is_adjacent_to_10121" "1" required
-criterion "IsNextToInfernalAlly"				"is_adjacent_to_10126" "1" required
-criterion "IsNextToAlabasterDrake"				"is_adjacent_to_10130" "1" required
+
+//Set 01 improvement targets
+criterion "IsTargetCheatingDeath"				"targetcardid"	"10181" required
+criterion "IsTargetBarracks"					"targetcardid"	"10147" required
+criterion "IsTargetMistOfAvernus"				"targetcardid"	"10169" required
+criterion "IsTargetHomefieldAdvantage"			"targetcardid"	"10155" required
+criterion "IsTargetAghanimsSanctum"				"targetcardid"	"10175" required
+criterion "IsTargetSteamCannon"					"targetcardid"	"10185" required
+criterion "IsTargetNetherWard"					"targetcardid"	"10173" required
+criterion "IsTargetTylerEstate"					"targetcardid"	"10154" required
+
 
 criterion "IsFactionAllyInLane"			"same_faction_present" "1" required
+
 criterion "IsFactionBronzeLegion"		"targetfaction" "Bronze Legion" required
 criterion "IsFactionVhoulRebellion"		"targetfaction" "Vhoul Rebellion" required
 criterion "IsFactionVeiledSisterhood"	"targetfaction" "Veiled Sisterhood" required
+criterion "IsFactionMarowfellHunters"	"targetfaction" "Marrowfell Hunters" required
 
-criterion "AllyHasFactionBronzeLegion"		"present_lane_ally_faction Bronze Legion" "1" required
-criterion "EnemyHasFactionBronzeLegion"		"present_lane_enemy_faction Bronze Legion" "1" required
-criterion "AllyHasFactionVhoulRebellion"	"present_lane_ally_faction Vhoul Rebellion" "1" required
-criterion "EnemyHasFactionVhoulRebellion"	"present_lane_enemy_faction Vhoul Rebellion" "1" required
-criterion "AllyHasFactionMultVhoulRebellion"	"present_lane_ally_faction Vhoul Rebellion" ">1" required
-criterion "EnemyHasFactionMultVhoulRebellion"	"present_lane_enemy_faction Vhoul Rebellion" ">1" required
-criterion "AllyHasFactionRumusqueFaithful"	"present_lane_ally_faction Rumusque Faithful" "1" required
-criterion "EnemyHasFactionRumusqueFaithful"	"present_lane_enemy_faction Rumusque Faithful" "1" required
-criterion "AllyHasFactionRedMist"			"present_lane_ally_faction Red Mist" "1" required
-criterion "EnemyHasFactionRedMist"			"present_lane_enemy_faction Red Mist" "1" required
-criterion "EnemyHasFactionZombie"			"present_lane_enemy_faction Zombie" "1" required
-criterion "EnemyHasFactionVeiledSisterhood"	"present_lane_enemy_faction Veiled Sisterhood" "1" weight 2 required
+criterion "AllyHasFactionBronzeLegion"			"present_lane_ally_faction Bronze Legion" ">0" weight 2 required
+criterion "AllyHasFactionMultBronzeLegion"		"present_lane_ally_faction Bronze Legion" ">1" weight 2 required
+criterion "EnemyHasFactionBronzeLegion"			"present_lane_enemy_faction Bronze Legion" ">0" weight 2 required
+criterion "EnemyHasFactionMultBronzeLegion"		"present_lane_enemy_faction Bronze Legion" ">1" weight 2 required
+criterion "AllyHasFactionVhoulRebellion"		"present_lane_ally_faction Vhoul Rebellion" ">0" weight 2 required
+criterion "EnemyHasFactionVhoulRebellion"		"present_lane_enemy_faction Vhoul Rebellion" ">0" weight 2 required
+criterion "AllyHasFactionMultVhoulRebellion"	"present_lane_ally_faction Vhoul Rebellion" ">1" weight 2 required
+criterion "EnemyHasFactionMultVhoulRebellion"	"present_lane_enemy_faction Vhoul Rebellion" ">1" weight 2 required
+criterion "AllyHasFactionRumusqueFaithful"		"present_lane_ally_faction Rumusque Faithful" ">0"  weight 2 required
+criterion "EnemyHasFactionRumusqueFaithful"		"present_lane_enemy_faction Rumusque Faithful" ">0" weight 2 required
+criterion "AllyHasFactionMultRumusqueFaithful"	"present_lane_ally_faction Rumusque Faithful" ">1" weight 2 required
+criterion "EnemyHasFactionMultRumusqueFaithful"	"present_lane_enemy_faction Rumusque Faithful" ">1" weight 2 required
+criterion "EnemyHasFactionMarrowfellHunters"	"present_lane_enemy_faction Marrowfell Hunters" ">0" weight 2 required
+criterion "AllyHasFactionRedMist"				"present_lane_ally_faction Red Mist" ">0" weight 2 required
+criterion "AllyHasFactionMultRedMist"			"present_lane_ally_faction Red Mist" ">1" weight 2 required
+criterion "EnemyHasFactionRedMist"				"present_lane_enemy_faction Red Mist" ">0" weight 2 required
+criterion "EnemyHasFactionMultRedMist"			"present_lane_enemy_faction Red Mist" ">1" weight 2 required
+criterion "EnemyHasFactionZombie"				"present_lane_enemy_faction Zombie" ">0" weight 2 required
+criterion "EnemyHasFactionVeiledSisterhood"		"present_lane_enemy_faction Veiled Sisterhood" ">0" weight 2 required
+criterion "AllyHasFactionMultVeiledSisterhood"	"present_lane_ally_faction Veiled Sisterhood" ">1" weight 2 required
+criterion "AllyHasFactionMultSOLK"				"present_lane_ally_faction The S.O.L.K." ">1" weight 2 required
+criterion "EnemyHasFactionMultSOLK"				"present_lane_enemy_faction The S.O.L.K." ">1" weight 2 required
+
+
+
 
 
 
@@ -1709,123 +1644,32 @@ criterion "EnemyHasFactionVeiledSisterhood"	"present_lane_enemy_faction Veiled S
 #include "talker/set_1_card_response_rules/ogre_magi.txt"
 #include "talker/set_1_card_response_rules/outworld_devourer.txt"
 #include "talker/set_1_card_response_rules/venomancer.txt"
+#include "talker/set_1_card_response_rules/oglodi_catapult.txt"
+
+// ADDITIONAL SET RESPONSE RULES
+#include "talker/set_2_card_response_rules/_response_rules_set_02.txt"
+
+// IMP response rules includers:
 
 
-// IMP core set 0 responses: 
+#include "talker/imp_response_rules/set_0/base_rules/board_states/board_states_criterion.txt"
+#include "talker/imp_response_rules/set_0/base_rules/game_states/game_states_criterion.txt"
+#include "talker/imp_response_rules/set_0/base_rules/unit_states/unit_states_criterion.txt"
+#include "talker/imp_response_rules/set_1/razzle/razzle_criterion.txt"
+#include "talker/imp_response_rules/set_shared/set_shared_criterion.txt"
 
-#include "talker/set_0_imp_response_rules/set_0_imps_generic_pos_neg_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_utility_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_playcard_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_buffs_special_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_player_interact_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_card_swaps_responses.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_summon_responses.txt"
+#include "talker/imp_response_rules/set_0/base_rules/board_states/board_states_responses.txt"
+#include "talker/imp_response_rules/set_0/base_rules/game_states/game_states_responses.txt"
+#include "talker/imp_response_rules/set_0/base_rules/unit_states/unit_states_responses.txt"
+#include "talker/imp_response_rules/set_1/razzle/razzle_responses.txt"
+#include "talker/imp_response_rules/set_shared/set_shared_responses.txt"
 
-#include "talker/set_0_imp_response_rules/set_0_imps_criterion.txt"
-
-#include "talker/set_0_imp_response_rules/set_0_imps_death_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_combat_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_damage_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_playcard_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_summon_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_buffs_generic_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_buffs_special_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_utility_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_player_interact_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_card_swaps_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_clock_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_death_skull_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_pause_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_tower_destruction_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_unit_numbers_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_win_lose_game_rules.txt"
-#include "talker/set_0_imp_response_rules/set_0_imps_game_state_winning_losing_idles_rules.txt"
-
-// set 1:
-#include "talker/set_1_imp_response_rules/set_1_imp_razzle_a_responses.txt"
-#include "talker/set_1_imp_response_rules/set_1_imp_criterion.txt"
-#include "talker/set_1_imp_response_rules/set_1_imp_razzle_a_rules.txt"
-
-// set Pax:
-
-#include "imp_reactions\set_pax\razzle_a\razzle_a_criterion.txt"
-#include "imp_reactions\set_pax\razzle_a\razzle_a_responses.txt"
-#include "imp_reactions\set_pax\razzle_a\razzle_a_rules.txt"
-
-//#include "talker/set_0_imp_response_rules/debug.txt"
+#include "talker/imp_response_rules/set_0/base_rules/board_states/board_states_rules.txt"
+#include "talker/imp_response_rules/set_0/base_rules/game_states/game_states_rules.txt"
+#include "talker/imp_response_rules/set_0/base_rules/unit_states/unit_states_rules.txt"
+#include "talker/imp_response_rules/set_1/razzle/razzle_rules.txt"
+#include "talker/imp_response_rules/set_shared/set_shared_rules.txt"
 
 
 
-////////////////////////////
-//&&old rules for reference///
-////////////////////////////
 
-//Response isblockingzeus
-//{
-//	speak "bronze_legionnaire_death_01" noscene 
-//}
-//Rule isblockingzeus_rule
-//{
-//	criteria Summon IsTargetVhoulMartyr IsBlockingZeus
-//	response isblockingzeus
-//}
-//
-//Response isnexttozeus
-//{
-//	speak "bronze_legionnaire_death_01" noscene 
-//}
-//Rule isblockingzeus_rule
-//{
-//	criteria Summon IsTargetVhoulMartyr IsNextToZeus
-//	response isnexttozeus
-//}
-
-//Response summon_vhoul_martyr1
-//{
-//	speak "vhoul_martyr_summon" noscene 
-//}
-//Rule summon_vhoul_martyr_rule
-//{
-//	criteria Summon IsTargetVhoulMartyr
-//	response summon_vhoul_martyr1
-//}
-//
-//Response summon_rampaging_vandal_vs_axe1
-//{
-//	speak "rampaging_vandal_summon_vs_axe"  noscene 
-//}
-//Rule summon_rampaging_vandal_vs_axe_rule
-//{
-//	criteria Summon IsTargetRampagingVandal EnemyHasAxe
-//	response summon_rampaging_vandal_vs_axe1
-//	matchonce 
-//}
-
-
-//Rule rule_buff_my_hero_armor
-//{
-//	criteria Buffed IsSourceLocal IsTargetLocal IsTargetHero NoDebuffsAttack BuffsArmor NoDebuffsHealth
-//	response local_acting_local_imp_5_seconds_remaining1
-//}
-//Rule rule_buff_my_hero_health
-//{
-//	criteria Buffed IsSourceLocal IsTargetLocal IsTargetHero NodebuffsAttack NoDebuffsArmor BuffsHealth
-//	response local_acting_local_imp_5_seconds_remaining1
-//}
-
-//Rule rule_buff_opp_hero_attack
-//{
-//	criteria Buffed IsSourceNotLocal IsTargetNotLocal IsTargetHero BuffsAttack NoDebuffsArmor NoDebuffsHealth
-//	response local_acting_opponent_imp_5_seconds_remaining1
-//}
-//Rule rule_buff_opp_hero_armor
-//{
-//	criteria Buffed IsSourceNotLocal IsTargetNotLocal IsTargetHero NoDebuffsAttack BuffsArmor NoDebuffsHealth
-//	response local_acting_opponent_imp_5_seconds_remaining1
-//}
-//Rule rule_buff_opp_hero_health
-//{
-//	criteria Buffed IsSourceNotLocal IsTargetNotLocal IsTargetHero NodebuffsAttack NoDebuffsArmor BuffsHealth
-//	response local_acting_opponent_imp_5_seconds_remaining1
-//}

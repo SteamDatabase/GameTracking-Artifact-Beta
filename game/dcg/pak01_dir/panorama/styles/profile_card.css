@@ -1,8 +1,8 @@
 /* DCGProfileCard styles */
 
-@define backgroundGradient: gradient( linear, 0% 0%, 0% 100%, from( #ffffff02 ), to( #ffffff04 ) );
-@define backgroundGradientHover: gradient( linear, 0% 0%, 0% 100%, from( #ffffff06 ), to( #ffffff10) );
-@define backgroundGradientActive: gradient( linear, 0% 0%, 0% 100%, from( #ffffff04 ), to( #ffffff0f ) );
+@define backgroundGradient: gradient( linear, 0% 0%, 100% 0%, from( rgba(68, 107, 122, 0.678) ), to( rgba(64, 103, 109, 0) ) );
+@define backgroundGradientHover: gradient( linear, 0% 0%, 100% 0%, from( rgba(68, 107, 122, 0.4) ), to( rgba(73, 125, 146, 0) ) );
+@define backgroundGradientActive: gradient( linear, 0% 0%, 100% 0%, from( rgba(25, 41, 43, 0.678) ), to( rgba(33, 51, 54, 0) ) );
 
 DCGProfileCard
 {
@@ -12,6 +12,11 @@ DCGProfileCard
 	transition-property: box-shadow;
 	transition-duration: 0.25s;
 	transition-timing-function: ease-in-out;
+
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba(39, 63, 66, 0.678) ), to( rgba(64, 103, 109, 0) ) );
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba(68, 107, 122, 0.678) ), to( rgba(73, 125, 146, 0) ) );
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba(25, 41, 43, 0.678) ), to( rgba(33, 51, 54, 0) ) );
+	background-color: transparent;
 }
 
 DCGFriendPicker DCGProfileCard #UserName .PersonaName
@@ -21,18 +26,15 @@ DCGFriendPicker DCGProfileCard #UserName .PersonaName
 
 DCGFriendPicker #ContentsMain:hover
 {
-	brightness: 2.5;
 }
 
 #ContentsMain:hover
 {
 	//box-shadow: fill #00000099 -4px -4px 8px 8px;
-	brightness: 1.4;
 }
 
 #HomeProfileContainer:hover #ContentsMain
 {
-	brightness: 1.4;
 }
 
 #MiniProfileContainer
@@ -44,24 +46,10 @@ DCGFriendPicker #ContentsMain:hover
 #ContentsMain
 {
 	flow-children: down;
-	background-color: black;
 	width: 100%;
 	horizontal-align: right;
 	
-	border-top: 1px solid #3b404777;
-	border-right: 1px solid #00000088;
-	border-left: 1px solid #4c434677;
-	border-bottom: 1px solid #00000088;
-
-	padding: 14px;
-	background-image: url("s2r://panorama/images/dashboard/leftbar/profile_card_background_png.vtex");
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	background-size: 100% 256px;
-	
-	height: 95px;
-
-	box-shadow: fill #00000055 -2px -2px 6px 6px;
+	height: 67px;
 
 	transition-property: box-shadow, brightness;
 	transition-duration: 0.15s;
@@ -174,6 +162,8 @@ DCGProfileCard #AvatarImage.HasCompendium Image
 #UserRichPresence Label
 {
 	font-size: 16px;
+	color: #83b3b9;
+	font-weight: lighter;
 }
 
 
@@ -501,4 +491,97 @@ DCGProfileCard #AvatarImage.HasCompendium Image
 	margin-right: 20px;
 
     visibility: collapse;
+}
+
+.ChallengeFriends #ContentsMain
+{
+	background-image: none;
+	border: 0px;
+	height: 60px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.ChallengeFriends #ContentsMain:hover
+{
+	background-color: backgroundGradientHover;
+}
+
+.ChallengeFriends #UserName Label
+{
+	font-size: 24px;
+	padding: 2px;
+}
+
+.ChallengeFriends DCGUserRichPresence
+{
+	padding: 1px;
+	padding-left: -1px;
+}
+
+.ChallengeFriends #UserRichPresence.FriendPlayingGame Label
+{
+	color: #91c257;
+}
+
+.ChallengeFriends DCGFriendPicker DCGProfileCard
+{
+	width: 100%;
+	margin: 0px;
+	border: 0px;
+}
+
+.ChallengeFriends DCGFriendPicker #ContentsMain:hover
+{
+	background-color: backgroundGradientHover;
+}
+
+.ChallengeFriends DCGFriendPicker DCGProfileCard:selected #ContentsMain
+{
+	background-color: backgroundGradient;
+}
+
+DCGFriendPickerMultiselect #ContentsMain
+{
+	background-image: none;
+	border: 0px;
+	height: 60px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+DCGFriendPickerMultiselect #ContentsMain:hover
+{
+	background-color: backgroundGradientHover;
+}
+
+DCGFriendPickerMultiselect #UserName Label
+{
+	font-size: 24px;
+	padding: 2px;
+}
+
+DCGFriendPickerMultiselect DCGUserRichPresence
+{
+	padding: 1px;
+	padding-left: -1px;
+}
+
+DCGFriendPickerMultiselect DCGProfileCard
+{
+	width: 100%;
+	margin: 0px;
+	border: 0px;
+}
+
+DCGFriendPickerMultiselect #ContentsMain:hover
+{
+	background-color: backgroundGradientHover;
+}
+
+DCGFriendPickerMultiselect DCGProfileCard:selected #ContentsMain
+{
+	background-color: backgroundGradientActive;
 }
