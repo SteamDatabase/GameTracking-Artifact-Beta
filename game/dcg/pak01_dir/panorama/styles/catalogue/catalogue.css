@@ -305,7 +305,6 @@ ToggleButton Label
 	
 }
 
-
 .IsSellCardsMode .DeckBuilderContainer
 {
 	animation-name: slide-in-sell;
@@ -314,6 +313,27 @@ ToggleButton Label
 	animation-iteration-count: 1;
 }
 
+@keyframes 'slide-in-recycle'
+{
+	0%
+	{
+		transform: translateX( 500px );
+	}
+	100%
+	{
+		transform: translateX( 0px );
+	}
+
+	
+}
+
+.IsRecycleCardsMode .DeckBuilderContainer
+{
+	animation-name: slide-in-recycle;
+	animation-duration: 0.25s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: 1;
+}
 
 
 .DeckInfoTabsContainer
@@ -351,9 +371,15 @@ ToggleButton Label
 	
 }
 
+.IsRecycleCardsMode .RecycleTab
+{
+	background-color: #FF00FF07;
+	
+}
 .IsBuildDecksMode .BuildTabText,
 .IsPurchaseCardsMode .BuyTabText,
-.IsSellCardsMode .SellTabText
+.IsSellCardsMode .SellTabText,
+.IsRecycleCardsMode .RecycleTabText
 {
 	color: white;
 }
@@ -389,6 +415,12 @@ ToggleButton Label
 }
 
 .IsSellCardsMode .DeckInfoContainer
+{
+	background-image: url("s2r://panorama/images/catalogue/background_deck_editor_tab_sell_cards_psd.vtex");
+	background-size: 100% 100%;
+}
+
+.IsRecycleCardsMode .DeckInfoContainer
 {
 	background-image: url("s2r://panorama/images/catalogue/background_deck_editor_tab_sell_cards_psd.vtex");
 	background-size: 100% 100%;
@@ -566,11 +598,6 @@ ToggleButton Label
 	margin-right: 25px;
 }
 
-.AspectRatio16x10 .IsPurchaseCardsMode #MainDeckRegion, .AspectRatio16x10 .IsSellCardsMode #MainDeckRegion
-{
-//	height: 962px;
-}
-
 #MainDeckRegion Label
 {
 	vertical-align: center;
@@ -723,7 +750,7 @@ ToggleButton Label
 	text-overflow: shrink;
 }
 
-.IsPurchaseCardsMode .RegionHeaderBordered, .IsSellCardsMode .RegionHeaderBordered
+.IsPurchaseCardsMode .RegionHeaderBordered, .IsSellCardsMode .RegionHeaderBordered, .IsRecycleCardsMode .RegionHeaderBordered
 {
 	margin-top: 14px;
 }
@@ -757,27 +784,38 @@ ToggleButton Label
 
 
 .IsPurchaseCardsMode #HeroRegion,
-.IsSellCardsMode #HeroRegion
+.IsSellCardsMode #HeroRegion,
+.IsRecycleCardsMode #HeroRegion
 {
 	visibility: collapse;
 }
 
 .IsBuildDecksMode #CardPurchaseListing,
-.IsBuildDecksMode #CardSaleListing
+.IsBuildDecksMode #CardSaleListing,
+.IsBuildDecksMode #CardRecycleListing
 {
 	visibility: collapse;
 }
 
 .IsSellCardsMode #DeckListing,
-.IsSellCardsMode #CardPurchaseListing
+.IsSellCardsMode #CardPurchaseListing,
+.IsSellCardsMode #CardRecycleListing
 {
 	visibility:collapse;
 }
 
 .IsPurchaseCardsMode #DeckListing,
-.IsPurchaseCardsMode #CardSaleListing
+.IsPurchaseCardsMode #CardSaleListing,
+.IsPurchaseCardsMode #CardRecycleListing
 {
 	visibility:collapse;
+}
+
+.IsRecycleCardsMode #DeckListing,
+.IsRecycleCardsMode #CardSaleListing,
+.IsRecycleCardsMode #CardPurchaseListing
+{
+	visibility: collapse;
 }
 
 #CardPurchaseListing, #CardSaleListing
@@ -792,7 +830,8 @@ ToggleButton Label
 }
 
 .IsPurchaseCardsMode #MainDeckRegion,
-.IsSellCardsMode #MainDeckRegion
+.IsSellCardsMode #MainDeckRegion,
+.IsRecycleCardsMode #MainDeckRegion
 {
 	margin-top: 25px;
 }
@@ -1245,6 +1284,101 @@ ToggleButton Label
 	text-align: right;
 }
 
+.RecycleStats
+{
+	margin-top: 4px;
+	margin-left: 25px;
+	margin-right: 25px;
+	flow-children: down;
+	width: 100%;
+}
+
+.RecycleProgressBarContainer
+{
+	flow-children: none;
+	height: 48px;
+	width: 100%;
+	
+	background-color: gradient( linear, 100% 0%, 100% 100%, from( #00000044 ), to( #00000011 ) );	
+	box-shadow: inset #00000088 20px 20px 40px 40px;
+	border-top: 4px solid #00000010;
+	border-right: 4px solid #a7cff107; 
+	border-bottom: 4px solid #a7cff108; 
+	border-left: 4px solid #00000007;
+}
+
+.RecycleProgressBar
+{
+	height: 100%;
+	width: 100%;
+	background-color: #00000020;
+}
+
+.RecycleProgressBarFill
+{
+	height: 100%;
+	width: 80%;
+	horizontal-align: left;
+
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/catalogue/card_list_bg_purple_psd.vtex");
+}
+
+#RecycleProgressBarText
+{
+	width: 100%;
+	vertical-align: center;
+	text-align: center;
+	color: white;
+}
+
+.RecycleProgressPanel
+{
+	height: fit-children;
+	width: 100%;
+	flow-children: right;
+}
+
+#RecycleProgressStat
+{
+	font-size: 16px;
+	text-align: left;
+	vertical-align: center;
+	width: fit-children;
+	max-width: 80%;
+	text-overflow: shrink;
+}
+
+.TicketsOutContainer
+{
+	flow-children: right;
+	horizontal-align: right;
+}
+
+
+#TicketsOutImage
+{
+    height: 34px;
+	width: 34px;
+	vertical-align: bottom;
+	margin-bottom: 7px;
+	margin-right: -6px;
+	wash-color: #a7bdbd;
+   
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("s2r://panorama/images/tournaments/icon_ticket_psd.vtex"); 
+}
+
+#RecycleTicketsOutText
+{
+	vertical-align: center;
+	font-size: 30px;
+	color: #a7bdbd;
+}
+
+
 .BuySellPriceLabel
 {
 	text-align: right;
@@ -1602,7 +1736,8 @@ ToggleButton:hover .TickBox
 }
 
 .IsPurchaseCardsMode .DeckStatsRegion,
-.IsSellCardsMode .DeckStatsRegion
+.IsSellCardsMode .DeckStatsRegion,
+.IsRecycleCardsMode .DeckStatsRegion
 {
 	visibility: collapse;
 }
@@ -1649,6 +1784,12 @@ ToggleButton:hover .TickBox
 	horizontal-align: right;
 }
 
+#TotalCardsStat
+{
+//	background-color: green;
+	margin-bottom: 20px;
+}
+
 .DetailedBuySellStatsRegion
 {
 	flow-children: right;
@@ -1656,6 +1797,21 @@ ToggleButton:hover .TickBox
 }
 
 .IsBuildDecksMode .BuySellStatsRegion
+{
+	visibility: collapse;
+}
+
+.RecycleStats
+{
+	visibility: collapse;
+}
+
+.IsRecycleCardsMode .RecycleStats
+{
+	visibility: visible;
+}
+
+.IsRecycleCardsMode .BuySellEstPrice
 {
 	visibility: collapse;
 }
@@ -1693,6 +1849,11 @@ ToggleButton:hover .TickBox
 	margin-top: 19px;
 }
 
+.IsRecycleCardsMode .BuySellTotals
+{
+	visibility: collapse;
+}
+
 .BuySellEstPrice
 {
 	flow-children: right;
@@ -1716,10 +1877,25 @@ ToggleButton:hover .TickBox
 }
 
 .HasRegisterGauntlet #SaveButton,
+.HasRegisterGauntlet #SaveAndReturnButton,
 .HasRegisterGauntlet #SaveAsButton,
 #RegisterButton
 {
 	visibility: collapse;
+}
+
+.HasSaveAndReturnButton #LoadDeckButton,
+.HasSaveAndReturnButton #SaveButton,
+.HasSaveAndReturnButton #SaveAsButton,
+.HasSaveAndReturnButton #ResetDeckButton,
+#SaveAndReturnButton
+{
+	visibility: collapse;
+}
+
+.HasSaveAndReturnButton #SaveAndReturnButton
+{
+	visibility: visible;
 }
 
 #CloseButton
@@ -1758,9 +1934,43 @@ ToggleButton:hover .TickBox
 	visibility: collapse;
 }
 
+.IsRecycleCardsMode #SaveButton,
+.IsRecycleCardsMode #SaveAsButton,
+.IsRecycleCardsMode #LoadDeckButton,
+.IsRecycleCardsMode #SellCardsButton,
+#RecycleCardsButton
+{
+	visibility: collapse;
+}
+
+.RecycleWarning #RecycleCardsButton
+{
+    //OM: Change this to restyle the recycle button if there are recycle warnings.
+}
+
+.IsRecycleCardsMode #RecycleCardsButton
+{
+	visibility: visible;
+}
+
+
 .IsSellCardsMode #SellCardsButton
 {
 	visibility: visible;
+}
+
+.IsRecycleCardsMode #SaveButton,
+.IsRecycleCardsMode #SaveAsButton,
+.IsRecycleCardsMode #LoadDeckButton,
+.IsRecycleCardsMode #SellCardsButton,
+#RecycleCardsButton
+{
+	visibility: collapse;
+}
+
+.IsRecycleCardsMode #RecycleCardsButton
+{
+ 	visibility: visible;
 }
 
 .GeneralButton:hover
@@ -2464,20 +2674,23 @@ flow-children: none;
 }
 
 .IsPurchaseCardsMode #DeckNameRegion,
-.IsSellCardsMode #DeckNameRegion
+.IsSellCardsMode #DeckNameRegion,
+.IsRecycleCardsMode #DeckNameRegion
 {
 	visibility: collapse;
 }
 
-.IsBuildDecksMode #AllCardsForBuyingToggle,
-.IsSellCardsMode #AllCardsForBuyingToggle,
-.IsBuildDecksMode #AllCardsForSellingToggle,
-.IsPurchaseCardsMode #AllCardsForSellingToggle
+.IsBuildDecksMode #CompleteSetForBuyingToggle,
+.IsSellCardsMode #CompleteSetForBuyingToggle,
+.IsRecycleCardsMode #CompleteSetForBuyingToggle,
+.IsBuildDecksMode #SellingExcessCopiesToggle,
+.IsPurchaseCardsMode #SellingExcessCopiesToggle
 {
 	visibility: collapse;
 }
 
-.IsSellCardsMode #AllCardsForSellingToggle
+.IsSellCardsMode #SellingExcessCopiesToggle,
+.IsRecycleCardsMode #SellingExcessCopiesToggle
 {
 	visibility: visible;
 }
@@ -2618,7 +2831,7 @@ flow-children: none;
 #DeckName
 {
 	text-overflow: ellipsis;
-	width: 366px;
+	width: 324px;
 	font-size: 30px;
 	text-align: left;
 	font-weight: light;
@@ -2698,6 +2911,24 @@ flow-children: none;
 	height: 50px;
 }
 
+.IsRecycleCardsMode #BuySellTitleRegion
+{
+	width: 100%;
+	flow-children: right;
+	
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #475e81 ), to( #5b77a2 ) );
+	
+	height: 65px;
+	width: 100%; 
+	box-shadow: inset #000000aa 0px -12px 40px 0px; 
+	border-bottom: 1px solid #6b498d44;
+	border-left: 1px solid #6b498d22;
+	border-left: 1px solid #ffffff03;
+	border-top: 1px solid #ffffff07;
+	
+	height: 50px;
+}
+
 .IsBuildDecksMode #BuySellTitleRegion
 {
 	visibility: collapse;
@@ -2759,6 +2990,13 @@ flow-children: none;
 {
 	visibility: visible;
 	text-shadow: 0px 0px 8px 4.0 #6a4581;
+	margin-top: 0px; 
+}
+
+.IsRecycleCardsMode #RecycleTitleLabel
+{
+	visibility: visible;
+	text-shadow: 0px 0px 4px 2.0 #17a7b0;
 	margin-top: 0px; 
 }
 

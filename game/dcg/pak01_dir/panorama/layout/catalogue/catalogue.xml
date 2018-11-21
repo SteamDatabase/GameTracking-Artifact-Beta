@@ -133,6 +133,7 @@
 							<Panel id="BuySellTitleRow">
 								<Label class="BuySellTitleLabel" id="BuyTitleLabel" text="#DCG_DeckBuilder_BuyTitleLabel"/>
 								<Label class="BuySellTitleLabel" id="SellTitleLabel" text="#DCG_DeckBuilder_SellTitleLabel"/>
+								<Label class="BuySellTitleLabel" id="RecycleTitleLabel" text="#DCG_DeckBuilder_RecycleTitleLabel"/>
 							</Panel>
 						</Panel>
 
@@ -194,6 +195,9 @@
 								<DCGDeckList id="CardSaleListing" class="DeckListing" addincludecards="false" allowdragdrop="true" allowcarddrag="true" emptydeckstring="#DCG_DeckBuilder_EmptySellListing">
 									<!--Dynamic content-->
 								</DCGDeckList>
+								<DCGDeckList id="CardRecycleListing" class="DeckListing" addincludecards="false" allowdragdrop="true" allowcarddrag="true" emptydeckstring="#DCG_DeckBuilder_EmptyRecycleListing">
+									<!--Dynamic content-->
+								</DCGDeckList>
 							</Panel>
 						</Panel>
 					</Panel>
@@ -202,9 +206,32 @@
 						<Panel class="DetailedBuySellStatsRegion">
 							<Panel class="BuySellTotals">
 								<Label class="BuySellTotalsStat" text="#DCG_DeckBuilder_TotalCards"/>
+								<Panel class="RecycleStats">
+									<Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_RecycleCurrentProgress"/>
+									<Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_RecycleCartProgress"/>
+									<Panel class="RecyclePadding"/>
+									<Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_RecycleResultsTickets"/>
+									<Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_RecycleResultsProgress"/>
+								</Panel>
 								<Panel class="BuySellEstPrice">
 									<Label class="BuySellPriceLabel" text="#DCG_DeckBuilder_TotalEstPrice"/>
 									<DCGMarketPrice id="PurchaseCost"/>
+								</Panel>
+							</Panel>
+							<Panel class="RecycleStats">
+								<Label class="BuySellTotalsStat" id="TotalCardsStat" text="#DCG_DeckBuilder_TotalCards"/>
+								<Panel class="RecycleProgressPanel">
+								<Label class="BuySellTotalsStat" id="RecycleProgressStat" text="#DCG_DeckBuilder_RecycleProgressDetails"/>
+								<Panel class="TicketsOutContainer">
+									<Panel id="TicketsOutImage"/>
+									<Label class="BuySellPriceLabel" id="RecycleTicketsOutText" text="#DCG_DeckBuilder_RecycleResultsTicketsOut"/>
+								</Panel>
+								</Panel>
+								
+								<Panel class="RecycleProgressBarContainer">
+									<Panel class="RecycleProgressBar" id="RecycleProgressBar"/>
+									<Panel class="RecycleProgressBarFill" id="RecycleProgressBarFill"/>
+									<Label id="RecycleProgressBarText" text="#DCG_DeckBuilder_RecycleProgressText"/>
 								</Panel>
 							</Panel>
 						</Panel>
@@ -221,7 +248,10 @@
 
 					<Panel class="RegionHeaderBordered">
 						<Panel class="RegionHeaderBorderedButtonContainer">
-							<Button class="SaveLoadClearButton" id="RegisterButton" onactivate="CatalogueRegisterGauntlet()">
+              <Button class="SaveLoadClearButton" id="RecycleCardsButton" onactivate="CatalogueRecycleListCards()">
+                <Label text="#DCG_DeckBuilder_RecycleCardsButton"/>
+              </Button>
+              <Button class="SaveLoadClearButton" id="RegisterButton" onactivate="CatalogueRegisterGauntlet()">
 								<Label text="#DCG_DeckBuilder_RegisterGauntlet"/>
 							</Button>
 							<Button class="SaveLoadClearButton HideEditingGauntletDeck" id="LoadDeckButton" onactivate="CatalogueLoadDeck( 1 )">
@@ -232,6 +262,9 @@
 							</Button>
 							<Button class="SaveLoadClearButton" id="SaveAsButton" onactivate="CatalogueSaveDeckAs( 1 )">
 								<Label text="#DCG_DeckBuilder_SaveAs"/>
+							</Button>
+							<Button class="SaveLoadClearButton" id="SaveAndReturnButton" onactivate="CatalogueSaveAndReturnFromEditDeck()">
+								<Label text="#DCG_DeckBuilder_Save"/>
 							</Button>
 							<Button class="SaveLoadClearButton" id="PurchaseCardsButton" onactivate="CataloguePurchaseCards()">
 								<Label text="#DCG_DeckBuilder_PurchaseCardsButton"/>

@@ -318,7 +318,6 @@ DCGSetIcon
 
 .PackInfoText
 {
-	horizontal-align: center;
 	color: white;
 	font-size: 24px;
 	margin: 3px;
@@ -425,7 +424,7 @@ DCGSetIcon
 .NPEVisible1,
 .NPEVisible2,
 .NPEVisible3,
-.NewPlayer #PostOpeningButtonContainer,
+.NewPlayer #PostOpeningContainer,
 .NewPlayer #CallToArmsDesc,
 .NewPlayer .PackPurchaseRow
 {
@@ -455,7 +454,6 @@ DCGSetIcon
 {
     horizontal-align: center;
     flow-children: down;
-
     visibility: collapse;
 }
 
@@ -473,14 +471,17 @@ DCGSetIcon
     letter-spacing: 6px;
 	margin: 3px;
 	text-transform: uppercase;
+	font-weight: light;
 }
 
 #NPEWelcome
 {
-    font-size:64px;
+    font-size: 48px;
     opacity: 0;
     text-transform: none;
-    letter-spacing: 0px;
+    letter-spacing: 1px;
+    font-weight: light;
+    visibility: collapse;
 }
 
 #NPEWelcome.AppearAnim
@@ -489,6 +490,7 @@ DCGSetIcon
     animation-duration: 7.0s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
+    visibility: visible;
 }
 
 @keyframes 'appear-and-disappear'
@@ -518,12 +520,13 @@ DCGSetIcon
 .TrainingDescriptionText
 {
     width: 460px;
-    //height: 150px;
+    height: 90px;
     font-size: 20px;
-    color: #777777;
+    color: uiStandardGrey;
     margin: 3px;
     horizontal-align: center;
     text-align: center;
+    text-overflow: shrink;
 }
 
 .MatchNum
@@ -531,7 +534,7 @@ DCGSetIcon
     width: 450px;
     //height: 150px;
     font-size: 20px;
-    color: #777777;
+    color: uiStandardGrey;
     letter-spacing: 6px;
 	margin: 3px;
 	text-transform: uppercase;
@@ -542,9 +545,10 @@ DCGSetIcon
 #NPEDesc1,
 #NPEDesc2
 {
-    margin-top: 400px;
+    margin-top: 460px;
     width: 420px;
     height: 80px;
+    text-overflow: shrink;
 }
 
 #NPEDesc3
@@ -606,13 +610,12 @@ DCGSetIcon
 
 
 
-#PostOpeningButtonContainer
+#PostOpeningContainer
 {
     horizontal-align: center;
     vertical-align: bottom;
     
-    width: fit-children;
-    flow-children: right;
+    width: 75%;
     margin-bottom: 86px;
     
     opacity: 0;
@@ -623,7 +626,7 @@ DCGSetIcon
 	transition-timing-function: ease-out;  
 }
 
-.OpenPackRevealed #PostOpeningButtonContainer
+.OpenPackRevealed #PostOpeningContainer
 {
     opacity: 1;
     transform: translateY(0px);
@@ -703,11 +706,6 @@ DCGSetIcon
     color: rgb(197, 87, 44);
     transition-property: color;
 	transition-duration: 0.18s;
-}
-
-#NextPackButton
-{
-    margin-left: 72px;
 }
 
 .NoPacksInCurrentSet #NextPackButton
@@ -905,4 +903,122 @@ DCGSetIcon
 .Language_english .FeaturedEventLabel
 {
 	visibility: collapse;
+}
+
+.PostOpeningButtonContainer
+{
+    horizontal-align: center;
+    width: 60%;
+}
+
+#DoneButton
+{
+    horizontal-align: left;
+}
+#NextPackButton
+{
+    horizontal-align: right;
+}
+
+#PostOpeningCardPacks
+{
+    overflow: noclip;
+    width: fit-children;
+    height: 48px;
+    flow-children: right;
+    visibility: visible;
+    brightness: 0.3;
+    transition-property: brightness;
+    transition-duration: 0.3s;
+    tooltip-position: top;
+    vertical-align: middle;
+    horizontal-align: left;
+}
+
+.HasUnopenedPacks #PostOpeningCardPacks,
+#PostOpeningCardPacks:hover
+{
+    brightness: 1.0;
+}
+
+#PostOpeningCardPacksIcon,
+{
+    height: 40px;
+    width: 40px;
+    horizontal-align: center;
+    vertical-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition-property: brightness, transform;
+    transition-duration: 0.2s, 0.16s;
+    transition-timing-function: ease-in-out;
+    tooltip-position: top;
+    overflow: noclip;
+}
+#PostOpeningCardPacks:hover #PostOpeningCardPacksIcon
+{
+    transform: translateY(-3px);
+}
+#PostOpeningCardPacksIcon
+{
+    background-image: url("s2r://panorama/images/main_menu/icon_packs_psd.vtex");
+}
+#PostOpeningCardPacksIcon:hover
+{
+    brightness: 1.0;
+}
+
+#PostOpeningCardPacksCount
+{
+    margin-right: 10px;
+}
+
+.UnopenedPackCountChanged #PostOpeningCardPacksCount,
+{
+    animation-name: flash-numbers;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+
+@keyframes
+
+'flash-numbers'
+{
+    0%
+
+{
+    text-shadow: none;
+}
+
+50%
+{
+    text-shadow: 0px 0px 8px 4.0 #71ffff03;
+}
+
+100%
+{
+    text-shadow: none;
+}
+
+}
+
+#PostOpeningUnopenedPacks
+{
+    opacity: 0;
+    wash-color: white;
+    pre-transform-scale2d: 1;
+    brightness: 2;
+    width: 164px;
+    height: 164px;
+    margin-left: -16px;
+    margin-top: -14px;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+.HasUnopenedPacks #PostOpeningUnopenedPacks
+{
+    opacity: 1;
 }

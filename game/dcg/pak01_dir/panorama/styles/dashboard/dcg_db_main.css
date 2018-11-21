@@ -475,9 +475,9 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 {
 	width: 100%;
 	wash-color: white;
-	transition-property: transform, opacity;
-	transition-duration: .2s;
-	//transition-timing-function: ease-in-out;
+	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
+	transition-duration: 0.4s;
+	transition-timing-function: ease-in-out;
 	transform: translateY(60px);
 	//visibility: collapse;
 	opacity: 0; 
@@ -664,6 +664,19 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 }
 
 #SecondaryBar.SellCards #SellCards Label
+{
+	color: #e5ebfa;
+	text-shadow: 0px 0px 15px 5.0 #4a81ff22;
+	
+	background-image: url("s2r://panorama/images/dashboard/topbar/secondary_bar_selected_background_psd.vtex");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	transition-property: opacity;
+	transition-duration: .3s;
+}
+
+#SecondaryBar.RecycleCards #RecycleCards Label
 {
 	color: #e5ebfa;
 	text-shadow: 0px 0px 15px 5.0 #4a81ff22;
@@ -866,6 +879,7 @@ DCGDashboard.InitialDisplay #DashboardForeground
 }
 
 .PopupBlurEnabled #TopBar,
+.PopupBlurEnabled #SecondaryBar,
 .PopupBlurEnabled #BottomInfoContainer,
 .PopupBlurEnabled #SocialOverlay,
 .PopupBlurEnabled #RootBackgroundMap,
@@ -1539,14 +1553,13 @@ DCGContextMenuManager
 
 #CancelButton
 {
-	width: 32px;
+	width: 34px;
 	min-width: 32px;
-	height: 32px;
+	height: 34px;
 	margin-right: 4px;
-
-	wash-color: #aa4942;
 	
-	background-image:url("s2r://panorama/images/catalogue/quit_icon_solid_psd.vtex");
+	wash-color: #aa4942;
+	background-image:url("s2r://panorama/images/catalogue/quit_icon_solid_shadow_psd.vtex");
 	background-size: 100% 100%;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
@@ -1559,6 +1572,11 @@ DCGContextMenuManager
 #CancelButton:hover
 {
 	brightness: 2;
+}
+
+.SelectedPageFeatured #CancelButton
+{
+	wash-color: #dd6058;
 }
 
 .Separator
@@ -1852,9 +1870,9 @@ DCGContextMenuManager
 .UserIsMarketRestricted #BuyCards Label.SecondaryBarTabLabel,
 .UserIsMarketRestricted #SellCards Label.SecondaryBarTabLabel,
 .MarketplaceDisabled #BuyCards Label.SecondaryBarTabLabel,
-.MarketplaceDisabled #SellCards Label.SecondaryBarTabLabel
+.MarketplaceDisabled #SellCards Label.SecondaryBarTabLabel,
 {
-	color: uiDarkGrey;
+    color: uiDarkGrey;
 }
 
 #SteamNotificationsPlaceholder
@@ -2022,4 +2040,5 @@ DCGContextMenuManager
 	text-overflow: shrink;
 	vertical-align: center;
 	color: #aaa;
+	text-shadow: 0px 2px 6px 0 #000000;
 }

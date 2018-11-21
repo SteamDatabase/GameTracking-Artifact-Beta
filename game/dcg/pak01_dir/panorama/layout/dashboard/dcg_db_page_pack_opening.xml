@@ -4,6 +4,7 @@
     <include src="s2r://panorama/styles/dashboard/dcg_db_page_pack_opening.vcss_c" />
     <include src="s2r://panorama/styles/card/card_set_rarity.vcss_c" />
     <include src="s2r://panorama/styles/catalogue/catalogue.vcss_c" />
+    <include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
   </styles>
 
   <DCGPackOpeningPage class="DashboardPage">
@@ -92,9 +93,17 @@
       </Panel>
       <Panel id="UnopenedPackClickRegion" hittest="true"/>
       <Panel id="NoMorePackClickRegion" hittest="true" onactivate="RemoveStyle( NoPacksOwnedHint, HintClicked); AsyncEvent( 0.1, AddStyle( NoPacksOwnedHint, HintClicked ) );"/>
-      <Panel id="PostOpeningButtonContainer">
-        <TextButton id="DoneButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenPacksDone" onactivate="DCGOnOpenPacksDone()"/>
-        <TextButton id="NextPackButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenNextPack" onactivate="DCGOnOpenPacksNextPack()"/>
+      <Panel id="PostOpeningContainer">
+        <Panel id="PostOpeningCardPacks" onmouseover="UIShowTextTooltip( #DCG_UnopenedPacks_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()">
+          <Panel id="PostOpeningCardPacksIcon">
+            <DCGScenePanel id="PostOpeningUnopenedPacks" camera="camera" map="scenes/mainmenu/mainmenu_unopened_packs" hittest="false" require-composition-layer="true" light="model_light" particleonly="true"  renderdeferred="true" deferredalpha="false"  antialias="true"/>
+          </Panel>
+          <Label id="PostOpeningCardPacksCount" text="{d:unopened_packs}" class="SocialNumberLabel"/>
+        </Panel>
+        <Panel class="PostOpeningButtonContainer">
+          <TextButton id="DoneButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenPacksDone" onactivate="DCGOnOpenPacksDone()"/>
+          <TextButton id="NextPackButton" class="PackInfoText Large PostOpeningButton" text="#DCG_OpenNextPack" onactivate="DCGOnOpenPacksNextPack()"/>
+        </Panel>
       </Panel>      
     </DCGPackOpeningPage>
 </root>

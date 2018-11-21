@@ -324,12 +324,6 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
     text-align:center;
 }
 
-.CardSaleListingHeader
-{
-	visibility: collapse;
-	width: 100%;
-}
-
 .CardSaleListingHeader Label
 {
 	font-size: 16px;
@@ -352,6 +346,32 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
 }
 
 .IsSellCardsMode #CardSaleListing .CardSaleListingHeader
+{
+	visibility: visible;
+}
+
+.CardRecycleListingHeader Label
+{
+	font-size: 16px;
+	horizontal-align: right; 
+	margin-right: 5px;
+	color: #cccccc88;
+}
+
+.CardRecycleListingHeader
+{
+	visibility: collapse;
+	width: 100%;
+	
+	
+	background-color: #1d152e;
+	padding: 5px;
+	padding-bottom: 4px;
+	padding-top: 3px;
+	border-bottom: 1px solid #2f457433; 
+}
+
+.IsRecycleCardsMode #CardRecycleListing .CardRecycleListingHeader
 {
 	visibility: visible;
 }
@@ -385,12 +405,11 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
 
 #BenchListToggle
 {
-	horizontal-align: center;
-	width: 44px;
+	width: 100%;
 	height: 44px;
 
 	z-index: 20;
-	margin-bottom: -28px;
+	margin-top: -28px;
 
 	visibility: collapse;
 }
@@ -411,30 +430,27 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
 	height: 44px;
 	background-size: 100% 100%;
     background-image:  url("s2r://panorama/images/control_icons/arrow_dropdown_disabled_png.vtex");
-	margin-top: -12px;
+	margin-top: 14px;
+	margin-bottom: -18px;
 	wash-color: white;
 	brightness: 2.5;
 	transform: rotateX( 180deg );
 	opacity: 1.0;
 	transition-property: opacity;
 	transition-duration: 0.4s;
+	horizontal-align: center;
 }
 
 .BenchListViewable #BenchListToggleImage
 {
 	transform: rotateX( 0deg );
-	margin-top: -20px;
+	margin-top: 8px;
 }
 
-#BenchListToggleImage:hover
+#BenchListToggle:hover #BenchListToggleImage
 {
 	opacity: 1.0;
 	brightness: 3.5;
-}
-
-.BenchListViewable #BenchDeckList
-{
-	height: 275px;
 }
 
 .BenchListViewable #BenchDeckList #DeckListCardsContainer
@@ -491,7 +507,8 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
 .BuyLibraryHeader,
 .SellLibraryHeader,
 .ExcessQtyLibraryHeader,
-.IsSellCardsMode.IsShowExcessMode .SellLibraryHeader
+.IsSellCardsMode.IsShowExcessMode .SellLibraryHeader,
+.IsRecycleCardsMode.IsShowExcessMode .SellLibraryHeader
 {
     visibility:collapse;
 }
@@ -499,7 +516,9 @@ DeckListCardPanel.Hidden.IsDimmed, DeckListCardPanel.IsDimmed, .IsUnlimitedColle
 .IsBuildDecksMode .BuildLibraryHeader,
 .IsPurchaseCardsMode.IsInBuyToCompleteSetMode .BuyLibraryHeader,
 .IsSellCardsMode .SellLibraryHeader,
-.IsSellCardsMode.IsShowExcessMode .ExcessQtyLibraryHeader
+.IsRecycleCardsMode .SellLibraryHeader,
+.IsSellCardsMode.IsShowExcessMode .ExcessQtyLibraryHeader,
+.IsRecycleCardsMode.IsShowExcessMode .ExcessQtyLibraryHeader
 {
 	z-index: 10;
     visibility: visible;

@@ -83,17 +83,28 @@
             <DCGSettingsSlider convar="snd_gamevoicevolume" min="0.0" max="1.0" percentage="true" text="#DCG_Settings_UnitSpeechVolume" />
             <DCGSettingsSlider convar="dcg_imp_volume" min="0.0" max="1.0" percentage="true" text="#DCG_Settings_ImpVolume" />
 
-
+			<Panel class="SettingsCheckboxContainer">
             <DCGSettingsCheckbox id="PlaySoundInDesktopCheckbox" convar="dcg_enable_audio_when_not_in_focus" text="#DCG_Settings_PlaySoundInDesktop" />
-            <DCGSettingsCheckbox convar="cc_subtitles" text="#DCG_CardInfo_SubtitleUnitSeech" invert="false" />
-            <DCGSettingsCheckbox convar="dcg_skipmovies" text="#DCG_Settings_SkipMovies" invert="false" />
-            <DCGSettingsCheckbox convar="dcg_anonymous_mode" text="#DCG_Settings_AnonymousMode" invert="false" onmouseover="UIShowTextTooltipStyled( #DCG_System_Tooltip_AnonymousMode, BindingsTooltip)" onmouseout="UIHideTextTooltip()" />
-
+            <DCGSettingsCheckbox id="SubtitleUnitSpeech" convar="cc_subtitles" text="#DCG_CardInfo_SubtitleUnitSeech" invert="false" />
+			</Panel>
+			<Panel class="SettingsCheckboxContainer">
+				<DCGSettingsCheckbox id="SkipMoviesCheckbox" convar="dcg_skipmovies" text="#DCG_Settings_SkipMovies" invert="false" />
+				<DCGSettingsCheckbox id="AnonymouseModeCheckbox" convar="dcg_anonymous_mode" text="#DCG_Settings_AnonymousMode" invert="false" onmouseover="UIShowTextTooltipStyled( #DCG_System_Tooltip_AnonymousMode, BindingsTooltip)" onmouseout="UIHideTextTooltip()" />
+			</Panel>
             <Button onactivate="DCGSetAudioDefaults()" class="ButtonBevel" id="AudioDefaultsButton">
               <Label text="#DCG_Settings_AudioDefaults" />
             </Button>
-				<Label class="SectionHeaderLabel ExtraSpacing" text="#DCG_Settings_Other" />
+				<Label id="OtherLabel" class="SectionHeaderLabel ExtraSpacing" text="#DCG_Settings_Other" />
 	      <Panel class="SectionHeaderLine"/>
+			<ToggleButton id="AutoCursorScaleButton" text="#DCG_settings_auto_cursor_scale" onactivate="DCGUpdateAutoCursorScaleSetting();" onmouseover="UIShowTextTooltipStyled( #DCG_settings_cursor_scale_overridden, BindingsTooltip)" onmouseout="UIHideTextTooltip()" />
+			<DCGSettingsSlider id="CursorScaleSlider" convar="cl_cursor_scale" min="0.5" max="3" percentage="true" value100percent="1" text="#DCG_settings_cursor_scale" onmouseover="UIShowTextTooltipStyled( #DCG_settings_cursor_scale_overridden, BindingsTooltip)" onmouseout="UIHideTextTooltip()" />
+			<Panel id="CursorTickContainer">
+				<Panel id="CursorScaleTick0" class="SliderTick"/>
+				<Panel id="CursorScaleTick1" class="SliderTick"/>
+				<Panel id="CursorScaleTick" class="SliderTick"/>
+				<Panel id="CursorScaleTick2" class="SliderTick"/>
+				<Panel id="CursorScaleTick3" class="SliderTick"/>
+			</Panel>
 	      <Panel class="OtherSettingsContainer">
 	        <Button onactivate="DCGResetTraining()" class="ButtonBevel" id="ResetTrainingButton">
 	          <Label text="#DCG_Settings_ResetTraining" />
