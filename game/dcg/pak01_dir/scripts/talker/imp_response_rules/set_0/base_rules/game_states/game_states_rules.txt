@@ -569,39 +569,8 @@ Rule rule_imps_game_states_ten_sec_remaining_TIMER_Pp_Or
 
     Response imps_game_states_ten_sec_remaining_Pp_Or
 
-}
-
-
-//-----------------------------------------------------------------------------
-// OPPONENT PLAYS CARD: ten_sec_remaining: Timer
-//-----------------------------------------------------------------------------
-
-
-// Player reacts:  ------------------------------------------------------------
-
-
-Rule rule_imps_game_states_ten_sec_remaining_TIMER_Op_Pr
-{
-
-    Criteria Timer IsNotCombat IsActionPhase IsLocalImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsNotActingPlayerLocal
-
-    Response imps_game_states_ten_sec_remaining_Op_Pr
-
-}
-
-
-// Opponent reacts:  ------------------------------------------------------------
-
-
-Rule rule_imps_game_states_ten_sec_remaining_TIMER_Op_Or
-{
-
-    Criteria Timer IsNotCombat IsActionPhase IsOpponentImp IsLoE10SecondsRemaining IsGoE8SecondsRemaining IsNotActingPlayerLocal o_var_wait_ten_sec_remaining
-
-    ApplyContext "o_var_wait_ten_sec_remaining:1:5"
-    ApplyContextToWorld
-
-    Response imps_game_states_ten_sec_remaining_Op_Or
+    // also sharing response:
+    Response imps_shared_generic_do_nothing
 
 }
 
