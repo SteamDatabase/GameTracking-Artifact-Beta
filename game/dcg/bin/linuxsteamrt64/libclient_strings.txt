@@ -1453,10 +1453,6 @@
 #DCG_DeckBuilder_MarketRestrict_Buy_Title
 #DCG_DeckBuilder_MarketRestrict_Sell_Body
 #DCG_DeckBuilder_MarketRestrict_Sell_Title
-#DCG_DeckBuilder_Market_Buy_Disabled_Body
-#DCG_DeckBuilder_Market_Buy_Disabled_Title
-#DCG_DeckBuilder_Market_Sell_Disabled_Body
-#DCG_DeckBuilder_Market_Sell_Disabled_Title
 #DCG_DeckBuilder_RarityTooltipBasic
 #DCG_DeckBuilder_RarityTooltipCommon
 #DCG_DeckBuilder_RarityTooltipRare
@@ -1711,7 +1707,8 @@
 #DCG_LoadDeck_UserDecksTag
 #DCG_LookingToPlay_CreateSteamBeaconFailed
 #DCG_LookingToPlay_JoinBeaconFailed
-#DCG_MainMenu_Reconnect
+#DCG_LookingToPlay_LobbyInviteActive
+#DCG_LookingToPlay_Tooltip
 #DCG_MainMenu_SparringMatch
 #DCG_ManagePacks_Qty%i
 #DCG_ManageTickets_Qty%i
@@ -3174,6 +3171,7 @@ $z0u.A
 %s:SetKinematic(CVariant::type=%s) expected bool argument
 %s<span class="Match">%s</span>%s
 %s=%c
+%s?l=%s
 %sAutocomplete
 %sColorFilter
 %sDropDownMenu
@@ -3416,9 +3414,8 @@ $z0u.A
 (#GameUI_Disconnect_LoopLevelLoadActivate
 (#GameUI_Disconnect_RemoteProblem_BadCert
 (#GameUI_Disconnect_RemoteProblem_Timeout
+(%/&3
 (%0.2f): %s
-(%<>6
-(%_#3
 (%d)  EffectName "%s"  Dormant? %s  Emission Stopped? %s 
 (%d) Name: %s (%s)
 (%d/%d)%s
@@ -3436,7 +3433,7 @@ $z0u.A
 (*%s*), 
 (*MARK) must have an argument
 (*VERB) not recognized or malformed
-(-kR}
+(-KU}
 (0x%08X)'??'
 (1 + n) * 3 <= vecsize
 (1@zD
@@ -3647,12 +3644,9 @@ $z0u.A
 )#GameUI_Disconnect_PureServer_ClientExtra
 )#GameUI_Disconnect_RemoteProblem_BadCrypt
 )#GameUI_Disconnect_SteamDeny_BadAntiCheat
-)%~nr
 ), this value label conflicts with 
-)-rnr
 ).  Contact the program author for an update.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 ).>Mj
-)5{nr
 )9IYiy
 )9}[p=
 ):2Y@
@@ -3919,12 +3913,15 @@ $z0u.A
 *ZL17PlayMoveImpToLanebEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL18PlayMoveDeckToLaneibEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL19Set1_Routed_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
+*ZL21PlayCardDrawAnimation10EDrawSpeedEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL24PlayChangeDeckVisibilityibEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL26PlayIfNotOpponentSpectatorRK20CScriptPlayListParamEUlRK16CConditionalEvalE_
+*ZL30PlayYieldBasedOnCardDrawNumber10EDrawSpeedEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL33Set1_ActivateRavenousMass_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL35Set1_ActivateWingfallHammer_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL36Set1_ActivateMercenaryExiles_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
+*ZL37PlayImpAnimationBasedOnCardDrawNumber10EDrawSpeedEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZN10CCatalogue20LockFirstPreviewCardEvEUlP21CDCGDeckListCardPanelE_
 *ZN10CDCGPuzzle24ApplyInitialSectionRulesEvEUlRK19CUtlConstStringBaseIcE15CUtlStringTokenRK7Empty_tE_
 *ZN10CLocalGame20ProcessButtonCommandEi11EGameButtonEUlvE_
@@ -4529,8 +4526,6 @@ $z0u.A
 . This will make the proto fail to compile for some languages, such as C#.
 .%-Sz
 .%0*llu
-.%Uk@
-.%ik@
 .%u?l
 .(Optional) Set of tags for the published file.
 .(zkuiH
@@ -4591,13 +4586,13 @@ $z0u.A
 ./zvutH
 .3333
 .5L{x
-.5e^3
-.5x6+
+.5U^3
 .=!N}
-.=?#9
+.=(LC
+.=/#9
 .=To|
-.=XIC
 .=uzx
+.=~XC
 .>()09
 .>N^n~
 .@(."
@@ -5152,6 +5147,7 @@ $z0u.A
 0123456789abcdef
 0: custom accelaration disabled
 0;VPu
+0;~ @
 0<	w1
 0<	wD
 0=off, 1=on, 2=debug visualization
@@ -6074,6 +6070,7 @@ $z0u.A
 16CScriptPlayDelay
 16CScriptPlayMusic
 16CScriptPlaySound
+16CScript_CardDraw
 16CScript_GameOver
 16CServerDraftCard
 16CSettingsHotkeys
@@ -8396,6 +8393,7 @@ $z0u.A
 25CDCGPlayerLimitedProgress
 25CDCGRuleEntity_PlayEffect
 25CDCGTourney_PaidEntryItem
+25CDCG_Popup_FullscreenHTML
 25CDCG_PortraitWorldSpawner
 25CDCG_SettingsEnumDropDown
 25CDCG_UI_Popup_ManagePacks
@@ -10587,6 +10585,7 @@ $z0u.A
 51CMsgClientToGCCreateStaticRecipeResponse_InputError
 51CMsgClientToGCCreateStaticRecipeResponse_OutputItem
 51CMsgGameServerToClientInitialGameState_CMsgDeckList
+51CScriptConfig_Set00_kDefaultScripts_CARD_DRAW_PHASE
 51CScriptConfig_Set00_kDefaultScripts_SHOPPING_UPDATE
 51CScriptConfig_Set01_kArcaneAssault_CARD_PLAY_SCRIPT
 51CScriptConfig_Set01_kArcaneCensure_CARD_PLAY_SCRIPT
@@ -11033,6 +11032,8 @@ $z0u.A
 926XsBm
 92t.H
 95*P>
+95s>x
+95~H3
 97t|H
 98N*>
 99W0t/A
@@ -11260,14 +11261,15 @@ $z0u.A
 ;3t5H9
 ;3tNH
 ;4,F]
+;5-H|
+;5lD|
 ;7};UI
 ;9t%H9
 ;9t4H
 ;:HcR
 ;:~`H
 ;;D$H
-;=@(u
-;=j'u
+;=*Au
 ;@*$pV
 ;Affff
 ;BXtC
@@ -11285,8 +11287,6 @@ $z0u.A
 ;H s&H
 ;H;:t#
 ;HDtYH
-;Hc5%W
-;Hc5`b
 ;I9<$uU
 ;IcL$
 ;J8t)H
@@ -11716,6 +11716,7 @@ $z0u.A
 ?OnNewPlayerPage
 ?Out of Memory
 ?Oyt#,*
+?PackOpeningCompleted
 ?PopupBlurEnabled
 ?R8q(2)
 ?R||Bv>
@@ -11818,7 +11819,6 @@ $z0u.A
 ?uv28J
 ?v@ffff
 ?vT5A
-?vstdlib
 ?wdQ}
 ?xG!$fQ
 ?xZeC
@@ -12011,7 +12011,6 @@ $z0u.A
 @PAPL
 @PAQL
 @PMc&E;f
-@SourceName
 @TAPD
 @TitleLabel
 @TpxADz"@
@@ -12023,7 +12022,7 @@ $z0u.A
 @XA^]
 @Xt E1
 @XtMH9
-@Y>)FJ_
+@Y>)FSourceName
 @YLl>
 @Y_nA
 @Z*oG8
@@ -12341,7 +12340,6 @@ A9Epr8Ic
 A9F t
 A9G t
 A9G$t
-A9G(r
 A9G0H
 A9G4H
 A9GL~O
@@ -12349,6 +12347,7 @@ A9GtA
 A9MLA
 A9NLA
 A9Nh~
+A9O0|
 A9OLA
 A9T$@t
 A9T$@t$I
@@ -12357,7 +12356,6 @@ A9V@t'I
 A9\$ 
 A9\$ s
 A9\$ t=
-A9\$$|
 A9\$(
 A9\$(t2I
 A9\$,
@@ -12388,6 +12386,7 @@ A9^$||L
 A9_ I
 A9_ M
 A9_ u
+A9_$|
 A9p8t
 A9t$(
 A9t$`A
@@ -14521,6 +14520,7 @@ AVAUATSHcO
 AVAUATSHc_
 AVAUATSI
 AVAUATSL
+AVAUATSLco
 AVAUATSLco,I9
 AVAUATSf
 AVAUATSt
@@ -14597,7 +14597,7 @@ AWAVfA
 AWhU(
 AXAYE
 AXAYH
-AXAYLc%n
+AXAYLc%
 AXfD9 tBL
 AXtxH
 AYAZE
@@ -14645,7 +14645,6 @@ A]A^H
 A]A^]
 A]A^]A
 A]A^]H
-A]A_t
 A^A_]
 A_txt
 Abaddon
@@ -15200,10 +15199,10 @@ BAcceptsFocus
 BAcceptsInput
 BAdjustingVolume
 BAscendantHasClass
-BButtonContents
 BCanSeeInParentScroll
 BCheckLaunchParameters - redundant, ignoring
 BCreateChildren
+BDCGAbandonGauntlet()
 BEAM_ENTPOINT
 BEAM_ENTS
 BEAM_HOSE
@@ -15471,7 +15470,6 @@ Bot Guy
 Both towers have -2 Mana.
 BottomArrow
 BottomArrowVisible
-BottomInfoContainer
 BottomMouseScrollRegion
 Bounce multiplier for when physically simulated objects collide with other objects.
 Bounce.Concrete
@@ -15557,6 +15555,7 @@ Button.DepressedBgColor
 Button.DepressedTextColor
 Button.FocusBorderColor
 ButtonBitMask_t
+ButtonContents
 ButtonGroup
 Buying Time
 Bx8Fxt
@@ -15571,7 +15570,6 @@ C ;C0f
 C @us1
 C A9D$ t
 C A;D$
-C A;D$ t}L
 C A;E
 C ASH
 C H9E
@@ -18958,8 +18956,10 @@ D$  t
 D$  tAI
 D$ 9B @
 D$ 9C t
+D$ ;C 
 D$ ;C t
 D$ ;C tYM
+D$ ;C t}M
 D$ @H
 D$ A+D$
 D$ A;
@@ -19152,7 +19152,7 @@ D$`9D$X
 D$`A9E`A
 D$`E1
 D$`H9
-D$`H;=
+D$`H;=}+*
 D$`H;X
 D$`Hc
 D$`IcT$XH
@@ -19224,13 +19224,12 @@ D8g1t
 D8gLD
 D9"tFA
 D9#~wJ
-D9%2Mn
-D9%?Yn
 D9+~3H
+D9-N0
+D9-ton
 D90s$H
 D98t	H
 D9;t3I
-D9=>`z
 D9@ s
 D9C ~JMc
 D9D$4B
@@ -19254,7 +19253,6 @@ D9h H
 D9h8t9A
 D9hL|cH
 D9hTu
-D9j t
 D9j }
 D9k H
 D9k@H
@@ -19289,34 +19287,30 @@ D; t~
 D;!ttHc
 D;"tIH
 D;$2tWL
-D;%(-5
-D;%(35
-D;%1j
-D;%H55
-D;%t*
+D;%:/
+D;%P_9
+D;%`b9
+D;%cb9
+D;%iH=
+D;%{O9
 D;'t!H
 D;'t3H
 D;'tXH
 D;(}lH
 D;)ts
 D;+}(L
-D;-3h9
-D;-4E
-D;-LJ
-D;-^g
-D;-d86
-D;-}%~
-D;-}f
+D;-$R6
+D;-KP6
 D;.tLH
 D;1tsH
 D;3t 
 D;3}5
-D;5 <9
+D;5NV9
+D;5g!
 D;8t f.
 D;8tQH
 D;9tlA
 D;;}dL
-D;=_N
 D;?t H
 D;CPt
 D;F`u
@@ -19330,6 +19324,8 @@ D;`(trE1
 D;`H}
 D;`Tt
 D;`X|
+D;b t
+D;b u
 D;c A
 D;c D
 D;c tlH
@@ -19359,7 +19355,6 @@ D;h H
 D;hX}6H
 D;i$A
 D;i$t
-D;j u
 D;k D
 D;k uYE
 D;k |
@@ -19427,7 +19422,6 @@ DCG Server Networking
 DCG State Updates
 DCG WorldScene
 DCGAbandonGauntlet
-DCGAbandonGauntlet()
 DCGAbandonLobby
 DCGAbilitiesTooltip
 DCGAcceptInitialClaim
@@ -19550,6 +19544,7 @@ DCGDeckSummary
 DCGDecreaseHandSize
 DCGDiceRoll
 DCGDiscardCard
+DCGDisplayComic
 DCGDrawCard
 DCGEmoticon
 DCGEmoticonMouseOut
@@ -19700,6 +19695,7 @@ DCGLobbyJoined
 DCGLobbyLeft
 DCGLookingToPlayAdvertiseSettingsChanged
 DCGLookingToPlayContextMenu
+DCGLookingToPlayMouseOver
 DCGMainMenuPage
 DCGMarketMiniIcon
 DCGMarketPrice
@@ -19768,6 +19764,8 @@ DCGPlaySocial
 DCGPlaySolo
 DCGPlayTrophySequence
 DCGPlayerSelected
+DCGPopupFullscreenHTML
+DCGPopupFullscreenHTMLClose
 DCGPopupNotificationBarHide
 DCGPopupSelectPlayer
 DCGPopupTourneyAddPhase
@@ -21110,7 +21108,6 @@ E;o }WL
 E;o }dI
 E;o }mI
 E;oH|
-E;t$ 
 E;t$ D
 E;t$ H
 E;t$0
@@ -21773,6 +21770,7 @@ F4A9G4
 F5A8G5
 F6:AR
 F6VectorfRKS_S1_E
+F8;FH
 F8A8D$8
 F8A9G8
 F8HcV0H
@@ -22886,6 +22884,7 @@ GxfD9 tmH
 Gz(<.
 H	9 X,
 H	C H
+H	C0H
 H	P0H
 H	P0I
 H	p(]
@@ -22963,7 +22962,7 @@ H9X t
 H9X u
 H9\$P
 H9l$(u
-H9p s
+H9q s
 H9r s
 H9s(H
 H9sHv
@@ -22991,279 +22990,291 @@ H;0t\H
 H;2t)H
 H;2t+H
 H;2tyHcJ
-H;5 ^
-H;5!r
-H;5$+
-H;5$G
-H;5(*
-H;5)(
-H;5*0
-H;5-g
-H;5.+
-H;50@
-H;54@
-H;59:
-H;59W
-H;59b
-H;5@*
-H;5@j
-H;5@l
-H;5@t
-H;5A$
-H;5G/
-H;5L4
-H;5M-
-H;5P/
-H;5Pv
-H;5Qz
-H;5dE
-H;5iF
-H;5j0
-H;5p/
-H;5pg
-H;5p{
-H;5xK
-H;5y%
+H;5!7
+H;5!9
+H;5,}
+H;50T
+H;51$
+H;52c
+H;58j
+H;5<B
+H;5@S
+H;5@Y
+H;5AB
+H;5AC
+H;5Gb
+H;5H)
+H;5H0
+H;5H?
+H;5Mx
+H;5N[
+H;5Ra
+H;5U`
+H;5Uh
+H;5Y2
+H;5`C
+H;5aV
+H;5a^
+H;5d_
+H;5l)
+H;5l^
+H;5lz
+H;5mL
+H;5o!
+H;5p]
+H;5q:
+H;5qC
+H;5qR
+H;5q[
+H;5rc
+H;5v^
+H;5xs
+H;5|8
+H;5|s
 H;7t"
 H;7t-1
 H;9u#
 H;:t(f
 H;:u'
-H;= 3
-H;= 4
-H;= v
-H;= w
-H;=!|7
-H;="$
-H;=#U
-H;=$v
-H;=%j
-H;=')6
+H;= j
+H;=!c
+H;=")W
+H;="R
+H;=$Fp
+H;=%?
+H;=',S
 H;='>>
-H;='D6
-H;='[
-H;='n
-H;='q
-H;='s
-H;=(9>
-H;=(X
-H;=(i
-H;=(l
-H;=*(
-H;=*)
-H;=*T=
-H;=*]=
-H;=*r7
-H;=+3
-H;=,N
-H;=-.e
-H;=.vW
-H;=/#
-H;=/,
-H;=/1o
-H;=/f
-H;=/i
-H;=02
-H;=09
-H;=0>
-H;=0t
-H;=0u
-H;=0v
-H;=10e
-H;=1Ro
-H;=1^
-H;=1x7
-H;=2W=
-H;=2`=
-H;=2r&
-H;=3Je
-H;=3a
-H;=40
-H;=4BC
-H;=5	
-H;=5*
-H;=7	
-H;=7*>
-H;=7-;
-H;=726
-H;=77.
-H;=7]
-H;=7g
-H;=8%>
-H;=8,6
-H;=83Q
-H;=8T
-H;=8X
-H;=8r
+H;='@
+H;='aQ
+H;='w
+H;=(	
+H;=(8
+H;=(A6
+H;=(V>
+H;=(\6
+H;=(ae
+H;=(j
+H;=(x
+H;=*,
+H;=*2
+H;=*?
+H;=*s=
+H;=*|=
+H;=+E
+H;=+U
+H;=,=
+H;=.<
+H;=.H
+H;=.K
+H;=.T
+H;=/	
+H;=/&
+H;=/5
+H;=/D
+H;=/O
+H;=/P
+H;=/h
+H;=0Kg
+H;=0i
+H;=1<
+H;=1Z
+H;=1s
+H;=2!C
+H;=2*W
+H;=25
+H;=2B
+H;=2m=
+H;=2v=
+H;=3!z
+H;=3o
+H;=57
+H;=5Up
+H;=5\
+H;=6)g
+H;=70,
+H;=756
+H;=7G>
+H;=7P6
+H;=7\Q
+H;=7z
+H;=8$z
+H;=8/6
+H;=80S
+H;=8<
+H;=8B>
+H;=8E;
+H;=8J6
+H;=8O.
 H;=8u
-H;=:P
-H;=:j
-H;=:n7
-H;=:t
-H;=>>
-H;=?$
-H;=?)
+H;=9B
+H;=9Sg
+H;=:%
+H;=:]
+H;==A
+H;==be
+H;=>'
 H;=?.
-H;=?1
-H;=@1
-H;=@s
-H;=@t
-H;=@u
-H;=A%
-H;=A@
-H;=At7
-H;=B	
-H;=BoW
-H;=CV
-H;=Ca
-H;=Co
-H;=ED
-H;=Ee
-H;=G 6
-H;=G3
-H;=G3>
-H;=G;6
-H;=GZ
-H;=Gf
-H;=H	
-H;=H.>
-H;=H.Q
-H;=Ha
-H;=Hw
-H;=IW
-H;=Iv
-H;=J*
-H;=JU=
-H;=J^=
-H;=KL
-H;=Kn
-H;=Ld
-H;=Li
-H;=N`
-H;=O 
-H;=O!
-H;=O;
-H;=OG
-H;=OH
-H;=OR
+H;=?0
+H;=?7
+H;=?;
+H;=?K
+H;=?[
+H;=?a
+H;=?c
+H;=?e
+H;=?k
+H;=?l
+H;=?y
+H;=?{
+H;=@h
+H;=AX
+H;=Ade
+H;=C2
+H;=C@
+H;=Dk
+H;=E;
+H;=EL
+H;=EO
+H;=Ej
+H;=GP>
+H;=Gv
+H;=H z
+H;=H86
+H;=HK>
+H;=HS6
+H;=H~
+H;=I&
+H;=I@e
+H;=J-
+H;=J3
+H;=J@
+H;=JV
+H;=JZ
+H;=Jk=
+H;=Jt=
+H;=J|
+H;=J}=
+H;=K=
+H;=K~e
+H;=L+W
+H;=Mw
+H;=Mx
+H;=N<
+H;=N]
+H;=O)
+H;=O?
+H;=OY
 H;=O[
-H;=P0
-H;=Pi
-H;=Ps
-H;=Pt
-H;=Q]
-H;=Qp7
-H;=Qx
-H;=RX=
-H;=Ra=
-H;=Rs&
-H;=S	
-H;=T.e
-H;=T4
-H;=TJ
-H;=U.u
-H;=V9q
-H;=W	C
+H;=O^
+H;=Of
+H;=P$
+H;=Pg
+H;=Qr
+H;=R'
+H;=RB
+H;=RC
+H;=RE
+H;=RH
+H;=Rn=
+H;=Rw=
+H;=S"z
+H;=S7
+H;=T:r
+H;=Tq
+H;=U<
+H;=UA
+H;=UK
+H;=UT
+H;=W'6
 H;=W<>
-H;=Wl
-H;=Wo
-H;=X#6
-H;=X7>
-H;=X>6
-H;=XU
-H;=Xg
-H;=Xj
-H;=Xy
-H;=Z#
-H;=ZR
-H;=Z{7
-H;=[]
-H;=\0e
-H;=\a
-H;=^4
-H;=^Z
-H;=^n
-H;=_)
-H;=_X
-H;=_\
-H;=_^
-H;=_a
-H;=_m
-H;=_s
-H;=`/
-H;=`i
-H;=`r
-H;=`s
-H;=a.
-H;=al7
-H;=au
-H;=az
-H;=b 
-H;=cW
-H;=eIB
-H;=fJ+
-H;=g(>
-H;=g-e
-H;=g5.
-H;=gY
-H;=g[
+H;=XT>
+H;=YR
+H;=Ym
+H;=Yn
+H;=]f
+H;=^8
+H;=^w
+H;=_.
+H;=_2u
+H;=_9
+H;=_>
+H;=_Q
+H;=_]
+H;=_y
+H;=_|
+H;=_}
+H;=`!
+H;=`5
+H;=`f
+H;=a/
+H;=ar
+H;=cs
+H;=cx
+H;=dA
+H;=dbe
+H;=d}i
+H;=e'
+H;=e\u
+H;=g+
+H;=gA
+H;=gC
+H;=gE>
+H;=gH;
+H;=gWQ
 H;=gu
-H;=h#>
-H;=h;
-H;=hFQ
-H;=hY
-H;=hp
+H;=gx
+H;=h!z
+H;=h.S
+H;=h@>
+H;=hM.
 H;=hs
-H;=h{
-H;=i>
-H;=ig
-H;=j+
-H;=jV=
-H;=j_=
-H;=jw7
-H;=kM
-H;=kUo
-H;=kv
-H;=n1u
-H;=n:
-H;=n~
+H;=j4
+H;=j;
+H;=jA
+H;=j[
+H;=jl=
+H;=ju=
+H;=j~=
+H;=l+
+H;=lde
+H;=l}C
+H;=n>
+H;=nM
+H;=o!
+H;=o(
+H;=o4
 H;=o9
-H;=oc
-H;=oi
-H;=ok
-H;=p.
-H;=pq
-H;=pr
-H;=q\
-H;=q}7
-H;=r'
-H;=r*
-H;=r-
-H;=r0
-H;=rY=
-H;=rb=
-H;=rt&
-H;=sS
-H;=tk
-H;=tv
-H;=u`
-H;=vn
-H;=w1>
-H;=wd
-H;=wr
-H;=x,>
-H;=x56
-H;=xAQ
-H;=xV
-H;=x_
-H;=x}
-H;=yF
-H;=z$
-H;=zi
-H;=zs7
-H;={ 
-H;={E
-H;=|V
+H;=oV
+H;=o_
+H;=ozo
+H;=pe
+H;=q"
+H;=qT
+H;=r(
+H;=rD
+H;=ro=
+H;=rx=
+H;=s#z
+H;=s&
+H;=sf
+H;=t6
+H;=tc
+H;=u<
+H;=u]
+H;=wH"
+H;=wN>
+H;=wae
+H;=w~
+H;=x>f
+H;=xI>
+H;=xl
+H;=xq
+H;=x|
+H;=yWm
+H;=z!q
+H;=z?$
+H;=zFp
+H;=~q
 H;B v
 H;C u
 H;C(t
@@ -23295,11 +23306,10 @@ H;SHs
 H;T$(
 H;W(u
 H;X t
-H;X v
 H;Y tZH;X
-H;Z v
 H;ZPtQH
 H;\$(u
+H;p s"H
 H;p(u
 H;r(t*L
 H;w t
@@ -23331,6 +23341,7 @@ HDR Color Scale: %0.3f
 HERO_LANE_ASSIGNMENT
 HERO_VS
 HH;1t3H
+HH;=F
 HHAPD
 HHcS,L
 HHc_P;_`
@@ -23523,8 +23534,9 @@ HasUnreadMessages
 HasWin
 HaticsType_Default
 HaticsType_None
-Hc506
-Hc50{
+Hc5@i
+Hc5lG
+Hc5sQ
 Hc7;w
 Hc@ H
 Hc@$H
@@ -23695,6 +23707,7 @@ HcQ 9
 HcQ A9
 HcQ D9
 HcQ H
+HcQ(H
 HcQ09
 HcQ0A9
 HcQ0D9
@@ -23792,6 +23805,7 @@ Hcsl1
 Hcst1
 Hcs|1
 Hcw0H9
+Hcw8H
 Hcwx1
 HcxLH
 Hc{ L
@@ -23975,7 +23989,6 @@ I91t#
 I94	H
 I9D$Hu
 I9E0L
-I9F v1H
 I9U`tHH
 I9\$8u
 I9pPt
@@ -24200,7 +24213,7 @@ IcM8Ic
 IcMhI
 IcN I
 IcNPIc
-IcNpE1
+IcNpL
 IcO I
 IcO(Ic
 IcO0I
@@ -24776,6 +24789,7 @@ InvisibleFallback
 Invite
 InviteEnabled
 InviteSent
+InviteUserKnown
 Invited
 InvulnChanged
 Ion Shell
@@ -24962,7 +24976,6 @@ J t)H
 J'Muy the Wise
 J(9N(|
 J(Optional) If this represents a game, this is the URL to that game's page."P
-J0HcR(H
 J0Mc.
 J7@eL
 J@ffff
@@ -25149,7 +25162,6 @@ L: %.2f deg
 L; t4
 L;!t!f.
 L;&u	
-L;-&]\
 L;0t?H9
 L;0t[A
 L;8t,H
@@ -25276,6 +25288,8 @@ Lc tu
 Lc"D;b
 Lc#D;c
 Lc#E9
+Lc%1/
+Lc%}zO
 Lc&D;f
 Lc'D)
 Lc'D;g
@@ -25284,10 +25298,7 @@ Lc(D;h
 Lc)D;i
 Lc+A9
 Lc+D;k
-Lc-I4u
-Lc-Ug
-Lc-t%~
-Lc-tf
+Lc-	Nu
 Lc.D;n
 Lc/D)
 Lc/D;o
@@ -25333,7 +25344,6 @@ LccHD;cXt?H
 LccPD;c`D
 LccPD;c`L
 LccPI
-LccXD;chE
 LccXD;chH
 LccXL
 Lcc`D;cpD
@@ -25496,7 +25506,6 @@ Loadout Default Offset:
 Loadout Scale:
 Lobby %llu for Match %llu created
 Lobby %llu for Match %llu destroyed
-LobbyOpponentAccountID
 LobbyOpponentState
 Local Player
 Local player changed team (or disconnected)...
@@ -25878,9 +25887,9 @@ Mcl$0I
 Mcl$0L
 Mcl$HE
 Mcl$pE;
-Mcl$pI
 Mcn@E
 Mcn`E;npt0I
+McnpI
 Mco E;o0
 Mct$ E;t$0D
 Mct$ E;t$0H
@@ -27275,6 +27284,7 @@ Nut?{
 Nx	V @M
 Nyctasha's Guard
 O A;N H
+O A;N tYM
 O A;N t_M
 O H;Q
 O HcW
@@ -27377,6 +27387,7 @@ OnCellChf
 OnChargesChanged
 OnColorChanged
 OnConnectedFlagsChanged
+OnDCGPopupFullscreenHTMLClosed
 OnDamageAttempted
 OnDamageAttempted.Blocked
 OnDamageAttempted.Damage
@@ -27385,6 +27396,9 @@ OnDialogActivatorChanged
 OnDialogH
 OnDifficultySelectionChanged
 OnDiskBufferData_t
+OnDrawFast
+OnDrawSlow
+OnDrawSuperFast
 OnEffectCalculation
 OnEffectCalculationNegative
 OnEffectCalculationNonZero
@@ -28046,7 +28060,6 @@ PackCardScene
 PackCards
 PackInPosition
 PackIsOpening
-PackOpeningCompleted
 PackPurchaseBox
 Pack_Price
 Packed store %s with refcount > 0.
@@ -28359,9 +28372,11 @@ Play Lambda
 Play Subscene
 Play Synced Animation on dice %u
 Play a fullscreen movie
+Play an imp animation for card draw based on speed and owner
 Play footstep sound for players
 Play named sound on Entity
 Play named sound only on the client for the passed in player
+Play the Card Draw Animation
 PlayDeck1
 PlayDeck2
 PlayHeroVS
@@ -30560,7 +30575,6 @@ SteamNetworking005
 SteamNetworkingSockets
 SteamNetworkingSockets()->ReceiveMessagesOnConnection flagged an invalid connection? %s
 SteamNetworkingUtils
-SteamNotificationsPlaceholder
 SteamPad
 SteamParties002
 SteamToursHost001
@@ -31352,7 +31366,6 @@ TypeItemArmor
 TypeItemDeed
 TypeItemWeapon
 TypeManager
-U ;S 
 U ARD
 U H9S t
 U I9T$ t
@@ -32178,7 +32191,7 @@ W IcD$
 W [A\A]A^A_]
 W u)H
 W%:O&t
-W%RQ6
+W%BQ6
 W(Aq=
 W(H92tOA
 W(H;2t'H
@@ -32187,12 +32200,14 @@ W(H;2tPA
 W(HcG H
 W,:V,u
 W,t&L
+W-pY6
 W092tgD
 W0;V0H
 W3|Uxa
 W49V4u
 W?,|C
 W@H+WHH
+W@t%H
 WAITING FOR VSCRIPT DEBUGGER CONNECTION -- '-vscriptdebug' was provided on the command line.
 WARNING
 WARNING! Field %s is using the wrong FIELD_ type!
@@ -32272,6 +32287,7 @@ W`;2t[A
 W`v0f
 Wait ms
 Waiting
+Waiting an amount of time based on card draw speed and owner
 Waiting for Async Children to finish
 Waiting for rendering to complete...
 WaitingForAuthorization
@@ -32528,19 +32544,22 @@ X`Hc@XL
 XboxSystemInterface001
 Xh#x\
 Y ANb
-Y%T\H
-Y%Z"A
+Y%$_H
+Y%*%A
+Y%y#/
+Y%{3$
 Y(Optional) Starting index to begin enumeration at. Defaults to the beginning of the list."Z
 Y, ]&]
-Y--g7
-Y-V]5
+Y-F]5
+Y-o_H
 Y/&4@4
 Y0fD+
 Y5*3y
-Y5iyI
-Y5y{I
+Y59|I
+Y5I~I
+Y5n_H
 Y6	@W'g(
-Y=> @
+Y=. @
 Y?3333E
 Y@B30q
 YB@fE
@@ -32552,7 +32571,6 @@ YFPL9
 YGDUH
 YGXfA
 YIcL$
-YIcL$(Ic
 YIcOhIc
 YK fA
 YT$0~`Ic
@@ -33136,6 +33154,7 @@ Z~A+E
 \$sE;o
 \$xI9
 \%03o
+\%_}C
 \-E6~
 \C not allowed in lookbehind assertion
 \C8E1
@@ -34983,7 +35002,6 @@ _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move
 _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move_bIPSsEEPT_PKS4_S7_S5_
 _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move_bIPvEEPT_PKS4_S7_S5_
 _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move_bIiEEPT_PKS3_S6_S4_
-_ZNSt20__uninitialized_copyILb0EE13__uninit_copyIN9__gnu_cxx17__normal_iteratorIPK30CardCompositeStateRulePropertySt6vectorIS4_SaIS4_EEEEPS4_EET0_T_SD_SC_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP13AttributeListS3_EET0_T_S5_S4_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP23AttributeDisplayEntry_tS3_EET0_T_S5_S4_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP30CardCompositeStateRulePropertyS3_EET0_T_S5_S4_
@@ -36436,7 +36454,8 @@ _xu:H
 `chunkCount' attribute is not found in the header.
 `u@'1
 `|D;%
-`|D;%vW3
+`|D;%6q3
+`|D;%v
 a numbered reference must not be zero
 a world layer in a dota map
 a2U0*	
@@ -39408,6 +39427,7 @@ fA;]>w
 fAther : low back unrounded vowel
 fAther : low front unrounded vowel
 fB94 
+fD9%PC=
 fD91t
 fD9an|_fA
 fD9cV
@@ -39738,6 +39758,7 @@ file://{resources}/layout/popups/popup_deck_info.xml
 file://{resources}/layout/popups/popup_deck_sample_hand.xml
 file://{resources}/layout/popups/popup_esc_menu.xml
 file://{resources}/layout/popups/popup_explain.xml
+file://{resources}/layout/popups/popup_fullscreen_html.xml
 file://{resources}/layout/popups/popup_gauntlet_reward.xml
 file://{resources}/layout/popups/popup_generic.xml
 file://{resources}/layout/popups/popup_generic_text_entry.xml
@@ -40632,8 +40653,9 @@ hwH1@
 hyena
 hyphen
 h|D;-
-h|D;->j3
-h|D;-ca3
+h|D;-#{3
+h|D;->&
+h|D;-^%
 i < length_
 i >= 0
 i t0H
@@ -45116,6 +45138,7 @@ main_max_instances
 main_min
 main_view
 mainmenu
+majorVersionNumber
 make_ai_suggestions_to_player
 makers mark id
 male cat
@@ -45443,6 +45466,7 @@ minhealthdmg
 minimal
 minimum_priority
 minlogexposure
+minorVersionNumber
 mintcream
 minusone
 minute
@@ -46205,7 +46229,6 @@ p=lb@
 p?}WF
 p@33333
 p@Unknown compression type %d
-p@t)H
 pA9E,
 pAUATSH
 pAVAUATI
@@ -47187,6 +47210,7 @@ predelay
 predicted
 prefabs
 preferred_carryangles
+prelude
 premium_only
 prepared_statements_executed
 prerequisite '%s'
@@ -47952,26 +47976,22 @@ s A9L$$t
 s A9O
 s E9u
 s H;5
-s H;5	
-s H;5	K
 s H;5 
-s H;5+
-s H;54h
-s H;59
-s H;59s
-s H;5D
-s H;5DL
+s H;5!
+s H;5!)
+s H;5(
+s H;51
+s H;51s
 s H;5P
-s H;5Tm
-s H;5X
-s H;5YC
-s H;5`
-s H;5d(
-s H;5i
-s H;5i%
-s H;5p
-s H;5pj
-s H;5y
+s H;5Q
+s H;5Q~
+s H;5T
+s H;5\w
+s H;5`j
+s H;5a
+s H;5h4
+s H;5s
+s H;5|
 s [A\A]A^]
 s off
 s v&E1
@@ -47981,10 +48001,11 @@ s$[A\H
 s(AUL
 s(E9&t-A
 s(H;5
-s(H;5	
-s(H;5-
-s(H;5DD
-s(H;5T
+s(H;5(
+s(H;5,
+s(H;5A
+s(H;5Q
+s(H;5u
 s(H;s
 s(t.H
 s(~?A
@@ -48001,10 +48022,8 @@ s/glow.vH
 s/previeH
 s/spriteH
 s0H;5
-s0H;59
-s0H;5Dd
-s0H;5`
-s0H;5s
+s0H;5X
+s0H;5\t
 s0[A\]
 s0t;H
 s0~;A
@@ -48017,18 +48036,18 @@ s5fA9
 s69F~
 s7>Ip
 s8H;5
-s8H;5@
-s8H;5I
-s8H;5ld
+s8H;5(
+s8H;5H
 s8t%H
 s9Hc@
 s9HcC
 s:@W[
 s@9C@
 s@H9sHv
-s@H;5
-s@H;5$
-s@H;50k
+s@H;5X
+s@H;5\
+s@H;5l
+s@H;5x
 s@H;q
 s@HcR
 s@I9p@w
@@ -48042,10 +48061,7 @@ sCSvz
 sChangedH
 sF?t+F
 sHH;5
-sHH;5@
-sHH;5@ 
-sHH;5T
-sHH;5gt
+sHH;5_
 sIHcB
 sIcL$
 sIf true, then files must have all the tags specified.  If false, then must have at least one of the tags specified.
@@ -48055,13 +48071,15 @@ sMA9|$
 sNHc@
 sOHc@
 sPH;5
-sPH;50
+sPH;5(
+sPH;5V
+sPH;5x
 sPLT chunk has bad length
 sPLT chunk requires too much memory
 sQHc@
 sWM$^-
 sXH;5
-sXH;5$0
+sXH;5lc
 sXt%H
 sYHc@
 sYHc[
@@ -48086,7 +48104,7 @@ s_nLatchPermissions
 s_nWatchTransmitEntity
 s`A]A^xq
 s`H;5
-s`H;5@,
+s`H;5P
 s`H;p
 saI^Bj
 saddlebrown
@@ -48357,8 +48375,7 @@ seven
 severity
 sfixed32
 sfixed64
-shH;5m
-shH;5p,
+shH;5
 shadowcascadecount
 shadowcascadedistance%d
 shadowcascadedistance0
@@ -49044,6 +49061,7 @@ swiss
 swiss_matches
 swiss_scoring
 sxH;5
+sxH;5U
 sxt!H
 sxtpH
 sy@3333
@@ -49071,7 +49089,6 @@ t	I9x
 t	X[]
 t	[A\A]A^]
 t	[A\]
-t 91H
 t ;3H
 t ;W8} Hc
 t HcM
@@ -49093,15 +49110,18 @@ t"D9p
 t"Hc@
 t"HcS
 t"L;%
-t"L;% 
-t"L;%0
-t"L;%0"
-t"L;%@
-t"L;%@$
-t"L;%P
-t"L;%Q
-t"L;%`
-t"L;%p
+t"L;%(
+t"L;%(V
+t"L;%8
+t"L;%8X
+t"L;%9
+t"L;%H
+t"L;%H 
+t"L;%X
+t"L;%XN
+t"L;%h
+t"L;%x
+t"L;%xU
 t"Mc&E;f
 t#92u
 t#9Q w
@@ -49119,8 +49139,8 @@ t$	H9
 t$ 9K$t
 t$ E1
 t$ H;5
-t$ H;5]g
-t$ H;5q5
+t$ H;5-M
+t$ H;5e
 t$ L)
 t$ L9
 t$ fA
@@ -49129,6 +49149,7 @@ t$ tQH
 t$(A9
 t$(H9
 t$(H;5
+t$(H;5M
 t$(L)
 t$(L9
 t$(L9.t`
@@ -49138,12 +49159,16 @@ t$,Hc
 t$0E1
 t$0H9
 t$0H;5
-t$0H;51
-t$0H;51T
-t$0H;51\
-t$0H;5<
+t$0H;55
 t$0H;5=
-t$0H;5=s
+t$0H;5E
+t$0H;5I	
+t$0H;5RP
+t$0H;5Us
+t$0H;5Y
+t$0H;5Y$
+t$0H;5]
+t$0H;5y
 t$0L9
 t$0Lc
 t$0f.
@@ -49153,14 +49178,14 @@ t$8A9t$4
 t$8D9
 t$8E1
 t$8H;5
-t$8H;5%
-t$8H;5J
-t$8H;5us
+t$8H;55
+t$8H;5m
 t$8L9
 t$<	t 
 t$<E1
 t$@H;5
-t$@H;5%v
+t$@H;55
+t$@H;5m
 t$@L9
 t$@fA
 t$D9j
@@ -49169,6 +49194,7 @@ t$H;9H
 t$H;h
 t$HH9
 t$HH;5
+t$HH;5B
 t$HIc\$HD
 t$HL9
 t$HcK8
@@ -49191,35 +49217,33 @@ t$Lc+I
 t$PA;pP
 t$PA;uPu
 t$PH;5
-t$PH;5U
 t$PHc
 t$PL9
 t$TLc
 t$XH;5
 t$XIcD$P
-t$`H;5
-t$hH;5=c
+t$`H;5=
+t$`H;5U
+t$hH;5
 t$lfA
-t$pH;5ae
+t$pH;5
 t$pL9
 t$pvufA
-t$xH;5M1
+t$xH;5
 t%90u
 t%;2u
 t%@:>t+
-t%D:%D
+t%D:%
 t%D;n
 t%HcC0A
 t%IcD$
 t%IcL$ 
 t%L;}
-t&;5O
 t&A;\$
-t&D;5
+t&D;5%
 t&HcQ
-t&Ic]
 t&L;%
-t&L;% 
+t&L;%h
 t&Lcc
 t&Mc7E;w
 t&[A\]
@@ -49227,7 +49251,7 @@ t';0u
 t'D;"H
 t'D;5
 t'H9P
-t'H;=
+t'H;=@|
 t'H;{ t!H;{(t
 t'IcA
 t'Icu
@@ -49245,10 +49269,10 @@ t(f;0t%H
 t(f;2t0H
 t)9Q w$H
 t)9pHu
+t);="?
 t);N r$H
-t);Q r$H
-t)@:5Q
-t)D:%8
+t)@:5
+t)D:%x
 t)H;Z
 t)HcE
 t)LccXD;chD
@@ -49264,7 +49288,6 @@ t*E;f
 t*HcJHH
 t*Hc]
 t*Lce
-t*Lc}
 t*Mc<$E;|$
 t+92u
 t+98u
@@ -49279,7 +49302,7 @@ t+IcG@H
 t+Ic\$
 t+Mc7E;w
 t+Mcl$pE;
-t,D:5
+t,D:5#
 t,H;;u'
 t,Hc@
 t,HcV
@@ -49287,6 +49310,7 @@ t,L;e
 t,Lc@
 t-;0u
 t-;N r(H
+t-;Q r(H
 t-;W@}.L
 t-L9c
 t-LcX
@@ -49419,7 +49443,7 @@ t3Lc#D;c
 t3[A\A]A^]
 t3[A\A]]
 t3[A\]
-t4D:%L
+t4D:%|
 t4HcC$H
 t4HcG
 t4HcG H
@@ -49502,10 +49526,9 @@ t9[A\A]A^]
 t9[A\]
 t:+wHx5;p
 t:HcG
-t:Lc-S
+t:Lc-
 t:UHc
 t:[A\]
-t;;0u
 t;HcS
 t;[A\]
 t<;3u
@@ -49523,7 +49546,6 @@ t>[A\]
 t>fA9
 t?HcH
 t?[A\A]A^]
-t@;5E
 t@Hc@
 t@Ic_
 t@[A\A]A^]
@@ -49543,7 +49565,7 @@ tC92u
 tC;0u
 tC;2u
 tC;8u
-tC;=G
+tC;=g
 tCHcM
 tCLc#D;c
 tCMce
@@ -49567,7 +49589,6 @@ tGHcx D
 tGLcc
 tG[A\]
 tHD;`4sB[A\A]A^]
-tHI9u wBI
 tHMc,$E;l$
 tH[A\]
 tID9e
@@ -49582,6 +49603,7 @@ tJHc\
 tJLc;D;{
 tJ[A\A]A^]
 tK92u
+tK;0u
 tK~%E1
 tLD;h
 tL[A\]
@@ -49598,7 +49620,8 @@ tPHcX
 tPIc](I
 tQI;<$uKI
 tQ~W=
-tR;=B
+tR;5E!
+tR;=b
 tRIcE
 tRIcL$ 
 tRNS chunk has out-of-range samples for bit_depth
@@ -49627,13 +49650,12 @@ t\UE1
 t]LcM
 t^[A\]
 t_D9k
-t_Hc=8
-t_HcX
+t_Hc=8j
 t_IcU
 t`9Z w[H
 t`[A\]
 ta9Z w\H
-ta;=!
+ta;=A
 taA;N r[HcC
 taG : voiced velar stop
 taHcE
@@ -49768,7 +49790,7 @@ texturescale
 tfHcH
 tfLcp
 tf[A\]
-tgHc=t
+tgHc=tj
 tgHcO
 tgHcQ
 tgIc\$
@@ -49970,7 +49992,6 @@ tower_health
 tower_health1
 tower_health2
 tower_max_mana
-tp;=t
 tpD9#H
 tpHcK
 tpHcW
@@ -50121,16 +50142,17 @@ type_id
 type_instances
 type_value
 tyrannosaur
+tz;5~!
 tzHcSh
 tzHcVPH
 tzL9m
 tzUE1
 t{E;l$
+t{HcU
 t{HcWp
 t{UE1
 t{[A\A]A^]
 t{riU
-t|H-x
 t|HcR
 t}HcE
 t}HcSH
@@ -50483,7 +50505,6 @@ v8array
 v8callback
 v8object
 v8value
-v9;8u
 v:Hc@
 v><vt:
 v>zlK9T
@@ -50496,6 +50517,7 @@ vHA9t$H
 vHAUATI
 vK<	uGH
 vKH+E
+vN;8u
 vNE^N
 vQHc@
 vRHcR
@@ -50872,6 +50894,7 @@ vscroll
 vsnap
 vsnd_files
 vsnprintf@@GLIBC_2.2.5
+vstdlib
 vsurf
 vtex1
 vtexAVE
@@ -51314,13 +51337,14 @@ zyuwH
 z|uzI
 z~u|A
 { H;=
-{ H;=9
-{ H;=;
-{ H;=K
-{ H;=tI
-{ H;=tL
-{ H;=tO
-{ H;=~
+{ H;=!
+{ H;=V
+{ H;=\a
+{ H;=\d
+{ H;=\g
+{ H;=\j
+{ H;=f
+{ H;=sA
 { H;}
 { HcC
 { [A\A]A^H
@@ -51339,7 +51363,7 @@ z~u|A
 {(1~WM
 {(9x(
 {(H;=
-{(H;=*
+{(H;=3p
 {(H;}
 {([A\A]H
 {([A\A]]
@@ -51354,20 +51378,20 @@ z~u|A
 {0@cz
 {0D;{@A
 {0H;=
-{0H;=%
 {4[A\]H
-{8H;=
+{8H;=:t
+{8H;{@
 {8[A\H
 {8[A\]
 {8t;[A\]
 {<u+LcK
 {<u.Lcc
 {@H;=
-{@H;=o
+{@H;=))[
 {@HcE
 {@ffff
-{HH;=p
-{PH;=)
+{HH;=
+{PH;=
 {PH;{X
 {YIN?
 {`D;{pA
@@ -51396,7 +51420,7 @@ z~u|A
 |$ E;|$0tLI
 |$ H)
 |$ H;=
-|$ H;=)
+|$ H;=K
 |$ I;|$(
 |$ t$L
 |$ ~RA
@@ -51425,7 +51449,7 @@ z~u|A
 |$@H)
 |$HA\A]H
 |$HE;|$XI
-|$HH;=
+|$HH;=/0
 |$HfA
 |$PA9
 |$PD1
@@ -51502,7 +51526,7 @@ z~u|A
 |jD9cp
 |pIcD$
 |yyF@6R
-} H;=!
+} H;=i
 } Ic_
 } f;r
 }!HcC8;CHt4
@@ -51528,7 +51552,7 @@ z~u|A
 }-A;_4
 }-f;s2w'H
 }0H;=
-}0H;=JlB
+}0H;=]w
 }1A;\$\
 }2'@+P
 }2fA9
@@ -51541,7 +51565,6 @@ z~u|A
 }8A\A]A^]
 }8E;e$
 }8H;=
-}8I;}@
 }9E;e$
 }9Hc@
 }9Lcc
@@ -51587,7 +51610,7 @@ z~u|A
 ~ Mcu
 ~&LccHD;cXD
 ~(A\A]A^A_]
-~(H;=HD
+~(H;=
 ~(t+A9
 ~(};Hc
 ~)H;7I
@@ -51615,7 +51638,6 @@ z~u|A
 ~7;XP|
 ~7;w$
 ~8HcM
-~8I;~@
 ~9;w$
 ~9HcR
 ~:HcO4
