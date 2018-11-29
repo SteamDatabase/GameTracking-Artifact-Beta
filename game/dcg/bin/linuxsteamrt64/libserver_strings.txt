@@ -454,7 +454,7 @@
  DoLookAhead invoked depth: %d numMoves: %d 
  E;g`
  GCConnectionStatus_GC_GOING_DOWN
- H;=F'=
+ H;=nA=
  IcD$
  Id: %d, %s, Score: %5.3lf (%5.3lf), Low utility: %d Cost: 
  NETWORK_DISCONNECT_CLIENT_NO_MAP
@@ -1709,8 +1709,8 @@ $zBu@
 %s attempting to join the server as local player index %u
 %s changed name to %s
 %s could not find attachment %s on target %s.
-%s disconnecting hconn=%d after match ended, not logging
-%s disconnecting hconn=%d before match ended.  Logging disconnection #%d
+%s disconnecting [%s] hconn=%d after match ended, not logging
+%s disconnecting [%s] hconn=%d before match ended.  Logging disconnection #%d
 %s executing script: %s
 %s has %d prior disconnections, but all were resolved.  We cannot match up this connection to any prior disconnection.
 %s has a health specified in model '%s'. Use prop_physics or prop_dynamic instead.
@@ -2043,9 +2043,9 @@ $zBu@
 (#GameUI_Disconnect_LoopLevelLoadActivate
 (#GameUI_Disconnect_RemoteProblem_BadCert
 (#GameUI_Disconnect_RemoteProblem_Timeout
-(%!`q
 (%0.2f) %s
 (%0.2f): %s
+(%aaq
 (%d %d %d %d)
 (%d) Name: %s (%s)
 (%f, %f, %f)
@@ -2056,7 +2056,6 @@ $zBu@
 (*%s*), 
 (*MARK) must have an argument
 (*VERB) not recognized or malformed
-(-E_f
 (0x%08X)'??'
 (1@zD
 (9w rh;w
@@ -2100,6 +2099,7 @@ $zBu@
 (E9} 
 (E;4$
 (E;<$}oM
+(H;=*A=
 (HcG H
 (HcWP
 (I9\$
@@ -2184,12 +2184,9 @@ $zBu@
 )#GameUI_Disconnect_PureServer_ClientExtra
 )#GameUI_Disconnect_RemoteProblem_BadCrypt
 )#GameUI_Disconnect_SteamDeny_BadAntiCheat
-)%~UB
 ), this value label conflicts with 
-)-rUB
 ).  Contact the program author for an update.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 ).>Mj
-)5{UB
 )9}[p=
 ):2Y@
 )?)	@u
@@ -2613,12 +2610,11 @@ $zBu@
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
 .%0*llu
-.%W{^
+.%1vB
+.%KKk
 .%llu
-.%qRk
-.-StB
-.-Ye}
-.-y~O
+.-ssB
+.-yd}
 ...<truncated>...
 ...And One For Me
 ../../public/entity2/concreteentitylist.h
@@ -2646,11 +2642,9 @@ $zBu@
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
 ../public/tier2/fieldpath.h
-.5<Ik
-.5KP$
+.5"uB
+.5|Jk
 .8z%u#
-.=s$M
-.=~uB
 .>()09
 .@(."
 .@(va
@@ -2920,6 +2914,7 @@ $zBu@
 .k0z,u*H
 .k0zbu`H
 .k_ECustomGameInstallStatus_FailedInternalError
+.k_EDCGDisconnectReason_GoodbyeUnrecognizedGame
 .k_EGCMsgInitiateTradeResponse_Using_New_Device
 .k_EGCMsgUseItemResponse_MiniGameAlreadyStarted
 .k_EMsgClientToGCPrivateLobbyInviteUserResponse
@@ -5477,6 +5472,7 @@ $zBu@
 23CMsgGCToClientSDRTicket
 23CMsgGCToGCConsoleOutput
 23CMsgGCToGCDirtySDOCache
+23CMsgGCToGCSubGCStarting
 23CMsgGameBoardGameButton
 23CMsgLobbyInviteResponse
 23CMsgPartyInviteResponse
@@ -6058,6 +6054,7 @@ $zBu@
 29CMsgGCToGCCanUseDropRateBonus
 29CMsgGameClientToServerChatMsg
 29CMsgGameServerToClientChatMsg
+29CMsgGameServerToClientGoodbye
 29CMsgGauntletConfig_RewardTier
 29CMsgHttpRequest_RequestHeader
 29CMsgPostMatchCardAchievements
@@ -7736,7 +7733,6 @@ $zBu@
 9$@]m
 92t.H
 95*P>
-95_lI
 98N*>
 999999
 99w(|&H
@@ -7866,8 +7862,10 @@ $zBu@
 ;39!@ffff
 ;3@F%u
 ;4,F]
-;5'EK
-;5}>K
+;57\K
+;58!J
+;5;+J
+;5S+J
 ;8tcH
 ;9t4H
 ;:HcR
@@ -7884,7 +7882,7 @@ $zBu@
 ;G tu+G$L
 ;GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT
 ;HDtYH
-;Hc5]+
+;Hc5mV
 ;I9<$uU
 ;IcL$
 ;K st
@@ -8032,6 +8030,7 @@ $zBu@
 =.f?y
 === %sEntity List Summary (%s) ===
 === Total: %s/%s %s entities%s ===
+==== CDotaCardGame::OnMatchCompleted ====
 ============================================
 ====================================================================
 =?_w_:R
@@ -10041,6 +10040,7 @@ ATSHcG
 ATSHc_0;
 ATSLc&H
 ATSLcg
+ATSLcg H
 ATSfA
 ATSt$@
 ATSt>H
@@ -10106,7 +10106,7 @@ AVAUATH
 AVAUATI
 AVAUATL
 AVAUATLc
-AVAUATLc%
+AVAUATLc%O
 AVAUATM
 AVAUATS
 AVAUATS1
@@ -11196,6 +11196,7 @@ CDotaCardGame::OnCardPlayBegin( turn=%d, lane=%d, acting_player=%d )
 CDotaCardGame::OnCardPlayEnd( turn=%d, lane=%d, acting_player=%d )
 CDotaCardGame::OnCombatBegin( turn=%d, lane=%d )
 CDotaCardGame::OnCombatEnd( turn=%d, lane=%d )
+CDotaCardGame::OnEndMatchBegin
 CDotaCardGame::OnEndTurnBegin( turn=%d )
 CDotaCardGame::OnEndTurnEnd( turn=%d )
 CDotaCardGame::OnPreGameBegin()
@@ -11900,7 +11901,9 @@ CLightSpotAlias_light_glspot::CEntityInstanceEntityClass
 CLightSpotEntity
 CLightSpotEntity::CEntityInstanceEntityClass
 CLobbyData_PostMatchSurvey
+CLocalGame::OnGameOver
 CLocalGame::PlayerDisconnected
+CLocalGame::SendHandoffAndFullStateToPlayer( %s ), nPlayerIndex=%d
 CLogicActiveAutosave
 CLogicActiveAutosave::CEntityInstanceEntityClass
 CLogicAuto
@@ -12159,6 +12162,7 @@ CMsgGCToGCPingResponse"4
 CMsgGCToGCRefreshSOCache
 CMsgGCToGCSOCacheSubscribe
 CMsgGCToGCSOCacheUnsubscribe
+CMsgGCToGCSubGCStarting
 CMsgGCToGCUniverseStartup
 CMsgGCToGCUpdateSQLKeyValue
 CMsgGCToGCUpdateSessionStats
@@ -12176,6 +12180,7 @@ CMsgGameHandoff
 CMsgGamePlayerRequestHandoff"`
 CMsgGameReplayActionMarker
 CMsgGameServerToClientChatMsg
+CMsgGameServerToClientGoodbye"1
 CMsgGauntletConfig
 CMsgGenericResult
 CMsgHaveVersions
@@ -13402,8 +13407,8 @@ ClientSetupVisibility: portal number (%d) too large
 Clientside physics push away (0=off, 1=only localplayer, 1=all players)
 Clint Cearley
 Cloak of Endless Carnage
-Closing connection hconn=%d remote=%s, we don't recognize that connection, ignoring.
-Closing connection hconnn=%d remote=%s, but that user is using hconn=%d now.  Ignoring.
+Closing connection [%s] hconn=%d we don't recognize that connection, ignoring.
+Closing connection [%s] hconnn=%d but that user is using hconn=%d now.  Ignoring.
 Closing old connection
 Closing previous connection to %s, hconn=%d, because we have a new one for that player!  This is unusual.
 ClothShapeCapsule
@@ -13554,7 +13559,7 @@ Could not find type "
 Couldn't alloc player sound slot!
 Couldn't create %s!
 Couldn't find HLTV client player.
-Couldn't find a local game that matched up with that hcon=%d
+Couldn't find a local game that matched up with [%s] hconn=%d
 Couldn't find any entity named '%s'
 Couldn't parse default value "
 Couldn't resolve response target %s
@@ -13850,12 +13855,10 @@ D8c1t
 D8kSt
 D8sUt
 D9#~wJ
-D9%M_
-D9%Y`
+D9%mt
+D9%yu
 D9't3H
-D9-TC>
 D9;t3I
-D9=Mu
 D9@ s
 D9C ~JMc
 D9D$4B
@@ -13890,16 +13893,24 @@ D; tMH
 D; }VH
 D;!ttHc
 D;$2tWL
-D;%#dF
-D;%?:
-D;%p!
-D;%r(
+D;%3:
+D;%8/
+D;%85
+D;%87
+D;%9z
+D;%<+L
+D;%B9
+D;%P5
+D;%R<
+D;%cxF
+D;%s)
 D;'tXH
 D;)ts
-D;-3f
-D;-R;I
-D;-ch
-D;-l 
+D;-2PI
+D;-C|
+D;-k,
+D;-sz
+D;-{	
 D;.tLH
 D;1tsH
 D;3t 
@@ -13932,6 +13943,7 @@ D;ch|
 D;cxD
 D;cx|
 D;g D
+D;g0D
 D;h H
 D;i$A
 D;i$t
@@ -16033,8 +16045,8 @@ H9X u
 H9X`f
 H9XpH
 H9\$P
+H9p s
 H9p t
-H9q s
 H9r s
 H9w UH
 H9w8]
@@ -16052,216 +16064,242 @@ H;0t\H
 H;0teH
 H;2t_A
 H;3t5L
-H;5!.
-H;5%<_
-H;50\v
-H;50^s
-H;58Pv
-H;5<%_
-H;5ALs
-H;5H^v
-H;5P@
-H;5Q5
-H;5Y*
-H;5YKv
-H;5\4
-H;5i:
-H;5pxs
-H;5qHs
-H;5tJ
-H;5x.
-H;5xE
-H;5|8s
-H;5|Mv
-H;5|fs
+H;5	'
+H;5	3T
+H;5	[i
+H;5 8
+H;5 Y
+H;5 p
+H;5 x_
+H;5!,{
+H;5"_e
+H;5$cs
+H;5$xv
+H;5-]
+H;50a
+H;50di
+H;51#{
+H;584_
+H;59,
+H;5=uW
+H;5@;
+H;5@C_
+H;5@Fi
+H;5@Ti
+H;5If
+H;5J\e
+H;5MN
+H;5YU
+H;5Yer
+H;5Y|v
+H;5Y}v
+H;5`A
+H;5a;T
+H;5i0
+H;5qE
+H;5qyv
+H;5t%n
+H;5tn_
+H;5xL
+H;5y!{
+H;5y4n
 H;7t"
 H;7t-1
 H;8tmH
 H;9u#
 H;:t(f
 H;:u'
-H;=	#
-H;=	4c
-H;=	8
-H;=	|
-H;= *
-H;= J
-H;= tX
-H;= }
-H;=!kf
-H;="(=
-H;="*
-H;="?
-H;=&<Y
-H;=''{
-H;=':Y
-H;='>Y
-H;='Gf
-H;='V
-H;='Wf
-H;=(6~
-H;=(SU
-H;=)0
-H;=)3!
-H;=)E
-H;=)R0
-H;=*N
-H;=*Q
-H;=*T
-H;=+#
-H;=,Zf
-H;=-lY
-H;=.>
-H;=/8
-H;=/9
-H;=03
-H;=0G}
-H;=1 Y
-H;=1jU
-H;=2&
-H;=2;
-H;=4Y
-H;=6Wj
-H;=7Af
-H;=7H
-H;=7O}
-H;=7x
-H;=7}
-H;=85~
-H;=8RU
-H;=8m
-H;=9,
-H;=9/!
-H;=9A
-H;=9Hu
-H;=;A
-H;==Uf
-H;==`w
-H;=?B
-H;=?g
-H;=?xY
-H;=@R
-H;=@a
-H;=@e
-H;=AN
-H;=B"
-H;=B1~
-H;=B7
-H;=B:!
-H;=B]9
-H;=B~!
-H;=FD
-H;=FO
-H;=F\
-H;=FsY
-H;=G%{
-H;=G5b
-H;=GB
-H;=GDp
-H;=GL
-H;=Ga
-H;=GqY
-H;=H4~
-H;=HQU
-H;=I(
-H;=I=
-H;=Kkf
-H;=M<Y
-H;=O-
-H;=O0
-H;=Op
-H;=P(
-H;=P*
-H;=R3
-H;=R6!
-H;=RH
-H;=S{
-H;=VE
-H;=W#
-H;=W5f
-H;=W@3
-H;=WAY
-H;=WNY
-H;=W`Y
-H;=Wj
-H;=Wv
-H;=X3~
-H;=XG}
-H;=XPU
-H;=Y$
-H;=Y9
-H;=[\
-H;=[z.
-H;=\ Y
-H;=\-Y
-H;=]Wj
-H;=^!
-H;=_6
-H;=_?
-H;=_IY
+H;= *t
+H;= Jr
+H;= uU
+H;=!	?
+H;=!<
+H;=!Q
+H;=![
+H;=#*
+H;=$s
+H;='$
+H;='(
+H;='A
+H;='D
+H;=(#
+H;=(<
+H;=(>
+H;=(^f
+H;=*%
+H;=*2
+H;=*G
+H;=*J!
+H;=*\
+H;=.Au
+H;=.w
+H;=/"U
+H;=/6b
+H;=/7
+H;=/:o
+H;=/Br
+H;=/V
+H;=0tU
+H;=1$
+H;=18
+H;=1M
+H;=1h0
+H;=3;\
+H;=58U
+H;=5mY
+H;=65
+H;=6Y
+H;=7-
+H;=7J
+H;=7m
+H;=8'
+H;=8,
+H;=8=}
+H;=8E
+H;=8G
+H;=8g
+H;=9QY
+H;=:.
+H;=:>o
+H;=:C
+H;=:E
+H;=:F!
+H;=:X
+H;=:w9
+H;=;Q{
+H;=;~T
+H;==W"
+H;=>&Y
+H;=>["
+H;=?8p
+H;=?S"
+H;=?V3
+H;=?X{
+H;=?[
+H;=?b{
+H;=?d
+H;=@i~
+H;=@sU
+H;=A4
+H;=AC
+H;=AI
+H;=AL!
+H;=A^
+H;=C5t
+H;=CAo
+H;=Eb
+H;=E|Y
+H;=G6
+H;=HP
+H;=In
+H;=J&
+H;=J*
+H;=J?
+H;=JB=
+H;=JT
+H;=Kn}
+H;=N=
+H;=N{\
+H;=O4t
+H;=O6o
+H;=O7{
+H;=O9t
+H;=O>\
+H;=O@o
+H;=Oi
+H;=Ph~
+H;=PrU
+H;=Pt}
+H;=Py}
+H;=Q*Z
+H;=Q0
+H;=QB
+H;=QE
+H;=QG
+H;=QH!
+H;=QZ
+H;=R 
+H;=R)\
+H;=R^f
+H;=S<\
+H;=V_"
+H;=W&
+H;=W?
+H;=W_
+H;=X!
+H;=XY
+H;=X~
+H;=Z;
+H;=Z;\
+H;=ZP
+H;=[	f
+H;=^zj
+H;=_(b
+H;=_9{
+H;=_K{
+H;=_R"
 H;=_Y
-H;=_y
-H;=`1
-H;=`3
-H;=`S
-H;=aV~
-H;=b/
-H;=b1
-H;=b2!
-H;=bD
-H;=cL}
-H;=cdT
-H;=eC"
-H;=fF\
-H;=fG"
-H;=fia
-H;=fxY
-H;=g%
-H;=g/{
-H;=g;
-H;=g?"
-H;=gF
-H;=hOU
-H;=i 
-H;=i/
-H;=i5
-H;=i8!
-H;=iJ
-H;=mD
-H;=m\
-H;=msY
-H;=o	
-H;=o"
-H;=o`w
-H;=p<
-H;=p|
-H;=qC{
-H;=q`
-H;=r	
-H;=r+
-H;=r@
-H;=tz
-H;=u|.
-H;=v)
-H;=v7
-H;=v:f
-H;=vkf
-H;=w5
-H;=w@
-H;=woY
-H;=xG`
-H;=y.
-H;=y0
-H;=y1
-H;=y4!
-H;=yF
-H;=zo7
-H;=|H
-H;=~K"
+H;=_Z~
+H;=`=}
+H;=`g~
+H;=`qU
+H;=a,
+H;=aA
+H;=aD!
+H;=aV
+H;=b`
+H;=dCY
+H;=dQY
+H;=e&Y
+H;=f"
+H;=g/
+H;=g2
+H;=gH
+H;=h*
+H;=h1\
+H;=hC
+H;=hf`
+H;=i%~
+H;=j'
+H;=j5t
+H;=j7
+H;=jAo
+H;=jL
+H;=kH{
+H;=kQ"
+H;=l\
+H;=n8k
+H;=nn{
+H;=o0t
+H;=oB
+H;=pf~
+H;=ppU
+H;=q=
+H;=qR
+H;=qb
+H;=r!
+H;=s3t
+H;=s=\
+H;=u{\
+H;=wD{
+H;=wv
+H;=xL
+H;=xp
+H;=z3
+H;=z<\
+H;=zH
+H;=zK!
+H;=z]
+H;=zc
+H;=|K
+H;=|f
+H;=}g
 H;C u
 H;CPw<I
 H;G t
 H;IXu
+H;OHtsH9
+H;OHu
 H;P v
 H;P(u
 H;Q I
@@ -16272,7 +16310,6 @@ H;T$(
 H;W(u
 H;[`u
 H;\$(u
-H;p s"H
 H;p t
 H;p(t
 H;p(u
@@ -16283,8 +16320,6 @@ H;shH
 H;w(t
 H;w0u
 H;w@u
-H;wHtKH9
-H;wHu
 H;xHt H
 H;y0t
 H;|$ t	H
@@ -16374,7 +16409,7 @@ Hc@pH
 HcA H
 HcA0L
 HcAHL
-HcAhH
+HcA`H
 HcAp;
 HcBh;Bx
 HcC ;C0
@@ -16431,7 +16466,6 @@ HcGX9
 HcGX;G@}
 HcGXH
 HcG`UH
-HcGhUH
 HcGpH
 HcH(H
 HcH0H
@@ -16496,9 +16530,9 @@ HcS$H
 HcS$I
 HcS(H
 HcS0H
+HcS41
 HcS81
 HcS8H
-HcS@1
 HcSH;SL
 HcSHH
 HcSP1
@@ -16642,6 +16676,7 @@ I94	H
 I9E t
 I9E t.A
 I9E(t
+I9F v1H
 I:2@1
 I;D$ r
 I;E8H
@@ -17681,13 +17716,16 @@ L: %.2f deg
 L; t4
 L; t=H
 L;!t!f.
+L;-6L-
 L;0t?H9
 L;0t[A
 L;6t;A
 L;?u"
 L;d$@L
 L;h H
+L;h v
 L;h(u
+L;j v
 L;n s>H
 L;p@u
 L;x tHA
@@ -17756,7 +17794,7 @@ Lc tu
 Lc!D;a
 Lc#D;c
 Lc#E9
-Lc%6:
+Lc%vN
 Lc&D;f
 Lc'D)
 Lc'D;g
@@ -17766,7 +17804,7 @@ Lc(E)
 Lc)D;i
 Lc*D;j
 Lc+D;k
-Lc-I;I
+Lc-)PI
 Lc.D;n
 Lc/D)
 Lc/D;o
@@ -19245,10 +19283,11 @@ OnPreDataUpdate: missing ent %d
 OnRenderAttributesChanged
 OnSource1LegacyGameEventListenBitsReceived: game event %i not found.
 OnSpriteScaleChanged
-OnSteamNetConnectionStatusChanged: %s.  hconn=%u, remote=%s, code=%u, Msg=%s
-OnSteamNetConnectionStatusChanged: Cleaned up hconn=%u, old state=%u, listensocket=%u, remote=%s )
-OnSteamNetConnectionStatusChanged: Closed hconn=%u, old state=%u, listensocket=%u, remote=%s )
-OnSteamNetConnectionStatusChanged: hconn=%u, new state=%u, old state=%u, listensocket=%u, remote=%s )
+OnSteamNetConnectionStatusChanged [%s] %s.  hconn=%u, code=%u, Msg=%s
+OnSteamNetConnectionStatusChanged [%s] Cleaned up hconn=%u, old state=%u, listensocket=%u )
+OnSteamNetConnectionStatusChanged [%s] Closed hconn=%u, old state=%u, listensocket=%u )
+OnSteamNetConnectionStatusChanged [%s] finished accepting: hconn=%u, listensocket=%u )
+OnSteamNetConnectionStatusChanged [%s] hconn=%u, new state=%u, old state=%u, listensocket=%u )
 OnUpdateOBB
 OnUpdateSolidFlags
 OnUpdateSolidType
@@ -19645,6 +19684,7 @@ Play the given VCD as an instanced scripted scene.
 Playable
 Player
 Player %d
+Player %d looses due to reason %d
 Player %d:
 Player %i has lost due to Match Clock expiration while disconnected.
 Player %i has lost due to Match Clock expiration.
@@ -20009,6 +20049,7 @@ Reads a spawn key
 Rebel Decoy
 Rebel Instigator
 Receive
+Received %s(%u), game %llu, player %u (%u bytes)
 Received a cancel match reservation for match %llu
 Received a match reservation for match %llu
 Received client welcome from GC.
@@ -20371,7 +20412,6 @@ SHOPPING_UPDATE
 SH[A\A]A^]
 SH[A\]
 SHcG0
-SHc_ ;_0
 SIGNONSTATE_CHALLENGE
 SIGNONSTATE_CHANGELEVEL
 SIGNONSTATE_CONNECTED
@@ -20908,7 +20948,6 @@ Server event "%s", Tick %i:
 Server failed to get reply from the GC
 Server game time: %f
 Server not running, command ignored.
-Server received message of type %s(%u), for game %llu, player %u (%u bytes)
 Server received reply from the GC. State: %u, Lobby: %llu
 Server state transitioned to state %s
 Server:
@@ -22183,7 +22222,7 @@ Unable to determine buffer encoding.
 Unable to determine compressed message length, likely malformed message
 Unable to establish a connection to the GC to enter matchmaking
 Unable to find a filename to save the selected set to disk.
-Unable to find a local game with instance ID of %llu
+Unable to find a local game with instance ID of %llu for message %s(%u)
 Unable to find base equip region named "%s" for conflicts.
 Unable to find enough dynamic attributes to hold all the attributes of name %s!
 Unable to find hero named "%s" for kill eater score type %u.
@@ -22202,7 +22241,7 @@ Unable to load manifest file '%s'
 Unable to open '%s' for writing!!!
 Unable to parse compressed message
 Unable to parse message for extra message block of type %u (Key: %llu)%s
-Unable to parse server message wrapper from data blob. Possible corruption
+Unable to parse message wrapper from data blob. Possible corruption!
 Unable to read resource file %s!
 Unable to save %d bytes to %s
 Unable to save the selected set to disk.
@@ -22646,15 +22685,15 @@ W ;2r+
 W ;2t
 W IcD$
 W u)H
-W%2c 
+W%_:F
 W(8QpH
 W(Aq=
 W(H;2t'H
 W,t&L
-W-`k 
+W- l 
+W-z5F
 W0;V0H
 W3|Uxa
-W='6F
 W?,|C
 W@t%H
 W@~ I
@@ -22850,15 +22889,15 @@ W{@3333
 X API
 X H+X
 X zR&="@r
-X%xqr
 X(Hc@ H
 X0Hc@(M
 X0fD9
 X2:jH
 X4[A\]
+X53:U
+X5:tF
 X9t6@
 X=2v?
-X=x)~
 X@ffff
 XA9^@~
 XA;]@|
@@ -22907,10 +22946,9 @@ X`Hc@XL
 XboxSystemInterface001
 Xh#x\
 Y ANb
-Y%zu$
-Y%{}Q
 Y/&4@4
 Y0fD+
+Y57^E
 Y6	@W'g(
 Y?3333E
 Y@phonemes
@@ -23097,8 +23135,8 @@ Z}uU
 \$pI9
 \$sE;o
 \%03o
-\-:7H
-\5LO,
+\5<fG
+\=mkG
 \C not allowed in lookbehind assertion
 \D$ H
 \IcEP1
@@ -23134,7 +23172,6 @@ Z}uU
 ]hIcE`L
 ]lARAQAPWV
 ]u9n5;> )"
-^%*B&
 ^)8~@
 ^-wf"
 ^?O<g
@@ -23159,7 +23196,7 @@ _8;_H
 _8AQM
 _@')UG3;
 _@H9^@t	[]
-_AXLc%(
+_AXLc%
 _ClientLevel
 _ClientModifier
 _ClientModifierLevel
@@ -26314,7 +26351,6 @@ eEconItemOrigin
 eIcD$ 1
 eIcO(Ic
 eInvalidSlot
-eK%m*
 eKeypoints
 eLiteralHandType
 eLogicalHandType
@@ -26705,7 +26741,6 @@ f	4JH9
 f %d %d %d
 f == __null || dynamic_cast<To>(f) != __null
 f D9'D
-f ~YA
 f98t<
 f98tM
 f9C(~
@@ -26741,7 +26776,6 @@ fD9cV
 fD; t
 fD;!t
 fD;"t
-fD;%V
 fD;+|
 fD;cvw
 fD;sv
@@ -27171,6 +27205,7 @@ g D;g0D
 g E;g0D
 g cMesh
 g default
+g ~iA
 g)YNB
 g0D;g@D
 g6F5`pF
@@ -28103,6 +28138,7 @@ k5@3333;
 k5s@=
 k8D;(
 k8D;(~
+k8~PA
 k9J{c>
 k9N<<
 k<[A\A]A^]
@@ -28116,7 +28152,6 @@ kCardEnteringLane
 kCardEnteringZone
 kCardLeavingZone
 kDamageDealt
-kD~PA
 kEconItemOrigin_Achievement
 kEconItemOrigin_AssassinEventReward
 kEconItemOrigin_CDKey
@@ -28243,6 +28278,7 @@ k_EChatRoomType_PrivateLobby
 k_EChatRoomType_PublicRegion
 k_EConnected
 k_ECustomGameInstallStatus_Busy
+k_EDCGDisconnectReason_Goodbye
 k_EDCGLobbyTeam_Spectator
 k_EDCGLobbyTeam_Team0
 k_EDCGLobbyTeam_Team1
@@ -28414,6 +28450,7 @@ k_EMsgGameHandoff
 k_EMsgGamePlayerRequestHandoff
 k_EMsgGameReplayActionMarker
 k_EMsgGameServerToClientChatMsg
+k_EMsgGameServerToClientGoodbye
 k_EMsgSQLAddDropRateBonus
 k_EMsgServerToGCAbandonMatch
 k_EMsgServerToGCIdlePing
@@ -33141,7 +33178,6 @@ o(ATI
 o(ATL
 o*Ral
 o,ATL
-o-u),
 o0A;_H
 o0ATA
 o0ATL
@@ -34201,34 +34237,36 @@ running_tests
 runspeed
 s E9u
 s H;5
-s H;5!
-s H;5!qs
+s H;5 
+s H;5 E
 s H;5(
-s H;51
-s H;51Mv
-s H;51z_
-s H;58.i
-s H;5<
-s H;5A
-s H;5H
+s H;5)
+s H;5)n_
+s H;50
+s H;54i
+s H;59
+s H;5@9
 s H;5P
-s H;5Pfs
-s H;5Q
+s H;5PY
 s H;5X
-s H;5a
+s H;5Yj
+s H;5`
 s H;5h
-s H;5hPv
-s H;5la_
-s H;5x
-s H;5x\v
+s H;5i
+s H;5p
+s H;5y
+s H;5|
 s [A\A]A^]
 s off
 s v&E1
 s ~XH
 s$[A\H
 s(H;5
-s(H;5H ^
-s(H;5l
+s(H;5	
+s(H;5=
+s(H;5P
+s(H;5PE
+s(H;5d
 s([A\A]A^]
 s([A\]
 s(t.H
@@ -34240,20 +34278,19 @@ s/glow.vH
 s/spriteH
 s0D;kH
 s0H;5
-s0H;5,
-s0H;5L
+s0H;5I
+s0H;5d
 s0~;A
 s1_mapname
 s5fA9
 s69F~
 s7>Ip
 s8H;5
-s8H;58_v
-s8H;5t
+s8H;5	
+s8H;5i
 s8t%H
 s:@W[
 s@H;5
-s@H;58
 s@I9p@w
 s@ffff
 s@ffffk
@@ -34262,8 +34299,7 @@ sAHc@
 sCSvz
 sF?t+F
 sHH;5
-sHH;5/
-sHH;5d
+sHH;5GGs
 sIHcB
 sLockedSentence
 sLockedSound
@@ -34272,10 +34308,12 @@ sM1@)\
 sMA9|$ 
 sOHc@
 sPH;5
+sPH;5P
+sPH;5`Fs
 sP~0H
 sUnlockedSentence
 sUnlockedSound
-sXH;5
+sXH;5T
 sXt%H
 s_EntComponentInfo
 s_bAbsQueriesValid
@@ -34287,7 +34325,7 @@ s_globalCount
 s_kDynamicValuesArraySize
 s_nSceneFlushCounter
 s_nWatchTransmitEntity
-s`H;5
+s`H;5p
 saI^Bj
 salamander
 sale_price
@@ -34740,7 +34778,7 @@ source_owner
 source_parent_card_id
 source_parent_object_id
 source_reference_id
-spH;5(
+spH;5
 space
 space shuttle
 spare error
@@ -35180,7 +35218,7 @@ swift_prefix
 swiss
 swiss_matches
 swiss_scoring
-sxH;5X
+sxH;5
 sxt!H
 sxtpH
 sy@3333
@@ -35227,28 +35265,27 @@ t"D9p
 t"Hc@
 t"HcS
 t"L;%
-t"L;%	
-t"L;%(-{
-t"L;%(0t
-t"L;%(7o
-t"L;%(Ao
-t"L;%8
-t"L;%89o
-t"L;%H*t
-t"L;%H4{
-t"L;%H6t
-t"L;%H=o
-t"L;%X
-t"L;%X1{
-t"L;%X6{
-t"L;%h
-t"L;%i
-t"L;%x
-t"L;%x/t
-t"L;%x4t
-t"L;%x6o
-t"L;%x@o
-t"L;%x~
+t"L;% 
+t"L;% #j
+t"L;% Zt
+t"L;% _t
+t"L;% ao
+t"L;% ko
+t"L;%0
+t"L;%0co
+t"L;%@
+t"L;%@^{
+t"L;%@go
+t"L;%P
+t"L;%P_o
+t"L;%P`{
+t"L;%`
+t"L;%a
+t"L;%p
+t"L;%p"j
+t"L;%pYt
+t"L;%p^t
+t"L;%pjo
 t"Mc&E;f
 t"[A\]
 t#;8u
@@ -35260,43 +35297,37 @@ t$	;s8u
 t$	H9
 t$ E1
 t$ H;5
-t$ H;59
+t$ H;5-
+t$ H;55
+t$ H;5e]
+t$ H;5muW
+t$ H;5}N
 t$ L9
 t$ t0
 t$ ~2H
 t$(H9
 t$(H;5
-t$(H;5%RW
 t$(L9
 t$(L9.t`
 t$(t-H
 t$0H9
 t$0H;5
-t$0H;5	w|
-t$0H;5)
-t$0H;523
-t$0H;55
-t$0H;59
-t$0H;5I
-t$0H;5e
-t$0H;5iXm
-t$0H;5y
+t$0H;5aie
+t$0H;5lCs
+t$0H;5u
 t$0L9
 t$0Lc
 t$0f.
 t$0~4L
 t$8E1
 t$8H;5
-t$8H;5=
-t$8H;5m
-t$8H;5r3
 t$8L9
 t$8fA
 t$<	t 
 t$<E1
 t$@E;
 t$@H;5
-t$@H;5-&
+t$@H;5=
 t$@L9
 t$@|)
 t$@|+
@@ -35304,7 +35335,9 @@ t$D9j
 t$H;h
 t$HH9
 t$HH;5
-t$HH;5}Av
+t$HH;5%lv
+t$HH;5Lev
+t$HH;5e
 t$HL9
 t$HcK8
 t$HcS
@@ -35321,33 +35354,33 @@ t$Lc+I
 t$PA;pP
 t$PA;uPu
 t$PH;5
+t$PH;5Ylv
 t$PHc
 t$PL9
-t$XH;5
+t$XH;5M
 t$`H;5
-t$`H;5=
 t$`[A\A]A^]
-t$hH;5
+t$hH;5MqW
 t$hHcE
-t$pH;5
+t$pH;5qsW
 t$pL9
 t%90u
 t%D:%
 t%HcC0A
 t%IcL$ 
 t%L;}
-t&;5o
+t&;5/
 t&A;\$
-t&D;5
+t&D;5U
 t&HcQ
 t&L;%
-t&L;%8
+t&L;%@
 t&Mc&E;f
 t&Mc7E;w
 t&[A\]
 t'D;5
 t'H9P
-t'H;=@5S
+t'H;=
 t'I9r
 t'Ic]
 t'Icu
@@ -35359,7 +35392,7 @@ t(Lc#D;c
 t([A\]
 t(f;0t%H
 t(f;2t0H
-t)D:%
+t)D:%xs
 t)HcE
 t)Lcm
 t)[A\]
@@ -35586,6 +35619,7 @@ t>M.F9
 t>[A\A]A^]
 t>fA9
 t?[A\A]A^]
+t@;55
 t@Ic_
 t@U@8
 t@[A\A]A^]
@@ -35615,6 +35649,7 @@ tF;Q rA9
 tFRA@F
 tF\sQF^e7F0
 tG98u
+tHI9u wBI
 tIHcP
 tJ;0u
 tJ;9u
@@ -35628,7 +35663,6 @@ tNMc/E;o
 tN~+A
 tPUf9
 tQX[A\A]A^A_]
-tR;5en
 tRHc\
 tRIcE
 tRIcL$ 
@@ -35695,6 +35729,7 @@ tauntfrequency
 tax_usd
 tbHcM
 tbHc_
+tcLcw I
 tc[A\]
 td@Q4
 tdD;}
@@ -36109,7 +36144,7 @@ ucHcC
 uc[A\]
 udp_connect_ip
 udp_connect_port
-ueL;=f
+ueL;=
 uf[A\]
 uf[A^]
 uhHcT
@@ -36636,7 +36671,6 @@ x	;V`
 x ;G`}
 x!;1|
 x";7}
-x";=O
 x#9SH~
 x#Hcp
 x#Hcw
@@ -36661,9 +36695,8 @@ x7Hcw
 x8"tq
 x8Mcl$ E;l$0
 x8mUM
-x:;=|
 x:Hcw
-x?Hc5
+x?Hc5,y
 x@;wp
 x@HcO
 xAVAUI
@@ -36833,12 +36866,10 @@ z{uyH
 z|uzI
 z}u{fA
 { H;=
-{ H;=1z!
-{ H;=A
-{ H;=lw
-{ H;=lz
-{ H;=l}
-{ H;=vz!
+{ H;=	
+{ H;=D
+{ H;=N
+{ H;=^
 { H;}
 { [A\A]A^]
 { [A\]
@@ -36857,12 +36888,10 @@ z}u{fA
 {0@cz
 {0D;{@A
 {0H;=
-{0H;=*
-{8H;{@
 {8[A\]
 {8[]H
-{@H;= 
-{@H;=I
+{@H;=
+{@H;=!
 {@HcE
 {@[A\]
 {@ffff
@@ -36882,8 +36911,9 @@ z}u{fA
 |#8C8<'t H
 |$ AWL
 |$ E;|$0tLI
-|$ H;=
-|$ ~RA
+|$ H;=@
+|$ H;=yQ
+|$ ~D
 |$$E1
 |$(HcF H
 |$0E1
@@ -36975,6 +37005,7 @@ z}u{fA
 }3fA;\$~w+H
 }3fA;]vw,L
 }8A\A]A^]
+}8I;}@
 }9Lcc
 }=o0/
 }>fD9
@@ -37011,7 +37042,7 @@ z}u{fA
 ~(A\A]A^A_]
 ~(};Hc
 ~)H;7I
-~)H;=
+~)H;=L
 ~*A9\$
 ~*fE;g
 ~+Hcu
@@ -37028,6 +37059,8 @@ z}u{fA
 ~6L;p
 ~7;XP|
 ~7;w$
+~8I;~@
+~8Lcu
 ~9;w$
 ~:L;p
 ~;HcE
@@ -37035,7 +37068,6 @@ z}u{fA
 ~=;w$w8
 ~=FLD4F
 ~=Lc}
-~>Lcu
 ~>fA9D$vr6K
 ~A3333
 ~BE9l$HE
@@ -37074,3 +37106,4 @@ z}u{fA
 ~p>u,
 ~s;C`}VH
 ~uUE1
+~w;=a
