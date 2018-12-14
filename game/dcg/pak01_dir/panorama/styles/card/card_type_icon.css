@@ -1,28 +1,54 @@
-.CardIconContainer
+.CardIconAndFactionContainer
 {
-	width: 35px;
-	height: 35px;
+	height: 116px;
+	width: 60px;
 	visibility: collapse;
-	padding-top: 4px;
-	padding-bottom: 3px;
-	padding-left: 4px;
-	padding-right: 3px;
-	flow-children: right;
+	flow-children: none;
 }
 
-.InHand.CardIconContainer
+.CardIconContainer
+{
+	width: 36px;
+	height: 116px;
+	flow-children: none;
+	z-index: 2;
+}
+
+.ColorblindModeSuits .CardIconContainer
+{
+}
+
+.InHand.CardIconAndFactionContainer, .ColorblindModeSuits.CardIconAndFactionContainer
 {
 	visibility: visible;
 }
 
 #CardType
 {
-	width: 26px;
-	height: 26px;
+	width: 25px;
+	height: 25px;
+	margin-left: 3.5px;
+	margin-top: 2px;
 	vertical-align: top;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	background-position: 50% 50%;}
+	background-position: 50% 50%;
+	z-index: 2;
+}
+
+.ColorblindModeSuits #CardType
+{
+	visibility: collapse;
+}
+
+.InHand.ColorblindModeSuits #CardType
+{
+	visibility: visible;
+}
+
+.ColorblindModeSuits #CardType
+{
+}
 
 .CardTypeSpell #CardType
 {
@@ -67,4 +93,95 @@
 .CardTypeDeed #CardType
 {
 	background-image: url("s2r://panorama/images/card/cardtype_consumable_psd.vtex");
+}
+
+#CardFaction
+{
+	width: 28px;
+	height: 60px;
+	vertical-align: top;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	z-index: 1;
+	visibility: collapse;
+	
+	margin-left: 2px;
+}
+
+#CardFactionOnBoard
+{
+	width: 60px;
+	height: 60px;
+	visibility: collapse;
+	vertical-align: top;
+	margin-left: -1px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+.CardTypeHero.InHand.ColorblindModeSuits.IsFlop #CardFaction, .CardTypeHero.InHand.ColorblindModeSuits #CardFactionOnBoard
+{
+	visibility: collapse;
+}
+
+.InHand.ColorblindModeSuits #CardFaction, .InHand.ColorblindModeSuits.CardTypeHero.IsFlop #CardFactionOnBoard, .CardTypeHero.ColorblindModeSuits #CardFactionOnBoard, .ColorblindModeSuits.CardTypeHero.IsFlop #CardFactionOnBoard
+{
+	visibility: visible;
+}
+
+.IsFlop.CardTypeHero.ColorblindModeSuits #CardFactionOnBoard
+{
+	visibility: visible;
+}
+
+.CardTypeCreep.ColorblindModeSuits #CardFactionOnBoard, .IsFlop.ColorblindModeSuits #CardFactionOnBoard, .IsFlop.InHand.ColorblindModeSuits #CardFaction
+{
+	visibility: collapse;
+}
+
+.ColorblindModeSuits #CardFactionOnBoard
+{
+	margin-top: 25px;
+}
+
+.Red #CardFaction
+{
+	background-image: url("s2r://panorama/images/factions/red_inhand_psd.vtex");
+}
+
+.Blue #CardFaction
+{
+	background-image: url("s2r://panorama/images/factions/blue_inhand_psd.vtex");
+}
+
+.Green #CardFaction
+{
+	background-image: url("s2r://panorama/images/factions/green_inhand_psd.vtex");
+}
+
+.Black #CardFaction
+{
+	background-image: url("s2r://panorama/images/factions/black_inhand_psd.vtex");
+}
+
+.Red #CardFactionOnBoard
+{
+	background-image: url("s2r://panorama/images/factions/red_tile_full_psd.vtex");
+}
+
+.Blue #CardFactionOnBoard
+{
+	background-image: url("s2r://panorama/images/factions/blue_tile_full_psd.vtex");
+}
+
+.Green #CardFactionOnBoard
+{
+	background-image: url("s2r://panorama/images/factions/green_tile_full_psd.vtex");
+}
+
+.Black #CardFactionOnBoard
+{
+	background-image: url("s2r://panorama/images/factions/black_tile_full_psd.vtex");
 }

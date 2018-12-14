@@ -28,7 +28,6 @@
  ReadToken overflow
  [%.3f server clamped to %.3f]
  [A\A]A^]
- [A\A^A_]
  [A\]
  [A^]
  max. %f
@@ -98,6 +97,8 @@ $[A\]
 %s(%d): Channel not found for sound guid '%d'.
 %s(%d): Could not pick channel for sound '%s'.
 %s(%d): params.pSfx is NULL.
+%s+--
+%s+-- Schema Class: %s
 %s, UNKNOWN %i
 %s.%s
 %s: %s
@@ -111,6 +112,14 @@ $[A\]
 %s::%s
 %s::Execute: Can't find operator stack %s in %s
 %s_KV3
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 &YA1D
 &YA1H
 &YA1L
@@ -231,7 +240,6 @@ $[A\]
 14CSoundOpSystem
 14CSoundSamplers
 14ConCommandBase
-14ISchemaBinding
 14ISoundOpSystem
 14ISoundSamplers
 15CAudioMixerWave
@@ -284,11 +292,6 @@ $[A\]
 18CAudioSourceCached
 18CCountedStringPool
 18CSDLAudioSubsystem
-18CSchemaEnumBindingI12ActionType_tE
-18CSchemaEnumBindingI14SosGroupType_tE
-18CSchemaEnumBindingI17SosEditItemType_tE
-18CSchemaEnumBindingI19SosActionSortType_tE
-18CSchemaEnumBindingI19SosActionStopType_tE
 18CSchemaManipulatorI10CUtlStringE
 18CSchemaManipulatorI10CUtlVectorI17SosEditItemInfo_t10CUtlMemoryIS1_iEEE
 18CSchemaManipulatorI10CUtlVectorI25CSosSoundEventGroupSchema10CUtlMemoryIS1_iEEE
@@ -317,18 +320,6 @@ $[A\]
 19CAudioSourceMemWave
 19CHRTFAudioProcessor
 19CNullAudioSubsystem
-19CSchemaClassBindingI13VSoundEvent_tE
-19CSchemaClassBindingI13VSoundStack_tE
-19CSchemaClassBindingI17SosEditItemInfo_tE
-19CSchemaClassBindingI19VSoundEventScript_tE
-19CSchemaClassBindingI19VSoundStackScript_tE
-19CSchemaClassBindingI21CSosGroupActionSchemaE
-19CSchemaClassBindingI21CSosGroupMatchPatternE
-19CSchemaClassBindingI22CSosGroupBranchPatternE
-19CSchemaClassBindingI22SelectedEditItemInfo_tE
-19CSchemaClassBindingI25CSosSoundEventGroupSchemaE
-19CSchemaClassBindingI26CSosGroupActionLimitSchemaE
-19CSchemaClassBindingI29CSosSoundEventGroupListSchemaE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19CSosOperatorFalloff
@@ -374,7 +365,6 @@ $[A\]
 21CUtlCStringConversion
 21IKeyValuesDumpContext
 21IVConCommDataReceived
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22CSosGroupBranchPattern
 22CSosOperatorAudibility
@@ -391,7 +381,6 @@ $[A\]
 23CDynamicsAudioProcessor
 23CKV3ResourceTypeManagerILy2020175222EE
 23CResourceAllocatorUtils
-23CSchemaClassBindingBase
 23CSosOperatorBlockEvents
 23CSosOperatorCalcDoppler
 23CSosOperatorDeltaFloat3
@@ -499,7 +488,6 @@ $[A\]
 4fff>fff>fff>fff>
 4vf;T
 5t~BC
-6;2t&H
 6ConVar
 6H92t%H
 7IConVar
@@ -529,10 +517,8 @@ $[A\]
 ;0tWD
 ;1t.A
 ;2t-H
-;2t8H
 ;7t01
 ;9t/H
-;=ok9
 ;A4|S
 ;BX|'1
 ;BX~#H
@@ -555,8 +541,8 @@ $[A\]
 <	tvM
 <	u 1
 <	u,1
-<	u0H
 <	uMUH
+<	uhUH
 <	w>H
 <	wlLcG
 <!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
@@ -599,6 +585,7 @@ $[A\]
 ?output_element_count
 @ A;D$ 
 @ A^]
+@,t9L
 @8A\]
 @8D9x
 @8F9l
@@ -622,7 +609,6 @@ A%s set to %x (%s)
 A+D$$
 A+D$$H
 A+D$$I
-A+D$8
 A+E$1
 A+E$A
 A+E$H
@@ -643,7 +629,6 @@ A+]$Hc
 A+_$H
 A+t$$H
 A+t$$Hc
-A3BH)
 A94$w
 A9D$ 
 A9D$@u
@@ -654,7 +639,6 @@ A9\$
 A9w0tZ1
 A;1u"
 A;D$Du
-A;D$H
 A;D$X}
 A;D$d
 A;D$p
@@ -665,13 +649,13 @@ A;G A
 A;GH|
 A;L$H|WH
 A;L$H}
-A;L$`
 A;T$8}
 A;T$<
 A;T$d
 A;T$h}
 A;W0|
 A;\$ 
+A;\$0H
 A;](|
 A;^0H
 A;^@|
@@ -730,7 +714,6 @@ AUATH
 AUATI
 AUATL
 AUATLc
-AUATM
 AUATS
 AUATS1
 AUATSD
@@ -761,6 +744,7 @@ AVAUATS~
 AVAUD
 AVAUE
 AVAUE1
+AVAUH
 AVAUI
 AVAUL
 AVAULc
@@ -800,6 +784,7 @@ A\A]]
 A\A]]H
 A\A^]
 A]A^]
+A]A^]H
 A^A_]
 Abort processing sound event %s (scheduled recursively will not process this frame)
 Action Type
@@ -905,6 +890,7 @@ Bad header format (no closing marker)
 Bad header: invalid binary marker
 Bad header: invalid compression header
 Bad header: unrecognized encoding id
+Bad version data for resource '%s': %d
 BakedLODBuilderMgr001
 BandPass
 Base: %s
@@ -937,6 +923,8 @@ C8D;0t
 C@[A\A]A^]
 CAsyncWavDataCache:  %i sounds total %s, %.2f %% of capacity
 CAudioMixThread
+CAuthPhysBody
+CAuthPhysJoint
 CBaseIntrospectedTypeManager:  Bindings don't match.
 CBaseIntrospectedTypeManager:  Missing TYPEMETA MDiskDataForResourceType
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -1135,6 +1123,13 @@ Can't find mixgroup name %s for submix
 Can't find sound event to remove for %s!
 Can't parse mp3 encoding %u
 Can't write binary data to a text buffer.
+Cannot allocate abstract class
+Cannot allocate over-aligned class
+Cannot construct abstract class
+Cannot copy abstract class
+Cannot deallocate abstract class
+Cannot deduce for class
+Cannot destruct abstract class
 Cannot find mix input %s
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
@@ -1187,8 +1182,6 @@ D$(~3I
 D$0H9
 D$4AUP
 D$8I9
-D$8Ic
-D$8IcW
 D$8uAA
 D$@;A@t*H
 D$@D;kH
@@ -1203,7 +1196,6 @@ D$PH9
 D$XL9
 D$`E1
 D$`H9
-D$`teA
 D$`uAA
 D$xH9
 D+C$Mc
@@ -1227,9 +1219,8 @@ D:"u;
 D:p(t/A
 D;!ttHc
 D;"}1H
-D;%$o9
+D;-{`:
 D;;uwH
-D;=	_9
 D;@Xt
 D;C(tCH
 D;c D
@@ -1255,6 +1246,7 @@ D;{HD
 D;{HH
 DATAH
 DATAI
+DATAL
 DNSVL
 DNSVtp
 DSP NODE
@@ -1332,11 +1324,9 @@ E;.tyA
 E;/}JI
 E;4$|
 E;4$}/E
-E;>tyA
 E;fH}2I
 E;g@|
 E;l$ |
-E;l$HD
 E;l$p
 E;n0H
 E;o0s!f
@@ -1344,7 +1334,6 @@ E;oX|
 E;t$`
 E;|$ }cI
 E;|$HA
-E;|$HD
 E;} D
 E@ATI
 EHt/E1
@@ -1432,6 +1421,30 @@ FIELDATA COMPARE FAIL: %s->%s
 FIELDATASIZE COMPARE FAIL: %s->%s
 FIELINFO COMPARE FAIL: %s->%s
 FREEING MATCH ENTRY:
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 FX Mix (1.0 == wet)
 Fade In
 Fade Out
@@ -1466,18 +1479,19 @@ Fork : voiceless labiodental fricative
 FormatV
 Forward Saw
 Free ?: %s
-From Class Binding
-From Enum Binding
-G	|P1
+G	|N1
 G A+G
 G A9G
 G D;(t
-G H;p
 G U9G
+G(H;p
 G0uGD
 G4333?
 G4fff?
+G8ATHcW
 G8HcG
+G8IcH
+G8IcP
 G8fff?
 G8t"H
 G8t+H
@@ -1498,6 +1512,7 @@ G@A;\$H
 G@UHc
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
+GHLcO
 GI@UH
 GLIBCXX_3.4
 GLIBC_2.14
@@ -1582,6 +1597,7 @@ HcC(A9
 HcCXA9
 HcG U
 HcGHusE1
+HcH`D
 HcJ H
 HcS$D
 HcS$H
@@ -1597,9 +1613,7 @@ HcVDf
 HcW$H
 HcWhH
 HcWpH
-HcY ;Y0
-HcY A
-HcY@;YP
+Hc^@;^P
 Hc_ ;_0
 Hc_0;_@
 Hc_H;_X
@@ -1626,6 +1640,7 @@ IcD$0I
 IcD$X9
 IcE H9
 IcE8A;EH
+IcF A;F0
 IcG8A;GH
 IcGXA;Gh
 IcGh9
@@ -1635,8 +1650,9 @@ IcM@H9
 IcN@H9
 IcO Ic
 IcT$@H
+Ic\$ A
 Ic\$ A9
-Ic\$0A;\$@
+Ic\$8A;\$H
 Ic\$8L
 Ic\$HA;\$X
 Ic\$HA;\$XI
@@ -1702,9 +1718,9 @@ LOG_GENERAL
 LOWVIOLENCE
 LayerTriggers
 Lc#D;c
-Lc%.{9
 Lc'E)
 Lc)D;i
+Lc-v`:
 Lc/E)
 Lc3D;s
 Lc6D;v
@@ -1712,15 +1728,16 @@ Lc7E)
 LcH LcP
 LcK B
 Lcc E
-Lcc0D;c@D
+Lcc8D;cHD
 Lcc`D;cpA
 Lcc`D;cpD
-Lch`E
+Lck D;k0
 Lck D;k0D
 LckXD;khD
 LckXD;khE
 LckpI
 Lcs D;s0t"H
+Lcs8D;sHD
 LcspI
 Lid : velarized voiced alveolar lateral approximant
 Lid : voiced alveolar lateral approximant
@@ -1801,11 +1818,9 @@ Mc>E;~
 McM`D
 Mcf E;f0Lc
 McfpA
-Mcl$ E;l$0
 Mcl$`H
 Mcl$pE;
 Mcn H
-Mc|$8E;|$HD
 Mc|$XE;|$ht)I
 Medium
 MemAlloc_AllocFunc
@@ -1878,8 +1893,8 @@ Num Match groups: %i
 O$fD9
 O8HcG
 O8HcW
+O8Icp
 O8v	1
-OLLcG I
 OPEN SIDED OUTDOOR AREA Detected 
 OPTIONS
 OPtQf
@@ -2089,6 +2104,7 @@ RenderHardwareConfig002
 RenderService_001
 RenderSystemSurface001
 RenderUtils_001
+ReportClassError
 Resolve the inputs and execute one specified operator from a specified stack
 Resource 
 ResourceCompilerSystem001
@@ -2283,14 +2299,11 @@ Sub-String
 Sustain target amplitude
 Sustain time (ms)
 SxbHc
-SxcHc
 Sync Track: %s
 T$ A;T$0
 T$(E1
-T$8IcO
 T$@Hc
 T$@Ic
-T$PIcO
 THen : voiced dental fricative
 THin : voiceless dental fricative
 TIMES
@@ -2369,7 +2382,6 @@ Unsupported binary encoding id.
 Unsupported text encoding id.
 Unsupported version %d for resource '%s' (Expected %d)
 Update SoundEvent: %s
-UpdateSoundEvents: event with empty name
 Usage:  playdelay delay_in_msec (negative to skip ahead) soundname
 Usage:  snd_compare_soundevents soundevent1 soundevent2
 Usage:  snd_print_soundevent <soundeventname>
@@ -2459,8 +2471,9 @@ V_acosf
 V_asinf
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -2517,8 +2530,11 @@ W LcG
 W u)H
 W8A\A]
 W8A\A]]
+W8HcG
 W8HcO
+W8IcH
 W8LcW
+W@LcG
 WARNING: Attempting to import existing public field %s in stack %s
 WARNING: Attempting to set fields on a stopped sound
 WARNING: Could not find schema data for helper class for resource type %lld '%s'. (Missing MDiskDataForResourceType metadata or schema data isn't loaded?)
@@ -2534,6 +2550,7 @@ WIN32
 WINDOWS
 WINXP
 WORDS
+WPIcH
 WXHcE
 Wait: elapsed time: %f, next sync time: %f, local elapsed: %f, local sync: %f, length: %f, num loops: %i
 Warning
@@ -2568,6 +2585,7 @@ Y@sos_import_stack
 YHcC@1
 YHcK(Ic
 Yacht : voiced palatal approximant
+ZHcK0Ic
 ZIcL$PIc
 ZYtJD
 ZYtiH
@@ -2612,6 +2630,7 @@ _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _IcL$
 _Jv_RegisterClasses
+_LLcW I
 _V_ComposeFileName
 _V_DefaultExtension
 _V_ExtractFileExtension
@@ -2841,7 +2860,6 @@ dBLimiterThreshold
 dBNoiseGateThreshold
 dH34%(
 dH3<%(
-dIcL$0Ic
 dOg : lower-mid back rounded vowel
 dataL
 data_type
@@ -2908,6 +2926,8 @@ fA+D$
 fAther : low back unrounded vowel
 fAther : low front unrounded vowel
 fD91t
+fD9c&w
+fD9k$w
 fD9{$
 fD9{$~|I
 fD;!t
@@ -2942,7 +2962,6 @@ free@@GLIBC_2.2.5
 friction
 function
 g E;g0D
-g8HcG
 g8HcW
 g@LcW L
 gHHcW I
@@ -3351,7 +3370,9 @@ m_nStopType
 m_nType
 m_nVectorComponent
 m_nameInputs
+m_pBody
 m_pHandle
+m_pParent
 m_pszSnapshotName
 m_snapshotName
 m_vActions
@@ -3619,6 +3640,7 @@ paused
 perlin
 physgun_interactions
 pitchScale
+play_endcap
 playback_type
 playvol
 point0
@@ -3654,11 +3676,11 @@ public.%s
 public.attack
 public.end_point
 public.pitch
+public.position
 public.release
 public.sample
 public.start_point
 public.volume
-q4IcO
 qHcKhIc
 qPD;~
 quantize_type
@@ -3692,6 +3714,7 @@ round_to_int
 s<u9H
 sampler_event
 schema
+schemaclassinfo.cpp
 scripts/soundmixers.txt
 scripts/vmidi/arrangements/arrangements_manifest.txt
 scripts/vmidi/samplers/samplers_manifest.txt
@@ -3952,27 +3975,31 @@ t$HcW
 t$`A\A]A^]
 t$`uAA
 t$pE1
-t'D;5
+t'D;5.M,
 t(;2}
-t);="
+t);=bd,
 t)HcE
 t*A+F$I
-t+Lck0D;k@D
+t+Lck8D;kHD
 t/;w t2;w0t=1
 t/Ic]
 t0[A\]
 t1A;4$t+A
-t1HcS
 t3Lc#D;c
 t3[A\]
 t4[A\A]]
 t4[A\]
+t6[A\A]]
 t8@:1uCH
-t9HcX0;Z@
+t9HcX8;ZH
+t;fE9
 t<Ic_(A;_8
+t<Lcs8D;sHD
 t<[A\A]A^]
+t<v"<
 t=[A\]
 tC[A\A]A^]
+tEfE9
 tGIc]
 tJHcC
 tN~+A
@@ -4004,13 +4031,14 @@ u)IcE
 u64( %lld = 0x%llX )
 u=[A\]
 u?;KL}:Hc
-uJ;Gd}E
+uD;Gd}?
 uKUHc
 u[[A\A]A^]
 uint32
 uint64
 um[A\]
 unicode
+unused
 update
 use_world_position
 util_draw_radius
@@ -4034,7 +4062,6 @@ vV<	uRH
 vector_facing_point
 velocity_zones
 vgraph_name
-vl;5\
 vmix.cpp
 vmix:%02d: %s
 vmixH
@@ -4115,8 +4142,9 @@ x%;p@} H
 x8;7H
 x@HcO
 xBHcO
-xD9%Ch<
-xD95Wo<
+xD9%&
+xD9%c
+xD95w
 xGIcL$
 xHLc@ LcH
 xLHcP
@@ -4131,7 +4159,6 @@ z7u5H
 z9u7H
 z>{}[]()=&, 	
 z@u>H
-zLuJA
 zau_H
 zfudH
 {0D;{@I
@@ -4142,10 +4169,10 @@ zfudH
 {}[]=, 	
 |$0E;|$@
 |$8E1
-|$HfA
 |$XIcT$<I
 |)A9\$0
 |*Ic:H
+|7Hf.
 }$A;]
 }*f;C
 }1;A$
@@ -4163,6 +4190,5 @@ zfudH
 ~Ef;w
 ~IHcK
 ~O;2u
-~PAUA
 ~Wf9=
 ~}f;w

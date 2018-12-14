@@ -14,6 +14,8 @@
 		<Movie id="ValveHeadTurn" src="file://{resources}/videos/main_menu/valve_headturn.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" />
 		<Panel id="DashboardForeground">
 			<Panel id="TopRightPanel" hittestchildren="true">
+				<Button id="DCGBlogButton" class="TopBarSmallButton" onactivate="DCGDisplayBlog(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" hittest="true" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )"/>
+				<Panel class="Separator"/>
 				<Button id="DCGSettingsButton" class="ControlIconButton SettingsButton" onactivate="DCGSettings(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" hittest="true" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )"/>
 				<Panel class="Separator"/>
 				<Button id="DCGQuitButton" class="TopBarSmallButton" onactivate="PlaySoundEffect( DCG_UI.MainMenu_Select_Quit ) DCGQuitGame();" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Quit )"/>
@@ -53,15 +55,15 @@
 					<Panel class="MainMenuButtonGlow"/>
 				</Button>
 
-				<Button class="TopBarTab HideNoFeaturedEvent" id="Featured" onactivate="DCGShowPlayFeaturedCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Featured )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Featured )">
+				<Button class="TopBarTab HideNoFeaturedEvent" id="Featured" onactivate="DCGShowPlayFeaturedCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Featured ) DCGAcknowledgeViolator( CTAUpdate1 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Featured )">
 					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayFeatured"/>
 				</Button>
 
-				<Button class="TopBarTab" id="Solo" onactivate="DCGShowPlaySoloCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
+				<Button class="TopBarTab" id="Solo" onactivate="DCGShowPlaySoloCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo ) DCGAcknowledgeViolator( SoloAIGauntlet )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
 					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySolo"/>
 				</Button>
 
-				<Button class="TopBarTab" id="Social" onactivate="DCGShowPlaySocialCarousel() PlaySoundEffect( DCG_UI.Shared_Select_SocialPlay )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_SocialPlay )">
+				<Button class="TopBarTab" id="Social" onactivate="DCGShowPlaySocialCarousel() PlaySoundEffect( DCG_UI.Shared_Select_SocialPlay ) DCGAcknowledgeViolator( SocialOpenTournaments )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_SocialPlay )">
 					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySocial"/>
 				</Button>
 

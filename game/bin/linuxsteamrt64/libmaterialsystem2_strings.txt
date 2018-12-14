@@ -75,7 +75,6 @@
  [%.3f server clamped to %.3f]
  [A\A]A^A_]
  [A\A]A^]
- [A\A^A_]
  [A\]
  [A\]H
  [Error Resource]
@@ -130,13 +129,24 @@ $t\Mc
 %s() isn't a known function.
 %s(): Deprecated and unimplemented. Fix client code to use new postprocessing resources.
 %s(): Trying to add an empty VS input signature
+%s+--
+%s+-- Schema Class: %s
 %s.360%s
+%s: %s
 %s: Can't set font scale on a non-bitmap font!
 %s: Input vector has incorrect length
 %s: Warning: No compile targets specified! Shader will not be compiled!
 %s: string format requested %d chars
 %s[line %d:%d] 
 %s__font_page_%d
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 &YA1D
 &YA1H
 &YA1L
@@ -146,6 +156,7 @@ $t\Mc
 'return'
 (*%s*), 
 (9w rh;w
+(E9L$x
 (HcWP
 (None)
 (Ocd5TA
@@ -380,7 +391,6 @@ $t\Mc
 14ICompressCoder
 14IMaterialLayer
 14IOpCodeHandlerIiE
-14ISchemaBinding
 15CIntOpEvaluator
 15CLineLayoutInfo
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorI31SerializeStaticCombosWorkUnit_t21CFuncJobItemProcessorIS2_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -431,11 +441,6 @@ $t\Mc
 18CAtomicManipulatorI8Vector2DE
 18CAtomicManipulatorI8Vector4DE
 18CCountedStringPool
-18CSchemaEnumBindingI14ViewFadeMode_tE
-18CSchemaEnumBindingI16BloomBlendMode_tE
-18CSchemaEnumBindingI19VertJustification_eE
-18CSchemaEnumBindingI20HorizJustification_eE
-18CSchemaEnumBindingI20LayoutPositionType_eE
 18CSchemaManipulatorI11CWeakHandleI31InfoForResourceTypeCTextureBaseEE
 18CSchemaManipulatorI14CResourceArrayI15CResourceStringEE
 18CSchemaManipulatorI14CResourceArrayI18MaterialParamInt_tEE
@@ -459,19 +464,6 @@ $t\Mc
 18ISchemaManipulator
 18ITSHashConstructorIP4CVfxE
 18ITextureDictionary
-19CSchemaClassBindingI15MaterialParam_tE
-19CSchemaClassBindingI18MaterialParamInt_tE
-19CSchemaClassBindingI20MaterialParamFloat_tE
-19CSchemaClassBindingI21MaterialParamBuffer_tE
-19CSchemaClassBindingI21MaterialParamString_tE
-19CSchemaClassBindingI21MaterialParamVector_tE
-19CSchemaClassBindingI21VBitmapFontDiskData_tE
-19CSchemaClassBindingI22MaterialParamTexture_tE
-19CSchemaClassBindingI22MaterialResourceData_tE
-19CSchemaClassBindingI24PostProcessingResource_tE
-19CSchemaClassBindingI31PostProcessingBloomParameters_tE
-19CSchemaClassBindingI33PostProcessingTonemapParameters_tE
-19CSchemaClassBindingI34PostProcessingVignetteParameters_tE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19IKeyValuesErrorSpew
@@ -501,13 +493,11 @@ $t\Mc
 21IKeyValuesDumpContext
 21IMaterialSystem2Utils
 21IPostProcessingSystem
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22CShaderCreateCallbacks
 22CUtlRenderShaderBuffer
 23CResourceAllocatorUtils
 23CResourceStreamGrowable
-23CSchemaClassBindingBase
 23CSplitScreenAddedConVar
 23CUtlStackMachineBuilder
 23CVfxStackMachineBuilder
@@ -538,6 +528,7 @@ $t\Mc
 37CCompileTargetExprStackMachineBuilder
 37CQueuedSetMaterialOrTextureRenderable
 3_0_gl
+4 E9~
 4(D;c
 47A84
 48B848u2
@@ -549,7 +540,7 @@ $t\Mc
 5_0_gl
 5_0_vulkan
 5t~BC
-6;2t&H
+692t&H
 6ConVar
 6D98t0
 6H92t%H
@@ -564,6 +555,7 @@ $t\Mc
 8HcC8H
 8Hc](D
 8IUnknown
+8LcoxE
 8VBKVt%HcF
 8[A\A]A^A_]
 8[A\A]]
@@ -583,7 +575,6 @@ $t\Mc
 ;0tSD
 ;0tWD
 ;0t\D
-;2t8H
 ;BDs'
 ;BX|'1
 ;G tu+G$L
@@ -591,8 +582,8 @@ $t\Mc
 ;mempool.cpp
 <	u 1
 <	u,1
-<	u0H
 <	uMUH
+<	uhUH
 <	w>H
 <	wlLcG
 <!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
@@ -634,9 +625,9 @@ $t\Mc
 ?IcT$
 ?LZMA]
 ?LZMAt
-?Resource 
 ?u0E1
 @$[A\]
+@,t9L
 @@A9F@
 @D; }qH
 @D;2}/H
@@ -664,7 +655,6 @@ A+D$$
 A+D$$H
 A+D$$I
 A+D$,I
-A+D$8
 A+E$1
 A+E$A
 A+E$H
@@ -696,9 +686,9 @@ A+_$H
 A+t$$H
 A+t$$Hc
 A+t$$I
-A3BH)
 A9A(tlL
 A9E t
+A9|$P
 A;D$ 
 A;D$(
 A;D$X}
@@ -710,8 +700,11 @@ A;G\A
 A;L$`}-I
 A;\$ 
 A;\$@|
+A;\$x
+A;\$x}S
 A;] |
 A;](|
+A;](}kI
 A;_ |
 A;_@|
 A;_@}4L
@@ -800,6 +793,7 @@ AVAUATSL
 AVAUATS~
 AVAUD
 AVAUE1
+AVAUH
 AVAUI
 AVAUL
 AVAULc
@@ -838,7 +832,7 @@ A\A]H
 A\A]]
 A]A^H
 A]A^]
-A^A_]
+A]A^]H
 Actually dude, we didn't seem to be expecting anything here, or at least
 AddMultipleToTail
 AddRef
@@ -962,6 +956,8 @@ C0tYI
 C4x'H
 C8t2H
 C<Lcc(
+CAuthPhysBody
+CAuthPhysJoint
 CBaseIntrospectedTypeManager:  Bindings don't match.
 CBaseIntrospectedTypeManager:  Missing TYPEMETA MDiskDataForResourceType
 CBitmapFont::Create
@@ -1105,7 +1101,14 @@ C`Hc@
 CalcDynamicComboIdFromValues
 CalcStaticComboIdFromValues
 Can't write binary data to a text buffer.
+Cannot allocate abstract class
+Cannot allocate over-aligned class
 Cannot allocate virtual address space in CResourceStreamVM::ReserveVirtualMemory, error %u
+Cannot construct abstract class
+Cannot copy abstract class
+Cannot deallocate abstract class
+Cannot deduce for class
+Cannot destruct abstract class
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
@@ -1147,6 +1150,8 @@ Custom font '%s' is already registered, ignoring new registration '%s' range %d 
 Custom font file '%s' ignored because no font name was given
 CxtzI
 Cycle or diamond double-reference to '%s'
+C~UUH
+D#5Y%5
 D#O\H
 D#j\H
 D$ E1
@@ -1162,6 +1167,7 @@ D$@H9
 D$@I9
 D$@swI
 D$HD;p
+D$PA\]
 D$PH9
 D$XA9GXu
 D$`A9G`u
@@ -1187,7 +1193,7 @@ D:"u;
 D;!ttHc
 D;)ts
 D;+}oL
-D;5GJ'
+D;5gE'
 D;@Ds
 D;c D
 D;c@|
@@ -1225,6 +1231,7 @@ DevShader
 Domain Shader
 DotaCardGameClient_001
 Double-register of KV3 conversion (from '%s' to '%s')
+Double-save to Member '%s'
 Dynamic )
 Dynamic combo %s referenced in expression doesn't exist.
 Dynamic combos:
@@ -1254,6 +1261,8 @@ E97t8A
 E9gPI
 E9t$(D
 E9u@u
+E9|$(
+E9|$(~iI
 E9}@~zI
 E;&}SI
 E;,$|
@@ -1342,6 +1351,30 @@ FLOATLITERAL
 FLOATSUFFIX
 FP8GP]
 FP9GP]
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 FT_Done_Face
 FT_Done_FreeType
 FT_Get_Char_Index
@@ -1362,6 +1395,7 @@ Failed to load font file '%s'
 Failed to map from %s to content-path
 Failed to map from %s to game-path
 Failed to parse custom font file '%s'
+Failed to save unsupported class
 Failed trying to Commit %u bytes, used %u bytes, reserved %u bytes
 FcCharSetCopy
 FcCharSetDestroy
@@ -1392,8 +1426,6 @@ FlattenedSerializersVersion001
 FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
 FormatV
-From Class Binding
-From Enum Binding
 Function %s() expects %d arguments. Found %d.
 G 9G0~
 G ;G0|ZH
@@ -1403,6 +1435,7 @@ G I;G(
 G I;G(r
 G U9G
 G(A^]
+G(H;p
 G(]H)
 G0H9G(
 G0I9G(rkH
@@ -1490,15 +1523,6 @@ HcE H
 HcG U
 HcG$H
 HcG@t	;GP
-HcJ 1
-HcJ(1
-HcJ01
-HcJ81
-HcJ@1
-HcJH1
-HcJP1
-HcJX1
-HcJ`1
 HcK$9
 HcK$D
 HcO$H
@@ -1507,18 +1531,20 @@ HcS$D
 HcS$H
 HcSPH
 HcSx1
+HcV 1
+HcV(1
+HcV01
+HcV81
+HcV@1
+HcVH1
+HcVP1
+HcVX1
+HcV`1
 HcW$H
-Hcs 1
+HcWhH
+HcWpH
 Hcs H
-Hcs(1
-Hcs01
-Hcs81
-Hcs@1
 Hcs@H
-HcsH1
-HcsP1
-HcsX1
-Hcs`1
 Hcu8H
 HelpSystem_001
 Hh#p\H
@@ -1536,8 +1562,6 @@ I;V@w
 INTZRAWZDF16DF24ATI2ATI1
 IQuickTime001
 IS_SM_
-IcD$(
-IcD$(A;D$8
 IcE H9
 IcF@H
 IcG@H
@@ -1545,7 +1569,6 @@ IcGPL9
 IcGxL9
 IcL$ Ic
 IcOXH9
-IcT$(
 IcT$<Hc0
 IcT$@H
 IcV0I
@@ -1587,7 +1610,6 @@ L$ H9
 L$$Hc
 L$(Ic@
 L$0H)
-L$HfA
 LAYOUTPOSITIONTYPE_FRACTIONAL
 LAYOUTPOSITIONTYPE_NONE
 LAYOUTPOSITIONTYPE_VIEWPORT_RELATIVE
@@ -1627,6 +1649,8 @@ LccpD;
 Lcg8dH
 LcgpD;
 Lck@H
+Lcs8D;sHD
+Lc{@D;{PD
 Lexer encountered %i errors parsing compile targets expression "%s"
 Liberation Sans
 Line %d at "%s": %s
@@ -1685,6 +1709,7 @@ MaterialUtilsInit
 MaterialUtils_001
 MathLib_Init
 Maximum time in ms to spend initializing shaders for materials each frame.
+MbP?+
 Mc$$I
 Mc&E;f
 Mc'E;g
@@ -1694,7 +1719,6 @@ McJPD9
 Mcl$@H
 Mcl$pE;
 Mco@E;oP
-Mc|$8E;|$HD
 MemAlloc_AllocFunc
 MemAlloc_FreeFunc
 MemZeroMemory
@@ -1716,6 +1740,9 @@ N4NHC412CMatchFinderE
 N9NCompress5NLZMA10CBaseStateE
 N9NCompress5NLZMA8CEncoderE
 NE fA
+NHcK8Ic
+NHcK`Ic
+NHcKhIc
 NOTE: Each static combo creates multiple shader programs based on the dynamic combos available.
 NULL shader pointer!
 NV_DST16
@@ -1918,12 +1945,14 @@ RenderService_001
 RenderSystemSurface001
 RenderUtils
 RenderUtils_001
+ReportClassError
 Requires
 Requires%d
 Requires%d( 
 ReserveVirtualMemory
 Reset material cost heuristic
 ResetColorCorrectionLookupWeights
+Resource 
 ResourceCompilerSystem001
 ResourceFile: %d/%d @%p align %u
 ResourceHandleUtils001
@@ -2159,8 +2188,9 @@ V_acosf
 V_asinf
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -2229,6 +2259,7 @@ VisBuilder_001
 Visualize overdraw
 Visualize shading complexity
 W u)H
+W0]7H
 W<)w )wH
 W<v2L
 W@H;2t'H
@@ -2264,7 +2295,6 @@ YD$,L
 Y^ulL
 ZYu+L
 [ mat_print_material_info ] Error! Cannot find material '%s'!
-[A\A]
 [A\A]A^A_]
 [A\A]A^A_]A
 [A\A]A^]
@@ -2427,6 +2457,7 @@ _init
 _psrs
 _test_conversion_counter
 `E;&|
+`[A\A]A^]
 `[A\]
 ``[A\A]A^]
 abort@@GLIBC_2.2.5
@@ -2457,6 +2488,7 @@ breakable_count
 burst_randomize
 burst_scale
 c@[A\A]A^]
+c`t1H
 cable
 calloc
 calloc@@GLIBC_2.2.5
@@ -2522,6 +2554,8 @@ f;0t_fD
 f;S.w
 f;r`u
 fA9_^r
+fD9c&w
+fD9k$w
 fD;!t
 fE9&D
 fE9&fA
@@ -2599,7 +2633,9 @@ j Hc@
 jIcE(1
 jsjcjvR
 k<[A\A]A^]
+k`HcSh
 keyvalues3.cpp
+khHcSp
 kv3format_manager.cpp
 l$@E;l$P
 l$DtjA
@@ -2722,6 +2758,8 @@ m_nType
 m_nValue
 m_nVariableSourceMax
 m_nVectorComponent
+m_pBody
+m_pParent
 m_pValue
 m_pszSnapshotName
 m_renderAttributesUsed
@@ -2911,6 +2949,7 @@ p]ATE
 panorama_text_pango
 particles/
 physgun_interactions
+play_endcap
 point0
 point1
 position
@@ -2973,6 +3012,7 @@ samplerCUBE
 samplerCUBEARRAY
 saturate
 schema
+schemaclassinfo.cpp
 schemasystem
 sdktools/bin/vproj.exe
 sdktools/bin/vprojUI.exe
@@ -3041,29 +3081,36 @@ t(;2}
 t)HcE
 t*A+F$I
 t+HcC
-t/HcJ
+t/;w t2;w0t=1
+t/HcV
 t0[A\]
 t1D9e8~+H
-t1HcJ
+t1HcV
 t2HcL
 t3Lc#D;c
 t4[A\]
+t6[A\A]]
 t8@:1uCH
 t:H;r
 t;[A\A]]
 t;[A\]
+t;fE9
 t<Ic_(A;_8
 t<LcG
+t<Lcs8D;sHD
+t<v"<
 t=Mc.E;n
 t@D9u
 t@HcS
 tC[A\A]A^]
+tEfE9
 tN~+A
+tPHcC
+tR[A\]
 tTHcL
 tW[A\]
 t_L9 u
 tangent
-tbIcT$(A;T$8
 test_angles_relative
 texcoordH
 texturescale
@@ -3155,6 +3202,7 @@ x	HcO
 x @8{h
 x!;1|
 x2fA)\$
+x:Lcc(D;c8
 x@HcO
 xH	w8
 xOIcD$PH9
@@ -3163,8 +3211,8 @@ x[A\A]A^A_]
 x|LcG
 yaw_end
 yaw_start
+z(u&H
 z/u-H
-z<u:H
 zbtOA
 { A8} 
 {0[A\]
@@ -3173,11 +3221,11 @@ zbtOA
 {}[]()=&, 	
 {}[]=, 	
 |$0E;|$@
-|$HfA
 |$PE1
 |$`~7A
 |$x~01
 |*Ic:H
+|7Hf.
 |sHf9x
 }$A;]
 }(f;w"w"H

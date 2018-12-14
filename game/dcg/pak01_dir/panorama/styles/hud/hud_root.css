@@ -130,9 +130,12 @@ DCGHud.AspectRatio16x9 #Overlay
 
 .VenchatoquistBubble
 {
-	flow-children: down;
+	//flow-children: right;
 
-	background-color: #ccccccee;
+	horizontal-align: center;
+
+	background-color: #cccccc;
+	background-color: gradient( linear, 0% 100%, 0% 0%, color-stop( 0.0, #cccccc), color-stop( 1.0, #e5e5e5dd) );
 	opacity: 1;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -145,31 +148,130 @@ DCGHud.AspectRatio16x9 #Overlay
 	box-shadow: #000000CC -8px -8px 16px 16px;
 }
 
-.VenchatoquistArrow
+.IsOtherUserMessage .VenchatoquistBubble
+{
+	//background-color: #99ccffee;
+}
+
+.VenchatoquistArrowDown
 {
 	border-style: solid;
-	border-color: #ccccccee transparent transparent transparent;
+	border-color: #cccccc transparent transparent transparent;
 	border-width: 18px 18px 0px 18px;
 	margin-left: 20px;
-	margin-bottom: -17px;
+	margin-top: -1px;
+	margin-bottom: -15px;
 	horizontal-align: center;
 	vertical-align: bottom;
 	visibility: visible;
 }
 
+.NoArrow .VenchatoquistArrowDown,
+.LeftArrow .VenchatoquistArrowDown,
+.RightArrow .VenchatoquistArrowDown
+{
+	visibility: collapse;
+}
+
+.IsOtherUserMessage .VenchatoquistArrowDown
+{
+	//border-color: #99ccffee transparent transparent transparent;
+}
+
+.VenchatoquistArrowLeft
+{
+	border-style: solid;
+	border-color: transparent #cccccc transparent transparent;
+	border-width: 18px 18px 18px 0px;
+	margin-top: 10px;
+	margin-left: -9px;
+	horizontal-align: left;
+	vertical-align: center;
+	visibility: collapse;
+}
+
+.LeftArrow .VenchatoquistArrowLeft
+{
+	visibility: visible;
+}
+
+.IsOtherUserMessage .VenchatoquistArrowLeft
+{
+	//border-color: transparent #99ccffee transparent transparent;
+}
+
+.VenchatoquistArrowRight
+{
+	border-style: solid;
+	border-color: transparent transparent transparent #cccccc;
+	border-width: 18px 0px 18px 18px;
+	margin-top: 10px;
+	margin-right: -17px;
+	horizontal-align: right;
+	visibility: collapse;
+}
+
+.RightArrow .VenchatoquistArrowRight
+{
+	visibility: visible;
+}
+
+.IsOtherUserMessage .VenchatoquistArrowRight
+{
+	//border-color: transparent transparent transparent #99ccffee;
+}
+
+.VenchatoquistHelpText
+{
+	width: 300px;
+	height: 28px;
+
+	z-index: 10;
+	margin-top: -25px;
+
+	horizontal-align: center;
+	text-overflow: shrink;
+	color: #ffffff;
+	font-size: 26px;
+	text-align: center;
+
+	text-shadow: 0px 0px 3px 3.0 #000000;
+
+	visibility: collapse;
+}
+
+.ShowHelp .VenchatoquistHelpText
+{
+	visibility: visible;
+}
+
 #VenchatoquistText
 {
-	min-width: 10px;
+	min-width: 50px;
 	max-width: 300px;
 	width: fit-children;
 
 	vertical-align: center;
-	//font-stretch: condensed;
 	color: #111111;
-	font-size: 32px;
+	font-size: 24px;
 	text-align: center;
 
 	visibility: visible;
+}
+
+.IsUserGenerated #VenchatoquistText
+{
+	color: white;
+	font-weight: light;
+	text-shadow: 0px 0px 2px 2.0 #08f8eb55;
+	margin-right: 20px;
+	margin-left: 20px; // margins for chat
+}
+
+
+.IsOtherUserMessage #VenchatoquistText
+{
+	//color: #111144;
 }
 
 .IsLocal #VenchatoquistText
@@ -179,7 +281,7 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #VenchatoquistTextEntry
 {
-	min-width: 10px;
+	min-width: 50px;
 	width: fit-children;
 	color: black;
 	font-size: 26px;
@@ -188,12 +290,48 @@ DCGHud.AspectRatio16x9 #Overlay
 	background-color: #FFFFFF00;
 	border: 0px solid black;
 
+	margin-left: 15px;
+	margin-right: 5px;
+	box-shadow: none;
+
 	visibility: collapse;
 }
 
 .IsLocal #VenchatoquistTextEntry
 {
 	visibility: visible;
+}
+
+.IsUserGenerated .VenchatoquistBubble
+{
+	border-radius: 5px;
+	box-shadow: #2bf9ed99 -1px -1px 20px 2px;
+	border: 1px solid #2bf9edaa;
+	background-color: gradient( linear, 0% 100%, 0% 0%, color-stop( 0.0, #45706d), color-stop( 0.05, #45706d), color-stop( 0.5, #282828dd), color-stop( 0.96, #282828ee), color-stop( 1.0, #b7b7b7) );
+}
+
+.IsUserGenerated .VenchatoquistArrowDown
+{
+	border-color: #45706d transparent transparent transparent;
+}
+
+.ToggleCustomButton, .ToggleUserButton
+{
+    visibility: collapse;
+    horizontal-align: right;
+}
+
+.IsHidingCustom .ToggleCustomButton,
+.IsOtherUserMessage .ToggleUserButton
+{
+    visibility: visible;
+}
+
+.VenchatoquistButtonImage
+{
+    width: 40px;
+    height: 40px;
+    background-size: 100% 100%;
 }
 
 #Paused

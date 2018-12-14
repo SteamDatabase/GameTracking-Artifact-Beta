@@ -26,6 +26,7 @@ $ORIGIN
 $[A\A]A^]
 $[A\]
 $~"Hc
+%%.%if
 %%.%if%s
 %*s%ld
 %.0f pct of time accounted for
@@ -230,6 +231,7 @@ $~"Hc
 -phased_window_create
 -profile
 -retail
+-start_resource_profiling
 -testmode
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
@@ -417,6 +419,7 @@ Abstract origin attr without ref4 value
 AddRef
 Address range refers to non-existent CU at 0x%x
 AllocTag
+AllocateEvent
 Always Ignore
 AppendConcat
 AppendConcatV
@@ -463,6 +466,8 @@ CThreadMultiWaitSemaphore
 CXXABI_1.3
 CXXABI_1.3.8
 Called Resume() on a thread that is not suspended!
+Cannot flush timstamped event log with no listener!
+Cannot register two timestamped event listeners!
 CatchAndWriteMiniDump
 CatchAndWriteMiniDumpEx
 CatchAndWriteMiniDumpExForVoidPtrFn
@@ -542,6 +547,7 @@ FAIL: Not all items popped
 Failed to set new handler for "%s" (%d)
 File: %s
 FileSystem
+FlushBuffer
 Found Application AutoArgs file '%s'
 Frame Boundary
 FreeCommandLine
@@ -1226,6 +1232,7 @@ SetAssertionCallback
 SetAssertionPrompt
 SetCPUMonitoringInterval
 SetDefaultMiniDumpHandler
+SetListener
 SetPtr
 SetThreadedLoadLibraryFunc
 SetWin32ConsoleColor
@@ -1313,6 +1320,11 @@ Tier0GenericMiniDumpHandler_SetFilenamePrefix
 Tier0GenericMiniDumpHandler_SetGetAdditionalFileAttachmentCallback
 Tier0GenericMiniDumpHandler_SetOptions
 Tier0GenericMiniDumpHandler_SetPreHandlerCallback
+Timestamped event buffer overflow!
+TimestampedEvent
+TimestampedEventMsg
+TimestampedEventMsgV
+TimestampedEvent_RegisterListenerAndFlushBuffer
 ToLowerFast
 Tools
 TracerPid:
@@ -1421,6 +1433,7 @@ V_ParseLine
 V_PathContainsPath
 V_PathNamesAreEquivalent
 V_PathsMatch
+V_PrettifyFloat
 V_PrettifyMem
 V_PrettifyNum
 V_RemoveDotSlashes
@@ -1466,8 +1479,9 @@ V_atan
 V_atan2
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -2307,6 +2321,7 @@ ctime_r@@GLIBC_2.2.5
 dH34%(
 dH3<%(
 darwin/uuids/
+dbg.cpp
 debug_abbrev
 debug_aranges
 debug_info
@@ -2431,6 +2446,7 @@ gmtime_r
 gmtime_r@@GLIBC_2.2.5
 hA\A]A^A_]
 h[A\A]A^A_]
+h[A\A]]
 hypot@@GLIBC_2.2.5
 ignored_assertions.txt
 int:transient:1
@@ -2677,7 +2693,7 @@ t$H;h
 t%<,u
 t&<,u
 t/<.u
-t/H;=hI'
+t/H;=
 t/Hcp
 t1L;M
 t2HcC

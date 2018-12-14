@@ -12,6 +12,7 @@
 	%s manifest end
 	(truncated)
 	. T.
+	.@w.
 	>Nsj?
 	?rfL
 	A#3M9
@@ -21,6 +22,9 @@
 	Can relay through "%s" to "%s" with %u hops
 	Can't relay through "%s" to "%s". Reason: %s
 	DEM_Error
+	Flags: 
+	Flags: H
+	Flags: J
 	For: "%s"%s.
 	IcL$XI
 	JS_NORMAL
@@ -212,8 +216,6 @@
  #GameUI_ServerRejectBadChallenge
  #Valve_Reject_Connect_From_Lobby
  #Valve_Reject_Reserved_For_Lobby
- %d/%d:  completed '%s'
- %d/%d:  pending '%s'
  %i refs
  %llu aggs, %s total data
  '%s'
@@ -265,7 +267,7 @@
  Driver %s (vendorid %x, deviceid %x DXSupport Level %d)
  E9l$\
  E;g`
- H;=73
+ H;=m
  H;D$PH
  H;D$`H
  IcD$
@@ -281,6 +283,7 @@
  NetMessageSplitscreenUserChanged
  Outdent() without matching Indent().
  Parameter to BackUp() can't be negative.
+ PositioH
  ReadToken overflow
  Tokenizer::ParseFloat() passed text that could not have been tokenized as a float: 
  Tokenizer::ParseStringAppend() passed text that could not have been tokenized as a string: 
@@ -292,7 +295,6 @@
  [A\A]A^A_]
  [A\A]A^]
  [A\A]]
- [A\A^A_]
  [A\]
  []A\
  []A\A]A^
@@ -668,8 +670,6 @@ $A;\$
 $A\A]A^]
 $D;3|
 $E;D$
-$Mce`E;epD
-$Mcf`E;fpD
 $NETWORK_DISCONNECT_REJECT_SERVERFULL
 $NETWORK_DISCONNECT_STEAM_AUTHINVALID
 $NETWORK_DISCONNECT_STEAM_VACBANSTATE
@@ -695,13 +695,14 @@ $woL)
 %#GameUI_ServerRejectInvalidConnection
 %#GameUI_ServerReject_InvalidKeyLength
 %%%s%%
+%%s%%-%d.%ds:  %%s%%s
 %&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
 %(0D"
 %-120s
 %-120s - %s
-%-30s %-12s %-12s %-12s %-12s %-12s
 %-32s: %6.3f ms (+/- %6.3f) ms
 %-32s: %6.3f ms (+/- %6.3f) ms (%6.3f ave fps)
+%-40s %-12s %-12s %-12s %-12s %-12s
 %.04f
 %.10f
 %.15lf
@@ -726,6 +727,7 @@ $woL)
 %5d:  DispatchEvent( %s )
 %6.2f %6.2f %6.2f %.3f %.3f %.3f
 %6d unresolved strings
+%8.8s: %-5d entries, '%s', ...
 %<8yX
 %NETWORK_DISCONNECT_CONNECTION_FAILURE
 %NETWORK_DISCONNECT_DISCONNECT_BY_USER
@@ -743,12 +745,16 @@ $woL)
 %d (s/n %d)
 %d / %s "%s" thinking for %.02f ms!!!
 %d addons loaded
+%d spawn groups
 %d total counted strings.
 %d(%f):  %s
 %d,%f,%f,%f,%f,%f
 %d.%d.%d
 %d.%d.%d.%d
 %d.%d.%d.%d:%d
+%d/%d
+%d/%d: %s
+%d/%d: '%s' %s
 %d:  '%s'
 %d: %s
 %d:%s
@@ -847,6 +853,8 @@ $woL)
 %s%s%s%s
 %s(%d) : %s
 %s*%s
+%s+--
+%s+-- Schema Class: %s
 %s, bool showScrollBar, bool allowMouseWheel, bool overrideChildPanelWidth
 %s, bool textHidden, bool editable, bool unicode, bool NumericInputOnly, int maxchars
 %s, int SubTabPosition
@@ -954,6 +962,14 @@ $woL)
 %s_%u_slot%d
 %s_saves
 %stemp%d.tga
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 %u:%u:%u
 %u[%d]
 &#%d;
@@ -1016,6 +1032,9 @@ $woL)
 (?R or (?[+-]digits must be followed by )
 (A9^ 
 (A9_ 
+(ATSH
+(AUATSH
+(AVAUI
 (Addresses differ: existing '%s' @ '%p' != requested '%s' @ '%p')
 (D;p 
 (D>C9[
@@ -1172,6 +1191,8 @@ $woL)
 , from: 
 , lo=
 , not just within "
+, parent: 
+, parentH
 , relayed from "%s"
 , to "%s"
 ,#GameUI_Disconnect_Splitpacket_Send_Overflow
@@ -1267,6 +1288,7 @@ $woL)
 -empty
 -endgamevid
 -entkv_use_schema
+-error_if_idle
 -flushlog
 -force_new_recommend
 -forcenovsync
@@ -1369,8 +1391,12 @@ $woL)
 -warmtime
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
-.%6Qm
-.-HPm
+.%H(&
+.%K1^
+.%}W]
+.-Y9j
+.-w}	
+................................................................................
 ...<truncated>...
 ../../../../..
 ../../public/tier1/utllinkedlist.h
@@ -1385,7 +1411,6 @@ $woL)
 ../public/ordered_constructor.h
 ../public/resourcefile/resourcestream.h
 ../public/scenesystem/iscenesystem.h
-../public/schemasystem/schema.h
 ../public/tier0/tslist.h
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utlfixedmemory.h
@@ -1395,8 +1420,7 @@ $woL)
 ../public/tier2/fieldpath.h
 ..\content
 ./hR%
-.5I5&
-.5x8&
+.=9}	
 .>N^n~
 .@TvJI
 .@Tz%u#
@@ -1511,6 +1535,7 @@ $woL)
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEF
 0123456789abcdef
+05:02:55
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0;{@|
@@ -1772,7 +1797,6 @@ $woL)
 14IKeyValueCache
 14IRenderHandler
 14IRenderService
-14ISchemaBinding
 14ISource2Engine
 14IVertColorBase
 15CBaseConstraint
@@ -2218,28 +2242,6 @@ $woL)
 18CSVCMsg_PeerList_t
 18CSVCMsg_ServerInfo
 18CSVCMsg_SetPause_t
-18CSchemaEnumBindingI12AnimVRHand_tE
-18CSchemaEnumBindingI12BundleType_tE
-18CSchemaEnumBindingI13SignonState_tE
-18CSchemaEnumBindingI14AnimVRFinger_tE
-18CSchemaEnumBindingI16ConstraintType_tE
-18CSchemaEnumBindingI20EntityDormancyType_tE
-18CSchemaEnumBindingI20EntityIOTargetType_tE
-18CSchemaEnumBindingI22MeshTranslucencyType_tE
-18CSchemaEnumBindingI24MeshDrawPrimitiveFlags_tE
-18CSchemaEnumBindingI24ModelBoneFlexComponent_tE
-18CSchemaEnumBindingI26AttachmentInfluenceFlags_tE
-18CSchemaEnumBindingI35RenderMeshFlexControllerRemapType_tE
-18CSchemaEnumBindingIN13VPhysXJoint_t7Flags_tEE
-18CSchemaEnumBindingIN14MorphSetData_t12LookupType_tEE
-18CSchemaEnumBindingIN14MorphSetData_t14EncodingType_tEE
-18CSchemaEnumBindingIN15PermModelInfo_t8FlagEnumEE
-18CSchemaEnumBindingIN16VPhysXBodyPart_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN19ModelSkeletonData_t11BoneFlags_tEE
-18CSchemaEnumBindingIN20RenderSkeletonData_t10FlagEnum_tEE
-18CSchemaEnumBindingIN21VPhysXAggregateData_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN23VPhysXDiskShapeHeader_t12VersinEnum_tEE
-18CSchemaEnumBindingIN24VPhysXConstraintParams_t12EnumFlags0_tEE
 18CSchemaManipulatorI10CTransformE
 18CSchemaManipulatorI10CUtlStringE
 18CSchemaManipulatorI10CUtlVectorI10CHitBoxSet10CUtlMemoryIS1_iEEE
@@ -2365,7 +2367,6 @@ $woL)
 18ISchemaManipulator
 18MenuItemCheckImage
 18ToolTraceRayResult
-19:40:53
 19C2S_CONNECT_Message
 19CBidirMsg_RelayInfo
 19CBoneConstraintBase
@@ -2382,130 +2383,6 @@ $woL)
 19CSVCMsg_UserMessage
 19CSVCMsg_VoiceData_t
 19CSVCMsg_VoiceInit_t
-19CSchemaClassBindingI10CHitBoxSetE
-19CSchemaClassBindingI10CWristBoneE
-19CSchemaClassBindingI10EntInput_tE
-19CSchemaClassBindingI10FlexDesc_tE
-19CSchemaClassBindingI10FlexRule_tE
-19CSchemaClassBindingI11CAttachmentE
-19CSchemaClassBindingI11CFingerBoneE
-19CSchemaClassBindingI11CRenderMeshE
-19CSchemaClassBindingI11EntOutput_tE
-19CSchemaClassBindingI11HitBoxSet_tE
-19CSchemaClassBindingI11MorphData_tE
-19CSchemaClassBindingI12BundleData_tE
-19CSchemaClassBindingI12CFingerChainE
-19CSchemaClassBindingI13CFingerSourceE
-19CSchemaClassBindingI13VPhysXJoint_tE
-19CSchemaClassBindingI13VPhysXRange_tE
-19CSchemaClassBindingI14CAimConstraintE
-19CSchemaClassBindingI14CHitBoxSetListE
-19CSchemaClassBindingI14EventSetTime_tE
-19CSchemaClassBindingI14MorphSetData_tE
-19CSchemaClassBindingI15CEntityIOOutputE
-19CSchemaClassBindingI15CEntityIdentityE
-19CSchemaClassBindingI15CRenderSkeletonE
-19CSchemaClassBindingI15EventSimulate_tE
-19CSchemaClassBindingI15MaterialGroup_tE
-19CSchemaClassBindingI15MorphRectData_tE
-19CSchemaClassBindingI15PermModelData_tE
-19CSchemaClassBindingI15PermModelInfo_tE
-19CSchemaClassBindingI16AttachmentData_tE
-19CSchemaClassBindingI16BaseConstraint_tE
-19CSchemaClassBindingI16CConstraintSlaveE
-19CSchemaClassBindingI16CEntityClassInfoE
-19CSchemaClassBindingI16CMorphConstraintE
-19CSchemaClassBindingI16CPointConstraintE
-19CSchemaClassBindingI16CSceneObjectDataE
-19CSchemaClassBindingI16CScriptComponentE
-19CSchemaClassBindingI16CTwistConstraintE
-19CSchemaClassBindingI16FlexController_tE
-19CSchemaClassBindingI16VPhysXBodyPart_tE
-19CSchemaClassBindingI17CConstraintTargetE
-19CSchemaClassBindingI17COrientConstraintE
-19CSchemaClassBindingI17CParentConstraintE
-19CSchemaClassBindingI17ConstraintSlave_tE
-19CSchemaClassBindingI17EngineLoopState_tE
-19CSchemaClassBindingI17SceneObjectData_tE
-19CSchemaClassBindingI17VPhysXDiskMesh2_tE
-19CSchemaClassBindingI18CNetworkVarChainerE
-19CSchemaClassBindingI18ConstraintTarget_tE
-19CSchemaClassBindingI18EntComponentInfo_tE
-19CSchemaClassBindingI18EventAdvanceTick_tE
-19CSchemaClassBindingI18EventAppShutdown_tE
-19CSchemaClassBindingI18OnDiskBufferData_tE
-19CSchemaClassBindingI18PermModelExtPart_tE
-19CSchemaClassBindingI18PhysSoftbodyDesc_tE
-19CSchemaClassBindingI18SkeletonBoneBbox_tE
-19CSchemaClassBindingI19EventClientOutput_tE
-19CSchemaClassBindingI19ModelSkeletonData_tE
-19CSchemaClassBindingI19VPhysXConstraint2_tE
-19CSchemaClassBindingI19VPhysXDiskCapsule_tE
-19CSchemaClassBindingI19VPhysics2ShapeDef_tE
-19CSchemaClassBindingI20CRenderBufferBindingE
-19CSchemaClassBindingI20CTiltTwistConstraintE
-19CSchemaClassBindingI20EventFrameBoundary_tE
-19CSchemaClassBindingI20EventPreDataUpdate_tE
-19CSchemaClassBindingI20PermRenderMeshData_tE
-19CSchemaClassBindingI20RenderSkeletonBone_tE
-19CSchemaClassBindingI20RenderSkeletonData_tE
-19CSchemaClassBindingI20SkeletonBoneBounds_tE
-19CSchemaClassBindingI21EventClientSimulate_tE
-19CSchemaClassBindingI21EventModInitialized_tE
-19CSchemaClassBindingI21EventPostDataUpdate_tE
-19CSchemaClassBindingI21EventServerSimulate_tE
-19CSchemaClassBindingI21ModelBoneFlexDriver_tE
-19CSchemaClassBindingI21RenderBufferBinding_tE
-19CSchemaClassBindingI21VPhysXAggregateData_tE
-19CSchemaClassBindingI22CPhysSurfacePropertiesE
-19CSchemaClassBindingI22EventClientPollInput_tE
-19CSchemaClassBindingI22EventClientPreOutput_tE
-19CSchemaClassBindingI22EventClientSendInput_tE
-19CSchemaClassBindingI22EventPostAdvanceTick_tE
-19CSchemaClassBindingI23CMaterialDrawDescriptorE
-19CSchemaClassBindingI23EventClientPostOutput_tE
-19CSchemaClassBindingI23VPhysXDiskShapeHeader_tE
-19CSchemaClassBindingI24CVariantDefaultAllocatorE
-19CSchemaClassBindingI24CVrSkeletalInputSettingsE
-19CSchemaClassBindingI24EventClientAdvanceTick_tE
-19CSchemaClassBindingI24EventClientPreSimulate_tE
-19CSchemaClassBindingI24EventServerAdvanceTick_tE
-19CSchemaClassBindingI24MaterialDrawDescriptor_tE
-19CSchemaClassBindingI24VPhysXConstraintParams_tE
-19CSchemaClassBindingI25EventClientPostSimulate_tE
-19CSchemaClassBindingI25EventClientProcessInput_tE
-19CSchemaClassBindingI25EventServerPostSimulate_tE
-19CSchemaClassBindingI26EventClientFrameSimulate_tE
-19CSchemaClassBindingI26EventClientPauseSimulate_tE
-19CSchemaClassBindingI27CPhysSurfacePropertiesAudioE
-19CSchemaClassBindingI27EntClassComponentOverride_tE
-19CSchemaClassBindingI27EventClientPollNetworking_tE
-19CSchemaClassBindingI27EventServerPollNetworking_tE
-19CSchemaClassBindingI27VPhysXCollisionAttributes_tE
-19CSchemaClassBindingI28CBoneConstraintPoseSpaceBoneE
-19CSchemaClassBindingI28CVPhysXSurfacePropertiesListE
-19CSchemaClassBindingI28EventClientPostAdvanceTick_tE
-19CSchemaClassBindingI28EventServerPostAdvanceTick_tE
-19CSchemaClassBindingI28EventSimpleLoopFrameUpdate_tE
-19CSchemaClassBindingI28ModelBoneFlexDriverControl_tE
-19CSchemaClassBindingI28VPhysXShapeCompoundHeader2_tE
-19CSchemaClassBindingI29CBoneConstraintPoseSpaceMorphE
-19CSchemaClassBindingI29CPhysSurfacePropertiesPhysicsE
-19CSchemaClassBindingI29EventClientProcessGameInput_tE
-19CSchemaClassBindingI30EventClientProcessNetworking_tE
-19CSchemaClassBindingI30EventProfileStorageAvailable_tE
-19CSchemaClassBindingI30EventServerProcessNetworking_tE
-19CSchemaClassBindingI30EventSplitScreenStateChanged_tE
-19CSchemaClassBindingI32CPhysSurfacePropertiesSoundNamesE
-19CSchemaClassBindingI41EventClientSceneSystemThreadStateChange_tE
-19CSchemaClassBindingI7CHitBoxE
-19CSchemaClassBindingI8FlexOp_tE
-19CSchemaClassBindingI8HitBox_tE
-19CSchemaClassBindingIN12CEntityClass16CClassAttributesEE
-19CSchemaClassBindingIN12CEntityClass17ComponentHelper_tEE
-19CSchemaClassBindingIN12CEntityClass18ComponentOffsets_tEE
-19CSchemaClassBindingIN28CBoneConstraintPoseSpaceBone7Input_tEE
-19CSchemaClassBindingIN29CBoneConstraintPoseSpaceMorph7Input_tEE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19CServerRemoteAccess
@@ -2634,7 +2511,6 @@ $woL)
 22CSVCMsg_FullFrameSplit
 22CSVCMsg_PacketEntities
 22CSVCMsg_PacketReliable
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22CSimpleLoggingListener
 22CUserInfoChangeService
@@ -2662,7 +2538,6 @@ $woL)
 23CResourceStreamGrowable
 23CSVCMsg_GameEvent_key_t
 23CSVCMsg_ServerSteamID_t
-23CSchemaClassBindingBase
 23CSequentialPrerequisite
 23CSplitScreenAddedConVar
 23CVConAutoCompleteHelper
@@ -2884,17 +2759,6 @@ $woL)
 35CEventQueue_SaveRestoreBlockHandler
 35CGameInfo_CDotaGameInfo_CPlayerInfo
 35CNETMsg_SpawnGroup_ManifestUpdate_t
-35CSchemaNonConstructibleClassBindingI12CEntityClassE
-35CSchemaNonConstructibleClassBindingI13IHandleEntityE
-35CSchemaNonConstructibleClassBindingI15CBaseConstraintE
-35CSchemaNonConstructibleClassBindingI15CEntityInstanceE
-35CSchemaNonConstructibleClassBindingI16CEntityComponentE
-35CSchemaNonConstructibleClassBindingI16IRecipientFilterE
-35CSchemaNonConstructibleClassBindingI19CBoneConstraintBaseE
-35CSchemaNonConstructibleClassBindingI20CEmptyEntityInstanceE
-35CSchemaNonConstructibleClassBindingI22CEntityComponentHelperE
-35CSchemaNonConstructibleClassBindingIN15CEntityInstance26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEmptyEntityInstance26CEntityInstanceEntityClassEE
 35ToolEvent_SFMToolActiveStateChanged
 36CNETMsg_SpawnGroup_SetCreationTick_t
 37CWaitForGameServerStartupPrerequisite
@@ -2906,7 +2770,6 @@ $woL)
 39CBaseServerSpawnGroupCreatePrerequisite
 39CFlattenedSerializerChangesSpewListener
 39CNetworkServerSpawnGroup_WaitForClients
-39CSchemaNonConstructibleClassBindingBase
 3IcF4H
 3[A\]
 4	IcL$
@@ -2954,11 +2817,9 @@ $woL)
 5t~BC
 6000.0
 60CNetworkClientSpawnGroup_WaitForManualCompletionPrerequisite
-60CNetworkServerSpawnGroup_WaitForManualCompletionPrerequisite
 64-bit
 692t&H
 692t+H
-6;2t&H
 6A;1t"
 6CModel
 6ConVar
@@ -3076,7 +2937,6 @@ $woL)
 ;2t)H
 ;2t,H
 ;2t/H
-;2t8H
 ;2|EH
 ;:~`H
 ;;D$H
@@ -3102,14 +2962,14 @@ $woL)
 ;wp|	]
 ;|$H|h
 ;|$\|I
-;~@UH
-;~Dt*;~Ht-9~Lf
+;~HUH
+;~Lt*;~Pt-9~Tf
 <	t<H
 <	u 1
 <	u,1
-<	u0H
 <	uKI
 <	uMUH
+<	uhUH
 <	w)A
 <	w>H
 <	wlLcG
@@ -3234,6 +3094,7 @@ $woL)
 >LZSS]
 >LZSSt
 >Server::CmdKeyValues
+>UnzipZip error: %s (%s)
 >fE9}
 >nkY?
 >r*#?
@@ -3260,12 +3121,15 @@ $woL)
 ?|7m=U
 @ A^]
 @ Current  :  %s
+@ ion
 @$IcD
+@,t9L
 @0H;E
 @8A]A^]
 @@/data/data/source2_main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
 @@/data/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
 @@H;E
+@CLoopModeInGameUI::LoopInit
 @HH;E
 @HcC 
 @HcC(
@@ -3278,7 +3142,6 @@ $woL)
 @PtyH
 @SetAllowAddonChanges
 @TAPD
-@UnzipZip error: %s (%s)
 @XAPD
 @XIcD$
 @Xt E1
@@ -3334,7 +3197,6 @@ A+D$$
 A+D$$H
 A+D$$I
 A+D$$f
-A+D$8
 A+D$H
 A+E$1
 A+E$A
@@ -3377,8 +3239,6 @@ A+u`Hc
 A+u`Ic
 A/data/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
 A0tlHcS
-A3BH)
-A3FH)
 A8Eps
 A8Lck D;k0
 A8Mcl$ E;l$0
@@ -3614,6 +3474,7 @@ AWAVAUI
 AWAVAUL
 AWAVAULc
 AWAVAUM
+AWAVAUfI
 AWAVD
 AWAVE
 AWAVE1
@@ -3748,6 +3609,8 @@ Already recording movie!
 Already recording.
 Already saw decimal point or exponent; can't have another one.
 Always force all engine & tools to render
+Angle; 
+Anglf
 Angular velocity limit before eyes considered snapped for demo playback.
 AnimAddLayer
 AnimAlign
@@ -3780,6 +3643,9 @@ AnimVrFinger_Middle
 AnimVrFinger_Pinky
 AnimVrFinger_Ring
 AnimVrFinger_Thumb
+Animated
+Animated Position, Dynamic Rotation
+AnimatedH
 AnimatingImagePanel
 Animation
 AnimationController
@@ -3926,6 +3792,9 @@ Bamum
 Banid: "%s<%i><%s><>" %s "%s" by "%s"
 Banid: "<><%s><>" %s "%s" by "%s"
 Banning %s for rcon hacking attempts
+Base Spr
+Base SprL
+Base Spring; 
 Base component class %s needs to have the same contained / referenced rules as its derived classes!
 BaseConstraint_t
 BaseIKRig
@@ -4068,9 +3937,9 @@ C89C\
 C8AUD
 C8[A\]
 C8t#Lcc
+C<[A\]
 C<u'Hc{
 C@H;CHs
-C@[A\]
 C@t8L
 C@u I
 CANCELLED
@@ -4083,6 +3952,8 @@ CAppSystemDict:Unable to create interface %s from %s (Dependency of %s)
 CAppSystemDict:Unable to load interface factory %s from %s (Dependency of %s), error %d
 CAppSystemDict:Unable to load module %s (Dependency of %s), error %d
 CAttachment
+CAuthPhysBody
+CAuthPhysJoint
 CBaseActionEditDialog
 CBaseActionPlaySoundStartDialog
 CBaseActionWithTargetDialog
@@ -4603,9 +4474,9 @@ CLoadSpawnGroupsPrerequisite
 CLoadStartupResourcePrerequisite
 CLog::Print: string too long (>1024 bytes).
 CLoopModeConsole::LoopInit
-CLoopModeInGameUI::LoopInit
 CLoopModeLevelLoad
 CLoopModeLevelLoad::LoopInit
+CLoopModeMainMenu
 CLoopModeMainMenu::LoopInit
 CLoopModeRemoteConnect
 CLoopModeRemoteConnect::LoopInit
@@ -4681,7 +4552,6 @@ CNetworkServerSpawnGroup_LoadSaveGamePrerequisite
 CNetworkServerSpawnGroup_WaitForAssetLoadPrerequisite
 CNetworkServerSpawnGroup_WaitForChildSpawnGroups
 CNetworkServerSpawnGroup_WaitForClients
-CNetworkServerSpawnGroup_WaitForManualCompletionPrerequisite
 CNetworkServerSpawnGroup_WaitForOwnerSpawnGroupPrerequisite
 CNetworkStringTable
 CNetworkStringTable::AddString:  client added string which server didn't put into table (consider SetAllowClientSideAddString?): %s %s
@@ -4748,6 +4618,7 @@ CPlayerSlot
 CPointConstraint
 CPostProcessingResource >
 CPtGHcS$L
+CPujH
 CP~P[A\]
 CRC error
 CRC'd '%s' .
@@ -5012,6 +4883,7 @@ Can't record during demo playback.
 Can't record on dedicated server.
 Can't retry, no previous SourceTV connection
 Can't save, not in a listen server game!
+Can't save.
 Can't savegame with a dead player
 Can't set both read_data_fn and write_data_fn in the same structure
 Can't split screen connect, no network channel
@@ -5025,6 +4897,7 @@ Candidate
 Cannot Apply
 Cannot allocate abstract class
 Cannot allocate buffer larger than kint32max for 
+Cannot allocate over-aligned class
 Cannot allocate virtual address space in CResourceStreamVM::ReserveVirtualMemory, error %u
 Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You must instead find a way to get your file into the underlying database.
 Cannot call QueuePostDataUpdate on an entity system that you did not initialize to support post data updates!
@@ -5033,6 +4906,7 @@ Cannot copy abstract class
 Cannot copy json_name to a proto of a different size.
 Cannot create an entity because entity class is NULL %d
 Cannot deallocate abstract class
+Cannot deduce for class
 Cannot destruct abstract class
 Cannot force non-networkable entity index %d
 Cannot get here
@@ -5308,6 +5182,8 @@ Creating INetChannel for '%s'
 Creating Window: 
 Creating game stats upload socket.
 Creating initial report.
+Cs[A\]
+Cst	I
 Ct9Cx
 Ctrl-c copies the settings of the last selected panel.
 Ctrl-v creates a new panel with the copied settings at the location of the mouse pointer.
@@ -5337,7 +5213,7 @@ Cycle or diamond double-reference to '%s'
 Cypriot
 Cyrillic
 C}t*W
-D#%mkn
+D#-A3m
 D#O\H
 D#b\H
 D#j\H
@@ -5371,6 +5247,8 @@ D$0H9
 D$0Hc
 D$0IcL$
 D$0L9}
+D$0L;m
+D$0L;u
 D$0M9
 D$0[A\]
 D$0fA
@@ -5394,7 +5272,6 @@ D$@I9
 D$@[A\]
 D$@f.
 D$DA\
-D$DA\A]A^]
 D$D[A\]
 D$HD9x
 D$HE9
@@ -5420,15 +5297,13 @@ D$\A9
 D$\M9
 D$`9D$X
 D$`H9
-D$`Hc
 D$`Ic
 D$`[A\]
 D$aHD
 D$hH;E
 D$ht~H
 D$l[A\]
-D$lv&H
-D$pH9
+D$pv&H
 D$qI9
 D$xt?H
 D%s*.%s
@@ -5437,6 +5312,7 @@ D)d$DL
 D)k L
 D)l$HL
 D+#Mc
+D+%[4
 D+C$H
 D+H$D
 D+K@D
@@ -5491,7 +5367,7 @@ D;(tPH
 D;)ts
 D;+}N
 D;+}fE
-D;5~H
+D;=g6m
 D;G,r
 D;`H}
 D;c D
@@ -5586,6 +5462,7 @@ DebugShowZPrepassDepth
 DebugShowZPrepassNormals
 DebugTextureInfo001
 DebugVisualizerMgr
+Dec 11 2018
 Decals
 DeclareCurrentThreadIsMainThread
 Decompression Error
@@ -5876,7 +5753,6 @@ ENTITY_NOT_DORMANT
 ENTITY_SUSPENDED
 ENetworkDisconnectionReason
 EPI9EHt
-EPunH
 EQueryCvarValueStatus
 ERCPD
 ERCPt%
@@ -5909,7 +5785,6 @@ EXRReadFile() - B channel not found!
 EXRReadFile() - G channel not found!
 EXRReadFile() - R channel not found!
 E`H;E
-E`t@A
 EarlyInit_Tier0
 Echo log information to the console.
 Echo the command arguments on the console
@@ -6184,8 +6059,8 @@ F	@t&
 F 9G tq
 F E+F
 F Hc1
-F L9(
-F L; 
+F L9 
+F L;(
 F t2SH
 F t5SH
 F-nogamestats
@@ -6284,6 +6159,30 @@ FRPVt
 FSKey=
 FT$,A
 FTIcD$,1
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 F_ALPHA_TEST
 F_MORPH_SUPPORTED
 F_TRANSLUCENT
@@ -6417,6 +6316,9 @@ FlexController_t
 FlexDesc_t
 FlexOp_t
 FlexRule_t
+Flexible; 
+FlexibleA
+FlexibleL
 Flicker
 FloatBitMap::DownsampleNiceFiltered
 FloatBitMap::QuarterSize
@@ -6492,8 +6394,6 @@ FrameTitleButton.DisabledFgColor
 FrameTitleButton.FgColor
 Freed EMS handle %u
 Freed XMS handle %u
-From Class Binding
-From Enum Binding
 FullFrameSplit tick=%d, chunk=%d of %d
 FullPacketGoto
 FullPathEdit
@@ -6501,13 +6401,13 @@ Function returned more than 1 return value, illegal!
 G A+G
 G A9G
 G A;G0
-G H;p
 G I+G
 G U9G
 G channel not found
 G channel not found in %s
 G$+GX;G,A
 G$HcG
+G(H;p
 G,ATSA
 G0;0t(H
 G0A;G@
@@ -6704,7 +6604,6 @@ H	P0H
 H	p(]
 H	w(UH
 H!w(H
-H+5io
 H+C(H
 H+C(I
 H+C0A
@@ -6734,97 +6633,116 @@ H;0t7H
 H;2t H
 H;2t=H
 H;3t?H
-H;5 x
-H;5)}
-H;50[
-H;50b
-H;5Ad
-H;5As
-H;5Pi
-H;5WS
-H;5ay
-H;5du
-H;5g}
-H;5iK
-H;5qh
-H;= $
-H;=!S
-H;="/
-H;=#H
-H;=(9
-H;=(Y
-H;=(\
-H;=(a
-H;=*(
-H;=+-
-H;=-(
-H;=.#
-H;=/	
-H;=0#
-H;=1E
-H;=1F
-H;=1H
-H;=1K
-H;=25
-H;=2I
-H;=7H
-H;=7o
-H;=8B
-H;=8U
-H;=9*
-H;=;T
-H;=?G
-H;=@"
-H;=AL
-H;=An
-H;=Dv
-H;=GZ
-H;=H0
-H;=HJ
-H;=HK
-H;=HZ
-H;=H_
-H;=N6
-H;=NN
-H;=OM
-H;=P!
-H;=Q:
-H;=QC
-H;=QD
-H;=QF
-H;=QI
-H;=QN
-H;=Wk
-H;=XV
-H;=YA
-H;=Yh
-H;=[I
-H;=\G
-H;=\c
-H;=]D
-H;=]_
-H;=]c
-H;=_O
-H;=` 
-H;=aP
-H;=gh
-H;=h'
-H;=h]
-H;=je
-H;=oQ
-H;=oh
-H;=pC
-H;=qD
-H;=qE
-H;=qG
-H;=qJ
-H;=qR
-H;=t<
-H;=w(
-H;=xW
-H;=~k
-H;C u
-H;C(H
+H;5Ae
+H;5Il
+H;5I}
+H;5Xc
+H;=	9
+H;=	]
+H;=	`
+H;=	c
+H;=	j
+H;= ?
+H;= b
+H;= r
+H;= u
+H;= z
+H;=(F
+H;=)]
+H;=)^
+H;=)a
+H;=)d
+H;=*)
+H;=+,
+H;=/j
+H;=0:
+H;=0n
+H;=1%
+H;=28
+H;=53
+H;=5t
+H;=6!
+H;=7/
+H;=8E
+H;=9e
+H;=:.
+H;=;Q
+H;=<j
+H;==|
+H;=>j
+H;=?s
+H;=@s
+H;=@x
+H;=A)
+H;=A6
+H;=E]
+H;=F)
+H;=G+
+H;=G5
+H;=Gf
+H;=HD
+H;=I\
+H;=I^
+H;=I_
+H;=Ib
+H;=Ig
+H;=J7
+H;=O'
+H;=P1
+H;=P;
+H;=P=
+H;=PR
+H;=Po
+H;=Q$
+H;=Q+
+H;=V4
+H;=Wh
+H;=XC
+H;=Y:
+H;=YV
+H;=Y_
+H;=Yi
+H;=[]
+H;=[~
+H;=]8
+H;=`D
+H;=`_
+H;=`c
+H;=`v
+H;=a%
+H;=ag
+H;=b;
+H;=g9
+H;=g`
+H;=gj
+H;=gt
+H;=hB
+H;=iK
+H;=i\
+H;=i]
+H;=i`
+H;=ic
+H;=ik
+H;=l$
+H;=m)
+H;=m.
+H;=oD
+H;=oS
+H;=p(
+H;=pM
+H;=pp
+H;=r5
+H;=r~
+H;=s*
+H;=u^
+H;=w 
+H;=wl
+H;=x%
+H;=xA
+H;=xP
+H;=yA
+H;=yL
+H;=|X
 H;ChI
 H;GHs
 H;S@w
@@ -6867,13 +6785,15 @@ HammerMapLoader001
 HangWatchdog_IndicateActivity
 Hangul
 Hanunoo
+Has CollH
+Has Collision; 
 HasField
 HasGameUI
 HasModAppSystems
 Hc@$H
-Hc@0H
-Hc@@H
-Hc@@I
+Hc@0M
+Hc@HH
+Hc@HI
 Hc@pH
 HcA`H
 HcAp;
@@ -6918,25 +6838,6 @@ HcGpH
 HcH(H
 HcH0H
 HcH@H
-HcJ 1
-HcJ$1
-HcJ(1
-HcJ,1
-HcJ01
-HcJ41
-HcJ81
-HcJ<1
-HcJ@1
-HcJH1
-HcJP1
-HcJT1
-HcJX1
-HcJ\1
-HcJ`1
-HcJd1
-HcJl1
-HcJt1
-HcJ|1
 HcK Ic
 HcK$9
 HcK$D
@@ -6973,6 +6874,25 @@ HcSxA
 HcSxE1
 HcT$4Mc
 HcT$x
+HcV 1
+HcV$1
+HcV(1
+HcV,1
+HcV01
+HcV41
+HcV81
+HcV<1
+HcV@1
+HcVH1
+HcVP1
+HcVT1
+HcVX1
+HcV\1
+HcV`1
+HcVd1
+HcVl1
+HcVt1
+HcV|1
 HcW$H
 HcWhH
 HcWpH
@@ -6987,30 +6907,11 @@ Hc_P;_`
 Hc_P;_`D
 Hc_p;
 Hcr4LcB$H
-Hcs 1
 Hcs H
-Hcs$1
-Hcs(1
-Hcs,1
-Hcs01
-Hcs41
-Hcs81
 Hcs8M
-Hcs<1
-Hcs@1
 Hcs@H
 Hcs@I
 Hcs@t	;sP
-HcsH1
-HcsP1
-HcsT1
-HcsX1
-Hcs\1
-Hcs`1
-Hcsd1
-Hcsl1
-Hcst1
-Hcs|1
 Hc~@H
 Heap is corrupt
 HeapCompactionService001
@@ -7057,18 +6958,18 @@ I+T$8
 I2fD+
 I94	H
 I9D$x
+I9E(H
+I9u(ro
+I;B0t71
 I;D$ 
 I;D$ r
 I;D$(H
-I;E(H
 I;F0u
 I;F8u
 I;F@u
-I;G(t4H
 I;V@w
 I;_ v
-I;t$(
-I;u(wv
+I;u u
 ID filter list: %i entries
 ID filter list: %i entry
 ID filter list: empty
@@ -7119,7 +7020,6 @@ IcEPM
 IcE`9E
 IcF I
 IcF01
-IcF0I
 IcF81
 IcFHH
 IcFpM
@@ -7171,6 +7071,7 @@ Ic\$HA;\$Xu
 Ic\$hA;\$x
 Ic]0A)
 Ic]PI
+Ic^`A;^p
 Ic_8A;_H
 Ic_PA;_`
 Ic_XA;_h
@@ -7432,12 +7333,16 @@ Invalid wire type for CPPTYPE_UINT64:
 Invalid zlib compression method or flags in IDAT
 Invalidate
 Inverse Multi Quadratic
+Invert A
+Invert AL
+Invert Axes; 
 IqvUm
 Is the server pausable.
 IsInPVS
 IsKeyValueUsed
 IsSource1DemoFile:  failed to read demo header from %s
 IsSplitScreenPlayer
+J8H9K t
 JD;t$H
 JFIF APP0 marker: version %d.%02d, density %dx%d  %d
 JFIF extension marker: JPEG-compressed thumbnail image, length %u
@@ -7621,7 +7526,6 @@ Known Peer State "%s"
 Known Resources:
 Known by handlers: 
 L %02i/%02i/%04i - %02i:%02i:%02i: %s
-L$ E1
 L$ H9
 L$ I9
 L$$E1
@@ -7635,7 +7539,6 @@ L$8Hc
 L$@D)
 L$@Mc
 L$@t>[A\]
-L$HfA
 L$PA#D$DH
 L$PE1
 L$XA)
@@ -7660,6 +7563,7 @@ L; tY
 L;0t?H9
 L;0t[A
 L;8t(H
+L;=I.
 L;O0UH
 L;`@toH
 L;b@tOH9
@@ -7744,6 +7648,7 @@ Lcc D;c0t,D
 Lcc D;c0txD
 Lcc@H
 LccHD;cXI
+Lcc`D;cpD
 LcchD;cx
 Lcg H
 Lcg(D;g8t\H
@@ -7751,10 +7656,10 @@ LcgXD;ghtOH
 Lch(E;n
 Lck D;k0D
 Lck H
-Lck`D;kpD
 LckhD;kxD
 Lcn H
 Lco E
+Lcs8D;sHD
 Lct$@
 Lcx4M
 LcxXH
@@ -7762,6 +7667,9 @@ Lc{8A
 Lc{8E9
 LeavePVS
 Left Hand
+Length; 
+Length; H
+Length; J
 Lepcha
 LightDesc_t
 LightSourceShape_t
@@ -7872,7 +7780,6 @@ Loop named "%s" failed to init!
 LoopModeConsole
 LoopModeInGameUI
 LoopModeLevelLoadVr
-LoopModeMainMenu
 LoopModeMainMenuVr
 LoopModeRemoteConnectVr
 Lost RCON connection, please retry command
@@ -7917,9 +7824,7 @@ MHcK8H
 MIcNPIc
 MIcO@Hc
 MIcO@Ic
-MModuleLocalTypeScope
 MNG features are not allowed in a PNG datastream
-MNetworkAssumeNotNetworkable
 MNetworkBitCount
 MNetworkChangeAccessorFieldPathIndex
 MNetworkChangeCallback
@@ -8021,6 +7926,7 @@ Mc>E;~
 McW(H
 Mce H
 Mce@E
+Mce`E;epD
 Mcf@E
 McgXE;ghD
 Mcl$(H
@@ -8032,7 +7938,7 @@ Mcn@E
 Mcn`E;npD
 Mct$X1
 Mct$`E;t$pD
-Mc|$8E;|$HD
+Mcu`E;upD
 Mc}01
 Meetei_Mayek
 MemAlloc_AllocFunc
@@ -8423,6 +8329,7 @@ No conversion from %s to uint now
 No default value
 No demos in list, use startdemos <demoname> <demoname2> to specify
 No demos listed with startdemos
+No display adapters found. Falling back to software rasterizer
 No existing hint file %s
 No field named "uninterpreted_option" in the Options proto.
 No free conversion of %s variant to %s right now
@@ -8484,8 +8391,6 @@ Not implemented.
 Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "
 Note: Changes to sv_pure take effect when the next map is loaded.
 Note: should use "addip" instead of "banip".
-Nov 20 2018
-Nov 29 2018
 Num Lock
 Num Lock Toggle
 Number of immediate Steam friends: %d (all friends %d)
@@ -8503,12 +8408,10 @@ O Ic_`B
 O#b"D
 O$HcO
 O(H;q
-O0I9M t
 O?_Y@?R
 O@~'H
 OD;@ 
 OGUBH
-OGtoolgamesimulationsystem.cpp
 OH91t`H
 OKButton
 OPA'F4
@@ -8807,6 +8710,8 @@ PickRandomStartupImage
 PinCorner
 PinnedCornerOffsetX
 PinnedCornerOffsetY
+Pitcf
+Pitch; 
 Plat_AlertUser
 Plat_ApproximateProcessMemoryUsage
 Plat_AttachDebuggerToProcess
@@ -9064,6 +8969,7 @@ Px~*H
 Q8[A\H
 QAngle
 QAngle-world
+QIcN(Ic
 QhsO;
 QkkXa
 QpL;u
@@ -9322,6 +9228,7 @@ Required fields are not allowed in proto3.
 Required return value not encountered for tool message %s!
 Required return value not encountered for tool message %s, expected %s, received %s!
 Requires -stereo on the command line
+Reserve slots for reconnecting human players.
 ReserveVirtualMemory
 ReserveWarnMB
 ReserveWarnMB_linuxsteamrt64
@@ -9373,6 +9280,8 @@ RichText.TextColor
 RichText: textfile parameter '%s' not found.
 RichTextInterior
 Right Hand
+Rigid; 
+Rigif
 RnCapsuleDesc_t
 RnHullDesc_t
 RnMeshDesc_t
@@ -9478,16 +9387,15 @@ SSE4.2
 STEAMAPPLIST_INTERFACE_VERSION001
 STEAMAPPS_INTERFACE_VERSION008
 STEAMAUTH: Client %s received failure code %d
-STEAMHTMLSURFACE_INTERFACE_VERSION_004
-STEAMHTTP_INTERFACE_VERSION002
-STEAMINVENTORY_INTERFACE_V002
+STEAMHTMLSURFACE_INTERFACE_VERSION_005
+STEAMHTTP_INTERFACE_VERSION003
+STEAMINVENTORY_INTERFACE_V003
 STEAMMUSICREMOTE_INTERFACE_VERSION001
 STEAMMUSIC_INTERFACE_VERSION001
 STEAMPARENTALSETTINGS_INTERFACE_VERSION001
 STEAMREMOTESTORAGE_INTERFACE_VERSION014
 STEAMSCREENSHOTS_INTERFACE_VERSION003
-STEAMUGC_INTERFACE_VERSION010
-STEAMUNIFIEDMESSAGES_INTERFACE_VERSION001
+STEAMUGC_INTERFACE_VERSION012
 STEAMUSERSTATS_INTERFACE_VERSION011
 STEAMVIDEO_INTERFACE_V002
 STEAM_
@@ -9854,8 +9762,12 @@ SignonState_t
 Similar to tv_grouprelaydata, but controls whether or not the voice channels should be routed into the grouped data for the relays
 SimpleEngineLoop
 SimpleEngineLoopService_001
+SimulateA
+SimulateH
+Simulated
 Sin( %s )
 Sinhala
+Sitting idle in the main menu for longer than 5 seconds with -error_if_idle or -buildcubemaps on the command line
 SkeletonBoneBbox_t
 SkeletonBoneBounds_t
 SkipAhead
@@ -10025,9 +9937,9 @@ SteamAPI_UnregisterCallback
 SteamAPI_UseBreakpadCrashHandler
 SteamAppId
 SteamAudio001
-SteamClient017
-SteamController005
-SteamFriends016
+SteamClient018
+SteamController007
+SteamFriends017
 SteamGameId
 SteamGameServer012
 SteamGameServerStats001
@@ -10040,11 +9952,12 @@ SteamGameServer_Shutdown
 SteamInternal_ContextInit
 SteamInternal_CreateInterface
 SteamInternal_GameServer_Init
+SteamMatchGameSearch001
 SteamMatchMaking009
 SteamMatchMakingServers002
 SteamNetworking005
 SteamServersDisconnected
-SteamUser019
+SteamUser020
 SteamUtils009
 SteamVR FAILED to initialize!
 SteamVR initialization begin...
@@ -10126,11 +10039,11 @@ T$@Ic
 T$@L9
 T$HIct$TA
 T$HL9
-T$HfA
 T$PHc
 T$XfA
 T$\McL$<B
 T$hA)
+T$hHc
 T$ht?
 T$pL)
 T$xIc
@@ -10276,6 +10189,8 @@ TimeDontCare
 TimeUseClock
 TimeUseTick
 Timed out for spawn group: %s
+TimestampedEvent
+TimestampedEventMsgV
 TitleButtonBorder
 TitleButtonDepressedBorder
 TitleButtonDisabledBorder
@@ -10387,6 +10302,7 @@ UHI9T$Ht
 UIcL$
 UIcL$ Ic
 UIcL$@Ic
+UIcM Ic
 UL9bBL
 UNAUTHENTICATED
 UNAVAILABLE
@@ -10724,8 +10640,9 @@ V_acosf
 V_asinf
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -10769,6 +10686,7 @@ V_swscanf
 V_tanf
 V_tier0_strstr
 V_uuid_t
+V_vscprintf
 V_vsnprintf
 V_vsnprintfRet
 V_vsnprintfSize
@@ -10863,9 +10781,11 @@ W IcD$
 W [A\A]A^A_]
 W u)H
 W$AQI
+W%{)$
 W(H92tHA
 W0H;r
-W=u?%
+W5D&$
+W5k"$
 WARNING
 WARNING:  FlushEntityPacket, %s
 WARNING:  OS Paged Pool Memory Low
@@ -10898,6 +10818,7 @@ WH;2t8H
 WIN32
 WINDOWS
 WINXP
+WIcF01
 WM$^SO
 WRITEOUT
 WRITEOUT 
@@ -10968,12 +10889,14 @@ Wrong JPEG library version: library is %d, caller expects %d
 Wrong alignment %d
 Wrote vis errors to %s
 X API
+X%M]'
 X0fD9
 X0~wA
 X2:jH
 X360_DST16
 X360_DST24
 X360_DST24F
+X55u+
 XA9^@~
 XA;]@|
 XA;]@}WM
@@ -10999,12 +10922,14 @@ XboxSystemInterface001
 Xh#x\
 Y, ]&]
 Y0fD+
+Y5y>+
+Y=Z/,
 YB@fE
 YT$0~`Ic
 Y^t,L
+Yaw; 
 You have been kicked and banned %s by the server.
 Your current chat group is "%s"
-ZD$ E
 ZD$ H
 ZD$(H
 ZFP compression is not supported in this build.
@@ -11145,9 +11070,12 @@ Z~A+E
 ]A\A]
 ]A\A]A^A_
 ]IcL$
+]IcM Ic
 ^ [A\A]A^]
-^5)Q	
-^=aU	
+^-<Y.
+^59N	
+^=	N	
+^=qR	
 ^HcCP1
 ^IcL$ Ic
 ^T$(f
@@ -13812,6 +13740,7 @@ command "%s"
 command line arguments:
 command_number
 commands "%s"
+completed
 component, you should also report this bug to the author(s)
 composite
 compressed %d -> %d bytes
@@ -13993,6 +13922,7 @@ driver,
 drophoverdelay
 droppable
 dt_name
+dtoolgamesimulationsystem.cpp
 dulltext
 dump the text currently in the console to condumpXX.log
 dumpstringtable
@@ -14050,9 +13980,7 @@ enginegameui_vgui.cpp
 engineservicemgr.cpp
 english
 entity2
-entityIdH
 entityIdentityNameChanged
-entityNaH
 entity_component_error_class_decl_says_contained_but_impl_is_referenced
 entity_data
 entity_index
@@ -14112,9 +14040,10 @@ fA9F v
 fB9L 
 fD9 t!H
 fD91t
+fD9c&w
 fD9d1
+fD9k$w
 fD;!t
-fD;%T
 fD;0u
 fE#<$fE
 fE9!fA
@@ -14130,7 +14059,6 @@ fG9\U
 fG;$Vu
 fIcD$
 fIcD$01
-fIcL$ Ic
 fMinAlpha <= fMaxAlpha
 fMinGrn <= fMaxGrn
 fMinRed <= fMaxRed
@@ -14138,7 +14066,6 @@ fWeightSumBottom > 0.0f
 fWeightSumLeft > 0.0f
 fWeightSumRight > 0.0f
 fWeightSumTop > 0.0f
-f`E;fpD
 faceMergeAngle
 factory
 factory "%s"
@@ -14194,6 +14121,7 @@ filterinZ
 filterinfo
 finalfov
 finalfov "%f"
+firstspawngroup
 fixed array found %d entries but expected %d
 fixed poH
 fixed point overflow ignored
@@ -14210,13 +14138,13 @@ float64
 float_array
 floatbitmap.cpp
 floatbitmap.cpp(128): Unknown gamma type "%s"!
-floatbitmap.cpp(2250): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2261): Error loading %s
-floatbitmap.cpp(2284): Error! Unknown file type for %s
-floatbitmap.cpp(2303): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(2258): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2269): Error loading %s
+floatbitmap.cpp(2292): Error! Unknown file type for %s
+floatbitmap.cpp(2311): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
 floatbitmap.cpp(312): Conversion not supported yet!
 floatbitmap.cpp(412): Conversion not supported yet!
-floatbitmap.cpp(874): Unsupported color format "%s", skipping!
+floatbitmap.cpp(875): Unsupported color format "%s", skipping!
 floor
 floor@@GLIBC_2.2.5
 floorf
@@ -14326,7 +14254,6 @@ g_pRenderDeviceMgr is NULL. Driver data unavailable
 g_pRenderHardwareConfig is NULL. Supported DX level unavailable
 g_pScheduledFunctions
 g_pThreadPool
-g`E;gpD
 game.DeferredDepth
 game.DepthPrePassNormals
 game.GBufferNormalSpecExp
@@ -14404,6 +14331,9 @@ graph
 gravity
 grep line for pattern, print out matching lines only
 group
+group %u awaiting world load for %s
+group %u awaiting world ref for %s
+group %u not async loaded
 group name must start with a non-digit
 group%d
 grp:%si
@@ -14413,8 +14343,6 @@ h@t)H
 hAVAUATSH
 hD; }dH
 hD;(}\L
-hE9l$
-hE9|$
 h[A\A]A^A_]
 h[A\A]]
 h[]A\A]A^A_
@@ -14511,6 +14439,7 @@ iRed2 < 0 || iRed2 > 31
 iRed2 >= (signed)(0 + a_uiRadius) && iRed2 <= (signed)(31 - a_uiRadius)
 iRed2 >= 0 && iRed2 <= 31
 i\tQK
+ic RotatH
 iconImage
 idempotency_level
 identifier_value
@@ -14546,6 +14475,7 @@ infested
 infinity
 info_player_start
 infocus_bgcolor_override
+ing;H
 ingameui
 initial update
 innerconeangle
@@ -14651,6 +14581,8 @@ isatty
 isatty@@GLIBC_2.2.5
 isgame
 ishltv
+isioH
+isiof
 isrecording
 iswalnum
 iswalnum@@GLIBC_2.2.5
@@ -14675,6 +14607,7 @@ java_multiple_files
 java_outer_classname
 java_package
 java_string_check_utf8
+jiggle bone %u
 joinsession
 joy_autoaimdampen
 joy_axisr_deadzone
@@ -15271,6 +15204,7 @@ m_outputWeightList
 m_pAttributes
 m_pBaseClassComponentHelper
 m_pBaseClassInfo
+m_pBody
 m_pCPPClassname
 m_pClass
 m_pClassInfo
@@ -15293,6 +15227,7 @@ m_pNext
 m_pNextByClass
 m_pNextClass
 m_pOutputs
+m_pParent
 m_pPrev
 m_pPrevByClass
 m_pTarget
@@ -15502,7 +15437,6 @@ max_clients
 max_entries
 max_spawngroup_creationsequence
 maxchars
-meChangef
 media/l4d2_background%02d.bik
 mem_compact
 mem_dump
@@ -15541,7 +15475,6 @@ message_type
 messagessize
 method
 method flags
-method flags2
 min_angle
 min_client_limit
 minimum-height
@@ -15597,9 +15530,11 @@ multvar: cvar "%s" not found
 multvar: no varname specified!
 n ATI
 n ATSH
+n, DynamH
 n,I-k
 n. W.
 nTries < 10000000
+n`E;npD
 name "%s"
 name is too long in (*MARK), (*PRUNE), (*SKIP), or (*THEN)
 navDown
@@ -15677,6 +15612,7 @@ nosounds
 not currently logging
 not enough codes
 not hibernating
+not started
 notconnected
 nothing to repeat
 notify
@@ -15712,6 +15648,7 @@ oB@fA
 oBPfA
 oH AQ
 oHj]n
+o`E;opD
 objc_class_prefix
 octal value is greater than \377 in 8-bit non-UTF-8 mode
 of that program.  Please make an effort to report this bug;
@@ -15786,6 +15723,8 @@ pAsv_ents_write.cpp
 pClass->m_ClassID(%i) >= %i
 pClient
 pE9e\
+pE9l$
+pE9|$
 pNJ!T
 p[A\A]A^A_]
 p[A\A]A^]
@@ -15810,6 +15749,7 @@ panorama_rt_
 panoramauiclient
 paramName
 parameter error
+parent of jiggle bone %u: %s
 parentheses are too deeply nested
 parentheses are too deeply nested (stack check)
 parentheses nested too deeply
@@ -15840,6 +15780,7 @@ pcre_stack_guard
 pcre_stack_malloc
 pcre_study
 peakWorkingSet MiB(%.2f)
+pending
 pending_full_frame
 perforce.inf
 permanently
@@ -15863,6 +15804,7 @@ pipe@@GLIBC_2.2.5
 pitch
 pixelAspectRatio
 plR%n
+play_endcap
 playback_frames
 playback_ticks
 playback_time
@@ -15921,7 +15863,7 @@ pread64@@GLIBC_2.2.5
 precomputedmaxrange
 preferred_carryangles
 prepend
-prerequisite '%s'
+prerequisite
 preserveAspectRatio
 prevhopcount
 previouslevel
@@ -16200,36 +16142,35 @@ runevent
 runspeed
 s E9u
 s H;5
-s H;5Pf
-s H;5Px
-s H;5Y
-s H;5`
+s H;5	
+s H;5 
+s H;50
+s H;59
+s H;5@
 s [A\A]A^]
 s off
 s v&E1
 s ~XH
 s$[A\H
-s(H;5
+s(H;50
+s(H;5p
 s(H;s
 s(HcE
 s(t.H
 s(~[H
 s0H;5
-s0H;5Tc
+s0H;5`
 s0[A\H
 s0[A\]
 s0~;A
 s1_mapname
 s5fA9
 s8H;5
-s8H;5 
-s8H;5|c
 s@H9sHv
 s@H;5
-s@H;5@j
 s@[A\]H
 sAmTb
-sHH;5
+sHH;5e
 sMA9|$ 
 sPH;5
 sPLT chunk has bad length
@@ -16239,6 +16180,7 @@ s_DMXAllocator
 s_EntComponentInfo
 s`A]A^xq
 sample_rate
+satisfied
 save LowBattery_AutoSave
 save_id
 savefile
@@ -16253,6 +16195,7 @@ scandir64@@GLIBC_2.2.5
 scenesystem
 sched_yield
 sched_yield@@GLIBC_2.2.5
+schemaclassinfo.cpp
 schemasystem
 scrapeRoughThreshold
 scraperough
@@ -16298,7 +16241,7 @@ sequence < 0, in COM_BlockSequenceCRCByte
 sequence_bytes
 sequence_name
 sequence_number
-sequential:  '%s'
+sequential
 serialize
 serializedAddr
 serializedAddress
@@ -16377,6 +16320,7 @@ sigaddset@@GLIBC_2.2.5
 sigemptyset
 sigemptyset@@GLIBC_2.2.5
 signedPayload
+signon
 signon_state
 sigprocmask
 sigprocmask@@GLIBC_2.2.5
@@ -16655,6 +16599,7 @@ sv_region
 sv_replaysdir
 sv_reservation_grace
 sv_reservation_timeout
+sv_reserve_slots_for_reconnecting_players
 sv_search_key
 sv_sendtables
 sv_show_whitelist_msg
@@ -16719,6 +16664,7 @@ syscall@@GLIBC_2.2.5
 system
 system/network
 system@@GLIBC_2.2.5
+t	D;@
 t	HcR
 t	X[]
 t	[A\A]A^]
@@ -16732,6 +16678,9 @@ t"< @
 t"HcK 
 t"HcM
 t"L;%
+t"L;%@
+t"L;%P
+t"L;%p
 t"Mc7E;w
 t"[A\]
 t#IcD$
@@ -16739,29 +16688,28 @@ t#L9m
 t#Lcc
 t$	H9
 t$ H;5
-t$ H;5-
+t$ H;5E
+t$ H;5]
 t$ L9
 t$(H;5
-t$(H;5]
+t$(H;5z
 t$(L9
 t$(t-H
 t$,Hc
 t$0H9
 t$0H;5
-t$0H;5%t
-t$0H;5:
-t$0H;5A[
-t$0H;5m(
-t$0H;5un
+t$0H;5%
+t$0H;5UM
 t$0Hc
 t$0L9
 t$8E1
 t$8H;5
-t$8H;5z
+t$8H;5u
+t$8H;5}
 t$8L9
 t$<	t 
 t$@H;5
-t$@H;55u
+t$@H;5n
 t$@L9
 t$D9j
 t$D9k
@@ -16770,16 +16718,15 @@ t$H9]
 t$H;h
 t$HH9
 t$HH;5
-t$HH;5ei
+t$HH;5<
 t$HL9
 t$HcS
 t$HcS(
 t$HcW
 t$Hf.
-t$HfA
 t$Lc'H
 t$Lc+I
-t$PH;5
+t$PH;5I
 t$PL9
 t$lfA
 t$pvufA
@@ -16797,21 +16744,22 @@ t(;2}
 t(<)u
 t(D9H
 t(D;%
-t(D;=w
+t(D;%W
+t(D;=
 t(HcK8
-t);=R
-t)D;=
+t);="
+t)D;=@p
 t)HcE
 t*<*u
 t*A+F$I
 t*D;=
-t*D;=9
 t*D;p
 t*Ic\$
 t+D;{
-t+HcJ
+t+HcV
 t+Mc,$E;l$
-t,D:5S
+t+Mce
+t,D:5
 t,H;;u'
 t,IcD$
 t-;W@}.L
@@ -16823,7 +16771,6 @@ t.HcC H
 t.HcC(H
 t.HcK8H
 t.HcO
-t.Ic\$
 t/;w t2;w0t=1
 t/<.u
 t/HcG
@@ -16838,12 +16785,11 @@ t0HcG(H
 t0IcM 
 t0Mc/E
 t0PHcB,L
-t1HcJ
 t1HcKlH
 t1HcO
 t1HcO8H
 t1HcOPH
-t1HcS
+t1HcV
 t1Ic_
 t1Ic_`A;_p
 t2HcC$H
@@ -16867,8 +16813,8 @@ t3HcC$H
 t3HcC(H
 t3HcG
 t3HcG H
-t3HcJ
 t3HcKtH
+t3HcV
 t3HcW,H
 t3IcU H
 t3Ic|$PH
@@ -16879,7 +16825,7 @@ t3Ic|$hH
 t3Ic|$lH
 t3Lc#D;c
 t3[A\]
-t4D:%|3
+t4D:%
 t4HcC$H
 t4HcG
 t4HcOHH
@@ -16893,6 +16839,7 @@ t5Mcb
 t6<-t2H
 t6IcD$ H
 t6IcT$$H
+t6[A\A]]
 t6[A\]
 t7HcG H
 t7HcO H
@@ -16917,24 +16864,27 @@ t9HcE
 t9IcD$0H
 t9[A\]
 t:[A\]
+t;fE9
 t;~OU
 t<ATL
 t<Ic_(A;_8
+t<Lcs8D;sHD
 t<Mc|$ L
+t<v"<
 t=[A\]
 t>IcE
 t>Mcv
 t>fA9
 t?HcH
-t@;5e
-t@[A\A]A^]
+t@;5%
 tAHcC
-tAHcJ
+tAHcV
 tALcc
 tB[A\A]A^]
 tCLcm
 tC[A\A]A^]
 tEHcC
+tEfE9
 tF~<1
 tIW?Z
 tIcL$X1
@@ -16947,6 +16897,7 @@ tN~+A
 tO[A\A]A^]
 tPLc`
 tQI;<$uKI
+tR;5u
 tRNS chunk has out-of-range samples for bit_depth
 tRNS chunk not allowed with alpha channel
 tR[A\]
@@ -16954,13 +16905,12 @@ tS[A\A]A^]
 tTHcu
 tTIct$
 tUE9e
-tUHcJ
+tUHcV
 tW[A\]
 tZI;<$uTI
 tZ[A\]
 t^Ic\$
 t^[A\]
-t_IcU
 t_[A\]
 t`Ic\$X
 t`[A\]
@@ -17006,7 +16956,6 @@ textureid
 texturescale
 tf_medigun_autoheal
 tgHcO
-tgHcQ
 thHcK
 thHcK@1
 thIcG
@@ -17519,6 +17468,11 @@ wOD;g
 wSHc{
 wXIcW
 w`AUL
+w`E;wpD
+waiting
+waiting for IsServerRunning()
+waiting for first spawn group
+waiting for startup resource list
 walkspeed
 was banned
 was banned by IP
@@ -17598,6 +17552,7 @@ x^HcW
 xb;wH}]Hc
 xboxsystem.cpp
 xdigit
+xes;H
 xqA9u
 xtA;{`}nHc
 xuidReserve
@@ -17637,8 +17592,7 @@ zt?Quitting
 zzYQ,
 z~u|f
 { H;=
-{ H;=Q#
-{ H;=Z
+{ H;=J
 { [A\]
 { |<H
 {%%%d.%ds} %%%d.%ds: %%-%d.%ds %%-%d.%ds: %%%d.%ds %%%d.%ds %%%d.%ds %%%d.%ds [%%-%d.%ds bits]
@@ -17647,7 +17601,7 @@ z~u|f
 {(t*A9
 {(t3[A\]
 {. y.
-{0H;=`
+{0H;=P
 {8H;=
 {8[A\H
 {8[A\]
@@ -17667,8 +17621,9 @@ z~u|f
 |$ H)
 |$ H9
 |$ H;=
-|$ H;=O
-|$ H;=`H
+|$ H;=.g
+|$ H;=/
+|$ H;=Ge
 |$ H;}
 |$ ~D
 |$$E1
@@ -17679,8 +17634,7 @@ z~u|f
 |$@	uS
 |$@H)
 |$@Lc
-|$HH;=
-|$HfA
+|$HH;=)E
 |$PtaD
 |$X@u
 |$\Hi
@@ -17693,6 +17647,7 @@ z~u|f
 |20M9
 |5H;I
 |7(Mc
+|7Hf.
 |B Hc
 |FHcK
 |P>~k
@@ -17705,10 +17660,12 @@ z~u|f
 |iIcE
 |pIcD$
 } H;=
+} H;=>J
+} H;=}D
 } fD9{"r
 }!A;GTw
 }!HcC8;CHt4
-}#f;=
+}#f;=}
 }$A;]
 });C<w$
 }*9C<r%
@@ -17734,6 +17691,8 @@ z~u|f
 }lfD;
 }};C\
 ~ H;=
+~ H;=FE
+~ H;=k
 ~ [A\A]A^]
 ~ t1A
 ~'D9{Hu
@@ -17779,4 +17738,3 @@ z~u|f
 ~m@:w
 ~pHcB
 ~qHcE
-~w;=y

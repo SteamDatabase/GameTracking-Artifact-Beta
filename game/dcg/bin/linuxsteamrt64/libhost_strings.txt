@@ -1,5 +1,8 @@
 	!O3H
 	CODE_SIZE
+	Flags: 
+	Flags: H
+	Flags: J
 	IcL$XI
 	JS_NORMAL
 	JS_NUMBER
@@ -69,13 +72,13 @@
  NETWORK_DISCONNECT_STEAM_DROPPED
  Outdent() without matching Indent().
  Parameter to BackUp() can't be negative.
+ PositioH
  ReadToken overflow
  Tokenizer::ParseFloat() passed text that could not have been tokenized as a float: 
  Tokenizer::ParseStringAppend() passed text that could not have been tokenized as a string: 
  [$0]
  [%.3f server clamped to %.3f]
  [A\A]A^]
- [A\A^A_]
  [A\]
  [default = $0
  [procedural] 
@@ -330,6 +333,7 @@ $zYuWA
 %02i/%02i/%04i - %02i:%02i:%02i
 %50.50s: %2.2d bits == '%s'
 %6.2f %6.2f %6.2f %.3f %.3f %.3f
+%8.8s: %-5d entries, '%s', ...
 %Lg@? ;
 %NETWORK_DISCONNECT_CONNECTION_FAILURE
 %NETWORK_DISCONNECT_DISCONNECT_BY_USER
@@ -345,6 +349,7 @@ $zYuWA
 %d / %s "%s" thinking for %.02f ms!!!
 %d total counted strings.
 %d.%d.%d
+%d/%d: '%s' %s
 %f %f %f %f
 %g %g %g %g
 %i %i %i %i
@@ -360,6 +365,8 @@ $zYuWA
 %s allocation count overflow( %llu >= %llu )
 %s executing script: %s
 %s%s%s
+%s+--
+%s+-- Schema Class: %s
 %s.360%s
 %s0x%08X %s = "%s"
 %s0x%08X:%s = "%s"
@@ -371,6 +378,14 @@ $zYuWA
 %s:  IGameSystem::LoopPostInitAllSystems(start)
 %s: %s
 %s: string format requested %d chars
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 &#%d;
 &#GameUI_Disconnect_InvalidMessageError
 &#GameUI_Disconnect_NoPeerGroupHandlers
@@ -412,6 +427,9 @@ $zYuWA
 (9w rh;w
 (A9^ 
 (A9_ 
+(ATSH
+(AUATSH
+(AVAUI
 (Addresses differ: existing '%s' @ '%p' != requested '%s' @ '%p')
 (D;p 
 (E9e ~iI
@@ -487,6 +505,8 @@ $zYuWA
 , from: 
 , lo=
 , not just within "
+, parent: 
+, parentH
 ,#GameUI_Disconnect_Splitpacket_Send_Overflow
 ,$E;l$
 ,6ATA
@@ -559,7 +579,6 @@ $zYuWA
 ../public/entity2/concreteentitylist.h
 ../public/networksystem/networkfieldscratchdata.h
 ../public/resourcefile/resourcestream.h
-../public/schemasystem/schema.h
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
@@ -680,7 +699,6 @@ $zYuWA
 14CMsgPlayerInfo
 14ConCommandBase
 14IGameModelInfo
-14ISchemaBinding
 14IVertColorBase
 15CAutoGameSystem
 15CBaseConstraint
@@ -858,27 +876,6 @@ $zYuWA
 18CEventsSaveDataOps
 18CNETMsg_Disconnect
 18CPredictionDiffMgr
-18CSchemaEnumBindingI12AnimVRHand_tE
-18CSchemaEnumBindingI12BundleType_tE
-18CSchemaEnumBindingI14AnimVRFinger_tE
-18CSchemaEnumBindingI16ConstraintType_tE
-18CSchemaEnumBindingI20EntityDormancyType_tE
-18CSchemaEnumBindingI20EntityIOTargetType_tE
-18CSchemaEnumBindingI22MeshTranslucencyType_tE
-18CSchemaEnumBindingI24MeshDrawPrimitiveFlags_tE
-18CSchemaEnumBindingI24ModelBoneFlexComponent_tE
-18CSchemaEnumBindingI26AttachmentInfluenceFlags_tE
-18CSchemaEnumBindingI35RenderMeshFlexControllerRemapType_tE
-18CSchemaEnumBindingIN13VPhysXJoint_t7Flags_tEE
-18CSchemaEnumBindingIN14MorphSetData_t12LookupType_tEE
-18CSchemaEnumBindingIN14MorphSetData_t14EncodingType_tEE
-18CSchemaEnumBindingIN15PermModelInfo_t8FlagEnumEE
-18CSchemaEnumBindingIN16VPhysXBodyPart_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN19ModelSkeletonData_t11BoneFlags_tEE
-18CSchemaEnumBindingIN20RenderSkeletonData_t10FlagEnum_tEE
-18CSchemaEnumBindingIN21VPhysXAggregateData_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN23VPhysXDiskShapeHeader_t12VersinEnum_tEE
-18CSchemaEnumBindingIN24VPhysXConstraintParams_t12EnumFlags0_tEE
 18CSchemaManipulatorI10CTransformE
 18CSchemaManipulatorI10CUtlStringE
 18CSchemaManipulatorI10CUtlVectorI10CHitBoxSet10CUtlMemoryIS1_iEEE
@@ -1000,130 +997,6 @@ $zYuWA
 19CNETMsg_SignonState
 19CSVCMsg_UserMessage
 19CSaveRestoreDataMgr
-19CSchemaClassBindingI10CHitBoxSetE
-19CSchemaClassBindingI10CWristBoneE
-19CSchemaClassBindingI10EntInput_tE
-19CSchemaClassBindingI10FlexDesc_tE
-19CSchemaClassBindingI10FlexRule_tE
-19CSchemaClassBindingI11CAttachmentE
-19CSchemaClassBindingI11CFingerBoneE
-19CSchemaClassBindingI11CRenderMeshE
-19CSchemaClassBindingI11EntOutput_tE
-19CSchemaClassBindingI11HitBoxSet_tE
-19CSchemaClassBindingI11MorphData_tE
-19CSchemaClassBindingI12BundleData_tE
-19CSchemaClassBindingI12CFingerChainE
-19CSchemaClassBindingI13CFingerSourceE
-19CSchemaClassBindingI13VPhysXJoint_tE
-19CSchemaClassBindingI13VPhysXRange_tE
-19CSchemaClassBindingI14CAimConstraintE
-19CSchemaClassBindingI14CHitBoxSetListE
-19CSchemaClassBindingI14EventSetTime_tE
-19CSchemaClassBindingI14MorphSetData_tE
-19CSchemaClassBindingI15CEntityIOOutputE
-19CSchemaClassBindingI15CEntityIdentityE
-19CSchemaClassBindingI15CRenderSkeletonE
-19CSchemaClassBindingI15EventSimulate_tE
-19CSchemaClassBindingI15MaterialGroup_tE
-19CSchemaClassBindingI15MorphRectData_tE
-19CSchemaClassBindingI15PermModelData_tE
-19CSchemaClassBindingI15PermModelInfo_tE
-19CSchemaClassBindingI16AttachmentData_tE
-19CSchemaClassBindingI16BaseConstraint_tE
-19CSchemaClassBindingI16CConstraintSlaveE
-19CSchemaClassBindingI16CEntityClassInfoE
-19CSchemaClassBindingI16CMorphConstraintE
-19CSchemaClassBindingI16CPointConstraintE
-19CSchemaClassBindingI16CSceneObjectDataE
-19CSchemaClassBindingI16CScriptComponentE
-19CSchemaClassBindingI16CTwistConstraintE
-19CSchemaClassBindingI16FlexController_tE
-19CSchemaClassBindingI16VPhysXBodyPart_tE
-19CSchemaClassBindingI17CConstraintTargetE
-19CSchemaClassBindingI17COrientConstraintE
-19CSchemaClassBindingI17CParentConstraintE
-19CSchemaClassBindingI17ConstraintSlave_tE
-19CSchemaClassBindingI17EngineLoopState_tE
-19CSchemaClassBindingI17SceneObjectData_tE
-19CSchemaClassBindingI17VPhysXDiskMesh2_tE
-19CSchemaClassBindingI18CNetworkVarChainerE
-19CSchemaClassBindingI18ConstraintTarget_tE
-19CSchemaClassBindingI18EntComponentInfo_tE
-19CSchemaClassBindingI18EventAdvanceTick_tE
-19CSchemaClassBindingI18EventAppShutdown_tE
-19CSchemaClassBindingI18OnDiskBufferData_tE
-19CSchemaClassBindingI18PermModelExtPart_tE
-19CSchemaClassBindingI18PhysSoftbodyDesc_tE
-19CSchemaClassBindingI18SkeletonBoneBbox_tE
-19CSchemaClassBindingI19EventClientOutput_tE
-19CSchemaClassBindingI19ModelSkeletonData_tE
-19CSchemaClassBindingI19VPhysXConstraint2_tE
-19CSchemaClassBindingI19VPhysXDiskCapsule_tE
-19CSchemaClassBindingI19VPhysics2ShapeDef_tE
-19CSchemaClassBindingI20CRenderBufferBindingE
-19CSchemaClassBindingI20CTiltTwistConstraintE
-19CSchemaClassBindingI20EventFrameBoundary_tE
-19CSchemaClassBindingI20EventPreDataUpdate_tE
-19CSchemaClassBindingI20PermRenderMeshData_tE
-19CSchemaClassBindingI20RenderSkeletonBone_tE
-19CSchemaClassBindingI20RenderSkeletonData_tE
-19CSchemaClassBindingI20SkeletonBoneBounds_tE
-19CSchemaClassBindingI21EventClientSimulate_tE
-19CSchemaClassBindingI21EventModInitialized_tE
-19CSchemaClassBindingI21EventPostDataUpdate_tE
-19CSchemaClassBindingI21EventServerSimulate_tE
-19CSchemaClassBindingI21ModelBoneFlexDriver_tE
-19CSchemaClassBindingI21RenderBufferBinding_tE
-19CSchemaClassBindingI21VPhysXAggregateData_tE
-19CSchemaClassBindingI22CPhysSurfacePropertiesE
-19CSchemaClassBindingI22EventClientPollInput_tE
-19CSchemaClassBindingI22EventClientPreOutput_tE
-19CSchemaClassBindingI22EventClientSendInput_tE
-19CSchemaClassBindingI22EventPostAdvanceTick_tE
-19CSchemaClassBindingI23CMaterialDrawDescriptorE
-19CSchemaClassBindingI23EventClientPostOutput_tE
-19CSchemaClassBindingI23VPhysXDiskShapeHeader_tE
-19CSchemaClassBindingI24CVariantDefaultAllocatorE
-19CSchemaClassBindingI24CVrSkeletalInputSettingsE
-19CSchemaClassBindingI24EventClientAdvanceTick_tE
-19CSchemaClassBindingI24EventClientPreSimulate_tE
-19CSchemaClassBindingI24EventServerAdvanceTick_tE
-19CSchemaClassBindingI24MaterialDrawDescriptor_tE
-19CSchemaClassBindingI24VPhysXConstraintParams_tE
-19CSchemaClassBindingI25EventClientPostSimulate_tE
-19CSchemaClassBindingI25EventClientProcessInput_tE
-19CSchemaClassBindingI25EventServerPostSimulate_tE
-19CSchemaClassBindingI26EventClientFrameSimulate_tE
-19CSchemaClassBindingI26EventClientPauseSimulate_tE
-19CSchemaClassBindingI27CPhysSurfacePropertiesAudioE
-19CSchemaClassBindingI27EntClassComponentOverride_tE
-19CSchemaClassBindingI27EventClientPollNetworking_tE
-19CSchemaClassBindingI27EventServerPollNetworking_tE
-19CSchemaClassBindingI27VPhysXCollisionAttributes_tE
-19CSchemaClassBindingI28CBoneConstraintPoseSpaceBoneE
-19CSchemaClassBindingI28CVPhysXSurfacePropertiesListE
-19CSchemaClassBindingI28EventClientPostAdvanceTick_tE
-19CSchemaClassBindingI28EventServerPostAdvanceTick_tE
-19CSchemaClassBindingI28EventSimpleLoopFrameUpdate_tE
-19CSchemaClassBindingI28ModelBoneFlexDriverControl_tE
-19CSchemaClassBindingI28VPhysXShapeCompoundHeader2_tE
-19CSchemaClassBindingI29CBoneConstraintPoseSpaceMorphE
-19CSchemaClassBindingI29CPhysSurfacePropertiesPhysicsE
-19CSchemaClassBindingI29EventClientProcessGameInput_tE
-19CSchemaClassBindingI30EventClientProcessNetworking_tE
-19CSchemaClassBindingI30EventProfileStorageAvailable_tE
-19CSchemaClassBindingI30EventServerProcessNetworking_tE
-19CSchemaClassBindingI30EventSplitScreenStateChanged_tE
-19CSchemaClassBindingI32CPhysSurfacePropertiesSoundNamesE
-19CSchemaClassBindingI41EventClientSceneSystemThreadStateChange_tE
-19CSchemaClassBindingI7CHitBoxE
-19CSchemaClassBindingI8FlexOp_tE
-19CSchemaClassBindingI8HitBox_tE
-19CSchemaClassBindingIN12CEntityClass16CClassAttributesEE
-19CSchemaClassBindingIN12CEntityClass17ComponentHelper_tEE
-19CSchemaClassBindingIN12CEntityClass18ComponentOffsets_tEE
-19CSchemaClassBindingIN28CBoneConstraintPoseSpaceBone7Input_tEE
-19CSchemaClassBindingIN29CBoneConstraintPoseSpaceMorph7Input_tEE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19CTier1AppSystemDict
@@ -1161,7 +1034,6 @@ $zYuWA
 22CDontUseThisGameSystem
 22CEntityComponentHelper
 22CSVCMsgList_GameEvents
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22CSimpleLoggingListener
 22IVTableIndexCalculator
@@ -1172,7 +1044,6 @@ $zYuWA
 23CResourceAllocatorUtils
 23CResourceStreamGrowable
 23CSVCMsg_GameEvent_key_t
-23CSchemaClassBindingBase
 23CSplitScreenAddedConVar
 23DS9z
 23IConCommandBaseAccessor
@@ -1245,18 +1116,7 @@ $zYuWA
 34CNETMsg_SpawnGroup_SetCreationTick
 34CSVCMsgList_UserMessages_usermsg_t
 35CEventQueue_SaveRestoreBlockHandler
-35CSchemaNonConstructibleClassBindingI12CEntityClassE
-35CSchemaNonConstructibleClassBindingI13IHandleEntityE
-35CSchemaNonConstructibleClassBindingI15CBaseConstraintE
-35CSchemaNonConstructibleClassBindingI15CEntityInstanceE
-35CSchemaNonConstructibleClassBindingI16CEntityComponentE
-35CSchemaNonConstructibleClassBindingI19CBoneConstraintBaseE
-35CSchemaNonConstructibleClassBindingI20CEmptyEntityInstanceE
-35CSchemaNonConstructibleClassBindingI22CEntityComponentHelperE
-35CSchemaNonConstructibleClassBindingIN15CEntityInstance26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEmptyEntityInstance26CEntityInstanceEntityClassEE
 38CFlattenedSerializerSpewFunc_UtlString
-39CSchemaNonConstructibleClassBindingBase
 3[A\]
 4$A\]
 4$HcE
@@ -1268,7 +1128,6 @@ $zYuWA
 4fff>fff>fff>fff>
 4vf;T
 5t~BC
-6;2t&H
 6A;1t"
 6CModel
 6ConVar
@@ -1304,29 +1163,27 @@ $zYuWA
 ;.t{H
 ;0t:H
 ;0tSD
-;0tTD
 ;0tVD
 ;0tWD
 ;0t\D
 ;2t)H
 ;2t,H
-;2t8H
-;=@,d
+;=p^b
 ;BX|'1
 ;G tu+G$L
-;Hc5=
+;Hc5_
 ;[A\]
 ;[A\]H
 ;mempool.cpp
 ;wH|#
 ;wH|#H
 ;wp|	]
-;~@UH
-;~Dt*;~Ht-9~Lf
+;~HUH
+;~Lt*;~Pt-9~Tf
 <	u 1
 <	u,1
-<	u0H
 <	uMUH
+<	uhUH
 <	w>H
 <	wlLcG
 < uEH
@@ -1401,6 +1258,8 @@ $zYuWA
 ?AimConstraint: %s - Cannot Find Aim Up Target Bone
 ?Mct$@
 ?u0E1
+@ ion
+@,t9L
 @0H;E
 @:0tWD
 @@H;E
@@ -1413,7 +1272,7 @@ $zYuWA
 @P<*t
 @P<*u
 @P</t
-@XtcL
+@Xt E1
 @[A\A]A^]
 @[A\]
 @`HcI0
@@ -1434,7 +1293,6 @@ A#|$TH
 A+D$$
 A+D$$H
 A+D$$I
-A+D$8
 A+E$1
 A+E$A
 A+E$H
@@ -1462,8 +1320,6 @@ A+_$Hc
 A+t$$H
 A+t$$Hc
 A0tlHcS
-A3BH)
-A3FH)
 A8Lck D;k0
 A8Mcl$ E;l$0
 A94	H
@@ -1626,11 +1482,13 @@ A\A]A^]
 A\A]A^]H
 A\A]H
 A\A]]
+A\A]]H
 A\A^]
 A]A^A_
 A]A^A_]
 A]A^]
 A]A^]A
+A]A^]H
 A^A_]
 Activate diffcheck system.
 Actually show diffcheck results.
@@ -1674,6 +1532,8 @@ AllocateResource
 AllowAddonDependencies
 Already saw decimal point or exponent; can't have another one.
 Amodel.cpp
+Angle; 
+Anglf
 AnimAddLayer
 AnimAlign
 AnimAutoLayer
@@ -1705,6 +1565,9 @@ AnimVrFinger_Middle
 AnimVrFinger_Pinky
 AnimVrFinger_Ring
 AnimVrFinger_Thumb
+Animated
+Animated Position, Dynamic Rotation
+AnimatedH
 Animation
 AnimationList
 AnimationSystemUtils_001
@@ -1774,6 +1637,9 @@ Bad key for entity "%s": Invalid parsed value type for matrix field "%s" (%s)!
 Bad key for entity "%s": Out of range parsed value for field "%s" (%s)!
 Bad type %d in saved CVariant
 BakedLODBuilderMgr001
+Base Spr
+Base SprL
+Base Spring; 
 Base component class %s needs to have the same contained / referenced rules as its derived classes!
 BaseConstraint_t
 BaseIKRig
@@ -1813,6 +1679,8 @@ CAppSystemDict:Unable to create interface %s from %s (Dependency of %s)
 CAppSystemDict:Unable to load interface factory %s from %s (Dependency of %s), error %d
 CAppSystemDict:Unable to load module %s (Dependency of %s), error %d
 CAttachment
+CAuthPhysBody
+CAuthPhysJoint
 CBaseConstraint
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
@@ -2308,6 +2176,7 @@ Can't get here: failed to get default value as string
 Can't write binary data to a text buffer.
 Cannot allocate abstract class
 Cannot allocate buffer larger than kint32max for 
+Cannot allocate over-aligned class
 Cannot allocate virtual address space in CResourceStreamVM::ReserveVirtualMemory, error %u
 Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You must instead find a way to get your file into the underlying database.
 Cannot call QueuePostDataUpdate on an entity system that you did not initialize to support post data updates!
@@ -2316,6 +2185,7 @@ Cannot copy abstract class
 Cannot copy json_name to a proto of a different size.
 Cannot create an entity because entity class is NULL %d
 Cannot deallocate abstract class
+Cannot deduce for class
 Cannot destruct abstract class
 Cannot force non-networkable entity index %d
 Cannot get here
@@ -2368,6 +2238,8 @@ Cp[A\]
 CreateEntity
 CreateInterface
 CreatePackedInputLayout
+Cs[A\]
+Cst	I
 Cubic
 Currently allocated agg data: {
 Cycle or diamond double-reference to '%s'
@@ -2384,6 +2256,8 @@ D$(fA
 D$,D9
 D$0H9
 D$0L9}
+D$0L;m
+D$0L;u
 D$0M9
 D$1@t\L
 D$4H9
@@ -2395,14 +2269,12 @@ D$@E;D$P
 D$@H9
 D$@I9
 D$DA\
-D$DA\A]A^]
 D$HL9m
 D$HL9u
 D$HL9}
 D$PA\]
 D$PH9
 D$XH9
-D$pH9
 D+c$H
 D+c$Mc
 D+k$H
@@ -2422,6 +2294,7 @@ D; tMH
 D;!ttHc
 D;'tXH
 D;)ts
+D;5g$;
 D;`H}
 D;c D
 D;c0|
@@ -2512,7 +2385,6 @@ E9t$8
 E;&}SI
 E;,$|
 E;7Lc
-E;>tyA
 E;f(|
 E;l$0|GD
 E;o }WL
@@ -2551,7 +2423,6 @@ EXA;]`
 EXECUTABLE_PATH
 EXPORTSYSTEM_INTERFACE_VERSION_001
 E`H;E
-E`t@A
 EarlyInit_Tier0
 EconItemToolModel_001
 EmptyAnim
@@ -2765,6 +2636,30 @@ FLEXCONTROLLER_REMAP_EYELID
 FLEXCONTROLLER_REMAP_NWAY
 FLEXCONTROLLER_REMAP_PASSTHRU
 FTIcD$,1
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 F_ALPHA_TEST
 F_MORPH_SUPPORTED
 F_TRANSLUCENT
@@ -2842,18 +2737,19 @@ FlexController_t
 FlexDesc_t
 FlexOp_t
 FlexRule_t
+Flexible; 
+FlexibleA
+FlexibleL
 Flt	H
 FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
 FormatV
 Found invalid proto option data for: 
-From Class Binding
-From Enum Binding
 G A+G
 G A9G
 G A;G0
-G H;p
 G U9G
+G(H;p
 G0A;G@
 G8H;0t0H
 G8t"H
@@ -2962,13 +2858,20 @@ H!w(H
 H+G ]
 H+S H
 H;*twH
-H;=,/c
-H;=K!e
-H;=W	d
-H;=YZd
-H;=g d
-H;=x8d
-H;C u
+H;='Tc
+H;='_b
+H;=*2c
+H;=1\c
+H;=2Lc
+H;=GVc
+H;=H~b
+H;=[Ac
+H;=[jc
+H;=^$c
+H;=g$b
+H;=gYb
+H;=t'c
+H;=wKb
 H;S@w
 H<~]{wr
 HBm_influenceFlags
@@ -2990,11 +2893,13 @@ H[A\A]A^A_]
 H[A\A]]
 HammerMapLoader001
 HangWatchdog_IndicateActivity
+Has CollH
+Has Collision; 
 HasField
 Hc@$H
-Hc@0H
-Hc@@H
-Hc@@I
+Hc@0M
+Hc@HH
+Hc@HI
 HcA`H
 HcAp;
 HcC H
@@ -3018,25 +2923,6 @@ HcGXH
 HcG`UH
 HcGpH
 HcH0H
-HcJ 1
-HcJ$1
-HcJ(1
-HcJ,1
-HcJ01
-HcJ41
-HcJ81
-HcJ<1
-HcJ@1
-HcJH1
-HcJP1
-HcJT1
-HcJX1
-HcJ\1
-HcJ`1
-HcJd1
-HcJl1
-HcJt1
-HcJ|1
 HcK$D
 HcK0Ic
 HcK@t	;KP
@@ -3051,6 +2937,25 @@ HcS81
 HcS8H
 HcSPH
 HcStH
+HcV 1
+HcV$1
+HcV(1
+HcV,1
+HcV01
+HcV41
+HcV81
+HcV<1
+HcV@1
+HcVH1
+HcVP1
+HcVT1
+HcVX1
+HcV\1
+HcV`1
+HcVd1
+HcVl1
+HcVt1
+HcV|1
 HcW$H
 HcWhH
 HcWpH
@@ -3061,28 +2966,9 @@ Hc_@;_P
 Hc_P;_`D
 Hc_p;
 Hcr4LcB$H
-Hcs 1
 Hcs H
-Hcs$1
-Hcs(1
-Hcs,1
-Hcs01
-Hcs41
-Hcs81
-Hcs<1
-Hcs@1
 Hcs@H
 Hcs@t	;sP
-HcsH1
-HcsP1
-HcsT1
-HcsX1
-Hcs\1
-Hcs`1
-Hcsd1
-Hcsl1
-Hcst1
-Hcs|1
 HelpSystem_001
 Hex and octal numbers must be integers.
 Hh#p\H
@@ -3093,8 +2979,9 @@ HostStateMgr001
 HostUtils001
 I+T$ H
 I2fD+
-I;G(t4H
+I;B0t71
 I;V@w
+I;u u
 I?NRG
 IDEMPOTENCY_UNKNOWN
 IDEMPOTENT
@@ -3121,7 +3008,6 @@ IcEP9E
 IcEPM
 IcE`9E
 IcF01
-IcF0I
 IcF81
 IcFHH
 IcFpM
@@ -3132,7 +3018,6 @@ IcG01
 IcGh1
 IcIhIc
 IcL$ 
-IcL$$E
 IcL$81
 IcL$HIc
 IcL$X1
@@ -3221,7 +3106,11 @@ Invalid wire type for CPPTYPE_MESSAGE:
 Invalid wire type for CPPTYPE_UINT32: 
 Invalid wire type for CPPTYPE_UINT64: 
 Inverse Multi Quadratic
+Invert A
+Invert AL
+Invert Axes; 
 IsKeyValueUsed
+J8H9K t
 JSType
 Jc<(H
 Jh#B\H
@@ -3242,12 +3131,10 @@ KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
 KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
 KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
-L$ E1
 L$ H9
 L$ I9
 L$$Hc
 L$8Hc
-L$HfA
 L+g H
 L;0t?H9
 L;0t[A
@@ -3276,7 +3163,11 @@ Lc;D;{
 Lc>D;~
 Lcg H
 Lcn H
+Lcs8D;sHD
 Left Hand
+Length; 
+Length; H
+Length; J
 LightingBasis
 LightmapUVW
 Line %d at "%s": %s
@@ -3328,8 +3219,6 @@ MESH_TRANSLUCENCY_FULLY_ALPHA_BLENDED
 MESH_TRANSLUCENCY_FULLY_OPAQUE
 MESH_TRANSLUCENCY_PARTIALLY_ALPHA_BLENDED
 MIcO@Hc
-MModuleLocalTypeScope
-MNetworkAssumeNotNetworkable
 MNetworkBitCount
 MNetworkChangeAccessorFieldPathIndex
 MNetworkChangeCallback
@@ -3392,7 +3281,6 @@ Mce@E
 Mcl$pE;
 Mcn@E
 Mct$X1
-Mc|$8E;|$HD
 MemAlloc_AllocFunc
 MemAlloc_FreeFunc
 Mesh contains %d blend weights per vertex;  truncating to %d
@@ -3579,7 +3467,6 @@ Note that enum values use C++ scoping rules, meaning that enum values are siblin
 Numbers starting with leading zero must be in octal.
 O$HcO
 O(H;q
-O0I9M t
 O:Ml}
 OD;@ 
 OH91t`H
@@ -3674,6 +3561,8 @@ PhysicsShapeCapsule
 PhysicsShapeHull
 PhysicsShapeMesh
 PhysicsShapeSphere
+Pitcf
+Pitch; 
 Plat_CheckSDL
 Plat_CreateUUIDImpl
 Plat_CreateWindow
@@ -3776,6 +3665,7 @@ Px~*H
 Q8[A\H
 QAngle
 QAngle-world
+QIcN(Ic
 Qg3kf
 Quaternion
 Quaternion-world
@@ -3863,6 +3753,8 @@ Retrieve the public script-side data associated with an entity
 Retrieve, creating if necessary, the private per-instance script-side data associated with an entity
 Retrieve, creating if necessary, the public script-side data associated with an entity
 Right Hand
+Rigid; 
+Rigif
 RnCapsuleDesc_t
 RnHullDesc_t
 RnMeshDesc_t
@@ -3950,6 +3842,9 @@ SetString
 SetUInt32
 SetUInt64
 Should not reach here.
+SimulateA
+SimulateH
+Simulated
 Sin( %s )
 SkeletonBoneBbox_t
 SkeletonBoneBounds_t
@@ -4002,7 +3897,6 @@ T$@Ic
 T$@L9
 T$HIct$TA
 T$HL9
-T$HfA
 T$ht?
 T$xIc
 T5?Z@2
@@ -4049,6 +3943,8 @@ This program was compiled against version
 This shouldn't be called if all the sizes are equal.
 ThreadGetCurrentId
 ThreadSleep
+TimestampedEvent
+TimestampedEventMsgV
 ToolFramework2_002
 ToolGameSimulationDispatcher_001
 ToolGameSimulationSystem_001
@@ -4228,8 +4124,9 @@ V_acosf
 V_asinf
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -4262,6 +4159,7 @@ V_swscanf
 V_tanf
 V_tier0_strstr
 V_uuid_t
+V_vscprintf
 V_vsnprintf
 V_vsnprintfRet
 V_vsnprintfSize
@@ -4318,6 +4216,7 @@ WARNING: You are trying to mount an addon (%s) in tools mode that is different f
 WIN32
 WINDOWS
 WINXP
+WIcF01
 Warning
 Warning parsing text-format 
 Warning:  %s = '%s' is infinite, clamping value.
@@ -4346,6 +4245,7 @@ X[A\A]]
 X[]A\A]A^A_
 Xh#x\
 Y0fD+
+Yaw; 
 Z8D6e
 ZIcG(1
 ZLHc<
@@ -5975,9 +5875,9 @@ _test_conversion_counter
 ` v`1
 `-dKJ
 `@  ( @
+`[A\A]A^]
 `[A\]
 a.%S>@
-aIcD$
 abort@@GLIBC_2.2.5
 activator
 addoninfo.txt
@@ -6130,9 +6030,7 @@ enable_limit
 encoding
 english
 entity2
-entityIdH
 entityIdentityNameChanged
-entityNaH
 entity_component_error_class_decl_says_contained_but_impl_is_referenced
 entity_log_load_unserialize
 entityclass.cpp
@@ -6166,6 +6064,8 @@ f;7tt
 f;S.w
 fA9D$(
 fD91t
+fD9c&w
+fD9k$w
 fD;!t
 fE9!fA
 fE9/L
@@ -6250,8 +6150,6 @@ go_package
 gravity
 group
 gwr,/s
-hE9l$
-hE9|$
 h[A\A]A^A_]
 h[A\A]]
 handindex
@@ -6287,6 +6185,7 @@ hurt_them
 i < length_
 i >= 0
 iH:_aq7
+ic RotatH
 idempotency_level
 identifier_value
 imemanager
@@ -6298,6 +6197,7 @@ import public "$0";
 import weak "$0";
 index < 10
 infinity
+ing;H
 input_type
 inputsystem
 int( %d = 0x%X )
@@ -6322,6 +6222,8 @@ is_multiplayer
 is_transition
 isgame
 ishltv
+isioH
+isiof
 iszString
 j>Z%I
 j@[A\A]]
@@ -6333,6 +6235,7 @@ java_multiple_files
 java_outer_classname
 java_package
 java_string_check_utf8
+jiggle bone %u
 js_array
 js_object
 js_raw_args
@@ -6382,6 +6285,8 @@ lightingbasis
 lightmap
 lightmapuvw
 linux
+loaded
+loading
 localToGlobal
 localize
 localnamefixup
@@ -6756,6 +6661,7 @@ m_outputWeightList
 m_pAttributes
 m_pBaseClassComponentHelper
 m_pBaseClassInfo
+m_pBody
 m_pCPPClassname
 m_pClass
 m_pClassInfo
@@ -6776,6 +6682,7 @@ m_pNext
 m_pNextByClass
 m_pNextClass
 m_pOutputs
+m_pParent
 m_pPrev
 m_pPrevByClass
 m_pTarget
@@ -6894,6 +6801,7 @@ m_worldGroupId
 m_wristBones
 malloc
 malloc@@GLIBC_2.2.5
+manifest
 manifestincomplete
 manifestloadpriority
 map keys are not unique
@@ -6917,7 +6825,6 @@ maxVerticesPerHull
 max_angle
 max_client_limit
 max_clients
-meChangef
 memchr
 memchr@@GLIBC_2.2.5
 memcmp
@@ -6939,7 +6846,6 @@ message_set_wire_format
 message_type
 method
 method flags
-method flags2
 min_angle
 min_client_limit
 mismatched inputfunc
@@ -6970,6 +6876,7 @@ modeldoc9
 modellib
 msg_data
 msg_type
+n, DynamH
 nK`/+O
 nav_attribute_avoid
 nav_data
@@ -7027,11 +6934,14 @@ output_type
 outputid
 overlay
 p5S~I
+pE9l$
+pE9|$
 pNJ!T
 p[A\]
 package
 package $0;
 packed
+parent of jiggle bone %u: %s
 parentnamefixup
 parse
 parsing
@@ -7045,6 +6955,7 @@ phys_res
 physgun_interactions
 physib
 pipe@@GLIBC_2.2.5
+play_endcap
 players_networkids
 please implement MergeFrom for your type.
 point0
@@ -7061,7 +6972,7 @@ posxyz
 pread64
 pread64@@GLIBC_2.2.5
 preferred_carryangles
-prerequisite '%s'
+prerequisite
 previouslevel
 printf@@GLIBC_2.2.5
 prop_data
@@ -7133,7 +7044,7 @@ runleft
 runright
 runspeed
 s H;5
-s H;5y
+s H;5x
 s off
 s v&E1
 s ~XH
@@ -7142,16 +7053,16 @@ s(H;5
 s(t.H
 s(~[H
 s0H;5
-s0H;5@|c
+s0H;5L
 s0~;A
 s1_mapname
 s5fA9
 s8H;5
-s8H;5p|c
-s@H;5
-sHH;5E}c
+s8H;5t
+s@H;58
+sHH;5
 sMA9|$ 
-sPH;5~}c
+sPH;5
 s_EntComponentInfo
 savegamefilename
 savegamename
@@ -7160,6 +7071,7 @@ scandir64@@GLIBC_2.2.5
 scenesystem
 sched_yield
 sched_yield@@GLIBC_2.2.5
+schemaclassinfo.cpp
 schemasystem
 scrapeRoughThreshold
 scraperough
@@ -7265,29 +7177,30 @@ surface_prop
 swift_prefix
 syntax
 syntax = "$0";
+t	D;@
 t	X[]
 t	[A\A]A^]
 t	[A\]
 t ;W8} Hc
 t L;u
 t"HcS
-t"L;%
+t"L;%x)b
 t$	H9
-t$ H;5=
+t$ H;5
 t$ L9
-t$(H;5u
+t$(H;5
 t$(t-H
 t$0H9
 t$0H;5
-t$8H;5]
+t$0H;59
+t$8H;5
 t$8L9
-t$@H;5
+t$@H;5-
 t$D9j
 t$H;h
-t$HH;5j
+t$HH;5
 t$HcS
 t$HcW
-t$HfA
 t$Lc'H
 t$Lc+I
 t&HcQ
@@ -7300,7 +7213,7 @@ t*<*u
 t*A+F$I
 t*D;p
 t+D;{
-t+HcJ
+t+HcV
 t,D:5
 t-;W@}.L
 t.HcC(H
@@ -7308,41 +7221,43 @@ t.HcK8H
 t/;w t2;w0t=1
 t0HcG H
 t0PHcB,L
-t1HcJ
 t1HcKlH
-t1HcS
+t1HcV
 t1Ic_
 t2HcC,H
 t2HcO
 t2[A\]
-t3HcJ
 t3HcKtH
+t3HcV
 t3Lc#D;c
-t4D:%
+t4D:%<9H
 t4HcG
 t4[A\A]A^]
 t4[A\]
 t5HcG H
+t6[A\A]]
 t6[A\]
 t7HcO H
 t8@:1uCH
 t8IcD$0H
+t;fE9
 t<ATL
 t<Ic_(A;_8
+t<Lcs8D;sHD
+t<v"<
 t=[A\]
 t>IcE
 t>fA9
-t@[A\A]A^]
-tAHcJ
+tAHcV
 tALcc
 tC[A\A]A^]
+tEfE9
 tJHcC
 tN~+A
 tR[A\]
 tTIct$
-tUHcJ
+tUHcV
 t^[A\]
-t_IcU
 ta[A\]
 tangent
 tangentu_signv
@@ -7356,7 +7271,6 @@ texcoordH
 text format contains deprecated field "
 texturescale
 tgHcO
-tgHcQ
 thHcK
 thHcK@1
 thIcG
@@ -7410,6 +7324,7 @@ unlink
 unlink@@GLIBC_2.2.5
 unsigned
 unspecified
+unused
 update
 useMotionDamping
 useSmoothPaths
@@ -7524,6 +7439,7 @@ x[A\A]H
 x[A\A]]
 x^HcO
 xb;wH}]Hc
+xes;H
 x|LcG
 yE>HO
 yaw_end
@@ -7545,11 +7461,11 @@ zeucH
 |$0E1
 |$0E;|$@
 |$@	uS
-|$HfA
 |( A]A^]
 |*Ic:H
 |20M9
 |7(Mc
+|7Hf.
 |pIcD$
 }!HcC8;CHt4
 }$A;]

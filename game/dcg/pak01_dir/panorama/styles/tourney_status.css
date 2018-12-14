@@ -436,14 +436,16 @@
 	padding-right: 8px;
 	height: 25px;
 	color: #e1e1dd;
+    text-overflow: shrink;
 }
 
 .OverviewMember #OverviewMemberStatus
 {
-	width: 208px;
+    width: fill-parent-flow( 1.0 );
 	padding-right: 8px;
 	height: 25px;
 	color: #e1e1dd;
+    text-overflow: shrink;
 }
 
 .OverviewContents
@@ -700,10 +702,15 @@
     visibility: collapse;
 }
 
+#PhaseBannerButtons
+{
+ 	flow-children: right;
+	horizontal-align: right;
+}
+
 #TourneyCopyLinkButton
 {
 	flow-children: right;
-	horizontal-align: right;
 	padding-top: 2px;
 }
 
@@ -730,6 +737,22 @@
 	brightness: 0.8;
 }
 
+#StageAdvanceTime
+{
+    visibility: collapse;
+    background-size: 90% 90%;
+	background-image: url("s2r://panorama/images/tournaments/time_alt_png.vtex");    
+}
+
+.ShowStageAdvanceTime #StageAdvanceTime
+{
+    visibility: visible;
+}
+
+.AlertStageAdvanceTime #StageAdvanceTime
+{
+    wash-color: #F88;
+}
 
 #TourneyCloseTime
 {
@@ -746,6 +769,57 @@
 .AlertTourneyCloseTime #TourneyCloseTime
 {
     wash-color: #F88;
+}
+
+#TimerSettingIcon
+{
+    width: 24px;
+	height: 24px;
+    margin-right: 5px;
+    margin-top: -3px;
+    
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	horizontal-align: right;
+    vertical-align: center;
+    
+    background-size: contain;
+	background-image: url("s2r://panorama/images/tournaments/hourglass_png.vtex");  
+
+	transition-property: wash-color;
+	transition-duration: 0.25s;
+	wash-color: uiStandardGrey;
+
+    visibility: collapse;
+}
+
+.OpenSpectatorIcon
+{
+    width: 24px;
+	height: 24px;
+    margin-right: 5px;
+    margin-top: -3px;
+    
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	horizontal-align: right;
+    vertical-align: center;
+    
+    background-size: contain;
+	background-image: url("s2r://panorama/images/tournaments/eye_png.vtex");  
+
+	transition-property: wash-color;
+	transition-duration: 0.25s;
+	wash-color: uiStandardGrey;
+
+    visibility: collapse;
+}
+
+.HasOpenSpectator .OpenSpectatorIcon
+{
+    visibility: visible;
 }
 
 .TourneyCopyIcon
@@ -791,11 +865,13 @@
 
 #OverviewMemberRank
 {
+    width: 50px;
     text-align: right;
     horizontal-align: right;
     margin-right: 20px;
     color: #444;
     opacity: 0;
+    text-overflow: shrink;
 }
 
 .HasRank #OverviewMemberRank

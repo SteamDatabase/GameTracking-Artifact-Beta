@@ -7,42 +7,57 @@
 
 	<snippets>
 		<snippet name="TournamentListEntry">
-			<Panel class="TournamentListEntry" ondblclick="DCGPlayCarouselNextClicked()" >
-        <Panel class="RightDisplay RightAdmin" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Admin')" onmouseout="DCGHideTextTooltip()"/>
+			<Panel class="TournamentListEntry" ondblclick="DCGPlayCarouselNextClicked()">
+				<Panel class="RightDisplay RightAdmin" onmouseover="DCGShowTextTooltipInXML('#DCG_TourneyRights_Admin')" onmouseout="DCGHideTextTooltip()"/>
 				<Label id="TournamentName" class="TournamentName" text="{g:dcg_tourney_name:tourney_id}" />
 				<Label class="TournamentStatus" text="{s:status}" />
-        <Panel class="TourneyCreator">
-          <DCGAvatarImage class="AvatarImage" id="CreatorAvatar" />
-          <Label class="PlayerName Real" text="{g:dcg_persona:creator_account_id}" html="true" />
-        </Panel>
-        <Panel id="LeaveTourney"/>
+				<Label class="OpenTourneyLabel" text="#DCG_Tourney_OpenTourney"/>
+				<Panel class="TourneyCreator">
+					<DCGAvatarImage class="AvatarImage" id="CreatorAvatar" />
+					<Label class="PlayerName Real" text="{g:dcg_persona:creator_account_id}" html="true" />
+				</Panel>
+				<Panel id="LeaveTourney"/>
 			</Panel>
 		</snippet>
-		
+
 	</snippets>
 
 	<DCGTourneyPicker hittest="false">
 		<Panel class="PlayBody ButtonsVisible">
-      <Label class="ContentsHeaderLabel" text="{s:contents_header}"/>
-      <Panel id="TournamentTable">
+			<Label class="ContentsHeaderLabel" text="{s:contents_header}"/>
+			<Panel id="TournamentTable">
+			
+				<Label class="TournamentListTitle" text="#DCG_TourneyPicker_ListTitle" />
 				<Panel id="TournamentListHeader">
 					<Label class="TournamentName" text="#DCG_TourneyPicker_TourneyName" />
 					<Label class="TournamentStatus" text="#DCG_TourneyPicker_TourneyStatus" />
-	        		<Label class="TournamentCreator" text="#DCG_TourneyPicker_TourneyCreator" />
+					<Label class="TournamentCreator" text="#DCG_TourneyPicker_TourneyCreator" />
+				</Panel>
+				
+				<Panel class="TournamentListContainer">
+					<Label class="TournamentListPlaceholder" text="#DCG_TourneyPicker_ListPlaceholder" />
+					<Panel id="TournamentList">
+						<!-- Filled with TournamentListEntry snippets -->
+					</Panel>
 				</Panel>
 
-				<Panel id="TournamentList">
-					<!-- Filled with TournamentListEntry snippets -->
+				<Panel id="CreateNewTourneyBG">
+					<Button id="CreateNewTourneyButton" class="SaveLoadClearButton" onactivate="DCGCreateTourneyClicked() PlaySoundEffect(DCG_UI.SocialPlay_Select_CreateNewTournament )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_CreateNewTournament )">
+						<Label text="#DCG_TourneyPicker_CreateNewTourney"/>
+					</Button>
+					<Button id="JoinOpenTourneyButton" class="SaveLoadClearButton" onactivate="DCGJoinOpenTourneyClicked() PlaySoundEffect(DCG_UI.SocialPlay_Select_CreateNewTournament ) DCGAcknowledgeViolator( PauperOpenTourney )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_CreateNewTournament )">
+            			<Panel class="ButtonContents">
+							<Label text="#DCG_TourneyPicker_JoinOpenTourney"/>
+              				<Panel id="OpenTourneyInfo" onmouseover="DCGShowTextTooltipInXML( '#DCG_NewFeature_OpenTournaments' )" onmouseout="DCGHideTextTooltip()"/>
+			            </Panel>
+					</Button>
+					<Button id="ViewOpenTourneyButton" class="SaveLoadClearButton" onactivate="DCGJoinOpenTourneyClicked() PlaySoundEffect(DCG_UI.SocialPlay_Select_CreateNewTournament ) DCGAcknowledgeViolator( PauperOpenTourney )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_CreateNewTournament )">
+						<Label text="#DCG_TourneyPicker_ViewOpenTourney"/>
+					</Button>
 				</Panel>
-
-		      <Panel id="CreateNewTourneyBG">
-		      	<Button id="CreateNewTourneyButton" class="SaveLoadClearButton" onactivate="DCGCreateTourneyClicked() PlaySoundEffect(DCG_UI.SocialPlay_Select_CreateNewTournament )" onmouseover="PlaySoundEffect( DCG_UI.SocialPlay_Rollover_CreateNewTournament )">      		
-				<Label text="#DCG_TourneyPicker_CreateNewTourney"/>
-			  </Button>
 			</Panel>
-			</Panel>	
 		</Panel>
 		<CustomLayoutPanel id="ButtonContainer" layout="file://{resources}/layout/play_carousel_navigation_buttons.xml" />
 	</DCGTourneyPicker>
-	
+
 </root>

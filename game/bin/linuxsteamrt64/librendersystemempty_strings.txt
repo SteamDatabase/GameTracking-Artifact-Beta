@@ -90,9 +90,20 @@ $woL)
 %i %i %i %i
 %ld%c
 %ls [wstring, len = %d]
+%s+--
+%s+-- Schema Class: %s
 %s.360%s
+%s: %s
 %s: string format requested %d chars
 %s_%d_%d_%d_%d
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 &#-n(#P.
 &'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz
 &6FVfv
@@ -100,8 +111,8 @@ $woL)
 '1x;L
 '7GWgw
 'A+U@Mc
-(%9;	
-(%n2	
+(%9,	
+(%n#	
 (%s): ADD %s = %s
 (%s): Setting %s to %s
 (*%s*), 
@@ -254,7 +265,6 @@ $woL)
 14CSwapChainBase
 14ConCommandBase
 14IRenderContext
-14ISchemaBinding
 15CMemberFunctor0IP31FastSweepThreadedExecutionStateI15JoinedClasses_tI23CValveThreadingControls23CEikonalExecuteControlsEEMS5_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IP31FastSweepThreadedExecutionStateI15JoinedClasses_tI23CValveThreadingControls29CHeatTransferEquationControlsEEMS5_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorI26KMeansQuantizationWorkUnit21CFuncJobItemProcessorIS2_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -304,13 +314,6 @@ $woL)
 18CEmptyShaderBuffer
 18CRenderContextBase
 18CRenderDeviceEmpty
-18CSchemaEnumBindingI13CubeMapFace_tE
-18CSchemaEnumBindingI16RenderSlotType_tE
-18CSchemaEnumBindingI19RenderBufferFlags_tE
-18CSchemaEnumBindingI21RenderPrimitiveType_tE
-18CSchemaEnumBindingI22InputLayoutVariation_tE
-18CSchemaEnumBindingI23RenderMultisampleType_tE
-18CSchemaEnumBindingI27TextureSpecificationFlags_tE
 18CSchemaManipulatorI10CUtlVectorI25VsInputSignatureElement_t10CUtlMemoryIS1_iEEE
 18CSchemaManipulatorI14CResourceArrayI15SheetSequence_tEE
 18CSchemaManipulatorI14CResourceArrayI17SheetFrameImage_tEE
@@ -325,16 +328,6 @@ $woL)
 18IAtomicManipulator
 18ISchemaManipulator
 19CRenderContextEmpty
-19CSchemaClassBindingI13TextureDesc_tE
-19CSchemaClassBindingI15SheetSequence_tE
-19CSchemaClassBindingI15TextureHeader_tE
-19CSchemaClassBindingI17SheetFrameImage_tE
-19CSchemaClassBindingI18VsInputSignature_tE
-19CSchemaClassBindingI20SequenceFloatParam_tE
-19CSchemaClassBindingI20SheetSequenceFrame_tE
-19CSchemaClassBindingI24RenderInputLayoutField_tE
-19CSchemaClassBindingI25VsInputSignatureElement_tE
-19CSchemaClassBindingI7Sheet_tE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19CTextureManagerBase
@@ -355,13 +348,11 @@ $woL)
 21CUtlCStringConversion
 21IKeyValuesDumpContext
 21IRenderHardwareConfig
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22IStreamBuilderCallbackI14CCommandStreamE
 22IToolsResourceListener
 23CResourceAllocatorUtils
 23CResourceStreamGrowable
-23CSchemaClassBindingBase
 23CSplitScreenAddedConVar
 23IConCommandBaseAccessor
 23IResourceAllocatorUtils
@@ -384,6 +375,7 @@ $woL)
 3[A\]
 4fff>fff>fff>fff>
 5UUUU
+5t~BC
 6A;1t"
 6ConVar
 6H92t%H
@@ -404,7 +396,7 @@ $woL)
 8b  16-May-2010
 8b?fE
 9.1.15
-95Dx4
+95Dt4
 9A\~;H
 9CdAXAYr
 9CdZY
@@ -470,6 +462,7 @@ $woL)
 ?u0E1
 ?u='@
 ?|7m=U
+@,t9L
 @@/data/data/source2_main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
 @@/data/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
 @PAPD
@@ -517,7 +510,6 @@ A+t$$H
 A+t$$Hc
 A+u`Hc
 A+u`Ic
-A3BH)
 A94	H
 A9D$$
 A9GL~O
@@ -643,6 +635,7 @@ A\A]]
 A]A^A_]
 A]A^A_]H
 A]A^]
+A]A^]H
 A^A_]
 AddRef
 Adobe APP14 marker: version %d, flags 0x%04x 0x%04x, transform %d
@@ -745,6 +738,8 @@ CResourceString
 CSOAContainer::SetAttributeType - ERROR, trying to change type of previously-defined attribute %d!
 CTSQueue corruption
 CT[A\]
+CTextureManagerBase::MarkAsyncUpdatedThisFrame - Invalid texture handle.
+CTextureManagerBase::WasAsyncUpdatedThisFrame - Invalid texture handle.
 CUBEMAP_FACE_NEGATIVE_X
 CUBEMAP_FACE_NEGATIVE_Y
 CUBEMAP_FACE_NEGATIVE_Z
@@ -770,7 +765,14 @@ Can't clear TEXTURE_WAITING_FOR_IO flag because of streaming request mismatch: %
 Can't detect memory size on this platform!
 Can't discard critical data on CRC error
 Can't set both read_data_fn and write_data_fn in the same structure
+Cannot allocate abstract class
+Cannot allocate over-aligned class
 Cannot allocate virtual address space in CResourceStreamVM::ReserveVirtualMemory, error %u
+Cannot construct abstract class
+Cannot copy abstract class
+Cannot deallocate abstract class
+Cannot deduce for class
+Cannot destruct abstract class
 Cannot quantize more than %d color components
 Cannot quantize to fewer than %d colors
 Cannot quantize to more than %d colors
@@ -868,7 +870,7 @@ D9t$HfE
 D9{8D
 D9|$ 
 D:"u;
-D;5Gi*
+D;57D*
 D;c D
 D;kdXZw
 D;l$(
@@ -982,6 +984,30 @@ F t2SH
 F t5SH
 FCVAR_NEVER_AS_STRING
 FT$,A
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 Failed to call CBaseIntrospectedTypeManager::Init
 Failed to call CBaseIntrospectedTypeManager::SetDiskDataBinding
 Failed to create device. Modules loaded: %s
@@ -1022,8 +1048,6 @@ Found %d streaming textures in array, but in-flight count is %d
 Fractional sampling not implemented yet
 Freed EMS handle %u
 Freed XMS handle %u
-From Class Binding
-From Enum Binding
 G A+G
 G A9E
 G A9G
@@ -1032,6 +1056,7 @@ G U9G
 G channel not found
 G channel not found in %s
 G$+GX;G,A
+G(H;p
 G4A9F`
 G8I;G@
 G8I;G@r
@@ -1136,6 +1161,7 @@ HcW$H
 Hc]8H
 Hc_@;_Pt0I
 Hc_X;_ht0I
+Hcs H
 Hcs8M
 Hc~@H
 HelpSystem_001
@@ -1708,6 +1734,7 @@ RenderSystem/AllowSampleableDepthInVr
 RenderSystem/AlwaysPreloadTexturesInGame
 RenderSystemSurface001
 RenderUtils_001
+ReportClassError
 Requested feature was omitted at compile time
 ReserveVirtualMemory
 Resource 
@@ -1819,6 +1846,11 @@ TSPEC_UNFILTERABLE_OK
 TSPEC_USE_TYPED_IMAGEFORMAT
 TSPEC_VERTEX_TEXTURE
 TSPEC_VOLUME_TEXTURE
+TestFormatA
+TestFormatB
+TestFormatC
+TestFormatD
+TestFormatE
 TestScriptMgr001
 TextLayout_001
 TextMessageMgr_001
@@ -1941,8 +1973,8 @@ V_acosf
 V_asinf
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat64
 V_atoi
 V_cosf
 V_expf
@@ -2059,6 +2091,7 @@ Zero length tRNS chunk
 \$8Mc
 \$8[A\A]A^]
 \$@Ii
+\52F	
 \BJ@2
 \L$0A
 \d$ f
@@ -2741,6 +2774,7 @@ _tools.txt
 `D9{8
 `D;l$(L
 `[A\A]A^A_]
+`[A\A]A^]
 `[A\]
 `chunkCount' attribute is not found in the header.
 a_fDecodedAlpha >= 0.0f
@@ -2752,6 +2786,8 @@ alpha
 archive
 basic_string::_S_construct null not valid
 before solve err=%f
+binary
+binary_bc
 blocking issue in occlusion queries!!
 borrow
 box2i
@@ -2809,6 +2845,8 @@ encodingTry.m_fError < 3.40282346638528859812e+38F
 error in user chunk
 exit@@GLIBC_2.2.5
 fA9D$
+fD9c&w
+fD9k$w
 fG9\U
 fIcL$8Ic
 fMinAlpha <= fMaxAlpha
@@ -2835,13 +2873,13 @@ float Etc::Block4x4Encoding::GetError()
 float( %f )
 floatbitmap.cpp
 floatbitmap.cpp(128): Unknown gamma type "%s"!
-floatbitmap.cpp(2250): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2261): Error loading %s
-floatbitmap.cpp(2284): Error! Unknown file type for %s
-floatbitmap.cpp(2303): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(2258): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2269): Error loading %s
+floatbitmap.cpp(2292): Error! Unknown file type for %s
+floatbitmap.cpp(2311): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
 floatbitmap.cpp(312): Conversion not supported yet!
 floatbitmap.cpp(412): Conversion not supported yet!
-floatbitmap.cpp(874): Unsupported color format "%s", skipping!
+floatbitmap.cpp(875): Unsupported color format "%s", skipping!
 floor
 floor@@GLIBC_2.2.5
 floorf
@@ -2867,6 +2905,7 @@ g_pThreadPool
 gameinfo.gi
 gameinfo.txt
 gamma = (%d/100000)
+generic
 getenv
 getenv@@GLIBC_2.2.5
 gfffD
@@ -3100,6 +3139,7 @@ sMA9|$
 sPLT chunk has bad length
 sPLT chunk requires too much memory
 s`A]A^xq
+schemaclassinfo.cpp
 screenWindowCenter
 screenWindowWidth
 sdktools/bin/vproj.exe
@@ -3178,7 +3218,7 @@ t$pvufA
 t'H9P
 t'IcA
 t*A+F$I
-t-HcJ
+t-HcV
 t.H9P
 t0Mc/E
 t1HcO
@@ -3187,11 +3227,14 @@ t3Lc#D;c
 t5Mcb
 t8@:1uCH
 t8IcJ
+t;fE9
 t<Ic_(A;_8
+t<v"<
 t>Mcv
 t?HcH
 t?UE1
 tC[A\A]A^]
+tEfE9
 tIW?Z
 tK~%E1
 tPLcc(D;c8D
@@ -3200,16 +3243,16 @@ tRNS chunk not allowed with alpha channel
 tUH;v0
 text compression mode is out of range
 texturebase.cpp
-texturebase.cpp(1545):Error loading texture: %s
-texturebase.cpp(2441):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2462):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2473):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2484):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2495):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2516):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2527):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2538):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2549):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(1546):Error loading texture: %s
+texturebase.cpp(2442):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2463):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2474):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2485):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2496):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2517):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2528):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2539):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2550):ResourceHandleToData( %s ) failed! Falling back to error texture!
 thIcG
 tiles
 tmE;>thH
@@ -3237,6 +3280,7 @@ unknown compression method
 unknown critical chunk
 unknown header flags set
 unsigned int Etc::Image::IterateThroughWorstBlocks(unsigned int, unsigned int, unsigned int)
+unused
 update
 utlbuffer.cpp
 utlstring.cpp
@@ -3328,7 +3372,6 @@ zlib version error
 |$0E1
 |$0Hi
 |$@H)
-|$HfA
 |$X@u
 |$\Hi
 |$hu%H
@@ -3336,6 +3379,7 @@ zlib version error
 |*A9^
 |5H;I
 |5H;I0
+|7Hf.
 |B Hc
 |FHcK
 |P>~k

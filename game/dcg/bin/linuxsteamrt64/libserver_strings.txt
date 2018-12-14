@@ -54,6 +54,9 @@
 	ESlotType
 	EntryItem
 	EntryType
+	Flags: 
+	Flags: H
+	Flags: J
 	Format: ent_orient <entity name> <optional: allangles>
 	Format: ent_teleport <entity name>
 	GAME_OVER
@@ -127,6 +130,7 @@
 	dir_index
 	direction
 	directory
+	eObjectID
 	eRollType
 	endentity
 	ent_create <classname> [{ "key1" "value1" "key2" "value2" }]
@@ -169,6 +173,7 @@
 	items_min
 	json_name
 	k_eClosed
+	k_eFailed
 	k_eRandom
 	key_field
 	languages
@@ -454,9 +459,9 @@
  DoLookAhead invoked depth: %d numMoves: %d 
  E;g`
  GCConnectionStatus_GC_GOING_DOWN
- H;=nA=
  IcD$
- Id: %d, %s, Score: %5.3lf (%5.3lf), Low utility: %d Cost: 
+ Id: %d, %s, Score: %5.3lf (%5.3lf), Randomness: %5.3lf, Low utility: %d Cost: 
+ Lc%/N
  NETWORK_DISCONNECT_CLIENT_NO_MAP
  NETWORK_DISCONNECT_REJECT_BANNED
  NETWORK_DISCONNECT_SNAPSHOTERROR
@@ -464,6 +469,7 @@
  Outdent() without matching Indent().
  Parameter to BackUp() can't be negative.
  Player %d, cards: 
+ PositioH
  ReadToken overflow
  Returning Result of Thinking 
  SfD9
@@ -475,7 +481,6 @@
  [%d] (%d) %s (%s) %s%s
  [A\A]A^A_]
  [A\A]A^]
- [A\A^A_]
  [A\]
  [A\fH
  [Player %d]
@@ -504,6 +509,7 @@
  k_AddSocket_Failed_ToolIsInvalid
  k_ECustomGameInstallStatus_Ready
  k_EGCMsgUseItemResponse_ItemUsed
+ k_EMsgClientToGCAIGauntletResult
  k_EMsgClientToGCLeaveChatChannel
  k_EMsgClientToGCLimitedGetFormat
  k_EMsgClientToGCNameItemResponse
@@ -526,7 +532,6 @@
  k_EServerSignoutData_GameOptions
  k_EServerSignoutData_PlayerDecks
  k_eActionType_HeroPlacementStart
- leftedge %s %.3f
  max. %f
  message of type "
  min. %f
@@ -540,7 +545,6 @@
  path(%u = '%s/')
  restore failed entirely
  restore got most of the way
- rightedge %s %.3f
  score %5.2lf: 
  t/IcT$4H
  t0HcG8H
@@ -554,12 +558,10 @@
  t4IcOHH
  t5HcG0H
  t6HcO,H
- t7IcNLH
  t8HcK8H
  tMv+@
  took %d bits, %d bytes
  type does not match
- u A	
  uWUH
  ud;W@I
  unexpected for field 
@@ -720,8 +722,6 @@
 "$0" does not declare $1 as an extension number.
 "$0", 
 "%s" 
-"%s" %f
-"%s" %f %i
 "%s" = "%s"
 "%s":
 "%s":%.3f
@@ -860,8 +860,6 @@
 "need_to_choose_most_helpful_friend
 "notification_body_localization_key
 "pA3Q
-"tq[A\]
-"ty[A\]
 #":z'
 ################################################################################
 ##GameUI_Disconnect_BadRelayPassword
@@ -1343,8 +1341,7 @@ $0message $1
 $0oneof $1 {
 $0option $1;
 $0rpc $1($4.$2) returns ($5.$3)
-$2~)H
-$=@h	
+$2~+H
 $@nlv
 $A3333
 $A9\$
@@ -1356,6 +1353,7 @@ $CMsgClientToGCGetAIVsAIMatchComplete
 $CMsgClientToGCPrivateLobbyInviteUser
 $CMsgClientToGCPrivateLobbyStartMatch
 $CMsgClientToGCTourneyGetInfoResponse
+$CMsgClientToGCTourneyJoinOpenTourney
 $CMsgEconPlayerStrangeCountAdjustment
 $CMsgGCGetPartnerAccountLink_Response
 $CMsgGCMsgMasterSetDirectory_Response
@@ -1425,6 +1423,7 @@ $lFH.
 $t*Mc.E;n
 $uL'#
 $woL)
+$z,u*
 $z,u*A
 $z-u+A
 $z.u,A
@@ -1454,7 +1453,6 @@ $zBu@
 %.15lf
 %.2f: server (pre-update)
 %.3d,%.3d,%.3d
-%.4f %.4f 
 %0.2f
 %02u/%02u/%04u
 %02u/%02u/%04u %02u:%02u:%02u
@@ -1493,6 +1491,7 @@ $zBu@
 %6.2f %6.2f %6.2f %.3f %.3f %.3f
 %8.3f
 %8.3f[%d] %s:  %s
+%8.8s: %-5d entries, '%s', ...
 %=gfA
 %@GaQ
 %CAttribute_ItemDynamicRecipeComponent
@@ -1560,6 +1559,7 @@ $zBu@
 %d,%.2f %.2f %.2f
 %d.%d.%d
 %d.%d.%d.%d:%d
+%d/%d: '%s' %s
 %d: %f %f %f
 %d: %s, %llu, %d ms, (%d:%d), OverallScore: %5.2lf
 %d: World: %s Refcount: %d
@@ -1719,6 +1719,7 @@ $zBu@
 %s prior disconnection #%d at %s, reconnected after %d seconds
 %s prior disconnection #%d at %s, we are reconnecting after %d seconds
 %s removed itself!
+%s restored from text format, should be converted to keyvalues3 text format using sceneimagebuilder -kv3convert -game <dota, etc.>
 %s skel=%p agg=%p[%d] %s
 %s took %0.2f seconds
 %s took %llu microseconds
@@ -1742,6 +1743,8 @@ $zBu@
 %s(%s) found an entity that wasn't a logic_choreographed_scene or logic_scene_list_manager in slot %d, named %s
 %s(%s):  Found %s connection to %s:  %s at %f %f %f
 %s(token %i) : %s
+%s+--
+%s+-- Schema Class: %s
 %s,%ld,%ld,%ld
 %s,%s
 %s.%s 
@@ -1877,6 +1880,14 @@ $zBu@
 %sjunk
 %smale%s
 %sreplay_%u_%llu.dcg
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d - % 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 %u:%u:%u
 %u[%d]
 %z@@@
@@ -1900,6 +1911,7 @@ $zBu@
 &A9D$
 &Affff
 &CGCSystemMsg_GetPurchaseTrust_Response
+&CMsgClientToGCAIGauntletResultResponse
 &CMsgClientToGCLimitedGetFormatResponse
 &CMsgClientToGCPrivateLobbyJoinChatRoom
 &CMsgClientToGCPrivateLobbyJoinResponse
@@ -1955,6 +1967,7 @@ $zBu@
 &k_EMsgClientToGCPrivateLobbyInviteUser
 &k_EMsgClientToGCPrivateLobbyStartMatch
 &k_EMsgClientToGCTourneyGetInfoResponse
+&k_EMsgClientToGCTourneyJoinOpenTourney
 &k_EMsgGCAddSocketToBaseItem_DEPRECATED
 &k_EMsgGCDev_UnlockAllItemStylesRequest
 &k_EMsgGCItemPurgatory_FinalizePurchase
@@ -2028,7 +2041,6 @@ $zBu@
 'k_EPartnerRequestUnsupportedPartnerType
 'out_location' must not be NULL
 'then ANY' or 'then ALL' response followups will be dispatched only to characters within this distance.
-'tk[A\]
 (	AB`
 ( Entity Player, string EventName, table EventData )
 ( int ListnerID ) - Unregister a specific listener
@@ -2045,17 +2057,18 @@ $zBu@
 (#GameUI_Disconnect_RemoteProblem_Timeout
 (%0.2f) %s
 (%0.2f): %s
+(%5%;
 (%d %d %d %d)
 (%d) Name: %s (%s)
 (%f, %f, %f)
 (%g %g %g %g)
 (%g %g %g)
 (%g %g)
-(%qaq
 (%s) %i,
 (*%s*), 
 (*MARK) must have an argument
 (*VERB) not recognized or malformed
+(-v4J
 (0x%08X)'??'
 (1@zD
 (9w rh;w
@@ -2064,6 +2077,9 @@ $zBu@
 (A9_ 
 (A?)\
 (ACTIVE)
+(ATSH
+(AUATSH
+(AVAUI
 (Affff
 (CMsgClientToGCCreateStaticRecipeResponse
 (CMsgClientToGCGetGauntletMatchesResponse
@@ -2099,7 +2115,6 @@ $zBu@
 (E9} 
 (E;4$
 (E;<$}oM
-(H;=*A=
 (HcG H
 (HcWP
 (I9\$
@@ -2119,6 +2134,7 @@ $zBu@
 (NPUH
 (None)
 (SERVER) Inventory for account (%d):
+(T$ A
 ([%d] %s)
 ([%d] %s: %s)
 ([A\A]
@@ -2129,6 +2145,7 @@ $zBu@
 ([A\I
 ([A^A_]
 ([]A\A]A^A_
+(\$0A
 (broken)
 (cannot determine missing fields for lite message)
 (const char *)
@@ -2146,6 +2163,7 @@ $zBu@
 (int iIndex, int iPoint, Vector vecOffset ) - Set the linear offset for a control on a particle effect
 (int index, bool bDestroyImmediately) - Destroy a particle, if bDestroyImmediately destroy it without playing end caps.
 (k_ECustomGameInstallStatus_FailedGeneric
+(k_EMsgClientToGCAIGauntletResultResponse
 (k_EMsgClientToGCLimitedGetFormatResponse
 (k_EMsgClientToGCPrivateLobbyJoinChatRoom
 (k_EMsgClientToGCPrivateLobbyJoinResponse
@@ -2292,6 +2310,7 @@ $zBu@
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE16_
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE17_
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE18_
+*Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE19_
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE1_
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE2_
 *Z37CreateCardSpecificEvaluationModifiersvEUlR12Evaluation_tS0_iE3_
@@ -2316,6 +2335,7 @@ $zBu@
 *ZN10CLocalGame20ProcessObjectCommandEii13StrongTypedefIj15ObjectIDTypeTagLj0EEEUlvE_
 *ZN10CNavEditor15UpdateSelectionEvEUlRK6VectorE_
 *ZN10CNavEditor15UpdateSelectionEvEUlRK6VectorRK8CNavAreaE0_
+*ZN10CNavEditor15UpdateSelectionEvEUlRK6VectorS2_E1_
 *ZN10CNavEditor23CommandNavTestLevelHullERK15CCommandContextRK8CCommandE18CTestNavHullFilter
 *ZN10CTableGame14RegisterButtonEi11EGameButtonRK13AttributeListEUlvE_
 *ZN10CTableGame18OutputClickCommandEiP11CGameObjectRKSt8functionIFvvEERK13AttributeListbEUlvE_
@@ -2358,7 +2378,8 @@ $zBu@
 *ZN18CDotaCardGameDraft13OutputActionsEiEUlvE_
 *ZN19CNavEntityInterface11ApplyMarkupER8CNavMeshEUlP8CNavAreaE_
 *ZN19CNavEntityInterface11ApplyMarkupER8CNavMeshEUlR8CNavAreaE0_
-*ZN19CNavObstacleAreaMgr24UpdateFirstDirtyObstacleEvEUlyyE_
+*ZN19CNavObstacleAreaMgr9DebugDrawEfEUlyE_
+*ZN19CNavObstacleAreaMgr9DebugDrawEfEUlyffE0_
 *ZN19CNavObstacleTileMgr14UpdateObstacleER12INavObstacleEUlRKyE0_
 *ZN19CNavObstacleTileMgr14UpdateObstacleER12INavObstacleEUlRKyE1_
 *ZN19CNavObstacleTileMgr14UpdateObstacleER12INavObstacleEUlRKyE_
@@ -2366,9 +2387,9 @@ $zBu@
 *ZN20CNavSearchHexLattice14DoSearchScaledEvEUlttE_
 *ZN20CNavSplitObstacleMgr17SplitObstacleCoreER17CNavSplitObstacleEUlvE_
 *ZN4Test15CDCGTestContext27AddTraceExpectationCallbackE12VariantUnionIJNS_14SpectatorTokenENS_15AllPlayersTokenEiEEOSt8functionIFbPK13CDotaCardGamei8OptionalIbEEEOS5_IFvbEEEUlS8_i13ENetworkGroupE_
-*ZN7CNavGen13SplitArea_OldER8CNavAreaRK6VectorfPPS0_S6_EUlvE_
-*ZN8CNavArea15SplitAreaByPolyEiP8Vector2DbbPPS_PSt8functionIFP8CNavPolyvEEEUlvE_
-*ZN8CNavArea16SplitAreaByPlaneERK6VectorfbPPS_bEUlvE_
+*ZN7CNavGen13SplitArea_OldER8CNavMeshR8CNavAreaRK6VectorfPPS2_S8_EUlvE_
+*ZN8CNavArea15SplitAreaByPolyER8CNavMeshiP8Vector2DbbPPS_PSt8functionIFP8CNavPolyvEEEUlvE_
+*ZN8CNavArea16SplitAreaByPlaneER8CNavMeshRK6VectorfbPPS_bEUlvE_
 *ZN8CNavMesh26ApplyMarkupFromNavGenInputEvEUlP8CNavAreaE_
 *ZN9CNavQuery24FindRandomConnectedPointERK6Vector9NavHull_tffEUlS2_E_
 *ZN9CNavQuery34FindNearestNavWithPhysicsClearanceERK6Vector9NavHull_tPS0_PK11CBaseEntityifEUlS2_E_
@@ -2426,20 +2447,18 @@ $zBu@
 +DCG_COMBATLOG_BEGGINING_OF_SPELLCASTING_END
 +E;,$}
 +GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK
-+H$Hc
 +K$Hc
-+N$Hc
 +NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP
 +NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT
 +NETWORK_DISCONNECT_REJECT_INVALIDCONNECTION
 +NETWORK_DISCONNECT_STEAM_VAC_CHECK_TIMEDOUT
 +O$Hc
-+Q$Hc
 +S$Hc
 +SlHc
 +W$Hc
 +X$Hc
 +dev_block_gc_hello
++dev_simulate_gcdown
 +e_v@
 +egy@
 +k_EGCMsgUseItemResponse_ItemUsed_Compendium
@@ -2464,6 +2483,8 @@ $zBu@
 , from: 
 , lo=
 , not just within "
+, parent: 
+, parentH
 , score %4.2f
 , t#HcK 
 ,#GameUI_Disconnect_Splitpacket_Send_Overflow
@@ -2473,12 +2494,13 @@ $zBu@
 ,$Y^M
 ,2ATSH
 ,6ATA
-,>t-H
+,7t-H
 ,@042#
 ,@ATH
 ,BfE9,@|
 ,CMsgClientToGCPrivateLobbyInviteUserResponse
 ,CMsgClientToGCPrivateLobbyStartMatchResponse
+,CMsgClientToGCTourneyJoinOpenTourneyResponse
 ,CMsgServerToGCMatchSignoutPermissionResponse
 ,GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE
 ,NETWORK_DISCONNECT_REJECT_CONNECT_FROM_LOBBY
@@ -2610,9 +2632,12 @@ $zBu@
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
 .%0*llu
-.%AvB
-.%[Kk
+.%XdF
 .%llu
+.%tKq
+.%y@N
+.-Y+}
+.-^JE
 ...<truncated>...
 ...And One For Me
 ../../public/entity2/concreteentitylist.h
@@ -2633,32 +2658,34 @@ $zBu@
 ../public/entity2/concreteentitylist.h
 ../public/networksystem/networkfieldscratchdata.h
 ../public/resourcefile/resourcestream.h
-../public/schemasystem/schema.h
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
 ../public/tier2/fieldpath.h
-.52uB
+.5-Uf
+.5DC\
+.5cs#
 .8z%u#
+.=`b&
 .>()09
 .@(."
 .@(va
 .@,wwH
 .@0wJH
 .@Tz'u%H
-.@XzYuW
 .@jfo!vCf?
 .@mV}
 .A;L$
 .AJob debugging disabled
-.BPrb
-.BTrJ
-.BXr2H
+.BPri
+.BTrQ
+.BXr9H
 .C$zwuu
 .C(z'u%
-.C(zHuF
+.C(z@u>
+.C,z	u
 .C4zCuA
 .C<rmH
 .C<zrup
@@ -2686,7 +2713,7 @@ $zBu@
 .CDemoStringTables
 .CDemoStringTables.items_t
 .CDemoStringTables.table_t
-.CDz u
+.CDz#u!
 .CExtraMsgBlock
 .CExtraMsgBlock"
 .CExtraMsgBlock"%
@@ -2782,6 +2809,7 @@ $zBu@
 .CProtoItemSocket
 .CProtoItemSocket""
 .CProtoItemSocket"L
+.CSODCGLobby.GauntletInfo"
 .CSODCGLobby.Member
 .CSODCGPrivateLobby.Invite
 .CSODCGPrivateLobby.Match
@@ -2804,16 +2832,18 @@ $zBu@
 .CServerDraftCard
 .CUserMessageShake
 .CUserMessageVGUIMenu.Keys
-.C\z%u#
+.C\z(u&
 .C`ziugH
-.Cdz	tC
 .Chr6
-.Chz(u&
+.Chz#u!
 .ContinuousEffectSingleProperty"
 .ContinuousEffectSingleProperty"J
 .D$ v
-.D$(z
-.D$8zYuWL
+.D$(z2u0
+.D$,z#u!
+.D$0z
+.D$4z
+.D$8z:u8L
 .D$8ziugL
 .D$Pr
 .D$PrM
@@ -2848,17 +2878,18 @@ $zBu@
 .ESourceEngine:
 .ESplitScreenMessageType
 .FPrF
+.FPr`
 .FTr.
-.G4zeuc
+.FTrJ
 .G8z)u'H
 .G8z:u8]
-.G8zXuV
-.G<zKuI
 .G<zUuS
 .GAME_PARTICLE_MANAGER_EVENT_SET_FOW_PROPERTIES
 .GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION
 .GCConnectionStatus
 .GhUH
+.GhrU
+.Glr?E
 .K$z+u)
 .K,zZuX
 .K8zBu@H
@@ -2880,10 +2911,11 @@ $zBu@
 .Vq6_
 .W4zjuh
 .W@zMuK
-.X8w#H
+.XXz7u5
+.XXzCuAM
 .[0z!u
 .[0z"u H
-.]8w!A
+._8w!A
 ._8z]u[
 ._DzEuC
 .`Tz/u-H
@@ -2916,6 +2948,7 @@ $zBu@
 .k_EGCMsgUseItemResponse_MiniGameAlreadyStarted
 .k_EMsgClientToGCPrivateLobbyInviteUserResponse
 .k_EMsgClientToGCPrivateLobbyStartMatchResponse
+.k_EMsgClientToGCTourneyJoinOpenTourneyResponse
 .k_EMsgGCItemPurgatory_FinalizePurchaseResponse
 .k_EMsgServerToGCMatchSignoutPermissionResponse
 .k_ItemPurgatoryResponse_Refund_Failed_NoDetail
@@ -2936,8 +2969,6 @@ $zBu@
 .vpcf
 .vrman
 /(6;<
-// Choreo version 1
-// Choreo version 1:  <%i> Exported Events
 /CMsgClientToGCTourneyAdminSetSeedValuesResponse
 /CMsgClientToGCTourneyGetRegisteredDecksResponse
 /CMsgClientToGCTourneyRegisterSharedDeckResponse
@@ -3043,8 +3074,8 @@ $zBu@
 0AVAUL
 0CClientMsg_WorldUIControllerHasPanelChangedEvent
 0GAME_PARTICLE_MANAGER_EVENT_SET_SHOULD_CHECK_FOW
+0H;=M
 0HcG4
-0L;p 
 0N2(	
 0NETWORK_DISCONNECT_REJECT_SERVERCDKEYAUTHINVALID
 0R@ffffF(
@@ -3275,7 +3306,6 @@ $zBu@
 12EDCGCardType
 12FilterHealth
 12IAchievement
-12ICollideable
 12IMotionEvent
 12INavDrawArea
 12INavDrawMesh
@@ -3577,7 +3607,6 @@ $zBu@
 14IDCGPuzzleList
 14IDamageHandler
 14IHasAttributes
-14ISchemaBinding
 14ISequenceSetup
 14IServerGCLobby
 14ISource2Server
@@ -4234,104 +4263,6 @@ $zBu@
 18CSODCGPrivateLobby
 18CSVCMsg_HLTVStatus
 18CSVCMsg_ServerInfo
-18CSchemaEnumBindingI10BeamType_tE
-18CSchemaEnumBindingI10ExplosionsE
-18CSchemaEnumBindingI10MoveType_tE
-18CSchemaEnumBindingI10NavDirTypeE
-18CSchemaEnumBindingI10RenderFx_tE
-18CSchemaEnumBindingI11DoorState_tE
-18CSchemaEnumBindingI11LifeState_tE
-18CSchemaEnumBindingI11SolidType_tE
-18CSchemaEnumBindingI11explosion_tE
-18CSchemaEnumBindingI11fieldtype_tE
-18CSchemaEnumBindingI12AnimVRHand_tE
-18CSchemaEnumBindingI12BundleType_tE
-18CSchemaEnumBindingI12RenderMode_tE
-18CSchemaEnumBindingI12ShadowType_tE
-18CSchemaEnumBindingI12TOGGLE_STATEE
-18CSchemaEnumBindingI12ThreeState_tE
-18CSchemaEnumBindingI12soundlevel_tE
-18CSchemaEnumBindingI13Disposition_tE
-18CSchemaEnumBindingI13MoveCollide_tE
-18CSchemaEnumBindingI13WeaponSound_tE
-18CSchemaEnumBindingI13WeaponState_tE
-18CSchemaEnumBindingI14AnimVRFinger_tE
-18CSchemaEnumBindingI14BaseActivity_tE
-18CSchemaEnumBindingI14ShakeCommand_tE
-18CSchemaEnumBindingI14interactions_tE
-18CSchemaEnumBindingI15BeamClipStyle_tE
-18CSchemaEnumBindingI15DamageOptions_tE
-18CSchemaEnumBindingI15HierarchyType_tE
-18CSchemaEnumBindingI15WeaponTexture_tE
-18CSchemaEnumBindingI15eEconItemOriginE
-18CSchemaEnumBindingI15navproperties_tE
-18CSchemaEnumBindingI16ConstraintType_tE
-18CSchemaEnumBindingI16NavAttributeEnumE
-18CSchemaEnumBindingI16ShatterSurface_tE
-18CSchemaEnumBindingI16eLiteralHandTypeE
-18CSchemaEnumBindingI16eLogicalHandTypeE
-18CSchemaEnumBindingI17BrushSolidities_eE
-18CSchemaEnumBindingI17EntFinderMethod_tE
-18CSchemaEnumBindingI17PerformanceMode_tE
-18CSchemaEnumBindingI17SosEditItemType_tE
-18CSchemaEnumBindingI18ScreenEffectType_tE
-18CSchemaEnumBindingI18SpeechPriorityTypeE
-18CSchemaEnumBindingI19EntityDisolveType_tE
-18CSchemaEnumBindingI19NetChannelBufType_tE
-18CSchemaEnumBindingI19PrecipitationType_tE
-18CSchemaEnumBindingI19TakeHealthOptions_tE
-18CSchemaEnumBindingI19VertJustification_eE
-18CSchemaEnumBindingI20EntityDormancyType_tE
-18CSchemaEnumBindingI20EntityIOTargetType_tE
-18CSchemaEnumBindingI20HorizJustification_eE
-18CSchemaEnumBindingI20LayoutPositionType_eE
-18CSchemaEnumBindingI20MaterialModifyMode_tE
-18CSchemaEnumBindingI20PlayerConnectedStateE
-18CSchemaEnumBindingI20vote_create_failed_tE
-18CSchemaEnumBindingI21TimelineCompression_tE
-18CSchemaEnumBindingI22LatchDirtyPermission_tE
-18CSchemaEnumBindingI22MeshTranslucencyType_tE
-18CSchemaEnumBindingI23SurroundingBoundsType_tE
-18CSchemaEnumBindingI24MeshDrawPrimitiveFlags_tE
-18CSchemaEnumBindingI24ModelBoneFlexComponent_tE
-18CSchemaEnumBindingI24ValueRemapperInputType_tE
-18CSchemaEnumBindingI24attributeprovidertypes_tE
-18CSchemaEnumBindingI25PoseController_FModType_tE
-18CSchemaEnumBindingI25ValueRemapperOutputType_tE
-18CSchemaEnumBindingI25WorldTextAttachmentType_tE
-18CSchemaEnumBindingI26AttachmentInfluenceFlags_tE
-18CSchemaEnumBindingI26ValueRemapperHapticsType_tE
-18CSchemaEnumBindingI26ValueRemapperRatchetType_tE
-18CSchemaEnumBindingI27ValueRemapperMomentumType_tE
-18CSchemaEnumBindingI27WorldTextPanelOrientation_tE
-18CSchemaEnumBindingI28LessonPanelLayoutFileTypes_tE
-18CSchemaEnumBindingI28PointWorldTextReorientMode_tE
-18CSchemaEnumBindingI29WorldTextPanelVerticalAlign_tE
-18CSchemaEnumBindingI31EconEntityParticleDisableMode_tE
-18CSchemaEnumBindingI31PointWorldTextJustifyVertical_tE
-18CSchemaEnumBindingI31WorldTextPanelHorizontalAlign_tE
-18CSchemaEnumBindingI33PointWorldTextJustifyHorizontal_tE
-18CSchemaEnumBindingI34PointTemplateOwnerSpawnGroupType_tE
-18CSchemaEnumBindingI35RenderMeshFlexControllerRemapType_tE
-18CSchemaEnumBindingI39PointTemplateClientOnlyEntityBehavior_tE
-18CSchemaEnumBindingI7Class_TE
-18CSchemaEnumBindingI7Touch_tE
-18CSchemaEnumBindingI8filter_tE
-18CSchemaEnumBindingI8gender_tE
-18CSchemaEnumBindingI9MaterialsE
-18CSchemaEnumBindingIN12CRR_Response14ResponseEnum_tEE
-18CSchemaEnumBindingIN13VPhysXJoint_t7Flags_tEE
-18CSchemaEnumBindingIN14MorphSetData_t12LookupType_tEE
-18CSchemaEnumBindingIN14MorphSetData_t14EncodingType_tEE
-18CSchemaEnumBindingIN15PermModelInfo_t8FlagEnumEE
-18CSchemaEnumBindingIN16CLogicBranchList30LogicBranchListenerLastState_tEE
-18CSchemaEnumBindingIN16VPhysXBodyPart_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN19ModelSkeletonData_t11BoneFlags_tEE
-18CSchemaEnumBindingIN20RenderSkeletonData_t10FlagEnum_tEE
-18CSchemaEnumBindingIN21VPhysXAggregateData_t16VPhysXFlagEnum_tEE
-18CSchemaEnumBindingIN23VPhysXDiskShapeHeader_t12VersinEnum_tEE
-18CSchemaEnumBindingIN24VPhysXConstraintParams_t12EnumFlags0_tEE
-18CSchemaEnumBindingIN28SimpleConstraintSoundProfile40SimpleConstraintsSoundProfileKeypoints_tEE
 18CSchemaManipulatorI10CTransformE
 18CSchemaManipulatorI10CUtlStringE
 18CSchemaManipulatorI10CUtlSymbolE
@@ -4632,237 +4563,6 @@ $zBu@
 19CSOEconItemEquipped
 19CSVCMsg_SplitScreen
 19CSVCMsg_UserMessage
-19CSchemaClassBindingI10CHitBoxSetE
-19CSchemaClassBindingI10CStopwatchE
-19CSchemaClassBindingI10CWristBoneE
-19CSchemaClassBindingI10EntInput_tE
-19CSchemaClassBindingI10FlexDesc_tE
-19CSchemaClassBindingI10FlexRule_tE
-19CSchemaClassBindingI10HandInfo_tE
-19CSchemaClassBindingI11CAttachmentE
-19CSchemaClassBindingI11CEffectDataE
-19CSchemaClassBindingI11CFingerBoneE
-19CSchemaClassBindingI11CPlayerInfoE
-19CSchemaClassBindingI11CRenderMeshE
-19CSchemaClassBindingI11EntOutput_tE
-19CSchemaClassBindingI11HitBoxSet_tE
-19CSchemaClassBindingI11MorphData_tE
-19CSchemaClassBindingI11fogparams_tE
-19CSchemaClassBindingI11locksound_tE
-19CSchemaClassBindingI11thinkfunc_tE
-19CSchemaClassBindingI12BundleData_tE
-19CSchemaClassBindingI12CFingerChainE
-19CSchemaClassBindingI12CPlayerStateE
-19CSchemaClassBindingI12CRR_ResponseE
-19CSchemaClassBindingI13CEconItemViewE
-19CSchemaClassBindingI13CFingerSourceE
-19CSchemaClassBindingI13CGlowPropertyE
-19CSchemaClassBindingI13CNavVolumeAllE
-19CSchemaClassBindingI13CPhysicsShakeE
-19CSchemaClassBindingI13CRandSimTimerE
-19CSchemaClassBindingI13IntervalTimerE
-19CSchemaClassBindingI13VPhysXJoint_tE
-19CSchemaClassBindingI13VPhysXRange_tE
-19CSchemaClassBindingI13audioparams_tE
-19CSchemaClassBindingI13dynpitchvol_tE
-19CSchemaClassBindingI13sky3dparams_tE
-19CSchemaClassBindingI14CAimConstraintE
-19CSchemaClassBindingI14CAttributeListE
-19CSchemaClassBindingI14CHitBoxSetListE
-19CSchemaClassBindingI14CSoundEnvelopeE
-19CSchemaClassBindingI14CStopwatchBaseE
-19CSchemaClassBindingI14CountdownTimerE
-19CSchemaClassBindingI14EventSetTime_tE
-19CSchemaClassBindingI14MorphSetData_tE
-19CSchemaClassBindingI14Relationship_tE
-19CSchemaClassBindingI14ResponseParamsE
-19CSchemaClassBindingI14handposepair_tE
-19CSchemaClassBindingI14hudtextparms_tE
-19CSchemaClassBindingI15CAI_MoveMonitorE
-19CSchemaClassBindingI15CAnimationLayerE
-19CSchemaClassBindingI15CEntityIOOutputE
-19CSchemaClassBindingI15CEntityIdentityE
-19CSchemaClassBindingI15CMultiplayRulesE
-19CSchemaClassBindingI15CRenderSkeletonE
-19CSchemaClassBindingI15CSceneEventInfoE
-19CSchemaClassBindingI15CSimpleSimTimerE
-19CSchemaClassBindingI15CTakeDamageInfoE
-19CSchemaClassBindingI15EventSimulate_tE
-19CSchemaClassBindingI15MaterialGroup_tE
-19CSchemaClassBindingI15MorphRectData_tE
-19CSchemaClassBindingI15PermModelData_tE
-19CSchemaClassBindingI15PermModelInfo_tE
-19CSchemaClassBindingI15VelocitySamplerE
-19CSchemaClassBindingI15cache_ragdoll_tE
-19CSchemaClassBindingI16AttachmentData_tE
-19CSchemaClassBindingI16BaseConstraint_tE
-19CSchemaClassBindingI16CBaseAchievementE
-19CSchemaClassBindingI16CConstraintSlaveE
-19CSchemaClassBindingI16CDamageComponentE
-19CSchemaClassBindingI16CEntityClassInfoE
-19CSchemaClassBindingI16CHealthComponentE
-19CSchemaClassBindingI16CHitboxComponentE
-19CSchemaClassBindingI16CMorphConstraintE
-19CSchemaClassBindingI16CMotorControllerE
-19CSchemaClassBindingI16CNavVolumeSphereE
-19CSchemaClassBindingI16CPlayerLocalDataE
-19CSchemaClassBindingI16CPointConstraintE
-19CSchemaClassBindingI16CRecipientFilterE
-19CSchemaClassBindingI16CRenderComponentE
-19CSchemaClassBindingI16CSceneObjectDataE
-19CSchemaClassBindingI16CScriptComponentE
-19CSchemaClassBindingI16CSoundParametersE
-19CSchemaClassBindingI16CTwistConstraintE
-19CSchemaClassBindingI16ConceptHistory_tE
-19CSchemaClassBindingI16FileWeaponInfo_tE
-19CSchemaClassBindingI16FlexController_tE
-19CSchemaClassBindingI16ResponseFollowupE
-19CSchemaClassBindingI16VPhysXBodyPart_tE
-19CSchemaClassBindingI16ragdollelement_tE
-19CSchemaClassBindingI17CAttributeManagerE
-19CSchemaClassBindingI17CCommentarySystemE
-19CSchemaClassBindingI17CConstraintTargetE
-19CSchemaClassBindingI17COrientConstraintE
-19CSchemaClassBindingI17CParentConstraintE
-19CSchemaClassBindingI17CPhysicsComponentE
-19CSchemaClassBindingI17ConstraintSlave_tE
-19CSchemaClassBindingI17EngineLoopState_tE
-19CSchemaClassBindingI17ResponseContext_tE
-19CSchemaClassBindingI17SceneObjectData_tE
-19CSchemaClassBindingI17SosEditItemInfo_tE
-19CSchemaClassBindingI17VPhysXDiskMesh2_tE
-19CSchemaClassBindingI17WeaponSoundData_tE
-19CSchemaClassBindingI17fogplayerparams_tE
-19CSchemaClassBindingI18CCollisionPropertyE
-19CSchemaClassBindingI18CEconItemAttributeE
-19CSchemaClassBindingI18CNetworkVarChainerE
-19CSchemaClassBindingI18ConstraintTarget_tE
-19CSchemaClassBindingI18EntComponentInfo_tE
-19CSchemaClassBindingI18EventAdvanceTick_tE
-19CSchemaClassBindingI18EventAppShutdown_tE
-19CSchemaClassBindingI18OnDiskBufferData_tE
-19CSchemaClassBindingI18PermModelExtPart_tE
-19CSchemaClassBindingI18PhysSoftbodyDesc_tE
-19CSchemaClassBindingI18SkeletonBoneBbox_tE
-19CSchemaClassBindingI18dynpitchvol_base_tE
-19CSchemaClassBindingI19CAttributeContainerE
-19CSchemaClassBindingI19CNetworkedIKContextE
-19CSchemaClassBindingI19ConstraintSoundInfoE
-19CSchemaClassBindingI19EventClientOutput_tE
-19CSchemaClassBindingI19ModelSkeletonData_tE
-19CSchemaClassBindingI19TonemapParameters_tE
-19CSchemaClassBindingI19VPhysXConstraint2_tE
-19CSchemaClassBindingI19VPhysXDiskCapsule_tE
-19CSchemaClassBindingI19VPhysics2ShapeDef_tE
-19CSchemaClassBindingI19WeaponTextureData_tE
-19CSchemaClassBindingI19magnetted_objects_tE
-19CSchemaClassBindingI20CCopyRecipientFilterE
-19CSchemaClassBindingI20CGameSceneNodeHandleE
-19CSchemaClassBindingI20CRenderBufferBindingE
-19CSchemaClassBindingI20CTiltTwistConstraintE
-19CSchemaClassBindingI20EventFrameBoundary_tE
-19CSchemaClassBindingI20EventPreDataUpdate_tE
-19CSchemaClassBindingI20GameFileWeaponInfo_tE
-19CSchemaClassBindingI20PermRenderMeshData_tE
-19CSchemaClassBindingI20RenderSkeletonBone_tE
-19CSchemaClassBindingI20RenderSkeletonData_tE
-19CSchemaClassBindingI20SkeletonBoneBounds_tE
-19CSchemaClassBindingI20TransitioningLayer_tE
-19CSchemaClassBindingI21CSequenceTransitionerE
-19CSchemaClassBindingI21CTimeOfDayDynamicKeysE
-19CSchemaClassBindingI21EventClientSimulate_tE
-19CSchemaClassBindingI21EventModInitialized_tE
-19CSchemaClassBindingI21EventPostDataUpdate_tE
-19CSchemaClassBindingI21EventServerSimulate_tE
-19CSchemaClassBindingI21ModelBoneFlexDriver_tE
-19CSchemaClassBindingI21RenderBufferBinding_tE
-19CSchemaClassBindingI21VPhysXAggregateData_tE
-19CSchemaClassBindingI21prevent_interaction_tE
-19CSchemaClassBindingI22CNavVolumeMarkupVolumeE
-19CSchemaClassBindingI22CNetworkVelocityVectorE
-19CSchemaClassBindingI22CPhysSurfacePropertiesE
-19CSchemaClassBindingI22CSequenceTransitioner2E
-19CSchemaClassBindingI22CVRHandAttachmentInputE
-19CSchemaClassBindingI22EventClientPollInput_tE
-19CSchemaClassBindingI22EventClientPreOutput_tE
-19CSchemaClassBindingI22EventClientSendInput_tE
-19CSchemaClassBindingI22EventPostAdvanceTick_tE
-19CSchemaClassBindingI22SelectedEditItemInfo_tE
-19CSchemaClassBindingI22constraint_axislimit_tE
-19CSchemaClassBindingI23CMaterialDrawDescriptorE
-19CSchemaClassBindingI23CTimeOfDayDynamicValuesE
-19CSchemaClassBindingI23EventClientPostOutput_tE
-19CSchemaClassBindingI23VPhysXDiskShapeHeader_tE
-19CSchemaClassBindingI24CBaseAnimatingControllerE
-19CSchemaClassBindingI24CConstantForceControllerE
-19CSchemaClassBindingI24CNavVolumeSphericalShellE
-19CSchemaClassBindingI24CNetworkViewOffsetVectorE
-19CSchemaClassBindingI24CVariantDefaultAllocatorE
-19CSchemaClassBindingI24CVrSkeletalInputSettingsE
-19CSchemaClassBindingI24EventClientAdvanceTick_tE
-19CSchemaClassBindingI24EventClientPreSimulate_tE
-19CSchemaClassBindingI24EventServerAdvanceTick_tE
-19CSchemaClassBindingI24MaterialDrawDescriptor_tE
-19CSchemaClassBindingI24VPhysXConstraintParams_tE
-19CSchemaClassBindingI24constraint_hingeparams_tE
-19CSchemaClassBindingI25EventClientPostSimulate_tE
-19CSchemaClassBindingI25EventClientProcessInput_tE
-19CSchemaClassBindingI25EventServerPostSimulate_tE
-19CSchemaClassBindingI26EventClientFrameSimulate_tE
-19CSchemaClassBindingI26EventClientPauseSimulate_tE
-19CSchemaClassBindingI27CNetworkedSequenceOperationE
-19CSchemaClassBindingI27CPhysSurfacePropertiesAudioE
-19CSchemaClassBindingI27EntClassComponentOverride_tE
-19CSchemaClassBindingI27EventClientPollNetworking_tE
-19CSchemaClassBindingI27EventServerPollNetworking_tE
-19CSchemaClassBindingI27VPhysXCollisionAttributes_tE
-19CSchemaClassBindingI28CAnimGraphNetworkedVariablesE
-19CSchemaClassBindingI28CBoneConstraintPoseSpaceBoneE
-19CSchemaClassBindingI28CNavVolumeBreadthFirstSearchE
-19CSchemaClassBindingI28CVPhysXSurfacePropertiesListE
-19CSchemaClassBindingI28EventClientPostAdvanceTick_tE
-19CSchemaClassBindingI28EventServerPostAdvanceTick_tE
-19CSchemaClassBindingI28EventSimpleLoopFrameUpdate_tE
-19CSchemaClassBindingI28ModelBoneFlexDriverControl_tE
-19CSchemaClassBindingI28SimpleConstraintSoundProfileE
-19CSchemaClassBindingI28VPhysXShapeCompoundHeader2_tE
-19CSchemaClassBindingI28VPhysicsCollisionAttribute_tE
-19CSchemaClassBindingI28constraint_breakableparams_tE
-19CSchemaClassBindingI29CBoneConstraintPoseSpaceMorphE
-19CSchemaClassBindingI29CNetworkOriginQuantizedVectorE
-19CSchemaClassBindingI29CPhysSurfacePropertiesPhysicsE
-19CSchemaClassBindingI29ClusteredDistributionParams_tE
-19CSchemaClassBindingI29EventClientProcessGameInput_tE
-19CSchemaClassBindingI30ChangeAccessorFieldPathIndex_tE
-19CSchemaClassBindingI30EventClientProcessNetworking_tE
-19CSchemaClassBindingI30EventProfileStorageAvailable_tE
-19CSchemaClassBindingI30EventServerProcessNetworking_tE
-19CSchemaClassBindingI30EventSplitScreenStateChanged_tE
-19CSchemaClassBindingI31CBaseAnimatingOverlayControllerE
-19CSchemaClassBindingI32CPhysSurfacePropertiesSoundNamesE
-19CSchemaClassBindingI35CNetworkedIKProceduralTargetContextE
-19CSchemaClassBindingI38CNetworkOriginCellCoordQuantizedVectorE
-19CSchemaClassBindingI41EventClientSceneSystemThreadStateChange_tE
-19CSchemaClassBindingI6AABB_tE
-19CSchemaClassBindingI6CSoundE
-19CSchemaClassBindingI6ExtentE
-19CSchemaClassBindingI7CHitBoxE
-19CSchemaClassBindingI8CRagdollE
-19CSchemaClassBindingI8FlexOp_tE
-19CSchemaClassBindingI8HitBox_tE
-19CSchemaClassBindingI9CSimTimerE
-19CSchemaClassBindingI9CTimelineE
-19CSchemaClassBindingI9ragdoll_tE
-19CSchemaClassBindingIN11CEconEntity22AttachedParticleInfo_tEE
-19CSchemaClassBindingIN12CEntityClass16CClassAttributesEE
-19CSchemaClassBindingIN12CEntityClass17ComponentHelper_tEE
-19CSchemaClassBindingIN12CEntityClass18ComponentOffsets_tEE
-19CSchemaClassBindingIN14CEnvWindShared14WindAveEvent_tEE
-19CSchemaClassBindingIN14CEnvWindShared20WindVariationEvent_tEE
-19CSchemaClassBindingIN17CAttributeManager24cached_attribute_float_tEE
-19CSchemaClassBindingIN20CBaseCombatCharacter13DamageHistoryEE
-19CSchemaClassBindingIN28CBoneConstraintPoseSpaceBone7Input_tEE
-19CSchemaClassBindingIN29CBoneConstraintPoseSpaceMorph7Input_tEE
 19CSchemaFieldVisitor
 19CSchemaRegistration
 19CSimplePhysicsBrush
@@ -4942,6 +4642,7 @@ $zBu@
 2!^dH
 2!^t!H
 2".CGCStoreRechargeRedirect_LineItem"c
+2".CMsgCreateTourneyPhase.FreeForAll
 2".CMsgGCMsgMasterSetDirectory.SubGC
 2".CMsgServerToGCAbandonMatch.Player
 2".CMsgSetItemPositions.ItemPosition
@@ -4950,6 +4651,7 @@ $zBu@
 2#.CMsgGCToGCConsoleOutput.OutputLine
 2#.CMsgSOMultipleObjects.SingleObject
 2#.CMsgServerToGCAbandonMatch.EReason
+2#.CMsgVenchatoquistEvent.EChatSource
 2#.CSVCMsgList_UserMessages.usermsg_t
 2#.CSVCMsg_GameEventList.descriptor_t
 2#.CServerLobbyData_DraftCards.Player
@@ -4961,7 +4663,7 @@ $zBu@
 2$.CMsgGauntletConfig.RewardTier.Grant
 2$.CMsgSerializedSOCache.Cache.Version
 2%.CMsgAMGetUserGameStatsResponse.Stats
-2%.CMsgClientToGCCreateTourney.EPrivacy"U
+2%.CMsgClientToGCCreateTourney.EPrivacy
 2%.CMsgCreateTourneyPhase.ESwissMatches
 2%.CMsgCreateTourneyPhase.ESwissScoring
 2%.CMsgExtractGemsResponse.EExtractGems"
@@ -5017,6 +4719,7 @@ $zBu@
 2-.CMsgClientToGCOpenPackItemResponse.ESlotType"
 2-.CMsgClientToGCRecycleCardsResponse.EResponse
 2-.CMsgClientToGCSetItemStyleResponse.ESetStyle"a
+2-.CMsgGauntletConfig.GauntletPointsLeaderboard
 2-.CMsgServerSignoutData_GameOptions.GameOption
 2..CMsgClientToGCCreateTourneyResponse.EResponse
 2..CMsgClientToGCGetMatchDetailsResponse.EResult
@@ -5057,7 +4760,6 @@ $zBu@
 20CEntityScaleModifier
 20CEnvDetailController
 20CEnvInstructorVRHint
-20CEnvLightProbeVolume
 20CEnvProjectedTexture
 20CFailableAchievement
 20CFuncPropRespawnZone
@@ -5119,7 +4821,6 @@ $zBu@
 20CSaveRestoreBlockSet
 20CSceneFindMarkFilter
 20CScenePrecacheSystem
-20CSceneTokenProcessor
 20CServerCrashSentinel
 20CSoundEventParameter
 20CSoundOpvarSetEntity
@@ -5153,7 +4854,6 @@ $zBu@
 20IPartitionEnumerator
 20IResourceTypeManager
 20ISaveRestoreBlockSet
-20ISceneTokenProcessor
 20ISchemaAttributeType
 20ISource2ClientConfig
 20ISource2GameEntities
@@ -5164,6 +4864,7 @@ $zBu@
 20ToolTraceRayResult_t
 20TransitioningLayer_t
 21.CBidirMsg_RelayPacket.SignedDestinationAddress_t
+21.CMsgClientToGCAIGauntletResultResponse.EResponse"
 21.CMsgClientToGCAbandonGauntletResponse.RewardItem
 21.CMsgClientToGCPrivateLobbyJoinResponse.EResponse"
 21.CMsgClientToGCTourneyAdminKickResponse.EResponse"
@@ -5174,7 +4875,6 @@ $zBu@
 21CBaseAnimatingOverlay
 21CBaseAttributableItem
 21CBaseGameStats_Driver
-21CBaseLightProbeVolume
 21CBaseVRHandAttachment
 21CBidirMsg_RelayPacket
 21CCLCMsg_ClientMessage
@@ -5318,6 +5018,7 @@ $zBu@
 22CMsgServerNetworkStats
 22CMsgServerToGCIdlePing
 22CMsgSosStartSoundEvent
+22CMsgVenchatoquistEvent
 22CMultiplayer_Expresser
 22CNavBreadthFirstSearch
 22CNavObstructionManager
@@ -5339,7 +5040,6 @@ $zBu@
 22CSVCMsg_PacketReliable
 22CSaveRestoreFileSystem
 22CSceneAnimatableObject
-22CSchemaEnumBindingBase
 22CSchemaInstallCallback
 22CScriptTriggerMultiple
 22CSequenceTransitioner2
@@ -5486,7 +5186,6 @@ $zBu@
 23CResourceAllocatorUtils
 23CResourceStreamGrowable
 23CSVCMsg_GameEvent_key_t
-23CSchemaClassBindingBase
 23CSosCopyRecipientFilter
 23CSoundOpvarSetOBBEntity
 23CSplitScreenAddedConVar
@@ -5588,6 +5287,7 @@ $zBu@
 24CNetworkFieldScratchData
 24CPointClientUIWorldPanel
 24CProtoItemSocket_Strange
+24CSODCGLobby_GauntletInfo
 24CSODCGPrivateLobby_Match
 24CSOEconGameAccountClient
 24CSOEconItemDropRateBonus
@@ -5815,6 +5515,7 @@ $zBu@
 27.CMsgClientToGCPrivateLobbyInviteUserResponse.EResponse
 27.CMsgClientToGCPrivateLobbyStartMatchResponse.EResponse
 27.CMsgClientToGCTourneyGetOpenInvitesResponse.OpenInvite
+27.CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse
 27CAdditionalWearableModifier
 27CBaseFlexAlias_funCBaseFlex
 27CBidirMsg_RebroadcastSource
@@ -5954,7 +5655,6 @@ $zBu@
 28CDefaultPlayerPickupVPhysics
 28CEconItemAttributeDefinition
 28CEntityMessagePropagateForce
-28CEnvCombinedLightProbeVolume
 28CGCMsgGetSystemStatsResponse
 28CGCMsgMemCachedStatsResponse
 28CGCToGCMsgMasterAck_Response
@@ -6176,6 +5876,7 @@ $zBu@
 30CInterpolatedVarProceduralBaseI19MeshGroupMaskInfo_tLb0ELb1E29CGlobalInterpolationLerpFuncsIS0_EE
 30CInterpolatedVarProceduralBaseI21EnableRenderingInfo_tLb0ELb1E29CGlobalInterpolationLerpFuncsIS0_EE
 30CMsgAMGetUserGameStatsResponse
+30CMsgClientToGCAIGauntletResult
 30CMsgClientToGCLeaveChatChannel
 30CMsgClientToGCLimitedGetFormat
 30CMsgClientToGCNameItemResponse
@@ -6422,6 +6123,7 @@ $zBu@
 33CMsgClientToGCTourneyRejectInvite
 33CMsgClientToGCTourneyRevokeInvite
 33CMsgClientToGCUnlockCrateResponse
+33CMsgCreateTourneyPhase_FreeForAll
 33CMsgFulfillDynamicRecipeComponent
 33CMsgGCMsgMasterSetDirectory_SubGC
 33CMsgGCStorePurchaseCancelResponse
@@ -6521,734 +6223,6 @@ $zBu@
 35CNetworkedIKProceduralTargetContext
 35CPointEntityAlias_water_lod_control
 35CPortraitBackgroundParticleModifier
-35CSchemaNonConstructibleClassBindingI10CBreakableE
-35CSchemaNonConstructibleClassBindingI10CDCGPlayerE
-35CSchemaNonConstructibleClassBindingI10CEnvGlobalE
-35CSchemaNonConstructibleClassBindingI10CFilterLOSE
-35CSchemaNonConstructibleClassBindingI10CFogVolumeE
-35CSchemaNonConstructibleClassBindingI10CFuncBrushE
-35CSchemaNonConstructibleClassBindingI10CGameRulesE
-35CSchemaNonConstructibleClassBindingI10CGunTargetE
-35CSchemaNonConstructibleClassBindingI10CLightGlowE
-35CSchemaNonConstructibleClassBindingI10CLightSpotE
-35CSchemaNonConstructibleClassBindingI10CLogicAutoE
-35CSchemaNonConstructibleClassBindingI10CLogicCaseE
-35CSchemaNonConstructibleClassBindingI10CMathRemapE
-35CSchemaNonConstructibleClassBindingI10CNavVolumeE
-35CSchemaNonConstructibleClassBindingI10CPhysFixedE
-35CSchemaNonConstructibleClassBindingI10CPhysForceE
-35CSchemaNonConstructibleClassBindingI10CPhysHingeE
-35CSchemaNonConstructibleClassBindingI10CPhysMotorE
-35CSchemaNonConstructibleClassBindingI10CPointPushE
-35CSchemaNonConstructibleClassBindingI10CSkyCameraE
-35CSchemaNonConstructibleClassBindingI10CWorldItemE
-35CSchemaNonConstructibleClassBindingI10FilterTeamE
-35CSchemaNonConstructibleClassBindingI11CAreaPortalE
-35CSchemaNonConstructibleClassBindingI11CBaseEntityE
-35CSchemaNonConstructibleClassBindingI11CBaseFilterE
-35CSchemaNonConstructibleClassBindingI11CBasePlayerE
-35CSchemaNonConstructibleClassBindingI11CBaseToggleE
-35CSchemaNonConstructibleClassBindingI11CEconEntityE
-35CSchemaNonConstructibleClassBindingI11CEnvCubemapE
-35CSchemaNonConstructibleClassBindingI11CFilterNameE
-35CSchemaNonConstructibleClassBindingI11CFlexCyclerE
-35CSchemaNonConstructibleClassBindingI11CFogTriggerE
-35CSchemaNonConstructibleClassBindingI11CGameEntityE
-35CSchemaNonConstructibleClassBindingI11CInfoTargetE
-35CSchemaNonConstructibleClassBindingI11CLogicRelayE
-35CSchemaNonConstructibleClassBindingI11CModelStateE
-35CSchemaNonConstructibleClassBindingI11CNullEntityE
-35CSchemaNonConstructibleClassBindingI11CPhysImpactE
-35CSchemaNonConstructibleClassBindingI11CPhysLengthE
-35CSchemaNonConstructibleClassBindingI11CPhysMagnetE
-35CSchemaNonConstructibleClassBindingI11CPhysPulleyE
-35CSchemaNonConstructibleClassBindingI11CPhysTorqueE
-35CSchemaNonConstructibleClassBindingI11CPropVRHandE
-35CSchemaNonConstructibleClassBindingI11CScriptItemE
-35CSchemaNonConstructibleClassBindingI11CSoundPatchE
-35CSchemaNonConstructibleClassBindingI11IPlayerInfoE
-35CSchemaNonConstructibleClassBindingI12CBaseDMStartE
-35CSchemaNonConstructibleClassBindingI12CBaseTriggerE
-35CSchemaNonConstructibleClassBindingI12CChangeLevelE
-35CSchemaNonConstructibleClassBindingI12CDynamicPropE
-35CSchemaNonConstructibleClassBindingI12CEntityClassE
-35CSchemaNonConstructibleClassBindingI12CFilterClassE
-35CSchemaNonConstructibleClassBindingI12CFilterEnemyE
-35CSchemaNonConstructibleClassBindingI12CFilterModelE
-35CSchemaNonConstructibleClassBindingI12CHintMessageE
-35CSchemaNonConstructibleClassBindingI12CItemGenericE
-35CSchemaNonConstructibleClassBindingI12CKeepUprightE
-35CSchemaNonConstructibleClassBindingI12CLightEntityE
-35CSchemaNonConstructibleClassBindingI12CLogicBranchE
-35CSchemaNonConstructibleClassBindingI12CLogicScriptE
-35CSchemaNonConstructibleClassBindingI12CMathCounterE
-35CSchemaNonConstructibleClassBindingI12CMultiSourceE
-35CSchemaNonConstructibleClassBindingI12CPhysConvertE
-35CSchemaNonConstructibleClassBindingI12CPhysicsPropE
-35CSchemaNonConstructibleClassBindingI12CPointCameraE
-35CSchemaNonConstructibleClassBindingI12CPointEntityE
-35CSchemaNonConstructibleClassBindingI12CPointPrefabE
-35CSchemaNonConstructibleClassBindingI12CRagdollPropE
-35CSchemaNonConstructibleClassBindingI12CRevertSavedE
-35CSchemaNonConstructibleClassBindingI12CSceneEntityE
-35CSchemaNonConstructibleClassBindingI12CTimerEntityE
-35CSchemaNonConstructibleClassBindingI12CTriggerHurtE
-35CSchemaNonConstructibleClassBindingI12CTriggerLookE
-35CSchemaNonConstructibleClassBindingI12CTriggerOnceE
-35CSchemaNonConstructibleClassBindingI12CTriggerPushE
-35CSchemaNonConstructibleClassBindingI12CTriggerSaveE
-35CSchemaNonConstructibleClassBindingI12FilterHealthE
-35CSchemaNonConstructibleClassBindingI13CAI_ExpresserE
-35CSchemaNonConstructibleClassBindingI13CDebugHistoryE
-35CSchemaNonConstructibleClassBindingI13CDynamicLightE
-35CSchemaNonConstructibleClassBindingI13CEconWearableE
-35CSchemaNonConstructibleClassBindingI13CEnvExplosionE
-35CSchemaNonConstructibleClassBindingI13CFuncConveyorE
-35CSchemaNonConstructibleClassBindingI13CFuncOccluderE
-35CSchemaNonConstructibleClassBindingI13CFuncRotatingE
-35CSchemaNonConstructibleClassBindingI13CInfoLandmarkE
-35CSchemaNonConstructibleClassBindingI13CLogicCompareE
-35CSchemaNonConstructibleClassBindingI13CMarkupVolumeE
-35CSchemaNonConstructibleClassBindingI13COrnamentPropE
-35CSchemaNonConstructibleClassBindingI13CPathKeyFrameE
-35CSchemaNonConstructibleClassBindingI13CPhysThrusterE
-35CSchemaNonConstructibleClassBindingI13CRopeKeyframeE
-35CSchemaNonConstructibleClassBindingI13CSpotlightEndE
-35CSchemaNonConstructibleClassBindingI13CStripWeaponsE
-35CSchemaNonConstructibleClassBindingI13CTriggerBrushE
-35CSchemaNonConstructibleClassBindingI13IHandleEntityE
-35CSchemaNonConstructibleClassBindingI14CBaseAnimatingE
-35CSchemaNonConstructibleClassBindingI14CBaseViewModelE
-35CSchemaNonConstructibleClassBindingI14CBodyComponentE
-35CSchemaNonConstructibleClassBindingI14CBreakablePropE
-35CSchemaNonConstructibleClassBindingI14CEntityBlockerE
-35CSchemaNonConstructibleClassBindingI14CEnvCubemapBoxE
-35CSchemaNonConstructibleClassBindingI14CEnvCubemapFogE
-35CSchemaNonConstructibleClassBindingI14CEnvMicrophoneE
-35CSchemaNonConstructibleClassBindingI14CEnvSoundscapeE
-35CSchemaNonConstructibleClassBindingI14CEnvTimeOfDay2E
-35CSchemaNonConstructibleClassBindingI14CEnvWindSharedE
-35CSchemaNonConstructibleClassBindingI14CFilterContextE
-35CSchemaNonConstructibleClassBindingI14CFlexExpresserE
-35CSchemaNonConstructibleClassBindingI14CFogControllerE
-35CSchemaNonConstructibleClassBindingI14CFuncTimescaleE
-35CSchemaNonConstructibleClassBindingI14CGameSceneNodeE
-35CSchemaNonConstructibleClassBindingI14CLogicAutosaveE
-35CSchemaNonConstructibleClassBindingI14CLogicalEntityE
-35CSchemaNonConstructibleClassBindingI14CMessageEntityE
-35CSchemaNonConstructibleClassBindingI14CParticleLightE
-35CSchemaNonConstructibleClassBindingI14CPhysExplosionE
-35CSchemaNonConstructibleClassBindingI14CPhysicsSpringE
-35CSchemaNonConstructibleClassBindingI14CPointTemplateE
-35CSchemaNonConstructibleClassBindingI14CPropHMDAvatarE
-35CSchemaNonConstructibleClassBindingI14CRagdollMagnetE
-35CSchemaNonConstructibleClassBindingI14CRandStopwatchE
-35CSchemaNonConstructibleClassBindingI14CResponseQueueE
-35CSchemaNonConstructibleClassBindingI14CShadowControlE
-35CSchemaNonConstructibleClassBindingI14CTextureToggleE
-35CSchemaNonConstructibleClassBindingI14CTriggerCameraE
-35CSchemaNonConstructibleClassBindingI14CTriggerImpactE
-35CSchemaNonConstructibleClassBindingI14CTriggerRemoveE
-35CSchemaNonConstructibleClassBindingI14CTriggerVolumeE
-35CSchemaNonConstructibleClassBindingI14IBotControllerE
-35CSchemaNonConstructibleClassBindingI14IDamageHandlerE
-35CSchemaNonConstructibleClassBindingI14IHasAttributesE
-35CSchemaNonConstructibleClassBindingI15CAmbientGenericE
-35CSchemaNonConstructibleClassBindingI15CBaseConstraintE
-35CSchemaNonConstructibleClassBindingI15CCommentaryAutoE
-35CSchemaNonConstructibleClassBindingI15CEntityDissolveE
-35CSchemaNonConstructibleClassBindingI15CEntityInstanceE
-35CSchemaNonConstructibleClassBindingI15CEnvEntityMakerE
-35CSchemaNonConstructibleClassBindingI15CFilterMultipleE
-35CSchemaNonConstructibleClassBindingI15CFuncNavBlockerE
-35CSchemaNonConstructibleClassBindingI15CFuncWallToggleE
-35CSchemaNonConstructibleClassBindingI15CGameGibManagerE
-35CSchemaNonConstructibleClassBindingI15CGameRulesProxyE
-35CSchemaNonConstructibleClassBindingI15CInfoWorldLayerE
-35CSchemaNonConstructibleClassBindingI15CLightComponentE
-35CSchemaNonConstructibleClassBindingI15CLogicGameEventE
-35CSchemaNonConstructibleClassBindingI15CLogicProximityE
-35CSchemaNonConstructibleClassBindingI15CMathColorBlendE
-35CSchemaNonConstructibleClassBindingI15CParticleSystemE
-35CSchemaNonConstructibleClassBindingI15CPhysBallSocketE
-35CSchemaNonConstructibleClassBindingI15CPhysConstraintE
-35CSchemaNonConstructibleClassBindingI15CPlayerResourceE
-35CSchemaNonConstructibleClassBindingI15CPointHMDAnchorE
-35CSchemaNonConstructibleClassBindingI15CPointSpotlightE
-35CSchemaNonConstructibleClassBindingI15CPointWorldTextE
-35CSchemaNonConstructibleClassBindingI15CPoseControllerE
-35CSchemaNonConstructibleClassBindingI15CProjectedDecalE
-35CSchemaNonConstructibleClassBindingI15CRagdollManagerE
-35CSchemaNonConstructibleClassBindingI15CSpriteOrientedE
-35CSchemaNonConstructibleClassBindingI15CTFWearableItemE
-35CSchemaNonConstructibleClassBindingI15CTonemapTriggerE
-35CSchemaNonConstructibleClassBindingI15CTriggerGravityE
-35CSchemaNonConstructibleClassBindingI15CTriggerPhysicsE
-35CSchemaNonConstructibleClassBindingI16CAI_ChangeTargetE
-35CSchemaNonConstructibleClassBindingI16CBaseModelEntityE
-35CSchemaNonConstructibleClassBindingI16CColorCorrectionE
-35CSchemaNonConstructibleClassBindingI16CEntityComponentE
-35CSchemaNonConstructibleClassBindingI16CEnvScreenEffectE
-35CSchemaNonConstructibleClassBindingI16CFilterProximityE
-35CSchemaNonConstructibleClassBindingI16CFuncIllusionaryE
-35CSchemaNonConstructibleClassBindingI16CFuncVehicleClipE
-35CSchemaNonConstructibleClassBindingI16CInfoPlayerStartE
-35CSchemaNonConstructibleClassBindingI16CLightSpotEntityE
-35CSchemaNonConstructibleClassBindingI16CLogicBranchListE
-35CSchemaNonConstructibleClassBindingI16CLogicNPCCounterE
-35CSchemaNonConstructibleClassBindingI16CLogicNavigationE
-35CSchemaNonConstructibleClassBindingI16CMultiLightProxyE
-35CSchemaNonConstructibleClassBindingI16CNavVolumeVectorE
-35CSchemaNonConstructibleClassBindingI16CSingleplayRulesE
-35CSchemaNonConstructibleClassBindingI16CSkyboxReferenceE
-35CSchemaNonConstructibleClassBindingI16CTriggerCallbackE
-35CSchemaNonConstructibleClassBindingI16CTriggerMultipleE
-35CSchemaNonConstructibleClassBindingI16CTriggerTeleportE
-35CSchemaNonConstructibleClassBindingI16FilterDamageTypeE
-35CSchemaNonConstructibleClassBindingI16IRecipientFilterE
-35CSchemaNonConstructibleClassBindingI17CBaseCombatWeaponE
-35CSchemaNonConstructibleClassBindingI17CBaseMoveBehaviorE
-35CSchemaNonConstructibleClassBindingI17CConstraintAnchorE
-35CSchemaNonConstructibleClassBindingI17CDevtestHierarchyE
-35CSchemaNonConstructibleClassBindingI17CEnvDOFControllerE
-35CSchemaNonConstructibleClassBindingI17CEnvDeferredLightE
-35CSchemaNonConstructibleClassBindingI17CEnvScreenOverlayE
-35CSchemaNonConstructibleClassBindingI17CFuncVPhysicsClipE
-35CSchemaNonConstructibleClassBindingI17CHintMessageQueueE
-35CSchemaNonConstructibleClassBindingI17CInfoIntermissionE
-35CSchemaNonConstructibleClassBindingI17CLightDirectionalE
-35CSchemaNonConstructibleClassBindingI17CLightOrthoEntityE
-35CSchemaNonConstructibleClassBindingI17CLogicPlayerProxyE
-35CSchemaNonConstructibleClassBindingI17CModelPointEntityE
-35CSchemaNonConstructibleClassBindingI17CMovementSpeedModE
-35CSchemaNonConstructibleClassBindingI17CSceneListManagerE
-35CSchemaNonConstructibleClassBindingI17CScriptNavBlockerE
-35CSchemaNonConstructibleClassBindingI17CServerOnlyEntityE
-35CSchemaNonConstructibleClassBindingI17CSkeletonInstanceE
-35CSchemaNonConstructibleClassBindingI17CSoundEventEntityE
-35CSchemaNonConstructibleClassBindingI17CTriggerHurtGhostE
-35CSchemaNonConstructibleClassBindingI17CTriggerProximityE
-35CSchemaNonConstructibleClassBindingI18CDCGGameRulesProxyE
-35CSchemaNonConstructibleClassBindingI18CDevtestHierarchy2E
-35CSchemaNonConstructibleClassBindingI18CEnableMotionFixupE
-35CSchemaNonConstructibleClassBindingI18CEnvInstructorHintE
-35CSchemaNonConstructibleClassBindingI18CFilterMassGreaterE
-35CSchemaNonConstructibleClassBindingI18CFlexExpresserShimE
-35CSchemaNonConstructibleClassBindingI18CGameWeaponManagerE
-35CSchemaNonConstructibleClassBindingI18CGenericConstraintE
-35CSchemaNonConstructibleClassBindingI18CGenericFlexCyclerE
-35CSchemaNonConstructibleClassBindingI18CLogicLineToEntityE
-35CSchemaNonConstructibleClassBindingI18CPointEntityFinderE
-35CSchemaNonConstructibleClassBindingI18CRagdollConstraintE
-35CSchemaNonConstructibleClassBindingI18CScriptTriggerHurtE
-35CSchemaNonConstructibleClassBindingI18CScriptTriggerOnceE
-35CSchemaNonConstructibleClassBindingI18CScriptTriggerPushE
-35CSchemaNonConstructibleClassBindingI18CSimplePhysicsPropE
-35CSchemaNonConstructibleClassBindingI18CTriggerSoundscapeE
-35CSchemaNonConstructibleClassBindingI18CTriggerToggleSaveE
-35CSchemaNonConstructibleClassBindingI18IEconItemInterfaceE
-35CSchemaNonConstructibleClassBindingI19CAI_ChangeHintGroupE
-35CSchemaNonConstructibleClassBindingI19CBaseClientUIEntityE
-35CSchemaNonConstructibleClassBindingI19CBodyComponentPointE
-35CSchemaNonConstructibleClassBindingI19CBoneConstraintBaseE
-35CSchemaNonConstructibleClassBindingI19CEnvSoundscapeProxyE
-35CSchemaNonConstructibleClassBindingI19CFuncAreaPortalBaseE
-35CSchemaNonConstructibleClassBindingI19CFuncCombineBarrierE
-35CSchemaNonConstructibleClassBindingI19CFuncNavObstructionE
-35CSchemaNonConstructibleClassBindingI19CInfoGameEventProxyE
-35CSchemaNonConstructibleClassBindingI19CInfoParticleTargetE
-35CSchemaNonConstructibleClassBindingI19CInteractionManagerE
-35CSchemaNonConstructibleClassBindingI19CLogicCollisionPairE
-35CSchemaNonConstructibleClassBindingI19CLogicNPCCounterOBBE
-35CSchemaNonConstructibleClassBindingI19CMarkupVolumeTaggedE
-35CSchemaNonConstructibleClassBindingI19CPhysBoxMultiplayerE
-35CSchemaNonConstructibleClassBindingI19CPointClientCommandE
-35CSchemaNonConstructibleClassBindingI19CPointServerCommandE
-35CSchemaNonConstructibleClassBindingI19CPointValueRemapperE
-35CSchemaNonConstructibleClassBindingI19CSimplePhysicsBrushE
-35CSchemaNonConstructibleClassBindingI19CTonemapController2E
-35CSchemaNonConstructibleClassBindingI19CTriggerSndSosOpvarE
-35CSchemaNonConstructibleClassBindingI20CBaseCombatCharacterE
-35CSchemaNonConstructibleClassBindingI20CEmptyEntityInstanceE
-35CSchemaNonConstructibleClassBindingI20CEnvDetailControllerE
-35CSchemaNonConstructibleClassBindingI20CEnvInstructorVRHintE
-35CSchemaNonConstructibleClassBindingI20CEnvLightProbeVolumeE
-35CSchemaNonConstructibleClassBindingI20CEnvProjectedTextureE
-35CSchemaNonConstructibleClassBindingI20CFailableAchievementE
-35CSchemaNonConstructibleClassBindingI20CFuncPropRespawnZoneE
-35CSchemaNonConstructibleClassBindingI20CInfoOverlayAccessorE
-35CSchemaNonConstructibleClassBindingI20CLogicActiveAutosaveE
-35CSchemaNonConstructibleClassBindingI20CLogicNPCCounterAABBE
-35CSchemaNonConstructibleClassBindingI20CMarkupVolumeWithRefE
-35CSchemaNonConstructibleClassBindingI20CPhysSlideConstraintE
-35CSchemaNonConstructibleClassBindingI20CPhysicsEntitySolverE
-35CSchemaNonConstructibleClassBindingI20CPhysicsPropOverrideE
-35CSchemaNonConstructibleClassBindingI20CPointClientUIDialogE
-35CSchemaNonConstructibleClassBindingI20CPointCommentaryNodeE
-35CSchemaNonConstructibleClassBindingI20CPointVelocitySensorE
-35CSchemaNonConstructibleClassBindingI20CPropVRTrackedObjectE
-35CSchemaNonConstructibleClassBindingI20CRagdollPropAttachedE
-35CSchemaNonConstructibleClassBindingI20CResponseCriteriaSetE
-35CSchemaNonConstructibleClassBindingI20CSoundEventParameterE
-35CSchemaNonConstructibleClassBindingI20CSoundOpvarSetEntityE
-35CSchemaNonConstructibleClassBindingI20CTargetChangeGravityE
-35CSchemaNonConstructibleClassBindingI20CVRHandModelOverrideE
-35CSchemaNonConstructibleClassBindingI21CBaseAnimatingOverlayE
-35CSchemaNonConstructibleClassBindingI21CBaseAttributableItemE
-35CSchemaNonConstructibleClassBindingI21CBaseVRHandAttachmentE
-35CSchemaNonConstructibleClassBindingI21CEnvDeferredSpotLightE
-35CSchemaNonConstructibleClassBindingI21CFuncAreaPortalWindowE
-35CSchemaNonConstructibleClassBindingI21CInstancedSceneEntityE
-35CSchemaNonConstructibleClassBindingI21CLogicMeasureMovementE
-35CSchemaNonConstructibleClassBindingI21CPostProcessingVolumeE
-35CSchemaNonConstructibleClassBindingI21CServerRagdollTriggerE
-35CSchemaNonConstructibleClassBindingI21CSoundEventAABBEntityE
-35CSchemaNonConstructibleClassBindingI21CSpriteAlias_env_glowE
-35CSchemaNonConstructibleClassBindingI22CBaseMultiplayerPlayerE
-35CSchemaNonConstructibleClassBindingI22CColorCorrectionVolumeE
-35CSchemaNonConstructibleClassBindingI22CDevtestHierarchyChildE
-35CSchemaNonConstructibleClassBindingI22CEntityComponentHelperE
-35CSchemaNonConstructibleClassBindingI22CInfoDynamicShadowHintE
-35CSchemaNonConstructibleClassBindingI22CInstructorEventEntityE
-35CSchemaNonConstructibleClassBindingI22CMaterialModifyControlE
-35CSchemaNonConstructibleClassBindingI22CMultiplayer_ExpresserE
-35CSchemaNonConstructibleClassBindingI22CPointGamestatsCounterE
-35CSchemaNonConstructibleClassBindingI22CPostProcessControllerE
-35CSchemaNonConstructibleClassBindingI22CScriptTriggerMultipleE
-35CSchemaNonConstructibleClassBindingI22CServerOnlyModelEntityE
-35CSchemaNonConstructibleClassBindingI22CServerOnlyPointEntityE
-35CSchemaNonConstructibleClassBindingI22CTriggerPlayerMovementE
-35CSchemaNonConstructibleClassBindingI23CCommentaryViewPositionE
-35CSchemaNonConstructibleClassBindingI23CInfoSpawnGroupLandmarkE
-35CSchemaNonConstructibleClassBindingI23CLightDirectionalEntityE
-35CSchemaNonConstructibleClassBindingI23CLightEnvironmentEntityE
-35CSchemaNonConstructibleClassBindingI23CLogicGameEventListenerE
-35CSchemaNonConstructibleClassBindingI23CMarkupVolumeTagged_NavE
-35CSchemaNonConstructibleClassBindingI23CPhysicsPropMultiplayerE
-35CSchemaNonConstructibleClassBindingI23CPhysicsPropRespawnableE
-35CSchemaNonConstructibleClassBindingI23CPointHMDAnchorOverrideE
-35CSchemaNonConstructibleClassBindingI23CSoundOpvarSetOBBEntityE
-35CSchemaNonConstructibleClassBindingI24CEnvPlayerSurfaceTriggerE
-35CSchemaNonConstructibleClassBindingI24CInfoTeleportDestinationE
-35CSchemaNonConstructibleClassBindingI24CPointClientUIWorldPanelE
-35CSchemaNonConstructibleClassBindingI24CSoundOpvarSetAABBEntityE
-35CSchemaNonConstructibleClassBindingI24IPhysicsPlayerControllerE
-35CSchemaNonConstructibleClassBindingI25CAI_ExpresserWithFollowupE
-35CSchemaNonConstructibleClassBindingI25CEnvSoundscapeTriggerableE
-35CSchemaNonConstructibleClassBindingI25CFuncInteractionLayerClipE
-35CSchemaNonConstructibleClassBindingI25CFuncNavConnectionBlockerE
-35CSchemaNonConstructibleClassBindingI25CInfoInstructorHintTargetE
-35CSchemaNonConstructibleClassBindingI25CInfoSpawnGroupLoadUnloadE
-35CSchemaNonConstructibleClassBindingI25CItemGenericTriggerHelperE
-35CSchemaNonConstructibleClassBindingI25CMarkupVolumeTagged_GroupE
-35CSchemaNonConstructibleClassBindingI25CNetworkTransmitComponentE
-35CSchemaNonConstructibleClassBindingI25CSoundOpvarSetPointEntityE
-35CSchemaNonConstructibleClassBindingI26CMarkupVolumeTagged_NavL4DE
-35CSchemaNonConstructibleClassBindingI26CNavVolumeCalculatedVectorE
-35CSchemaNonConstructibleClassBindingI26CPointPlayerMoveConstraintE
-35CSchemaNonConstructibleClassBindingI26CTriggerActiveWeaponDetectE
-35CSchemaNonConstructibleClassBindingI27CBaseFlexAlias_funCBaseFlexE
-35CSchemaNonConstructibleClassBindingI27CBodyComponentBaseAnimatingE
-35CSchemaNonConstructibleClassBindingI27CEnvVolumetricFogControllerE
-35CSchemaNonConstructibleClassBindingI27CMarkupVolumeTagged_AI_HLVRE
-35CSchemaNonConstructibleClassBindingI27CMarkupVolumeTagged_NavHLVRE
-35CSchemaNonConstructibleClassBindingI27CPointAngularVelocitySensorE
-35CSchemaNonConstructibleClassBindingI28CEnvCombinedLightProbeVolumeE
-35CSchemaNonConstructibleClassBindingI28CLightSpotAlias_light_glspotE
-35CSchemaNonConstructibleClassBindingI28CPointBroadcastClientCommandE
-35CSchemaNonConstructibleClassBindingI28CPointClientUIWorldTextPanelE
-35CSchemaNonConstructibleClassBindingI28CRopeKeyframeAlias_move_ropeE
-35CSchemaNonConstructibleClassBindingI28CSkeletonAnimationControllerE
-35CSchemaNonConstructibleClassBindingI29CBodyComponentBaseModelEntityE
-35CSchemaNonConstructibleClassBindingI30CBodyComponentSkeletonInstanceE
-35CSchemaNonConstructibleClassBindingI30CDynamicPropAlias_dynamic_propE
-35CSchemaNonConstructibleClassBindingI30CGenericFlexCyclerAlias_cyclerE
-35CSchemaNonConstructibleClassBindingI30CPhysicsPropAlias_physics_propE
-35CSchemaNonConstructibleClassBindingI32CPhysHingeAlias_phys_hinge_localE
-35CSchemaNonConstructibleClassBindingI34CBodyComponentBaseAnimatingOverlayE
-35CSchemaNonConstructibleClassBindingI34CEnvSoundscapeAlias_snd_soundscapeE
-35CSchemaNonConstructibleClassBindingI35CPointEntityAlias_water_lod_controlE
-35CSchemaNonConstructibleClassBindingI38CRagdollPropAlias_physics_prop_ragdollE
-35CSchemaNonConstructibleClassBindingI38CSoundEventEntityAlias_snd_event_pointE
-35CSchemaNonConstructibleClassBindingI39CDynamicPropAlias_prop_dynamic_overrideE
-35CSchemaNonConstructibleClassBindingI43CSceneEntityAlias_logic_choreographed_sceneE
-35CSchemaNonConstructibleClassBindingI45CEnvSoundscapeProxyAlias_snd_soundscape_proxyE
-35CSchemaNonConstructibleClassBindingI48CTonemapController2Alias_env_tonemap_controller2E
-35CSchemaNonConstructibleClassBindingI57CEnvSoundscapeTriggerableAlias_snd_soundscape_triggerableE
-35CSchemaNonConstructibleClassBindingI5CBeamE
-35CSchemaNonConstructibleClassBindingI5CItemE
-35CSchemaNonConstructibleClassBindingI5CTeamE
-35CSchemaNonConstructibleClassBindingI6CDecalE
-35CSchemaNonConstructibleClassBindingI6CLightE
-35CSchemaNonConstructibleClassBindingI6CWorldE
-35CSchemaNonConstructibleClassBindingI7CEnvSkyE
-35CSchemaNonConstructibleClassBindingI7CGameUIE
-35CSchemaNonConstructibleClassBindingI7CShowerE
-35CSchemaNonConstructibleClassBindingI7CSpriteE
-35CSchemaNonConstructibleClassBindingI8CAISoundE
-35CSchemaNonConstructibleClassBindingI8CCreditsE
-35CSchemaNonConstructibleClassBindingI8CEnvBeamE
-35CSchemaNonConstructibleClassBindingI8CEnvFadeE
-35CSchemaNonConstructibleClassBindingI8CEnvTiltE
-35CSchemaNonConstructibleClassBindingI8CEnvZoomE
-35CSchemaNonConstructibleClassBindingI8CMessageE
-35CSchemaNonConstructibleClassBindingI8CPhysBoxE
-35CSchemaNonConstructibleClassBindingI8IRagdollE
-35CSchemaNonConstructibleClassBindingI9CBaseFlexE
-35CSchemaNonConstructibleClassBindingI9CBasePropE
-35CSchemaNonConstructibleClassBindingI9CEnvClockE
-35CSchemaNonConstructibleClassBindingI9CEnvShakeE
-35CSchemaNonConstructibleClassBindingI9CEnvSparkE
-35CSchemaNonConstructibleClassBindingI9CFuncWallE
-35CSchemaNonConstructibleClassBindingI9CFunc_LODE
-35CSchemaNonConstructibleClassBindingI9CInfoDataE
-35CSchemaNonConstructibleClassBindingI9CPropDartE
-35CSchemaNonConstructibleClassBindingI9CPushableE
-35CSchemaNonConstructibleClassBindingI9CSoundEntE
-35CSchemaNonConstructibleClassBindingI9CSprayCanE
-35CSchemaNonConstructibleClassBindingIN10CBreakable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CDCGPlayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CEnvGlobal26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CFilterLOS26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CFogVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CFuncBrush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CGunTarget26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CLightGlow26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CLightSpot26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CLogicAuto26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CLogicCase26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CMathRemap26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CPhysFixed26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CPhysForce26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CPhysHinge26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CPhysMotor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CPointPush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CSkyCamera26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10CWorldItem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN10FilterTeam26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CAreaPortal26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CBaseEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CBaseFilter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CBasePlayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CBaseToggle26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CEconEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CEnvCubemap26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CFilterName26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CFlexCycler26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CFogTrigger26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CGameEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CInfoTarget26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CLogicRelay26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CNullEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPhysImpact26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPhysLength26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPhysMagnet26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPhysPulley26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPhysTorque26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CPropVRHand26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN11CScriptItem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CBaseDMStart26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CBaseTrigger26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CChangeLevel26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CDynamicProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CFilterClass26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CFilterEnemy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CFilterModel26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CItemGeneric26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CKeepUpright26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CLightEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CLogicBranch26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CLogicScript26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CMathCounter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CMultiSource26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CPhysConvert26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CPhysicsProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CPointCamera26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CPointEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CPointPrefab26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CRagdollProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CRevertSaved26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CSceneEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTimerEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTriggerHurt26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTriggerLook26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTriggerOnce26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTriggerPush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12CTriggerSave26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN12FilterHealth26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CDebugHistory26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CDynamicLight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CEconWearable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CEnvExplosion26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CFuncConveyor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CFuncOccluder26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CFuncRotating26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CInfoLandmark26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CLogicCompare26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CMarkupVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13COrnamentProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CPathKeyFrame26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CPhysThruster26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CRopeKeyframe26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CSpotlightEnd26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CStripWeapons26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN13CTriggerBrush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CBaseAnimating26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CBaseViewModel26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CBreakableProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEntityBlocker26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEnvCubemapBox26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEnvCubemapFog26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEnvMicrophone26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEnvSoundscape26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CEnvTimeOfDay226CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CFilterContext26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CFlexExpresser26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CFogController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CFuncTimescale26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CLogicAutosave26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CLogicalEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CMessageEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CParticleLight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CPhysExplosion26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CPhysicsSpring26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CPointTemplate26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CPropHMDAvatar26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CRagdollMagnet26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CResponseQueue17CDeferredResponseEE
-35CSchemaNonConstructibleClassBindingIN14CShadowControl26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CTextureToggle26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CTriggerCamera26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CTriggerImpact26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CTriggerRemove26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN14CTriggerVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CAmbientGeneric26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CCommentaryAuto26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CEntityDissolve26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CEntityInstance26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CEnvEntityMaker26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CFilterMultiple26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CFuncNavBlocker26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CFuncWallToggle26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CGameGibManager26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CGameRulesProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CInfoWorldLayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CLogicGameEvent26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CLogicProximity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CMathColorBlend26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CParticleSystem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPhysBallSocket26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPhysConstraint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPlayerResource26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPointHMDAnchor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPointSpotlight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPointWorldText26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CPoseController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CProjectedDecal26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CRagdollManager26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CSpriteOriented26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CTFWearableItem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CTonemapTrigger26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CTriggerGravity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN15CTriggerPhysics26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CAI_ChangeTarget26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CBaseModelEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CColorCorrection26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CEnvScreenEffect26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CFilterProximity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CFuncIllusionary26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CFuncVehicleClip26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CInfoPlayerStart26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CLightSpotEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CLogicBranchList26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CLogicNPCCounter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CLogicNavigation26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CMultiLightProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CSkyboxReference26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CTriggerCallback26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CTriggerMultiple26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16CTriggerTeleport26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN16FilterDamageType26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CBaseCombatWeapon26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CBaseMoveBehavior26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CConstraintAnchor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CDevtestHierarchy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CEnvDOFController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CEnvDeferredLight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CEnvScreenOverlay26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CFuncVPhysicsClip26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CInfoIntermission26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CLightDirectional26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CLightOrthoEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CLogicPlayerProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CModelPointEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CMovementSpeedMod26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CSceneListManager26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CScriptNavBlocker26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CServerOnlyEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CSoundEventEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CTriggerHurtGhost26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN17CTriggerProximity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CDCGGameRulesProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CDevtestHierarchy226CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CEnableMotionFixup26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CEnvInstructorHint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CFilterMassGreater26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CFlexExpresserShim26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CGameWeaponManager26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CGenericConstraint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CGenericFlexCycler26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CLogicLineToEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CPointEntityFinder26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CRagdollConstraint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CScriptTriggerHurt26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CScriptTriggerOnce26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CScriptTriggerPush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CSimplePhysicsProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CTriggerSoundscape26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN18CTriggerToggleSave26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CAI_ChangeHintGroup26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CBaseClientUIEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CEnvSoundscapeProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CFuncAreaPortalBase26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CFuncCombineBarrier26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CFuncNavObstruction26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CInfoGameEventProxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CInfoParticleTarget26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CLogicCollisionPair26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CLogicNPCCounterOBB26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CMarkupVolumeTagged26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CPhysBoxMultiplayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CPointClientCommand26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CPointServerCommand26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CPointValueRemapper26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CSimplePhysicsBrush26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CTonemapController226CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN19CTriggerSndSosOpvar26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CBaseCombatCharacter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEmptyEntityInstance26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEnvDetailController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEnvInstructorVRHint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEnvLightProbeVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CEnvProjectedTexture26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CFuncPropRespawnZone26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CInfoOverlayAccessor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CLogicActiveAutosave26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CLogicNPCCounterAABB26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CMarkupVolumeWithRef26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPhysSlideConstraint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPhysicsEntitySolver26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPhysicsPropOverride26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPointClientUIDialog26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPointCommentaryNode26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPointVelocitySensor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CPropVRTrackedObject26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CRagdollPropAttached26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CSoundEventParameter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CSoundOpvarSetEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CTargetChangeGravity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN20CVRHandModelOverride26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CBaseAnimatingOverlay26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CBaseAttributableItem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CBaseVRHandAttachment26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CEnvDeferredSpotLight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CFuncAreaPortalWindow26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CInstancedSceneEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CLogicMeasureMovement26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CPostProcessingVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CServerRagdollTrigger26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CSoundEventAABBEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN21CSpriteAlias_env_glow26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CBaseMultiplayerPlayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CColorCorrectionVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CDevtestHierarchyChild26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CInfoDynamicShadowHint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CInstructorEventEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CMaterialModifyControl26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CPointGamestatsCounter26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CPostProcessController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CScriptTriggerMultiple26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CServerOnlyModelEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CServerOnlyPointEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN22CTriggerPlayerMovement26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CCommentaryViewPosition26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CInfoSpawnGroupLandmark26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CLightDirectionalEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CLightEnvironmentEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CLogicGameEventListener26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CMarkupVolumeTagged_Nav26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CPhysicsPropMultiplayer26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CPhysicsPropRespawnable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CPointHMDAnchorOverride26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN23CSoundOpvarSetOBBEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN24CEnvPlayerSurfaceTrigger26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN24CInfoTeleportDestination26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN24CPointClientUIWorldPanel26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN24CSoundOpvarSetAABBEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CEnvSoundscapeTriggerable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CFuncInteractionLayerClip26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CFuncNavConnectionBlocker26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CInfoInstructorHintTarget26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CInfoSpawnGroupLoadUnload26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CItemGenericTriggerHelper26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CMarkupVolumeTagged_Group26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN25CSoundOpvarSetPointEntity26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN26CMarkupVolumeTagged_NavL4D26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN26CPointPlayerMoveConstraint26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN26CTriggerActiveWeaponDetect26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN27CBaseFlexAlias_funCBaseFlex26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN27CEnvVolumetricFogController26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN27CMarkupVolumeTagged_AI_HLVR26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN27CMarkupVolumeTagged_NavHLVR26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN27CPointAngularVelocitySensor26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN28CEnvCombinedLightProbeVolume26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN28CLightSpotAlias_light_glspot26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN28CPointBroadcastClientCommand26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN28CPointClientUIWorldTextPanel26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN28CRopeKeyframeAlias_move_rope26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN30CDynamicPropAlias_dynamic_prop26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN30CGenericFlexCyclerAlias_cycler26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN30CPhysicsPropAlias_physics_prop26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN32CPhysHingeAlias_phys_hinge_local26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN34CEnvSoundscapeAlias_snd_soundscape26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN35CPointEntityAlias_water_lod_control26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN38CRagdollPropAlias_physics_prop_ragdoll26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN38CSoundEventEntityAlias_snd_event_point26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN39CDynamicPropAlias_prop_dynamic_override26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN43CSceneEntityAlias_logic_choreographed_scene26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN45CEnvSoundscapeProxyAlias_snd_soundscape_proxy26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN48CTonemapController2Alias_env_tonemap_controller226CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN57CEnvSoundscapeTriggerableAlias_snd_soundscape_triggerable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN5CBeam26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN5CItem26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN5CTeam26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN6CDecal26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN6CLight26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN6CWorld26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN7CEnvSky26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN7CGameUI26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN7CShower26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN7CSprite26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CAISound26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CCredits26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CEnvBeam26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CEnvFade26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CEnvTilt26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CEnvZoom26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CMessage26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN8CPhysBox26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CBaseFlex26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CBaseProp26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CEnvClock26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CEnvShake26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CEnvSpark26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CFuncWall26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CFunc_LOD26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CInfoData26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CPropDart26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CPushable26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CSoundEnt26CEntityInstanceEntityClassEE
-35CSchemaNonConstructibleClassBindingIN9CSprayCan26CEntityInstanceEntityClassEE
 35CSosFilterSetSoundEventFieldsInfo_t
 35CTraceMsg_PreviewDeathResultChanged
 35CTraceMsg_UnitChangedCombatPosition
@@ -7263,6 +6237,7 @@ $zBu@
 36CMsgClientToGCPrivateLobbyInviteUser
 36CMsgClientToGCPrivateLobbyStartMatch
 36CMsgClientToGCTourneyGetInfoResponse
+36CMsgClientToGCTourneyJoinOpenTourney
 36CMsgEconPlayerStrangeCountAdjustment
 36CMsgGCGetPartnerAccountLink_Response
 36CMsgGCMsgMasterSetDirectory_Response
@@ -7316,6 +6291,7 @@ $zBu@
 38CGCSystemMsg_GetPurchaseTrust_Response
 38CGCToGCMsgMasterStartupComplete_GCInfo
 38CMsgAnyToGCReportAsserts_TrackedAssert
+38CMsgClientToGCAIGauntletResultResponse
 38CMsgClientToGCLimitedGetFormatResponse
 38CMsgClientToGCPrivateLobbyJoinChatRoom
 38CMsgClientToGCPrivateLobbyJoinResponse
@@ -7366,7 +6342,6 @@ $zBu@
 39CMsgRequestCrateEscalationLevelResponse
 39CMsgRequestItemPurgatory_RefundPurchase
 39CMsgServerCrashSentinelFile_DCGGameInfo
-39CSchemaNonConstructibleClassBindingBase
 39CSpawnGroupCompletionCallbackGameSystem
 39CTraceFilterSkipTwoEntitiesAndTeammates
 39CUserMsg_ParticleManager_CreateParticle
@@ -7377,7 +6352,7 @@ $zBu@
 3Affff~'
 3D90}
 3G@fffff
-3H;0t7H
+3H90t<H
 3[A\]
 3[A\]H
 3\.,I
@@ -7474,6 +6449,8 @@ $zBu@
 44CInlineJob_CMsgGCToServerAddTourneySpectator
 44CMsgClientToGCPrivateLobbyInviteUserResponse
 44CMsgClientToGCPrivateLobbyStartMatchResponse
+44CMsgClientToGCTourneyJoinOpenTourneyResponse
+44CMsgGauntletConfig_GauntletPointsLeaderboard
 44CMsgServerSignoutData_GameOptions_GameOption
 44CMsgServerToGCMatchSignoutPermissionResponse
 456789:;<=
@@ -7597,7 +6574,6 @@ $zBu@
 67&-@
 692t&H
 692t+H
-6;2t&H
 6;p@t-H
 6<]q@
 6<u7@
@@ -7609,6 +6585,7 @@ $zBu@
 6@u!V
 6A3333c
 6A;1t"
+6AUATSH
 6CCoJob
 6CDecal
 6CLight
@@ -7692,6 +6669,7 @@ $zBu@
 8Czt$H
 8E9l$`
 8EGNv@
+8H;=	
 8HcGPH
 8HcK0A
 8HcW`
@@ -7728,12 +6706,12 @@ $zBu@
 8t9E1
 8|@ffff
 9$@]m
+91tyHcI 
 92t.H
 95*P>
 98N*>
 999999
 99w(|&H
-9:wYUH
 9>J"@TJ
 9@(D@
 9A3333#
@@ -7787,7 +6765,6 @@ $zBu@
 9ILoopMode
 9IRegistry
 9ISequence
-9IcT$
 9JDt<H9
 9JcL9
 9N ~GL
@@ -7795,12 +6772,12 @@ $zBu@
 9X`~_H
 9Zg,>4
 9dPipvj
-9event %s "%s"
 9f4M38
 9gCN>
 9jsA{
 9k_ItemPurgatoryResponse_Finalize_Failed_CouldNotFindItems
 9n@3333
+9unified
 9w UH
 9w0UH
 9w4UH
@@ -7822,7 +6799,6 @@ $zBu@
 ::ExecGameTypeCfg
 :=]7e
 :@p%;6
-:CNavVolumeAll
 :T@dY0
 :Ug59
 :Z0LA
@@ -7830,6 +6806,7 @@ $zBu@
 :[A\]
 :[tlL
 :m2OS
+:navlib
 :x&4I,
 ; @t{Ic
 ;(~M7
@@ -7850,19 +6827,19 @@ $zBu@
 ;0tWD
 ;0tXD
 ;0t\D
+;0t_D
 ;1tyHcI
 ;2t)H
 ;2t,H
 ;2t1H
-;2t8H
 ;2tfA
 ;39!@ffff
 ;3@F%u
 ;4,F]
-;57\K
-;58!J
-;5;+J
-;5S+J
+;5A3B
+;5S:B
+;5Y3B
+;5\GC
 ;8tcH
 ;9t4H
 ;:HcR
@@ -7879,25 +6856,25 @@ $zBu@
 ;G tu+G$L
 ;GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT
 ;HDtYH
-;Hc5mV
 ;I9<$uU
-;IcL$
 ;K st
 ;O<gK
 ;S8t	1
 ;V8}eUH
 ;WD|2H
+;Yxt#H
 ;Z u*
+;Z(t11
 ;Z(~3H
-;[A\A]A^]
+;[A\]
 ;[A\]H
 ;^pt;H
 ;_(t0I
 ;c?BU
 ;fA9<$
 ;k_ItemPurgatoryResponse_Finalize_Failed_ItemsNotInPurgatory
-;p t)A
 ;p$t,
+;p(t)A
 ;pTt$H9
 ;pTt;H
 ;p\t(A
@@ -7909,14 +6886,14 @@ $zBu@
 ;wH|#
 ;wH|#H
 ;wp|	]
-;~@UH
-;~Dt*;~Ht-9~Lf
+;~HUH
+;~Lt*;~Pt-9~Tf
 ;~hy?'
 <	u 1
 <	u,1
-<	u0H
 <	uKI
 <	uMUH
+<	uhUH
 <	v?@
 <	w)A
 <	w>H
@@ -7926,6 +6903,8 @@ $zBu@
 <!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
 <!-- schH
 <$/tsL
+<$A\A]A^]
+<$A\A]H
 <$A\H
 <$A\]
 <$E;|$
@@ -8031,6 +7010,7 @@ $zBu@
 ============================================
 ====================================================================
 =?_w_:R
+=JRJH
 =N3@\
 =\rLG@
 =\rNP@
@@ -8106,7 +7086,6 @@ $zBu@
 ?*ij~
 ?*oG8-
 ?+Vh{O@
-?+dev_simulate_gcdown
 ?+hZbe4
 ?,F]k
 ?,cC7
@@ -8177,6 +7156,7 @@ $zBu@
 ?B\9{g
 ?CSceneTokenProcessor::Error:  %s in '%s' at offset %llu : line %u : char %llu
 ?Create(CDCGLobby)
+?Current sound patches: %d
 ?D]`,
 ?ERCP
 ?F:"'FL
@@ -8193,10 +7173,10 @@ $zBu@
 ?R8q(2)
 ?R||Bv>
 ?S]Nv$x
+?SteamClient018
 ?T%@O
 ?TFm,r
 ?UUUUUU
-?VCCDt
 ?Vc	kc,
 ?Vdt@
 ?Wzm6V"
@@ -8219,8 +7199,10 @@ $zBu@
 ?aR||B
 ?aXY6
 ?am<{
+?animationgraph
 ?bMeQ
 ?bQ	6KU
+?bvcd
 ?c	kc
 ?cLU5
 ?dj\I<
@@ -8249,7 +7231,7 @@ $zBu@
 ?lzPP
 ?m ]lZi
 ?mEQV
-?m_BoolVariables
+?m_iRawValue32
 ?m_vecX
 ?n1?74%
 ?nav_use_place %s
@@ -8308,6 +7290,7 @@ $zBu@
 @ HcC
 @ [A\A]]
 @ [A\]
+@ ion
 @"6X8I
 @"lxz
 @$*T7
@@ -8325,6 +7308,7 @@ $zBu@
 @)XKP
 @){K9_
 @+,]f}/
+@,t9L
 @-oyrn
 @/5B?S
 @0A;@@
@@ -8401,11 +7385,12 @@ $zBu@
 @3333wM
 @3333wr
 @3333y
+@4A\]
 @5z5@i  @
 @6;R}
 @6@`YiR
 @8/N|
-@8A\A]A^]
+@8AZA[H
 @8A^]
 @8V{;6
 @8gDio
@@ -8426,14 +7411,14 @@ $zBu@
 @@h=|
 @@w8p
 @A;\$H
-@AUATSH
+@ATSH
 @CW"P
 @DA\H
 @DP5z5@
 @GZ*oG 7@
 @Gr}H
 @HH;E
-@HI;D$H
+@HI;FH
 @HcC 
 @HcC(
 @Lcg(I
@@ -8445,14 +7430,16 @@ $zBu@
 @P<*u
 @P</t
 @P|;A
+@QAngle
 @SNDLVL_
 @TpxADz"@
 @UN{J
-@V<	t
+@V[A\]
 @Vc	kc
 @W?,}
 @X9ChtyH
 @X9Chu
+@XA\A]A^]
 @XA^]
 @XtMH9
 @YLl>
@@ -8470,7 +7457,6 @@ $zBu@
 @`McR0B
 @`Mc[0B
 @`YiR
-@`f9<0
 @a2U0
 @a2U0*
 @a2U0*	
@@ -8564,6 +7550,7 @@ $zBu@
 @h"lxz
 @h"lxz=k@
 @h?RD
+@hA#P\H
 @hA#x\H
 @hi]YX&
 @i4^_
@@ -8574,6 +7561,7 @@ $zBu@
 @pH90
 @player_start_teleport_destination
 @p}Xo
+@sA8Gsu
 @sJ@L
 @t&LckHE
 @t.IcL$HH
@@ -8582,9 +7570,10 @@ $zBu@
 @t2HcK4H
 @t2HcK\H
 @t2HcO0H
-@t2IcOTH
+@t2IcNPH
 @t3Ic|$`H
 @t4HcG0H
+@t7IcNLH
 @t<UH
 @tBE+
 @tB[A\]
@@ -8629,18 +7618,21 @@ A#P\H
 A#T$lH
 A#U\H
 A#UlH
+A#V\H
 A#p\H
 A#u\H
 A#x\H
 A#|$TH
+A#|$\H
 A&iG@p
 A(H9G(
+A(Ic\$ A;\$0
 A(Lcc D;c0
 A(Lck D;k0
+A(Lcs D;s0
 A+D$$
 A+D$$H
 A+D$$I
-A+D$8
 A+E$1
 A+E$A
 A+E$H
@@ -8652,7 +7644,6 @@ A+G$I
 A+G$f
 A+M$L
 A+N$H
-A+N$Hc
 A+O$H
 A+O$Hc
 A+P@I
@@ -8670,7 +7661,6 @@ A+W$Hc
 A+W$f
 A+\$$Hc
 A+]$Hc
-A+^$Hc
 A+_$H
 A+_$Hc
 A+_$L
@@ -8690,14 +7680,13 @@ A3333eY
 A3333k
 A3333s
 A3333}
-A3BH)
-A3FH)
 A5fSXbf7
 A8E6t
 A8G1t#I
 A8Ic\$ A;\$0
 A8Lcc D;c0
 A8Lck D;k0
+A8Lcs D;s0
 A8Mcl$ E;l$0
 A94	H
 A9D$ 
@@ -8718,11 +7707,12 @@ A9NLA
 A9Nh~
 A9OLA
 A9T$ t
-A9T$@t
-A9T$@t$I
-A9V@t'I
+A9T$Ht
+A9T$Ht$I
+A9VHt'I
 A9\$ 
 A9\$ t=
+A9\$ ~%I
 A9\$(w
 A9\$,
 A9\$8
@@ -8732,7 +7722,7 @@ A9\$X
 A9\$`
 A9\$h
 A9\$p
-A9\$utKI
+A9\$utOI
 A9](u
 A9]8~+L
 A9]p~SI
@@ -8747,6 +7737,7 @@ A;D$8
 A;D$PA
 A;D$Pt
 A;D$X}
+A;D$`}
 A;D$p
 A;D$p|
 A;EPs
@@ -8777,6 +7768,7 @@ A;\$H
 A;\$`
 A;\$h|
 A;\$h}5
+A;]$w
 A;](|
 A;]8|
 A;]H|
@@ -8788,6 +7780,7 @@ A;]p|
 A;]x|
 A;]x}5L
 A;^ t!I
+A;^$w
 A;^(u
 A;^h|
 A;^l|!I
@@ -10040,13 +9033,12 @@ ATSLcg
 ATSLcg H
 ATSfA
 ATSt$@
-ATSt>H
 ATStDH
 ATStEL
-ATStJA
 ATStML
-ATSt\H
+ATStRA
 ATSt_H
+ATStkH
 ATSttH
 ATSv=
 ATSw(H
@@ -10065,6 +9057,7 @@ ATTEMPTED TO DECOMMIT OWNED MEMORY STACK SPACE
 ATUSH
 AUAT1
 AUATA
+AUATD
 AUATE
 AUATE1
 AUATH
@@ -10078,7 +9071,6 @@ AUATS@
 AUATSD
 AUATSH
 AUATSHc
-AUATSHcG
 AUATSI
 AUATSL
 AUATSLc'E)
@@ -10138,6 +9130,7 @@ AWAVATSH
 AWAVAU
 AWAVAUA
 AWAVAUATA
+AWAVAUATARSH
 AWAVAUATD
 AWAVAUATE
 AWAVAUATE1
@@ -10177,17 +9170,16 @@ AWAVMc
 AWAVSH
 AWAVSHc
 AWAVfA
-AWhU(
 AXAY1
 AXAYH
 AXAYM
-AXtxH
 AXu!I
 AYAZA
 AYAZD
 AYAZH
 AYAZI
 AYAZt
+AYAZu
 AYAZv
 AZA[H
 AZA[u`H
@@ -10198,7 +9190,6 @@ A[A^H
 A[A^u
 A[tq1
 A\A]8
-A\A]A
 A\A]A^
 A\A]A^A_]
 A\A]A^A_]A
@@ -10405,7 +9396,6 @@ Allseeing One's Favor
 Already saw decimal point or exponent; can't have another one.
 Altar of the Mad Moon
 Alternate icon definition index %d must be greater than or equal to zero
-AmbientCubes
 Ambiguous
 An RR_Concept couldn't find its string in the symbol table!
 An environment light entity
@@ -10417,7 +9407,9 @@ Anchor nav_begin_area Z to editing player's feet
 AnchorList
 Ancient Rubble
 Ancient Tower
+Angle; 
 AngleDiff
+Anglf
 AngularImpulse
 AnimAddLayer
 AnimAlign
@@ -10463,7 +9455,10 @@ AnimVrFinger_Thumb
 AnimateDuringGameplayPause
 AnimateThink
 AnimateUntilDead
+Animated
+Animated Position, Dynamic Rotation
 Animated characters who have vertex flex capability.
+AnimatedH
 Animating models
 AnimationFrameAdvance
 AnimationList
@@ -10592,6 +9587,7 @@ Avg/Msg
 A}?5^z
 A}@3333
 B 9C @
+B A9E @
 B A9G @
 B H9C @
 B!@3333
@@ -10600,12 +9596,12 @@ B(Lcc D;c0
 B*g"J@M
 B,}3H
 B-Spline
-B09F0t`H
 B0;B@
 B0Mc.
 B0[A\]
 B2f9B,D
 B8Hc@
+B8Ic\$ A;\$0
 B8Lck D;k0
 B8Mcl$ E;l$0
 B94(t$M
@@ -10696,6 +9692,9 @@ Barrier Clip
 Barroom Brawler
 Base Attribute Flags: 0x%016llx
 Base PropData: %s
+Base Spr
+Base SprL
+Base Spring; 
 Base Trigger for all the triggers
 Base component class %s needs to have the same contained / referenced rules as its derived classes!
 Base entity with model
@@ -10873,6 +9872,7 @@ C([A\A]A^A_]
 C([A\A]A^]
 C([A\]
 C(t	I
+C(t1D
 C(|v1
 C,+C(
 C,[A\A]A^]
@@ -10882,7 +9882,6 @@ C,u'H
 C,u*H
 C-side of entity framework
 C.[A\A]A^]
-C0;C@
 C0H+C(H
 C0HcS(H
 C0IcT$(H
@@ -10902,8 +9901,6 @@ C8JcT0
 C8[A\A]A^]
 C8[A\]
 C8t#I
-C8~@H
-C8~CH
 C9,h5
 C<+C8
 C<[A\A]A^]
@@ -10918,13 +9915,13 @@ C@Ll>
 C@[A\A]A^]
 C@[A\]
 C@tqA
-C@~%H
-C@~'H
 C@~+H
+C@~,H
+C@~/H
+C@~5H
 C@~;H
-C@~=H
 C@~>H
-C@~BH
+C@~CH
 CA*oG8-
 CAISound
 CAISound::CEntityInstanceEntityClass
@@ -10956,6 +9953,8 @@ CAttributeManager
 CAttributeManager::cached_attribute_float_t
 CAttribute_Socket::ItemSocketFactory:  Unknown gem type for gem def %u
 CAttribute_String
+CAuthPhysBody
+CAuthPhysJoint
 CBaseAchievement
 CBaseAnimating
 CBaseAnimating::CEntityInstanceEntityClass
@@ -11097,6 +10096,7 @@ CCLCMsg_VoiceData
 CC_ResetGameStats : Server cleared game stats
 CChangeLevel
 CChangeLevel::CEntityInstanceEntityClass
+CChoreoScene::ImportEventFromKV3( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::ParseEvent( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::RestoreFromBinaryBuffer( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CClientMsg_ClientUIEvent
@@ -11292,8 +10292,6 @@ CEnvBeam::CEntityInstanceEntityClass
 CEnvClock
 CEnvClock::Activate( ActivateType_t activateType ) call to Plat_gmtime failed!
 CEnvClock::CEntityInstanceEntityClass
-CEnvCombinedLightProbeVolume
-CEnvCombinedLightProbeVolume::CEntityInstanceEntityClass
 CEnvCubemap
 CEnvCubemap::CEntityInstanceEntityClass
 CEnvCubemapBox
@@ -11320,8 +10318,6 @@ CEnvInstructorHint
 CEnvInstructorHint::CEntityInstanceEntityClass
 CEnvInstructorVRHint
 CEnvInstructorVRHint::CEntityInstanceEntityClass
-CEnvLightProbeVolume
-CEnvLightProbeVolume::CEntityInstanceEntityClass
 CEnvMicrophone
 CEnvMicrophone::CEntityInstanceEntityClass
 CEnvPlayerSurfaceTrigger
@@ -11386,6 +10382,7 @@ CFilterProximity::CEntityInstanceEntityClass
 CFingerBone
 CFingerChain
 CFingerSource
+CFlexAnimationTool::OnImportFlexAnimation:  %s, expecting "flexanimations"
 CFlexCycler
 CFlexCycler::CEntityInstanceEntityClass
 CFlexExpresser
@@ -12033,6 +11030,7 @@ CMsgClearWorldDecalsEvent
 CMsgClientHello
 CMsgClientPingData
 CMsgClientServerHeader
+CMsgClientToGCAIGauntletResult
 CMsgClientToGCAbandonGauntlet
 CMsgClientToGCCreateTourney
 CMsgClientToGCEquipItems
@@ -12300,6 +11298,7 @@ CMsgUseMultipleItems
 CMsgVDebugGameSessionIDEvent
 CMsgVector
 CMsgVector2D
+CMsgVenchatoquistEvent
 CMsgVoiceAudio
 CMsgWebAPIKey
 CMsgWebAPIRequest
@@ -12343,6 +11342,7 @@ CNavMesh::Update
 CNavObstructionManager::InitConnectionBlockers: %d connection blockers found
 CNavScript
 CNavVolume
+CNavVolumeAll
 CNavVolumeBreadthFirstSearch
 CNavVolumeCalculatedVector
 CNavVolumeMarkupVolume
@@ -13068,7 +12068,6 @@ CUtlMemoryPoolBase
 CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
 CUtlMultiList overflow! (exhausted index range)
 CUtlMultiList overflow! (exhausted memory allocator)
-CUtlOctree
 CUtlRBTree overflow with %u elements!
 CUtlString
 CUtlStringToken
@@ -13241,6 +12240,7 @@ CancelEntityIOEvents
 Cancels all ent_fire created outputs that are currently waiting for their delay to expire.
 Cannot allocate abstract class
 Cannot allocate buffer larger than kint32max for 
+Cannot allocate over-aligned class
 Cannot allocate virtual address space in CResourceStreamVM::ReserveVirtualMemory, error %u
 Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You must instead find a way to get your file into the underlying database.
 Cannot call QueuePostDataUpdate on an entity system that you did not initialize to support post data updates!
@@ -13253,6 +12253,7 @@ Cannot create hierarchy constraint between %s and %s : cannot find physics part 
 Cannot create hierarchy constraint between %s and %s because the parent has no physics aggregate
 Cannot create physics for %s "%s" (%s) @{%g,%g,%g}
 Cannot deallocate abstract class
+Cannot deduce for class
 Cannot destruct abstract class
 Cannot execute "%s", no player
 Cannot find markup_group named '%s'
@@ -13262,7 +12263,6 @@ Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot run script: NULL script name
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
-CaptionLookup_t
 Card Draw
 Card Game Data
 CardCast
@@ -13450,7 +12450,6 @@ Commit the result of QueryBestResponse back to the given entity to play. Call wi
 Common
 Compel
 Compendium Event ID:
-CompiledCaptionHeader_t
 Completed partial cache for %s from %d parts (%d up to date)
 Componenf
 Component %d for achievement %s found
@@ -13622,6 +12621,8 @@ Cross3D
 Cross3DOriented
 CrossVectors
 Crystal Maiden
+Cs[A\]
+Cst	I
 Ct[A\]
 Ctx@H
 CubeMapTexture
@@ -13633,7 +12634,6 @@ Current State: %u - Lobby: %s
 Current item schema is up-to-date with version %08X.
 Current name of the skybox texture
 Current place set to '%s'
-Current sound patches: %d
 Currently allocated agg data: {
 Currently running tests so rejected match reservation for match %llu
 Curse of Atrophy
@@ -13653,6 +12653,7 @@ D#B\H
 D#O\H
 D#b\H
 D#j\H
+D#r\H
 D#s\H
 D$ 	X
 D$ 9C t
@@ -13663,8 +12664,9 @@ D$ D;u
 D$ E1
 D$ E9l$
 D$ H9
-D$ H9C tdH
+D$ H9C taH
 D$ H9E
+D$ H;C
 D$ Hc
 D$ I;E t
 D$ Ic
@@ -13689,7 +12691,7 @@ D$( u
 D$(A\A]A^]
 D$(A\]
 D$(H9
-D$(H9C(tdH
+D$(H9C(taH
 D$(Hc
 D$(Ic
 D$(Jc
@@ -13699,31 +12701,34 @@ D$([A\A]A^]
 D$([A\]
 D$(fA
 D$(t9A
-D$(t9I
+D$*fA
 D$,D9
 D$,[A\]
 D$09C0t`H
-D$09C0tcH
 D$0H9
 D$0Hc
 D$0Ic
 D$0IcL$
 D$0IcT$(H
 D$0L9}
+D$0L;m
+D$0L;u
 D$0M9
 D$0[A\]
 D$0fA
 D$1@t\L
+D$49C4t"H
 D$49C4t`H
 D$4A+D$0
 D$4A;\$
 D$4H9
-D$4f9C4teH
-D$68C6tdH
+D$4f9C4tbH
+D$68C6taH
 D$78C7t#H
 D$88C8t
 D$89C8t
 D$89C8t H
+D$89C8t"H
 D$89C8t`H
 D$8A9D$4t
 D$8A;D$H
@@ -13737,13 +12742,15 @@ D$8Mc
 D$8[A\]
 D$8f%
 D$8tuH
-D$<8C<t
+D$<8C<tXL
 D$<8C<t}1
 D$<9C
 D$<9C<t
+D$<9C<t"H
 D$<9C<t`H
 D$<f%
 D$@8C@t]H
+D$@9C@t"H
 D$@E1
 D$@E;D$P
 D$@H9
@@ -13751,10 +12758,8 @@ D$@Hc
 D$@I9
 D$@Ic
 D$@Lc
-D$D9CDt
 D$D9CDt H
 D$DA\
-D$DA\A]A^]
 D$DE1
 D$D[A\]
 D$HE1
@@ -13766,7 +12771,7 @@ D$HL9u
 D$HL9}
 D$H[A\]
 D$HfA
-D$Ht:H
+D$Ht2H
 D$IA\A]A^]
 D$L| A
 D$P9E
@@ -13782,13 +12787,13 @@ D$P[A\A]A^]
 D$P[A\]
 D$P~iH
 D$P~|H
-D$R8CRtdH
+D$R8CRtaH
 D$R@u
-D$S8CStdH
-D$T8CTt$H
-D$U8CUt$H
-D$V8CVtdH
-D$W8CWtdH
+D$S8CStaH
+D$T8CTtaH
+D$U8CUtaH
+D$V8CVtaH
+D$W8CWtaH
 D$X8CXt!H
 D$X9CXt
 D$X9D$H
@@ -13814,6 +12819,7 @@ D$`t
 D$a8Cat
 D$b8Cbt
 D$h9Cht H
+D$hE1
 D$hH9
 D$hIc
 D$hf9Cht
@@ -13828,40 +12834,43 @@ D$pIc
 D$pIcT$hH
 D$p[A
 D$t9Ctt H
+D$x8Cxt!H
 D$x9Cxt H
 D$xA\A
 D$xH)
+D$y8Cyt!H
+D$z8Czt!H
 D&@3333
 D&A3333
 D)#[A\]
 D+K$H
 D+c$H
+D+c$L
 D+c$Mc
 D+k$H
 D+k$Mc
 D+s$H
 D+s$Mc
+D+{$H
 D+{$Mc
 D/ D9
 D00fB
-D1,Hc
-D6,Hc
 D7	_Hc
 D8"u'
 D8c1t
-D8kSt
 D8sUt
 D9#~wJ
-D9%"O>
-D9%/[>
-D9%}t
+D9%m5
+D9%qo
+D9%y6
 D9't3H
 D9;t3I
+D9=	P&
+D9=Eq
 D9@ s
 D9C ~JMc
 D9D$4B
 D9D$4H
-D9I s
 D9K$~mH
 D9` s
 D9aTH
@@ -13891,23 +12900,16 @@ D; tMH
 D; }VH
 D;!ttHc
 D;$2tWL
-D;%(.
-D;%(3
-D;%<+L
-D;%C:
-D;%H/
-D;%H5
-D;%H7
-D;%Iz
-D;%R9
-D;%`5
-D;%b<
-D;%sxF
+D;%+o
+D;%5N
+D;%9;
+D;%>pR
+D;%Cr>
 D;'tXH
 D;)ts
-D;-BPI
-D;-S|
-D;-{,
+D;-#&
+D;-Cj
+D;-S$
 D;.tLH
 D;1tsH
 D;3t 
@@ -13929,29 +12931,24 @@ D;c D
 D;c t
 D;c t1H
 D;c |
-D;c }.H
 D;c(A
 D;c(D
 D;c0|
+D;c0}BH
 D;c8|
 D;c8}yH
 D;c@|
 D;ch|
-D;cxD
 D;cx|
 D;g D
 D;g0D
 D;h H
 D;i$A
-D;i$t
+D;i$u
 D;k t
 D;k uYE
 D;k |
-D;k }QH
-D;k }VH
 D;k(D
-D;k8}NH
-D;k8}PH
 D;k@|
 D;l$H
 D;n }>H
@@ -13959,6 +12956,7 @@ D;nPt
 D;o(D
 D;p tI
 D;p u
+D;p(t
 D;q(t%I
 D;s@}RM
 D;sp}BH
@@ -14050,6 +13048,7 @@ DEM_SyncTick
 DEM_UserCmd
 DEV_COMMAND
 DHcK8Ic
+DHcKxIc
 DIALOG_ASKCONNECT
 DIALOG_ENTRY
 DIALOG_MENU
@@ -14071,6 +13070,7 @@ DOOR_STATE_CLOSED
 DOOR_STATE_CLOSING
 DOOR_STATE_OPEN
 DOOR_STATE_OPENING
+DOnSpriteScaleChanged
 DPRECIPITATION
 DROWN
 DROWNRECOVER
@@ -14417,15 +13417,16 @@ E 9C t"H
 E A+E
 E I;D$ t
 E I;G t
-E t%f
+E t<f
 E#e\H
 E$9C$t"H
 E(Mc>E;~
 E(Mce
+E(t1f
 E(tBA
-E(tZL
 E+D$ 
 E+D$0
+E+F$Mc
 E+G$H
 E+G$Mc
 E+O$H
@@ -14434,10 +13435,7 @@ E+f$Mc
 E+g$L
 E+g$Mc
 E+n$Mc
-E+o$L
 E+o$Mc
-E+t$$H
-E+t$$Mc
 E+u$Mc
 E+}$Mc
 E.M. Gist
@@ -14449,6 +13447,7 @@ E0L;p
 E0tQA
 E8D94
 E8u*H
+E8u>H
 E9&t2A
 E9&~|I
 E9,$H
@@ -14484,8 +13483,7 @@ E;'Hc]
 E;,$|
 E;.tuA
 E;.tyA
-E;.}<E
-E;.}?I
+E;.}@E
 E;4$|
 E;7Lc
 E;<$|
@@ -14503,9 +13501,11 @@ E;g0}qI
 E;gL|
 E;l$ H
 E;l$ }
+E;l$ }II
 E;l$(
 E;l$0|
 E;l$0|GD
+E;l$8}QI
 E;l$@D
 E;l$L|#I
 E;l$X|
@@ -14515,7 +13515,6 @@ E;l$h
 E;l$p|
 E;l$p}2I
 E;n D
-E;n(D
 E;n(s
 E;n(t
 E;nPE
@@ -14538,14 +13537,14 @@ E;w(D
 E;|$ }cI
 E;|$0|
 E;|$4u8H
-E;|$L|&I
+E;|$L|$f
 E;}$XZ|
 E;}$}jH
 E;}@D
+E;~(t?I
 E@7l[
 E@ATI
 E@t+I
-E@~,H
 EAchievementGrantType
 EAction
 EActionType
@@ -14561,6 +13560,7 @@ ECON_ENTITY_PARTICLES_ENABLED
 ECardDrawnSource
 EChatMessageAdditionalData
 EChatRoomType
+EChatSource
 EClientUIEvent
 EClientUIEvent_DialogFinished
 EClientUIEvent_FireOutput
@@ -14759,7 +13759,6 @@ E`:r?X
 E`H;E
 E`d!@
 E`fD9 t\H
-E`t@A
 Each enemy has a 50% chance of being disarmed this round.
 Each item in your Secret Shop costs X less gold, where X is equal to its base cost.
 EarlyInit_Tier0
@@ -15098,7 +14097,10 @@ F(N9, tn
 F(U9G(H
 F(bPF
 F08G0t
+F09G0t`H
+F0A;F@
 F0ECQ
+F0HcE
 F0L;}
 F25TemporaryReferenceWrapperI18MergeAttributeListEP13CDotaCardGameRK25IAttributeContainerReaderRK17SpecificObjects_tE
 F6:AR
@@ -15106,7 +14108,7 @@ F7g4hy+
 F8;FH
 F8HcV0H
 F8HcV0L
-F8uxH
+F8L;`
 F9$:t
 F: %.2f deg
 F;$2t
@@ -15118,7 +14120,7 @@ F=D%@
 F=t)@
 F?-xF
 F?ZaF
-F@t-I
+F@t%I
 FA+<@H
 FAILED
 FAILED to send %s(%u) to player %d (%s) for game %llu, %u bytes, result=%d
@@ -15230,6 +14232,30 @@ FRK18MatchAttributeList35AttributeListGeneratorFunctionParamIS_EE
 FTIcD$,1
 FTNAA\]H
 FTU;BTH
+FTYPEDESC_ADDITIONAL_FIELDS
+FTYPEDESC_ENUM
+FTYPEDESC_EXPLICIT_BASE
+FTYPEDESC_FUNCTIONTABLE
+FTYPEDESC_GEN_ARRAY_KEYNAMES_0
+FTYPEDESC_GEN_ARRAY_KEYNAMES_1
+FTYPEDESC_GLOBAL
+FTYPEDESC_INPUT
+FTYPEDESC_INSENDTABLE
+FTYPEDESC_KEY
+FTYPEDESC_MODELINDEX
+FTYPEDESC_NOERRORCHECK
+FTYPEDESC_NONE
+FTYPEDESC_OUTPUT
+FTYPEDESC_OVERRIDE
+FTYPEDESC_OVERRIDE_RECURSIVE
+FTYPEDESC_PRIVATE
+FTYPEDESC_PROCEDURAL_KEYFIELD
+FTYPEDESC_PTR
+FTYPEDESC_REMOVED_KEYFIELD
+FTYPEDESC_SAVE
+FTYPEDESC_SCHEMA_INITIALIZED
+FTYPEDESC_WAS_INPUT
+FTYPEDESC_WAS_OUTPUT
 FV yF
 FX9GXt
 FXt	@>	l
@@ -15264,7 +14290,6 @@ Failed to call CBaseIntrospectedTypeManager::Init
 Failed to call CBaseIntrospectedTypeManager::SetDiskDataBinding
 Failed to change directory for replay %s:
 Failed to convert replay path to full path. szReplaysPath = %s
-Failed to create %s
 Failed to create Bot.
 Failed to create ragdoll for %s
 Failed to create/update SO
@@ -15308,11 +14333,11 @@ Farvhan the Dreamer
 FastHexToBuffer() wants non-negative integers, not 
 FastRetrigger: %s
 Fblendindices
-Fdemo.proto
 FeMoF
 Feel free to add support for more if you need it.
 Feral Impulse
 Fetched %d bytes item schema version %08X via HTTP; update is queued.
+FhA#V\H
 FhA;Fx
 Field "
 Field "$0" uses reserved number $1.
@@ -15456,6 +14481,9 @@ FlexDesc_t
 FlexOp_t
 FlexRule_t
 FlexSceneFileManager
+Flexible; 
+FlexibleA
+FlexibleL
 Flips the selected ladder's direction.
 Floor %d ('%s') of elevator at ( %3.2f, %3.2f, %3.2f ) has no matching navigation areas
 Flow through spawn groups for vis (0 == default, 1 == always visible, 2 == never visible.
@@ -15464,7 +14492,6 @@ FltsH
 Flush all .vcds from the cache and reload from disk.
 Flushes entity bone cache on lag compensation
 Flushes the server & client side soundscapes
-Flushes the sounds.txt system
 FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 Fo-hFGx
 FoExF#
@@ -15483,7 +14510,6 @@ Force the height to something.  -1 to ignore
 ForceOff
 ForceRefresh
 ForceSpawn() : Spawns all of the entities the point_template is pointing at.
-Forcing '%s' to be writable!!!
 Forcing S1 g_pNetworkStringTable to use version from engine.dll
 Forcing split screen player onto team %s
 Foresight
@@ -15516,13 +14542,12 @@ Fractured Timeline
 FrameUpdatePostEntityThink
 Free Sound List is full!
 Free a damageinfo object that was created with CreateDamageInfo().
+FreeForAll
 Frees the specified particle index
 Friction during noclip move.
 FrictionRevertThink
 FriendPermission
 Friendly Fire
-From Class Binding
-From Enum Binding
 Frostbite
 FullObserverMove
 FullTossMoveBaseVelocity
@@ -15551,7 +14576,6 @@ G A+G
 G A9E
 G A9G
 G A;G0
-G H;p
 G Hc_
 G I9E
 G U9G
@@ -15561,25 +14585,26 @@ G$9C$t"M
 G$@UH
 G$@tZUH
 G$HcG
+G$x%H
+G$x)H
 G(D9@(
 G(H9A(
 G(H;0t
 G(H;0t!H
 G(H;0t3H
+G(H;p
 G(I9A(
 G(UHc
-G(t>I
 G/0L"
 G0;F0t
-G0;F0tHUH
 G0A;G@
 G0A;_H
-G0H+G(H
 G0HcW(H
 G0L9(u
 G0UHc
 G89G4t
 G8H;0t0H
+G8H;X
 G8HcD
 G8Lck D;k0
 G8Mcl$ E;l$0
@@ -15677,7 +14702,6 @@ GLIBC_2.2.5
 GLIBC_2.3
 GLIBC_2.3.4
 GLIBC_2.4
-GLOBAL
 GLOBALNAME: %s
 GT:FTt
 GX9G@~rUH
@@ -15731,6 +14755,8 @@ GameToolEventToolTraceRayResult_tHookupGameSystem
 GameToolEventTraceRayServerToolEvent_tHookupGameSystem
 GameUIService_001
 GauntletID: %u
+GauntletInfo
+GauntletPointsLeaderboard
 Gaussian
 Gdisplay_name
 Generate a Navigation Mesh for the current map and save it to disk.
@@ -16036,7 +15062,7 @@ H9D$(
 H9J s
 H9M(txI
 H9M(u
-H9P0t
+H9P8t
 H9Q0]
 H9X u
 H9X`f
@@ -16061,241 +15087,245 @@ H;0t\H
 H;0teH
 H;2t_A
 H;3t5L
-H;5	'
-H;5	3T
-H;5	[i
-H;5 8
-H;5 Y
-H;5 p
-H;5 x_
-H;5!,{
-H;5"_e
-H;5$cs
-H;5$xv
-H;5-]
-H;50a
-H;50di
-H;51#{
-H;584_
-H;59,
-H;5=uW
-H;5@;
-H;5@C_
-H;5@Fi
-H;5@Ti
-H;5If
-H;5J\e
-H;5MN
-H;5YU
-H;5Yer
-H;5Y|v
-H;5Y}v
-H;5`A
-H;5a;T
-H;5i0
-H;5qE
-H;5qyv
-H;5t%n
-H;5tn_
-H;5xL
-H;5y!{
-H;5y4n
+H;5!.N
+H;5(FY
+H;5,*`
+H;501N
+H;51Sx
+H;5<PY
+H;5LLr
+H;5Omh
+H;5RAm
+H;5X;Y
+H;5YVN
+H;5`[Y
+H;5h&`
+H;5h>`
+H;5h@r
+H;5hah
+H;5hjY
+H;5p4n
+H;5|	q
+H;5|"n
 H;7t"
 H;7t-1
 H;8tmH
 H;9u#
 H;:t(f
 H;:u'
-H;= *t
-H;= Jr
-H;= uU
-H;=!	?
-H;=!+
-H;=!@
-H;=!C!
-H;=!U
-H;=![
-H;="'
-H;=$s
-H;=%0"
-H;='V
-H;='{
-H;=(^f
-H;=(u
-H;=(y
-H;=)b
-H;=*6
-H;=*K
-H;=*N!
-H;=.Au
-H;=.c
-H;=.w
-H;=/"U
-H;=/6b
-H;=/:o
-H;=/Br
-H;=/V
-H;=0tU
-H;=1$
-H;=1<
-H;=1Q
-H;=1h0
-H;=3*
-H;=3;\
-H;=58U
-H;=5mY
-H;=6Y
-H;=7$
-H;=7(
-H;=7A
-H;=7D
+H;=	b-
+H;= =q
+H;= Za
+H;= s}
+H;=!6
+H;=!V
+H;="\
+H;=#e
+H;=#x/
+H;=%f
+H;='F
+H;='Nr
+H;='Y
+H;=']
+H;='|
+H;=(T
+H;=(W
+H;=([
+H;=(b,
+H;=(}`
+H;=* 
+H;=*,
+H;=*Na
+H;=*m
+H;=,V
+H;=-k
+H;=.`S
+H;=.y
+H;=/.O
+H;=/:q
+H;=/=}
+H;=/B
+H;=/g}
+H;=/ve
+H;=0Ya
+H;=0r}
+H;=12
+H;=1p
+H;=2B
+H;=3d,
+H;=4pr
+H;=5Zo
+H;=7'
+H;=7E
+H;=7O
+H;=7Y
+H;=7j
+H;=7m
+H;=8!4
 H;=8#
-H;=8<
-H;=8=}
-H;=8>
-H;=9QY
-H;=:%
-H;=:2
-H;=:>o
-H;=:G
-H;=:J!
-H;=:\
-H;=:w9
-H;=;Q{
-H;=;~T
-H;=>&Y
-H;=?7
-H;=?8p
-H;=?V3
-H;=?X{
-H;=?[
-H;=?b{
-H;=?d
-H;=@i~
-H;=@sU
-H;=A8
-H;=AM
-H;=C5t
-H;=CAo
-H;=Eb
-H;=E|Y
-H;=F5
-H;=G-
-H;=GJ
-H;=Gm
-H;=H'
-H;=H,
-H;=HE
-H;=HG
-H;=Hg
-H;=In
-H;=J.
-H;=JB=
-H;=JC
-H;=JE
-H;=JF!
-H;=JX
-H;=Kn}
-H;=MW"
-H;=N["
-H;=N{\
-H;=O4t
-H;=O6o
-H;=O7{
-H;=O9t
-H;=O>\
-H;=O@o
-H;=OS"
-H;=Oi
-H;=Ph~
-H;=PrU
-H;=Pt}
-H;=Py}
-H;=Q*Z
-H;=Q4
-H;=QC
-H;=QG
-H;=QI
-H;=QL!
-H;=Q^
-H;=R)\
-H;=R^f
-H;=S<\
-H;=W6
-H;=XP
-H;=Z&
-H;=Z*
-H;=Z;\
-H;=Z?
-H;=ZT
-H;=[	f
-H;=^=
-H;=^zj
-H;=_(b
-H;=_9{
-H;=_K{
-H;=_Y
-H;=_Z~
-H;=`=}
-H;=`g~
-H;=`qU
-H;=a0
-H;=aB
-H;=aE
-H;=aH!
-H;=aZ
-H;=b 
-H;=dCY
-H;=dQY
-H;=e&Y
-H;=f_"
-H;=g&
-H;=g?
-H;=g_
-H;=h!
-H;=h1\
-H;=hY
-H;=hf`
-H;=h~
-H;=i%~
-H;=j5t
-H;=j;
-H;=jAo
-H;=jP
-H;=kH{
-H;=n8k
-H;=nn{
-H;=o0t
-H;=oB
-H;=oR"
-H;=pf~
-H;=ppU
-H;=q,
-H;=qA
-H;=qD!
-H;=qV
-H;=r`
-H;=s3t
-H;=s=\
-H;=u{\
-H;=v"
-H;=w/
-H;=w2
-H;=wD{
-H;=wH
-H;=x*
-H;=xC
-H;=z'
-H;=z7
-H;=z<\
-H;=zL
-H;={Q"
-H;=|\
-H;=|f
-H;C u
+H;=8@
+H;=8d
+H;=8g,
+H;=8h
+H;=9*.
+H;=:6d
+H;=:ZV
+H;=:l}
+H;=:t;
+H;=;.*
+H;==T.
+H;=={
+H;=>	}
+H;=>!}
+H;=>R
+H;=>\q
+H;=>nw
+H;=>t
+H;=?&}
+H;=?;q
+H;=?Zq
+H;=?iS
+H;=?lj
+H;=?tS
+H;=?yw
+H;=@Xa
+H;=A"
+H;=A.
+H;=AU
+H;=Cm
+H;=Cqd
+H;=D?{
+H;=D^4
+H;=E<S
+H;=F~
+H;=GN
+H;=Gb;
+H;=Gs
+H;=H7
+H;=H:V
+H;=H=q
+H;=HI
+H;=HR
+H;=Hc,
+H;=IC
+H;=Ila
+H;=JDV
+H;=K@
+H;=N|S
+H;=O/}
+H;=O;}
+H;=O<q
+H;=OF*
+H;=ON
+H;=Oi}
+H;=Ope
+H;=OzS
+H;=O|\
+H;=O~S
+H;=PWa
+H;=Plw
+H;=Q	
+H;=Q*
+H;=RNr
+H;=R{
+H;=R}`
+H;=S!
+H;=SP
+H;=Sa
+H;=Se,
+H;=TG
+H;=WW
+H;=WX
+H;=Wn
+H;=X 
+H;=X"
+H;=X+
+H;=X@
+H;=XR
+H;=Xt
+H;=Y`S
+H;=Yjd
+H;=Z5
+H;=Z\4
+H;=Z^
+H;=[!
+H;=[%
+H;=[~
+H;=]x
+H;=^<\
+H;=^_o
+H;=^he
+H;=^vq
+H;=_,O
+H;=_KO
+H;=_Oa
+H;=_Wr
+H;=_]o
+H;=`0
+H;=`LV
+H;=`Va
+H;=`zw
+H;=`~}
+H;=aT
+H;=e	}
+H;=e!}
+H;=eR
+H;=e\q
+H;=enw
+H;=g/
+H;=gC
+H;=gk
+H;=h	
+H;=h)
+H;=h>
+H;=hGq
+H;=h[
+H;=hd,
+H;=hv|
+H;=i%
+H;=j%
+H;=j1
+H;=l6d
+H;=m8d
+H;=n=]
+H;=o	[
+H;=o&O
+H;=o<o
+H;=oGa
+H;=o^
+H;=oao
+H;=om}
+H;=oud
+H;=oye
+H;=pD4
+H;=p}}
+H;=r&
+H;=r:V
+H;=rx
+H;=sE*
+H;=sf,
+H;=to~
+H;=u|S
+H;=w%
+H;=wL
+H;=wW
+H;=xBq
+H;=xG
+H;=xd
+H;=xlw
+H;=xm
+H;=xo
+H;=z!
+H;=z-
+H;=zi}
+H;=|DV
+H;=|~
+H;=~H\
+H;=~pw
 H;CPw<I
 H;G t
 H;IXu
+H;J v
 H;OHtsH9
 H;OHu
 H;P v
@@ -16306,12 +15336,15 @@ H;Q@u
 H;S@w
 H;T$(
 H;W(u
+H;X v
+H;YPt
+H;Z v
 H;[`u
 H;\$(u
 H;p t
 H;p(t
-H;p(u
 H;p0t
+H;p0u
 H;p8t
 H;r(t*L
 H;shH
@@ -16389,18 +15422,21 @@ HangWatchdogInternal_BeginScope
 HangWatchdogInternal_EndScope
 Hangul
 Hanunoo
+Has CollH
+Has Collision; 
 HasField
 HasTag
 HaticsType_Default
 HaticsType_None
 Have Entity say string, and teamOnly or not
+Hc57QQ
 Hc7;w
 Hc@$H
 Hc@(L
 Hc@0A
-Hc@0H
-Hc@@H
-Hc@@I
+Hc@0M
+Hc@HH
+Hc@HI
 Hc@XL
 Hc@hL
 Hc@pH
@@ -16429,11 +15465,11 @@ HcC81
 HcC8A9
 HcC8H
 HcC@1
-HcC@A
 HcC@H
 HcC@t	;CP
 HcCH1
 HcCH;CLu
+HcCHA
 HcCHH
 HcCHH9
 HcCHf
@@ -16472,36 +15508,19 @@ HcHPH
 HcHPIc\$
 HcHPMcl$
 HcHpH
+HcHxH
 HcI 9
-HcJ 1
 HcJ H
-HcJ$1
 HcJ$D
 HcJ$H
-HcJ(1
 HcJ(H
-HcJ,1
 HcJ,H
-HcJ01
 HcJ0H
-HcJ41
-HcJ81
-HcJ<1
-HcJ@1
 HcJ@H
-HcJH1
 HcJHH
 HcJLH
-HcJP1
-HcJT1
-HcJX1
-HcJ\1
-HcJ`1
-HcJd1
-HcJl1
-HcJt1
-HcJ|1
 HcK Ic
+HcK$A
 HcK$D
 HcK(D
 HcK(Ic
@@ -16541,8 +15560,27 @@ HcShH
 HcSlH
 HcStH
 HcT$4Mc
+HcV 1
 HcV H
 HcV K
+HcV$1
+HcV(1
+HcV,1
+HcV01
+HcV41
+HcV81
+HcV<1
+HcV@1
+HcVH1
+HcVP1
+HcVT1
+HcVX1
+HcV\1
+HcV`1
+HcVd1
+HcVl1
+HcVt1
+HcV|1
 HcW H
 HcW$H
 HcWXI
@@ -16550,6 +15588,7 @@ HcWhH
 HcWpH
 HcX(L
 HcX@;XP
+HcYh;Yx
 Hc_ ;_0
 Hc_ ;_0t0I
 Hc_ H
@@ -16563,36 +15602,18 @@ Hc_X;_ht+I
 Hc_X;_ht-I
 Hc_p;
 Hcp Hc
+HcpX9
 Hcr4LcB$H
-Hcs 1
 Hcs H
-Hcs$1
-Hcs(1
 Hcs(;s,D
 Hcs(H
-Hcs,1
-Hcs01
-Hcs41
-Hcs81
-Hcs<1
-Hcs@1
 Hcs@H
 Hcs@t	;sP
-HcsH1
-HcsP1
 HcsPH
-HcsT1
-HcsX1
 HcsX;s\t7H
 HcsX;s\tGH
 HcsX;s\toH
-Hcs\1
-Hcs`1
-Hcsd1
 HcshH
-Hcsl1
-Hcst1
-Hcs|1
 Hcw8H
 Header | 
 Heal a unit [damaged allied] {hero} 3.
@@ -16664,9 +15685,9 @@ HurtThink
 HurtTouch
 Hurts the player.
 I("hq
-I(;A4
 I(E9J(A
 I(}!$
+I+<$I
 I+T$ H
 I2fD+
 I91t#
@@ -16676,11 +15697,12 @@ I9E t.A
 I9E(t
 I9F v1H
 I:2@1
+I;B0t71
 I;D$ r
-I;E8H
-I;G(t4H
+I;F8H
 I;V@w
 I;t$Pu
+I;u u
 I@ )"
 I@:@0G
 I@originx
@@ -16705,6 +15727,7 @@ INITIAL_FLOP
 INSERT_INTO_CURRENTLY_ACTIVE_SPAWN_GROUP
 INSERT_INTO_NEWLY_CREATED_SPAWN_GROUP
 INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP
+INTERACTION_CHARGEDCLIP_TO_SHOTGUN
 INTERACTION_CLIP_TO_ENERGYGUN
 INTERACTION_CLIP_TO_RAPIDFIRE
 INTERACTION_CLIP_TO_SHOTGUN
@@ -16712,7 +15735,7 @@ INTERACTION_GRENADE_TO_SHOTGUN
 INTERACTION_LARGE_CLIP_TO_ENERGYGUN
 INTERACTION_MULTICLIP_TO_SHOTGUN
 INTERACTION_NONE
-INTERACTION_SPEEDLOADER_TO_SHOTGUN
+INTERACTION_XENGRENADE_TO_SHOTGUN
 INTERACTIVE
 INTERNAL
 INVALID CGameEventStartTouchCollideAdaptor
@@ -16745,7 +15768,7 @@ IToolObject
 I[A\I
 Ic6A;v
 Ic7A;w
-Ic@@A
+Ic@HA
 IcAhA;Ax
 IcD$ A;D$0
 IcD$ H
@@ -16755,15 +15778,14 @@ IcD$0
 IcD$01
 IcD$0A;D$4
 IcD$0I
-IcD$81
 IcD$89
 IcD$8H
 IcD$8I
 IcD$@
 IcD$@1
 IcD$@H9
-IcD$@I
 IcD$@fE
+IcD$H
 IcD$P1
 IcD$PI
 IcD$PL
@@ -16804,13 +15826,11 @@ IcFhA;Fx
 IcFhI
 IcFpM
 IcFxH
-IcG A;G0
-IcG H
 IcG I
 IcG L
 IcG$A
 IcG(1
-IcG(L
+IcG(M
 IcG01
 IcG81
 IcG89
@@ -16827,7 +15847,6 @@ IcIhIc
 IcL$ 
 IcL$ Ic
 IcL$ M
-IcL$$
 IcL$$E
 IcL$(Ic
 IcL$0
@@ -16878,6 +15897,7 @@ IcV`A;VpD
 IcV`H
 IcVlH
 IcVlI
+IcVpL
 IcVxA;
 Ic\$ A;\$0
 Ic\$ A;\$0L
@@ -16890,7 +15910,6 @@ Ic\$HA;\$XA
 Ic\$PA;\$`
 Ic\$PI
 Ic\$pA;
-Ic] I
 Ic]@A;]P
 Ic]PE
 Ic]PI
@@ -16908,8 +15927,8 @@ Ict$4
 Ict$8
 Icu H
 Icu`H
+Ic|$PH
 Ic~(L
-Ic~PH
 Id-@f
 IdempotencyLevel
 Idx: %d, Depth: %d, Move: %s 
@@ -17501,6 +16520,9 @@ Invalid wire type for CPPTYPE_MESSAGE:
 Invalid wire type for CPPTYPE_UINT32: 
 Invalid wire type for CPPTYPE_UINT64: 
 Inverse Multi Quadratic
+Invert A
+Invert AL
+Invert Axes; 
 Invisible physics body for: %s
 Invite
 Ion Shell
@@ -17567,11 +16589,11 @@ ItemTest_CreateTestItemSet:  ignored, test item set %s already exists
 ItemTouch
 ItemsGameFile
 Iwwg?
-J 9H @
 J t)H
 J'Muy the Wise
 J(9N(|
 J7@eL
+J8H9K t
 J@ffff
 J@lxz
 JD;t$H
@@ -17608,13 +16630,13 @@ JointMotion_t
 Joints: %d (%d)
 Joseph Meehan
 Jp d=?
-JrtuL
 Julie Baroh
 JvljQ
 J|5!Q
 K %vmo
 K 9H t
 K0;SH
+K0H;K8H
 K1@333333
 K6u:H
 K8HcE
@@ -17628,7 +16650,6 @@ KJtiH
 KNuPH
 KTu6L
 KV Conditional Evaluation Error
-KXHcP
 KXtUH
 K]K+2
 K_s@3333
@@ -17671,7 +16692,6 @@ KqUq;@
 Kraken Shell
 Kx`[A\]
 L$ A;L$0
-L$ E1
 L$ E;L$0ttI
 L$ H9
 L$ I9
@@ -17690,7 +16710,6 @@ L$8Hc
 L$<E1
 L$@D)
 L$@[A
-L$HfA
 L$PE1
 L$PI)
 L$XA)
@@ -17707,23 +16726,21 @@ L$pI)
 L$xD9
 L$xE1
 L+g H
+L+w(H
 L2rpR@r
 L9khu
 L9|$HJ
 L: %.2f deg
 L; t4
-L; t=H
+L; t?H
 L;!t!f.
-L;-FL-
 L;0t?H9
 L;0t[A
 L;6t;A
 L;?u"
 L;d$@L
 L;h H
-L;h v
 L;h(u
-L;j v
 L;n s>H
 L;p@u
 L;x tHA
@@ -17792,6 +16809,7 @@ Lc tu
 Lc!D;a
 Lc#D;c
 Lc#E9
+Lc%5pR
 Lc&D;f
 Lc'D)
 Lc'D;g
@@ -17801,13 +16819,13 @@ Lc(E)
 Lc)D;i
 Lc*D;j
 Lc+D;k
-Lc-9PI
 Lc.D;n
 Lc/D)
 Lc/D;o
 Lc/E)
 Lc0D;p
 Lc3D;s
+Lc6D;v
 Lc7D;w
 Lc7E)
 Lc8D;x
@@ -17826,14 +16844,12 @@ Lc`(D;`8
 Lc`@D;`P
 LcaxD;
 Lcc D;c0
-Lcc D;c0D
+Lcc D;c0t2H
 Lcc0D;c@D
 Lcc8D;cHI
 Lcc@D;cPD
 LccHD;cX
 LccHD;cXt?H
-LcchD;cxD
-LcchE
 LccpD;
 LccxE
 Lcf0H
@@ -17845,9 +16861,10 @@ Lcg0D;g@D
 Lcg@u/I
 Lch D;h0D
 LchXE
+LchhE
 Lck D;k0
-Lck8D;kH
-LckPIct$PD;k`H
+Lck@D;kP
+LckXIct$PD;khH
 Lck`D;kpI
 LckhD;kxD
 LckpD;
@@ -17876,6 +16893,9 @@ LeftHandle
 Legion Commander
 Legion Standard Bearer
 Length: %3.2f
+Length; 
+Length; H
+Length; J
 Lepcha
 LerpVectors
 LessonPanelLayoutFileTypes_t
@@ -18048,9 +17068,7 @@ MIcN Ic
 MIcO@Hc
 MIsWorldSpace
 MIsWorldSpaceOrientation
-MModuleLocalTypeScope
 MNetworkAlias
-MNetworkAssumeNotNetworkable
 MNetworkBitCount
 MNetworkChangeAccessorFieldPathIndex
 MNetworkChangeCallback
@@ -18064,7 +17082,6 @@ MNetworkIncludeByName
 MNetworkIncludeByUserGroup
 MNetworkMaxValue
 MNetworkMinValue
-MNetworkNoBase
 MNetworkOverride
 MNetworkOverride_Invalid
 MNetworkPriority
@@ -18242,15 +17259,12 @@ Mcl$hE;l$xD
 Mcl$pE;
 Mcn@E
 Mcn`E;npD
-McnhE;nxD
 McnxE;
 Mct$ E;t$0D
 Mct$X1
 Mct$hE
 Mcw E;w0D
-Mc|$8E;|$HD
 Mc} E;}0D
-Mc~hE;~xD
 MeasureThink
 Measures distance along a ray
 Meepo
@@ -18465,7 +17479,7 @@ Mystic Flare
 N 9O u
 N"@q:
 N(9O(u
-N,9O,u
+N09O0u
 N0A;VH
 N10CBreakable26CEntityInstanceEntityClassE
 N10CDCGPlayer26CEntityInstanceEntityClassE
@@ -18720,7 +17734,6 @@ N19CTriggerSndSosOpvar26CEntityInstanceEntityClassE
 N20CBaseCombatCharacter26CEntityInstanceEntityClassE
 N20CEnvDetailController26CEntityInstanceEntityClassE
 N20CEnvInstructorVRHint26CEntityInstanceEntityClassE
-N20CEnvLightProbeVolume26CEntityInstanceEntityClassE
 N20CEnvProjectedTexture26CEntityInstanceEntityClassE
 N20CFuncPropRespawnZone26CEntityInstanceEntityClassE
 N20CInfoOverlayAccessor26CEntityInstanceEntityClassE
@@ -18805,7 +17818,6 @@ N27CEnvVolumetricFogController26CEntityInstanceEntityClassE
 N27CMarkupVolumeTagged_AI_HLVR26CEntityInstanceEntityClassE
 N27CMarkupVolumeTagged_NavHLVR26CEntityInstanceEntityClassE
 N27CPointAngularVelocitySensor26CEntityInstanceEntityClassE
-N28CEnvCombinedLightProbeVolume26CEntityInstanceEntityClassE
 N28CLightSpotAlias_light_glspot26CEntityInstanceEntityClassE
 N28CPointBroadcastClientCommand26CEntityInstanceEntityClassE
 N28CPointClientUIWorldTextPanel26CEntityInstanceEntityClassE
@@ -18923,6 +17935,7 @@ N9CPushable26CEntityInstanceEntityClassE
 N9CSoundEnt26CEntityInstanceEntityClassE
 N9CSprayCan26CEntityInstanceEntityClassE
 NA(fA9
+NATE1
 NAV AREA
 NAV IGNORE
 NAV_IGNORE
@@ -18935,6 +17948,8 @@ NAV_MESH_NO_MERGE
 NAV_MESH_OBSTACLE_TOP
 NAV_MESH_PRECISE
 NAV_MESH_STAIRS
+ND$(1
+ND$(f9
 NDebugOverlay::Box
 NDebugOverlay::Line
 NDebugOverlay::ScreenTextOffset
@@ -19018,6 +18033,7 @@ NULL entity in global entity list!
 NULL output boolean given.
 NUM_DIRECTIONS
 NUM_HAND_INTERACTIONS
+NUM_PETLEVELUPRULES
 NUM_PRECIPITATION_TYPES
 NWay( 
 Name of the .txt file used to cycle the maps on multiplayer servers 
@@ -19052,6 +18068,7 @@ NavMesh
 NavPlace.db
 NavRegionMergeSize
 NavRegionMinSize
+NavSmallAreaOnEdgeRemovalSize
 NavStepHeight
 NavSystem
 NavThink
@@ -19184,16 +18201,13 @@ Numbers starting with leading zero must be in octal.
 Nut?{
 Nx	V @M
 Nyctasha's Guard
-O A;N H
 O HcW
 O$HcO
 O(H9H(
 O,t	[A\]
 O.@Jt;
-O0A;N0H
 O0A;WH
 O0H;1t4A
-O0I9M t
 O:Ml}
 O<toA
 O?0 ,	f
@@ -19202,6 +18216,7 @@ OBSTRUCTED
 OD;@ 
 OFbS.F/
 OH91t`H
+OHv>I
 OHzIuG
 OH~2fA
 OIcF81
@@ -19244,6 +18259,7 @@ OnBoolVariableChanged
 OnByteVariableChanged
 OnCase%02d
 OnCellChanged
+OnColorChanged
 OnCommentaryMultiplayerSpawn
 OnDetach
 OnDialogActivatorChanged
@@ -19279,7 +18295,6 @@ OnPreDataUpdate
 OnPreDataUpdate: missing ent %d
 OnRenderAttributesChanged
 OnSource1LegacyGameEventListenBitsReceived: game event %i not found.
-OnSpriteScaleChanged
 OnSteamNetConnectionStatusChanged [%s] %s.  hconn=%u, code=%u, Msg=%s
 OnSteamNetConnectionStatusChanged [%s] Cleaned up hconn=%u, old state=%u, listensocket=%u )
 OnSteamNetConnectionStatusChanged [%s] Closed hconn=%u, old state=%u, listensocket=%u )
@@ -19337,14 +18352,15 @@ OverrideFriction
 P A;]
 P AUH
 P D	@
+P HcC
 P IcF
-P IcF@I
+P IcFHI
 P Mc<$I
 P$@Jb
 P(A:F
 P(A;]
 P(AXD
-P(AYAZ
+P(AZA[
 P0Ic\$
 P13ClusterMarker
 P15SelectCollector
@@ -19411,6 +18427,9 @@ PCRE does not support \L, \l, \N{name}, \U, or \u
 PD;#|
 PE+N(1
 PERMISSION_DENIED
+PETLEVELFROM_COMPENDIUM_LEVEL
+PETLEVELFROM_KILLEATER
+PETLEVELFROM_NOTHING
 PEvent
 PF25TemporaryReferenceWrapperI18MergeAttributeListEP13CDotaCardGameRK25IAttributeContainerReaderRK17SpecificObjects_tE
 PFRK18MatchAttributeList35AttributeListGeneratorFunctionParamIS_EE
@@ -19580,6 +18599,7 @@ Permanent
 Permit Responses
 PersonaName
 PersonaNameReplacementToken
+PetLevelup_Rule_t
 PhA#@\H
 Phags_Pa
 Phantom Assassin
@@ -19624,6 +18644,8 @@ Picker %i/%s - ent %s model %s
 Pickup Item:
 Pistol
 Pit Fighter of Quoidge
+Pitcf
+Pitch; 
 PitchShift
 Place
 Placed %d areas on the ground
@@ -19890,7 +18912,6 @@ PuzzleShenanigans
 Pv~*H
 Pw~*H
 PxA;F,
-PxHcp
 PxXZH
 PxZYH
 Px~*H
@@ -19898,9 +18919,9 @@ Q#@?9L,
 Q8[A\H
 Q8q(2
 Q?3333
-QAngle
 QAngle-world
 QHcKpIc
+QIcN(Ic
 QTAAR
 Qg3kf
 QjN?#
@@ -20201,6 +19222,7 @@ ResourceThink
 Respawn all the entities in the map.
 Respawn failed to create %s!
 RespawnAllEntitiesSystem
+RespawnTime
 Respawns the player from death!
 Response %s has a followup with unsupported response type %d
 Response Rule %s does not have a 'concept' criterion!
@@ -20282,6 +19304,8 @@ Right Hand
 Right Path
 RightFoot
 RightHandle
+Rigid; 
+Rigif
 Ring of Tarrasque
 Rising Anger
 Ristul Emblem
@@ -20339,7 +19363,6 @@ S HcE
 S HcS
 S I9G
 S I;G
-S IcE
 S [A\A]A^]
 S fD;"tMH
 S$[A\A]A^]
@@ -20351,7 +19374,6 @@ S([A\A]A^]
 S*fA;
 S,[A\A]A^]
 S.[A\A]A^]
-S0A;V0H
 S0[A\A]A^]
 S2SVL
 S2SVt4H
@@ -20503,16 +19525,15 @@ SPfA9
 SSE and SSE2 are required.
 STEAMAPPLIST_INTERFACE_VERSION001
 STEAMAPPS_INTERFACE_VERSION008
-STEAMHTMLSURFACE_INTERFACE_VERSION_004
-STEAMHTTP_INTERFACE_VERSION002
-STEAMINVENTORY_INTERFACE_V002
+STEAMHTMLSURFACE_INTERFACE_VERSION_005
+STEAMHTTP_INTERFACE_VERSION003
+STEAMINVENTORY_INTERFACE_V003
 STEAMMUSICREMOTE_INTERFACE_VERSION001
 STEAMMUSIC_INTERFACE_VERSION001
 STEAMPARENTALSETTINGS_INTERFACE_VERSION001
 STEAMREMOTESTORAGE_INTERFACE_VERSION014
 STEAMSCREENSHOTS_INTERFACE_VERSION003
-STEAMUGC_INTERFACE_VERSION010
-STEAMUNIFIEDMESSAGES_INTERFACE_VERSION001
+STEAMUGC_INTERFACE_VERSION012
 STEAMUSERSTATS_INTERFACE_VERSION011
 STEAMVIDEO_INTERFACE_V002
 STRING
@@ -21023,7 +20044,6 @@ SetBodygroup
 SetBodygroupByName
 SetBool
 SetBool(name, val) : sets the value of the convar to the bool.
-SetBrightness
 SetCanBeBlocked
 SetContext
 SetContext( name , value, duration ): store any key/value pair in this entity's dialog contexts. Value must be a string. Will last for duration (set 0 to mean 'forever').
@@ -21152,8 +20172,6 @@ SettleThink
 SetupModel
 SetupSequences
 Sg \"
-Sh#C\H
-Sh9Pht
 ShI9T$ht
 Sh[A\A]A^]
 ShadowType_t
@@ -21229,6 +20247,9 @@ SimpleConstraintSoundProfile::kHIGHWATER
 SimpleConstraintSoundProfile::kMIN_FULL
 SimpleConstraintSoundProfile::kMIN_THRESHOLD
 Simulate: %6.3f [ms]
+SimulateA
+SimulateH
+Simulated
 Simulated GC communications failure is active.
 Simulated GC communications failure is not active.
 Sin( %s )
@@ -21245,7 +20266,6 @@ Skin:
 Skin: %d
 SkyStateChanged
 Skywrath Mage
-Sl8Plt
 Sl[A\A]A^]
 Sleeping
 Smash Their Defenses!
@@ -21318,7 +20338,6 @@ South
 SouthEast
 SouthWest
 Sow Venom
-Sp9Ppt
 SpI9T$pt
 Sp[A\A]A^]
 SparkThink
@@ -21461,9 +20480,8 @@ SteamAPI_RunCallbacks
 SteamAPI_UnregisterCallResult
 SteamAPI_UnregisterCallback
 SteamAudio001
-SteamClient017
-SteamController005
-SteamFriends016
+SteamController007
+SteamFriends017
 SteamGameCoordinator001
 SteamGameServer012
 SteamGameServerStats001
@@ -21475,12 +20493,13 @@ SteamID
 SteamID   : %s (%llu)
 SteamInternal_ContextInit
 SteamInternal_CreateInterface
+SteamMatchGameSearch001
 SteamMatchMaking009
 SteamMatchMakingServers002
 SteamNetworking005
 SteamNetworkingSockets
 SteamToursHost001
-SteamUser019
+SteamUser020
 SteamUtils009
 Steamworks Stats: %s Ending %s session id: %llu
 Steamworks Stats: %s Ending CLIENT session id: %llu
@@ -21591,7 +20610,6 @@ SxPHc
 Sx[A\A]A^]
 Sx`Hc
 SxbHc
-SxcHc
 SxqHc
 SxrLc
 Syloti_Nagri
@@ -21601,7 +20619,7 @@ Synchronously spawns a single entity from a table
 Syntax Error at offset: %d
 Syriac
 System %s failed to init
-T$ ;S 
+T$ ;B
 T$ H9
 T$ H9S t
 T$ H;C
@@ -21627,22 +20645,21 @@ T$0I9U0t
 T$0L9
 T$0tnH
 T$2fA
-T$4A;
+T$8E1
 T$8H9S8t
 T$8Ic
 T$8L9
-T$<8S<tXL
 T$@B;
 T$@E1
 T$@Hc
 T$@HcD
 T$@Ic
 T$@L9
+T$@~<H
 T$HH9SHt
 T$HHc
 T$HI;UHtN
 T$HL9
-T$HfA
 T$PH9SPt
 T$PIc
 T$PL9
@@ -21661,10 +20678,10 @@ T$pH9
 T$pH;
 T$pL)
 T$pL9
-T$xD9
 T$xIc
 T$xL9
 T$xfA
+T%N?.
 T0@GZ
 T5?Z@2
 T5i@H
@@ -22097,14 +21114,16 @@ TypeManager
 U H9S t
 U I9T$ t
 U IcD$
-U Mc/E;o
+U IcG
 U(H9S(t
 U(I9T$(t
+U(Mc/E;o
 U+s0@
 U0H9S0t
 U0I9T$0t
 U7r8Ne
 U8H9S8t
+U8H;Z
 U8I9T$8t
 U9W8H
 U: %.2f deg
@@ -22235,7 +21254,6 @@ Unable to load %s.
 Unable to load '%s'
 Unable to load card set file %s
 Unable to load manifest file '%s'
-Unable to open '%s' for writing!!!
 Unable to parse compressed message
 Unable to parse message for extra message block of type %u (Key: %llu)%s
 Unable to parse message wrapper from data blob. Possible corruption!
@@ -22377,12 +21395,9 @@ Using a specific item loot list as part of a static recipe. Use the general loot
 Using model "%s"
 UxH9Sxt
 Uz5u3f
-V ;S 
-V A;T$ H
 V tC1
 V%QdH
 V-O	u{^
-V0A;T$0H
 V0Jct9
 V<8S<tWL
 V?ffff
@@ -22413,6 +21428,7 @@ VGUI_System010
 VGUI_ivgui008
 VHUH9WHH
 VHfA9
+VIcD$81
 VJ}@q=
 VM Did not start!
 VMDLLIB001
@@ -22536,8 +21552,9 @@ V_asinf
 V_atan2
 V_atan2f
 V_atanf
-V_atod
 V_atof
+V_atofloat32
+V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
@@ -22682,17 +21699,14 @@ W ;2r+
 W ;2t
 W IcD$
 W u)H
-W%o:F
 W(8QpH
 W(Aq=
 W(H;2t'H
 W,t&L
-W-0l 
 W0;V0H
 W3|Uxa
 W?,|C
 W@t%H
-W@~ I
 WAITING FOR VSCRIPT DEBUGGER CONNECTION -- '-vscriptdebug' was provided on the command line.
 WALKABLESEED
 WARNING
@@ -22885,15 +21899,16 @@ W{@3333
 X API
 X H+X
 X zR&="@r
+X%7z~
 X(Hc@ H
-X-,fG
+X-Tz~
 X0Hc@(M
 X0fD9
 X2:jH
 X4[A\]
-X5C:U
-X5JtF
+X5bdJ
 X9t6@
+X=2V"
 X=2v?
 X@ffff
 XA9^@~
@@ -22907,6 +21922,7 @@ XD$8A
 XD$8H
 XD$P1
 XD$PA
+XD$T1
 XE9t$0
 XE;l$ }
 XF$HcG
@@ -22914,8 +21930,8 @@ XFcH?F
 XGDUH
 XHc_h;_x
 XIcL$
-XIcL$xHc
 XL$<H
+XL$T1
 XLcm H
 XLco`D;opD
 XMlKw
@@ -22943,11 +21959,16 @@ X`Hc@XL
 XboxSystemInterface001
 Xh#x\
 Y ANb
-Y%*w$
+Y%4S+
+Y%Jy 
+Y-:%&
 Y/&4@4
 Y0fD+
-Y5G^E
+Y5)p,
+Y59r,
+Y5~S+
 Y6	@W'g(
+Y=RPj
 Y?3333E
 Y@phonemes
 YAxis
@@ -22960,6 +21981,7 @@ YYYY-MM-DD hh:mm:ss
 Y[A\A]A^A_]
 Y[A\]
 Y^tiL
+Yaw; 
 YawArrow
 YcuP.
 Yd?3333?Y	
@@ -22992,7 +22014,6 @@ ZIcL$
 ZKDfI
 ZL$8L
 ZL$<H
-ZL$DH
 ZLHc<
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI25CDCGAxeAchievementFactoryEEv13StrongTypedefIj13CardIDTypeTagLj0EEEUliP13CDotaCardGameE_
@@ -23009,13 +22030,11 @@ ZNK17CAttributeMatcherI10CTableGameE18GetMatchingObjectsERK36ContextFreeAttribut
 ZNK17CAttributeMatcherI10CTableGameE21BMatchingObjectsExistERK36ContextFreeAttributeListMatchPatternEUlP11CGameObjectE_
 ZNK17CAttributeMatcherI10CTableGameE22GetMatchingObjectCountERK36ContextFreeAttributeListMatchPatternjEUlP11CGameObjectE_
 ZRTfD
-ZYu31
 ZYu3L
 ZY~YA
 Zd;_<
 Zd;_c
 Zg|_\
-Zw0fH
 Zx?HuS-
 Z|J'@X
 Z}uU 
@@ -23122,7 +22141,6 @@ Z}uU
 [xYq|m
 \ at end of pattern
 \$ L9
-\$(IcD$ H
 \$8A;\$HtEI
 \$8D9
 \$8Ic
@@ -23133,11 +22151,16 @@ Z}uU
 \$pI9
 \$sE;o
 \%03o
-\5LfG
-\=}kG
+\%9gB
+\%f;I
+\-;QT
+\5P%"
+\=#f&
 \C not allowed in lookbehind assertion
-\D$ H
+\D$$H
+\H8L9
 \IcEP1
+\IcF(1
 \L$<A
 \N is not supported in a class
 \U%08x
@@ -23159,13 +22182,14 @@ Z}uU
 ]#A;_
 ]%h@sh
 ](IcE L
+]0A;]@
 ]7@Kvl
 ]8[A\A]A^]
 ]9p(H
 ]A\A]A^A_
 ]IcL$
 ]Kyw@
-]Pt;A
+]PtGA
 ]XtfH
 ]hIcE`L
 ]lARAQAPWV
@@ -23189,7 +22213,6 @@ _ D	3H
 _ tSA
 _"HcG
 _(HcG L
-_(IcW L
 _8;_H
 _8AQM
 _@')UG3;
@@ -23203,6 +22226,7 @@ _DA;_H
 _FZZ#F
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
+_IcF(1
 _IcG81
 _IcL$
 _I~@ffffF
@@ -23247,6 +22271,14 @@ _ZN10CVProfNode9ExitScopeEv
 _ZN12CThreadEvent3SetEv
 _ZN12CThreadEventC1Eb
 _ZN12CThreadMutex7TryLockEv
+_ZN12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES3_IFRK18MatchAttributeList35AttributeListGeneratorFunctionParamIS6_EEE16CombatPosition_t13AttributeList18MergeAttributeListS6_St6vectorIiSaIiEESG_ISE_SaISE_EE13StrongTypedefIj13CardIDTypeTagLj0EESL_Iy14MatchIDTypeTagLy0EESG_ISN_SaISN_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSL_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS3_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES3_IF25TemporaryReferenceWrapperISF_ES16_RK25IAttributeContainerReaderS1B_EESG_IhSaIhEE13EDCGEventNameSL_Ij15ObjectIDTypeTagLj0EESG_IS1P_SaIS1P_EE30CardCalculatedCompositeState_tSG_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1U_EE10ECardColorSL_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSL_Iy16TourneyIDTypeTagLy0EEEE16s_TypePropertiesE
+_ZN12VariantUnionII13StrongTypedefIj15EffectIDTypeTagLj0EEN3Opt5EmptyEEE16s_TypePropertiesE
+_ZN12VariantUnionII17InvalidPosition_ti17SpecialPosition_tEE16s_TypePropertiesE
+_ZN12VariantUnionII32CTraceMsg_CardReturnedToFountain25CTraceMsg_CardMovedToDeck25CTraceMsg_CardMovedToHand31CTraceMsg_CardMovedToDeployment30CTraceMsg_CardMovedToGraveyard28CTraceMsg_CardMovedToEffects31CTraceMsg_CardMovedToSpellStack27CTraceMsg_UnitLeavingCombat25CTraceMsg_DamageAttempted20CTraceMsg_CardKilled27CTraceMsg_CardSurvivedDeath21CTraceMsg_TowerKilled30CTraceMsg_ImprovementDestroyed24CTraceMsg_CardDuplicated26CTraceMsg_TriggerTriggered35CTraceMsg_UnitChangedCombatPosition33CTraceMsg_UnitChangedCombatTarget41CTraceMsg_RandomlySelectedSecondaryTarget20CTraceMsg_GoldEarned21CTraceMsg_TowerHealed23CTraceMsg_CardDiscarded22CTraceMsg_CardRevealed21CTraceMsg_CardCreated20CTraceMsg_UnitHealed20CTraceMsg_CardPlayed28CTraceMsg_UnitEnteringCombat28CTraceMsg_PathingCardChanged33CTraceMsg_ImprovementEnteringPlay20CTraceMsg_InnerBlock23CTraceMsg_UnitCondemned35CTraceMsg_PreviewDeathResultChanged31CTraceMsg_ColorsPlayableChanged19CTraceMsg_CardDrawn22CTraceMsg_UnitTargeted20CTraceMsg_UnitLocked27CTraceMsg_TowerManaRestored26CTraceMsg_UnitUserTargeted25CTraceMsg_DeathShieldUsed22CTraceMsg_ItemEquipped24CTraceMsg_TowerManaSpent31CTraceMsg_CardEffectCalculation26CTraceMsg_ScriptBlockBegin24CTraceMsg_ScriptBlockEnd24CTraceMsg_DeathSyncPoint22CTraceMsg_PlayerPassed43CTraceMsg_UnitReadiedForDeploymentUponDeath30CTraceMsg_ShoppingCardAppeared30CTraceMsg_ShoppingCardShuffled20CTraceMsg_ShopAction31CTraceMsg_ShopHoldItemAvailable25CTraceMsg_ShopCardRemoved19CTraceMsg_ShopEnded20CTraceMsg_CardBought38CTraceMsg_PrepareHeroForLaneAssignment16CTraceMsg_HeroVS31CTraceMsg_GainedAppliedEffectEx29CTraceMsg_LostAppliedEffectEx42CTraceMsg_ContinuousAppliedEffectChangedEx31CTraceMsg_AttributeValueChanged22CTraceMsg_PlayerResult24CTraceMsg_TargetSelected24CTraceMsg_ChargesChanged23CTraceMsg_EffectProcced30CTraceMsg_PreviewDamageChangedN3Opt5EmptyEEE16s_TypePropertiesE
+_ZN12VariantUnionII32CardCompositeStateUnnamedPassive33CardCompositeStateUnnamedReactive30CardCompositeStateNamedPassive31CardCompositeStateNamedReactive32CardCompositeStateGrantedPassive33CardCompositeStateGrantedReactive31CardCompositeStateActiveAbility35CardCompositeStateItemActiveAbility39CardCompositeStateTemplateActiveAbility28CardCompositeStatePlayEffect29CardCompositeStateDeathEffect33CardCompositeStateEnterLaneEffect30CardCompositeStateEquippedItem26CardCompositeStateIsCloned31CardCompositeStateHiddenStatModEE16s_TypePropertiesE
+_ZN12VariantUnionII36CardCompositeStateNativeStatProperty39CardCompositeStateNamedItemStatProperty46CardCompositeStateNamedAttachedModStatProperty45CardCompositeStateNamedAuraSourceStatProperty37CardCompositeStateDynamicStatPropertyEE16s_TypePropertiesE
+_ZN12VariantUnionIIfN3Opt5EmptyEEE16s_TypePropertiesE
+_ZN12VariantUnionIIiN3Opt5EmptyEEE16s_TypePropertiesE
 _ZN13CBufferString10ExtendPathEPKcc
 _ZN13CBufferString10FixSlashesEc
 _ZN13CBufferString10RelinquishENS_19EAllocationOption_tE
@@ -23928,7 +22960,6 @@ _ZNSt11__copy_moveILb0ELb1ESt26random_access_iterator_tagE8__copy_mIPvEEPT_PKS4_
 _ZNSt11__copy_moveILb0ELb1ESt26random_access_iterator_tagE8__copy_mIiEEPT_PKS3_S6_S4_
 _ZNSt11char_traitsIcE6lengthEPKc
 _ZNSt11char_traitsIcE7compareEPKcS2_m
-_ZNSt12_Destroy_auxILb0EE9__destroyIPN4Test15CDCGTestContext18TraceExpectation_tEEEvT_S6_
 _ZNSt12_Destroy_auxILb0EE9__destroyIPSsEEvT_S3_
 _ZNSt12_Destroy_auxILb1EE9__destroyIPPFvvEEEvT_S5_
 _ZNSt12_Destroy_auxILb1EE9__destroyIPPKSsEEvT_S5_
@@ -24105,10 +23136,11 @@ _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move
 _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move_bIPvEEPT_PKS4_S7_S5_
 _ZNSt20__copy_move_backwardILb0ELb1ESt26random_access_iterator_tagE13__copy_move_bIiEEPT_PKS3_S6_S4_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIN9__gnu_cxx17__normal_iteratorIPK30CardCompositeStateRulePropertySt6vectorIS4_SaIS4_EEEEPS4_EET0_T_SD_SC_
-_ZNSt20__uninitialized_copyILb0EE13__uninit_copyIN9__gnu_cxx17__normal_iteratorIPK30CardCompositeStateStatPropertySt6vectorIS4_SaIS4_EEEEPS4_EET0_T_SD_SC_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP13AttributeListS3_EET0_T_S5_S4_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP30CardCompositeStateRulePropertyS3_EET0_T_S5_S4_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIP30CardCompositeStateStatPropertyS3_EET0_T_S5_S4_
+_ZNSt20__uninitialized_copyILb0EE13__uninit_copyIPN17AttributeListBaseI31MatchAttributeListNodeContent_t42MatchAttributeListCombineOpVariadicSupportI18MatchAttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEESB_IFRKS5_35AttributeListGeneratorFunctionParamIS5_EEE16CombatPosition_t13AttributeList18MergeAttributeListS5_St6vectorIiSaIiEESN_ISL_SaISL_EE13StrongTypedefIj13CardIDTypeTagLj0EESS_Iy14MatchIDTypeTagLy0EESN_ISU_SaISU_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSS_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationSB_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEESB_IF25TemporaryReferenceWrapperISM_ES1D_RK25IAttributeContainerReaderS1I_EESN_IhSaIhEE13EDCGEventNameSS_Ij15ObjectIDTypeTagLj0EESN_IS1W_SaIS1W_EE30CardCalculatedCompositeState_tSN_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS21_EE10ECardColorSS_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSS_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeES2E_EET0_T_S2G_S2F_
+_ZNSt20__uninitialized_copyILb0EE13__uninit_copyIPN17AttributeListBaseI31MatchAttributeListNodeContent_t42MatchAttributeListCombineOpVariadicSupportI18MatchAttributeListE12VariantUnionIJ10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEESB_IFRKS5_35AttributeListGeneratorFunctionParamIS5_EEE16CombatPosition_t13AttributeList18MergeAttributeListS5_St6vectorIiSaIiEESN_ISL_SaISL_EE13StrongTypedefIj13CardIDTypeTagLj0EESS_Iy14MatchIDTypeTagLy0EESN_ISU_SaISU_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSS_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationSB_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEESB_IF25TemporaryReferenceWrapperISM_ES1D_RK25IAttributeContainerReaderS1I_EESN_IhSaIhEE13EDCGEventNameSS_Ij15ObjectIDTypeTagLj0EESN_IS1W_SaIS1W_EE30CardCalculatedCompositeState_tSN_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS21_EE10ECardColorSS_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSS_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeES2E_EET0_T_S2G_S2F_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIPN17AttributeListBaseI31MergeAttributeListNodeContent_t42MergeAttributeListCombineOpVariadicSupportI18MergeAttributeListE12VariantUnionII10Unassignedi13AttributeListSt6vectorIS9_SaIS9_EEbEEE13AttributeNodeESG_EET0_T_SI_SH_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIPN17AttributeListBaseI31MergeAttributeListNodeContent_t42MergeAttributeListCombineOpVariadicSupportI18MergeAttributeListE12VariantUnionIJ10Unassignedi13AttributeListSt6vectorIS9_SaIS9_EEbEEE13AttributeNodeESG_EET0_T_SI_SH_
 _ZNSt20__uninitialized_copyILb0EE13__uninit_copyIPN17AttributeListBaseI7Empty_t28AttributeListVariadicSupportI13AttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEESB_IFRK18MatchAttributeList35AttributeListGeneratorFunctionParamISE_EEE16CombatPosition_tS5_18MergeAttributeListSE_St6vectorIiSaIiEESN_IS5_SaIS5_EE13StrongTypedefIj13CardIDTypeTagLj0EESS_Iy14MatchIDTypeTagLy0EESN_ISU_SaISU_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSS_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationSB_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEESB_IF25TemporaryReferenceWrapperISM_ES1D_RK25IAttributeContainerReaderS1I_EESN_IhSaIhEE13EDCGEventNameSS_Ij15ObjectIDTypeTagLj0EESN_IS1W_SaIS1W_EE30CardCalculatedCompositeState_tSN_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS21_EE10ECardColorSS_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSS_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeES2E_EET0_T_S2G_S2F_
@@ -24295,6 +23327,15 @@ _ZNSt6chrono3_V212system_clock3nowEv
 _ZNSt6chrono3_V212system_clock3nowEv@@GLIBCXX_3.4.19
 _ZNSt6vectorI10ECardColorSaIS0_EED1Ev
 _ZNSt6vectorI10ECardColorSaIS0_EED2Ev
+_ZNSt6vectorIN17AttributeListBaseI31MatchAttributeListNodeContent_t42MatchAttributeListCombineOpVariadicSupportI18MatchAttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRKS3_35AttributeListGeneratorFunctionParamIS3_EEE16CombatPosition_t13AttributeList18MergeAttributeListS3_S_IiSaIiEES_ISJ_SaISJ_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EED1Ev
+_ZNSt6vectorIN17AttributeListBaseI31MatchAttributeListNodeContent_t42MatchAttributeListCombineOpVariadicSupportI18MatchAttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRKS3_35AttributeListGeneratorFunctionParamIS3_EEE16CombatPosition_t13AttributeList18MergeAttributeListS3_S_IiSaIiEES_ISJ_SaISJ_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EED2Ev
+_ZNSt6vectorIN17AttributeListBaseI31MatchAttributeListNodeContent_t42MatchAttributeListCombineOpVariadicSupportI18MatchAttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRKS3_35AttributeListGeneratorFunctionParamIS3_EEE16CombatPosition_t13AttributeList18MergeAttributeListS3_S_IiSaIiEES_ISJ_SaISJ_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EEaSERKS2C_
+_ZNSt6vectorIN17AttributeListBaseI31MergeAttributeListNodeContent_t42MergeAttributeListCombineOpVariadicSupportI18MergeAttributeListE12VariantUnionII10Unassignedi13AttributeListS_IS7_SaIS7_EEbEEE13AttributeNodeESaISC_EED1Ev
+_ZNSt6vectorIN17AttributeListBaseI31MergeAttributeListNodeContent_t42MergeAttributeListCombineOpVariadicSupportI18MergeAttributeListE12VariantUnionII10Unassignedi13AttributeListS_IS7_SaIS7_EEbEEE13AttributeNodeESaISC_EED2Ev
+_ZNSt6vectorIN17AttributeListBaseI31MergeAttributeListNodeContent_t42MergeAttributeListCombineOpVariadicSupportI18MergeAttributeListE12VariantUnionII10Unassignedi13AttributeListS_IS7_SaIS7_EEbEEE13AttributeNodeESaISC_EEaSERKSE_
+_ZNSt6vectorIN17AttributeListBaseI7Empty_t28AttributeListVariadicSupportI13AttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRK18MatchAttributeList35AttributeListGeneratorFunctionParamISC_EEE16CombatPosition_tS3_18MergeAttributeListSC_S_IiSaIiEES_IS3_SaIS3_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EED1Ev
+_ZNSt6vectorIN17AttributeListBaseI7Empty_t28AttributeListVariadicSupportI13AttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRK18MatchAttributeList35AttributeListGeneratorFunctionParamISC_EEE16CombatPosition_tS3_18MergeAttributeListSC_S_IiSaIiEES_IS3_SaIS3_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EED2Ev
+_ZNSt6vectorIN17AttributeListBaseI7Empty_t28AttributeListVariadicSupportI13AttributeListE12VariantUnionII10Unassigned19CUtlConstStringBaseIcEiSt8functionIFvvEES9_IFRK18MatchAttributeList35AttributeListGeneratorFunctionParamISC_EEE16CombatPosition_tS3_18MergeAttributeListSC_S_IiSaIiEES_IS3_SaIS3_EE13StrongTypedefIj13CardIDTypeTagLj0EESP_Iy14MatchIDTypeTagLy0EES_ISR_SaISR_EE8itemid_t23item_definition_index_t15CUtlStringTokenb12EDCGCardType15EDCGCardSubType22ETriggerConditionFlags22ETargetSelectionMethod23ECardIsUnplayableReasonSP_Ij15EffectIDTypeTagLj0EE15ECardEffectType11ECardRarity15EEffectDurationS9_IFvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEES9_IF25TemporaryReferenceWrapperISK_ES1A_RK25IAttributeContainerReaderS1F_EES_IhSaIhEE13EDCGEventNameSP_Ij15ObjectIDTypeTagLj0EES_IS1T_SaIS1T_EE30CardCalculatedCompositeState_tS_IN25ClientServerSharedHelpers30ConditionalDamageBonusResult_tESaIS1Y_EE10ECardColorSP_Ij12SetIDTypeTagLj0EE11EDCGFaction25ECombatPreviewDeathResultSP_Iy16TourneyIDTypeTagLy0EEEEE13AttributeNodeESaIS2A_EEaSERKS2C_
 _ZNSt6vectorIPFvvESaIS1_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS1_S3_EERKS1_
 _ZNSt6vectorIPFvvESaIS1_EE3endEv
 _ZNSt6vectorIPFvvESaIS1_EE5beginEv
@@ -24974,7 +24015,6 @@ _male
 _models/H
 _nav.txt
 _nav.txtH
-_octree.dat
 _previewH
 _resetgamestats
 _rifle.vH
@@ -25021,7 +24061,6 @@ a2U0*
 a?CJ#
 a@ffff
 aA3333)
-aIcD$
 aIcL$
 aIcL$0Ic
 aT,@J
@@ -25044,7 +24083,6 @@ abs==1
 absolute_time
 absolute_timeout
 absolutetags
-absolutetags %s
 absorigin
 absorigin_follow
 acceleration
@@ -25081,13 +24119,12 @@ action
 actionHint
 actionObjNull
 activate_time
-active "0"
-active 0
 active_jobs
 active_lobby_id
 active_spawngroup_handle
 actor "%s"
 actormodel
+actors
 add 0x%p: %s-%s (%d-%d) [%d in play, %d max]
 add_categories
 add_empty_socket
@@ -25148,6 +24185,7 @@ ai_show_hull_attacks
 ai_sound
 ai_upkeep_check
 ai_use_visibility_cache
+ai_validators
 aiplayers=2;difficulty=Vanilla;enablesignout=0;aimatchsetid=%d
 airliner
 ak[9 .
@@ -25237,7 +24275,6 @@ animationLayerCycleReset
 animationLayerOpChanged
 animationLayerOrderChanged
 animation_modifiers
-animationgraph
 animevents_dump
 animgraph_debug_entindex
 animgraph_debug_tags
@@ -25341,6 +24378,8 @@ audiosounds
 audit_action
 audit_data
 autoDisable
+auto_advance_after_s
+auto_advance_time
 auto_close_time
 auto_convert_back_from_debris
 auto_populate_deck
@@ -25443,7 +24482,6 @@ belligerent
 bentnormal
 best_of
 bezier
-bezier { %s } 
 bi_GameEvent
 bi_RebroadcastGameEvent
 bi_RebroadcastSource
@@ -25472,13 +24510,11 @@ block1
 block2
 block3
 blockLOS
-blockNum
 block_id
 blocked_colors
 blocked_rarities
 blocking team %d
 blocking team %s
-blocksize
 bloodimpact
 bloom_start_value
 bloom_strength
@@ -25564,8 +24600,6 @@ burst_randomize
 burst_scale
 busyactor
 butterfly
-bvcdA
-bvcdL
 bvcdu
 bytes
 bytes. 
@@ -25577,7 +24611,6 @@ c D;
 c D; ~
 c E;e
 c [A\]
-c tIH
 c tul)
 c([A\]
 c+@ffff6
@@ -25591,7 +24624,6 @@ c?Mg'
 c?kdWZF
 c@3333#)
 c@[A\A]A^]
-c@t"A
 c@tQH
 cD@oG8-x
 cDHcChA9
@@ -25655,6 +24687,7 @@ carry_distance_offset
 carry_type
 cast_hull
 cast_ray
+cast_sphere
 castingHero
 castshadows
 casual
@@ -25675,9 +24708,7 @@ cc_showmissing
 cc_slave
 cc_usingcombinedfile
 cctoken
-cctoken "%s"
 cctype
-cctype "%s"
 ce_name_H
 ceil@@GLIBC_2.2.5
 ceilf
@@ -25699,7 +24730,6 @@ chainname
 chair
 challenge_account_id
 challenge_instance
-chance
 chances
 change callback spew threshold %f msecs
 change_control_point_attachment
@@ -25707,12 +24737,14 @@ changed
 changelevel2
 channel
 channel "%s"
+channels
 character
 character value in \u.... sequence is too large
 character value in \x{} or \o{} is too large
 charge_delta
 chat_msg
 chat_room_id
+chat_source
 chdir
 chdir@@GLIBC_2.2.5
 cheap
@@ -25856,7 +24888,6 @@ combat<
 combat_lane_width
 combat_log_entry
 combo
-combo 
 command
 command_id
 command_line
@@ -25871,6 +24902,7 @@ commentary_finishnode
 commentary_semaphore
 commentaryfile
 commonitem
+community_key
 community_market_item_remaps
 compendium_event_id
 compendiumlevel
@@ -25892,7 +24924,6 @@ confused
 connection_state
 constant
 constrainedEventID
-constrainedEventID "%i"
 constraintCount
 constraint_axislimit_t
 constraint_breakableparams_t
@@ -25921,6 +24952,7 @@ convars
 converts delta QAngle to an angular velocity Vector
 cookie
 cooldown_time
+cooldown_time_after
 coord_integral
 copied_card_object_id
 copper
@@ -25961,6 +24993,7 @@ create_on_client
 create_particle
 create_real_copies
 created_by
+created_time
 creation_date
 creationsequence
 creditsdone
@@ -26014,6 +25047,7 @@ custom_game_crc
 custom_game_install_status
 custom_game_timestamp
 custom_kill_effect
+custom_type
 customcubemaptexture
 customize_texture_item
 customkill
@@ -26077,7 +25111,6 @@ data2
 data_center_codes
 data_compressed
 data_table_name
-dataoffset
 date_end
 date_start
 day_night
@@ -26146,6 +25179,7 @@ deceitful
 deck_bytes
 deck_choices
 deck_code
+deck_id
 deck_index
 deck_list
 deck_name
@@ -26177,6 +25211,7 @@ delete_hits
 delete_misses
 deleted_item_id
 delta_from
+demo.proto
 demo.proto"
 demo_file_stamp
 demorestart
@@ -26249,13 +25284,11 @@ directionentityname
 directionx
 directiony
 directionz
-directorysize
 disableRandomCreepSpawns
 disable_delete
 disable_dynamic_prop_loading
 disable_style_selector
 disableallshadows
-disabled 
 disabledValue
 disablelowviolence
 disablereceiveshadows
@@ -26287,7 +25320,6 @@ distanceMin
 distance_check_subtitle
 distance_falloff
 distancetotarget
-distancetotarget %.2f
 dl_iterate_phdr
 dl_iterate_phdr@@GLIBC_2.2.5
 dme_position_map
@@ -26339,12 +25371,14 @@ d~#[fA
 e,}@n
 e0F$J
 e8E;eH
+e8txH
 eColor_Black
 eColor_Blue
 eColor_Green
 eColor_Red
 eConsumableShop
 eDc?t
+eDeckImp
 eEconItemOrigin
 eIcD$ 1
 eIcO(Ic
@@ -26353,6 +25387,7 @@ eKeypoints
 eLiteralHandType
 eLogicalHandType
 eMiddleShop
+ePlayer
 eQueryCvarValueStatus_NotACvar
 eRarity_Common
 eRarity_Rare
@@ -26527,10 +25562,8 @@ entity %s at %s has physics attachment to more than one entity with the name %s!
 entity2
 entity2_networking.cpp
 entityFilterName
-entityIdH
 entityIdentityNameChanged
 entityLumpName
-entityNaH
 entity_clientside_model
 entity_component_error_class_decl_says_contained_but_impl_is_referenced
 entity_component_error_class_decl_says_referenced_but_impl_is_contained
@@ -26592,7 +25625,6 @@ env_fog_controller
 env_global
 env_instructor_hint
 env_instructor_vr_hint
-env_light_probe_volume
 env_lightglow
 env_lightglow maxdist too large (%d should be %d).
 env_lightglow outermaxdist too large (%d should be %d).
@@ -26638,6 +25670,8 @@ eresult
 eresult_deprecated
 erroffset passed as NULL
 error
+error %s
+error %s:  %s
 error in transition graph: %s to %s
 error_code
 error_message
@@ -26651,8 +25685,8 @@ escalation_level2
 escalation_level3
 essence_item_id
 event
+event %s "%s"
 eventID
-eventID "%i"
 eventMatchList
 eventName
 eventSetup
@@ -26686,7 +25720,9 @@ expRandom
 expUsePrecise
 expected_audit_action
 expected_def_index
+expected_losses
 expected_version
+expected_wins
 expecting =
 expecting channel got %s
 expecting event got %s
@@ -26739,6 +25775,7 @@ f	4JH9
 f %d %d %d
 f == __null || dynamic_cast<To>(f) != __null
 f D9'D
+f [A\A]A^]
 f98t<
 f98tM
 f9C(~
@@ -26759,6 +25796,7 @@ f?3333{
 f@ffff
 fA9D$
 fA9D$(
+fA9D$(fA
 fA9E4t
 fA9F v
 fA9G(fA
@@ -26768,12 +25806,16 @@ fA;1I
 fA;G6
 fA;L$R
 fA;\$vw
+fD9%P
 fD90t~
 fD91t
+fD9c&w
 fD9cV
+fD9k$w
 fD; t
 fD;!t
 fD;"t
+fD;%f*
 fD;+|
 fD;cvw
 fD;sv
@@ -26814,7 +25856,6 @@ f^7:!
 faceMergeAngle
 faceposer
 faceposermodel
-faceposermodel "%s"
 faction
 fade a player's screen to black when he dies
 fadeDuration
@@ -26949,12 +25990,15 @@ filter_base
 filter_damage_type
 filter_enemy
 filter_health
+filter_lA
 filter_los
+filter_mI
 filter_max_per_enemy
 filter_multi
 filter_multi: Tried to add entity (%s) which is not a filter entity!
 filter_multi: Tried to add more filters than MAX_FILTERS(%d)!
 filter_outer_radius
+filter_pI
 filter_proximity
 filter_radius
 filter_t
@@ -27013,13 +26057,8 @@ flex_expression
 flex_talk
 flexanimation
 flexanimations
-flexanimations samples_use_time
-flexanimations samples_use_time defaultcurvetype=%s
-flexsetting_t
-flexsettinghdr_t
-flexsettingindex
+flexanimations_default_curvetype
 flextimingtags
-flexweight_t
 flicker
 flip_horizontal
 flip_viewmodel
@@ -27120,13 +26159,13 @@ fow_control_point2
 fow_radius
 fprintf
 fprintf@@GLIBC_2.2.5
-fps %i
 fraction
 frags
 frame_data
 framerate
 framestart
 free@@GLIBC_2.2.5
+free_for_all
 free_trial_expiration
 friction
 friend_count
@@ -27301,8 +26340,10 @@ gametoolevents.proto
 gasCan_pull_back_layer
 gauntlet_config
 gauntlet_id
+gauntlet_info
 gauntlet_instance
 gauntlet_instance_id
+gauntlet_points_leaderboards
 gazelle
 gc inter msg %s, SourceAppID %d, version %hd, job source %llu, job target %llu
 gc msg %s, SteamID %llu
@@ -27461,9 +26502,7 @@ gxXM|Z
 gyrating
 gytU@
 h Hc@
-h L;h(
 h"lxz
-h(Ic\$ A;\$0
 h;K5X]
 h@tYIcv 
 hATSH
@@ -27471,12 +26510,8 @@ hAttachment
 hAttacker
 hCallbackFunc
 hCallbackScope
-hE9l$
-hE9|$
 hEntity
 hEntity to follow, bool bBoneMerge
-hHHc@@I
-hIcL$
 hInfo
 hParent
 hResult
@@ -27577,6 +26612,7 @@ hide_inspect
 hide_quantity
 hide_styles_from_ui
 hide_tradecraftdelete
+hide_visuals_on_model_change
 hidechild
 hideous
 high_value
@@ -27694,6 +26730,7 @@ iSkin
 iTeamNum
 iUnlockedSentence
 iValue
+ic RotatH
 icon_basic
 icon_common
 icon_path
@@ -27709,7 +26746,6 @@ idle: %s, weight: %.2f
 ignite
 ignore socket quality
 ignorePhonemes
-ignorePhonemes %s
 ignore_depth
 ignore_enabled_flag
 ignore_in_collection_view
@@ -27780,7 +26816,6 @@ inconsistent NEWLINE options
 incredulous
 index
 index < 10
-indexindex
 indignant
 indigo
 indirect %s missing valid serializer
@@ -27790,7 +26825,6 @@ inertiafactor
 inertiascale
 ineye
 infinity
-influence
 influence_cone
 influenceradius
 info_big*
@@ -27821,7 +26855,9 @@ info_teleport_destination
 info_world_layer
 infodecal
 infos
+ing;H
 ingame_scale
+inherit_owner_name
 initial_grant_ack_def
 initial_group
 initial_inventory
@@ -27905,8 +26941,10 @@ isActive
 isCancelCommand
 isCombatCommand
 isFirstPlayerToPass
+isPreconstructed
 is_account_locked_down
 is_adjacent
+is_ai_gauntlet
 is_ambient
 is_anonymous
 is_available
@@ -27969,10 +27007,13 @@ is_vac_banned
 is_valid_path_target
 is_verified
 is_wallet_cash_trusted
+is_win
 isactive
 isbetween
 isbot
 ishltv
+isioH
+isiof
 ismember
 isrecording
 iszString
@@ -28016,8 +27057,9 @@ item_hlvr_clip_energygun_large
 item_hlvr_clip_rapidfire
 item_hlvr_clip_shotgun_shellgroup
 item_hlvr_clip_shotgun_single
-item_hlvr_clip_shotgun_speedloader
 item_hlvr_grenade_frag
+item_hlvr_grenade_stun_rapidfire
+item_hlvr_grenade_xen
 item_iconname
 item_id
 item_ids
@@ -28101,6 +27143,7 @@ jealous
 jellyfish
 jf-U 
 jhATI
+jiggle bone %u
 jklmnopqrstuvwxyzyxwvutsrqponmlkj
 job warning: Resuming job '%s (id: %lld)' due to timeout while paused for %s
 job_id_source
@@ -28108,6 +27151,7 @@ job_id_target
 jobmsgcontext
 joined_persona_names
 joined_time
+joined_tourney_id
 joined_user_ids
 joy_autoaimdampen
 js_array
@@ -28129,7 +27173,6 @@ k(tCH
 k0D;(
 k0D;(~
 k0D;k@
-k0L;k8H
 k0t$L
 k0tAL
 k5@3333;
@@ -28456,6 +27499,7 @@ k_EMsgServerToGCMatchSignout
 k_EMsgServerToGCTestConnection
 k_EMsgServerToGCTestResults
 k_EMsgTutorialEvent
+k_EMsgVenchatoquistEvent
 k_EPartnerRequestBadAccount
 k_EPartnerRequestNotLinked
 k_EPartnerRequestOK
@@ -28559,6 +27603,9 @@ k_eBestOfFive_Ties
 k_eBestOfOne
 k_eBestOfThree
 k_eBestOfThree_Ties
+k_eBracket_BestOf
+k_eBracket_FinalsBestOf
+k_eBusy
 k_eCancelFindMatch
 k_eCancelInvite
 k_eCannotChangePlayer
@@ -28583,12 +27630,19 @@ k_eDeveloper
 k_eDisabled
 k_eEditPhase
 k_eFormat_Bracket_SingleElim
+k_eFormat_FreeForAll
 k_eFormat_Invalid
 k_eFormat_Swiss
+k_eFreeForAll_MaxGames
+k_eGlobal_OpenSpectating
+k_eGlobal_SeedStage
+k_eGlobal_TimerMode
 k_eHasUnownedCards
 k_eInMatch
 k_eInMatchMaking
 k_eInMatchmaking
+k_eInTooManyOpenAlready
+k_eInTooManyTotal
 k_eInTooManyTourneys
 k_eIncorrectStage
 k_eIncorrectVersion
@@ -28608,10 +27662,12 @@ k_eInvalidItemID
 k_eInvalidItemType
 k_eInvalidKey
 k_eInvalidLobbyID
+k_eInvalidMode
 k_eInvalidParams
 k_eInvalidPermissions
 k_eInvalidPhase
 k_eInvalidPlayer
+k_eInvalidRequest
 k_eInvalidRights
 k_eInvalidSeries
 k_eInvalidSharedDeck
@@ -28641,6 +27697,7 @@ k_eLobbyServerState_SignedOut
 k_eMatchCompleted
 k_eMatchMakingStopped_User
 k_eMatchMakingStopped_Version
+k_eMismatchedGames
 k_eMissingEntryFees
 k_eMissingInvite
 k_eMissingItem
@@ -28664,6 +27721,7 @@ k_ePhaseStage_Edit
 k_ePhaseStage_Limited
 k_ePhaseStage_Pending
 k_ePhaseStage_Playing
+k_ePhase_EditStage
 k_ePhase_MaxPlayers
 k_ePlayerKicked
 k_ePlayerMismatch
@@ -28674,6 +27732,7 @@ k_ePlaying
 k_ePrivacy_Default
 k_ePrivacy_MembersOnly
 k_ePrivacy_Public
+k_eRandomDeckNotAllowed
 k_eRateLimited
 k_eRegionLocked
 k_eRegistrationClosed
@@ -28703,6 +27762,7 @@ k_eStage_Invites
 k_eStage_PlayPhases
 k_eStage_Seeding
 k_eSuccess
+k_eSwiss_Matches
 k_eSwiss_NumRounds
 k_eTargetInMatch
 k_eTargetNotFriends
@@ -28739,8 +27799,6 @@ key_uint64
 keyframe_rope
 keyframe_track
 keyframes
-keymappingindex
-keynameindex
 keyvalues3.cpp
 khD;(
 khHcSp
@@ -28776,7 +27834,6 @@ kv3format_manager.cpp
 l$ D;(
 l$ D;(~
 l$ E9
-l$(L9
 l$,A	
 l$0D;(
 l$0E;l$@D
@@ -28828,6 +27885,7 @@ leagueid
 left_
 left_cheek_raiser
 left_corner_puller
+left_edge
 left_funneler
 left_inner_raiser
 left_lid_droop
@@ -28840,7 +27898,6 @@ left_puckerer
 left_upper_raiser
 left_user_ids
 leftedge
-leftedge %s %.3f 
 legacymaterialtag
 lemur
 len >= 0
@@ -28893,9 +27950,6 @@ lightingbasis
 lightmap
 lightmapuvw
 lightonlytarget
-lightprobetexture
-lightprobetexture_dli
-lightprobetexture_dls
 lightquery_debug_direct_lighting
 lightquery_debug_indirect_lighting
 lightquery_debug_indirect_lighting_fast
@@ -28914,6 +27968,7 @@ limited_instance_id
 limited_pool
 limited_pool_id
 limittoentity
+line_id
 line_items
 line_number
 linear_damping_ratio_x
@@ -29024,7 +28079,6 @@ loop_break_on_flashlight
 loop_in_action
 loopback
 loopcount
-loopcount "%i"
 looping
 loot_list_name
 loot_list_rolls
@@ -29060,6 +28114,7 @@ m_AttributeList
 m_AttributeManager
 m_Attributes
 m_AutoaimTimer
+m_BoolVariables
 m_BounceColor
 m_BusyActor
 m_ByteVariables
@@ -29147,6 +28202,7 @@ m_HackedGunPos
 m_HandPoses
 m_HitBoxSets
 m_HitBoxes
+m_HoldDuration
 m_HoldTime
 m_IdealActivity
 m_InitPose
@@ -29800,6 +28856,7 @@ m_bNotifyWhenSequenceFinished
 m_bOffsetExistingPos
 m_bOnlyDrawInFastShadowPath
 m_bOnlyPump
+m_bOnlyRenderToTexture
 m_bOpaque
 m_bOriginalBlockLOS
 m_bOverrideMassCenter
@@ -29866,11 +28923,9 @@ m_bShouldDestroyImmediately
 m_bShouldDetach
 m_bShouldRemove
 m_bShowOnHUD
-m_bShowOnscreen
 m_bSimpleProjection
 m_bSimulatedEveryTick
 m_bSinglePlayerGameEnding
-m_bSkeletonActive
 m_bSlowMovement
 m_bSnapToGoal
 m_bSolidBsp
@@ -29930,6 +28985,7 @@ m_bUsingPredictionRules
 m_bVisible
 m_bVolIs2D
 m_bVolumetric
+m_bVrSkeletonActive
 m_bWaitForRefire
 m_bWaitingForActor
 m_bWaitingForInterrupt
@@ -30005,6 +29061,7 @@ m_currentAmp
 m_currentNavArea
 m_currentOp
 m_currentWindVector
+m_customType
 m_damage
 m_damageHistory
 m_damageModel
@@ -30080,7 +29137,7 @@ m_fHaloScale
 m_fIconOffset
 m_fIdealSampleRate
 m_fInitHUD
-m_fInterpolationTime
+m_fInterpolationDuration
 m_fIsRunning
 m_fLastPlayerTalkTime
 m_fLerpTime
@@ -30176,9 +29233,9 @@ m_flBreakAfterTimeY
 m_flBreakAfterTimeZ
 m_flBrightness
 m_flBrightnessDelta
+m_flBrightnessDuration
 m_flBrightnessMult
 m_flBrightnessScale
-m_flBrightnessTime
 m_flBrightnessTimeStart
 m_flCachedGroundSpeed
 m_flCachedOneMinusLastVisibleCycle
@@ -30263,6 +29320,7 @@ m_flFOVRate
 m_flFOVTime
 m_flFacingYaw
 m_flFadeDist
+m_flFadeDuration
 m_flFadeEndDist
 m_flFadeInDuration
 m_flFadeInLength
@@ -30437,7 +29495,7 @@ m_flMaxLinearImpulseY
 m_flMaxLinearImpulseZ
 m_flMaxLogExposure
 m_flMaxRadius
-m_flMaxRandAnimTime
+m_flMaxRandAnimDuration
 m_flMaxRange
 m_flMaxRotation
 m_flMaxSpeed
@@ -30453,7 +29511,7 @@ m_flMinBlendRate
 m_flMinExposure
 m_flMinGustDelay
 m_flMinLogExposure
-m_flMinRandAnimTime
+m_flMinRandAnimDuration
 m_flMinRotation
 m_flMinVal
 m_flMomentumModifier
@@ -30563,13 +29621,13 @@ m_flRenderFrameTime
 m_flRenderFrameTimeUnbounded
 m_flRenderFrameTimeUnscaled
 m_flRenderTime
-m_flRespawnTime
+m_flRespawnDuration
 m_flReturnTime
 m_flRotation
 m_flRotationSpeed
 m_flSaveTime
 m_flScale
-m_flScaleTime
+m_flScaleDuration
 m_flScaleTimeStart
 m_flScattering
 m_flScrollSpeed
@@ -30798,9 +29856,6 @@ m_hLastWeapon
 m_hLayerSequence
 m_hLayerSpawnGroup
 m_hLight
-m_hLightProbeDirectLightIndicesTexture
-m_hLightProbeDirectLightScalarsTexture
-m_hLightProbeTexture
 m_hListManagers
 m_hListenFilter
 m_hLiteralControllerSlots
@@ -31063,7 +30118,6 @@ m_iProgressMsgMinimum
 m_iProgressShown
 m_iPulseOption
 m_iRadiusOverride
-m_iRawValue32
 m_iReapplyProvisionParity
 m_iRecord
 m_iRefName
@@ -31611,7 +30665,6 @@ m_nShadowQuality
 m_nShadowWidth
 m_nShuffleCases
 m_nSimulationTick
-m_nSkeletonBoneCount
 m_nSlaveAxis
 m_nSlaveChannel
 m_nSlimeTouch
@@ -31665,6 +30718,7 @@ m_nVehicleViewSavedFrame
 m_nVertexCount
 m_nVerticalSize
 m_nViewModelIndex
+m_nVrBoneCount
 m_nWaterLevel
 m_nWaterTouch
 m_nWaterType
@@ -31716,6 +30770,7 @@ m_pAttributes
 m_pBaseClassComponentHelper
 m_pBaseClassInfo
 m_pBlocker
+m_pBody
 m_pCPPClassname
 m_pChild
 m_pClass
@@ -31728,7 +30783,6 @@ m_pCurrentCommand
 m_pCurrentKeyFrame
 m_pData
 m_pEntity
-m_pEnvMap
 m_pExpHdr
 m_pExpresser
 m_pFeModel
@@ -31742,7 +30796,6 @@ m_pInflictorClassNameFilter
 m_pInflictorEntityNameFilter
 m_pInfo
 m_pInputs
-m_pLightProbeVolume
 m_pManager
 m_pMapNameFilter
 m_pMaterial
@@ -31936,7 +30989,6 @@ m_shape
 m_shutdownTime
 m_skeleton
 m_skeletonInstance
-m_skeletonTransformCompressed
 m_skybox3d
 m_skyboxData
 m_skyboxData.bClip3DSkyBoxNearToWorldFar
@@ -32085,8 +31137,8 @@ m_unHorizontalAlign
 m_unOrientation
 m_unOverrideOrigin
 m_unOwnerContext
-m_unSkeletonTransformSize
 m_unVerticalAlign
+m_unVrCompressedBoneTransformsSize
 m_unpressedAttack
 m_unpressedAttack2
 m_unpressedBack
@@ -32255,6 +31307,7 @@ m_viewtarget
 m_voicePitch
 m_volume
 m_vphysicsCollisionState
+m_vrCompressedBoneTransforms
 m_wasRestored
 m_width
 m_windRadius
@@ -32276,7 +31329,6 @@ m_zmin
 machine_name
 made_first_purchase
 magenta
-magic
 magnetted_objects_t
 magpie
 main lump
@@ -32299,6 +31351,7 @@ mana_amount_restore_attempt
 mana_amount_restored
 mana_spent
 manatee
+manifest
 manifestincomplete
 manifestloadpriority
 manual
@@ -32315,7 +31368,6 @@ mapcycle.txt
 mapcyclefile
 mapload
 mapname
-mapname "%s"
 maps/%s.txt
 maps/%s/world_physics.vphys
 maps/%s_commentary.txt
@@ -32356,6 +31408,7 @@ matWood
 matchCardAchievements%d
 matchCardAchievements%u
 matchList
+matchMode
 matchTurns
 match_data
 match_details
@@ -32428,6 +31481,7 @@ max_client_version
 max_clients
 max_deck_colors
 max_entries
+max_games_per_player
 max_health
 max_ilevel
 max_item_id
@@ -32442,6 +31496,8 @@ max_update_time_micros
 max_uses
 max_val
 max_wins
+max_wins_per_deck_trophy_id
+max_wins_random_mode_trophy_id
 max_wins_trophy_id
 maxcpulevel
 maxdensityLerpTo
@@ -32459,7 +31515,6 @@ maxpieces
 maxspeedfactor
 maxweight
 maxwind
-meChangef
 measuretarget
 medium car
 melee_hit
@@ -32504,7 +31559,6 @@ messagessize
 messagevolume
 method
 method flags
-method flags2
 method_name
 microtxn
 minBlendRate
@@ -32602,7 +31656,6 @@ models/extras/info_speech.vmdl
 models/props_plants/claypot03.vmdl
 models/survivors/survivor_gambler.vmdl
 models/wH
-models/wI
 models/w_models/weapons/w_desert_rifle.vmdl
 modifiedconvars_t
 modifier_type
@@ -32629,10 +31682,8 @@ move_yaw
 moveable 
 movedir
 moveforwarddistance
-moveforwarddistance "%i"
 moveparent: (%d) Name: %s (%s)
 moverightdistance
-moverightdistance "%i"
 mp_allowNPCs
 mp_allowspectators
 mp_autocrosshair
@@ -32690,6 +31741,7 @@ muzzle
 muzzle_flash_enable
 muzzleflash_particle
 n D9o t3H
+n, DynamH
 n/i,P@$
 n8ATL
 nActiveAreas %d + nAreasDestroyed %d + nAreasPendingDestruction %d = %d
@@ -32951,6 +32003,7 @@ nav_test_find_random_connected
 nav_test_find_random_connected_dist_max
 nav_test_find_random_connected_dist_min
 nav_test_find_z
+nav_test_force_npc_repath
 nav_test_genrt
 nav_test_genrt_place
 nav_test_hull_level: Entity '%s'/'%s' of class '%s' at (%0.2f,%0.2f,%0.2f) is intruding into navmesh
@@ -32968,9 +32021,12 @@ nav_test_path_max_drop_down
 nav_test_path_move
 nav_test_path_opt
 nav_test_path_opt_transitions
+nav_test_pos_name
+nav_test_pos_place
 nav_test_rays
 nav_test_search_lattice
 nav_test_smooth
+nav_test_smooth_extern_push
 nav_test_smooth_in_speed
 nav_test_smooth_in_yaw
 nav_test_smooth_path_speed
@@ -32978,7 +32034,6 @@ nav_test_smooth_separating_dist
 nav_test_smooth_spring_const
 nav_test_smooth_spring_tension_max
 nav_test_spline
-nav_test_spline_place
 nav_test_split_obstacle
 nav_test_split_obstacle_dirty
 nav_test_split_obstacle_leave
@@ -32998,7 +32053,6 @@ nav_validate
 nav_volume_debug
 nav_warp_to_mark
 nav_world_center
-navlib
 navprop
 navproperties_t
 nearz
@@ -33118,6 +32172,7 @@ npc_dota_hero_%s
 npc_height_adjust
 npc_material_override
 npc_vphysics
+npcsolve_attract_draw
 npcsolve_constraint_nav
 npcsolve_constraint_npc
 npcsolve_drag_linear
@@ -33129,12 +32184,13 @@ npcsolve_path_close_const
 npcsolve_path_close_max_tension
 npcsolve_path_lookahead_const
 npcsolve_path_lookahead_dist
+npcsolve_path_vel_const
 npcsolve_separation
 npcsolve_separation_const
 npcsolve_separation_dist
+npcsolve_separation_draw
 npcsolve_separation_jitter
 npcsolve_separation_r2
-npcsolve_separation_threshold_dist
 npehelper
 nqCBJ
 nt;Hc
@@ -33159,14 +32215,9 @@ number after (?C is > 255
 number is too big
 number too big in {} quantifier
 numbers out of order in {} quantifier
-numblocks
 numcascades
 numeric
-numflexsettings
-numindexes
-numkeys
 numsegments
-numsettings
 o ATH
 o ATI
 o ATL
@@ -33176,7 +32227,6 @@ o(ATI
 o(ATL
 o*Ral
 o,ATL
-o-%+,
 o0A;_H
 o0ATA
 o0ATL
@@ -33208,8 +32258,6 @@ objects_modified
 objects_removed
 obscene
 obsolete
-obsolete1
-obsolete2
 occlusionMax
 occlusionMin
 occlusionRadius
@@ -33224,7 +32272,6 @@ old_combat_position
 old_combat_target
 old_preview_damage
 old_preview_death_result
-old_radiusdamage
 oldname
 oldteam
 olive
@@ -33274,6 +32321,7 @@ onfirstimpact
 onlaunch
 online
 only_breakable_by
+only_render_to_texture
 onpickup
 onplayerdeath
 onworldimpact
@@ -33281,6 +32329,9 @@ oo@Eh
 op_id
 opaque
 open_invites
+open_spectating
+open_tourney
+open_tourney_mode
 opened
 operand of unlimited repeat could match the empty string
 operation
@@ -33328,6 +32379,7 @@ other_steamids
 otherentity
 otter
 ouJQx
+out of range (%d/%d)
 outcome
 outerconeangle
 outgoing
@@ -33365,6 +32417,7 @@ p 41@u
 p Hc@ H
 p HcC
 p IcF
+p IcG
 p l6@
 p tXI
 p+Affff
@@ -33382,6 +32435,8 @@ pAttachmentName
 pAttachmentname
 pData->GetDataDescMap() == pTemplateDataMap
 pDefault
+pE9l$
+pE9|$
 pLightGroup
 pMaterialGroup
 pMeshGroupName
@@ -33439,6 +32494,7 @@ param4
 parameterName
 parameter_type
 params_data_driven
+parent of jiggle bone %u: %s
 parentAttachmentName
 parentIndex
 parentMatchList
@@ -33532,7 +32588,6 @@ pervertexlighting
 phantom_id
 phase
 phase_id
-phase_name
 phases
 pheasant
 phone_id
@@ -33615,7 +32670,6 @@ ping_avg_ms
 ping_stddev_ms
 ping_times
 pitch
-pitch "%i"
 pitchVel
 pitchfrac
 pitchhigh
@@ -33631,6 +32685,7 @@ platinum
 platypus
 play_ai_match_headless
 play_ai_tourney_headless
+play_endcap
 play_movie
 play_to_owner_only
 playbackRateChanged
@@ -33782,7 +32837,7 @@ preferred_carryangles
 preferredcarryangles
 premium_only
 prepared_statements_executed
-prerequisite '%s'
+prerequisite
 preserve_cycle
 pretty
 prev_color_flags
@@ -33987,14 +33042,15 @@ ragdoll_dissolved
 ragdoll_prop_settle
 ragdoll_prop_sleepaftertime
 ragdoll_sleepaftertime
+rand@@GLIBC_2.2.5
 random_attributes
 random_colors
 random_decks
 random_seed
+random_spawn_chance
 randomization
 randomizecycle
 randomnum
-range %.1f %.1f 
 range out of order in character class
 rangefinder
 rank_name
@@ -34044,7 +33100,8 @@ related_object_id
 relative
 relativedamping
 relativetag
-relativetag "%s" "%s"
+relativetag_name
+relativetag_sound
 relay_codes
 relay_pings
 release_date
@@ -34179,6 +33236,7 @@ right
 right_
 right_cheek_raiser
 right_corner_puller
+right_edge
 right_funneler
 right_inner_raiser
 right_lid_droop
@@ -34190,7 +33248,6 @@ right_outer_raiser
 right_puckerer
 right_upper_raiser
 rightedge
-rightedge %s %.3f 
 rights
 rights_flags
 rnd_down
@@ -34210,6 +33267,7 @@ round_end
 round_start_pre_entity
 routing
 routing_app_id
+roximityH
 rr_AddDecisionRule
 rr_CommitAIResponse
 rr_GetResponseTargets
@@ -34236,36 +33294,32 @@ running_tests
 runspeed
 s E9u
 s H;5
-s H;5 
-s H;5 E
-s H;5(
-s H;5)
-s H;5)n_
-s H;50
-s H;54i
-s H;59
-s H;5@9
+s H;5!
+s H;5!-n
+s H;5,
+s H;51	q
 s H;5P
-s H;5PY
+s H;5P"n
+s H;5PFY
+s H;5Q
 s H;5X
-s H;5Yj
 s H;5`
+s H;5a
 s H;5h
-s H;5i
 s H;5p
-s H;5y
-s H;5|
+s H;5q
+s H;5x
 s [A\A]A^]
 s off
 s v&E1
 s ~XH
 s$[A\H
 s(H;5
-s(H;5	
-s(H;5=
-s(H;5P
-s(H;5PE
-s(H;5d
+s(H;5,
+s(H;55
+s(H;5H
+s(H;5L
+s(H;5\
 s([A\A]A^]
 s([A\]
 s(t.H
@@ -34277,16 +33331,19 @@ s/glow.vH
 s/spriteH
 s0D;kH
 s0H;5
-s0H;5I
-s0H;5d
+s0H;5(
+s0H;5A
+s0H;5L'`
+s0H;5{
+s0H;5|
 s0~;A
 s1_mapname
 s5fA9
 s69F~
 s7>Ip
 s8H;5
-s8H;5	
-s8H;5i
+s8H;58
+s8H;5X
 s8t%H
 s:@W[
 s@H;5
@@ -34298,7 +33355,9 @@ sAHc@
 sCSvz
 sF?t+F
 sHH;5
-sHH;5GGs
+sHH;5-
+sHH;5/
+sHH;5tg_
 sIHcB
 sLockedSentence
 sLockedSound
@@ -34307,12 +33366,11 @@ sM1@)\
 sMA9|$ 
 sOHc@
 sPH;5
-sPH;5P
-sPH;5`Fs
+sPH;5f
 sP~0H
 sUnlockedSentence
 sUnlockedSound
-sXH;5T
+sXH;5
 sXt%H
 s_EntComponentInfo
 s_bAbsQueriesValid
@@ -34324,7 +33382,7 @@ s_globalCount
 s_kDynamicValuesArraySize
 s_nSceneFlushCounter
 s_nWatchTransmitEntity
-s`H;5p
+s`H;5
 saI^Bj
 salamander
 sale_price
@@ -34332,6 +33390,7 @@ salmon
 sample_msg
 sample_rate
 sample_stack
+samples
 samples_use_time
 sardine
 save %s
@@ -34376,6 +33435,7 @@ scenes/%s.vcd
 sched_yield
 sched_yield@@GLIBC_2.2.5
 schema_catalog
+schemaclassinfo.cpp
 schemasystem
 scores
 scorpion
@@ -34465,6 +33525,7 @@ sections
 seed_stage
 select_high
 select_low
+select_random_deck
 selfMatchList
 sell_price
 send_node_sym
@@ -34485,7 +33546,6 @@ sequence_bytes
 sequence_name
 sequence_number
 sequenceduration
-sequenceduration %f
 sequencename
 sequences
 sequential
@@ -34596,7 +33656,6 @@ short term test for assert cast improvements
 shotclock_only
 should_draw
 show_item_asset_loot_list
-show_onscreen
 show_subtitle
 showchild
 showtriggers
@@ -34680,7 +33739,6 @@ small_icon
 smg1_grenade
 smoothstairs
 snail
-snap %s
 snapValue
 snapshot_file
 snd_event_alignedbox
@@ -34777,7 +33835,7 @@ source_owner
 source_parent_card_id
 source_parent_object_id
 source_reference_id
-spH;5
+spH;5(@m
 space
 space shuttle
 spare error
@@ -34891,7 +33949,6 @@ start_memory_bytes
 start_time
 startclockseconds
 startdelay
-startdelay %f
 startdisabled
 startentity
 startframe
@@ -34945,6 +34002,7 @@ steamworks_sessionid_client
 steamworks_sessionid_server
 steel
 step_spline
+stereo
 stingy
 stop_building
 stop_immediately
@@ -35160,7 +34218,6 @@ sv_showfootsteps
 sv_showlagcompensation
 sv_skip_update_animations
 sv_skyname
-sv_soundemitter_reload
 sv_soundemitter_trace
 sv_soundscape_printdebuginfo
 sv_specaccelerate
@@ -35217,9 +34274,9 @@ swift_prefix
 swiss
 swiss_matches
 swiss_scoring
-sxH;5
+sxH;5X@m
 sxt!H
-sxtpH
+sxtjH
 sy@3333
 symbols
 sync_version
@@ -35232,17 +34289,19 @@ szName
 s{	@B
 t	9N 
 t	9Q 
+t	;Q 
 t	;Y r
 t	A;@
 t	D9@
 t	D9`
-t	D9h
 t	D;@
 t	D;B
 t	D;H
+t	D;J
 t	D;P
 t	D;`
 t	D;h
+t	D;p
 t	E9P
 t	Hc@
 t	I9x
@@ -35264,29 +34323,19 @@ t"D9p
 t"Hc@
 t"HcS
 t"L;%
-t"L;% 
-t"L;% #j
-t"L;% Zt
-t"L;% _t
-t"L;% ao
-t"L;% ko
-t"L;%0
-t"L;%0co
-t"L;%@
-t"L;%@^{
-t"L;%@go
-t"L;%P
-t"L;%P_o
-t"L;%P`{
-t"L;%`
-t"L;%a
-t"L;%p
-t"L;%p"j
-t"L;%pYt
-t"L;%p^t
-t"L;%pjo
+t"L;%	
+t"L;%(
+t"L;%(2[
+t"L;%8
+t"L;%H
+t"L;%X
+t"L;%Y
+t"L;%h
+t"L;%h/[
+t"L;%x
+t"L;%x1[
 t"Mc&E;f
-t"[A\]
+t"Mc'E;g
 t#;8u
 t#D;`
 t#HcM
@@ -35296,47 +34345,54 @@ t$	;s8u
 t$	H9
 t$ E1
 t$ H;5
-t$ H;5-
-t$ H;55
-t$ H;5e]
-t$ H;5muW
-t$ H;5}N
+t$ H;5	
+t$ H;5%
+t$ H;5e
 t$ L9
 t$ t0
 t$ ~2H
 t$(H9
 t$(H;5
+t$(H;5B
+t$(H;5]
 t$(L9
 t$(L9.t`
 t$(t-H
 t$0H9
 t$0H;5
-t$0H;5aie
-t$0H;5lCs
-t$0H;5u
+t$0H;55
+t$0H;5Y:x
+t$0H;5YOc
+t$0H;5]
+t$0H;5i
+t$0H;5m
+t$0H;5y
 t$0L9
 t$0Lc
 t$0f.
 t$0~4L
 t$8E1
 t$8H;5
+t$8H;5E
+t$8H;5e
 t$8L9
 t$8fA
 t$<	t 
 t$<E1
-t$@E;
 t$@H;5
-t$@H;5=
+t$@H;56
+t$@H;5}
 t$@L9
 t$@|)
 t$@|+
 t$D9j
 t$H;h
+t$HE;
 t$HH9
 t$HH;5
-t$HH;5%lv
-t$HH;5Lev
-t$HH;5e
+t$HH;5R
+t$HH;5]
+t$HH;5}
 t$HL9
 t$HcK8
 t$HcS
@@ -35350,32 +34406,32 @@ t$Hf.
 t$HfA
 t$Lc'H
 t$Lc+I
-t$PA;pP
 t$PA;uPu
+t$PH)
 t$PH;5
-t$PH;5Ylv
 t$PHc
+t$PL)
 t$PL9
-t$XH;5M
+t$XH;5E
 t$`H;5
 t$`[A\A]A^]
-t$hH;5MqW
+t$hH;5E
 t$hHcE
-t$pH;5qsW
+t$pH)
+t$pH;5i
+t$pL)
 t$pL9
 t%90u
 t%D:%
 t%HcC0A
 t%IcL$ 
 t%L;}
-t&;5?
 t&A;\$
-t&D;5e
+t&D;5U^
 t&HcQ
 t&L;%
-t&L;%@
+t&L;%8
 t&Mc&E;f
-t&Mc7E;w
 t&[A\]
 t'D;5
 t'H9P
@@ -35388,10 +34444,12 @@ t(;2}
 t(<)u
 t(D9H
 t(Lc#D;c
+t([A\A]A^]
 t([A\]
 t(f;0t%H
 t(f;2t0H
 t)D:%
+t)D;e
 t)HcE
 t)Lcm
 t)[A\]
@@ -35401,9 +34459,10 @@ t*A+F$I
 t*D;p
 t*H;x
 t+98u
+t+;0u
 t+<\u
 t+D;{
-t+HcJ
+t+HcV
 t+Ic\$
 t+Mcl$pE;
 t,D:5
@@ -35416,7 +34475,6 @@ t-;W@}.L
 t-L9p
 t-[A\A]]
 t-rex
-t.;;tW
 t.H9P
 t.H;w(t8H;w0tBH;w8tLH;w@t
 t.HcC H
@@ -35448,19 +34506,17 @@ t0HcG(H
 t0HcK@H
 t0HcKXH
 t0PHcB,L
-t0[A\A]]
 t0[A\]
 t0f;2t3H
 t1H;p
 t1HcG
-t1HcJ
 t1HcKlH
 t1HcKpH
 t1HcO8H
 t1HcOHH
 t1HcOPH
 t1HcOXH
-t1HcS
+t1HcV
 t1Ic_
 t1L;e
 t1Mc,$E;l$
@@ -35498,8 +34554,6 @@ t2[A\]
 t390u
 t3;0u
 t3D;	u
-t3D; u
-t3D;`
 t3HcC$H
 t3HcC(H
 t3HcG
@@ -35507,11 +34561,11 @@ t3HcG H
 t3HcG$H
 t3HcG(H
 t3HcG,H
-t3HcJ
 t3HcK0H
 t3HcK<H
 t3HcKLH
 t3HcKtH
+t3HcV
 t3HcW,H
 t3HcW0H
 t3Hc]
@@ -35538,7 +34592,6 @@ t4HcG
 t4HcG H
 t4HcG$H
 t4HcG(H
-t4HcG,H
 t4HcK8H
 t4HcKTH
 t4HcOHH
@@ -35548,10 +34601,11 @@ t4HcW(H
 t4IcL$PH
 t4IcM@H
 t4IcM\H
+t4IcN4H
 t4IcO4H
-t4IcO<H
 t4IcO@H
 t4IcOdH
+t4IcT$,H
 t4[A\A]A^]
 t4[A\A]]
 t4[A\]
@@ -35566,7 +34620,6 @@ t5IcL$<H
 t5Mc7E;w
 t5[A\]
 t5~;=
-t6E;<$tY
 t6HcC,H
 t6IcD$ H
 t6IcD$(H
@@ -35597,6 +34650,7 @@ t8HcW(H
 t8HcW0H
 t8HcW8H
 t8IcD$0H
+t8U@8
 t8[A\]
 t8~of
 t9HcKlH
@@ -35606,25 +34660,23 @@ t:H;p
 t;HcS
 t;Ic]
 t;[A\]
-t<;3u
+t;fE9
 t<ATL
 t<Ic_(A;_8
+t<Lcs8D;sHD
 t<M9|$
 t<[A\]
+t<v"<
 t=[A\]
-t>HcU
 t>IcE
 t>M.F9
 t>[A\A]A^]
 t>fA9
 t?[A\A]A^]
-t@;5E
 t@Ic_
-t@U@8
-t@[A\A]A^]
 t@}?5^
 tA;s r<H
-tAHcJ
+tAHcV
 tAIc]
 tALcc
 tAMc,$E;l$
@@ -35633,8 +34685,10 @@ tBHcp
 tBIc]
 tBLc;D;{
 tB[A\A]A^]
+tB[A\]
 tC;0u
 tC;8u
+tCLc#D;c
 tCMce
 tC[A\A]A^]
 tDHcA
@@ -35644,24 +34698,25 @@ tEIc]
 tEMc,$E;l$
 tEU@8
 tE[A\A]A^]
+tEfE9
 tF;Q rA9
 tFRA@F
 tF\sQF^e7F0
 tG98u
 tHI9u wBI
+tHMc,$E;l$
 tIHcP
 tJ;0u
 tJ;9u
 tJHcC
 tJHcShH
 tJ[A\A]A^]
-tJ[A\]
 tK92u
 tM[A\]
 tNMc/E;o
 tN~+A
+tP;3u
 tPUf9
-tQX[A\A]A^A_]
 tRHc\
 tRIcE
 tRIcL$ 
@@ -35671,7 +34726,7 @@ tSL9k
 tTIct$
 tTf;w2
 tUE9e
-tUHcJ
+tUHcV
 tUMc.E
 tV90u
 tWMc/E
@@ -35684,7 +34739,6 @@ t\H90u
 t\H;p
 t\IcT$@
 t^[A\]
-t_IcU
 t`[A\]
 taA;N r[HcC
 ta[A\]
@@ -35722,7 +34776,6 @@ targetclassname
 targetentityname
 targetpoint
 targetposition
-targetposition %.2f %.2f %.2f
 taunt
 tauntfrequency
 tax_usd
@@ -35775,7 +34828,6 @@ tfLcp
 tf[A\]
 tf_escort_score_rate
 tgHcO
-tgHcQ
 tgIc\$
 tgL;e
 th<ptK<0u
@@ -35802,7 +34854,6 @@ threads
 threads_active
 threads_connected
 tiHcN
-tiHcQ
 tiL;u
 tick_interval
 ticket
@@ -35835,6 +34886,7 @@ tint_color
 tired
 titanium
 tjHcM
+tjHcO
 tk;2u
 tkHcS8
 tkHc_P
@@ -35844,6 +34896,7 @@ tlrJA
 tl~)A
 tmHcO
 tnHcM
+tnr\@
 toIcD$
 toIcT$
 toLcm
@@ -35905,7 +34958,6 @@ tower_health1
 tower_health2
 tpD9#H
 tpHcW
-tpLc2I
 tqHcQ
 tqHcSh
 trHcU
@@ -35968,9 +35020,9 @@ true,
 trusted
 ts90u
 ttHcU
-ttLcs0D;s@D
 tuHcO
 tuHcU
+tuLcs0D;s@D
 turbo_mode
 turkey
 turn_card_entered_hand
@@ -35988,12 +35040,12 @@ tv_log_director_events
 tv_msg
 tv_show_allchat
 twL;+u
-twLc2I
 two named subpatterns have the same name
 two_factor_enabled_time
 twofactor_enabled
 txA9\$ I
 txHcW
+txLc2I
 txn_country_code
 txn_id
 tyHcQ
@@ -36018,6 +35070,7 @@ type_instances
 type_value
 tyrannosaur
 tzL9m
+tzLc2I
 tzUE1
 t{E;l$
 t{HcWp
@@ -36025,6 +35078,7 @@ t{UE1
 t{[A\A]A^]
 t{riU
 t|HcR
+t}D8kSt
 t}HcSH
 t~D;{4u
 t~HcM
@@ -36052,6 +35106,7 @@ u)D;e
 u)[A\]
 u*E9,$H
 u*[A\]
+u,D9u
 u,[A\]
 u-[A\]
 u.HW?
@@ -36078,7 +35133,6 @@ u9HcG
 u9HcX
 u9[A\A]A^]
 u9[A\]
-u:A	\$
 u;[A\A]A^]
 u;[A\]
 u<Ic\$
@@ -36116,7 +35170,6 @@ uOIcEHI
 uO[A\]
 uPD9z
 uPHcA
-uPMcu
 uP[A\]
 uR[A\]
 uSA	\$
@@ -36143,7 +35196,7 @@ ucHcC
 uc[A\]
 udp_connect_ip
 udp_connect_port
-ueL;=
+ueL;=F
 uf[A\]
 uf[A^]
 uhHcT
@@ -36167,7 +35220,6 @@ uncompressed_size
 undefined
 unfortunate
 unhandled input: (%s) -> (%s), from (%s,%s); %s
-unified
 unified 
 uninterpreted_option
 units
@@ -36223,6 +35275,7 @@ unusual
 unusual_index
 unweighted
 unweighted 
+uoMc&E;f
 upLco
 up[A\]
 updateOnClient
@@ -36288,13 +35341,12 @@ utlstringtoken
 uxIcG
 ux[A\]
 uz9GxV
-u~A	D$
 v %g %g %g
 v %g %g %g%s
+v IcD$
 v"HcR
-v&]H9
 v)HcU
-v/Icw
+v+Icw
 v8array
 v8callback
 v8object
@@ -36311,6 +35363,7 @@ vHAUATI
 vJ90u
 vK<	uGH
 vNE^N
+vPA;pP
 vV<	uRH
 vValue
 vVd{AVd{AVd{AVd{A
@@ -36478,6 +35531,7 @@ vr_hand_left_attachment_rotation
 vr_hand_model
 vr_hand_model_override
 vr_hand_right_attachment_offset
+vr_hand_use_compression_locally
 vr_hide_viewmodel
 vr_hmd_positions_debug
 vr_hmd_tracking_passthrough
@@ -36512,6 +35566,7 @@ vsurf
 vtexAVE
 vtexH
 vulture
+vzHc@
 v|f9O
 w ATL
 w AUA
@@ -36529,7 +35584,7 @@ w,ATL
 w,AUL
 w0ATL
 w0AUL
-w0t)UI
+w0t)UH
 w4ATL
 w4AUL
 w74@ffffb
@@ -36543,6 +35598,7 @@ w?3333
 w?ffff
 w@?5^
 w@ATL
+w@ATSH
 w@AUI
 w@AUL
 w@HcCH;CL
@@ -36551,6 +35607,7 @@ wDATL
 wE@)@
 wEDM@
 wHATL
+wHATSH
 wHAUL
 wLATL
 wP9AR
@@ -36669,7 +35726,7 @@ x	;F`
 x	;V`
 x ;G`}
 x!;1|
-x";7}
+x";=O
 x#9SH~
 x#Hcp
 x#Hcw
@@ -36694,13 +35751,14 @@ x7Hcw
 x8"tq
 x8Mcl$ E;l$0
 x8mUM
+x:;=|
 x:Hcw
-x?Hc5<y
+x?Hc5
 x@;wp
 x@HcO
-xAVAUI
 xBHcO
 xH"t:f
+xHHc@@I
 xHXZH
 xI9<$u
 xI9>u
@@ -36730,6 +35788,7 @@ xb;wH}]Hc
 xc_crouch_debounce
 xdigit
 xen_plant*
+xes;H
 xf;WP}hUH
 xfIc\$
 xg;7}cHc
@@ -36744,7 +35803,6 @@ y?ffff
 y@x^*6
 yE>Strange
 ya$d\
-yaw "%i"
 yawVel
 yaw_end
 yaw_start
@@ -36789,8 +35847,11 @@ z.u,A
 z.u,H
 z/u-A
 z/u-H
+z0u.1
 z0u.H
 z1u/H
+z2u0A
+z3u1A
 z4u2H
 z6$r@ffff.N
 z6u4H
@@ -36801,22 +35862,20 @@ z8"tl
 z8"tv
 z8GVA	5
 z8u61
-z8u6A
 z8u6H
 z:u8H
-z;u9A
 z;u9H
 z;u9I
-z<u:A
 z<u:H
 z<u:fA
 z=u;H
 z>u<H
 z>{}[]()=&, 	
-z?u=I
 zAu?H
+zAu?L
 zD?fffff*
 zEuCH
+zEuCL
 zF!8YFr
 zFGjIF}
 zH"tE
@@ -36831,6 +35890,7 @@ zPuNH
 zSuQUH
 zTuRA
 zTuRH
+zUuSH
 zWuUHc
 zYuW1
 zYuWA
@@ -36838,9 +35898,11 @@ zZuXH
 z\uZA
 z\uZH
 z]u[H
+z`u^A
 z`u^H
 zcuaE
 zebra
+zero_value
 zeucA
 zeucH
 zeucM
@@ -36849,7 +35911,6 @@ zhufH
 zkuiH
 zm6Vb
 zmukI
-znulH
 zone_id
 zoneid
 zoumH
@@ -36860,16 +35921,16 @@ zturH
 zwuuD
 zyuwM
 zzYQ,
-zzuxM
 z{uyH
-z|uzI
 z}u{fA
 { H;=
-{ H;=	
-{ H;=)
-{ H;=T
-{ H;=^
-{ H;=n
+{ H;=3V%
+{ H;=AJ3
+{ H;=Ab
+{ H;=\1
+{ H;=\4
+{ H;=\7
+{ H;=\:
 { H;}
 { [A\A]A^]
 { [A\]
@@ -36877,29 +35938,30 @@ z}u{fA
 { t2H
 {(9x(
 {(D9{8D
-{(H;=
+{(H;="W%
 {(H;}
 {(HcE
 {([A\]
-{([A\]H
 {(fD9't)H
 {(t3[A\]
 {)<8"@
 {0@cz
 {0D;{@A
 {0H;=
+{0H;=h
 {8[A\]
 {8[]H
 {@H;=
-{@H;=1
 {@HcE
 {@[A\]
 {@ffff
-{HH;=
+{HH;=\
+{HH;=hT%
 {PD;{`
-{PH;=
+{PH;=!T%
 {PH;{X
 {S6wD
+{SDE1
 {YIN?
 {`D;{pA
 {o3@yCu
@@ -36912,25 +35974,29 @@ z}u{fA
 |$ AWL
 |$ E;|$0tLI
 |$ H;=
-|$ H;=@
 |$ ~D
 |$$E1
 |$(HcF H
+|$(IcD$ M
+|$(L9
+|$([A\]H
 |$0E1
 |$0E;|$@
 |$0Hc
 |$8	~<
+|$8A\]
 |$8Hi
 |$8M9
 |$@	uS
-|$@A;
 |$@A\]
 |$@E	
 |$@Hc
+|$HA;
 |$HfA
 |$PA9
 |$PD1
 |$PD9
+|$PH)
 |$PVCCDt5L
 |$XfA
 |$`A\]
@@ -36950,6 +36016,7 @@ z}u{fA
 |20M9
 |5H;I
 |7(Mc
+|7Hf.
 |7IcN
 |=H;IX
 |?5&[@R
@@ -36974,10 +36041,10 @@ z}u{fA
 |PIcL$
 |QIcO
 |RIcO
-|SIcL$
 |XHcK
 |XIcOhHc
 |Xg!'
+|YIcL$
 |_&H~0
 |a2U0
 |pIcD$
@@ -36990,14 +36057,12 @@ z}u{fA
 }$A;]
 }'f9CFr!L
 }(D;c\
-})9C<r$
-});C<w$
+}*9C<r%
 }+f;C
 },fA9\$vr$H
 },fA;]vw%H
 }/fA9L$vr'O
 }0H;=
-}0HcW
 }1A;\$\
 }2'@+P
 }2UHc
@@ -37014,7 +36079,6 @@ z}u{fA
 }?5^:[
 }?5^z,
 }?E:n
-}?Lcu
 }@33331
 }BE9l$$|;I
 }BfA;]vw;H
@@ -37024,14 +36088,12 @@ z}u{fA
 }EfD9
 }RfD9
 }XA\A]A^A_]
-}Xt@H
+}XtHH
 }[fA9
-}aD;}
 }aEzi!E@
 }cfA9
 }d)H"j
 }efA9
-}gD;m
 }l7f~
 }lfD;
 }rf;C6I
@@ -37040,16 +36102,19 @@ z}u{fA
 ~ D;?
 ~'L;x
 ~(A\A]A^A_]
+~(IcF I
 ~(};Hc
 ~)H;7I
-~)H;=\
+~)H;=
 ~*A9\$
 ~*fE;g
 ~+Hcu
 ~+Lc}
 ~/Hcu
+~0ATL
 ~0AffffN
 ~0HcE
+~0HcW
 ~1Lc}
 ~31]H
 ~3HcE
@@ -37106,4 +36171,3 @@ z}u{fA
 ~p>u,
 ~s;C`}VH
 ~uUE1
-~w;=q
