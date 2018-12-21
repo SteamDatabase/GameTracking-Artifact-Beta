@@ -38,6 +38,7 @@
 	Arguments: x y z
 	Arguments: x1 y1 z1 x2 y2 z2
 	Arguments: {.vmdl name}
+	Bonus %s: Progress %d/%d
 	CDemoStop"0
 	CGameInfo
 	CMsg_Card
@@ -184,6 +185,7 @@
 	magnitude
 	map_entry
 	max_games
+	mmr_level
 	name_part
 	new responses:
 	new_class
@@ -357,6 +359,7 @@
   Version: %llu:
   criterion '%25s':'%15s' 
   input: %s
+  notmostrecent prevents tracking the name of the last .sav file
   o [%5d] '%s' (%s) [group entity]
   o [no group entity]
   output: %s
@@ -364,6 +367,7 @@
   szFullScriptFile = %s
   szReplaysPath = %s
   used during construction differ from defaults. Please re-export the map.
+  wait forces async .sav to finish before returning
   x %6.6f  : no samples latched
  !"#$%&'()*+,-./0123
  !"#$%&'()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~
@@ -461,7 +465,7 @@
  GCConnectionStatus_GC_GOING_DOWN
  IcD$
  Id: %d, %s, Score: %5.3lf (%5.3lf), Randomness: %5.3lf, Low utility: %d Cost: 
- Lc%/N
+ Lc%_d
  NETWORK_DISCONNECT_CLIENT_NO_MAP
  NETWORK_DISCONNECT_REJECT_BANNED
  NETWORK_DISCONNECT_SNAPSHOTERROR
@@ -596,6 +600,7 @@
 !A3333
 !Access to convar functions
 !Access to global system functions
+!Access to steam functions
 !CEcon_FlushInventoryCache_Request
 !CGCStoreRechargeRedirect_LineItem
 !CMsgClientToGCRemoveItemAttribute
@@ -943,7 +948,6 @@
 #CardEffect_10177_0
 #CardEffect_10178_0
 #CardEffect_10179_0
-#CardEffect_10181_0
 #CardEffect_10182_0
 #CardEffect_10183_0
 #CardEffect_10187_0
@@ -1045,6 +1049,7 @@
 #DCG_ActionHint_Hero_Ally
 #DCG_ActionHint_Hero_Ally_move
 #DCG_ActionHint_Hero_Ally_return
+#DCG_ActionHint_Hero_Enemy
 #DCG_ActionHint_Hero_kill
 #DCG_ActionHint_Hero_modify
 #DCG_ActionHint_Hero_purge
@@ -1309,6 +1314,7 @@
 #k_EMsgGC_IncrementKillCountResponse
 #k_EServerLobbyData_CardAchievements
 #k_EServerSignoutData_Disconnections
+#k_EServerSignoutData_PlayerProgress
 #k_ESignout_Success_AlreadySignedOut
 #k_UnpackBundle_Failed_ItemIsInvalid
 #notification_title_localization_key
@@ -1364,6 +1370,7 @@ $CMsgGCToGCReloadServerRegionSettings*
 $CMsgGCToServerCancelAllocateForMatch
 $CMsgNotificationOfSuspiciousActivity
 $CMsgServerSignoutData_Disconnections
+$CMsgServerSignoutData_PlayerProgress
 $CMsgServerToGCMatchSignoutPermission
 $CMsgServerToGCTestConnectionResponse
 $CMsgServerToGCUpdateLobbyServerState
@@ -1888,6 +1895,7 @@ $zBu@
 %s| Project: '%s' Binary: '%s'
 %s| SizeOf: %d
 %s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
+%u:%02u:%02u
 %u:%u:%u
 %u[%d]
 %z@@@
@@ -2057,7 +2065,6 @@ $zBu@
 (#GameUI_Disconnect_RemoteProblem_Timeout
 (%0.2f) %s
 (%0.2f): %s
-(%5%;
 (%d %d %d %d)
 (%d) Name: %s (%s)
 (%f, %f, %f)
@@ -2065,10 +2072,10 @@ $zBu@
 (%g %g %g)
 (%g %g)
 (%s) %i,
+(%v"8
 (*%s*), 
 (*MARK) must have an argument
 (*VERB) not recognized or malformed
-(-v4J
 (0x%08X)'??'
 (1@zD
 (9w rh;w
@@ -2631,13 +2638,19 @@ $zBu@
 -vscriptdebug
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
+.%%(v
+.%(sF
 .%0*llu
-.%XdF
+.%5Nj
+.%T|p
+.%YJN
+.%jVF
+.%kKN
 .%llu
-.%tKq
-.%y@N
-.-Y+}
-.-^JE
+.-+0@
+.-6(B
+.-Pri
+.-^ZE
 ...<truncated>...
 ...And One For Me
 ../../public/entity2/concreteentitylist.h
@@ -2664,11 +2677,15 @@ $zBu@
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
 ../public/tier2/fieldpath.h
-.5-Uf
-.5DC\
-.5cs#
+.5 >~
+.53Z"
+.54UL
+.5UA~
+.5iwp
 .8z%u#
-.=`b&
+.=.'B
+.=:]|
+.=fQ&
 .>()09
 .@(."
 .@(va
@@ -2877,9 +2894,7 @@ $zBu@
 .EShoppingSlot"
 .ESourceEngine:
 .ESplitScreenMessageType
-.FPrF
 .FPr`
-.FTr.
 .FTrJ
 .G8z)u'H
 .G8z:u8]
@@ -3074,7 +3089,6 @@ $zBu@
 0AVAUL
 0CClientMsg_WorldUIControllerHasPanelChangedEvent
 0GAME_PARTICLE_MANAGER_EVENT_SET_SHOULD_CHECK_FOW
-0H;=M
 0HcG4
 0N2(	
 0NETWORK_DISCONNECT_REJECT_SERVERCDKEYAUTHINVALID
@@ -4019,8 +4033,6 @@ $zBu@
 18CAtomicManipulatorI10CUtlVectorI7CHandleI21CBaseVRHandAttachmentE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEEE
 18CAtomicManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEEE
 18CAtomicManipulatorI10CUtlVectorI7CHitBox10CUtlMemoryIS1_iEEE
-18CAtomicManipulatorI10CUtlVectorIN12CEntityClass17ComponentHelper_tE10CUtlMemoryIS2_iEEE
-18CAtomicManipulatorI10CUtlVectorIN12CEntityClass18ComponentOffsets_tE10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIN17CAttributeManager24cached_attribute_float_tE10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIN28CBoneConstraintPoseSpaceBone7Input_tE10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIN29CBoneConstraintPoseSpaceMorph7Input_tE10CUtlMemoryIS2_iEEE
@@ -4030,11 +4042,9 @@ $zBu@
 18CAtomicManipulatorI10CUtlVectorIP15CTeamSpawnPoint10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIP22CPhysSurfaceProperties10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEEE
-18CAtomicManipulatorI10CUtlVectorIPK18EntComponentInfo_t10CUtlMemoryIS3_iEEE
 18CAtomicManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEEE
 18CAtomicManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEEE
 18CAtomicManipulatorI10CUtlVectorIS0_I7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEES4_IS6_iEEE
-18CAtomicManipulatorI10CUtlVectorIb10CUtlMemoryIbiEEE
 18CAtomicManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEE
 18CAtomicManipulatorI10CUtlVectorIf10CUtlMemoryIfiEEE
 18CAtomicManipulatorI10CUtlVectorIf28CNetworkUtlVector_MemoryTypeIfLin1EEEE
@@ -4312,8 +4322,6 @@ $zBu@
 18CSchemaManipulatorI10CUtlVectorI7CHandleI21CBaseVRHandAttachmentE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEEE
 18CSchemaManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEEE
 18CSchemaManipulatorI10CUtlVectorI7CHitBox10CUtlMemoryIS1_iEEE
-18CSchemaManipulatorI10CUtlVectorIN12CEntityClass17ComponentHelper_tE10CUtlMemoryIS2_iEEE
-18CSchemaManipulatorI10CUtlVectorIN12CEntityClass18ComponentOffsets_tE10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIN17CAttributeManager24cached_attribute_float_tE10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIN28CBoneConstraintPoseSpaceBone7Input_tE10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIN29CBoneConstraintPoseSpaceMorph7Input_tE10CUtlMemoryIS2_iEEE
@@ -4323,11 +4331,9 @@ $zBu@
 18CSchemaManipulatorI10CUtlVectorIP15CTeamSpawnPoint10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIP22CPhysSurfaceProperties10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEEE
-18CSchemaManipulatorI10CUtlVectorIPK18EntComponentInfo_t10CUtlMemoryIS3_iEEE
 18CSchemaManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEEE
 18CSchemaManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEEE
 18CSchemaManipulatorI10CUtlVectorIS0_I7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEES4_IS6_iEEE
-18CSchemaManipulatorI10CUtlVectorIb10CUtlMemoryIbiEEE
 18CSchemaManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEE
 18CSchemaManipulatorI10CUtlVectorIf10CUtlMemoryIfiEEE
 18CSchemaManipulatorI10CUtlVectorIf28CNetworkUtlVector_MemoryTypeIfLin1EEEE
@@ -4739,6 +4745,7 @@ $zBu@
 2/.CMsgLookupMultipleAccountNamesResponse.Account
 20.CMsgClientToGCAbandonGauntletResponse.EResponse
 20.CMsgClientToGCTourneyAddPhaseResponse.EResponse"
+20.CMsgServerSignoutData_PlayerProgress.PointBonus
 20.CUserMsg_ParticleManager.UpdateParticleFallback
 200.0
 200000
@@ -5608,8 +5615,6 @@ $zBu@
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CBaseVRHandAttachmentE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHitBox10CUtlMemoryIS1_iEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIN12CEntityClass17ComponentHelper_tE10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIN12CEntityClass18ComponentOffsets_tE10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN17CAttributeManager24cached_attribute_float_tE10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN28CBoneConstraintPoseSpaceBone7Input_tE10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN29CBoneConstraintPoseSpaceMorph7Input_tE10CUtlMemoryIS2_iEES2_E
@@ -5619,11 +5624,9 @@ $zBu@
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP15CTeamSpawnPoint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CPhysSurfaceProperties10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIPK18EntComponentInfo_t10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIS0_I7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEES4_IS6_iEES6_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIb10CUtlMemoryIbiEEbE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEbE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf10CUtlMemoryIfiEEfE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf28CNetworkUtlVector_MemoryTypeIfLin1EEEfE
@@ -5634,6 +5637,7 @@ $zBu@
 27CSchemaUtlVectorManipulatorI23CUtlVectorFixedGrowableI16CSceneObjectDataLm1EES1_E
 27CServerLobbyData_DraftCards
 27CServerLobbyData_PlayerDeck
+27CServerLobbyData_PlayerInfo
 27CTraceFilterSkipTwoEntities
 27CTraceMsg_CardSurvivedDeath
 27CTraceMsg_TowerManaRestored
@@ -5660,6 +5664,7 @@ $zBu@
 28CGCToGCMsgMasterAck_Response
 28CLightSpotAlias_light_glspot
 28CMsgAMAddFreeLicenseResponse
+28CMsgClientToGCSetPlayerBadge
 28CMsgClientToGCTourneyGetInfo
 28CMsgCreateTourneyPhase_Swiss
 28CMsgGCGetCommandListResponse
@@ -6249,6 +6254,7 @@ $zBu@
 36CMsgNotificationOfSuspiciousActivity
 36CMsgSOCacheSubscribed_SubscribedType
 36CMsgServerSignoutData_Disconnections
+36CMsgServerSignoutData_PlayerProgress
 36CMsgServerToGCMatchSignoutPermission
 36CMsgServerToGCTestConnectionResponse
 36CMsgServerToGCTestResults_TestResult
@@ -6481,6 +6487,7 @@ $zBu@
 47CMsgClientToGCTourneyGetRegisteredDecksResponse
 47CMsgClientToGCTourneyRegisterSharedDeckResponse
 47CMsgRequestItemPurgatory_RefundPurchaseResponse
+47CMsgServerSignoutData_PlayerProgress_PointBonus
 47CUserMsg_ParticleManager_UpdateParticleFallback
 48CBidirMsg_RelayPacket_SignedDestinationAddress_t
 48CClientMsg_WorldUIControllerHasPanelChangedEvent
@@ -6505,7 +6512,6 @@ $zBu@
 4@fD9|
 4AffffN
 4Bff&?a
-4CCGameEntity::CEntityInstanceEntityClass
 4I@X{3
 4dLcd
 4fff>fff>fff>fff>
@@ -6669,7 +6675,6 @@ $zBu@
 8Czt$H
 8E9l$`
 8EGNv@
-8H;=	
 8HcGPH
 8HcK0A
 8HcW`
@@ -6709,6 +6714,7 @@ $zBu@
 91tyHcI 
 92t.H
 95*P>
+953`>
 98N*>
 999999
 99w(|&H
@@ -6769,6 +6775,7 @@ $zBu@
 9JcL9
 9N ~GL
 9Px? FcH
+9VHUH
 9X`~_H
 9Zg,>4
 9dPipvj
@@ -6836,10 +6843,6 @@ $zBu@
 ;39!@ffff
 ;3@F%u
 ;4,F]
-;5A3B
-;5S:B
-;5Y3B
-;5\GC
 ;8tcH
 ;9t4H
 ;:HcR
@@ -6856,6 +6859,7 @@ $zBu@
 ;G tu+G$L
 ;GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT
 ;HDtYH
+;Hc5?
 ;I9<$uU
 ;K st
 ;O<gK
@@ -6886,9 +6890,9 @@ $zBu@
 ;wH|#
 ;wH|#H
 ;wp|	]
-;~HUH
-;~Lt*;~Pt-9~Tf
+;~hUH
 ;~hy?'
+;~lt*;~pt-9~tf
 <	u 1
 <	u,1
 <	uKI
@@ -6904,7 +6908,6 @@ $zBu@
 <!-- schH
 <$/tsL
 <$A\A]A^]
-<$A\A]H
 <$A\H
 <$A\]
 <$E;|$
@@ -6963,9 +6966,11 @@ $zBu@
 <Pu;H
 <RAVI
 <RealPosition: %i>
+<ResponseToPlayerCommand>
 <Rt&<Pu
 <SpecialPosition: %s>
 <Unknown>
+<Unspecified>
 <Uu`H
 <X^/N
 <Xu;H
@@ -7173,7 +7178,7 @@ $zBu@
 ?R8q(2)
 ?R||Bv>
 ?S]Nv$x
-?SteamClient018
+?SteamUser020
 ?T%@O
 ?TFm,r
 ?UUUUUU
@@ -7430,7 +7435,6 @@ $zBu@
 @P<*u
 @P</t
 @P|;A
-@QAngle
 @SNDLVL_
 @TpxADz"@
 @UN{J
@@ -7629,10 +7633,10 @@ A(H9G(
 A(Ic\$ A;\$0
 A(Lcc D;c0
 A(Lck D;k0
-A(Lcs D;s0
 A+D$$
 A+D$$H
 A+D$$I
+A+D$x
 A+E$1
 A+E$A
 A+E$H
@@ -7661,6 +7665,7 @@ A+W$Hc
 A+W$f
 A+\$$Hc
 A+]$Hc
+A+^$Hc
 A+_$H
 A+_$Hc
 A+_$L
@@ -7683,10 +7688,8 @@ A3333}
 A5fSXbf7
 A8E6t
 A8G1t#I
-A8Ic\$ A;\$0
 A8Lcc D;c0
 A8Lck D;k0
-A8Lcs D;s0
 A8Mcl$ E;l$0
 A94	H
 A9D$ 
@@ -7722,7 +7725,7 @@ A9\$X
 A9\$`
 A9\$h
 A9\$p
-A9\$utOI
+A9\$utKI
 A9](u
 A9]8~+L
 A9]p~SI
@@ -7735,7 +7738,6 @@ A;@`}
 A;D$ 
 A;D$8
 A;D$PA
-A;D$Pt
 A;D$X}
 A;D$`}
 A;D$p
@@ -9095,7 +9097,7 @@ AVAUATH
 AVAUATI
 AVAUATL
 AVAUATLc
-AVAUATLc%_
+AVAUATLc%
 AVAUATM
 AVAUATS
 AVAUATS1
@@ -9173,11 +9175,12 @@ AWAVfA
 AXAY1
 AXAYH
 AXAYM
+AXAYt
+AXtvH
 AXu!I
 AYAZA
 AYAZD
 AYAZH
-AYAZI
 AYAZt
 AYAZu
 AYAZv
@@ -9239,6 +9242,7 @@ Activate (Assassin's Veil)
 Activate (Blink Dagger)
 Activate (Book of the Dead)
 Activate (Bracers of Sacrifice)
+Activate (Cheating Death)
 Activate (Demagicking Maul)
 Activate (Emissary of the Quorum)
 Activate (Escape Route)
@@ -9573,6 +9577,7 @@ AuthenticAMD
 Auto director allows spectators to become camera man
 Auto director uses fixed level cameras for shots
 AutoGenerated(%s)
+AutoSaveDangerous
 Autogenerate nav areas on fence and obstacle tops
 Autograph
 Automatically set by the game when a commentary file is available for the current map.
@@ -9601,7 +9606,6 @@ B0Mc.
 B0[A\]
 B2f9B,D
 B8Hc@
-B8Ic\$ A;\$0
 B8Lck D;k0
 B8Mcl$ E;l$0
 B94(t$M
@@ -9730,9 +9734,12 @@ Before the action phase, if there are charges on THIS_CARD_NAME, remove one and 
 Before the action phase, there is a 50% chance to give PARENT_CARD_NAME +4 Attack this round.
 Begin an iteration over the list of entities
 Begin shifting the Selected Set.
+BeginCardDraw
 BeginFadeOutThink
+BeginInitialFlop
 BeginRestoreEntities without previous EndRestoreEntities.
 BeginScriptDebug
+BeginShopping
 BeginSpellCasting
 Beginner
 Bellow
@@ -9826,6 +9833,9 @@ Bronze Legion
 Bronze Legionnaire
 BrushSolidities_e
 Buckshot
+Buff Hero to 15 Armor
+Buff Hero to 20 attack
+Buff Hero to 30 health
 Buginese
 Buhid
 Build out high-precision areas around the edit cursor and create them.
@@ -9841,6 +9851,7 @@ BundleData_t
 BundleType_t
 Burning Oil
 ButtonBitMask_t
+Buy every item in your deck
 Buying Time
 Byte size calculation and serialization were inconsistent.  This may indicate a bug in protocol buffers or it may be caused by concurrent modification of 
 C ;C0
@@ -9859,6 +9870,7 @@ C Yu
 C [A\A]A^]
 C [A\]H
 C uaH
+C!?tN1
 C$ tuH
 C$A9G$t#H
 C$[A\A]A^A_]
@@ -9878,8 +9890,8 @@ C,+C(
 C,[A\A]A^]
 C,[A\]
 C,t	I
-C,u'H
 C,u*H
+C,u.H
 C-side of entity framework
 C.[A\A]A^]
 C0H+C(H
@@ -9924,11 +9936,8 @@ C@~>H
 C@~CH
 CA*oG8-
 CAISound
-CAISound::CEntityInstanceEntityClass
 CAI_ChangeHintGroup
-CAI_ChangeHintGroup::CEntityInstanceEntityClass
 CAI_ChangeTarget
-CAI_ChangeTarget::CEntityInstanceEntityClass
 CAI_Expresser
 CAI_ExpresserWithFollowup
 CAI_MoveMonitor
@@ -9938,14 +9947,12 @@ CARD_PLAY_SCRIPT
 CA[A\]
 CAimConstraint
 CAmbientGeneric
-CAmbientGeneric::CEntityInstanceEntityClass
 CAnimGraphNetworkedVariables
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (1)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (2)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (3)
 CAnimationLayer
 CAreaPortal
-CAreaPortal::CEntityInstanceEntityClass
 CAttachment
 CAttributeContainer
 CAttributeList
@@ -9957,32 +9964,26 @@ CAuthPhysBody
 CAuthPhysJoint
 CBaseAchievement
 CBaseAnimating
-CBaseAnimating::CEntityInstanceEntityClass
 CBaseAnimatingController
 CBaseAnimatingController::LastVisibleCycle( %d ) NULL pstudiohdr on %s!
 CBaseAnimatingController::LastVisibleCycle( %d ) on %s!
 CBaseAnimatingController::SequenceDuration( %d ) NULL CModel on %s!
 CBaseAnimatingController::SequenceDuration( %d ) out of range
+CBaseAnimatingEasingFloat_t
+CBaseAnimatingEasings_t
 CBaseAnimatingOverlay
-CBaseAnimatingOverlay::CEntityInstanceEntityClass
 CBaseAnimatingOverlayController
 CBaseAnimatingOverlayController::AddGesture:  model %s missing activity %s
 CBaseAttributableItem
-CBaseAttributableItem::CEntityInstanceEntityClass
 CBaseClientUIEntity
-CBaseClientUIEntity::CEntityInstanceEntityClass
 CBaseCombatCharacter
-CBaseCombatCharacter::CEntityInstanceEntityClass
 CBaseCombatCharacter::DamageHistory
 CBaseCombatCharacter::UpdateLastKnownArea
 CBaseCombatWeapon
-CBaseCombatWeapon::CEntityInstanceEntityClass
 CBaseCombatWeapon::Operator_FrameUpdate one or both of the ModelPtrs is NULL w:%s v:%s
 CBaseConstraint
 CBaseDMStart
-CBaseDMStart::CEntityInstanceEntityClass
 CBaseEntity
-CBaseEntity::CEntityInstanceEntityClass
 CBaseEntity::EmitSound
 CBaseEntity::PhysicsDispatchThink
 CBaseEntity::TakeDamage:  with inputInfo.GetDamageForce() == vec3_origin
@@ -9990,14 +9991,11 @@ CBaseEntity::TakeDamage:  with inputInfo.GetDamagePosition() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamagePosition() == vec3_origin
 CBaseFilter
-CBaseFilter::CEntityInstanceEntityClass
 CBaseFlex::AddSceneEvent:  event failed
 CBaseFlex::AddSceneEvent:  event->GetActor() was NULL!!!
 CBaseFlex::AddSceneEvent:  scene or event was NULL!!!
-CBaseFlex::CEntityInstanceEntityClass
 CBaseFlex::FlexControllerLocalToGlobal failed!
 CBaseFlexAlias_funCBaseFlex
-CBaseFlexAlias_funCBaseFlex::CEntityInstanceEntityClass
 CBaseGameStats::Event_Commentary [%d]
 CBaseGameStats::Event_CrateSmashed
 CBaseGameStats::Event_Credits
@@ -10021,31 +10019,21 @@ CBaseGameStats::Event_WeaponFired [%s] %s weapon [%s]
 CBaseGameStats::Event_WeaponHit [%s] %s weapon [%s] damage [%f]
 CBaseGameStats::LoadingEvent_PlayerIDDifferentThanLoadedStats
 CBaseModelEntity
-CBaseModelEntity::CEntityInstanceEntityClass
 CBaseModelEntity::EnableMeshGroup failed: no model!
 CBaseModelEntity::SetBodygroup(%d,%d) failed: CBaseModelEntity has no model!
 CBaseMoveBehavior
-CBaseMoveBehavior::CEntityInstanceEntityClass
 CBaseMultiplayerPlayer
-CBaseMultiplayerPlayer::CEntityInstanceEntityClass
 CBasePlayer
-CBasePlayer::CEntityInstanceEntityClass
 CBasePlayer::ChangeTeam( %d ) - invalid team index.
 CBasePlayer::ProcessUsercmds: too many cmds %i sent for player %s
 CBaseProp
-CBaseProp::CEntityInstanceEntityClass
 CBaseTempEntity::StaticInitTempEnts()
 CBaseToggle
-CBaseToggle::CEntityInstanceEntityClass
 CBaseTrigger
-CBaseTrigger::CEntityInstanceEntityClass
 CBaseVRHandAttachment
-CBaseVRHandAttachment::CEntityInstanceEntityClass
 CBaseVRHandAttachmentHandle
 CBaseViewModel
-CBaseViewModel::CEntityInstanceEntityClass
 CBeam
-CBeam::CEntityInstanceEntityClass
 CBidirMsg_RebroadcastGameEvent
 CBidirMsg_RebroadcastSource
 CBidirMsg_RelayInfo
@@ -10075,9 +10063,7 @@ CBoneConstraintPoseSpaceBone::Input_t
 CBoneConstraintPoseSpaceMorph
 CBoneConstraintPoseSpaceMorph::Input_t
 CBreakable
-CBreakable::CEntityInstanceEntityClass
 CBreakableProp
-CBreakableProp::CEntityInstanceEntityClass
 CCLCMsg_BaselineAck
 CCLCMsg_ClientInfo
 CCLCMsg_ClientMessage
@@ -10095,7 +10081,6 @@ CCLCMsg_SplitPlayerDisconnect
 CCLCMsg_VoiceData
 CC_ResetGameStats : Server cleared game stats
 CChangeLevel
-CChangeLevel::CEntityInstanceEntityClass
 CChoreoScene::ImportEventFromKV3( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::ParseEvent( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::RestoreFromBinaryBuffer( %s ):  discarding invalid event of type '%s' [%f -> %f]
@@ -10115,24 +10100,18 @@ CCoJobThreadFuncWorkItem::DispatchCompleted
 CCoJobThreadFuncWorkItem::ThreadProcess
 CCollisionProperty
 CColorCorrection
-CColorCorrection::CEntityInstanceEntityClass
 CColorCorrectionVolume
-CColorCorrectionVolume::CEntityInstanceEntityClass
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CCommentaryAuto
-CCommentaryAuto::CEntityInstanceEntityClass
 CCommentarySystem
 CCommentaryViewPosition
-CCommentaryViewPosition::CEntityInstanceEntityClass
 CConstantForceController
 CConstraintAnchor
-CConstraintAnchor::CEntityInstanceEntityClass
 CConstraintSlave
 CConstraintTarget
 CCopyRecipientFilter
 CCredits
-CCredits::CEntityInstanceEntityClass
 CCustomGameEventManager
 CCustomGameEventManager::ScriptSend_ServerToPlayer - Invalid player
 CCustomGameEventManager::Script_RegisterListener - Failed to duplicate callback
@@ -10144,11 +10123,9 @@ CD+C@
 CDCGGameRules
 CDCGGameRules *
 CDCGGameRulesProxy
-CDCGGameRulesProxy::CEntityInstanceEntityClass
 CDCGInventoryManager
 CDCGLobby
 CDCGPlayer
-CDCGPlayer::CEntityInstanceEntityClass
 CDCGServerGCSystem
 CDCGServerLobby
 CDCGTourney
@@ -10160,10 +10137,8 @@ CDamageComponent
 CDamageComponentReferenced
 CDamageComponentReferencedPtr
 CDebugHistory
-CDebugHistory::CEntityInstanceEntityClass
 CDebugOverlayScriptHelper
 CDecal
-CDecal::CEntityInstanceEntityClass
 CDecalEmitterSystem::LoadDecalsFromScript:  Unable to load '%s'
 CDefaultResponseSystem::Init() was called twice! Deleting old system at @%p
 CDemoClassInfo
@@ -10182,10 +10157,7 @@ CDemoSyncTick"$
 CDemoUserCmd
 CDevtestHierarchy
 CDevtestHierarchy2
-CDevtestHierarchy2::CEntityInstanceEntityClass
-CDevtestHierarchy::CEntityInstanceEntityClass
 CDevtestHierarchyChild
-CDevtestHierarchyChild::CEntityInstanceEntityClass
 CDf9CFt&HcS8
 CDotaCardGame::OnCardDrawBegin( turn=%d )
 CDotaCardGame::OnCardDrawEnd( turn=%d )
@@ -10206,13 +10178,9 @@ CDotaCardGame::PlayerConnectionStatusChanged DCG_GAME_PHASE_PREGAME, and all pla
 CDotaGameInfo
 CDt I
 CDynamicLight
-CDynamicLight::CEntityInstanceEntityClass
 CDynamicProp
-CDynamicProp::CEntityInstanceEntityClass
 CDynamicPropAlias_dynamic_prop
-CDynamicPropAlias_dynamic_prop::CEntityInstanceEntityClass
 CDynamicPropAlias_prop_dynamic_override
-CDynamicPropAlias_prop_dynamic_override::CEntityInstanceEntityClass
 CDynamicRecipeComponentCriteriaMatch has invalid item quality: %s
 CDynamicRecipeComponentCriteriaMatch has invalid item rarity: %s
 CDynamicRecipeComponentLootList references invalid loot list: '%s'
@@ -10221,7 +10189,6 @@ CE_ADDED
 CE_REMOVED
 CEconEntity
 CEconEntity::AttachedParticleInfo_t
-CEconEntity::CEntityInstanceEntityClass
 CEconItem
 CEconItem::BAddToMessage::std::string
 CEconItemAttribute
@@ -10230,31 +10197,23 @@ CEconItemSchema::GetAttributeDefinitionByName
 CEconItemSystem::Init
 CEconItemView
 CEconWearable
-CEconWearable::CEntityInstanceEntityClass
 CEffectData
 CEmptyEntityInstance
-CEmptyEntityInstance::CEntityInstanceEntityClass
 CEnableMotionFixup
-CEnableMotionFixup::CEntityInstanceEntityClass
 CEngineServiceRegistry::RegisterEngineServices()
 CEntities
+CEntity2SaveRestore::AutoSaveDangerousIsSafe()
 CEntity2SaveRestore::FinishAsyncSave
 CEntity2SaveRestore::OnLoad:  DirectoryExtract failed '%s'
 CEntity2SaveRestore::OnLoad:  SaveReadHeaderAndSpawnGroupList failed '%s'
 CEntity2SaveRestore::OnLoad:  no such save file '%s'
+CEntity2SaveRestore::SaveGame(%s) failed:  %s
 CEntity2SaveRestore::StreamEntitiesToFile on %s failed
 CEntityBlocker
-CEntityBlocker::CEntityInstanceEntityClass
-CEntityClass
-CEntityClass::CClassAttributes
-CEntityClass::ComponentHelper_t
-CEntityClass::ComponentOffsets_t
 CEntityClass::Unserialize( %d:%s:%s )
-CEntityClassInfo
 CEntityComponent
 CEntityComponentHelper
 CEntityDissolve
-CEntityDissolve::CEntityInstanceEntityClass
 CEntityHandle
 CEntityIOOutput
 CEntityIdentity
@@ -10263,7 +10222,6 @@ CEntityIdentity::SetEntityName called, but there is no entity name string table 
 CEntityIndex
 CEntityInstance
 CEntityInstance: Root class for all entities
-CEntityInstance::CEntityInstanceEntityClass
 CEntityKeyValues::Serialize: Unable to write into a text-based utlbuffer!
 CEntityKeyValues::Serialize: Unsupported keyvalue variant type! (%s) type=%d
 CEntityKeyValues::Unserialize: Invalid version! Expected %d, encountered %d!
@@ -10288,151 +10246,84 @@ CEntitySystem
 CEntitySystem::BuildComponentUnserializer '%s'
 CEntitySystem::PrecacheEntity: Classname missing from entity!
 CEnvBeam
-CEnvBeam::CEntityInstanceEntityClass
 CEnvClock
 CEnvClock::Activate( ActivateType_t activateType ) call to Plat_gmtime failed!
-CEnvClock::CEntityInstanceEntityClass
 CEnvCubemap
-CEnvCubemap::CEntityInstanceEntityClass
 CEnvCubemapBox
-CEnvCubemapBox::CEntityInstanceEntityClass
 CEnvCubemapFog
-CEnvCubemapFog::CEntityInstanceEntityClass
 CEnvDOFController
-CEnvDOFController::CEntityInstanceEntityClass
 CEnvDeferredLight
-CEnvDeferredLight::CEntityInstanceEntityClass
 CEnvDeferredSpotLight
-CEnvDeferredSpotLight::CEntityInstanceEntityClass
 CEnvDetailController
-CEnvDetailController::CEntityInstanceEntityClass
 CEnvEntityMaker
-CEnvEntityMaker::CEntityInstanceEntityClass
 CEnvExplosion
-CEnvExplosion::CEntityInstanceEntityClass
 CEnvFade
-CEnvFade::CEntityInstanceEntityClass
 CEnvGlobal
-CEnvGlobal::CEntityInstanceEntityClass
 CEnvInstructorHint
-CEnvInstructorHint::CEntityInstanceEntityClass
 CEnvInstructorVRHint
-CEnvInstructorVRHint::CEntityInstanceEntityClass
 CEnvMicrophone
-CEnvMicrophone::CEntityInstanceEntityClass
 CEnvPlayerSurfaceTrigger
-CEnvPlayerSurfaceTrigger::CEntityInstanceEntityClass
 CEnvProjectedTexture
-CEnvProjectedTexture::CEntityInstanceEntityClass
 CEnvScreenEffect
-CEnvScreenEffect::CEntityInstanceEntityClass
 CEnvScreenOverlay
-CEnvScreenOverlay::CEntityInstanceEntityClass
 CEnvShake
-CEnvShake::CEntityInstanceEntityClass
 CEnvSky
-CEnvSky::CEntityInstanceEntityClass
 CEnvSoundscape
-CEnvSoundscape::CEntityInstanceEntityClass
 CEnvSoundscapeAlias_snd_soundscape
-CEnvSoundscapeAlias_snd_soundscape::CEntityInstanceEntityClass
 CEnvSoundscapeProxy
-CEnvSoundscapeProxy::CEntityInstanceEntityClass
 CEnvSoundscapeProxyAlias_snd_soundscape_proxy
-CEnvSoundscapeProxyAlias_snd_soundscape_proxy::CEntityInstanceEntityClass
 CEnvSoundscapeTriggerable
-CEnvSoundscapeTriggerable::CEntityInstanceEntityClass
 CEnvSoundscapeTriggerableAlias_snd_soundscape_triggerable
-CEnvSoundscapeTriggerableAlias_snd_soundscape_triggerable::CEntityInstanceEntityClass
 CEnvSpark
-CEnvSpark::CEntityInstanceEntityClass
 CEnvTilt
-CEnvTilt::CEntityInstanceEntityClass
 CEnvTimeOfDay2
-CEnvTimeOfDay2::CEntityInstanceEntityClass
 CEnvVolumetricFogController
-CEnvVolumetricFogController::CEntityInstanceEntityClass
 CEnvWindShared
 CEnvWindShared::WindAveEvent_t
 CEnvWindShared::WindVariationEvent_t
 CEnvZoom
-CEnvZoom::CEntityInstanceEntityClass
 CEventLog::PrintPlayerEvent: Failed to find player (userid: %i, event: %s)
 CExtraMsgBlock
 CFailableAchievement
 CFeModelCombiner: combined finite element model is too large, with %u nodes
 CFilterClass
-CFilterClass::CEntityInstanceEntityClass
 CFilterContext
-CFilterContext::CEntityInstanceEntityClass
 CFilterEnemy
-CFilterEnemy::CEntityInstanceEntityClass
 CFilterLOS
-CFilterLOS::CEntityInstanceEntityClass
 CFilterMassGreater
-CFilterMassGreater::CEntityInstanceEntityClass
 CFilterModel
-CFilterModel::CEntityInstanceEntityClass
 CFilterMultiple
-CFilterMultiple::CEntityInstanceEntityClass
 CFilterName
-CFilterName::CEntityInstanceEntityClass
 CFilterProximity
-CFilterProximity::CEntityInstanceEntityClass
 CFingerBone
 CFingerChain
 CFingerSource
 CFlexAnimationTool::OnImportFlexAnimation:  %s, expecting "flexanimations"
 CFlexCycler
-CFlexCycler::CEntityInstanceEntityClass
 CFlexExpresser
-CFlexExpresser::CEntityInstanceEntityClass
 CFlexExpresserShim
-CFlexExpresserShim::CEntityInstanceEntityClass
 CFogController
-CFogController::CEntityInstanceEntityClass
 CFogTrigger
-CFogTrigger::CEntityInstanceEntityClass
 CFogVolume
-CFogVolume::CEntityInstanceEntityClass
 CFuncAreaPortalBase
-CFuncAreaPortalBase::CEntityInstanceEntityClass
 CFuncAreaPortalWindow
-CFuncAreaPortalWindow::CEntityInstanceEntityClass
 CFuncBrush
-CFuncBrush::CEntityInstanceEntityClass
 CFuncCombineBarrier
-CFuncCombineBarrier::CEntityInstanceEntityClass
 CFuncConveyor
-CFuncConveyor::CEntityInstanceEntityClass
 CFuncIllusionary
-CFuncIllusionary::CEntityInstanceEntityClass
 CFuncInteractionLayerClip
-CFuncInteractionLayerClip::CEntityInstanceEntityClass
 CFuncNavBlocker
-CFuncNavBlocker::CEntityInstanceEntityClass
 CFuncNavConnectionBlocker
-CFuncNavConnectionBlocker::CEntityInstanceEntityClass
 CFuncNavObstruction
-CFuncNavObstruction::CEntityInstanceEntityClass
 CFuncOccluder
-CFuncOccluder::CEntityInstanceEntityClass
 CFuncPropRespawnZone
-CFuncPropRespawnZone::CEntityInstanceEntityClass
 CFuncRotating
-CFuncRotating::CEntityInstanceEntityClass
 CFuncTimescale
-CFuncTimescale::CEntityInstanceEntityClass
 CFuncVPhysicsClip
-CFuncVPhysicsClip::CEntityInstanceEntityClass
 CFuncVehicleClip
-CFuncVehicleClip::CEntityInstanceEntityClass
 CFuncWall
-CFuncWall::CEntityInstanceEntityClass
 CFuncWallToggle
-CFuncWallToggle::CEntityInstanceEntityClass
 CFunc_LOD
-CFunc_LOD::CEntityInstanceEntityClass
 CF|W F+
 CGCClient
 CGCClientSystem - failed to init GCClient!
@@ -10489,7 +10380,6 @@ CGameEventManager::AddListener: event '%s' unknown.
 CGameEventManager::UnserializeEvent:: failed to create event %s.
 CGameEventManager::UnserializeEvent:: unknown event id %i.
 CGameGibManager
-CGameGibManager::CEntityInstanceEntityClass
 CGameJobSystem
 CGameMovement(%s):  %d/%s Got a NaN origin on %s
 CGameMovement(%s):  %d/%s Got a NaN velocity on %s
@@ -10499,7 +10389,6 @@ CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment %s on m
 CGameParticleManagerSystem
 CGameRules
 CGameRulesProxy
-CGameRulesProxy::CEntityInstanceEntityClass
 CGameSceneNode
 CGameSceneNode::AddHierarchyUpdate: Encountered unknown bone in parent entity %s (model %s)!
 CGameSceneNode::BuildBoneMergeWork: Invalid use of bonemerge-based hierarchy in non-skeleton instance based entity %s / entity %s!
@@ -10514,18 +10403,12 @@ CGameSceneNode::m_hierarchyAttachName
 CGameSceneNodeHandle
 CGameSceneNodeOriginSerializer::Serialize:  CellFromCoord( %d, %f ) == %d, expected %d for ( %f %f %f )[%d]%s
 CGameUI
-CGameUI::CEntityInstanceEntityClass
 CGameWeaponManager
-CGameWeaponManager::CEntityInstanceEntityClass
 CGenericConstraint
-CGenericConstraint::CEntityInstanceEntityClass
 CGenericFlexCycler
-CGenericFlexCycler::CEntityInstanceEntityClass
 CGenericFlexCyclerAlias_cycler
-CGenericFlexCyclerAlias_cycler::CEntityInstanceEntityClass
 CGlowProperty
 CGunTarget
-CGunTarget::CEntityInstanceEntityClass
 CHANGE LEVEL: %s
 CHANGE LEVEL: %s %s
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1): 
@@ -10798,33 +10681,19 @@ CIKInterpolationState::GetDebugString: TODO
 CIPASNInfo
 CIPLocationInfo
 CInfoData
-CInfoData::CEntityInstanceEntityClass
 CInfoDynamicShadowHint
-CInfoDynamicShadowHint::CEntityInstanceEntityClass
 CInfoGameEventProxy
-CInfoGameEventProxy::CEntityInstanceEntityClass
 CInfoInstructorHintTarget
-CInfoInstructorHintTarget::CEntityInstanceEntityClass
 CInfoIntermission
-CInfoIntermission::CEntityInstanceEntityClass
 CInfoLandmark
-CInfoLandmark::CEntityInstanceEntityClass
 CInfoOverlayAccessor
-CInfoOverlayAccessor::CEntityInstanceEntityClass
 CInfoParticleTarget
-CInfoParticleTarget::CEntityInstanceEntityClass
 CInfoPlayerStart
-CInfoPlayerStart::CEntityInstanceEntityClass
 CInfoSpawnGroupLandmark
-CInfoSpawnGroupLandmark::CEntityInstanceEntityClass
 CInfoSpawnGroupLoadUnload
-CInfoSpawnGroupLoadUnload::CEntityInstanceEntityClass
 CInfoTarget
-CInfoTarget::CEntityInstanceEntityClass
 CInfoTeleportDestination
-CInfoTeleportDestination::CEntityInstanceEntityClass
 CInfoWorldLayer
-CInfoWorldLayer::CEntityInstanceEntityClass
 CInlineJob_CMsgClientWelcome_Server
 CInlineJob_CMsgGCServerVersionUpdated
 CInlineJob_CMsgGCToServerAddTourneySpectator
@@ -10833,17 +10702,12 @@ CInlineJob_CMsgGCToServerCancelAllocateForMatch
 CInlineJob_CMsgGCToServerRequestPing
 CInlineJob_CMsgGCToServerRunTests
 CInstancedSceneEntity
-CInstancedSceneEntity::CEntityInstanceEntityClass
 CInstructorEventEntity
-CInstructorEventEntity::CEntityInstanceEntityClass
 CInteractionManager
 CItem
-CItem::CEntityInstanceEntityClass
 CItemGeneration
 CItemGeneric
-CItemGeneric::CEntityInstanceEntityClass
 CItemGenericTriggerHelper
-CItemGenericTriggerHelper::CEntityInstanceEntityClass
 CJobH
 CJobImplClassMgr -- Dispatch completed work items
 CJobImplClassMgr::BRouteMsgToJob() - continue job
@@ -10851,7 +10715,6 @@ CJobImplClassMgr::BRouteMsgToJob() - job
 CJobImplClassMgr::PassMsgToJob() job %s received unexpected message %s when paused for %s
 CJobImplClassMgr::m_WorkThreadPool
 CKeepUpright
-CKeepUpright::CEntityInstanceEntityClass
 CKeyValues3Cluster
 CKeyValues3Cluster allocated with bad alignment! (%p) (If this is inside of a heap allocation, you may need to inherit from CAlignedNewDelete< KV3_CLUSTER_SIZEOF >.)
 CL$(9
@@ -10871,80 +10734,49 @@ CLIENT_STEAMID
 CLagCompensationManager::StartLagCompensation with NULL CUserCmd!!!
 CLane
 CLight
-CLight::CEntityInstanceEntityClass
 CLightComponent::Storage_t
 CLightComponentReferenced
 CLightComponentReferencedPtr
 CLightDirectional
-CLightDirectional::CEntityInstanceEntityClass
 CLightDirectionalEntity
-CLightDirectionalEntity::CEntityInstanceEntityClass
 CLightEntity
-CLightEntity::CEntityInstanceEntityClass
 CLightEnvironmentEntity
-CLightEnvironmentEntity::CEntityInstanceEntityClass
 CLightGlow
-CLightGlow::CEntityInstanceEntityClass
 CLightOrthoEntity
-CLightOrthoEntity::CEntityInstanceEntityClass
 CLightQueryGameSystem::OnPostSimulate
 CLightSpot
-CLightSpot::CEntityInstanceEntityClass
 CLightSpotAlias_light_glspot
-CLightSpotAlias_light_glspot::CEntityInstanceEntityClass
 CLightSpotEntity
-CLightSpotEntity::CEntityInstanceEntityClass
 CLobbyData_PostMatchSurvey
 CLocalGame::OnGameOver
 CLocalGame::PlayerDisconnected
 CLocalGame::SendHandoffAndFullStateToPlayer( %s ), nPlayerIndex=%d
 CLogicActiveAutosave
-CLogicActiveAutosave::CEntityInstanceEntityClass
 CLogicAuto
-CLogicAuto::CEntityInstanceEntityClass
 CLogicAutosave
-CLogicAutosave::CEntityInstanceEntityClass
 CLogicBranch
-CLogicBranch::CEntityInstanceEntityClass
 CLogicBranchList
-CLogicBranchList::CEntityInstanceEntityClass
 CLogicBranchList::LOGIC_BRANCH_LISTENER_ALL_FALSE
 CLogicBranchList::LOGIC_BRANCH_LISTENER_ALL_TRUE
 CLogicBranchList::LOGIC_BRANCH_LISTENER_MIXED
 CLogicBranchList::LOGIC_BRANCH_LISTENER_NOT_INIT
 CLogicBranchList::LogicBranchListenerLastState_t
 CLogicCase
-CLogicCase::CEntityInstanceEntityClass
 CLogicCollisionPair
-CLogicCollisionPair::CEntityInstanceEntityClass
 CLogicCompare
-CLogicCompare::CEntityInstanceEntityClass
 CLogicGameEvent
-CLogicGameEvent::CEntityInstanceEntityClass
 CLogicGameEventListener
-CLogicGameEventListener::CEntityInstanceEntityClass
 CLogicLineToEntity
-CLogicLineToEntity::CEntityInstanceEntityClass
 CLogicMeasureMovement
-CLogicMeasureMovement::CEntityInstanceEntityClass
 CLogicNPCCounter
-CLogicNPCCounter::CEntityInstanceEntityClass
 CLogicNPCCounterAABB
-CLogicNPCCounterAABB::CEntityInstanceEntityClass
 CLogicNPCCounterOBB
-CLogicNPCCounterOBB::CEntityInstanceEntityClass
 CLogicNavigation
-CLogicNavigation::CEntityInstanceEntityClass
 CLogicPlayerProxy
-CLogicPlayerProxy::CEntityInstanceEntityClass
 CLogicProximity
-CLogicProximity::CEntityInstanceEntityClass
 CLogicRelay
-CLogicRelay::CEntityInstanceEntityClass
 CLogicScript
-CLogicScript::CEntityInstanceEntityClass
 CLogicalEntity
-CLogicalEntity::CEntityInstanceEntityClass
 CLoopModeGame::InitAllSystems()
 CLoopModeGame::LoopInit:  save file '%s' expected to have a single entry [%d]
 CLoopModeGame::OnFrameBoundary
@@ -10961,46 +10793,30 @@ CM_MAX_BASE
 CM_RotateAnchor
 CMapSpawnGroup::OnPostSpawnGroupLoad:  Misconfigured CInfoSpawnGroupLoadUnload(%d), couldn't find landmark named %s
 CMarkupVolume
-CMarkupVolume::CEntityInstanceEntityClass
 CMarkupVolumeTagged
-CMarkupVolumeTagged::CEntityInstanceEntityClass
 CMarkupVolumeTagged_AI_HLVR
-CMarkupVolumeTagged_AI_HLVR::CEntityInstanceEntityClass
 CMarkupVolumeTagged_Group
-CMarkupVolumeTagged_Group::CEntityInstanceEntityClass
 CMarkupVolumeTagged_Nav
-CMarkupVolumeTagged_Nav::CEntityInstanceEntityClass
 CMarkupVolumeTagged_NavHLVR
-CMarkupVolumeTagged_NavHLVR::CEntityInstanceEntityClass
 CMarkupVolumeTagged_NavL4D
-CMarkupVolumeTagged_NavL4D::CEntityInstanceEntityClass
 CMarkupVolumeWithRef
-CMarkupVolumeWithRef::CEntityInstanceEntityClass
 CMaterialDrawDescriptor
 CMaterialModifyControl
-CMaterialModifyControl::CEntityInstanceEntityClass
 CMathColorBlend
-CMathColorBlend::CEntityInstanceEntityClass
 CMathCounter
-CMathCounter::CEntityInstanceEntityClass
 CMathRemap
-CMathRemap::CEntityInstanceEntityClass
 CMemAllocSystemInitialize
 CMemoryStack %s
 CMesh Cannot create packed input layout, because the bone indices are out of range (0x%X)
 CMessage
-CMessage::CEntityInstanceEntityClass
 CMessageEntity
-CMessageEntity::CEntityInstanceEntityClass
 CModel >
 CModelPointEntity
-CModelPointEntity::CEntityInstanceEntityClass
 CModelState
 CModelState::DoSetupPhysics
 CMorphConstraint
 CMotorController
 CMovementSpeedMod
-CMovementSpeedMod::CEntityInstanceEntityClass
 CMsgAMAddFreeLicense
 CMsgAMAddFreeLicenseResponse
 CMsgAMFindAccounts
@@ -11054,6 +10870,7 @@ CMsgClientToGCPrivateLobbyLeave
 CMsgClientToGCRecycleCards
 CMsgClientToGCSendChatMessage
 CMsgClientToGCSetItemStyle
+CMsgClientToGCSetPlayerBadge
 CMsgClientToGCSpectateUser
 CMsgClientToGCStartMatchmaking
 CMsgClientToGCStopMatchmaking"8
@@ -11305,9 +11122,7 @@ CMsgWebAPIRequest
 CMsg_CVars
 CMultiDamage
 CMultiLightProxy
-CMultiLightProxy::CEntityInstanceEntityClass
 CMultiSource
-CMultiSource::CEntityInstanceEntityClass
 CMultiplayRules
 CMultiplayer_Expresser
 CNETMsg_Disconnect
@@ -11367,7 +11182,6 @@ CNetworkedQuantizedFloat
 CNetworkedQuantizedFloat:  called before encoder initialized, use DECLARE_NETWORK_QUANTIZED_FLOAT_NETWORKVAR or DECLARE_NETWORK_QUANTIZED_FLOAT to make sure the encoder is initialized;
 CNetworkedSequenceOperation
 CNullEntity
-CNullEntity::CEntityInstanceEntityClass
 CO-%u
 COLLAPSE_LANE
 COLORCORRECTION_VERSION_1
@@ -11393,7 +11207,6 @@ CONTENT
 CONTENTROOT
 COrientConstraint
 COrnamentProp
-COrnamentProp::CEntityInstanceEntityClass
 CPD;0
 CPHcSHH
 CPIcT$HH
@@ -11412,150 +11225,90 @@ CP[A\A]A^]
 CP[A\]
 CParentConstraint
 CParticleLight
-CParticleLight::CEntityInstanceEntityClass
 CParticleSystem
-CParticleSystem::CEntityInstanceEntityClass
 CParticleSystemDefinition
 CPathKeyFrame
-CPathKeyFrame::CEntityInstanceEntityClass
 CPhysBallSocket
-CPhysBallSocket::CEntityInstanceEntityClass
 CPhysBox
-CPhysBox::CEntityInstanceEntityClass
 CPhysBoxMultiplayer
-CPhysBoxMultiplayer::CEntityInstanceEntityClass
 CPhysConstraint
-CPhysConstraint::CEntityInstanceEntityClass
 CPhysConvert
-CPhysConvert::CEntityInstanceEntityClass
 CPhysExplosion
-CPhysExplosion::CEntityInstanceEntityClass
 CPhysFixed
-CPhysFixed::CEntityInstanceEntityClass
 CPhysForce
-CPhysForce::CEntityInstanceEntityClass
 CPhysHinge
 CPhysHinge '%s' does not have a valid axis helper, and self-destructed!
-CPhysHinge::CEntityInstanceEntityClass
 CPhysHingeAlias_phys_hinge_local
-CPhysHingeAlias_phys_hinge_local::CEntityInstanceEntityClass
 CPhysImpact
-CPhysImpact::CEntityInstanceEntityClass
 CPhysLength
-CPhysLength::CEntityInstanceEntityClass
 CPhysMagnet
 CPhysMagnet %s:%d blocking magnet
-CPhysMagnet::CEntityInstanceEntityClass
 CPhysMotor
-CPhysMotor::CEntityInstanceEntityClass
 CPhysPulley
-CPhysPulley::CEntityInstanceEntityClass
 CPhysSlideConstraint
-CPhysSlideConstraint::CEntityInstanceEntityClass
 CPhysSurfaceProperties
 CPhysSurfacePropertiesAudio
 CPhysSurfacePropertiesPhysics
 CPhysSurfacePropertiesSoundNames
 CPhysThruster
-CPhysThruster::CEntityInstanceEntityClass
 CPhysTorque
-CPhysTorque::CEntityInstanceEntityClass
 CPhysicsComponent
 CPhysicsEntitySolver
-CPhysicsEntitySolver::CEntityInstanceEntityClass
 CPhysicsGameSystem::GameWorldInit
 CPhysicsGameSystem::OnSimulate
 CPhysicsGameSystem::PullKinematicTransformsWorker
 CPhysicsGameSystem::PullSoftbodyTransforms
 CPhysicsProp
 CPhysicsProp '%s' has become an obstacle after spawning.  Probably need to update dynamically.
-CPhysicsProp::CEntityInstanceEntityClass
 CPhysicsPropAlias_physics_prop
-CPhysicsPropAlias_physics_prop::CEntityInstanceEntityClass
 CPhysicsPropMultiplayer
-CPhysicsPropMultiplayer::CEntityInstanceEntityClass
 CPhysicsPropOverride
-CPhysicsPropOverride::CEntityInstanceEntityClass
 CPhysicsPropRespawnable
-CPhysicsPropRespawnable::CEntityInstanceEntityClass
 CPhysicsShake
 CPhysicsSpring
-CPhysicsSpring::CEntityInstanceEntityClass
 CPlayerAchievementState: failed to upload stats to Steam, EResult %d
 CPlayerInfo
 CPlayerInventory::RemoveTestItemByItemDefIndex no such item definition index: %u
 CPlayerLocalData
 CPlayerResource
-CPlayerResource::CEntityInstanceEntityClass
 CPlayerSlot
 CPlayerState
 CPlayerVoiceListener
 CPointAngularVelocitySensor
-CPointAngularVelocitySensor::CEntityInstanceEntityClass
 CPointBroadcastClientCommand
-CPointBroadcastClientCommand::CEntityInstanceEntityClass
 CPointCamera
-CPointCamera::CEntityInstanceEntityClass
 CPointClientCommand
-CPointClientCommand::CEntityInstanceEntityClass
 CPointClientUIDialog
-CPointClientUIDialog::CEntityInstanceEntityClass
 CPointClientUIWorldPanel
-CPointClientUIWorldPanel::CEntityInstanceEntityClass
 CPointClientUIWorldTextPanel
-CPointClientUIWorldTextPanel::CEntityInstanceEntityClass
 CPointCommentaryNode
-CPointCommentaryNode::CEntityInstanceEntityClass
 CPointConstraint
 CPointEntity
-CPointEntity::CEntityInstanceEntityClass
 CPointEntityAlias_water_lod_control
-CPointEntityAlias_water_lod_control::CEntityInstanceEntityClass
 CPointEntityFinder
-CPointEntityFinder::CEntityInstanceEntityClass
 CPointGamestatsCounter
-CPointGamestatsCounter::CEntityInstanceEntityClass
 CPointGamestatsCounter::InputIncrement:  No stat name specified for point_gamestats_counter @%f, %f, %f [ent index %d]
 CPointHMDAnchor
-CPointHMDAnchor::CEntityInstanceEntityClass
 CPointHMDAnchorOverride
-CPointHMDAnchorOverride::CEntityInstanceEntityClass
 CPointPlayerMoveConstraint
-CPointPlayerMoveConstraint::CEntityInstanceEntityClass
 CPointPrefab
-CPointPrefab::CEntityInstanceEntityClass
 CPointPush
-CPointPush::CEntityInstanceEntityClass
 CPointServerCommand
-CPointServerCommand::CEntityInstanceEntityClass
 CPointSpotlight
-CPointSpotlight::CEntityInstanceEntityClass
 CPointTemplate
-CPointTemplate::CEntityInstanceEntityClass
 CPointValueRemapper
-CPointValueRemapper::CEntityInstanceEntityClass
 CPointVelocitySensor
-CPointVelocitySensor::CEntityInstanceEntityClass
 CPointWorldText
-CPointWorldText::CEntityInstanceEntityClass
 CPoseController
-CPoseController::CEntityInstanceEntityClass
 CPostProcessController
-CPostProcessController::CEntityInstanceEntityClass
 CPostProcessingResource >
 CPostProcessingVolume
-CPostProcessingVolume::CEntityInstanceEntityClass
 CProjectedDecal
-CProjectedDecal::CEntityInstanceEntityClass
 CPropDart
-CPropDart::CEntityInstanceEntityClass
 CPropHMDAvatar
-CPropHMDAvatar::CEntityInstanceEntityClass
 CPropVRHand
 CPropVRHand::AttachmentsThink
-CPropVRHand::CEntityInstanceEntityClass
 CPropVRTrackedObject
-CPropVRTrackedObject::CEntityInstanceEntityClass
 CProtoItemSocket
 CProtoItemSocket_AssetModifier
 CProtoItemSocket_Autograph
@@ -11566,7 +11319,6 @@ CProtoItemSocket_Spectator
 CProtoItemSocket_StaticVisuals
 CProtoItemSocket_Strange
 CPushable
-CPushable::CEntityInstanceEntityClass
 CP~P[A\]
 CP~]H
 CP~hI
@@ -11581,19 +11333,13 @@ CRR_Response::ResponseEnum_t
 CRUSH
 CRagdoll
 CRagdollConstraint
-CRagdollConstraint::CEntityInstanceEntityClass
 CRagdollLRURetirement
 CRagdollMagnet
-CRagdollMagnet::CEntityInstanceEntityClass
 CRagdollManager
-CRagdollManager::CEntityInstanceEntityClass
 CRagdollProp
-CRagdollProp::CEntityInstanceEntityClass
 CRagdollProp::Teleport( ) for ragdoll without root object
 CRagdollPropAlias_physics_prop_ragdoll
-CRagdollPropAlias_physics_prop_ragdoll::CEntityInstanceEntityClass
 CRagdollPropAttached
-CRagdollPropAttached::CEntityInstanceEntityClass
 CRandSimTimer
 CRandStopwatch
 CRecipientFilter
@@ -11620,12 +11366,9 @@ CResponseSystem:  failed to load %s
 CResponseSystem::LoadFromBuffer [%s] - Start
 CResponseSystem::LoadFromFile took %f msec
 CRevertSaved
-CRevertSaved::CEntityInstanceEntityClass
 CRopeKeyframe
-CRopeKeyframe::CEntityInstanceEntityClass
 CRopeKeyframe::Precache:: path '%s' is a vmt! Fixing for now.
 CRopeKeyframeAlias_move_rope
-CRopeKeyframeAlias_move_rope::CEntityInstanceEntityClass
 CRuleScriptBridge
 CRuleScriptBridge initializing...
 CRuleScriptBridge was double-initialized: tearing down and rebuilding
@@ -11700,7 +11443,6 @@ CSceneEntity %s :"%s" unable to find sequence "%s"
 CSceneEntity %s unable to find a camera (point_viewcontrol) in this map!
 CSceneEntity %s unable to find actor "%s"
 CSceneEntity %s unable to find actor named "%s"
-CSceneEntity::CEntityInstanceEntityClass
 CSceneEntity::GenerateSceneForSound:  Alloc of actor, channel, or event failed!!!
 CSceneEntity::GenerateSceneForSound:  Couldn't determine duration of %s
 CSceneEntity::LoadScene: Unable to load binary scene '%s'
@@ -11708,10 +11450,8 @@ CSceneEntity::LoadSceneFromString: Unable to parse scene data '%s'
 CSceneEntity::SCRIPT event - '%s' entity has no script function '%s' defined!
 CSceneEntity::SCRIPT event - unable to find entity named '%s' in this map!
 CSceneEntityAlias_logic_choreographed_scene
-CSceneEntityAlias_logic_choreographed_scene::CEntityInstanceEntityClass
 CSceneEventInfo
 CSceneListManager
-CSceneListManager::CEntityInstanceEntityClass
 CSceneManager
 CSceneObjectData
 CScenePrecacheSystem
@@ -11724,21 +11464,16 @@ CScriptConvarAccessor::RegisterConvar convar %s already registered
 CScriptEntityIterator
 CScriptGlobalSysAccessor
 CScriptItem
-CScriptItem::CEntityInstanceEntityClass
 CScriptKeyValues
 CScriptNativeOutputs
 CScriptNavBlocker
-CScriptNavBlocker::CEntityInstanceEntityClass
 CScriptParticleManager
 CScriptPrecacheContext
+CScriptSteamInfoAccessor
 CScriptTriggerHurt
-CScriptTriggerHurt::CEntityInstanceEntityClass
 CScriptTriggerMultiple
-CScriptTriggerMultiple::CEntityInstanceEntityClass
 CScriptTriggerOnce
-CScriptTriggerOnce::CEntityInstanceEntityClass
 CScriptTriggerPush
-CScriptTriggerPush::CEntityInstanceEntityClass
 CSequenceTransitioner
 CSequenceTransitioner2
 CServerAchievementManager
@@ -11750,24 +11485,17 @@ CServerLobbyData_DeckValidator
 CServerLobbyData_DraftCards
 CServerLobbyData_GauntletInfo
 CServerLobbyData_PlayerDeck
+CServerLobbyData_PlayerInfo
 CServerLobbyData_PlayerMMR
 CServerOnlyEntity
-CServerOnlyEntity::CEntityInstanceEntityClass
 CServerOnlyModelEntity
-CServerOnlyModelEntity::CEntityInstanceEntityClass
 CServerOnlyPointEntity
-CServerOnlyPointEntity::CEntityInstanceEntityClass
 CServerRagdollTrigger
-CServerRagdollTrigger::CEntityInstanceEntityClass
 CShadowControl
-CShadowControl::CEntityInstanceEntityClass
 CShower
-CShower::CEntityInstanceEntityClass
 CSimTimer
 CSimplePhysicsBrush
-CSimplePhysicsBrush::CEntityInstanceEntityClass
 CSimplePhysicsProp
-CSimplePhysicsProp::CEntityInstanceEntityClass
 CSimpleSimTimer
 CSingleplayRules
 CSisterResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
@@ -11775,35 +11503,24 @@ CSkeletonAnimationController
 CSkeletonInstance
 CSkeletonInstance::SetAnimationController can only be called once!
 CSkyCamera
-CSkyCamera::CEntityInstanceEntityClass
 CSkyboxReference
-CSkyboxReference::CEntityInstanceEntityClass
 CSound
 CSoundEmitterSystem:  Unknown sound level %s
 CSoundEnt
 CSoundEnt pool is low on sounds due to high number of clients.
-CSoundEnt::CEntityInstanceEntityClass
 CSoundEnvelope
 CSoundEventAABBEntity
-CSoundEventAABBEntity::CEntityInstanceEntityClass
 CSoundEventEntity
-CSoundEventEntity::CEntityInstanceEntityClass
 CSoundEventEntityAlias_snd_event_point
-CSoundEventEntityAlias_snd_event_point::CEntityInstanceEntityClass
 CSoundEventParameter
-CSoundEventParameter::CEntityInstanceEntityClass
 CSoundOpGameSystem::SetLibraryStackField: Faied library stack message to: %s, %s, %s
 CSoundOpGameSystem::SetSoundEventParam: Failed cached soundevent param message
 CSoundOpGameSystem::SetSoundEventParam: Failed soundevent param message to: %s
 CSoundOpGameSystem::StopSoundEvent: Attempting to stop non-existent soundevent: %s
 CSoundOpvarSetAABBEntity
-CSoundOpvarSetAABBEntity::CEntityInstanceEntityClass
 CSoundOpvarSetEntity
-CSoundOpvarSetEntity::CEntityInstanceEntityClass
 CSoundOpvarSetOBBEntity
-CSoundOpvarSetOBBEntity::CEntityInstanceEntityClass
 CSoundOpvarSetPointEntity
-CSoundOpvarSetPointEntity::CEntityInstanceEntityClass
 CSoundParameters
 CSoundPatch
 CSoundPatch CUtlMemoryPool
@@ -11826,39 +11543,29 @@ CSpeechScriptBridge::Script_FindBestResponse
 CSpeechScriptBridge::Script_GetExpressers
 CSplitScreenSlot
 CSpotlightEnd
-CSpotlightEnd::CEntityInstanceEntityClass
 CSprayCan
-CSprayCan::CEntityInstanceEntityClass
 CSprite
-CSprite::CEntityInstanceEntityClass
 CSpriteAlias_env_glow
-CSpriteAlias_env_glow::CEntityInstanceEntityClass
 CSpriteOriented
-CSpriteOriented::CEntityInstanceEntityClass
 CStat
 CSteamWorksGameStatsServer
 CStopwatch
 CStopwatchBase
 CStrangeCountAdjustment
 CStripWeapons
-CStripWeapons::CEntityInstanceEntityClass
 CStrongHandle
 CStrongHandle< InfoForResourceType
 CTEFizz_server
 CTEGlowSprite_server
 CTELargeFunnel_server
 CTFWearableItem
-CTFWearableItem::CEntityInstanceEntityClass
 CTSQueue corruption
 CTakeDamageInfo
 CTargetChangeGravity
-CTargetChangeGravity::CEntityInstanceEntityClass
 CTeam
-CTeam::CEntityInstanceEntityClass
 CTeamSpawnPoint
 CTextureBase >
 CTextureToggle
-CTextureToggle::CEntityInstanceEntityClass
 CTiltTwistConstraint
 CTimeOfDayDynamicKeyVaules: %s is not a valid slot name or is the wrong type.
 CTimeOfDayDynamicKeys
@@ -11867,13 +11574,9 @@ CTimeOfDayDynamicValues
 CTimeOfDayStaticKeyValues
 CTimeline
 CTimerEntity
-CTimerEntity::CEntityInstanceEntityClass
 CTonemapController2
-CTonemapController2::CEntityInstanceEntityClass
 CTonemapController2Alias_env_tonemap_controller2
-CTonemapController2Alias_env_tonemap_controller2::CEntityInstanceEntityClass
 CTonemapTrigger
-CTonemapTrigger::CEntityInstanceEntityClass
 CToolGameSimulationAPI::LoadSavegame:  no such save file '%s'
 CTraceMsg_AttributeValueChanged
 CTraceMsg_CardBought
@@ -11933,49 +11636,27 @@ CTraceMsg_UnitUserTargeted"?
 CTransform
 CTransform-world
 CTriggerActiveWeaponDetect
-CTriggerActiveWeaponDetect::CEntityInstanceEntityClass
 CTriggerBrush
-CTriggerBrush::CEntityInstanceEntityClass
 CTriggerCallback
-CTriggerCallback::CEntityInstanceEntityClass
 CTriggerCamera
-CTriggerCamera::CEntityInstanceEntityClass
 CTriggerGravity
-CTriggerGravity::CEntityInstanceEntityClass
 CTriggerHurt
-CTriggerHurt::CEntityInstanceEntityClass
 CTriggerHurtGhost
-CTriggerHurtGhost::CEntityInstanceEntityClass
 CTriggerImpact
-CTriggerImpact::CEntityInstanceEntityClass
 CTriggerLook
-CTriggerLook::CEntityInstanceEntityClass
 CTriggerMultiple
-CTriggerMultiple::CEntityInstanceEntityClass
 CTriggerOnce
-CTriggerOnce::CEntityInstanceEntityClass
 CTriggerPhysics
-CTriggerPhysics::CEntityInstanceEntityClass
 CTriggerPlayerMovement
-CTriggerPlayerMovement::CEntityInstanceEntityClass
 CTriggerProximity
-CTriggerProximity::CEntityInstanceEntityClass
 CTriggerPush
-CTriggerPush::CEntityInstanceEntityClass
 CTriggerRemove
-CTriggerRemove::CEntityInstanceEntityClass
 CTriggerSave
-CTriggerSave::CEntityInstanceEntityClass
 CTriggerSndSosOpvar
-CTriggerSndSosOpvar::CEntityInstanceEntityClass
 CTriggerSoundscape
-CTriggerSoundscape::CEntityInstanceEntityClass
 CTriggerTeleport
-CTriggerTeleport::CEntityInstanceEntityClass
 CTriggerToggleSave
-CTriggerToggleSave::CEntityInstanceEntityClass
 CTriggerVolume
-CTriggerVolume::CEntityInstanceEntityClass
 CTwistConstraint
 CType
 CUserMessageAchievementEvent
@@ -12081,7 +11762,6 @@ CUtlVectorFixedGrowable
 CVPhysXSurfacePropertiesList
 CVRHandAttachmentInput
 CVRHandModelOverride
-CVRHandModelOverride::CEntityInstanceEntityClass
 CVariant
 CVariantBase
 CVariantDefaultAllocator
@@ -12096,9 +11776,7 @@ CWorkThreadPool::StartWorkThreads: called with no threads in the pool, this is p
 CWorkThreadPool::~CWorkThreadPool: work complete queue not empty, %d items discarded.
 CWorkThreadPool::~CWorkThreadPool: work processing queue not empty: %d items discarded.
 CWorld
-CWorld::CEntityInstanceEntityClass
 CWorldItem
-CWorldItem::CEntityInstanceEntityClass
 CWristBone
 CXA8D$X
 CXXABI_1.3
@@ -12110,6 +11788,7 @@ CXt	I
 CXt)H
 CYA8D$Y
 CZA8D$Z
+C[[A\]
 C\+ClH
 C\LckHE
 C\[A\]
@@ -12119,6 +11798,7 @@ C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
 C_INIT_CreateOnModelAtHeight
+C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
 C_INIT_DistanceToCPInit
 C_INIT_GlobalScale
@@ -12167,6 +11847,7 @@ C_OP_EnableChildrenFromParentParticleCount
 C_OP_HSVShiftToCP
 C_OP_InitSetSnapshotOnCP
 C_OP_InstantaneousEmitter
+C_OP_LockToSavedSequentialPath
 C_OP_NoiseEmitter
 C_OP_RampCPLinearRandom
 C_OP_RemapAverageScalarValuetoCP
@@ -12174,6 +11855,7 @@ C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
 C_OP_RemapSpeedtoCP
+C_OP_RenderModels
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -12194,6 +11876,7 @@ C_OP_StopAfterCPDuration
 C_OP_TwistAroundAxis
 C`A9G
 C`HcM
+C`HcSXH
 C`IcT$XH
 C`[A\]
 C`fD; t
@@ -12447,6 +12130,7 @@ Commentary: Could not find commentary data file '%s'.
 Commentary: Loading commentary data from %s. 
 Commit
 Commit the result of QueryBestResponse back to the given entity to play. Call with params (entity, airesponse)
+Committing autosavedangerous...
 Common
 Compel
 Compendium Event ID:
@@ -12569,6 +12253,7 @@ CountdownTimer
 CountryDailyRevenue
 Coup de Grace
 Court of Ristul
+CpHcShH
 CpIcT$hH
 Cp[A\]
 Crash detection sentinel file '%s' file is present!
@@ -12810,7 +12495,6 @@ D$`A\A]A^]
 D$`E1
 D$`Hc
 D$`Ic
-D$`IcT$XH
 D$`[A\A]A^]
 D$`f9
 D$`f;
@@ -12831,7 +12515,6 @@ D$p9Cpt H
 D$pH9
 D$pI)
 D$pIc
-D$pIcT$hH
 D$p[A
 D$t9Ctt H
 D$x8Cxt!H
@@ -12860,13 +12543,13 @@ D8"u'
 D8c1t
 D8sUt
 D9#~wJ
-D9%m5
-D9%qo
-D9%y6
+D9%Bq3
+D9%O}3
+D9%m4
+D9%y5
 D9't3H
 D9;t3I
-D9=	P&
-D9=Eq
+D9=pWA
 D9@ s
 D9C ~JMc
 D9D$4B
@@ -12878,6 +12561,7 @@ D9c L
 D9c ~<H
 D9h H
 D9j }
+D9k8uB1
 D9l$H
 D9m XZ}
 D9n v>H
@@ -12900,31 +12584,30 @@ D; tMH
 D; }VH
 D;!ttHc
 D;$2tWL
-D;%+o
-D;%5N
-D;%9;
-D;%>pR
-D;%Cr>
+D;%9:
+D;%[O
+D;%cT;
+D;%ed
 D;'tXH
 D;)ts
-D;-#&
-D;-Cj
-D;-S$
+D;-C>
+D;-s<
 D;.tLH
 D;1tsH
 D;3t 
 D;8tQH
 D;9tlA
+D;=!	
 D;?t H
 D;CxD
-D;FPt
 D;F`u
 D;G(}mL
 D;GH|
 D;ITu
-D;KPt
+D;NPtuK
 D;O I
 D;O(A
+D;OPtuK
 D;`H}
 D;`X|
 D;c D
@@ -12943,6 +12626,7 @@ D;cx|
 D;g D
 D;g0D
 D;h H
+D;h(t
 D;i$A
 D;i$u
 D;k t
@@ -12952,18 +12636,15 @@ D;k(D
 D;k@|
 D;l$H
 D;n }>H
-D;nPt
 D;o(D
 D;p tI
 D;p u
-D;p(t
 D;q(t%I
 D;s@}RM
 D;sp}BH
 D;t$@
 D;t$H
 D;{ t[H
-D;{Pt
 D;{h}?M
 D;|$X
 D;|$Xt$D
@@ -13104,6 +12785,7 @@ David Palumbo
 Deal 1 piercing damage to PARENT_CARD_NAME's enemy neighbors after you play a blue spell.
 Deal 1 piercing damage to each enemy before the action phase.
 Deal 10 piercing damage to a unit in any lane [enemy] {hero}.
+Deal 100 Damage To Tower
 Deal 12 damage evenly divided among a unit [enemy] and its allied neighbors.
 Deal 2 damage to a unit [enemy] and disarm it this round.
 Deal 2 damage to a unit [enemy].
@@ -13132,7 +12814,7 @@ Deal 5 damage to each enemy across from an empty combat position.
 Deal 6 damage to equipped hero's enemy neighbors and condemn equipped hero.
 Deal 6 damage to every unit.
 Deal 6 damage to the enemy tower.
-Deal 8 piercing damage to a unit [enemy] {hero}.
+Deal 8 piercing damage to a unit [enemy] {hero}.  Quicken (reduce cooldown by 1, but not below 1).
 Deal damage to each enemy equal to the number of enemies.
 Deal damage to the enemy tower equal to the total Armor on enemies.
 Deallocate
@@ -13206,6 +12888,7 @@ Destroy Immediately
 DestroyAllEntitiesToolEvent"
 DestroyDamageInfo
 DestroyEntities
+DestroyEntitySystem
 DestroyEntityToolEvent
 DestroyItem
 DestroyParticle
@@ -13238,7 +12921,6 @@ Disable npc background expressions when you can't see them.
 Disable's the trigger
 Disabled: %s
 Disables all chains except for the mentioned one on the selected entity(ies), by name of the chain.
-Disabling damage on breakable prop %s - no physics interactions on model and no breakpieces.
 Disabling motion on phys prop
 Disallow backtracking a player for lag compensation if it will cause them to become stuck
 DisappearDist
@@ -13452,7 +13134,7 @@ E9&t2A
 E9&~|I
 E9,$H
 E9,$f
-E9.t.A
+E9.t2A
 E94$t)I
 E97XL
 E9<$v{
@@ -13481,6 +13163,7 @@ E;&}sI
 E;'Hc
 E;'Hc]
 E;,$|
+E;.t4A
 E;.tuA
 E;.tyA
 E;.}@E
@@ -13489,7 +13172,6 @@ E;7Lc
 E;<$|
 E;>tyA
 E;L$h
-E;T$Pt
 E;e0D
 E;e@}
 E;e@}*I
@@ -13739,6 +13421,14 @@ EStage
 EStatus
 ESwissMatches
 ESwissScoring
+ET:  '%s'
+ET:  AccumulateElapsedTime %u seconds to %u, now at %s
+ET:  AccumulateElapsedTime( %s ) at %d
+ET:  Init from comment string to %u seconds, now at %s
+ET:  Restoring game at %u %s : '%s'
+ET:  SaveGame_Start at %u %s : '%s'
+ET:  SetMostRecentElapsedTime( %s ) at %d
+ET:  elapsed time:  %s (%u seconds)
 ETABLE
 ETestResult
 EUnlockStyle
@@ -13787,6 +13477,7 @@ EhA;Ex
 EhE#e\L
 EhHcE
 Eiffel tower
+Elapsed
 ElectrocuteThink
 Emissary of the Quorum
 Empower
@@ -13837,7 +13528,6 @@ EngineServiceMgr001
 Enough Magic!
 Enrage
 EnsureCapacity
-EntClassComponentOverride_t
 EntCmpOverride_CBodyComponent
 EntComponentInfo_t
 EntFinderMethod_t
@@ -13863,6 +13553,7 @@ Entity class %s does not have its own datadesc (uses %s)
 Entity component datadesc mismatch, template %s vs. virtual %s
 Entity for controlling time of day and weather effects
 Entity for controlling tonemap values from the map.
+Entity global initializers did not run
 Entity hull is too large for navmesh generation parameters.
 Entity is in spawn group %s(%s)
 Entity is phsycally %s spawn group %s(%s)
@@ -13920,7 +13611,7 @@ Equipped hero has +2 Armor. Equipped hero's allied neighbors have +1 Armor.
 Equipped hero has +2 Armor. Equipped hero's allied neighbors have +3 Armor.
 Equipped hero has +2 Attack and +2 Cleave.
 Equipped hero has +2 Attack and +5 Siege.
-Equipped hero has +2 Attack and Pierce.
+Equipped hero has +2 Attack and Pierce. Equip Effect: Purge your opponent's effects from equipped hero.
 Equipped hero has +2 Attack.
 Equipped hero has +2 Attack. Get 5 gold after an enemy hero dies. Get 1 gold after an enemy creep dies.
 Equipped hero has +2 Attack. Modify THIS_CARD_NAME with "Equipped hero has +1 Attack" after the combat phase.
@@ -14106,6 +13797,7 @@ F25TemporaryReferenceWrapperI18MergeAttributeListEP13CDotaCardGameRK25IAttribute
 F6:AR
 F7g4hy+
 F8;FH
+F8AUH
 F8HcV0H
 F8HcV0L
 F8L;`
@@ -14146,9 +13838,11 @@ FCVAR_UNREGISTERED
 FCVAR_USERINFO
 FCVAR_VCONSOLE_SET_FOCUS
 FD9GDt
+FDu7]
 FE0@$^
-FHAUH
+FGHcE
 FHH9GHt
+FH[A\A]A^]
 FHt{H
 FHu5H
 FIELD_BOOLEAN
@@ -14387,10 +14081,7 @@ FillVBForAttribute
 FilledRect2D
 Filter%02d
 FilterDamageType
-FilterDamageType::CEntityInstanceEntityClass
 FilterHealth
-FilterHealth::CEntityInstanceEntityClass
-FilterTeam::CEntityInstanceEntityClass
 Find a key in the VM 
 Find a specific model override for this hand
 Find all entities by name. Returns an array containing all the found entities in it.
@@ -14555,6 +14246,7 @@ FullTossMovePreGravity
 FullTossMovePush
 FullWalkMovePostMove
 FullWalkMovePreMove
+Fully Equip All Heroes
 Fully heal PARENT_CARD_NAME after a unit blocking it dies.
 Fully heal PARENT_CARD_NAME and give it Damage Immunity this round.
 Fully heal THIS_CARD_NAME after the combat phase.
@@ -14626,7 +14318,6 @@ G<@uCD
 G@Jc\(
 G@T	J33s?
 G@UHc
-G@twH
 GAMECONSOLE
 GAMEROOT
 GAME_HEADER
@@ -14710,6 +14401,7 @@ G`;F`u
 G`H;0
 G`H;E
 G`fD9 tpH
+Gain 100 Gold
 Gambler
 Game Event Fired: %s
 Game System %s is defined twice!
@@ -14784,6 +14476,7 @@ Get a script instance of a player by index.
 Get a table containing the 'Mins' & 'Maxs' vector bounds, centered on object.
 Get a vector containing max bounds, centered on object.
 Get a vector containing min bounds, centered on object.
+Get an Enemy to Negative Attack
 Get control of an enemy creep.
 Get entity local origin as a Vector
 Get entity local pitch, yaw, roll as a QAngle
@@ -14962,6 +14655,7 @@ Give a red hero [allied] {hero} +2 Armor this round. Quick.
 Give a red hero [allied] {red hero} +4 Attack and +4 Armor this round.
 Give a red hero [allied] {unblocked ally} +8 Attack and -8 Armor this round.
 Give a supply of ammo for current weapon..
+Give a unit [ally] a Death Shield this round. May only be used if there is an allied green hero in this lane.
 Give a unit [enemy] -4 Attack this round and give another unit [ally] +4 Attack this round.
 Give a unit [enemy] {hero} "Deal 2 piercing damage to this unit before the action phase" until it dies.
 Give a unit in any lane [allied] {hero} +3 Armor until end of its next combat phase.
@@ -14985,6 +14679,7 @@ GlobalState
 GlobalSys
 Globalname: %s
 Glyph of Confusion
+Go to Fountain 5 times without dying
 God's Strength
 Gold cost to hold the random item for a round
 Golden Ticket
@@ -15087,241 +14782,228 @@ H;0t\H
 H;0teH
 H;2t_A
 H;3t5L
-H;5!.N
-H;5(FY
-H;5,*`
-H;501N
-H;51Sx
-H;5<PY
-H;5LLr
-H;5Omh
-H;5RAm
-H;5X;Y
-H;5YVN
-H;5`[Y
-H;5h&`
-H;5h>`
-H;5h@r
-H;5hah
-H;5hjY
-H;5p4n
-H;5|	q
-H;5|"n
+H;5!*b
+H;5!0z
+H;5!:L
+H;5![L
+H;5(k^
+H;50co
+H;50el
+H;51>L
+H;58Wo
+H;59 z
+H;5<"P
+H;5@'}
+H;5@AL
+H;5ASl
+H;5H1}
+H;5H3b
+H;5Heo
+H;5LMz
+H;5Mp^
+H;5Qd^
+H;5X#b
+H;5X1z
+H;5XCz
+H;5XT^
+H;5YRo
+H;5a#P
+H;5ifL
+H;5o|#
+H;5qOl
+H;5|?l
+H;5|To
+H;5|ml
 H;7t"
 H;7t-1
 H;8tmH
 H;9u#
 H;:t(f
 H;:u'
-H;=	b-
-H;= =q
-H;= Za
-H;= s}
-H;=!6
-H;=!V
-H;="\
-H;=#e
-H;=#x/
-H;=%f
-H;='F
-H;='Nr
-H;='Y
-H;=']
-H;='|
-H;=(T
-H;=(W
-H;=([
-H;=(b,
-H;=(}`
-H;=* 
-H;=*,
-H;=*Na
-H;=*m
-H;=,V
-H;=-k
-H;=.`S
-H;=.y
-H;=/.O
-H;=/:q
-H;=/=}
-H;=/B
-H;=/g}
-H;=/ve
-H;=0Ya
-H;=0r}
-H;=12
-H;=1p
-H;=2B
-H;=3d,
-H;=4pr
-H;=5Zo
-H;=7'
-H;=7E
-H;=7O
-H;=7Y
-H;=7j
-H;=7m
-H;=8!4
-H;=8#
-H;=8@
-H;=8d
-H;=8g,
-H;=8h
-H;=9*.
-H;=:6d
-H;=:ZV
-H;=:l}
-H;=:t;
-H;=;.*
-H;==T.
-H;=={
-H;=>	}
-H;=>!}
-H;=>R
-H;=>\q
-H;=>nw
-H;=>t
-H;=?&}
-H;=?;q
-H;=?Zq
-H;=?iS
-H;=?lj
-H;=?tS
-H;=?yw
-H;=@Xa
-H;=A"
-H;=A.
-H;=AU
-H;=Cm
-H;=Cqd
-H;=D?{
-H;=D^4
-H;=E<S
-H;=F~
-H;=GN
-H;=Gb;
-H;=Gs
-H;=H7
-H;=H:V
-H;=H=q
-H;=HI
-H;=HR
-H;=Hc,
-H;=IC
-H;=Ila
-H;=JDV
-H;=K@
-H;=N|S
-H;=O/}
-H;=O;}
-H;=O<q
-H;=OF*
-H;=ON
-H;=Oi}
-H;=Ope
-H;=OzS
-H;=O|\
-H;=O~S
-H;=PWa
-H;=Plw
-H;=Q	
-H;=Q*
-H;=RNr
-H;=R{
-H;=R}`
-H;=S!
-H;=SP
-H;=Sa
-H;=Se,
-H;=TG
-H;=WW
-H;=WX
-H;=Wn
-H;=X 
-H;=X"
-H;=X+
-H;=X@
-H;=XR
-H;=Xt
-H;=Y`S
-H;=Yjd
-H;=Z5
-H;=Z\4
-H;=Z^
-H;=[!
-H;=[%
-H;=[~
-H;=]x
-H;=^<\
-H;=^_o
-H;=^he
-H;=^vq
-H;=_,O
-H;=_KO
-H;=_Oa
-H;=_Wr
-H;=_]o
-H;=`0
-H;=`LV
-H;=`Va
-H;=`zw
-H;=`~}
-H;=aT
-H;=e	}
-H;=e!}
-H;=eR
-H;=e\q
-H;=enw
-H;=g/
-H;=gC
-H;=gk
-H;=h	
-H;=h)
-H;=h>
-H;=hGq
-H;=h[
-H;=hd,
-H;=hv|
-H;=i%
-H;=j%
-H;=j1
-H;=l6d
-H;=m8d
-H;=n=]
-H;=o	[
-H;=o&O
-H;=o<o
-H;=oGa
-H;=o^
-H;=oao
-H;=om}
-H;=oud
-H;=oye
-H;=pD4
-H;=p}}
-H;=r&
-H;=r:V
-H;=rx
-H;=sE*
-H;=sf,
-H;=to~
-H;=u|S
-H;=w%
-H;=wL
-H;=wW
-H;=xBq
-H;=xG
-H;=xd
-H;=xlw
-H;=xm
-H;=xo
-H;=z!
-H;=z-
-H;=zi}
-H;=|DV
-H;=|~
-H;=~H\
-H;=~pw
+H;=	7
+H;=	8~
+H;=	L
+H;=	Y
+H;= O
+H;= V
+H;=!%k
+H;=!h
+H;=">
+H;="S
+H;=#Op
+H;=$ip
+H;=&2_
+H;='5M
+H;='5u
+H;='8{
+H;='<Z
+H;='?u
+H;='A{
+H;='BZ
+H;='FY
+H;='QM
+H;='Q_
+H;='m
+H;='vZ
+H;=(Fx
+H;=(nT
+H;=(zT
+H;=);
+H;=)D
+H;=)X
+H;=)})
+H;=,:
+H;=,J_
+H;=-!i
+H;=-?{
+H;=/]
+H;=/c
+H;=0(
+H;=0X
+H;=0z
+H;=0}
+H;=1K~
+H;=1M9
+H;=22
+H;=2:
+H;=2O
+H;=3#u
+H;=3k~
+H;=6Qc
+H;=6eM
+H;=6~Q
+H;=74_
+H;=7F{
+H;=7lQ
+H;=7xM
+H;=8Ex
+H;=9$~
+H;=97
+H;=9@
+H;=:d~
+H;=;Y'
+H;=<7_
+H;==O_
+H;==h
+H;=?JQ
+H;=?f
+H;=?r
+H;=@1
+H;=@a
+H;=B6
+H;=BB
+H;=BGY
+H;=BK
+H;=FS_
+H;=F^x
+H;=Fu{
+H;=Fw
+H;=G!h
+H;=G(u
+H;=G)M
+H;=G6{
+H;=G7x
+H;=G]{
+H;=HDx
+H;=I<
+H;=IQ
+H;=IW
+H;=LF2
+H;=M2_
+H;=MUp
+H;=OR
+H;=OYZ
+H;=O{
+H;=P:
+H;=PL
+H;=PM
+H;=R2
+H;=R>
+H;=RB
+H;=RG
+H;=U['
+H;=VKu
+H;=W(Z
+H;=WIY
+H;=WOM
+H;=WSY
+H;=XCx
+H;=Y8
+H;=YM
+H;=YQn
+H;=Yj
+H;=Yk
+H;=Yy
+H;=]Qc
+H;=]eM
+H;=_I
+H;=_Z
+H;=_[
+H;=_i
+H;=_r
+H;=_}
+H;=`C
+H;=`V
+H;=`c
+H;=`w
+H;=`x
+H;=`~
+H;=a~Q
+H;=b:
+H;=bC
+H;=bD2
+H;=bf9
+H;=c6w
+H;=dC~
+H;=f&i
+H;=fJQ
+H;=fSQ
+H;=g$i
+H;=gMi
+H;=gRY
+H;=g\,
+H;=hBx
+H;=i'j
+H;=i4
+H;=i@
+H;=iI
+H;=iV
+H;=k~T
+H;=l!u
+H;=mS_
+H;=mf
+H;=mu{
+H;=nu~
+H;=oR
+H;=od
+H;=oz
+H;=p_
+H;=pt
+H;=q#U
+H;=r6
+H;=r7x
+H;=r?
+H;=rm
+H;=uk
+H;=v%k
+H;=vJ~
+H;=vSc
+H;=vYZ
+H;=w&u
+H;=w'M
+H;=wOY
+H;=w\_
+H;=x,2
+H;=xAx
+H;=xm}
+H;=y<
+H;=yE
+H;=yE~
+H;=yWR
+H;=zk~
+H;={MY
+H;=}x
+H;=~	2
 H;CPw<I
 H;G t
 H;IXu
@@ -15428,8 +15110,9 @@ HasField
 HasTag
 HaticsType_Default
 HaticsType_None
+Have 20 Creeps In Lane
 Have Entity say string, and teamOnly or not
-Hc57QQ
+Have all opponent's heroes in the fountain
 Hc7;w
 Hc@$H
 Hc@(L
@@ -15477,7 +15160,7 @@ HcC`1
 HcC`;Cdu
 HcCdA
 HcCdJ
-HcChMcl$XA9
+HcChMcuXA9
 HcClH
 HcCp9C
 HcCtL
@@ -15556,7 +15239,6 @@ HcSP1
 HcSPH
 HcSXH
 HcS\Hc
-HcShH
 HcSlH
 HcStH
 HcT$4Mc
@@ -15589,6 +15271,7 @@ HcWpH
 HcX(L
 HcX@;XP
 HcYh;Yx
+Hc[hH
 Hc_ ;_0
 Hc_ ;_0t0I
 Hc_ H
@@ -15630,6 +15313,7 @@ Helm of the Dominator
 HelpSystem_001
 Heonhwa Choe
 Hero's Cape
+HeroBeingDeployed
 Heroic Resolve
 Hex and octal numbers must be integers.
 Hh#p\H
@@ -15882,8 +15566,10 @@ IcT$PI
 IcT$X
 IcT$XA;T$\
 IcT$XH
+IcT$XI
 IcT$`I
 IcT$h
+IcT$hI
 IcU H
 IcU4H
 IcU8H
@@ -15893,12 +15579,12 @@ IcV81
 IcV@H
 IcVXH
 IcVXI
-IcV`A;VpD
 IcV`H
 IcVlH
 IcVlI
 IcVpL
-IcVxA;
+IcW`A;WpD
+IcWxA;
 Ic\$ A;\$0
 Ic\$ A;\$0L
 Ic\$ E1
@@ -15958,7 +15644,6 @@ If set, this will override the starting health for ancient (useful for speeding 
 If set, this will override the starting health for towers (useful for speeding up games for testing)
 If the GC hasn't sent an idle keep alive from the match maker in this many minutes, the server will restart
 If the given file doesn't exist, creates it with the given contents; does nothing if it exists
-If there is an allied green hero in this lane, allies have a 50% chance of surviving with 1 Health when they would die.
 If there is an allied red hero in this lane, all heroes have +2 Cleave.
 If this scene is currently paused.
 If this scene is currently playing.
@@ -16534,6 +16219,7 @@ Is Gesture
 Is Loadout Intro Effect
 Is Minimum Priority
 Is attached to parent
+Is the script connected to the public Steam universe
 Is this entity a player?
 Is this entity alive?
 Is this entity an CAI_BaseNPC?
@@ -16547,6 +16233,7 @@ IsMarkedForDeletion
 IsNoclipping
 IsPaused
 IsPlayer
+IsPublicUniverse
 IsSequenceFinished
 IsSpeaking() %f
 IsVRControllerButtonPressed
@@ -16678,6 +16365,7 @@ KeyValuesSystem
 Kharoshthi
 Khmer
 Kieran Yanner
+Kill 25 Creeps
 KillEaterRank
 KillTarget: %s
 Kills a player applying an explosive force. Usage: explodevector <player> <x value> <y value> <z value>
@@ -16809,7 +16497,7 @@ Lc tu
 Lc!D;a
 Lc#D;c
 Lc#E9
-Lc%5pR
+Lc%RO
 Lc&D;f
 Lc'D)
 Lc'D;g
@@ -16819,6 +16507,7 @@ Lc(E)
 Lc)D;i
 Lc*D;j
 Lc+D;k
+Lc-_B
 Lc.D;n
 Lc/D)
 Lc/D;o
@@ -17019,6 +16708,7 @@ Loot list %s: Missing "additional_drop" loot list or item name
 Loot list %s: Missing "escalating_chance_drop" item name
 Loot list %s: Multiple "escalating_chance_drop" blocks in the same slot not supported!
 Loot list %s: Specified both an item (%s) and a loot list (%s)
+Lose but Destroy An Opponent's Tower
 Lost in Time
 Lower the bottom of the drag select volume.
 Lower the selected corner of the currently marked Area.
@@ -17258,7 +16948,6 @@ Mcl$0L
 Mcl$hE;l$xD
 Mcl$pE;
 Mcn@E
-Mcn`E;npD
 McnxE;
 Mct$ E;t$0D
 Mct$X1
@@ -17935,6 +17624,7 @@ N9CPushable26CEntityInstanceEntityClassE
 N9CSoundEnt26CEntityInstanceEntityClassE
 N9CSprayCan26CEntityInstanceEntityClassE
 NA(fA9
+NA(fD9
 NATE1
 NAV AREA
 NAV IGNORE
@@ -17948,6 +17638,7 @@ NAV_MESH_NO_MERGE
 NAV_MESH_OBSTACLE_TOP
 NAV_MESH_PRECISE
 NAV_MESH_STAIRS
+NC(f9
 ND$(1
 ND$(f9
 NDebugOverlay::Box
@@ -17956,6 +17647,7 @@ NDebugOverlay::ScreenTextOffset
 NDebugOverlay::ScreenTextPretty
 NDebugOverlay::Text
 NE fA
+NE(fA9
 NERVEGAS
 NETWORK_DISCONNECT_BADDELTATICK
 NETWORK_DISCONNECT_BANADDED
@@ -18209,7 +17901,6 @@ O.@Jt;
 O0A;WH
 O0H;1t4A
 O:Ml}
-O<toA
 O?0 ,	f
 O?ffff
 OBSTRUCTED 
@@ -18390,7 +18081,7 @@ PARALYZE
 PARENT_CARD_NAME deals +2 damage when attacking a hero or tower.
 PARENT_CARD_NAME deals +4 damage when attacking a hero.
 PARENT_CARD_NAME deals +4 damage when attacking a tower.
-PARENT_CARD_NAME has +1 Armor for each of its attackers.
+PARENT_CARD_NAME has +1 Armor for each of its attackers. PARENT_CARD_NAME's attackers have -1 Armor.
 PARENT_CARD_NAME has +2 Regeneration. PARENT_CARD_NAME's allied neighbors have +2 Regeneration.
 PARENT_CARD_NAME has +2 Retaliate.
 PARENT_CARD_NAME has +X Cleave where X is equal to half its Attack.
@@ -18424,7 +18115,7 @@ PATTACH_RENDERORIGIN_FOLLOW
 PATTACH_ROOTBONE_FOLLOW
 PATTACH_WORLDORIGIN
 PCRE does not support \L, \l, \N{name}, \U, or \u
-PD;#|
+PD;+|
 PE+N(1
 PERMISSION_DENIED
 PETLEVELFROM_COMPENDIUM_LEVEL
@@ -18437,6 +18128,7 @@ PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
 PF_MAP_TYPE_REMAP_BIASED
+PF_RANDOM_MODE_VARYING
 PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
@@ -18687,6 +18379,10 @@ Plat_gmtime
 Plat_localtime
 Plat_timegm
 Platemail
+Play 15 Black Cards
+Play 15 Blue Cards
+Play 15 Green Cards
+Play 15 Red Cards
 Play Effect: Deal 4 damage to the enemy tower.
 Play Effect: Discard your hand.
 Play Effect: Give THIS_CARD_NAME a Death Shield.
@@ -18694,7 +18390,9 @@ Play Effect: Heal your tower 7.
 Play Effect: Modify THIS_CARD_NAME with +1 Attack, +1 Health, and +1 Cleave for each enemy.
 Play Effect: Modify a random allied hero with +1 Armor.
 Play Effect: Modify a random allied hero with +2 Attack.
+Play Every Card In Your Deck
 Play Subscene
+Play a card of each color
 Play all vcds on the clients.
 Play footstep sound for players
 Play named sound on Entity
@@ -18761,6 +18459,7 @@ PlusThree
 PlusTwo
 Poaching Knife
 PointAtEntity
+PointBonus
 PointTemplateClientOnlyEntityBehavior_t
 PointTemplateOwnerSpawnGroupType_t
 PointWorldTextJustifyHorizontal_t
@@ -18919,6 +18618,7 @@ Q#@?9L,
 Q8[A\H
 Q8q(2
 Q?3333
+QAngle
 QAngle-world
 QHcKpIc
 QIcN(Ic
@@ -19391,7 +19091,7 @@ S@[A\A]A^]
 SA3333;E
 SAVE/
 SAVE/%s%02d.%s
-SAVE/%s%s.jpg
+SAVE/%s%s.%s
 SAVE/%s.%s
 SAVE/%s.HL%s
 SAVE/%s.HL3
@@ -19587,6 +19287,9 @@ SV:  PreservePlayerNetworkables(%d)
 SV:  SpawnGroupUnloadingThink(%s), ignored because server doesn't know about this spawngroup!
 SV:  SpawnGroupUnloadingThink:  UNLOAD FINISH %s]
 SV:  SpawnGroupUnloadingThink:  UNLOAD START %s
+SV:  can't %s, no IEntity2SaveRestore
+SV:  can't autosavedangerousissafe, no IEntity2SaveRestore
+SV:  can't save, no IEntity2SaveRestore
 SVC_Messages
 SVC_Messages_LowFrequency
 SXt%H
@@ -19601,9 +19304,13 @@ Satyr Duelist
 Satyr Magician
 Saurashtra
 Savage Wolf
+Save Game
 Save Header
 Save failed: invalid file name '%s'
 Save/Restore overflow!
+SaveGame_ForgetLastSave (clearing '%s')
+SaveGame_GetLastSaveFile:  reloading from '%s'
+SaveGame_SetLastSaveFile (changing from '%s' to '%s')
 SaveInMemoryCallback:  UNTESTED CODE PATH IN SOURCE2!!!
 SaveJob
 SaveRestore
@@ -20016,6 +19723,7 @@ Set the specific param on or off
 Set the specific param value, type is inferred from the type in script
 Set the specified pose parameter to the specified value.
 Set to 1 and restart the map to be warned if the map has no trigger_transition volumes. Set to 2 to see a dump of all entities & associated results during a transition.
+Set to 1 to autosave game on level transition. Does not affect autosave triggers.
 Set to 1 to end the WaitingForPlayers period.
 Set to 1 to start or restart the WaitingForPlayers period.
 Set to change selection trace to be an arc instead of a line.  Value 1 should give a reasonable arc.
@@ -20196,7 +19904,9 @@ Shiva's Guard
 Shoots a phys object.
 Shop Deed
 Shopping or Deployment: 
+ShoppingFinished
 ShoppingStart
+ShoppingUpdate
 Short Sword
 Should not reach here.
 Should the mover proxy be a capsule shape?
@@ -20238,7 +19948,7 @@ Signout: Permission granted. Sending full signout
 Signout: Successful signout with result code %u
 Silence a unit [enemy] {hero} this round.
 Silence a unit {allied creep} this round. Give that unit +4 Attack this round.
-Silence enemy heroes this round.
+Silence an enemy hero and its allied neighbors this round.
 SimThinkHook
 Simple Cubic
 SimpleConstraintSoundProfile
@@ -20480,6 +20190,7 @@ SteamAPI_RunCallbacks
 SteamAPI_UnregisterCallResult
 SteamAPI_UnregisterCallback
 SteamAudio001
+SteamClient018
 SteamController007
 SteamFriends017
 SteamGameCoordinator001
@@ -20491,6 +20202,7 @@ SteamGameServer_RunCallbacks
 SteamGameStats001
 SteamID
 SteamID   : %s (%llu)
+SteamInfo
 SteamInternal_ContextInit
 SteamInternal_CreateInterface
 SteamMatchGameSearch001
@@ -20499,7 +20211,6 @@ SteamMatchMakingServers002
 SteamNetworking005
 SteamNetworkingSockets
 SteamToursHost001
-SteamUser020
 SteamUtils009
 Steamworks Stats: %s Ending %s session id: %llu
 Steamworks Stats: %s Ending CLIENT session id: %llu
@@ -20592,6 +20303,7 @@ Sung Choi
 Supports Coop Teleport
 Surge
 Surplus %s removed
+Surrender
 SurroundingBoundsType_t
 Suzanne Helmigh
 Svetlin Velinov
@@ -20638,6 +20350,7 @@ T$(H9S(t
 T$(Hc
 T$(I9
 T$(L9
+T$(fA
 T$0H9
 T$0H9S0t
 T$0Hc
@@ -20681,7 +20394,6 @@ T$pL9
 T$xIc
 T$xL9
 T$xfA
-T%N?.
 T0@GZ
 T5?Z@2
 T5i@H
@@ -21374,6 +21086,7 @@ Usage: global_set <globalname> <state>: Sets the state of the given env_global (
 Usage: mp_disable_autokick <userid>
 Usage: nav_merge_mesh filename
 Usage: switch_nav filename
+Use 5 Consumables
 Use IK on in-place turns.
 Use Radial vis for networking PVS checks.
 Use a particular weapon	
@@ -21761,6 +21474,7 @@ WEAPON_TEXTURE_ICON_ZOOMED_AUTOAIM
 WEAPON_TEXTURE_ICON_ZOOMED_CROSSHAIR
 WEBAPI_PARAM
 WEBAPI_PARAM_STEAMID_ACCOUNTID
+WGLc}
 WHcKXIc
 WILL TRANSITION
 WIN32
@@ -21855,6 +21569,15 @@ Whirling Death
 Whispers of Madness
 Wh}gL
 Will transmit all entities to client, regardless of PVS conditions (will still skip based on transmit flags, however).
+Win During Upkeep
+Win Taking Less Than 10 Tower Damage
+Win With a Common Only deck
+Win Without Healing
+Win Without Losing Any Tower
+Win a game after being teamwiped
+Win after Losing 10 heroes
+Win with No Heroes ever dying
+Win without buying any items
 Wingfall Hammer
 Winter Wyvern
 Winter's Curse
@@ -21899,16 +21622,15 @@ W{@3333
 X API
 X H+X
 X zR&="@r
-X%7z~
 X(Hc@ H
-X-Tz~
+X-\ G
 X0Hc@(M
 X0fD9
 X2:jH
 X4[A\]
-X5bdJ
+X5"xJ
+X5D$G
 X9t6@
-X=2V"
 X=2v?
 X@ffff
 XA9^@~
@@ -21920,7 +21642,6 @@ XD$ A
 XD$(L
 XD$8A
 XD$8H
-XD$P1
 XD$PA
 XD$T1
 XE9t$0
@@ -21938,6 +21659,7 @@ XMlKw
 XT$@H
 XT$@f
 XT$\<
+XZ[A\]
 XZt	H
 XZt9H
 XZtEH
@@ -21959,16 +21681,13 @@ X`Hc@XL
 XboxSystemInterface001
 Xh#x\
 Y ANb
-Y%4S+
-Y%Jy 
-Y-:%&
+Y%$,+
+Y-o,+
 Y/&4@4
 Y0fD+
-Y5)p,
-Y59r,
-Y5~S+
+Y5)K,
+Y5n,+
 Y6	@W'g(
-Y=RPj
 Y?3333E
 Y@phonemes
 YAxis
@@ -22151,11 +21870,8 @@ Z}uU
 \$pI9
 \$sE;o
 \%03o
-\%9gB
-\%f;I
-\-;QT
-\5P%"
-\=#f&
+\%O_E
+\5| G
 \C not allowed in lookbehind assertion
 \D$$H
 \H8L9
@@ -22217,7 +21933,7 @@ _8;_H
 _8AQM
 _@')UG3;
 _@H9^@t	[]
-_AXLc%
+_AXLc%x
 _ClientLevel
 _ClientModifier
 _ClientModifierLevel
@@ -22303,6 +22019,7 @@ _ZN13CBufferString6FormatEPKcz
 _ZN13CBufferString6InsertEiPKcib
 _ZN13CBufferString6SetPtrEPciibb
 _ZN13CBufferString8RemoveAtEii
+_ZN13CBufferString9StrFormatEPKcz
 _ZN13CThreadRWLock11UnlockWriteEv
 _ZN13CThreadRWLock11WaitForReadEv
 _ZN13CThreadRWLock12LockForWriteEv
@@ -24000,6 +23717,7 @@ __tls_get_addr
 __tls_get_addr@@GLIBC_2.3
 __vsprintf_chk
 __vsprintf_chk@@GLIBC_2.3.4
+_`A;_pD
 _addons
 _attr_
 _bfA3333
@@ -24398,6 +24116,7 @@ autograph_item_id
 autograph_score
 autokick is disabled for %s
 automate
+autosave
 autosavedangerous
 autosavedangerousissafe
 autoswitchfrom
@@ -24531,8 +24250,12 @@ bone(%d:%s)
 bonemerge
 bonus
 bonus_count
+bonus_id
 bonus_itemdefs
+bonus_period_wins
+bonus_points
 bonus_to_add
+bonuses
 bool_value
 boolean
 booster_type
@@ -24612,6 +24335,7 @@ c D; ~
 c E;e
 c [A\]
 c tul)
+c$1VL
 c([A\]
 c+@ffff6
 c0D;c@D
@@ -24928,6 +24652,7 @@ constraintCount
 constraint_axislimit_t
 constraint_breakableparams_t
 constraint_hingeparams_t
+constructed_mmr_level
 consumable_item_ids
 consumption_components
 content
@@ -25302,6 +25027,7 @@ disgraceful
 disgusted
 dishonest
 dispcoll_drawplane
+display up-to-date elapsed play time
 displayName
 display_game_events
 display_msg
@@ -25340,6 +25066,7 @@ double_shot_npc
 double_value
 dpd:|F
 dppI@
+draft_mmr_level
 drag_override
 dragon
 dragonfly
@@ -25357,7 +25084,6 @@ dump_globals
 dumpsavedir
 duration
 dxt!H
-dying
 dynamicAttachOffset
 dynamicResetCount
 dynamic_attributes
@@ -25797,6 +25523,7 @@ f@ffff
 fA9D$
 fA9D$(
 fA9D$(fA
+fA9E(fA
 fA9E4t
 fA9F v
 fA9G(fA
@@ -25806,16 +25533,17 @@ fA;1I
 fA;G6
 fA;L$R
 fA;\$vw
-fD9%P
 fD90t~
 fD91t
 fD9c&w
 fD9cV
 fD9k$w
+fD9s(D
+fD9s(f
 fD; t
 fD;!t
 fD;"t
-fD;%f*
+fD;%6s
 fD;+|
 fD;cvw
 fD;sv
@@ -25824,14 +25552,15 @@ fE9'D
 fE9,$
 fE9.L
 fE9.fA
-fE9/L
-fE9/fA
 fE94$D
 fE9>u)
 fE9HTu
+fE9a(fA
 fE9gv
 fE9i(fA
 fE9n(D
+fE9o(L
+fE9}(fA
 fE;&t
 fE;,$uGH
 fE;,$uP
@@ -26208,6 +25937,8 @@ func_elevator
 func_guntarget
 func_hlvr_nav_markup
 func_illusionary
+func_interaction_layer_clip: invalid interact-as attribute %s
+func_interaction_layer_clip: invalid interact-with attribute %s
 func_l4d_nav_markup
 func_lod
 func_nav_avoidance_obstacle
@@ -26442,10 +26173,7 @@ glowcolor
 glowrange
 glowrangemin
 glowstate
-gm_ClassAttributes
-gm_ComponentInfosById
 gm_NavBlockers
-gm_fComponentsContained
 go_package
 godmode OFF
 godmode ON
@@ -26474,6 +26202,7 @@ grant_stages
 grant_type
 grant_types
 granted_items
+granted_weekly_bonus
 graph
 graph_param
 graph_states
@@ -26612,7 +26341,6 @@ hide_inspect
 hide_quantity
 hide_styles_from_ui
 hide_tradecraftdelete
-hide_visuals_on_model_change
 hidechild
 hideous
 high_value
@@ -27185,6 +26913,7 @@ k9N<<
 k<[A\A]A^]
 k<fD9
 k@[A\A]A^]
+k@_aH
 kAffff
 kBEAMCLIPSTYLE_NUMBITS
 kCardDied
@@ -27364,6 +27093,7 @@ k_EMsgClientToGCRecycleCards
 k_EMsgClientToGCRemoveItemName
 k_EMsgClientToGCSendChatMessage
 k_EMsgClientToGCSetItemStyle
+k_EMsgClientToGCSetPlayerBadge
 k_EMsgClientToGCStopMatchmaking
 k_EMsgClientToGCTourneyAddPhase
 k_EMsgClientToGCTourneyGetInfo
@@ -27544,6 +27274,7 @@ k_ESOMsg_UpdateMultiple
 k_EServerLobbyData_DraftCards
 k_EServerLobbyData_GauntletInfo
 k_EServerLobbyData_PlayerDeck
+k_EServerLobbyData_PlayerInfo
 k_EServerLobbyData_PlayerMMR
 k_EServerSignoutData_LobbyInfo
 k_ESignout_Failed_InFlight
@@ -27802,7 +27533,6 @@ keyframes
 keyvalues3.cpp
 khD;(
 khHcSp
-khMcl$X
 khaki
 kiU8CoIBCAAQABgBIgcIgVEQBgUJBNpODQkEt1ANCQDgERIEp08FEjQGCAAQARgAIgcI0k4QBQU1AKERCRwAEAwYzA0iBwEsAAkFG1ynTxAOGAMiBwjuBxADGAIiBwjRThADGAMFRxgCGEkKeQgBDYQAzhFyALwJaQgHCLERlgCUERIA7AmNAYQICxgBBQgJjAC2EYMApgkJAAgFjATOsAHdBXskBCIHCKlOEAcYBwU2EAIYUApBBXsAAgUQNk4AAcgU6k0iBwiuAa0ACAm/AAcNKwHZAYEBQwAxJUIJQwmJATsUyQciBwjYATsBdgzYThAEDawQAhhHCjAFdikBGXYIBSIHBTsUsS4iBwjDATsABQ1lCEgKQwVlCTIZZQDEAWUAmgHSAAYJoClfBO4HBaklcS53ABSTAQgBEAEllAziTxAKEQkp9gDSMXsA+E5gAQFgLVcAByGCIQEFCQAOBeAA7AGEAAgFrgEaKXoE2tg1egE/AKkB0gGxDO4HEAQtMBACGEgKZ0VNASsA5BGDAKcJCSFiCe0A2CnSAAc2ZwIA0A1OAAMFhE1VRV4B9jr/AAg/Cm8FaSmpOXZBkASnUAW3AAcBCQnRIcMEuxEJRClVANIBvwHIDO4HEAgFNgTSTg0JBKdQGQkBegG4EAIYOQpfJW8JcQgBGAwtFwTynwHsBPhODXMM+E4QDgVPVWgAtgFqQTYuyAEJhQD4IWgABA1hCEgKOQXSSRY20gABwAyMCyIHQh4CEZwAKAWcCTsEARhhsAEzBK1hSXsAB1V7CEIKg0E2AAIloQDeUTYA3nGNAMwpqggHCKwJEgFfAU9JAgTDsmH3BKxPDesArIEJIXB1jkU4AetVHQCmHf1ZJghCCoGBqQmGAKYRdADLGXQ2/gAA0VEvAOAxZgDgIWYBjQHmBJsWMdkBEgDgAXIBlgChAQkBjQDgaa5NQSnAIAIYNQpCCAAQAg0QGXEBMgFWBMsZCTIpqi4vAlkUAC8xTglVCAEYEC0qBNPAAYIAsQnRDAcIyFEtM20sAAcBG2FaBQkADiWNRjACTR4FuAmGVUIAtgnTIZ8QAhhCCncFyin+GcpBMAC+EXoB0wzSICIHwQ8JegDaIUSBpRVWleCFhBAKIgcI2UmhhfsR9wE+CXkYLwo6CAEQAg15CAEYEQ3+BJPpqcgACSWIBLFPjb8yBAUIMgqlQQMAAwX8BLwXjb8EvBeNvwD2UZsA9jFEAK4RCQC7STABgwABBeSVTgHkBLUooeRRowCuQaNh5gD2ERJFrGGyJYsBCRSuTxAIGAkFUAHbhZUADXWWCCAKrmExCagEglANqACCCYQIBwj9qV4IBwizydkBljmCQZnVx2UUQaIAwymUaVQExdoBEwCUEZ8AlAGxIZUuSwPB4gAHMksDqSMAlCFaiT8BugF8GAIYMgpvCAFFMAEQGYwAFwmlASkFrqEZCYME5KpB9ADiEYNViVUYTYkBUAk/DK5OEA2VUxAsClUIABVxKZMcABAMGMMcIgchrQkzBLtQrRil2CF4ANJBXCGcANFJzTp5AQgaCksFV07WAgFfBI8nqQ8pCwDZce0A2QFNYX0AoQGkKR0IAhgaEpUIHqUICAEYHA37BMCmUaohhlWqAP2RaAD9YSQhHgCC0VNFQAFgAP0Rck3X5eQADRJaCDofAQCvQUFhPggHCL5R6QC+UekAkFHXMnIFAB4NoASogQGYHM5QEAMYLSIHAQkpTgDOIU7hLy4nAgADBRIApiFXAbMlvwEJRSfxzgG7AKkhJCGDAMMhJA4MCTqyAACJYZsJsiKxCa2nQQVZVYFjtZ4AsUnYEuUJAA4FjCGoBNohKdoJT5VjAOkONggBhCpMCQncMrkBCBQKlCk+qWIZemHnANIxlQDSIQ8AAy00BMT2AVdGpgYAriGxAe0lw2FkAPgBEiEi5aMNEgmolR5eIwFB9NHRofgW7AkEsxqxrwFX1TUA4gFpIXoA4jF6FWA67gBB9AAEQvQCABINXwS+Mkn0AAdlOAXIAVYFTQEJOk0AAIIpO2lCCAEYOy0hBOTWLvUCAKyBRQAMIbYBCQFGRsgBAM8x2hVzVf41yFYpAQgiCqRBTBZVDAC9Uf4AvVH+IiMKAJupSDZeAgH3td0ikgwA6wkrAAcBRkkyQWcM4jYiBw5CCAkSAMuhRwAGBU/JhYV2YUwlLEEhOiwBAMEhLAmnAJSx5gCUseYAn3GlALMJEgGnCAEYPRaADAE1qUkEysgBYgCUUZYA3rFSAOcxP3WuZZMhdSVRQSwurgOJ041YAWwACQW7AKZhruHDXmsBZbcABUIrAyFHAOuR0gDrgdIWiQwpKyE9DMopIgfhfOEIBQkJGwWdQRI2yQIBr3rJAggPCospUGm3CAEYPi0jBOuPAVAAnzEaAJ8hqIHIZZ0OcggVdGU0CAkiB2GdAAdlnQCgIYYJURWgaa6CGgEAigmOaQqZRQBAPV5GCAMAoAGmAAINuQTGyUE1FZ51AAD9QtIDgo0AEEwIABAFDYwIARgTbdwAySHaIq8JRQ8hKwCagTuVtgESMrkCCA8Kv2FgAAZF00ZeBgCrITMBuRoFEEFNGf8AFQ5WCMFcABQJCSlWAKahTSGUbTQBNGlFJAAQDBiKWiIHCMBR0QCh0W0A0QEJQf4lIkEi9dZ1chJpCUrCAAC4IZ0JwkbIDkbUAACGEdQA7okJAaAIARhALagEgNoBYgDDQpYBAOwhSAGYZXsAGKmnAAcREmlyBbxRYQ6aCHrLAQghCrcJuwk0OVkQRiIHCPMpJIkaBKjLAZYiYwkAs5EjALMhbMF5dQAA4iFJAagAtgEJIYdlCQEkAKYBEgGXMgkDBVkR7xWxALaBLAE1ViwEGCEKZggAEAYNuQgBGBtNhQTwMCVPSQkAq2EAQT0Aq2GmAZSVCATLT216tf8A6xGDNKFOEA0YBCIGCAAQAhgA
 kickid %d CBaseEntity::InputKill()
@@ -27873,6 +27603,8 @@ last_sniff
 last_update_time
 last_valid_class
 last_valid_item_slot
+last_win_bonus_time
+last_win_bounus_time
 latest_timestamp_from_steam
 latitude
 launchoptions
@@ -28100,7 +27832,6 @@ m_AIAddOn
 m_Activity
 m_ActualFlags
 m_AirFinished
-m_AllHelpers
 m_Amplitude
 m_Angles
 m_AngularVelocity
@@ -28133,7 +27864,6 @@ m_CollisionAttributeIndices
 m_CollisionGroup
 m_CollisionGroupString
 m_Color
-m_ComponentOffsets
 m_ConceptHistories
 m_CurrentSwayVector
 m_CurrentWeaponProficiency
@@ -28159,6 +27889,7 @@ m_DraftCards.players_size() == nPlayers
 m_Duration
 m_DynamicKeys
 m_DynamicValues
+m_Easings
 m_EditItems
 m_EffectName
 m_Emitters
@@ -28204,6 +27935,7 @@ m_HitBoxSets
 m_HitBoxes
 m_HoldDuration
 m_HoldTime
+m_IKMasterBlendAmountEasing
 m_IdealActivity
 m_InitPose
 m_Initializers
@@ -28723,6 +28455,7 @@ m_bFlipHorizontal
 m_bFogEnable
 m_bFollowPlayerAcrossTeleport
 m_bForceCaption
+m_bForceLoopingAnimation
 m_bForceNavIgnore
 m_bForceNewLevelUnit
 m_bForceOrigin
@@ -29388,6 +29121,7 @@ m_flFrequency
 m_flFriction
 m_flGlowBackfaceMult
 m_flGlowProxySize
+m_flGoal
 m_flGravity
 m_flGripAnalogValue
 m_flGroundChangeTime
@@ -29569,6 +29303,9 @@ m_flOldMaxDensity
 m_flOldPlayerViewOffsetZ
 m_flOldPlayerZ
 m_flOldStart
+m_flOpStrength
+m_flOpStrengthMaxScale
+m_flOpStrengthMinScale
 m_flOpvarValue
 m_flOriginalDamage
 m_flOrthoLightHeight
@@ -29625,6 +29362,7 @@ m_flRespawnDuration
 m_flReturnTime
 m_flRotation
 m_flRotationSpeed
+m_flSampleTime
 m_flSaveTime
 m_flScale
 m_flScaleDuration
@@ -30395,7 +30133,6 @@ m_nAABBDirection
 m_nActiveInteraction
 m_nActivity
 m_nAddDecal
-m_nAllHelpersFlags
 m_nAngularMotionX
 m_nAngularMotionY
 m_nAngularMotionZ
@@ -30410,7 +30147,6 @@ m_nAttachmentName
 m_nAttributeToWrite
 m_nAutomatedAction
 m_nBakeLightIndex
-m_nBaseOffset
 m_nBaseVertex
 m_nBeamFlags
 m_nBeamType
@@ -30534,7 +30270,6 @@ m_nIndirectTextureDimY
 m_nIndirectTextureDimZ
 m_nIndoorOutdoorLevel
 m_nInfluences
-m_nInputCount
 m_nInputType
 m_nInstanceCount
 m_nInteractsAs
@@ -30609,11 +30344,12 @@ m_nNumPrefixedContexts
 m_nOldButtons
 m_nOldTakeDamage
 m_nOldTickBase
+m_nOpScaleCP
+m_nOpStrengthScaleSeed
 m_nOpvarIndex
 m_nOpvarType
 m_nOrder
 m_nOuterMaxDist
-m_nOutputCount
 m_nOutputID
 m_nOutputType
 m_nOutsideWorld
@@ -30634,6 +30370,7 @@ m_nPriority
 m_nPushEnumCount
 m_nQuestPhase
 m_nQueuedAttack
+m_nRandomMode
 m_nRandomSeed
 m_nRatchetType
 m_nRefCounter
@@ -30650,6 +30387,7 @@ m_nRotateMotion
 m_nRuleIndex
 m_nRuntimeIndex
 m_nScaleCP
+m_nScaleCPComponent
 m_nScaleCPField
 m_nSceneFlushCounter
 m_nSceneStringIndex
@@ -30768,15 +30506,11 @@ m_pAreas
 m_pAttackerClassNameFilter
 m_pAttributes
 m_pBaseClassComponentHelper
-m_pBaseClassInfo
 m_pBlocker
 m_pBody
 m_pCPPClassname
 m_pChild
-m_pClass
-m_pClassInfo
 m_pCollision
-m_pComponentOverrides
 m_pController
 m_pController == NULL
 m_pCurrentCommand
@@ -30795,7 +30529,6 @@ m_pId
 m_pInflictorClassNameFilter
 m_pInflictorEntityNameFilter
 m_pInfo
-m_pInputs
 m_pManager
 m_pMapNameFilter
 m_pMaterial
@@ -30806,7 +30539,6 @@ m_pNetworkDataReferencedDescription
 m_pNetworkDataReferencedPtrPropDescription
 m_pNext
 m_pNextByClass
-m_pNextClass
 m_pNextKey
 m_pNextSibling
 m_pOnCommentaryStarted
@@ -30820,7 +30552,6 @@ m_pOutputForce
 m_pOutputOnEntitiesSpawned
 m_pOutputOnFailedSpawn
 m_pOutputOnSpawned
-m_pOutputs
 m_pOwner
 m_pParent
 m_pPath
@@ -30895,12 +30626,9 @@ m_pressedMoveRight
 m_prevSample
 m_projectionAngularTolerance
 m_projectionLinearTolerance
-m_pszCPPClassname
-m_pszClassname
 m_pszComponentDisplayNames
 m_pszComponentNames
 m_pszComponentPrefix
-m_pszDescription
 m_pszGrayedOutReason
 m_pszName
 m_pszSnapshotName
@@ -30938,7 +30666,6 @@ m_reflectivity
 m_registeredNavTeam
 m_remappingTable
 m_remappingTableStarts
-m_requiredEHandle
 m_response
 m_restrike
 m_reversalSoundThresholds
@@ -31226,6 +30953,7 @@ m_vTipOffset
 m_vTrackedPosition
 m_vUpLS
 m_vUpVector
+m_vVelocity
 m_vViewMax
 m_vViewMin
 m_valueOverride
@@ -31420,6 +31148,7 @@ match_lobby_id
 match_mode
 match_signout
 match_signout_puzzles
+match_win_streak
 matched, weight %4.2f (s %4.2f x c %4.2f)
 matches
 matchonce
@@ -31750,7 +31479,6 @@ nButton
 nDamageTaken
 nDefault
 nFlags
-nHATI
 nHATSH
 nHand
 nHandID
@@ -32164,6 +31892,7 @@ notifyforce_z
 notifyforcemintime_x
 notifyforcemintime_y
 notifyforcemintime_z
+notmostrecent
 notsolid
 npATI
 npc_*
@@ -32321,6 +32050,7 @@ onfirstimpact
 onlaunch
 online
 only_breakable_by
+only_display_on_hero_model_change
 only_render_to_texture
 onpickup
 onplayerdeath
@@ -32703,6 +32433,7 @@ playerResult%u
 player_
 player_1_perspective
 player_activate
+player_badge
 player_card
 player_chat
 player_connect
@@ -32864,7 +32595,9 @@ private_lobby_id
 process_id
 process_name
 progress
+progress_level
 progress_msg
+progress_xp
 projection_rotation
 projection_size
 promo
@@ -32910,14 +32643,12 @@ proto2
 proto3
 protocol
 proxies
-pszBaseComponent
 pszClasses
 pszContextName
 pszConvar
 pszCurrentValue
 pszName
 pszOrgValue
-pszOverrideComponent
 pszParam
 pszScene
 pszTagName
@@ -32995,7 +32726,6 @@ queue_size
 quick
 r t<H
 r tLH
-r tNH
 r u,L
 r%L9e
 r,9s,
@@ -33011,6 +32741,7 @@ r@3333S
 r@:[@h=
 r@ffff
 r@~aLc
+rCw51
 rJ@LB
 rKK	@i;
 rOWw,
@@ -33295,33 +33026,36 @@ runspeed
 s E9u
 s H;5
 s H;5!
-s H;5!-n
-s H;5,
-s H;51	q
-s H;5P
-s H;5P"n
-s H;5PFY
-s H;5Q
-s H;5X
-s H;5`
-s H;5a
+s H;5!Ez
+s H;5!xl
+s H;50a^
+s H;51
+s H;51To
+s H;58
+s H;5<
+s H;5A
+s H;5Pml
 s H;5h
+s H;5h&P
+s H;5hWo
+s H;5l
 s H;5p
 s H;5q
-s H;5x
+s H;5q$T
+s H;5xco
 s [A\A]A^]
 s off
 s v&E1
 s ~XH
 s$[A\H
+s$[A\]
 s(H;5
-s(H;5,
-s(H;55
-s(H;5H
-s(H;5L
-s(H;5\
+s(H;5!
+s(H;5,$b
+s(H;5E
+s(H;5X
+s(H;5l
 s([A\A]A^]
-s([A\]
 s(t.H
 s(~[H
 s)~+@
@@ -33331,19 +33065,18 @@ s/glow.vH
 s/spriteH
 s0D;kH
 s0H;5
-s0H;5(
-s0H;5A
-s0H;5L'`
-s0H;5{
-s0H;5|
+s0H;5H }
+s0H;5Q
 s0~;A
 s1_mapname
 s5fA9
 s69F~
 s7>Ip
 s8H;5
-s8H;58
-s8H;5X
+s8H;51
+s8H;58fo
+s8H;5x }
+s8HcA
 s8t%H
 s:@W[
 s@H;5
@@ -33355,9 +33088,8 @@ sAHc@
 sCSvz
 sF?t+F
 sHH;5
-sHH;5-
 sHH;5/
-sHH;5tg_
+sHH;5M!}
 sIHcB
 sLockedSentence
 sLockedSound
@@ -33366,7 +33098,6 @@ sM1@)\
 sMA9|$ 
 sOHc@
 sPH;5
-sPH;5f
 sP~0H
 sUnlockedSentence
 sUnlockedSound
@@ -33394,14 +33125,15 @@ samples
 samples_use_time
 sardine
 save %s
-save autosave
 save/%s.spe
 save_animgraph_recording
 save_async
+save_finish_async
 save_game_key
 save_history_count
 save_id
 save_screenshot
+save_showelapsedtime
 save_spew
 save_to_attribute_table
 saved_time
@@ -33618,6 +33350,7 @@ setting m_SimulationState[%d].m_flSimulationTime=%f
 sfixed32
 sfixed64
 shH;5
+shMcuX
 shadow_control
 shadowcascadecount
 shadowcascadedistance%d
@@ -33835,7 +33568,7 @@ source_owner
 source_parent_card_id
 source_parent_object_id
 source_reference_id
-spH;5(@m
+spH;5(
 space
 space shuttle
 spare error
@@ -34120,6 +33853,7 @@ sv_alltalk
 sv_alternateticks
 sv_anim_queue_changes
 sv_anim_sequence_transitioner
+sv_autosave
 sv_backspeed
 sv_bonus_challenge
 sv_bounce
@@ -34274,7 +34008,7 @@ swift_prefix
 swiss
 swiss_matches
 swiss_scoring
-sxH;5X@m
+sxH;5X
 sxt!H
 sxtjH
 sy@3333
@@ -34318,22 +34052,34 @@ t!HcK
 t!HcM
 t!IcD$
 t!IcE
-t";0u
 t"D9p
 t"Hc@
 t"HcS
 t"L;%
-t"L;%	
 t"L;%(
-t"L;%(2[
+t"L;%(7m
+t"L;%(>h
+t"L;%(Hh
+t"L;%(nY
+t"L;%)
 t"L;%8
-t"L;%H
+t"L;%8@h
+t"L;%8pY
+t"L;%8zY
+t"L;%H1m
+t"L;%H=m
+t"L;%HDh
 t"L;%X
-t"L;%Y
+t"L;%XlY
 t"L;%h
-t"L;%h/[
+t"L;%h:u
 t"L;%x
-t"L;%x1[
+t"L;%x6m
+t"L;%x;m
+t"L;%x<u
+t"L;%x=h
+t"L;%xGh
+t"L;%y
 t"Mc&E;f
 t"Mc'E;g
 t#;8u
@@ -34345,43 +34091,45 @@ t$	;s8u
 t$	H9
 t$ E1
 t$ H;5
-t$ H;5	
-t$ H;5%
-t$ H;5e
+t$ H;5-8z
+t$ H;55
+t$ H;5E)}
+t$ H;5MD^
+t$ H;5u
 t$ L9
 t$ t0
 t$ ~2H
 t$(H9
 t$(H;5
-t$(H;5B
-t$(H;5]
+t$(H;5%
+t$(H;5b8z
+t$(H;5})}
 t$(L9
 t$(L9.t`
 t$(t-H
 t$0H9
 t$0H;5
-t$0H;55
-t$0H;5Y:x
-t$0H;5YOc
-t$0H;5]
-t$0H;5i
-t$0H;5m
-t$0H;5y
+t$0H;5%yO
+t$0H;5=
+t$0H;5Y
+t$0H;5i_f
+t$0H;5y|v
+t$0H;5}
 t$0L9
 t$0Lc
 t$0f.
 t$0~4L
 t$8E1
 t$8H;5
-t$8H;5E
-t$8H;5e
+t$8H;5e+}
 t$8L9
 t$8fA
+t$;0u
 t$<	t 
 t$<E1
 t$@H;5
-t$@H;56
-t$@H;5}
+t$@H;5EJW
+t$@H;5V9z
 t$@L9
 t$@|)
 t$@|+
@@ -34390,9 +34138,9 @@ t$H;h
 t$HE;
 t$HH9
 t$HH;5
-t$HH;5R
-t$HH;5]
-t$HH;5}
+t$HH;5m
+t$HH;5r,}
+t$HH;5}Ho
 t$HL9
 t$HcK8
 t$HcS
@@ -34412,29 +34160,30 @@ t$PH;5
 t$PHc
 t$PL)
 t$PL9
-t$XH;5E
+t$XH;5U
 t$`H;5
+t$`H;5%
 t$`[A\A]A^]
-t$hH;5E
+t$hH;5U
 t$hHcE
 t$pH)
-t$pH;5i
+t$pH;5y
 t$pL)
 t$pL9
 t%90u
+t%95~>
 t%D:%
 t%HcC0A
 t%IcL$ 
 t%L;}
 t&A;\$
-t&D;5U^
+t&D;5
 t&HcQ
 t&L;%
-t&L;%8
+t&L;%X
 t&Mc&E;f
 t&[A\]
-t'D;5
-t'H9P
+t'D;5n
 t'H;=
 t'I9r
 t'Ic]
@@ -34465,7 +34214,7 @@ t+D;{
 t+HcV
 t+Ic\$
 t+Mcl$pE;
-t,D:5
+t,D:5CS
 t,H;r
 t,Hc6H
 t,Ic:H
@@ -34475,6 +34224,7 @@ t-;W@}.L
 t-L9p
 t-[A\A]]
 t-rex
+t.D:-V
 t.H9P
 t.H;w(t8H;w0tBH;w8tLH;w@t
 t.HcC H
@@ -34586,7 +34336,6 @@ t3Ic|$lH
 t3Lc#D;c
 t3[A\A]]
 t3[A\]
-t4D:%
 t4HcC$H
 t4HcG
 t4HcG H
@@ -34673,6 +34422,8 @@ t>M.F9
 t>[A\A]A^]
 t>fA9
 t?[A\A]A^]
+t?[A\]
+t@;5e@
 t@Ic_
 t@}?5^
 tA;s r<H
@@ -34685,11 +34436,9 @@ tBHcp
 tBIc]
 tBLc;D;{
 tB[A\A]A^]
-tB[A\]
 tC;0u
 tC;8u
 tCLc#D;c
-tCMce
 tC[A\A]A^]
 tDHcA
 tDMc,$E;l$
@@ -34712,6 +34461,7 @@ tJHcC
 tJHcShH
 tJ[A\A]A^]
 tK92u
+tL[A\A]A^]
 tM[A\]
 tNMc/E;o
 tN~+A
@@ -34738,10 +34488,10 @@ t[IcE
 t\H90u
 t\H;p
 t\IcT$@
+t][A\]
 t^[A\]
 t`[A\]
 taA;N r[HcC
-ta[A\]
 table_flags
 table_id
 table_name
@@ -34789,6 +34539,7 @@ tdH;]
 te.proto
 teHcWH
 teHc_
+te[A\A]A^]
 teamToBlock
 team_
 team_id
@@ -34830,7 +34581,6 @@ tf_escort_score_rate
 tgHcO
 tgIc\$
 tgL;e
-th<ptK<0u
 thHcK
 thHcK@1
 thIcG
@@ -34958,6 +34708,7 @@ tower_health1
 tower_health2
 tpD9#H
 tpHcW
+tq<ptO<0u
 tqHcQ
 tqHcSh
 trHcU
@@ -35019,7 +34770,6 @@ true
 true,
 trusted
 ts90u
-ttHcU
 tuHcO
 tuHcU
 tuLcs0D;s@D
@@ -35078,6 +34828,7 @@ t{UE1
 t{[A\A]A^]
 t{riU
 t|HcR
+t|HcU
 t}D8kSt
 t}HcSH
 t~D;{4u
@@ -35140,7 +34891,6 @@ u<[A\]
 u=[A\]
 u>HcC
 u>[A\]
-u?H9G8L
 u?[A\A]A^]
 u?[A\]
 u@[A\]
@@ -35155,6 +34905,7 @@ uHLcs D;s0D
 uH[A\A]A^]
 uH[A\]
 uIA	\$
+uIMcu
 uI[A\]
 uJE;|$(u
 uJHcC
@@ -35196,7 +34947,7 @@ ucHcC
 uc[A\]
 udp_connect_ip
 udp_connect_port
-ueL;=F
+ueL;=
 uf[A\]
 uf[A^]
 uhHcT
@@ -35306,6 +35057,7 @@ usage
 usage has duplicate item_def index: %u
 usage level requirement
 usage: %s <entindex>
+usage: save savename <wait> <notmostrecent>
 usage_capabilities
 useClientSideAnimation
 useLocalOffset
@@ -35347,6 +35099,7 @@ v IcD$
 v"HcR
 v)HcU
 v+Icw
+v-[A\]
 v8array
 v8callback
 v8object
@@ -35354,12 +35107,12 @@ v8value
 v;90u
 v><vt:
 v>zlK9T
-v@ATL
 v@ffff
 vDefault
 vED9w
 vHA9t$H
 vHAUATI
+vHAUI
 vJ90u
 vK<	uGH
 vNE^N
@@ -35496,6 +35249,9 @@ vpcf10
 vpcf11
 vpcf12
 vpcf13
+vpcf14
+vpcf15
+vpcf16
 vpcf2
 vpcf3
 vpcf4
@@ -35612,6 +35368,7 @@ wHAUL
 wLATL
 wP9AR
 wPATL
+wPtND
 wSHc{
 wUIcT$hA;T$l
 wXATL
@@ -35682,6 +35439,7 @@ white
 whitelist_cards_code
 whitelistname
 width
+win_streak
 windradius
 winning_account_id
 winning_player
@@ -35726,7 +35484,6 @@ x	;F`
 x	;V`
 x ;G`}
 x!;1|
-x";=O
 x#9SH~
 x#Hcp
 x#Hcw
@@ -35751,8 +35508,9 @@ x7Hcw
 x8"tq
 x8Mcl$ E;l$0
 x8mUM
-x:;=|
+x:;=,
 x:Hcw
+x;;=|
 x?Hc5
 x@;wp
 x@HcO
@@ -35763,14 +35521,15 @@ xHXZH
 xI9<$u
 xI9>u
 xL9-C
-xLIcD$
 xMIcE
 xNHcO
+xPIcD$
 xPUHc
 xQUHc
 xR;W }PUH
 xRHcO
 xRHcW
+xRIcD$
 xSIcL$
 xTHcO
 xTUHc
@@ -35792,6 +35551,7 @@ xes;H
 xf;WP}hUH
 xfIc\$
 xg;7}cHc
+xp_to_grant
 xrUHc
 xsHcW
 xtw?g
@@ -35850,7 +35610,6 @@ z/u-H
 z0u.1
 z0u.H
 z1u/H
-z2u0A
 z3u1A
 z4u2H
 z6$r@ffff.N
@@ -35924,21 +35683,24 @@ zzYQ,
 z{uyH
 z}u{fA
 { H;=
-{ H;=3V%
-{ H;=AJ3
-{ H;=Ab
-{ H;=\1
-{ H;=\4
-{ H;=\7
-{ H;=\:
+{ H;=!.
+{ H;=#$#
+{ H;=1+1
+{ H;=1>
+{ H;=f.
+{ H;=v>
 { H;}
 { [A\A]A^]
 { [A\]
 { []H
 { t2H
+{%s}SAVE/autosave%s.sav
+{%s}SAVE/autosave%s.tga
+{%s}SAVE/autosavedangerous%s.sav
+{%s}SAVE/autosavedangerous%s.tga
 {(9x(
 {(D9{8D
-{(H;="W%
+{(H;=
 {(H;}
 {(HcE
 {([A\]
@@ -35948,28 +35710,29 @@ z}u{fA
 {0@cz
 {0D;{@A
 {0H;=
-{0H;=h
 {8[A\]
 {8[]H
 {@H;=
 {@HcE
 {@[A\]
 {@ffff
-{HH;=\
-{HH;=hT%
+{HH;=
+{HH;=X"#
 {PD;{`
-{PH;=!T%
+{PH;=
 {PH;{X
 {S6wD
 {SDE1
 {YIN?
 {`D;{pA
+{`[A\]
 {o3@yCu
 {uyfn?z
 {}()'
 {}()':
 {}[]=, 	
 |!$Hc
+|!D:z
 |#8C8<'t H
 |$ AWL
 |$ E;|$0tLI
@@ -36018,6 +35781,7 @@ z}u{fA
 |7(Mc
 |7Hf.
 |7IcN
+|;0J+|;(H
 |=H;IX
 |?5&[@R
 |?5><
@@ -36031,11 +35795,11 @@ z}u{fA
 |?5~M
 |?5~i
 |BVSInputSignature
+|DHcK
 |FIcO
 |IIcN
 |IIcO
 |KIcO
-|LHcK
 |MIcO
 |NIcO
 |PIcL$
@@ -36050,6 +35814,7 @@ z}u{fA
 |pIcD$
 |yyF@6R
 } f;r
+}!E9u
 }!HcC8;CHt4
 }!f;r
 }#fA;
@@ -36080,12 +35845,13 @@ z}u{fA
 }?5^z,
 }?E:n
 }@33331
-}BE9l$$|;I
 }BfA;]vw;H
 }DE9e$|>I
 }DfA;_vw=L
 }EIc\$
 }EfD9
+}FE9l$$|?I
+}HE;l$$
 }RfD9
 }XA\A]A^A_]
 }XtHH
@@ -36100,12 +35866,13 @@ z}u{fA
 }w+Kt
 }xfE9evrqL
 ~ D;?
+~ H;=y
 ~'L;x
 ~(A\A]A^A_]
 ~(IcF I
 ~(};Hc
 ~)H;7I
-~)H;=
+~)H;=l]
 ~*A9\$
 ~*fE;g
 ~+Hcu

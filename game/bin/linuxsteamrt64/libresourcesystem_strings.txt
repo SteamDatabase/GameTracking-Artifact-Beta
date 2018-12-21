@@ -500,7 +500,6 @@ AnimProxy
 AnimSmoothLoop
 AnimStartLoop
 AnimSubtract
-Animation
 AnimationList
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -597,6 +596,7 @@ C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
 C_INIT_CreateOnModelAtHeight
+C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
 C_INIT_DistanceToCPInit
 C_INIT_GlobalScale
@@ -645,6 +645,7 @@ C_OP_EnableChildrenFromParentParticleCount
 C_OP_HSVShiftToCP
 C_OP_InitSetSnapshotOnCP
 C_OP_InstantaneousEmitter
+C_OP_LockToSavedSequentialPath
 C_OP_NoiseEmitter
 C_OP_RampCPLinearRandom
 C_OP_RemapAverageScalarValuetoCP
@@ -652,6 +653,7 @@ C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
 C_OP_RemapSpeedtoCP
+C_OP_RenderModels
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -916,6 +918,7 @@ H	w(UH
 H!w(H
 H;*twH
 H;2t,H
+H;5nu.
 H;:tE
 H;PHu
 H;WPu 
@@ -1099,6 +1102,7 @@ PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
 PF_MAP_TYPE_REMAP_BIASED
+PF_RANDOM_MODE_VARYING
 PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
@@ -1651,6 +1655,7 @@ interfaces.cpp
 invert_orientation
 is_debris
 k<[A\A]A^]
+k@_aH
 k`HcSh
 keep_all_records
 keepall
@@ -1747,6 +1752,7 @@ m_bCastShadows
 m_bDisableChild
 m_bDisableOperator
 m_bEnableProfiling
+m_bForceLoopingAnimation
 m_bInitFromKilledParentParticles
 m_bLocalSpace
 m_bOffsetExistingPos
@@ -1817,6 +1823,9 @@ m_flMinPitch
 m_flMinYaw
 m_flMultFactor
 m_flOffset
+m_flOpStrength
+m_flOpStrengthMaxScale
+m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
 m_flPitchBounce
@@ -1871,16 +1880,20 @@ m_nJiggleParent
 m_nMapType
 m_nNode
 m_nNodeCount
+m_nOpScaleCP
+m_nOpStrengthScaleSeed
 m_nPriority
 m_nQuadCount1
 m_nQuadCount2
 m_nQuadVelocitySmoothIterations
+m_nRandomMode
 m_nReserved
 m_nReservedUint8
 m_nRodVelocitySmoothIterations
 m_nRopeCount
 m_nRotLockStaticNodes
 m_nScaleCP
+m_nScaleCPComponent
 m_nScaleCPField
 m_nShadowCascadeCount
 m_nShadowCascadeResolution
@@ -2130,6 +2143,9 @@ vpcf10
 vpcf11
 vpcf12
 vpcf13
+vpcf14
+vpcf15
+vpcf16
 vpcf2
 vpcf3
 vpcf4
