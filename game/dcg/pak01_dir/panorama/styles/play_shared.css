@@ -194,3 +194,141 @@
 	opacity-mask: url("s2r://panorama/images/main_menu/friends_list_opacity_mask_psd.vtex");	
 }
 
+
+#RankContainer
+{
+    flow-children: right;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: .15s;
+    margin-top: 982px;
+
+    horizontal-align: right;
+    margin-right: 440px;
+    tooltip-position: top;
+}
+
+.HasLocalPlayerConstructedMMRLevel.SelectedPageCasual #RankContainer,
+.HasLocalPlayerConstructedMMRLevel.SelectedPageCompetitive  #RankContainer
+{
+    opacity: 1;
+}
+
+#RankLabelConstructed, #RankLabelDraft
+{
+    vertical-align: center;
+    horizontal-align: left;
+    letter-spacing: 2px;
+    font-size: 18px;
+    color: #616b88;
+    text-transform: uppercase;
+	margin-right: 4px;
+	margin-top: 4px;
+    visibility: collapse;
+    font-weight: light;
+}
+
+#RankLabelValue_Constructed, #RankLabelValue_Draft
+{
+    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, #c8cdd6 ), color-stop( .3, #c8cdd6 ), color-stop( .8, #8b97a6 ), to( #8b97a6 ) );
+    font-size: 28px;
+    font-weight: light;
+    margin-left: 4px;
+    margin-right: 4px;
+    visibility: collapse;
+	vertical-align: center;
+	margin-top: 7px;
+}
+
+#RankLabelValue_Constructed
+{
+    text-shadow: 0px 0px 3px 1.0 #5da9d466;
+}
+
+#RankLabelValue_Draft
+{
+    text-shadow: 0px 0px 3px 1.0 #dd6bad66;
+}
+
+.PlayTypeOnlineMatch #RankLabelConstructed,
+.PlayTypeFreeConstructed #RankLabelConstructed,
+.PlayCompetitive.ConstructedMode #RankLabelConstructed,
+.PlayTypeOnlineMatch #RankLabelValue_Constructed,
+.PlayTypeFreeConstructed #RankLabelValue_Constructed,
+.PlayCompetitive.ConstructedMode #RankLabelValue_Constructed
+{
+    visibility: visible;
+}
+
+.PlayTypeFreeDraft #RankLabelDraft,
+.PlayCompetitive.LimitedMode #RankLabelDraft,
+.PlayTypeFreeDraft #RankLabelValue_Draft,
+.PlayCompetitive.LimitedMode #RankLabelValue_Draft
+{
+    visibility: visible;
+}
+
+#RankLabelInfo
+{
+    width: 32px;
+    height: 32px;
+    vertical-align: center;
+    background-image: url("s2r://panorama/images/tournaments/constructed_skill_icon_psd.vtex");
+    background-size: cover;
+	margin-left: 2px;
+	margin-top: -2px;
+	box-shadow: 0px 0px 14px #507488;
+	border-radius: 50%;
+	animation-duration: 3s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;	
+	animation-name: SkillPulse;
+}
+
+@keyframes 'SkillPulse'
+{
+	0%
+	{
+		box-shadow: 0px 0px 8px #50748888;
+	}
+	50%
+	{
+		box-shadow: 0px 0px 14px #507488dd;
+	}
+	
+	100%
+	{
+		box-shadow: 0px 0px 8px #50748888;
+	}	
+}
+
+.PlayTypeFreeDraft #RankLabelInfo
+{
+	animation-name: SkillPulseFreeDraft;
+}
+
+@keyframes 'SkillPulseFreeDraft'
+{
+	0%
+	{
+		box-shadow: 0px 0px 8px #C577B188;
+	}
+	50%
+	{
+		box-shadow: 0px 0px 14px #C577B1dd;
+	}
+	
+	100%
+	{
+		box-shadow: 0px 0px 8px #C577B188;
+	}	
+}
+
+
+.PlayTypeFreeDraft #RankLabelInfo,
+.PlayCompetitive.LimitedMode #RankLabelInfo,
+.PlayTypeFreeDraft #RankLabelInfo,
+.PlayCompetitive.LimitedMode #RankLabelInfo
+{
+	background-image: url("s2r://panorama/images/tournaments/draft_skill_icon_psd.vtex");
+}

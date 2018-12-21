@@ -265,14 +265,14 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 #TopBar.Social #PlayTopBar_BG
 {
-	transform:  translatex( 462px);
+	transform:  translatex( 693px );
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
 
 .NoFeaturedEvent #TopBar.Social #PlayTopBar_BG
 {
-	transform:  translatex( 221px);
+	transform:  translatex( 231px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
@@ -293,14 +293,14 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 #TopBar.Casual #PlayTopBar_BG
 {
-	transform:  translatex( 693px );
+	transform:  translatex( 462px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
 
 .NoFeaturedEvent #TopBar.Casual #PlayTopBar_BG
 {
-	transform:  translatex( 231px);
+	transform:  translatex( 221px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
@@ -877,6 +877,8 @@ DCGDashboard.InitialDisplay #DashboardForeground
 	visibility: collapse;
 }
 
+.PopupBlurEnabled #MiniProfileGlow,
+.PopupBlurEnabled #MiniProfile,
 .PopupBlurEnabled #TopBar,
 .PopupBlurEnabled #SecondaryBar,
 .PopupBlurEnabled #SocialOverlay,
@@ -1674,17 +1676,20 @@ DCGContextMenuManager
 #DCGBlogButton
 {
 	margin: 0px;
-	width: 32px;
-	height: 32px;
+	width: 26px;
+	height: 26px;
 	vertical-align: middle;
 	background-image: url("s2r://panorama/images/control_icons/news_psd.vtex");
-	background-size: 29px;
+	background-size: 26px;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
 	wash-color: #666666;
 	margin-right: 9px;
 	margin-left: 8px;
-	margin-top: 0px;
+	margin-top: 1px;
+
+	transition-property: wash-color;
+	transition-duration: 0.25s;
 }
 
 #DCGSettingsButton
@@ -1701,19 +1706,25 @@ DCGContextMenuManager
 	margin-right: 9px;
 	margin-left: 8px;
 	margin-top: 0px;
+	
+	transition-property: wash-color;
+	transition-duration: 0.25s;
 }
 #DCGQuitButton 
 {
 	background-image: url("s2r://panorama/images/control_icons/quit_psd.vtex");
 	width: 32px;
 	height: 32px;
-	background-size: 29px;
+	background-size: 30px;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
 	wash-color: #666666;
 	margin-right: 8px;
-    margin-left: 6px;
-	margin-top: 1px;
+  margin-left: 6px;
+	margin-top: 2px;
+	
+	transition-property: wash-color;
+	transition-duration: 0.25s;
 }
 
 #DCGBlogButton:hover
@@ -2062,4 +2073,39 @@ DCGContextMenuManager
 {
 	margin-top: 11px;
 	font-size: 12px;
+}
+
+/* Miniprofile */
+
+#MiniProfile
+{
+	margin-top: 16px;
+	horizontal-align: left;
+	vertical-align: bottom;
+	margin-bottom: 82px;
+	margin-left: 16px;
+	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
+	transition-duration: 0.4s;
+	transition-timing-function: ease-in-out;
+}
+
+#MiniProfileGlow
+{
+	width: 320px;
+	height: 400px;
+
+	brightness: 1;
+	horizontal-align: left;
+	vertical-align: bottom;
+	margin-left: -82px;
+	margin-bottom: -32px;
+	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
+	transition-duration: 0.4s;
+	transition-timing-function: ease-in-out;
+}
+
+#Dashboard.InPackOpening #MiniProfileGlow,
+#Dashboard.InCatalogue #MiniProfileGlow
+{
+	opacity: 0;
 }

@@ -1,0 +1,112 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_mini_profile.vcss_c" />
+		<include src="s2r://panorama/styles/mini_profile.vcss_c" />
+
+	</styles>
+
+	<snippets>
+
+		<snippet name="RewardRow">
+			<Panel class="RewardRow">
+				<Panel class="ProgressColumn">
+					<Panel class="RewardAchievedIcon"/>
+				</Panel>
+				<Panel class="LevelColumn">
+					<Label class="LevelLabel" text="{u:row_level}"/>
+				</Panel>
+				<Panel id="BadgeColumn">
+				</Panel>
+				<Panel class="RewardsColumn">
+					<Panel class="RewardPacks" onmouseover="UIShowTextTooltip( #DCG_Profile_Rewards_Packs )" onmouseout="UIHideTextTooltip()">
+						<Panel class="RewardPacksIcon"/>
+						<Label class="RewardAmount" text="#DCG_Profile_RewardsPackAmount"/>
+					</Panel>
+					<Panel class="RewardTickets" onmouseover="UIShowTextTooltip( #DCG_Profile_Rewards_Tickets )" onmouseout="UIHideTextTooltip()">
+						<Panel class="RewardTicketsIcon"/>
+						<Label class="RewardAmount" text="#DCG_Profile_RewardsTicketAmount"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+
+	</snippets>
+
+	<DCGPopupMiniProfile class="Hidden" popupbackground="blur" >
+
+		<Panel id="PopupContainer" class="PopupPanel">
+			<Button id="ClosePopupButton" class="CloseButton" onactivate="UIPopupButtonClicked()"/>
+			<Panel class="ProfileContainer">
+				<Panel class="ProfileLeftContents">
+
+					<Panel class="ProgressContainer">
+						<Panel class="ProgressAccount">
+							<Panel class="LevelProgress">
+								<DCGAccountBadge id="AccountBadge"/>
+								<Panel class="ProfileData">
+									<DCGUserName id="UserName" class="ArtifactlevelPlayerName" text="Player_Name"/> 
+									<ProgressBar id="PlayerLevelProgress" class="LargeProgressBar">
+											<Label id="XPtoNextLevel"  text="#DCG_Profile_XPToNextLevel"/> 
+											<Panel id="PlayerLevelProgress_Left" class="ProgressBarLeft">
+												<Panel id="ProgressFXContainer">
+													<DCGScenePanel id="PlayerLevelProgressBurner" map="scenes/progression/progression_progressbar" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>											
+												</Panel>
+											</Panel>
+									</ProgressBar>
+									<Panel class="ProfileChangeBadge">
+		          	<Button id="ChangeBadgeButton" onactivate="ChangeAccountBadge()">
+		            	<Label text="#DCG_Change_Account_Badge"/>
+		          	</Button>
+		        	</Panel>
+								</Panel>
+							</Panel>
+        			</Panel>
+        			<Panel class="RewardSchedule">
+							<Panel class="RewardsHeader">
+								<Label id="ProgressHeaderLabel" class="RewardsHeaderLabel" text="#DCG_Profile_Progress"/>
+								<Label id="LevelHeaderLabel" class="RewardsHeaderLabel" text="#DCG_Profile_Level"/>
+								<Label id="BadgesHeaderLabel" class="RewardsHeaderLabel" text="#DCG_Profile_Badges"/>
+								<Label id="RewardsHeaderLabel" class="RewardsHeaderLabel" text="#DCG_Profile_Rewards"/>
+							</Panel>
+							<Panel id="RewardsRowContainer">
+								
+							</Panel>
+						</Panel>
+						
+					</Panel>
+					
+				</Panel>
+				<Panel class="ProfileRightContents">
+					<Panel class="WeeklyBonusInfo">
+						<Label class="ProfileHeaderLabel" text="#DCG_MiniProfile_WeeklyBonus"/> 
+						<Panel class="WeekyBonusContainer">
+							<Panel id="WeeklyBonus1" class="WeeklyBonusPip">
+								<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+							</Panel>
+							<Panel id="WeeklyBonus2" class="WeeklyBonusPip">
+								<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+							</Panel>
+							<Panel id="WeeklyBonus3" class="WeeklyBonusPip">
+								<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>	
+							</Panel>
+						</Panel>
+						<Label id="WeeklyBonusResetTimer" text="#DCG_MiniProfile_WeeklyResetTime"/>
+						<Label class="ProfileBodyLabel" html="true" text="#DCG_MiniProfile_WeeklyBonus_Description"/>
+					</Panel>
+					<Panel class="ArtifactLevelsDescription">
+						<Label class="ProfileHeaderLabel" text="#DCG_Profile_ArtifactLevelsHeader"/> 
+						<Label class="ProfileBodyLabel" html="true" text="#DCG_Profile_ArtifactLevelsDescription"/>
+					</Panel>
+				</Panel>
+
+
+			</Panel>
+
+
+		</Panel>
+
+		
+	</DCGPopupMiniProfile>
+</root>

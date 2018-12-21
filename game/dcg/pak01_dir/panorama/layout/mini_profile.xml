@@ -1,0 +1,44 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/base.vcss_c" />
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_main.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+		<include src="s2r://panorama/styles/mini_profile.vcss_c" />
+	</styles>
+
+	<DCGMiniProfile class="MainMenuLabelContainer">
+		<Panel id="MiniProfileContainer">
+			<Panel class="MiniProfileContents">
+				<DCGAccountBadge id="AccountBadge" onmouseout=""/>
+				<Panel class="MiniProfileData">
+					<DCGUserName id="UserName" class="ArtifactlevelPlayerName" text="Player_Name"/> 
+					<ProgressBar id="PlayerLevelProgress">
+						<Panel id="PlayerLevelProgress_Left" class="ProgressBarLeft">
+							<Panel id="ProgressFXContainer">
+								<DCGScenePanel id="PlayerLevelProgressBurner" map="scenes/progression/progression_progressbar" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>											
+							</Panel>
+						</Panel>
+						<Label id="XPtoNextLevel"  text="#DCG_Profile_XPToNextLevel"/> 
+					</ProgressBar>
+					<Panel id="BonusLabelsContainer" hittest="false" onmouseover="UIShowTextTooltip( #DCG_MiniProfile_WeeklyBonus_Description )" onmouseout="UIHideTextTooltip()">
+						<Label class="WeeklyBonusLabel" text="#DCG_MiniProfile_WeeklyBonus"/> 
+					</Panel>
+					<Panel class="WeekyBonusContainer">
+						<Panel id="WeeklyBonus1" class="WeeklyBonusPip">
+							<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+						</Panel>
+						<Panel id="WeeklyBonus2" class="WeeklyBonusPip">
+							<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+						</Panel>
+						<Panel id="WeeklyBonus3" class="WeeklyBonusPip">
+							<DCGScenePanel class="PipFill" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>	
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		<DCGScenePanel class="MiniProfileMask" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>
+		<Panel id="MiniProfileClickTarget" onactivate="DCGMiniProfileClicked()" onmouseover="UIShowTextTooltip( #DCG_MiniProfile_BadgeTooltip ) AddStyle( MiniProfile, Hovered)" onmouseout="UIHideTextTooltip() RemoveStyle( MiniProfile, Hovered)" />
+	</DCGMiniProfile>
+</root>

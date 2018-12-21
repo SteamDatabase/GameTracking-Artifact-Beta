@@ -833,7 +833,6 @@ AnimProxy
 AnimSmoothLoop
 AnimStartLoop
 AnimSubtract
-Animation
 AnimationList
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -1045,6 +1044,7 @@ C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
 C_INIT_CreateOnModelAtHeight
+C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
 C_INIT_DistanceToCPInit
 C_INIT_GlobalScale
@@ -1093,6 +1093,7 @@ C_OP_EnableChildrenFromParentParticleCount
 C_OP_HSVShiftToCP
 C_OP_InitSetSnapshotOnCP
 C_OP_InstantaneousEmitter
+C_OP_LockToSavedSequentialPath
 C_OP_NoiseEmitter
 C_OP_RampCPLinearRandom
 C_OP_RemapAverageScalarValuetoCP
@@ -1100,6 +1101,7 @@ C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
 C_OP_RemapSpeedtoCP
+C_OP_RenderModels
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -1219,7 +1221,7 @@ D:"u;
 D:p(t/A
 D;!ttHc
 D;"}1H
-D;-{`:
+D;-[o:
 D;;uwH
 D;@Xt
 D;C(tCH
@@ -1720,7 +1722,7 @@ LayerTriggers
 Lc#D;c
 Lc'E)
 Lc)D;i
-Lc-v`:
+Lc-Vo:
 Lc/E)
 Lc3D;s
 Lc6D;v
@@ -1925,6 +1927,7 @@ PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
 PF_MAP_TYPE_REMAP_BIASED
+PF_RANDOM_MODE_VARYING
 PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
@@ -3237,6 +3240,7 @@ j8Hcr
 k0D;k@
 k8t L
 k<[A\A]A^]
+k@_aH
 kXHcChE
 k`HcSh
 key_groups
@@ -3302,6 +3306,7 @@ m_audioMeters
 m_bApplyMinForce
 m_bDisableChild
 m_bDisableOperator
+m_bForceLoopingAnimation
 m_bInitFromKilledParentParticles
 m_bInvertMatch
 m_bIsBlocking
@@ -3339,6 +3344,9 @@ m_flInput0
 m_flInput1
 m_flLiteralValue
 m_flMultFactor
+m_flOpStrength
+m_flOpStrengthMaxScale
+m_flOpStrengthMinScale
 m_flOpvar
 m_flOutput0
 m_flOutput1
@@ -3363,7 +3371,11 @@ m_nGraphOutputChannels
 m_nIncrement
 m_nMapType
 m_nMaxCount
+m_nOpScaleCP
+m_nOpStrengthScaleSeed
+m_nRandomMode
 m_nScaleCP
+m_nScaleCPComponent
 m_nScaleCPField
 m_nSortType
 m_nStopType
@@ -3975,9 +3987,8 @@ t$HcW
 t$`A\A]A^]
 t$`uAA
 t$pE1
-t'D;5.M,
+t'D;5
 t(;2}
-t);=bd,
 t)HcE
 t*A+F$I
 t+Lck8D;kHD
@@ -4062,6 +4073,7 @@ vV<	uRH
 vector_facing_point
 velocity_zones
 vgraph_name
+vl;5,J:
 vmix.cpp
 vmix:%02d: %s
 vmixH
@@ -4094,6 +4106,9 @@ vpcf10
 vpcf11
 vpcf12
 vpcf13
+vpcf14
+vpcf15
+vpcf16
 vpcf2
 vpcf3
 vpcf4
@@ -4142,9 +4157,6 @@ x%;p@} H
 x8;7H
 x@HcO
 xBHcO
-xD9%&
-xD9%c
-xD95w
 xGIcL$
 xHLc@ LcH
 xLHcP
@@ -4190,5 +4202,5 @@ zfudH
 ~Ef;w
 ~IHcK
 ~O;2u
-~Wf9=
+~Wf9=^
 ~}f;w

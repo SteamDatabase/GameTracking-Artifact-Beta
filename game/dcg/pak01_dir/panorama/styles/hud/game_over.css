@@ -3,8 +3,18 @@
 #GameOverVideo, #GameOverVideoResult, #GameOverVideoLoop
 {
     width:100%;
-    height:100%;
+	height:100%;
+	transition-property: blur;
+	transition-duration: 5s;
+	transition-timing-function: ease-in;
 }
+
+
+.ShowingLevelProgress #GameOverVideoLoop
+{
+	blur: gaussian( 6px );
+}
+
 #GameOverPanel
 {
     width:100%;
@@ -23,7 +33,8 @@
 		opacity: 1;
 	}
 }
-    @keyframes 'FadeOpacityInFast'
+
+@keyframes 'FadeOpacityInFast'
 {
 	0%
 	{
@@ -33,36 +44,48 @@
 	{
 		opacity: 0;
 	}
-    100%
+	100%
 	{
 		opacity: 1;
 	}
 }
+
 #GameEndReason
 {
-    width:100%;
-    z-index:999;
+	width:100%;
+	z-index:999;
 }
+
 .EndReason
 {
-    margin-top:540px;
-    horizontal-align:center;
-    font-weight:light;
-    font-size:28px;
+	margin-top: 390px;
+	horizontal-align:center;
+	font-weight:light;
+	font-size:28px;
 	letter-spacing: 10px;
-    text-transform: uppercase;
+	text-transform: uppercase;
 	color: white;
 	opacity: .5;
-    text-shadow: 0px 0px 5px 5.0 #9400D311;
-    visibility:collapse;
-	//temp
-	
-  	animation-name: EndReasonFadeIn;
-    animation-duration: 5s;
+	text-shadow: 0px 0px 5px 5.0 #9400D311;
+	visibility:collapse;
+	text-align: center;
+
+	transition-property: pre-transform-scale2d, transform, opacity;
+	transition-duration: 2s;	
+	transition-timing-function: ease-in;
+
+	animation-name: EndReasonFadeIn;
+	animation-duration: 3s;
 	animation-timing-function: ease-out;
-	animation-iteration-count: 1;    
-	
+	animation-iteration-count: 1;	
 }
+
+.ShowingLevelProgress .EndReason
+{
+	transform: translateY(-180px);
+	pre-transform-scale2d: .9;
+}
+
 
 @keyframes 'EndReasonFadeIn'
 {
@@ -122,21 +145,31 @@
 
 #MenuOptions
 {
-    horizontal-align:center;    
+	horizontal-align: center;
 	width:100%;
-    vertical-align:bottom;
-    margin-bottom:160px;
-    animation-name: FadeOpacityInFast;
-	animation-duration: 5s;
-	animation-timing-function: ease-in;
-	animation-iteration-count: 1;
-    z-index:999;
-    flow-children:down;
+	margin-top: 48px;
+	z-index:999;
+	flow-children: down;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+
+}
+
+.IntroOver.DisplayMenuOptions #MenuOptions
+{
+	opacity: 1;
+}
+
+#GameOverPanel:not(.ShowingLevelProgress) #MenuOptions
+{
+	margin-top: 164px;
 }
 
 .MenuButton
 {
-    horizontal-align:center;
+	horizontal-align:center;
 }
 
 
@@ -212,6 +245,7 @@
 
 .AIMatch #ChatWithOpponent,
 .AIGauntlet #ChatWithOpponent,
+.PuzzleMatch #ChatWithOpponent,
 .OpponentAnonymous #ChatWithOpponent
 {
 	visibility: collapse;
@@ -258,18 +292,20 @@
 }
 
 .VictoryText
-{
-	margin-top: 40px;
+{	
+	margin-top: -90px;
+	pre-transform-scale2d: 1;
 	font-weight: light;
-    font-size:162px;
-    animation-duration: 4s;
+	font-size:162px;
+	animation-duration: 4s;
 	animation-timing-function: ease-in;
 	animation-iteration-count: 1;
-    transition-property: 1;
+	transition-property: pre-transform-scale2d;
 	transition-duration: 4s;	
 	transition-timing-function: ease-in;
-    text-shadow: 0px 0px 8px 4.0 #9400D311;
-    z-index:10;
+	text-shadow: 0px 0px 8px 4.0 #9400D311;
+	z-index:10;
+	transform: translateY( -200px );
 }
 
 @keyframes 'Victory1Anim'
@@ -977,16 +1013,24 @@
 
 #OutcomeWrapper
 {
-    width: 100%;
-    height: 100%;
-  	animation-name: ZoomIn;
-    animation-duration: 4s;
+	width: 100%;
+	height: 100%;
+	animation-name: ZoomIn;
+	animation-duration: 4s;
 	animation-timing-function: ease-in;
-	animation-iteration-count: 1;    
-    z-index:999;
+	animation-iteration-count: 1;
+	z-index: 100;
+
+	transition-property: pre-transform-scale2d, transform, opacity;
+	transition-duration: 1.8s;	
+	transition-timing-function: ease-in;
 }
 
-
+.ShowingLevelProgress #OutcomeWrapper
+{
+	transform: translateY(-230px);
+	pre-transform-scale2d: .6;
+}
 
 .EvenLeft1
 {
@@ -1072,6 +1116,10 @@
 {
     transform: translateX( -280px );
 }
+.OddRight0
+{
+    transform: translateX( 0px );  	
+}
 .OddRight1
 {
     transform: translateX( 40px );  	
@@ -1099,4 +1147,52 @@
 .OddRight7
 {
     transform: translateX( 280px );
+}
+
+#PostGameProgress
+{
+	horizontal-align: center;
+	vertical-align: top;
+	width:100%;
+	height: fit-children;
+
+	margin-top: 450px;
+	margin-top: 250px;
+	z-index: 999;
+	opacity: 1;
+
+	transition-property: opacity, transform;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+#ProgressAndOptions
+{
+	z-index: 999;
+	flow-children: down;
+	height: fit-children;
+	width: 100%;
+	opacity: 0;
+	transform: translateY(100px);
+	transition-property: opacity, transform;
+	transition-duration: 1.5s;
+	transition-delay: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+.DisplayMenuOptions #ProgressAndOptions
+{
+	opacity: 1;
+}
+
+.ShowingLevelProgress #ProgressAndOptions
+{
+	opacity: 1;
+	transform: translateY(0px);
+}
+
+.ShowingLevelProgressWithRewards .EndReason,
+.ShowingLevelProgressWithRewards #OutcomeWrapper
+{
+	opacity: 0.03;
 }

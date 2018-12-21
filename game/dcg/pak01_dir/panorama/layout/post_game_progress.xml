@@ -1,0 +1,151 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/base.vcss_c" />
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/post_game_progress.vcss_c" />
+	</styles>
+
+	<scripts>
+		<include src="s2r://panorama/scripts/util.vjs_c" />
+		<include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
+		<include src="s2r://panorama/scripts/post_game_progress.vjs_c" />
+	</scripts>
+
+	<snippets>
+
+		<!-- Hero Badge Progress Screen -->
+
+		<snippet name="PlayerLevelProgress">
+			<Panel class="ProgressScreen" onactivate="StartSkippingAhead()">
+				<Panel id="PlayerLevelProgressMain">
+					<Panel id="PlayerLevelProgressCenter">
+						<Panel class="PlayerLevelProgressTitleContainer">
+							<Panel class="PlayerLevelProgressTitle">
+								<Panel id="BadgeContainer">
+									<DCGAccountBadge id="AccountBadge" class="PlayerLevelProgressIcon" size="large" />
+									<Panel id="BadgeWhiteCover"/>
+								</Panel>
+								<Panel id="AccountProgressContainer">
+									<Panel id="PlayerLevelProgressSection">
+										<Label class="PlayerLevelProgressLevelProgressTitle" text="#DCG_PostGame_PlayerLevel" />
+										<Label class="PlayerLevelProgressXP" text="#DCG_PostGame_XPProgress" />
+									</Panel>
+									<Panel id="PlayerLevelProgressContainer">
+										<ProgressBar id="PlayerLevelProgress" min="0" max="1000" >
+											<Panel id="PlayerLevelProgress_Left" class="ProgressBarLeft">
+												<Panel id="ProgressFXContainer">
+													<DCGScenePanel id="PlayerLevelProgressBurner" map="scenes/progression/progression_progressbar" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>											
+												</Panel>
+											</Panel>
+										</ProgressBar>
+									</Panel>
+									
+								</Panel>
+							</Panel>
+						</Panel>
+
+						<Panel id="PlayerLevelProgressCore">
+							<Panel id="PlayerLevelProgressXPGrid">
+								<Panel id="PlayerXPProgressRows" hittest="true">
+								</Panel>
+								<Panel id="TotalsHLine"/>
+								<Panel id="TotalsRow" class="PlayerXPProgressRow">
+									<Label class="PlayerXPProgressRowType" text="#DCG_PostGame_Total" />
+									<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_XPValue" />
+								</Panel>
+							</Panel>
+						</Panel>
+					</Panel>
+				
+				</Panel>
+
+				<Panel id="PlayerLevelUpPanel" hittest="false">
+					<Label id="LevelUpTitle" text="#DCG_PostGame_LevelUp" hittest="false"/>
+					<Label id="LevelUpValue" text="#DCG_PostGame_CurrentLevel" hittest="false"/>
+					<DCGScenePanel id="GodRays" map="scenes/progression/levelup_burst" camera="cardpackcamera" hittest="false" particleonly="true" />
+					<Label class="PlayerLevelProgressCurrentLevel" text="{d:next_level}" hittest="false"/>					
+				</Panel>
+
+				<Panel id="PlayerLevelUpPanelWithRewardsContainer" hittest="false">
+					<Panel id="PlayerLevelUpPanelWithRewards" hittest="false" >
+						<Panel id="LevelUpKeyArt" hittest="false" />					
+						<Panel id="PlayerLevelProgressRewards" hittest="false" >
+							<Panel id="PlayerLevelProgressRewardsList" hittest="false" />
+							<Panel id="MessageAndButton" >
+								<Label id="RewardLevelReached" text="#DCG_LevelUp_RewardLevel" />
+								<TextButton id="RewardsFinishedButton" class="MenuButton" text="#DCG_LevelUp_Continue" hittest="true" />
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerXPProgressRow">
+			<Panel class="PlayerXPProgressRow">
+				<Label class="PlayerXPProgressRowType" text="{s:xp_type}" />
+				<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_XPValue" />
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerXPProgressRow_3_Wins_Challenge">
+			<Panel class="PlayerXPProgressRow PlayerXPProgressRow_Challenge">
+				<Panel class="PlayerXPProgressRowChallengeDetails">
+					<Label class="PlayerXPProgressRowType" text="{s:xp_type}" />
+					<Panel class="PlayerXPProgressRowChallengeDetailsBottom">
+						<Panel class="PlayerXPProgressRowChallengeStars">
+							<Panel class="PlayerXPProgressRowChallengeStar Star1" />
+							<Panel class="PlayerXPProgressRowChallengeStar Star2" />
+							<Panel class="PlayerXPProgressRowChallengeStar Star3" />
+						</Panel>
+						<!-- <Label class="PlayerXPProgressRowChallengeName" text="{s:challenge_name}" html="true" /> -->
+					</Panel>
+					<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_XPValue" />
+				</Panel>
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerXPProgressRow_Challenge">
+			<Panel class="PlayerXPProgressRow PlayerXPProgressRow_Challenge">
+				<Panel class="PlayerXPProgressRowNameBox"  > 
+					<Label class="PlayerXPProgressRowType" text="{s:xp_type}" />
+					<Label class="PlayerXPProgressRowDescription" text="{s:xp_type_desc}" />
+				</Panel>
+				<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_XPValue" />
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerLevelUpRewardPack">
+			<Panel class="PlayerLevelUpRewardPack PlayerLevelUpReward">
+				<Panel class="PlayerLevelUpRewardImage" />
+				<Label class="PlayerLevelUpRewardTitle" text="#DCG_PlayerLevelReward_Pack" />
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerLevelUpRewardTicket">
+			<Panel class="PlayerLevelUpRewardTicket PlayerLevelUpReward">
+				<Panel class="PlayerLevelUpRewardImage" />
+				<Label class="PlayerLevelUpRewardTitle" text="#DCG_PlayerLevelReward_Ticket" />
+			</Panel>
+		</snippet>
+		<snippet name="PlayerLevelUpRewardBadge">
+			<Panel class="PlayerLevelUpRewardBadge PlayerLevelUpReward">
+				<DCGAccountBadge id="BadgeIcon" class="PlayerLevelUpRewardImage" size="large" />
+				<Label class="PlayerLevelUpRewardTitle" text="#DCG_PlayerLevelReward_ProfileBadge" />
+			</Panel>
+		</snippet>
+
+	</snippets>
+
+	<DCGPostGameProgress hittest="false">
+		<Panel id="ProgressScreens" hittest="false" />
+		<Panel id="DebugControls">
+			<TextButton class="PopupButton" text="Again" onactivate="AnimatePlayerLevelAgain()" />
+			<TextButton class="PopupButton" text="Player Level Up" onactivate="TestAnimatePlayerLevel()" />
+			<TextButton class="PopupButton" text="Reset" onactivate="DevRestartProgress()" />
+			<TextButton class="PopupButton" text="Hide" onactivate="HideProgress()" />
+		</Panel>
+	</DCGPostGameProgress>
+
+</root>

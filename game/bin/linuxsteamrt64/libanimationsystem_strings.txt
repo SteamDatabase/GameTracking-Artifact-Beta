@@ -363,7 +363,6 @@ $t[[A\A]A^]
 0123456789ABCDEF
 0;A }
 0<	wD
-0D959vH
 0HcG4
 0[A\A]A^]
 0[A\A]H
@@ -1284,8 +1283,8 @@ $t[[A\A]A^]
 ;wH|#
 ;wH|#H
 ;wp|	]
-;~HUH
-;~Lt*;~Pt-9~Tf
+;~hUH
+;~lt*;~pt-9~tf
 <	u 1
 <	u,1
 <	uMUH
@@ -1401,7 +1400,7 @@ A+_$H
 A+t$$H
 A+t$$Hc
 A0tlHcS
-A8Lck D;k0
+A8Lcs D;s0
 A9D$ 
 A9D$ vCH
 A9D$(v
@@ -1458,7 +1457,9 @@ AE_CL_CREATE_PARTICLE_BRASS
 AE_CL_CREATE_PARTICLE_EFFECT
 AE_CL_CREATE_PARTICLE_EFFECT_CFG
 AE_CL_DISABLE_BODYGROUP
+AE_CL_DOTA_NPC_CREATE_PARTICLE_EFFECT
 AE_CL_DOTA_PLAY_STATUS_EFFECT
+AE_CL_DOTA_RUBICK_ARCANA_CREATE_PARTICLE_EFFECT
 AE_CL_ENABLE_BODYGROUP
 AE_CL_FOOTSTEP_LEFT
 AE_CL_FOOTSTEP_RIGHT
@@ -1816,7 +1817,7 @@ Auto Reset
 B  0x%08X %s,
 B(t&1
 B2f9B,D
-B8Lck D;k0
+B8Lcs D;s0
 BLEND_PREALIGNED|
 BREAK: distance to target.
 BREAK: hyperextension. (%.2f degrees vs max of %.2f)
@@ -2234,6 +2235,7 @@ C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
 C_INIT_CreateOnModelAtHeight
+C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
 C_INIT_DistanceToCPInit
 C_INIT_GlobalScale
@@ -2282,6 +2284,7 @@ C_OP_EnableChildrenFromParentParticleCount
 C_OP_HSVShiftToCP
 C_OP_InitSetSnapshotOnCP
 C_OP_InstantaneousEmitter
+C_OP_LockToSavedSequentialPath
 C_OP_NoiseEmitter
 C_OP_RampCPLinearRandom
 C_OP_RemapAverageScalarValuetoCP
@@ -2289,6 +2292,7 @@ C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
 C_OP_RemapSpeedtoCP
+C_OP_RenderModels
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -2442,6 +2446,7 @@ Cycle Control
 Cycle Control node is missing its control parameter
 Cycle or diamond double-reference to '%s'
 C|[A\]
+D#=LoK
 D#O\H
 D#j\H
 D$ A9
@@ -2495,7 +2500,6 @@ D+s$Mc
 D+{$Mc
 D8 t9H
 D8"u'
-D9%TsJ
 D9(t5L
 D9C ~JMc
 D9K$~mH
@@ -2503,14 +2507,12 @@ D9s u
 D:"u;
 D; t"H
 D;)ts
-D;-~tJ
 D;.tLH
 D;0t*H
 D;0}tI
 D;1tsH
-D;5'j:
+D;5'o:
 D;8tQH
-D;=GcK
 D;`H}
 D;`P~
 D;c D
@@ -3033,7 +3035,7 @@ HammerMapLoader001
 Has CollH
 Has Collision; 
 Has a Path
-Hc5Pl;
+Hc5Pq;
 Hc8E1
 Hc@$H
 Hc@@H9
@@ -4007,6 +4009,7 @@ PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
 PF_MAP_TYPE_REMAP_BIASED
+PF_RANDOM_MODE_VARYING
 PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
@@ -5025,6 +5028,7 @@ burst_randomize
 burst_scale
 c [A\]
 c([A\]
+c*.mG
 c0[A\]
 c8HcC0M
 c8[A\]
@@ -5079,6 +5083,7 @@ default
 delete
 deltaAngle
 deltaMovement
+detach_from_owner
 developer
 dl_iterate_phdr
 dl_iterate_phdr@@GLIBC_2.2.5
@@ -5283,6 +5288,7 @@ js_value
 k0D;k@
 k8~PA
 k<[A\A]A^]
+k@_aH
 kPtOH
 kXtvH
 k`HcSh
@@ -5442,6 +5448,7 @@ m_bEnableTwistLimit
 m_bEnabled
 m_bFetchFrame
 m_bFinishEarly
+m_bForceLoopingAnimation
 m_bGoalChanged
 m_bHasBakedLightingBasisInVertex
 m_bHasBakedLightingFromLightMap
@@ -5738,6 +5745,9 @@ m_flMinImpactForce
 m_flMinSpringTension
 m_flMultFactor
 m_flNextAnimTime
+m_flOpStrength
+m_flOpStrengthMaxScale
+m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
 m_flPitchLimit
@@ -5959,6 +5969,8 @@ m_nMapType
 m_nMaxUniqueFrameIndex
 m_nNameHash
 m_nNodeID
+m_nOpScaleCP
+m_nOpStrengthScaleSeed
 m_nOrder
 m_nParent
 m_nPeakFrame
@@ -5968,12 +5980,14 @@ m_nPrimitiveType
 m_nPriority
 m_nQuatChannel
 m_nQuatElement
+m_nRandomMode
 m_nRefCounter
 m_nReserved
 m_nReserved2
 m_nRetargetStyle
 m_nRotateMotion
 m_nScaleCP
+m_nScaleCPComponent
 m_nScaleCPField
 m_nSlaveAxis
 m_nSlaveChannel
@@ -6608,7 +6622,7 @@ t&HcQ
 t'HcJ
 t(;2}
 t(D9H
-t)@:=a
+t)@:=q%Q
 t)A9\$
 t)HcE
 t)HcV
@@ -6790,6 +6804,9 @@ vpcf10
 vpcf11
 vpcf12
 vpcf13
+vpcf14
+vpcf15
+vpcf16
 vpcf2
 vpcf3
 vpcf4

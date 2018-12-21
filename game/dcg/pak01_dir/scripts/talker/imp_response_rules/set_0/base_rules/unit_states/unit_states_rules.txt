@@ -403,13 +403,13 @@ Rule rule_imps_unit_states_unit_buffed_generic_HEAL_Op_Or_late_game
 Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Pp_Pr
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsArmor PlayerIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsArmor PlayerIsWinningGame IsGameRound4orMore p_var_wait_unit_buffed_special_armor
+
+    ApplyContext "p_var_wait_unit_buffed_special_armor:1:25"
+    ApplyContextToWorld
 
     // response has chain:
     Response imps_unit_states_unit_buffed_special_armor_Pp_Pr_chain_intro
-
-    // also sharing response:
-    Response imps_shared_generic_player_small_positive
 
 }
 
@@ -429,12 +429,12 @@ Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Pp_Pr_CHAIN_outro
 Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Op_Or
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsArmor OpponentIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsArmor OpponentIsWinningGame IsGameRound4orMore o_var_wait_unit_buffed_special_armor
+
+    ApplyContext "o_var_wait_unit_buffed_special_armor:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_armor_Op_Or
-
-    // also sharing response:
-    Response imps_shared_generic_opponent_small_positive
 
 }
 
@@ -462,12 +462,12 @@ Rule rule_imps_unit_states_unit_buffed_special_armor_BUFFED_Op_Or
 Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Pp_Pr
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsAttack  PlayerIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsAttack  PlayerIsWinningGame IsGameRound4orMore p_var_wait_unit_buffed_special_attack
+
+    ApplyContext "p_var_wait_unit_buffed_special_attack:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_attack_Pp_Pr
-
-    // also sharing response:
-    Response imps_shared_generic_player_small_positive
 
 }
 
@@ -478,12 +478,12 @@ Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Pp_Pr
 Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Op_Or
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsAttack  OpponentIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsAttack  OpponentIsWinningGame IsGameRound4orMore o_var_wait_unit_buffed_special_attack
+
+    ApplyContext "o_var_wait_unit_buffed_special_attack:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_attack_Op_Or
-
-    // also sharing response:
-    Response imps_shared_generic_opponent_small_positive
 
 }
 
@@ -511,7 +511,10 @@ Rule rule_imps_unit_states_unit_buffed_special_attack_BUFFED_Op_Or
 Rule rule_imps_unit_states_unit_buffed_special_cleave_BUFFED_Pp_Pr
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsCleave PlayerIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsCleave PlayerIsWinningGame IsGameRound4orMore p_var_wait_unit_buffed_special_cleave
+
+    ApplyContext "p_var_wait_unit_buffed_special_cleave:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_cleave_Pp_Pr
 
@@ -524,73 +527,73 @@ Rule rule_imps_unit_states_unit_buffed_special_cleave_BUFFED_Pp_Pr
 Rule rule_imps_unit_states_unit_buffed_special_cleave_BUFFED_Op_Or
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsCleave OpponentIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsCleave OpponentIsWinningGame IsGameRound4orMore o_var_wait_unit_buffed_special_cleave
+
+    ApplyContext "o_var_wait_unit_buffed_special_cleave:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_cleave_Op_Or
 
-    // also sharing response:
-    Response imps_shared_generic_opponent_small_positive
-
 }
 
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//  UNIT_BUFFED_SPECIAL_HEAL
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
-
-
-
-//-----------------------------------------------------------------------------
-// PLAYER PLAYS CARD: unit_buffed_special_heal: Buffed
-//-----------------------------------------------------------------------------
-
-
-// Player reacts:  ------------------------------------------------------------
-
-
-Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr
-{
-
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsHealth  PlayerIsWinningGame IsGameRound4orMore
-
-    // response has chain:
-    Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_intro
-
-    // also sharing response:
-    Response imps_shared_generic_player_small_positive
-
-}
-
-Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr_CHAIN_outro
-{
-
-    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_heal_Pp_Pr_ IsLocalImp
-
-    Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_outro
-
-}
-
-
-// Opponent reacts:  ------------------------------------------------------------
-
-
-Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Op_Or
-{
-
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsHealth OpponentIsWinningGame IsGameRound4orMore
-
-    Response imps_unit_states_unit_buffed_special_heal_Op_Or
-
-    // also sharing response:
-    Response imps_shared_generic_opponent_small_positive
-
-}
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  //  UNIT_BUFFED_SPECIAL_HEAL
+//  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  
+//  // Plays a much broader animation with props if the CARD PLAYER is winning. Note that the non winning imp will fall back to use the standard buffed reactions as we dont define any here to react to the broader animation
+//  
+//  
+//  
+//  //-----------------------------------------------------------------------------
+//  // PLAYER PLAYS CARD: unit_buffed_special_heal: Buffed
+//  //-----------------------------------------------------------------------------
+//  
+//  
+//  // Player reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr
+//  {
+//  
+//      Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsHealth  PlayerIsWinningGame IsGameRound4orMore
+//  
+//      // response has chain:
+//      Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_intro
+//  
+//      // also sharing response:
+//      Response imps_shared_generic_player_small_positive
+//  
+//  }
+//  
+//  Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Pp_Pr_CHAIN_outro
+//  {
+//  
+//      Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_heal_Pp_Pr_ IsLocalImp
+//  
+//      Response imps_unit_states_unit_buffed_special_heal_Pp_Pr_chain_outro
+//  
+//  }
+//  
+//  
+//  // Opponent reacts:  ------------------------------------------------------------
+//  
+//  
+//  Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Op_Or
+//  {
+//  
+//      Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsHealth OpponentIsWinningGame IsGameRound4orMore
+//  
+//      Response imps_unit_states_unit_buffed_special_heal_Op_Or
+//  
+//      // also sharing response:
+//      Response imps_shared_generic_opponent_small_positive
+//  
+//  }
 
 
 
@@ -616,7 +619,10 @@ Rule rule_imps_unit_states_unit_buffed_special_heal_BUFFED_Op_Or
 Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Pp_Pr
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsInvuln PlayerIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsInvuln PlayerIsWinningGame IsGameRound4orMore p_var_wait_unit_buffed_special_immune
+
+    ApplyContext "p_var_wait_unit_buffed_special_immune:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_immune_Pp_Pr
 
@@ -629,7 +635,10 @@ Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Pp_Pr
 Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Op_Or
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsInvuln OpponentIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsInvuln OpponentIsWinningGame IsGameRound4orMore o_var_wait_unit_buffed_special_immune
+
+    ApplyContext "o_var_wait_unit_buffed_special_immune:1:25"
+    ApplyContextToWorld
 
     Response imps_unit_states_unit_buffed_special_immune_Op_Or
 
@@ -659,33 +668,12 @@ Rule rule_imps_unit_states_unit_buffed_special_immune_BUFFED_Op_Or
 Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Pp_Pr
 {
 
-    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsSiege PlayerIsWinningGame IsGameRound4orMore
+    Criteria Buffed IsNotCombat IsActionPhase IsLocalImp IsTargetLocal BuffsSiege PlayerIsWinningGame IsGameRound4orMore p_var_wait_unit_buffed_special_siege
 
-    // response has chain:
-    Response imps_unit_states_unit_buffed_special_siege_Pp_Pr_chain_intro
+    ApplyContext "p_var_wait_unit_buffed_special_siege:1:25"
+    ApplyContextToWorld
 
-}
-
-Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Pp_Pr_CHAIN_outro
-{
-
-    Criteria Special ThisIsImportant p_var_chains_unit_states_unit_buffed_special_siege_Pp_Pr_ IsLocalImp
-
-    Response imps_unit_states_unit_buffed_special_siege_Pp_Pr_chain_outro
-
-}
-
-
-// Opponent reacts:  ------------------------------------------------------------
-
-
-Rule rule_imps_unit_states_unit_buffed_special_siege_BUFFED_Op_Or
-{
-
-    Criteria Buffed IsNotCombat IsActionPhase IsOpponentImp IsTargetNotLocal BuffsSiege OpponentIsWinningGame IsGameRound4orMore
-
-    // sharing response:
-    Response imps_shared_generic_opponent_small_positive
+    Response imps_unit_states_unit_buffed_special_siege_Pp_Pr
 
 }
 
@@ -1234,10 +1222,7 @@ Rule rule_imps_unit_states_unit_dies_DEATH_Op_Or
 Rule rule_imps_unit_states_unit_imp_poked_SPECIAL_Pp_Pr
 {
 
-    Criteria Special IsLocalImp IsActionPhase IsPoke IsNotCombat p_var_1SecInOut
-
-    ApplyContext "p_var_1SecInOut:1:1"
-    ApplyContextToWorld
+    Criteria Special IsLocalImp IsActionPhase IsPoke IsNotCombat
 
     Response imps_unit_states_unit_imp_poked_Pp_Pr
 

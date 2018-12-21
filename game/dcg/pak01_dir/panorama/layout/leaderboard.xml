@@ -7,35 +7,41 @@
 	</styles>
 
 	<DCGLeaderboard>
-		<Panel class="LeaderBoardHeaderContainer">
-			<Panel class="LeaderboardHeaderTabs">
-				<RadioButton id="GlobalButton" group="LeaderboardView" class="LeaderboardTab" onactivate="DCGSetLeaderboardViewMode( eLeaderboard_ViewGlobalAroundUser )">
-					<Label class="LeaderboardTabLabel" text="#DCG_Leaderboard_ViewGlobal"/>
-				</RadioButton>
-				<RadioButton id="FriendsButton" group="LeaderboardView" class="LeaderboardTab" onactivate="DCGSetLeaderboardViewMode( eLeaderboard_ViewFriends )">
-					<Label class="LeaderboardTabLabel" text="#DCG_Leaderboard_ViewFriends"/>
-				</RadioButton>
-			</Panel>
-			<Panel class="LeaderboardHeaderColumnNames">
-				<Label id="RankLabel" class="LeaderBoardHeader" text="#DCG_Leaderboard_Rank"/>
-				<Label id="PlayerLabel" class="LeaderBoardHeader LeftAlign" text="{s:user_column_loc_string}"/>
-				<Label class="LeaderBoardHeader RightAlign" text="{s:score_column_loc_string}"/>
-			</Panel>
+		<Panel class="SpinnerContainer">
+			<Panel id="Spinner" class="Spinner"/>
 		</Panel>
+		<Panel class="LeaderboardContents">
+			<Panel class="LeaderBoardHeaderContainer">
+				<Panel class="LeaderboardHeaderTabs">
+					<RadioButton id="GlobalButton" group="LeaderboardView" class="LeaderboardTab" onactivate="DCGSetLeaderboardViewMode( eLeaderboard_ViewGlobalAroundUser )">
+						<Label class="LeaderboardTabLabel" text="#DCG_Leaderboard_ViewGlobal"/>
+					</RadioButton>
+					<RadioButton id="FriendsButton" group="LeaderboardView" class="LeaderboardTab" onactivate="DCGSetLeaderboardViewMode( eLeaderboard_ViewFriends )">
+						<Label class="LeaderboardTabLabel" text="#DCG_Leaderboard_ViewFriends"/>
+					</RadioButton>
+				</Panel>
+				<Panel class="LeaderboardHeaderColumnNames">
+					<Label id="RankLabel" class="LeaderBoardHeader" text="#DCG_Leaderboard_Rank"/>
+					<Label id="PlayerLabel" class="LeaderBoardHeader LeftAlign" text="{s:user_column_loc_string}"/>
+					<Label class="LeaderBoardHeader RightAlign" text="{s:score_column_loc_string}"/>
+				</Panel>
+			</Panel>
 
-		<Panel id="LeaderList" class="LeaderboardEntryContainer">
-			<!-- Children populated in code from gauntlet_leaderboard_row.xml -->
+			<Panel id="LeaderList" class="LeaderboardEntryContainer">
+				<!-- Children populated in code from gauntlet_leaderboard_row.xml -->
+			</Panel>
+			<Panel id="NavControls">
+				<RadioButton id="FirstPageButton" group="Rankings" class="NavButton" onactivate="DCGShowFirstLeaderboardPage()">
+					<Label id="FirstPageButtonText" text="#DCG_Leaderboard_TopRank"/>
+				</RadioButton>
+				<Button id="PrevPageButton" class="NavButton" onactivate="DCGShowPrevLeaderboardPage()"/>
+				<RadioButton id="FindLocalUserButton" group="Rankings" class="NavButton" onactivate="DCGShowLocalUserOnLeaderboard()">
+					<Label id="FindLocalUserText" text="#DCG_Leaderboard_MyRank"/>
+				</RadioButton>
+				<Button id="NextPageButton" class="NavButton" onactivate="DCGShowNextLeaderboardPage()"/>
+				<Button id="LastPageButton" class="NavButton" onactivate="DCGShowLastLeaderboardPage()"/>
+			</Panel>
 		</Panel>
-		<Panel id="NavControls">
-			<RadioButton id="FirstPageButton" group="Rankings" class="NavButton" onactivate="DCGShowFirstLeaderboardPage()">
-				<Label id="FirstPageButtonText" text="#DCG_Leaderboard_TopRank"/>
-			</RadioButton>
-			<Button id="PrevPageButton" class="NavButton" onactivate="DCGShowPrevLeaderboardPage()"/>
-			<RadioButton id="FindLocalUserButton" group="Rankings" class="NavButton" onactivate="DCGShowLocalUserOnLeaderboard()">
-				<Label id="FindLocalUserText" text="#DCG_Leaderboard_MyRank"/>
-			</RadioButton>
-			<Button id="NextPageButton" class="NavButton" onactivate="DCGShowNextLeaderboardPage()"/>
-			<Button id="LastPageButton" class="NavButton" onactivate="DCGShowLastLeaderboardPage()"/>
-		</Panel>
+		
 	</DCGLeaderboard>
 </root>
