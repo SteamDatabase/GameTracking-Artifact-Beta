@@ -5,30 +5,81 @@
 	vertical-align: bottom;
 	horizontal-align: right;
 
-  margin-top: 0px;
-	margin-bottom: 64px;
-	margin-right: 16px;
+	width: 210px;
+	height: 350px;
 
-	transition-property: opacity;
+	margin-top: 0px;
+	margin-bottom: 53px;
+	margin-right: 4px;
+
+	transition-property: opacity, transform;
 	transition-duration: 0.3s;
-	transition-delay: 0.1s;
+	transition-delay: 0.0s;
 
-    opacity: 0;
+	opacity: 0;
+	z-index: 100;
 
-	tooltip-body-position: 100% 100%;
+	tooltip-position: top;
+	tooltip-arrow-position: 50% 50%;
 }
 
-.LastCard:hover
+#LastCardScenePanel
 {
-	brightness: 1.8;
+	width: 210px;
+	height: 350px;
+	z-index: 9;
+}
+
+#SmallLastCardPanel
+{
+	width: 195px;
+	height: 330px;
+	margin-top: 10px;
+	margin-left: 7px;
+	z-index: 10;
+	opacity: 1;
+}
+
+#GrowingPanel:hover #SmallLastCardPanel
+{
+	opacity: 0;
 }
 
 .OpponentInfo
 {
 	vertical-align: top;
-	margin-top: 64px;
+	margin-top: 53px;
 	margin-bottom: 0px;
-	tooltip-body-position: 0% 0%;
+	//tooltip-body-position: 100% 100%;
+	tooltip-position: bottom;
+	tooltip-arrow-position: 50% 50%;
+}
+
+#GrowingPanel
+{
+	width: 210px;
+	height: 350px;
+
+	transition-property: transform;
+	transition-duration: 0.2s;
+	transition-delay: 0.0s;
+
+	transform: translateX(290px) translateY(460px) scaleX(0.25) scaleY(0.25);
+}
+
+.OpponentInfo #GrowingPanel
+{
+	transform: translateX(290px) translateY(-460px) scaleX(0.25) scaleY(0.25);
+}
+
+.HasValidCard #GrowingPanel:hover
+{
+	transform: translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0);
+}
+
+.HasValidCard.OpponentInfo #GrowingPanel:hover
+{
+	transform: translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0);
 }
 
 .VSPhase8_Complete.LastCard
@@ -47,8 +98,8 @@
 
 #LastPlayed
 {
-	width: 36px;
-	height: 60px;
+	width: 210px;
+	height: 350px;
 
     background-size: contain;
     background-position: center;
@@ -57,78 +108,7 @@
     background-image: url("s2r://panorama/images/hud/card_back_psd.vtex");
 }
 
-#LastPlayedGlow
-{
-	width: 36px;
-	height: 60px;
-	opacity: 0;
-}
-
 #LastPlayed
 {
 	z-index: 1;
-}
-
-@keyframes 'last-card-played'
-{
-    0%
-    {
-		opacity: 0;
-    }
-
-	20%
-    {
-		opacity: 1;
-    }
-
-	40%
-    {
-		opacity: 0;
-    }
-
-	60%
-    {
-		opacity: 1;
-    }
-
-	80%
-    {
-		opacity: 0;
-    }
-
-    100%
-    {
-		opacity: 1;
-    }
-}
-
-#StaticGlowAroundLastCard
-{
-	width: 36px;
-	height: 60px;
-	opacity: 0;
-	z-index: 2;
-}
-
-.StaticGlowLastCard #StaticGlowAroundLastCard
-{
-	opacity: 1;
-}
-
-.GlowLastCard #LastPlayedGlow
-{
-	z-index: 5;
-	animation-name: last-card-played;
-	animation-duration: 6.0s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
-	opacity: 1;
-}
-
-.TutorialHighlight
-{
-    animation-name: border-pulse;
-	animation-duration: 1.0s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: infinite;
 }

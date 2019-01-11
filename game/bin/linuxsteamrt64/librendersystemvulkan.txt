@@ -31,6 +31,7 @@
  CBufferString::Swap(CBufferString&)
  CBufferString::ToLowerFast(int)
  CMemAllocSystemInitialize
+ COneTimeEvent::Allocate()
  CThreadEvent::CThreadEvent(bool)
  CThreadEvent::Set()
  CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
@@ -44,6 +45,7 @@
  CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
  CThreadRWLock_FastRead::UnlockReadAccounting(unsigned int)
  CThreadRWLock_FastRead::UnlockRead_LockForWrite()
+ CThreadRWLock_FastRead::UnlockWrite_LockForRead()
  CThreadRWLock_FastRead::WaitForReadLockTransition(unsigned int)
  CThreadSemaphore::Release(int, int*)
  CThreadSemaphore::~CThreadSemaphore()
@@ -115,6 +117,8 @@
  Plat_RequireSDL
  Plat_ShouldCollectMiniDumpsForFatalErrors
  Plat_TicksAfterSecsF
+ Plat_UUIDFromString
+ Plat_UUIDToString
  Plat_VirtualAlloc
  Plat_VirtualFree
  Plat_WindowToOsSpecificHandle
@@ -2970,12 +2974,17 @@
  V_atan2f
  V_atanf
  V_atof
+ V_atofloat32
  V_atofloat64
  V_atoi
+ V_atoi64
+ V_atoui64
  V_cosf
  V_expf
  V_fmodf
+ V_fpclassify
  V_frexpf
+ V_isnan
  V_localeconv
  V_logf
  V_pow

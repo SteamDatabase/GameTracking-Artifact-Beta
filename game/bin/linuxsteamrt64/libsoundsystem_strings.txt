@@ -33,7 +33,6 @@
  max. %f
  min. %f
  tMv+@
- w:A9
 "%s" 
 "%s" = "%s"
 "A\A]A^A_]
@@ -153,6 +152,7 @@ $[A\]
 ,$IcD$
 ,$t(A
 ,$t*A
+,$t,A
 ,BfE9,@|
 ,CXE1
 ,DLc#D;c
@@ -278,13 +278,30 @@ $[A\]
 17ISequenceArranger
 17IVMixToolServices
 18CAsyncWavDataCache
+18CAtomicManipulatorI10CTransformE
 18CAtomicManipulatorI10CUtlStringE
+18CAtomicManipulatorI10CUtlSymbolE
 18CAtomicManipulatorI10CUtlVectorI17SosEditItemInfo_t10CUtlMemoryIS1_iEEE
 18CAtomicManipulatorI10CUtlVectorI25CSosSoundEventGroupSchema10CUtlMemoryIS1_iEEE
+18CAtomicManipulatorI10QuaternionE
+18CAtomicManipulatorI11DegreeEulerE
+18CAtomicManipulatorI11RadianEulerE
+18CAtomicManipulatorI11matrix3x4_tE
+18CAtomicManipulatorI12CEntityIndexE
+18CAtomicManipulatorI12matrix3x4a_tE
+18CAtomicManipulatorI13VectorAlignedE
 18CAtomicManipulatorI14CResourceArrayI13VSoundEvent_tEE
 18CAtomicManipulatorI14CResourceArrayI13VSoundStack_tEE
 18CAtomicManipulatorI15CResourceStringE
+18CAtomicManipulatorI15CUtlStringTokenE
+18CAtomicManipulatorI15CUtlSymbolLargeE
+18CAtomicManipulatorI5ColorE
+18CAtomicManipulatorI6QAngleE
+18CAtomicManipulatorI6VectorE
+18CAtomicManipulatorI7VMatrixE
 18CAtomicManipulatorI8Vector2DE
+18CAtomicManipulatorI8Vector4DE
+18CAtomicManipulatorIDv4_fE
 18CAudioMixerEncoded
 18CAudioMixerStretch
 18CAudioMixerWaveMP3
@@ -292,13 +309,30 @@ $[A\]
 18CAudioSourceCached
 18CCountedStringPool
 18CSDLAudioSubsystem
+18CSchemaManipulatorI10CTransformE
 18CSchemaManipulatorI10CUtlStringE
+18CSchemaManipulatorI10CUtlSymbolE
 18CSchemaManipulatorI10CUtlVectorI17SosEditItemInfo_t10CUtlMemoryIS1_iEEE
 18CSchemaManipulatorI10CUtlVectorI25CSosSoundEventGroupSchema10CUtlMemoryIS1_iEEE
+18CSchemaManipulatorI10QuaternionE
+18CSchemaManipulatorI11DegreeEulerE
+18CSchemaManipulatorI11RadianEulerE
+18CSchemaManipulatorI11matrix3x4_tE
+18CSchemaManipulatorI12CEntityIndexE
+18CSchemaManipulatorI12matrix3x4a_tE
+18CSchemaManipulatorI13VectorAlignedE
 18CSchemaManipulatorI14CResourceArrayI13VSoundEvent_tEE
 18CSchemaManipulatorI14CResourceArrayI13VSoundStack_tEE
 18CSchemaManipulatorI15CResourceStringE
+18CSchemaManipulatorI15CUtlStringTokenE
+18CSchemaManipulatorI15CUtlSymbolLargeE
+18CSchemaManipulatorI5ColorE
+18CSchemaManipulatorI6QAngleE
+18CSchemaManipulatorI6VectorE
+18CSchemaManipulatorI7VMatrixE
 18CSchemaManipulatorI8Vector2DE
+18CSchemaManipulatorI8Vector4DE
+18CSchemaManipulatorIDv4_fE
 18CSchemaVisitorBase
 18CSosOperatorConvar
 18CSosOperatorCurve4
@@ -550,12 +584,14 @@ $[A\]
 <$A\]
 <$E;|$
 <$t'H
+<$t-A
 <+t^H
 <4A;]
 << NULL >>
 <Af9<F|
 <INVALID>
 <NULL>
+<No schemasystem>
 <Rt&<Pu
 <UNRESOLVED>
 <invalid soundevent name>
@@ -585,7 +621,7 @@ $[A\]
 ?output_element_count
 @ A;D$ 
 @ A^]
-@,t9L
+@$t9L
 @8A\]
 @8D9x
 @8F9l
@@ -631,8 +667,8 @@ A+t$$H
 A+t$$Hc
 A94$w
 A9D$ 
+A9D$(
 A9D$@u
-A9D$`
 A9E t
 A9F L
 A9\$ 
@@ -784,7 +820,6 @@ A\A]]
 A\A]]H
 A\A^]
 A]A^]
-A]A^]H
 A^A_]
 Abort processing sound event %s (scheduled recursively will not process this frame)
 Action Type
@@ -929,6 +964,7 @@ CBaseIntrospectedTypeManager:  Missing TYPEMETA MDiskDataForResourceType
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CDHcKTI
+CEntityIndex
 CHAN_BODY
 CHAN_ITEM
 CHAN_STATIC
@@ -1021,6 +1057,7 @@ CSoundSampler: Min: %i
 CSoundSampler: Sampler: %s
 CSoundSampler: SoundEvent: %s
 CTSQueue corruption
+CTransform
 CUE Operators:
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
@@ -1030,6 +1067,9 @@ CUtlMemoryPoolBase
 CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
 CUtlRBTree overflow with %u elements!
 CUtlString
+CUtlStringToken
+CUtlSymbol
+CUtlSymbolLarge
 CUtlVector
 CVSoundEventScriptTypeManager::AddSoundEvent:  %s has a hash collision with existing %s
 CVSoundStackScriptTypeManager::Allocate can't parse stack %s
@@ -1147,6 +1187,7 @@ Clock ERROR!: %.2f %.2f
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
+Color
 CommandLine
 CommandProcedure
 CommandProcedureList
@@ -1196,7 +1237,6 @@ D$PA\]
 D$PE1
 D$PH9
 D$XL9
-D$`E1
 D$`H9
 D$`uAA
 D$xH9
@@ -1212,6 +1252,7 @@ D+k|Mc
 D+s$H
 D+s$Mc
 D+{$Mc
+D1	 t
 D8"u'
 D9C ~JMc
 D9k0~{L
@@ -1221,7 +1262,6 @@ D:"u;
 D:p(t/A
 D;!ttHc
 D;"}1H
-D;-[o:
 D;;uwH
 D;@Xt
 D;C(tCH
@@ -1281,6 +1321,7 @@ Decay time (ms)
 Decompression failure
 Default: %s
 Default_Mix
+DegreeEuler
 Delay Count
 Delay Scale
 Delay Type
@@ -1290,7 +1331,6 @@ Detected %d-level recursion in sound operator stack, abort!
 DevMsg
 Dig : voiced alveolar flap or tap
 Dig : voiced bilabial stop
-Disable All Reverb.
 Distortion Mix (1.0 = wet)
 Distortion Threshold
 Distortion feedback
@@ -1331,6 +1371,7 @@ E;g@|
 E;l$ |
 E;l$p
 E;n0H
+E;n`}
 E;o0s!f
 E;oX|
 E;t$`
@@ -1356,8 +1397,6 @@ EconItemToolModel_001
 Elapsed Time
 Element Count: %i
 EmptyAnim
-Enabing Auto Reverb.
-Enabing Steam Audio Reverb.
 Enable automatic buffer latency detection (requires driver support)
 EngineServiceMgr001
 EnsureCapacity
@@ -1418,6 +1457,8 @@ F t2SH
 F t5SH
 F$Hcv
 F8A;\$
+F8IcH
+F8IcP
 FCVAR_NEVER_AS_STRING
 FIELDATA COMPARE FAIL: %s->%s
 FIELDATASIZE COMPARE FAIL: %s->%s
@@ -1481,19 +1522,16 @@ Fork : voiceless labiodental fricative
 FormatV
 Forward Saw
 Free ?: %s
-G	|N1
+G	|`1
 G A+G
 G A9G
 G D;(t
+G H;p
 G U9G
-G(H;p
 G0uGD
 G4333?
 G4fff?
-G8ATHcW
 G8HcG
-G8IcH
-G8IcP
 G8fff?
 G8t"H
 G8t+H
@@ -1514,7 +1552,6 @@ G@A;\$H
 G@UHc
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
-GHLcO
 GI@UH
 GLIBCXX_3.4
 GLIBC_2.14
@@ -1568,7 +1605,6 @@ H90t%A
 H;*twH
 H;1t*H
 H;2t H
-H;2t'H
 H;S@w
 HALL Detected 
 HFPOA
@@ -1591,6 +1627,7 @@ H[A\A]]
 HammerMapLoader001
 HandleSetLibStackFieldsMessageQueue
 HandleSetSoundEventFieldsMessageQueue
+Hc5$<I
 Hc@pH
 HcC A
 HcC H
@@ -1650,7 +1687,7 @@ IcL$hIc
 IcM@A;MP
 IcM@H9
 IcN@H9
-IcO Ic
+IcO(Ic
 IcT$@H
 Ic\$ A
 Ic\$ A9
@@ -1720,9 +1757,10 @@ LOG_GENERAL
 LOWVIOLENCE
 LayerTriggers
 Lc#D;c
+Lc'D;g
 Lc'E)
 Lc)D;i
-Lc-Vo:
+Lc.D;n
 Lc/E)
 Lc3D;s
 Lc6D;v
@@ -1774,7 +1812,6 @@ M9u(L
 MASK_WATER
 MATCHFRAMEWORK_001
 MDiskDataForResourceType
-MDmElementType
 MNetworkBitCount
 MNetworkChangeCallback
 MNetworkEncoder
@@ -1823,6 +1860,7 @@ McfpA
 Mcl$`H
 Mcl$pE;
 Mcn H
+McnpA
 Mc|$XE;|$ht)I
 Medium
 MemAlloc_AllocFunc
@@ -1849,11 +1887,11 @@ ModelDocUtils001
 Modulation Depth
 Modulation Frequency
 Music volume
-N14MDmElementType45CValueSearchTester_ClassIntrospectionHandle_tE
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
 N24MDiskDataForResourceType45CValueSearchTester_ClassIntrospectionHandle_tE
+N8Icp
 NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
 NETWORK_FIELD_CHANGED_NO_VALUE
 NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
@@ -1895,8 +1933,8 @@ Num Match groups: %i
 O$fD9
 O8HcG
 O8HcW
-O8Icp
 O8v	1
+OLLcG I
 OPEN SIDED OUTDOOR AREA Detected 
 OPTIONS
 OPtQf
@@ -2059,13 +2097,14 @@ PushTwoPack5LeftDeltaOne
 PushTwoPack5LeftDeltaZero
 Put; voiceless alveolar stop
 PxA;\$H|
+QAngle
 QHcK(Ic
+Quaternion
 Queue sound '%s'
 Queue took %f msec to drain
 Queued: elapsed time: %f, next sync time: %f, length: %f
 QueuedLoaderVersion001
 R8X[]
-RAUATSH
 RERLH
 RESOURCE_TYPE_SOUND
 RESOURCE_TYPE_SOUNDEVENTSCRIPT
@@ -2075,7 +2114,7 @@ RHcK(Ic
 RHcK01
 RIFFH
 ROOM Detected 
-RX[A\H
+RadianEuler
 Random Modulation
 RandomFloat
 RandomInt
@@ -2177,27 +2216,22 @@ SequenceMarkup
 SequenceMarkupList
 SerializedEntitiesVersion001
 ServerUploadGameStats001
-Set all reverb flags to false, effectively turning OFF any reverb node in mix graph.
 Set an input mix value
-Set auto reverb flag, if auto reverb node is inserted in mix graph, turn it ON.
-Set direct level for Steam Audio. Suggested values from [.0f, 10.0f]
 Set indirect binaural flag for Steam Audio Reverb.
 Set input %s to %s on graph %s
 Set named Mixgroup of current mixer to mix vol, mute, solo.
 Set named Mixgroup of named mix layer to mix vol, mute, solo.
 Set named mix layer / mix group, trigger amount.
 Set named mix layer mix amount.
-Set reverb level for Steam Audio Reverb. Suggested values from [.0f, 10.0f]
-Set steam audio reverb flag, if steam audio reverb node is inserted in mix graph, turn it ON.
+Set reverb level for Steam Audio Reverb. Suggested values from [.0f, 10.0f]. Setting it to zero disables all simulation for reverb calculation as well.
 SetDataFromKV3: Unrecognized KV3 type on field %s.
 Sets the tempo of the specified track
 Sets the transposition of the specified track
 Setting MixLayer %s
 Setting MixLayer %s : mix %f
 Setting Mixer %s: MixGroup %s: %s : %f
-Setting Steam Audio Direct Level to %.1f.
 Setting Steam Audio Reverb Binaural to %.1f.
-Setting Steam Audio Reverb Level to %.1f.
+Setting Steam Audio Reverb Level to %.3f.
 Setting field %s to %s
 Setting null device for -nosound
 Sh[A\]H
@@ -2397,12 +2431,12 @@ Usage:  snd_sos_set_operator_field <stackname> <operator> <field> <index> <float
 Usage:  snd_sos_start_soundevent <eventname> <ent id) 
 Usage:  snd_sos_stop_soundevent_guid <guid>
 Usage:  snd_sos_stop_soundevent_index <index>
-Usage:  snd_steamaudio_set_direct_level <level in following range: [0.0 10.0]>
 Usage:  snd_steamaudio_set_reverb_level <level in following range: [0.0 10.0]>
 Usage: movie_fixwave wavname
 Used stack: %s
 UserInfoChangeService_001
 V D;b
+V8IcH
 VALUES
 VApplication001
 VAvi001
@@ -2430,12 +2464,14 @@ VMDLLIB001
 VMIX: Unknown filter type for DSP:%s
 VMIX: Unknown processor type %s (name %s)
 VMaterialSystem2_001
+VMatrix
 VMediaFoundation001
 VMixEditTool001
 VMixStartup
 VMixTableInit
 VNewAsyncFileSystem001
 VP4003
+VPIcH
 VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
@@ -2524,20 +2560,20 @@ Val : voiced labialdental fricative
 Value Operator Offset: %i
 Value Stack Offset: %i
 Vector2D
+Vector4D
+VectorAligned
 VeryHigh
 VisBuilder_001
 Voice overflow, voice count == MAX_CHANNELS
 Voice volume
 Volume of sounds in tools (e.g. Hammer, SFM)
+W H;2t'H
 W LcG
 W u)H
 W8A\A]
 W8A\A]]
-W8HcG
 W8HcO
-W8IcH
 W8LcW
-W@LcG
 WARNING: Attempting to import existing public field %s in stack %s
 WARNING: Attempting to set fields on a stopped sound
 WARNING: Could not find schema data for helper class for resource type %lld '%s'. (Missing MDiskDataForResourceType metadata or schema data isn't loaded?)
@@ -2553,7 +2589,6 @@ WIN32
 WINDOWS
 WINXP
 WORDS
-WPIcH
 WXHcE
 Wait: elapsed time: %f, next sync time: %f, local elapsed: %f, local sync: %f, length: %f, num loops: %i
 Warning
@@ -2578,8 +2613,6 @@ WorldRendererBuilderMgr001
 WorldRendererMgr001
 X8HcP
 X@LcP
-XIMSH
-XIcL$
 X[A\A]A^A_]
 X[A\A]]
 X[]A\A]A^A_
@@ -2587,6 +2620,7 @@ Xh#x\
 Y@sos_import_stack
 YHcC@1
 YHcK(Ic
+YJTfA
 Yacht : voiced palatal approximant
 ZHcK0Ic
 ZIcL$PIc
@@ -2633,7 +2667,6 @@ _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _IcL$
 _Jv_RegisterClasses
-_LLcW I
 _V_ComposeFileName
 _V_DefaultExtension
 _V_ExtractFileExtension
@@ -2872,6 +2905,7 @@ default_to_max
 delay count
 denominator
 developer
+displayName
 display_category
 display_game
 display_group
@@ -2929,8 +2963,6 @@ fA+D$
 fAther : low back unrounded vowel
 fAther : low front unrounded vowel
 fD91t
-fD9c&w
-fD9k$w
 fD9{$
 fD9{$~|I
 fD;!t
@@ -2957,6 +2989,7 @@ floor
 floor@@GLIBC_2.2.5
 floorf
 floorf@@GLIBC_2.2.5
+fltx4
 fmt D
 force
 force_direction
@@ -2965,6 +2998,7 @@ free@@GLIBC_2.2.5
 friction
 function
 g E;g0D
+g8HcG
 g8HcW
 g@LcW L
 gHHcW I
@@ -3249,7 +3283,6 @@ khHcSp
 kj[A\A]A^]
 kv3format_manager.cpp
 l$@E;l$P
-l$hIcU
 last_sniff
 left_front
 left_front1
@@ -3319,6 +3352,7 @@ m_bOffsetExistingPos
 m_bParticleFeathering
 m_bRemapPullForceToLife
 m_bRunForParentApplyKillList
+m_bScalePerParticle
 m_bTrailBias
 m_bUseHighestEndCP
 m_branchPattern
@@ -3352,6 +3386,7 @@ m_flOutput0
 m_flOutput1
 m_flRandomMax
 m_flRandomMin
+m_flScalePerParentParticle
 m_groupList
 m_hSnapshot
 m_matchPattern
@@ -3428,6 +3463,8 @@ math_speakers
 math_string
 math_velocity
 mathlib.cpp
+matrix3x4_t
+matrix3x4a_t
 maxHullVertices
 maxVerticesPerHull
 max_angle
@@ -3659,6 +3696,7 @@ point0
 point1
 preferred_carryangles
 preload_vsnds
+preview
 preview.editor
 preview.editor.000
 preview.editor.001
@@ -3762,7 +3800,6 @@ snd_compare_soundevents
 snd_delay_sound_shift
 snd_disable_mixer_duck
 snd_disable_mixer_solo
-snd_disable_reverb
 snd_dma.cpp
 snd_duckerattacktime
 snd_duckerreleasetime
@@ -3770,8 +3807,6 @@ snd_duckerthreshold
 snd_ducktovolume
 snd_dump_filepaths
 snd_dump_filepaths: Wrote %s
-snd_enable_autoverb
-snd_enable_steamaudio_reverb
 snd_envelope_rate
 snd_filter
 snd_front_headphone_position
@@ -3886,7 +3921,6 @@ snd_soundmixer_set_trigger_factor
 snd_soundmixer_setmixlayer_amount
 snd_soundmixer_version
 snd_steamaudio_export_scene
-snd_steamaudio_set_direct_level
 snd_steamaudio_set_reverb_binaural
 snd_steamaudio_set_reverb_level
 snd_stereo_speaker_pan_exponent
@@ -3976,7 +4010,6 @@ submix_name
 suppress
 surface_prop
 sync_track
-t	9p,
 t	;CP
 t	[A\]
 t$	H9
@@ -3989,12 +4022,14 @@ t$`uAA
 t$pE1
 t'D;5
 t(;2}
+t);="
 t)HcE
 t*A+F$I
 t+Lck8D;kHD
 t/;w t2;w0t=1
 t/Ic]
 t0[A\]
+t1;2}-Hc
 t1A;4$t+A
 t3Lc#D;c
 t3[A\]
@@ -4002,7 +4037,7 @@ t4[A\A]]
 t4[A\]
 t6[A\A]]
 t8@:1uCH
-t9HcX8;ZH
+t9HcX8;^H
 t;fE9
 t<Ic_(A;_8
 t<Lcs8D;sHD
@@ -4028,6 +4063,7 @@ tiIcw
 time slice ms
 tkD+@
 tl~)A
+tools/
 total preset slots used: %d 
 tpE;o0
 track_queue
@@ -4042,7 +4078,6 @@ u)IcE
 u64( %lld = 0x%llX )
 u=[A\]
 u?;KL}:Hc
-uD;Gd}?
 uKUHc
 u[[A\A]A^]
 uint32
@@ -4073,7 +4108,7 @@ vV<	uRH
 vector_facing_point
 velocity_zones
 vgraph_name
-vl;5,J:
+vl;5<w:
 vmix.cpp
 vmix:%02d: %s
 vmixH
@@ -4117,6 +4152,7 @@ vpcf6
 vpcf7
 vpcf8
 vpcf9
+vpx6H
 vrgrp
 vrnmd
 vsnap
@@ -4129,6 +4165,7 @@ vsndevts
 vsndevtsH
 vsndevtsI
 vsndevtsL
+vsndevtsh8D
 vsndstck
 vsndstckH
 vsndstckI
@@ -4152,11 +4189,11 @@ x	HcS@H9
 x	HcqpH9
 x ;w@}
 x!;1|
-x%;2}!Hc
 x%;p@} H
 x8;7H
 x@HcO
 xBHcO
+xD9%r
 xGIcL$
 xHLc@ LcH
 xLHcP
@@ -4171,14 +4208,15 @@ z7u5H
 z9u7H
 z>{}[]()=&, 	
 z@u>H
+zLuJA
 zau_H
-zfudH
 {0D;{@I
 {UOtp
 {UOtx
 {YIN?
 {}()':
 {}[]=, 	
+|$ Hc
 |$0E;|$@
 |$8E1
 |$XIcT$<I
@@ -4187,6 +4225,7 @@ zfudH
 |7Hf.
 }$A;]
 }*f;C
+}+Mc&E;f
 }1;A$
 }=A;D$,
 ~$f9W&r
@@ -4194,6 +4233,7 @@ zfudH
 ~(f9W&r"
 ~)H;7I
 ~7;w$
+~8Mch
 ~9;w$
 ~;HcE
 ~CHcG
@@ -4202,5 +4242,5 @@ zfudH
 ~Ef;w
 ~IHcK
 ~O;2u
-~Wf9=^
+~Wf9=N
 ~}f;w
