@@ -5,8 +5,24 @@
   	</styles>
 
   <LastCard class="LastCard">
-    <Panel id="GrowingPanel" onmouseover="ViewLastCard();" onmouseout="DCGHideLastCardTooltip(); UIHideTextTooltip();" ondblclick="ShowInspectTakeover()" onactivate="">
-      <Panel id="LastPlayed"/>
+    <Panel id="GrowingPanel" onmouseout="DCGHideLastCardTooltip();" ondblclick="ShowInspectTakeover()" onactivate="">
+			<Panel id="LastCardHeaderContainer">
+				<Panel id="LastCardHeader">
+					<Label id="LastPlayText" class="LastCardText" text="#DCG_Hud_LastCard_LastPlay" />
+					<Label id="TargetedLane" html="true" text="#DCG_Hud_LastCard_LaneTarget" />
+					<Label id="Targets1Label" html="true" text="{s:first_target_text} {s:target1_unit}" />
+					<Label id="Targets2Label" html="true" text="{s:second_target_text} {s:target2_unit}" />
+					<Label id="DiscardedCardLabel" html="true" text="#DCG_Hud_LastCard_DiscardedCard" />
+				</Panel>
+			</Panel>
+			<Panel id="LastCardContainer" />
+      <Panel id="LastPlayed" onmouseover="ViewLastCard();" onmouseout="UIHideTextTooltip();" />
+    </Panel>
+    <Panel class="DeckListContainer" onactivate="ToggleDeckList()" onmouseover="UIShowTextTooltip( #DCG_Keybindings_ShowDecklist )" onmouseout="UIHideTextTooltip()">
+      <Image id="DeckListIcon"/>
+    </Panel>
+    <Panel class="DeckListEnemyContainer" onactivate="ToggleOpponentDeckList()" onmouseover="UIShowTextTooltip( #DCG_Keybindings_ShowOpponentsDecklist )" onmouseout="UIHideTextTooltip()">
+      <Image id="DeckListIcon"/>
     </Panel>
   </LastCard>
 

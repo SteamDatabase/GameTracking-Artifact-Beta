@@ -2,8 +2,8 @@
 {
 	game 		"Artifact"
 	title 		"Artifact"
-	type		singleplayer_only
-
+	type		multiplayer_only
+	
 	SupportsDX8 0
 	nodegraph 0
 	nomodels 1
