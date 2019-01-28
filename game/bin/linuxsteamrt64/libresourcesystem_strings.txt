@@ -34,6 +34,7 @@ $[A\]
 %-120s
 %-120s - %s
 %.15lf
+%50.50s: %2.2d bits == '%s'
 %d General references (More ResourceAddRef() calls than ResourceRelease())
 %d Manifest references (Still holding onto a HResourceManifest somewhere)
 %d Schema references (Most likely a resource referring to another resource)
@@ -41,6 +42,8 @@ $[A\]
 %d total counted strings.
 %i %i %i %i
 %lld, 
+%s allocation count overflow
+%s allocation count overflow( %llu > %llu )
 %s$Fence%d
 %s%s%s%s
 %s+--
@@ -62,6 +65,7 @@ $[A\]
 &YA1H
 &YA1L
 '":|;
+(D;p 
 (HcWP
 (None)
 ([A\A]A^A_]
@@ -84,6 +88,7 @@ $[A\]
 +X$Hc
 +s$Hc
 +s$HcU
+,BfE9,@|
 - CStrongHandle, %d operations: %s
 - CStrongHandle, operation: %lld)
 - Manifest, %d operations: %s
@@ -92,6 +97,7 @@ $[A\]
 - ResourceRelease(), ResourceReferencePairingId_t: %d, operation: %lld
 - Schematized reference, %d operations: %s
 - Schematized reference, Pairing ID: %d, operation: %lld
+-> %s
 -exit_on_resource_load_failure
 -force_all_resource_loads_to_fail
 -resource_exit_after_time
@@ -106,9 +112,12 @@ $[A\]
 ../public/resourcefile/resourcestream.h
 ../public/tier0/tslist.h
 ../public/tier1/utlblockmemory.h
+../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
+../public/tier2/fieldpath.h
+.A;L$
 .comment
 .data
 .data.rel.ro
@@ -138,11 +147,13 @@ $[A\]
 0[A\]
 0[A^]
 0[]A\A]A^
+0t3Lc
 10ConCommand
 10IAppSystem
 11IRefCounted
 12CEmptyConVar
 12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
+12CSceneObject
 12CThreadEvent
 14CBaseAppSystemI15IResourceSystemE
 14ConCommandBase
@@ -157,6 +168,8 @@ $[A\]
 16CLoadingResource
 16CNullTypeManager
 16ICommandCallback
+16ISceneObjectDesc
+17IGenericInterface
 18CAtomicManipulatorI10CTransformE
 18CAtomicManipulatorI10CUtlStringE
 18CAtomicManipulatorI10CUtlSymbolE
@@ -311,20 +324,25 @@ $[A\]
 28CCodeResourceManifestManager
 28CResourceManifestTypeManager
 28ICodeResourceManifestManager
+28IFlattenedSerializerSpewFunc
 29CRD_RegisterResourceDataUtils
 29IRD_RegisterResourceDataUtils
+2fD91u>
 30IAsyncResourceDataRequestOwner
+32CFlattenedSerializerSpewFunc_Log
 32CSchemaRegistration_resourcefile
 33333333H
 34CSchemaRegistration_resourcesystem
 34CVConResourceProfileCommandHandler
 36CSchemaRegistration_mathlib_extended
+38CFlattenedSerializerSpewFunc_UtlString
 4fff>fff>fff>fff>
 5t~BC
 6ConVar
 6H92t%H
 6I90I
 7IConVar
+7[A\A]A^]
 8CFmtStrNILi256ELb0EE
 8CFunctor
 8[A\A]A^A_]
@@ -350,12 +368,16 @@ $[A\]
 <+t^H
 <.t></t&<\u
 </u*H
+<Af9<F|
 <INVALID>
 <Rt&<Pu
 <\t-</u
 <null>
+<unknown>
+>CResourceArray
 >E89t
 ?<No schemasystem>
+?A\A]D
 ?C_OP_RemapSpeedtoCP
 ?u0E1
 @$t9L
@@ -454,7 +476,9 @@ AUATSL
 AUATSLc/E)
 AUATStII
 AVATI
+AVATS
 AVAUA
+AVAUATD
 AVAUATE1
 AVAUATI
 AVAUATL
@@ -477,10 +501,10 @@ AWAVAUATH
 AWAVAUATI
 AWAVAUATL
 AWAVAUATS
+AWAVAUATSD;_
 AWAVAUATSH
 AWAVAUATSRH
 AWAVAUATUSH
-AWAVAUE1
 AWAVAUI
 AWAVAUL
 AWAVE1
@@ -493,7 +517,9 @@ A\A]A^A_]
 A\A]A^]
 A\A]A^]H
 A\A]]
+A\A^]
 A]A^]
+A^A_]
 AddRef
 AllocInternal
 Allocate
@@ -583,7 +609,6 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CParticleSystemDefinition
-CResourceArray
 CResourceExtReference
 CResourcePointer
 CResourceString
@@ -705,6 +730,8 @@ Cannot destruct abstract class
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
+ChangeCallbackOnChange
+ChangeCallbackOnChangeOrCreate
 ChangeSize
 Cht7Lc{pD;
 ClothShapeCapsule
@@ -720,6 +747,7 @@ ConnectInterfaces
 CovMatrix3
 CreateInterface
 Cycle or diamond double-reference to '%s'
+D#%`[/
 D#O\H
 D#b\H
 D#j\H
@@ -742,9 +770,9 @@ D+{$Mc
 D8"u'
 D9C ~JMc
 D:"u;
-D;5W,'
 D;c D
 D;k |
+D;q(t%I
 D;s(H
 D;s(tKH
 DATAH
@@ -799,6 +827,7 @@ EconItemToolModel_001
 EmptyAnim
 Encountered nonexistent %s: %016llX (file "%s")
 EngineServiceMgr001
+EnsureCapacity
 EnvironmentMapBuilder_001
 Error initializing resource manager for resource type "%lld"!
 Error loading resource "%s" (Invalid header version: %d != %d)
@@ -898,6 +927,7 @@ FeTreeChildren_t
 FeTri_t
 FeWeightedNode_t
 FeWorldCollisionParams_t
+FieldPathEncodeFinish
 FileSystem
 Final operation count %llu
 FindLessOrEqual
@@ -938,6 +968,8 @@ GenericGameData
 GetCPUInformation
 GetNamedManifestResources: Manifest group name is empty or null.
 GetNamedManifestResources: Manifest name not registered: "%s"
+GetPathData
+GetPathData failed for read only CFieldPath
 GetRegistrationForType(pResourceData->m_nResourceType)->m_pTypeManager == NULL
 GetResourceManifestCount
 GetResourceManifests
@@ -947,6 +979,7 @@ H	w(UH
 H!w(H
 H;*twH
 H;2t,H
+H;5Nj0
 H;:tE
 H;PHu
 H;WPu 
@@ -956,6 +989,7 @@ HResourceManifestInternal
 H[A\A]A^A_]
 H[A\A]]
 HammerMapLoader001
+Hc5yV0
 Hc@pH
 HcC H
 HcC(M
@@ -1084,7 +1118,15 @@ MATERIAL_LIGHT_ORTHO
 MATERIAL_LIGHT_POINT
 MATERIAL_LIGHT_SPOT
 MDiskDataForResourceType
+MNetworkBitCount
+MNetworkChangeCallback
+MNetworkEncoder
+MNetworkOverride_Invalid
+MNetworkPriority
+MNetworkRemoveAll
 MNetworkSerializeAs
+MNetworkSerializer
+MNetworkUserGroup
 MNoScatter
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
@@ -1103,7 +1145,22 @@ MeshUtils001
 MetaTxtAH
 Missing file '%s'
 ModelDocUtils001
+N24CFieldPathHuffmanEncoder12InternalNodeE
+N24CFieldPathHuffmanEncoder5INodeE
+N24CFieldPathHuffmanEncoder8LeafNodeE
 N24MDiskDataForResourceType45CValueSearchTester_ClassIntrospectionHandle_tE
+NE fA
+NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
+NETWORK_FIELD_CHANGED_TYPE_NONE
+NETWORK_FIELD_CHANGED_WITH_VALUE
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL_SORTLOWER
+NETWORK_FIELD_DEFAULT_PRIORITY
+NETWORK_FIELD_HIGHEST_PRIORITY
+NETWORK_FIELD_LOWEST_PRIORITY
 NHcK`Ic
 NHcKhIc
 NetworkClientService_001
@@ -1118,6 +1175,10 @@ Newline in string literal
 No Buffer
 No support for saving fltx4
 No valid format conversion from '%s' to '%s'
+NonTopoComplex
+NonTopoComplexPack4Bits
+NonTopoPenultimatePluseOne
+O@v9I
 OldFeEdge_t
 Ordered constructor wrapped type has no default constructor.
 PARTICLE_DEPTH_FEATHERING_OFF
@@ -1134,11 +1195,19 @@ PF_TYPE_RANDOM_UNIFORM
 PIcL$
 P[A\A]A^]
 P[A\A]I
+P[A\]
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
 ParticleSystemMgr003
 Path Overflow, must be less than 260 characters.
+Path_AddToTail
+Path_AddToTail failed for read only CFieldPath
+Path_AddToTail failed, depth already == DEFAULT_MAX_PATH_DEPTH(%d)
+Path_PopLast
+Path_PopLast failed for read only CFieldPath
+Path_RemoveAll
+Path_RemoveAll failed for read only CFieldPath
 PhysFeModelDesc_t
 Physics2 Interface Old v0.5
 PhysicsBodyMarkup
@@ -1166,8 +1235,42 @@ Plat_TickDiffMilliSecF
 Plat_USTime
 Plat_UUIDFromString
 Plat_UUIDToString
+PlusFour
+PlusThree
+PlusTwo
+PopAllButOnePlusN
+PopAllButOnePlusNPack3Bits
+PopAllButOnePlusNPack6Bits
+PopAllButOnePlusOne
+PopNAndNonTopographical
+PopNPlusN
+PopNPlusOne
+PopOnePlusN
+PopOnePlusOne
 PostProcessingSystem_001
 PropertyEditorSystem_001
+PushN
+PushNAndNonTopographical
+PushOneLeftDeltaNRightNonZero
+PushOneLeftDeltaNRightNonZeroPack6Bits
+PushOneLeftDeltaNRightNonZeroPack8Bits
+PushOneLeftDeltaNRightZero
+PushOneLeftDeltaOneRightNonZero
+PushOneLeftDeltaOneRightZero
+PushOneLeftDeltaZeroRightNonZero
+PushOneLeftDeltaZeroRightZero
+PushThreeLeftDeltaN
+PushThreeLeftDeltaOne
+PushThreeLeftDeltaZero
+PushThreePack5LeftDeltaN
+PushThreePack5LeftDeltaOne
+PushThreePack5LeftDeltaZero
+PushTwoLeftDeltaN
+PushTwoLeftDeltaOne
+PushTwoLeftDeltaZero
+PushTwoPack5LeftDeltaN
+PushTwoPack5LeftDeltaOne
+PushTwoPack5LeftDeltaZero
 QAngle
 Quaternion
 QueuedLoaderVersion001
@@ -1366,6 +1469,7 @@ V_strnchr
 V_strnlen
 V_strtod
 V_strtoi64
+V_strtok
 V_strtoui64
 V_strupper_fast
 V_tanf
@@ -1411,12 +1515,14 @@ X[A\A]A^A_]
 X[A\A]]
 X[]A\A]A^A_
 Xh#x\
+[A\A]
 [A\A]A^A_]
 [A\A]A^]
 [A\A]A^]H
 [A\A]D
 [A\A]H
 [A\A]]
+[A\A^]
 [A\]H
 [Disk class %d/%d] Name = '%s'; Project = '%s'; Binary = '%s'
 []A\A]
@@ -1504,6 +1610,7 @@ _ZdaPv
 _ZdlPv
 _Znam
 _Znwm
+__UNKNOWN__
 __bss_start
 __cxa_atexit
 __cxa_atexit@@GLIBC_2.2.5
@@ -1534,7 +1641,9 @@ _fini
 _init
 _test_conversion_counter
 `[A\]
+aabb_h_schema.gen_cpp
 abort@@GLIBC_2.2.5
+all_projects_common_code.cpp
 allowstatic
 anchor_angles
 anchor_position
@@ -1543,18 +1652,23 @@ anim_name_a
 anim_name_b
 anonymous 
 archive
+asyncresourcedatarequest.cpp
 attachment_offset
 auto_unragdoll_duration
 bUpdate
 badresources_whitelist.txt
 binary
 binary_bc
+bitbuf.cpp
 blendamount
 blockLOS
+blockcompress.cpp
 body_type
 break_create_joint_revolute
 break_uniform_burst
 breakable_count
+breakable_model
+breakable_skin
 burst_randomize
 burst_scale
 c0t#Lcc
@@ -1562,7 +1676,9 @@ c`t1H
 cable
 cantdie
 center
+characterset.cpp
 cheat
+checksum_crc.cpp
 children
 client
 clientcmd_can_execute
@@ -1571,6 +1687,7 @@ cloth_collision_layer0
 cloth_collision_layer1
 cloth_collision_layer2
 cloth_collision_layer3
+codemanifestmanager.cpp
 collision_group
 collision_prop
 command
@@ -1578,7 +1695,10 @@ composite
 configvalue.cpp
 content
 control_point
+convar.cpp
 create_particle
+crtoverride.cpp
+crtstuff.c
 dH34%(
 dH3<%(
 dIcL$
@@ -1612,14 +1732,22 @@ f4Weight0
 f4Weights
 f;0tZfD
 f;S.w
+fD91t
 fD;!t
+fE;4@u/L9
 fE;}.
 faceMergeAngle
 false
+fejigglebone_h_schema.gen_cpp
+femodel_h_schema.gen_cpp
+femodelcombiner_h_schema.gen_cpp
+femodeldesc_h_schema.gen_cpp
 ffff.
 fffff.
 ffffff.
+fieldpath.cpp
 filesystem_stdio
+fileutils.cpp
 flAlpha
 flAnimationForceAttraction
 flAnimationVertexAttraction
@@ -1660,8 +1788,10 @@ frame
 free@@GLIBC_2.2.5
 friction
 g E;g0D
+g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
+g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
 game_class
@@ -1669,6 +1799,7 @@ game_keys
 gameinfo.gi
 gameinfo.txt
 generic
+generichash.cpp
 gravity
 h[A\A]A^A_]
 handindex
@@ -1677,17 +1808,28 @@ health
 health_override
 hurt_me
 hurt_them
+interface.cpp
 interfaces.cpp
 invert_orientation
 is_debris
+jIcE(1
 k<[A\A]A^]
 k@_aH
 k`HcSh
 keep_all_records
 keepall
 keyvalues3.cpp
+keyvalues3_binaryreader.cpp
+keyvalues3_binarywriter.cpp
+keyvalues3_oldschematext.cpp
+keyvalues3_textreader.cpp
+keyvalues3_textwriter.cpp
 khHcSp
 kv3format_manager.cpp
+kv3formats.cpp
+kv3formats_modeldoc.cpp
+kv3formats_vpcf.cpp
+kv3transfer.cpp
 l$@E;l$P
 last_sniff
 length
@@ -1699,6 +1841,7 @@ libresourcesystem.so.dbg
 libstdc++.so.6
 libtier0.so
 libvstdlib.so
+lightdesc_h_schema.gen_cpp
 loadingresource.cpp
 lockRotationAlpha
 loop_break_on_damage
@@ -1849,6 +1992,7 @@ m_flMaxYaw
 m_flMinPitch
 m_flMinYaw
 m_flMultFactor
+m_flNearClipPlane
 m_flOffset
 m_flOpStrength
 m_flOpStrengthMaxScale
@@ -1962,9 +2106,11 @@ m_vPoint1
 m_vecUp
 malloc
 malloc@@GLIBC_2.2.5
+manifestregistrar.cpp
 material
 mathlib.cpp
 mathlib_extended
+mathlib_extended_schema_anchor.gen_cpp
 matrix3x4_t
 matrix3x4a_t
 maxHullVertices
@@ -1976,6 +2122,7 @@ memcpy
 memcpy@@GLIBC_2.14
 memmove
 memmove@@GLIBC_2.2.5
+memoverride.cpp
 mempool.cpp
 memset
 memset@@GLIBC_2.2.5
@@ -1992,6 +2139,7 @@ modeldoc15
 modeldoc16
 modeldoc17
 modeldoc18
+modeldoc19
 modeldoc2
 modeldoc3
 modeldoc4
@@ -2046,6 +2194,7 @@ play_endcap
 point0
 point1
 preferred_carryangles
+profilehelpers.cpp
 prop_data
 pthread_mutex_destroy
 pthread_mutex_destroy@@GLIBC_2.2.5
@@ -2062,9 +2211,11 @@ pthread_mutexattr_settype@@GLIBC_2.2.5
 pthread_once
 pthread_once@@GLIBC_2.2.5
 qAdjust
+quaternionaligned.cpp
 r5Hcq
 radius0
 radius1
+randsse.cpp
 recenter_on_parent_bone
 replicated
 require_exact_pairings
@@ -2077,14 +2228,33 @@ resource_repeated_reload
 resource_repeated_reload <count> <resource_name> (<resource name> ...): Load and unload the specified resource(s)
 resource_repeated_reload(%d)
 resource_repeated_reload: Invalid resource name '%s'
+resourcedictionary.cpp
+resourcedictionary_h_schema.gen_cpp
+resourceeditinfo_h_schema.gen_cpp
+resourceextreflist_h_schema.gen_cpp
 resourcefile
+resourcefile.cpp
+resourcefile_schema_anchor.gen_cpp
+resourcehandletypes_h_schema.gen_cpp
+resourcemanifest.cpp
+resourcemanifestfiledata_h_schema.gen_cpp
+resourcestream_h_schema.gen_cpp
 resourcesystem
 resourcesystem.cpp
+resourcesystem_leaktracker.cpp
+resourcesystem_schema_anchor.gen_cpp
+resourcesystemprofileinfo_h_schema.gen_cpp
+resourcetype_h_schema.gen_cpp
+rnd_down
+rnd_up
 rootNode
 rs_dump_stats
 rs_dump_stats - Dump resourcesystem stats.
 schema
+schemabindings.cpp
 schemaclassinfo.cpp
+schemaenuminfo.cpp
+schemaiterator.cpp
 schemasystem
 sdktools/bin/vproj.exe
 sdktools/bin/vprojUI.exe
@@ -2098,10 +2268,15 @@ singleplayer
 source_filename
 spawn_motion_disabled
 speed
+splitstring.cpp
 sqrtf
 sqrtf@@GLIBC_2.2.5
 src/public/tier0/platform.h
 ss_added
+sseconst.cpp
+ssemath_h_schema.gen_cpp
+ssequaternion_h_schema.gen_cpp
+stacktools_tier1.cpp
 stop_immediately
 stop_instantly
 stop_on_seq_change
@@ -2112,8 +2287,10 @@ strcmp@@GLIBC_2.2.5
 strcpy
 strcpy@@GLIBC_2.2.5
 streamingresourcedata.cpp
+stringpool.cpp
 strlen
 strlen@@GLIBC_2.2.5
+stronghandle_h_schema.gen_cpp
 strstr@@GLIBC_2.2.5
 suppress
 surface_prop
@@ -2123,8 +2300,10 @@ t$H;h
 t$HcW
 t%L;8u
 t%L;}
+t'D;5
 t'L;0u
 t(;2}
+t);=2P&
 t)HcE
 t*A+F$I
 t/;w t2;w0t=1
@@ -2135,10 +2314,12 @@ t8@:1uCH
 t;fE9
 t<Lcs8D;sHD
 t<v"<
+t=[A\]
 t?L;3u
 tC[A\A]A^]
 tEfE9
 tGL;8u
+tJHcC
 tN~+A
 tR[A\]
 t\M;/u
@@ -2146,16 +2327,25 @@ test_angles_relative
 texturescale
 tgL;0u
 thIcG
+tier1.cpp
+tier2.cpp
 tkD9p
 tlH;1u
 tl~)A
 tmFrame
+transform.cpp
 turn_rate
 u1Lc#D;c
+u[[A\A]A^]
 uint64
 unused
 utlbuffer.cpp
+utlmemory.cpp
+utlstablesymboltable.cpp
 utlstring.cpp
+utlstringtoken.cpp
+utlsymbol.cpp
+utltokenizer.cpp
 vCenter
 vK<	uGH
 vOffset
@@ -2167,11 +2357,13 @@ value
 vanim
 vanmgrphvdpn
 vcdlist
+vector.cpp
 vents
 version
 vfont
 vgraf
 vltre
+vmatrix.cpp
 vmesh
 vmorf
 vpcf1
@@ -2205,12 +2397,14 @@ vvvtx
 vwenvmapvwrlt
 vwnod
 vwrld
+weakhandle_h_schema.gen_cpp
 width
 x	;B`
 x	;F`
 x!;1|
 x@HcO
 x[A\A]A^A_]
+x[A\A]]
 x|LcG
 yaw_end
 yaw_start
@@ -2225,7 +2419,6 @@ z/u-H
 |$8E1
 |)A9\$0
 |*Ic:H
-|7Hf.
 |NA;]
 }$A;]
 ~&H;wHt'H
@@ -2239,4 +2432,5 @@ z/u-H
 ~CHcW
 ~CLoadingResource
 ~CStreamingResourceData
+~IHcK
 ~Tf;w

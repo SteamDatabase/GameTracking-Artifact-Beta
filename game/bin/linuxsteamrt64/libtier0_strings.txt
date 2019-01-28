@@ -19,6 +19,7 @@
  failed to dlopen "%s" error=%s
  failed to dlopen %s error=%s
  tMv+@
+"8#x,
 "></img>
 "E:#uIA
 #[A\A]A^]
@@ -211,7 +212,6 @@ $~"Hc
 -- Summary --
 --hint
 -?[`/?291?
--S"/=
 -allowmultiple
 -assertbreak
 -clearassertstate
@@ -520,6 +520,7 @@ DevWarning
 Developer
 DeveloperConsole
 DeveloperVerbose
+DkEF]
 DoAssertDialog: invalid Assert response returned from dialog/vxconsole - breaking to debugger
 Duplicate abbrev code 0x%x at 0x%x
 E9w,tvL
@@ -825,6 +826,8 @@ Particle/Effect_Rendering
 Path component too long
 Path search filename too long
 Peak %.2f ms frame
+PlatEnterHibernation()
+PlatExitHibernation()
 Plat_AlertUser
 Plat_AppendMiniDumpErrorString
 Plat_ApproximateProcessMemoryUsage
@@ -851,6 +854,8 @@ Plat_DisableIOBuffering
 Plat_EnableCustomerMachineMode
 Plat_EnableHeadlessMode
 Plat_EndWatchdogTimer
+Plat_EnterHibernation
+Plat_ExitHibernation
 Plat_ExitProcess
 Plat_FastVerifyHardwareKey
 Plat_FileExists
@@ -867,6 +872,7 @@ Plat_GetComputerName
 Plat_GetCurrentDate
 Plat_GetCurrentDirectory
 Plat_GetCurrentFrame
+Plat_GetCurrentHibernationState
 Plat_GetCurrentRSS
 Plat_GetDPI
 Plat_GetDefaultMonitorIndex
@@ -1045,6 +1051,7 @@ Read off the end of the file name table
 Read off the end of the include path table
 Read off the end of the opcode size table
 RegisterAssertionFailureListener
+RegisterHibernationListener
 RegisterKeyValuesSystem
 RegisterLoggingChannel
 Release
@@ -1383,6 +1390,7 @@ Unrecognized ELF data layout or version
 Unrecognized Mach-O header magic
 Unrecognized module magic
 UnregisterAssertionFailureListener
+UnregisterHibernationListener
 Unsupported ELF machine type %d
 Unsupported Mach-O machine type %d
 Unsupported define_file instruction
@@ -1548,6 +1556,8 @@ V_logf
 V_longjmp
 V_mkostemps
 V_mkstemps
+V_modf
+V_modff
 V_normalizeFloatString
 V_normalizeFloatWString
 V_pow
@@ -1686,7 +1696,6 @@ ZN17CThreadLocalScopeC2EP16ThreadHandle_t(bool)
 \$hE1
 \D2%4
 \tHUH
-\|4W *
 _AssertValidReadPtr
 _AssertValidReadWritePtr
 _AssertValidWritePtr
@@ -2286,12 +2295,14 @@ acos@@GLIBC_2.2.5
 acosf@@GLIBC_2.2.5
 alarm
 alarm@@GLIBC_2.2.5
+all_projects_common_code.cpp
 asctime
 asctime@@GLIBC_2.2.5
 asctime_r
 asctime_r@@GLIBC_2.2.5
 asin@@GLIBC_2.2.5
 asinf@@GLIBC_2.2.5
+assert_dialog.cpp
 atan2@@GLIBC_2.2.5
 atan2f@@GLIBC_2.2.5
 atan@@GLIBC_2.2.5
@@ -2311,6 +2322,7 @@ clearerr@@GLIBC_2.2.5
 clock_gettime
 clock_gettime@@GLIBC_2.2.5
 close@@GLIBC_2.2.5
+commandline.cpp
 const
 core id
 cos@@GLIBC_2.2.5
@@ -2319,6 +2331,10 @@ cosh@@GLIBC_2.2.5
 coshf@@GLIBC_2.2.5
 cpu MHz
 cpu.cpp
+cpu_usage.cpp
+cpumonitoring.cpp
+cputopology.cpp
+crtstuff.c
 ctime_r@@GLIBC_2.2.5
 dH34%(
 dH3<%(
@@ -2331,6 +2347,7 @@ debug_line
 debug_pubnames
 debug_ranges
 debug_str
+debugdraw.cpp
 detailed
 distributed...
 dl_iterate_phdr
@@ -2346,9 +2363,13 @@ dlopen@@GLIBC_2.2.5
 dlsym
 dlsym@@GLIBC_2.2.5
 double
+dwarf_symbols.cpp
+dynfunction.cpp
 dynstr
 dynsym
+earlyinit_tier0.cpp
 error
+etwprof.cpp
 eventfd
 eventfd@@GLIBC_2.7
 execlp
@@ -2359,6 +2380,7 @@ exp2f@@GLIBC_2.2.5
 exp@@GLIBC_2.2.5
 expf@@GLIBC_2.2.5
 false
+fasttimer.cpp
 fchmod
 fchmod@@GLIBC_2.2.5
 fclose@@GLIBC_2.2.5
@@ -2375,6 +2397,7 @@ fffffff
 fflush@@GLIBC_2.2.5
 fgetc@@GLIBC_2.2.5
 fgets@@GLIBC_2.2.5
+fibertools.cpp
 fileno@@GLIBC_2.2.5
 float
 floor@@GLIBC_2.2.5
@@ -2447,9 +2470,10 @@ gettimeofday@@GLIBC_2.2.5
 gmtime_r
 gmtime_r@@GLIBC_2.2.5
 hA\A]A^A_]
-hLc%vD%
 h[A\A]A^A_]
 h[A\A]]
+hangwatchdogthread.cpp
+hibernate.cpp
 hypot@@GLIBC_2.2.5
 ignored_assertions.txt
 int:transient:1
@@ -2501,19 +2525,29 @@ malloc
 malloc@@GLIBC_2.2.5
 malloc_usable_size
 malloc_usable_size@@GLIBC_2.2.5
+math_tables.cpp
+mem.cpp
+mem_helpers.cpp
 memcmp@@GLIBC_2.2.5
 memcpy@@GLIBC_2.14
+memdbg.cpp
 memmove@@GLIBC_2.2.5
+memprocessheap.cpp
 memset@@GLIBC_2.2.5
 memstats_%d.txt
 memstd.cpp
+memvirt.cpp
 message
+minidump.cpp
+miniprofiler.cpp
 mkdir
 mkdir@@GLIBC_2.2.5
 mkostemps64
 mkostemps64@@GLIBC_2.11
 mmap64
 mmap64@@GLIBC_2.2.5
+modf@@GLIBC_2.2.5
+modff@@GLIBC_2.2.5
 mprotect
 mprotect@@GLIBC_2.2.5
 munmap
@@ -2534,9 +2568,13 @@ p[A\]
 pb>pAf>
 pclose
 pclose@@GLIBC_2.2.5
+perftrace.cpp
 physical id
 platform.cpp
+platform_com.cpp
+platform_posix.cpp
 platform_sdl.cpp
+platwindow.cpp
 poll@@GLIBC_2.2.5
 popen
 popen@@GLIBC_2.2.5
@@ -2545,6 +2583,7 @@ powf@@GLIBC_2.2.5
 prctl
 prctl@@GLIBC_2.2.5
 processor
+progressbar.cpp
 pthread_attr_destroy
 pthread_attr_destroy@@GLIBC_2.2.5
 pthread_attr_init
@@ -2623,6 +2662,7 @@ rmdir@@GLIBC_2.2.5
 sVwES
 sched_setaffinity
 sched_setaffinity@@GLIBC_2.3.4
+security.cpp
 semctl
 semctl@@GLIBC_2.2.5
 semget
@@ -2652,6 +2692,13 @@ sqrtf@@GLIBC_2.2.5
 srand
 srand@@GLIBC_2.2.5
 sscanf@@GLIBC_2.2.5
+stackcontext.cpp
+stackhelpers.cpp
+stackhelpers_dwarf_translation.cpp
+stackhelpers_linux_capture.cpp
+stackhelpers_virtualmachine_capture.cpp
+stackstats.cpp
+stacktools.cpp
 stderr@@GLIBC_2.2.5
 stdin@@GLIBC_2.2.5
 stdout@@GLIBC_2.2.5
@@ -2689,6 +2736,7 @@ sysconf
 sysconf@@GLIBC_2.2.5
 system
 system@@GLIBC_2.2.5
+systeminformation.cpp
 t	[A\A]A^]
 t	[A\]
 t H;0u
@@ -2715,7 +2763,10 @@ tcxIA
 thIcG
 threadtools.cpp
 tiH;r
+tier0_stdlib.cpp
 tier0_strtools.cpp
+tier0_unicode.cpp
+tier1_tables.cpp
 time@@GLIBC_2.2.5
 timegm@@GLIBC_2.2.5
 timestamped.log
@@ -2725,10 +2776,12 @@ tolower@@GLIBC_2.2.5
 toupper@@GLIBC_2.2.5
 towlower@@GLIBC_2.2.5
 towupper@@GLIBC_2.2.5
+tslist.cpp
 u	[A\]
 uG[A\]
 ueLckp
 uname -mrsv
+unitlib.cpp
 unknown
 unknown_module
 unlink
@@ -2743,6 +2796,8 @@ usleep@@GLIBC_2.2.5
 vfscanf
 vfscanf@@GLIBC_2.2.5
 volatile
+vprof.cpp
+vprof_database.cpp
 vsscanf
 vsscanf@@GLIBC_2.2.5
 vswscanf
@@ -2767,6 +2822,7 @@ wcstoll
 wcstoll@@GLIBC_2.2.5
 wcstoull
 wcstoull@@GLIBC_2.2.5
+win32consoleio.cpp
 windows
 wn>Jj
 write@@GLIBC_2.2.5

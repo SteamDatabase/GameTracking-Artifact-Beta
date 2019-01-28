@@ -11,43 +11,46 @@
     <Panel class="ActingPlayerStartImage" />
     <Panel class="PlayerInfoBGLayer2" />
     <Panel class="PlayerInfoContents">
-      <Panel class="DisconnectedDisplay">
-        <Label id="DisconnectedLabel" text="#DCG_Disconnected"/>
-      </Panel>
+				<Panel id="PlayerInfoContentsContainer">
+				<Panel class="DisconnectedDisplay">
+					<Label id="DisconnectedLabel" text="#DCG_Disconnected"/>
+				</Panel>
 
-      <Panel class="GameClockContainer">
-        <Image id="GameClockIcon" />
-        <Label id="GameClockCount" class="GameClockCount PlayerInfoNumber MonoFont" text="#DCG_MatchClock" />
-      </Panel>
+				<Panel class="GameClockContainer">
+					<Image id="GameClockIcon" />
+					<Label id="GameClockCount" class="GameClockCount PlayerInfoNumber MonoFont" text="#DCG_MatchClock" />
+				</Panel>
 
-      <Panel class="GoldContainer">
-        <Image id="GoldIcon"/>
-        <Label id="GoldCount" class="GoldCount PlayerInfoNumber MonoFont" text="{i:availableGold}"/>
-      </Panel>
+				<Panel class="GoldContainer" onmouseover="UIShowTextTooltip( #DCG_HUD_GoldInfo )" onmouseout="UIHideTextTooltip()">
+					<Image id="GoldIcon"/>
+					<Label id="GoldCount" class="GoldCount PlayerInfoNumber MonoFont" text="{i:availableGold}"/>
+					<Label id="GoldSpend" class="GoldSpend PlayerInfoNumber MonoFont" text="({i:unaccountedGoldSpend})"  onmouseover="UIShowTextTooltip( #DCG_HUD_GoldSpendInfo )" onmouseout="UIHideTextTooltip()"/>
+				</Panel>
         
-      <Panel id="ShopDeedContainer" onactivate="" ondblclick="ShowShopDeedTakeover()">
-        <Image id="ShopDeedIcon" class="ShopDeedIcon PlayerInfoNumber MonoFont"  />
-        <Label id="ShopDeedCount" class="ShopDeedCount PlayerInfoNumber MonoFont" text="#DCG_PlayerInfo_ShopDeedCount" />
-      </Panel>
-        
-      <Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
-      <Label class="PersonaName" id="AnonymousPlayerName" text="#DCG_Anonymous" html="true"/>
+				<Panel id="ShopDeedContainer" onactivate="" ondblclick="ShowShopDeedTakeover()">
+					<Image id="ShopDeedIcon" class="ShopDeedIcon PlayerInfoNumber MonoFont"  />
+					<Label id="ShopDeedCount" class="ShopDeedCount PlayerInfoNumber MonoFont" text="#DCG_PlayerInfo_ShopDeedCount" />
+				</Panel>
+             
       
-      
-      <Panel id="ButtonsContainer">
-        <Panel class="CardsInHandContainer" onactivate="SortCardsInHand()" onmouseover="UIShowTextTooltip( #DCG_HUD_HandSort )" onmouseout="UIHideTextTooltip()">
-          <Image id="CardsInHandIcon"/>
-          <Panel class="CardsInHandRadioButtonContainer">
-            <Panel id="SortByTime" class="CardsInHandRadioButton"/>
-            <Panel id="SortByMana" class="CardsInHandRadioButton"/>
-            <Panel id="SortByColor" class="CardsInHandRadioButton"/>
-          </Panel>
-        </Panel>
-        <Button id="SteamChatButton"  onactivate="DCGInGameSteamChat()" onmouseover="UIShowTextTooltip( #DCG_HUD_SteamChat )" onmouseout="UIHideTextTooltip()"/>
-        <Panel class="ShowESCMenuButton" onactivate="DCGToggleESCMenu()" onmouseover="UIShowTextTooltip( #DCG_HUD_Menu )" onmouseout="UIHideTextTooltip()" />
-      </Panel>
+				<Panel id="ButtonsContainer">
+					<Panel class="CardsInHandContainer" onactivate="SortCardsInHand()" onmouseover="UIShowTextTooltip( #DCG_HUD_HandSort )" onmouseout="UIHideTextTooltip()">
+						<Image id="CardsInHandIcon"/>
+						<Panel class="CardsInHandRadioButtonContainer">
+							<Panel id="SortByTime" class="CardsInHandRadioButton"/>
+							<Panel id="SortByMana" class="CardsInHandRadioButton"/>
+							<Panel id="SortByColor" class="CardsInHandRadioButton"/>
+						</Panel>
+					</Panel>
+					<Button id="SteamChatButton"  onactivate="DCGInGameSteamChat()" onmouseover="UIShowTextTooltip( #DCG_HUD_SteamChat )" onmouseout="UIHideTextTooltip()"/>
+					<Panel class="ShowESCMenuButton" onactivate="DCGToggleESCMenu()" onmouseover="UIShowTextTooltip( #DCG_HUD_Menu )" onmouseout="UIHideTextTooltip()" />
+				</Panel>
         
-    </Panel>
+			</Panel>
+			<Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
+			<Label class="PersonaName" id="AnonymousPlayerName" text="#DCG_Anonymous" html="true"/>
+		</Panel>
+		
      
 	</Panel>
 

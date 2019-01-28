@@ -138,6 +138,7 @@ $t)E1
 %.2f%s
 %3d: e=%.3f rms=%.6f %u
 %5.2f
+%50.50s: %2.2d bits == '%s'
 %5EUeu
 %6.2f %6.2f %6.2f %.3f %.3f %.3f
 %6.3f
@@ -159,6 +160,8 @@ $t)E1
 %s + %s
 %s - %s
 %s / %s
+%s allocation count overflow
+%s allocation count overflow( %llu > %llu )
 %s#%d
 %s+--
 %s+-- Schema Class: %s
@@ -197,6 +200,7 @@ $t)E1
 (ATSH
 (AUATSH
 (AVAUI
+(D;p 
 (D>C9[
 (E9e ~iI
 (E9e ~uH
@@ -267,6 +271,7 @@ $t)E1
 ,$t)M
 ,6ATA
 ,<L\l|
+,BfE9,@|
 --  Increase the size of the resource stream   --
 --  Need %d bytes, but only have %d bytes
 --------------------WARNING----------------------
@@ -274,6 +279,7 @@ $t)E1
 -1080
 -50 -100 30
 -=M]m}
+-> %s
 -VUUU
 -autofidelityconfig
 -cyclerandom
@@ -301,17 +307,17 @@ $t)E1
 -width
 . Pixels per eye after stencil mask: 
 . Renderer now requires 
-.-qaK
 ../public/ordered_constructor.h
 ../public/resourcefile/resourcestream.h
 ../public/tier0/tslist.h
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utlfixedmemory.h
+../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
-.=Q0"
 .>N^n~
+.A;L$
 .G<zUuS
 .M;UU
 .W4zjuh
@@ -375,6 +381,7 @@ $t)E1
 0[A\]
 0[A^]
 0[]A\A]A^
+0t3Lc
 0x%016llX
 1 1 1
 1 = spew constantly, 2 = every second, 3 = only when over budget
@@ -390,6 +397,7 @@ $t)E1
 11IVSSequence
 12CEmptyConVar
 12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
+12CSceneObject
 12CThreadEvent
 13IBaseSequence
 13IInputHandler
@@ -424,9 +432,11 @@ $t)E1
 16CMorphConstraint
 16CPointConstraint
 16CTwistConstraint
+16ISceneObjectDesc
 17COrientConstraint
 17CParentConstraint
 17CResourceStreamVM
+17IGenericInterface
 18CAtomicManipulatorI10CTransformE
 18CAtomicManipulatorI10CUtlStringE
 18CAtomicManipulatorI10CUtlSymbolE
@@ -717,16 +727,20 @@ $t)E1
 28CBoneConstraintPoseSpaceBone
 28CSchemaRegistration_modellib
 28CVRSetSkyboxOverrideCallback
+28IFlattenedSerializerSpewFunc
 28ISchemaCollectionManipulator
 29CBoneConstraintPoseSpaceMorph
 29CKeyValuesDumpContextAsDevMsg
 29CSchemaRegistration_meshutils
 2Way_0( %s )
 2Way_1( %s )
+2fD91u>
+32CFlattenedSerializerSpewFunc_Log
 32CResourceReferenceFixupTraversal
 333333
 33333333H
 33s?(knN
+38CFlattenedSerializerSpewFunc_UtlString
 3[A\]
 4$A\]
 4$HcE
@@ -739,6 +753,7 @@ $t)E1
 6ConVar
 6H92t%H
 7IConVar
+7[A\A]A^]
 7t$UH
 8A^]H
 8BPSL
@@ -810,6 +825,7 @@ $t)E1
 <7;x?5
 << NULL >>
 <@AVI
+<Af9<F|
 <INVALID EXPRESSION>
 <INVALID_RBF_TYPE>
 <Iwi>y
@@ -824,7 +840,7 @@ $t)E1
 <}tQ<{uW
 =)\O?
 =33s?
-=VectorAligned
+=<unknown>
 =m_eRbfType
 =yvn?
 ={=v?
@@ -844,13 +860,15 @@ $t)E1
 >nkY?
 >r*#?
 >|Z2>'ez?
+?../public/tier2/fieldpath.h
 ?5?s!
-?<unknown>
 ?@Hc[
+?A\A]D
+?AimConstraint: %s - Cannot Find Aim Up Target Bone
 ?Mct$@
 ?Out of Memory
 ?UPDATE_STRING_TOKEN_DATABASE
-?_addons
+?_modelbuilder_phys_%i.vphys
 ?e(W\
 ?formats.cpp
 ?u0E1
@@ -1042,9 +1060,11 @@ AUATUSH
 AUATUSv
 AUATfA
 AVATI
+AVATS
 AVATSH
 AVAUA
 AVAUATA
+AVAUATD
 AVAUATE
 AVAUATE1
 AVAUATI
@@ -1083,6 +1103,7 @@ AWAVAUATL
 AWAVAUATS
 AWAVAUATS1
 AWAVAUATSD
+AWAVAUATSD;_
 AWAVAUATSH
 AWAVAUATSL
 AWAVAUATSRH
@@ -1131,7 +1152,6 @@ AddRef
 Adobe APP14 marker: version %d, flags 0x%04x 0x%04x, transform %d
 AimConstraint: %s - Cannot Find Aim Slave Bone
 AimConstraint: %s - Cannot Find Aim Up Target Attachment: %s
-AimConstraint: %s - Cannot Find Aim Up Target Bone
 Align
 AllocInternal
 Allocate
@@ -1202,6 +1222,8 @@ B channel not found in %s
 B2f9B,D
 B>q=j?
 BA?8gV?
+BC6h compression not supported on this target (windows only).
+BC7 compression not supported on this target (windows only).
 BGR565
 BGR888_BLUESCREEN
 BGRA1010102
@@ -1285,6 +1307,7 @@ C([A\]
 C*w*<
 C,;C0
 C,[A\]
+C4[A\]
 C89C\
 C8AUD
 C8[A\]
@@ -1512,6 +1535,8 @@ Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Cannot transcode due to multiple use of quantization table %d
 Caution: quantization tables are too coarse for baseline JPEG
+ChangeCallbackOnChange
+ChangeCallbackOnChangeOrCreate
 ChangeSize
 Checker.
 Cht7Lc{pD;
@@ -1664,6 +1689,7 @@ D9{8D
 D9|$ 
 D:"u;
 D;)ts
+D;5WN0
 D;`H}
 D;c D
 D;c0|
@@ -1797,13 +1823,29 @@ Encountered unknown VrInputError_t value.
 Encountered unknown vr::EVRInputError value.
 End Of Image
 EngineServiceMgr001
+EnsureCapacity
 EnvironmentMapBuilder_001
 Error loading resource "%s" (Invalid resource version: %d != %d)
+Etc.cpp
 Etc::DifferentialTrys::DifferentialTrys(Etc::ColorFloatRGBA, Etc::ColorFloatRGBA, const unsigned int*, const unsigned int*, unsigned int, int, int)
 Etc::Image::EncodingStatus Etc::Image::Encode(Etc::Image::Format, Etc::ErrorMetric, float, unsigned int, unsigned int)
 Etc::Image::Image(Etc::Image::Format, unsigned int, unsigned int, unsigned char*, unsigned int, Etc::Image*, Etc::ErrorMetric)
 Etc::Image::Image(float*, unsigned int, unsigned int, Etc::ErrorMetric)
 Etc::IndividualTrys::IndividualTrys(Etc::ColorFloatRGBA, Etc::ColorFloatRGBA, const unsigned int*, const unsigned int*, unsigned int)
+EtcBlock4x4.cpp
+EtcBlock4x4Encoding.cpp
+EtcBlock4x4Encoding_ETC1.cpp
+EtcBlock4x4Encoding_R11.cpp
+EtcBlock4x4Encoding_RG11.cpp
+EtcBlock4x4Encoding_RGB8.cpp
+EtcBlock4x4Encoding_RGB8A1.cpp
+EtcBlock4x4Encoding_RGBA8.cpp
+EtcDifferentialTrys.cpp
+EtcFilter.cpp
+EtcImage.cpp
+EtcIndividualTrys.cpp
+EtcMath.cpp
+EtcSortedBlockList.cpp
 EventSystem001
 Exceeded size limit while expanding chunk
 Expected "="after member '%s'
@@ -1897,6 +1939,7 @@ Failed to write obj to '%s'
 Failed to write tga to '%s'
 Failed trying to Commit %u bytes, used %u bytes, reserved %u bytes
 FeModel combiner: Too many ropes (%u) or links (%u): cannot fit sum in uint16
+FieldPathEncodeFinish
 File has not been opened!
 FillAttr
 FillVBForAttribute
@@ -2002,6 +2045,8 @@ GenericGameData
 GenuineIntel
 GetBoneIndexForHitboxForMesh
 GetCPUInformation
+GetPathData
+GetPathData failed for read only CFieldPath
 GetResourceManifestCount
 GetResourceManifests
 GhUHc
@@ -2021,6 +2066,7 @@ H9W8t
 H9l$(u
 H9sHv
 H;*twH
+H;=(UE
 H;GHs
 H;I u
 H;J0H
@@ -2422,17 +2468,14 @@ LOG_GENERAL
 LOWVIOLENCE
 Launching %s
 Lc#D;c
-Lc'D)
 Lc'E)
 Lc)D;i
 Lc.D;n
 Lc/D)
 Lc/E)
 Lc3D;s
-Lc5XtL
 Lc7D)
 Lc;D;{
-Lc=qrL
 Lc>D;~
 LcCPJ
 LcC`HcKd+
@@ -2490,6 +2533,14 @@ MESH_TRANSLUCENCY_FULLY_OPAQUE
 MESH_TRANSLUCENCY_PARTIALLY_ALPHA_BLENDED
 MIN INCREASE vr_fidelity_level %d. Last frames = %.2fms, %.2fms, %.2fms < %.2f
 MNG features are not allowed in a PNG datastream
+MNetworkBitCount
+MNetworkChangeCallback
+MNetworkEncoder
+MNetworkOverride_Invalid
+MNetworkPriority
+MNetworkRemoveAll
+MNetworkSerializer
+MNetworkUserGroup
 MNoScatter
 MODEL_BONE_FLEX_INVALID
 MODEL_BONE_FLEX_TX
@@ -2600,6 +2651,9 @@ MorphSetData_t::LOOKUP_TYPE_VERTEX_ID
 MorphSetData_t::LookupType_t
 Move offset convars in direction you are looking
 MovementSettings
+N24CFieldPathHuffmanEncoder12InternalNodeE
+N24CFieldPathHuffmanEncoder5INodeE
+N24CFieldPathHuffmanEncoder8LeafNodeE
 N24MDiskDataForResourceType45CValueSearchTester_ClassIntrospectionHandle_tE
 N2f9N,
 N3Etc16Block4x4EncodingE
@@ -2614,6 +2668,17 @@ N3Etc30Block4x4Encoding_RGB8A1_OpaqueE
 N3Etc34Block4x4Encoding_RGBA8_TransparentE
 N3Etc35Block4x4Encoding_RGB8A1_TransparentE
 NE fA
+NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
+NETWORK_FIELD_CHANGED_TYPE_NONE
+NETWORK_FIELD_CHANGED_WITH_VALUE
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL_SORTLOWER
+NETWORK_FIELD_DEFAULT_PRIORITY
+NETWORK_FIELD_HIGHEST_PRIORITY
+NETWORK_FIELD_LOWEST_PRIORITY
 NHcK(Ic
 NHcK`Ic
 NHcKhIc
@@ -2670,6 +2735,9 @@ No valid format conversion from '%s' to '%s'
 Non-windows platforms don't support loading of JPG images
 Non-windows platforms don't support loading of PNG images
 Non-windows platforms don't support loading of TIFF images
+NonTopoComplex
+NonTopoComplexPack4Bits
+NonTopoPenultimatePluseOne
 Normalize3ComponentVectorInAttributes
 Normalized3x3SobelEdgeFilterFrom
 Not a JPEG file: starts with 0x%02x 0x%02x
@@ -2684,13 +2752,12 @@ NpC9D
 O Ic_`B
 O$HcO
 O?_Y@?R
+O@v9I
 OD;@ 
 OH91t`H
 Obtained EMS handle %u
 Obtained XMS handle %u
 OnDiskBufferData_t
-Only BC6H compression not supported on this target (windows only).
-Only BC7 compression not supported on this target (windows only).
 Only DXT1/DXT5 online texture compression supported.
 OpenVR event vr::VREvent_InputFocusCaptured
 OpenVR event vr::VREvent_InputFocusReleased
@@ -2738,6 +2805,7 @@ PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFjjjjEEPS2_jijEE
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFvjjEEPS2_ijEE
 P[A\A]A^A_]
 P[A\A]A^]
+P[A\]
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
@@ -2746,6 +2814,13 @@ ParseEXRHeaderFromMemory() failed! Error message: %s
 ParticleSystemMgr003
 Particles.ControlPoints
 Path Overflow, must be less than 260 characters.
+Path_AddToTail
+Path_AddToTail failed for read only CFieldPath
+Path_AddToTail failed, depth already == DEFAULT_MAX_PATH_DEPTH(%d)
+Path_PopLast
+Path_PopLast failed for read only CFieldPath
+Path_RemoveAll
+Path_RemoveAll failed for read only CFieldPath
 PerVertexLighting
 PermModelData_t
 PermModelExtPart_t
@@ -2806,6 +2881,18 @@ Plat_VirtualAlloc
 Plat_VirtualFree
 Please add a MovementSettings node to the model in ModelDoc
 Please add a Skeletal Input Settings node to the model in ModelDoc
+PlusFour
+PlusThree
+PlusTwo
+PopAllButOnePlusN
+PopAllButOnePlusNPack3Bits
+PopAllButOnePlusNPack6Bits
+PopAllButOnePlusOne
+PopNAndNonTopographical
+PopNPlusN
+PopNPlusOne
+PopOnePlusN
+PopOnePlusOne
 PosXYZ
 PostProcessingSystem_001
 Potential overflow in png_zalloc()
@@ -2817,6 +2904,28 @@ Profile size field missing from iCCP chunk
 PropWorldOrigin
 PropertyEditorSystem_001
 PtKfD9
+PushN
+PushNAndNonTopographical
+PushOneLeftDeltaNRightNonZero
+PushOneLeftDeltaNRightNonZeroPack6Bits
+PushOneLeftDeltaNRightNonZeroPack8Bits
+PushOneLeftDeltaNRightZero
+PushOneLeftDeltaOneRightNonZero
+PushOneLeftDeltaOneRightZero
+PushOneLeftDeltaZeroRightNonZero
+PushOneLeftDeltaZeroRightZero
+PushThreeLeftDeltaN
+PushThreeLeftDeltaOne
+PushThreeLeftDeltaZero
+PushThreePack5LeftDeltaN
+PushThreePack5LeftDeltaOne
+PushThreePack5LeftDeltaZero
+PushTwoLeftDeltaN
+PushTwoLeftDeltaOne
+PushTwoLeftDeltaZero
+PushTwoPack5LeftDeltaN
+PushTwoPack5LeftDeltaOne
+PushTwoPack5LeftDeltaZero
 Pv~*H
 Pw~*H
 Px~*H
@@ -2838,7 +2947,7 @@ R16F_EXPAND
 R32_UINT
 R8G8B8A8_ETC2_EAC
 R8G8B8_ETC2
-R8X[]
+R@X[]
 REDIA
 RENDER_BUFFER_APPEND_CONSUME_BUFFER
 RENDER_BUFFER_BYTEADDRESS_BUFFER
@@ -3389,6 +3498,7 @@ V_strnchr
 V_strnlen
 V_strtod
 V_strtoi64
+V_strtok
 V_strtoui64
 V_strupper_fast
 V_swscanf
@@ -3408,6 +3518,7 @@ Valid Relative Path
 Valve
 Vector2D
 Vector4D
+VectorAligned
 VertexPaintBlendParams
 VertexPaintBlendParams1
 VertexPaintTintColor
@@ -3547,6 +3658,7 @@ Zero length tRNS chunk
 ](Hc@
 ]@+] 
 ]A\A]
+^%D}#
 ^HcCP1
 ^IcL$ Ic
 ^T$(f
@@ -4165,6 +4277,7 @@ _ZdaPv
 _ZdlPv
 _Znam
 _Znwm
+__UNKNOWN__
 __assert_fail
 __assert_fail@@GLIBC_2.2.5
 __bss_start
@@ -4214,10 +4327,10 @@ __temp_unserialization_member__
 __tls_get_addr
 __tls_get_addr@@GLIBC_2.3
 _`v6f.
+_addons
 _edata
 _fini
 _init
-_modelbuilder_phys_%i.vphys
 _pv"A
 _root_keyname
 _setjmp
@@ -4237,7 +4350,9 @@ a_fDecodedAlpha >= 0.0f
 a_uiMultithreadingStride > 0
 a_uiRadius <= MAX_RADIUS
 abort@@GLIBC_2.2.5
+adler32.c
 after solve err=%f
+all_projects_common_code.cpp
 allowstatic
 alpha
 amd_multigpu
@@ -4266,17 +4381,25 @@ bentnormal
 bin\tools\bin\win32\vrperftestviewer.exe
 binary
 binary_bc
+bitbuf.cpp
+bitmap.cpp
 blendamount
 blendindices
 blendweight
 blendweights
 blockLOS
+blockcompress.cpp
 body_type
+bone_constraints.cpp
+boneconstraints.cpp
+boneconstraints_h_schema.gen_cpp
 borrow
 box2i
 break_create_joint_revolute
 break_uniform_burst
 breakable_count
+breakable_model
+breakable_skin
 buf error
 buffer error
 bulletimpact
@@ -4306,9 +4429,12 @@ ceilf@@GLIBC_2.2.5
 center
 cfg\actions.json
 channels
+characterset.cpp
 cheat
+checksum_crc.cpp
 children
 chlist
+cholesky.cpp
 chunkCount
 client
 clientcmd_can_execute
@@ -4321,14 +4447,20 @@ cloth_enable
 collision_group
 collision_prop
 color
+color_conversion.cpp
+colorconversion.cpp
 composite
 compression
 configvalue.cpp
 content
 control_point
 control_points_list
+convar.cpp
 cpD)ctL
+crc32.c
 create_particle
+crtoverride.cpp
+crtstuff.c
 curvature
 cylon
 d$ A9
@@ -4337,6 +4469,7 @@ d$(;l$@
 d$(E1
 dH34%(
 dH3<%(
+dIcD$
 dIcL$
 data error
 dataWindow
@@ -4369,6 +4502,8 @@ exit@@GLIBC_2.2.5
 explosion_delay
 explosive_damage
 explosive_radius
+exprevaluator.cpp
+externalreferences.cpp
 eye_data
 eye_data_list
 f	4JH9
@@ -4377,7 +4512,9 @@ f %d/%d/%d %d/%d/%d %d/%d/%d
 f;0tZfD
 f;0t_fD
 f;S.w
+fD91t
 fD;!t
+fE;4@u/L9
 fE;}.
 fG9\U
 fIcD$
@@ -4391,11 +4528,16 @@ fWeightSumRight > 0.0f
 fWeightSumTop > 0.0f
 faceMergeAngle
 false
+feagglomerator.cpp
+femodel.cpp
+femodelcombiner.cpp
 fff?fff?fff?fff?
 ffff.
 fffff.
 ffffff.
+fieldpath.cpp
 file error
+fileutils.cpp
 filterinY
 filterinZ
 fixed poH
@@ -4405,14 +4547,15 @@ float Etc::Block4x4Encoding::CalcPixelError(Etc::ColorFloatRGBA, float, Etc::Col
 float Etc::Block4x4Encoding::GetError()
 float( %f )
 floatbitmap.cpp
-floatbitmap.cpp(128): Unknown gamma type "%s"!
-floatbitmap.cpp(2258): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2269): Error loading %s
-floatbitmap.cpp(2292): Error! Unknown file type for %s
-floatbitmap.cpp(2311): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(312): Conversion not supported yet!
-floatbitmap.cpp(412): Conversion not supported yet!
-floatbitmap.cpp(875): Unsupported color format "%s", skipping!
+floatbitmap.cpp(137): Unknown gamma type "%s"!
+floatbitmap.cpp(2405): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2416): Error loading %s
+floatbitmap.cpp(2439): Error! Unknown file type for %s
+floatbitmap.cpp(2458): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(321): Conversion not supported yet!
+floatbitmap.cpp(421): Conversion not supported yet!
+floatbitmap.cpp(884): Unsupported color format "%s", skipping!
+floatbitmap2.cpp
 floor
 floor@@GLIBC_2.2.5
 floorf
@@ -4421,6 +4564,7 @@ flow in H
 fltx4
 force
 format
+formats.cpp
 fprintf
 fprintf@@GLIBC_2.2.5
 fputc
@@ -4440,8 +4584,10 @@ g0D;g@D
 g0Lc_8A
 gXu	H
 g_Mathlib_GammaToLinearByteTable
+g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
+g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
 g_pThreadPool
@@ -4456,11 +4602,13 @@ gamepad
 gamma = (%d/100000)
 generic
 generic tracked controller
+generichash.cpp
 getenv
 getenv@@GLIBC_2.2.5
 gfffD
 gfffG
 ghD;gx
+glview_buffer.cpp
 gravity
 grip0
 gx=%d, gy=%d, bx=%d, by=%d
@@ -4468,6 +4616,7 @@ hPVs-
 h[A\A]A^A_]
 h[A\A]]
 h[]A\A]A^A_
+halton.cpp
 handindex
 header crc mismatch
 headtype
@@ -4501,6 +4650,7 @@ iRed2 >= (signed)(0 + a_uiRadius) && iRed2 <= (signed)(31 - a_uiRadius)
 iRed2 >= 0 && iRed2 <= 31
 ic RotatH
 ignoring out of range rgb_to_gray coefficients
+imageformat.cpp
 impactHardThreshold
 impacthard
 impactsoft
@@ -4509,10 +4659,14 @@ incorrect data check
 incorrect gamma=(%d/100000)
 incorrect header check
 incorrect length check
+inffast.c
+inflate.c
+inftrees.c
 ing;H
 insufficient memory
 int overH
 int( %d = 0x%X )
+interface.cpp
 interfaces.cpp
 introspectedtypemanager.cpp
 invalid background gamma type
@@ -4535,17 +4689,72 @@ is_debris
 isioH
 isiof
 jIcE(1
+jaricom.c
+jcapimin.c
+jcapistd.c
+jcarith.c
+jccoefct.c
+jccolor.c
+jcdctmgr.c
+jchuff.c
+jcinit.c
+jcmainct.c
+jcmarker.c
+jcmaster.c
+jcomapi.c
+jcparam.c
+jcprepct.c
+jcsample.c
+jdapimin.c
+jdapistd.c
+jdarith.c
+jdcoefct.c
+jdcolor.c
+jddctmgr.c
+jdhuff.c
+jdinput.c
+jdmainct.c
+jdmarker.c
+jdmaster.c
+jdmerge.c
+jdpostct.c
+jdsample.c
+jerror.c
+jfdctflt.c
+jfdctfst.c
+jfdctint.c
+jidctflt.c
+jidctfst.c
+jidctint.c
 jiggle bone %u
+jmemmgr.c
+jmemnobs.c
 joystick%d
+jpegloader.cpp
+jquant1.c
+jquant2.c
+json_parser.c
+jutils.c
 k0D;k@
 k8~PA
 k<[A\A]A^]
 k@_aH
 k`HcSh
 k`v8f
+keyvalues.cpp
 keyvalues3.cpp
+keyvalues3_binaryreader.cpp
+keyvalues3_binarywriter.cpp
+keyvalues3_kv1textreader.cpp
+keyvalues3_oldschematext.cpp
+keyvalues3_textreader.cpp
+keyvalues3_textwriter.cpp
 khHcSp
 kv3format_manager.cpp
+kv3formats.cpp
+kv3formats_modeldoc.cpp
+kv3formats_vpcf.cpp
+kv3transfer.cpp
 l$ E9
 l$ u0H
 l$ v=
@@ -4578,6 +4787,7 @@ localToGlobal
 lockRotationAlpha
 longjmp
 longjmp@@GLIBC_2.2.5
+lookatchain.cpp
 loop_break_on_damage
 loop_break_on_flashlight
 loop_in_action
@@ -4906,6 +5116,8 @@ m_nXLeftDst
 m_nYTopDst
 m_nameHash
 m_offsets
+m_outerKnuckle1
+m_outerKnuckle2
 m_outputMorph
 m_outputTransformList
 m_outputWeightList
@@ -5001,6 +5213,8 @@ m_uiAddedBlocks == m_uiImageBlocks
 m_uiEncodingIterations == 0
 m_vAngularTargetVelocity
 m_vBasePosition
+m_vCapsulePos1
+m_vCapsulePos2
 m_vEnds
 m_vEyePosition
 m_vForwardLS
@@ -5027,6 +5241,7 @@ m_wristBones
 malformed sPLT chunk
 malloc
 malloc@@GLIBC_2.2.5
+manifestregistrar.cpp
 mapbuilder.nodraw
 mapbuilder.occluder
 materials/dev/steamvr_controller_base.vmat
@@ -5046,6 +5261,7 @@ memcpy
 memcpy@@GLIBC_2.14
 memmove
 memmove@@GLIBC_2.2.5
+memoverride.cpp
 mempool.cpp
 memset
 memset@@GLIBC_2.2.5
@@ -5054,11 +5270,17 @@ meshUtilsKeyValues
 mesh_calculate_curvature_smooth_invert
 mesh_calculate_curvature_smooth_pass_count
 mesh_calculate_curvature_smooth_weight
+meshedgesplitter.cpp
 meshutils
+meshutils_schema_anchor.gen_cpp
 min_angle
 model.cpp
 model_default_preview_sequence_name
 model_dump_convert_info
+model_old_disk.cpp
+model_old_disk_h_schema.gen_cpp
+modelbuilder.cpp
+modelbuilder_h_schema.gen_cpp
 modeldoc0
 modeldoc1
 modeldoc10
@@ -5070,6 +5292,7 @@ modeldoc15
 modeldoc16
 modeldoc17
 modeldoc18
+modeldoc19
 modeldoc2
 modeldoc3
 modeldoc4
@@ -5079,7 +5302,12 @@ modeldoc7
 modeldoc8
 modeldoc9
 modellib
+modellib_schema_anchor.gen_cpp
 modf@@GLIBC_2.2.5
+morphset.cpp
+morphset_old_disk.cpp
+morphset_old_disk_h_schema.gen_cpp
+movementsettings.cpp
 n$ATE1
 n, DynamH
 n??5^?
@@ -5125,10 +5353,13 @@ pbucket->plinkLast->GetNext() == nullptr
 perftest_multigpu
 pervertexlighting
 phys_res
+physaggregatedata.cpp
 physgun_interactions
 physib
+physicsresourcehelpers.cpp
 pixelAspectRatio
 play_endcap
+png.c
 png_do_quantize returned rowbytes=0
 png_do_rgb_to_gray found nongray pixel
 png_inflate logic error
@@ -5136,6 +5367,16 @@ png_set_background
 png_set_gAMA
 png_set_gamma file gamma
 png_set_gamma screen gamma
+pngerror.c
+pngget.c
+pngloader.cpp
+pngmem.c
+pngread.c
+pngrio.c
+pngrtran.c
+pngrutil.c
+pngset.c
+pngtrans.c
 point0
 point1
 position
@@ -5144,6 +5385,7 @@ posxyz
 pow@@GLIBC_2.2.5
 preferred_carryangles
 prop_data
+psd.cpp
 ptestbed
 pthread_mutex_destroy
 pthread_mutex_destroy@@GLIBC_2.2.5
@@ -5165,6 +5407,7 @@ ptry < &a_phalf->m_atry[IndividualTrys::Half::MAX_TRYS]
 ptry->m_fError < 3.40282346638528859812e+38F
 ptryBest1 != nullptr
 ptryBest2 != nullptr
+quaternionaligned.cpp
 r AQD
 r%L9e
 r5Hcq
@@ -5174,17 +5417,28 @@ r_multigpu_num_gpus_found
 r_multigpu_num_gpus_used
 radius0
 radius1
+randsse.cpp
 rc?Quh
 realloc
 realloc@@GLIBC_2.2.5
 recenter_on_parent_bone
 remapping vertex %d[w%d] invalid: %d->%d >= %d
 remapping vertex %d[w%d] invalid: %d->? >= %d
+rendermesh.cpp
+rendermesh_h_schema.gen_cpp
+rendermesh_old_disk.cpp
+rendermesh_old_disk_h_schema.gen_cpp
+rendersystemtypes_h_schema.gen_cpp
 replicated
+resample.cpp
 resource
+resourcedictionary.cpp
+resourcefile.cpp
 resourcestream.cpp
 rgb to gray green coefficient
 rgb to gray red coefficient
+rnd_down
+rnd_up
 rootNode
 roundf
 roundf@@GLIBC_2.2.5
@@ -5203,7 +5457,11 @@ sPLT chunk has bad length
 sPLT chunk requires too much memory
 s`A]A^xq
 schema
+schemabindings.cpp
 schemaclassinfo.cpp
+schemadatatraversal.cpp
+schemaenuminfo.cpp
+schemaiterator.cpp
 scrapeRoughThreshold
 scraperough
 scrapesmooth
@@ -5222,8 +5480,11 @@ sin@@GLIBC_2.2.5
 singleplayer
 snprintf@@GLIBC_2.2.5
 source_filename
+sparsematrix.cpp
 spawn_motion_disabled
 speeds
+spherical.cpp
+splitstring.cpp
 springConstant
 sqrt@@GLIBC_2.2.5
 sqrtf
@@ -5232,12 +5493,14 @@ src/public/tier0/platform.h
 srgbgammatolinear
 ss_added
 sscanf@@GLIBC_2.2.5
+sseconst.cpp
 stats.m_flFidelityDroppedFramesAverage = %f
 stats.m_flFidelityDroppedFramesCPUAverage = %f
 stats.m_flFidelityFPSAverage = %f
 stats.m_flFidelityLevelAverage = %f
 stats.m_nFidelityNumFrames = %d
 status
+stb_dxt_impl.cpp
 stderr
 stderr@@GLIBC_2.2.5
 steam.app.450390
@@ -5254,6 +5517,7 @@ strcpy@@GLIBC_2.2.5
 strdup
 strdup@@GLIBC_2.2.5
 stream end
+stringpool.cpp
 strlen
 strlen@@GLIBC_2.2.5
 strncpy@@GLIBC_2.2.5
@@ -5262,11 +5526,13 @@ strstr@@GLIBC_2.2.5
 strtod@@GLIBC_2.2.5
 strtol
 strtol@@GLIBC_2.2.5
+studioboneconstraints.cpp
 sub%dx%d.tga
 submrg%dx%d.tga
 suppress
 surfacePropertyName
 surface_prop
+surfaceproperties_resource_h_schema.gen_cpp
 system
 t	HcR
 t	[A\A]A^]
@@ -5285,9 +5551,11 @@ t$lfA
 t$pvufA
 t&HcQ
 t&HcU
+t'D;5>
 t'IcA
 t(;2}
 t(D9H
+t);=r
 t)HcE
 t*A+F$I
 t*D;p
@@ -5319,6 +5587,7 @@ t;fE9
 t<Ic_(A;_8
 t<Lcs8D;sHD
 t<v"<
+t=[A\]
 t>IcE
 t>Mcv
 t>fA9
@@ -5328,6 +5597,7 @@ tAHcV
 tC[A\A]A^]
 tEfE9
 tIW?Z
+tJHcC
 tK~%E1
 tN~+A
 tRNS chunk has out-of-range samples for bit_depth
@@ -5346,12 +5616,17 @@ texcoordH
 text compression mode is out of range
 texturescale
 tgHcO
+tgaloader.cpp
+tgawriter.cpp
 thHcK
 thHcK@1
 thIcG
 th_BEGINH
 th___ENDH
+tier1.cpp
+tier2.cpp
 tiles
+tinyexr_impl.cpp
 tjHcM
 tl~)A
 tmE;>thH
@@ -5360,6 +5635,7 @@ tolower@@GLIBC_2.2.5
 too many length or distance symbols
 tpIcP
 trackpad%d
+transform.cpp
 transparency
 trigger%d
 trunc
@@ -5376,11 +5652,12 @@ u:[A\A]A^A_]
 u;IcA
 u;IcE
 u<Ic\$
-uAL;%R
+uAL;%:AE
 uIMc~
 uKH9G8L
 uRIcI
 uXMc}
+u[[A\A]A^]
 uiTransparentPixels < PIXELS
 unable to load mesh "%s"
 unknown compression method
@@ -5394,7 +5671,13 @@ useMotionDamping
 useSmoothPaths
 usemtl initialShadingGroup
 utlbuffer.cpp
+utlmemory.cpp
+utlsoacontainer.cpp
+utlstreambuffer.cpp
 utlstring.cpp
+utlstringtoken.cpp
+utlsymbol.cpp
+utltokenizer.cpp
 v %.6g, %.6g, %.6g
 v %g %g %g
 v %g %g %g%s
@@ -5403,10 +5686,14 @@ vKH+E
 vV<	uRH
 v`m`J
 vb phys
+vector.cpp
 vector::_M_default_append
 vector::_M_emplace_back_aux
 vector::_M_range_check: __n (which is %zu) >= this->size() (which is %zu)
 vector::_M_range_insert
+vectoraligned.cpp
+vertexkdtree.cpp
+vertexops.cpp
 vf7Sd
 virtual void Etc::Block4x4Encoding_ETC1::PerformIteration(float)
 virtual void Etc::Block4x4Encoding_ETC1::SetEncodingBits()
@@ -5427,6 +5714,7 @@ virtual void Etc::Block4x4Encoding_RGBA8_Opaque::PerformIteration(float)
 virtual void Etc::Block4x4Encoding_RGBA8_Transparent::PerformIteration(float)
 vmatAVL
 vmatL
+vmatrix.cpp
 vmesh
 vmorf
 vn %.6g, %.6g, %.6g
@@ -5473,6 +5761,9 @@ vpcf7
 vpcf8
 vpcf9
 vphys
+vphysx_collisionmesh_resource_h_schema.gen_cpp
+vphysx_resource_handles_h_schema.gen_cpp
+vphysx_shape_resource_h_schema.gen_cpp
 vr.cpp
 vr.cpp(4620): ERROR! Unknown controller axis type %d!
 vr.cpp(5730): VR - Destroying old VB for Stenciling!
@@ -5487,6 +5778,7 @@ vr.cpp(6686): VR - Destroying old IB for reconstruction eye %d!
 vr.cpp(6707): VR - Destroying old IB for reconstruction!
 vr.cpp(6847): VR - Error! VB handle is invalid in CVrReconstructionRenderer!
 vr.cpp(6856): VR - Error! IB handle is invalid in CVrReconstructionRenderer!
+vr_assert.cpp
 vr_author_refpt vrfly_refpt_pos vrfly_refpt_ang anchor models/dev/gordon_at_desk.vmdl
 vr_black_level_clamp
 vr_chaperone_hardbounds_disabled
@@ -5494,6 +5786,7 @@ vr_companion_window_always_on
 vr_companion_window_brightnessmultiplier
 vr_companion_window_zoom
 vr_compute_ideal_render_target_scalars
+vr_debugvisualizer.cpp
 vr_eye_separation_mm
 vr_eye_separation_mm_enable
 vr_fast_gs
@@ -5509,6 +5802,7 @@ vr_fidelity_threshold_frame_percent_critical
 vr_fidelity_threshold_frame_percent_extrapolation
 vr_fidelity_threshold_frame_percent_max
 vr_fidelity_threshold_frame_percent_min
+vr_flymode.cpp
 vr_foveated_boundary
 vr_foveated_inner_scalar
 vr_foveated_outer_scalar
@@ -5525,6 +5819,7 @@ vr_ghost_increment
 vr_ghost_next
 vr_ghost_previous
 vr_info
+vr_input.cpp
 vr_interleaved_reprojection
 vr_loading_card_fg_offset_x
 vr_loading_card_fg_offset_y
@@ -5582,6 +5877,8 @@ vrfly_refpt_pos
 vrfly_speed
 vrgrp
 vrnmd
+vrskeletalinputsettings_h_schema.gen_cpp
+vrskeletondefinition_h_schema.gen_cpp
 vsnap
 vsurf
 vt %.6g, %.6g
@@ -5610,6 +5907,7 @@ x@HcO
 xNHcO
 x[A\A]A^A_]
 x[A\A]H
+x[A\A]]
 x[]A\A]A^A_
 xb;wH}]Hc
 xes;H
@@ -5627,6 +5925,7 @@ zeucH
 zlib memory error
 zlib stream error
 zlib version error
+zutil.c
 {(t3[A\]
 {8D;{HD
 {8[A\]
@@ -5650,7 +5949,6 @@ zlib version error
 |*Ic:H
 |20M9
 |7(Mc
-|7Hf.
 |=H;I 
 |B Hc
 |FHcK
@@ -5663,7 +5961,6 @@ zlib version error
 }cHcU
 ~(A\A]A^A_]
 ~)H;7I
-~+Hcu
 ~+Lc}
 ~0HcE
 ~1Lc}
@@ -5673,12 +5970,14 @@ zlib version error
 ~;HcE
 ~<;w$w7
 ~=;w$w8
-~?HcE
+~>HcE
 ~BE9l$HE
 ~CHcG
 ~CHcW
 ~E;w$
 ~FHcu
+~HLcu
+~IHcK
 ~aIcE
 ~gHc6H
 ~gLc]

@@ -133,6 +133,7 @@ $[A\]
 (Lck D;k0D
 (None)
 (Unknown)
+([A\A]A
 ([A\A]A^A_]
 ([A\A]A^H
 ([A\A]]
@@ -181,6 +182,7 @@ $[A\]
 .D$Tv
 .D$Tz
 .F(rn
+.O4z%u#
 .[@z	u
 .comment
 .data
@@ -227,6 +229,7 @@ $[A\]
 11CAudioMixer
 12CAudioSource
 12CEmptyConVar
+12CSceneObject
 12CSosOperator
 12CSoundSystem
 12CThreadEvent
@@ -268,13 +271,16 @@ $[A\]
 16CSosOperatorNull
 16CSosOperatorVec3
 16CVMixTypeManager
+16ISceneObjectDesc
 17CAudioDeviceNull2
 17CSequenceArranger
+17CSosOperatorCurve
 17CSosOperatorDelta
 17CSosOperatorFloat
 17CSosOperatorFunc1
 17CSosOperatorNoise
 17CSosOperatorTimer
+17IGenericInterface
 17ISequenceArranger
 17IVMixToolServices
 18CAsyncWavDataCache
@@ -433,6 +439,7 @@ $[A\]
 24CSosOperatorGetOpVarInfo
 24CSosOperatorGetOpVarVsnd
 24CSosOperatorInRangeFloat
+24CSosOperatorLerpSpeakers
 24CSosOperatorMathAverage8
 24CSosOperatorQueueToTrack
 24CSosOperatorRandomFloat3
@@ -480,6 +487,7 @@ $[A\]
 28CSosOperatorArrangementStart
 28CSosOperatorPauseSoundEvents
 28CSosOperatorRightAngleFloat3
+28IFlattenedSerializerSpewFunc
 28ISchemaCollectionManipulator
 29CKeyValuesDumpContextAsDevMsg
 29CSosOperatorCalcFixedRotation
@@ -509,6 +517,7 @@ $[A\]
 31CSosOperatorIncrementOpVarFloat
 31CSosOperatorLogicSwitchSpeakers
 31CSosSetLibraryStackFieldsInfo_t
+32CFlattenedSerializerSpewFunc_Log
 32CNopVSoundEventScriptTypeManager
 32CNopVSoundStackScriptTypeManager
 32CResourceReferenceFixupTraversal
@@ -518,6 +527,7 @@ $[A\]
 33CVSoundEventScriptTypeManagerBase
 33CVSoundStackScriptTypeManagerBase
 35CSosOperatorIterateAndMergeSpeakers
+38CFlattenedSerializerSpewFunc_UtlString
 4$HcU
 4fff>fff>fff>fff>
 4vf;T
@@ -603,9 +613,8 @@ $[A\]
 >SDL Audio Device: %s
 >[A\]
 >\Lc#D;c
->math_remap_float
+>math_lerp_speakers
 >q`tD
-?../public/tier2/fieldpath.h
 ?333333
 ?A\A]D
 ?Cleaning up leaked audio stream!
@@ -618,6 +627,8 @@ $[A\]
 ?input_folliage_loss
 ?input_max_events
 ?input_max_velocity
+?m_bMatchEventName
+?math_delta
 ?output_element_count
 @ A;D$ 
 @ A^]
@@ -800,17 +811,14 @@ AWAVAUATSH
 AWAVAUATSL
 AWAVAUATSRH
 AWAVAUATUSH
-AWAVAUD
 AWAVAUI
 AWAVAUL
 AWAVAULc
 AWAVAUM
-AWAVE
 AWAVE1
 AWAVH
 AWAVI
 AWAVL
-AWAVLc
 AWAVM
 AZA[1
 A\A]A^A_]
@@ -840,12 +848,12 @@ Addon unloaded, unloading sound resources.
 Afff?fff?fff?
 Ago : lower-mid central unrounded vowel
 Ago : mid-central unrounded vowel
-Ainvalid_hitbox
 AllPass
 AllocInternal
 Allocate
 AllocateAndCopy
 AllocateResource
+Am_nIncomingTangent
 AnimAddLayer
 AnimAlign
 AnimAutoLayer
@@ -1059,6 +1067,11 @@ CSoundSampler: SoundEvent: %s
 CTSQueue corruption
 CTransform
 CUE Operators:
+CURVE_TANGENT_FREE
+CURVE_TANGENT_LINEAR
+CURVE_TANGENT_MIRROR
+CURVE_TANGENT_SINE
+CURVE_TANGENT_SPLINE
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -1211,7 +1224,6 @@ Cutoff Freq
 Cutoff Frequency
 Cycle or diamond double-reference to '%s'
 C|x<H
-D"i*t
 D#O\H
 D#j\H
 D$ E1
@@ -1225,6 +1237,7 @@ D$(~3I
 D$0H9
 D$4AUP
 D$8I9
+D$8Ic
 D$8uAA
 D$@;A@t*H
 D$@D;kH
@@ -1254,6 +1267,8 @@ D+s$Mc
 D+{$Mc
 D1	 t
 D8"u'
+D9%2==
+D9%D&=
 D9C ~JMc
 D9k0~{L
 D9kLvEIc
@@ -1276,6 +1291,7 @@ D;kHD
 D;kHH
 D;o(D
 D;p@|
+D;q(t%I
 D;s |
 D;s }uH
 D;s(t6H
@@ -1369,6 +1385,7 @@ E;4$}/E
 E;fH}2I
 E;g@|
 E;l$ |
+E;l$HD
 E;l$p
 E;n0H
 E;n`}
@@ -1522,7 +1539,7 @@ Fork : voiceless labiodental fricative
 FormatV
 Forward Saw
 Free ?: %s
-G	|`1
+G	|N1
 G A+G
 G A9G
 G D;(t
@@ -1627,7 +1644,6 @@ H[A\A]]
 HammerMapLoader001
 HandleSetLibStackFieldsMessageQueue
 HandleSetSoundEventFieldsMessageQueue
-Hc5$<I
 Hc@pH
 HcC A
 HcC H
@@ -1762,8 +1778,8 @@ Lc'E)
 Lc)D;i
 Lc.D;n
 Lc/E)
+Lc1D;q
 Lc3D;s
-Lc6D;v
 Lc7E)
 LcH LcP
 LcK B
@@ -1868,6 +1884,7 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 MhD;1
+Mirror
 Missing file '%s'
 Missing wav file '%s'
 MixGroup %s:
@@ -1892,6 +1909,7 @@ N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
 N24MDiskDataForResourceType45CValueSearchTester_ClassIntrospectionHandle_tE
 N8Icp
+NE fA
 NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
 NETWORK_FIELD_CHANGED_NO_VALUE
 NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
@@ -1934,6 +1952,7 @@ O$fD9
 O8HcG
 O8HcW
 O8v	1
+O@v9I
 OLLcG I
 OPEN SIDED OUTDOOR AREA Detected 
 OPTIONS
@@ -2097,6 +2116,7 @@ PushTwoPack5LeftDeltaOne
 PushTwoPack5LeftDeltaZero
 Put; voiceless alveolar stop
 PxA;\$H|
+Q)=../public/tier2/fieldpath.h
 QAngle
 QHcK(Ic
 Quaternion
@@ -2104,7 +2124,7 @@ Queue sound '%s'
 Queue took %f msec to drain
 Queued: elapsed time: %f, next sync time: %f, length: %f
 QueuedLoaderVersion001
-R8X[]
+R@X[]
 RERLH
 RESOURCE_TYPE_SOUND
 RESOURCE_TYPE_SOUNDEVENTSCRIPT
@@ -2303,6 +2323,7 @@ Spew data about the list of block entries.
 Spew message to console any time async sound loading blocks on file i/o.
 Spew stream pool failures.
 Spew streaming info ( 0=Off, 1=streams, 2=buffers
+Spline
 Square Wave
 Stack %s: Unable to connect input to specified field: %s
 Stack Collection:
@@ -2632,6 +2653,7 @@ Zap : voiced alveolar fricative
 [%s] %s : src %d : channel %d : %d dB : vol %.2f : time %.3f
 [AZA\A]A^A_]I
 [A\A]
+[A\A]A
 [A\A]A^A_]
 [A\A]A^A_]A
 [A\A]A^H
@@ -2794,6 +2816,7 @@ adsp_street_min
 adsp_tunnel_min
 adsp_wall_height
 advanced
+all_projects_common_code.cpp
 allowstatic
 anchor_angles
 anchor_position
@@ -2809,6 +2832,10 @@ array_selection_type
 attachment
 attachment_offset
 attackTime
+audio_pch.cpp
+audio_stream.cpp
+audio_stream_attached.cpp
+audioprocessor.cpp
 auto_connect_public_fields
 auto_unragdoll_duration
 bIcL$
@@ -2818,14 +2845,18 @@ backward
 base_operator
 binary
 binary_bc
+bitbuf.cpp
 blendamount
 blockLOS
 block_equal_priority
+blockcompress.cpp
 body_type
 borrow
 break_create_joint_revolute
 break_uniform_burst
 breakable_count
+breakable_model
+breakable_skin
 burst_randomize
 burst_scale
 c@[A\A]A^]
@@ -2854,12 +2885,15 @@ ceilf@@GLIBC_2.2.5
 center1
 center2
 channels
+characterset.cpp
 cheat
 check_event_data
 checksum
+checksum_crc.cpp
 children
 circle
 circle_bounce
+circularbuffer.cpp
 clamp_range
 client
 clientcmd_can_execute
@@ -2875,6 +2909,7 @@ composite
 configvalue.cpp
 construction_stack
 control_point
+convar.cpp
 convar_get
 convar_set
 core.null
@@ -2883,6 +2918,8 @@ core_update_default
 cplayervoice
 create_particle
 crossfade ms
+crtoverride.cpp
+crtstuff.c
 ctrl_switch12_float
 ctrl_switch3_float
 ctrl_switch3_float3
@@ -2905,6 +2942,9 @@ default_to_max
 delay count
 denominator
 developer
+device_capture.cpp
+device_null.cpp
+device_sdl.cpp
 displayName
 display_category
 display_game
@@ -2954,6 +2994,8 @@ exit_if_blocked
 explosion_delay
 explosive_damage
 explosive_radius
+exprevaluator.cpp
+externalreferences.cpp
 f;0tXfD
 f;0tZfD
 f;0t_fD
@@ -2979,6 +3021,7 @@ ffff.
 fffff.
 ffffff.
 field_override
+fieldpath.cpp
 float( %f )
 float2
 float4
@@ -3017,7 +3060,9 @@ game_entity_world_aabb
 game_get_point_contents
 game_get_source_info
 game_keys
+gametrace.cpp
 generic
+generichash.cpp
 get_system_globals
 global
 grainSampleCount
@@ -3186,6 +3231,8 @@ input_rotation_angle
 input_sampler
 input_scalar
 input_scale
+input_scale_X
+input_scale_Y
 input_size
 input_soundlevel
 input_source_position
@@ -3255,22 +3302,28 @@ input_y
 input_z
 instrument
 int( %d = 0x%X )
+interface.cpp
 interfaces.cpp
+interval.cpp
 introspectedtypemanager.cpp
 invalid stack
 invalid_bone
+invalid_hitbox
 invalid_vsnd
 invert
 invert_orientation
 invert_scale
 is_debris
 is_untimed
+isoundopsystemedit_h_schema.gen_cpp
 itemKVString
 itemName
 itemPos
 itemType
 itemTypeName
 j8Hcr
+jIcE(1
+json_parser.c
 k0D;k@
 k8t L
 k<[A\A]A^]
@@ -3278,10 +3331,20 @@ k@_aH
 kXHcChE
 k`HcSh
 key_groups
+keyvalues.cpp
 keyvalues3.cpp
+keyvalues3_binaryreader.cpp
+keyvalues3_binarywriter.cpp
+keyvalues3_oldschematext.cpp
+keyvalues3_textreader.cpp
+keyvalues3_textwriter.cpp
 khHcSp
 kj[A\A]A^]
 kv3format_manager.cpp
+kv3formats.cpp
+kv3formats_modeldoc.cpp
+kv3formats_vpcf.cpp
+kv3transfer.cpp
 l$@E;l$P
 last_sniff
 left_front
@@ -3345,7 +3408,6 @@ m_bInvertMatch
 m_bIsBlocking
 m_bLocalSpace
 m_bMatchEntIndex
-m_bMatchEventName
 m_bMatchEventSubString
 m_bMatchOpvar
 m_bOffsetExistingPos
@@ -3387,6 +3449,8 @@ m_flOutput1
 m_flRandomMax
 m_flRandomMin
 m_flScalePerParentParticle
+m_flSlopeIncoming
+m_flSlopeOutgoing
 m_groupList
 m_hSnapshot
 m_matchPattern
@@ -3408,6 +3472,7 @@ m_nMapType
 m_nMaxCount
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOutgoingTangent
 m_nRandomMode
 m_nScaleCP
 m_nScaleCPComponent
@@ -3422,11 +3487,16 @@ m_pHandle
 m_pParent
 m_pszSnapshotName
 m_snapshotName
+m_spline
+m_tangents
 m_vActions
+m_vDomainMaxs
+m_vDomainMins
 m_values
 make_vertical
 malloc
 malloc@@GLIBC_2.2.5
+manifestregistrar.cpp
 mask_type
 match_duration_type
 match_entity
@@ -3442,6 +3512,7 @@ math_calc_directional_vec3
 math_calc_doppler
 math_calc_fixed_rotation
 math_clamp_float
+math_curve_2d
 math_curve_2d_4knot
 math_db_to_gain
 math_delta
@@ -3452,6 +3523,7 @@ math_float3
 math_func_float
 math_gain_to_db
 math_inrange_float
+math_lerp_speakers
 math_normalize_vec3
 math_perlin_noise
 math_random_float
@@ -3479,6 +3551,8 @@ memcpy
 memcpy@@GLIBC_2.14
 memmove
 memmove@@GLIBC_2.2.5
+memoverride.cpp
+mempool.cpp
 memset
 memset@@GLIBC_2.2.5
 meshes
@@ -3486,6 +3560,7 @@ min_angle
 min_note
 min_output
 min_velocity_db
+mix.cpp
 mixDownRule
 mix_input
 mod_LFO
@@ -3500,6 +3575,7 @@ modeldoc15
 modeldoc16
 modeldoc17
 modeldoc18
+modeldoc19
 modeldoc2
 modeldoc3
 modeldoc4
@@ -3510,6 +3586,7 @@ modeldoc8
 modeldoc9
 movie_fixwave
 movie_fixwave: File '%s' does not exist
+mp3_helpers.cpp
 mpg123_close
 mpg123_decode_frame
 mpg123_delete
@@ -3687,13 +3764,16 @@ particles/
 pass_opvar_args
 paused
 perlin
+phonemeconverter.cpp
 physgun_interactions
+piecewisecurve.cpp
 pitchScale
 play_endcap
 playback_type
 playvol
 point0
 point1
+powsse.cpp
 preferred_carryangles
 preload_vsnds
 preview
@@ -3731,9 +3811,11 @@ public.release
 public.sample
 public.start_point
 public.volume
+public_field_name
 qHcKhIc
 qPD;~
 quantize_type
+quaternionaligned.cpp
 r5Hcq
 r8HcJ
 radius0
@@ -3741,6 +3823,7 @@ radius1
 random
 random_exclusive
 random_weighted
+randsse.cpp
 ratio
 recenter_on_parent_bone
 reference_operator
@@ -3750,6 +3833,7 @@ replicated
 reserve_array
 resource
 resourceManifest
+resourcefile.cpp
 resourcesystem
 right_down
 right_front
@@ -3759,12 +3843,18 @@ right_rear
 right_rear1
 right_rear2
 rmsTime
+rnd_down
+rnd_up
 rootNode
 round_to_int
 s<u9H
 sampler_event
 schema
+schemabindings.cpp
 schemaclassinfo.cpp
+schemadatatraversal.cpp
+schemaenuminfo.cpp
+schemaiterator.cpp
 scripts/soundmixers.txt
 scripts/vmidi/arrangements/arrangements_manifest.txt
 scripts/vmidi/samplers/samplers_manifest.txt
@@ -3773,6 +3863,7 @@ secondary
 send%d
 sendOperator
 send_type
+sentence.cpp
 sequence_index
 sequence_number
 sequencer_start
@@ -3783,6 +3874,7 @@ siNG : voiced velar nasal
 sideChain
 sideChainPeak
 silence
+simple_filter.cpp
 singleplayer
 slerp
 slerp_bounce
@@ -3797,10 +3889,13 @@ snd_async_stream_spew
 snd_autodetect_latency
 snd_compare_KV_convert
 snd_compare_soundevents
+snd_das.cpp
 snd_delay_sound_shift
+snd_dev_common.cpp
 snd_disable_mixer_duck
 snd_disable_mixer_solo
 snd_dma.cpp
+snd_dsp.cpp
 snd_duckerattacktime
 snd_duckerreleasetime
 snd_duckerthreshold
@@ -3825,12 +3920,14 @@ snd_list_soundevents_by_stack
 snd_max_same_sounds
 snd_max_same_weapon_sounds
 snd_mergemethod
+snd_mix.cpp
 snd_mix_async
 snd_mix_minframetime
 snd_mixahead
 snd_mixer_master_dsp
 snd_mixer_master_level
 snd_mixgroups.cpp
+snd_mp3_source.cpp
 snd_musicvolume
 snd_occlusion_debug
 snd_op_sys/sos_system.cpp
@@ -3932,15 +4029,59 @@ snd_toolvolume
 snd_visualize
 snd_vmix_show_input_updates
 snd_voipvolume
+snd_wave_data.cpp
+snd_wave_mixer.cpp
+snd_wave_mixer_adpcm.cpp
 snd_wave_mixer_mp3.cpp
+snd_wave_source.cpp
+snd_wave_temp.cpp
+snd_win.cpp
 sndplaydelay
 solo: %3.2f 
 soloname
+sos_edit.cpp
+sos_entry_match_system.cpp
 sos_goto
+sos_group_system.cpp
 sos_import_stack
+sos_op.cpp
+sos_op_block_entry.cpp
+sos_op_convar.cpp
+sos_op_delta.cpp
+sos_op_distant_dsp.cpp
+sos_op_entity_info.cpp
+sos_op_falloff.cpp
+sos_op_filters.cpp
+sos_op_iterate_merge_speakers.cpp
+sos_op_math.cpp
+sos_op_mixer.cpp
+sos_op_mixlayer.cpp
+sos_op_mods.cpp
+sos_op_occlusion.cpp
+sos_op_opvar.cpp
+sos_op_pause_soundevents.cpp
+sos_op_pos_vec8.cpp
+sos_op_samplers.cpp
+sos_op_sequencer.cpp
+sos_op_sos.cpp
+sos_op_soundevent_groups.cpp
+sos_op_source_info.cpp
+sos_op_spatialize.cpp
+sos_op_start_soundevent.cpp
+sos_op_stop_soundevents.cpp
+sos_op_timers.cpp
+sos_op_tracks.cpp
+sos_op_util.cpp
+sos_op_vmix.cpp
 sos_set_info
+sos_system.cpp
+sos_track_system.cpp
+sos_vmidi_samplers.cpp
+sos_vmidi_sequencer.cpp
 sound/
 sound_device_override
+sound_shared.cpp
+soundevent.cpp
 soundevent_block
 soundevent_block_test
 soundevent_control
@@ -3959,8 +4100,10 @@ soundevent_pause
 soundevent_samples
 soundevent_start
 soundevent_stop_all
+soundeventgroupsystem_h_schema.gen_cpp
 soundevents/soundevents_manifest.vrman
 soundevents/soundevents_manifest_tools.vrman
+soundeventscriptschema_h_schema.gen_cpp
 soundinfo
 soundlist
 soundmixer_get_mixgroup
@@ -3977,17 +4120,24 @@ soundstacks/mixgraph.vmix
 soundstacks/sosstrings.txt
 soundstacks/soundeventgroups.vsndgrps
 soundstacks/soundstacks_manifest.vrman
+soundstackscriptschema_h_schema.gen_cpp
 soundsystem
+soundsystem.cpp
+soundsystem_schema_anchor.gen_cpp
 source_filename
 sparse_convolution
+sparse_convolution_noise.cpp
 spawn_motion_disabled
 spawn_orphans
 speaker_config
 speed
+splitstring.cpp
 sqrt@@GLIBC_2.2.5
 sqrtf
 sqrtf@@GLIBC_2.2.5
 ss_added
+sseconst.cpp
+steamaudio_wrapper.cpp
 stop_immediately
 stop_instantly
 stop_oldest
@@ -4001,6 +4151,7 @@ strcmp@@GLIBC_2.2.5
 strcpy
 strcpy@@GLIBC_2.2.5
 string_token
+stringpool.cpp
 strlen
 strlen@@GLIBC_2.2.5
 strrchr
@@ -4022,7 +4173,6 @@ t$`uAA
 t$pE1
 t'D;5
 t(;2}
-t);="
 t)HcE
 t*A+F$I
 t+Lck8D;kHD
@@ -4060,7 +4210,10 @@ test_angles_relative
 texturescale
 thIcG
 tiIcw
+tier1.cpp
+tier2.cpp
 time slice ms
+time_stretch.cpp
 tkD+@
 tl~)A
 tools/
@@ -4068,6 +4221,7 @@ total preset slots used: %d
 tpE;o0
 track_queue
 track_stop
+transform.cpp
 turn_rate
 txHcW
 tyHcW
@@ -4078,6 +4232,7 @@ u)IcE
 u64( %lld = 0x%llX )
 u=[A\]
 u?;KL}:Hc
+uD;Gd}?
 uKUHc
 u[[A\A]A^]
 uint32
@@ -4101,18 +4256,26 @@ util_print_vsnd
 util_timer
 util_timer_ramp
 utlbuffer.cpp
+utlmemory.cpp
 utlmemoryarena.cpp
+utlstablesymboltable.cpp
 utlstring.cpp
+utlstringtoken.cpp
+utlstringtokendict.cpp
+utlsymbol.cpp
+utltokenizer.cpp
 vK<	uGH
 vV<	uRH
+vector.cpp
 vector_facing_point
 velocity_zones
 vgraph_name
-vl;5<w:
+vmatrix.cpp
 vmix.cpp
 vmix:%02d: %s
 vmixH
 vmixL
+vmix_mixer.cpp
 vmix_mixgraph_input
 vmix_mixgraph_send
 vmix_start_vmix_8track has empty vsnd string
@@ -4122,6 +4285,7 @@ vmix_voicegraph_start_8track
 vmix_vsnd_info
 vmix_vsnd_start
 vmix_vsnd_start has empty vsnd string
+voice.cpp
 voiceList
 voice_duck
 voice_fadeouttime
@@ -4165,7 +4329,6 @@ vsndevts
 vsndevtsH
 vsndevtsI
 vsndevtsL
-vsndevtsh8D
 vsndstck
 vsndstckH
 vsndstckI
@@ -4193,11 +4356,13 @@ x%;p@} H
 x8;7H
 x@HcO
 xBHcO
-xD9%r
+xD9%R4=
+xD9%l
 xGIcL$
 xHLc@ LcH
 xLHcP
 x[A\A]A^A_]
+x[A\A]]
 xfade
 x|LcG
 yaw_end
@@ -4222,7 +4387,6 @@ zau_H
 |$XIcT$<I
 |)A9\$0
 |*Ic:H
-|7Hf.
 }$A;]
 }*f;C
 }+Mc&E;f
@@ -4242,5 +4406,5 @@ zau_H
 ~Ef;w
 ~IHcK
 ~O;2u
-~Wf9=N
+~Wf9=.
 ~}f;w

@@ -16,7 +16,12 @@
 .DisconnectedDisplay
 {
     visibility: collapse;
-    vertical-align: center;
+    vertical-align: top;
+}
+
+.OpponentInfo .DisconnectedDisplay
+{
+	vertical-align: bottom;
 }
 
 .IsDisconnected .DisconnectedDisplay
@@ -25,9 +30,15 @@
 }
 
 #DisconnectedLabel {
-    margin: 10px;
+	margin-left: 15px;
+	margin-right: 10px;
     font-size: 24px;
     color: #ac0f0a;
+}
+
+.OpponentInfo #DisconnectedLabel
+{
+	margin-bottom: 5px;
 }
 
 @keyframes 'bad-red-pulsing'
@@ -156,17 +167,30 @@
 
 .PlayerInfoContents
 {
+	flow-children: none;
+	width: 100%;
+	height: 100%;
+	padding-top: 27px;
+}
+
+#PlayerInfoContentsContainer
+{
+	vertical-align: bottom;
 	flow-children: right;
 	width: 100%;
-	height: fit-children;
-	padding-top: 37px;
-	padding-bottom: 4px;
+	height: 100%;
+	margin-bottom: -5px;
+}
+
+.OpponentInfo #PlayerInfoContentsContainer
+{
+	vertical-align: top;
 }
 
 .OpponentInfo .PlayerInfoContents
 {
-	padding-top: 12px;
-	padding-bottom: 29px;
+	padding-bottom: 26px;
+	padding-top: 0px;
 }
 
 .HasGameClock.PlayerInfo
@@ -283,11 +307,6 @@
 	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_psd.vtex");
 }
 
-.OpponentInfo .PlayerInfoContents
-{
-	flow-children: right;
-}
-
 .IconsContainer
 {
 	padding-top: 0px;
@@ -320,13 +339,20 @@
 	flow-children: right;
 	height: fit-children;
 	width: 102px;
-	vertical-align: center;
+	vertical-align: bottom;
     visibility: collapse;
+}
+
+.OpponentInfo .GameClockContainer
+{
+	vertical-align: top;
+	margin-top: 3px;
 }
 
 .IsDisconnected .GameClockContainer
 {
     margin-left: 0px;
+	vertical-align: bottom;
 }
 
 .HasGameClock .GameClockContainer
@@ -346,7 +372,7 @@
 	width: 22px;
 	height: 22px;
 
-	margin-bottom: 7px;
+	margin-bottom: 8px;
 
 	background-size: cover;
 	background-image: url("s2r://panorama/images/hud/gameclock_small_psd.vtex");
@@ -414,7 +440,18 @@
 	flow-children: right;
 	height: fit-children;
 	width: fit-children;
-	vertical-align: center;
+	vertical-align: bottom;
+}
+
+.OpponentInfo .GoldContainer
+{
+	vertical-align: top;
+	margin-top: 2px;
+}
+
+.IsDisconnected .GoldContainer
+{
+	visibility: collapse;
 }
 
 .GoldIconContainer
@@ -429,7 +466,7 @@
 	width: 26px;
 	height: 26px;
 
-	margin-bottom: 8px;
+	margin-bottom: 4px;
 
 	background-size: cover;
 	background-image: url("s2r://panorama/images/hud/gold_small_psd.vtex");
@@ -438,16 +475,38 @@
 	horizontal-align: center;
 }
 
+.OpponentInfo #GoldIcon
+{
+
+}
+
 .GoldCount
 {
 	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
 	//color: textColorGold;
 	
 	margin-left: 6px;
+	margin-top: 1px;
+
+    vertical-align: center;
+	horizontal-align: center;
+}
+
+.GoldSpend
+{
+	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
+	
+	margin-left: 6px;
 	margin-bottom: 2px;
 
     vertical-align: center;
 	horizontal-align: center;
+	visibility: collapse;
+}
+
+.HasUnaccountedGoldSpend .GoldSpend
+{
+// visibility: visible;
 }
 
 #ShopDeedContainer
@@ -457,7 +516,13 @@
 	tooltip-position: top;
 	height: fit-children;
 	width: fit-children;
-	vertical-align: center;
+	vertical-align: bottom;
+}
+
+.OpponentInfo #ShopDeedContainer
+{
+	vertical-align: top;
+	margin-top: 4px;
 }
 
 #ShopDeedIcon
@@ -493,6 +558,7 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 	horizontal-align: right;
+	vertical-align: center;
 
 	transition-property: pre-transform-scale2d, brightness;
 	transition-duration: .06s, .1s;
@@ -611,21 +677,18 @@
 
 .PersonaName
 {
-	width: fill-parent-flow (1.0);
+	width: 269px;
 	height: 32px;
 
-	text-align: right;
 	text-overflow: ellipsis;
 
 	font-size: 20px;
-	margin-top: 3px;
 	color: #FFFFFFFF;
 	//font-stretch: condensed;
 
-	horizontal-align: right;
-	vertical-align: center;
-
-    margin-right: 65px;
+	vertical-align: top;
+	margin-left: 18px;
+	margin-top: 2px;
 }
 
 .IsAI .PersonaName
@@ -640,9 +703,9 @@
 
 .OpponentInfo .PlayerInfoContents .PersonaName
 {
-	horizontal-align: right;
-    
-   
+	vertical-align: bottom;
+	margin-top: 0px;
+	margin-bottom: -5px;
 }
 
 .IsDisconnected .PersonaName
@@ -724,6 +787,6 @@
 	horizontal-align: right;
 	vertical-align: center;
 	margin-left: 10px;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 

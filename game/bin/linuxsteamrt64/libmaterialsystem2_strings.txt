@@ -111,6 +111,7 @@ $t\Mc
 %-120s
 %-120s - %s
 %.15lf
+%50.50s: %2.2d bits == '%s'
 %6d %-50s
 %6s %-50s %5s %5s %5s %5s %5s %10s
 %7sK (mem) %7sK (disk) 
@@ -156,6 +157,7 @@ $t\Mc
 'return'
 (*%s*), 
 (9w rh;w
+(D;p 
 (E9L$x
 (HcWP
 (None)
@@ -262,17 +264,20 @@ $t\Mc
 +mat_clearshadercache
 +s$Hc
 +s$HcU
+, E9u
 , GetFont used
 , LoadFont used
 , at <EOF>
 , at offset %d
 , near %s
 ,$E;l$
+,BfE9,@|
 --  Increase the size of the resource stream   --
 --  Need %d bytes, but only have %d bytes
 ----------
 --------------------------------------------------
 --------------------WARNING----------------------
+-> %s
 -Stop: 
 -VUUU
 -asyncfeatureload
@@ -303,6 +308,8 @@ $t\Mc
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlntree.h
 ../public/tier1/utlrbtree.h
+../public/tier2/fieldpath.h
+.A;L$
 .D$HzLuJ
 .L$Lz:u8A
 .M;UU
@@ -352,6 +359,7 @@ $t\Mc
 0[A\]
 0[A^]
 0[]A\A]A^
+0t3Lc
 0x%016llX
 1.0 0.5 0.25
 10CMaterial2
@@ -542,13 +550,16 @@ $t\Mc
 27ICompressSetCoderProperties
 27IKeyValuesDumpContextAsText
 28CBaseIntrospectedTypeManager
+28IFlattenedSerializerSpewFunc
 29CKeyValuesDumpContextAsDevMsg
 29ICompressWriteCoderProperties
 29IRuntimeShaderCreateCallbacks
+2fD91u>
 31CCompileTargetExprOpCodeHandler
 31CDefaultIntrospectedTypeManagerILy1952542070E22MaterialResourceData_tE
 31CDefaultIntrospectedTypeManagerILy500069000822E21VBitmapFontDiskData_tE
 31CDefaultIntrospectedTypeManagerILy500152889462E24PostProcessingResource_tE
+32CFlattenedSerializerSpewFunc_Log
 32CResourceReferenceFixupTraversal
 33333333H
 35CQueuedResetMaterialCacheRenderable
@@ -556,8 +567,8 @@ $t\Mc
 36CVfxMaterialParamStackMachineBuilder
 37CCompileTargetExprStackMachineBuilder
 37CQueuedSetMaterialOrTextureRenderable
+38CFlattenedSerializerSpewFunc_UtlString
 3_0_gl
-4 E9~
 4(D;c
 47A84
 48B848u2
@@ -576,6 +587,7 @@ $t\Mc
 6QZ^&D
 7I9t$
 7IConVar
+7[A\A]A^]
 8!tPL
 8A^]H
 8CFmtStrNILi256ELb0EE
@@ -630,6 +642,7 @@ $t\Mc
 <>A8?u
 <>t f
 <?A8<7u
+<Af9<F|
 <DOWN>
 <EOR>
 <NULL>
@@ -650,6 +663,7 @@ $t\Mc
 >E89t
 >LZMA]
 >LZMAt
+?A\A]D
 ?A]A^]
 ?Glyph Miss: FontHandle_t:0x%8.8llx (%s), %s
 ?IcT$
@@ -734,8 +748,8 @@ A;\$x
 A;\$x}S
 A;] |
 A;](|
-A;](}kI
 A;_ |
+A;_(}cI
 A;_@|
 A;_@}4L
 A;_p|
@@ -810,8 +824,10 @@ AUATSfA
 AUATStII
 AUHcE
 AVATI
+AVATS
 AVAUA
 AVAUATA
+AVAUATD
 AVAUATE1
 AVAUATI
 AVAUATL
@@ -840,6 +856,7 @@ AWAVAUATL
 AWAVAUATS
 AWAVAUATS1
 AWAVAUATSD
+AWAVAUATSD;_
 AWAVAUATSH
 AWAVAUATSL
 AWAVAUATSRH
@@ -860,8 +877,10 @@ A\A]A^]
 A\A]A^]H
 A\A]H
 A\A]]
+A\A^]
 A]A^H
 A]A^]
+A^A_]
 Actually dude, we didn't seem to be expecting anything here, or at least
 AddMultipleToTail
 AddRef
@@ -1150,6 +1169,8 @@ Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Cc}L)
+ChangeCallbackOnChange
+ChangeCallbackOnChangeOrCreate
 ChangeSize
 CheckBox
 ChildOf
@@ -1160,6 +1181,7 @@ ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
 CmdLinkAH
+ColorLUT
 CommandLine
 CommandProcedure
 CommandProcedureList
@@ -1229,7 +1251,7 @@ D:"u;
 D;!ttHc
 D;)ts
 D;+}oL
-D;=Lb5
+D;=L=7
 D;@Ds
 D;c D
 D;c@|
@@ -1455,6 +1477,7 @@ FcPatternGetString
 Feature combo %s referenced in expression doesn't exist.
 FeatureRule
 Features
+FieldPathEncodeFinish
 File has not been opened!
 FindOrAddVsInputSignatureToArray
 FixupResourceName: Illegal full path passed in ("%s")!
@@ -1494,12 +1517,12 @@ G<UHc
 G>0]H
 G@A9D$@u
 G@A;D$@u
-G@H;0t0H
 G@UHc
 GAMECONSOLE
 GAMEROOT
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GDD;FDu
+GHH;0t0H
 GLIBCXX_3.4.14
 GLIBC_2.14
 GLIBC_2.2.5
@@ -1516,6 +1539,8 @@ GenerateResourceNameFromFileName: Invalid extension specified in file name "%s"!
 GenericGameData
 Geometry Shader
 GetCPUInformation
+GetPathData
+GetPathData failed for read only CFieldPath
 GetResourceManifestCount
 GetResourceManifests
 GetVariableTextureValue
@@ -1555,7 +1580,7 @@ Hc@$H
 HcBDH
 HcC H
 HcC$H
-HcCH1
+HcCP1
 HcE H
 HcG U
 HcG$H
@@ -1683,7 +1708,7 @@ Lc3D;s
 LcE8L
 Lcc(A9
 LccpD;
-Lcg8dH
+Lcg@dH
 LcgpD;
 Lck@H
 Lcs8D;sHD
@@ -1706,6 +1731,14 @@ MATCHFRAMEWORK_001
 MD5 match on %s, loading from vcs
 MD5 mismatch on %s, will load from vfx instead.
 MDiskDataForResourceType
+MNetworkBitCount
+MNetworkChangeCallback
+MNetworkEncoder
+MNetworkOverride_Invalid
+MNetworkPriority
+MNetworkRemoveAll
+MNetworkSerializer
+MNetworkUserGroup
 MNoScatter
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
@@ -1765,8 +1798,12 @@ Mismatched set
 Missing file '%s'
 Missing token
 ModelDocUtils001
+More than 8 active color correction lookup textures!
 Multiply defined variable "%s"
 Must run with -shaderstats to use mat_shading_complexity!
+N24CFieldPathHuffmanEncoder12InternalNodeE
+N24CFieldPathHuffmanEncoder5INodeE
+N24CFieldPathHuffmanEncoder8LeafNodeE
 N24MDiskDataForResourceType45CValueSearchTester_ClassIntrospectionHandle_tE
 N4NBT212CMatchFinderE
 N4NBT312CMatchFinderE
@@ -1775,6 +1812,17 @@ N4NHC412CMatchFinderE
 N9NCompress5NLZMA10CBaseStateE
 N9NCompress5NLZMA8CEncoderE
 NE fA
+NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE
+NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
+NETWORK_FIELD_CHANGED_TYPE_NONE
+NETWORK_FIELD_CHANGED_WITH_VALUE
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL
+NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL_SORTLOWER
+NETWORK_FIELD_DEFAULT_PRIORITY
+NETWORK_FIELD_HIGHEST_PRIORITY
+NETWORK_FIELD_LOWEST_PRIORITY
 NHcK8Ic
 NHcK`Ic
 NHcKhIc
@@ -1799,7 +1847,11 @@ NkuRD
 No Buffer
 No valid format conversion from '%s' to '%s'
 No valid vcs file found for shader %s
+NonTopoComplex
+NonTopoComplexPack4Bits
+NonTopoPenultimatePluseOne
 O$HcO
+O@v9I
 OCTAL_ESC
 OH;NHH
 Ordered constructor wrapped type has no default constructor.
@@ -1865,6 +1917,13 @@ PanoramaUIEngine001
 Parser encountered %i errors parsing compile targets expression "%s"
 ParticleSystemMgr003
 Path Overflow, must be less than 260 characters.
+Path_AddToTail
+Path_AddToTail failed for read only CFieldPath
+Path_AddToTail failed, depth already == DEFAULT_MAX_PATH_DEPTH(%d)
+Path_PopLast
+Path_PopLast failed for read only CFieldPath
+Path_RemoveAll
+Path_RemoveAll failed for read only CFieldPath
 Physics2 Interface Old v0.5
 PhysicsBodyMarkup
 PhysicsBoneMarkup
@@ -1901,9 +1960,22 @@ Plat_UUIDToString
 Plat_UnloadModule
 Plat_VirtualAlloc
 Plat_VirtualFree
+PlusFour
+PlusThree
+PlusTwo
 Polygon too large (%d points / max %d, %d indices / max %d), ignoring
+PopAllButOnePlusN
+PopAllButOnePlusNPack3Bits
+PopAllButOnePlusNPack6Bits
+PopAllButOnePlusOne
+PopNAndNonTopographical
+PopNPlusN
+PopNPlusOne
+PopOnePlusN
+PopOnePlusOne
 PostProcessingBloomParameters_t
 PostProcessingResource_t
+PostProcessingSystemManifest
 PostProcessingSystem_001
 PostProcessingTonemapParameters_t
 PostProcessingVignetteParameters_t
@@ -1924,6 +1996,28 @@ Program MD5 is out of date with features! %s
 Program MD5 is out of date with features! If you recompiled shaders in the background, reload shaders now! %s
 Programmer Error! Static combo not loaded!
 PropertyEditorSystem_001
+PushN
+PushNAndNonTopographical
+PushOneLeftDeltaNRightNonZero
+PushOneLeftDeltaNRightNonZeroPack6Bits
+PushOneLeftDeltaNRightNonZeroPack8Bits
+PushOneLeftDeltaNRightZero
+PushOneLeftDeltaOneRightNonZero
+PushOneLeftDeltaOneRightZero
+PushOneLeftDeltaZeroRightNonZero
+PushOneLeftDeltaZeroRightZero
+PushThreeLeftDeltaN
+PushThreeLeftDeltaOne
+PushThreeLeftDeltaZero
+PushThreePack5LeftDeltaN
+PushThreePack5LeftDeltaOne
+PushThreePack5LeftDeltaZero
+PushTwoLeftDeltaN
+PushTwoLeftDeltaOne
+PushTwoLeftDeltaZero
+PushTwoPack5LeftDeltaN
+PushTwoPack5LeftDeltaOne
+PushTwoPack5LeftDeltaZero
 QAngle
 Quaternion
 QueuedLoaderVersion001
@@ -1932,7 +2026,7 @@ R16F_EXPAND
 R32_UINT
 R8G8B8A8_ETC2_EAC
 R8G8B8_ETC2
-R8X[]
+R@X[]
 RERLH
 RESOURCE_TYPE_BITMAP_FONT
 RESOURCE_TYPE_MATERIAL
@@ -2262,6 +2356,7 @@ V_strnlen
 V_strspn
 V_strtod
 V_strtoi64
+V_strtok
 V_strtoui64
 V_strupper_fast
 V_swscanf
@@ -2303,7 +2398,6 @@ W u)H
 W0]7H
 W<)w )wH
 W<v2L
-W@H;2t'H
 W@}PH
 WARNING: Could not find schema data for helper class for resource type %lld '%s'. (Missing MDiskDataForResourceType metadata or schema data isn't loaded?)
 WARNING: LoadAndValidateResourceHeader - FileSystem not initialized!
@@ -2312,6 +2406,7 @@ WARNING: Missing introspection manifest for file: %s
 WARNING: Multiple classes registered as disk data for resource type %lld '%s'. (Should only have one class MDiskDataForResourceType - %d listed above.)
 WARNING: Problems encounted with external references in resource '%s'. See above for reason(s)
 WARNING: Trying to create a CRenderContextPtr without a valid context.
+WHH;2t'H
 WIN32
 WINDOWS
 WINXP
@@ -2336,6 +2431,7 @@ YD$,L
 Y^ulL
 ZYu+L
 [ mat_print_material_info ] Error! Cannot find material '%s'!
+[A\A]
 [A\A]A^A_]
 [A\A]A^A_]A
 [A\A]A^]
@@ -2343,6 +2439,7 @@ ZYu+L
 [A\A]D
 [A\A]H
 [A\A]]
+[A\A^]
 [A\Hc
 [A\]H
 [Disk class %d/%d] Name = '%s'; Project = '%s'; Binary = '%s'
@@ -2353,6 +2450,7 @@ ZYu+L
 []A\A]A^
 []A\A]A^A_
 \$([A\]
+\$0I9
 \error.vmat
 \u0000
 ^0A;^@
@@ -2452,6 +2550,7 @@ __RenderStateLiteral__
 __SET_BY_FEATURE__
 __SetByArtistAndExpression__
 __SetByArtist__
+__UNKNOWN__
 ______<INVALID>______
 __bss_start
 __ctype_b_loc
@@ -2501,12 +2600,29 @@ _test_conversion_counter
 `[A\]
 ``[A\A]A^]
 abort@@GLIBC_2.2.5
+all_projects_common_code.cpp
+alloc.cpp
 allowstatic
 anchor_angles
 anchor_position
 anim_name
 anim_name_a
 anim_name_b
+antlr3baserecognizer.c
+antlr3bitset.c
+antlr3collections.c
+antlr3commontoken.c
+antlr3convertutf.c
+antlr3cyclicdfa.c
+antlr3exception.c
+antlr3inputstream.c
+antlr3intstream.c
+antlr3lexer.c
+antlr3parser.c
+antlr3string.c
+antlr3stringstream.c
+antlr3tokenstream.c
+antlr3ucs2inputstream.c
 appendstructuredbuffer
 archive
 argeH
@@ -2515,8 +2631,12 @@ auto_unragdoll_duration
 bUpdate
 binary
 binary_bc
+bitbuf.cpp
+bitmapfont.cpp
+bitmapfontschema_h_schema.gen_cpp
 blendamount
 blockLOS
+blockcompress.cpp
 body_type
 bool2
 bool3
@@ -2525,6 +2645,8 @@ borrow
 break_create_joint_revolute
 break_uniform_burst
 breakable_count
+breakable_model
+breakable_skin
 burst_randomize
 burst_scale
 c@[A\A]A^]
@@ -2537,8 +2659,11 @@ cbuffer
 ceilf
 ceilf@@GLIBC_2.2.5
 center
+characterset.cpp
 charset
 cheat
+checksum_crc.cpp
+checksum_md5.cpp
 children
 clamp
 client
@@ -2551,13 +2676,21 @@ cloth_collision_layer3
 collision_group
 collision_prop
 color
+color_conversion.cpp
 colorcorrection_%p.vtex
+colorcorrectionparams_h_schema.gen_cpp
+compiletargetexprLexer.c
+compiletargetexprParser.c
 composite
 configvalue.cpp
 consumestructuredbuffer
 content
 control_point
+convar.cpp
+crc.cpp
 create_particle
+crtoverride.cpp
+crtstuff.c
 cs_5_0
 dH34%(
 dH3<%(
@@ -2588,17 +2721,21 @@ eventindex
 explosion_delay
 explosive_damage
 explosive_radius
+exprevaluator.cpp
 externaldescriptorset
+externalreferences.cpp
 f;0tZfD
 f;0t_fD
 f;S.w
 f;r`u
 fA9_^r
+fD91t
 fD;!t
 fE9&D
 fE9&fA
 fE9<$D
 fE9<$fA
+fE;4@u/L9
 fE;}.
 faceMergeAngle
 false
@@ -2607,7 +2744,10 @@ features
 ffff.
 fffff.
 ffffff.
+fieldpath.cpp
 filesystem_stdio
+fileutils.cpp
+filmictonemaphelpers.cpp
 firstrenderstatelement < 0 : i = %d, frse = %d
 float
 float( %f )
@@ -2623,7 +2763,11 @@ floorf
 floorf@@GLIBC_2.2.5
 fltx4
 font_show_glyph_miss
+fontamalgam.cpp
+fonteffects.cpp
+fontmanager.cpp
 fontmanager/fontmanager.cpp
+fonttexturecache.cpp
 force
 format
 fputc
@@ -2635,8 +2779,10 @@ fwrite
 fwrite@@GLIBC_2.2.5
 g E;g0D
 g(D;g8D
+g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
+g_Tier1_ExtraMasks
 g_flTexCoordScale0
 g_pMemAlloc
 g_pThreadPool
@@ -2647,6 +2793,7 @@ gameinfo.gi
 gameinfo.txt
 gamelayer
 generic
+generichash.cpp
 gravity
 gs_4_0
 gs_4_1
@@ -2662,21 +2809,36 @@ hs_5_0
 hurt_me
 hurt_them
 i`t<H
+imageformat.cpp
+imaterial2_h_schema.gen_cpp
 int( %d = 0x%X )
+interface.cpp
 interfaces.cpp
 introspectedtypemanager.cpp
 invert_orientation
 is also the end of the line, so you must check your lexer rules
 is_debris
+itextlayout_h_schema.gen_cpp
 j Hc@ 
 jIcE(1
 jsjcjvR
+json_parser.c
 k<[A\A]A^]
 k@_aH
 k`HcSh
+keyvalues.cpp
 keyvalues3.cpp
+keyvalues3_binaryreader.cpp
+keyvalues3_binarywriter.cpp
+keyvalues3_oldschematext.cpp
+keyvalues3_textreader.cpp
+keyvalues3_textwriter.cpp
 khHcSp
 kv3format_manager.cpp
+kv3formats.cpp
+kv3formats_modeldoc.cpp
+kv3formats_vpcf.cpp
+kv3transfer.cpp
 l$@E;l$P
 l$DtjA
 l$HtRA
@@ -2693,6 +2855,7 @@ libpthread.so.0
 libstdc++.so.6
 libtier0.so
 libvstdlib.so
+linuxfont.cpp
 localize
 lockRotationAlpha
 log10
@@ -2701,6 +2864,11 @@ loop_break_on_damage
 loop_break_on_flashlight
 loop_in_action
 looping
+lzinwindow.cpp
+lzma.cpp
+lzmadecode.c
+lzmadecoder.cpp
+lzmaencoder.cpp
 m_Children
 m_Emitters
 m_ForceGenerators
@@ -2833,6 +3001,7 @@ m_vignetteParams
 m_vsInputSignatureArray
 malloc
 malloc@@GLIBC_2.2.5
+manifestregistrar.cpp
 mat_assert_on_error_shader_use
 mat_assert_on_shader_use
 mat_assert_on_shader_use disabled
@@ -2897,6 +3066,7 @@ material2.cpp(527): Material "%s" is requesting a bad mode "%s"!
 material2.cpp(627): Error! Material "%s" doesn't have any valid layers to get the CVsInputSignatureVector from!
 material2.cpp(651): Error! Material "%s" doesn't have a CVsInputSignatureVector!
 material_command_buffer.cpp
+material_resource_data_h_schema.gen_cpp
 material_shader_params.cpp
 material_shader_params.cpp(1011): Invalid data type for render state variable %s in material "%s"!
 material_shader_params.cpp(1018): Error evaluating expression for render state variable %s in material "%s"!
@@ -2926,6 +3096,7 @@ material_shader_params.cpp(923): Unknown variable type for %s in material "%s"!
 material_shader_params.cpp(969): Invalid data type for render state variable %s in material "%s"!
 material_type_manager.cpp
 material_type_manager.cpp(50): GetErrorMaterial() called before error material exists!
+materials/dev/combine_colorcorrection_lut_cs.vmat
 materials/dev/cs_mipgen.vmat
 materials/dev/debug_solid.vmat
 materials/dev/debug_wireframe.vmat
@@ -2941,6 +3112,8 @@ materialsystem2.cpp(342): ERROR!!! Materials not released by other systems on sh
 materialsystem2.cpp(347): ERROR!!! Shaders not freed on shutdown, likely due to unreleased materials! (See spew above)
 materialsystem2.cpp(361): GetErrorMaterial() called when m_pMaterialTypeManager == NULL!
 materialsystem2.cpp(804): ERROR!!! Shaders not freed before shader reload! (See spew above)
+materialsystem2_schema_anchor.gen_cpp
+materialsystem2utils.cpp
 mathlib.cpp
 matrix3x4_t
 matrix3x4a_t
@@ -2955,6 +3128,8 @@ memcpy
 memcpy@@GLIBC_2.14
 memmove
 memmove@@GLIBC_2.2.5
+memoverride.cpp
+mempool.cpp
 memset
 memset@@GLIBC_2.2.5
 meshes
@@ -2970,6 +3145,7 @@ modeldoc15
 modeldoc16
 modeldoc17
 modeldoc18
+modeldoc19
 modeldoc2
 modeldoc3
 modeldoc4
@@ -2995,6 +3171,7 @@ o@ATI
 opATL
 origin_max_delta
 origin_relative
+outbuffer.cpp
 p[A\A]A^]
 p[A\]
 p]ATE
@@ -3006,6 +3183,9 @@ point0
 point1
 position
 positionH
+postprocessingsystem.cpp
+postprocessingtypemanager.cpp
+powsse.cpp
 preferred_carryangles
 procedural
 prop_data
@@ -3028,18 +3208,25 @@ pthread_mutexattr_settype@@GLIBC_2.2.5
 pthread_once
 pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
+quaternionaligned.cpp
 r5Hcq
 radius0
 radius1
 random
+randsse.cpp
+rangecoderbit.cpp
 realloc
 realloc@@GLIBC_2.2.5
 recenter_on_parent_bone
 rendersystemdx9
 replicated
 resource
+resourcedictionary.cpp
+resourcefile.cpp
 resourcestream.cpp
 resourcesystem
+rnd_down
+rnd_up
 rootNode
 rsqrt
 rwbuffer
@@ -3064,7 +3251,11 @@ samplerCUBE
 samplerCUBEARRAY
 saturate
 schema
+schemabindings.cpp
 schemaclassinfo.cpp
+schemadatatraversal.cpp
+schemaenuminfo.cpp
+schemaiterator.cpp
 schemasystem
 sdktools/bin/vproj.exe
 sdktools/bin/vprojUI.exe
@@ -3086,11 +3277,13 @@ source_filename
 spawn_motion_disabled
 speed
 spew_fonts
+splitstring.cpp
 sqrt@@GLIBC_2.2.5
 sqrtf
 sqrtf@@GLIBC_2.2.5
 src/public/tier0/platform.h
 ss_added
+sseconst.cpp
 stderr
 stderr@@GLIBC_2.2.5
 stop_immediately
@@ -3104,11 +3297,14 @@ strcpy
 strcpy@@GLIBC_2.2.5
 strdup
 strdup@@GLIBC_2.2.5
+streamutils.cpp
+stringpool.cpp
 strlen
 strlen@@GLIBC_2.2.5
 strstr@@GLIBC_2.2.5
 strtol
 strtol@@GLIBC_2.2.5
+strtools.cpp
 struct
 struct DS_INPUT
 struct DS_PATCH_CONSTANT_INPUT
@@ -3129,7 +3325,9 @@ t$HcW
 t$\A\A]A^]
 t%IcU
 t&L;.H
+t'D;5
 t(;2}
+t);=B
 t)HcE
 t*A+F$I
 t+HcC
@@ -3152,10 +3350,12 @@ t<LcG
 t<Lcs8D;sHD
 t<v"<
 t=Mc.E;n
+t=[A\]
 t@D9u
 t@HcS
 tC[A\A]A^]
 tEfE9
+tJHcC
 tN~+A
 tPHcC
 tR[A\]
@@ -3165,14 +3365,20 @@ t_L9 u
 tangent
 test_angles_relative
 texcoordH
+textlayout.cpp
+texturedictionary.cpp
+texturepacker.cpp
 texturescale
 tf[A\]
 tgHcO
 tgL9 u
 thIcG
+tier1.cpp
+tier2.cpp
 tl~)A
 tools
 tp</u
+transform.cpp
 ts[A\]
 tuD;h
 tuHcSP1
@@ -3182,17 +3388,26 @@ u0[A\]
 u64( %lld = 0x%llX )
 uAfE9
 uPfA9
+u[[A\A]A^]
 upHcE
 update
 utils/materialsystem2utils.cpp
 utlbuffer.cpp
+utlmemory.cpp
+utlstackmachine.cpp
+utlstreambuffer.cpp
 utlstring.cpp
+utlstringtoken.cpp
+utlsymbol.cpp
+utltokenizer.cpp
 uzfD9
 v"Hc}
 vK<	uGH
 vV<	uRH
+vector.cpp
 version
 vfont
+vfx_bytecode_manager.cpp
 vfx_common.cpp
 vfx_common.cpp(3516): Error! Ref count !=0 for static combo data cache entry!
 vfx_common.cpp(3603): Error! Ref count !=0 for static combo data cache entry!
@@ -3201,23 +3416,30 @@ vfx_common.cpp(6829): VCS %s Unserialize failed
 vfx_common.cpp(6843): VCS %s Unserialize hit EOF
 vfx_common.cpp(6981): Error opening file %s
 vfx_common.cpp(6988): Error calling SkipAndValidateVCSHeader() for %s
+vfx_compile_helpers.cpp
+vfx_compile_target_expr.cpp
 vfx_compile_target_expr.cpp(106): : Failed to create lexer from "%s"
 vfx_compile_target_expr.cpp(114): : Failed to create token stream from "%s"
 vfx_compile_target_expr.cpp(122): : Failed to create parser from "%s"
 vfx_compile_target_expr.cpp(98): : Failed to create input stream from "%s"
 vfx_dx11
 vfx_dx9
+vfx_expression_parser.cpp
 vfx_expression_parser.cpp(366): : Failed to create input stream from "%s"
 vfx_expression_parser.cpp(374): : Failed to create lexer from "%s"
 vfx_expression_parser.cpp(382): : Failed to create token stream from "%s"
 vfx_expression_parser.cpp(390): : Failed to create parser from "%s"
 vfx_gl
+vfx_render_state.cpp
+vfxexprLexer.c
+vfxexprParser.c
 vkD;c
 vmatAUATSH
 vmatD
 vmatH
 vmatI
 vmatL
+vmatrix.cpp
 vpcf1
 vpcf10
 vpcf11
@@ -3263,6 +3485,7 @@ xH	w8
 xOIcD$PH9
 xSIcEXI9
 x[A\A]A^A_]
+x[A\A]]
 x|LcG
 yaw_end
 yaw_start
@@ -3280,7 +3503,6 @@ zbtOA
 |$`~7A
 |$x~01
 |*Ic:H
-|7Hf.
 |sHf9x
 }$A;]
 }(f;w"w"H
@@ -3297,6 +3519,7 @@ zbtOA
 ~CHcG
 ~CHcW
 ~HIcD$
+~IHcK
 ~OIcH
 ~ef;w
 ~lfA9
