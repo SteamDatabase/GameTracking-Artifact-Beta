@@ -1,0 +1,191 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_nMaxParticles = 20
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderRopes"
+			m_flTextureVWorldSize = 500.000000
+			m_hTexture = resource:"materials/particle/beam_hotwhite.vtex"
+			m_nMaxTesselation = 4
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 0.500000
+		},
+		{
+			_class = "C_OP_FadeInSimple"
+			m_flFadeInTime = 0.500000
+		},
+		{
+			_class = "C_OP_RemapCPtoScalar"
+			m_nCPInput = 10
+			m_nFieldOutput = "16"
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMax = 10.000000
+			m_fLifetimeMin = 10.000000
+		},
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 100
+			m_nAlphaMax = 100
+		},
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMin = 
+			[
+				190,
+				147,
+				255,
+				255,
+			]
+			m_ColorMax = 
+			[
+				169,
+				113,
+				233,
+				255,
+			]
+		},
+		{
+			_class = "C_INIT_CreateSequentialPath"
+			m_flNumToAssign = 20.000000
+			m_PathParams = 
+			{
+				m_nStartControlPointNumber = 4
+				m_nEndControlPointNumber = 5
+			}
+		},
+		{
+			_class = "C_INIT_InheritFromParentParticles"
+			m_flScale = 0.200000
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nFieldOutput = "7"
+			m_nInputMax = 5
+			m_bScaleInitialRange = true
+		},
+		{
+			_class = "C_INIT_RemapParticleCountToScalar"
+			m_nFieldOutput = "7"
+			m_nInputMin = 15
+			m_nInputMax = 20
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.000000
+			m_bScaleInitialRange = true
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_ContinuousEmitter"
+			m_flEmissionDuration = 0.100000
+			m_bDisableOperator = true
+			m_flEmitRate = 200.000000
+		},
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 20
+		},
+	]
+	m_nBehaviorVersion = 7
+	m_nFirstMultipleOverride_BackwardCompat = 6
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 3
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_bOrient = true
+			m_nCP1 = 4
+			m_nCP2 = 5
+			m_nCP3 = 0
+			m_nCP4 = 0
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP2Pos = 
+			[
+				0.000000,
+				400.000000,
+				300.000000,
+			]
+			m_vecCP3Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP4Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_nHeadLocation = 3
+		},
+	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/ui/scenes/ui_artifact_sky_line_dot.vpcf"
+		},
+	]
+}

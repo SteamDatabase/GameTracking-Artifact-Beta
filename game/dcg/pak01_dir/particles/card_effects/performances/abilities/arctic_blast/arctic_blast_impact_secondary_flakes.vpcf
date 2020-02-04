@@ -1,0 +1,219 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 80
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderSprites"
+			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+			m_bAdditive = true
+			m_hTexture = resource:"materials/particle/snowflake/snowflakes_01.vtex"
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_BasicMovement"
+			m_fDrag = 0.020000
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_OscillateVector"
+			m_flStartTime_max = 0.100000
+			m_flStartTime_min = 0.100000
+			m_FrequencyMax = 
+			[
+				2.000000,
+				2.000000,
+				2.000000,
+			]
+			m_RateMax = 
+			[
+				2.000000,
+				2.000000,
+				2.000000,
+			]
+			m_RateMin = 
+			[
+				-2.000000,
+				-2.000000,
+				-2.000000,
+			]
+			m_bDisableOperator = true
+			m_flEndTime_min = 0.200000
+			m_flEndTime_max = 0.200000
+			m_flOscMult = 4.000000
+		},
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 1.000000
+		},
+		{
+			_class = "C_OP_RampScalarSpline"
+			m_RateMin = -8.000000
+			m_RateMax = 8.000000
+			m_nField = "4"
+			m_bEaseOut = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RampScalarSpline"
+			m_RateMin = -3.000000
+			m_RateMax = 3.000000
+			m_nField = "12"
+			m_bEaseOut = true
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMin = 1.000000
+			m_fLifetimeMax = 2.000000
+		},
+		{
+			_class = "C_INIT_RandomRotation"
+			m_flDegreesMin = -10.000000
+			m_flDegreesMax = 10.000000
+		},
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 0.160000
+			m_flRadiusMax = 0.200000
+		},
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMin = 
+			[
+				205,
+				232,
+				246,
+				255,
+			]
+			m_ColorMax = 
+			[
+				117,
+				175,
+				241,
+				255,
+			]
+		},
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMax = 15
+		},
+		{
+			_class = "C_INIT_CreateOnModel"
+			m_HitboxSetName = "fx"
+		},
+		{
+			_class = "C_INIT_VelocityRadialRandom"
+			m_fSpeedMax = -5.000000
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 80
+		},
+	]
+	m_ForceGenerators = 
+	[
+		{
+			_class = "C_OP_TurbulenceForce"
+			m_flNoiseCoordScale0 = 6.000000
+			m_flNoiseCoordScale1 = 4.000000
+			m_flNoiseCoordScale2 = 2.000000
+			m_vecNoiseAmount0 = 
+			[
+				10.000000,
+				-8.000000,
+				2.000000,
+			]
+			m_vecNoiseAmount1 = 
+			[
+				-6.000000,
+				4.000000,
+				0.500000,
+			]
+			m_vecNoiseAmount2 = 
+			[
+				2.500000,
+				-3.300000,
+				-2.000000,
+			]
+		},
+		{
+			_class = "C_OP_RandomForce"
+			m_MinForce = 
+			[
+				0.000000,
+				2.000000,
+				0.000000,
+			]
+			m_MaxForce = 
+			[
+				0.000000,
+				4.000000,
+				0.000000,
+			]
+		},
+	]
+	m_ConstantColor = 
+	[
+		255,
+		255,
+		255,
+		200,
+	]
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+				{
+					m_iControlPoint = 1
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 8
+}

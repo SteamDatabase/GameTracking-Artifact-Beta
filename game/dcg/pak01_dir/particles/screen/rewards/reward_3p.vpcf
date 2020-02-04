@@ -1,0 +1,156 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_controlPointConfigurations = 
+	[
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				{
+					m_iAttachType = "PATTACH_WORLDORIGIN"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						null,
+						null,
+						null,
+					]
+					m_entityName = "self"
+				},
+			]
+		},
+	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_BasicMovement"
+			m_fDrag = 0.050000
+		},
+		{
+			_class = "C_OP_Decay"
+			m_nOpEndCapState = 1
+		},
+		{
+			_class = "C_OP_RemapCPOrientationToRotations"
+			m_vecRotation = 
+			[
+				90.000000,
+				0.000000,
+				-20.000000,
+			]
+			m_bUseQuat = true
+		},
+		{
+			_class = "C_OP_SetControlPointsToModelParticles"
+			m_AttachmentName = "pack1"
+			m_nFirstControlPoint = 1
+			m_bSkin = true
+			m_bAttachment = true
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flEndTime = 0.100000
+			m_flStartScale = 0.000000
+			m_flEndScale = 1.200000
+		},
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flStartTime = 0.100000
+			m_flEndTime = 0.300000
+			m_flStartScale = 1.200000
+		},
+		{
+			_class = "C_OP_SetControlPointsToModelParticles"
+			m_AttachmentName = "pack2"
+			m_nFirstControlPoint = 2
+			m_bSkin = true
+			m_bAttachment = true
+		},
+		{
+			_class = "C_OP_SetControlPointsToModelParticles"
+			m_AttachmentName = "pack3"
+			m_nFirstControlPoint = 3
+			m_bSkin = true
+			m_bAttachment = true
+		},
+	]
+	m_Renderers = 
+	[
+		{
+			_class = "C_OP_RenderModels"
+			m_ModelList = 
+			[
+				{
+					m_model = resource:"models/particle/screen/rewards/reward_packs.vmdl"
+				},
+			]
+			m_nBodyGroupField = "19"
+			m_nSubModelField = "9"
+			m_bAnimated = true
+			m_bUseRawMeshGroup = true
+		},
+	]
+	m_Initializers = 
+	[
+		{
+			_class = "C_INIT_CreateWithinSphere"
+		},
+		{
+			_class = "C_INIT_PositionOffset"
+			m_bLocalCoords = true
+			m_OffsetMin = 
+			[
+				0.000000,
+				8.000000,
+				0.000000,
+			]
+			m_OffsetMax = 
+			[
+				0.000000,
+				8.000000,
+				0.000000,
+			]
+		},
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMin = 2
+			m_nSequenceMax = 2
+		},
+	]
+	m_Emitters = 
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 1
+		},
+	]
+	m_nMaxParticles = 1
+	m_flConstantRadius = 1.000000
+	m_nBehaviorVersion = 7
+	m_flConstantLifespan = 1.300000
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/screen/rewards/reward_pack_glow.vpcf"
+			m_flDelay = 0.100000
+		},
+		{
+			m_ChildRef = resource:"particles/screen/rewards/reward_pack2_border.vpcf"
+			m_flDelay = 0.300000
+		},
+		{
+			m_ChildRef = resource:"particles/screen/rewards/reward_pack3_border.vpcf"
+			m_flDelay = 0.300000
+		},
+		{
+			m_ChildRef = resource:"particles/screen/rewards/reward_pack_border.vpcf"
+			m_flDelay = 0.300000
+		},
+	]
+}
