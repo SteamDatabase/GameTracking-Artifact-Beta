@@ -508,7 +508,6 @@ $tI
 (>q
 (?R or (?[+-]digits must be followed by )
 (Direct Routing)
-(If sv_mincmdrate is > 0), this sets the maximum value for cl_cmdrate.
 (None)
 (Not Visible)
 (Relay)
@@ -732,7 +731,6 @@ $tI
 -launchersublanguage
 -low
 -mainthreadpriority
--mantle
 -msaa
 -multiplier
 -netconport
@@ -1355,7 +1353,6 @@ $tI
 16IMatchEventsSink
 16IProtobufBinding
 16IUploadGameStats
-17:43:50
 17CBaseCmdKeyValuesI20CCLCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI20CSVCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI32CSVCMsg_GameSessionConfigurationE
@@ -1472,8 +1469,8 @@ $tI
 200
 2000
 200000
+20:14:58
 20CAsyncTrackingConvar
-20CBoundedCvar_CmdRate
 20CCLCMsg_ClientInfo_t
 20CCLCMsg_CmdKeyValues
 20CCLCMsg_FileCRCCheck
@@ -1733,7 +1730,6 @@ $tI
 39CNetworkServerSpawnGroup_WaitForClients
 4
 4 - no pin
-40
 4096
 40CGameInfo_CDotaGameInfo_CHeroSelectEvent
 43CNetworkClientSpawnGroupCreatePrerequisites
@@ -2068,7 +2064,7 @@ Application transferred too few scanlines
 Application transferred too many scanlines
 Application unable to load gameinfo.gi file from directory "%s"!
 ApplicationInfo
-Apply cl_cmdrate and cl_updaterate to loopback connection
+Apply cl_updaterate to loopback connection
 ApplyButton
 ApplyChanges
 ApplyDataToControls
@@ -2801,8 +2797,8 @@ CL:  ProcessSpawnGroup_ManifestUpdate( %s ) -- spawn group manifest update recei
 CL:  Queue CNETMsg_SignonState_t(%s:%d) message
 CL:  Receiving uncompressed update from server
 CL:  Removing SuppressTransmit to allow 'disconnect' command to send
-CL:  SendMove()
 CL:  SendMove(connecting)
+CL:  SendMoveInternal()
 CL:  SendStringCmd(disconnect)
 CL:  Server disconnected: %d: %s
 CL:  SetSignonState changing from %s to %s
@@ -5161,7 +5157,6 @@ MaterialUtils_001
 MathLib_Init
 Max SourceTV spectator bandwidth rate allowed, 0 == unlimited
 Max bandwidth rate allowed on server, 0 == unlimited
-Max number of command packets sent to server per second
 Max number of ticks to simulate per frame, after which simulation will start to slow down compared to real time.
 Max number of times a user can fail rcon authentication before being banned
 MaxNetworkableEntities
@@ -5179,6 +5174,7 @@ Maximum supported image dimension is %u pixels
 Maximum updates per second that the server will allow
 May
 May 25 2020
+May 26 2020
 Mc
 Me
 Meetei_Mayek
@@ -5795,9 +5791,9 @@ P
 P8
 P?
 P@
-PARALLEL_PROCESS hltvserver.cpp:1823
-PARALLEL_PROCESS sv_packedentities.cpp:927
-PARALLEL_PROCESS sv_packedentities.cpp:946
+PARALLEL_PROCESS hltvserver.cpp:1801
+PARALLEL_PROCESS sv_packedentities.cpp:923
+PARALLEL_PROCESS sv_packedentities.cpp:942
 PARALLEL_PROCESS utlsoacontainer.cpp:2533
 PARAM_ERROR
 PARENT
@@ -6276,7 +6272,6 @@ RandomFloat
 RandomInt
 RandomSeed
 Rate at which to attempt internal heap compaction
-Rate multiplier when connected via hltv
 Reached an unintended state: CPPTYPE_MESSAGE
 Reached impossible case in HasBit().
 Reactivate moving '%s' from slot %d to slot %d
@@ -6481,14 +6476,6 @@ SHADER_SOURCE_ROOT
 SIGINT received
 SIGNED_R11
 SIGNED_RG11
-SIGNONSTATE_CHALLENGE
-SIGNONSTATE_CHANGELEVEL
-SIGNONSTATE_CONNECTED
-SIGNONSTATE_FULL
-SIGNONSTATE_NEW
-SIGNONSTATE_NONE
-SIGNONSTATE_PRESPAWN
-SIGNONSTATE_SPAWN
 SIGTERM received while server hibernating.
 SIGTERM received while server was **not** hibernating!  Shutting down even though a game may be in progress!
 SKIP
@@ -6715,7 +6702,6 @@ Server PackEntities
 Server Send Networking
 Server Shutting Down
 Server Simulation
-Server connection overflowed.
 Server connection timed out.
 Server is a lan server ( no heartbeat, no authentication, no non-class C addresses )
 Server is hibernating
@@ -6830,7 +6816,6 @@ Sharada
 Shavian
 Shift
 Should not reach here.
-Should we update the master server.
 Show Main Menu
 Show SourceTV server status.
 Show alien gib entities
@@ -6864,7 +6849,6 @@ ShutdownRequest
 ShutdownSource2Logging
 Signon buffer overflowed %i bytes!!!
 SignonState
-SignonState_t
 Similar to tv_grouprelaydata, but controls whether or not the voice channels should be routed into the grouped data for the relays
 SimpleEngineLoopService_001
 SimpleEngineLoop{
@@ -7204,7 +7188,6 @@ This is a test of the emergency broadcast system.
 This program requires version
 This program was compiled against version
 This server is password protected for console access. Must send PASS command
-This sets the minimum value for cl_cmdrate. 0 == unlimited.
 This shouldn't be called if all the sizes are equal.
 This soundevent is called to stop the desired soundevents when the game is disconnected.
 ThreadGetCurrentId
@@ -8263,8 +8246,6 @@ cl_clock_showdebuginfo
 cl_clock_unhook
 cl_clockdbg
 cl_clockdrift_max_ticks
-cl_cmdrate
-cl_cmdrate is moved to within sv_client_cmdrate_difference units of cl_updaterate before it is clamped between sv_mincmdrate and sv_maxcmdrate.
 cl_connectionretrytime_p2p
 cl_consistencycheck
 cl_consistencycheck_interval
@@ -8299,7 +8280,6 @@ cl_resend
 cl_sendtable_cache_filename
 cl_showdemooverlay
 cl_spawngroup_spewresources
-cl_spectator_cmdrate_factor
 cl_spewserializers
 cl_team
 cl_timeout
@@ -10109,7 +10089,6 @@ rendersystemdx11.dll
 rendersystemdx9.dll
 rendersystemempty.dll
 rendersystemgl.dll
-rendersystemmantle.dll
 rendersystemvulkan.dll
 repeated
 repeated subpattern is too long
@@ -10550,7 +10529,6 @@ sv_banid_dev_enabled
 sv_banid_enabled
 sv_cheats
 sv_cheats 1%s
-sv_client_cmdrate_difference
 sv_client_predict
 sv_cluster
 sv_consistency
@@ -10582,12 +10560,10 @@ sv_max_queries_sec_global
 sv_max_queries_window
 sv_max_unreliable_delta_size
 sv_maxclientframes
-sv_maxcmdrate
 sv_maxrate
 sv_maxreplay
 sv_maxupdaterate
 sv_memlimit
-sv_mincmdrate
 sv_minrate
 sv_minupdaterate
 sv_networkvar_perfieldtracking
@@ -10636,7 +10612,6 @@ sv_tags
 sv_temp_baseline_string_table_buffer_size
 sv_timeout
 sv_unlockedchapters
-sv_update_master_server
 sv_usenetworkvars
 sv_visiblemaxplayers
 sv_voicecodec

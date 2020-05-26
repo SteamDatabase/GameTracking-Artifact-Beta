@@ -241,7 +241,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-05-15 23:36:27.463000
+2020-05-25 17:58:22.169000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -490,6 +490,8 @@ Agg data %d: %p (%d parts, crc 0x%08X)
 Aggregate Count
 AggregateInstance
 AirDensity
+AirToCloth
+AirToClothDensity
 Align
 All Groups:
 All Layers:
@@ -821,6 +823,7 @@ CResourceArray< FeNodeBaseUnpacked_t > FeModelRefl_t::m_NodeBasesUnpacked
 CResourceArray< FeNodeBase_t > FeModelRefl_t::m_NodeBasesArray
 CResourceArray< FeNodeIntegrator_t > FeModelOverlayRefl_t::m_NodeIntegratorArray
 CResourceArray< FeNodeReverseOffset_t > FeModelRefl_t::m_ReverseOffsetsArray
+CResourceArray< FeNodeWindBase_t > FeModelRefl_t::m_NodeWindBases
 CResourceArray< FeQuad_t > FeModelRefl_t::m_QuadsArray
 CResourceArray< FeRigidColliderIndices_t > FeModelRefl_t::m_RigidColliderPrioritiesArray
 CResourceArray< FeRodConstraint_t > FeModelRefl_t::m_RodsArray
@@ -1449,6 +1452,7 @@ FeNodeBaseUnpacked_t
 FeNodeBase_t
 FeNodeIntegrator_t
 FeNodeReverseOffset_t
+FeNodeWindBase_t
 FeQuad_t
 FeRigidColliderIndices_t
 FeRodConstraint_t
@@ -1922,6 +1926,7 @@ Node %d
 NodeAnimSource
 NodeBasesUnpacked
 NodePool
+NodeWindBases
 Nodes:
 Non-Collideable
 Non-dynamics
@@ -2976,6 +2981,7 @@ VelocityDamping
 VertexColorPos_t
 VertexMap
 VertexMapHash
+VertexMapIndex
 VertexPaintBlendParams
 VertexPaintBlendParams1
 VertexPaintTintColor
@@ -3119,6 +3125,7 @@ bEnableSprings
 bFrozen
 bFrozenInLocalSpace
 bGoalAttractionSimplified
+bHasScale
 bIsContinuousEnabled
 bIsLimitEnabled
 bIsMassCenterOverridden
@@ -3174,6 +3181,7 @@ bool RnBodyRefl_t::m_bSleeping
 bool RnConicalJointRefl_t::m_bIsSwingLimitEnabled
 bool RnConicalJointRefl_t::m_bIsTwistLimitEnabled
 bool RnHullShapeRefl_t::m_bOwnHull
+bool RnMeshShapeRefl_t::m_bHasScale
 bool RnMeshShapeRefl_t::m_bOwnMesh
 bool RnPrismaticJointRefl_t::m_bIsLimitEnabled
 bool RnRevoluteJointRefl_t::m_bIsLimitEnabled
@@ -3196,7 +3204,6 @@ bool RnWorldRefl_t::m_bParallelIslands
 bool RnWorldRefl_t::m_bParallelSolver
 bool RnWorldRefl_t::m_bSleeping
 bool SoftbodyEffectPressurizeRefl_t::m_bAdditive
-bool SoftbodyEffectWindRefl_t::m_bAdditive
 borrow
 both sides of collision in the same hierarchy must have self-collision and solid contacts enabled.Intersection disabled.
 break_create_joint_revolute
@@ -3501,6 +3508,7 @@ float SoftbodyEffectRefl_t::m_flLifeTime
 float SoftbodyEffectRefl_t::m_flPeakTime
 float SoftbodyEffectRefl_t::m_flTailTime
 float SoftbodyEffectStiffenRefl_t::m_flStiffenBias
+float SoftbodyEffectWindRefl_t::m_flAirToClothDensity
 float abap = Dot( ab, ap );
 float abbp = abap - abab;
 float abnap = Dot( abn, ap );
@@ -3621,6 +3629,7 @@ int RnWorldRefl_t::m_nVelocityIterations
 int SoftbodyEffectGravityRefl_t::m_nParentNode
 int SoftbodyEffectRefl_t::m_nIndexInWorld
 int SoftbodyEffectWindRefl_t::m_nParentNode
+int SoftbodyEffectWindRefl_t::m_nVertexMapIndex
 int( %d = 0x%X )
 int16 BroadphaseProxyDataRefl_t::m_nPairCount
 int16 BroadphaseProxyNodeRefl_t::m_nHeight

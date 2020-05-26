@@ -458,6 +458,7 @@
 #CardEffect_11052_0
 #CardEffect_11054_0
 #CardEffect_11055_0
+#CardEffect_11058_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -1143,6 +1144,7 @@
 #DCG_Glossary_Quickcast
 #DCG_Glossary_Quickstrike
 #DCG_Glossary_RapidDeployment
+#DCG_Glossary_Reflect
 #DCG_Glossary_Regeneration
 #DCG_Glossary_Repeatable
 #DCG_Glossary_Retaliate
@@ -1155,6 +1157,7 @@
 #DCG_Glossary_Silence
 #DCG_Glossary_Silenced
 #DCG_Glossary_Slay
+#DCG_Glossary_SneakAttack
 #DCG_Glossary_Soulbound
 #DCG_Glossary_Spectral
 #DCG_Glossary_Spell
@@ -1691,6 +1694,7 @@
 #DCG_Tooltips_DamageType_Combat
 #DCG_Tooltips_DamageType_Combat_Modified
 #DCG_Tooltips_DamageType_Decay
+#DCG_Tooltips_DamageType_Reflect
 #DCG_Tooltips_DamageType_Regeneration
 #DCG_Tooltips_DamageType_Retaliation
 #DCG_Tooltips_DamageType_Siege
@@ -3314,6 +3318,7 @@ $tI
 (ObjectID : %d)
 (WIPE AND EXTRACT)
 (Yielding)
+(\b(battling|battles?(?! damage))\b)
 (\bCleaving\b)
 (\bSilenced\b)
 (\baction phase(?!\]\])\b)
@@ -3324,7 +3329,6 @@ $tI
 (\battack\b)
 (\baura\b)
 (\bbattle damage\b)
-(\bbattle(?! damage)\b)
 (\bbefore the action phase\b)
 (\bblocker\b)
 (\bbounce\b)
@@ -3344,7 +3348,6 @@ $tI
 (\bdevour\b)
 (\bdisarm\b)
 (\bdispel\b)
-(\bdisplace\b)
 (\bdrain\b)
 (\benchant\b)
 (\benter lane effect\b)
@@ -3361,9 +3364,10 @@ $tI
 (\bimprovement(s)?\b)
 (\bitem\b)
 (\bjump\b)
+(\blethal to creeps\b)
+(\blethal to heroes\b)
 (\blifesteal\b)
 (\block\b)
-(\bmagic immunity\b)
 (\bmana\b)
 (\bmax mana\b)
 (\bminion\b)
@@ -3376,8 +3380,10 @@ $tI
 (\bpillager\b)
 (\bplay effect\b)
 (\bpurge\b)
+(\bpush\b)
 (\bquickstrike\b)
 (\brapid deployment\b)
+(\breflect\b)
 (\bregeneration\b)
 (\brepeatable\b)
 (\bretaliate\b)
@@ -3388,6 +3394,7 @@ $tI
 (\bsiege\b)
 (\bsilence\b)
 (\bslay\b)
+(\bsneak attacks?\b)
 (\bsoulbound\b)
 (\bspell(s)?\b)
 (\bstun\b)
@@ -3399,6 +3406,7 @@ $tI
 (\btrample\b)
 (\bunblocked\b)
 (\bunit\b)
+(\buntargetable\b)
 (broken)
 (cannot determine missing fields for lite message)
 (classmap missing)
@@ -3900,7 +3908,6 @@ $tI
 +gripanalog_hand0
 +gripanalog_hand1
 +inf
-+invaction
 +iv_attack
 +iv_attack2
 +iv_jump
@@ -4108,7 +4115,6 @@ $tI
 -hugeportrait
 -icon_editor
 -inf
--invaction
 -jlook
 -jump
 -klook
@@ -4382,6 +4388,7 @@ $tI
 1) Green: %i
 1) Red  : %i
 1*
+1+
 1.0.2, 30-Dec-2001
 1.0f
 1.2
@@ -5946,6 +5953,7 @@ $tI
 2) Green: %i
 2) Red  : %i
 2*
+2+
 2.
 2.5f
 20.0f
@@ -21193,6 +21201,7 @@ NumberEntryIncrementValue
 Numbers starting with leading zero must be in octal.
 Numerical
 Nyctasha's Guard
+Nyx Assassin
 O
 O'
 O*9y
@@ -22634,7 +22643,6 @@ Q*
 QAR
 QAngle
 QAngle-world
-QF
 Q\E
 Quality definition %d: Duplicate quality name %s
 Quality definition %s: Missing required field "value"
@@ -23219,14 +23227,6 @@ SHe : voiceless postalveolar fricative
 SI
 SIGNED_R11
 SIGNED_RG11
-SIGNONSTATE_CHALLENGE
-SIGNONSTATE_CHANGELEVEL
-SIGNONSTATE_CONNECTED
-SIGNONSTATE_FULL
-SIGNONSTATE_NEW
-SIGNONSTATE_NONE
-SIGNONSTATE_PRESPAWN
-SIGNONSTATE_SPAWN
 SKIN
 SKIP
 SLOWBURN
@@ -24253,6 +24253,7 @@ Spew both interpolated var debug info and history for entity.
 Spew interpolated var info for entity.
 Spew state on when client entities become dormant or active.
 Spewing missing commands:
+Spiked Carapace
 SpinnerVisible
 Spirit Bound
 Spirit Breaker
@@ -25415,7 +25416,6 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
-Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25721,6 +25721,7 @@ VelThrow : %f, %f, %f - Speed: %f
 Venchatoquist
 VenchatoquistText
 VenchatoquistTextEntry
+Vendetta
 Vengeance Aura
 Vengeful Spirit
 Venomancer
@@ -28709,6 +28710,7 @@ dcg_max_hand_size
 dcg_max_reconnect_time_secs
 dcg_media_match
 dcg_media_mode
+dcg_min_rounds_for_event_progress_in_bot_games
 dcg_new_player
 dcg_new_player 0; host_writeconfig
 dcg_new_player_enabled
@@ -30111,7 +30113,6 @@ gaussian(
 gc inter msg %s, SourceAppID %d, version %hd, job source %llu, job target %llu
 gc msg %s, SteamID %llu
 gc msg %s, SteamID %llu, version %hd, job source %llu, job target %llu
-gcSignoutInProgress
 gc_chat_channel_list_updated
 gc_connected
 gc_mismatched_version
@@ -34192,7 +34193,6 @@ mat_yuv
 matchCardAchievements%d
 matchCardAchievements%u
 matchClock
-matchDurationS
 matchID
 matchList
 matchMode
@@ -34948,6 +34948,7 @@ origin=%f, %f, %f
 originParentSpace
 origin_max_delta
 origin_relative
+original_itemid
 originx
 originy
 originz
@@ -38386,6 +38387,7 @@ unknown strokeLineCap value: %s
 unknown strokeLineJoin value: %s
 unknown_scene_panel
 unknown_variant_type
+unlessExistsMatchList
 unlimited quantity
 unlink
 unlocalized_name

@@ -428,6 +428,7 @@
 #CardEffect_11052_0
 #CardEffect_11054_0
 #CardEffect_11055_0
+#CardEffect_11058_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -9700,6 +9701,7 @@ Find entities that intrude into the nav mesh.  List those entities in console ou
 Find entities within a radius.
 Find entities within a radius. Pass 'null' to start an iteration, or reference to a previously found entity to continue a search
 Find the delta between two QAngles.
+Find the nearest point on the nav mesh to a given search position.  - Inputs: vSearchPos, flMaxDist, nNavHull -- Outputs: bFound, vNavPos
 FindAllByClassname
 FindAllByClassnameWithin
 FindAllByModel
@@ -10069,6 +10071,7 @@ GetInt(name) : returns the convar as an int. May return null if no such convar.
 GetInt32
 GetInt64
 GetIntAttr
+GetLevelsFromSaveFile
 GetLocalPlayer
 GetLocalScale
 GetLocalVelocity
@@ -12142,6 +12145,7 @@ Name of the .txt file used to cycle the maps on multiplayer servers
 Name of the particle system to dynamically spawn
 Name of the script used to upload replay files
 NativeFunctions
+Nav Script: Nav hull %d out of range [ 0, %d ]
 Nav Selected Set
 Nav file name too short.
 Nav ignore = %s
@@ -12311,6 +12315,7 @@ Number of cards to draw each turn.
 Number of nav areas is: %u.
 Numbers starting with leading zero must be in octal.
 Nyctasha's Guard
+Nyx Assassin
 O
 O'
 OBSTRUCTED
@@ -12400,6 +12405,7 @@ Oneof must have at least one field.
 OneofOptions
 Only show closed captions if recipient is within this many units of speaking actor (0==disabled).
 Opaque type representing a return value from the old response system.
+OpenSaveFileAndExtractLevels() failed for save file: %s
 OpponentPass
 Option "
 Option field "
@@ -13360,14 +13366,6 @@ SHAKE_START
 SHAKE_START_NORUMBLE
 SHAKE_START_RUMBLEONLY
 SHAKE_STOP
-SIGNONSTATE_CHALLENGE
-SIGNONSTATE_CHANGELEVEL
-SIGNONSTATE_CONNECTED
-SIGNONSTATE_FULL
-SIGNONSTATE_NEW
-SIGNONSTATE_NONE
-SIGNONSTATE_PRESPAWN
-SIGNONSTATE_SPAWN
 SLASH
 SLOWBURN
 SMALL_CENTERED_HULL
@@ -13760,6 +13758,7 @@ Script_GetChildren
 Script_GetFrameCount
 Script_GetInflictor
 Script_GetListenServerHost
+Script_GetNearestNav
 Script_GetPhysAngularVelocity
 Script_GetPhysVelocity
 Script_GetSequence
@@ -13826,10 +13825,10 @@ Script_StopSoundEventReliable
 Script_StopSoundEventUnreliable
 Script_StopSoundOn
 Script_TakeDamage
-Script_TestRayToMesh
 Script_TraceCollideable
 Script_TraceHull
 Script_TraceLine
+Script_TraceRayToNavmesh
 Script_Trigger
 Script_UTIL_MessageText
 Script_UTIL_MessageTextAll
@@ -14330,6 +14329,7 @@ Spew PVS debug info for entity
 Spew all current markup groups and their members
 Spew touch link activity
 Spew warning if command queue has grown above this many backlogged commands.
+Spiked Carapace
 SpinDownMove
 SpinThink
 SpinUpMove
@@ -14700,7 +14700,6 @@ Terrapin Placeholder
 Terrorize
 Test CNavMesh::TestRayToMesh().  Args: nNumrays, flRayLength, flRadialOffset
 Test Item %u
-Test a ray against the nav mesh.  - Inputs: vStart, vEnd  -- Outputs: bStartsInMesh, bExitsMesh, vPos (vStart if not bStartsInMesh)
 Test command that drops an entity blocker out in front of the player.
 Test networking visibility distance
 TestFormatA
@@ -14878,6 +14877,7 @@ Tower Barrage
 Tower Explosion
 Tower turns until destroyed:
 Trace Events
+Trace a ray against the nav mesh.  - Inputs: vStart, vEnd, nNavHull  -- Outputs: bStartsInMesh, bExitsMesh, vTraceEndPos (= vStart if not bStartsInMesh)
 Trace using: %s
 Track
 TrackedControllerManager
@@ -15354,6 +15354,7 @@ VelThrow - PoseData is Zero
 VelThrow : %f, %f, %f - Speed: %f
 Velocity: %.3f
 VelocitySampler
+Vendetta
 Vengeance Aura
 Vengeful Spirit
 Venomancer
@@ -16142,9 +16143,11 @@ bEOFLocked
 bEOFUnlocked
 bExitsMesh
 bFired
+bFound
 bIsDynamicVsDynamicContinuousEnabled
 bOn
 bStartsInMesh
+bSuccess
 bUpdate
 bValue
 backpack_expander
@@ -16673,6 +16676,7 @@ dcg_mana_per_turn_ai
 dcg_max_ai_thinks
 dcg_max_hand_size
 dcg_media_mode
+dcg_min_rounds_for_event_progress_in_bot_games
 dcg_num_tower_damage_rewards
 dcg_old_guid_sequence
 dcg_open_handed
@@ -23980,7 +23984,6 @@ std::string::swap(std::string&)
 std::terminate()
 std::tr1::__detail::__prime_list
 std::vector<ECardColor, std::allocator<ECardColor> >::~vector()
-std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>(std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*)
 std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
 std::vector<unsigned char, std::allocator<unsigned char> >::operator=(std::vector<unsigned char, std::allocator<unsigned char> > const&)
 std::vector<unsigned char, std::allocator<unsigned char> >::~vector()
@@ -24501,8 +24504,10 @@ v8callback
 v8object
 v8value
 vDefault
+vNavPos
 vPoint
 vPos
+vTraceEndPos
 vValue
 v_angle
 value
