@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1"
@@ -12,10 +13,11 @@
 			m_hTexture = resource:"materials/particle/vistasmokev1/vistasmokev1.vtex"
 			m_flAnimationRate2 = 0.100000
 			m_flAnimationRate = 0.500000
-			m_bParticleFeathering = true
 			m_flFeatheringMaxDist = 0.500000
 			m_bDisableOperator = true
+			m_nFeatheringMode = "PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL"
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flAnimationRate = 0.500000
@@ -29,31 +31,39 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.800000
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 1
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 20.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 2.000000
@@ -61,11 +71,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 2.000000
 			m_fLifetimeMin = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 10.000000
@@ -78,26 +90,31 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 2
 		},
+		
 		{
 			_class = "C_INIT_RandomSecondSequence"
 			m_nSequenceMax = 59
 			m_nSequenceMin = 41
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 3.000000
 			m_flRadiusMin = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMax = 200
 			m_nAlphaMin = 150
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -115,9 +132,15 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
+		{
+			_class = "C_INIT_CreateOnModel"
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -134,6 +157,7 @@
 			]
 			m_bLocalCoords = true
 		},
+		
 		{
 			_class = "C_INIT_VelocityRadialRandom"
 			m_fSpeedMin = -2.000000
@@ -146,6 +170,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_bDisableOperator = true
@@ -162,24 +187,32 @@
 				0.000000,
 			]
 		},
-		{
-			_class = "C_INIT_CreateOnModel"
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 20.000000
-			m_flEmissionDuration = 1.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 20.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -202,16 +235,24 @@
 	m_flConstantRadius = 1.000000
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = 15.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 15.000000
+			}
 			m_fFalloffPower = 0.200000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 5.000000
 			m_bDisableOperator = true
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 9
 }

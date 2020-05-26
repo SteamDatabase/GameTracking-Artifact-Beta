@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -15,6 +15,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -25,9 +26,11 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.025000
@@ -38,6 +41,7 @@
 				-250.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
@@ -46,14 +50,17 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_InitFromCPSnapshot"
 			m_nLocalSpaceCP = 4
-			m_nAttributeToRead = 0
+			m_nAttributeToRead = "0"
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -71,11 +78,28 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 5.000000
 			m_flRadiusMin = 3.000000
 		},
+		
+		{
+			_class = "C_INIT_RandomYaw"
+		},
+		
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMin = 2.000000
+			m_fLifetimeMax = 4.000000
+		},
+		
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMax = 63
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = 
@@ -85,6 +109,7 @@
 				1.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMax = 
@@ -101,25 +126,21 @@
 			]
 			m_flNoiseScaleLoc = 5.500000
 		},
-		{
-			_class = "C_INIT_RandomYaw"
-		},
-		{
-			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 2.000000
-			m_fLifetimeMax = 4.000000
-		},
-		{
-			_class = "C_INIT_RandomSequence"
-			m_nSequenceMax = 63
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 64
-			m_nMinParticlesToEmit = 32
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 32.000000
+				m_flRandomMax = 64.000000
+				m_nRandomMode = "PF_TYPE_RANDOM_UNIFORM"
+			}
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

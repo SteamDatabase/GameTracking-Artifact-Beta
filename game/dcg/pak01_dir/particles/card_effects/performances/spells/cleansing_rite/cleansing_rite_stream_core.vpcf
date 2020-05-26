@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_BoundingBoxMin = 
@@ -15,10 +15,12 @@
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -41,13 +43,16 @@
 	m_nMaxParticles = 512
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.050000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_vecRotAxis = 
@@ -59,15 +64,18 @@
 			m_flRotRate = 66.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.500000
 			m_bEaseInAndOut = true
 		},
+		
 		{
 			_class = "C_OP_SetChildControlPoints"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_vecRotAxis = 
@@ -79,6 +87,7 @@
 			m_flRotRate = -88.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VelocityMatchingForce"
 			m_flDirScale = 0.100000
@@ -86,18 +95,21 @@
 			m_flOpEndFadeOutTime = 1.000000
 			m_flOpStartFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeOut"
 			m_flFadeOutTimeMin = 0.200000
 			m_flFadeOutTimeMax = 0.800000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_LerpScalar"
 			m_nFieldOutput = "10"
 			m_flOutput = 0.050000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -109,6 +121,7 @@
 			]
 			m_flFadeEndTime = 0.400000
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_nFieldOutput = "16"
@@ -116,6 +129,7 @@
 			m_nStartCP = 3
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_nFieldOutput = "10"
@@ -123,15 +137,17 @@
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
 			m_nStartCP = 3
-			m_bScaleInitialRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_OP_MaxVelocity"
 			m_flMaxVelocity = 40.000000
 			m_bDisableOperator = true
 			m_flOpEndFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 1.000000
@@ -139,57 +155,73 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_flConstrainRadiusToLengthRatio = 0.500000
 			m_flLengthFadeInTime = 0.300000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-				0.000000,
-			]
 			m_bAdditive = true
 			m_flOverbrightFactor = 2.000000
 			m_hTexture = resource:"materials/particle/sparks/sparks.vtex"
 			m_bCannotBeRefracted = false
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_flInitialRadius = 3.000000
 			m_bEvenDistribution = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreateOnModel"
 			m_HitboxSetName = "fx"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 3.000000
 			m_fSpeedMax = 66.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.000000
 			m_fLifetimeMax = 2.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMin = 6
 			m_nSequenceMax = 6
 		},
+		
 		{
 			_class = "C_INIT_RandomTrailLength"
 			m_flMaxLength = 0.120000
 			m_flMinLength = 0.080000
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -208,24 +240,44 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
 			m_bDisableOperator = true
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 155
 			m_bDisableOperator = true
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 155.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.500000
-			m_flEmitRate = 555.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 555.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_fForceAmount = 
@@ -236,6 +288,7 @@
 			m_nControlPointNumber = 3
 			m_flOpEndFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 40.000000
@@ -249,6 +302,7 @@
 			m_nControlPointNumber = 3
 			m_flOpEndFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_CurlNoiseForce"
 			m_useCurl = true
@@ -266,26 +320,20 @@
 			]
 			m_flOpStartFadeOutTime = 1.000000
 		},
-		{
-			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = 
-			{
-				m_flLiteralValue = 200.000000
-			}
-			m_fFalloffPower = 0.000000
-			m_bDisableOperator = true
-		},
 	]
 	m_flConstantRadius = 0.400000
 	m_flConstantLifespan = 2.000000
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/cleansing_rite/cleansing_rite_ref.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/cleansing_rite/cleansing_rite_soft.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/cleansing_rite/cleansing_rite_stream.vpcf"
 		},
@@ -297,31 +345,20 @@
 		0,
 		255,
 	]
-	m_Constraints = 
-	[
-		{
-			_class = "C_OP_ConstrainDistanceToPath"
-			m_flMaxDistance0 = 32.000000
-			m_PathParameters = 
-			{
-				m_nStartControlPointNumber = 1
-			}
-			m_flTravelTime = 1.000000
-			m_bDisableOperator = true
-		},
-	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetControlPointToCenter"
 			m_nCP1 = 3
 		},
+		
 		{
 			_class = "C_OP_SetCPOrientationToPointAtCP"
 			m_nOutputCP = 3
 			m_nInputCP = 0
 		},
 	]
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 6
 }

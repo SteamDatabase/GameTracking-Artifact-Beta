@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 8
@@ -12,12 +12,14 @@
 	m_nConstantSequenceNumber1 = 4
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_bIgnoreNormal = true
 			m_bOrientZ = true
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/particle/soil_fx_a.vmdl"
 				},
@@ -27,17 +29,21 @@
 			m_hOverrideMaterial = resource:"materials/models/particle/soil_rupture_alt.vmat"
 			m_bOverrideTranslucentMaterials = false
 			m_bForceDrawInterlevedWithSiblings = true
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.500000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -50,42 +56,27 @@
 			m_flFadeStartTime = 0.500000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.250000
 			m_flStartScale = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_bLockRot = true
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				-3.000000,
-				0.000000,
-			]
-		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_nCP1 = 2
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				3.000000,
-				0.000000,
-			]
-		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_flDegreesMin = -360.000000
 			m_nFieldOutput = "12"
 		},
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 3.000000
@@ -101,38 +92,51 @@
 				]
 			}
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMax = 1
 			m_flOutputMin = 0.650000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMin = 1
 			m_nInputMax = 2
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.750000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 3
-			m_flStartTime = 0.050000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.050000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
 		},
 	]
 	m_flConstantLifespan = 1.400000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -149,6 +153,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_vecOffset = 
@@ -169,11 +174,13 @@
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistanceToUserSpecifiedPath"
 			m_flMaxDistance = 0.000000
 			m_pointList = 
 			[
+				
 				{
 					m_flTimeDuration = 0.200000
 					m_vOffset = 
@@ -184,6 +191,7 @@
 					]
 					m_nControlPoint = 2
 				},
+				
 				{
 					m_flTimeDuration = 0.150000
 					m_vOffset = 
@@ -194,6 +202,7 @@
 					]
 					m_nControlPoint = 2
 				},
+				
 				{
 					m_flTimeDuration = 0.300000
 					m_vOffset = 
@@ -204,6 +213,7 @@
 					]
 					m_nControlPoint = 2
 				},
+				
 				{
 					m_flTimeDuration = 0.150000
 					m_vOffset = 
@@ -214,6 +224,7 @@
 					]
 					m_nControlPoint = 2
 				},
+				
 				{
 					m_flTimeDuration = 5.000000
 					m_vOffset = 
@@ -228,4 +239,30 @@
 			m_bDisableOperator = true
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				-3.000000,
+				0.000000,
+			]
+		},
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 2
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				3.000000,
+				0.000000,
+			]
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 2
 }

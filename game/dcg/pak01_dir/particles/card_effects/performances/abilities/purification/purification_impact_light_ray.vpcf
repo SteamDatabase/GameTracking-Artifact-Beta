@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 32
@@ -13,6 +13,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_bAdditive = true
@@ -26,6 +27,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_MaintainSequentialPath"
 			m_flNumToAssign = 32.000000
@@ -35,23 +37,28 @@
 			}
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 			m_flOpStartFadeInTime = 0.500000
 			m_flOpEndFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.300000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.650000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.300000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -66,6 +73,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 32.000000
@@ -79,6 +87,7 @@
 				]
 			}
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_flOutputMax = 0.600000
@@ -86,6 +95,7 @@
 			m_nFieldOutput = "16"
 			m_nInputMax = 6
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "16"
@@ -95,6 +105,7 @@
 			m_flOutputMax = 0.600000
 			m_bActiveRange = true
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMax = 31
@@ -104,26 +115,34 @@
 			m_flOutputMax = 0.000000
 			m_bActiveRange = true
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_flOutputMin = 0.100000
-			m_bScaleInitialRange = true
 			m_nInputMax = 31
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 32
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 32.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -140,6 +159,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -162,6 +182,7 @@
 	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_vecCP1Pos = 

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_ConstantColor = 
@@ -12,10 +12,12 @@
 	m_flConstantLifespan = 0.800000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -38,29 +40,35 @@
 	m_nMaxParticles = 64
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.600000
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.120000
 		},
+		
 		{
 			_class = "C_OP_RemapVelocityToVector"
 			m_nFieldOutput = "21"
 			m_bNormalize = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RemapDirectionToCPToVector"
 			m_nFieldOutput = "21"
 			m_bNormalize = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.500000
@@ -68,18 +76,12 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_flMaxLength = 20.000000
 			m_flMinLength = 15.000000
 			m_flConstrainRadiusToLengthRatio = 0.600000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-				0.000000,
-			]
 			m_flForwardShift = 0.500000
 			m_flAnimationRate = 1.000000
 			m_flSelfIllumAmount = 1.000000
@@ -87,14 +89,31 @@
 			m_bAdditive = true
 			m_flOverbrightFactor = 3.000000
 			m_hTexture = resource:"materials/particle/fire_particle_10/fire_particle_10_low.vtex"
-			m_bFitCycleToLifetime = true
+			m_nAnimationType = "ANIMATION_TYPE_FIT_LIFETIME"
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMin = 0.200000
@@ -114,21 +133,25 @@
 			m_fSpeedMin = 11.000000
 			m_fSpeedMax = 66.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomTrailLength"
 			m_flMinLength = 0.600000
 			m_flMaxLength = 0.600000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 10
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.300000
 			m_fLifetimeMax = 0.900000
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -147,11 +170,16 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 11
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 11.000000
+			}
 		},
 	]
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 5
 }

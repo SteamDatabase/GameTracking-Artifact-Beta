@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_ConstantColor = 
@@ -12,10 +12,12 @@
 	m_flConstantLifespan = 1.500000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -38,6 +40,7 @@
 	m_nMaxParticles = 64
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -48,12 +51,15 @@
 			]
 			m_fDrag = 0.030000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_DampenToCP"
 			m_flRange = 0.660000
@@ -61,6 +67,7 @@
 			m_flOpEndFadeInTime = 1.000000
 			m_flScale = 2.000000
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_nFieldOutput = "4"
@@ -70,19 +77,26 @@
 			m_flOutputMax = 10.000000
 			m_nStartCP = 2
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 40.000000
 			m_flOpEndFadeInTime = 0.500000
-			m_nOpStrengthScaleSeed = 227
-			m_flOpStrengthMinScale = 0.600000
-			m_flOpStrengthMaxScale = 1.400000
 			m_nCP = 2
+			m_flOpStrength = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 0.600000
+				m_flRandomMax = 1.400000
+				m_nRandomMode = "PF_RANDOM_MODE_VARYING"
+			}
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
@@ -90,6 +104,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_hTexture = resource:"materials/particle/particle_flares/particle_flare_010.vtex"
@@ -97,6 +112,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 0.100000
@@ -122,22 +138,30 @@
 			]
 			m_nControlPointNumber = 2
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 32
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 32.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_fForceAmount = 
@@ -152,9 +176,8 @@
 			m_flOpTimeOffsetMax = 0.200000
 			m_nOpTimeOffsetSeed = 44
 			m_nControlPointNumber = 2
-			m_fForceAmountMin = null
 		},
 	]
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 4
 }

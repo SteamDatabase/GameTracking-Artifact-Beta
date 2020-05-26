@@ -1,12 +1,14 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -29,18 +31,22 @@
 	m_nMaxParticles = 8
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_SetChildControlPoints"
 			m_nFirstControlPoint = 2
 			m_nFirstSourcePoint = 1
 			m_nNumControlPoints = 2
 		},
+		
 		{
 			_class = "C_OP_OscillateVectorSimple"
 			m_Rate = 
@@ -60,6 +66,7 @@
 			m_bOffset = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_OscillateVectorSimple"
 			m_Rate = 
@@ -76,6 +83,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_nFieldOutput = "0"
@@ -96,6 +104,7 @@
 			m_bAdditive = true
 			m_bOffset = true
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_nFieldOutput = "16"
@@ -104,6 +113,7 @@
 			m_fl4NoiseScale = 0.300000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -128,11 +138,7 @@
 			m_bProportionalOp = false
 			m_bOffset = true
 		},
-		{
-			_class = "C_OP_SetControlPointToCenter"
-			m_nCP1 = 5
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_OP_DampenToCP"
 			m_nControlPointNumber = 5
@@ -142,6 +148,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 4.000000
@@ -151,6 +158,7 @@
 			}
 			m_fMaxDistance = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -166,6 +174,7 @@
 				2.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMin = 
@@ -185,24 +194,33 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 4
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 4.000000
+			}
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/equip_events/claymore/claymore_equip_bolt.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/equip_events/claymore/claymore_equip_bolt.vpcf"
 			m_flDelay = 0.100000
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/equip_events/claymore/claymore_equip_bolt.vpcf"
 			m_flDelay = 0.200000
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/equip_events/claymore/claymore_equip_bolt_end.vpcf"
 			m_flDelay = 0.300000
@@ -210,6 +228,7 @@
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MinForce = 
@@ -226,6 +245,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 50.000000
@@ -237,17 +257,23 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = -20.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -20.000000
+			}
 			m_fFalloffPower = 0.000000
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = 100.000000
 			m_nControlPointNumber = 1
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_TurbulenceForce"
 			m_flNoiseCoordScale1 = 0.750000
@@ -276,4 +302,15 @@
 	]
 	m_flConstantRadius = 1.000000
 	m_flMaximumTimeStep = 0.050000
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetControlPointToCenter"
+			m_nCP1 = 5
+			m_bDisableOperator = true
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 1
 }

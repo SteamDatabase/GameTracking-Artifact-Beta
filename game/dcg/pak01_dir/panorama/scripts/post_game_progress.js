@@ -288,6 +288,7 @@ const PLAYER_XP_TYPE_MATCH_FINISHED = 0;
 const PLAYER_XP_TYPE_MATCH_WON = 1;
 const PLAYER_XP_TYPE_CHALLENGE_COMPLETED = 2;
 
+
 // Keep in sync with EPlayerLevelReward
 const PLAYER_LEVEL_REWARD_PACK = 0;
 const PLAYER_LEVEL_REWARD_TICKET = 1;
@@ -343,22 +344,7 @@ AnimatePlayerXPIncreaseAction.prototype.start = function ()
 			row.SetDialogVariable( 'xp_type', this.progress.challenge_name );
 			row.SetDialogVariable( 'xp_type_desc', this.progress.challenge_description );
 			row.SetHasClass( 'has_description', this.progress.challenge_description.length > 0 );
-			//row.SetDialogVariable( 'xp_type', $.Localize( '#DCG_PostGame_ChallengeCompleted' ) );
-			//row.SetDialogVariable( 'challenge_name', this.progress.challenge_name );
 		}
-
-		// this row won't show when we pass it 0 xp. in future, allow a row to appear here and not grant xp ?
-		// maybe needs to be a new action AnimatePartialChallengeAction
-
-		//else if ( this.progress.xp_type == PLAYER_XP_TYPE_3_WINS_CHALLENGE )
-		//{
-		//	$.Msg( "Add a 3 Wins CHALLENGE COMPLETED row",  this.progress.challenge_name  );
-		//	row.BLoadLayoutSnippet( 'PlayerXPProgressRow_3_Wins_Challenge' );
-		//	row.SetDialogVariable( 'xp_type', this.progress.challenge_name );
-			//row.SetDialogVariable( 'xp_type', $.Localize( '#DCG_PostGame_ChallengeCompleted' ) );
-			//row.SetDialogVariable( 'challenge_name', this.progress.challenge_name );
-		//	row.SwitchClass( 'challenge_stars', "StarsEarned_" + this.progress.challenge_stars );
-		//}
 
 		else
 		{
@@ -487,27 +473,22 @@ AnimatePlayerXPLevelScreenAction.prototype.start = function ()
 	panel.FindChildInLayoutFile( "PlayerLevelProgress" ).max = xpLevelNext;
 	panel.FindChildInLayoutFile( "PlayerLevelProgress" ).value = xpLevelStart;
 
-	$.GetContextPanel().GetParent().GetParent().RemoveClass( 'ShowingLevelProgress' );
+	$.GetContextPanel().GetParent().GetParent().RemoveClass('ShowingLevelProgress');
+	$.GetContextPanel().GetParent().GetParent().RemoveClass('ShowingGauntletProgress');
 
 	// Setup the sequence of actions to animate the screen
 	this.seq = new RunSequentialActions();
 
 	// Delay for the fade-in of victory / defeat.
-	this.seq.actions.push( new WaitAction( 4 ) );
+	//this.seq.actions.push( new WaitAction( 4 ) );
 
 	this.seq.actions.push( new AddClassAction( $.GetContextPanel().GetParent().GetParent(), 'ShowingLevelProgress'));
 	this.seq.actions.push( new AddClassAction( panel, 'ShowScreen' ) );
-	//this.seq.actions.push( new ActionWithTimeout( new WaitForClassAction( heroModel, 'SceneLoaded' ), 3.0 ) );
 
-	this.seq.actions.push( new WaitAction( 2.5 ) );
+	this.seq.actions.push( new WaitAction( 1.5 ) );
 
 	if ( this.data.player_xp_progress )
 	{
-		//this.seq.actions.push( new AddScreenLinkAction( panel, 'HeroBadgeProgress', '#DOTA_PlusPostGame_HeroProgress', function ()
-		//{
-		//	panel.SwitchClass( 'current_screen', '.ShowPlayerLevelUp' );
-		//} ) );
-
 		this.seq.actions.push( new SwitchClassAction( panel, 'current_screen', 'ShowPlayerLevelUp' ) );
 
 		var xpEarned = 0;
@@ -565,7 +546,7 @@ AnimatePlayerXPLevelScreenAction.prototype.start = function ()
 						} ) );
 
 						
-						me.seq.actions.push( new WaitAction( 1.20 ) );
+						me.seq.actions.push( new WaitAction( .60 ) );
 						me.seq.actions.push( new RunFunctionAction( function ()
 						{							
 							panel.SetDialogVariableInt( 'current_level', playerLevel );
@@ -602,7 +583,7 @@ AnimatePlayerXPLevelScreenAction.prototype.start = function ()
 							if ( levelUpData.rewards !== undefined )
 							{
 
-								me.seq.actions.push( new WaitAction( 1.30 ) );
+								me.seq.actions.push( new WaitAction( .65 ) );
 								for ( var j = 0; j < levelUpData.rewards.length; ++j )
 								{
 									me.seq.actions.push( new SkippableAction( new AnimatePlayerLevelRewardAction( levelUpData.rewards[j], rewardsPanel, playerLevel ) ) );
@@ -614,7 +595,7 @@ AnimatePlayerXPLevelScreenAction.prototype.start = function ()
 							}
 							else
 							{
-								me.seq.actions.push( new SkippableAction( new WaitAction( 1.0 ) ) );
+								me.seq.actions.push( new SkippableAction( new WaitAction( .5 ) ) );
 							}
 							me.seq.actions.push( new StopSkippingAheadAction() );
 						}
@@ -650,19 +631,12 @@ AnimatePlayerXPLevelScreenAction.prototype.start = function ()
 				}
 			}
 
-			this.seq.actions.push( new WaitAction( 0.2 ) );
+			this.seq.actions.push( new WaitAction( 0.1 ) );
 		}
 
 		this.seq.actions.push( new StopSkippingAheadAction() );
 		this.seq.actions.push( new SwitchClassAction( panel, 'current_screen', '' ) );
 	}
-
-	// Signal back to the C++ code that we're done displaying progress
-	this.seq.actions.push( new RunFunctionAction( function ()
-	{
-		/*$.GetContextPanel().GetParent().GetParent().RemoveClass( 'ShowingLevelProgress' );*/
-		$.DispatchEvent( 'DCGPostGameProgressComplete', $.GetContextPanel() );
-	} ) );
 
 	this.seq.start();
 }
@@ -760,6 +734,221 @@ function TestAnimatePlayerLevel()
 }
 
 
+//---------------------------------------------------------------------------------------------
+//-- AnimateGauntletPointsRow
+//---------------------------------------------------------------------------------------------
+function AnimateGauntletPointsRow( panel, progress, isMultiplier ) {
+	this.panel = panel;
+	this.progress = progress;
+	this.isMultiplier = isMultiplier;
+}
+AnimateGauntletPointsRow.prototype = new BaseAction();
+AnimateGauntletPointsRow.prototype.start = function () {
+	var rowsContainer = this.panel.FindChildInLayoutFile( "PlayerGauntletPointsProgressRows" );
+	this.seq = new RunSequentialActions();
+	var row = $.CreatePanel( 'Panel', rowsContainer, '' );
+	row.BLoadLayoutSnippet( this.isMultiplier ? 'PlayerGauntletProgressRow_MultiplierBonus' : 'PlayerGauntletProgressRow_GauntletPoints' );
+	row.SetDialogVariable( 'name', this.progress.name );
+	row.SetDialogVariable( 'description', this.progress.description );
+	row.SetHasClass( 'has_description', this.progress.description.length > 0 );
+	this.seq.actions.push( new AddClassAction( row, 'ShowRow' ) );
+	this.seq.actions.push( new SkippableAction( new WaitAction( 0.5 ) ) );
+	this.seq.actions.push( new AddClassAction( row, 'ShowValue' ) );
+	var duration = .5;
+	var par = new RunParallelActions();
+	par.actions.push( new AnimateDialogVariableIntAction( row, 'amount', this.isMultiplier ? 1 : 0, this.progress.amount, duration ) );
+	par.actions.push(new PlaySoundForDurationAction("DCG_UI.XP_Count", duration, true));
+	this.seq.actions.push( par );
+	this.seq.start();
+}
+AnimateGauntletPointsRow.prototype.update = function () {
+	return this.seq.update();
+}
+AnimateGauntletPointsRow.prototype.finish = function () {
+	this.seq.finish();
+}
+
+
+//---------------------------------------------------------------------------------------------
+//-- AnimatePointsTotal
+//---------------------------------------------------------------------------------------------
+function AnimatePointsTotal( panel, pointsStart, pointsThisLevelStart, pointsToCount ) {
+	this.panel = panel;
+	this.pointsStart = pointsStart;
+	this.pointsThisLevelStart = pointsThisLevelStart;
+	this.pointsToCount = pointsToCount;
+}
+AnimatePointsTotal.prototype = new BaseAction();
+AnimatePointsTotal.prototype.start = function () {
+	var totalsRow = this.panel.FindChildInLayoutFile( "TotalsRow" );
+	var levelProgressBar = this.panel.FindChildInLayoutFile( 'PlayerLevelProgress' );	
+	this.seq = new RunSequentialActions();
+	var duration = .5;
+	var par = new RunParallelActions();
+	par.actions.push( new AnimateDialogVariableIntAction( this.panel, 'current_level_points', this.pointsThisLevelStart, this.pointsThisLevelStart+this.pointsToCount, duration ) );
+	par.actions.push( new AnimateDialogVariableIntAction( totalsRow, 'amount', this.pointsStart, this.pointsStart+this.pointsToCount, duration ) );
+	par.actions.push( new AnimateProgressBarAction( levelProgressBar, this.pointsThisLevelStart,this.pointsThisLevelStart+this.pointsToCount, duration ) )
+	par.actions.push( new PlaySoundForDurationAction( "XP.Count", duration, true ) );
+	this.seq.actions.push( par );
+	this.seq.start();
+}
+AnimatePointsTotal.prototype.update = function () {
+	return this.seq.update();
+}
+AnimatePointsTotal.prototype.finish = function () {
+	this.seq.finish();
+}
+
+
+//---------------------------------------------------------------------------------------------
+//-- AnimatePlayerGauntletScreenAction
+//---------------------------------------------------------------------------------------------
+function AnimatePlayerGauntletScreenAction( data ) {
+	this.data = data;
+}
+
+AnimatePlayerGauntletScreenAction.prototype = new BaseAction();
+AnimatePlayerGauntletScreenAction.prototype.start = function () {
+	var pointsPerLevel = this.data.player_gauntlet_points_per_level;
+	var playerPointsStart = this.data.player_gauntlet_points_initial;
+	var playerLevelStart = 1 + Math.floor( playerPointsStart / pointsPerLevel);
+	var playerPointsEarned = this.data.player_gauntlet_points_earned;
+	var pointsToNextLevel = pointsPerLevel - (playerPointsStart % pointsPerLevel);
+
+	// Create the screen and do a bunch of initial setup
+	var panel = StartNewScreen( 'PlayerGauntletProgressScreen' );
+	panel.BLoadLayoutSnippet( "PlayerGauntletLevelProgress" );
+	panel.FindChildInLayoutFile( "AccountBadge" ).badgeLevel = playerLevelStart;
+
+	panel.FindChildInLayoutFile( "TotalsRow" ).SetDialogVariableInt( 'amount', 0 );
+	panel.SetDialogVariableInt( 'current_level_points', playerPointsStart % pointsPerLevel );
+	panel.SetDialogVariableInt( 'points_to_next_level', pointsPerLevel );
+	panel.SetDialogVariableInt( 'current_level', playerLevelStart );
+	panel.SetDialogVariableInt( 'next_level', playerLevelStart + 1 );
+
+	panel.FindChildInLayoutFile( "PlayerLevelProgress" ).max = pointsPerLevel;
+	panel.FindChildInLayoutFile( "PlayerLevelProgress" ).value = playerPointsStart % pointsPerLevel;
+
+	$.GetContextPanel().GetParent().GetParent().RemoveClass('ShowingLevelProgress');
+	$.GetContextPanel().GetParent().GetParent().RemoveClass('ShowingGauntletProgress');
+
+	// Setup the sequence of actions to animate the screen
+	this.seq = new RunSequentialActions();
+	this.seq.actions.push(new AddClassAction($.GetContextPanel().GetParent().GetParent(), 'ShowingGauntletProgress'));
+	this.seq.actions.push( new AddClassAction( panel, 'ShowScreen' ) );
+	this.seq.actions.push( new WaitAction( 3.0 ) );
+	if ( this.data.player_gauntlet_points_initial !== null ) {
+		this.seq.actions.push( new SwitchClassAction( panel, 'current_screen', 'ShowPlayerLevelUp' ) );
+		for ( var i = 0; i < this.data.player_gauntlet_progress_points.length; ++i ) {
+			this.seq.actions.push( new SkippableAction( 
+				new AnimateGauntletPointsRow( panel, this.data.player_gauntlet_progress_points[i], false /*isMultiplier*/ ) ) 
+			);
+		}
+		for ( var i = 0; i < this.data.player_gauntlet_progress_multipliers.length; ++i ) {
+			this.seq.actions.push( new SkippableAction( 
+				new AnimateGauntletPointsRow( panel, this.data.player_gauntlet_progress_multipliers[i], true /*isMultiplier*/ ) ) 
+			);
+		}		
+		var pointsToCount = playerPointsEarned;
+		var pointsToCountFrom = playerPointsStart;		
+		var playerLevel = playerLevelStart;
+		while( pointsToCount > 0 ) {	
+			var pointsToNextLevel = pointsPerLevel - (pointsToCountFrom % pointsPerLevel);
+			var pointsThisLevel = Math.min( pointsToCount, pointsToNextLevel );
+			var pointsToCountFromThisLevel = pointsToCountFrom % pointsPerLevel;
+			var didLevelUp = pointsThisLevel == pointsToNextLevel;
+			this.seq.actions.push( new SkippableAction( 
+				new AnimatePointsTotal( panel, pointsToCountFrom - playerPointsStart, pointsToCountFromThisLevel, pointsThisLevel  ) ) 
+			);
+			pointsToCount -= pointsThisLevel;
+			pointsToCountFrom += pointsThisLevel;			
+			if ( didLevelUp ) {
+				++playerLevel;
+				var sceneFX = panel.FindChildInLayoutFile( 'GodRays' );
+				this.seq.actions.push( new StopSkippingAheadAction() );
+			    (function (me, playerLevel)
+			    {
+			        if (playerLevel == 4 || playerLevel == 6 || playerLevel == 8 || playerLevel == 12 || playerLevel == 20 || playerLevel == 24)
+			        {
+					    me.seq.actions.push(new RunFunctionAction(function () {
+					        impCelebration = $.CreatePanel('Panel', $('#ProgressScreens').GetParent().GetParent().GetParent(), '');
+					        if ( playerLevel >= 24)
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet24');
+					        }
+					        else if (playerLevel >= 20)
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet20');
+					        }
+					        else if (playerLevel >= 12)
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet12');
+					        }
+					        else if (playerLevel >= 8)
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet8');
+					        }
+					        else if (playerLevel >= 6)
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet6');
+					        }
+					        else
+					        {
+					            impCelebration.BLoadLayoutSnippet('ImpCelebrationSnippet4');
+					        }
+
+					        $('#ProgressScreens').AddClass("GauntletLeveledUp");
+					    }));
+					    me.seq.actions.push(new WaitAction(0.8));
+					    me.seq.actions.push(new RunFunctionAction(function () {
+					        $.GetContextPanel().PlayUISoundScript("DCG_UI.RankUp");
+					    }));
+					    me.seq.actions.push(new WaitAction(3.8));
+					}
+
+			        me.seq.actions.push(new RunFunctionAction(function () {
+						$('#ProgressScreens').RemoveClass("GauntletLeveledUp");
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_bar', 'stop', '0' );
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_bar', 'start', '0.0' );
+					} ) );			
+					me.seq.actions.push( new WaitAction( .60 ) );
+					me.seq.actions.push( new RunFunctionAction( function () {							
+						panel.SetDialogVariableInt( 'current_level', playerLevel );
+						panel.FindChildInLayoutFile( "AccountBadge" ).badgeLevel = playerLevel;
+						panel.SetDialogVariableInt( 'current_level_points', 0 );
+						panel.SetDialogVariableInt( 'points_to_next_level', pointsPerLevel );
+						panel.FindChildInLayoutFile( "PlayerLevelProgress" ).max = pointsPerLevel;
+						panel.FindChildInLayoutFile( "PlayerLevelProgress" ).value = 0;
+					} ) );
+					me.seq.actions.push( new RunFunctionAction( function () {							
+
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_rays', 'stop', '0.0' );
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_rays', 'start', '0.0' );
+
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_red', 'stop', '0' );
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_red', 'start', '0.0' );
+					
+						$.DispatchEvent( 'DCGSceneFireEntityInput', sceneFX, 'ui_burst_rays', 'stop', '1.0' );
+
+						$.GetContextPanel().PlayUISoundScript("DCG_Progression.XP_Level_Up_Generic");
+					} ) );
+					me.seq.actions.push( new WaitAction( .60 ) );		
+					
+				} )( this, playerLevel );
+			}
+		}
+		this.seq.actions.push( new StopSkippingAheadAction() );
+		this.seq.actions.push( new SwitchClassAction( panel, 'current_screen', '' ) );
+	}
+	this.seq.start();
+}
+AnimatePlayerGauntletScreenAction.prototype.update = function () {
+	return this.seq.update();
+}
+AnimatePlayerGauntletScreenAction.prototype.finish = function () {
+	this.seq.finish();
+}
+
 // ----------------------------------------------------------------------------
 //   All Screens
 // ----------------------------------------------------------------------------
@@ -767,12 +956,16 @@ function TestAnimatePlayerLevel()
 function CreateProgressAnimationSequence( data )
 {
 	var seq = new RunSequentialActions();
-
-	if ( data.player_xp_progress !== null )
-	{
+	if ( data.show_xp_progress ) {
 		seq.actions.push( new AnimatePlayerXPLevelScreenAction( data ) );
+	}	
+	if ( data.show_gauntlet_progress ) {
+		seq.actions.push( new AnimatePlayerGauntletScreenAction( data ) );
 	}
-
+	seq.actions.push( new RunFunctionAction( function () {
+		// Signal back to the C++ code that we're done displaying progress
+		$.DispatchEvent( 'DCGPostGameProgressComplete', $.GetContextPanel() );
+	} ) );
 	return seq;
 }
 
@@ -795,7 +988,9 @@ function StartProgressAnimation( data )
 	StopSkippingAhead();
 
 	var seq = CreateProgressAnimationSequence( data );
-	RunSingleAction( seq );
+	RunSingleAction(seq);
+
+	$('#ProgressScreens').GetParent().GetParent().GetParent().FindChildInLayoutFile('#AchievementProgressSection').RemoveAndDeleteChildren();
 }
 
 function HideProgress()

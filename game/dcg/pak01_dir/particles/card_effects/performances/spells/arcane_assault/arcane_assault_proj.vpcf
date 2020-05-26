@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -13,6 +13,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -30,20 +31,25 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.500000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.125000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_FrequencyMax = 
@@ -68,11 +74,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.250000
 			m_fLifetimeMax = 0.250000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -90,6 +98,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_CreationNoise"
 			m_flNoiseScale = 0.500000
@@ -98,6 +107,23 @@
 			m_flOutputMax = 16.000000
 			m_bDisableOperator = true
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 1.500000
+			m_flRadiusMax = 2.500000
+		},
+		
+		{
+			_class = "C_INIT_CreateSequentialPath"
+			m_flNumToAssign = 50.000000
+			m_bLoop = false
+			m_PathParams = 
+			{
+				m_nEndControlPointNumber = 2
+			}
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_flNoiseScaleLoc = 1.000000
@@ -114,6 +140,7 @@
 				20.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_CreateInEpitrochoid"
 			m_bUseLocalCoords = true
@@ -126,6 +153,7 @@
 			m_bOffsetExistingPos = true
 			m_nControlPointNumber = 2
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_bUseCount = true
@@ -137,6 +165,7 @@
 			]
 			m_flWarpTime = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_nControlPointNumber = 2
@@ -150,52 +179,50 @@
 			m_flWarpStartTime = 40.000000
 			m_bUseCount = true
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 1.500000
-			m_flRadiusMax = 2.500000
-		},
-		{
-			_class = "C_INIT_CreateSequentialPath"
-			m_flNumToAssign = 50.000000
-			m_bLoop = false
-			m_PathParams = 
-			{
-				m_nEndControlPointNumber = 2
-			}
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 50
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 50.000000
+			}
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/arcane_assault/arcane_assault_proj_glow.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/arcane_assault/arcane_assault_proj_energy.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/arcane_assault/arcane_assault_proj_smoke.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/arcane_assault/arcane_assault_proj_thin.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/arcane_assault/arcane_assault_proj_web.vpcf"
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -212,6 +239,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -232,4 +260,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

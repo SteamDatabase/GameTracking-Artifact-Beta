@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 16
 	m_flConstantRadius = 0.008000
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -13,22 +14,27 @@
 			m_hTexture = resource:"materials/particle/crystal/crystal.vtex"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
-					m_model = resource:"models/effects/crystal002.vmdl"
+					m_model = resource:"models/particle/spells/frostbite/frostbite_crystals.vmdl"
 				},
 			]
 			m_hOverrideMaterial = resource:"materials/models/effects/crystals/crystal002.vmat"
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_OscillateScalar"
 			m_RateMin = -1.000000
@@ -37,14 +43,17 @@
 			m_bProportional = false
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.150000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -56,31 +65,37 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_bLockRot = true
 		},
+		
 		{
 			_class = "C_OP_DistanceCull"
 			m_flDistance = 1.500000
 			m_bCullInside = true
 			m_nControlPoint = 1
 		},
+		
 		{
 			_class = "C_OP_RemapControlPointDirectionToVector"
 			m_nFieldOutput = "21"
 		},
+		
 		{
 			_class = "C_OP_NormalizeVector"
 			m_nFieldOutput = "21"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.000000
 			m_flBias = 0.990000
 			m_flEndTime = 0.100000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.100000
@@ -90,16 +105,19 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 12
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.006000
 			m_flRadiusMax = 0.008000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_vecMin = 
@@ -117,48 +135,64 @@
 			m_bLocalSpace = true
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomYawFlip"
-			m_bDisableOperator = true
-		},
-		{
-			_class = "C_INIT_DistanceToCPInit"
-			m_flInputMax = 4.500000
-			m_flOutputMin = 0.200000
-			m_bScaleInitialRange = true
-		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_nFieldOutput = "12"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_nFieldOutput = "20"
 			m_bDisableOperator = true
 		},
+		
+		{
+			_class = "C_INIT_CreateOnModel"
+			m_HitboxSetName = "fx"
+		},
+		
+		{
+			_class = "C_INIT_RandomYawFlip"
+			m_bDisableOperator = true
+		},
+		
+		{
+			_class = "C_INIT_DistanceToCPInit"
+			m_flInputMax = 4.500000
+			m_flOutputMin = 0.200000
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
+		},
+		
 		{
 			_class = "C_INIT_DistanceToCPInit"
 			m_nFieldOutput = "1"
 			m_flInputMin = 1.000000
 			m_flInputMax = 4.500000
 			m_flOutputMin = 0.200000
-			m_bScaleInitialRange = true
-		},
-		{
-			_class = "C_INIT_CreateOnModel"
-			m_HitboxSetName = "fx"
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.250000
-			m_flEmitRate = 160.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.250000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 160.000000
+			}
 		},
 	]
 	m_ConstantColor = 
@@ -168,13 +202,15 @@
 		255,
 		250,
 	]
-	m_flConstantLifespan = 4.800000
+	m_flConstantLifespan = 2.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -194,4 +230,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 10
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

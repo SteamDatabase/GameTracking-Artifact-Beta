@@ -1,9 +1,10 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -11,27 +12,38 @@
 			m_flOverbrightFactor = 10.000000
 			m_hTexture = resource:"materials/particle/yellowflare2.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_flConstrainRadiusToLengthRatio = 0.200000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-				0.000000,
-			]
 			m_bAdditive = true
 			m_hTexture = resource:"materials/particle/beam_generic_2.vtex"
 			m_bDisableOperator = true
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_flFadeStartTime = 0.250000
@@ -43,9 +55,11 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.260000
@@ -56,12 +70,14 @@
 				133.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.100000
 			m_flEndTime = 0.100000
 			m_flStartScale = 3.000000
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_bAdditive = true
@@ -81,6 +97,7 @@
 			m_fl4NoiseScale = 7.500000
 			m_flNoiseAnimationTimeScale = 0.220000
 		},
+		
 		{
 			_class = "C_OP_MaxVelocity"
 			m_flMaxVelocity = 15.000000
@@ -88,17 +105,21 @@
 			m_flOpEndFadeInTime = 0.300000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 33
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 555.000000
@@ -110,6 +131,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMin = 0.100000
@@ -123,11 +145,13 @@
 			m_nControlPointNumber = 1
 			m_fSpeedMax = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 64
 			m_nAlphaMax = 160
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -145,16 +169,26 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 1.200000
 			m_fLifetimeMin = 0.600000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 2.200000
 			m_flRadiusMin = 1.500000
 		},
+		
+		{
+			_class = "C_INIT_RandomTrailLength"
+			m_flMinLength = 0.040000
+			m_flMaxLength = 0.060000
+			m_bDisableOperator = true
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMax = 
@@ -174,27 +208,32 @@
 			m_flNoiseScale = 1.100000
 			m_flNoiseScaleLoc = 88.000000
 		},
-		{
-			_class = "C_INIT_RandomTrailLength"
-			m_flMinLength = 0.040000
-			m_flMaxLength = 0.060000
-			m_bDisableOperator = true
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.100000
-			m_flEmitRate = 444.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.100000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 444.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -216,12 +255,14 @@
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 444.000000
 			m_nControlPointNumber = 1
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_vecComponentScale = 
@@ -230,12 +271,17 @@
 				1.000000,
 				0.000000,
 			]
-			m_fForceAmount = -60.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -60.000000
+			}
 			m_fFalloffPower = 0.000000
 			m_flOpEndFadeOutTime = 0.500000
 			m_bDisableOperator = true
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_OP_ForceBasedOnDistanceToPlane"
 			m_flMinDist = 4.000000
@@ -254,6 +300,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_vecComponentScale = 
@@ -262,7 +309,11 @@
 				1.000000,
 				0.000000,
 			]
-			m_fForceAmount = 500.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 500.000000
+			}
 			m_fFalloffPower = 0.000000
 			m_nControlPointNumber = 1
 			m_flOpStartFadeOutTime = 0.750000
@@ -272,4 +323,6 @@
 	]
 	m_flConstantLifespan = 0.600000
 	m_nMaxParticles = 128
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 6
 }

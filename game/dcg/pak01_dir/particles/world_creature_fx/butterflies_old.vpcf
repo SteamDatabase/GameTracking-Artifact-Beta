@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -31,6 +31,7 @@
 	m_nMinCPULevel = 1
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_bOrientZ = true
@@ -38,24 +39,29 @@
 			m_bScaleAnimationRate = true
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/props_wildlife/wildlife_butterfly001.vmdl"
 				},
 			]
 			m_bAnimated = true
 			m_nLOD = 1
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.020000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_FrequencyMax = 
@@ -85,6 +91,7 @@
 			m_flEndTime_min = 1000000000.000000
 			m_flEndTime_max = 1000000000.000000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_FrequencyMax = 
@@ -117,11 +124,13 @@
 			m_flOpEndFadeOutTime = 0.400000
 			m_flOpFadeOscillatePeriod = 4.000000
 		},
+		
 		{
 			_class = "C_OP_VelocityMatchingForce"
 			m_flSpdScale = 0.001000
 			m_flDirScale = 0.006000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_flEndTime_max = 100000000.000000
@@ -152,6 +161,7 @@
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_OscillateScalar"
 			m_flEndTime_max = 1000000000.000000
@@ -159,16 +169,18 @@
 			m_FrequencyMax = 3.000000
 			m_RateMax = 2.000000
 			m_RateMin = 1.000000
-			m_nField = 20
+			m_nField = "20"
 		},
+		
 		{
 			_class = "C_OP_ClampScalar"
 			m_flOutputMax = 1.600000
-			m_nFieldOutput = 20
+			m_nFieldOutput = "20"
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
-			m_nFieldOutput = 0
+			m_nFieldOutput = "0"
 			m_vecOutputMin = 
 			[
 				-2.000000,
@@ -183,22 +195,49 @@
 			]
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_MaxVelocity"
 			m_flMaxVelocity = 230.000000
 		},
+		
 		{
 			_class = "C_OP_OrientTo2dDirection"
-			m_nFieldOutput = 12
+			m_nFieldOutput = "12"
 			m_flSpinStrength = 0.100000
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 64.000000
 		},
+		
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMax = 
+			[
+				149,
+				167,
+				0,
+				255,
+			]
+		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMax = 0.750000
+			m_flRadiusMin = 0.125000
+		},
+		
+		{
+			_class = "C_INIT_RandomTrailLength"
+			m_flMinLength = 0.600000
+			m_flMaxLength = 1.000000
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = 
@@ -214,36 +253,22 @@
 				32.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomColor"
-			m_ColorMax = 
-			[
-				149,
-				167,
-				0,
-				255,
-			]
-		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 0.750000
-			m_flRadiusMin = 0.125000
-		},
-		{
-			_class = "C_INIT_RandomTrailLength"
-			m_flMinLength = 0.600000
-			m_flMaxLength = 1.000000
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 18
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 18.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_vecComponentScale = 
@@ -253,15 +278,21 @@
 				2.000000,
 			]
 			m_fFalloffPower = -0.100000
-			m_fForceAmount = 10.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
 		},
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistance"
 			m_fMaxDistance = 1400.000000
 		},
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_bGlobalNormal = true
@@ -272,6 +303,7 @@
 				-10.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_PlaneNormal = 
@@ -288,4 +320,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 4
 }

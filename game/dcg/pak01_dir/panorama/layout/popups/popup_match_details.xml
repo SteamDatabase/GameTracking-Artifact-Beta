@@ -5,148 +5,138 @@
 		<include src="s2r://panorama/styles/popups/popup_match_details.vcss_c" />
 	</styles>
   
-  <PopupMatchHistory class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked()">
+  <PopupMatchDetails class="PopupPanel Hidden" popupbackground="dim" oncancel="UIPopupButtonClicked()" acceptsfocus="true">
+    <Panel class="MatchLoading" >
+      <Panel class="Spinner" />
+    </Panel>
 
     <Panel class="MainPanel">
-
-      <Panel class="TitleBar">
-        <Label id="MatchIDLabel" html="true" text="#DCG_MatchDetails_Match"/>
-
-        <Panel class="MatchDetailsGroup">
-          <Label id="MatchDateLabel" html="true" text="#DCG_MatchDetails_Date"/>
-          <Label id="MatchLengthLabel" html="true" text="#DCG_MatchDetails_Length"/>
-        </Panel>
-      </Panel>
-      <Panel class="HorizontalBar"/>
-
       <Panel id="StatusPanel" class="MatchInfoBlock">
         <Label id="StatusLabel"/>
       </Panel>
       
-      <Panel id="BodyPanel" class="MatchInfoBlock">
-        
-        <Label id="Player1Winner" class="PlayerWinner" text="#DCG_MatchDetails_Winner"/>
+      <Panel class="MatchInfoBlock">
+        <Panel class="PlayerColumnsContainer">
 
-        <Panel class="PlayerSide">
-          <Panel class="PlayerColumn">
-        
-            <Panel class="PlayerPanel Player1">
-              <Panel class="PlayerPanel">
-                <DCGAvatarImage id="PersonaIcon1" />
-                <Label html="true" text="{g:dcg_persona_or_bot:player_1}"/>
+          <Panel class="PlayerColumn Player1">
+
+            <Panel class="DeckAndTowerContainer" >
+
+              <DCGDeckLoader id="Player1DeckLoader" class="DeckLoader" />
+
+
+            <Panel class="PlayerStats">
+              <Panel class="PlayerStatsRow">
+                <Label id="Player1ViewProfile" html="true" text="#DCG_MatchDetails_ViewProfile" class="DetailLabel" />
               </Panel>
-            </Panel>
-        
-            <Panel id="Player1Towers" class="PlayerTowers">
-             <Panel class="PlayerTowerRow">
-               <Panel class="TowerPanel Ancient">
-                  <Panel class="AncientImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player1_t4}"/>
-                </Panel>
-             </Panel>
-              <Panel class="PlayerTowerRow">
-                <Panel class="TowerPanel Tower1">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player1_t1}"/>
-                </Panel>
-                <Panel class="TowerPanel Tower2">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player1_t2}"/>
-                </Panel>
-                <Panel class="TowerPanel Tower3">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player1_t3}"/>
-                </Panel>
-             </Panel>
-           </Panel>
-
-          </Panel>
-
-          <Panel class="PlayerHeroes">
-            <DCGScenePanel class="HeroImage" id="Player1Hero1" />
-            <DCGScenePanel class="HeroImage" id="Player1Hero2" />
-            <DCGScenePanel class="HeroImage" id="Player1Hero3" />
-            <DCGScenePanel class="HeroImage" id="Player1Hero4" />
-            <DCGScenePanel class="HeroImage" id="Player1Hero5" />
-          </Panel>
-        </Panel>
-
-        <Panel class="VersusRow">
-          <Panel class="HorizontalBar"/>
-          <Label text="#DCG_MatchDetails_Versus"/>
-          <Panel class="HorizontalBar"/>
-        </Panel>
-
-        <Panel class="PlayerSide">
-          <Panel class="PlayerColumn">
-
-            <Panel id="Player2Towers" class="PlayerTowers">
-              <Panel class="PlayerTowerRow">
-                <Panel class="TowerPanel Tower1">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player2_t1}"/>
-                </Panel>
-                <Panel class="TowerPanel Tower2">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player2_t2}"/>
-                </Panel>
-                <Panel class="TowerPanel Tower3">
-                  <Panel class="TowerImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player2_t3}"/>
-                </Panel>
-              </Panel>
-              <Panel class="PlayerTowerRow">
-                <Panel class="TowerPanel Ancient">
-                  <Panel class="AncientImage"/>
-                  <Panel class="DestroyedX"/>
-                  <Label text="{d:player2_t4}"/>
-                </Panel>
+              <Panel id="SkillRatingRow" class="PlayerStatsRow">
+                <Label html="true" text="#DCG_MatchDetails_SkillRating" class="DetailLabel" />
+                <Panel class="SkillRatingImage" />
+                <Label html="true" class="DetailText" text="{d:player1_skill_rating}" />
               </Panel>
             </Panel>
 
-            <Panel class="PlayerPanel Player2">
-              <Panel class="PlayerPanel">
-                <DCGAvatarImage id="PersonaIcon2" />
-                <Label html="true" text="{g:dcg_persona_or_bot:player_2}"/>
+
+
+              <Panel class="PlayerTowerRow" id="Player1Towers">
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower1" />              
+                  <Label class="DetailText" text="{d:player1_t1}"/>
+                </Panel>
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower2" />              
+                  <Label class="DetailText" text="{d:player1_t2}"/>
+                </Panel>
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower3" />              
+                  <Label class="DetailText" text="{d:player1_t3}"/>
+                </Panel>
               </Panel>
+
             </Panel>
 
 
           </Panel>
 
-          <Panel class="PlayerHeroes">
-            <DCGScenePanel class="HeroImage" id="Player2Hero1" />
-            <DCGScenePanel class="HeroImage" id="Player2Hero2" />
-            <DCGScenePanel class="HeroImage" id="Player2Hero3" />
-            <DCGScenePanel class="HeroImage" id="Player2Hero4" />
-            <DCGScenePanel class="HeroImage" id="Player2Hero5" />
+          <Label id="VersusLabel" text="#DCG_MatchDetails_Versus" />
+
+          <Panel class="PlayerColumn Player2">
+
+            <Panel class="DeckAndTowerContainer" >
+
+              <DCGDeckLoader id="Player2DeckLoader" class="DeckLoader" />
+
+            <Panel class="PlayerStats">
+              <Panel class="PlayerStatsRow">
+                <Label id="Player2ViewProfile" html="true" text="#DCG_MatchDetails_ViewProfile" class="DetailLabel" />
+              </Panel>            
+              <Panel id="SkillRatingRow" class="PlayerStatsRow">
+                  <Label html="true" text="#DCG_MatchDetails_SkillRating" class="DetailLabel SkillRatingLabel" />
+                  <Panel class="SkillRatingImage" />
+                  <Label html="true" class="DetailText SkillRatingLabel" text="{d:player2_skill_rating}" />
+              </Panel>
+
+            </Panel>
+
+              <Panel class="PlayerTowerRow" id="Player2Towers">
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower1" />              
+                  <Label class="DetailText" text="{d:player2_t1}"/>
+                </Panel>
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower2" />              
+                  <Label class="DetailText" text="{d:player2_t2}"/>
+                </Panel>
+                <Panel class="TowerPanel">
+                  <Panel class="TowerImage Tower3" />              
+                  <Label class="DetailText" text="{d:player2_t3}"/>
+                </Panel>
+              </Panel>
+            </Panel>
+
+
           </Panel>
         </Panel>
-        
-        <Label id="Player2Winner" class="PlayerWinner" text="#DCG_MatchDetails_Winner"/>
+        <Button id="ClosePopupButton" class="CloseButton" onactivate="UIPopupButtonClicked()"/>
+
 
       </Panel>
 
-      <Panel class="Footer">
-        <Panel class="HorizontalBar"/>
-
-        <Panel class="PopupButtonRow">
-          <Button id="MatchReplay" class="ButtonDark">
-            <Label text="#DCG_MatchDetails_WatchReplay" />
-          </Button>
-          <Button class="ButtonDark" onactivate="UIPopupButtonClicked()">
-            <Label text="#DCG_MatchDetails_Close" />
-          </Button>
-        </Panel>
+      <Panel class="MatchDetailsBlock">
+          <Panel class="MatchDetailsColumn">
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_Date" />
+              <Label html="true" class="DetailText" text="{t:s:date}" />
+            </Panel>
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_Time" />
+              <Label html="true" class="DetailText" text="{t:t:date}" />
+            </Panel>
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_MatchDuration" />
+              <Label html="true" class="DetailText" text="{s:duration}" />
+            </Panel>
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_MatchID" />
+              <Label html="true" class="DetailText" text="{d:r:match_id}" />
+            </Panel>
+          </Panel>
+          <Panel class="MatchDetailsColumn">
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_MatchType" />
+              <Label html="true" class="DetailText" text="{s:match_type}" />
+            </Panel>
+            <Panel id="GauntletNameRow" class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_Gauntlet" />
+              <Label html="true" class="DetailText" text="{s:gauntlet_name}" />
+            </Panel>            
+            <Panel class="MatchDetailsRow">
+              <Label html="true" class="DetailLabel" text="#DCG_MatchDetails_Replay" />
+              <Panel id="ReplayButton" />
+            </Panel>
+          </Panel>
       </Panel>
 
     </Panel>
-	</PopupMatchHistory>
+  </PopupMatchDetails>
 </root>

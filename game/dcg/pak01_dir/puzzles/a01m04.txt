@@ -1,0 +1,84 @@
+"a01m04"
+{
+	"name"		"a01m04_title"
+	"description"	"a01m04_desc"
+	"sections"
+	{
+		"part1"
+		{
+			"rules"
+			{
+				// All rules and their default values
+				"deck_player"
+				{
+					"use_deck"					"RTFACTJdwN7rkCBScBZRiK3wS8ugKLkZetAR8CAwcLBBYItQGwA7AFkQgDBqUEDTMEDy0CYTAxbTA0X3BsYXllcg__"
+					"allow_user_decks"			"0"
+				}
+				"deck_ai"
+				{
+					"use_deck"					"ADCJbUJbbkCE9YFqxT7BgS8ugISmLgBqwSdiCMCvgWoA5lhMDFtMDRfYWk_"
+					"allow_user_decks"			"0"
+				}
+
+				"set1"							"1" // needed for the shop to work properly
+
+				"tower1_health_ai"				"10"
+				"tower2_health_ai"				"10"
+				"tower3_health_ai"				"10"
+				"ancient1_health_ai"			"30"
+				"ancient2_health_ai"			"30"
+				"ancient3_health_ai"			"30"
+				
+
+				"no_shotclock"							"1"
+				"is_puzzle"								"1"
+				"dcg_player_auto_pass_no_actions"		"1"
+				//"scale_ai_difficulty"					"0.1"
+				//"store_enabled"							"0"
+				"no_vs_intro"							"1"
+				"initial_mana_ai"						"7"
+				"dcg_mana_per_turn"						"-1"
+				"ai_action_choice_non_random"			"1"
+				
+				"dcg_shop_blacklist"			"*"
+				"dcg_shop_blacklist_ai"			"*"
+				
+			}
+			"deck_order_ai"
+			{
+				"draw"	"10417" //Spring the Trap
+				"draw"	"10174" //Burning Oil
+				"draw"	"10174" //Burning Oil
+				"draw"	"10174" //Burning Oil
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"auto"			"load_vmap pve/a01m01"
+					">"				"goto intro_dialog"
+				}
+				
+				"intro_dialog"
+				{
+					"on_all_heroes_deployed"		"npehelper #DCG_a01m04_InGame_Rix_01 cardID 10842"
+					"> 2.5"							"npehelper #DCG_a01m04_InGame_Marcus_02 cardID 10852"
+					"> 5.0"							"npehelper #DCG_a01m04_InGame_Tres_03 cardID 10069"
+					"> 7.5"							"npehelper remove cardID 10842"
+					"> 8.5"							"npehelper remove cardID 10852"
+					"> 9.5"							"npehelper remove cardID 10069"
+					"> 9.5"							"goto end_intro_dialog"
+				}
+				
+				"end_intro_dialog"
+				{
+					"auto"							"npehelper remove"
+				}
+			}
+		}
+	}
+}
+
+//	"DCG_a01m04_InGame_Rix_01"		"A trap... they've been amassing resources and mana..."
+//	"DCG_a01m04_InGame_Marcus_02"	"Then we'll just have to starve them out, won't we?"
+//	"DCG_a01m04_InGame_Tres_03"		"Siege it is."

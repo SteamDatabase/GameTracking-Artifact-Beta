@@ -79,28 +79,54 @@
 #LOC_Duration_m_s
 #LOC_Duration_mmss
 #LOC_Duration_s
+#Valve_SelectLanguage_Brazilian
+#Valve_SelectLanguage_Bulgarian
+#Valve_SelectLanguage_Czech
+#Valve_SelectLanguage_Danish
+#Valve_SelectLanguage_Dutch
+#Valve_SelectLanguage_English
+#Valve_SelectLanguage_Finnish
+#Valve_SelectLanguage_French
+#Valve_SelectLanguage_German
+#Valve_SelectLanguage_Greek
+#Valve_SelectLanguage_Hungarian
+#Valve_SelectLanguage_Italian
+#Valve_SelectLanguage_Japanese
+#Valve_SelectLanguage_Korean
+#Valve_SelectLanguage_Latam_Spanish
+#Valve_SelectLanguage_Norwegian
+#Valve_SelectLanguage_Polish
+#Valve_SelectLanguage_Portuguese
+#Valve_SelectLanguage_Romanian
+#Valve_SelectLanguage_Russian
+#Valve_SelectLanguage_Simplified_Chinese
+#Valve_SelectLanguage_Spanish
+#Valve_SelectLanguage_Swedish
+#Valve_SelectLanguage_Thai
+#Valve_SelectLanguage_Traditional_Chinese
+#Valve_SelectLanguage_Turkish
+#Valve_SelectLanguage_Ukrainian
+#Valve_SelectLanguage_Vietnamese
 #base
 #base is NULL
 #empty#
 #include
 #include is NULL
 #int#
+#|
 $@
 $ORIGIN
 $U
-%
 %-120s
 %-120s - %s
+%.18g
 %04d
 %04d_%02d_%02d_%02d_%02d_%02d
-%d total counted strings.
 %f %f %f %f
 %hd
 %hu
 %i %i %i %i
 %language%
-%ld
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -110,18 +136,12 @@ $U
 %s localization, %s tokens
 %s%d
 %s,
-%s: string format requested %d chars
-%s\%s
-%s\Settings
+%s/
 %s_[%s]
-'
-(
 ( def. "%s" )
 (*%s*),
-)
 *.*
 *.txt
--
 -all_languages
 -ccsyntax
 -enablejongsung
@@ -133,6 +153,7 @@ $U
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
+../public/tier1/utlsymboltable.h
 //
 /content/
 /game/
@@ -141,7 +162,6 @@ $U
 0x%p
 10ConCommand
 10IAppSystem
-12CEmptyConVar
 12CThreadEvent
 14CBaseAppSystemI9ILocalizeE
 14ConCommandBase
@@ -149,31 +169,17 @@ $U
 15CTier1AppSystemI9ILocalizeLi0EE
 15CTier2AppSystemI9ILocalizeLi0EE
 16CDefaultAccessor
-18CCountedStringPool
-18CUtlCharConversion
-19IKeyValuesErrorSpew
+18CPlaceholderConVar
 20CPostConnectCallback
-21CUtlCStringConversion
-21IKeyValuesDumpContext
 22CSchemaInstallCallback
-23CSplitScreenAddedConVar
 23IConCommandBaseAccessor
-26CDefaultKeyValuesErrorSpew
-27IKeyValuesDumpContextAsText
-29CKeyValuesDumpContextAsDevMsg
-4372
 6ConVar
 7IConVar
-8
-8CFmtStrNILi256ELb0EE
 9CLocalize
-9CRegistry
 9ILocalize
-9IRegistry
-:
-<
 << NULL >>
 <NULL>
+<deferred>
 <floating-point value out of range>
 <invalid currency %d>
 <invalid date format %d>
@@ -182,16 +188,19 @@ $U
 <invalid integral number format %d>
 <invalid ordinal format %d>
 <invalid precision %d>
+<no deferred ref found>
+<no failure reason set>
 <none>
 <null>
 <space>
->
-?
+<unconnected>
 A$
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 ARS$
+Access of unconnected ConVarRef
+Access of unconnected SplitScreenConVarRef
 Add
-AllocInternal
+AddTokenMiss
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -207,17 +216,27 @@ BakedLODBuilderMgr001
 BenchmarkService001
 BinaryProperties_GetValue
 Br
-C
 C$
 CBufferString::AppendFormat(char const*, ...)
+CBufferString::AppendFormatV(char const*, __va_list_tag*)
+CBufferString::ComposeFileName(char const*, char const*, char)
+CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
+CBufferString::ExtractFileBase(char const*)
+CBufferString::ExtractFileExtension(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
+CBufferString::Format(char const*, ...)
 CBufferString::GetInsertPtr(int, int, bool, int*)
 CBufferString::Insert(int, char const*, int, bool)
+CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
+CBufferString::RemoveAt(int, int)
 CBufferString::RemovePartialUTF8Tail(bool)
+CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
-CBufferString::ShortenPath()
+CBufferString::ShortenPath(bool)
+CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CHF
@@ -228,25 +247,19 @@ COL$
 COLORCORRECTION_VERSION_1
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
-CThreadRWLock::LockForWrite()
-CThreadRWLock::UnlockWrite()
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
+CThreadRWLock::LockForWrite(char const*, int)
+CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
-CThreadSpinRWLock::LockForRead()
-CThreadSpinRWLock::SpinLockForWrite(unsigned long long)
-CThreadSpinRWLock::UnlockRead()
-CThreadSpinRWLock::UnlockWrite()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryPoolBase
 CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
 CUtlRBTree overflow with %u elements!
 CXXABI_1.3
-CXXABI_1.3.8
 ChangeSize
 CommandLine
 ConMsg(char const*, ...)
@@ -256,62 +269,37 @@ Conditional Error: %s
 ConfigurationSystem_001
 ConnectInterfaces
 CreateInterface
-D
 DEMO
 DH
 DebugTextureInfo001
 DevMsg
 DevMsg(char const*, ...)
 DotaCardGameClient_001
-EMPTY - ok for slot zero only!
+DuplicateTokensAssert
+DuplicateTokensFail
+DuplicateTokensWarning
+ERROR: Duplicate string token '%s' found in %s (original in %s)
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyInit_Tier0
 EconItemToolModel_001
 EngineServiceMgr001
-EnvironmentMapBuilder_001
 EventSystem001
-F
-FATAL ERROR: Duplicate string token '%s' found in %s
+FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
-FTYPEDESC_ADDITIONAL_FIELDS
-FTYPEDESC_ENUM
-FTYPEDESC_EXPLICIT_BASE
-FTYPEDESC_FUNCTIONTABLE
-FTYPEDESC_GEN_ARRAY_KEYNAMES_0
-FTYPEDESC_GEN_ARRAY_KEYNAMES_1
-FTYPEDESC_GLOBAL
-FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
-FTYPEDESC_KEY
-FTYPEDESC_MODELINDEX
-FTYPEDESC_NOERRORCHECK
-FTYPEDESC_NONE
-FTYPEDESC_OUTPUT
-FTYPEDESC_OVERRIDE
-FTYPEDESC_OVERRIDE_RECURSIVE
-FTYPEDESC_PRIVATE
-FTYPEDESC_PROCEDURAL_KEYFIELD
-FTYPEDESC_PTR
-FTYPEDESC_REMOVED_KEYFIELD
-FTYPEDESC_SAVE
-FTYPEDESC_SCHEMA_INITIALIZED
-FTYPEDESC_WAS_INPUT
-FTYPEDESC_WAS_OUTPUT
 Failed to read localization file %s
 File change watching failed for '%s', retraversing
+FindCompatibleSafe
+FindPluralCompatibleSafe
+FindPluralSafe
 FindSafe
-FindSafeAsWString
 FlattenedSerializersVersion001
-FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
-FormatV
 Full paths not allowed in localization file specification '%s'
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
 GLIBC_2.3
-GLIBC_2.3.4
 GLIBC_2.4
 GNU
 GameResourceServiceClientV001
@@ -326,7 +314,6 @@ HangWatchdog_IndicateActivity
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
-I
 ILocalize::AddFile() failed to load file "%s".
 IQuickTime001
 Ignoring unsupported encoding in localization file '%s'
@@ -337,14 +324,9 @@ InstallChangeCallback called with NULL callback, ignoring!!!
 InstallChangeCallback ignoring duplicate change callback!!!
 InstallSchemaBindings
 Intentionally vague touch behavior for %p
-K
+Invalid access of deferred ConVarRef for '%s'
 KD
-KV Conditional Evaluation Error
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
 LANG
 LC_ALL
@@ -365,18 +347,19 @@ LOG_GENERAL
 LOWVIOLENCE
 Language
 Latam_Spanish
-List all loaded localization files.
-LoadFromBuffer: expected '{', found '%s'
+List all loaded localization files
 Loaded localization files:
 Localization key '%s' has a conditional that is too long. Truncating.
 Localization key '%s' has a value that is too long. Truncating.
 Localization key '%s' is too long. Truncating.
 Localization string too long: %d chars in '%.20s...'
 Localization watching these dirs for changes:
+Localize
 Localize_001
 Localize_Create
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
+LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Logic Error in CExpressionEvaluator
 MATCHFRAMEWORK_001
@@ -390,8 +373,6 @@ MeshSystem001
 MeshUtils001
 Mex$
 ModelDocUtils001
-Msg
-N
 NT$
 NULL
 NZ$
@@ -403,7 +384,6 @@ NetworkServerService_001
 NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
-NewNode
 None
 OSX
 POSIX
@@ -412,7 +392,6 @@ PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
 ParticleSystemMgr003
-Physics2 Interface Old v0.5
 PhysicsBuilderMgr001
 Plat_DebugPrint
 Plat_DebugString
@@ -421,7 +400,7 @@ Plat_FileSize
 Plat_GetOSType
 Plat_GetTime
 Plat_IsHighDPI
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_MessageBox
 Plat_ShouldCollectMiniDumpsForFatalErrors
 Plat_gmtime
@@ -432,13 +411,7 @@ QR
 QueuedLoaderVersion001
 R$
 RM
-ReadToken overflow
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
+RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Release
 RenderDevice003
@@ -452,7 +425,6 @@ ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
 Rp
-S
 S/.
 SR
 SceneSystem_002
@@ -481,8 +453,6 @@ Source2Server001
 Source2ServerSerializers002
 StatsService_001
 SteamAudio001
-String %d: ref:%d %s
-T
 TL
 TestFormatA
 TestFormatB
@@ -491,21 +461,16 @@ TestFormatD
 TestFormatE
 TestScriptMgr001
 TextLayout_001
-TextMessageMgr_001
 ThreadGetCurrentId
 Tokens
 ToolFramework2_002
-ToolGameSimulationDispatcher_001
-ToolGameSimulationSystem_001
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
 Traditional_Chinese
-U
 Unable to find localization token '%s'
 Unable to watch '%s'
 UserInfoChangeService_001
-V
 VApplication001
 VAvi001
 VBAllocTracker001
@@ -513,7 +478,6 @@ VBaseFileSystem011
 VBik001
 VConComm001
 VDebugService_001
-VDmeMakeFileUtils001
 VEngineCvar007
 VFileSystem017
 VGUI_Input005
@@ -527,7 +491,6 @@ VMaterialSystem2_001
 VMediaFoundation001
 VNewAsyncFileSystem001
 VP4003
-VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
@@ -548,8 +511,6 @@ V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
-V_StripFilename
-V_StripTrailingSlash
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -562,7 +523,6 @@ V_atof
 V_atofloat64
 V_atoi
 V_fpclassify
-V_iswspace
 V_localeconv
 V_pow
 V_qsort_s
@@ -581,14 +541,13 @@ V_strupper_fast
 V_swscanf
 V_tier0_strstr
 V_vsnprintf
-V_vsnprintfRet
 V_vsnprintfSize
 V_wcstod
 V_wcstoi64
+Valve_TestPluralsEnglishOnly
 VisBuilder_001
 WARNING: CDirWatcher not implemented
-WARNING: Duplicate string token '%s' found in %s
-WIN32
+WARNING: Duplicate string token '%s' found in %s (original in %s)
 WINDOWS
 WINXP
 Warning
@@ -598,116 +557,69 @@ WorldRendererBuilderMgr001
 WorldRendererMgr001
 X360
 Y@
+[!$
 [$
 [%.3f server clamped to %.3f]
 [english]
 [unknown string]
 [unknown]
-\
-_
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_ComposeFileName
-_V_ExtractFileExtension
 _V_ExtractFilePath
-_V_FileBase
 _V_MakeAbsolutePath
 _V_StrSubst
 _V_StringAfterPrefix
-_V_StripExtension
-_V_StripLastDir
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
 __bss_start
 __ctype_toupper_loc
-__ctype_toupper_loc@@GLIBC_2.3
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __errno_location
-__errno_location@@GLIBC_2.2.5
 __fxstat64
-__fxstat64@@GLIBC_2.2.5
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
 __lxstat64
-__lxstat64@@GLIBC_2.2.5
-__pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
-__snprintf_chk
-__snprintf_chk@@GLIBC_2.3.4
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
 __xstat64
-__xstat64@@GLIBC_2.2.5
 _edata
 _end
-_english.txt
 _fini
-_init
-a
-abort@@GLIBC_2.2.5
-all_projects_common_code.cpp
 alphasort64
-alphasort64@@GLIBC_2.2.5
 archive
 bg_BG
 binary
+binary_auto
 binary_bc
-bitstring.cpp
+binary_lz4
 borrow
 brazilian
 bulgarian
-c
-characterset.cpp
 cheat
-checksum_crc.cpp
 client
 clientcmd_can_execute
 close
-close@@GLIBC_2.2.5
 closedir
-closedir@@GLIBC_2.2.5
 configvalue.cpp
-convar.cpp
-crtoverride.cpp
-crtstuff.c
 cs
 cs_CZ
 czech
-d
 da
 da_DK
 danish
 de_DE
 delete
 developer
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
 dump_localization_files
 dup
-dup@@GLIBC_2.2.5
 dutch
-e
 el
 el_GR
 en
@@ -716,41 +628,29 @@ english
 es-419
 es_419
 es_ES
-exprevaluator.cpp
-f
 false
 fcntl
-fcntl@@GLIBC_2.2.5
 fdatasync
-fdatasync@@GLIBC_2.2.5
 fi
 fi_FI
-fileio.cpp
 finnish
 float( %f )
 fr
 fr_FR
 free
-free@@GLIBC_2.2.5
 french
 ftruncate64
-ftruncate64@@GLIBC_2.2.5
-g
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_pMemAlloc
 game
 generic
-generichash.cpp
 german
 getenv
-getenv@@GLIBC_2.2.5
 greek
 hu_HU
 hungarian
-i
 int( %d = 0x%X )
-interface.cpp
 interfaces.cpp
 it
 it_IT
@@ -758,15 +658,12 @@ italian
 ja
 ja_JP
 japanese
-json_parser.c
 keyvalues.cpp
 ko
 ko_KR
 korean
 koreana
 kr
-l
-language.cpp
 latam
 ld-linux-x86-64.so.2
 libc.so.6
@@ -774,24 +671,15 @@ liblocalize.so
 libpthread.so.0
 libstdc++.so.6
 libtier0.so
+localize
 localize_imp.cpp
 lseek64
-lseek64@@GLIBC_2.2.5
-m
-malloc
-malloc@@GLIBC_2.2.5
-manifestregistrar.cpp
 max. %f
 memcpy
-memcpy@@GLIBC_2.14
 memmove
-memmove@@GLIBC_2.2.5
-memoverride.cpp
 mempool.cpp
 memset
-memset@@GLIBC_2.2.5
 min. %f
-n
 nl
 nl_NL
 no
@@ -800,53 +688,36 @@ none
 norwegian
 notconnected
 notify
-o
+null
 open64
-open64@@GLIBC_2.2.5
 opendir
-opendir@@GLIBC_2.2.5
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
+operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
+operator new[](unsigned long, std::nothrow_t const&)
 pipe
-pipe@@GLIBC_2.2.5
 pl
 pl_PL
 polish
 portuguese
 posix_fadvise64
-posix_fadvise64@@GLIBC_2.2.5
 pread64
-pread64@@GLIBC_2.2.5
 pt_BR
 pt_PT
 pthread_mutex_destroy
-pthread_mutex_destroy@@GLIBC_2.2.5
 pthread_mutex_init
-pthread_mutex_init@@GLIBC_2.2.5
 pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
 pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
 pthread_mutexattr_init
-pthread_mutexattr_init@@GLIBC_2.2.5
 pthread_mutexattr_settype
-pthread_mutexattr_settype@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
 pwrite64
-pwrite64@@GLIBC_2.2.5
-r
 rb
 read
-read@@GLIBC_2.2.5
 readdir64
-readdir64@@GLIBC_2.2.5
 readlink
-readlink@@GLIBC_2.2.5
-registry.cpp
 replicated
 resource/valve_%language%.txt
 ro
@@ -855,9 +726,7 @@ romanian
 ru
 ru_RU
 russian
-s
 scandir64
-scandir64@@GLIBC_2.2.5
 schemabindings.cpp
 schinese
 server_can_execute
@@ -865,52 +734,32 @@ singleplayer
 spanish
 ss_added
 strcasecmp
-strcasecmp@@GLIBC_2.2.5
 strchr
-strchr@@GLIBC_2.2.5
 strcmp
-strcmp@@GLIBC_2.2.5
 strcpy
-strcpy@@GLIBC_2.2.5
 string data: %s bytes (%s extra waste) in %s blocks
-stringpool.cpp
 strlen
-strlen@@GLIBC_2.2.5
 strrchr
-strrchr@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-strtools_unicode.cpp
 sv
 sv_SE
 swedish
-t
 tchinese
 text
 th_TH
 thai
-tier1.cpp
-tier2.cpp
 tr
 tr_TR
 turkish
 typeinfo for CThreadSyncObject
-u
 u64( %lld = 0x%llX )
 uk
 uk_UA
 ukrainian
-unicodefilehelpers.cpp
 unknown
 unlink
-unlink@@GLIBC_2.2.5
-unused
 update
 user
-utlbuffer.cpp
-utlmemory.cpp
 utlstring.cpp
-utlsymbol.cpp
-v
 vi
 vi_VN
 vietnamese
@@ -919,12 +768,8 @@ vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 wb
 wcscmp
-wcscmp@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
 write
-write@@GLIBC_2.2.5
-y
 zh
 zh_CN
 zh_TW

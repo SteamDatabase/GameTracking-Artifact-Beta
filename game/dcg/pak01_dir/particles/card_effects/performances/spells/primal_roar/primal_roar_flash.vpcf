@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -7,6 +7,7 @@
 	m_flConstantLifespan = 0.450000
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -16,6 +17,7 @@
 			m_bDisableZBuffering = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -24,23 +26,30 @@
 			m_hTexture = resource:"materials/particle/dcg/particle_flare_11.vtex"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flRadiusScale = 8.000000
 			m_flAlphaScale = 8.000000
-			m_ColorScale = 
-			[
-				255,
-				255,
-				255,
-			]
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -51,21 +60,25 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.000000
 			m_flEndScale = 2.000000
 		},
+		
 		{
 			_class = "C_OP_LerpScalar"
 			m_flStartTime = 0.500000
 			m_nFieldOutput = "10"
 			m_flOutput = 0.000000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -77,9 +90,11 @@
 			]
 			m_flFadeStartTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 5
@@ -89,20 +104,24 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.300000
 			m_fLifetimeMax = 0.450000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 12.000000
 			m_flRadiusMax = 16.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMin = 7
@@ -111,22 +130,38 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 3
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.200000
-			m_flEmitRate = 10.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.200000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -147,4 +182,5 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
 }

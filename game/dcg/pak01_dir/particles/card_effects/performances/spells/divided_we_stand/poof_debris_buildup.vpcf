@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -6,18 +6,20 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_flOverbrightFactor = 0.700000
 			m_bBlendFramesSeq0 = false
 			m_hTexture = resource:"materials/particle/impact/fleks.vtex"
-			m_bFitCycleToLifetime = true
 			m_flAnimationRate = 1.500000
+			m_nAnimationType = "ANIMATION_TYPE_FIT_LIFETIME"
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.020000
@@ -28,30 +30,31 @@
 				-100.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_RemapSpeed"
 			m_flInputMax = 10.000000
-			m_nFieldOutput = 5
-			m_bScaleInitialRange = true
+			m_nFieldOutput = "5"
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.750000
 			m_flEndScale = 0.000000
 		},
-		{
-			_class = "C_OP_SetControlPointRotation"
-			m_flRotRate = 800.000000
-		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -69,19 +72,40 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 1.000000
 			m_fLifetimeMin = 0.500000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 63
 			m_nSequenceMin = 50
 		},
+		
+		{
+			_class = "C_INIT_CreationNoise"
+			m_flNoiseScale = 3.000000
+			m_flNoiseScaleLoc = 1.000000
+			m_nFieldOutput = "5"
+			m_flOutputMin = -150.000000
+			m_flOutputMax = 150.000000
+		},
+		
+		{
+			_class = "C_INIT_RingWave"
+			m_flInitialRadius = 3.000000
+			m_flThickness = 0.250000
+			m_flInitialSpeedMin = 0.500000
+			m_flInitialSpeedMax = 1.000000
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_flNoiseScale = 0.000000
@@ -100,35 +124,31 @@
 			]
 			m_bLocalSpace = true
 		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
-		},
-		{
-			_class = "C_INIT_CreationNoise"
-			m_flNoiseScale = 3.000000
-			m_flNoiseScaleLoc = 1.000000
-			m_nFieldOutput = 5
-			m_flOutputMin = -150.000000
-			m_flOutputMax = 150.000000
-		},
-		{
-			_class = "C_INIT_RingWave"
-			m_flInitialRadius = 3.000000
-			m_flThickness = 0.250000
-			m_flInitialSpeedMin = 0.500000
-			m_flInitialSpeedMax = 1.000000
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 1.000000
-			m_flEmitRate = 111.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 111.000000
+			}
 		},
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_PointOnPlane = 
@@ -142,10 +162,12 @@
 	m_flConstantRadius = 0.250000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -165,4 +187,13 @@
 			]
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetControlPointRotation"
+			m_flRotRate = 800.000000
+		},
+	]
+	m_nFirstMultipleOverride_BackwardCompat = 6
 }

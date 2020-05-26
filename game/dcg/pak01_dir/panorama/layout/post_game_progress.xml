@@ -140,10 +140,83 @@
 			</Panel>
 		</snippet>
 
+		<snippet name="PlayerGauntletLevelProgress">
+			<Panel class="ProgressScreen" onactivate="StartSkippingAhead()">
+				<Panel id="PlayerLevelProgressMain">
+					<Panel id="PlayerLevelProgressCenter">
+						<Panel class="PlayerLevelProgressTitleContainer">
+							<Panel class="PlayerLevelProgressTitle">
+								<Panel id="BadgeContainer">
+									<DCGChaosBadge id="AccountBadge" size="large" />
+								</Panel>
+								<Panel id="AccountProgressContainer">
+									<Panel id="PlayerLevelProgressSection">
+										<Label class="PlayerLevelProgressLevelProgressTitle" text="#DCG_PostGame_GauntletPlayerLevel" />
+										<Label class="PlayerLevelProgressXP" text="#DCG_PostGame_GauntletProgress" />
+									</Panel>
+									<Panel id="PlayerLevelProgressContainer">
+										<ProgressBar id="PlayerLevelProgress" min="0" max="1000" >
+											<Panel id="PlayerLevelProgress_Left" class="ProgressBarLeft">
+												<Panel id="ProgressFXContainer">
+													<DCGScenePanel id="PlayerLevelProgressBurner" map="scenes/progression/progression_progressbar" renderdeferred="false" rendershadows="false" camera="camera_1" hittest="false" particleonly="true"/>											
+												</Panel>
+											</Panel>
+										</ProgressBar>
+									</Panel>									
+								</Panel>
+							</Panel>
+						</Panel>
+
+						<Panel id="PlayerLevelProgressCore">
+							<Panel id="PlayerLevelProgressXPGrid">
+								<Panel id="PlayerGauntletPointsProgressRows" hittest="true">
+								</Panel>
+								<Panel id="TotalsHLine"/>
+								<Panel id="TotalsRow" class="PlayerXPProgressRow">
+									<Panel class="PlayerXPProgressRowNameBox"> 
+									  <Label class="PlayerXPProgressRowType" text="#DCG_PostGame_Total" />
+									</Panel>
+									<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_GauntletPointsValue" />
+								</Panel>
+							</Panel>
+						</Panel>
+					</Panel>
+
+					<Panel id="PlayerLevelUpPanel" hittest="false">
+						<Label id="LevelUpTitle" text="#DCG_PostGame_LevelUp" hittest="false"/>
+						<Label id="LevelUpValue" text="#DCG_PostGame_CurrentLevel" hittest="false"/>
+						<DCGScenePanel id="GodRays" class="InGauntlet" map="scenes/progression/levelup_burst" camera="cardpackcamera" hittest="false" particleonly="true" />
+						<Label class="PlayerLevelProgressCurrentLevel" text="{d:next_level}" hittest="false"/>					
+					</Panel>
+					
+				</Panel>
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerGauntletProgressRow_MultiplierBonus">
+			<Panel class="PlayerXPProgressRow PlayerXPProgressRow_Challenge">
+				<Panel class="PlayerXPProgressRowNameBox"  > 
+					<Label class="PlayerXPProgressRowType" text="{s:name}" />
+					<Label class="PlayerXPProgressRowDescription" text="{s:description}" />
+				</Panel>
+				<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_GauntletPointsMultiplierValue" />
+			</Panel>
+		</snippet>
+
+		<snippet name="PlayerGauntletProgressRow_GauntletPoints">
+			<Panel class="PlayerXPProgressRow PlayerXPProgressRow_Challenge">
+				<Panel class="PlayerXPProgressRowNameBox"  > 
+					<Label class="PlayerXPProgressRowType" text="{s:name}" />
+					<Label class="PlayerXPProgressRowDescription" text="{s:description}" />
+				</Panel>
+				<Label class="PlayerXPProgressRowValue" text="#DCG_PostGame_GauntletPointsValue" />
+			</Panel>
+		</snippet>		
+
 	</snippets>
 
 	<DCGPostGameProgress hittest="false">
-		<Panel id="ProgressScreens" hittest="false" />
+		<Panel id="ProgressScreens" hittest="false"/>
 		<Panel id="DebugControls">
 			<TextButton class="PopupButton" text="Again" onactivate="AnimatePlayerLevelAgain()" />
 			<TextButton class="PopupButton" text="Player Level Up" onactivate="TestAnimatePlayerLevel()" />

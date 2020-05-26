@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_ConstantColor = 
@@ -11,10 +11,12 @@
 	m_flConstantRadius = 3.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -36,52 +38,61 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.200000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flInputMax = 5.500000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
 			m_nStartCP = 5
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_flInputMax = 9.000000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.750000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_flInputMin = 9.000000
 			m_flInputMax = 18.000000
 			m_flOutputMin = 0.750000
 			m_flOutputMax = 0.100000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -94,6 +105,7 @@
 			m_hTexture = resource:"materials/particle/beam_claw_rip.vtex"
 			m_bCannotBeRefracted = false
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -106,6 +118,7 @@
 			m_flDepthBias = 4.000000
 			m_flSelfIllumAmount = 1.000000
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -121,46 +134,62 @@
 	]
 	m_Initializers = 
 	[
+		
+		{
+			_class = "C_INIT_CreateSequentialPath"
+			m_flNumToAssign = 64.000000
+			m_PathParams = 
+			{
+				m_nStartControlPointNumber = 3
+				m_nEndControlPointNumber = 4
+			}
+		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 1
+			m_nFieldOutput = "1"
 			m_flOutputMin = 0.500000
 			m_flOutputMax = 0.100000
-			m_bScaleInitialRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMax = 0.300000
 			m_flOutputMin = 0.100000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMin = 0.250000
 			m_flInputMax = 0.350000
 			m_flOutputMin = 1.000000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMin = 0.350000
 			m_flInputMax = 0.400000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.200000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_InheritVelocity"
 			m_flVelocityScale = 0.250000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_vecWarpMin = 
@@ -179,6 +208,7 @@
 			m_flWarpStartTime = 0.500000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_vecWarpMin = 
@@ -198,6 +228,7 @@
 			m_flPrevPosScale = 4.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_vecWarpMin = 
@@ -217,29 +248,36 @@
 			m_flPrevPosScale = 4.000000
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_CreateSequentialPath"
-			m_flNumToAssign = 64.000000
-			m_PathParams = 
-			{
-				m_nStartControlPointNumber = 3
-				m_nEndControlPointNumber = 4
-			}
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.400000
-			m_flEmitRate = 66.000000
 			m_bDisableOperator = true
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.400000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 66.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 64
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 64.000000
+			}
 		},
 	]
 	m_flConstantLifespan = 0.500000
 	m_nMaxParticles = 128
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 1
 }

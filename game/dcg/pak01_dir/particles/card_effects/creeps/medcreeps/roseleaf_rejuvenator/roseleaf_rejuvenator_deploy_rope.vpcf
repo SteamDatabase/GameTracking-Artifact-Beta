@@ -1,12 +1,14 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -28,16 +30,20 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -48,22 +54,26 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.700000
 		},
+		
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_nFieldOutput = "16"
 			m_flOutput = 0.000000
 			m_flLerpTime = 0.300000
 		},
+		
 		{
 			_class = "C_OP_SnapshotRigidSkinToBones"
 		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_flOverbrightFactor = 3.000000
@@ -74,24 +84,29 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_InitSkinnedPositionFromCPSnapshot"
 			m_nSnapshotControlPointNumber = 6
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.600000
 			m_flRadiusMax = 0.650000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.000000
 			m_fLifetimeMax = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -109,6 +124,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "8"
@@ -116,12 +132,14 @@
 			m_flOutputMin = 0.200000
 			m_flOutputMax = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMax = 20
 			m_nScaleControlPointField = 1
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMin = 50
@@ -129,22 +147,32 @@
 			m_nScaleControlPointField = 1
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 40.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 40.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 90
 			m_bDisableOperator = true
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 90.000000
+			}
 		},
 	]
 	m_nMaxParticles = 100
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 5
 }

@@ -1,52 +1,51 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 3.500000
 	m_flConstantLifespan = 3.000000
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 10
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.600000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_bSetOnce = true
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				5.000000,
-			]
-		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.050000
 		},
+		
 		{
 			_class = "C_OP_DampenToCP"
 			m_nControlPointNumber = 1
 			m_flRange = 2.000000
 		},
+		
 		{
 			_class = "C_OP_RotateVector"
 			m_vecRotAxisMin = 
@@ -65,13 +64,16 @@
 			m_flRotRateMax = 30.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateMinDegrees = 60
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateMinDegrees = -40
@@ -79,6 +81,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nOrientationType = 3
@@ -92,6 +95,7 @@
 			m_flOverbrightFactor = 4.000000
 			m_hTexture = resource:"materials/particle/warp_ripple2_normal.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nOrientationType = 3
@@ -108,6 +112,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_vecMin = 
@@ -124,18 +129,18 @@
 			]
 			m_bLocalSpace = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_bRandomlyFlipDirection = false
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 64
 			m_nAlphaMax = 64
 		},
-		{
-			_class = "C_INIT_RandomYawFlip"
-		},
+		
 		{
 			_class = "C_INIT_RandomVector"
 			m_vecMin = 
@@ -150,22 +155,33 @@
 				0.200000,
 				1.000000,
 			]
-			m_nFieldOutput = 21
+			m_nFieldOutput = "21"
+		},
+		
+		{
+			_class = "C_INIT_RandomYawFlip"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 3.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -195,11 +211,32 @@
 	m_nMaxParticles = 16
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = 2.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 2.000000
+			}
 			m_fFalloffPower = 0.000000
 			m_nControlPointNumber = 1
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_bSetOnce = true
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				5.000000,
+			]
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 4
 }

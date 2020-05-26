@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 350
@@ -11,6 +11,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 46
@@ -24,17 +25,21 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.440000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -46,29 +51,33 @@
 			]
 			m_flFadeStartTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PercentageBetweenCPs"
 			m_flOutputMin = -50.000000
 			m_flOutputMax = 0.000000
-			m_nFieldOutput = 5
+			m_nFieldOutput = "5"
 			m_nStartCP = 2
 			m_nEndCP = 3
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.250000
 		},
+		
 		{
 			_class = "C_OP_PercentageBetweenCPs"
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
 			m_nStartCP = 2
 			m_nEndCP = 3
-			m_bScaleCurrent = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_CURRENT_VALUE"
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
-			m_nFieldOutput = 21
+			m_nFieldOutput = "21"
 			m_vecOutputMin = 
 			[
 				-1.000000,
@@ -78,44 +87,51 @@
 			m_fl4NoiseScale = 0.130000
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_NormalizeVector"
-			m_nFieldOutput = 21
+			m_nFieldOutput = "21"
 		},
+		
 		{
 			_class = "C_OP_Noise"
-			m_nFieldOutput = 5
+			m_nFieldOutput = "5"
 			m_flOutputMin = -3.000000
 			m_flOutputMax = 3.000000
 			m_fl4NoiseScale = 0.770000
 			m_flNoiseAnimationTimeScale = 2.600000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_Rate = 12.000000
-			m_nField = 5
+			m_nField = "5"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_PercentageBetweenCPs"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flInputMax = 0.100000
 			m_flOutputMax = 0.000000
 			m_nStartCP = 2
 			m_nEndCP = 3
 			m_bActiveRange = true
 		},
+		
 		{
 			_class = "C_OP_PercentageBetweenCPs"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_nStartCP = 2
 			m_nEndCP = 3
 			m_flInputMin = 0.100000
 			m_bActiveRange = true
 		},
+		
 		{
 			_class = "C_OP_DampenToCP"
 			m_nControlPointNumber = 3
@@ -124,27 +140,17 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_NormalAlignToCP"
 			m_nControlPointNumber = 4
 		},
-		{
-			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 1
-			m_flInputMax = 0.250000
-			m_flOutputMin = 1.000000
-			m_flOutputMax = 0.500000
-		},
-		{
-			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 4
-			m_flInputMax = 0.200000
-			m_flOutputMax = 66.000000
-		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_nControlPointNumber = 4
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -162,23 +168,53 @@
 				255,
 			]
 		},
+		
+		{
+			_class = "C_INIT_RemapScalar"
+			m_nFieldOutput = "1"
+			m_flInputMax = 0.250000
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.500000
+		},
+		
+		{
+			_class = "C_INIT_RemapScalar"
+			m_nFieldOutput = "4"
+			m_flInputMax = 0.200000
+			m_flOutputMax = 66.000000
+		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 222.000000
-			m_flEmissionDuration = 0.250000
-			m_flStartTime = 0.010000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.250000
+			}
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.010000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 222.000000
+			}
 		},
 	]
 	m_flConstantRadius = 1.800000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -195,6 +231,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -217,6 +254,7 @@
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_CurlNoiseForce"
 			m_useCurl = true
@@ -233,12 +271,19 @@
 				111.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = 20.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 20.000000
+			}
 			m_fFalloffPower = 0.000000
 			m_nControlPointNumber = 3
 		},
 	]
 	m_flConstantLifespan = 0.700000
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

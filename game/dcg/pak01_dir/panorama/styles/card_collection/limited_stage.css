@@ -50,6 +50,13 @@ LimitedStage
 	horizontal-align: center;
 }
 
+#BodyContainerContainer
+{
+	flow-children: none;
+	height: fit-children;
+	width: 100%;
+}
+
 #BodyHeader
 {
     width: 100%;
@@ -105,6 +112,11 @@ LimitedStage
 	flow-children: right;
 	width: 100%;
 	margin-bottom: 10px;
+}
+
+.IsLiveDraft #ChosenCardsContainer
+{
+	visibility: collapse;
 }
 
 #GrantStageCounterContainer
@@ -168,6 +180,7 @@ LimitedStage
     margin-left: 40px;
 	vertical-align: center;
     flow-children: down;
+	height: 50px;
 }
 
 #NextStage,
@@ -184,6 +197,7 @@ LimitedStage
 	font-size: 26px;
 	letter-spacing: 5px;
 	margin-right: 22px;
+	text-align: center;
 }
 
 #QuitDraftStage
@@ -214,11 +228,18 @@ LimitedStage
 
 DCGScenePanel.CardScenePanel
 {
-    width: 194px;
-    height: 328px;
-    margin: 8px;
-    horizontal-align: left;
-    vertical-align: top;
+	width: 194px;
+	height: 328px;
+	margin: 8px;
+	horizontal-align: left;
+	vertical-align: top;
+}
+
+DCGScenePanel.AbilityTooltipPosition
+{
+	tooltip-position: left;
+	tooltip-body-position: 80% 80%;
+	tooltip-arrow-position: 75% 75%;
 }
 
 DCGScenePanel.CardScenePanel.NoCardSet, DCGScenePanel.CardScenePanel.LoadingNewEntity
@@ -316,13 +337,79 @@ DCGScenePanel.CardScenePanel.NoCardSet, DCGScenePanel.CardScenePanel.LoadingNewE
     visibility: visible;
 }
 
+#LiveDraftOpponentLabel
+{
+	visibility: collapse;
+	text-align: center;
+	color: #7c8e8e;
+}
+
+.IsOpponentsTurn #LiveDraftOpponentLabel
+{
+	visibility: visible;
+}
+
+.IsOrderingHeroesPhase  #LiveDraftOpponentLabel,
+.IsOrderingHeroesPhase  #ChoosePrompt
+{
+	visibility: collapse; 
+}
+
+#LiveDraftFinalizeOrder
+{
+	flow-children: right;
+}
+
+#LiveDraftFinalizeOrder:hover
+{
+	brightness: 2.0;
+}
+
+#LiveDraftOpponentOrderingLabel, #LiveDraftFinalizeOrder
+{
+	visibility: collapse;
+}
+
+.IsOrderingHeroesPhase #LiveDraftFinalizeOrder
+{
+	visibility: visible;
+}
+
+.IsOrderingHeroesPhase.HaveSubmittedHeroes #LiveDraftFinalizeOrder
+{
+	visibility: collapse;
+}
+
+.IsOrderingHeroesPhase.HaveSubmittedHeroes #LiveDraftOpponentOrderingLabel
+{
+	visibility: visible;
+}
+
+#NextStage #LiveDraftFinalizeOrderButton
+{
+	margin-right: 5px;
+}
+
+#LiveDraftFinalizeImage
+{
+	background-image: url("s2r://panorama/images/control_icons/draft_ordering_complete_psd.vtex");
+    background-size: contain;
+    background-repeat: no-repeat;
+	height: 60px;
+	width: 60px;
+	margin-right: 15px;
+	margin-bottom: 5px;
+}
+
 .isLastGrant #GrantNextLabel,
 #GrantFinishLabel,
 #OverBudget,
 .selectionComplete #ChoosePrompt,
 .selectionIncomplete #GrantFinishLabel,
 .selectionIncomplete #GrantNextLabel,
-.overBudget #GrantNextLabel
+.overBudget #GrantNextLabel,
+.IsOpponentsTurn #GrantNextLabel,
+.IsOpponentsTurn #ChoosePrompt
 {
     visibility: collapse;
 }
@@ -627,11 +714,22 @@ LimitedStage.ShowAIPicks .WouldBePickedByAI
 	height: 818px;
 }
 
-#DeckList
+#DeckList, #LiveDraftDeckList
 {
 	transition-property: height;
 	transition-duration: .23s;
 	transition-timing-function: ease-in;
+}
+
+#LiveDraftDeckList
+{
+	visibility: collapse;
+}
+
+.IsLiveDraft #LiveDraftDeckList
+{
+	visibility: visible;
+	height: 50%;
 }
 
 #BenchDeckList
@@ -647,6 +745,11 @@ LimitedStage.ShowAIPicks .WouldBePickedByAI
 }
 
 .IsReplay #BenchDeckList
+{
+	visibility: collapse;
+}
+
+.IsLiveDraft #BenchDeckList
 {
 	visibility: collapse;
 }
@@ -679,10 +782,20 @@ DCGDeckList.DeckList
 	height: 325px;
 }
 
-DCGDeckSummary
+#DeckSummary
 {
 	margin-left: 20px;
 	width: 100%;
+}
+
+#OpponentDeckSummary
+{
+	visibility: collapse;
+}
+
+.IsLiveDraft #OpponentDeckSummary
+{
+	visibility: visible;
 }
 
 #ChosenCardsContainer
@@ -776,4 +889,165 @@ DCGDeckSummary
 .CardChoices.Colorless
 {
 	box-shadow: #dfd1a044 -2px -2px 4px 4px; 
+}
+
+.DeckSummaryContainer
+{
+	flow-children: down;
+	vertical-align: center;
+	width: fit-children;
+	height: fit-children;
+}
+
+.IsLiveDraft .DeckSummaryContainer
+{
+	width: 430px;
+}
+
+.OpponentSummaryContainer
+{
+	horizontal-align: right;
+	margin-right: 40px;
+}
+
+.PlayerSummaryContainer
+{
+	margin-left: 40px;
+}
+
+.DeckSummaryLabel
+{
+	visibility: collapse;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #7c8e8e;
+	letter-spacing: 3px;
+	font-weight: lighter;
+	horizontal-align: center;
+	margin-top: 5px;
+	margin-left: -3px;
+}
+
+.IsLiveDraft .DeckSummaryLabel
+{
+	visibility: visible;
+}
+
+.DeckSummaryNamesContainer
+{
+	flow-children: right;
+	horizontal-align: center;
+}
+
+DCGUserName
+{
+	visibility: collapse;
+}
+
+DCGUserName Label
+{
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #7c8e8e;
+	letter-spacing: 3px;
+	font-weight: lighter;
+	horizontal-align: center;
+	margin-top: 5px;
+}
+
+.IsLiveDraft DCGUserName
+{
+	visibility: visible;
+}
+
+#ReorderHerosLabel
+{
+	margin-top: 5px;
+	horizontal-align: center;
+	font-size: 12px;
+}
+
+#YourTurnLabel
+{
+	font-size: 36px;
+	vertical-align: center;
+	margin-left: 200px;
+	text-transform: uppercase;
+	animation-name: YourTurnPulsing;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in;
+	animation-iteration-count: infinite;
+	visibility: collapse;
+}
+
+.IsLiveDraft #YourTurnLabel
+{
+	visibility: visible;
+}
+
+.IsLiveDraft.IsOpponentsTurn #YourTurnLabel, .IsLiveDraft.IsOrderingHeroesPhase #YourTurnLabel
+{
+	visibility: collapse;
+}
+
+@keyframes 'YourTurnPulsing'
+{
+    0%
+    {
+		pre-transform-scale2d: 1.0;
+    }
+    50%
+    {
+		pre-transform-scale2d: 1.5;
+    }
+	100%
+    {
+		pre-transform-scale2d: 1.0;
+    }
+}
+
+#LiveDraftLabelsContainer
+{
+	flow-children: down;
+	visibility: collapse;
+}
+
+.IsOrderingHeroesPhase #LiveDraftLabelsContainer, .HaveSubmittedHeroes #LiveDraftLabelsContainer
+{
+	visibility: visible;
+}
+
+#LiveDraftHeroPositions
+{
+	flow-children: right;
+	margin-top: 340px;
+}
+
+.HeroOrderLabel
+{
+	font-size: 28px;
+	text-transform: uppercase;
+	width: 210px;
+	text-align: center;
+}
+
+#ClickAndDragHeroesLabel
+{
+	margin-top: 50px;
+	width: 1050px;
+	text-align: center;
+}
+
+.HighlightHeroResponsibleForInclusion
+{
+	box-shadow: #0dfffc 0px 0px 4px 0px;
+
+	transition-property: box-shadow, border;
+	transition-duration: 0.25s;
+
+    animation-name: HeroLineupPortraitGlowAnimation;
+    animation-duration: 0.5s;
+    animation-delay: 0.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }

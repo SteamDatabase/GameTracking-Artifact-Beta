@@ -1,58 +1,43 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.100000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 1.200000
 			m_flBias = 0.900000
 			m_flEndTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_nControlPointNumber = 1
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_nCP1 = 2
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				0.000000,
-			]
-			m_nHeadLocation = 1
-		},
-		{
-			_class = "C_OP_SetControlPointOrientation"
-			m_nCP = 2
-			m_nHeadLocation = 1
-			m_vecRotation = 
-			[
-				-40.000000,
-				0.000000,
-				0.000000,
-			]
-		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_hTexture = resource:"materials/particle/particle_ring_soft.vtex"
@@ -61,14 +46,20 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 3
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
 		},
 	]
 	m_nMaxParticles = 16
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_previewState = 
@@ -106,25 +97,58 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/glyph_of_confusion/glyph_confusion_trigger_target_runes_glow.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/glyph_of_confusion/glyph_confusion_trigger_target_mist.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/glyph_of_confusion/glyph_confusion_trigger_target_light.vpcf"
 		},
 	]
 	m_flConstantRadius = 4.000000
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 2
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_nHeadLocation = 1
+		},
+		
+		{
+			_class = "C_OP_SetControlPointOrientation"
+			m_nCP = 2
+			m_nHeadLocation = 1
+			m_vecRotation = 
+			[
+				-40.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+	]
+	m_nBehaviorVersion = 4
 }

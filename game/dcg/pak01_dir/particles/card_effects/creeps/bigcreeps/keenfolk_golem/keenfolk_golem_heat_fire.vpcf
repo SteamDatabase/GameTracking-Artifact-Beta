@@ -1,13 +1,15 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 6.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -24,6 +26,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -53,60 +56,52 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RemapCPOrientationToRotations"
 			m_bWriteNormal = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flAnimationRate = 1.000000
 			m_hTexture = resource:"materials/particle/smoke/steam/steam.vtex"
 			m_nOrientationType = 3
 			m_bAdditive = true
-			m_bFitCycleToLifetime = true
 			m_flSelfIllumAmount = 1.000000
 			m_flOverbrightFactor = 5.000000
+			m_nAnimationType = "ANIMATION_TYPE_FIT_LIFETIME"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
-		{
-			_class = "C_INIT_PositionOffset"
-			m_OffsetMin = 
-			[
-				5.000000,
-				-1.000000,
-				-1.300000,
-			]
-			m_OffsetMax = 
-			[
-				6.000000,
-				1.000000,
-				-1.300000,
-			]
-			m_bLocalCoords = true
-		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 150
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -124,27 +119,55 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_flDegreesMin = 90.000000
 			m_flDegreesMax = 90.000000
 			m_bRandomlyFlipDirection = false
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_flDegreesMin = 90.000000
 			m_flDegreesMax = 0.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 1
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.400000
 			m_fLifetimeMax = 0.800000
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 5.000000
+			m_flRadiusMax = 6.000000
+		},
+		
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				5.000000,
+				-1.000000,
+				-1.300000,
+			]
+			m_OffsetMax = 
+			[
+				6.000000,
+				1.000000,
+				-1.300000,
+			]
+			m_bLocalCoords = true
+		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -160,11 +183,7 @@
 				0.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 5.000000
-			m_flRadiusMax = 6.000000
-		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_nFieldOutput = "7"
@@ -172,28 +191,43 @@
 			m_flInputMax = 1.300000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMin = 0.500000
 			m_flInputMax = 1.300000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.500000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 20.000000
-			m_flEmissionDuration = 1.300000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.300000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 20.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 30
 			m_bDisableOperator = true
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 30.000000
+			}
 		},
 	]
 	m_ConstantColor = 
@@ -211,4 +245,6 @@
 		1.000000,
 		0.000000,
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 8
 }

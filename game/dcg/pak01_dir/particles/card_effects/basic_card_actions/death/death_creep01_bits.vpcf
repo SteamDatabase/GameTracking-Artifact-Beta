@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nSnapshotControlPoint = 6
@@ -6,10 +6,12 @@
 	m_flConstantRadius = 4.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -31,15 +33,19 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -50,16 +56,19 @@
 			]
 			m_fDrag = 0.020000
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 44
 			m_flOpEndFadeInTime = 0.400000
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateDegrees = 88
 			m_flOpEndFadeInTime = 0.400000
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_nFieldOutput = "4"
@@ -68,10 +77,15 @@
 			m_bAdditive = true
 			m_flNoiseAnimationTimeScale = 0.600000
 			m_flOpEndFadeInTime = 0.400000
-			m_nOpStrengthScaleSeed = 9698
-			m_flOpStrengthMinScale = 0.500000
-			m_flOpStrengthMaxScale = 2.000000
+			m_flOpStrength = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 0.500000
+				m_flRandomMax = 2.000000
+				m_nRandomMode = "PF_RANDOM_MODE_VARYING"
+			}
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_nFieldOutput = "12"
@@ -81,13 +95,18 @@
 			m_bAdditive = true
 			m_flNoiseAnimationTimeScale = 0.020000
 			m_flOpEndFadeInTime = 0.400000
-			m_nOpStrengthScaleSeed = 9698
-			m_flOpStrengthMinScale = 0.500000
-			m_flOpStrengthMaxScale = 2.000000
+			m_flOpStrength = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 0.500000
+				m_flRandomMax = 2.000000
+				m_nRandomMode = "PF_RANDOM_MODE_VARYING"
+			}
 		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nOrientationType = 3
@@ -98,46 +117,58 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_InitSkinnedPositionFromCPSnapshot"
 			m_nSnapshotControlPointNumber = 6
 			m_bRandom = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMin = 5
+			m_nSequenceMax = 9
+		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 0.400000
+			m_flRadiusMax = 0.800000
+		},
+		
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMin = 0.400000
+			m_fLifetimeMax = 0.700000
+		},
+		
 		{
 			_class = "C_INIT_VelocityRadialRandom"
 			m_fSpeedMin = -5.000000
 			m_fSpeedMax = -25.000000
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomSequence"
-			m_nSequenceMin = 5
-			m_nSequenceMax = 9
-		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 0.400000
-			m_flRadiusMax = 0.800000
-		},
-		{
-			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 0.400000
-			m_fLifetimeMax = 0.700000
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 24
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 24.000000
+			}
 		},
 	]
 	m_nMaxParticles = 200
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MinForce = 
@@ -155,11 +186,18 @@
 			m_flOpEndFadeOutTime = 0.300000
 			m_flOpStartFadeOutTime = 0.150000
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = -100.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -100.000000
+			}
 			m_fFalloffPower = 0.000000
 			m_flOpEndFadeOutTime = 0.500000
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

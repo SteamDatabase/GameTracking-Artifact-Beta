@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_ConstantColor = 
@@ -11,12 +11,14 @@
 	m_nMaxParticles = 10
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nOrientationType = 2
@@ -27,27 +29,40 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateFromParentParticles"
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_InheritFromParentParticles"
-			m_nFieldOutput = 0
-		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.020000
 			m_fLifetimeMax = 0.020000
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 9
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 3.000000
+			m_flRadiusMax = 6.000000
+			m_bDisableOperator = true
+		},
+		
+		{
+			_class = "C_INIT_InheritFromParentParticles"
+			m_nFieldOutput = "0"
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -63,33 +78,36 @@
 				0.100000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 3.000000
-			m_flRadiusMax = 6.000000
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_INIT_InheritFromParentParticles"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.500000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -109,4 +127,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

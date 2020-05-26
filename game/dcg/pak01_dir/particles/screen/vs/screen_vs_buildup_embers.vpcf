@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -6,32 +6,40 @@
 	m_bShouldSort = false
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.500000
 			m_flBias = 0.400000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_nControlPointNumber = 10
 		},
+		
 		{
 			_class = "C_OP_SnapshotRigidSkinToBones"
 			m_nControlPointNumber = 10
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_nFieldOutput = "0"
@@ -55,46 +63,58 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.500000
 			m_fLifetimeMax = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_InitSkinnedPositionFromCPSnapshot"
 			m_nSnapshotControlPointNumber = 13
 			m_nControlPointNumber = 10
 			m_bRandom = true
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_nFieldOutput = "7"
 			m_flInputMax = 2.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMax = 2.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 50.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 50.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -111,6 +131,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -128,6 +149,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -145,6 +167,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -162,6 +185,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 5
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -179,6 +203,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 6
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -206,6 +231,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_bAdditive = true
@@ -224,6 +250,6 @@
 	m_flConstantLifespan = 2.000000
 	m_pszTargetLayerID = "vignette"
 	m_nMaxParticles = 200
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 3
 }

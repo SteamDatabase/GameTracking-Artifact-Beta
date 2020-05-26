@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "econ_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -9,12 +10,34 @@ enum EGCDCGCommonMessages {
 }
 
 enum EDCGMatchMode {
+	k_EDCGMatchMode_Invalid = 0;
 	k_EDCGMatchMode_Unranked = 2;
 	k_EDCGMatchMode_Gauntlet = 3;
+	k_EDCGMatchMode_Draft = 5;
 	k_EDCGMatchMode_PrivateLobby = 6;
 	k_EDCGMatchMode_Puzzle = 7;
 	k_EDCGMatchMode_AI = 8;
 	k_EDCGMatchMode_Tournament = 9;
+}
+
+enum EDCGPlayerState {
+	k_EPlayerState_Playing = 0;
+	k_EPlayerState_Eliminated = 1;
+	k_EPlayerState_Abandoned = 2;
+	k_EPlayerState_Disconnected = 3;
+	k_EPlayerState_ServerCrashed = 4;
+}
+
+enum EDCGFormat {
+	k_EDCGFormat_Other = 0;
+	k_EDCGFormat_Constructed = 1;
+	k_EDCGFormat_Limited = 2;
+	k_EDCGFormat_Preconstructed = 3;
+}
+
+enum EDCGGauntletScoreType {
+	k_EDCGGauntletScoreType_WinStreakAtAbandon = 0;
+	k_EDCGGauntletScoreType_ChaosGauntlet = 1;
 }
 
 enum EDCGLobbyTeam {
@@ -73,13 +96,6 @@ enum DCG_COMBATLOG_TYPES {
 	DCG_COMBATLOG_TRIGGER_TRIGGERED = 24;
 }
 
-message CExtraMsgBlock {
-	optional uint32 msg_type = 1;
-	optional bytes contents = 2;
-	optional uint64 msg_key = 3;
-	optional bool is_compressed = 4;
-}
-
 message CSODCGLobby {
 	message GauntletInfo {
 		optional uint32 wins = 1;
@@ -93,6 +109,7 @@ message CSODCGLobby {
 		optional bool has_left = 4;
 		optional bool is_anonymous = 5;
 		optional .CSODCGLobby.GauntletInfo gauntlet_info = 6;
+		optional uint32 game_mode_id = 7;
 	}
 
 	repeated .CSODCGLobby.Member members = 1;
@@ -103,12 +120,13 @@ message CSODCGLobby {
 	optional uint32 gauntlet_id = 7;
 	optional .ELobbyServerState server_state = 8 [default = k_eLobbyServerState_Assign];
 	optional fixed32 replay_salt = 9;
-	optional .EDCGMatchMode match_mode = 10 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode match_mode = 10 [default = k_EDCGMatchMode_Invalid];
 	optional uint32 udp_connect_ip = 11;
 	optional uint32 udp_connect_port = 12;
 	optional uint64 tourney_id = 13;
 	optional uint32 tourney_phase_id = 14;
 	optional uint32 tourney_series_id = 15;
+	optional uint32 game_mode_id = 16;
 }
 
 message CLobbyData_PostMatchSurvey {
@@ -131,12 +149,15 @@ message CSOGameAccountClient {
 	optional uint32 recycling_progress = 6;
 	optional uint32 progress_level = 7;
 	optional uint32 progress_xp = 8;
-	optional uint32 constructed_mmr_level = 9;
 	optional uint32 last_win_bounus_time = 10;
 	optional uint32 match_win_streak = 11;
 	optional uint32 bonus_period_wins = 12;
 	optional uint32 player_badge = 13;
-	optional uint32 draft_mmr_level = 14;
+	optional uint32 default_cardback = 15;
+	optional uint32 mmr_level = 16;
+	optional uint32 mmr_leaderboard = 17;
+	optional uint32 mmr_level_score = 18;
+	optional float mmr_level_partial_progress = 19;
 }
 
 message CSOGauntlet {
@@ -152,6 +173,7 @@ message CSOGauntlet {
 	optional uint32 losses = 13;
 	optional uint64 wins_mask = 14;
 	optional bool select_random_deck = 15;
+	optional uint32 selected_colors = 16;
 }
 
 message CSOPhantomItem {
@@ -210,9 +232,11 @@ message CMsgStartFindingMatchInfo {
 	optional uint32 gauntlet_id = 1;
 	optional string server_search_key = 2;
 	optional uint32 client_version = 3;
-	optional .EDCGMatchMode match_mode = 4 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode match_mode = 4 [default = k_EDCGMatchMode_Invalid];
 	optional bytes deck_data = 5;
 	optional bool is_anonymous = 6;
+	optional uint32 selected_colors = 7;
+	optional uint32 game_mode_id = 8;
 }
 
 message CMsgDCGCombatLogEntry {
@@ -257,6 +281,7 @@ message CMsgDeckValidator {
 		eRarity_Common = 1;
 		eRarity_Uncommon = 2;
 		eRarity_Rare = 3;
+		eRarity_Epic = 4;
 	}
 
 	enum EColor {
@@ -284,7 +309,16 @@ message CMsgDeckValidator {
 	optional uint32 max_deck_colors = 17;
 	repeated .CMsgDeckValidator.EColor blocked_colors = 18;
 	optional bool random_decks = 19;
+	optional bool can_select_colors = 21;
 	repeated .CMsgDeckValidator.Deck deck_choices = 20;
+	optional uint32 creeps_min = 22;
+	optional uint32 creeps_max = 23;
+	optional uint32 improvements_min = 24;
+	optional uint32 improvements_max = 25;
+	optional uint32 spells_min = 26;
+	optional uint32 spells_max = 27;
+	optional uint32 min_unlock_level = 28;
+	optional uint32 max_unlock_level = 29;
 }
 
 message CMsgAnyToGCReportAsserts {
@@ -359,6 +393,12 @@ message CMsgGauntletConfig {
 	repeated .CMsgDeckValidator ai_validators = 27;
 	repeated .CMsgGauntletConfig.GauntletPointsLeaderboard gauntlet_points_leaderboards = 29;
 	optional string timer = 30;
+	optional uint32 parallel_gauntlet_id = 31;
+	repeated .CMsgGauntletConfig.GauntletPointsLeaderboard gauntlet_color_streak_leaderboards = 32;
+	optional .EDCGFormat format = 33 [default = k_EDCGFormat_Other];
+	optional uint32 game_mode_id = 34;
+	optional .EDCGGauntletScoreType score_type = 35 [default = k_EDCGGauntletScoreType_WinStreakAtAbandon];
+	optional uint32 active_quest = 36;
 }
 
 message CMsgLimitedFormat {
@@ -423,12 +463,11 @@ message CSODCGPrivateLobby {
 	optional .EDCGLobbyTimer timer_mode = 9 [default = k_eDCGLobbyTimer_Unspecified];
 	optional fixed64 match_lobby_id = 10;
 	repeated .CSODCGPrivateLobby.SharedDeck shared_decks = 11;
-	optional .CMsgDeckValidator deck_validator = 12;
 	optional uint32 min_client_version = 15;
 	optional uint32 max_client_version = 16;
 	optional uint64 steam_chat_group_id = 17;
 	optional fixed64 lobby_salt = 18;
-	optional uint32 validator_id = 19;
+	optional uint32 game_mode_id = 19;
 }
 
 message CSODCGTourneyInvite {
@@ -596,6 +635,16 @@ message CMsgMatchData {
 		optional uint32 mmr = 11;
 		optional uint32 mmr_uncertainty = 12;
 		optional bytes deck_bytes = 13;
+		optional uint32 mmr_level_score = 14;
+		optional uint32 ancient_lane = 15;
+		optional uint32 mana_spent = 16;
+		optional uint32 gold_spent = 17;
+		optional uint32 cards_drawn = 18;
+		optional uint32 cards_played = 19;
+		optional uint32 abilities_activated = 20;
+		optional uint32 cards_in_hand = 21;
+		optional uint32 items_in_hand = 22;
+		optional uint32 shop_level = 23;
 	}
 
 	enum EEndReason {
@@ -612,4 +661,55 @@ message CMsgMatchData {
 	optional .CMsgMatchData.EEndReason end_reason = 6 [default = k_EEndReason_TeamWin];
 	optional .EDCGLobbyTeam winning_team = 7 [default = k_EDCGLobbyTeam_Team0];
 	repeated .CMsgMatchData.PlayerInfo players = 8;
+	optional uint32 mode_duration_s = 9;
+}
+
+message QuestAchievementProgress {
+	optional uint32 achievement_id = 1;
+	optional uint32 achievements_achieved_for_quest = 2;
+	optional uint32 achievements_required_for_quest = 3;
+}
+
+message CServerLobbyData_PlayerInfo {
+	message Currency {
+		optional uint32 currency_id = 1;
+		optional uint32 amount = 2;
+	}
+
+	message Challenge {
+		optional uint32 challenge_id = 1;
+		optional uint32 progress = 2;
+		optional uint32 sequence_id = 3;
+		optional uint32 slot_id = 4;
+		optional uint32 config_id = 5;
+		optional uint32 claimed = 6;
+	}
+
+	message VirtualItem {
+		optional uint32 def_index = 1;
+		optional uint32 equip_slot = 2;
+		optional uint32 equip_sub_slot = 3;
+	}
+
+	message Event {
+		optional uint32 event_id = 1;
+		optional bool event_owned = 2;
+		repeated .CServerLobbyData_PlayerInfo.Challenge challenges = 3;
+		repeated .CServerLobbyData_PlayerInfo.Currency currencies = 4;
+		repeated .CServerLobbyData_PlayerInfo.VirtualItem virtual_items = 5;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint32 progress_level = 2;
+	optional uint32 progress_xp = 3;
+	optional uint32 player_mmr_level_score = 4;
+	optional uint32 last_win_bonus_time = 5;
+	optional uint32 win_streak = 6;
+	optional uint32 bonus_period_wins = 7;
+	optional uint32 player_badge = 8;
+	repeated .QuestAchievementProgress quest_achievement_progress = 9;
+	optional uint32 event_progress = 10;
+	optional uint32 event_win_streak = 11;
+	optional uint32 default_cardback = 12;
+	repeated .CServerLobbyData_PlayerInfo.Event events = 13;
 }

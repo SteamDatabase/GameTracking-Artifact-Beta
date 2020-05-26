@@ -1,5 +1,3 @@
-
-!!! debug info could not be found for %s, result %d
 "></img>
 $@
 $ORIGIN
@@ -9,30 +7,38 @@ $tI
 %%.%if%s
 %*s%ld
 %.0f pct of time accounted for
-%02X
-%02X%02X/
-%02x
-%10.3f %9.2f      %10.3f %6.2f      %10.3f %6.2f   %8d %6.2f
-%10.3f %9.2f      %8d
+%.2f
+%0*llx bytes at %0*llx is the largest open user-space VA region%s
+%0*llx bytes of %s at %0*llx%s
+%0*llx: address after highest user-space virtual region
+%02d: %u:0x%llx
+%12.3f %12.2f
+%14.3f %12.2f
+%14s %10s
+%2d.%03d
+%2u - proc %2u (grp %u:%-2u / phy %u / cor %u / smt %u): max freq %llu
 %52.52s%12d%12.3f%12.3f%7.2f%12.3f%7.2f%12.3f%12.3f%12.3f%12.3f
 %8.4f / %9.2f:  %s
 %8.4f / %9.2f:  Writing profile data to '%s'
 %8.8x-%4.4x-%4.4x-%2.2x%2.2x-%2.2x%2.2x%2.2x%2.2x%2.2x%2.2x
 %8x-%4x-%4x-%2x%2x-%2x%2x%2x%2x%2x%2x
+%9.2f
+%9d
 %d
 %d frames sampled for %.2f seconds
-%d ranges given for subprogram
 %d.
+%d:%02d.%03d
+%d:%02d:%02d.%03d
 %i
 %i%s
 %lf
 %llu,%u,%u,%s
+%s %d: proc %d (group %u:%u)
 %s %i %s
 %s '%s'
 %s (%d) : %s
 %s (%i) : %s
-%s debug info does not match %s, ignoring
-%s does not have debug info, ignoring
+%s slot %d combined mask %u:0x%llx
 %s specified, allocating %d MB%s
 %s test: multithread interleaved push/pop, %s
 %s test: multithread push, multithread pop, %s
@@ -42,10 +48,9 @@ $tI
 %s test: single thread push, multithread pop, %s
 %s test: single thread push/pop, in order...
 %s test: single thread push/pop, interleaved...
+%s total bytes in user-space regions (%s bytes in kernel-space regions)
+%s(%d%%) %s
 %s():%s
-%s.dSYM/Contents/Resources/DWARF/%s
-%s.dbg
-%s/%s
 %s/source_engine_%u.lock
 %s: %s
 %s: Unable to get executable filename (%d byte buffer).
@@ -65,6 +70,8 @@ $tI
 %s: invalid nOldChars %d (string %d)
 %s: invalid nStart %d (string %d)
 %s: invalid pointer byte count
+%s: invalid string pointer (string chars %d)
+%s: requested conversion of %d chars
 %s: string format requested %d chars
 %s: string length overflows (is %d, adding %d)
 %s: unable to find %s in '%s'
@@ -72,7 +79,6 @@ $tI
 %zu %zu %zu %zu %zu %zu %zu
 &
 &#039;
-&&
 &AElig;
 &Aacute;
 &Acirc;
@@ -183,14 +189,15 @@ $tI
 &yuml;
 '%s' %s
 (
-(%d) + %d bytes
 (DISABLED)
-*
+(Missing)
+(Unaccounted)
+(forced)
+(including user space up to 63 bits)
 ***** OUT OF MEMORY! /+/ attempted allocation size: %llu ****
 ******** BEGIN VPROF REPORT ********
 ******** END VPROF REPORT ********
 ,%03d
--
 -- Hierarchical Call Graph --
 -- Profile scopes sorted by average time (including children) --
 -- Profile scopes sorted by average time (without children) --
@@ -199,8 +206,11 @@ $tI
 -- Profile scopes sorted by time (including children) --
 -- Profile scopes sorted by time (without children) --
 -- Summary --
----------- ---------      --------
----------- ---------      ---------- ------      ---------- ------   -------- ------
+---------
+---------- ------------
+------------ ----------
+------------ ------------
+-------------------------------------------
 ---------------------------------------------------- ----------- ----------- ----------- ------ ----------- ------ ----------- ----------- ----------- -----------
 --hint
 -2GB
@@ -210,15 +220,24 @@ $tI
 -debug_exitprocess
 -debugbreak
 -dedicated
+-disable_affinity_preferences
 -emaildumps
 -etwprofile
+-force_battery_level
+-force_battery_level_battery
 -force_dpi
 -i
 -ignorecontentasserts
+-inset_bottom
+-inset_left
+-inset_right
+-inset_top
 -mpi_worker
+-no_assert_dialog
 -noassert
 -noautoargs
 -nocustomermachine
+-nohibernate
 -nowatchdog
 -phased_window_create
 -profile
@@ -227,15 +246,12 @@ $tI
 -t
 -testmode
 .%c
+............|
 ../
 ../public/ordered_constructor.h
+../public/tier0/globallist.h
 ../public/tier0/tslist.h
 .\
-.gnu_debuglink
-.gnu_debuglink doesn't have a filename
-.gnu_debuglink doesn't have string terminator
-.gnu_debuglink filename string too long
-.so
 //
 /e%s%s
 /etc/SUSE-release
@@ -250,20 +266,23 @@ $tI
 /proc/cpuinfo
 /proc/self/cmdline
 /proc/self/exe
+/proc/self/maps
 /proc/self/statm
 /proc/version
 /sys/devices/system/clocksource/clocksource0/current_clocksource
+/sys/devices/system/cpu/cpu%u/cpufreq/cpuinfo_max_freq
+/sys/devices/system/cpu/cpu%u/topology/core_id
+/sys/devices/system/cpu/cpu%u/topology/physical_package_id
 /tmp
 /tmp/.steam-sem-names
 0
 0123456789ABCDEF
 0@
-0x%p
 10CTestSuite
 10ITestSuite
 12CCommandLine
-12CStdMemAllocI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEEE
-12CStdMemAllocI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEEE
+12CStdMemAllocI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEE
+12CStdMemAllocI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEE
 12CThreadEvent
 12ICommandLine
 13CFiberJobPool
@@ -274,11 +293,12 @@ $tI
 16CThreadFullMutex
 16CThreadSemaphore
 16ILoggingListener
-17CStdMemAlloc_DataI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEEE
-17CStdMemAlloc_DataI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEEE
+17CStdMemAlloc_DataI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEE
+17CStdMemAlloc_DataI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEE
 17CThreadSyncObject
 18CThreadManualEvent
-1922
+18IMemAlloc_Internal
+20IMobileEventListener
 22CPerfTraceDepotDefault
 22CSimpleLoggingListener
 22CStdMemAlloc_Data_Base
@@ -286,19 +306,58 @@ $tI
 24BasicStatStructFieldDesc
 2500
 25CColorizedLoggingListener
-28CStdMemAlloc_Data_StackStatsI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEELb0EE
-28CStdMemAlloc_Data_StackStatsI24MemoryAllocationHeader_tI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEELb0EE
+25CVProfileOutputColumn_Sum
+26CVProfileOutputColumn_Base
+26CVProfileOutputColumn_Name
+26CVProfileOutputColumn_Peak
+27CMiniDumpCommentBuilderBase
+27CVProfileOutputColumn_Count
+28CStdMemAlloc_Data_StackStatsI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesELb0EE
+28CStdMemAlloc_Data_StackStatsI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesELb0EE
 28CallStackStatStructDescFuncs
 29CDefaultLoggingResponsePolicy
-3211
-64-bit DWARF format is not supported
+31CTier0MasterMobileEventListener
+31IForceSignalNumberIntoCallStack
+40CVProfileOutputColumn_AverageTimePerCall
+41CVProfileOutputColumn_AverageTimePerFrame
+7CSignalILi0EE
+7CSignalILi10EE
+7CSignalILi11EE
+7CSignalILi12EE
+7CSignalILi13EE
+7CSignalILi14EE
+7CSignalILi15EE
+7CSignalILi16EE
+7CSignalILi17EE
+7CSignalILi18EE
+7CSignalILi19EE
+7CSignalILi1EE
+7CSignalILi20EE
+7CSignalILi21EE
+7CSignalILi22EE
+7CSignalILi23EE
+7CSignalILi24EE
+7CSignalILi25EE
+7CSignalILi26EE
+7CSignalILi27EE
+7CSignalILi28EE
+7CSignalILi29EE
+7CSignalILi2EE
+7CSignalILi30EE
+7CSignalILi31EE
+7CSignalILi3EE
+7CSignalILi4EE
+7CSignalILi5EE
+7CSignalILi6EE
+7CSignalILi7EE
+7CSignalILi8EE
+7CSignalILi9EE
 7CThread
 8
-907
-941
 9CTestCase
 9IMemAlloc
 9ITestCase
+:
 ::<lambda_
 ::_CAssertFastInternal::AssertionFailed
 </a>
@@ -325,11 +384,33 @@ $tI
 @X@
 A
 AbortMessage({
-Abstract origin attr without ref4 value
 AddRef
-Address range refers to non-existent CU at 0x%x
+Affinity preferences: %d logical processors, limiting to %d
+Affinity preferences: %d speeds, preference split at sort index %d
+Affinity preferences: '%s' thread assigned to all-procs mask %u:0x%llx
+Affinity preferences: '%s' thread assigned to proc mask %u:0x%llx (index %d)%s, next proc mask %u:0x%llx (index %d)
+Affinity preferences: all-procs gather crossed group boundary
+Affinity preferences: disabled (%u physical procs, %u logical)
+Affinity preferences: explicitly disabled
+Affinity preferences: no logical processor speed variation
+Affinity preferences: no logical processor split fit
+Affinity preferences: no per-logical-processor information
+Affinity preferences: no preferences, skipping assignment
+Affinity preferences: no-pref all-procs does not set affinity
+Affinity preferences: only one logical processor
+Affinity preferences: turned off for internal reason
 AllocateEvent
 Always Ignore
+Android
+Android 10.0
+Android 5.0
+Android 5.1
+Android 6.0
+Android 7.0
+Android 7.1.1
+Android 8 MR1
+Android 8.0
+Android 9.0
 AppendConcat
 AppendConcatV
 AppendFormatV
@@ -342,18 +423,15 @@ AssertValidWStringPtr
 Assertion Failed
 Assertion Failed in function %s():%s
 AssertionFailureListenerMiniDumpContext_t
-Attempt %d to find debug info for %s:
 AuthenticAMD
 Average %.2f fps, %.2f ms per frame
-Avg Time/Frame (ms)
+Avg Time/Call (%s)
+Avg Time/Frame (%s)
 Bad node link detected
 BasicStatStructFieldDesc::DescribeField(unsigned char*, unsigned long)
 BinaryProperties_GetValue
 Break
 BroadcastAssertionMiniDumpContext_t
-Build ID filename too long
-Build ID too large
-Build ID too large, %d bytes
 BuiltDebug
 CBufferString::AppendConcat(char const*, char const*, ...)
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
@@ -365,18 +443,20 @@ CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ConvertIn(wchar_t const*, int, bool)
 CBufferString::DefaultExtension(char const*)
+CBufferString::EndsWith(char const*)
+CBufferString::EndsWith_FastCaseInsensitive(char const*)
 CBufferString::EnsureAddedCapacity(int, char**, bool, bool)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::EnsureLength(int, bool, int*)
 CBufferString::EnsureOwnedAllocation(CBufferString::EAllocationOption_t)
-CBufferString::EnsureTrailingSlash(char)
+CBufferString::EnsureTrailingSlash(char, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
 CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::ExtractFirstDir(char const*)
 CBufferString::FixSlashes(char)
-CBufferString::FixupPathName()
+CBufferString::FixupPathName(char)
 CBufferString::Format(char const*, ...)
 CBufferString::GetAllocChars(int, int)
 CBufferString::GetInsertPtr(int, int, bool, int*)
@@ -402,13 +482,22 @@ CBufferString::ReverseChars(int, int)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
-CBufferString::ShortenPath()
+CBufferString::ShortenPath(bool)
+CBufferString::StartsWith(char const*)
+CBufferString::StartsWith_FastCaseInsensitive(char const*)
 CBufferString::StrAppendFormat(char const*, ...)
 CBufferString::StrFormat(char const*, ...)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
+CBufferString::ToUpperFast(int)
+CBufferString::Trim(char const*)
+CBufferString::TrimHead(char const*)
+CBufferString::TrimTail(char const*)
+CBufferString::TruncateAt(char const*, bool)
+CBufferString::TruncateAt(int, bool)
+CBufferString::UnicodeCaseConvert(int, EStringConvertErrorPolicy)
 CCallStackCapture::CCallStackCapture(int (*)(void**, int, int), unsigned int, unsigned int)
 CCallStackCapture::Capture(int (*)(void**, int, int), unsigned int, unsigned int)
 CCallStackMarker::CCallStackMarker(bool)
@@ -433,6 +522,8 @@ CDeferredCallStackMarker::Remove()
 CDynamicFunction: Closing library '%s' (%p)
 CDynamicFunction: Loading library '%s' (%p)
 CDynamicFunction: Lookup of '%s' in '%s': %p
+CEventListNode::AllocTempNode()
+CEventListNode::FreeTempNode(CEventListNode*)
 CEventRWLock::DuplicateReadLock()
 CEventRWLock::HandleFirstWriteLockTransition(CEventListNode&)
 CEventRWLock::UnlockRead_LockForWrite(CEventListNode&)
@@ -462,6 +553,25 @@ CFiber::WaitForJobCompletion(CEventListNode&)
 CFiber::~CFiber()
 CLoggingSystem::AllocTag overflowed!
 CMemAllocSystemInitialize
+CMiniDumpComment encountered an error while generating the comment
+CMiniDumpComment::AppendComment(char const*)
+CMiniDumpComment::AppendFormattedComment(char const*, ...)
+CMiniDumpComment::AppendOSComment()
+CMiniDumpComment::CMiniDumpComment(int)
+CMiniDumpComment::EnsureOSDescription()
+CMiniDumpComment::GetAvailableBufferSize() const
+CMiniDumpComment::GetCurrentPointer()
+CMiniDumpComment::GetCurrentPointer() const
+CMiniDumpComment::GetEndPointer() const
+CMiniDumpComment::GetStartPointer()
+CMiniDumpComment::GetStartPointer() const
+CMiniDumpComment::OnExceptionCaught()
+CMiniDumpComment::PrependComment(char const*)
+CMiniDumpComment::Reset()
+CMiniDumpComment::~CMiniDumpComment()
+CMiniDumpCommentBuilderBase::CMiniDumpCommentBuilderBase()
+CMiniDumpCommentBuilderBase::GetNextCommentBuilder()
+CMiniDumpCommentBuilderBase::~CMiniDumpCommentBuilderBase()
 COM_TimestampedLog
 CPU_MHZ
 CRecursionCallStackMarker::CRecursionCallStackMarker(bool)
@@ -492,7 +602,6 @@ CTestSuite::~CTestSuite()
 CThread::CThread()
 CThread::GetCurrentCThread()
 CThread::GetName()
-CThread::GetPriority() const
 CThread::GetResult()
 CThread::GetThreadHandle()
 CThread::Init()
@@ -502,7 +611,6 @@ CThread::Join(unsigned int)
 CThread::OnExit()
 CThread::Resume()
 CThread::SetName(char const*)
-CThread::SetPriority(int)
 CThread::Sleep(unsigned int)
 CThread::Start(unsigned int, ThreadPriorityEnum_t)
 CThread::Stop(int)
@@ -518,7 +626,7 @@ CThreadEvent::Reset()
 CThreadEvent::Set()
 CThreadEvent::WaitForMultiple(int, CThreadEvent**, bool, unsigned int)
 CThreadEvent::WaitForMultiple(int, CThreadEvent*, bool, unsigned int)
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadFiber::CThreadFiber(unsigned long)
 CThreadFullMutex::CThreadFullMutex(bool, char const*, bool, bool)
 CThreadFullMutex::IsCreator() const
@@ -527,6 +635,7 @@ CThreadLocalScope::CScopeCreatedOrDestroyedHandler::CScopeCreatedOrDestroyedHand
 CThreadLocalScope::CScopeCreatedOrDestroyedHandler::~CScopeCreatedOrDestroyedHandler()
 CThreadLocalScope::CThreadLocalScope(ThreadHandle_t__*, bool)
 CThreadLocalScope::FindScopeForThreadHandle(ThreadHandle_t__*)
+CThreadLocalScope::FindScopeForThreadId(unsigned long long)
 CThreadLocalScope::GetScopeListMutex()
 CThreadLocalScope::IsLocalThreadScope() const
 CThreadLocalScope::SetThreadName(char const*)
@@ -537,36 +646,44 @@ CThreadMultiWaitEvent::Reset()
 CThreadMultiWaitEvent::Set()
 CThreadMultiWaitEvent::~CThreadMultiWaitEvent()
 CThreadMultiWaitObject::CThreadMultiWaitObject()
+CThreadMultiWaitObject::Signal()
 CThreadMultiWaitObject::~CThreadMultiWaitObject()
 CThreadMultiWaitSemaphore
 CThreadMultiWaitSemaphore::CThreadMultiWaitSemaphore()
 CThreadMultiWaitSemaphore::Release()
 CThreadMultiWaitSemaphore::~CThreadMultiWaitSemaphore()
-CThreadMutex::TryLock()
-CThreadRWLock::LockForWrite()
-CThreadRWLock::TryLockForWrite()
-CThreadRWLock::UnlockRead_LockForWrite()
-CThreadRWLock::UnlockWrite()
-CThreadRWLock::UnlockWrite_LockForRead()
+CThreadMutex::TryLock(char const*, int)
+CThreadRWLock::LockForWrite(char const*, int)
+CThreadRWLock::TryLockForWrite(char const*, int)
+CThreadRWLock::UnlockRead_LockForWrite(char const*, int)
+CThreadRWLock::UnlockWrite(char const*, int)
+CThreadRWLock::UnlockWrite_LockForRead(char const*, int)
 CThreadRWLock::WaitForRead()
-CThreadRWLock_FastRead::CThreadRWLock_FastRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
 CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
-CThreadRWLock_FastRead::UnlockReadAccounting(unsigned int)
-CThreadRWLock_FastRead::UnlockRead_LockForWrite()
-CThreadRWLock_FastRead::UnlockWrite_LockForRead()
-CThreadRWLock_FastRead::WaitForReadLockTransition(unsigned int)
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockRead_LockForWrite(char const*, int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadRWLock_FastRead::UnlockWrite_LockForRead(char const*, int)
 CThreadSemaphore::CThreadSemaphore(int, int, char const*, bool)
 CThreadSemaphore::Release(int, int*)
 CThreadSemaphore::WaitImpl(unsigned int)
 CThreadSemaphore::~CThreadSemaphore()
-CThreadSpinLock::CThreadSpinLock(int)
+CThreadSpinLock::CThreadSpinLock(char const*, int)
 CThreadSpinLock::SetMaxSpins(int)
-CThreadSpinRWLock::LockForRead()
-CThreadSpinRWLock::SpinLockForWrite(unsigned long long)
-CThreadSpinRWLock::UnlockRead()
-CThreadSpinRWLock::UnlockRead_LockForWrite()
-CThreadSpinRWLock::UnlockWrite()
-CThreadSpinRWLock::UnlockWrite_LockForRead()
+CThreadSpinRWLock::LockForRead(char const*, int)
+CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
+CThreadSpinRWLock::UnlockRead(char const*, int)
+CThreadSpinRWLock::UnlockRead_LockForWrite(char const*, int)
+CThreadSpinRWLock::UnlockWrite(char const*, int)
+CThreadSpinRWLock::UnlockWrite_LockForRead(char const*, int)
+CThreadSwapContext::CThreadSwapContext(CThreadSwapTarget*)
+CThreadSwapContext::~CThreadSwapContext()
+CThreadSwapTarget::CThreadSwapTarget()
+CThreadSwapTarget::OwnerThreadRun()
+CThreadSwapTarget::ReleaseOwnerThread()
+CThreadSwapTarget::ReserveOwnership()
 CThreadSyncObject::AcquireSemaphoreInternal(unsigned int)
 CThreadSyncObject::AssertUseable()
 CThreadSyncObject::CThreadSyncObject()
@@ -589,8 +706,9 @@ CThreadSyncObject::operator!() const
 CThreadSyncObject::~CThreadSyncObject()
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
-CVProfNode::GetSubNode(char const*, int, char const*)
+CVProfNode::GetSubNode(char const*, int, char const*) const
 CVProfNode::GetSubNode(char const*, int, char const*, int)
+CVProfNode::GetSubNode(char const*, int, char const*, int) const
 CVProfNode::MarkFrame()
 CVProfNode::Pause()
 CVProfNode::Reset()
@@ -607,12 +725,13 @@ CVProfReporter::ScheduleVProfQuery(CVProfReporter*)
 CVProfReporter::~CVProfReporter()
 CVProfile::AddBudgetGroupName(char const*, int)
 CVProfile::AddDeferredFunction(void (*)(void*), void*)
+CVProfile::AssignNextTimespanId()
 CVProfile::BudgetGroupNameToBudgetGroupID(char const*)
 CVProfile::BudgetGroupNameToBudgetGroupID(char const*, int)
 CVProfile::CVProfile()
 CVProfile::CalcBudgetGroupL2CacheMisses_Recursive(CVProfNode*, unsigned int*, int, float)
 CVProfile::CalcBudgetGroupTimes_Recursive(CVProfNode*, unsigned int*, int, float)
-CVProfile::DumpNodes(CVProfNode*, int, bool, CVProfSummingContext&)
+CVProfile::DumpNodes(VProfReportSettings_t const&, CVProfNode const*, int, bool, CVProfSummingContext const&, double, double, bool)
 CVProfile::ExecuteDeferredFunctions()
 CVProfile::FindBudgetGroupName(char const*)
 CVProfile::FindNode(CVProfNode*, char const*)
@@ -621,17 +740,18 @@ CVProfile::FreeNodes_R(CVProfNode*)
 CVProfile::GetBudgetGroupColor(int, int&, int&, int&, int&)
 CVProfile::GetCounterGroup(int) const
 CVProfile::GetCounterName(int) const
-CVProfile::GetCounterNameAndValue(int, int&) const
+CVProfile::GetCounterNameAndValue(int, unsigned long&) const
 CVProfile::GetCounterValue(int) const
 CVProfile::GetNumBudgetGroups()
 CVProfile::GetNumCounters() const
 CVProfile::HideBudgetGroup(int, bool)
-CVProfile::OutputReport(int, char const*, int)
+CVProfile::OutputReport(VProfReportSettings_t const&, char const*, int)
+CVProfile::OutputReport(char const*, int)
 CVProfile::RegisterNumBudgetGroupsChangedCallBack(void (*)())
 CVProfile::RemoveDeferredFunction(void (*)(void*), void*)
 CVProfile::ResetCounters(CounterGroup_t)
 CVProfile::SetOutputStream(void (*)(char const*, ...))
-CVProfile::SumTimes(CVProfNode*, int, CVProfSummingContext&)
+CVProfile::SumTimes(CVProfNode const*, int, CVProfSummingContext&)
 CVProfile::SumTimes(char const*, int, CVProfSummingContext&)
 CVProfile::Term()
 CVProfile::~CVProfile()
@@ -650,7 +770,15 @@ CVirtualMachineCallStackTranslationEncoder::GetMappingSize()
 CVirtualMachineCallStackTranslationEncoder::GetName()
 CVirtualMachineCallStackTranslationEncoder::GetVMID()
 CVirtualMachineCallStackTranslationEncoder::~CVirtualMachineCallStackTranslationEncoder()
-CWorkerThread::BoostPriority()
+CVirtualMemorySnapshot::CVirtualMemorySnapshot()
+CVirtualMemorySnapshot::Capture()
+CVirtualMemorySnapshot::Diff(CVirtualMemorySnapshot const*, CVirtualMemorySnapshot const*)
+CVirtualMemorySnapshot::GetAddressAfterLastRegion(unsigned long long) const
+CVirtualMemorySnapshot::GetLargestUnmappedRegion(unsigned long long*, unsigned long long*, unsigned long long) const
+CVirtualMemorySnapshot::IsEqualRegion(CVirtualMemorySnapshot const*, CVirtualMemorySnapshot::Region_t const*, CVirtualMemorySnapshot const*, CVirtualMemorySnapshot::Region_t const*)
+CVirtualMemorySnapshot::Purge()
+CVirtualMemorySnapshot::Report(int) const
+CVirtualMemorySnapshot::~CVirtualMemorySnapshot()
 CWorkerThread::CWorkerThread()
 CWorkerThread::Call(unsigned int, unsigned int, bool, unsigned int (*)(unsigned int, CThreadEvent**, int, unsigned int))
 CWorkerThread::CallMaster(unsigned int, unsigned int)
@@ -664,10 +792,10 @@ CWorkerThread::WaitForCall(unsigned int, unsigned int*)
 CWorkerThread::WaitForReply(unsigned int)
 CWorkerThread::WaitForReply(unsigned int, unsigned int (*)(unsigned int, CThreadEvent**, int, unsigned int))
 CXXABI_1.3
-CXXABI_1.3.8
 Called Resume() on a thread that is not suspended!
 Cannot flush timstamped event log with no listener!
 Cannot register two timestamped event listeners!
+Capture
 CatchAndWriteMiniDump
 CatchAndWriteMiniDumpEx
 CatchAndWriteMiniDumpExForVoidPtrFn
@@ -680,21 +808,19 @@ Client Rendering
 Client Simulation
 Client VScript
 Client_Animation
-CommandLine
-Comp dir attr without string value
-Compilation units ran off the end of .debug_info
+Comment unavailable. CMiniDumpComment encountered an error while generating the comment
 ConColorMsg(Color const&, char const*, ...)
 ConDMsg
 ConMsg(char const*, ...)
 Corefile
 Couldn't window icon! %s
+Count
 CrackSmokingCompiler
 CreateCommandLine
 CreateInterface
 CreateSimpleProcess
 CreateSimpleThread
 DEBUG_EXITPROCESS
-DWARF:
 DWARF_LOCAL_TRANSLATE
 DeclareCurrentThreadIsMainThread
 DevMsg
@@ -704,8 +830,8 @@ DevWarning(char const*, ...)
 Developer
 DeveloperConsole
 DeveloperVerbose
+Diff
 DoAssertDialog: invalid Assert response returned from dialog/vxconsole - breaking to debugger
-Duplicate abbrev code 0x%x at 0x%x
 ENABLE_ASSERT_DIALOG_PRINT
 ERROR: Alloc exceeded allocation limit /+/ %llu > %llu
 ERROR: HangWatchdogInternal_BeginScope() - Hang watchdog not implemented for this platform!
@@ -720,12 +846,13 @@ EarlyInit_Tier0
 EnsureAddedCapacity
 EnsureCapacity
 Error reading args file
+Exit Process
 Exiting due to logging LR_ABORT request.
 F
 FAIL: !IsEmpty()
 FAIL: !Validate()
 FAIL: Not all items popped
-Failed to set new handler for "%s" (%d)
+Fatal Error
 File: %sLine: %iExpr: %s
 FileSystem
 FlushBuffer
@@ -746,6 +873,7 @@ GLIBC_2.3.4
 GLIBC_2.4
 GLIBC_2.7
 GLIBC_2.8
+GLIBC_2.9
 GNU
 General
 GenuineIntel
@@ -762,6 +890,7 @@ GetLocalHostname
 GetModuleNameFromAddress
 GetNameFromOSType
 GetOSDetailString
+GetPerfSortedLogicalProcessors
 GetPlatformName
 GetReplacePtr
 GetSymbolNameFromAddress
@@ -770,11 +899,11 @@ GetUnitTest
 GetWin32ConsoleCursorColumnIndex
 H
 H@
-HEAP WARNING: memory block at %p appears to be corrupt
 HEAP WARNING: memory block at %p is unexpectedly allocated
 HEAP WARNING: memory block at %p is unexpectedly free
 HEAP WARNING: memory block at %p is unexpectedly unrecognized
 HEAP WARNING: memory pointer %p is invalid
+HH:MM:SS.z
 HOME
 HangWatchdog
 HangWatchdogInternal_BeginScope
@@ -785,67 +914,32 @@ HangWatchdog_SetHangImageRGBA
 HangWatchdog_SetMainThreadWindow
 HangWatchdog_Shutdown
 Heap: standard allocator
-High PC attr without addr value (form %u)
 I
 IAssertionFailureListener::AssertionFailure()
+IMemAlloc::DumpStats: could not open output file %s
+IMobileEventListener::OnEnterHibernationState()
+IMobileEventListener::OnExitHibernationState()
+IMobileEventListener::OnLowMemoryNotification()
 Ignore All Asserts
 Ignore For 24 Hours
 Ignore This File
 Illegal char string format specifier '%c' (%d) in '%s'
 Illegal wchar_t string format specifier '%c' (%d) in '%s'
-Implicit debug link filename too long
 InitWin32ConsoleColorContext
-Inline attr without data1 value
 InstallProgressReportHandler
 Intentionally vague touch behavior for %p
-Internal error reading fat arch header
 Interpolation
-Invalid ELF Phdr
-Invalid ELF Shdr
-Invalid ELF program header %d
-Invalid Mach-O header
-Invalid Mach-O program header %d
-Invalid Mach-O segment %d
-Invalid abbrev children setting %d
-Invalid abstract origin offset 0x%llx
-Invalid arange debug info offset
-Invalid arange header address size
-Invalid arange header segment size
-Invalid arange start address
-Invalid attr strp offset 0x%llx
-Invalid attribute value 0x%llx
-Invalid compilation unit abbrev offset
-Invalid compilation unit header address size
-Invalid extended instruction size
-Invalid fat binary slice %u (slices %u)
-Invalid file index %d
-Invalid form value 0x%llx
-Invalid high PC offset 0x%llx (low PC RVA 0x%x)
-Invalid high PC value 0x%llx (base 0x%llx)
-Invalid include directory index
-Invalid indirect form 0x%llx
-Invalid line header size
-Invalid low PC value 0x%llx (base 0x%llx)
-Invalid number (%u) of fat binary architectures
-Invalid range end value 0x%llx (base 0x%llx)
-Invalid range start value 0x%llx (base 0x%llx)
-Invalid range with start greater than end
-Invalid set_address instruction
-Invalid set_discriminator size
-Invalid sibling offset 0x%llx
-Invalid statement list line info offset %llx
 InvokeMiniDumpHandler
 IterateCapturedStackAnnotations
 J
 JmpToAlternateStack
 Jobs/Coroutines
 KB
-KeyValuesSystem
 L
 LOADING
 LOG_GENERAL
+Launch Debugger
 LengthOfMatchingPaths
-Line info at 0x%x refers to non-existent CU
 Linux
 Linux 2.2
 Linux 2.4
@@ -854,6 +948,10 @@ Linux 3.10
 Linux 3.2
 Linux 3.5
 Linux 3.6
+Linux 4.0
+Linux 4.18
+Linux 4.5
+Linux 5.0
 LoggingSystem_AddTagToChannel
 LoggingSystem_CurrentStateIndex
 LoggingSystem_EnableBackdoorLoggingListeners
@@ -903,11 +1001,15 @@ LoggingSystem_SetChannelVerbosityByTag
 LoggingSystem_SetLoggingResponsePolicy
 LoggingSystem_TagName
 LoggingSystem_UnregisterLoggingListener
-Low PC attr without addr value
 MB
 Mac OS
 MacOS 10.10
 MacOS 10.11
+MacOS 10.12
+MacOS 10.13
+MacOS 10.14
+MacOS 10.15
+MacOS 10.16
 MacOS 10.4
 MacOS 10.5
 MacOS 10.5.8
@@ -918,7 +1020,6 @@ MacOS 10.6.7
 MacOS 10.7
 MacOS 10.8
 MacOS 10.9
-Malformed attribute list terminator
 MemAllocScratch
 MemAlloc_AllocFunc
 MemAlloc_CallocFunc
@@ -930,8 +1031,8 @@ MemFreeScratch
 MemZeroMemory
 MicroProfilerAddTS
 MiniDumpAdditionalStringData_t
+MiniDumpCommentEnsureOSDescription
 MiniDumpExceptionHandler
-MiniDumpExceptionHandler() is undefined for this platform
 MiniDumpRegisterForUnhandledExceptions
 MiniDumpStandardData_t::HandlerQueueHeartBeat() const
 MinidumpSetMiniDumpComment
@@ -939,49 +1040,36 @@ MinidumpUserStreamInfoAppend
 MinidumpUserStreamInfoGet
 MinidumpUserStreamInfoSetHeader
 Module %s is a debug build
-Msg
-Multiple abstract origin attrs
-Multiple comp dir attrs
-Multiple high PC attrs
-Multiple inline attrs
-Multiple low PC attrs
-Multiple name attrs
-Multiple ranges attrs
-Multiple sibling attrs
-Multiple specification attrs
-Multiple statement lists
 N11TSListTests8CListOpsE
 N11TSListTests8CTestOpsE
 N11TSListTests9CQueueOpsE
+NOTE: this is the total bytes of the regions above, not the growth since the old snapshot
 NO_GAME_ASSERT_DIALOG
 NO_RAISE_ON_ASSERT
 NPCs
-Name attr without string value
+NavMesh
 Networking
+NextBot
 No samples
-Not enough data for arange set header
-Not enough data for compilation unit header
-Not enough data for compilation unit size
-Not enough data for line set header
 NoteAlloc
 O
 OK
+OS memory stats:
+OS type: %s (%d)
+OS: %s
 OSTypesAreCompatible
 Other VScript
 Out of logging channels.
-Out of range abbrev code %llu
-Out of range abbrev tag %llu
-Out of range compilation unit code %llu
 Out of thread ids. Decrease the number of threads or increase MAX_RECYCLEABLE_THREAD_IDS so we can recycle more
 PS3
 Parameter file '%s' not found, skipping...
 Particle Simulation
 Particle/Effect_Rendering
-Path component too long
-Path search filename too long
+Peak
 Peak %.2f ms frame
-PlatEnterHibernation()
-PlatExitHibernation()
+Peak resident virtual bytes: %s
+Peak total virtual bytes: %s
+Peak working set: %s
 Plat_AlertUser
 Plat_AlertUser(PlatWindow_t__*, wchar_t const*, wchar_t const*)
 Plat_AppendMiniDumpErrorString
@@ -1009,8 +1097,6 @@ Plat_DisableIOBuffering
 Plat_EnableCustomerMachineMode
 Plat_EnableHeadlessMode
 Plat_EndWatchdogTimer
-Plat_EnterHibernation
-Plat_ExitHibernation
 Plat_ExitProcess
 Plat_FastVerifyHardwareKey
 Plat_FileExists
@@ -1036,9 +1122,13 @@ Plat_GetDesktopResolution
 Plat_GetDocumentDirectory
 Plat_GetEnv
 Plat_GetExecutablePathUTF8
+Plat_GetFileType
+Plat_GetGameDirectory
 Plat_GetGlobalListRegistry
 Plat_GetLastGameInstanceMutex
 Plat_GetLocalTime
+Plat_GetMainWindowSwapChainScale
+Plat_GetMasterMobileEventHandler
 Plat_GetMemPageSize
 Plat_GetMiniDumpErrorString
 Plat_GetModuleFilename
@@ -1048,16 +1138,19 @@ Plat_GetMonitorBounds
 Plat_GetMonitorContentsScale
 Plat_GetMonitorIndexFromName
 Plat_GetMonitorName
+Plat_GetMonitorPPI
 Plat_GetMonitorResolution
 Plat_GetOSDescriptionString
 Plat_GetOSType
 Plat_GetPagedPoolInfo
 Plat_GetPeakRSS
 Plat_GetPlatformError
+Plat_GetPowerInfo
 Plat_GetProcAddress
 Plat_GetProcAddresses
 Plat_GetRawCallStack
 Plat_GetShellWindow
+Plat_GetSteamLoginWithAccessCode
 Plat_GetThreadIndex
 Plat_GetTime
 Plat_GetTimeString
@@ -1067,9 +1160,20 @@ Plat_GetWindowClientBounds
 Plat_GetWindowClientSize
 Plat_GetWindowContentsScale
 Plat_GetWindowMonitorIndex
+Plat_GetWindowPhysicalSize
+Plat_GetWindowSafeAreaInsets
 Plat_GlobalMemoryStatus
 Plat_HasClipboardText
 Plat_HasDefaultMonitorIndexChanged
+Plat_HookSpecialThread
+Plat_IAPConsumePurchase
+Plat_IAPGetPricingAsync
+Plat_IAPPurchaseSku
+Plat_IAPQueryExistingPurchases
+Plat_IAPSetHandler
+Plat_IAPUpdateConsumedStatus
+Plat_IAPUpdatePricing
+Plat_IAPUpdatePurchaseStatus
 Plat_IgnoreContentAsserts
 Plat_InitializeCOM
 Plat_InstallControlCHandler
@@ -1079,12 +1183,12 @@ Plat_IsConsoleApplication
 Plat_IsDirectory
 Plat_IsFile
 Plat_IsHighDPI
-Plat_IsInBenchmarkMode
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_IsInHeadlessMode
 Plat_IsInTestMode
 Plat_IsModuleLoaded
 Plat_IsRunningOnCustomerMachine
+Plat_IsScreenKeyboardShown
 Plat_IsWindowFocused
 Plat_IsWindowMinimized
 Plat_IsWindowVisible
@@ -1106,9 +1210,16 @@ Plat_NeedsLowFragmentation
 Plat_OsSpecificHandleToPlatWindow
 Plat_Printf
 Plat_PutEnv
+Plat_QueueSteamLoginWithAccessCode
 Plat_ReconfigureWindow
 Plat_RefreshDPI
 Plat_RegisterSignalHandler
+Plat_RegistryDirectoryClose
+Plat_RegistryDirectoryOpenOrCreate
+Plat_RegistryReadInt
+Plat_RegistryReadString
+Plat_RegistryWriteInt
+Plat_RegistryWriteString
 Plat_RelativeTickFrequency
 Plat_RelativeTicks
 Plat_ReleaseMouseCapture
@@ -1118,21 +1229,25 @@ Plat_RenameFile
 Plat_RequireSDL
 Plat_RestartCurrentProcess
 Plat_RunningWithDebugModules
+Plat_SafeRemoveFile
 Plat_ScreenToWindowCoords
 Plat_SecTickDiff
 Plat_SecTickDiffF
 Plat_SetActiveWindow
-Plat_SetBenchmarkMode
 Plat_SetClipboardText
 Plat_SetCpuTimeIsReliable
 Plat_SetCurrentDirectory
 Plat_SetCurrentFrame
 Plat_SetDefaultMonitorIndex
+Plat_SetDenormalsAreZero
 Plat_SetDesktopNotifyIconPath
 Plat_SetFileReadOnly
 Plat_SetForegroundWindow
 Plat_SetFullscreenMinimizeOnFocusLoss
+Plat_SetGameDirectories
+Plat_SetGlobalSafeAreaInsets
 Plat_SetIsConsoleApplication
+Plat_SetMainWindowSwapChainScale
 Plat_SetModuleFilename
 Plat_SetMouseCapture
 Plat_SetVirtualReserveFailLimit
@@ -1188,26 +1303,10 @@ PushMiniProfilerTS
 PushPopThread
 PushThread
 Qt_GetCustomAllocators
-Range end value 0x%llx out of virtual bound 0x%x
-Range list outside of .debug_ranges
-Range list without .debug_ranges
-Range list without a default base address
-Range start value 0x%llx out of virtual bound 0x%x
-Ranges attr without a section offset
-Read off the end of a range list
-Read off the end of abbrev attr data
-Read off the end of abbrev data
-Read off the end of arange data
-Read off the end of compilation unit debug info
-Read off the end of line data
-Read off the end of the compilation unit debug info (depth %u, %u byte overflow)
-Read off the end of the file name table
-Read off the end of the include path table
-Read off the end of the opcode size table
 RegisterAssertionFailureListener
-RegisterHibernationListener
 RegisterKeyValuesSystem
 RegisterLoggingChannel
+RegisterMobileEventListener
 Release
 ReleaseThreadHandle
 RemoveAssertionCallback
@@ -1216,6 +1315,7 @@ RemoveAtUTF8
 RemoveMiniProfilerFromList
 ReplaceAt
 ReportProgress
+Resident virtual bytes: %s
 RestoreWin32ConsoleColor
 ReverseChars
 Root
@@ -1265,6 +1365,7 @@ SDL_GetModState
 SDL_GetNumAudioDevices
 SDL_GetNumDisplayModes
 SDL_GetNumVideoDisplays
+SDL_GetPowerInfo
 SDL_GetQueuedAudioSize
 SDL_GetRelativeMouseMode
 SDL_GetScancodeFromKey
@@ -1278,6 +1379,10 @@ SDL_GetWindowPosition
 SDL_GetWindowSize
 SDL_GetWindowTitle
 SDL_GetWindowWMInfo
+SDL_HapticClose
+SDL_HapticOpen
+SDL_HapticRumbleInit
+SDL_HapticRumblePlay
 SDL_HasClipboardText
 SDL_HasScreenKeyboardSupport
 SDL_HideWindow
@@ -1306,7 +1411,9 @@ SDL_NewAudioStream
 SDL_NumJoysticks
 SDL_OpenAudioDevice
 SDL_PauseAudioDevice
+SDL_PeepEvents
 SDL_PollEvent
+SDL_PumpEvents
 SDL_QueueAudio
 SDL_Quit
 SDL_QuitSubSystem
@@ -1319,6 +1426,7 @@ SDL_SetCursor
 SDL_SetHint
 SDL_SetRelativeMouseMode
 SDL_SetTextInputRect
+SDL_SetThreadPriority
 SDL_SetWindowBordered
 SDL_SetWindowDisplayMode
 SDL_SetWindowFullscreen
@@ -1402,17 +1510,10 @@ SetPtr
 SetThreadedLoadLibraryFunc
 SetWin32ConsoleColor
 SetupWin32ConsoleIO
-Sibling attr without ref4 value
-Signal "%s" handling could not be queried
-Signal "%s" handling could not be set
-Signal "%s" with alert flag has been raised.
-Signal handler for "%s" (%d) changed by other code. Expected %p, was %p
 SoundMix
 SoundOperators
-Source line address out of range
-Source line end sequence address out of range
-Specification 0x%x not found
-Specification attr without ref4 value
+StackContext_StartData_t::ReplaceReturnContext(JmpBuf_AlternateStack_t*)
+StackContext_StartData_t::UnlinkFromLongJumpHierarchy()
 StackMarkup_RestoreState
 StackMarkup_SaveState
 StackStats_DumpNamedInstance
@@ -1429,20 +1530,15 @@ StackTools_EnumerateVirtualMachineEncoders
 StackTools_InstallModuleMappingListener
 StackTools_RemoveModuleMappingListener
 StackTools_VerifyLoadedModuleMappings
-Statement list without data4/sec_offset value
 Steam
 Stop has been called on thread.
-Sum (ms)            Avg Time/Frame (ms)     Avg Time/Call (ms)
-Swap_Buffers
-Symbol name index too large
-Symbol nesting too deep
+Sum (%s)
 T
 TMPDIR
 TSList cannot hold more that %d nodes
 Test bucket %d has an invalid value %d
 Testing %d threads:
 Tests done, purging test memory...
-Texture_Cache
 Thread failed to initialize
 Thread failed to respond, probably exited
 Thread(%p/0x%llx)
@@ -1451,7 +1547,8 @@ ThreadGetCurrentHandle
 ThreadGetCurrentId
 ThreadGetCurrentProcessHandle
 ThreadGetCurrentProcessId
-ThreadGetPriority
+ThreadGetDebugNameForThreadHandle
+ThreadGetDebugNameForThreadId
 ThreadGetProcessExitCode
 ThreadGetProcessPriority
 ThreadInMainThread
@@ -1461,9 +1558,13 @@ ThreadIsProcessActive
 ThreadIsProcessIdActive
 ThreadJoin
 ThreadMultiWait
+ThreadMultiWaitObjectSetCreate
+ThreadMultiWaitObjectSetCreate(pollfd const*, ThreadMultiWaitExtra_t const*, int)
+ThreadMultiWaitObjectSetDestroy
 ThreadNanoSleep
 ThreadScopeChangeEventHandler_ThreadID
 ThreadSetAffinity
+ThreadSetAffinityPreference
 ThreadSetDebugNameS2
 ThreadSetPriority
 ThreadSetProcessPriority
@@ -1490,66 +1591,28 @@ TimestampedEventMsg
 TimestampedEventMsgV
 TimestampedEvent_RegisterListenerAndFlushBuffer
 ToLowerFast
+ToUpperFast
 Tools
+Total virtual bytes: %s
 TracerPid:
 TranslateStackInfo
+TruncateAt
 UCS-2
 USER
 UTF-8
 Unable to create event, error %d
 Unable to create semaphore, error %d
 Unable to determine CPU Frequency
-Unable to determine ELF default base address
-Unable to determine Mach-O default base address
 Unable to load SDL2
-Unable to read .gnu_debuglink
-Unable to read ELF note
-Unable to read ELF program headers
-Unable to read ELF section header strings
-Unable to read ELF section headers
-Unable to read ELF32 header
-Unable to read ELF64 header
-Unable to read Mach-O load commands
-Unable to read debug section %d
-Unable to read fat arch header
-Unable to read fat header
-Unable to read module header
-Unable to read module magic
-Unable to seek to .gnu_debuglink
-Unable to seek to ELF note
-Unable to seek to ELF phoff
-Unable to seek to ELF section header strings
-Unable to seek to ELF shoff
-Unable to seek to Mach-O load commands
-Unable to seek to Macho-O slice base
-Unable to seek to debug section %d
 Unaccounted
-Unexpected Mach-O UUID length
-Unexpected data at the end of .gnu_debuglink
-Unexpected high PC attr in addition to ranges
-Unexpected high PC attr without a low PC attr
-Unexpected nested comp dir
-Unhandled DWARF attribute form 0x%x
+UnicodeCaseConvert
 UnitTestCount
 UnitTestInstallTestCase
 Unknown
-Unknown (%d)
-Unknown arange header version
-Unknown compilation unit abbrev code
-Unknown compilation unit header version
-Unknown extended instruction 0x%x
-Unknown line header version
-Unknown standard instruction 0x%x
-Unrecognized ELF class
-Unrecognized ELF data layout or version
-Unrecognized Mach-O header magic
-Unrecognized module magic
+Unknown (invalid)
+UnknownOS
 UnregisterAssertionFailureListener
-UnregisterHibernationListener
-Unsupported ELF machine type %d
-Unsupported Mach-O machine type %d
-Unsupported define_file instruction
-Unsupported maximum number of instruction operations %d
+UnregisterMobileEventListener
 V
 VALVE_DISABLE_CLOCK_SPEED_CALCULATION
 VALVE_TESTMODE
@@ -1580,6 +1643,7 @@ V_FixupPathSpaceToUnderscore
 V_GetErrno
 V_GetFileExtension
 V_GetFileExtensionSafe
+V_GetPathOriginLength
 V_GetUTF8BytesNeeded(char const*, int)
 V_GetUTF8BytesNeeded(unsigned short const*, int)
 V_GetUTF8BytesNeeded(wchar_t const*, int)
@@ -1718,8 +1782,6 @@ V_fseeki64
 V_ftell
 V_ftelli64
 V_fwrite
-V_get_crt_longjmp_fn
-V_get_crt_setjmp_fn
 V_hypot
 V_isbreakablewspace
 V_isbreakablewspace32
@@ -1762,6 +1824,9 @@ V_sinf
 V_sinh
 V_sinhf
 V_snprintf
+V_snprintfNoSecurityDoNotUse
+V_snprintfWarnTrunc
+V_snprintfcat
 V_snwprintf_bytes
 V_snwprintf_cch
 V_sscanf
@@ -1817,8 +1882,11 @@ V_towupper32
 V_vfprintf
 V_vscprintf
 V_vsnprintf
+V_vsnprintf truncated to %u without QUIET_TRUNCATION specified! String: "%s"
 V_vsnprintfRet
 V_vsnprintfSize
+V_vsnprintfWarnTrunc
+V_vsnprintfcat
 V_vsnwprintfRet_cch
 V_vsnwprintf_cch
 V_wcsicmp
@@ -1828,13 +1896,21 @@ V_wcstod
 V_wcstoi64
 V_wcstoui64
 ValidateStringFormatSpecifiers
+Virtual Memory %s Report for PID %u
+Virtual memory regions sorted by size:
+VmHWM
+VmPeak
+VmRSS
+VmSize
 VoidFnPtrLookup_Tier0
 W
-WARNING: CU has %u (of %u) symbols missing an address
 WARNING: Large alloc of %llu bytes of memory (limit %llu)
 WARNING: Large virtual reservation of %llu bytes of memory (limit %llu)
+WARNING: there were errors during information capture, this report may be incomplete
 WARNING: total wall clock time was %.2f seconds, results may be invalid
-Warning
+WARNING: truncated input line
+WARNING: unable to parse line: '%s'
+WARNING: zero-length line in maps
 Warning: Fell out of small block heap!
 WatchDog! Server took too long to process (probably infinite loop)
 Windows
@@ -1842,6 +1918,7 @@ Windows 10
 Windows 2000
 Windows 2003
 Windows 2008
+Windows 2008 R2
 Windows 2012
 Windows 2012 R2
 Windows 3.11
@@ -1854,10 +1931,11 @@ Windows ME
 Windows NT
 Windows Vista
 Windows XP
+Working set: %s
 Y
-Y@
-[ func+child      func ]       Count
-[ func+child      func ]  [ func+child   func ]  [ func+child   func ]    Count   Peak
+[   func+child         func ]
+[   func+child       func ]
+[ func+child         func ]
 [*]
 [/b]
 [/code]
@@ -1877,6 +1955,7 @@ Y@
 [s]
 [u]
 [url=
+_
 _AssertValidReadPtr
 _AssertValidReadWritePtr
 _AssertValidWritePtr
@@ -1924,233 +2003,80 @@ _V_wcsncat_cch
 _V_wcsncpy_bytes
 _Warning_AlwaysSpewCallStack_Enable
 _Warning_AlwaysSpewCallStack_Length
-_ZNSt8__detail15_List_node_base7_M_hookEPS0_@@GLIBCXX_3.4.15
-_ZNSt8__detail15_List_node_base9_M_unhookEv@@GLIBCXX_3.4.15
-_ZNSt8ios_base4InitC1Ev@@GLIBCXX_3.4
-_ZNSt8ios_base4InitD1Ev@@GLIBCXX_3.4
-_ZSt17__throw_bad_allocv@@GLIBCXX_3.4
-_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base@@GLIBCXX_3.4
-_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base@@GLIBCXX_3.4
-_ZSt28_Rb_tree_rebalance_for_erasePSt18_Rb_tree_node_baseRS_@@GLIBCXX_3.4
-_ZSt29_Rb_tree_insert_and_rebalancebPSt18_Rb_tree_node_baseS0_RS_@@GLIBCXX_3.4
-_ZTIi@@CXXABI_1.3
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
-_ZdaPv@@GLIBCXX_3.4
-_ZdlPv@@GLIBCXX_3.4
-_Znam@@GLIBCXX_3.4
-_Znwm@@GLIBCXX_3.4
 __bss_start
-__cxa_allocate_exception
-__cxa_allocate_exception@@CXXABI_1.3
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
-__cxa_begin_catch
-__cxa_begin_catch@@CXXABI_1.3
-__cxa_end_catch
-__cxa_end_catch@@CXXABI_1.3
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_rethrow
-__cxa_rethrow@@CXXABI_1.3
-__cxa_throw
-__cxa_throw@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __errno_location
-__errno_location@@GLIBC_2.2.5
 __fpclassify
-__fpclassify@@GLIBC_2.2.5
 __fprintf_chk
-__fprintf_chk@@GLIBC_2.3.4
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
 __isnan
-__isnan@@GLIBC_2.2.5
 __longjmp_chk
-__longjmp_chk@@GLIBC_2.11
 __lxstat64
-__lxstat64@@GLIBC_2.2.5
 __memcpy_chk
-__memcpy_chk@@GLIBC_2.3.4
 __memset_chk
-__memset_chk@@GLIBC_2.3.4
 __printf_chk
-__printf_chk@@GLIBC_2.3.4
 __pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
-__restrict
 __snprintf_chk
-__snprintf_chk@@GLIBC_2.3.4
 __sprintf_chk
-__sprintf_chk@@GLIBC_2.3.4
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
-__strcpy_chk
-__strcpy_chk@@GLIBC_2.3.4
 __tls_get_addr
-__tls_get_addr@@GLIBC_2.3
 __vfprintf_chk
-__vfprintf_chk@@GLIBC_2.3.4
 __vsnprintf_chk
-__vsnprintf_chk@@GLIBC_2.3.4
 __vswprintf_chk
-__vswprintf_chk@@GLIBC_2.4
 __xstat64
-__xstat64@@GLIBC_2.2.5
 _edata
 _end
 _exit
-_exit@@GLIBC_2.2.5
 _fini
-_init
-_setjmp@@GLIBC_2.2.5
 a
-abort@@GLIBC_2.2.5
-acos@@GLIBC_2.2.5
-acosf@@GLIBC_2.2.5
 alarm
-alarm@@GLIBC_2.2.5
-all_projects_common_code.cpp
 asctime
-asctime@@GLIBC_2.2.5
 asctime_r
-asctime_r@@GLIBC_2.2.5
-asin@@GLIBC_2.2.5
-asinf@@GLIBC_2.2.5
 assert_dialog.cpp
 at+
-atan2@@GLIBC_2.2.5
-atan2f@@GLIBC_2.2.5
-atan@@GLIBC_2.2.5
-atanf@@GLIBC_2.2.5
 backtrace
-backtrace@@GLIBC_2.2.5
-bool
+bin/linuxsteamrt64/libtier0.so
 buffer_string.cpp
+bytes
 calloc
-calloc@@GLIBC_2.2.5
-ceil@@GLIBC_2.2.5
-ceilf@@GLIBC_2.2.5
 chdir
-chdir@@GLIBC_2.2.5
-chmod@@GLIBC_2.2.5
-clearerr@@GLIBC_2.2.5
 clock_gettime
-clock_gettime@@GLIBC_2.2.5
-close@@GLIBC_2.2.5
-commandline.cpp
-const
 core id
-cos@@GLIBC_2.2.5
-cosf@@GLIBC_2.2.5
-cosh@@GLIBC_2.2.5
-coshf@@GLIBC_2.2.5
 cpu.cpp
-cpu_usage.cpp
-cpumonitoring.cpp
-cputopology.cpp
-crtstuff.c
-ctime_r@@GLIBC_2.2.5
 d
-darwin/uuids/
-dbg.cpp
-debug_abbrev
-debug_aranges
-debug_info
-debug_line
-debug_pubnames
-debug_ranges
-debug_str
-debugdraw.cpp
 detailed
 distributed...
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
 dladdr
-dladdr@@GLIBC_2.2.5
 dlclose
-dlclose@@GLIBC_2.2.5
 dlerror
-dlerror@@GLIBC_2.2.5
 dlopen
-dlopen@@GLIBC_2.2.5
 dlsym
-dlsym@@GLIBC_2.2.5
 done
-double
-dwarf_symbols.cpp
-dynfunction.cpp
-dynstr
-dynsym
-earlyinit_tier0.cpp
+epoll_create1
+epoll_ctl
+epoll_wait
 error
-etwprof.cpp
 eventfd
-eventfd@@GLIBC_2.7
 execlp
-execlp@@GLIBC_2.2.5
 exitprocess_%d
-exp2@@GLIBC_2.2.5
-exp2f@@GLIBC_2.2.5
-exp@@GLIBC_2.2.5
-expf@@GLIBC_2.2.5
 failed to dlopen "%s" error=%s
 failed to dlopen %s error=%s
 false
-fasttimer.cpp
 fchmod
-fchmod@@GLIBC_2.2.5
-fclose@@GLIBC_2.2.5
 fcntl
 fcntl(%d) for %s failed
-fcntl@@GLIBC_2.2.5
-fdopen@@GLIBC_2.2.5
-feof@@GLIBC_2.2.5
-ferror@@GLIBC_2.2.5
-fflush@@GLIBC_2.2.5
-fgetc@@GLIBC_2.2.5
-fgets@@GLIBC_2.2.5
 fibertools.cpp
-fileno@@GLIBC_2.2.5
-float
-floor@@GLIBC_2.2.5
-floorf@@GLIBC_2.2.5
-fmod@@GLIBC_2.2.5
-fmodf@@GLIBC_2.2.5
 fopen64
-fopen64@@GLIBC_2.2.5
 forced dump
 fork
-fork@@GLIBC_2.2.5
-found matching debug info in %s
-fputc@@GLIBC_2.2.5
-fputs@@GLIBC_2.2.5
-fread@@GLIBC_2.2.5
 free
-free@@GLIBC_2.2.5
 freopen64
-freopen64@@GLIBC_2.2.5
-frexp@@GLIBC_2.2.5
-frexpf@@GLIBC_2.2.5
-fscanf@@GLIBC_2.2.5
-fseek@@GLIBC_2.2.5
 fseeko64
-fseeko64@@GLIBC_2.2.5
-ftell@@GLIBC_2.2.5
 ftello64
-ftello64@@GLIBC_2.2.5
-fwrite@@GLIBC_2.2.5
 g_Mathlib_GammaToLinearByteTable
 g_Mathlib_SinCosTable
 g_Tier1_BitWriteMasks
@@ -2174,56 +2100,34 @@ g_pLastMiniProfiler
 g_pMemAlloc
 g_pPerfTraceDepot
 g_pRootMiniProfiler
+game
 game/
+game/bin
+game/bin/linuxsteamrt64
 game\..\autoargs
 getcwd
-getcwd@@GLIBC_2.2.5
 getenv
-getenv@@GLIBC_2.2.5
 gethostname
-gethostname@@GLIBC_2.2.5
 getloadavg
-getloadavg@@GLIBC_2.2.5
 getpid
-getpid@@GLIBC_2.2.5
 getpriority
-getpriority@@GLIBC_2.2.5
+getpwuid
 getrlimit64
-getrlimit64@@GLIBC_2.2.5
 getrusage
-getrusage@@GLIBC_2.2.5
 gettimeofday
-gettimeofday@@GLIBC_2.2.5
+getuid
 gmtime_r
-gmtime_r@@GLIBC_2.2.5
-hangwatchdogthread.cpp
 hibernate.cpp
-hypot@@GLIBC_2.2.5
+high
+higher
 i
+iOS
 ignored_assertions.txt
 int:transient:1
-isalnum@@GLIBC_2.2.5
-isalpha@@GLIBC_2.2.5
-isgraph@@GLIBC_2.2.5
-isprint@@GLIBC_2.2.5
-ispunct@@GLIBC_2.2.5
 isspace
-isspace@@GLIBC_2.2.5
-iswalnum@@GLIBC_2.2.5
-iswalpha@@GLIBC_2.2.5
-iswcntrl@@GLIBC_2.2.5
-iswdigit@@GLIBC_2.2.5
-iswlower@@GLIBC_2.2.5
-iswspace@@GLIBC_2.2.5
-iswupper@@GLIBC_2.2.5
-j
 k
-kill@@GLIBC_2.2.5
 ld-linux-x86-64.so.2
-ldexp@@GLIBC_2.2.5
-ldexpf@@GLIBC_2.2.5
 lib
-libSDL2-2.0.so.0
 libc.so.6
 libdl.so.2
 libm.so.6
@@ -2232,59 +2136,30 @@ librt.so.1
 libstdc++.so.6
 libtier0.so
 linux
-linux/.build-id/
-localeconv@@GLIBC_2.2.5
-localtime@@GLIBC_2.2.5
 localtime_r
-localtime_r@@GLIBC_2.2.5
-log10@@GLIBC_2.2.5
-log10f@@GLIBC_2.2.5
-log2@@GLIBC_2.2.5
-log2f@@GLIBC_2.2.5
-log@@GLIBC_2.2.5
-logf@@GLIBC_2.2.5
 logging.cpp
+low
+lower
 macos
 malloc
-malloc@@GLIBC_2.2.5
 malloc_usable_size
-malloc_usable_size@@GLIBC_2.2.5
-math_tables.cpp
-mem.cpp
-mem_helpers.cpp
-memcmp@@GLIBC_2.2.5
-memcpy@@GLIBC_2.14
-memdbg.cpp
-memmove@@GLIBC_2.2.5
-memprocessheap.cpp
-memset@@GLIBC_2.2.5
 memstats_%d.txt
 memstd.cpp
-memvirt.cpp
 message
-minidump.cpp
-miniprofiler.cpp
 mkdir
-mkdir@@GLIBC_2.2.5
 mkostemps64
-mkostemps64@@GLIBC_2.11
 mmap64
-mmap64@@GLIBC_2.2.5
-modf@@GLIBC_2.2.5
-modff@@GLIBC_2.2.5
 mprotect
-mprotect@@GLIBC_2.2.5
+ms
 munmap
-munmap@@GLIBC_2.2.5
 nTries < 10000000
 nanosleep
-nanosleep@@GLIBC_2.2.5
 nexttoken
 no affinity...
+nopref-all
 notify-send
 open
 open(%s) failed
-open64@@GLIBC_2.2.5
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -2293,137 +2168,59 @@ p
 p?&quot;
 pass
 pclose
-pclose@@GLIBC_2.2.5
-perftrace.cpp
 physical id
 platform.cpp
-platform_com.cpp
-platform_posix.cpp
 platform_sdl.cpp
-platwindow.cpp
-poll
-poll@@GLIBC_2.2.5
 popen
-popen@@GLIBC_2.2.5
-pow@@GLIBC_2.2.5
-powf@@GLIBC_2.2.5
+posix_memalign
 prctl
-prctl@@GLIBC_2.2.5
 processor
-progressbar.cpp
 pthread_attr_destroy
-pthread_attr_destroy@@GLIBC_2.2.5
 pthread_attr_init
-pthread_attr_init@@GLIBC_2.2.5
 pthread_attr_setstacksize
-pthread_attr_setstacksize@@GLIBC_2.2.5
 pthread_cond_broadcast
-pthread_cond_broadcast@@GLIBC_2.3.2
 pthread_cond_destroy
-pthread_cond_destroy@@GLIBC_2.3.2
 pthread_cond_init
-pthread_cond_init@@GLIBC_2.3.2
 pthread_cond_signal
-pthread_cond_signal@@GLIBC_2.3.2
 pthread_cond_timedwait
-pthread_cond_timedwait@@GLIBC_2.3.2
 pthread_cond_wait
-pthread_cond_wait@@GLIBC_2.3.2
 pthread_create
-pthread_create@@GLIBC_2.2.5
-pthread_getschedparam
-pthread_getschedparam@@GLIBC_2.2.5
 pthread_join
-pthread_join@@GLIBC_2.2.5
-pthread_key_create@@GLIBC_2.2.5
 pthread_kill
-pthread_kill@@GLIBC_2.2.5
 pthread_mutex_destroy
-pthread_mutex_destroy@@GLIBC_2.2.5
 pthread_mutex_init
-pthread_mutex_init@@GLIBC_2.2.5
 pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
 pthread_mutex_trylock
-pthread_mutex_trylock@@GLIBC_2.2.5
 pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
 pthread_mutexattr_destroy
-pthread_mutexattr_destroy@@GLIBC_2.2.5
 pthread_mutexattr_init
-pthread_mutexattr_init@@GLIBC_2.2.5
 pthread_mutexattr_settype
-pthread_mutexattr_settype@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 pthread_self
-pthread_self@@GLIBC_2.2.5
+pthread_setaffinity_np
 pthread_setname_np
-pthread_setname_np@@GLIBC_2.12
 pthread_setspecific
-pthread_setspecific@@GLIBC_2.2.5
 pthread_yield
-pthread_yield@@GLIBC_2.2.5
 putenv
-putenv@@GLIBC_2.2.5
-puts@@GLIBC_2.2.5
-qsort@@GLIBC_2.2.5
 qsort_r
-qsort_r@@GLIBC_2.8
 queue force advance
 queue max wait
 raise
-raise@@GLIBC_2.2.5
-rand@@GLIBC_2.2.5
 rb
-read@@GLIBC_2.2.5
 readlink
-readlink@@GLIBC_2.2.5
 realloc
-realloc@@GLIBC_2.2.5
 rename
-rename@@GLIBC_2.2.5
-rewind@@GLIBC_2.2.5
 rmdir
-rmdir@@GLIBC_2.2.5
+round
 sched_setaffinity
-sched_setaffinity@@GLIBC_2.3.4
-security.cpp
 semctl
-semctl@@GLIBC_2.2.5
 semget
-semget@@GLIBC_2.2.5
 semop
-semop@@GLIBC_2.2.5
-setjmp@@GLIBC_2.2.5
 setpriority
-setpriority@@GLIBC_2.2.5
-setvbuf@@GLIBC_2.2.5
 sigaction
-sigaction@@GLIBC_2.2.5
 sigaddset
-sigaddset@@GLIBC_2.2.5
 sigemptyset
-sigemptyset@@GLIBC_2.2.5
 sigprocmask
-sigprocmask@@GLIBC_2.2.5
-sin@@GLIBC_2.2.5
-sincos@@GLIBC_2.2.5
-sincosf@@GLIBC_2.2.5
-sinf@@GLIBC_2.2.5
-sinh@@GLIBC_2.2.5
-sinhf@@GLIBC_2.2.5
-sqrt@@GLIBC_2.2.5
-sqrtf@@GLIBC_2.2.5
 srand
-srand@@GLIBC_2.2.5
-sscanf@@GLIBC_2.2.5
-stackcontext.cpp
-stackhelpers.cpp
-stackhelpers_dwarf_translation.cpp
-stackhelpers_linux_capture.cpp
-stackhelpers_virtualmachine_capture.cpp
-stackstats.cpp
 stacktools.cpp
 std::_Rb_tree<char const*, std::pair<char const* const, unsigned long long>, std::_Select1st<std::pair<char const* const, unsigned long long> >, std::less<char const*>, std::allocator<std::pair<char const* const, unsigned long long> > >::_M_erase(std::_Rb_tree_node<std::pair<char const* const, unsigned long long> >*)
 std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
@@ -2433,67 +2230,31 @@ std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_b
 std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
 std::__detail::_List_node_base::_M_unhook()
 std::__throw_bad_alloc()
+std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned long, char, std::allocator<char> const&)
 std::ios_base::Init::Init()
 std::ios_base::Init::~Init()
 std::pair<std::_Rb_tree_iterator<std::pair<char const* const, unsigned long long> >, bool> std::_Rb_tree<char const*, std::pair<char const* const, unsigned long long>, std::_Select1st<std::pair<char const* const, unsigned long long> >, std::less<char const*>, std::allocator<std::pair<char const* const, unsigned long long> > >::_M_insert_unique<std::pair<char const*, unsigned long> >(std::pair<char const*, unsigned long>&&)
-stderr@@GLIBC_2.2.5
-stdin@@GLIBC_2.2.5
-stdout@@GLIBC_2.2.5
+std::string::_M_leak_hard()
+std::string::_Rep::_M_destroy(std::allocator<char> const&)
+std::string::_Rep::_S_empty_rep_storage
 steam://openurl/
 steam://openurl_external/
-strchr@@GLIBC_2.2.5
-strcmp@@GLIBC_2.2.5
-strcpy@@GLIBC_2.2.5
-strcspn@@GLIBC_2.2.5
 strerror
-strerror@@GLIBC_2.2.5
 strlen
-strlen@@GLIBC_2.2.5
 strncasecmp
-strncasecmp@@GLIBC_2.2.5
-strncat@@GLIBC_2.2.5
-strncmp@@GLIBC_2.2.5
-strncpy@@GLIBC_2.2.5
-strnlen@@GLIBC_2.2.5
-strspn@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-strtab
-strtod@@GLIBC_2.2.5
-strtok@@GLIBC_2.2.5
 strtok_r
-strtok_r@@GLIBC_2.2.5
 strtol
-strtol@@GLIBC_2.2.5
 strtoll
-strtoll@@GLIBC_2.2.5
 strtoull
-strtoull@@GLIBC_2.2.5
-symtab
 sysconf
-sysconf@@GLIBC_2.2.5
+sysinfo
 system
-system@@GLIBC_2.2.5
-systeminformation.cpp
 t
-tan@@GLIBC_2.2.5
-tanf@@GLIBC_2.2.5
-tanh@@GLIBC_2.2.5
-tanhf@@GLIBC_2.2.5
 threadtools.cpp
-tier0_stdlib.cpp
+tier0
 tier0_strtools.cpp
-tier0_unicode.cpp
-tier1_tables.cpp
-time@@GLIBC_2.2.5
-timegm@@GLIBC_2.2.5
 timestamped.log
-tmpnam@@GLIBC_2.2.5
-tolower@@GLIBC_2.2.5
-toupper@@GLIBC_2.2.5
-towlower@@GLIBC_2.2.5
-towupper@@GLIBC_2.2.5
 tsc
-tslist.cpp
 typeinfo for BasicStatStructFieldDesc
 typeinfo for CTestCase
 typeinfo for CTestSuite
@@ -2505,7 +2266,6 @@ typeinfo for CThreadSyncObject
 typeinfo for CVProfReporter
 typeinfo for CWorkerThread
 typeinfo for CallStackStatStructDescFuncs
-typeinfo for int
 typeinfo name for BasicStatStructFieldDesc
 typeinfo name for CTestCase
 typeinfo name for CTestSuite
@@ -2519,29 +2279,14 @@ typeinfo name for CWorkerThread
 typeinfo name for CallStackStatStructDescFuncs
 ugc:
 uname -mrsv
-unitlib.cpp
 unknown
-unknown_module
 unlink
-unlink@@GLIBC_2.2.5
-unsigned char
-unsigned int
-unsigned long
-unsigned long long
-unsigned short
 usleep
-usleep@@GLIBC_2.2.5
 vfscanf
-vfscanf@@GLIBC_2.2.5
-void
-volatile
 vpk:
 vprof.cpp
-vprof_database.cpp
 vsscanf
-vsscanf@@GLIBC_2.2.5
 vswscanf
-vswscanf@@GLIBC_2.2.5
 vtable for BasicStatStructFieldDesc
 vtable for CTestCase
 vtable for CTestSuite
@@ -2557,33 +2302,15 @@ vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 vtune
 waitpid
-waitpid@@GLIBC_2.2.5
 warning
 wb+
-wcschr@@GLIBC_2.2.5
-wcscmp@@GLIBC_2.2.5
 wcscoll
-wcscoll@@GLIBC_2.2.5
-wcscpy@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
 wcsncat
-wcsncat@@GLIBC_2.2.5
 wcsncpy
-wcsncpy@@GLIBC_2.2.5
-wcstod@@GLIBC_2.2.5
 wcstoll
-wcstoll@@GLIBC_2.2.5
 wcstoull
-wcstoull@@GLIBC_2.2.5
-win32consoleio.cpp
 windows
-write@@GLIBC_2.2.5
-zD
-|  |  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |  |  |  |  |
-|  |  |  |  |  |  |  |  |  |  |  |  |
+wt
 })
 ~

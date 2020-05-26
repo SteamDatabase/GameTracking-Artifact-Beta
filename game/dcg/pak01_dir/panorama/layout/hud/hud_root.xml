@@ -23,6 +23,9 @@
     </snippets>
 
     <Panel class="DCGHUDRoot" hittest="true">
+		<DCGChat id="Chat" chatstyle="hud" />
+	<Panel id="ActivatedAbillitySummaryContainer" hittest="false" class="NoAbilitiesShown" />
+    <Panel class="ArtifactLogoContainer" hittest="false"/>
     <Panel id="Overlay" hittest="false"/>
     <Panel id="PhaseName" hittest="false" hittestchildren="false">
       <Panel id="PhaseNameBackground"/>
@@ -47,11 +50,65 @@
       <Label id="SelectErrorFlyoutText" text="{s:errorText}"/>
     </Panel>
 		<Movie id="GlobalMoviePlayer" hittest="false" hittestchildren="true" controls="none" repeat="false" autoplay="off" />
-    <Panel id="ShopItems" class="Maximized">
-      <Button id="ShopMinimizeItem" class="PopupButton" onactivate="DCGHUDToggleShopState()">
-        <Label class="MaximizedText" text="#DCG_UI_Minimize" />
-        <Label class="MinimizedText" text="#DCG_UI_Maximize" />
-      </Button>
+    <Panel id="ShopItems" hittest="true" hittestchildren="true">
+      <Panel id="ShopTopPanel" hittest="true" hittestchildren="true">
+        <Panel id="ShopTopRow" class="ShopRow">
+          <Panel id="ShopLevel" class="LeftAlign ShopCount">
+            <Label id="ShopHeaderLevel" class="ShopCountLabel" text="#DCG_UI_SecretShopLevel"/>
+            <Label id="ShopHeaderLevelAmt" class="ShopCountAmount" text="#DCG_UI_SecretShopLevel_Amt" onmouseover="UIShowCustomLayoutTooltip( ShopTierTooltip, file://{resources}/layout/tooltips/shop_tooltip_tiers.xml )" onmouseout="UIHideCustomLayoutTooltip( ShopTierTooltip )"/>
+          </Panel>
+          <Panel id="ShopHeader" class="CenterAlign CenterAlignV">
+            <Label id="ShopHeaderLabel" class="TitleFont" text="#DCG_UI_SecretShop"/>          
+          </Panel>
+          <Panel id="ShopGoldCount" class="RightAlign ShopCount">
+            <Label id="GoldCountButton" class="ShopCountLabel" text="#DCG_UI_ShopGold" />
+            <Label id="GoldCountButtonAmt" class="ShopCountAmount" html="true" text="#DCG_UI_ShopGold_Amt" />
+          </Panel>
+        </Panel>
+
+        <Panel id="ShopButtonsRow" class="ShopRow" hittest="true" hittestchildren="true">
+          <Label id="ShopButtonsLabel" class="LeftAlign TitleFont" text="#DCG_UI_Purchase" />
+          <Panel id="ShopButtonsPanel" class="RightAlign">
+            <TextButton id="RerollButton" text="#DCG_UI_RerollPanoramaShop" class="ButtonBevel ShopActionButton CenterAlignV" onactivate="DCGPanoramaShopReroll();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipReroll, ShopTooltip )" onmouseout="UIHideTextTooltip()">
+              <Image class="ShopActionCostImage">
+                <Label class="ShopActionCostLabel" text="#DCG_UI_RerollPanoramaShop_Cost"/>
+              </Image>
+            </TextButton>
+            <TextButton id="UpgradeButton" text="#DCG_UI_UpgradeShop" class="ButtonBevel ShopActionButton CenterAlignV" onactivate="DCGPanoramaShopUpgrade();" onmouseover="UIShowCustomLayoutTooltip( ShopTierTooltip, file://{resources}/layout/tooltips/shop_tooltip_tiers.xml )" onmouseout="UIHideCustomLayoutTooltip( ShopTierTooltip )">
+              <Image class="ShopActionCostImage">
+                <Label class="ShopActionCostLabel" text="#DCG_UI_UpgradeShop_Cost"/>
+              </Image>
+            </TextButton>
+          </Panel>
+        </Panel>
+
+        <Panel id="ShopCardsContainer" class="ShopRow" hittest="true" hittestchildren="true">  
+          <Panel id="PanoramaShopCardContainer0" class="ShopCardContainer"/>
+          <Panel id="PanoramaShopCardContainer1" class="ShopCardContainer"/>
+          <Panel id="PanoramaShopCardContainer2" class="ShopCardContainer"/>
+        </Panel>
+
+        <Panel id="BuyButtonsRow" class="ShopRow" hittest="true" hittestchildren="true">       
+           <TextButton id="BuyItem0" text="#DCG_UI_Buy" class="ShopActionButton BuyItemButton CenterAlignV" onactivate="DCGBuyCardPanoramaShop(0);"/>
+           <TextButton id="BuyItem1" text="#DCG_UI_Buy" class="ShopActionButton BuyItemButton CenterAlignV" onactivate="DCGBuyCardPanoramaShop(1);" />
+           <TextButton id="BuyItem2" text="#DCG_UI_Buy" class="ShopActionButton BuyItemButton CenterAlignV" onactivate="DCGBuyCardPanoramaShop(2);"/>
+        </Panel>
+
+        <Panel id="InvestLabelRow" class="ShopRow" hittest="true" hittestchildren="true">
+          <Label id="InvestButtonsLabel" class="LeftAlign TitleFont" text="#DCG_UI_OrInvest" />
+        </Panel>
+    
+        <Panel id="InvestButtonsRow" class="ShopRow" hittest="true" hittestchildren="true">
+          <Panel class="CenterAlign CenterAlignV">
+            <TextButton id="InvestButton" text="#DCG_UI_InvestShop" html="true" class="ButtonBevel ShopActionButton CenterAlignV" onactivate="DCGPanoramaShopInvest();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipInvest, ShopTooltip )" onmouseout="UIHideTextTooltip()"/>
+          </Panel>
+        </Panel>
+
+        <Panel id="BottomButtonsRow" class="ShopRow" hittest="true" hittestchildren="true">
+          <TextButton id="ViewBoardButton" class="ButtonBevel ShopControlButton LeftAlign CenterAlignV" text="#DCG_UI_Minimize" onactivate="DCGHUDToggleShopState();" />
+          <TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ButtonBevel ShopButton RightAlign CenterAlignV" onactivate="DCGPanoramaShopCloseShop();" />      
+        </Panel>        
+      </Panel>
     </Panel>
     <Panel id="TimerCountdown">
       <Label text="{d:countdown}"/>
@@ -82,6 +139,18 @@
         </Panel>
       </Panel>
     </Panel>
+
+      <Panel id="DeployButtonsContainer" class="InitialDeployMid">
+        <Panel id="DeployButtonPanelLane1" class="DeployButtonsPanel" >
+          <TextButton id="DeployButtonLane1" text="#DCG_UI_DeployLeft" class="DeployButton" onactivate="DCGDeploymentConfirmed()" />
+        </Panel>
+        <Panel id="DeployButtonPanelLane2" class="DeployButtonsPanel" >
+          <TextButton id="DeployButtonLane2" text="#DCG_UI_DeployMid" class="DeployButton" onactivate="DCGDeploymentConfirmed()" />
+        </Panel>
+        <Panel id="DeployButtonPanelLane3" class="DeployButtonsPanel" >
+          <TextButton id="DeployButtonLane3" text="#DCG_UI_DeployRight" class="DeployButton" onactivate="DCGDeploymentConfirmed()" />
+        </Panel>
+      </Panel>
 
     <Button id="ScrollLeftButton" class="ScrollLaneButton SettingsButton" onactivate="DCGScrollLeft();">
     <Panel id="ScrollLeftButtonOverlay"/>

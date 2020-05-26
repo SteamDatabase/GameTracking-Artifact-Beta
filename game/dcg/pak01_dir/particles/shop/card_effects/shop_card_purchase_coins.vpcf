@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 0.300000
 	m_flConstantLifespan = 1.400000
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -15,16 +16,20 @@
 			]
 			m_fDrag = 0.010000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateDegrees = 30
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_nFieldOutput = "12"
@@ -32,15 +37,18 @@
 			m_fl4NoiseScale = 0.010000
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 30
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.400000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RemapSpeed"
 			m_nFieldOutput = "5"
@@ -48,18 +56,7 @@
 			m_flOutputMax = 50.000000
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_bUseWorldLocation = true
-			m_bSetOnce = true
-			m_vecCP1Pos = 
-			[
-				10.000000,
-				0.000000,
-				0.000000,
-			]
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.500000
@@ -68,19 +65,78 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/particle/shop/coin.vmdl"
 				},
 			]
 			m_flAnimationRate = 0.000000
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Initializers = 
 	[
+		
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+			m_nFieldOutput = "12"
+		},
+		
+		{
+			_class = "C_INIT_CreationNoise"
+			m_nFieldOutput = "12"
+			m_bAbsValInv = true
+			m_flOffset = 0.220000
+			m_flOutputMax = 10.000000
+			m_vecOffsetLoc = 
+			[
+				1.000000,
+				5.000000,
+				8.000000,
+			]
+			m_flWorldTimeScale = 16.000000
+		},
+		
+		{
+			_class = "C_INIT_CreateWithinSphere"
+			m_fRadiusMin = 0.500000
+			m_fRadiusMax = 2.000000
+			m_fSpeedMin = 8.000000
+			m_fSpeedMax = 32.000000
+			m_vecDistanceBiasAbs = 
+			[
+				0.000000,
+				0.000000,
+				1.000000,
+			]
+		},
+		
+		{
+			_class = "C_INIT_RandomVector"
+			m_vecMax = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
+			m_nFieldOutput = "21"
+		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 0.300000
+			m_flRadiusMax = 0.610000
+		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -97,40 +153,7 @@
 			]
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomRotation"
-		},
-		{
-			_class = "C_INIT_RandomRotation"
-			m_nFieldOutput = "12"
-		},
-		{
-			_class = "C_INIT_CreationNoise"
-			m_nFieldOutput = "12"
-			m_bAbsValInv = true
-			m_flOffset = 0.220000
-			m_flOutputMax = 10.000000
-			m_vecOffsetLoc = 
-			[
-				1.000000,
-				5.000000,
-				8.000000,
-			]
-			m_flWorldTimeScale = 16.000000
-		},
-		{
-			_class = "C_INIT_CreateWithinSphere"
-			m_fRadiusMin = 0.500000
-			m_fRadiusMax = 2.000000
-			m_fSpeedMin = 8.000000
-			m_fSpeedMax = 32.000000
-			m_vecDistanceBiasAbs = 
-			[
-				0.000000,
-				0.000000,
-				1.000000,
-			]
-		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -146,35 +169,27 @@
 				10.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomVector"
-			m_vecMax = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-			]
-			m_nFieldOutput = "21"
-		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 0.300000
-			m_flRadiusMax = 0.610000
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 5
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 5.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -195,4 +210,22 @@
 		},
 	]
 	m_nMaxParticles = 5
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_bUseWorldLocation = true
+			m_bSetOnce = true
+			m_vecCP1Pos = 
+			[
+				10.000000,
+				0.000000,
+				0.000000,
+			]
+			m_bDisableOperator = true
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 6
 }

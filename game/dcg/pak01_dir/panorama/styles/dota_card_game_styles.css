@@ -131,16 +131,23 @@ Panel
 	}
 }
 
+	
+.LineSpacing
+{
+	font-size: 4px;
+	color: #00000001;
+}
+
 Label.ProbablyUnlocalizedText
 {
-	/*background-color: red;
+	background-color: red;
 	color: yellow;
 
 	animation-name: ProbablyUnlocalizedAnimation;
 	animation-name: none;
 	animation-duration: 0.4s;
 	animation-timing-function: linear;
-	animation-iteration-count: infinite;*/
+	animation-iteration-count: infinite;
 }
 
 .DeckSummaryDoubleLine
@@ -348,10 +355,14 @@ TextEntry #PlaceholderText
 	color: #555555;
 	font-size: 16px;
 	font-weight: lighter;
-    vertical-align: center;
+  vertical-align: top;
 	text-align: left;
 }
 
+.HudChat TextEntry #PlaceholderText
+{
+	color: white;
+}
 
 TextEntry:focus #PlaceholderText, TextEntry.HasInput #PlaceholderText
 {
@@ -1260,7 +1271,7 @@ RadioButton:disabled:selected .RadioBox
 
 RadioButton:disabled Label
 {
-	color: #333333;
+	color: #4a4c70;
 }
 
 
@@ -2541,12 +2552,36 @@ DCGAvatarImage .AvatarBorderImage
 }
 
 /* Rich Presence colors */
-.StateFindingMatch DCGUserRichPresence.FriendPlayingGame Label, .StateFindingMatch DCGUserName.FriendPlayingGame Label a .PersonaName		{ color: #CDFFC9; text-shadow: 0px 0px 6px 2.0 #6A9561;}
-DCGUserRichPresence.FriendPlayingGame Label, DCGUserName.FriendPlayingGame Label a .PersonaName			{ color: #d0b891; }
-DCGUserRichPresence.FriendPlayingGameIdle Label, DCGUserName.FriendPlayingGameIdle Label a .PersonaName	{ color: #d0b891; }
-DCGUserRichPresence.FriendPending Label, DCGUserName.FriendPending Label a .PersonaName					{ color: #d0b891; }
-DCGUserRichPresence.FriendOnline Label, DCGUserName.FriendOnline Label a .PersonaName					{ color: #d0b891; }
-DCGUserRichPresence.FriendOffline Label, DCGUserName.FriendOffline Label a .PersonaName					{ color: #aaaaaa; }
+.StateFindingMatch DCGUserRichPresence.FriendPlayingGame Label, .StateFindingMatch DCGUserName.FriendPlayingGame Label a .PersonaName
+{
+	color: #CDFFC9;
+	text-shadow: 0px 0px 6px 2.0 #6A9561;
+}
+
+DCGUserRichPresence.FriendPlayingGame Label, DCGUserName.FriendPlayingGame Label a .PersonaName
+{
+	color: #d0b891;
+}
+
+DCGUserRichPresence.FriendPlayingGameIdle Label, DCGUserName.FriendPlayingGameIdle Label a .PersonaName
+{
+	color: #d0b891;
+}
+
+DCGUserRichPresence.FriendPending Label, DCGUserName.FriendPending Label a .PersonaName
+{
+	color: #d0b891;
+}
+
+DCGUserRichPresence.FriendOnline Label, DCGUserName.FriendOnline Label a .PersonaName
+{
+	color: #d0b891;
+}
+
+DCGUserRichPresence.FriendOffline Label, DCGUserName.FriendOffline Label a .PersonaName
+{
+	color: #aaaaaa;
+}
 
 DCGCardName,
 .CardNameColor_Neutral,
@@ -2748,7 +2783,7 @@ Slider.HorizontalSlider #SliderThumb:disabled, SlottedSlider.HorizontalSlider #S
 }
 
 @define toastExitDuration: 0.3s;
-#ToastManager
+.ToastManager
 {
 	margin-top: 400px;
 	height: 100%;
@@ -2756,17 +2791,17 @@ Slider.HorizontalSlider #SliderThumb:disabled, SlottedSlider.HorizontalSlider #S
 	flow-children: down;
 }
 
-#ToastManager > .ToastPanel
+.ToastManager > .ToastPanel
 {
 	opacity: 0.0;
-	transform: translateX( -40px );
+	transform: translateX( 40px );
     width:100px;
     height:100px;
 	transition-property: position, opacity, transform;
 	transition-duration: toastExitDuration;
 }
 
-#ToastManager > .ToastPanel.ToastVisible
+.ToastManager > .ToastPanel.ToastVisible
 {
 	opacity: 1.0;
 	transform: none;
@@ -2799,17 +2834,20 @@ DragZoom
 	z-index: 1;
 	transition-property: transform, position;
 	transition-delay: 0.0s;
+	transition-duration: 0.0s;
 	transition-timing-function: ease-in-out;
 }
 
 .DragZoomFastTransition
 {
 	transition-duration: 0.0s;
+	transition-delay: 0.0s;
 }
 
 .DragZoomSlowTransition
 {
-	transition-duration: 0.5s;
+	transition-delay: 0.5s;
+	transition-duration: 1.0s;
 }
 
 /* End of Styles for DragZoom Panel */
@@ -2895,6 +2933,24 @@ DragZoom
     }
 }
 
+@keyframes 'OpponentHeroLineupPortraitGlowAnimation'
+{
+    0%
+    {
+        box-shadow: #ff0d0d 0px 0px 2px 0px;
+    }
+
+    50%
+    {
+        box-shadow: #ff0d0d 0px 0px 6px 0px;
+    }
+
+    100%
+    {
+        box-shadow: #ff0d0d 0px 0px 2px 0px;
+    }
+}
+
 .BlueButtonSmall
 {
 	margin-right: 4px;
@@ -2936,7 +2992,6 @@ DragZoom
 	text-transform: uppercase;
 	horizontal-align: center;
 	vertical-align: center;
-	margin-top: 7px;
 	text-overflow: shrink; 
 	transition-property: brightness, text-shadow, color;
 	transition-duration: .2s; 
@@ -3222,4 +3277,34 @@ DCGViolator.Acknowledged
 #TextTooltip #TextLabel
 {
 		font-size: 20px;
+}
+
+.DBPageTitleLabel
+{
+	text-transform: uppercase;
+	color: abilityGradient;
+	font-size: 40px;
+	letter-spacing: 4px;
+	text-shadow: 1px 2px 6px 4.0 #130f1a80;
+}
+
+
+.PopupBackButton
+{
+	z-index: 99;
+	margin-top: 5px;
+	height: 35px;
+	width: 35px;
+	background-image: url("s2r://panorama/images/catalogue/new_hud_back_arrow_catalogue_png.vtex");
+	background-size: 100% 100%;
+	opacity: 0.8;
+	transition-property: brightness, opacity;
+	transition-duration: 0.18s;
+	transition-timing-function: ease-in-out;
+}
+
+.PopupBackButton:hover
+{
+	brightness: 1.5;
+	opacity: 1.0;
 }

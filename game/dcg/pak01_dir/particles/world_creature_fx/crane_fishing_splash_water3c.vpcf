@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -6,6 +6,7 @@
 	m_flConstantRadius = 30.000000
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -18,6 +19,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -27,21 +29,25 @@
 				-400.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeIn"
 			m_flFadeInTimeMin = 0.500000
 			m_flFadeInTimeMax = 0.500000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.500000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
-			m_nFieldOutput = 22
+			m_nFieldOutput = "22"
 			m_ColorFade = 
 			[
 				0,
@@ -50,6 +56,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
@@ -57,6 +64,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_LocalCoordinateSystemSpeedMax = 
@@ -80,50 +88,32 @@
 			m_fRadiusMax = 10.000000
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.500000
 			m_fLifetimeMin = 0.350000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 6.000000
 			m_flRadiusMax = 10.000000
 		},
-		{
-			_class = "C_INIT_RemapScalar"
-			m_flInputMax = 0.500000
-			m_flOutputMin = 2.500000
-			m_flOutputMax = 2.000000
-			m_bScaleInitialRange = true
-		},
-		{
-			_class = "C_INIT_PositionOffset"
-			m_OffsetMin = 
-			[
-				0.000000,
-				0.000000,
-				16.000000,
-			]
-			m_OffsetMax = 
-			[
-				0.000000,
-				0.000000,
-				24.000000,
-			]
-			m_nControlPointNumber = 1
-		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 20
 			m_nAlphaMax = 25
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
-			m_nFieldOutput = 22
+			m_nFieldOutput = "22"
 			m_ColorMax = 
 			[
 				213,
@@ -139,6 +129,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -156,13 +147,49 @@
 				255,
 			]
 		},
+		
+		{
+			_class = "C_INIT_RemapScalar"
+			m_flInputMax = 0.500000
+			m_flOutputMin = 2.500000
+			m_flOutputMax = 2.000000
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
+		},
+		
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				0.000000,
+				0.000000,
+				16.000000,
+			]
+			m_OffsetMax = 
+			[
+				0.000000,
+				0.000000,
+				24.000000,
+			]
+			m_nControlPointNumber = 1
+		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.300000
-			m_flEmitRate = 200.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.300000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 200.000000
+			}
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

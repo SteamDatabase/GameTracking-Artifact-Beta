@@ -1,9 +1,10 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 64
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -12,34 +13,50 @@
 			m_hTexture = resource:"materials/particle/particle_cone_gradient_1.vtex"
 			m_bIgnoreDT = true
 			m_flLengthFadeInTime = 0.050000
-			m_flRadiusScale = 0.500000
 			m_flFinalTextureScaleV = -1.000000
 			m_flFinalTextureOffsetV = 1.000000
-			m_vEndTrailTintFactor = 
-			[
-				0.000000,
-				0.000000,
-				1.000000,
-				0.000000,
-			]
 			m_bDisableZBuffering = true
+			m_flRadiusScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL"
+				m_vLiteralValue = 
+				[
+					0.000000,
+					0.000000,
+					1.000000,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
 			m_flBias = 0.100000
 			m_flStartScale = 8.000000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -70,22 +87,26 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.100000
 			m_fLifetimeMax = 0.200000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 8.000000
 			m_flRadiusMin = 4.000000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 1.000000
 			m_fRadiusMin = 1.000000
 			m_nControlPointNumber = 3
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -103,6 +124,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_OffsetVectorToVector"
 			m_vecOutputMax = 
@@ -122,17 +144,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 48
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 48.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -149,6 +178,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -169,6 +199,6 @@
 			]
 		},
 	]
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 4
 }

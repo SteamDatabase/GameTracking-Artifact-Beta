@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -15,6 +15,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			VisibilityInputs = 
@@ -32,9 +33,11 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.050000
@@ -45,21 +48,25 @@
 				-250.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.470000
 			m_flEndScale = 4.000000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 		},
+		
 		{
 			_class = "C_OP_RampScalarSpline"
 			m_bEaseOut = true
 			m_RateMax = 0.250000
 			m_RateMin = -0.250000
-			m_nField = 4
+			m_nField = "4"
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -71,21 +78,24 @@
 			]
 			m_flFadeStartTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_flDegreesMin = -33.000000
 			m_flDegreesMax = 33.000000
 			m_bRandomlyFlipDirection = false
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
-			m_nFieldOutput = 22
+			m_nFieldOutput = "22"
 			m_ColorMin = 
 			[
 				107,
@@ -101,36 +111,13 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 32.000000
 			m_flRadiusMin = 12.000000
 		},
-		{
-			_class = "C_INIT_PositionOffset"
-			m_OffsetMax = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-			]
-		},
-		{
-			_class = "C_INIT_InitialVelocityNoise"
-			m_vecOutputMax = 
-			[
-				164.000000,
-				164.000000,
-				356.000000,
-			]
-			m_vecOutputMin = 
-			[
-				-164.000000,
-				-164.000000,
-				228.000000,
-			]
-			m_flNoiseScaleLoc = 5.000000
-		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -148,14 +135,13 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_bShuffle = true
 			m_nSequenceMax = 3
 		},
-		{
-			_class = "C_INIT_RandomYawFlip"
-		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMin = 32.000000
@@ -167,35 +153,79 @@
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 2.500000
 			m_fLifetimeMin = 1.750000
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMax = 200
 			m_nAlphaMin = 175
 		},
+		
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMax = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
+		},
+		
+		{
+			_class = "C_INIT_InitialVelocityNoise"
+			m_vecOutputMax = 
+			[
+				164.000000,
+				164.000000,
+				356.000000,
+			]
+			m_vecOutputMin = 
+			[
+				-164.000000,
+				-164.000000,
+				228.000000,
+			]
+			m_flNoiseScaleLoc = 5.000000
+		},
+		
+		{
+			_class = "C_INIT_RandomYawFlip"
+		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nMinParticlesToEmit = 8
-			m_nParticlesToEmit = 16
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 8.000000
+				m_flRandomMax = 16.000000
+				m_nRandomMode = "PF_TYPE_RANDOM_UNIFORM"
+			}
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/water_splash_rocks_generic_c.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/water_splash_rocks_generic_d.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/water_splash_rocks_generic_e.vpcf"
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 8
 }

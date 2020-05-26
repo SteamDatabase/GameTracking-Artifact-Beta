@@ -23,7 +23,8 @@ DCGHeroButtonContainer
 }
 
 .HasHeroAssigned .HeroLineupLabel,
-.HasHeroAssigned .HeroLineupLabelNumber
+.HasHeroAssigned .HeroLineupLabelNumber,
+.HasHeroAssigned .HeroLineupContentContainer
 {
     visibility: collapse;
 }
@@ -33,6 +34,13 @@ DCGHeroButtonContainer
 	flow-children: down;
 }
 
+.HeroLineupContentContainer
+{
+	vertical-align: center;
+	flow-children: down;
+	height: 57px;
+	width: 100%;
+}
 
 .HeroButtonContainer.HasHeroAssigned.HighlightOnHover:hover,
 .HeroButtonContainer.HighlightHeroResponsibleForInclusion
@@ -48,6 +56,20 @@ DCGHeroButtonContainer
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
+
+LimitedStage .HeroButtonContainer.HighlightHeroResponsibleForInclusion
+{
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in;
+}
+
+LimitedStage.IsOpponentsTurn .HeroButtonContainer.HighlightHeroResponsibleForInclusion, LimitedStage #OpponentDeckSummary .HeroButtonContainer.HasHeroAssigned.HighlightOnHover:hover
+{
+	box-shadow: #ff0d0d 0px 0px 4px 0px;
+	animation-name: OpponentHeroLineupPortraitGlowAnimation;
+}
+
+
 
 .HeroLineupLabel
 {
@@ -110,3 +132,17 @@ DCGGauntlet .HeroButtonContainer:hover
 /* ------------------------------------------------------------------------- */
 /*  End Gauntlet Panel Specific Stuff								                 */
 /* ------------------------------------------------------------------------- */
+
+LimitedStage .HeroDragHover
+{
+	box-shadow: #0dfffc 0px 0px 4px 0px;
+
+	transition-property: box-shadow, border;
+	transition-duration: 0.25s;
+
+    animation-name: HeroLineupPortraitGlowAnimation;
+    animation-duration: 2s;
+    animation-delay: 0.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}

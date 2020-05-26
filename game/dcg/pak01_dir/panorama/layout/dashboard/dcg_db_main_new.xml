@@ -1,0 +1,123 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/base.vcss_c" />
+		<include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_main_new.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page.vcss_c" />
+		<include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
+	</styles>
+
+	<DCGDashboard class="InitialDisplay" hittest="true" oncancel="DCGNavigateBack();">
+		<Panel id="FriendsAndFamilyBetaMessage">
+			<Panel id="BetaMessageContainer">
+				<Label id="FriendsAndFamilyBetaLabel" html="true" text="#DCG_FriendsAndFamilyMessage" />
+				<TextButton id="FriendsAndFamilyButton" class="SaveLoadClearButton" text="#DCG_RewardEventPoints_Continue" onactivate="DCGDismissFriendsAndFamilyBeta();" />
+			</Panel>
+		</Panel>
+		<Panel id="DashboardForeground" hittest="false">
+			<DCGFriendMenu id="FriendMenu" />
+			<Panel id="FriendsMenuClick" onactivate="DCGToggleFriendsMenu();" />
+			<Panel id="TopBar">
+				<Panel id="TopBarStatusBar">
+					<Panel id="TopBarStatusMessageContainer">
+						<Panel id="TopBarStatusSpinner" class="Spinner" />
+						<Label id="TopBarStatusMessage" />
+					</Panel>
+				</Panel>
+				<Panel id="TopBarArtifactBetaLogo" />				
+				<Panel id="TopBarButtons">
+					<Button id="FriendsMenuButton" onactivate="DCGToggleFriendsMenu();">
+						<Panel id="FriendsMenuButtonImage" class="TopBarButtonImage" />
+					</Button>
+					<Panel class="LeftRightFlow MatchmakingIconContainer">
+						<Panel id="FindingMatchPanel">
+							<Panel id="FindMatchContents">
+								<Button id="CancelButton" onactivate="CancelFindOpponent()" />
+								<Label class="FindingMatchLabel" text="{s:finding_match_info}"/>
+							</Panel>
+						</Panel>
+						<Panel id="PlayersSearchingPanel">
+							<Label class="PlayersSearchingLabel" text="#DCG_MainMenu_PlayersSearching"/>
+						</Panel>
+						<Panel id="PrivateLobbyPanel" onactivate="DCGShowLobbyPage()">
+							<Label class="PrivateLobbyPrefix" text="#DCG_PrivateLobbyState_Prefix" />
+							<DCGAvatarImage id="PrivateLobbyOpponentImage" />
+							<DCGUserName id="PrivateLobbyOpponentName" />
+							<Label id="PrivateLobbyStatus" text="{s:LobbyOpponentState}" />
+						</Panel>
+					</Panel>
+					<Panel id="TopBarRightButtons">
+						<Button id="SubmitUserFeedback" onactivate="DCGShowSubmitFeedback( 'MainMenu', -1 )" onmouseover="UIShowTextTooltip( #DCG_UserFeedback_Tooltip )" onmouseout="UIHideTextTooltip()">
+							<Image id="SubmitUserFeedbackImage" class="TopBarButtonImage" src="s2r://panorama/images/dashboard/icon_feedback_png.vtex" />
+						</Button>
+						<Button id="BlogButton" onactivate="DCGDisplayBlog(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )">
+							<Image id="BlogButtonImage" class="TopBarButtonImage" src="s2r://panorama/images/control_icons/v2_news_psd.vtex" />
+						</Button>
+						<Button id="SettingsButton" onactivate="DCGSettings(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )">
+							<Panel id="SettingsButtonImage" class="TopBarButtonImage" src="s2r://panorama/images/control_icons/v2_settings_psd.vtex" />
+						</Button>
+						<Button id="QuitButton" onactivate="PlaySoundEffect( DCG_UI.MainMenu_Select_Quit ) DCGQuitGame();" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Quit )">
+							<Panel id="QuitButtonImage" class="TopBarButtonImage" src="s2r://panorama/images/control_icons/v2_power_psd.vtex" />
+						</Button>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="DashboardContents">
+			<DCGChat id="Chat" expanded="1" chatstyle="dashboard" oncancel="SetInputFocus( Dashboard )" />
+			<Panel id="LeftContents">
+				<Panel id="AccountBadgeContainer">
+					<DCGAccountBadge id="AccountBadge" />
+					<Panel id="PersonaNameContainer">
+						<Label id="PersonaNameLabel" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true" />
+					</Panel>
+				</Panel>
+				<Panel id="MainNav">
+					<RadioButton id="NavCardCollection" class="MainNavMenuItem" group="DashboardNavTabs" onactivate="DCGOpenDeckBuilder()  CatalogueBuildDeck()  PlaySoundEffect( DCG_UI.Shared_Select_Collection )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Collection )">
+						<Label id="CardCollectionLabel" class="NavButtonLabels" text="#DCG_DBCollection_Collection" />
+					</RadioButton>
+					<RadioButton id="NavOpenPacks" class="MainNavMenuItem" group="DashboardNavTabs" onactivate="DCGShowOpenPacksPage()" >
+						<Label class="NavButtonLabels" text="#DCG_MainMenu_OpenPacks" />
+					</RadioButton>
+					<RadioButton id="NavEnterTournament" class="MainNavMenuItem" group="DashboardNavTabs" disabled="true">
+						<Label class="NavButtonLabels" text="#DCG_DBCollection_EnterTournament" />
+					</RadioButton>
+					<DCGPlayButton id="PlayButton" />
+					<RadioButton id="NavPlayArtifact" class="MainNavMenuItem" group="DashboardNavTabs"  onactivate="DCGShowPlayPage();">
+						<Label class="NavButtonLabels" text="#DCG_MainMenu_Play" />
+					</RadioButton>
+					<RadioButton id="NavCancelSearch" class="MainNavMenuItem" group="DashboardNavTabs" onactivate="CancelFindOpponent()">
+						<Label class="NavButtonLabels" text="#DCG_MainMenu_CancelSearching" />
+					</RadioButton>
+					<RadioButton id="NavReturnToPrivateLobby" class="MainNavMenuItem" group="DashboardNavTabs"  onactivate="DCGReturnToPrivateLobby();">
+						<Label class="NavButtonLabels" text="#DCG_MainMenu_ReturnToLobby" />
+					</RadioButton>
+					<RadioButton id="NavLeavePrivateLobby" class="MainNavMenuItem" group="DashboardNavTabs"  onactivate="PrivateLobbyLeave();">
+						<Label class="NavButtonLabels" text="#DCG_PrivateLobby_Leave" />
+					</RadioButton>
+				</Panel>
+			</Panel>
+			<Panel id="RightContents">
+				<PageManager id="PageManager" hittest="false" />
+			</Panel>
+
+		</Panel>
+
+		<!-- Make sure these are at the bottom to get the z-order right -->
+		<DCGDashboardPopupManager id="DashboardPopupManager" require-composition-layer="true" onpopupsdismissed="SetInputFocus( PageManager )" />
+		<ToastManager id="ToastManager" class="ToastManager" hittest="false" toastduration="5.0s" maxtoastsvisible="3" />
+		
+		<DCGSocialOverlay id="SocialOverlay" />
+		
+		
+		<DCGContextMenuManager id="ContextMenuManager" />
+		<DCGTooltipManager id="Tooltips" hittest="false" />
+		
+		<Panel id="NavigationControls">
+			<Button id="NavigateBackButton" onactivate="DCGNavigateBack()" />
+			<Button id="NavigateForwardButton" onactivate="DCGNavigateForward()" />
+		</Panel>	
+		
+	</DCGDashboard>
+</root>

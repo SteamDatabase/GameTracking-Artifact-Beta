@@ -5,6 +5,62 @@
 		<include src="s2r://panorama/styles/hud/game_over.vcss_c" />
 	</styles>
 
+	<snippets>
+		<snippet name="AchievementProgress">
+			<Panel class="AchievementContainer">
+				<Panel class="AchievementAndSceneContainer">
+					<Image id="AchievementArt"/>			
+					<DCGScenePanel id="AchievementScene" camera="camera" map="scenes/achievements/achievement" hittest="false" require-composition-layer="true" light="model_light" particleonly="true" renderdeferred="true" deferredalpha="false" antialias="true"/>
+				</Panel>					
+				<Panel class="AchievementTextContainer">
+					<Label text="{s:current_progress_str} / {s:required_progress_str}" id="AchievementProgressText" />
+					<Label text="{s:achievement_name}" id="AchievementName" />
+					<Panel class="AchievementTextDescriptionPanel">
+						<Label text="{s:achievement_description}" id="AchievementText" />				
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet24">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration24" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet20">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration20" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet12">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration12" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet8">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration8" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet6">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration6" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+
+		<snippet name="ImpCelebrationSnippet4">
+			<Panel class="ImpCelebrationContainer">
+				<DCGScenePanel class="ImpCelebration" camera="camera" map="scenes/chaos/chaos_imp_celebration4" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+  
+	</snippets>
+	
+
 	<Panel class="GameOverPanel">
 		<Movie id="GameOverVideo" src="file://{resources}/videos/main_menu/victory.webm" controls="none" repeat="false" autoplay="on" disableactivatepause="true" acceptsfocus="false" />
 		<Movie id="GameOverVideoLoop" src="file://{resources}/videos/main_menu/victory_loop.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" acceptsfocus="false" />
@@ -27,38 +83,96 @@
 		</Panel>
 		<Panel id="ProgressAndOptions">
 			<DCGPostGameProgress id="PostGameProgress" />
-			<Panel id="MenuOptions">
-				<Button id="ChatWithOpponent" class="MenuButton ChatWithOpponentOption" onactivate="DCGChatWithOpponent()">
-					<Label text="#DCG_GameOver_ChatWithOpponent" allowtextselection="false"/>
-				</Button>
-				<Button id="AddFriend" class="MenuButton ChatWithOpponentOption" onactivate="DCGChatWithOpponent()">
-					<Label text="#DCG_GameOver_AddFriend" allowtextselection="false"/>
-				</Button>		
-				<Button id="AcceptFriend" class="MenuButton ChatWithOpponentOption" onactivate="DCGChatWithOpponent()">
-					<Label text="#DCG_GameOver_AcceptFriend" allowtextselection="false"/>
-				</Button>		
-				<Button id="HaveSentFriendRequest" class="MenuButton ChatWithOpponentOption">
-					<Label text="#DCG_GameOver_HaveSentFriendRequest" allowtextselection="false"/>
-				</Button>										
-
-				<Button id="Rematch" class="MenuButton" onactivate="DCGRematch()">
-					<Label text="#DCG_GameOver_Rematch" allowtextselection="false"/>
-				</Button>
-				<Button id="FindNextMatch" class="MenuButton" onactivate="DCGFindNextMatch()">
-					<Label text="#DCG_GameOver_FindNextMatch" allowtextselection="false"/>
-				</Button>
-				<Button id="ReturnToLobby" class="MenuButton" onactivate="ReturnToLobby()">
-					<Label text="#DCG_GameOver_ReturnToLobby" allowtextselection="false"/>
-				</Button>
-				<Button id="ViewDeck" class="MenuButton" onactivate="DCGShowOpponentsDeck()">
-					<Label text="#DCG_GameOver_ViewOpponentDeck" allowtextselection="false"/>
-				</Button>
-				<Button id="BackToMenu" class="MenuButton" onactivate="QuitPostMatchGame()">
-					<Label text="#DCG_GameOver_BackToMenu" allowtextselection="false"/>
+			<Panel id="ProgressMenuOptions">
+				<Button id="ShowMenuOptions" class="MenuButton" onactivate="DCGDisplayMenuOptions()">
+					<Label text="#DCG_GameOver_Continue" allowtextselection="false"/>
 				</Button>
 			</Panel>
 		</Panel>
-		<Panel id="OutcomeWrapper" hittest="false">
+
+
+	<Panel id="AchievementProgressSection">
+    	<Panel id="AchievementProgressRow" />
+		<TextButton id="AchievementProgressContinue" class="MenuButton" text="#DCG_LevelUp_Continue" hittest="true" onactivate="DCGAchievementProgressComplete()" />
+	</Panel>
+
+	<Panel id="StatsSection">
+		<Panel  class="StatsSectionRow">
+			<Label id="GameDurationLabel" class="StatsSectionLabel" text="Game Length"/>
+			<Label id="GameDuration" class="StatsSectionValue" text="{s:game_duration}" />
+		</Panel>
+		<Panel class="StatsSectionRow">
+			<Label text="Tower Damage" class="StatsSectionLabel"/>
+			<ProgressBar id="TowerDamage" min="0" max="100" class="StatsSectionValue" >
+				<Panel id="TowerDamage_Left" class="ProgressBarLeft">
+					<Label text="{d:PlayerValue}" class="StatsProgressValue" />
+				</Panel>
+				<Panel id="TowerDamage_Right" class="ProgressBarRight">
+					<Label text="{d:OpponentValue}" class="StatsProgressValue" />
+				</Panel>
+			</ProgressBar>
+		</Panel>
+		<Panel class="StatsSectionRow">
+			<Label text="Hero Kills" class="StatsSectionLabel"/>
+			<ProgressBar id="HeroKills" min="0" max="100" class="StatsSectionValue" >
+				<Panel id="HeroKills_Left" class="ProgressBarLeft">
+					<Label text="{d:PlayerValue}" class="StatsProgressValue" />
+				</Panel>
+				<Panel id="HeroKills_Right" class="ProgressBarRight">
+					<Label text="{d:OpponentValue}" class="StatsProgressValue" />
+				</Panel>
+			</ProgressBar>
+		</Panel>		
+		<Panel class="StatsSectionRow">
+			<Label text="Mana Spent" class="StatsSectionLabel"/>
+			<ProgressBar id="ManaSpent" min="0" max="100" class="StatsSectionValue" >
+				<Panel id="ManaSpent_Left" class="ProgressBarLeft">
+					<Label text="{d:PlayerValue}" class="StatsProgressValue" />
+				</Panel>
+				<Panel id="ManaSpent_Right" class="ProgressBarRight">
+					<Label text="{d:OpponentValue}" class="StatsProgressValue" />
+				</Panel>
+			</ProgressBar>
+		</Panel>
+		<Panel class="StatsSectionRow">
+			<Label text="Gold Spent" class="StatsSectionLabel"/>
+			<ProgressBar id="GoldSpent" min="0" max="100" class="StatsSectionValue" >
+				<Panel id="GoldSpent_Left" class="ProgressBarLeft">
+					<Label text="{d:PlayerValue}" class="StatsProgressValue" />
+				</Panel>
+				<Panel id="GoldSpent_Right" class="ProgressBarRight">
+					<Label text="{d:OpponentValue}" class="StatsProgressValue" />
+				</Panel>
+			</ProgressBar>
+		</Panel>		
+	</Panel>	
+
+
+	<Panel id="MenuOptions">
+		<Button id="Rematch" class="MenuButton" onactivate="DCGRematch()">
+			<Label text="#DCG_GameOver_Rematch" allowtextselection="false"/>
+		</Button>
+		<Button id="ReturnToLobby" class="MenuButton" onactivate="ReturnToLobby()">
+			<Label text="#DCG_GameOver_ReturnToLobby" allowtextselection="false"/>
+		</Button>
+		<Button id="ViewDeck" class="MenuButton" onactivate="DCGShowOpponentsDeck()">
+			<Label text="#DCG_GameOver_ViewOpponentDeck" allowtextselection="false"/>
+		</Button>
+		<Button id="ViewOpponentProfile" class="MenuButton" onactivate="DCGShowOpponentsProfile()">
+			<Label text="#DCG_GameOver_ViewOpponentProfile" allowtextselection="false"/>
+		</Button>
+		<Button id="ViewOwnDeck" class="MenuButton" onactivate="DCGShowOwnDeck()">
+			<Label text="#DCG_GameOver_ViewOwnDeck" allowtextselection="false"/>
+		</Button>				
+		<Button id="ViewOwnProfile" class="MenuButton" onactivate="DCGShowOwnProfile()">
+			<Label text="#DCG_GameOver_ViewOwnProfile" allowtextselection="false"/>
+		</Button>				
+		<Button id="BackToMenu" class="MenuButton" onactivate="QuitPostMatchGame()">
+			<Label text="#DCG_GameOver_BackToMenu" allowtextselection="false"/>
+		</Button>
+	</Panel>	
+	
+    <Panel id="OutcomeWrapper" hittest="false">
 		</Panel>
 	</Panel>
 </root>

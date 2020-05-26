@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -14,6 +14,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_flOverbrightFactor = 5.000000
@@ -25,28 +26,35 @@
 			m_bIgnoreDT = true
 			m_flFinalTextureScaleV = -1.000000
 			m_flFinalTextureOffsetV = 1.000000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				4.000000,
-				1.000000,
-			]
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL"
+				m_vLiteralValue = 
+				[
+					1.000000,
+					1.000000,
+					4.000000,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_bLockRot = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
@@ -55,51 +63,68 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.300000
 			m_fLifetimeMin = 0.200000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 3.000000
 			m_flRadiusMin = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomTrailLength"
 			m_flMaxLength = 0.400000
 			m_flMinLength = 0.300000
 		},
+		
 		{
 			_class = "C_INIT_CreateOnModel"
 		},
+		
 		{
 			_class = "C_INIT_VelocityRadialRandom"
 			m_fSpeedMin = 2000.000000
 			m_fSpeedMax = 2000.000000
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMax = 1.500000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 60.000000
-			m_flEmissionDuration = 1.500000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.500000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 60.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -116,6 +141,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -136,4 +162,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 4
 }

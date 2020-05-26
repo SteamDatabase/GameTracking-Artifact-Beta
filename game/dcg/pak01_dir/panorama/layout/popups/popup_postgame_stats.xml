@@ -1,0 +1,173 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_postgame_stats.vcss_c" />
+	</styles>
+
+    <snippets>
+      <snippet name="PlaySnippet">
+        <Panel class="PlayPanel">
+          <Panel class="PlayPanelLeft" >
+            <Label id="PlayTitle" text="{s:play_title}" />
+            <Label id="PlayDescription" text="{s:play_description}" />
+          </Panel>
+          <Panel id="PlayHero1" class="PlayHero">
+            <DCGScenePanel id="PlayHero1Portait" class="PlayHeroPortait" map="cardscenemap" hittest="true" camera="cardscenecamera" antialias="true"/>
+            <Label id="PlayHero1Stat" class="PlayHeroStat" text="{d:play_hero_1_stat}" />
+            <Panel id="OwnerIcon">
+              <DCGAvatarImage id="PlayHeroAvatar" />
+              <Panel id="BotImage" />
+            </Panel>
+          </Panel>
+          <Panel id="PlayHero2" class="PlayHero">
+            <DCGScenePanel id="PlayHero2Portait" class="PlayHeroPortait" map="cardscenemap" hittest="true" camera="cardscenecamera" antialias="true"/>
+            <Label id="PlayHero2Stat" class="PlayHeroStat" text="{d:play_hero_2_stat}" />
+            <Panel id="OwnerIcon">
+              <DCGAvatarImage id="PlayHeroAvatar" />
+              <Panel id="BotImage" />
+            </Panel>
+          </Panel>
+          <Panel id="PlayHero3" class="PlayHero">
+            <DCGScenePanel id="PlayHero3Portait" class="PlayHeroPortait" map="cardscenemap" hittest="true" camera="cardscenecamera" antialias="true"/>
+            <Label id="PlayHero3Stat" class="PlayHeroStat" text="{d:play_hero_2_stat}" />
+            <Panel id="OwnerIcon">
+              <DCGAvatarImage id="PlayHeroAvatar" />
+              <Panel id="BotImage" />
+            </Panel>
+          </Panel>
+        </Panel>
+      </snippet>
+    </snippets>
+
+  <PopupPostgameStats popupbackground="dim" oncancel="UIPopupButtonClicked( DCGClosePostgameStats() )">
+    <Panel id="BackgroundContainer" class="PopupPanel ContentContainer" />
+    <Panel id="EffectsContainer" >
+      <DCGScenePanel id="Player1Effects" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+      <DCGScenePanel id="Player2Effects" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+    </Panel>
+    <Panel id="ForegroundContainer" class="ContentContainer">
+      <Panel class="MainBody">
+        <Panel id="HeaderRow">
+          <Panel id="LeftAvatar" class="AvatarContainer">
+            <Panel class="WinnerRow WinnerRowPlayer1" >
+              <Panel class="CrownIcon" />
+              <Label class="WinnerText" text="#DCG_PostgameStats_Winner" />
+            </Panel>
+            <DCGAccountBadge id="AccountBadgePlayer1" class="AccountBadge" />
+            <Panel class="MiniButtonContainer">
+              <Button class="DeckDetailsButton MiniButton" onactivate="DCGPostgameStatsViewDeck(0)" onmouseover="UIShowTextTooltip( #DCG_PostgameStats_ViewDeck )" onmouseout="UIHideTextTooltip()"/>
+              <Button class="CopyDeckCodeButton MiniButton" onactivate="DCGPostgameStatsCopyDeck(0)" onmouseover="UIShowTextTooltip( #DCG_PostgameStats_CopyDeckCode )" onmouseout="UIHideTextTooltip()"/>
+            </Panel>
+          </Panel>
+          <Panel id="HeaderStats">
+            <Label class="StatsLabel HeaderTitle" text="#DCG_PostgameStats_Duration" />
+            <Label class="StatsLabel" id="Duration" text="{s:match_duration}" />
+            <Label class="StatsLabel HeaderTitle" text="#DCG_PostgameStats_MatchID" />
+            <Label class="StatsLabel" id="MatchID" text="{d:r:match_id}" />
+          </Panel>
+          <Panel id="RightAvatar" class="AvatarContainer">
+            <Panel class="WinnerRow WinnerRowPlayer2" >
+              <Panel class="CrownIcon" />
+              <Label class="WinnerText" text="#DCG_PostgameStats_Winner" />
+            </Panel>
+            <DCGAccountBadge id="AccountBadgePlayer2" class="AccountBadge" />
+            <Panel class="MiniButtonContainer">
+              <Button class="DeckDetailsButton MiniButton" onactivate="DCGPostgameStatsViewDeck(1)" onmouseover="UIShowTextTooltip( #DCG_PostgameStats_ViewDeck )" onmouseout="UIHideTextTooltip()"/>
+              <Button class="CopyDeckCodeButton MiniButton" onactivate="DCGPostgameStatsCopyDeck(1)" onmouseover="UIShowTextTooltip( #DCG_PostgameStats_CopyDeckCode )" onmouseout="UIHideTextTooltip()"/>
+            </Panel>
+          </Panel>
+        </Panel>
+        <Panel id="HealthRow" class="BodyRow">
+          <Label class="StatsLabel" text="#DCG_PostgameStats_HealthRemaining"/>
+          <Panel id="HealthBarContainer" class="BarContainer">
+            <Panel id="HealthBar" class="ProgressBar" />
+            <Panel class="BarSubLabels" >
+              <Label class="BarSubLabelLeft BarSubLabelText" text="#DCG_PostgameStats_GameEnd"/>
+              <Label class="BarSubLabelCenter BarSubLabelText" text="#DCG_PostgameStats_GameStart"/>
+              <Label class="BarSubLabelRight BarSubLabelText" text="#DCG_PostgameStats_GameEnd"/>
+            </Panel>
+          </Panel>
+        </Panel>
+        <Panel class="BodyRow">
+          <Label class="StatsLabel" text="#DCG_PostgameStats_CardsPlayed"/>
+          <Panel id="CardsBarContainer" class="BarContainer">
+            <Panel class="BarRow">
+              <ProgressBar id="CardsPlayed" min="0" max="100" class="StatsSectionValue" >
+                <Panel id="CardsPlayed_Left" class="ProgressBarLeft">
+                  <Label text="{d:PlayerValue}" class="StatsProgressValue" />
+                </Panel>
+                <Panel id="CardsPlayed_Right" class="ProgressBarRight">
+                  <Label text="{d:OpponentValue}" class="StatsProgressValue" />
+                </Panel>
+              </ProgressBar>
+            </Panel>
+          </Panel>
+        </Panel>
+        <Panel class="BodyRow">
+          <Label class="StatsLabel" text="#DCG_PostgameStats_ManaSpentPlusBonus"/>
+          <Panel id="ManaBarContainer" class="BarContainer">
+            <Panel class="BarRow">
+              <ProgressBar id="ManaSpent" min="0" max="100" class="StatsSectionValue" >
+                <Panel id="ManaSpent_Left" class="ProgressBarLeft">
+                  <Panel id="BonusMana_Left" class="BonusManaLeft">
+                    <Label text="{d:PlayerBonusMana}" id="BonusManaPlayer1" />
+                  </Panel>
+                  <Label text="{d:PlayerValue}" class="StatsProgressValue" />
+                </Panel>
+                <Panel id="ManaSpent_Right" class="ProgressBarRight">
+                  <Panel id="BonusMana_Right" class="BonusManaRight">
+                    <Label text="{d:OpponentBonusMana}" id="BonusManaPlayer2" />
+                  </Panel>
+                  <Label text="{d:OpponentValue}" class="StatsProgressValue Player2Value" />
+                </Panel>
+              </ProgressBar>
+            </Panel>
+          </Panel>
+        </Panel>
+        <Panel class="BodyRow">
+          <Label class="StatsLabel" text="#DCG_PostgameStats_GoldSpentShopLevel"/>
+          <Panel id="GoldBarContainer" class="BarContainer">
+            <Panel class="BarRow">
+              <ProgressBar id="GoldSpent" min="0" max="100" class="StatsSectionValue" >
+                <Panel id="GoldSpent_Left" class="ProgressBarLeft">
+                  <Label text="{d:PlayerValue}" class="StatsProgressValue" />
+                </Panel>
+                <Panel id="GoldSpent_Right" class="ProgressBarRight">
+                  <Label text="{d:OpponentValue}" class="StatsProgressValue" />
+                </Panel>
+              </ProgressBar>
+            </Panel>
+            <Panel class="BarSubLabels" >
+              <Label class="BarSubLabelLeft BarSubLabelText" text="#DCG_PostgameStats_ShopLevelPlayer1"/>
+              <Label class="BarSubLabelRight BarSubLabelText" text="#DCG_PostgameStats_ShopLevelPlayer2"/>
+            </Panel>
+          </Panel>
+        </Panel>
+
+        <Panel id="PlaysRow" class="BodyRow">
+          <Label id="PlaysLabel" text="#DCG_PostgameStats_PlaysOfTheMatch" />
+          <Panel id="PlaysContainer">
+            <Panel id="NavWidgetContainer" class="PlayPanelLeft">
+              <CarouselNav id="NavWidget" class="TransportControls" carouselid="PlaysCarousel" maxpips="3" disablenav="false" />
+            </Panel>
+            <Carousel id="PlaysCarousel" class="SingleItemCarousel" panels-visible="1" wrap="true" >
+            </Carousel>
+          </Panel>
+        </Panel>
+      </Panel>
+
+      <Panel id="ButtonContainer">
+        <Button id="ViewBoardButton" class="PopupButton" onactivate="DCGTogglePostgameStats()">
+          <Label text="#DCG_PostgameStats_ViewBoard" />
+        </Button>
+        <Button id="ViewStatsButton" class="PopupButton" onactivate="DCGTogglePostgameStats()">
+          <Label text="#DCG_PostgameStats_ViewStats" />
+        </Button>
+        <Button id="MainMenuButton" class="PopupButton" onactivate="UIPopupButtonClicked( DCGClosePostgameStats() )">
+          <Label text="#DCG_PostgameStats_MainMenu" />
+        </Button>
+      </Panel>
+    </Panel>
+  </PopupPostgameStats>
+</root>

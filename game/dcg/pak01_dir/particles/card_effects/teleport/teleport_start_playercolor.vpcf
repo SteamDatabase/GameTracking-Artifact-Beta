@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -24,6 +24,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -40,19 +41,23 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.100000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.980000
 			m_flStartScale = 20.000000
 			m_nOpEndCapState = 0
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMax = 
@@ -71,34 +76,41 @@
 			m_flEndTime_min = 1000000000.000000
 			m_flEndTime_max = 1000000000.000000
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_nOpEndCapState = 1
 			m_Rate = -24.000000
 		},
+		
 		{
 			_class = "C_OP_EndCapTimedDecay"
 			m_flDecayTime = 0.600000
 		},
+		
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_flOutput = 0.000000
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flLerpTime = 0.600000
 		},
+		
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_flLerpTime = 0.600000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_flInitialSpeedMax = 320.000000
@@ -107,11 +119,19 @@
 			m_bEvenDistribution = true
 			m_flInitialRadius = 30.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 44.000000
 			m_flRadiusMin = 34.000000
 		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMax = 155
+			m_nAlphaMin = 155
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMax = 
@@ -127,28 +147,26 @@
 				75.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMax = 155
-			m_nAlphaMin = 155
-		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_bActiveRange = true
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_nInputMax = 1
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_bActiveRange = true
 			m_flOutputMax = 0.000000
 			m_flOutputMin = 1.000000
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_nInputMax = 79
 			m_nInputMin = 78
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -164,6 +182,7 @@
 				32.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RemapCPtoVector"
 			m_vOutputMax = 
@@ -172,7 +191,7 @@
 				1.000000,
 				1.000000,
 			]
-			m_nFieldOutput = 6
+			m_nFieldOutput = "6"
 			m_vInputMax = 
 			[
 				1.000000,
@@ -184,17 +203,27 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 80
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 80.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_fFalloffPower = 0.000000
-			m_fForceAmount = -800.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -800.000000
+			}
 			m_nOpEndCapState = 1
 			m_vecComponentScale = 
 			[
@@ -204,4 +233,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

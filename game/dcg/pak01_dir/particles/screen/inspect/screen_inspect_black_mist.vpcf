@@ -1,15 +1,17 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flAnimationRate = 0.200000
 			m_hTexture = resource:"materials/particle/smoke/steam/steam.vtex"
 			m_flSourceAlphaValueToMapToZero = 0.560000
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flAnimationRate = 0.500000
@@ -21,13 +23,16 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.300000
 		},
+		
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_nFieldOutput = "7"
@@ -35,16 +40,20 @@
 			m_flLerpTime = 0.000000
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.900000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -56,10 +65,12 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 1.500000
 		},
+		
 		{
 			_class = "C_OP_InheritFromParentParticles"
 			m_nFieldOutput = "6"
@@ -67,21 +78,25 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.800000
 			m_fLifetimeMax = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 15.000000
 			m_flRadiusRandExponent = 3.000000
 			m_flRadiusMax = 20.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_flDegreesMax = 30.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -100,30 +115,18 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 1
 		},
-		{
-			_class = "C_INIT_VelocityRandom"
-			m_LocalCoordinateSystemSpeedMin = 
-			[
-				2.000000,
-				0.000000,
-				0.000000,
-			]
-			m_LocalCoordinateSystemSpeedMax = 
-			[
-				2.000000,
-				0.000000,
-				0.000000,
-			]
-		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 50
 			m_nAlphaMax = 150
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_vecMin = 
@@ -140,6 +143,23 @@
 			]
 			m_bLocalSpace = true
 		},
+		
+		{
+			_class = "C_INIT_VelocityRandom"
+			m_LocalCoordinateSystemSpeedMin = 
+			[
+				2.000000,
+				0.000000,
+				0.000000,
+			]
+			m_LocalCoordinateSystemSpeedMax = 
+			[
+				2.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -159,17 +179,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 30.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 30.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -186,6 +213,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_POINT_FOLLOW"
@@ -208,4 +236,6 @@
 		},
 	]
 	m_flConstantRadius = 1.000000
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

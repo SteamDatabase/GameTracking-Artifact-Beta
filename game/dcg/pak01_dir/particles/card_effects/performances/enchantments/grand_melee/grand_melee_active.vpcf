@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -8,6 +8,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_hTexture = resource:"materials/particle/beam_energy_01.vtex"
@@ -24,36 +25,32 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
-		{
-			_class = "C_OP_SetControlPointRotation"
-			m_nCP = 2
-			m_vecRotAxis = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-			]
-		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.100000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_bXYVelocityOnly = false
@@ -62,6 +59,7 @@
 			m_flPitch = 90.000000
 			m_flInitialRadius = 1.200000
 		},
+		
 		{
 			_class = "C_INIT_RemapInitialDirectionToCPToVector"
 			m_nFieldOutput = "21"
@@ -70,17 +68,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 10.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -108,23 +113,42 @@
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/grand_melee/grand_melee_active_endcap.vpcf"
 			m_bEndCap = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/grand_melee/grand_melee_glow.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/grand_melee/grand_melee_active_waves.vpcf"
 			m_bDisableChild = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/grand_melee/grand_melee_active_smoke.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/enchantments/grand_melee/grand_melee_active_streaks.vpcf"
 			m_bDisableChild = true
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetControlPointRotation"
+			m_nCP = 2
+			m_vecRotAxis = 
+			[
+				1.000000,
+				1.000000,
+				1.000000,
+			]
 		},
 	]
 }

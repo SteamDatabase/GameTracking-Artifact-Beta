@@ -1,0 +1,137 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_controlPointConfigurations = 
+	[
+		
+		{
+			m_name = "preview"
+			m_drivers = 
+			[
+				
+				{
+					m_iAttachType = "PATTACH_POINT_FOLLOW"
+					m_vecOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_angOffset = 
+					[
+						0.000000,
+						0.000000,
+						0.000000,
+					]
+					m_entityName = "self"
+					m_attachmentName = "imp_attach"
+				},
+			]
+			m_previewState = 
+			{
+				m_previewModel = "models/character/imps/imp/imp.vmdl"
+				m_sequenceName = "dcg_card_imp_player_idle_headshake"
+				m_materialGroupName = "imp_blue"
+			}
+		},
+	]
+	m_Operators = 
+	[
+		
+		{
+			_class = "C_OP_Decay"
+		},
+		
+		{
+			_class = "C_OP_InterpolateRadius"
+			m_flBias = 0.100000
+			m_flStartScale = 2.000000
+		},
+		
+		{
+			_class = "C_OP_FadeOutSimple"
+			m_flFadeOutTime = 1.000000
+		},
+		
+		{
+			_class = "C_OP_OscillateScalar"
+			m_RateMin = -11.000000
+			m_RateMax = 11.000000
+			m_FrequencyMin = 0.125000
+			m_FrequencyMax = 0.500000
+			m_nField = "4"
+			m_flOscAdd = 0.100000
+		},
+	]
+	m_Renderers = 
+	[
+		
+		{
+			_class = "C_OP_RenderSprites"
+			m_hTexture = resource:"materials/particle/particle_flares/particle_flare_001.vtex"
+			m_bAdditive = true
+			VisibilityInputs = 
+			{
+				m_flCameraBias = 2.000000
+			}
+			m_flOverbrightFactor = 2.000000
+			m_flSourceAlphaValueToMapToZero = 0.278000
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers = 
+	[
+		
+		{
+			_class = "C_INIT_CreateWithinSphere"
+		},
+		
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMin = 5
+			m_nSequenceMax = 5
+		},
+	]
+	m_Emitters = 
+	[
+		
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
+		},
+	]
+	m_nMaxParticles = 1
+	m_ConstantColor = 
+	[
+		255,
+		236,
+		179,
+		255,
+	]
+	m_ConstantNormal = 
+	[
+		1.000000,
+		0.000000,
+		0.000000,
+	]
+	m_Children = 
+	[
+		
+		{
+			m_ChildRef = resource:"particles/character/imp/imp_headshake_dust.vpcf"
+		},
+		
+		{
+			m_ChildRef = resource:"particles/character/imp/imp_headshake_feathers.vpcf"
+		},
+	]
+	m_flConstantLifespan = 0.300000
+	m_nBehaviorVersion = 10
+	m_nFirstMultipleOverride_BackwardCompat = 1
+	m_flConstantRadius = 8.000000
+	m_pszTargetLayerID = "postvignette"
+}

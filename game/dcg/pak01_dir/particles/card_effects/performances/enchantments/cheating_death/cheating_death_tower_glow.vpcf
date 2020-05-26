@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -14,6 +14,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flSelfIllumAmount = 1.000000
@@ -22,6 +23,7 @@
 			m_flOverbrightFactor = 0.250000
 			m_hTexture = resource:"materials/particle/particle_glow_06.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flSelfIllumAmount = 1.000000
@@ -33,53 +35,44 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.100000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.800000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_bEaseInAndOut = true
 			m_flEndScale = 0.750000
 		},
+		
 		{
 			_class = "C_OP_RemapDotProductToScalar"
-			m_nFieldOutput = 18
+			m_nFieldOutput = "18"
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				10.000000,
-			]
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_OP_RemapDotProductToScalar"
 			m_nInputCP2 = 1
-			m_nFieldOutput = 26
+			m_nFieldOutput = "26"
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_RemapAverageScalarValuetoCP"
-			m_nOutControlPointNumber = 2
-			m_nField = 26
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_OP_RemapCPtoVector"
 			m_nCPInput = 2
-			m_nFieldOutput = 21
+			m_nFieldOutput = "21"
 			m_vInputMax = 
 			[
 				1.000000,
@@ -94,18 +87,21 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_RampScalarSpline"
 			m_RateMin = -20.000000
 			m_RateMax = 20.000000
-			m_nField = 5
+			m_nField = "5"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -121,6 +117,15 @@
 				-1000.000000,
 			]
 		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		
+		{
+			_class = "C_INIT_RandomRotationSpeed"
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -136,30 +141,32 @@
 				4.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomRotation"
-		},
-		{
-			_class = "C_INIT_RandomRotationSpeed"
-		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_flConstantLifespan = 0.700000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -179,4 +186,27 @@
 			]
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				10.000000,
+			]
+			m_bDisableOperator = true
+		},
+		
+		{
+			_class = "C_OP_RemapAverageScalarValuetoCP"
+			m_nOutControlPointNumber = 2
+			m_nField = "26"
+			m_bDisableOperator = true
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

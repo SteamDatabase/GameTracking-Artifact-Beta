@@ -7,6 +7,7 @@
   <Panel hittest="false">
     <Panel class="topLine">
       <Label id="TitleLabel" class="TitleFont" text="#DCG_Inspect_Takeover_Title"/>
+      <Label id="ActionHistoryLabel" class="TitleFont" text="#DCG_Inspect_Takeover_ActionHistory"/>
       <Panel class="setAndNamePanel">
         <Panel class="setAndNamePanel2">
           <DCGSetIcon id="setIcon"/>
@@ -23,6 +24,10 @@
         <Panel class="middleSectionRightBackground"/>
       </Panel>
       <Panel class="middleSectionForeground">
+        <Panel id="ActionHistory">
+          <Panel id="HistoryList">
+          </Panel>
+        </Panel>
         <Panel id="modifiers">
           <Panel class="modifierList" id="damageBonusModifiers" hittest="true">
             <Label class="modifierHeader" text=""/>
@@ -40,6 +45,11 @@
               <Panel class="attributeIcon" id="healthIcon" />
               <Label class="attributeName" text="#DCG_Glossary_Health_Title"/>
               <Label class="attributeValue" text="{i:healthAmount}"/>
+            </Panel>
+            <Panel class="attributePanel" id="Power" onmouseover="UIShowInspectAttributeTooltip( #DCG_Hotkeys_Tooltip_CameraZoom, BindingsTooltip)" onmouseout="UIHideInspectAttributeTooltip()">
+              <Panel class="attributeIcon" id="attackIcon" />
+              <Label class="attributeName" text="[Power] Counters"/>
+              <Label class="attributeValue" text="{i:powerCounterQuantity}"/>
             </Panel>
             <Panel class="attributePanel" id="cleave" onmouseover="UIShowInspectAttributeTooltip( #DCG_Hotkeys_Tooltip_CameraZoom, BindingsTooltip)" onmouseout="UIHideInspectAttributeTooltip()">
               <Panel class="attributeIcon" id="cleaveIcon" />
@@ -128,8 +138,6 @@
         </Panel>
         <Panel id="CardTypeLine">
           <Label class="cardTypeLineText" text="#DCG_CardType_FullDescription"  html="true"/>
-        </Panel>
-        <Panel id="CardTypeLine">
           <Label class="cardTypeText" id="cardReasonActivatedAbility" text="#DCG_CardType_ActivatedAbilityOf" html="true"/>
           <Label class="cardTypeText" id="cardReasonIncluded" text="#DCG_CardType_IncludedBy" html="true"/>
           <Label class="cardTypeText" id="cardReasonReferenced" text="#DCG_CardType_ReferencedBy" html="true"/>

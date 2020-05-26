@@ -1,0 +1,77 @@
+"a01m01"
+{
+	"name"		"a01m01_title"
+	"description"	"a01m01_desc"
+	"sections"
+	{
+		"part1"
+		{
+			"rules"
+			{
+				// All rules and their default values
+				"deck_player"
+				{
+					"use_deck"					"RTFACTJQYN7rkCBScBZRiK3wQ4XQEBrd0BkZetAR8CCgsMDr0BNQkGrAQMOwVhMDFtMDFfcGxheWVy"
+					"allow_user_decks"			"0"
+				}
+				"deck_ai"
+				{
+					"use_deck"					"ADCJSgJJbkCwwVF0wSyE7y6ApKpB4+pCKEEYTAxbTAxX2Fp"
+					"allow_user_decks"			"0"
+				}
+				
+				//"tower2_improvements_player"
+				//{
+				//	"10291" "1"
+				//}			
+
+				"set1"							"1" // needed for the shop to work properly
+
+				"tower1_health_ai"				"10"
+				"tower2_health_ai"				"10"
+				"tower3_health_ai"				"10"
+				"ancient1_health_ai"			"20"
+				"ancient2_health_ai"			"20"
+				"ancient3_health_ai"			"20"
+				
+				//"initial_heroes"				"1"
+				//"initial_heroes_ai"				"1"
+				//"creeps_first_turn"				"1"
+				//"creeps_first_turn_ai"			"1"
+				//"creeps_per_turn"				"1"
+				//"creeps_per_turn_ai"			"1"
+
+				"no_shotclock"							"1"
+				"is_puzzle"								"1"
+				"dcg_player_auto_pass_no_actions"		"1"
+				//"scale_ai_difficulty"					"0.1"
+				
+				"dcg_shop_blacklist"			"*"
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"auto"			"load_vmap pve/a01m01"
+					">"				"goto intro_dialog"					
+				}
+				
+				"intro_dialog"
+				{
+					"on_all_heroes_deployed"		"npehelper #DCG_a01m01_InGame_Tres_01 cardID 10069"
+					"> 2.5"							"npehelper #DCG_a01m01_InGame_Marcus_02 cardID 10852"
+					"> 5.0"							"npehelper #DCG_a01m01_InGame_Rix_03 cardID 10842"
+					"> 7.5"							"npehelper remove cardID 10069"
+					"> 8.5"							"npehelper remove cardID 10852"
+					"> 9.5"							"npehelper remove cardID 10842"
+					"> 9.5"							"goto end_intro_dialog"
+				}
+				
+				"end_intro_dialog"
+				{
+					"auto"							"npehelper remove"
+				}
+			}
+		}
+	}
+}

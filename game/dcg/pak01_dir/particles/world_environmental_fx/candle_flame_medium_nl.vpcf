@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -28,24 +28,30 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_bUseTexture = true
 			m_flStartFalloff = 0.010000
 			m_flAlphaScale = 5.000000
-			m_ColorScale = 
-			[
-				249,
-				190,
-				121,
-			]
 			m_flRadiusScale = 6.000000
 			m_bDisableOperator = true
 			m_hTexture = resource:"materials/particle/particle_light_mask_tower_good.vtex"
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					249,
+					190,
+					121,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -56,17 +62,20 @@
 			]
 			m_fDrag = 0.100000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 1.000000
 			m_fLifetimeMin = 0.900000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 2.000000
@@ -74,18 +83,26 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 0.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/candle_flame_a_medium.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/candle_flame_c_medium.vpcf"
 		},
 	]
+	m_nBehaviorVersion = 4
 }

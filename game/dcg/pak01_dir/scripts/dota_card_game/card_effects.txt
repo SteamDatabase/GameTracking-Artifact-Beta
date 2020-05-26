@@ -42,6 +42,7 @@
 	//		kStronghold,
 	//		kPathing,
 	// 9 camera_orientation
+	// 10 custom
 
 	//
 	//
@@ -96,28 +97,28 @@
 		"destroy_immediately"	"0"
 	}
 
-	"willDieInCombat"
-	{
-		"particle_system"	"particles/card_effects/status_effects/card_dying_creep_top.vpcf"
-		"apply_when_attribute_exists"	"internal: guaranteed death"
-		"attach_type"	"pattach_point_follow"
-		"attach_point"	"card_origin"
-		"destroy_immediately"	"0"
-		"only_non_hero"		"1"
-		"not_in_inspect_view" "1"
-	}
-
-	"willDieInCombatHero"
-	{
-		"particle_system"	"particles/card_effects/status_effects/card_dying_hero_top.vpcf"
-		"apply_when_attribute_exists"	"internal: guaranteed death"
-		"attach_type"	"pattach_point_follow"
-		"attach_point"	"card_origin"
-		"destroy_immediately"	"0"
-		"only_hero"		"1"
-		"not_in_inspect_view" "1"
-		"not_in_fountain"		"1"
-	}
+//	"willDieInCombat"
+//	{
+//		"particle_system"	"particles/card_effects/status_effects/card_dying_creep_top.vpcf"
+//		"apply_when_attribute_exists"	"internal: guaranteed death"
+//		"attach_type"	"pattach_point_follow"
+//		"attach_point"	"card_origin"
+//		"destroy_immediately"	"0"
+//		"only_non_hero"		"1"
+//		"not_in_inspect_view" "1"
+//	}
+//
+//	"willDieInCombatHero"
+//	{
+//		"particle_system"	"particles/card_effects/status_effects/card_dying_hero_top.vpcf"
+//		"apply_when_attribute_exists"	"internal: guaranteed death"
+//		"attach_type"	"pattach_point_follow"
+//		"attach_point"	"card_origin"
+//		"destroy_immediately"	"0"
+//		"only_hero"		"1"
+//		"not_in_inspect_view" "1"
+//		"not_in_fountain"		"1"
+//	}
 
 	"mightDieInCombat"
 	{
@@ -1099,6 +1100,7 @@
 		"immediate_destroy_events"
 		{
 			"PE_CARD_CREEP_PLACEMENT_TARGET_END"	"1"
+			"PE_CARD_TARGETED_END"					"1"
 		}
 	}
 
@@ -1197,6 +1199,25 @@
 		}
 	}
 
+
+	////// State: A lane does not contain any valid targets for a card being hovered or dragged. //////
+	
+	"lane_hide_targets"
+	{
+		"particle_system"	"particles/board/default/lane_darkener.vpcf"
+		"attach_type"		"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_LANE_HIDE_TARGETS_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_LANE_HIDE_TARGETS_DISABLED"	"1"
+		}
+	}
 
 	////// Shop //////
 
@@ -2656,7 +2677,7 @@
 	{
 		"particle_system"	 "particles/board/dire/ancient/ancient_dire_ambient.vpcf"
 		"attach_type"		"pattach_point_follow"
-		"attach_point"		"root"
+		"attach_point"		"attach_root"
 		"destroy_immediately"	"0"
 		"play_endcap"		"1"
 
@@ -2776,4 +2797,345 @@
 			"PE_CARD_INSPECT_DISABLED"	"1"
 		}
 	}
+
+	"opponent_gesture_card_look"
+	{
+		"particle_system"   	"particles/card_effects/generic_event/generic_state_card_code_colored.vpcf"
+		"attach_type"       	"pattach_point_follow"
+		"attach_point"        	"card_origin"
+		"destroy_immediately"   "1"
+		"play_endcap"			"1"
+
+		"create_events"
+		{
+			"PE_GESTURE_LOOK"	"1"
+		}
+		"destroy_events"
+		{
+		}
+		"immediate_destroy_events"
+		{
+			"PE_GESTURE_STOP_LOOK"	"1"			
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"custom"
+				"x" "255"
+				"y" "255"
+				"z" "255"
+			}
+		}		
+	}
+
+	"opponent_gesture_card_drag"
+	{
+		"particle_system"   	"particles/card_effects/generic_event/generic_state_card_code_colored.vpcf"
+		"attach_type"       	"pattach_point_follow"
+		"attach_point"        	"card_origin"
+		"destroy_immediately"   "1"
+		"play_endcap"			"1"
+
+		"create_events"
+		{
+			"PE_GESTURE_DRAG"	"1"
+		}
+		"destroy_events"
+		{
+		}
+		"immediate_destroy_events"
+		{
+			"PE_GESTURE_STOP_DRAG"	"1"			
+		}
+		"control_points"
+		{
+			"1"
+			{
+				"type"	"custom"
+				"x" "255"
+				"y" "255"
+				"z" "255"
+			}
+		}				
+	}
+
+	"will_be_destroyed_by_deployment"
+	{
+		"particle_system"	"particles/card_effects/status_effects/card_dying_creep_top.vpcf"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_REPLACE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TARGET_PREVIEW_REPLACE_DISABLED"	"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}
+	}
+
+	"card_action_target_beam"
+	{
+		"particle_system"   "particles/card_effects/generic_link/generic_link_v2.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"apply_to_all_drag_action_targets" "1"
+
+		"create_events"
+		{
+			"PE_CARD_ACTION_TARGET_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_ACTION_TARGET_DISABLED"	"1"
+		}
+
+		"control_points"
+		{
+			"0"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"1"
+			{
+				"type"			"target_orientation"
+				"attach_point"	"card_origin"
+			}
+			"2"
+			{
+				"type"			"custom"
+				"x" 			"128"
+				"y" 			"0"
+				"z" 			"0"
+			}
+
+		}
+	}
+
+	"click_action_target_beam"
+	{
+		"particle_system"   "particles/card_effects/generic_link/generic_link_v3.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"apply_to_all_click_action_targets" "1"
+
+		"create_events"
+		{
+			"PE_CLICK_ACTION_TARGET_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CLICK_ACTION_TARGET_DISABLED"	"1"
+		}
+
+		"control_points"
+		{
+			"0"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"1"
+			{
+				"type"			"target_orientation"
+				"attach_point"	"card_origin"
+			}
+			"2"
+			{
+				"type"			"custom"
+				"x" 			"128"
+				"y" 			"0"
+				"z" 			"0"
+			}
+
+		}
+	}
+
+	"card_automatic_targeting_beam_target"
+	{
+		"particle_system"   "particles/card_effects/generic_targeting/generic_targeting_card_flat.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"apply_to_all_automatic_targets" "1"
+
+		"create_events"
+		{
+			"PE_CARD_ACTION_AUTO_TARGET_SOURCE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_ACTION_AUTO_TARGET_SOURCE_DISABLED"	"1"
+			"PE_CARD_CAST_CANCELLED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+
+		"control_points"
+		{
+			"0"
+			{
+				"type"	"attach_origin_and_orientation"
+			}
+			"1"
+			{
+				"type"	"target_orientation"
+				"attach_point"	"card_origin"
+			}
+			"3"
+			{
+				// This needs to be passed down from code - red = negative, green = positive
+				// Going to set this inside the effect for now as the standard seafoam -ErikR
+				"type"			"custom"
+				"x" 			"255"
+				"y" 			"0"
+				"z" 			"0"
+			}
+		}
+	}
+
+	"card_automatic_targeting_beam_source"
+	{
+		"particle_system"			"particles/card_effects/generic_targeting/generic_targeting_card_source.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+
+		"create_events"
+		{
+			"PE_CARD_ACTION_AUTO_TARGET_SOURCE_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_ACTION_AUTO_TARGET_SOURCE_DISABLED"	"1"
+			"PE_CARD_CAST_CANCELLED"	"1"
+		}
+		"immediate_destroy_events"
+		{
+			"PE_CARD_CAST"	"1"
+		}
+	}
+
+
+	"card_replace_hero_with_hero"
+	{
+		"particle_system"	"particles/card_effects/status_effects/card_cheatdeath.vpcf"
+		"attach_type"	"pattach_point_follow"
+		"attach_point"	"card_origin"
+		"destroy_immediately"	"0"
+		"not_in_inspect_view" "1"
+
+		"create_events"
+		{
+			"PE_TARGET_PREVIEW_REPLACE_HERO_WITH_HERO_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TARGET_PREVIEW_REPLACE_HERO_WITH_HERO_DISABLED"	"1"
+			"PE_CARD_ACTION_DISABLED" 				"1"
+			"PE_CARD_TARGETED_END"					"1"
+			"PE_CARD_CAST"						"1"
+		}
+	}
+
+	"hud_gradient_local_player"
+	{
+		"particle_system"   "particles/ui/hud_gradient.vpcf"
+		"attach_type"		"pattach_worldorigin"
+		"destroy_immediately"	"0"
+		"create_events"
+		{
+			"PE_HUD_PLAYER_ACTIVE"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_HUD_PLAYER_INACTIVE"			"1"
+		}		
+	}
+
+	"hud_your_turn"
+	{
+		"particle_system"   "particles/ui/hud_msg_your_turn.vpcf"
+		"attach_type"		"pattach_worldorigin"
+		"destroy_immediately"	"1"
+		"create_events"
+		{
+			"PE_HUD_YOUR_TURN"	"1"
+		}
+	}
+
+	"hud_go_again"
+	{
+		"particle_system"   "particles/ui/hud_msg_go_again.vpcf"
+		"attach_type"		"pattach_worldorigin"
+		"destroy_immediately"	"1"
+		"create_events"
+		{
+			"PE_HUD_GO_AGAIN"	"1"
+		}		
+	}
+
+	"caster_highlight_opponent"
+	{
+		"particle_system"   	"particles/card_effects/generic_event/generic_precast_card.vpcf"
+		"attach_type"			"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"			"0"
+
+		"create_events"
+		{
+			"PE_CASTER_STARTING_CASTING"	"1"
+		}
+		"destroy_events"
+		{
+			//"PE_CASTER_FINISHED_CASTING"	"1"
+		}		
+
+		"control_points"
+		{
+			"3"
+			{
+				"type"	"card_color"
+			}
+		}
+	}
+
+	"caster_highlight_local"
+	{
+		"particle_system"   	"particles/card_effects/generic_event/generic_precast_card.vpcf"
+		"attach_type"			"attach_origin_and_orientation"
+		"destroy_immediately"	"0"
+		"play_endcap"			"0"
+
+		"create_events"
+		{
+			"PE_CASTER_STARTING_CASTING_LOCAL"	"1"
+		}
+		"destroy_events"
+		{
+			//"PE_CASTER_FINISHED_CASTING"		"1"
+		}		
+
+		"control_points"
+		{
+			"3"
+			{
+				"type"	"card_color"
+			}
+		}
+	}
+
 }

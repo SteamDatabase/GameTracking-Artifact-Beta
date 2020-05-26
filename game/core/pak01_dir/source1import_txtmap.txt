@@ -84,6 +84,10 @@
 	"assettype"	"bin" 
 	"assettype"	"tga"
 	"assettype"	"filelist"
+	"assettype"	"svg"
+	"assettype"	"vtf"
+	"assettype"	"js"
+	"assettype"	"conf" // fontconfig
 
 	".filelist"
 	{
@@ -157,7 +161,7 @@
 
 	"models\headcrab.mdl"	
 	{
-		"mod"	"hl3"
+		"mod"	"hlvr"
 		"importfunc"	"ImportMDLtoVMDL"
 		"getSkinningFromLod0" "1"
 	}
@@ -221,6 +225,14 @@
 	"splitscreen_config.txt"	
 	{
 		"importfunc"	"integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+
+	".js"
+	{
+		"importfunc"	"ImportJS"
+		"mod"	"csgo"
 		"src" "IMPORT_GAME"
 		"dest" "EXPORT_GAME"
 	}
@@ -389,6 +401,27 @@
 		"importfunc"	"ImportVguiVMTToVMat"
 	}
 
+	// CSGO specific 
+	"materials\sprites\scope_arc.vmt"	
+	{
+		"mod"			"csgo"
+		"importfunc"	"ImportVguiVMTToVMat"
+	}
+
+	// CSGO specific 
+	"materials\sprites\scope_line_blur.vmt"	
+	{
+		"mod"			"csgo"
+		"importfunc"	"ImportVguiVMTToVMat"
+	}
+
+	// CSGO specific 
+	"materials\overlays\scope_lens.vmt"	
+	{
+		"mod"			"csgo"
+		"importfunc"	"ImportVguiVMTToVMat"
+	}
+
 	".vmt"
 	{
 		"importfunc"	"ImportVMTToVMat"
@@ -532,6 +565,20 @@
 		"dest" "GAME"
 	}
 	
+	// CSGO econ images
+	"\resource\Flash\econ\*.png"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaEconImage"
+	}
+	
+	// CSGO legacy ui icons
+	"\resource\Flash\images\ui_icons\*.png"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaLegacyUiIcon"
+	}
+
 	// Flash content assets
     // all content moves up to leafiest mod.
 	// TODO: should images and video content be lowercased as in the game dir?
@@ -548,6 +595,11 @@
 		"importfunc"	"ImportUpdateVguiResourceRefs"
 	}
 
+	"\resource\*events.res"
+	{
+		"importfunc"	"ImportGameEvents"
+	}
+
 	"\resource\*scheme.res"
 	{
 		"importfunc"	"ImportUpdateVguiResourceRefs"
@@ -561,6 +613,19 @@
 	"\resource\dota_english.txt"	
 	{
 		"importfunc"	"ImportDotaEnglish"
+	}	
+
+	// CSGO overhead maps for hud radar
+	"\resource\overview\*.psd"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaOverheadMap"
+	}
+	
+	// CSGO localization files
+	"\resource\csgo_*.txt"	
+	{
+		"importfunc"	"ImportCsgoLocalization"
 	}	
 
 	// *.vfonts
@@ -580,7 +645,7 @@
 	{
 		"importfunc"	"ImportVCD"
 		"src" "IMPORT_GAME"
-		"dest" "EXPORT_GAME"
+		"dest" "EXPORT_CONTENT"
 	}
 
 	// Anything 'game_sounds' in sound dir
@@ -828,6 +893,14 @@
 		"dest" "EXPORT_GAME"
 	}
 
+	"\scripts\talker\*.txt"
+	{
+		"mod"	"csgo"
+		"importfunc"	"integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+
 	// TODO vscripts
 	// Any text file in the scripts dir that is not handled above should be integged and have any resource refs updated.
 	"\scripts\*.txt"
@@ -841,4 +914,76 @@
 		"src" "IMPORT_GAME"
 		"dest" "EXPORT_GAME"
 	}
+	
+	// panorama *.vfont
+	"\panorama\fonts\*.vfont"
+	{
+		"importfunc" "ImportPanoramaVFont"
+	}
+
+	// panorama font config
+	"\panorama\fonts\fonts.conf"
+	{
+		"mod"	"csgo"
+		"importfunc"	"ImportPanoramaFontConfig"
+	}
+
+	// panorama images
+	"\materials\panorama\images"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaImage"
+	}
+
+	// panorama css
+	"\panorama\styles\*.css"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaCss"
+	}
+
+	// panorama xml
+	"\panorama\layout\*.xml"
+	{
+		"mod"	"csgo"
+		"importfunc" "ImportPanoramaXml"
+	}
+
+		// panorama xml
+	"\panorama\videos\*.webm"
+	{
+		"mod"	"csgo"
+		"importfunc"	"Integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+
+	// panorama key bindings
+	"\panorama\*keybinds.cfg"
+	{
+		"mod"	"csgo"
+		"importfunc"	"Integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+
+
+	// csgo nav placenames
+	"\NavPlace.db"
+	{
+		"mod"	"csgo"
+		"importfunc"	"Integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+	
+	// csgo autobuy and rebuy defaults
+	"\*buy.txt"
+	{
+		"mod"	"csgo"
+		"importfunc"	"Integ"
+		"src" "IMPORT_GAME"
+		"dest" "EXPORT_GAME"
+	}
+
 }

@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 4
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			VisibilityInputs = 
@@ -17,23 +18,29 @@
 			m_hTexture = resource:"materials/particle/particle_flares/aircraft_blue.vtex"
 			m_nOrientationType = 2
 		},
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flRadiusScale = 2.000000
 			m_flAlphaScale = 4.000000
 			m_flStartFalloff = 0.100000
 			m_hTexture = resource:"materials/particle/particle_flares/aircraft_blue.vtex"
-			m_ColorScale = 
-			[
-				255,
-				255,
-				255,
-			]
 			m_bDisableOperator = true
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -43,14 +50,17 @@
 				2.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 4.000000
 			m_flStartScale = 0.650000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.850000
@@ -58,11 +68,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.150000
 			m_fLifetimeMin = 0.100000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fSpeedMin = 24.000000
@@ -80,11 +92,13 @@
 				6.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 6.000000
 			m_flRadiusMax = 8.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -102,9 +116,11 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -120,23 +136,31 @@
 				0.200000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 3
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -156,4 +180,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

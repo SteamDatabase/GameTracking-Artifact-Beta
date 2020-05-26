@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 128
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -13,27 +14,36 @@
 			m_bSaturateColorPreAlphaBlend = false
 			m_hTexture = resource:"materials/particle/sparks/sparks.vtex"
 			m_flMaxLength = 10.000000
-			m_flRadiusScale = 0.500000
 			m_flFinalTextureScaleV = -1.000000
 			m_flFinalTextureOffsetV = 1.000000
+			m_flRadiusScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.100000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_bAdditive = true
@@ -53,6 +63,7 @@
 			m_fl4NoiseScale = 0.500000
 			m_bOffset = true
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -67,11 +78,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.300000
 			m_fLifetimeMax = 0.800000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -89,21 +102,44 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.500000
 		},
-		{
-			_class = "C_INIT_RandomYawFlip"
-		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMin = 50
 			m_nSequenceMax = 63
 		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		
+		{
+			_class = "C_INIT_RandomRotationSpeed"
+			m_flDegreesMin = 120.000000
+			m_flDegreesMax = 180.000000
+		},
+		
+		{
+			_class = "C_INIT_CreateWithinSphere"
+			m_fRadiusMin = 0.500000
+			m_fRadiusMax = 1.000000
+			m_fSpeedMin = 10.000000
+			m_fSpeedMax = 30.000000
+		},
+		
+		{
+			_class = "C_INIT_RandomYawFlip"
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_flNoiseScaleLoc = 0.800000
@@ -120,14 +156,7 @@
 				10.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomRotation"
-		},
-		{
-			_class = "C_INIT_RandomRotationSpeed"
-			m_flDegreesMin = 120.000000
-			m_flDegreesMax = 180.000000
-		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -143,28 +172,32 @@
 				2.000000,
 			]
 		},
-		{
-			_class = "C_INIT_CreateWithinSphere"
-			m_fRadiusMin = 0.500000
-			m_fRadiusMax = 1.000000
-			m_fSpeedMin = 10.000000
-			m_fSpeedMax = 30.000000
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 600.000000
-			m_flEmissionDuration = 0.200000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.200000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 600.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -181,6 +214,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -201,4 +235,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 8
 }

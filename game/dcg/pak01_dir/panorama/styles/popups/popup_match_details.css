@@ -1,6 +1,10 @@
-@import url("file://{resources}/styles/dota_card_game_styles.css");
+PopupMatchDetails.PopupPanel
+{
+	width: 1010px;
+    min-height: 580px;
+}
 
-//TEMP - Disable transforming form now due to asserts
+/*//TEMP - Disable transforming form now due to asserts
 .PopupPanel.Hidden
 {
 	opacity: 1.0;
@@ -8,20 +12,75 @@
 	transform: translateY( 0px );
     visibility: collapse;
 }
+*/
+
+#ClosePopupButton
+{
+    margin-top: 16px;
+    margin-right: -16px; //OM: Sorry world...
+    width: 28px;
+    height: 28px;
+}
+
+.DeckLoader
+{
+    margin-bottom: 20px;
+}
+
+.Player1Victory #Player1DeckLoader
+{
+    box-shadow: #5194f05a -6px -6px 16px 12px;
+}
+
+.Player2Victory #Player2DeckLoader
+{
+    box-shadow: #5194f05a -6px -6px 16px 12px;
+}
 
 .MainPanel
 {
-	width: 1100px;
-	height: 800px;
+	width: 100%;
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-bottom: 32px;
 	horizontal-align: center;
 	vertical-align: center;
 	flow-children: down;
-	
+	visibility: visible;
 }
+
+.Loading .MainPanel
+{
+    visibility: collapse;
+}
+
+.MatchLoading
+{
+    visibility: collapse;
+}
+
+.MatchLoading .Spinner
+{
+    vertical-align: center;
+    horizontal-align: center;
+}
+
+.Loading .MatchLoading
+{
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    flow-children: down;
+    visibility: visible;   
+}
+
 
 .TitleBar
 {
     width: 100%;
+    margin-bottom: 32px;
+    margin-top: 20px;
 }
 
 .Footer
@@ -29,16 +88,6 @@
     width: 100%;
     flow-children: down;
 }
-
-.HorizontalBar
-{
-    border: 2px solid #444444;
-    width: 95%;
-    height: 1px;
-    horizontal-align: center;
-    margin-top:20px;
-}
-
 
 #StatusPanel
 {
@@ -70,267 +119,244 @@
     opacity: 0;
 }
 
-#BodyPanel
+.DeckAndTowerContainer
 {
-	width: 100%;
-	horizontal-align: left;
-	vertical-align: center;
-	flow-children: down;
+    flow-children: down;
+}
+
+.DetailLabel
+{
+    width: 180px;
+    color: uiLightGrey;
+    font-size: 18px;
+    font-weight: light;
+    text-transform: uppercase;
+    text-overflow: shrink;
+    vertical-align: center;
+}
+
+.DetailText
+{
+    color: uiNeutralGrey;
+    font-size: 18px;
+    font-weight: light;
+    text-overflow: shrink;  
+    vertical-align: center;
+}
+
+#GauntletNameRow
+{
+    visibility: collapse;
+}
+
+.IsGauntlet #GauntletNameRow
+{
+    visibility: visible;
+}
+
+.MatchDetailsBlock
+{
+    flow-children: right;
+    background-color: rgba(0, 0, 0, 0.473);
+    width: 100%;
+    padding: 30px;
+}
+
+.MatchDetailsColumn
+{
+    flow-children: down;
+    width: 380px;
+    margin-right: 50px;
+}
+
+.MatchDetailsRow
+{
+    flow-children: right;
+    margin-bottom: 10px;
+}
+
+.PlayerColumnsContainer
+{
+    margin-top: 48px;
+    flow-children: right;
 }
 
 .MatchInfoBlock
 {
     width: 100%;
-    height: 600px;
+    horizontal-align: left;
+    vertical-align: center;
+    flow-children: right;
+    margin-bottom: 20px;
 }
 
 #MatchIDLabel
 {
     horizontal-align: left;
-    color: white;
-    font-size: 40px;
+    color: uiLightGrey;
+    font-size: 32px;
+    font-weight: light;
+    text-overflow: shrink;
 }
 
-#MatchDateLabel
+#Player2SkillRankImage
 {
-    font-size: 14px;
-    color: #666666;
-    margin-bottom: 5px;
-}
-
-
-
-#BodyButton{
-    background-color:gradient( linear, 0% 0%, 0% 100%, from( #5a6c75 ), to( #3d4a50 ) );
-    border-top:1px solid #ffffff44;
-    border-right:1px solid #4e5b60;
-    border-left:1px solid #4e5b60;
-    border-bottom:1px solid #00000088;
-    padding:2px;
     
-    width:120px;
-}
-
-.BodyButton Label
-{
-    color: white;
-    horizontal-align:center;
-    vertical-align:middle;
-    width:100%;
-    margin-left:3px;
 }
 
 .PlayerColumn
 {
-    height: 100%;
+    flow-children: down;
+    horizontal-align: left;
 }
 
-.PlayerSide
+.PlayerStats
+{
+    flow-children: down;
+    min-height: 45px;
+    width: 100%;
+}
+
+.PlayerStatsRow
 {
     flow-children: right;
-    horizontal-align: center;
+    margin-left: 33px;
+    margin-bottom: 10px;
 }
 
 .PlayerTowers
 {
     horizontal-align: right;
-    flow-children: down;
+    flow-children: right;
 }
 
-.PlayerHeroes
-{    
-    flow-children:right;
-    horizontal-align:center; 
+#ReplayButton
+{
+    height: 32px;
+    width: 32px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: center;
+    background-image: url("file://{resources}/images/control_icons/replay_icon_psd.vtex");
+    margin-left: -2px;
 }
 
-.AncientImage,
 .TowerImage
 {
-	width: 60px;
-	height: 60px;
+	width: 30px;
+	height: 42px;
+	margin: 10px;
 
-	background-color: #00000066;
-	margin: 5px;
-
-    box-shadow: black -3px -3px 6px 6px;
-
-	background-image: url("s2r://panorama/images/dcg/card_artwork/tower_card_radiant_png.vtex");
-	background-size: 100% 100%;
+  background-size: 100% 100%;
 	background-repeat: no-repeat;
-	background-position: center;	
+	background-position: right;	
+}
+
+#Player1Towers .TowerImage
+{
+    background-image: url("s2r://panorama/images/hud/hud_tower_radiant_active_psd.vtex");
+}
+
+#Player2Towers .TowerImage
+{
+    background-image: url("s2r://panorama/images/hud/hud_tower_dire_active_psd.vtex");
 }
 
 .AncientImage
 {
-  	background-image: url("s2r://panorama/images/dcg/card_artwork/tower_card_ancient_png.vtex");
+  	background-image: url( "s2r://panorama/images/dcg/card_artwork/tower_card_ancient_png.vtex" );
 }
 
-.DestroyedX
+.Player1_t1Down #Player1Towers .Tower1.TowerImage,
+.Player1_t2Down #Player1Towers .Tower2.TowerImage,
+.Player1_t3Down #Player1Towers .Tower3.TowerImage
 {
-    margin: 5px;
-    width: 60px;
-    height: 60px;
-    visibility: collapse;
-    background-image: url("s2r://panorama/images/hud/hud_hero_x_png.vtex");
-  	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	background-position: center;	
+    background-image: url("s2r://panorama/images/hud/hud_ancient_radiant_psd.vtex");
 }
 
-.Player1_t1Down #Player1Towers .Tower1 .TowerImage,
-.Player1_t2Down #Player1Towers .Tower2 .TowerImage,
-.Player1_t3Down #Player1Towers .Tower3 .TowerImage,
-.Player1_t4Down #Player1Towers .Ancient .AncientImage,
-.Player2_t1Down #Player2Towers .Tower1 .TowerImage,
-.Player2_t2Down #Player2Towers .Tower2 .TowerImage,
-.Player2_t3Down #Player2Towers .Tower3 .TowerImage,
-.Player2_t4Down #Player2Towers .Ancient .AncientImage
+.Player2_t1Down #Player2Towers .TowerImage.Tower1,
+.Player2_t2Down #Player2Towers .TowerImage.Tower2,
+.Player2_t3Down #Player2Towers .TowerImage.Tower3,
 {
-    saturation: 0;
-}
-
-.Player1_t1Down #Player1Towers .Tower1 .DestroyedX,
-.Player1_t2Down #Player1Towers .Tower2 .DestroyedX,
-.Player1_t3Down #Player1Towers .Tower3 .DestroyedX,
-.Player1_t4Down #Player1Towers .Ancient .DestroyedX,
-.Player2_t1Down #Player2Towers .Tower1 .DestroyedX,
-.Player2_t2Down #Player2Towers .Tower2 .DestroyedX,
-.Player2_t3Down #Player2Towers .Tower3 .DestroyedX,
-.Player2_t4Down #Player2Towers .Ancient .DestroyedX
-{
-    visibility: visible;
-}
-
-.Player1_t1Down #Player1Towers .Tower1 Label,
-.Player1_t2Down #Player1Towers .Tower2 Label,
-.Player1_t3Down #Player1Towers .Tower3 Label,
-.Player1_t4Down #Player1Towers .Ancient Label,
-.Player2_t1Down #Player2Towers .Tower1 Label,
-.Player2_t2Down #Player2Towers .Tower2 Label,
-.Player2_t3Down #Player2Towers .Tower3 Label,
-.Player2_t4Down #Player2Towers .Ancient Label
-{
-    visibility: collapse;
-}
-
-
-.TowerPanel Label
-{
-    text-shadow: -3px -3px 6px 3 black;
-    horizontal-align: center;
-    vertical-align:bottom;
-    font-size:25px;
-    font-weight:bold;
-    color: yellow;
-}
-
-.TowerPanel.Ancient Label
-{
-    color: red;
-}
-
-.HeroImage
-{
-    height: 250px;
-    width: 170px;
-    background-position: 50% 0%;
-    background-size: 125% 100%;
-}
-
-DCGAvatarImage
-{
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.PlayerPanel
-{
-    horizontal-align: left;
-    flow-children: right;
-    vertical-align: center;
-    margin-left: 5px;
-}
-
-.PlayerPanel Label
-{
-    vertical-align: center;
-}
-
-.PlayerWinner
-{
-    visibility: collapse;
-    horizontal-align: center;
-    color:gold;
-    font-weight:bolder;
-    font-size:40px;
-    text-shadow: 0px 0px 6px 3.0 #858f2d;
-    margin: 10px;
-}
-
-.HeroGroup
-{
-    margin: 10px;
-    flow-children: down;
-}
-
-.Player1Won #Player1Winner,
-.Player2Won #Player2Winner
-{
-    visibility:visible;
-}
-
-.VersusRow
-{
-    height: 30px;
-    horizontal-align: center;
-    flow-children: right;
-}
-
-.VersusRow .HorizontalBar
-{
-    width: 500px;
-    vertical-align: center;
-    margin-top: 0px;
-    border-color: #888888;
-}
-
-.VersusRow Label
-{
-    vertical-align: center;
-    color: red;
-    margin-left: 10px;
-    margin-right: 10px;
-    text-shadow: 0px 0px 6px 3.0 #992222;
-}
-
-#MatchReplay
-{
-    margin-right: 30px;
+    background-image: url("s2r://panorama/images/hud/hud_ancient_dire_psd.vtex");
 }
 
 .PlayerTowerRow
 {
     flow-children: right;
     horizontal-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.MatchDetailsGroup
+.PlayerAvatarImage
 {
-    flow-children: down;
-    horizontal-align: right;
+    height: 32px;
+    width: 32px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: center;
+    margin-right: 10px;   
 }
 
-#Player1Towers,
-.Player2.PlayerPanel
+.SkillRankImage
 {
-    vertical-align: bottom;
+    height: 32px;
+    width: 32px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: center;
+    margin-right: 10px;
 }
 
-#Player2Towers,
-.Player1.PlayerPanel
+.FormatConstructed .SkillRankImage 
 {
+    background-image: url("s2r://panorama/images/tournaments/constructed_skill_icon_psd.vtex");
+}
+
+.FormatDraft .SkillRankImage
+{
+    background-image: url("s2r://panorama/images/tournaments/draft_skill_icon_psd.vtex");
+}
+
+.FormatOther #SkillRankRow
+{
+    visibility: collapse;
+}
+
+.Player1IsBot #Player1ViewProfile,
+.Player2IsBot #Player2ViewProfile
+{
+    visibility: collapse;
+}
+
+.TowerPanel
+{
+    flow-children: right;
+	horizontal-align: center;
+	vertical-align: center;
+	padding: 12px;
+    width: 110px;
+}
+
+.TowerPanel Label
+{
+    horizontal-align: center;
+	vertical-align: center;
+    font-size: 25px;
+}
+
+#VersusLabel
+{
+    margin-top: 48px;
+    margin-left: 32px;
+    margin-right: 32px;
+    color: uiLightGrey;
+    font-size: 36px;
+    text-transform: uppercase;
+    text-overflow: shrink;
     vertical-align: top;
 }
-
-

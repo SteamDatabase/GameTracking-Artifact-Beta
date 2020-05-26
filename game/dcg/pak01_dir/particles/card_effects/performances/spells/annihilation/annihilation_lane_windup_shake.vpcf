@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 16
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderScreenShake"
 			m_nFilterCP = -1
@@ -12,40 +13,56 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_Rate = 64.000000
-			m_nField = 7
+			m_nField = "7"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_Rate = 0.300000
 			m_flEndTime = 2.000000
-			m_nField = 16
+			m_nField = "16"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_LerpScalar"
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_flOutput = 160.000000
 			m_bDisableOperator = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nFieldOutput = "16"
+			m_nAlphaMin = 64
+			m_nAlphaMax = 64
+			m_bDisableOperator = true
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -63,22 +80,17 @@
 			m_nControlPointNumber = 1
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomAlpha"
-			m_nFieldOutput = 16
-			m_nAlphaMin = 64
-			m_nAlphaMax = 64
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_flInputMax = 2.500000
 			m_flOutputMin = 0.100000
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flInputMax = 2.500000
 			m_flOutputMin = 0.250000
 			m_flOutputMax = 0.500000
@@ -86,33 +98,67 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
-			m_flStartTime = 1.000000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
-			m_flStartTime = 1.800000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.800000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
-			m_flStartTime = 2.400000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 2.400000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_flConstantRadius = 1000.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -129,6 +175,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -150,4 +197,6 @@
 		},
 	]
 	m_flConstantLifespan = 2.000000
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 2
 }

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -13,6 +13,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -24,11 +25,12 @@
 			m_bSaturateColorPreAlphaBlend = false
 			m_hTexture = resource:"materials/particle/fire_particle_4/fire_particle_4_flat.vtex"
 			m_flAnimationRate = 1.000000
-			m_bParticleFeathering = true
+			m_nFeatheringMode = "PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL"
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -38,51 +40,60 @@
 				40.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.125000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.400000
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_fl4NoiseScale = 0.001310
-			m_nFieldOutput = 4
+			m_nFieldOutput = "4"
 			m_flOutputMax = 130.000000
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_bAdditive = true
 			m_flOutputMax = 90.000000
-			m_nFieldOutput = 12
+			m_nFieldOutput = "12"
 			m_fl4NoiseScale = 0.001100
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.400000
 			m_flBias = 0.450000
 			m_flStartScale = 0.100000
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_nOpEndCapState = 1
 			m_Rate = 150.000000
 			m_flEndTime = 9999.000000
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_nOpEndCapState = 1
-			m_nField = 16
+			m_nField = "16"
 			m_Rate = -6.000000
 			m_flEndTime = 99999.000000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_flFadeEndTime = 0.750000
@@ -95,6 +106,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_LockToBone"
 			m_flLifeTimeFadeEnd = 1.000000
@@ -102,11 +114,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 2.160000
 			m_fLifetimeMin = 0.425000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -125,9 +139,10 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
-			m_nFieldOutput = 22
+			m_nFieldOutput = "22"
 			m_ColorMax = 
 			[
 				47,
@@ -144,6 +159,47 @@
 			]
 			m_bDisableOperator = true
 		},
+		
+		{
+			_class = "C_INIT_CreationNoise"
+			m_flOutputMax = 20.000000
+			m_flOutputMin = 5.000000
+			m_flNoiseScale = 0.500000
+			m_flNoiseScaleLoc = 0.010000
+		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		
+		{
+			_class = "C_INIT_RandomYaw"
+			m_flDegreesMax = 4.000000
+			m_flDegreesMin = -4.000000
+		},
+		
+		{
+			_class = "C_INIT_CreateOnModel"
+			m_vecDirectionBias = 
+			[
+				0.000000,
+				0.000000,
+				4.000000,
+			]
+			m_flHitBoxScale = 0.900000
+		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMax = 124
+			m_nAlphaMin = 114
+		},
+		
+		{
+			_class = "C_INIT_RandomSequence"
+			m_nSequenceMax = 4
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMax = 
@@ -160,57 +216,31 @@
 			]
 			m_bLocalSpace = true
 		},
-		{
-			_class = "C_INIT_CreationNoise"
-			m_flOutputMax = 20.000000
-			m_flOutputMin = 5.000000
-			m_flNoiseScale = 0.500000
-			m_flNoiseScaleLoc = 0.010000
-		},
-		{
-			_class = "C_INIT_RandomRotation"
-		},
-		{
-			_class = "C_INIT_RandomYaw"
-			m_flDegreesMax = 4.000000
-			m_flDegreesMin = -4.000000
-		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
-		},
-		{
-			_class = "C_INIT_CreateOnModel"
-			m_vecDirectionBias = 
-			[
-				0.000000,
-				0.000000,
-				4.000000,
-			]
-			m_flHitBoxScale = 0.900000
-		},
-		{
-			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMax = 124
-			m_nAlphaMin = 114
-		},
-		{
-			_class = "C_INIT_RandomSequence"
-			m_nSequenceMax = 4
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 48.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 48.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -230,4 +260,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 9
 }

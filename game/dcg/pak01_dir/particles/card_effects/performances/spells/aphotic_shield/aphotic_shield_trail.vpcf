@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -15,6 +15,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -25,19 +26,32 @@
 			m_bIgnoreDT = true
 			m_flMaxLength = 120.000000
 			m_flLengthFadeInTime = 1.000000
-			m_flRadiusScale = 0.500000
 			m_flFinalTextureScaleV = -1.000000
 			m_flFinalTextureOffsetV = 1.000000
-			m_vEndTrailTintFactor = 
-			[
-				0.250000,
-				0.250000,
-				0.500000,
-				0.125000,
-			]
 			m_bDisableOperator = true
 			m_flSelfIllumAmount = 1.000000
+			m_flRadiusScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL"
+				m_vLiteralValue = 
+				[
+					0.250000,
+					0.250000,
+					0.500000,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.125000
+			}
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 16
@@ -48,44 +62,27 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_bLockRot = true
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_nCP1 = 2
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				0.000000,
-			]
-		},
-		{
-			_class = "C_OP_SetControlPointRotation"
-			m_vecRotAxis = 
-			[
-				1.200000,
-				-1.000000,
-				0.950000,
-			]
-			m_nCP = 2
-			m_nLocalCP = 0
-			m_flRotRate = 90.000000
-		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.000000
 			m_flEndTime = 0.250000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.500000
@@ -94,6 +91,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_nControlPointNumber = 2
@@ -110,19 +108,30 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 60.000000
-			m_flEmissionDuration = 3.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 3.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 60.000000
+			}
 		},
 	]
 	m_flConstantLifespan = 0.250000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -139,6 +148,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -156,6 +166,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -174,6 +185,33 @@
 					m_entityName = "self"
 				},
 			]
+		},
+	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_nCP1 = 2
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+		
+		{
+			_class = "C_OP_SetControlPointRotation"
+			m_vecRotAxis = 
+			[
+				1.200000,
+				-1.000000,
+				0.950000,
+			]
+			m_nCP = 2
+			m_nLocalCP = 0
+			m_flRotRate = 90.000000
 		},
 	]
 }

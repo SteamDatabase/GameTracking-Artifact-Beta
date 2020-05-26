@@ -1,4 +1,5 @@
 import "dcg_gcmessages_common.proto";
+import "econ_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -59,6 +60,9 @@ enum EScriptBlockType {
 	EXPORT_CARD_SET_TO_IMAGES = 33;
 	GAME_OVER = 34;
 	TOKEN_DEPLOYED = 35;
+	ACHIEVEMENT_ACHIEVED = 36;
+	TURN_ANNOUNCEMENT = 37;
+	TOWER_DAMAGE_REWARD = 38;
 }
 
 enum EShoppingSlot {
@@ -109,9 +113,16 @@ message CMsgGamePlayerRequestHandoff {
 }
 
 message CMsgGameHandoff {
+	message PlayerAccount {
+		optional uint32 account_id = 1;
+		optional uint32 player_index = 2;
+	}
+
 	optional uint32 player_count = 1;
 	optional bool is_spectator = 3;
-	optional .EDCGMatchMode game_mode = 4 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode game_mode = 4 [default = k_EDCGMatchMode_Invalid];
+	repeated .CMsgGameHandoff.PlayerAccount players = 5;
+	optional bool is_draft = 6;
 }
 
 message CMsgGameServerToClientInitialGameState {
@@ -153,6 +164,9 @@ message CMsgGameReplayActionMarker {
 		k_eActionType_LaneEnd = 9;
 		k_eActionType_LaneCombat = 10;
 		k_eActionType_PlayerAction = 11;
+		k_eActionType_TowerDestroyed = 12;
+		k_eActionType_InitialFlopStart = 13;
+		k_eActionType_InitialFlopEnd = 14;
 	}
 
 	optional .CMsgGameReplayActionMarker.EActionType action = 1 [default = k_eActionType_TurnStart];
@@ -173,6 +187,15 @@ message CMsgVenchatoquistEvent {
 		eDeckImp = 3;
 	}
 
+	enum EGesture {
+		eLook = 1;
+		eStopLooking = 2;
+		eDrag = 3;
+		eStopDragging = 4;
+		eInspect = 5;
+		eStopInspecting = 6;
+	}
+
 	optional string text = 1;
 	optional uint32 object_id = 2;
 	optional .CMsgVenchatoquistEvent.EChatSource chat_source = 3 [default = eObjectID];
@@ -180,6 +203,7 @@ message CMsgVenchatoquistEvent {
 	optional uint32 user_id = 5;
 	optional uint32 line_id = 6;
 	optional bool toggle_mute = 7;
+	optional .CMsgVenchatoquistEvent.EGesture gesture = 8 [default = eLook];
 }
 
 message CMsgGameClientToServerChatMsg {
@@ -280,6 +304,8 @@ message CTraceMsg_PathingCardChanged {
 message CTraceMsg_CardBought {
 	optional int32 turn_card_entered_hand = 1;
 	optional int32 order_card_entered_hand = 2;
+	optional bool is_drawn_shop_item = 3;
+	optional int32 shop_items_remaining = 4;
 }
 
 message CTraceMsg_ChargesChanged {
@@ -343,6 +369,8 @@ message CTraceMsg_TowerKilled {
 	optional uint32 owner_id = 1;
 	optional bool is_combat = 2;
 	optional bool is_defeat_for_owner = 3;
+	repeated uint32 damageContributors = 4;
+	repeated uint32 siegeDamageContributors = 5;
 }
 
 message CTraceMsg_CardKilled {
@@ -350,6 +378,7 @@ message CTraceMsg_CardKilled {
 	optional bool is_creep = 2;
 	optional bool is_hero = 3;
 	optional bool is_combat = 4;
+	repeated uint32 damageContributors = 5;
 }
 
 message CTraceMsg_ImprovementDestroyed {
@@ -371,6 +400,7 @@ message CTraceMsg_CardMovedToHand {
 message CTraceMsg_CardMovedToDeployment {
 	optional uint32 lane_id = 1;
 	optional uint32 this_turn_hero_deployment_order = 2;
+	optional int32 desired_combat_position = 3;
 }
 
 message CTraceMsg_CardMovedToEffects {
@@ -404,6 +434,7 @@ message CTraceMsg_CardDrawn {
 	optional int32 turn_card_entered_hand = 2;
 	optional int32 order_card_entered_hand = 3;
 	optional .CTraceMsg_CardDrawn.ECardDrawnSource drawn_source = 4 [default = k_eCardDrawnSource_Deck];
+	optional bool is_overdrawn = 5;
 }
 
 message CTraceMsg_CardPlayed {
@@ -433,6 +464,7 @@ message CTraceMsg_UnitTargeted {
 message CTraceMsg_PlayerPassed {
 	optional uint32 player_id = 1;
 	optional bool pass_to_combat = 2;
+	optional bool had_actions = 3;
 }
 
 message CTraceMsg_UnitUserTargeted {
@@ -513,9 +545,17 @@ message CTraceMsg_ContinuousAppliedEffectChangedEx {
 message CTraceMsg_AttributeValueChanged {
 	optional uint32 attr_token = 1;
 	optional int32 value_final = 2;
+	optional int32 delta = 3;
 }
 
 message CTraceMsg_GoldEarned {
+	optional uint32 owner_id = 1;
+	optional uint32 source_object_id = 2;
+	optional int32 amount = 3;
+	optional int32 available = 4;
+}
+
+message CTraceMsg_GoldSpent {
 	optional uint32 owner_id = 1;
 	optional uint32 source_object_id = 2;
 	optional int32 amount = 3;
@@ -547,6 +587,7 @@ message CTraceMsg_CardCreated {
 	optional bool was_spawned_as_dire = 6;
 	optional uint32 spawn_duplicate_index = 7;
 	optional bool is_duplicate = 8;
+	optional bool flop_entered_play = 9;
 }
 
 message CTraceMsg_CardRevealed {
@@ -635,4 +676,44 @@ message CTraceMsg_HeroVS {
 message CTraceMsg_PlayerResult {
 	optional uint32 owner_id = 1;
 	optional bool has_won = 2;
+}
+
+message CTraceMsg_CardTemplateOperation {
+	optional uint32 operation = 1;
+	optional uint32 template_id = 2;
+	optional bytes card_template_data = 3;
+}
+
+message CTraceMsg_PlayerActionsAvailable {
+	optional uint32 player_id = 1;
+	optional uint32 phase = 2;
+	optional bool is_shopping = 3;
+	optional bool is_repeat_action = 4;
+}
+
+message CTraceMsg_AchievementAchieved {
+	optional uint32 player_id = 1;
+	optional uint64 achievement_id = 2;
+	optional uint32 required_progress = 3;
+	optional uint32 starting_progress = 4;
+	optional uint32 current_progress = 5;
+	optional uint32 delta_progress = 6;
+}
+
+message CTraceMsg_CasterCasting {
+	optional uint32 caster_object_id = 1;
+	optional uint32 card_object_id = 2;
+}
+
+message CTraceMsg_FocusAttack {
+	optional uint32 target_object_id = 1;
+	optional uint32 source_object_id = 2;
+}
+
+message CTraceMsg_RandomShopItemCreated {
+	optional uint32 owner_id = 1;
+	optional uint32 template_card_id = 2;
+}
+
+message CTraceMsg_ExampleTraceMessage {
 }

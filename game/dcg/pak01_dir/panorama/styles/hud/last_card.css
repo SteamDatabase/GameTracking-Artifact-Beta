@@ -1,16 +1,16 @@
 .LastCard
 {
 	flow-children: none;
-
+	transition-delay: 0.0s;
+	horizontal-align: left;
 	vertical-align: bottom;
-	horizontal-align: right;
 
 	width: 280px;
-	height: 560px;
+	height: 580px;
 
 	margin-top: 0px;
-	margin-bottom: 53px;
-	margin-right: 4px;
+	margin-bottom: 143px;
+	margin-left: 20px;
 
 	transition-property: opacity, transform;
 	transition-duration: 0.3s;
@@ -33,17 +33,23 @@
 	margin-top: 209px;
 	transition-property: opacity, transform;
 	transition-duration: 0.3s;
-	transition-delay: 0.0s;
+
 
 	width: 280px;
 	flow-children: none;
-
 }
 
 .OpponentInfo #LastCardContainer
 {
 	margin-top: 0px;
-	vertical-align: top;
+}
+
+.InInspectView #LastCardContainer
+{
+    margin-top: 0px;
+
+    width: 100%;
+    height: 100%;
 }
 
 #LastCardScenePanel
@@ -55,6 +61,11 @@
 	transition-property: opacity;
 	transition-duration: 0.3s;
 	transition-delay: 0.0s;	
+}
+
+.InInspectView #LastCardScenePanel
+{
+	visibility: collapse;
 }
 
 .OpponentInfo #LastCardScenePanel
@@ -85,18 +96,52 @@
 	opacity: 0;
 }
 
+.InInspectView #GrowingPanel:hover #SmallLastCardPanel
+{
+	opacity: 1;
+    brightness: 1;
+}
+
 .OpponentInfo #SmallLastCardPanel
 {
 	margin-top: 15px;
 }
 
-.OpponentInfo
+.InInspectView #SmallLastCardPanel
+{
+	margin-top: 0px;
+	margin-left: 0px;
+   padding: 0px;
+	horizontal-align: left;
+
+    width: 100%;
+	height: 100%;
+}
+
+.OpponentInfo.LastCard
 {
 	vertical-align: top;
-	margin-top: 53px;
+	margin-top: 160px;
 	margin-bottom: 0px;
 	//tooltip-body-position: 100% 100%;
 	tooltip-position: bottom;
+	tooltip-arrow-position: 50% 50%;
+}
+
+.InInspectView.LastCard
+{
+	width: 52px;
+	height: 87px;
+	opacity: 1;
+	margin-bottom: 0px;
+	margin-right: 10px;
+	margin-left: 0px;
+	horizontal-align: left;
+	vertical-align: bottom;
+
+	margin-top: 0px;
+
+	tooltip-position: top;
 	tooltip-arrow-position: 50% 50%;
 }
 
@@ -109,19 +154,32 @@
 	transition-duration: 0.3s;
 	transition-delay: 0.0s;
 
-	transform: translateX(440px) translateY(790px) scaleX(0.25) scaleY(0.25);
+	transform: translateX(-440px) translateY(790px) scaleX(0.25) scaleY(0.25);
 
 	z-index: 1;
 }
 
 .OpponentInfo #GrowingPanel
 {
-	transform: translateX(440px) translateY(-800px) scaleX(0.25) scaleY(0.25);
+	transform: translateX(-440px) translateY(-800px) scaleX(0.25) scaleY(0.25);
+}
+
+.InInspectView #GrowingPanel
+{
+    transform: translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0);
+
+    width: 100%;
+	height: 100%;
 }
 
 .HasValidCard #GrowingPanel:hover
 {
 	transform: translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0);
+}
+
+.InInspectView #GrowingPanel:hover
+{
+    transform: translateX(0px) translateY(0px) scaleX(1.0) scaleY(1.0);
 }
 
 .HasValidCard.OpponentInfo #GrowingPanel:hover
@@ -134,15 +192,6 @@
     opacity: 1;
 }
 
-#LastPlayedText
-{
-	text-align: center;
-	horizontal-align: center;
-	font-size: 20px;
-	font-weight: bold;
-	visibility: collapse;
-}
-
 .HasValidCard #LastPlayed
 {
 	visibility: collapse;
@@ -153,15 +202,16 @@
 	width: 210px;
 	height: 350px;
 
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
     
-    background-image: url("s2r://panorama/images/hud/card_back_psd.vtex");
-	tooltip-position: left;
+  background-image: url("s2r://panorama/images/hud/card_back_psd.vtex");
+	tooltip-position: right;
 	margin-top: 226px;
 	z-index: 1;
 	margin-left: 55px;
+	margin-bottom: 20px;
 }
 
 .OpponentInfo #LastPlayed
@@ -171,11 +221,10 @@
 
 .DeckListContainer
 {
-	margin-top: 98px;
-	margin-bottom: 98px;
-	margin-right: 0px;
+	margin-bottom: 120px;
+	margin-left: 12px;
 	flow-children: down;
-	horizontal-align: right;
+	horizontal-align: left;
 	vertical-align: bottom;
 	z-index: 100;
 	transition-property: pre-transform-scale2d, brightness;
@@ -196,13 +245,18 @@
 	pre-transform-scale2d: 1.2;
 }
 
+.ShowMyDecklist .DeckListContainer
+{
+	brightness: 1.0;
+	pre-transform-scale2d: 1.2;
+}
+
 .DeckListEnemyContainer
 {
 	margin-top: 98px;
-	margin-bottom: 98px;
-	margin-right: 0px;
+	margin-left: 11px;
 	flow-children: down;
-	horizontal-align: right;
+	horizontal-align: left;
 	vertical-align: top;
 	z-index: 100;
 	transition-property: pre-transform-scale2d, brightness;
@@ -217,7 +271,6 @@
 {
 	visibility: visible;
 }
-
 .IsHidingPlayerInfoAI .DeckListContainer,
 .IsHidingPlayerInfoAI .DeckListEnemyContainer
 {
@@ -225,6 +278,12 @@
 }
 
 .DeckListEnemyContainer:hover
+{
+	brightness: 1.0;
+	pre-transform-scale2d: 1.2;
+}
+
+.ShowEnemyDecklist .DeckListEnemyContainer
 {
 	brightness: 1.0;
 	pre-transform-scale2d: 1.2;

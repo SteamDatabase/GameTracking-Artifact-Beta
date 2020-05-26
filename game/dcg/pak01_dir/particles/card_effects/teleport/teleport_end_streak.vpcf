@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -13,6 +13,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -21,31 +22,47 @@
 			m_hTexture = resource:"materials/particle/particle_square_gradient_2.vtex"
 			m_flMaxLength = 1000.000000
 			m_flLengthFadeInTime = 0.100000
-			m_flRadiusScale = 0.500000
 			m_flFinalTextureScaleV = -1.000000
 			m_flFinalTextureOffsetV = 1.000000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-				0.000000,
-			]
+			m_flRadiusScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_flFadeStartTime = 1.000000
 			m_flFadeEndTime = 0.000000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
@@ -54,16 +71,19 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.200000
 			m_fLifetimeMax = 0.250000
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMin = 4
 			m_nSequenceMax = 5
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -74,17 +94,31 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 25.000000
 			m_flRadiusMax = 50.000000
 		},
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_flInitialRadius = 50.000000
 			m_flInitialSpeedMin = -500.000000
 			m_flInitialSpeedMax = -500.000000
 		},
+		
+		{
+			_class = "C_INIT_RandomTrailLength"
+			m_flMinLength = 0.200000
+			m_flMaxLength = 0.400000
+		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 200
+		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -100,15 +134,7 @@
 				-500.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomTrailLength"
-			m_flMinLength = 0.200000
-			m_flMaxLength = 0.400000
-		},
-		{
-			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMin = 200
-		},
+		
 		{
 			_class = "C_INIT_RemapCPtoVector"
 			m_nCPInput = 2
@@ -118,7 +144,7 @@
 				1.000000,
 				1.000000,
 			]
-			m_nFieldOutput = 6
+			m_nFieldOutput = "6"
 			m_vOutputMax = 
 			[
 				0.500000,
@@ -129,9 +155,16 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 32
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 32.000000
+			}
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

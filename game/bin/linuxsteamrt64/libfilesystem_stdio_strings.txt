@@ -1,4 +1,3 @@
-
 !pRequest->m_bUsedAsContext
 !pRequestBase->m_bUsedAsContext
 "
@@ -17,66 +16,62 @@ $ORIGIN
 %-120s - %s
 %-20s "%s" %s%s
 %-20s %s
-%02x
-%d total counted strings.
-%d:  %s -> %s at parent %i
-%d:  %s -> subtree at parent %i
+%.18g
 %d_%d_%d_%d_%d.tmp
 %f %f %f %f
 %f elapsed w/o i/o
 %hd
 %hu
 %i %i %i %i
-%ld
 %lg
 %lld
-%llu
 %ls [wstring, len = %d]
 %s %20s %30s = %8.2fms (call count = %d)
 %s%d
 %s%s%s crc=0x%x metadatasz=%d
 %s,
 %s, %s, %s
-%s.360%s
+%s/
+%s/%llu
+%s/%llu.vpk
 %s: file too large
 %s: request %llu has op %d
 %s: string format requested %d chars
 %s_%03d.vpk
 %u
-'
-(
 ( def. "%s" )
 (*%s*),
 (Unique   ): [%s]\%s
 (vpk)
-)
 *.*
 - %u
 ---------------
 ---FS%s:  %s %s (%.3f)
----FS%s:  close %s %p %i (%.3f)
----FS%s:  read %s %i %p (%.3f)
----FS%s:  write %s %i %p
+---FS%s:  close %s 0x%llX %i (%.3f)
+---FS%s:  read %s %i 0x%llX (%.3f)
+---FS%s:  write %s %i 0x%llX
+-async_memory_map
 -disable_auto_vpk_loading
+-fake_workshop_dir
 -log_opened_files
 -noasync
 -onethreadpool
+-recordPerfStats
 ...
 ../public/ordered_constructor.h
+../public/tier0/threadtools.h
 ../public/tier0/tslist.h
 ../public/tier1/utlblockmemory.h
 ../public/tier1/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
+../public/tier1/utlsymboltable.h
 ../public/tier2/fileutils.h
 ./
-.360
 .\
 .bsp
 .zip
 /content/
-/game/
-0123456789ABCDEF
 0:Off, 1:All (for tracking accumulated duplicate read times), >1:Microsecond threashold
 0:Off, 1:Always, 2:Not during load
 0:Off, 1:Any, 2:Sync only
@@ -87,20 +82,15 @@ $ORIGIN
 10ConCommand
 10IAppSystem
 11CFileHandle
-11CFileStream
 11CRefCountedI20CRefCountServiceBaseILb0E6CRefMTEE
 11IFileSystem
 11IRefCounted
-12CEmptyConVar
 12CRefCounted1I11IRefCounted20CRefCountServiceBaseILb1E6CRefMTEE
 12CThreadEvent
 12CThreadedJob
-12IWriteStream
-13CBufferStream
 13CFileAsyncJob
 14CBaseAppSystemI11IFileSystemE
 14CBaseAppSystemI16IAsyncFileSystemE
-14CUGCFileHandle
 14ConCommandBase
 15CBaseFileSystem
 15CTier0AppSystemI11IFileSystemE
@@ -110,70 +100,60 @@ $ORIGIN
 15CTier2AppSystemI11IFileSystemLi0EE
 15CTier2AppSystemI16IAsyncFileSystemLi0EE
 15IBaseFileSystem
-1650
-1694
-1699
+16
 16CAsyncFileSystem
 16CDefaultAccessor
 16CFioReadOnlyFile
 16IAsyncFileSystem
-1716
 17AsyncOpenedFile_t
 17CAsyncFileRequest
 17CFileAsyncReadJob
 17CFileSystem_Stdio
 17IAsyncFileRequest
 17IAsyncRequestBase
+17IMemoryMappedFile
 18CCountedStringPool
 18CFileAsyncWriteJob
+18CPlaceholderConVar
 18CStdFilesystemFile
-18CUtlCharConversion
 18FileAsyncRequest_t
-1951
-19CAsyncSearchRequest
 19CIODelayAlarmThread
-19IAsyncSearchRequest
 19IKeyValuesErrorSpew
 20CPostConnectCallback
 20CRefCountServiceBaseILb0E6CRefMTE
 20CRefCountServiceBaseILb1E6CRefMTE
 21CFileAsyncFileSizeJob
-21CFileAsyncWriteUGCJob
-21CUtlCStringConversion
-21IKeyValuesDumpContext
 22CFileAsyncWriteFileJob
 22CSchemaInstallCallback
 23CFileAsyncAppendFileJob
-23CSplitScreenAddedConVar
 23IConCommandBaseAccessor
-25CFileAsyncWriteUGCFileJob
+24CMemoryMappedFileSection
 25CFileSystemReloadFileList
 26CDefaultKeyValuesErrorSpew
 26CFileAsyncDirectoryScanJob
-27IKeyValuesDumpContextAsText
-29CKeyValuesDumpContextAsDevMsg
-4CZip
-4IZip
+28CFioReadOnlyMemoryMappedFile
+28CPackedStoreMemoryMappedFile
+35CMemoryMappedFileSection_SelfDelete
 6ConVar
 7IConVar
-8CFmtStrNILi256ELb0EE
-922
 9IFileList
-:
 ;
 << NULL >>
 <Invalid file time %lld>
 <NULL>
+<deferred>
+<no deferred ref found>
+<no failure reason set>
 <null>
-?
+<unconnected>
 ???
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 AWATING_FINISH
 AbortAfterServicing
 Aborting IO request for %s
+Access of unconnected ConVarRef
+Access of unconnected SplitScreenConVarRef
 Add N ms of delay to every low-level read operation, to simulate a slow disk
-AddFile
-AddFileToDirectory
 Adding VPK file: %s
 Addreffing existing VPK file: %s
 Alignment
@@ -189,10 +169,15 @@ AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
 Async I/O disabled from command line
-Async Request has not finished, unable to release
+Async Request has not finished, unable to release (state=%i)
 Async result Status %d makes no sense
 AsyncIOCallBackHandler
+Attempted to mount UGC VPK "%s" but the UGC it lives inside (%llu) must be mounted first!
 Attempted to mount VPK "%s" but the VPK it lives inside ("%s") must be mounted first!
+Attempting to read UGC %llu but Steam isn't available!
+Attempting to read UGC %llu but failed to get installation directory.
+Attempting to read UGC %llu but failed to open vpk file: %s
+Attempting to read UGC %llu that isn't installed! Need to finish downloading first...
 Bad Release Request
 Bad expression operator: '%c%c', expected C style boolean expression operator.
 Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
@@ -205,7 +190,6 @@ BinaryProperties_GetValue
 Blocked change to read-only path %s!
 Buffer not big enough to hold requested File IO
 BuildHashTables
-C
 CAsyncFileRequest::GetProfilingInfo called with bad buffer size (%d passed, expecting %llu)
 CAsyncRequestBase::ProcessCallback callback function:  %8.3f msec (>10): %s
 CAsyncRequestQueue destructor called while queue was not empty
@@ -228,33 +212,37 @@ CBaseFileSystem::Tell
 CBaseFileSystem::Write
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
 CBufferString::AppendFormat(char const*, ...)
+CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
-CBufferString::EnsureTrailingSlash(char)
+CBufferString::EnsureCapacity(int, char**, bool, bool)
+CBufferString::EnsureTrailingSlash(char, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
 CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::ExtractFirstDir(char const*)
 CBufferString::FixSlashes(char)
-CBufferString::FixupPathName()
+CBufferString::FixupPathName(char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
+CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
-CBufferString::ShortenPath()
+CBufferString::ShortenPath(bool)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CFileAsyncJob
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
 COMPLETED
@@ -273,21 +261,26 @@ CThread::WaitForCreateComplete(CThreadEvent*)
 CThread::~CThread()
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadMultiWaitEvent::Set()
-CThreadMultiWaitEvent::~CThreadMultiWaitEvent()
-CThreadRWLock::LockForWrite()
-CThreadRWLock::UnlockWrite()
+CThreadRWLock::LockForWrite(char const*, int)
+CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
-CThreadSpinRWLock::LockForRead()
-CThreadSpinRWLock::SpinLockForWrite(unsigned long long)
-CThreadSpinRWLock::UnlockRead()
-CThreadSpinRWLock::UnlockWrite()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockRead_LockForWrite(char const*, int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
+CThreadSpinRWLock::LockForRead(char const*, int)
+CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
+CThreadSpinRWLock::UnlockRead(char const*, int)
+CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -298,12 +291,11 @@ CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
 CXXABI_1.3
-CXXABI_1.3.8
 Callback called at wrong time (%d)
 Can't find completed Async IO request, request description %s
 Cannot open %s for writing
 Cannot rename file "%s" that exists in a VPK or UGC file!
-ChangeMultipleDirectoryEntries
+Cannot rename file "%s" that exists in a read only search path!
 ChangeSize
 Clear the list of files that have been opened.
 CommandLine
@@ -319,7 +311,6 @@ CopyAFile: dest '%s' must be absolute path.
 CreateFile
 CreateInterface
 CreateNewThreadPool
-D
 DEFAULT_WRITE_PATH
 DEMO
 DataOffset
@@ -328,7 +319,6 @@ DeleteOuter
 DevMsg
 DevMsg(char const*, ...)
 DotaCardGameClient_001
-EMPTY - ok for slot zero only!
 ERROR_ALIGNMENT
 ERROR_ALREADYSERVICED
 ERROR_ALREADYSUBMITTED
@@ -337,6 +327,12 @@ ERROR_BADPATHSPEC
 ERROR_BADPTR
 ERROR_BADUSERBUFFER
 ERROR_FAILURE
+ERROR_FAILURE[ABORT]
+ERROR_FAILURE[APPEND]
+ERROR_FAILURE[FINISH]
+ERROR_FAILURE[GET_RESULT]
+ERROR_FAILURE[SET_PRIORITY]
+ERROR_FAILURE[STATUS]
 ERROR_FILENAMETOOLONG
 ERROR_FILEOPEN
 ERROR_INVALIDFILENAME
@@ -357,10 +353,8 @@ EarlyInit_Tier0
 EconItemToolModel_001
 EnableWhitelistFileTracking
 EngineServiceMgr001
-EnvironmentMapBuilder_001
 EventSystem001
-Exceeded limit of number of vpk files supported (%d)!
-F
+FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
 FS:  Tried to Close NULL file handle!
 FS:  Tried to EndOfFile NULL file handle!
@@ -377,45 +371,17 @@ FS:  Tried to Tell NULL file handle!
 FS:  Tried to Write NULL file handle!
 FS:  Tried to Write NULL file pointer inside valid file handle!
 FS: Specified two path IDs (%s, %s).
-FTYPEDESC_ADDITIONAL_FIELDS
-FTYPEDESC_ENUM
-FTYPEDESC_EXPLICIT_BASE
-FTYPEDESC_FUNCTIONTABLE
-FTYPEDESC_GEN_ARRAY_KEYNAMES_0
-FTYPEDESC_GEN_ARRAY_KEYNAMES_1
-FTYPEDESC_GLOBAL
-FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
-FTYPEDESC_KEY
-FTYPEDESC_MODELINDEX
-FTYPEDESC_NOERRORCHECK
-FTYPEDESC_NONE
-FTYPEDESC_OUTPUT
-FTYPEDESC_OVERRIDE
-FTYPEDESC_OVERRIDE_RECURSIVE
-FTYPEDESC_PRIVATE
-FTYPEDESC_PROCEDURAL_KEYFIELD
-FTYPEDESC_PTR
-FTYPEDESC_REMOVED_KEYFIELD
-FTYPEDESC_SAVE
-FTYPEDESC_SCHEMA_INITIALIZED
-FTYPEDESC_WAS_INPUT
-FTYPEDESC_WAS_OUTPUT
 Failed
 Failed to load module %s
-Failed to map from %s to content-path
-Failed to map from %s to game-path
 Failed to read %d bytes
 File %s was never closed
 File '%s' was returned by GetFileList, but OpenFile() fails?!
 File Path:
 File System
-File change watching failed for '%s', retraversing
 FileSystem
 Filename '%s' is invalid to be contained in a VPK
 Filesystem
 FlattenedSerializersVersion001
-FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
 Fopen
 FormatV
@@ -424,7 +390,6 @@ From Steam: [%s]\%s
 GAMECONSOLE
 GAMEROOT
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
-GLIBCXX_3.4
 GLIBC_2.14
 GLIBC_2.2.5
 GLIBC_2.3
@@ -434,8 +399,6 @@ GNU
 GameResourceServiceClientV001
 GameResourceServiceServerV001
 GameUIService_001
-GetFileHandle
-GetFileList
 GetInterfaceBase
 GetProfilingInfo
 GetResourceManifestCount
@@ -448,7 +411,6 @@ HangWatchdog_IndicateActivity
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
-I
 IN_CALLBACK
 IOJob
 IQuickTime001
@@ -460,13 +422,13 @@ InstallChangeCallback ignoring duplicate change callback!!!
 InstallSchemaBindings
 Intentionally vague touch behavior for %p
 Invalid Path
+Invalid access of deferred ConVarRef for '%s'
 Invalid async read of %s
-K
+JSON error, unterminated element:
 KV Conditional Evaluation Error
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
 KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
 KickOffFileJobs
@@ -481,6 +443,7 @@ LogBadInnerOp
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
+LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Logic Error in CExpressionEvaluator
 Loose
@@ -488,6 +451,7 @@ MATCHFRAMEWORK_001
 MOD
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
+Manually releasing a completed request that has autorelease set
 MapListService_001
 MaterialUtils_001
 MemAlloc_AllocFunc
@@ -496,9 +460,7 @@ MeshSystem001
 MeshUtils001
 ModelDocUtils001
 Modifying Async Filesystem Request after it has been submitted
-Msg
 MustRead
-N
 NULL
 NetworkClientService_001
 NetworkMessagesVersion001
@@ -520,8 +482,6 @@ PanoramaUIClient001
 PanoramaUIEngine001
 ParticleSystemMgr003
 Path ID:
-Path Overflow, must be less than 260 characters.
-Physics2 Interface Old v0.5
 PhysicsBuilderMgr001
 Plat_CreateDirectory
 Plat_DebugPrint
@@ -531,12 +491,14 @@ Plat_FileSize
 Plat_FloatTime
 Plat_GetCurrentDirectory
 Plat_GetEnv
+Plat_GetFileType
 Plat_GetModuleFilename
 Plat_GetOSType
 Plat_IsFile
 Plat_IsHighDPI
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_LoadModule
+Plat_NeedsLowFragmentation
 Plat_RelativeTicks
 Plat_RemoveDirectory
 Plat_RemoveFile
@@ -555,19 +517,19 @@ Preload size for '%s' is too big
 PreloadDirectoryEntries
 ProcessCallback
 PropertyEditorSystem_001
-Push
 QueuedLoaderVersion001
 RandomInt
 ReadFile
 ReadFileEx
 ReadToBuffer
-ReadToken overflow
+Reading UGC %llu that still needs update. Continuing...
 RecursiveLoadFromBuffer:  got EOF instead of keyname
 RecursiveLoadFromBuffer:  got NULL key
 RecursiveLoadFromBuffer:  got conditional between key and value
 RecursiveLoadFromBuffer:  got empty keyname
 RecursiveLoadFromBuffer:  got } in key
 RecursiveLoadFromBuffer:  recursion overflow
+RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Release
 ReleaseAsyncRequest
@@ -584,10 +546,11 @@ ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
 ResubmitRequest
-S
+ReturnJobManualEventToPool
 SERVICING_IO
 STATUS_UNDEFINED
-STEAMREMOTESTORAGE_INTERFACE_VERSION014
+STEAMAPPS_INTERFACE_VERSION008
+STEAMUGC_INTERFACE_VERSION013
 SceneSystem_002
 SceneUtils_001
 SchemaSystem_001
@@ -619,13 +582,10 @@ Source2Host001
 Source2Server001
 Source2ServerSerializers002
 StatsService_001
-SteamAPI_GetHSteamPipe
 SteamAPI_GetHSteamUser
 SteamAudio001
-SteamClient018
 SteamInternal_ContextInit
-SteamInternal_CreateInterface
-String %d: ref:%d %s
+SteamInternal_FindOrCreateUserInterface
 SubmitAsyncFileRequest
 SubmitSyncFileRequest
 SyncGetFileSize
@@ -636,32 +596,24 @@ TestFormatD
 TestFormatE
 TestScriptMgr001
 TextLayout_001
-TextMessageMgr_001
-The filename may only contain lower case alphanumeric characters and underscores.
 ThreadGetCurrentId
-ThreadGetPriority
 ThreadInMainThread
-ThreadSetPriority
 ThreadSleep
 ToolFramework2_002
-ToolGameSimulationDispatcher_001
-ToolGameSimulationSystem_001
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
 Total Seconds: %.5f
 Tried to Seek NULL file handle!
-Tried to close unknown file pointer %p
-Tried to read %i bytes from unknown file pointer %p
-Tried to write %i bytes from unknown file pointer %p
-U
+Tried to close unknown file pointer 0x%llX
+Tried to read %i bytes from unknown file pointer 0x%llX
+Tried to write %i bytes from unknown file pointer 0x%llX
 UNKNOWN
 UNKNOWN VALUE
 Unable to determine async job type (%d)
 Unable to remove %s!
 Unable to rename "%s" to "%s"!
 Unable to watch '%s'
-Unknown
 Unknown Path Class
 Unknown Request
 Unknown read error %d
@@ -670,7 +622,6 @@ UnzipFile
 UpdateAfterServicing
 Use native FS or STDIO
 UserInfoChangeService_001
-V
 VApplication001
 VAvi001
 VBAllocTracker001
@@ -678,7 +629,6 @@ VBaseFileSystem011
 VBik001
 VConComm001
 VDebugService_001
-VDmeMakeFileUtils001
 VEngineCvar007
 VFileSystem017
 VGAME
@@ -696,7 +646,6 @@ VP4003
 VPK
 VPK directory for '%s' corrupt
 VPK signing not implemented
-VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
@@ -720,8 +669,6 @@ V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
 V_StripFilename
-V_StripTrailingSlash
-V_UTF16ToUTF32
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -751,7 +698,6 @@ V_qsort
 V_qsort_s
 V_setvbuf
 V_snprintf
-V_snwprintf_bytes
 V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
@@ -765,8 +711,8 @@ V_strtoui64
 V_strupper_fast
 V_swscanf
 V_tier0_strstr
+V_vscprintf
 V_vsnprintf
-V_vsnprintfRet
 V_vsnprintfSize
 V_wcstod
 V_wcstoi64
@@ -775,11 +721,9 @@ Valid External Path
 Valid Game Absolute Path
 Valid Relative Path
 ValidateLiveness
-ValidateRequestModification
 ValidateSubmittedRequest
 Version
 VisBuilder_001
-WARNING: CDirWatcher not implemented
 WARNING: File might be corrupt or missing - '%s'
 WARNING: Local content might be corrupt or missing files
 WARNING: Local content might be corrupt or missing files. Not reporting to Steam due to disabled reporting.
@@ -795,7 +739,6 @@ Whitelist - don't reload (unheard-of-file) %s
 WorkshopSetup001
 WorldRendererBuilderMgr001
 WorldRendererMgr001
-Write
 X360
 XZP
 XZP%c %d
@@ -806,80 +749,44 @@ ZIP_PreloadDirectoryEntry
 ZIP_PreloadHeader
 [%.3f server clamped to %.3f]
 [a]
-\
 \*
-_
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_ComposeFileName
-_V_ExtractFileExtension
 _V_ExtractFilePath
-_V_FileBase
-_V_FixupPathName
 _V_MakeAbsolutePath
 _V_StrSubst
 _V_StringAfterPrefix
-_V_StripExtension
 _V_StripLastDir
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
-_ZSt9terminatev@@GLIBCXX_3.4
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
 __bss_start
 __ctype_toupper_loc
-__ctype_toupper_loc@@GLIBC_2.3
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __errno_location
-__errno_location@@GLIBC_2.2.5
 __fxstat64
-__fxstat64@@GLIBC_2.2.5
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
 __lxstat64
-__lxstat64@@GLIBC_2.2.5
-__pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
 __strcpy_chk
-__strcpy_chk@@GLIBC_2.3.4
 __tls_get_addr
-__tls_get_addr@@GLIBC_2.3
 __xstat64
-__xstat64@@GLIBC_2.2.5
 _addons
 _edata
 _end
 _fini
 _flt.vpk
-_init
-a
 a+
 ab+
-abort@@GLIBC_2.2.5
-all_projects_common_code.cpp
 alphasort64
-alphasort64@@GLIBC_2.2.5
 archive
 async_allow_held_files
 async_mode
@@ -893,71 +800,49 @@ bIsLive && !pRequestBase->m_bUsedAsContext
 basefilesystem.cpp
 basefilesystemasync.cpp
 binary
+binary_auto
 binary_bc
+binary_lz4
 borrow
-byteswap.cpp
-c
 centralDirectorySize
-characterset.cpp
 cheat
-checksum_crc.cpp
-checksum_md5.cpp
 chmod
 client
 clientcmd_can_execute
-close@@GLIBC_2.2.5
 closedir
-closedir@@GLIBC_2.2.5
 commentLength
 compressionMethod
-configvalue.cpp
 console.log
 content
-convar.cpp
 crc32
-crtoverride.cpp
-crtstuff.c
 d
 delete
 developer
 diskNumberStart
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
 dup
-dup@@GLIBC_2.2.5
-e
-exprevaluator.cpp
 externalFileAttribs
 extraFieldLength
 f
+false
 fcntl
-fcntl@@GLIBC_2.2.5
 fdatasync
-fdatasync@@GLIBC_2.2.5
-fflush@@GLIBC_2.2.5
-file( %s )
 fileCommentLength
 fileNameLength
-fileio.cpp
+filenamesymboltable.cpp
 fileno_unlocked
-fileno_unlocked@@GLIBC_2.2.5
 filesystem_buffer_size
 filesystem_max_stdio_read
 filesystem_native
 filesystem_report_buffered_io
-filesystem_stdio.cpp
+filesystem_stdio
 filesystem_unbuffered_io
-filesystemasync.cpp
+filesystemasync.h
 filetime
-filetracker.cpp
-fileutils.cpp
 flags
 float( %f )
 flock
-flock@@GLIBC_2.2.5
 fnumber=%d ofs=0x%x sz=%d
 free
-free@@GLIBC_2.2.5
 fs_clear_open_duplicate_times
 fs_debug
 fs_debug:
@@ -968,8 +853,6 @@ fs_report_long_reads
 fs_report_sync_opens
 fs_warning_mode
 ftruncate64
-ftruncate64@@GLIBC_2.2.5
-g
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_VProfCurrentProfile
@@ -979,14 +862,9 @@ game
 gameinfo.gi
 gameinfo.txt
 generic
-generichash.cpp
-i
 int( %d = 0x%X )
-interface.cpp
 interfaces.cpp
 internalFileAttribs
-json_parser.c
-kevvaluescompiler.cpp
 keyvalues.cpp
 l
 lastModifiedDate
@@ -1000,92 +878,63 @@ libsteam_api.so
 libtier0.so
 libvstdlib.so
 localtime
-localtime@@GLIBC_2.2.5
 lseek64
-lseek64@@GLIBC_2.2.5
-m
-malloc
-malloc@@GLIBC_2.2.5
-manifestregistrar.cpp
 materials/overviews/
 materials/vgui/hud/
 max. %f
 memcmp
-memcmp@@GLIBC_2.2.5
 memcpy
-memcpy@@GLIBC_2.14
 memmove
-memmove@@GLIBC_2.2.5
-memoverride.cpp
 mempool.cpp
 memset
-memset@@GLIBC_2.2.5
 min. %f
-n
+mmap64
+munmap
 nCentralDirectoryEntries_ThisDisk
 nCentralDirectoryEntries_Total
 nTries < 10000000
 need to hook up zip for linux
 notconnected
 notify
+null
 numberOfTheDiskWithStartOfCentralDirectory
 numberOfThisDisk
-o
 open64
-open64@@GLIBC_2.2.5
 opendir
-opendir@@GLIBC_2.2.5
 opened_files.txt
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
+operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
+operator new[](unsigned long, std::nothrow_t const&)
 packedstore.cpp
 pak%s%02d.vpk
 pak%s%02d_dir.vpk
 path
 pipe
-pipe@@GLIBC_2.2.5
 posix_fadvise64
-posix_fadvise64@@GLIBC_2.2.5
 pread64
-pread64@@GLIBC_2.2.5
 pthread_mutex_destroy
-pthread_mutex_destroy@@GLIBC_2.2.5
 pthread_mutex_init
-pthread_mutex_init@@GLIBC_2.2.5
 pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
 pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
 pthread_mutexattr_init
-pthread_mutexattr_init@@GLIBC_2.2.5
 pthread_mutexattr_settype
-pthread_mutexattr_settype@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
 pwrite64
-pwrite64@@GLIBC_2.2.5
-r
 rb
 rb+
-read@@GLIBC_2.2.5
 readdir64
-readdir64@@GLIBC_2.2.5
 readlink
-readlink@@GLIBC_2.2.5
 relativeOffsetOfLocalHeader
 replicated
 resource/cursor/
 resource/flash3/images/
 resource/flash3/videos/
 rewind
-rewind@@GLIBC_2.2.5
 rw+
-s
 scandir64
-scandir64@@GLIBC_2.2.5
 schemabindings.cpp
 scripts/game_sounds_heroes/
 scripts/music/
@@ -1102,42 +951,22 @@ src/public/tier0/platform.h
 ss_added
 startOfCentralDirOffset
 stat
-std::terminate()
 strcasecmp
-strcasecmp@@GLIBC_2.2.5
 strchr
-strchr@@GLIBC_2.2.5
 strcmp
-strcmp@@GLIBC_2.2.5
 strcpy
-strcpy@@GLIBC_2.2.5
-stringpool.cpp
 strlen
-strlen@@GLIBC_2.2.5
 strrchr
-strrchr@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-strtools.cpp
-t
-tier1.cpp
-tier2.cpp
-time@@GLIBC_2.2.5
+sysconf
 typeinfo for CThread
 typeinfo for CThreadSyncObject
-u
 u64( %lld = 0x%llX )
 ugc:
 uncompressedSize
 unlink
-unlink@@GLIBC_2.2.5
-unused
 update
 user
-utlbuffer.cpp
-utlmemory.cpp
 utlstring.cpp
-utlsymbol.cpp
-v
 versionMadeBy
 versionNeededToExtract
 vpk:
@@ -1146,14 +975,9 @@ vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 wb
 wcscmp
-wcscmp@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
-write@@GLIBC_2.2.5
 wt
-y
 zD
-zip_utils.cpp
 {
 {}()':
 }

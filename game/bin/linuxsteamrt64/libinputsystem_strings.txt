@@ -15,12 +15,11 @@ $ORIGIN
 %
 %-120s
 %-120s - %s
-%d total counted strings.
+%.18g
 %f %f %f %f
 %hd
 %hu
 %i %i %i %i
-%ld
 %lg
 %lld
 %llu
@@ -28,18 +27,19 @@ $ORIGIN
 %s
 %s%d
 %s,
+%s/
 %s: string format requested %d chars
 %u
 'is NOT active'
 'is active'
-(
 ( def. "%s" )
 (*%s*),
-)
 *
 ,
 ,%d
 -
+-------------------- PollInputState_SDL (frame %llu, elapsed ms = %.2f) --------------------
+--> SDL_PumpEvents - %d new events (elapsed time from last pump %.2f ms)
 -cursor_scale_percent
 -disable_cursor_clip
 -input_button_code_is_scan_code
@@ -50,7 +50,6 @@ $ORIGIN
 ...
 ../public/ordered_constructor.h
 ../public/tier1/utlrbtree.h
-/
 /cursor.res
 0
 0.3
@@ -59,10 +58,8 @@ $ORIGIN
 1
 10ConCommand
 10IAppSystem
-12CEmptyConVar
 12CInputSystem
 12CThreadEvent
-12IInputSystem
 14CBaseAppSystemI12IInputSystemE
 14CBaseAppSystemI17IInputStackSystemE
 14ConCommandBase
@@ -75,33 +72,30 @@ $ORIGIN
 16CDefaultAccessor
 17CInputStackSystem
 17IInputStackSystem
-18CCountedStringPool
-18CUtlCharConversion
+18CPlaceholderConVar
 19IKeyValuesErrorSpew
 2
 20CPostConnectCallback
-21CUtlCStringConversion
-21IKeyValuesDumpContext
 22CSchemaInstallCallback
-23CSplitScreenAddedConVar
 23IConCommandBaseAccessor
 26CDefaultKeyValuesErrorSpew
-27IKeyValuesDumpContextAsText
-29CKeyValuesDumpContextAsDevMsg
 5
 6
 6ConVar
 7
 7IConVar
 8
-8CFmtStrNILi256ELb0EE
 9
 :
 ;
 <
 << NULL >>
 <NULL>
+<deferred>
+<no deferred ref found>
+<no failure reason set>
 <null>
+<unconnected>
 =
 >
 ?
@@ -133,6 +127,8 @@ A_WITH_DIAERESIS
 A_WITH_GRAVE
 A_WITH_RING_ABOVE
 A_WITH_TILDE
+Access of unconnected ConVarRef
+Access of unconnected SplitScreenConVarRef
 Analog axis range before a button press is registered.
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
@@ -160,7 +156,25 @@ CANCEL
 CAPSLOCK
 CAPSLOCKTOGGLE
 CARET
+CBufferString::AppendFormat(char const*, ...)
+CBufferString::AppendFormatV(char const*, __va_list_tag*)
+CBufferString::ComposeFileName(char const*, char const*, char)
+CBufferString::ExtractFileBase(char const*)
+CBufferString::ExtractFileExtension(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
+CBufferString::FixSlashes(char)
+CBufferString::Format(char const*, ...)
+CBufferString::Insert(int, char const*, int, bool)
+CBufferString::MakeAbsolutePath(char const*, char const*)
+CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
+CBufferString::RemoveAt(int, int)
+CBufferString::SetExtension(char const*)
+CBufferString::SetLength(int, bool, int*)
+CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::ShortenPath(bool)
+CBufferString::StripExtension()
+CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CENT_SIGN
@@ -183,21 +197,16 @@ COPYRIGHT_SIGN
 CRSEL
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
-CThreadRWLock::LockForWrite()
-CThreadRWLock::UnlockWrite()
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
+CThreadRWLock::LockForWrite(char const*, int)
+CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
-CThreadSpinRWLock::LockForRead()
-CThreadSpinRWLock::SpinLockForWrite(unsigned long long)
-CThreadSpinRWLock::UnlockRead()
-CThreadSpinRWLock::UnlockWrite()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CURRENCYSUBUNIT
 CURRENCYUNIT
 CURRENCY_SIGN
 CUT
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlMemoryPoolBase
 CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
 CUtlRBTree overflow with %u elements!
@@ -205,7 +214,6 @@ CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
 CXXABI_1.3
-CXXABI_1.3.8
 C_WITH_CEDILLA
 CommandLine
 ConMsg(char const*, ...)
@@ -219,7 +227,6 @@ Current coordinate bias %s: %g,%g scale %g,%g
 Cursor size scaling factor.
 D
 DECIMALSEPARATOR
-DEGREE_SIGN
 DEGREE_SYMBOL
 DEMO
 DISPLAYSWITCH
@@ -232,7 +239,6 @@ DevMsg(char const*, ...)
 DotaCardGameClient_001
 E
 EJECT
-EMPTY - ok for slot zero only!
 END
 ESCAPE
 ETH
@@ -248,7 +254,6 @@ E_WITH_GRAVE
 EarlyInit_Tier0
 EconItemToolModel_001
 EngineServiceMgr001
-EnvironmentMapBuilder_001
 EventSystem001
 F
 F1
@@ -275,44 +280,19 @@ F6
 F7
 F8
 F9
+FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
 FEMININE_ORDINAL_INDICATOR
 FIND
-FTYPEDESC_ADDITIONAL_FIELDS
-FTYPEDESC_ENUM
-FTYPEDESC_EXPLICIT_BASE
-FTYPEDESC_FUNCTIONTABLE
-FTYPEDESC_GEN_ARRAY_KEYNAMES_0
-FTYPEDESC_GEN_ARRAY_KEYNAMES_1
-FTYPEDESC_GLOBAL
-FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
-FTYPEDESC_KEY
-FTYPEDESC_MODELINDEX
-FTYPEDESC_NOERRORCHECK
-FTYPEDESC_NONE
-FTYPEDESC_OUTPUT
-FTYPEDESC_OVERRIDE
-FTYPEDESC_OVERRIDE_RECURSIVE
-FTYPEDESC_PRIVATE
-FTYPEDESC_PROCEDURAL_KEYFIELD
-FTYPEDESC_PTR
-FTYPEDESC_REMOVED_KEYFIELD
-FTYPEDESC_SAVE
-FTYPEDESC_SCHEMA_INITIALIZED
-FTYPEDESC_WAS_INPUT
-FTYPEDESC_WAS_OUTPUT
 Failed to load cursor from '%s'
 Failed to load image for cursor from %s: %s
 Failed to scale image for cursor to %d,%d (hot %d,%d; scaling %g): %s
 FlattenedSerializersVersion001
-FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
 FormatV
 G
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
-GLIBCXX_3.4
 GLIBC_2.14
 GLIBC_2.2.5
 GLIBC_2.4
@@ -354,7 +334,9 @@ IE_InputLanguageChanged
 IE_KeyCodeReleased
 IE_KeyCodeTyped
 IE_KeyTyped
+IE_MultiTouchData
 IE_Quit
+IE_ScreenOrientationChanged
 IE_WindowMove
 IE_WindowSizeChanged
 IMEManager001
@@ -389,6 +371,7 @@ InstallChangeCallback called with NULL callback, ignoring!!!
 InstallChangeCallback ignoring duplicate change callback!!!
 InstallSchemaBindings
 Intentionally vague touch behavior for %p
+Invalid access of deferred ConVarRef for '%s'
 J
 JOY1
 JOY10
@@ -422,6 +405,7 @@ JOY6
 JOY7
 JOY8
 JOY9
+JSON error, unterminated element:
 K
 KBDILLUMDOWN
 KBDILLUMTOGGLE
@@ -500,7 +484,6 @@ KV Conditional Evaluation Error
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
 KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
 L
@@ -518,6 +501,7 @@ Localize_001
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
+LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Logic Error in CExpressionEvaluator
 M
@@ -550,7 +534,6 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
-Msg
 N
 NOT_SIGN
 NULL
@@ -596,10 +579,10 @@ PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
 ParticleSystemMgr003
-Physics2 Interface Old v0.5
 PhysicsBuilderMgr001
 Plat_DebugPrint
 Plat_ExitProcess
+Plat_GetCurrentFrame
 Plat_GetDefaultMonitorIndex
 Plat_GetDesktopResolution
 Plat_GetEnv
@@ -608,7 +591,7 @@ Plat_GetWindowClientBounds
 Plat_GetWindowClientSize
 Plat_GetWindowMonitorIndex
 Plat_IsHighDPI
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_LoadSDL
 Plat_MSTime
 Plat_MilliSecTickDiff
@@ -618,6 +601,7 @@ Plat_RequireSDL
 Plat_ScreenToWindowCoords
 Plat_SetupFPUControlWord
 Plat_ShouldCollectMiniDumpsForFatalErrors
+Plat_TickDiffMilliSecF
 Plat_UnloadModule
 Plat_WindowToOsSpecificHandle
 Plat_WindowToScreenCoords
@@ -643,13 +627,13 @@ R_AXIS_NEG
 R_AXIS_POS
 R_SHOULDER
 R_TRIGGER
-ReadToken overflow
 RecursiveLoadFromBuffer:  got EOF instead of keyname
 RecursiveLoadFromBuffer:  got NULL key
 RecursiveLoadFromBuffer:  got conditional between key and value
 RecursiveLoadFromBuffer:  got empty keyname
 RecursiveLoadFromBuffer:  got } in key
 RecursiveLoadFromBuffer:  recursion overflow
+RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 RegisterStringToken
 Release
@@ -663,7 +647,6 @@ ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
-S
 S1_DOWN
 S1_LEFT
 S1_RIGHT
@@ -677,6 +660,8 @@ SCROLLLOCKTOGGLE
 SDL is %s relative mouse
 SDL says cursor is %s and is set to 0x%p
 SDL:  got %s
+SDL: Display %d orientation changed to %d
+SDL: Display %d unknown event %d (data1 %d)
 SDL: Mouse entered window %d
 SDL: Mouse left window %d
 SDL: Window %d closed
@@ -694,7 +679,6 @@ SDL: Window %d resized to %dx%d
 SDL: Window %d restored
 SDL: Window %d shown
 SDL: Window %d size changed [%d,%d]
-SDL_ANDROID_SEPARATE_MOUSE_AND_TOUCH
 SDL_APP_DIDENTERBACKGROUND
 SDL_APP_DIDENTERFOREGROUND
 SDL_APP_LOWMEMORY
@@ -708,6 +692,7 @@ SDL_CONTROLLERBUTTONUP
 SDL_CONTROLLERDEVICEADDED
 SDL_CONTROLLERDEVICEREMAPPED
 SDL_CONTROLLERDEVICEREMOVED
+SDL_DISPLAYEVENT
 SDL_DOLLARGESTURE
 SDL_DOLLARRECORD
 SDL_DROPFILE
@@ -775,10 +760,8 @@ Source2GameEntities001
 Source2Host001
 Source2Server001
 Source2ServerSerializers002
-Stall
 StatsService_001
 SteamAudio001
-String %d: ref:%d %s
 T
 TEXTINPUT '%s'
 THORN
@@ -790,11 +773,8 @@ TestFormatD
 TestFormatE
 TestScriptMgr001
 TextLayout_001
-TextMessageMgr_001
 ThreadGetCurrentId
 ToolFramework2_002
-ToolGameSimulationDispatcher_001
-ToolGameSimulationSystem_001
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
@@ -812,7 +792,6 @@ U_WITH_GRAVE
 UpdateCursorClipOnFocusChange:  %s SDL_SetWindowGrab on 0x%p (%s) %s
 Updates game keyboard layout to current windows keyboard setting.
 UserInfoChangeService_001
-V
 VApplication001
 VAvi001
 VBAllocTracker001
@@ -820,7 +799,6 @@ VBaseFileSystem011
 VBik001
 VConComm001
 VDebugService_001
-VDmeMakeFileUtils001
 VERTICAL_BAR
 VEngineCvar007
 VFileSystem017
@@ -837,7 +815,6 @@ VNewAsyncFileSystem001
 VOLUMEDOWN
 VOLUMEUP
 VP4003
-VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
@@ -860,8 +837,6 @@ V_GetErrno
 V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
-V_StripFilename
-V_StripTrailingSlash
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -890,9 +865,7 @@ V_strupper_fast
 V_swscanf
 V_tier0_memset
 V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfRet
 V_vsnprintfSize
 V_wcstod
 V_wcstoi64
@@ -935,91 +908,55 @@ _
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFileExtension
-_V_ExtractFilePath
 _V_FileBase
-_V_MakeAbsolutePath
-_V_SetExtension
 _V_StringAfterPrefix
-_V_StripExtension
-_V_StripLastDir
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
-_ZSt9terminatev@@GLIBCXX_3.4
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
 __UNKNOWN__
 __bss_start
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
-__pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
 _edata
 _end
 _fini
-_init
 _vsz%u.bmp
 `
 a
-abort@@GLIBC_2.2.5
-all_projects_common_code.cpp
 archive
 aux
 b
 binary
+binary_auto
 binary_bc
+binary_lz4
 borrow
 c
-characterset.cpp
 cheat
-checksum_crc.cpp
 cl_auto_cursor_scale
 cl_cursor_scale
 client
 clientcmd_can_execute
 configvalue.cpp
-convar.cpp
-crtoverride.cpp
-crtstuff.c
 d
 delete
 developer
 disabled
 disabling
 disallowed
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
 down
 e
 enabled
 enabling
-exprevaluator.cpp
 f
 float( %f )
-free
-free@@GLIBC_2.2.5
 g
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -1027,27 +964,19 @@ g_VProfCurrentProfile
 g_pMemAlloc
 game
 generic
-generichash.cpp
 h
 hidden
 hotx
 hoty
-i
 initializing SDL joystick %d %s
-inputstacksystem.cpp
 inputsystem
-inputsystem.cpp
 int( %d = 0x%X )
-interface.cpp
 interfaces.cpp
 j
 joy_axisbutton_threshold
 joy_wingmanwarrior_centerhack
 joy_wingmanwarrior_turnhack
 joystick not found -- driver not present
-joystick.cpp
-json_parser.c
-key_translation.cpp
 key_updatelayout
 keyc
 keyvalues.cpp
@@ -1058,51 +987,34 @@ libpthread.so.0
 libstdc++.so.6
 libtier0.so
 libvstdlib.so
-m
-malloc
-malloc@@GLIBC_2.2.5
-manifestregistrar.cpp
 max. %f
 memcpy
-memcpy@@GLIBC_2.14
 memmove
-memmove@@GLIBC_2.2.5
-memoverride.cpp
 mempool.cpp
-memset@@GLIBC_2.2.5
 min. %f
 mouse %d %s (%d) at %d %d on window %d
 mouse motion %d %d at %d %d with buttons "%s" on window %d
-n
 not using
 notconnected
 notify
-o
+null
 off
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
+operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
+operator new[](unsigned long, std::nothrow_t const&)
 pthread_mutex_destroy
-pthread_mutex_destroy@@GLIBC_2.2.5
 pthread_mutex_init
-pthread_mutex_init@@GLIBC_2.2.5
 pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
 pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
 pthread_mutexattr_init
-pthread_mutexattr_init@@GLIBC_2.2.5
 pthread_mutexattr_settype
-pthread_mutexattr_settype@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
 q
-r
 rb
 replicated
-s
 scan
 schemabindings.cpp
 server_can_execute
@@ -1110,35 +1022,18 @@ shown
 singleplayer
 ss
 ss_added
-std::terminate()
 strchr
-strchr@@GLIBC_2.2.5
 strcmp
-strcmp@@GLIBC_2.2.5
-strcpy
-strcpy@@GLIBC_2.2.5
-stringpool.cpp
 strlen
-strlen@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-t
 text
-tier1.cpp
-tier2.cpp
 typeinfo for CThreadSyncObject
-u
 u64( %lld = 0x%llX )
 unknown event
 unset
-unused
 up
 update
 user
-utlbuffer.cpp
-utlmemory.cpp
 utlstring.cpp
-utlstringtoken.cpp
-utlsymbol.cpp
 v
 visible
 vstdlib
@@ -1147,11 +1042,7 @@ vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 wb
 wcscmp
-wcscmp@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
-y
 z
 {
 {}()':
-}

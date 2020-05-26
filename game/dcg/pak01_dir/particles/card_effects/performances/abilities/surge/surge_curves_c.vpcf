@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -19,6 +19,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -35,13 +36,16 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.150000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.250000
@@ -49,16 +53,19 @@
 			m_flEndScale = 0.000000
 			m_bEaseInAndOut = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.100000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.250000
 			m_flStartScale = 0.000000
 			m_flBias = 0.750000
 		},
+		
 		{
 			_class = "C_OP_RemapDirectionToCPToVector"
 			m_nFieldOutput = "21"
@@ -67,11 +74,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMax = 190
 			m_nAlphaMin = 190
 		},
+		
 		{
 			_class = "C_INIT_CreateInEpitrochoid"
 			m_flRadius1 = 3.900000
@@ -81,6 +90,14 @@
 			m_bUseCount = true
 			m_nComponent1 = 2
 		},
+		
+		{
+			_class = "C_INIT_RemapInitialDirectionToCPToVector"
+			m_nFieldOutput = "21"
+			m_bNormalize = true
+			m_bDisableOperator = true
+		},
+		
 		{
 			_class = "C_INIT_CreateInEpitrochoid"
 			m_nComponent1 = 1
@@ -92,12 +109,7 @@
 			m_bOffsetExistingPos = true
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RemapInitialDirectionToCPToVector"
-			m_nFieldOutput = "21"
-			m_bNormalize = true
-			m_bDisableOperator = true
-		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_vecWarpMin = 
@@ -114,6 +126,7 @@
 			]
 			m_flWarpTime = 0.100000
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -133,26 +146,42 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 222.000000
-			m_flEmissionDuration = 0.500000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 222.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_fFalloffPower = 0.000000
-			m_fForceAmount = 6.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 6.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -174,4 +203,6 @@
 	]
 	m_flConstantRadius = 1.000000
 	m_flConstantLifespan = 1.200000
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

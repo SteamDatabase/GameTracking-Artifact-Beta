@@ -1,0 +1,64 @@
+<root>
+	<styles>
+    <include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    <include src="s2r://panorama/styles/dashboard/dcg_db_friend_menu.vcss_c" />
+	</styles>
+
+  <DCGFriendMenu class="Hidden" hittest="false">
+    <Panel id="FriendsPanelHeader">
+      <Panel id="FriendsPanelWindowHeader">
+        <Panel id="FriendsPanelWindowHeaderLeft">
+            <Label id="FriendLabel" text="#DCG_Friends_WindowTitle" />
+        </Panel>
+
+        <Panel id="FriendsPanelWindowHeaderRight">
+          <Button id="FriendsTabButton" />
+          <Button class="ControlIconButton" id="AddFriend" onmouseover="UIShowTextTooltip( #DCG_Friends_Add_Friend_Tooltip )" onmouseout="UIHideTextTooltip()" onactivate="DCGShowAddFriendByAccountID();"/>
+        </Panel>
+      </Panel>
+    </Panel>
+
+    <Panel id="FriendPanelMainAreaContainer" class="OnFriends">
+      <Panel id="FriendPanelFriendsList" class="FriendsPanelMainArea" sendchildscrolledintoviewevents="true">
+        <Panel id="FriendsPlayingDCG" class="FriendsCategory HideWhenEmpty">
+					<Panel id="FriendsHeaderContainer">
+						<Label id="NumberFriendsOnline" text="{d:friend_count}" />
+						<ToggleButton id="FriendsHeader" text="#DCG_FriendsCategory_PlayingDCG" html="true" onactivate="DCGFriendCategoryClicked()" />
+					</Panel>
+          <Panel id="FriendList" sendchildscrolledintoviewevents="true"/>
+        </Panel>
+        <Panel id="FriendsPending" class="FriendsCategory HideWhenEmpty" sendchildscrolledintoviewevents="true">
+					<Panel id="FriendsHeaderContainer">
+						<Label id="NumberFriendsOnline" text="{d:friend_count}" />
+						<ToggleButton id="FriendsHeader" text="#DCG_FriendsCategory_Pending" html="true" onactivate="DCGFriendCategoryClicked()" />
+					</Panel>
+          <Panel id="FriendList"  sendchildscrolledintoviewevents="true"/>
+        </Panel>
+        <Panel id="FriendsOnline" class="FriendsCategory" sendchildscrolledintoviewevents="true">
+					<Panel id="FriendsHeaderContainer">
+						<Label id="NumberFriendsOnline" text="{d:friend_count}" />
+						<ToggleButton id="FriendsHeader" text="#DCG_FriendsCategory_Online" html="true" onactivate="DCGFriendCategoryClicked()" />
+					</Panel>
+          <Panel id="FriendList"  sendchildscrolledintoviewevents="true"/>
+        </Panel>
+        <Panel id="FriendsOffline" class="FriendsCategory Collapsed" sendchildscrolledintoviewevents="true">
+					<Panel id="FriendsHeaderContainer">
+						<Label id="NumberFriendsOnline" text="{d:friend_count}" />
+						<ToggleButton id="FriendsHeader" text="#DCG_FriendsCategory_Offline" html="true" onactivate="DCGFriendCategoryClicked()" />
+					</Panel>
+          <Panel id="FriendList"  sendchildscrolledintoviewevents="true"/>
+        </Panel>
+        <Panel id="FriendsSentInvite" class="FriendsCategory HideWhenEmpty Collapsed" sendchildscrolledintoviewevents="true">
+					<Panel id="FriendsHeaderContainer">
+						<Label id="NumberFriendsOnline" text="{d:friend_count}" />
+						<ToggleButton id="FriendsHeader" text="#DCG_FriendsCategory_SentInvite" html="true" onactivate="DCGFriendCategoryClicked()" />
+					</Panel>
+          <Panel id="FriendList"  sendchildscrolledintoviewevents="true"/>
+        </Panel>
+
+        <Label id="FriendListEmptyMessage" text="#DCG_Friends_Empty" />
+
+      </Panel>      
+    </Panel>
+  </DCGFriendMenu>
+</root>

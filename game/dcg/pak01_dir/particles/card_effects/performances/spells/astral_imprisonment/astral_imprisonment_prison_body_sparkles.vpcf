@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 666
 	m_nInitialParticles = 1
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -16,39 +17,41 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.500000
 			m_flBias = 0.750000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_bDisableOperator = true
 			m_flFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_MaxVelocity"
 			m_flMaxVelocity = 40.000000
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_StopAfterCPDuration"
-			m_bDestroyImmediately = true
-			m_bPlayEndCap = false
-		},
+		
 		{
 			_class = "C_OP_MaintainSequentialPath"
 			m_fMaxDistance = 4.000000
@@ -72,20 +75,12 @@
 			}
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_DampenToCP"
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_bSetOnce = true
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				5.000000,
-			]
-		},
+		
 		{
 			_class = "C_OP_RemapDistanceToLineSegmentToScalar"
 			m_nFieldOutput = "16"
@@ -94,13 +89,16 @@
 			m_nCP1 = 1
 			m_flMaxInputValue = 4.000000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 22
 		},
+		
 		{
 			_class = "C_OP_RemapDistanceToLineSegmentToScalar"
 			m_nFieldOutput = "3"
@@ -110,6 +108,7 @@
 			m_flMaxInputValue = 4.000000
 			m_bInfiniteLine = true
 		},
+		
 		{
 			_class = "C_OP_PlaneCull"
 			m_vecPlaneDirection = 
@@ -120,6 +119,7 @@
 			]
 			m_flPlaneOffset = 8.200000
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 90.000000
@@ -127,11 +127,13 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.300000
 			m_flRadiusMax = 0.800000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 5.000000
@@ -148,6 +150,29 @@
 				1.000000,
 			]
 		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+		},
+		
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMin = 
+			[
+				100,
+				202,
+				255,
+				255,
+			]
+			m_ColorMax = 
+			[
+				50,
+				151,
+				222,
+				255,
+			]
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOutputMax = 
@@ -167,12 +192,11 @@
 			m_bDisableOperator = true
 			m_flOffset = 1.100000
 		},
-		{
-			_class = "C_INIT_RandomRotation"
-		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = 
@@ -182,38 +206,28 @@
 				8.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomColor"
-			m_ColorMin = 
-			[
-				100,
-				202,
-				255,
-				255,
-			]
-			m_ColorMax = 
-			[
-				50,
-				151,
-				222,
-				255,
-			]
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 666
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 666.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 300.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_vecComponentScale = 
@@ -222,9 +236,14 @@
 				1.000000,
 				0.000000,
 			]
-			m_fForceAmount = 200.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 200.000000
+			}
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_TurbulenceForce"
 			m_flNoiseCoordScale1 = 0.500000
@@ -249,6 +268,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_ForceBasedOnDistanceToPlane"
 			m_flMaxDist = 10.000000
@@ -263,10 +283,12 @@
 	m_flConstantLifespan = 0.500000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -283,6 +305,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -305,14 +328,17 @@
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistanceToUserSpecifiedPath"
 			m_flMaxDistance = 4.000000
 			m_pointList = 
 			[
+				
 				{
 					m_flTimeDuration = 5.000000
 				},
+				
 				{
 					m_flTimeDuration = 5.000000
 					m_vOffset = 
@@ -326,4 +352,26 @@
 			m_bDisableOperator = true
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_StopAfterCPDuration"
+			m_bDestroyImmediately = true
+			m_bPlayEndCap = false
+		},
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_bSetOnce = true
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				5.000000,
+			]
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 4
 }

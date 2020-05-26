@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -14,6 +14,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -22,26 +23,31 @@
 			m_hTexture = resource:"materials/particle/lightning/ground_cracks.vtex"
 			m_flAnimationRate2 = 0.500000
 			m_flAnimationRate = 0.000000
-			m_bFitCycleToLifetime = true
+			m_nAnimationType = "ANIMATION_TYPE_FIT_LIFETIME"
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeIn"
 			m_flFadeInTimeMin = 0.125000
 		},
+		
 		{
 			_class = "C_OP_FadeOut"
 			m_flFadeOutTimeMin = 0.750000
 			m_flFadeOutTimeMax = 1.000000
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_fl4NoiseScale = 0.250000
@@ -50,6 +56,7 @@
 			m_flOutputMax = 250.000000
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_fl4NoiseScale = 1.000000
@@ -63,11 +70,13 @@
 			m_bAdditive = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
 			m_flBias = 0.250000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -80,10 +89,12 @@
 			m_flFadeStartTime = 0.125000
 			m_flFadeEndTime = 0.750000
 		},
+		
 		{
 			_class = "C_OP_InheritFromParentParticles"
 			m_nFieldOutput = "0"
 		},
+		
 		{
 			_class = "C_OP_InheritFromParentParticles"
 			m_nFieldOutput = "2"
@@ -91,17 +102,27 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.400000
 			m_fLifetimeMin = 0.250000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMax = 2.500000
+			m_flRadiusMin = 1.500000
+		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_bLocalSpace = true
@@ -120,26 +141,32 @@
 			m_flNoiseScaleLoc = 1.000000
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 2.500000
-			m_flRadiusMin = 1.500000
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 45
-			m_flStartTime = 0.050000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.050000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 45.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -159,4 +186,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

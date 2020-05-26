@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 200
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -13,6 +14,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.050000
@@ -24,41 +26,49 @@
 				15.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
 			m_flBias = 0.300000
 			m_nOpEndCapState = 0
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
-			m_nField = 4
+			m_nField = "4"
 			m_Rate = 15.000000
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_flEndTime = 9999.000000
 			m_Rate = -3.000000
-			m_nField = 16
+			m_nField = "16"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_flEndTime = 999999.000000
 			m_Rate = -3.000000
-			m_nField = 1
+			m_nField = "1"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 380.000000
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_bOffset = true
@@ -75,22 +85,25 @@
 				-64.000000,
 				-64.000000,
 			]
-			m_nFieldOutput = 0
+			m_nFieldOutput = "0"
 			m_bDisableOperator = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.200000
 			m_fLifetimeMax = 1.300000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 2.000000
 			m_flRadiusRandExponent = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMin = 3.000000
@@ -103,9 +116,22 @@
 			]
 			m_fSpeedMax = 10.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
+		{
+			_class = "C_INIT_RandomColor"
+			m_ColorMax = 
+			[
+				0,
+				170,
+				255,
+				255,
+			]
+		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecAbsVal = 
@@ -128,6 +154,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_flWarpStartTime = 1.250000
@@ -140,16 +167,7 @@
 			]
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomColor"
-			m_ColorMax = 
-			[
-				0,
-				170,
-				255,
-				255,
-			]
-		},
+		
 		{
 			_class = "C_INIT_GlobalScale"
 			m_flScale = 0.100000
@@ -158,15 +176,21 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
 			m_flOpEndFadeOutTime = 2.500000
 			m_flOpStartFadeOutTime = 1.500000
-			m_flEmitRate = 45.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 45.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_vecComponentScale = 
@@ -176,19 +200,27 @@
 				0.000000,
 			]
 			m_fFalloffPower = 0.000000
-			m_fForceAmount = -350.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -350.000000
+			}
 			m_bDisableOperator = true
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/magic_portal/mp_sparkles.vpcf"
 			m_bDisableChild = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/magic_portal/mp_debris_01.vpcf"
 			m_bDisableChild = true
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

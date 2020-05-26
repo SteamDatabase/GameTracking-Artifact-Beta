@@ -1,0 +1,44 @@
+<root>
+
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/campaign/dcg_ui_campaign_map.vcss_c" />
+	</styles>
+
+	<snippets>
+		<snippet name="ChallengeNode">
+			<Panel class="ChallengeNode">
+				<Label text="{s:nodeID}" />
+			</Panel>
+		</snippet>
+		<snippet name="ChallengeEdge">
+			<Panel class="ChallengeEdgeContainer">
+				<Panel class="ChallengeEdge" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<DCGCampaignMap class="PrimaryCarouselPanel">
+		<Panel id="CampaignTopBar">
+			<Label id="CampaignLabel" class="DBPageTitleLabel TitleFont" text="#DCG_PlayPage_Campaign" />
+			<Label id="DeleteEventData" text="#DCG_EventPopup_ResetProgress" allowtextselection="false" onactivate="DCGDeleteEventData()" />
+		</Panel>
+
+
+		<Panel id="RegionContainer" class="MapContainer">
+			<Panel id="CompletedChallengesPanel">
+				<Panel id="CompletedMissionsContainer">
+					<Label class="CompletedMissionLabel TitleFont" text="{i:completed_missions}" />
+					<Label class="CompletedMissionLabel TitleFont" text="/" />
+					<Label class="CompletedMissionLabel TitleFont" text="{i:total_missions}" />
+					<Label class="CompletedMissionsSmall" text="#DCG_Campaign_CompletedMissions" />
+				</Panel>
+			</Panel>
+			<Panel class="RegionMap">
+				<UICanvas id="ChallengeEdges" class="edges" hittest="false" />
+				<Panel class="nodes" id="ChallengeNodes" hittest="false">
+				</Panel>
+			</Panel>
+		</Panel>
+	</DCGCampaignMap>
+</root>

@@ -1,0 +1,506 @@
+DCGCampaignMap
+{
+	margin-top: 9px;
+	width: 100%;
+	height: 100%;
+	flow-children: none;
+	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/dashboard_new/play_panel_bg_psd.vtex");
+}
+
+.Hidden
+{
+	visibility: collapse;
+}
+
+#StartMatchLabel, #SelectDeckLabel
+{
+	z-index: 5;
+	color: white;
+	font-weight: bold;
+	font-size: 26px;
+	border: 1px solid white;
+}
+
+#SelectDeckLabel
+{
+	margin-left: 150px;
+}
+
+#StartMatchLabel:disabled
+{
+	color: grey;
+}
+
+#DeleteEventData
+{
+	z-index: 5;
+	color: white;
+	font-weight: bold;
+	font-size: 26px;
+	border: 1px solid white;
+	horizontal-align: right;
+	visibility: collapse;
+	vertical-align: center;
+	margin-right: 45px;
+}
+
+#CampaignLabel
+{
+	vertical-align: center;
+	margin-left: 30px;
+}
+
+//======= Dev Buttons ========
+
+#Reload
+{
+	vertical-align: top;
+	horizontal-align: left;
+	width: 100px;
+	height: 100px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#Reload:hover
+{
+	brightness: 1.3;
+}
+
+#GoBackButton
+{
+	vertical-align: top;
+	horizontal-align: left;
+	width: 50px;
+	height: 50px;
+
+	margin-left: 10px;
+	margin-top: 10px;
+
+	background-size: 100%;
+	background-repeat: no-repeat;
+
+	visibility: collapse;
+}
+
+#GoBackButton:hover
+{
+	brightness: 1.3;
+}
+
+.ZoomToRegion #GoBackButton
+{
+	visibility: visible;
+}
+
+//=======
+
+DragZoom
+{
+	flow-children: down;
+}
+
+.nodes
+{
+	padding: 30px;
+	width: 1348px;
+	height: 832px;
+}
+
+.edges
+{
+	margin: 30px;
+	width: 1288px;
+	height: 772px;
+}
+
+.nodes
+{
+	overflow: noclip;
+}
+
+.node
+{
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	border: 5px solid white;
+}
+
+.ChallengeNode
+{
+	width: 30px;
+	height: 30px;
+	//border-radius: 50%;
+	background-color: blue;
+	transform: translateX(-15px) translateY(-15px);
+	overflow: noclip;
+}
+
+.ChallengeNode.Premium
+{
+	background-color: hotpink;
+}
+
+.ChallengeNode.Claimable
+{
+	border: 1px solid yellow;
+}
+
+.ChallengeNode.Claimed
+{
+	background-color: grey;
+}
+
+#ChallengeEdges
+{
+}
+
+.ChallengeEdgeContainer
+{
+	width: 96px;
+	height: 96px;
+	background-position: 50% 50%;
+	background-size: 100% 100%;
+	transform: translateX(-48px) translateY(-48px);
+}
+
+.ChallengeEdgeContainer:hover, .ChallengeEdgeContainer:active, .CurrentlySelectedNode.ChallengeEdgeContainer
+{
+	background-image: url("s2r://panorama/images/campaign/mapnodeglow_psd.vtex");
+}
+
+.ChallengeEdge
+{
+	width: 48px;
+	height: 48px;
+	vertical-align: center;
+	horizontal-align: center;
+	overflow: noclip;
+	tooltip-body-position: 0% 0%;
+	tooltip-arrow-position: 30% 30%;
+	background-position: 50% 50%;
+	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/campaign/campaignfinishedicon_false_png.vtex");
+}
+
+.ChallengeEdgeContainer.Claimable .ChallengeEdge
+{
+	background-image: url("s2r://panorama/images/campaign/campaignfinishedicon_true_png.vtex");
+}
+
+
+.ChallengeEdgeContainer.ChallengeNotReady
+{
+	visibility: collapse;
+}
+
+@keyframes 'PulseChallengeEdge'
+{
+    0%
+    {
+		pre-transform-scale2d: 1.0;
+    }
+    50%
+    {
+		pre-transform-scale2d: 1.5;
+    }
+	100%
+    {
+		pre-transform-scale2d: 1.0;
+    }
+}
+
+.StopEdgePulsing .ChallengeEdge.ContainsChallenge.PulsePanel
+{
+	animation-name: PulseChallengeEdge;
+}
+
+.StopEdgePulsing .ChallengeEdge.ContainsChallenge
+{
+	animation-name: none;
+}
+
+.ChallengeEdge.ContainsChallenge, .node.ContainsChallenge
+{
+	animation-name: PulseChallengeEdge;
+    animation-duration: 1s;
+    animation-delay: 0.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.ChallengeEdge.ContainsChallenge.Claimable
+{
+	height: 50px;
+	width: 50px;
+	animation-name: none;
+	border: 3px solid gold;
+	transform: translateX(-25px) translateY(-25px);
+}
+
+.ChallengeEdge.ContainsChallenge.Claimed
+{
+	animation-name: none;
+	border-width: 0px;
+	background-color: grey;
+}
+
+
+.ChallengeNode Label,
+.ChallengeEdge Label
+{
+	visibility: collapse;
+}
+
+#node1
+{
+	margin-left: 1100px;
+	margin-top: 800px;
+}
+
+#node2
+{
+	margin-left: 640px;
+	margin-top: 400px;
+}
+
+#node3
+{
+	margin-left: 170px;
+	margin-top: 650px;
+}
+
+#node4
+{
+	margin-left: 210px;
+	margin-top: 120px;
+}
+
+.MapContainer
+{
+	width: 100%;
+	height: 100%;
+
+	transition-property: opacity;
+	transition-duration: 0.5s;
+}
+
+#OverviewContainer
+{
+	opacity: 1;
+	margin-top: 40px;
+}
+
+#RegionContainer
+{
+	width: 1440px;
+	height: 904px;
+	background-image: url("s2r://panorama/images/campaign/mappanel_png.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+	flow-children: none;
+}
+
+.AspectRatio16x10 #RegionContainer
+{
+	margin-bottom: 60px;
+}
+
+.ZoomToRegion #OverviewContainer
+{
+	opacity: 0;
+}
+
+.RegionMap
+{
+	margin: 46px;
+	width: 1348px;
+	height: 832px;
+
+	background-image: url("s2r://panorama/images/campaign/mapgraphic_png.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	z-index: 5;
+}
+
+//================
+// Region Buttons
+
+.RegionButton
+{
+	width: fit-children;
+	height: fit-children;
+	padding: 30px;
+}
+
+.RegionButton.Anessix
+{
+	margin-left: 800px;
+	margin-top: 100px;
+}
+
+.RegionButton.Jull
+{
+	margin-left: 700px;
+	margin-top: 650px;
+}
+
+.RegionButton.Enno
+{
+	margin-left: 1600px;
+	margin-top: 150px;
+}
+
+.RegionButton.Hobgen
+{
+	margin-left: 1700px;
+	margin-top: 700px;
+}
+
+.RegionImage
+{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 6px solid #aaa;
+	background-size: 100%;
+	background-repeat: no-repeat;
+
+	horizontal-align: center;
+}
+
+.RegionButton:hover .RegionImage
+{
+	border: 6px solid white;
+}
+
+.Anessix .RegionImage
+{
+}
+
+.Jull .RegionImage
+{
+}
+
+.Enno .RegionImage
+{
+}
+
+.Hobgen .RegionImage
+{
+}
+
+.WhereAmI,
+.RegionMap Label
+{
+	color: black;
+	font-size: 50px;
+	horizontal-align: center;
+}
+
+.RegionTitle
+{
+	font-size: 40px;
+	font-weight: black;
+	color: black;
+	background-color: white;
+	box-shadow: 0px 0px 3px #ffffff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 0px 30px;
+	transform: rotateZ(2deg);
+
+	margin-top: 130px;
+
+	horizontal-align: center;
+}
+
+.RegionProgress
+{
+	horizontal-align: center;
+	margin-top: 170px;
+	transform: rotateZ(2deg);
+}
+
+
+.ClaimButton Label, .CompleteButton Label
+{
+	color: green;
+}
+
+.ChallengeEdge.ContainsChallenge.SelectedNode
+{
+	height: 40px;
+	width: 40px;
+	brightness: 2.0;
+	border: 4px solid black;
+	background-color: green;
+	transform: translateX(-20px) translateY(-20px);
+}
+
+.ChallengeEdge.ContainsChallenge.SelectedNode.ChallengeNotReady
+{
+	height: 30px;
+	width: 30px;
+	brightness: 2.0;
+	border: 1px solid black;
+	background-color: red;
+	transform: translateX(-15px) translateY(-15px);
+}
+
+.AppMain #DeleteEventData
+{
+	visibility: visible;
+}
+
+#CampaignTopBar
+{
+	width: 100%;
+	height: 140px;
+
+}
+
+#CompletedChallengesPanel
+{
+	width: 203px;
+	height: 78px;
+	background-image: url("s2r://panorama/images/campaign/completedmissionspanel_png.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	z-index: 6;
+	horizontal-align: right;
+	margin-top: 65px;
+	margin-right: 65px;
+	flow-children: right;
+	box-shadow: fill #000000 2px 2px 6px 2px;
+}
+
+#CompletedMissionsContainer
+{
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: right;
+	margin: 5px;
+}
+
+.CompletedMissionLabel
+{
+	vertical-align: center;
+	color: #dfd79a;
+	font-size: 28px;
+}
+
+.CompletedMissionsSmall
+{
+	margin-left: 10px;
+	vertical-align: center;
+	width: 80px;
+	text-align: center;
+	color: #d2a865;
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 1px;
+}

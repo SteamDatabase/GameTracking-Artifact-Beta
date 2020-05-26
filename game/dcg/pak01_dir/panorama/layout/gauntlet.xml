@@ -59,14 +59,6 @@
 
 				</Panel>
 
-				<Panel class="PrizeToggle VisibleParallelPrizeMode">
-					<Panel class="PrizeToggleButton">
-						<Image class="PrizeToggleButtonNub" src="s2r://panorama/images/main_menu/toggle_button_nub_png.vtex"/>  
-					</Panel>
-					<Label class="PrizeToggleLabel LightGrey" text="DCG_MainMenu_PlayCompetitive"/>
-					<Image class="PrizeToggleInfo" src="s2r://panorama/images/control_icons/info_icon_png.vtex"/>
-				</Panel>
-
 				<Panel id="LabelAndDifficultySelectorPanel">
 					<Label class="ContentsLabel ExtraSpacingForLabel" text="#DCG_PlayAIGame_SelectDifficulty"/>
 					<DropDown id="DifficultySelector" dropdownbodyposition="100% 100%" oninputsubmit="DCGAIDifficultyDropDownChanged()">
@@ -78,18 +70,19 @@
 
 			</Panel>
 				<Panel class="GauntletBottom">
-		          <Panel class="GauntletAchievementContainer">
-				  	<Panel class="WinStreak">
-						<Image class="WinStreakImage" src="s2r://panorama/images/tournaments/icon_perfectgauntlet_psd.vtex" />
-            			<Label class="WinStreakLabel TitleFont" text="#DCG_Gauntlet_HighScore" />
-					</Panel>
-					<Panel class="PerfectRuns">
-						<Image class="PerfectRunsImage" src="s2r://panorama/images/tournaments/icon_perfectgauntlet_psd.vtex" />
-            			<Label class="PerfectRunsLabel" text="#DCG_Gauntlet_PerfectRuns" />
-					</Panel>
-          		</Panel>
+
+          <Panel class="PrizeToggle VisibleParallelPrizeMode">
+            <Panel class="PrizeToggleButton" onactivate="DCGTogglePlayCompetitiveOn()">
+              <Image class="PrizeToggleButtonNub"/>
+            </Panel>
+            <Panel class="PrizeToggleOffButton" onactivate="DCGTogglePlayCompetitiveOff()">
+              <Image class="PrizeToggleButtonNub"/>
+            </Panel>
+            <Label class="PrizeToggleLabel" text="DCG_MainMenu_PlayCompetitive"/>
+            <Image class="PrizeToggleInfo" src="s2r://panorama/images/control_icons/info_icon_png.vtex" onmouseover="UIShowTextTooltip( #DCG_PrizePlay_Tooltip ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()"/>
+          </Panel>
 				</Panel>
-		</Panel>
+		  </Panel>
 			<Panel id="BottomContainer">
 				<Panel id="WinsLossesContainer">
 					<Panel id="WinsContainer">
@@ -126,6 +119,18 @@
 								</Panel>
 							</Panel>
 						</Panel>
+            
+            <Panel class="GauntletAchievementContainer">
+              <Panel class="WinStreak">
+                <Image class="WinStreakImage" src="s2r://panorama/images/tournaments/icon_perfectgauntlet_psd.vtex" />
+                <Label class="WinStreakLabel TitleFont" text="{d:gauntlet_high_score}" />
+              </Panel>
+              <Panel class="PerfectRuns">
+                <Image class="PerfectRunsImage" src="s2r://panorama/images/tournaments/icon_perfectgauntlet_psd.vtex" onmouseover="UIShowTextTooltip( #DCG_Gauntlet_PerfectRuns ) PlaySoundEffect( DCG_UI.MainMenu_Rollover )" onmouseout="UIHideTextTooltip()" />
+                <Label class="PerfectRunsLabel" text="{d:gauntlet_perfect_runs}" />
+              </Panel>
+            </Panel>
+            
 					</Panel>
 					<Panel id="LossesContainer">
 						<Label id="LossesLabel" html="true" class="WinLossTitle" text="#DCG_Gauntlet_LossesLabel" />
@@ -150,6 +155,6 @@
 					<Label class="InfiniteWinsCount" text="#DCG_Gauntlet_InfiniteWinsCount" />
 				</Panel>
 			</Panel>
-			<CustomLayoutPanel id="ButtonContainer" layout="file://{resources}/layout/play_carousel_navigation_buttons.xml" />
+			<CustomLayoutPanel id="ButtonContainer" layout="file://{resources}/layout/play_navigation_buttons.xml" />
 	</DCGGauntlet>
 </root>

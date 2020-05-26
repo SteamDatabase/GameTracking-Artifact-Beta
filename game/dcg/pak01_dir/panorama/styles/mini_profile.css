@@ -11,36 +11,57 @@ DCGMiniProfile
 	flow-children: none;
 }
 
-#Dashboard.InLimitedStage DCGMiniProfile
+#MiniProfile
 {
-    visibility: collapse;
+	margin-top: 16px;
+	horizontal-align: left;
+	vertical-align: bottom;
+	margin-bottom: 82px;
+	margin-left: 16px;
+	width: 100%;
+	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
+	transition-duration: 0.4s;
+	transition-timing-function: ease-in-out;
+}
+
+#MiniProfileGlow
+{
+	width: 320px;
+	height: 400px;
+
+	brightness: 1;
+	horizontal-align: left;
+	vertical-align: bottom;
+	margin-left: -82px;
+	margin-bottom: -32px;
+	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
+	transition-duration: 0.4s;
+	transition-timing-function: ease-in-out;
 }
 
 #AccountBadge
 {
-	width: 96px;
+	width: 100px;
+	height: 133px;
 	margin-right: 0px;
-	
 }
 
 #MiniProfileContainer
 {
-	/*width: 100%;*/
-	height: 100%;
+	width: 100%;
+	height: 120px;
 
 }
 
 .MiniProfileContents
 {
 	flow-children: right;
-	/*width: 100%;*/
-	overflow: noclip;
+	width: 100%;
 }
 
 .MiniProfileData
 {
 	width: 211px;
-	width: fit-children;
 	flow-children: down;
 	overflow: noclip;
 	margin-left: 16px;
@@ -111,6 +132,8 @@ DCGMiniProfile
 	transition-property: width, height, transform;
 	transition-duration: .32s;
 	transition-timing-function: ease-in-out;
+
+	visibility: collapse;
 }
 
 
@@ -194,6 +217,7 @@ ProgressBar
 	transition-property: opacity, transform;
 	transition-duration: .12s;
 	transition-timing-function: ease-in-out;
+	visibility: collapse;
 }
 
 .WeekyBonusContainer
@@ -204,6 +228,8 @@ ProgressBar
 	transition-property: width, height, transform;
 	transition-duration: 0.32s;
 	transition-timing-function: ease-in-out;
+
+	visibility: collapse;
 }
 
 .WeeklyBonusPip
@@ -216,6 +242,7 @@ ProgressBar
 	transition-property: width, height, transform, background-color, border;
 	transition-duration: 0.32s;
 	transition-timing-function: ease-in-out;
+	margin-top: 0px;
 }
 
 #WeeklyBonus3.WeeklyBonusPip
@@ -250,7 +277,9 @@ ProgressBar
 
 
 #Dashboard.InPackOpening DCGMiniProfile,
-#Dashboard.InCatalogue DCGMiniProfile
+#Dashboard.InCatalogue DCGMiniProfile,
+#Dashboard.InLimitedStage DCGMiniProfile,
+#Dashboard.SelectedPageFeatured DCGMiniProfile
 {
 	opacity: 0;
 	transform: translateX(-32px);
@@ -313,11 +342,15 @@ ProgressBar
 	opacity: 0;
 }
 
+.SelectedPageFeatured DCGPlayerProfile DCGMiniProfile .MiniProfileData
+{
+	opacity: 1;
+}
+
 .SelectedPageFeatured DCGMiniProfile #XPtoNextLevel,
 .SelectedPageFeatured DCGMiniProfile #BonusLabelsContainer,
 .SelectedPageFeatured DCGMiniProfile .ArtifactlevelPlayerName
 {
-	opacity: 0;
 	/*transition-delay: .4s;*/
 	transition-duration: .42s;
 }
@@ -332,6 +365,11 @@ ProgressBar
 	width: 100px;
 	height: 100%;
 	tooltip-position: top;
+}
+
+DCGPlayerProfile .MiniProfileMask
+{
+	visibility: collapse;
 }
 
 .MiniProfileMask
@@ -370,6 +408,13 @@ ProgressBar
 }
 
 .HasTimer #WeeklyBonusResetTime
+{
+	visibility: visible;
+}
+
+.IsLocalPlayer #PlayerLevelProgress,
+.IsLocalPlayer #BonusLabelsContainer,
+.IsLocalPlayer .WeekyBonusContainer
 {
 	visibility: visible;
 }

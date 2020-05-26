@@ -23,6 +23,15 @@
 							"code"				""		// The deck code for this deck
 						}
 					}
+					
+					// Can specify starting items equipped to a hero.
+					// Items do not have to by in the deck as they are created on the spot
+					"starting_items"
+					{
+						// "HeroID" "ItemID"
+						"10842"	"10202"
+						"10842"	"10206"
+					}
 
 					"validator"							// If you allow users to play custom decks, this can be specified to provide a custom deck validator to enforce the user selection of decks
 					{									
@@ -53,8 +62,8 @@
 				"initial_heroes"				"3"
 				"initial_heroes_ai"				"3"
 				
-				"tower_health"					"40" // for all towers
-				"ancient_health"				"80" // for all ancients
+				"tower_health"					"30" // for all towers
+				"ancient_health"				"40" // for all ancients
 
 				"tower1_health"					"40" // override health for a specific tower
 				"tower2_health"					"40"
@@ -69,7 +78,7 @@
 				"ancient2_health_ai"			"80"
 				"ancient3_health_ai"			"80"
 
-				"store_enabled"					"1" // set to 0 to disable shopping
+				"store_enabled"					"1" // NOT IMPLEMENTED
 				"initial_mana"					"3"
 				"initial_mana_ai"				"3"
 				"creeps_first_turn"				"1"
@@ -82,6 +91,10 @@
 				"cards_per_turn_ai"				"2"
 				"gold_per_turn_ai"				"0"
 				"mana_boost_per_turn_ai"		"0"
+				
+				"dcg_mana_per_turn"				"1" // How much the player's max mana changes each turn
+				"dcg_mana_per_turn_ai"			"1" // How much the AI's max mana changes each turn
+
 
 				"creep_list"					"1006" // Comma separated list of possible automatic creeps at deployment, EX: "10092,10003"
 				"creep_list_ai"					"1006" // Comma separated list of possible automatic creeps at deployment, EX: "10092,10003"
@@ -133,6 +146,8 @@
 				"on_card_played"				"<action>"
 				"on_card_drawn"					"<action>"
 				"on_deploy_start"				"<action>"
+				"on_hero_deployed"				"<action>" // After a single hero is deployed to a lane
+				"on_all_heroes_deployed"		"<action>" // After all heroes for that turn have been deployed
 				"on_next_lane"					"<action>"
 				"on_store_openned"				"<action>"
 				"on_tower_destroyed"			"<action>"

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -6,23 +6,30 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flRadiusScale = 5.000000
 			m_hTexture = resource:"materials/particle/beam_edge_01.vtex"
-			m_ColorScale = 
-			[
-				255,
-				255,
-				255,
-			]
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.010000
@@ -33,19 +40,22 @@
 				300.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_FadeAndKill"
 			m_flEndFadeInTime = 0.250000
 			m_flStartFadeOutTime = 0.800000
 			m_flStartAlpha = 0.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.500000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
-			m_nField = 2
+			m_nField = "2"
 			m_RateMin = 
 			[
 				-2.000000,
@@ -71,37 +81,40 @@
 				10.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.200000
 			m_flStartScale = 0.100000
 			m_flEndScale = 3.000000
 		},
+		
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
 			m_flRotRate = 4000.000000
 			m_nCP = 5
 		},
-		{
-			_class = "C_OP_StopAfterCPDuration"
-		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.250000
 			m_fLifetimeMax = 0.250000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 64.000000
 			m_flRadiusMin = 16.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 150
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -119,12 +132,14 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_nControlPointNumber = 5
 			m_flInitialRadius = 30.000000
 			m_flInitialSpeedMax = 100.000000
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -143,6 +158,7 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_NoiseEmitter"
 			m_flOutputMax = 1.000000
@@ -150,6 +166,7 @@
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_TurbulenceForce"
 			m_flNoiseCoordScale0 = 0.100000
@@ -170,14 +187,26 @@
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/radiant_circular_wisp_trail.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/radiant_circ_wispspark.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/world_environmental_fx/radiant_circ_wisplight.vpcf"
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_StopAfterCPDuration"
+		},
+	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

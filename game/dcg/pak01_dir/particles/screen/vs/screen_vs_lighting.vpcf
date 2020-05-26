@@ -1,29 +1,36 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 10
 	m_flConstantRadius = 30.000000
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flAlphaScale = 15.000000
-			m_ColorScale = 
-			[
-				125,
-				65,
-				255,
-			]
 			m_flRadiusScale = 5.000000
 			m_flStartFalloff = 0.100000
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					125,
+					65,
+					255,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_SetToCP"
 			m_bOffsetLocal = true
@@ -34,6 +41,7 @@
 				-20.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_nFieldOutput = "7"
@@ -43,23 +51,31 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -82,11 +98,14 @@
 	m_flConstantLifespan = 10.000000
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/screen/vs/screen_vs_card_lighting.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/gameintro/screen_gameintro_board_light.vpcf"
 		},
 	]
+	m_nBehaviorVersion = 5
 }

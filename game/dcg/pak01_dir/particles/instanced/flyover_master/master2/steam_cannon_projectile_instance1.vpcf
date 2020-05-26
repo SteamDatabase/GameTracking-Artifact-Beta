@@ -1,13 +1,15 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 0.800000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -30,39 +32,47 @@
 	m_nMaxParticles = 2
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_SetChildControlPoints"
 			m_bSetOrientation = true
-			m_nFirstSourcePoint = "0"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.200000
 			m_flStartScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.200000
 			m_flEndTime = 0.960000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.960000
 			m_flEndScale = 2.000000
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 44
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateDegrees = -66
@@ -70,24 +80,29 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
-					m_model = resource:"models/effects/cannonball.vmdl"
+					m_model = resource:"models/particle/spells/steam_cannon/cannonball.vmdl"
 				},
 			]
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
 		},
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistanceToPath"
 			m_flMaxDistance0 = 0.000000
@@ -107,12 +122,15 @@
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/instanced/flyover_master/master2/steam_cannon_projectile_trail_fire_instance1.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/instanced/flyover_master/master2/steam_cannon_projectile_trail_instance1.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/instanced/flyover_master/master2/steam_cannon_impact_instance1.vpcf"
 			m_bEndCap = true
@@ -120,6 +138,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RemapCPtoScalar"
 			m_nCPInput = 4
@@ -132,11 +151,18 @@
 	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_StopAfterCPDuration"
-			m_nCP = 4
-			m_flDuration = 0.760000
+			m_flDuration = 
+			{
+				m_nType = "PF_TYPE_CONTROL_POINT_COMPONENT"
+				m_nControlPoint = 4
+				m_nVectorComponent = 0
+				m_nMapType = "PF_MAP_TYPE_MULT"
+				m_flMultFactor = 0.760000
+			}
 		},
 	]
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 }

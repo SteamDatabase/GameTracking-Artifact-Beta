@@ -1,14 +1,16 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 10.000000
 	m_flConstantLifespan = 2.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -30,22 +32,27 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.400000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.600000
 			m_bEaseInAndOut = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_nFieldOutput = "21"
@@ -69,6 +76,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMaxTesselation = 1
@@ -81,6 +89,7 @@
 			m_bAdditive = true
 			m_hTexture = resource:"materials/particle/beam_plasma_06.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMaxTesselation = 1
@@ -90,6 +99,7 @@
 			m_flDepthBias = 4.000000
 			m_hTexture = resource:"materials/particle/beam_noise05.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMaxTesselation = 1
@@ -104,6 +114,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 16.000000
@@ -113,6 +124,7 @@
 				m_nEndControlPointNumber = 2
 			}
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -128,23 +140,26 @@
 				1.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMax = 7
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
 			m_flRemapBias = 0.600000
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMin = 7
 			m_nInputMax = 15
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
 			m_flRemapBias = 0.600000
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "16"
@@ -152,6 +167,7 @@
 			m_bActiveRange = true
 			m_flRemapBias = 0.400000
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "16"
@@ -162,6 +178,7 @@
 			m_bActiveRange = true
 			m_flRemapBias = 0.400000
 		},
+		
 		{
 			_class = "C_INIT_RandomVector"
 			m_vecMin = 
@@ -178,6 +195,7 @@
 			]
 			m_nFieldOutput = "21"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "1"
@@ -188,20 +206,35 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 16
 			m_bDisableOperator = true
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 16.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.500000
-			m_flEmitRate = 32.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.500000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 32.000000
+			}
 		},
 	]
 	m_nMaxParticles = 16
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetControlPointPositions"
 			m_bSetOnce = true
@@ -231,7 +264,7 @@
 			]
 		},
 	]
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 7
 	m_nFirstMultipleOverride_BackwardCompat = 6
 	m_ConstantColor = 
 	[

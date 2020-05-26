@@ -1,0 +1,79 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_add_event.vcss_c" />
+	</styles>
+
+	<snippets>
+		<snippet name="CardDialogSnippet">
+			<Panel class="CardDialogContainer" hittest="false" hittestchildren="false">
+				<Panel id="CardDialogImageContainer">
+					<Panel id="CardImageContainer">
+						<Panel id="CardImage" />
+					</Panel>
+					<Panel id="CardImageFrame" />
+				</Panel>
+				<Panel id="TextDialogContainer">
+					<Panel id="SpeechBubbleDirection" />
+					<Panel id="SpeechBubbleContainer">
+						<Label id="SpeechText" text="{s:unit_speech}" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+		
+	<PopupEvent class="PopupPanel Hidden" hittest="false" oncancel="UIPopupButtonClicked( DCGCloseMissionDialog( false ) )">
+		<Panel id="MissionBoxShadow" />
+		<Panel id="CarouselContainer">
+			<Carousel id="CardCarousel" class="SingleItemCarousel" panels-visible="2" wrap="true" onactivate="DCGNewCardCarouselClicked();"/>
+			<CarouselNav id="CardCarouselNav" class="TransportControls" carouselid="CardCarousel" maxpips="3" disablenav="true" />
+		</Panel>
+		<Panel id="FullMissionContainer">
+			<Panel id="MissionInfoContainer">
+				<Button id="ClosePopupButton" class="CloseMissionButton" onactivate="UIPopupButtonClicked( DCGCloseMissionDialog( false ) )"/>
+				<Panel id="MissionHeader">
+					<Panel id="MissionStatus">
+						<Label id="MissionNumLabel" class="TitleFont" text="#DCG_MissionNumberText" />
+						<Panel id="MissionStatusImage" />
+						<Label id="MissionStatusLabel" text="{s:mission_status_text}" />
+					</Panel>
+					<Label id="MissionName" text="{s:mission_name}" />
+				</Panel>
+			</Panel>
+			<Panel id="MissionBottomContainer">
+				<Panel id="LeftContainer">
+					<Panel id="MissionDescContainer">
+						<Label id="MissionDesc" text="{s:mission_desc}" />
+					</Panel>
+					<DCGDeckLoader id="SelectedDeckLoader" />
+				</Panel>
+				<Panel id="RightContainer">
+					<Panel id="RightContents">
+						<Panel id="NewMissionCards" />
+						<Label id="NewCardsForMission" text="#DCG_Campaign_NewCardsForMission" />
+					</Panel>
+				</Panel>
+				<Panel id="MissionDialogContainer" />
+				<Panel id="MissionCompleteContainer">
+					<Label id="MissionCompleteLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionComplete" />
+					<Label id="MissionFailedLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionFailed" />
+					<Panel id="MissionCompleteBottom">
+						
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel id="MissionButtonsContainer">
+				<TextButton id="ManualClaimButton" text="#DCG_ResultScreen_Quit_Puzzle" onactivate="DCGCampaignStartMatch()" />
+				<TextButton id="PlayAgainButton" text="#DCG_Campaign_PlayAgain" onactivate="DCGCampaignForceStart()" />
+				<TextButton id="StartMatchButton" text="#DCG_EventPopup_StartMatch" onactivate="DCGCampaignForceStart()" />
+				<TextButton id="ContinueButton" text="#DCG_ResultScreen_Quit_Puzzle" onactivate="DCGContinueToDialog()" />
+				<TextButton id="ExitOutroButton" text="#DCG_Campaign_ExitOutro" onactivate="UIPopupButtonClicked( DCGCloseMissionDialog( false ) )" />
+				<TextButton id="PlayMissionButton" onactivate="DCGCampaignStartMatch()" />
+				<TextButton id="CompleteChallengeButton" text="#DCG_Challenge_DevClaimChallenge" onactivate="DCGChallengeMapCompleteSelectedChallenge()" />
+				<TextButton id="CancelMatchButton" text="#DCG_Event_CancelMatchSearch" onactivate="CancelFindOpponent()" />
+			</Panel>
+		</Panel>
+	</PopupEvent>
+</root>

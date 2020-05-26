@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -14,6 +14,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -27,6 +28,7 @@
 			m_bDisableOperator = true
 			m_flSelfIllumAmount = 1.000000
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -40,6 +42,7 @@
 			m_bLightenMode = true
 			m_hTexture = resource:"materials/particle/beam_edge_06.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 32
@@ -56,13 +59,16 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.200000
@@ -70,6 +76,7 @@
 			m_flBias = 0.750000
 			m_flEndScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -81,10 +88,12 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.850000
@@ -92,15 +101,17 @@
 			m_flEndTime = 0.200000
 			m_flStartScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_flOpEndFadeInTime = 0.100000
 			m_flOpStartFadeInTime = 0.100000
 			m_fDrag = 0.100000
 		},
+		
 		{
 			_class = "C_OP_RemapDirectionToCPToVector"
-			m_nFieldOutput = 21
+			m_nFieldOutput = "21"
 			m_flOffsetRot = 5.000000
 			m_bNormalize = true
 			m_vecOffsetAxis = 
@@ -113,6 +124,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_flInitialRadius = 2.000000
@@ -120,6 +132,7 @@
 			m_flParticlesPerOrbit = 13.000000
 			m_flPitch = 90.000000
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = 
@@ -136,6 +149,7 @@
 			]
 			m_bLocalCoords = true
 		},
+		
 		{
 			_class = "C_INIT_PositionWarp"
 			m_bUseCount = true
@@ -154,58 +168,74 @@
 			]
 			m_bInvertWarp = true
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_bActiveRange = true
-			m_bScaleInitialRange = true
 			m_flOutputMax = 0.000000
 			m_flOutputMin = 1.000000
 			m_nInputMax = 32
 			m_nInputMin = 16
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.100000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flInputMax = 0.900000
 			m_flOutputMin = 1.000000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_nFieldOutput = 16
+			m_nFieldOutput = "16"
 			m_flInputMin = 0.900000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 1.000000
-			m_flEmitRate = 64.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 64.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -225,4 +255,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 1
 }

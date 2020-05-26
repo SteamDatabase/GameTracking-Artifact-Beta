@@ -1,0 +1,41 @@
+// rule naming conv: card category/card name/core concept/player context/variant or chain info
+// var naming conv: player context/variable type/card category/card name/variant or chain info/player context
+// p_var = player centric variable //
+// o_var = opponent centric variable //
+// Pp = "player plays" //
+// Pr = "player reacts" //
+// Op = "opponent plays" //
+// Or = "opponent reacts" //
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  TREAT_FEED
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// this is a special case card to have the imps play 'feeding' reactions
+
+
+
+//-----------------------------------------------------------------------------
+// PLAYER PLAYS CARD: treat_feed: Special
+//-----------------------------------------------------------------------------
+
+
+// Player reacts:  ------------------------------------------------------------
+
+
+Rule rule_imps_interact_states_treats_treat_feed_SPECIAL_Pp_Pr
+{
+
+    Criteria Special IsLocalImp IsActionPhase IsNotCombat IsImpFeed p_var_wait_treat_feed
+
+    ApplyContext "p_var_wait_treat_feed:1:4"
+    ApplyContextToWorld
+
+    Response imps_interact_states_treats_treat_feed_Pp_Pr
+
+}

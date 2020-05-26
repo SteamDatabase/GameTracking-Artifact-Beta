@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -8,18 +8,24 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flAlphaScale = 15.000000
-			m_ColorScale = 
-			[
-				204,
-				191,
-				255,
-			]
 			m_hTexture = resource:"materials/particle/particle_glow_01.vtex"
 			m_flRadiusScale = 10.000000
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					204,
+					191,
+					255,
+				]
+			}
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_bDisableOperator = true
@@ -27,6 +33,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
@@ -34,6 +41,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -51,15 +59,18 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 15.000000
 			m_flRadiusMax = 20.000000
 			m_flRadiusRandExponent = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -80,17 +91,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -107,6 +125,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_POINT_FOLLOW"
@@ -125,6 +144,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_POINT_FOLLOW"
@@ -143,6 +163,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_POINT_FOLLOW"
@@ -176,6 +197,6 @@
 		1.000000,
 		1.000000,
 	]
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 4
 }

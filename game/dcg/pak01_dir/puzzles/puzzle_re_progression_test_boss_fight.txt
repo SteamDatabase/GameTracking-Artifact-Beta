@@ -1,0 +1,86 @@
+"puzzle_RE_test_05c"
+{
+	"name"		"#DCG_Puzzle_RE_test_05c"
+	"description"	"#DCG_Puzzle_RE_test_05c"
+	"sections"
+	{
+		"part1"
+		{
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"		"ADCJeUZJ7kCIwFBgTwOsb0CgYKBC4aCgScBippCvAFwdXp6bGUgLSBzaGl0dHkgb2F0aCBkZWNr"
+				}
+				"deck_ai"
+				{
+					"use_deck"		"ADCJT8ZJ7kCQpkIPg6suwKkAaEBhCUBg0EERrYBtAEgAa0Bi3B1enpsZSAtIGNoZWFwIG1vbm8gYmxhY2s_"
+				}
+
+				"set1"							"1"
+
+
+				"initial_heroes_ai"				"5"
+				
+				"tower1_health_ai"				"500"
+				"tower2_health_ai"				"500"
+				"tower3_health_ai"				"500"
+				
+				"ancient1_health_ai"			"999"
+				"ancient2_health_ai"			"999"
+				"ancient3_health_ai"			"999"
+				
+				"tower1_health"					"60"
+				"tower2_health"					"60"
+				"tower3_health"					"60"
+				
+				"initial_mana"					"8"
+				
+				
+				"cards_first_turn"				"7"
+				"cards_per_turn"				"3"
+				"creep_list"					"10115, 10091"
+				"creeps_per_turn"				"5"
+				"creeps_first_turn"				"5"
+				
+				
+				"cards_first_turn_ai"			"10"
+				"creeps_per_turn_ai"			"3"
+				"creeps_first_turn_ai"			"14"
+				"creep_list_ai"					"10128,10092"
+				
+							
+			
+			}
+			
+			"sequences"
+			{
+				"start"
+				{
+					"on_next_lane 9.0"			"goto intro"
+				}
+				
+				"intro"
+				{
+					"auto 2.0"					"npehelper #StA_boss_fight,0,0,0,n,c,c"
+					"on_message_dismissed 2.0"		"goto end"
+					">"					"npehelper remove"
+				}
+				
+				"end"
+				{
+					"on_victory"				"goto winner"
+					"on_failure"				"goto loser"
+				}
+				
+				"winner"
+				{
+					"auto 2.5"			"npehelper #StA_victory;#StA_start_over,0,0,0,n,c,c"
+					"> 2.6"				"concommand pause"
+					"on_message_dismissed 5.0"	"load_puzzle puzzle_re_progression_test01a"
+					">"				"concommand unpause"
+				}	
+			}
+		}
+	}
+}

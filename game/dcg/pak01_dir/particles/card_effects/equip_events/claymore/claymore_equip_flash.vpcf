@@ -1,12 +1,14 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -31,13 +33,16 @@
 	m_flConstantLifespan = 0.100000
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.800000
@@ -45,32 +50,40 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_bAdditive = true
 			m_bDisableZBuffering = true
 			m_hTexture = resource:"materials/particle/particle_glow_05.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_bMod2X = true
 			m_bDisableZBuffering = true
 			m_hTexture = resource:"materials/particle/particle_glow_06.vtex"
 		},
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flRadiusScale = 4.000000
 			m_flAlphaScale = 8.000000
-			m_ColorScale = 
-			[
-				255,
-				255,
-				255,
-			]
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_vecMin = 
@@ -86,6 +99,7 @@
 				2.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 16
@@ -94,11 +108,21 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 1.000000
-			m_flEmitRate = 64.000000
 			m_flOpEndFadeOutTime = 1.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 64.000000
+			}
 		},
 	]
+	m_nBehaviorVersion = 5
 }

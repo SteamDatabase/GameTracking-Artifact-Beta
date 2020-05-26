@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -25,6 +25,7 @@
 	m_nMinCPULevel = 1
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_bOrientZ = true
@@ -32,23 +33,28 @@
 			m_bScaleAnimationRate = true
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/props_wildlife/wildlife_butterfly002.vmdl"
 				},
 			]
 			m_bAnimated = true
 			m_nLOD = 1
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.050000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -79,6 +85,7 @@
 			m_flOpEndFadeOutTime = 0.625000
 			m_flOpFadeOscillatePeriod = 7.500000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -108,8 +115,8 @@
 			m_flOpStartFadeOutTime = 0.200000
 			m_flOpEndFadeOutTime = 0.250000
 			m_flOpFadeOscillatePeriod = 10.000000
-			m_flOpStrengthMaxScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -134,12 +141,12 @@
 			m_flOpStartFadeOutTime = 0.400000
 			m_flOpEndFadeOutTime = 0.500000
 			m_flOpFadeOscillatePeriod = 5.000000
-			m_flOpStrengthMaxScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_fl4NoiseScale = 0.050000
-			m_nFieldOutput = 0
+			m_nFieldOutput = "0"
 			m_vecOutputMin = 
 			[
 				-4.000000,
@@ -156,15 +163,16 @@
 			m_flOpStartFadeOutTime = 0.400000
 			m_flOpEndFadeOutTime = 0.500000
 			m_flOpFadeOscillatePeriod = 5.000000
-			m_flOpStrengthMaxScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_MaxVelocity"
 			m_flMaxVelocity = 210.000000
 		},
+		
 		{
 			_class = "C_OP_OrientTo2dDirection"
-			m_nFieldOutput = 12
+			m_nFieldOutput = "12"
 			m_flRotOffset = 90.000000
 			m_flSpinStrength = 0.075000
 			m_flOpStartFadeInTime = 0.050000
@@ -173,14 +181,21 @@
 			m_flOpEndFadeOutTime = 0.500000
 			m_flOpFadeOscillatePeriod = 5.000000
 			m_flOpTimeOffsetMax = 3.000000
-			m_flOpStrengthMaxScale = 2.000000
-			m_nOpStrengthScaleSeed = 999
+			m_flOpStrength = 
+			{
+				m_nType = "PF_TYPE_RANDOM_UNIFORM"
+				m_flRandomMin = 1.000000
+				m_flRandomMax = 2.000000
+				m_nRandomMode = "PF_RANDOM_MODE_VARYING"
+			}
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.021000
 			m_flStartScale = 0.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.975000
@@ -189,6 +204,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_vecDistanceBias = 
@@ -199,11 +215,40 @@
 			]
 			m_fRadiusMax = 64.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 80.000000
 			m_fLifetimeMin = 30.000000
 		},
+		
+		{
+			_class = "C_INIT_RandomRotation"
+			m_flDegreesMax = 25.000000
+			m_flDegreesMin = -25.000000
+		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+		},
+		
+		{
+			_class = "C_INIT_RandomScalar"
+			m_nFieldOutput = "20"
+		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 0.400000
+			m_flRadiusRandExponent = 0.375000
+		},
+		
+		{
+			_class = "C_INIT_RandomTrailLength"
+			m_flMaxLength = 1.200000
+			m_flMinLength = 0.800000
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -219,58 +264,53 @@
 				48.000000,
 			]
 		},
-		{
-			_class = "C_INIT_RandomRotation"
-			m_flDegreesMax = 25.000000
-			m_flDegreesMin = -25.000000
-		},
-		{
-			_class = "C_INIT_RandomAlpha"
-		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
-		},
-		{
-			_class = "C_INIT_RandomScalar"
-			m_nFieldOutput = 20
-		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 0.400000
-			m_flRadiusRandExponent = 0.375000
-		},
-		{
-			_class = "C_INIT_RandomTrailLength"
-			m_flMaxLength = 1.200000
-			m_flMinLength = 0.800000
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 10.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_fFalloffPower = -0.100000
-			m_fForceAmount = 8.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 8.000000
+			}
 			m_flOpStartFadeOutTime = 0.400000
 			m_flOpEndFadeOutTime = 0.500000
 			m_flOpFadeOscillatePeriod = 5.000000
 		},
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
 			m_nControlPointNumber = 2
 			m_fFalloffPower = -0.050000
-			m_fForceAmount = 20.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 20.000000
+			}
 			m_flOpStartFadeOutTime = 0.400000
 			m_flOpEndFadeOutTime = 0.500000
 			m_flOpFadeOscillatePeriod = 10.000000
 		},
+		
 		{
 			_class = "C_OP_TwistAroundAxis"
 			m_fForceAmount = 10.000000
@@ -281,14 +321,17 @@
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistance"
 			m_fMaxDistance = 1200.000000
 		},
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_bGlobalNormal = true
 		},
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_bGlobalNormal = true
@@ -305,11 +348,14 @@
 				200.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_WorldTraceConstraint"
-			m_nCollisionMode = 2
 			m_flBounceAmount = 1.000000
 			m_flSlideAmount = 1.000000
+			m_nCollisionMode = "COLLISION_MODE_INITIAL_TRACE_DOWN"
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 7
 }

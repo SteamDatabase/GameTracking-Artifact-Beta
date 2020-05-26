@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 16
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -20,37 +21,28 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOut"
 			m_flFadeOutTimeMax = 1.000000
 			m_flFadeOutTimeMin = 1.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
-		},
-		{
-			_class = "C_OP_SetControlPointPositions"
-			m_nHeadLocation = 2
-			m_nCP3 = 4
-			m_nCP2 = 4
-			m_vecCP1Pos = 
-			[
-				-64.000000,
-				32.000000,
-				-148.000000,
-			]
-			m_nCP1 = 3
-			m_bDisableOperator = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 8.000000
@@ -60,6 +52,7 @@
 				m_nStartControlPointNumber = 1
 			}
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -77,11 +70,24 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.200000
 			m_fLifetimeMin = 0.100000
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMax = 10.000000
+			m_flRadiusMin = 5.000000
+		},
+		
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 24
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMax = 
@@ -98,37 +104,36 @@
 			]
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 10.000000
-			m_flRadiusMin = 5.000000
-		},
-		{
-			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMin = 24
-		},
+		
 		{
 			_class = "C_INIT_DistanceToCPInit"
 			m_flOutputMin = 2.000000
 			m_flOutputMax = 0.500000
 			m_nStartCP = 2
-			m_bScaleInitialRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 8
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 8.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -145,6 +150,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -162,6 +168,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -179,6 +186,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 5
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -196,6 +204,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 6
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -216,4 +225,24 @@
 			]
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nHeadLocation = 2
+			m_nCP3 = 4
+			m_nCP2 = 4
+			m_vecCP1Pos = 
+			[
+				-64.000000,
+				32.000000,
+				-148.000000,
+			]
+			m_nCP1 = 3
+			m_bDisableOperator = true
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

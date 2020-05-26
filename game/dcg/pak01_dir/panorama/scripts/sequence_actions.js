@@ -1,7 +1,11 @@
 // Sequence actions are objects that you can use to queue up work to happen in a
 // sequence over time.  
 
-
+var g_Speed = 1.5;
+function SpeedUp()
+{	
+	g_Speed *= 15.0;
+}
 
 // Base action, which is something that will tick per-frame for a while until it's done.
 function BaseAction() { }
@@ -250,7 +254,6 @@ RunFunctionAction.prototype.update = function ()
 	return false;
 }
 
-
 // Action to wait for some amount of seconds before resuming
 function WaitAction( seconds )
 {
@@ -259,11 +262,12 @@ function WaitAction( seconds )
 WaitAction.prototype = new BaseAction();
 WaitAction.prototype.start = function ()
 {
-	this.endTimestamp = Date.now() + this.seconds * 1000.0;
+	this.startTimestamp = Date.now();
 }
+WaitAction.prototype.endTimestamp = function() { return this.startTimestamp + this.seconds * 1000.0 * 1.0/g_Speed; }
 WaitAction.prototype.update = function ()
 {
-	return Date.now() < this.endTimestamp;
+	return Date.now() < this.endTimestamp();
 }
 
 // Action that waits for a specific event type to be fired on the given panel.
@@ -405,18 +409,18 @@ function AnimateDialogVariableIntAction( panel, dialogVariable, start, end, seco
 	this.seconds = seconds;
 }
 AnimateDialogVariableIntAction.prototype = new BaseAction();
+AnimateDialogVariableIntAction.prototype.endTimestamp = function() { return this.startTimestamp + this.seconds * 1000.0 * 1.0/g_Speed; }
 AnimateDialogVariableIntAction.prototype.start = function ()
 {
 	this.startTimestamp = Date.now();
-	this.endTimestamp = this.startTimestamp + this.seconds * 1000;
 }
 AnimateDialogVariableIntAction.prototype.update = function ()
 {
 	var now = Date.now();
-	if ( now >= this.endTimestamp )
+	if ( now >= this.endTimestamp() )
 		return false;
 
-	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp - this.startTimestamp );
+	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp() - this.startTimestamp );
 	this.panel.SetDialogVariableInt( this.dialogVariable, this.startValue + ( this.endValue - this.startValue ) * ratio );
 	return true;
 }
@@ -449,18 +453,18 @@ function AnimateProgressBarAction( progressBar, startValue, endValue, seconds )
 	this.seconds = seconds;
 }
 AnimateProgressBarAction.prototype = new BaseAction();
+AnimateProgressBarAction.prototype.endTimestamp = function() { return this.startTimestamp + this.seconds * 1000.0 * 1.0/g_Speed; }
 AnimateProgressBarAction.prototype.start = function ()
 {
 	this.startTimestamp = Date.now();
-	this.endTimestamp = this.startTimestamp + this.seconds * 1000;
 }
 AnimateProgressBarAction.prototype.update = function ()
 {
 	var now = Date.now();
-	if ( now >= this.endTimestamp )
+	if ( now >= this.endTimestamp() )
 		return false;
 
-	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp - this.startTimestamp );
+	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp() - this.startTimestamp );
 	this.progressBar.value = this.startValue + ( this.endValue - this.startValue ) * ratio;
 	return true;
 }
@@ -479,18 +483,18 @@ function AnimateProgressBarWithMiddleAction( progressBar, startValue, endValue, 
 	this.seconds = seconds;
 }
 AnimateProgressBarWithMiddleAction.prototype = new BaseAction();
+AnimateProgressBarWithMiddleAction.prototype.endTimestamp = function() { return this.startTimestamp + this.seconds * 1000.0 * 1.0/g_Speed; }
 AnimateProgressBarWithMiddleAction.prototype.start = function ()
 {
 	this.startTimestamp = Date.now();
-	this.endTimestamp = this.startTimestamp + this.seconds * 1000;
 }
 AnimateProgressBarWithMiddleAction.prototype.update = function ()
 {
 	var now = Date.now();
-	if ( now >= this.endTimestamp )
+	if ( now >= this.endTimestamp() )
 		return false;
 
-	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp - this.startTimestamp );
+	var ratio = ( now - this.startTimestamp ) / ( this.endTimestamp() - this.startTimestamp );
 	this.progressBar.uppervalue = this.startValue + ( this.endValue - this.startValue ) * ratio;
 	return true;
 }

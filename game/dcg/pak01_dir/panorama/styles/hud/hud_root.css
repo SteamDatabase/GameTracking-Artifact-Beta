@@ -50,6 +50,14 @@ DCGHUDRoot #Overlay
 	visibility: collapse;
 }
 
+.ArtifactLogoContainer
+{
+	width: 240px;
+	height: 70px;
+	background-image: url("s2r://panorama/images/dashboard_new/artifact_beta_logo_topbar_psd.vtex");
+	background-size: 100% 100%;
+}
+
 DCGHud.AspectRatio4x3 #Overlay
 {
     margin-top: 30%;
@@ -620,17 +628,47 @@ DCGHud.AspectRatio16x9 #Overlay
 #PhaseName.RoundStart Label,
 #PhaseName.RoundEnd Label,
 #PhaseName.ShoppingStart Label,
-#PhaseName.HeroDeployment Label
+#PhaseName.HeroDeployment Label,
+#PhaseName.CombatPhase Label,
+#PhaseName.OpponentTurn Label
 {
-	font-size: 72px;
+    font-size: 72px;
+}
+
+#PhaseName.YourTurn Label,
+#PhaseName.NoActions Label,
+#PhaseName.DeployHeroes Label,
+#PhaseName.OpponentPass Label
+{
+    font-size: 144px;
+}
+
+
+#PhaseName.YourTurn,
+#PhaseName.DeployHeroes,
+#PhaseName.NoActions,
+#PhaseName.OpponentPass 
+{
+    vertical-align: bottom;
+    margin-bottom: 20%;
 }
 
 #PhaseNameBackground.RoundStart,
 #PhaseNameBackground.RoundEnd,
 #PhaseNameBackground.ShoppingStart,
-#PhaseNameBackground.HeroDeployment
+#PhaseNameBackground.HeroDeployment,
+#PhaseNameBackground.CombatPhase,
+#PhaseNameBackground.OpponentTurn
 {
-	height: 130px;
+    height: 130px;
+}
+
+#PhaseNameBackground.YourTurn,
+#PhaseNameBackground.NoActions,
+#PhaseNameBackground.DeployHeroes,
+#PhaseNameBackground.OpponentPass
+{
+    height: 260px;
 }
 
 #PhaseName.IsVisible
@@ -660,13 +698,39 @@ DCGHud.AspectRatio16x9 #Overlay
 	animation-iteration-count: 1;
 }
 
+#PhaseName.IsVisible.OpponentTurn,
+#PhaseName.IsVisible.DeployHeroes,
+#PhaseName.IsVisible.YourTurn,
+#PhaseName.IsVisible.NoActions,
+#PhaseName.IsVisible.OpponentPass
+{
+    animation-name: fade-in-out;
+    animation-duration: 2.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+
 #PhaseNameBackground.IsVisible.HeroVS,
 #PhaseNameBackground.IsVisible.RoundStart,
 #PhaseNameBackground.IsVisible.RoundEnd,
 #PhaseNameBackground.IsVisible.ShoppingStart,
 #PhaseNameBackground.IsVisible.HeroDeployment,
-#PhaseNameBackground.IsVisible.LaneStart.Lane1 {
+#PhaseNameBackground.IsVisible.CombatPhase,
+#PhaseNameBackground.IsVisible.LaneStart.Lane1
+{
     animation-name: fade-in-out-slide-out;
+    animation-duration: 2.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+
+#PhaseNameBackground.IsVisible.OpponentTurn,
+#PhaseNameBackground.IsVisible.DeployHeroes,
+#PhaseNameBackground.IsVisible.YourTurn,
+#PhaseNameBackground.IsVisible.NoActions,
+#PhaseNameBackground.IsVisible.OpponentPass 
+{
+    animation-name: fade-in-out;
     animation-duration: 2.0s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
@@ -704,13 +768,33 @@ DCGHud.AspectRatio16x9 #Overlay
 #PhaseNameText1.IsVisible.RoundStart,
 #PhaseNameText1.IsVisible.RoundEnd,
 #PhaseNameText1.IsVisible.ShoppingStart,
-#PhaseNameText1.IsVisible.HeroDeployment
+#PhaseNameText1.IsVisible.HeroDeployment,
+#PhaseNameText1.IsVisible.CombatPhase,
+#PhaseNameText1.IsVisible.OpponentTurn
 {
-	animation-name: blur-text-in-out-floating-right;
-	animation-duration: 2s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
-	opacity: 0;
+    animation-name: blur-text-in-out-floating-right;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    opacity: 0;
+}
+
+#PhaseNameText1.IsVisible.YourTurn,
+#PhaseNameText1.IsVisible.OpponentTurn,
+#PhaseNameText1.IsVisible.DeployHeroes,
+#PhaseNameText1.IsVisible.NoActions,
+#PhaseNameText1.IsVisible.OpponentPass,
+#PhaseNameText2.IsVisible.YourTurn,
+#PhaseNameText2.IsVisible.OpponentTurn,
+#PhaseNameText2.IsVisible.DeployHeroes,
+#PhaseNameText2.IsVisible.NoActions,
+#PhaseNameText2.IsVisible.OpponentPass
+{
+    animation-name: blur-text-in-out-down-up-lane2-3;
+    animation-duration: 2.0s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    opacity: 0;
 }
 
 #PhaseNameText1.IsVisible.RoundStart.Round1
@@ -726,14 +810,15 @@ DCGHud.AspectRatio16x9 #Overlay
 #PhaseNameText2.IsVisible.RoundStart,
 #PhaseNameText2.IsVisible.RoundEnd,
 #PhaseNameText2.IsVisible.ShoppingStart,
-#PhaseNameText2.IsVisible.HeroDeployment
+#PhaseNameText2.IsVisible.HeroDeployment,
+#PhaseNameText2.IsVisible.CombatPhase
 {
-	animation-name: blur-text-in-out-floating-right;
-	animation-duration: 1.9s;
-	animation-delay: .25s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
-	opacity: 0;
+    animation-name: blur-text-in-out-floating-right;
+    animation-duration: 1.5s;
+    animation-delay: .25s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    opacity: 0;
 }
 
 #PhaseNameText2.IsVisible.RoundStart.Round1
@@ -875,16 +960,13 @@ DCGHud.AspectRatio16x9 #Overlay
 	max-width: 600px;
 	flow-children: down;
 
-    padding: 12px;
-    border: 0px solid black;
+  padding: 12px;
+  border: 0px solid black;
 
 	horizontal-align: center;
 	vertical-align: center;
-
 	margin-top: 660px;
-
 	background-color: #000000AA;
-
 	visibility: collapse;
 }
 
@@ -895,7 +977,7 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #PhaseInfo Label
 {
-    color: #0189e7;
+  color: #0189e7;
 	text-align: center;
 	font-size: 32px;
 }
@@ -1078,9 +1160,9 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #ScrollRightButton
 {
-    transform: translateX( 80px );
-    horizontal-align: right;
-    background-image: url("s2r://panorama/images/hud/right_arrow_psd.vtex");
+  transform: translateX( 80px );
+  horizontal-align: right;
+  background-image: url("s2r://panorama/images/hud/right_arrow_psd.vtex");
 	opacity: 0.0;
 	
 	transition-property: transform, opacity;
@@ -1111,11 +1193,10 @@ DCGHud.AspectRatio16x9 #Overlay
 #ScrollRightButtonOverlay
 {
 	opacity: 0.0;
-	
-    margin: 0px;
-    width: 72px;
-    height: 256px;
-    vertical-align: middle;
+  margin: 0px;
+  width: 72px;
+  height: 256px;
+  vertical-align: middle;
 
 	background-image: url("s2r://panorama/images/hud/right_arrow_active_psd.vtex");
 	
@@ -1127,7 +1208,7 @@ DCGHud.AspectRatio16x9 #Overlay
 .canScrollRight #ScrollRightButton
 {
 	opacity: 1.0;
-    transform: translateX( 0px );
+  transform: translateX( 0px );
 	
 	transition-property: transform, opacity;
 	transition-duration: .25s;
@@ -1852,8 +1933,447 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #ShopItems
 {
-    height:100%;
-    width: 100%;
+	width: 869px;
+	height: 807px;
+	margin-bottom: 200px;
+	flow-children: down;
+	vertical-align: center;
+	horizontal-align: center;
+	visibility: collapse;
+	z-index: 9999;
+	background-color: #000000dd;
+
+	background-image: url("s2r://panorama/images/shop/secretshop_background_psd.vtex");
+	background-size: 100% 100%;
+	img-shadow: #000000 0px 8px 30px 16px;
+}
+
+.ShopMinimized #ShopItems
+{
+	background-color: none;
+	background-image: none;
+}
+
+
+.Shopping #ShopItems
+{
+	visibility: visible;
+}
+
+.LeftAlign
+{
+	horizontal-align: left;
+}
+
+.RightAlign
+{
+	horizontal-align: right;
+}
+
+.CenterAlign
+{
+	horizontal-align: center;
+}
+
+.CenterAlignV
+{
+	vertical-align: center;
+}
+
+.ShopActionButton
+{
+	background-image: url("s2r://panorama/images/shop/secretshop_buttonsmall_psd.vtex");
+	background-size: 100% 100%;
+}
+
+.ShopControlButton
+{
+	background-image: url("s2r://panorama/images/shop/secretshop_windowbutton_psd.vtex");
+	background-size: 100% 100%;
+}
+
+#InvestButton 
+{
+	height: 60px;
+	transition-property: background-color, opacity, brightness, img-shadow;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
+}
+
+#InvestButton:hover
+{
+	brightness: 1.2;
+}
+
+#InvestButton:enabled
+{	
+	border: 1px solid #ffe77b;
+	img-shadow: 0px 0px 7px 1.0 white;
+}
+
+.ShopButton Button:disabled
+{
+    brightness: 0.1;
+}
+
+.ShopButton Button:hover:disabled
+{
+    brightness: 0.15;
+}
+
+.ShopButton Button:disabled Label
+{
+    text-shadow: none;
+}
+
+.ShopButton Button:hover:disabled Label
+{
+    text-shadow: none;
+}
+
+#ShopButtonsPanel
+{
+	flow-children: left;
+	height: 100%;
+}
+
+#ShopButtonsLabel, #InvestButtonsLabel
+{
+	vertical-align: center;
+	margin-left: 5px;
+	font-size: 32px;
+	text-shadow: 0px 1px 2px 2.0 #00000070;
+	color: white;
+}
+
+#ShopHeaderLevel, #GoldCountButton
+{
+	color: #403836;
+}
+
+.ShopRow
+{
+	width: 100%;
+	flow-children: right;
+}
+
+#ShopTopPanel
+{
+	height: 100%;
+	width: 100%;
+	padding: 7px 20px 0px 20px;
+	flow-children: down;
+}
+
+#ShopTopRow
+{
+	height: 80px;
+	flow-children: right;
+}
+
+#ShopButtonsRow
+{
+	margin-top: 10px;
+	padding-left: 35px;
+	padding-right: 35px;
+	height: 50px;
+}
+
+#InvestButtonsRow
+{
+	margin-top: 10px;
+	padding-left: 35px;
+	padding-right: 35px;	
+	height: 85px;
+}
+
+#InvestLabelRow
+{
+	margin-top: 10px;
+	padding-left: 35px;
+	padding-right: 35px;	
+	height: 45px;
+}
+
+#BuyButtonsRow
+{
+	padding: 0px 40px 0px 50px;
+	height: 50px;
+	flow-children: none;
+}
+
+#BuyItem0
+{
+	margin-left: 35px;
+//	x:0px;
+}
+
+#BuyItem1
+{
+		margin-left: 302px;
+//	x:270px;
+}
+
+#BuyItem2
+{
+	margin-left: 560px;
+//	x:525px;
+}
+
+.BuyItemButton
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #373d45 ), to( #4d5860 ) );
+	width: 120px;
+	height: 33px;
+	horizontal-align: left;
+	transition-property: background-color, text-shadow, opacity, brightness;
+	transition-duration: 0.1s;
+	transition-timing-function: linear;
+	
+	border: 1px solid #ffe77b;
+	img-shadow: 0px 0px 7px 2.0 #ffe77b;
+}
+
+.BuyItemButton:enabled:hover
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4c5561 ), to( #6c7d88 ) );
+	brightness: 2.0;
+	border: 1px solid #ffe77b;
+	img-shadow: 0px 0px 7px 1.0 white;
+}
+
+.BuyItemButton:disabled
+{
+	wash-color: #999999;
+	saturation: 0;
+}
+
+.BuyItemButton:disabled Label
+{
+	color: #888888;
+}
+
+.BuyItemButton:active
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #393939), to( #555555 ) );
+	sound: "ui_generic_button_click";
+	border: 1px solid #ffe77b;
+	img-shadow: 0px 0px 7px 1.0 white;
+}
+
+.BuyItemButton Label
+{
+	margin-top: 2px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #FFFFFF;
+	horizontal-align: center;
+	text-align: center;
+	vertical-align: middle;
+	text-shadow: 2px 2px 4px 1.0 #000000;
+}
+
+.BuyItemButton:active Label
+{
+//		transform: translateY(1px);
+}
+
+#BottomButtonsRow
+{
+	margin-top: 10px;
+	height: 75px;
+}
+
+#RerollButton
+{
+	visibility: collapse;
+}
+
+#UpgradeButton
+{
+	width: 205px;
+}
+
+#UpgradeButton, #RerollButton
+{
+	height: 5px;
+	margin-left: 15px;
+	transition-property: brightness;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-in-out;
+}
+
+#RerollButton Label, #UpgradeButton Label
+{
+	horizontal-align: left;
+}
+
+#RerollButton, #UpgradeButton, #InvestButton
+{
+	horizontal-align: left;
+}
+
+#RerollButton:hover, 
+#UpgradeButton:hover,
+{
+	brightness: 1.2;
+}
+
+.ShopActionCostImage
+{
+	background-image: url("s2r://panorama/images/shop/secretshop_coinonbutton_psd.vtex");
+	background-size: 100% 100%;
+	width: 31px;
+	height: 31px;
+	horizontal-align: right;
+	padding-right: 4px;
+	padding-bottom: 2px;
+}
+
+#RerollButton .ShopActionCostLabel,
+#UpgradeButton .ShopActionCostLabel,
+{
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+
+.ShopMaximized #CloseShopButton,
+.ShopMaximized #ShopTopRow,
+.ShopMaximized #ShopButtonsRow,
+.ShopMaximized #BuyButtonsRow,
+.ShopMaximized #InvestButtonsRow,
+.ShopMaximized #InvestLabelRow,
+.ShopMaximized #CloseShopButton
+{
+	opacity: 1.0;
+}
+
+#ShopTopRow, #ShopButtonsRow, #BuyButtonsRow, #InvestButtonsRow, #InvestLabelRow, #CloseShopButton
+{
+	transition-property: opacity;
+	transition-duration: 0.3s;
+	opacity: 0.0;
+}
+
+#ShopHeader
+{
+	width: 500px;
+}
+
+#ShopHeaderLabel
+{
+	text-overflow: shrink;
+	color: abilityGradient;
+	text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 50px;
+	width: 100%;
+	text-align: center;
+}
+
+#TopButtonsPanel
+{
+	flow-children: right;
+	width: 100%;
+	height: 60px;
+}
+
+
+.ShopCount
+{
+	width: 155px;
+	height: 57px;
+	flow-children: right;
+	background-image: url("s2r://panorama/images/shop/secretshop_goldlevelcontainer_bg_psd.vtex");
+	background-size: 100% 100%;
+	vertical-align: center;
+	padding-left: 6px;
+}
+
+.ShopCountLabel
+{
+	background-image: url("s2r://panorama/images/shop/secretshop_goldlevelcontainer_labelcontainer_psd.vtex");
+	background-size: 100% 100%;
+	width: 91px;
+	height: 41px;
+	font-size: 55px;
+	text-align: center;
+	text-overflow: shrink;
+	vertical-align: center;
+	padding: 8px;
+}
+
+.ShopCountAmount
+{
+	width: 55px;
+	height: 52px;
+	background-image: url("s2r://panorama/images/shop/secretshop_goldlevelcontainer_numbercontainer_psd.vtex");
+	background-size: 100% 100%;
+	font-size: 35px;
+	text-align: center;
+	text-overflow: shrink;
+	padding: 15px 4px 4px 4px;	
+	color: abilityGradient;
+	font-family: "Artifact Numbers";
+}
+
+#GoldCountButtonAmt
+{
+//	wash-color: #f2cb41aa;
+}
+
+#ShopCardsContainer
+{
+	flow-children: right;
+	width: 100%;
+	height: 375px;
+	padding: 15px 40px 0px 50px;
+	horizontal-align: center;
+	transition-property: opacity, pre-transform-scale2d;
+	transition-duration: 0.4s;
+	pre-transform-scale2d: 0.0;
+	opacity: 0.0;
+}
+
+.ShopCardContainer
+{
+	vertical-align: center;
+}
+
+#PanoramaShopCardContainer1
+{
+	margin-left: 73px;
+	margin-right: 63px;
+}
+
+.ShopMaximized #ShopCardsContainer
+{
+	pre-transform-scale2d: 1.0;
+	opacity: 1.0;
+}
+
+.PanoramaShopCard
+{
+	width: 194px;
+	height: 328px;
+}
+
+.HighlightPanoramaCard
+{
+	opacity-mask: url("s2r://panorama/images/draft/card_selected_mask_psd.vtex");
+}
+
+#ShopBotomPanel
+{
+	horizontal-align: center;
+}
+
+#CloseShopButton
+{
+	transition-property: opacity;
+	transition-duration: 0.4s;
+	opacity: 0.0;
+	height: 50px;
 }
 
 .CardHovered #ShopMinimizeItem
@@ -1889,12 +2409,13 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #TimerCountdown.TimeRunningOut
 {
-    animation-name: FadeOpacityOut;
+  animation-name: FadeOpacityOut;
 	animation-duration: 5s;
 	animation-timing-function: ease-in;
 	animation-iteration-count: 1;
-    opacity:1;
+  opacity:1;
 }
+
 #TimerCountdown Label
 {
     font-size:300px;
@@ -1903,9 +2424,168 @@ DCGHud.AspectRatio16x9 #Overlay
     text-align:center;
     opacity:0.5;
     text-shadow: 0px 0px 12px 3.0 #000000;
-    
 }
+
 .GameTimeRunningOut Label
 {
     color:red;
+}
+
+#ViewBoardButton
+{
+	horizontal-align: center;
+	height: 50px;
+}
+
+#ActivatedAbillitySummaryContainer
+{
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+}
+
+.Shopping.ShopMaximized #ActivatedAbillitySummaryContainer
+{
+	visibility: collapse;
+}
+
+#DeployButtonPanelLane1 
+{
+    width: 595px;
+}
+
+#DeployButtonPanelLane2 
+{
+    width: 722px;
+}
+
+#DeployButtonPanelLane3
+{
+    width: 100%;
+}
+
+#DeployButtonsContainer
+{
+    vertical-align: center;
+    flow-children: right;
+    width: 100%;  
+}
+
+.DeployButton
+{
+	horizontal-align: center;
+	visibility: collapse;
+	width: 100%;
+	height: 65px;
+	border-radius: 0px;
+	background-size: 100% 100%;
+	opacity: 0.95;
+	background-image: url("s2r://panorama/images/hud/deploy_bg_psd.vtex");
+	transition-property: opacity, brightness, text-shadow;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-in-out;
+	
+	animation-name: deploy-pulse;
+	animation-duration: 2.0s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes 'deploy-pulse'
+{
+	0%		{opacity: 0.8;}
+	15% 	{opacity: 1;}
+	20%		{text-shadow: 0 0 20px #fff;}
+	25%		{text-shadow: 0 0 15px #fff;}
+	35%		{text-shadow: 0 0 0px #fff;}
+	80%		{text-shadow: 0 0 0px #fff;}
+	85%		{opacity: 0.8;}
+	95%		{text-shadow: 0 0 15px #fff;}
+	100%	{text-shadow: 0 0 20px #fff; opacity: 0.8; }
+}
+
+.DeployButton:active
+{
+	brightness: 1.2;
+}
+
+.InitialDeployLane1 #DeployButtonLane1 
+{
+    visibility: visible;
+}
+
+.InitialDeployLane2 #DeployButtonLane2,
+.ShopAndFlopDeploy #DeployButtonLane2 
+{
+    visibility: visible;
+}
+
+.InitialDeployLane3 #DeployButtonLane3 
+{
+    visibility: visible;
+}
+
+.DeployButton Label
+{
+    width: 100%;
+    letter-spacing: 3px;
+    vertical-align: center;
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+    color: gradient( linear, 0% 0%, 100% 100%, from( #d4c9e1 ), to( #cff2f6 ) );
+    font-weight: light;
+    text-overflow: shrink;
+    text-shadow: 0px 0px 4px 1.0 #7489ff;
+}
+
+.WaitingForDeployComfirmation
+{
+	background-image: url("s2r://panorama/images/hud/deploy_bg_confirm_psd.vtex");
+	background-size: cover;
+	opacity: 1.0;
+}
+
+.WaitingForDeployComfirmation:hover
+{
+//	brightness: 1.2;
+//	animation: none;
+}
+
+.WaitingForDeployComfirmation Label
+{
+    width: 100%;
+    letter-spacing: 3px;
+    vertical-align: center;
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    transition-property: text-shadow;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-out;
+    color: gradient( linear, 0% 0%, 100% 100%, from( #ffffff ), to( #cff2f6 ) );
+    font-weight: light;
+    text-shadow: 0px 0px 6px 2.0 #7489ff;
+    text-overflow: shrink;
+}
+
+
+#Chat
+{
+	z-index: 999;
+	vertical-align: bottom;
+	horizontal-align: left;
+	flow-children: right;
+	transform: translateX( 0px ) translateY( 0px );
+	opacity: 1.0;
+	transition-property: transform;
+	transition-duration: 0.45s;
+	transition-timing-function: ease-in;
+}
+
+.IsPlayingAIPlayer #Chat
+{
+	visibility: collapse;
 }

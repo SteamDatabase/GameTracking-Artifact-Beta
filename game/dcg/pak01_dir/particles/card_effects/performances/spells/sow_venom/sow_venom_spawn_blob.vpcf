@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -16,6 +16,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderBlobs"
 			m_renderRadius = 0.950000
@@ -25,18 +26,10 @@
 			m_bCannotBeRefracted = false
 			m_cubeWidth = 0.950000
 		},
-		{
-			_class = "C_OP_RenderBlobs"
-			m_cutoffRadius = 1.000000
-			m_renderRadius = 1.000000
-			m_nScaleCP = 1
-			m_hMaterial = resource:"materials/particle/blob_sow_venom_ref.vmat"
-			m_bCannotBeRefracted = false
-			m_bDisableOperator = true
-		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.100000
@@ -47,6 +40,7 @@
 				4.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_LerpVector"
 			m_bDisableOperator = true
@@ -59,12 +53,14 @@
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_RemapVectortoCP"
 			m_bDisableOperator = true
 			m_nOutControlPointNumber = 5
 			m_nFieldInput = "17"
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_flOscAdd = 0.750000
@@ -100,6 +96,7 @@
 			m_nOpEndCapState = 1
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_nFieldOutput = "0"
@@ -114,14 +111,17 @@
 			m_flNoiseAnimationTimeScale = 0.500000
 			m_flOpEndFadeOutTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartScale = 0.100000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_LerpVector"
 			m_nFieldOutput = "17"
@@ -132,16 +132,19 @@
 				0.500000,
 			]
 		},
+		
 		{
 			_class = "C_OP_RemapVectortoCP"
 			m_nOutControlPointNumber = 1
 			m_nFieldInput = "17"
 		},
+		
 		{
 			_class = "C_OP_DistanceCull"
 			m_flDistance = 8.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VelocityMatchingForce"
 			m_flDirScale = 0.000000
@@ -150,6 +153,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomVector"
 			m_bDisableOperator = true
@@ -167,6 +171,7 @@
 			]
 			m_nFieldOutput = "17"
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 0.400000
@@ -178,11 +183,13 @@
 			]
 			m_fSpeedMax = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_PointList"
 			m_nFieldOutput = "17"
 			m_pointList = 
 			[
+				
 				{
 					m_nControlPoint = 1
 					m_vOffset = 
@@ -194,6 +201,7 @@
 				},
 			]
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMax = 
@@ -210,6 +218,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RemapCPtoScalar"
 			m_bDisableOperator = true
@@ -218,6 +227,7 @@
 			m_nFieldOutput = "1"
 			m_flOutputMax = 150.000000
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -233,6 +243,7 @@
 				4.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -252,13 +263,19 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 32
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 32.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MaxForce = 
@@ -268,6 +285,7 @@
 				5.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MinForce = 
@@ -288,10 +306,12 @@
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -308,6 +328,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -325,28 +346,12 @@
 					]
 					m_entityName = "self"
 				},
-				{
-					m_iControlPoint = 2
-					m_iAttachType = "PATTACH_WORLDORIGIN"
-					m_vecOffset = 
-					[
-						1.000000,
-						0.000000,
-						1.000000,
-					]
-					m_angOffset = 
-					[
-						null,
-						null,
-						null,
-					]
-					m_entityName = "self"
-				},
 			]
 		},
 	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_bUseWorldLocation = true
@@ -358,6 +363,7 @@
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_StopAfterCPDuration"
 			m_flDuration = 1.250000
@@ -365,6 +371,6 @@
 			m_bPlayEndCap = false
 		},
 	]
-	m_nBehaviorVersion = 6
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 3
 }

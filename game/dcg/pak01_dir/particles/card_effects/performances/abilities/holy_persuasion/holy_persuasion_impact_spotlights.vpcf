@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -14,39 +14,56 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderTrails"
 			m_bAdditive = true
 			m_hTexture = resource:"materials/particle/beam_flashlight.vtex"
 			m_bIgnoreDT = true
-			m_flRadiusScale = 0.100000
-			m_vEndTrailTintFactor = 
-			[
-				1.000000,
-				1.000000,
-				1.000000,
-				0.000000,
-			]
 			m_flSelfIllumAmount = 1.000000
+			m_flRadiusScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.100000
+			}
+			m_vecTailColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
+			m_flTailAlphaScale = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.000000
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.100000
 			m_flBias = 0.800000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_RampScalarLinearSimple"
 			m_nField = "10"
 			m_Rate = 0.040000
 			m_flEndTime = 0.700000
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -58,10 +75,12 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.800000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.200000
@@ -69,38 +88,23 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
-		{
-			_class = "C_INIT_RandomYawFlip"
-		},
-		{
-			_class = "C_INIT_OffsetVectorToVector"
-			m_nFieldOutput = "2"
-			m_vecOutputMax = 
-			[
-				0.000000,
-				0.000000,
-				900.000000,
-			]
-			m_vecOutputMin = 
-			[
-				0.000000,
-				0.000000,
-				222.000000,
-			]
-		},
+		
 		{
 			_class = "C_INIT_RandomTrailLength"
 			m_flMaxLength = 0.012000
 			m_flMinLength = 0.010000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 44.000000
 			m_flRadiusMax = 88.000000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinBox"
 			m_vecMin = 
@@ -117,20 +121,48 @@
 			]
 			m_nControlPointNumber = 1
 		},
+		
+		{
+			_class = "C_INIT_RandomYawFlip"
+		},
+		
+		{
+			_class = "C_INIT_OffsetVectorToVector"
+			m_nFieldOutput = "2"
+			m_vecOutputMax = 
+			[
+				0.000000,
+				0.000000,
+				900.000000,
+			]
+			m_vecOutputMin = 
+			[
+				0.000000,
+				0.000000,
+				222.000000,
+			]
+		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 8
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 8.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -151,4 +183,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 4
 }

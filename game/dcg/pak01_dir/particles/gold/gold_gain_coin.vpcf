@@ -1,10 +1,11 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 0.700000
 	m_flConstantLifespan = 1.400000
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -15,16 +16,20 @@
 			]
 			m_fDrag = 0.080000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateDegrees = 30
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_nFieldOutput = "12"
@@ -32,36 +37,25 @@
 			m_fl4NoiseScale = 0.010000
 			m_bAdditive = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.500000
 			m_flEndScale = 0.250000
 		},
-		{
-			_class = "C_OP_SetSingleControlPointPosition"
-			m_bSetOnce = true
-			m_vecCP1Pos = 
-			[
-				0.000000,
-				0.000000,
-				0.000000,
-			]
-		},
-		{
-			_class = "C_OP_SetControlPointOrientation"
-			m_bUseWorldLocation = true
-			m_bSetOnce = true
-		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 100
 			m_fSpinRateStopTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_SpinYaw"
 			m_nSpinRateDegrees = 30
 			m_fSpinRateStopTime = 1.000000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.100000
@@ -69,27 +63,33 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/particle/shop/coin.vmdl"
 				},
 			]
 			m_flAnimationRate = 0.000000
 			m_hOverrideMaterial = resource:"materials/particle/coin/coin.vmat"
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_nFieldOutput = "12"
 		},
+		
 		{
 			_class = "C_INIT_CreationNoise"
 			m_nFieldOutput = "12"
@@ -104,6 +104,7 @@
 			]
 			m_flWorldTimeScale = 16.000000
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fSpeedMin = 20.000000
@@ -130,11 +131,13 @@
 			m_fRadiusMin = 0.500000
 			m_fRadiusMax = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.600000
 			m_flRadiusMax = 0.700000
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.000000
@@ -143,18 +146,27 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
-			m_nScaleControlPoint = 2
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_CONTROL_POINT_COMPONENT"
+				m_nControlPoint = 2
+				m_nVectorComponent = 0
+				m_nMapType = "PF_MAP_TYPE_MULT"
+				m_flMultFactor = 1.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -177,9 +189,11 @@
 	m_nMaxParticles = 16
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/gold/gold_gain_glow.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/gold/gold_gain_flare.vpcf"
 		},
@@ -191,4 +205,25 @@
 		250,
 		255,
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetSingleControlPointPosition"
+			m_bSetOnce = true
+			m_vecCP1Pos = 
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+		
+		{
+			_class = "C_OP_SetControlPointOrientation"
+			m_bUseWorldLocation = true
+			m_bSetOnce = true
+		},
+	]
+	m_nBehaviorVersion = 5
 }

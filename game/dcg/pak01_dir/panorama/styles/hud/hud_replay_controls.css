@@ -1,26 +1,85 @@
-.ReplayControls
+ReplayControlButtons
 {
 	width: fit-children;
 	height: fit-children;
 
 	padding: 4px;
-	margin-left: 20px;
-	margin-bottom: 100px;
+	padding-left: 20px;
 
-	vertical-align: bottom;
+	vertical-align: top;
 	horizontal-align: left;
+	margin-top: 90px;
 
-	flow-children: up;
+	background-color: #000000DD;
+
+	z-index: 101;
+
+	flow-children: down;
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 2.0s;
+	transition-timing-function: ease-in-out;
+}
+
+ReplayControlButtons.ReplayPregameTime
+{
+	opacity: 0;
+}
+
+#ClickToHide
+{
+	color: grey;
+}
+
+#ClickToHide:hover
+{
+	color: white;
+}
+
+#ReplayContentsContainer
+{
+	flow-children: down;
+	height: 557px;
+	transition-property: height;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in-out;
+}
+
+.HideReplayControls #ReplayContentsContainer
+{
+	height: 0px;
+}
+
+#ReplayTitleTop
+{
+	width: 100%;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	flow-children: down;
+}
+
+.LaneContainer
+{
+	flow-children: down;
+	width: 45px;
+	margin-right: 8px;
+	margin-left: 8px;
+	vertical-align: center;
+	height: 62px;
+}
+
+#TurnGlossary
+{
+	horizontal-align: center;
+	text-transform: uppercase;
 }
 
 .BasicControls
 {
-	width: 250px;
+	width: 185px;
 	height: 80px;
 	flow-children: down;
-	border: 1px solid #FFFFFF;
-	background-size: cover;
-	background-image: url("s2r://panorama/images/hud/scoreboard_bg_semi_fade_psd.vtex");
+	horizontal-align: center;
 }
 
 .ReplayControls Label
@@ -34,63 +93,81 @@
 
 .MainContainer
 {
-	width: 200px;
+	width: 105px;
 	height: 50px;
-
 	margin-top: 4px;
-
 	flow-children: right;
+	horizontal-align: center;
+}
+
+#PauseButtonContainer
+{
+	width: 35px;
+	height: 40px;
 }
 
 #PauseButton
 {
-	width: 30px;
-	height: 50px;
-
-	border: 1px solid #FFFFFF;
-	background-color: black;
-
-	background-image: url("s2r://panorama/images/control_icons/pause_png.vtex");
+	width: 20px;
+	height: 30px;
+	vertical-align: center;
+	horizontal-align: center;
+	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/replay_controls/pause_button_png.vtex");
+}
+
+.DisableReplayControls #PauseButton
+{
+	wash-color: #a8a8a8;
 }
 
 #PauseButton:hover
 {
-	background-color: gray;
+	ui-scale: 130%;
+}
+
+#PauseButton:active
+{
+	wash-color: none;
 }
 
 .Paused #PauseButton
 {
-	background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
+	background-repeat: no-repeat;
 	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/replay_controls/play_button_png.vtex");
 }
 
 .ControlButton
 {
 	width: 60px;
-	height: 50px;
+	height: 30px;
 
-	horizontal-align: right;
-
-	border: 1px solid #FFFFFF;
-	background-color: black;
+	horizontal-align: center;
+	vertical-align: center;
 }
 
-.ControlButton:hover
+.ControlButton:hover 
 {
-	background-color: gray;
+	ui-scale: 130%;
+}
+
+.ControlButton:active
+{
+	wash-color: none;
 }
 
 #PausedControls,
 #LiveControls
 {
-	margin-left: 10px;
-	width: 160px;
+	height: 40px;
+	width: 70px;
 	flow-children: right;
 }
 
 #PausedControls,
-.Paused #LiveControls,
+.Paused #LiveControls
 {
 	visibility: collapse;
 }
@@ -117,6 +194,10 @@
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
+	tooltip-body-position: 30% 30%;
+	tooltip-arrow-position: 50% 50%;
+	width: 100%;
+	text-align: center;
 }
 
 #ToggleSpeedUpLongTurns Label
@@ -128,6 +209,17 @@
 	font-weight: bold;
 }
 
+#TurnLabel
+{
+	vertical-align: center;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: lighter;
+	margin-right: 3px;
+	width: 55px;
+	margin-top: 3px;
+	text-overflow: shrink;
+}
 
 
 
@@ -136,9 +228,9 @@
 {
 	width: fit-children;
 	height: fit-children;
-	background-size: cover;
-	background-image: url("s2r://panorama/images/hud/scoreboard_bg_semi_fade_psd.vtex");
+	max-height: 700px;
 	flow-children: none;
+	overflow: scroll;
 }
 
 .HideTimeline #Timeline
@@ -146,17 +238,21 @@
 	visibility: collapse;
 }
 
+.HideReplayControls #Timeline
+{
+	overflow: clip;
+}
+
 #Markers,
 #MarkersCover
 {
-	height: 600px;
-	width: 250px;	
+	height: fit-children;
+	width: 185px;
 	flow-children: down;
 }
 
 #Markers
 {
-	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
@@ -169,7 +265,7 @@
 }
 
 .Running2 #MarkersCover,
-.WaitingForPause2 #MarkersCover,
+.WaitingForPause2 #MarkersCover
 {
 	visibility: visible;
 }
@@ -177,21 +273,24 @@
 .TurnRow
 {
 	width: 100%;
-	height: 40px;
-	margin-bottom: 4px;
+	height: 45px;
 	flow-children: right;
 }
 
 .JumpPoint
 {
-	width: 48px;
-	height: 48px;
-	margin-left: 10px;
+	width: 45px;
+	height: 45px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/replay_controls/lane_indicator_png.vtex");
+	margin-right: 8px;
+	margin-left: 8px;
 }
 
 .JumpPoint.IsCurrentMarker
 {
-	border: 1px solid #fafad2FF;	
+	background-image: url("s2r://panorama/images/replay_controls/lane_selected_png.vtex");
 }
 
 .JumpPoint.MarkerNotValid
@@ -207,23 +306,62 @@
 
 .LaneNumber
 {
-	margin-left: 20px;
-	margin-top: 16px;
+	horizontal-align: center;
+	vertical-align: center;
+	text-align: center;
 	font-size: 40px;
 }
 
-
-#Lane1,
-#Lane2,
-#Lane3
+.LaneNumberContainer
 {
-	background-repeat: no-repeat;
-	background-position: left;
-	background-image: url("s2r://panorama/images/hud/hud_tower_psd.vtex");
+	height: 30px;
+	width: 100%;
+	background-size: 100% 100%;
+	background-image: url("s2r://panorama/images/replay_controls/lane_outline_png.vtex");
 }
 
 #Shop
 {
-	background-size: cover;
-	background-image: url("s2r://panorama/images/hud/gold_small_psd.vtex");
+	wash-color: #deab39;
+}
+
+.ReplayPregameTime.DisableReplayControls #Shop
+{
+	wash-color: #deab39;
+}
+
+.DisableReplayControls .JumpPoint, .DisableReplayControls #Shop
+{
+	wash-color: #a8a8a8;
+}
+
+#ReplayControlsBottom
+{
+	flow-children: down;
+}
+
+#LaneIconContainer
+{
+	margin-left: 55px;
+	flow-children: right;
+}
+
+#LaneIconContainer .LaneTitle
+{
+	text-transform: uppercase;
+	font-weight: light;
+	text-align: center;
+	vertical-align: center;
+	horizontal-align: center;
+	text-overflow: shrink;
+}
+
+#SeekingText, .DisableReplayControls.Paused #SeekingText
+{
+	visibility: collapse;
+}
+
+.DisableReplayControls #SeekingText
+{
+	visibility: visible;
 }

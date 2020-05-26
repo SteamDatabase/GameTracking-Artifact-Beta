@@ -2,8 +2,8 @@
 {
 	game 		"Artifact"
 	title 		"Artifact"
-	type		multiplayer_only
-	
+	type		singleplayer_only
+
 	SupportsDX8 0
 	nodegraph 0
 	nomodels 1
@@ -16,8 +16,8 @@
 
 	FileSystem
 	{
-		SteamAppId				583950		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
-		ToolsAppId				583950		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+		SteamAppId				1269260		// This will mount all the GCFs we need (240=CS:S, 220=HL2).
+		ToolsAppId				1269260		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
 
 		//
 		// The code that loads this file automatically does a few things here:

@@ -56,12 +56,23 @@
 				"intro"
 				{
 					"auto 2.0"					"npehelper #StA_Round_5,0,0,0,n,c,c"
-					"on_message_dismissed"		"goto end"
+					"on_message_dismissed 2.0"		"goto end"
+					">"					"npehelper remove"
 				}
 				
 				"end"
 				{
+					"on_victory"				"goto winner"
+					"on_failure"				"goto loser"
 				}
+				
+				"winner"
+				{
+					"auto 2.5"			"npehelper #StA_progress_to_bossfight;#StA_what_to_expect,0,0,0,n,c,c"
+					"> 2.6"				"concommand pause"
+					"on_message_dismissed 5.0"	"load_puzzle puzzle_re_progression_test_boss_fight"
+					">"				"concommand unpause"
+				}	
 			}
 			
 		}

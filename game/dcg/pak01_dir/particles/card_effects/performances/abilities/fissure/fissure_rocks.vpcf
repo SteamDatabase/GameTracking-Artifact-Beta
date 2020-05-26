@@ -1,30 +1,35 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_bBlendFramesSeq0 = false
 			m_hTexture = resource:"materials/particle/impact/fleks2.vtex"
 			m_flAnimationRate = 1.500000
-			m_bFitCycleToLifetime = true
+			m_nAnimationType = "ANIMATION_TYPE_FIT_LIFETIME"
 		},
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
-					m_model = resource:"models/props_gameplay/tower/dcg_rock_dire.vmdl"
+					m_model = resource:"models/particle/generic/dcg_rock_dire.vmdl"
 				},
 			]
 			m_bDisableOperator = true
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -35,25 +40,30 @@
 			]
 			m_fDrag = 0.200000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_RemapSpeed"
-			m_bScaleInitialRange = true
 			m_nFieldOutput = "5"
 			m_flInputMax = 10.000000
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.000000
 			m_flBias = 0.200000
 		},
+		
 		{
 			_class = "C_OP_Spin"
 			m_nSpinRateDegrees = 100
@@ -62,6 +72,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMax = 
@@ -72,20 +83,24 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 1.000000
 			m_fLifetimeMax = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.200000
 			m_flRadiusMax = 0.800000
 			m_flRadiusRandExponent = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMin = 2.000000
@@ -99,6 +114,7 @@
 			m_fSpeedMin = 20.000000
 			m_fSpeedMax = 50.000000
 		},
+		
 		{
 			_class = "C_INIT_VelocityRandom"
 			m_LocalCoordinateSystemSpeedMin = 
@@ -114,6 +130,7 @@
 				30.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -133,17 +150,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 50
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 50.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -165,9 +189,12 @@
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_PlanarConstraint"
 			m_bGlobalNormal = true
 		},
 	]
+	m_nBehaviorVersion = 9
+	m_nFirstMultipleOverride_BackwardCompat = 5
 }

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -13,19 +13,25 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_hTexture = resource:"materials/particle/particle_glow_04.vtex"
-			m_ColorScale = 
-			[
-				255,
-				140,
-				0,
-			]
 			m_flRadiusScale = 2.000000
 			m_flAlphaScale = 10.000000
 			m_flStartFalloff = 0.100000
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					140,
+					0,
+				]
+			}
 		},
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nOrientationType = 2
@@ -34,30 +40,40 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.100000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 150
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_bDisableOperator = true
 		},
+		
+		{
+			_class = "C_INIT_CreateFromParentParticles"
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -74,27 +90,32 @@
 			]
 			m_bLocalCoords = true
 		},
-		{
-			_class = "C_INIT_CreateFromParentParticles"
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
 		},
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 1.000000
 			m_bDisableOperator = true
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -111,6 +132,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -131,4 +153,6 @@
 			]
 		},
 	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

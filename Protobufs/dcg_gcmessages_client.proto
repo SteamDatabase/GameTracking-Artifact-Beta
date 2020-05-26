@@ -1,4 +1,5 @@
 import "dcg_gcmessages_common.proto";
+import "econ_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -25,6 +26,8 @@ enum EGCDCGClientMessages {
 	k_EMsgClientToGCOpenPackItemResponse = 9037;
 	k_EMsgClientToGCLeaveChatChannelByKey = 9040;
 	k_EMsgClientToGCSendChatMessageRoll = 9041;
+	k_EMsgClientToGCSpectateUser = 9042;
+	k_EMsgClientToGCSpectateUserResponse = 9043;
 	k_EMsgClientToGCGetMatchHistory = 9044;
 	k_EMsgClientToGCGetMatchHistoryResponse = 9045;
 	k_EMsgClientToGCGetMatchDetails = 9046;
@@ -35,6 +38,15 @@ enum EGCDCGClientMessages {
 	k_EMsgClientToGCLimitedGrantChoiceResponse = 9051;
 	k_EMsgClientToGCLimitedGetFormat = 9052;
 	k_EMsgClientToGCLimitedGetFormatResponse = 9053;
+	k_EMsgClientToGCSubmitUserFeedback = 9067;
+	k_EMsgClientToGCSubmitUserFeedbackResponse = 9068;
+	k_EMsgClientToGCPostMatchSurveyResponse = 9069;
+	k_EMsgClientToGCMatchResultScreenAnalytics = 9070;
+	k_EMsgClientToGCGetQuestMapStatus = 9071;
+	k_EMsgClientToGCGetQuestMapStatusResponse = 9072;
+	k_EMsgClientToGCClaimQuestMapNode = 9073;
+	k_EMsgClientToGCClaimQuestMapNodeResponse = 9074;
+	k_EMsgClientToGCQuestDevCommand = 9075;
 	k_EMsgClientToGCGetAIVsAIMatchConfig = 9076;
 	k_EMsgClientToGCGetAIVsAIMatchConfigResponse = 9077;
 	k_EMsgClientToGCGetAIVsAIMatchComplete = 9078;
@@ -77,6 +89,9 @@ enum EGCDCGClientMessages {
 	k_EMsgClientToGCRecycleCards = 9135;
 	k_EMsgClientToGCRecycleCardsResponse = 9136;
 	k_EMsgClientToGCSetPlayerBadge = 9137;
+	k_EMsgClientToGCGetProfileData = 9138;
+	k_EMsgClientToGCGetProfileDataResponse = 9139;
+	k_EMsgClientToGCSetDefaultCardback = 9140;
 	k_EMsgClientToGCTourneyGetInfo = 9500;
 	k_EMsgClientToGCTourneyGetInfoResponse = 9501;
 	k_EMsgClientToGCTourneyUnsubscribe = 9502;
@@ -144,6 +159,28 @@ enum EGCDCGClientMessages {
 	k_EMsgClientToGCTourneyChangeValueResponse = 9570;
 	k_EMsgClientToGCTourneyJoinOpenTourney = 9571;
 	k_EMsgClientToGCTourneyJoinOpenTourneyResponse = 9572;
+	k_EMsgGCToClientEventInfo = 9580;
+	k_EMsgClientToGCRerollChallenge = 9581;
+	k_EMsgClientToGCRerollChallengeResponse = 9582;
+	k_EMsgClientToGCClaimChallengeReward = 9583;
+	k_EMsgClientToGCClaimChallengeRewardResponse = 9584;
+	k_EMsgClientToGCEventRequestInfo = 9585;
+	k_EMsgClientToGCEventRequestInfoSync = 9586;
+	k_EMsgClientToGCEventRequestInfoSyncResponse = 9587;
+	k_EMsgClientToGCEventEquipVirtualItem = 9588;
+	k_EMsgClientToGCEventEquipVirtualItemResponse = 9589;
+	k_EMsgClientToGCEventClaim = 9590;
+	k_EMsgClientToGCEventClaimResponse = 9591;
+	k_EMsgClientToGCDevEventOperation = 9592;
+	k_EMsgClientToGCDevEventOperationResponse = 9593;
+	k_EMsgClientToGCPerformAutoActions = 9594;
+	k_EMsgClientToGCPerformAutoActionsResponse = 9595;
+	k_EMsgClientToGCEventEquipVirtualItems = 9596;
+	k_EMsgClientToGCEventEquipVirtualItemsResponse = 9597;
+	k_EMsgClientToGCSetCardOwnership = 9598;
+	k_EMsgClientToGCAchievementDevCommand = 9600;
+	k_EMsgClientToGCAttemptClientManualClaim = 9610;
+	k_EMsgClientToGCAttemptClientManualClaimResponse = 9611;
 }
 
 enum EChatRoomType {
@@ -225,6 +262,7 @@ message CMsgGCToClientDefaultValidator {
 message CMsgClientWelcomeDCG {
 	optional uint32 currency = 1;
 	repeated .CExtraMsgBlock extra_messages = 2;
+	optional uint32 replay_version = 3;
 }
 
 message CMsgClientToGCJoinChatChannel {
@@ -317,7 +355,6 @@ message CMsgClientToGCOpenPackItemResponse {
 	message OpenedItem {
 		optional uint32 def_index = 1;
 		optional uint64 item_id = 2;
-		optional .CMsgClientToGCOpenPackItemResponse.ESlotType slot_type = 3 [default = k_eSlot_Unspecified];
 	}
 
 	enum EResponse {
@@ -327,16 +364,6 @@ message CMsgClientToGCOpenPackItemResponse {
 		k_eInvalidItemID = 4;
 		k_eDisabled = 5;
 		k_eRegionLocked = 6;
-	}
-
-	enum ESlotType {
-		k_eSlot_Unspecified = 0;
-		k_eSlot_Common = 1;
-		k_eSlot_Uncommon = 2;
-		k_eSlot_Rare = 3;
-		k_eSlot_UncommonFromCommon = 4;
-		k_eSlot_RareFromCommon = 5;
-		k_eSlot_RareFromUncommon = 6;
 	}
 
 	optional .CMsgClientToGCOpenPackItemResponse.EResponse response = 1 [default = k_eSuccess];
@@ -367,20 +394,62 @@ message CMsgClientToGCGetMatchHistory {
 }
 
 message CMsgClientToGCGetMatchHistoryResponse {
-	message MatchDetails {
-		optional uint32 player1 = 1;
-		optional uint32 player2 = 2;
-		optional uint32 start_time = 3;
-		optional uint32 duration = 4;
-		optional uint32 turns = 5;
-		optional uint64 match_id = 6;
-		optional uint32 outcome = 7;
-		optional .EDCGMatchMode match_mode = 8 [default = k_EDCGMatchMode_Unranked];
-		repeated uint32 tower_health = 9;
-		repeated uint32 heroes = 10;
+	message PlayerDetails {
+		optional uint32 account_id = 1;
+		optional uint32 team_id = 2;
+		optional string deck_code = 3;
+		optional uint32 skill_rating = 4;
+		repeated uint32 tower_health = 5;
+		optional uint32 game_clock = 6;
+		optional uint32 ancient_lane = 7;
 	}
 
-	repeated .CMsgClientToGCGetMatchHistoryResponse.MatchDetails match_details = 1;
+	message MatchDetails {
+		optional uint32 start_time = 1;
+		optional uint32 duration = 2;
+		optional uint32 turns = 3;
+		optional uint64 match_id = 4;
+		optional uint32 outcome = 5;
+		optional .EDCGMatchMode match_mode = 6 [default = k_EDCGMatchMode_Invalid];
+		repeated .CMsgClientToGCGetMatchHistoryResponse.PlayerDetails player_details = 7;
+		optional uint32 cluster_id = 8;
+		optional uint32 replay_salt = 9;
+		optional uint32 replay_version = 10;
+		optional .EDCGFormat format = 11 [default = k_EDCGFormat_Other];
+	}
+
+	enum EResult {
+		eResult_OK = 1;
+		eResult_InvalidAccount = 2;
+		eResult_RateLimited = 3;
+	}
+
+	optional .CMsgClientToGCGetMatchHistoryResponse.EResult result = 1 [default = eResult_OK];
+	repeated .CMsgClientToGCGetMatchHistoryResponse.MatchDetails match_details = 2;
+	optional uint32 account_id = 3;
+}
+
+message CMsgClientToGCGetProfileData {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetProfileDataResponse {
+	enum EResult {
+		eResult_OK = 1;
+		eResult_InvalidAccount = 2;
+		eResult_RateLimited = 3;
+	}
+
+	optional .CMsgClientToGCGetProfileDataResponse.EResult result = 1 [default = eResult_OK];
+	optional uint32 account_id = 2;
+	optional uint32 player_level = 3;
+	optional uint32 player_badge = 4;
+	optional uint32 mmr_level = 5;
+	optional uint32 wins = 6;
+	optional uint32 losses = 7;
+	optional uint32 ties = 8;
+	optional uint32 first_match_date = 9;
+	optional uint32 default_cardback = 10;
 }
 
 message CMsgClientToGCGetMatchDetails {
@@ -388,6 +457,16 @@ message CMsgClientToGCGetMatchDetails {
 }
 
 message CMsgClientToGCGetMatchDetailsResponse {
+	message PlayerDetails {
+		optional uint32 account_id = 1;
+		optional uint32 team_id = 2;
+		repeated uint32 heroes = 3;
+		repeated uint32 tower_health = 4;
+		optional string deck_code = 5;
+		optional uint32 skill_rating = 6;
+		optional uint32 ancient_lane = 7;
+	}
+
 	enum EResult {
 		eResult_Success = 0;
 		eResult_InvalidMatch = 1;
@@ -395,21 +474,113 @@ message CMsgClientToGCGetMatchDetailsResponse {
 		eResult_InternalError = 3;
 	}
 
-	optional uint32 player1 = 1;
-	optional uint32 player2 = 2;
-	optional uint32 start_time = 3;
-	optional uint32 duration = 4;
-	optional uint32 turns = 5;
-	optional uint64 match_id = 6;
-	optional uint32 outcome = 7;
-	optional .EDCGMatchMode match_mode = 8 [default = k_EDCGMatchMode_Unranked];
-	repeated uint32 tower_health1 = 9;
-	repeated uint32 tower_health2 = 10;
-	repeated uint32 heroes1 = 11;
-	repeated uint32 heroes2 = 12;
-	optional .CMsgClientToGCGetMatchDetailsResponse.EResult result = 13 [default = eResult_Success];
-	optional uint32 cluster_id = 14;
-	optional uint32 replay_salt = 15;
+	repeated .CMsgClientToGCGetMatchDetailsResponse.PlayerDetails player_details = 1;
+	optional uint32 start_time = 2;
+	optional uint32 duration = 3;
+	optional uint32 turns = 4;
+	optional uint64 match_id = 5;
+	optional uint32 outcome = 6;
+	optional .EDCGMatchMode match_mode = 7 [default = k_EDCGMatchMode_Invalid];
+	optional .CMsgClientToGCGetMatchDetailsResponse.EResult result = 8 [default = eResult_Success];
+	optional uint32 cluster_id = 9;
+	optional uint32 replay_salt = 10;
+	optional uint32 gauntlet_id = 11;
+	optional .EDCGFormat format = 12 [default = k_EDCGFormat_Other];
+}
+
+message CMsgClientToGCSubmitUserFeedback {
+	enum EType {
+		eType_CriticalBug = 1;
+		eType_Bug = 2;
+		eType_Suggestion = 3;
+		eType_Other = 4;
+		eType_General = 5;
+	}
+
+	optional string message_text = 1;
+	optional .CMsgClientToGCSubmitUserFeedback.EType feedback_type = 2 [default = eType_CriticalBug];
+	optional string source_info = 3;
+	optional uint32 client_version = 4;
+}
+
+message CMsgClientToGCSubmitUserFeedbackResponse {
+	enum EResponse {
+		eResponse_Success = 0;
+		eResponse_InternalError = 1;
+		eResponse_InvalidMsg = 2;
+	}
+
+	optional .CMsgClientToGCSubmitUserFeedbackResponse.EResponse response = 1 [default = eResponse_Success];
+}
+
+message CMsgClientToGCPostMatchSurveyResponse {
+	optional uint64 match_id = 1;
+	optional uint32 question_id = 2;
+	optional uint32 response_value = 3;
+}
+
+message CMsgClientToGCMatchResultScreenAnalytics {
+	message GraphStats {
+		optional uint32 time_spent_s = 1;
+		optional uint32 graph_id = 2;
+		optional bool timeline_view = 3;
+		optional uint32 times_viewed = 4;
+	}
+
+	optional uint32 starting_graph = 1;
+	optional uint64 match_id = 2;
+	repeated .CMsgClientToGCMatchResultScreenAnalytics.GraphStats graph_stats = 3;
+}
+
+message CMsgClientToGCGetQuestMapStatus {
+	optional uint32 quest_id = 1;
+}
+
+message CMsgClientToGCGetQuestMapStatusResponse {
+	optional bool success = 1;
+	repeated uint32 unlocked_nodes = 2;
+}
+
+message CMsgClientToGCClaimQuestMapNode {
+	optional uint32 quest_id = 1;
+	optional uint32 node_id = 2;
+	optional bool deferred_node = 3;
+}
+
+message CMsgClientToGCClaimQuestMapNodeResponse {
+	message CurrencyGrant {
+		optional uint32 currency_id = 1;
+		optional uint32 amount = 2;
+	}
+
+	enum EResult {
+		eResult_Success = 0;
+		eResult_SystemDisabled = 1;
+		eResult_InternalError = 2;
+		eResult_InsufficientCurrency = 3;
+		eResult_NodeUnavailable = 4;
+		eResult_AlreadyUnlocked = 5;
+		eResult_NotDeferredNode = 6;
+		eResult_PriorNodesLocked = 7;
+		eResult_AchievmentsIncomplete = 8;
+	}
+
+	optional .CMsgClientToGCClaimQuestMapNodeResponse.EResult result = 1 [default = eResult_Success];
+	repeated uint32 granted_items = 2;
+	repeated .CMsgClientToGCClaimQuestMapNodeResponse.CurrencyGrant granted_currency = 3;
+	repeated uint32 unlocked_nodes = 4;
+}
+
+message CMsgClientToGCQuestDevCommand {
+	optional uint32 quest_id = 1;
+	optional bool reset_progress = 2;
+	optional int32 grant_currency = 3;
+}
+
+message CMsgClientToGCAchievementDevCommand {
+	optional uint32 achievement_id = 1;
+	optional uint32 set_progress = 2;
+	optional int32 add_progress = 3;
 }
 
 message CMsgClientToGCGetAIVsAIMatchConfig {
@@ -522,6 +693,7 @@ message CMsgClientToGCGetGauntletMatchesResponse {
 message CMsgClientToGCRegisterGauntletDeck {
 	optional uint32 gauntlet_id = 1;
 	optional bytes deck_bytes = 2;
+	optional uint32 deck_colors = 3;
 }
 
 message CMsgClientToGCRegisterGauntletDeckResponse {
@@ -791,7 +963,7 @@ message CMsgClientToGCPrivateLobbyJoinChatRoomResponse {
 message CMsgClientToGCMatchSignout {
 	optional uint32 start_time = 1;
 	optional uint32 version = 2;
-	optional .EDCGMatchMode match_mode = 3 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode match_mode = 3 [default = k_EDCGMatchMode_Invalid];
 	optional .CMsgMatchData match_data = 4;
 	repeated .CExtraMsgBlock additional_data = 5;
 }
@@ -836,6 +1008,10 @@ message CMsgClientToGCRecycleCardsResponse {
 
 message CMsgClientToGCSetPlayerBadge {
 	optional uint32 player_badge = 1;
+}
+
+message CMsgClientToGCSetDefaultCardback {
+	optional uint32 default_cardback = 1;
 }
 
 message CMsgClientToGCReplacementSDRTicketResponse {
@@ -1587,4 +1763,304 @@ message CMsgClientToGCTourneyJoinOpenTourneyResponse {
 	optional .CMsgClientToGCTourneyJoinOpenTourneyResponse.EResponse result = 1 [default = k_eInternalError];
 	optional uint64 joined_tourney_id = 2;
 	optional uint32 cooldown_time_after = 3;
+}
+
+message CMsgClientToGCEventRequestInfo {
+	optional uint32 account_id = 1;
+	optional uint32 event_id = 2;
+}
+
+message CMsgGCToClientEventInfo {
+	message EventState {
+		optional bool event_owned = 1;
+	}
+
+	message Currency {
+		optional uint32 currency_id = 1;
+		optional uint32 balance = 2;
+	}
+
+	message Claim {
+		optional uint32 claim_id = 1;
+		optional uint32 num_claims = 2;
+	}
+
+	message Challenge {
+		optional uint32 slot_id = 1;
+		optional uint32 sequence_id = 2;
+		optional uint32 challenge_id = 3;
+		optional uint32 created_time = 4;
+		optional uint32 claimed = 5;
+		optional uint32 progress = 6;
+		optional uint32 config_id = 7;
+		optional bool active = 8;
+	}
+
+	message VirtualItem {
+		optional uint32 def_index = 1;
+		optional uint32 equip_slot = 2;
+		optional uint32 equip_sub_slot = 3;
+	}
+
+	message VirtualItemEquip {
+		optional uint32 equip_slot = 1;
+		optional uint32 equip_sub_slot = 2;
+		optional uint32 def_index = 3;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint32 event_id = 2;
+	optional .CMsgGCToClientEventInfo.EventState event_state = 3;
+	repeated .CMsgGCToClientEventInfo.Currency currencies = 5;
+	repeated .CMsgGCToClientEventInfo.Claim claims = 6;
+	repeated .CMsgGCToClientEventInfo.Challenge challenges = 7;
+	repeated .CMsgGCToClientEventInfo.VirtualItem virtual_items = 8;
+	repeated .CMsgGCToClientEventInfo.VirtualItemEquip virtual_item_equips = 9;
+	optional bool merge_contents = 10;
+}
+
+message CMsgClientToGCEventRequestInfoSync {
+	optional uint32 account_id = 1;
+	optional uint32 event_id = 2;
+}
+
+message CMsgClientToGCEventRequestInfoSyncResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eInvalidEventID = 3;
+		k_eInvalidPermissions = 4;
+		k_eRateLimited = 5;
+		k_eDisabled = 6;
+		k_eTooBusy = 7;
+	}
+
+	optional .CMsgClientToGCEventRequestInfoSyncResponse.EResponse result = 1 [default = k_eInternalError];
+	optional .CMsgGCToClientEventInfo event_info = 2;
+}
+
+message CMsgGCToClientEventInfoSerialize {
+	optional .CMsgGCToClientEventInfo event_info = 1;
+	optional uint32 time_stamp = 2;
+	optional uint32 version = 3;
+	optional uint32 account_id = 4;
+}
+
+message CMsgClientToGCEventClaim {
+	optional uint32 event_id = 1;
+	optional uint32 claim_id = 2;
+	optional uint32 starting_value = 3;
+}
+
+message CMsgEventClaimRewards {
+	message Item {
+		optional uint32 def_index = 1;
+		optional uint64 item_id = 2;
+	}
+
+	message Achievement {
+		optional uint32 achievement_id = 1;
+		optional uint32 progress = 2;
+	}
+
+	message Currency {
+		optional uint32 currency_id = 1;
+		optional uint32 grant = 2;
+	}
+
+	message Challenge {
+		optional uint32 challenge_slot = 1;
+		optional uint32 progress = 2;
+		optional bool activated = 3;
+		optional bool rolled = 4;
+	}
+
+	repeated .CMsgEventClaimRewards.Item items = 1;
+	repeated .CMsgEventClaimRewards.Achievement achievements = 2;
+	repeated .CMsgEventClaimRewards.Currency currencies = 3;
+	repeated .CMsgEventClaimRewards.Challenge challenges = 4;
+}
+
+message CMsgClientToGCEventClaimResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eStartingValueMismatch = 2;
+		k_eInvalidEventID = 3;
+		k_eInvalidClaimID = 4;
+		k_eRequirementsNotMet = 5;
+		k_eDisabled = 6;
+		k_eTooBusy = 7;
+	}
+
+	optional .CMsgClientToGCEventClaimResponse.EResponse result = 1 [default = k_eInternalError];
+	optional .CMsgEventClaimRewards rewards = 2;
+}
+
+message CMsgClientToGCRerollChallenge {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
+}
+
+message CMsgClientToGCRerollChallengeResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eRateLimited = 4;
+		k_eRerollCooldown = 5;
+		k_eNotComplete = 6;
+		k_eCannotReroll = 7;
+		k_eSequenceMismatch = 8;
+		k_eRewardsNotClaimed = 9;
+		k_eEventInactive = 10;
+		k_eRequiresOwningEvent = 11;
+	}
+
+	optional .CMsgClientToGCRerollChallengeResponse.EResponse result = 1 [default = k_eInternalError];
+}
+
+message CMsgClientToGCClaimChallengeReward {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
+	optional uint32 starting_claimed = 4;
+}
+
+message CMsgClientToGCClaimChallengeRewardResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eRateLimited = 4;
+		k_eNotComplete = 5;
+		k_eAlreadyClaimed = 6;
+		k_eSequenceMismatch = 7;
+		k_eEventInactive = 8;
+		k_eNoRewards = 9;
+	}
+
+	optional .CMsgClientToGCClaimChallengeRewardResponse.EResponse result = 1 [default = k_eInternalError];
+	optional .CMsgEventClaimRewards rewards = 2;
+}
+
+message CMsgClientToGCEventEquipVirtualItem {
+	optional uint32 event_id = 1;
+	optional uint32 def_index = 2;
+	optional uint32 equip_slot = 3;
+	optional uint32 equip_sub_slot = 4;
+}
+
+message CMsgClientToGCEventEquipVirtualItemResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eInvalidItem = 4;
+		k_eInvalidSlot = 5;
+		k_eEventInactive = 6;
+	}
+
+	optional .CMsgClientToGCEventEquipVirtualItemResponse.EResponse result = 1 [default = k_eInternalError];
+}
+
+message CMsgClientToGCDevEventOperation {
+	enum EOperation {
+		k_eOp_Reset = 0;
+		k_eOp_GrantCurrency = 1;
+		k_eOp_GrantChallenge = 2;
+		k_eOp_RerollCooldown = 3;
+		k_eOp_SetCurrencyLevel = 4;
+		k_eOp_SetCurrencyValue = 5;
+		k_eOp_SetChallengeValue = 6;
+		k_eOp_GrantOwnership = 7;
+	}
+
+	optional .CMsgClientToGCDevEventOperation.EOperation operation = 1 [default = k_eOp_Reset];
+	optional uint32 event_id = 2;
+	optional uint32 id = 3;
+	optional uint32 amount = 4;
+}
+
+message CMsgClientToGCDevEventOperationResponse {
+}
+
+message CMsgClientToGCPerformAutoActions {
+	optional uint32 event_id = 1;
+	optional bool update_auto_claims = 3;
+	repeated uint32 update_challenge_slots = 4;
+	repeated uint32 update_claims = 5;
+	optional uint32 client_version = 6;
+}
+
+message CMsgClientToGCPerformAutoActionsResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eInvalidEventID = 4;
+	}
+
+	optional .CMsgClientToGCPerformAutoActionsResponse.EResponse result = 1 [default = k_eInternalError];
+	optional .CMsgEventClaimRewards rewards = 2;
+}
+
+message CMsgClientToGCAttemptClientManualClaim {
+	optional uint32 event_id = 1;
+	optional uint32 challenge_slot_id = 2;
+	optional uint32 progress_amount = 3;
+}
+
+message CMsgClientToGCAttemptClientManualClaimResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eInvalidChallengeSlotID = 4;
+		k_eChallengeNotClaimable = 5;
+		k_eInvalidEventID = 6;
+	}
+
+	optional .CMsgClientToGCAttemptClientManualClaimResponse.EResponse result = 1 [default = k_eInternalError];
+}
+
+message CMsgClientToGCEventEquipVirtualItems {
+	message Equip {
+		optional uint32 def_index = 2;
+		optional uint32 equip_slot = 3;
+		optional uint32 equip_sub_slot = 4;
+	}
+
+	optional uint32 event_id = 1;
+	repeated .CMsgClientToGCEventEquipVirtualItems.Equip equip_list = 2;
+}
+
+message CMsgClientToGCEventEquipVirtualItemsResponse {
+	enum EResponse {
+		k_eInternalError = 0;
+		k_eSuccess = 1;
+		k_eDisabled = 2;
+		k_eTooBusy = 3;
+		k_eInvalidItem = 4;
+		k_eInvalidSlot = 5;
+		k_eEventInactive = 6;
+		k_eTooManyEquips = 7;
+		k_eDuplicateEquip = 8;
+	}
+
+	optional .CMsgClientToGCEventEquipVirtualItemsResponse.EResponse result = 1 [default = k_eInternalError];
+}
+
+message CMsgClientToGCSetCardOwnership {
+	optional uint32 card_percentage = 1;
+}
+
+message CMsgGCToClientMatchmakingStatus {
+	optional uint32 queued_unranked = 1;
 }

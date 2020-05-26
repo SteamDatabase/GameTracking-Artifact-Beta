@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 64
@@ -17,6 +17,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -33,6 +34,7 @@
 			m_bLightenMode = true
 			m_nOrientationType = 2
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nMinTesselation = 16
@@ -53,6 +55,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.160000
@@ -63,34 +66,41 @@
 				100.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndScale = 0.300000
 			m_flEndTime = 0.400000
 			m_flStartScale = 1.200000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flStartTime = 0.400000
 			m_flStartScale = 0.300000
 			m_flEndScale = 0.100000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.600000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_nFieldOutput = "16"
 			m_flFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_flEndTime_max = 0.500000
@@ -100,6 +110,7 @@
 			m_bDisableOperator = true
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_OP_RotateVector"
 			m_flRotRateMin = 900.000000
@@ -110,19 +121,23 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 3.000000
 			m_flRadiusMin = 2.600000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -141,6 +156,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOffsetLoc = 
@@ -165,6 +181,7 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_vecOffsetLoc = 
@@ -189,29 +206,33 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
-			m_bScaleInitialRange = true
 			m_flOutputMax = 0.000000
 			m_flOutputMin = 1.000000
 			m_nFieldOutput = "7"
 			m_flInputMax = 3.000000
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flOutputMin = 0.100000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMin = 1.000000
 			m_flInputMax = 3.000000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.200000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 64
@@ -220,19 +241,30 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 2.500000
-			m_flEmitRate = 30.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 2.500000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 30.000000
+			}
 		},
 	]
 	m_flConstantRadius = 1.000000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -249,6 +281,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 9
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -271,6 +304,7 @@
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MinForce = 
@@ -286,6 +320,7 @@
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_CurlNoiseForce"
 			m_useCurl = true
@@ -308,6 +343,7 @@
 				0.200000,
 			]
 		},
+		
 		{
 			_class = "C_OP_TurbulenceForce"
 			m_flNoiseCoordScale1 = 0.500000
@@ -333,6 +369,6 @@
 		},
 	]
 	m_flConstantLifespan = 0.800000
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 4
 }

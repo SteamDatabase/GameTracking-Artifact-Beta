@@ -1,11 +1,6 @@
 @define textColorGold: #e9c35e;
 @define textColorCardsInHand: #cacaca;
-@define textColorGameClock: #cacaca;
-
-.IsDisconnected
-{
-    background-color: #CC0000AA;
-}
+@define textColorGameClock: #FFFFFF;
 
 .PlayerInfo.IsDisconnected
 {
@@ -13,15 +8,23 @@
     opacity: 1;
 }
 
+.AutoPassUntilCombatEnabled .PersonaName
+{
+	color: #ac0f0a;
+}
+
 .DisconnectedDisplay
 {
     visibility: collapse;
     vertical-align: top;
+	horizontal-align: right;
+	margin-right: 165px;
 }
 
 .OpponentInfo .DisconnectedDisplay
 {
-	vertical-align: bottom;
+	vertical-align: top;
+	margin-top: 134px;
 }
 
 .IsDisconnected .DisconnectedDisplay
@@ -29,7 +32,8 @@
    visibility: visible;
 }
 
-#DisconnectedLabel {
+#DisconnectedLabel
+{
 	margin-left: 15px;
 	margin-right: 10px;
     font-size: 24px;
@@ -59,7 +63,7 @@
 	}
 }              
 
-.IsActingPlayer #DisconnectedLabel
+.IsActivePlayer #DisconnectedLabel
 {
 	animation-name: bad-red-pulsing;
     animation-duration: 1.0s;
@@ -69,12 +73,11 @@
 
 .PlayerInfo
 {
-	flow-children: none;
+	flow-children: left;
 
-	width: 427px;
-
-	height: 85px;
-
+	width: 933px;
+	height: 308px;
+	
 	vertical-align: bottom;
 	horizontal-align: right;
 
@@ -85,6 +88,64 @@
 	transition-delay: 0.1s;
 	
     opacity: 0;
+}
+
+PlayerInfo.LocalInfo .PlayerInfoContents
+{
+		background-image: url("s2r://panorama/images/hud/v3_hudbg_player_rad_psd.vtex");
+}
+
+PlayerInfo.OpponentInfo .PlayerInfoContents
+{
+		background-image: url("s2r://panorama/images/hud/v3_hudbg_opp_dire_psd.vtex");
+}
+
+.LocalDire PlayerInfo.LocalInfo .PlayerInfoContents
+{
+		background-image: url("s2r://panorama/images/hud/v3_hudbg_player_dire_psd.vtex");
+}
+
+.LocalDire PlayerInfo.OpponentInfo .PlayerInfoContents
+{
+		background-image: url("s2r://panorama/images/hud/v3_hudbg_opp_rad_psd.vtex");
+}
+
+#NameAndBadgeContainer
+{
+	flow-children: left;
+	horizontal-align: right;
+	height: fit-children;
+	width: 100%;
+	margin-right: 65px;
+	overflow: clip;
+}
+
+.OpponentInfo #NameAndBadgeContainer
+{
+	vertical-align: bottom;
+	margin-bottom: 7px;
+}
+
+#PlayerTurnLabel
+{
+	margin-top: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	margin-right: 10px;
+	vertical-align: center;
+	visibility: collapse;
+}
+
+.ShowPlayerTurn #PlayerTurnLabel
+{
+	visibility: visible;
+}
+
+#PlayerInfoContainer
+{
+	width: 100%;
+	height: 100%;
+	horizontal-align: right;
 }
 
 #PlayerInfoBlurBackground
@@ -99,7 +160,7 @@
 
 .OpponentInfo #PlayerInfoBlurBackground
 {
-    margin-top: 0px;
+  margin-top: 0px;
 	margin-bottom: 25px;
 }
 
@@ -120,107 +181,74 @@
 	border-bottom-left-radius: 8px;
 }
 
-.PlayerInfoBG
-{
-	width: 100%;
-	height: 100%;
-    background-repeat: no-repeat;
-	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_psd.vtex");
-	background-size: 100% 100%;
-
-    margin-top: 25px;
-}
-
-.OpponentInfo .PlayerInfoBG
-{
-    margin-top: 0px;
-	margin-bottom: 25px;
-}
-
-.PlayerInfoBGLayer2
-{
-	width: 100%;
-	height: 100%;
-	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_outline_psd.vtex");
-	background-size: cover;
-	visibility: collapse;
-	background-repeat: no-repeat;
-
-    margin-top: 25px;
-}
-
-.OpponentInfo .PlayerInfoBGLayer2
-{
-    margin-top: 0px;
-	margin-bottom: 25px;
-}
-
-.OpponentInfo .PlayerInfoBGLayer2
-{
-	pre-transform-scale2d: 1, -1;
-}
-
-.IsActingPlayer .PlayerInfoBGLayer2
-{
-	visibility: visible;
-}
-
 .PlayerInfoContents
 {
 	flow-children: none;
-	width: 100%;
-	height: 100%;
-	padding-top: 27px;
-}
-
-#PlayerInfoContentsContainer
-{
 	vertical-align: bottom;
-	flow-children: right;
+	
+	width: 100%;
+	height: 182px;
+	padding-left: 5px; 
+	padding-top: 5px;
+	background-image: url("s2r://panorama/images/hud/v3_hudbg_psd.vtex");
+	background-size: 100% 100%;
+}
+
+#CoinContainer
+{
+	width: 181px;
+	height: 133px;
+	margin-right: 23px;
+
+	horizontal-align: right;
+	vertical-align: bottom;
+	flow-children: none;
+	z-index: 50;
+}
+
+.OpponentInfo #CoinContainer
+{
+	margin-right: 28px;
+	horizontal-align: right;
+	vertical-align: top;
+	flow-children: none;
+	z-index: 50;
+}
+
+#CoinBackground
+{
 	width: 100%;
 	height: 100%;
-	margin-bottom: -5px;
+	background-image: url("s2r://panorama/images/hud/v3_coin_psd.vtex");
+	background-size: 100% 100%;
 }
 
-.OpponentInfo #PlayerInfoContentsContainer
+.IsActivePlayer #CoinBackground,
+.LocalInfo.InShopping #CoinBackground 
 {
-	vertical-align: top;
-}
-
-.OpponentInfo .PlayerInfoContents
-{
-	padding-bottom: 26px;
-	padding-top: 0px;
-}
-
-.HasGameClock.PlayerInfo
-{
-	width: 424px;	
-}
-
-.PlayerInfo.IsActingPlayer .PlayerInfoBG
-{
-	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_psd.vtex");
-}
-
-.PlayerInfo.OpponentInfo.IsActingPlayer .PlayerInfoBG
-{
-	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_activeplayer_psd.vtex");
-}    
-
-.PlayerInfo.IsActingPlayer .PlayerInfoBG
-{
-	animation-name: acting-player-highlight;
-    animation-duration: 3.5s;
+    animation-name: coin_pulse;
+    animation-duration: 3.0s;
     animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;    
+    animation-iteration-count: infinite;
+    background-image: url("s2r://panorama/images/hud/v3_coin_active_psd.vtex");
 }
 
-@keyframes 'acting-player-highlight'
+.LocalInfo.IsActivePlayer #CoinBackground:hover,
+.LocalInfo.InShopping #CoinBackground:hover
+{
+    brightness: 2.0;
+}
+
+.OpponentInfo.IsActivePlayer #CoinBackground:hover
+{
+    brightness: 0.5;
+}
+
+@keyframes 'coin_pulse'
 {
 	0%
 	{
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	50%
@@ -230,10 +258,71 @@
 
 	100%
 	{
-		opacity: 0.4;
+		opacity: 0.5;
 	}
-}              
+}          
 
+#CoinInitiativeLabel
+{
+	margin-top: 14px;
+	font-size: 15px;
+	width: 100%;
+	height: 24px;
+	text-align: center;
+	color: #ffffff;
+	text-shadow: 0px 0px 5px 3.0 #000000;
+	text-transform: uppercase;
+	visibility: collapse;
+}
+
+.HasInitiative #CoinInitiativeLabel
+{
+	visibility: visible;
+}
+
+#CoinAction
+{
+	horizontal-align: center;
+	vertical-align: center;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 24px;
+	color: #ffffff;
+	text-shadow: 0px 0px 6px 4.0 #192c31;
+//	text-overflow: shrink;
+	visibility: collapse;
+}
+
+.ShowPlayerTurn #CoinAction
+{
+	visibility: visible;
+}
+
+.OpponentInfo #CoinAction
+{
+	visibility: collapse;
+}
+
+#PlayerInfoContentsContainer
+{
+	vertical-align: bottom;
+	flow-children: right;
+	width: 100%;
+	height: 100%;
+	margin-bottom: -5px;
+	z-index: 20;
+}
+
+.OpponentInfo #PlayerInfoContentsContainer
+{
+	vertical-align: top;
+}
+
+.OpponentInfo .PlayerInfoContents
+{
+	vertical-align: top;
+	padding-top: 0px;
+}
 
 .ActingPlayerStartImage
 {
@@ -242,14 +331,13 @@
 	opacity: 0.0;
 	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_activeplayer_start_psd.vtex");
 	background-size: 100% 100%;
-    background-repeat: no-repeat;
-
-    margin-top: 25px;
+  background-repeat: no-repeat;
+	margin-top: 25px;
 }
 
 .OpponentInfo .ActingPlayerStartImage
 {
-    margin-top: 0px;
+  margin-top: 0px;
 	margin-bottom: 25px;
 }
 
@@ -263,7 +351,7 @@
 	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_activeplayer_start_psd.vtex");
 }
 
-.PlayerInfo.IsActingPlayer .ActingPlayerStartImage
+.PlayerInfo.IsActivePlayer .ActingPlayerStartImage
 {
     animation-name: acting-player-start;
     animation-duration: 1s;
@@ -302,11 +390,6 @@
 	vertical-align: top;
 }
 
-.OpponentInfo .PlayerInfoBG
-{
-	background-image: url("s2r://panorama/images/hud/player_info_bg_timer_opponent_psd.vtex");
-}
-
 .IconsContainer
 {
 	padding-top: 0px;
@@ -335,24 +418,20 @@
 
 .GameClockContainer
 {
-	margin-left: 16px;
 	flow-children: right;
 	height: fit-children;
 	width: 102px;
-	vertical-align: bottom;
-    visibility: collapse;
+	vertical-align: top;
+	horizontal-align: right;
+	visibility: collapse;
+	margin-right: 60px;
+	margin-top: 7px;
 }
 
 .OpponentInfo .GameClockContainer
 {
-	vertical-align: top;
-	margin-top: 3px;
-}
-
-.IsDisconnected .GameClockContainer
-{
-    margin-left: 0px;
 	vertical-align: bottom;
+	margin-bottom: 10px;
 }
 
 .HasGameClock .GameClockContainer
@@ -436,17 +515,21 @@
 
 .GoldContainer
 {
-	margin-left: 16px;
-	flow-children: right;
+	flow-children: down;
 	height: fit-children;
-	width: fit-children;
+	width: 88px;
+	horizontal-align: center;
 	vertical-align: bottom;
+	margin-bottom: 22px;
+	margin-left: 6px;
+	padding: 4px;
 }
 
 .OpponentInfo .GoldContainer
 {
 	vertical-align: top;
-	margin-top: 2px;
+	margin-top: 52px;
+	margin-left: 6px;
 }
 
 .IsDisconnected .GoldContainer
@@ -458,10 +541,9 @@
 {
 	height: fit-children;
 	width: fit-children;
-//	vertical-align: center;
 }
 
-#GoldIcon
+#GoldIcon, #GoldPreviewIcon
 {
 	width: 26px;
 	height: 26px;
@@ -475,21 +557,57 @@
 	horizontal-align: center;
 }
 
-.OpponentInfo #GoldIcon
+#SilverIcon, #SilverPreviewIcon
+{
+	width: 26px;
+	height: 26px;
+
+	margin-bottom: 4px;
+	margin-left: 3px;
+
+	background-size: cover;
+	background-image: url("s2r://panorama/images/hud/silver_small_psd.vtex");
+
+	vertical-align: center;
+	horizontal-align: center;
+	visibility: collapse;
+}
+
+.OpponentInfo #GoldIcon,
+.OpponentInfo #SilverIcon,
+.OpponentInfo #GoldPreviewIcon,
+.OpponentInfo #GoldPreviewIcon
 {
 
 }
 
-.GoldCount
+#GoldCount
 {
-	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
-	//color: textColorGold;
+	color: abilityGradient;
+	wash-color: #f2cb41aa;
+//	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
+	text-shadow: 0px 0px 5px 2.0 #000000;
+	margin-top: 1px;
+	margin-bottom: 25px;
+	margin-left: 0px;
+	horizontal-align: center;
+	font-family: Artifact Numbers;
+	font-size: 32px;
+	text-overflow: ellipsis;
+	tooltip-arrow-position: 0% 50%;
+	tooltip-body-position: 0% 20%;
+}
+
+.SilverCount
+{
+	color: gradient( linear, 0% 0%, 0% 100%, from( #f7f7f7 ), to( #bcbcbc) );
 	
 	margin-left: 6px;
 	margin-top: 1px;
 
     vertical-align: center;
-	horizontal-align: center;
+	horizontal-align: center;	
+	visibility: collapse;
 }
 
 .GoldSpend
@@ -507,46 +625,6 @@
 .HasUnaccountedGoldSpend .GoldSpend
 {
 // visibility: visible;
-}
-
-#ShopDeedContainer
-{
-	margin-left: 16px;
-	flow-children: right;
-	tooltip-position: top;
-	height: fit-children;
-	width: fit-children;
-	vertical-align: bottom;
-}
-
-.OpponentInfo #ShopDeedContainer
-{
-	vertical-align: top;
-	margin-top: 4px;
-}
-
-#ShopDeedIcon
-{
-	width: 26px;
-	height: 26px;
-
-    margin-bottom: 8px;
-
-	background-size: cover;
-	background-image: url("s2r://panorama/images/hud/hud_shop_deed_icon_png.vtex");
-
-	vertical-align: center;
-	horizontal-align: center;
-}
-
-#ShopDeedCount
-{
-	color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
-
-	margin-bottom: 2px;
-
-    vertical-align: center;
-	horizontal-align: center;
 }
 
 .CardsInHandContainer
@@ -675,59 +753,6 @@
     visibility:visible;
 }
 
-.PersonaName
-{
-	width: 269px;
-	height: 32px;
-
-	text-overflow: ellipsis;
-
-	font-size: 20px;
-	color: #FFFFFFFF;
-	//font-stretch: condensed;
-
-	vertical-align: top;
-	margin-left: 18px;
-	margin-top: 2px;
-}
-
-.IsAI .PersonaName
-{
-    margin-right: 92px;
-}
-
-.PersonaName:hover
-{
-	text-decoration: none;
-}
-
-.OpponentInfo .PlayerInfoContents .PersonaName
-{
-	vertical-align: bottom;
-	margin-top: 0px;
-	margin-bottom: -5px;
-}
-
-.IsDisconnected .PersonaName
-{
-    visibility: collapse;
-}
-
-#AccountBadge
-{
-	width: 62px;
-    horizontal-align: right;
-    margin-top: 3px;
-	margin-right: 72px;
-}
-
-.OpponentInfo #AccountBadge
-{
-    margin-top: -2px;
-    margin-bottom: 4px;
-    vertical-align: bottom;
-}
-
 .ShowESCMenuButton
 {
 	width: 22px;
@@ -788,5 +813,402 @@
 	vertical-align: center;
 	margin-left: 10px;
 	margin-right: 5px;
+	visibility: collapse;
 }
 
+#AccountBadge
+{
+	width: 100px;
+	height: 133px;
+  margin-top: 13px;
+	z-index: 5;
+}
+
+#ChaosBadge
+{
+	width: 90px;
+	margin-top: 15px;
+  horizontal-align: right;
+	margin-right: 42px;
+	z-index: 999;
+}
+
+.OpponentInfo #ChaosBadge
+{
+	margin-top: -15px;
+	margin-bottom: 30px;
+	margin-right: 42px;
+}
+
+#AccountBadge,
+.ChaosGauntlet #ChaosBadge
+{
+	visibility: visible;
+}
+
+#ChaosBadge,
+.ChaosGauntlet #AccountBadge
+{
+	visibility: collapse;
+}
+
+
+#ManaContainer
+{
+	z-index: 99;
+	flow-children: down;
+	tooltip-position: top;
+
+	background-size: 100%;
+	background-position: 50% 50%;
+  background-repeat: no-repeat;
+	height: 88px;
+	width: 50px;
+	vertical-align: bottom;
+	margin-left: 403px;
+	margin-right: 6px;
+	margin-bottom: 5px;
+}
+
+.OpponentInfo #ManaContainer
+{
+	vertical-align:top;
+	background-size: 100%;
+	background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+	vertical-align: top;
+	margin-top: 36px;
+	margin-left: 400px;
+	margin-right: 6px;
+}
+
+#ManaIconImage
+{
+	ui-scale: 100%;
+}
+
+.ManaAmountLabel
+{
+	font-size: 32px;
+	text-shadow: 2px 2px 8px 1.0 #000000;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #62adf3 ), to( #628def) ) vertical-align: center;
+	width: 100%;
+	height: 22px;
+	text-align: center;
+	font-family: Artifact Numbers;
+}
+
+.TopManaLabel
+{
+	margin-bottom: 20px;
+}
+
+#OverdrawCountainer
+{
+    horizontal-align: left;
+    vertical-align: bottom;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    width: 60px;
+    height: 88px;
+    border: 3px solid #969492;
+    border-radius: 5px;
+    flow-children: down;
+    background-color: gradient( linear, 0% 100%, 0% 0%, from( #161616 ), to( #2a2a2a ) );
+    background-size: cover;
+    box-shadow: #00000088 -4px -4px 10px 10px;
+    visibility: collapse;
+    z-index: 21;
+}
+
+.HasOverdraw #OverdrawCountainer
+{
+	visibility: visible;
+}
+
+#OverdrawLabel
+{
+	horizontal-align: center;
+	vertical-align: center;
+	color: abilityGradient;
+	font-size: 32px;
+	font-family: Artifact Numbers;
+	text-shadow: 1px 2px 5px 2.0 #000000;
+}
+
+.OpponentInfo #OverdrawLabel
+{
+	vertical-align: top;
+	margin-top: 0px;
+}
+
+#FountainContainer
+{
+	flow-children: down;
+	vertical-align: bottom;
+	horizontal-align: center;
+	width: 250px;
+	height: 60px;
+	margin-bottom: 34px;
+	margin-right: 370px;
+	z-index: 999;
+}
+
+.OpponentInfo #FountainContainer
+{
+	flow-children: down;
+	vertical-align: top;
+	margin-top: 16px;
+	margin-right: 380px;
+}
+
+#FountainLabel
+{
+	text-overflow: shrink;
+	vertical-align: center;
+	horizontal-align: center;
+	color: #000000;
+	text-transform:uppercase;
+	font-size: 16px;
+}
+
+.OpponentInfo #FountainLabel
+{
+visibility: collapse;	
+}
+
+#FountainHeros
+{
+	width: fit-children;
+	height: 100%;
+	padding: 0px;
+	horizontal-align: center;
+	flow-children: right-wrap;
+}
+
+#FountainHeros DCGHeroButton
+{
+	visibility: visible;
+	ui-scale: 50%;
+	vertical-align: center;
+	margin-right: 2px;
+	margin-left: 2px;
+	wash-color: grey;
+	tooltip-position: top;
+	tooltip-body-position: 50% 50%;
+	border-radius: 3px;
+}
+
+.OpponentInfo #FountainHeros DCGHeroButton
+{
+	tooltip-position: bottom;
+}
+
+.LocalInfo #FountainHeros DCGHeroButton.DeployedNextTurn, 
+.LocalDire .OpponentInfo #FountainHeros DCGHeroButton.DeployedNextTurn
+{
+//	box-shadow: 0px 0px 10px #82ccff80;
+	box-shadow: #509bff88 -5px -5px 10px 10px;
+	border: 1px solid #82ccff88;
+	wash-color: none;
+	brightness: 1.6;
+}
+
+.OpponentInfo #FountainHeros DCGHeroButton.DeployedNextTurn,
+.LocalDire .LocalInfo  #FountainHeros DCGHeroButton.DeployedNextTurn
+{
+	box-shadow: 0px 0px 10px #f06600;
+	border: 1px solid #ffb41880;
+	wash-color: none;
+	brightness: 1.6;
+}
+
+#ManaGemsContainer
+{
+    width: 160px;
+    height: 80px;
+    vertical-align: bottom;
+    margin-bottom: 17px;
+    margin-left: 6px;
+    flow-children: down;
+    tooltip-position: top;
+}
+
+.OpponentInfo #ManaGemsContainer
+{
+	vertical-align: top;
+	margin-top: 30px;
+}
+
+
+#ManaGemsTop
+{
+	height: 50%;
+	width: 216px;
+	flow-children: right;
+}
+
+#ManaGemsBottom
+{
+	height: 50%;
+	width: 216px;
+	margin-left: 12.5px;
+	flow-children: right;
+}
+
+.ManaGem
+{
+	background-image: url("s2r://panorama/images/hud/v2_mana_crystal_blue_psd.vtex");
+	background-size: 100%;
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+	width: 23px;
+	height: 39px;
+	margin-right: 1px;
+	margin-left: 1px;
+	z-index: 1;
+}
+
+.SingleGemContainer
+{
+	flow-children: none;
+	width: 23px;
+	height: 39px;
+}
+
+.ManaSpent .ManaGem, .PulseManaCrystal .ManaGem
+{
+	background-image: url("s2r://panorama/images/hud/v2_mana_crystal_blue_spent_psd.vtex");
+}
+
+.PulseManaCrystal .ManaGemPulse
+{
+	animation-name: mana-gem-pulse;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+	visibility: visible;
+}
+
+.ManaGemPulse
+{
+	background-image: url("s2r://panorama/images/hud/v2_mana_crystal_blue_psd.vtex");
+	background-size: 100%;
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+	z-index: 5;
+	width: 23px;
+	height: 39px;
+	margin-right: 1px;
+	margin-left: 1px;
+	visibility: collapse;
+}
+
+#ManaLabel
+{
+	z-index: 99;
+	horizontal-align: right;
+	vertical-align: top;
+	color: #000000;
+//	color: gradient( linear, 0% 0%, 0% 100%, from( #ffffff ), to( #628def) );
+	margin-top: 58px;
+	margin-right: 379px;
+	text-transform: uppercase;
+}
+
+.OpponentInfo #ManaLabel
+{
+visibility: collapse;	
+}
+
+#GoldLabel
+{
+	z-index: 99;
+	vertical-align: top;
+	horizontal-align: right;
+	color: #000000;
+	// color: gradient( linear, 0% 0%, 0% 100%, from( #f2cb41 ), to( #c58d08) );
+	margin-top: 58px;
+	margin-right: 230px;
+	text-transform: uppercase;
+}
+
+.OpponentInfo #GoldLabel
+{
+visibility: collapse;	
+}
+
+@keyframes 'mana-gem-pulse'
+{
+    0%
+    {
+	    opacity: 1;
+    }
+
+	50%
+    {
+	    opacity: 0;
+    }
+
+    100%
+    {
+	    opacity: 1;
+    }
+}
+
+
+.PersonaName
+{
+	font-size: 24px;
+	vertical-align: center;
+	horizontal-align: center;
+	margin: 20px;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #f7f7f7 ), to( #bcbcbc) );
+	text-shadow: 0px 0px 8px 3.0 #000000;
+}
+
+.PersonaName:hover
+{
+}
+
+.IsDisconnected .PersonaName
+{
+}
+
+#PersonaNameContainer,
+.LocalDire .OpponentInfo #PersonaNameContainer
+{
+	width: 305px;
+	height: fit-children;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #161616 ), color-stop( .3, #000000 ), to( #2a2a2a88 ) );
+	background-image: url("s2r://panorama/images/hud/avatar_nameplate_blue_psd.vtex");
+	background-size: 100% 100%;
+	margin-top: 25px;
+	transition-property: transform;
+	transform: translateX( 305px );
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+//	box-shadow:  0px 0px 20px #6e98d550;
+
+	opacity: 0.5;
+
+}
+
+.PersonaAvatarHovered #PersonaNameContainer,
+.LocalDire .PersonaAvatarHovered #PersonaNameContainer
+{
+	transition-property: transform, brightness, opacity;
+	transform: translateX( 0px );
+	brightness: 1.8;
+	opacity: 1;
+	transition-duration: 0.5s, 0.3s, 0.6s;
+	transition-timing-function: ease-out;
+}
+
+.OpponentInfo #PersonaNameContainer,
+.LocalDire .LocalInfo #PersonaNameContainer
+{
+	background-image: url("s2r://panorama/images/hud/avatar_nameplate_red_psd.vtex");
+//	box-shadow: 0px 0px 20px #f0660050;
+}

@@ -4,12 +4,16 @@
 		<include src="s2r://panorama/styles/toasts/dcg_ui_achievement_toast.vcss_c" />
 	</styles>
 
-  <DCGAchievementToast>
-    <Image id="CardArtMiniIcon"/>    
+  <DCGAchievementToast toast_duration_override="6">
+    <Panel class="CheeveImageContainer">
+      <Image id="AchievementArt" class="CheeveImage"/>
+      <CircularProgressBar id="CheeveProgressBar" />
+    </Panel>
     <Panel id="TextContainer">
-      <Label text="{s:achievement_name}"/>
-      <Label text="{s:achievement_description}"/>
-      <Label text="25/80"/>
+      <Label text="{s:achievement_name}" class="AchievementName" />
+      <Label text="{s:achievement_description}" class="AchievementText" />
+      <Label id="Completed" text="#DCG_AchievementAchieved" class="AchievementText" />
+      <Label id="PartialProgress" text="{i:current_progress}/{i:required_progress}" class="AchievementText" />
     </Panel>
 	</DCGAchievementToast>
 </root>

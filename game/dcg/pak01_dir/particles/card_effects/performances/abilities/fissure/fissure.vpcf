@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -7,39 +7,51 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_bOrientZ = true
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/particle/spells/fissure/fissure.vmdl"
 				},
 			]
 			m_bAnimated = true
 			m_nLOD = 1
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.150000
 			m_flStartScale = 0.800000
 			m_flBias = 0.900000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -56,51 +68,63 @@
 			]
 			m_bLocalCoords = true
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_ground_b.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_flash_light.vpcf"
 			m_bDisableChild = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_debris.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_cracks_c.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_dust_b.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/screen_shakes/shake_medium.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/audio/snd_fissure.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/fissure/fissure_rocks.vpcf"
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -117,6 +141,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -134,6 +159,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -151,6 +177,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -176,4 +203,6 @@
 		},
 	]
 	m_flConstantLifespan = 1.500000
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

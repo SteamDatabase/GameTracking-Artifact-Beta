@@ -1,4 +1,4 @@
-@define TitleYOffset: 280px; 
+@define TitleYOffset: 380px; 
 
 #GameOverVideo, #GameOverVideoResult, #GameOverVideoLoop
 {
@@ -50,15 +50,24 @@
 	}
 }
 
+.VictoryHide
+{
+    opacity: 0;
+    transition-duration: 0.8s;
+}
+
 #GameEndReason
 {
-	width:100%;
-	z-index:999;
+    width: 100%;
+    z-index: 999;
+    transition-property: opacity;
+    transition-duration: 0.7s;
+    transition-timing-function: ease-in;
 }
 
 .EndReason
 {
-	margin-top: 390px;
+	margin-top: 570px;
 	horizontal-align:center;
 	font-weight:light;
 	font-size:28px;
@@ -79,6 +88,12 @@
 	animation-timing-function: ease-out;
 	animation-iteration-count: 1;	
 }
+
+.AchievementTextDescriptionPanel
+{
+	width: 100%;
+}
+
 
 .ShowingLevelProgress .EndReason
 {
@@ -111,8 +126,6 @@
 	}
 }
 
-
-
 .PlayerConceded #LabelYouConceded,
 .OpponentConceded #LabelOpponentConceded,
 .PlayerKilledTwoTowers #LabelYourTowersDestroyed,
@@ -132,8 +145,6 @@
     visibility:visible;
 }
 
-
-
 #GameOverPanel.GameOverAnimate
 {
     animation-name: FadeOpacityIn;
@@ -143,7 +154,7 @@
     //background-image: url('file://{images}/backgrounds/end_game_clean.png');
 }
 
-#MenuOptions
+#ProgressMenuOptions, #MenuOptions
 {
 	horizontal-align: center;
 	width:100%;
@@ -154,7 +165,16 @@
 	transition-property: opacity;
 	transition-duration: 0.5s;
 	transition-timing-function: ease-in;
+}
 
+#MenuOptions
+{
+	vertical-align: center;
+}
+
+.IntroOver.DisplayContinueButton #ProgressMenuOptions
+{
+	opacity: 1;
 }
 
 .IntroOver.DisplayMenuOptions #MenuOptions
@@ -162,9 +182,15 @@
 	opacity: 1;
 }
 
+.IntroOver.DisplayMenuOptions #ProgressMenuOptions
+{
+	visibility: collapse;
+}
+
+#GameOverPanel:not(.ShowingLevelProgress) #ProgressMenuOptions,
 #GameOverPanel:not(.ShowingLevelProgress) #MenuOptions
 {
-	margin-top: 164px;
+	margin-top: 64px;
 }
 
 .MenuButton
@@ -172,7 +198,58 @@
 	horizontal-align:center;
 }
 
+#AchievementProgressContinue Label
+{
+	text-align: center;
+	horizontal-align: center;
+	font-weight: light;
+	font-size:35px;
+	letter-spacing: 8px;
+	text-transform: uppercase;
+	color: #86709b;
+	
+	text-shadow: 0px 0px 2px 2.0 #9400D311;
+	opacity: .85;
+	transform: none;
 
+	transition-property: text-shadow, opacity, color, transform, pre-transform-scale2d;
+	transition-duration: .25s;	
+	transition-timing-function: ease-in;
+}
+
+#AchievementProgressContinue Label:hover
+{
+	animation-name: none;
+	color: white;
+}
+
+#AchievementProgressContinue Label
+{
+	animation-duration: 1.3s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;	
+	animation-name: ContinuePulse;
+}
+
+
+@keyframes 'ContinuePulse'
+{
+	0%
+	{
+		color: #86709b;
+	}
+	50%
+	{
+		color: #f2e3ff;
+	}
+	
+	100%
+	{
+		color: #86709b;
+	}	
+}
+
+#ProgressMenuOptions Label,
 #MenuOptions Label
 {
 	font-weight: light;
@@ -206,82 +283,67 @@
     opacity:0;
 }
 
-
 .ResultOver #GameOverVideoResult
 {
     opacity:0;
 }
 
-
-#ViewDeck
+#ViewDeck, #ViewOpponentProfile
 {
-    visibility:visible;
+    visibility: visible;
 }
 #Rematch, #FindNextMatch, #ReturnToLobby
 {
-    visibility:collapse;
+    visibility: collapse;
 }
 .GauntletMatch #FindNextMatch
 {
-    visibility:visible;
+    visibility: visible;
 }
 .SparringMatch #FindNextMatch
 {
-    visibility:visible;
+    visibility: visible;
 }
 .AIMatch #Rematch
 {
-    visibility:visible;
+    visibility: visible;
 }
-.PuzzleMatch #ViewDeck
+
+.AIMatch #ViewOpponentProfile,
+.IsReplay #ViewOpponentProfile
 {
     visibility: collapse;
 }
 
-#ChatWithOpponent
+#ViewOwnDeck
 {
 	visibility: collapse;
 }
 
-#AddFriend
-{
-	visibility: collapse;
-}
-
-#AcceptFriend
-{
-	visibility: collapse;
-}
-
-#HaveSentFriendRequest
-{
-	visibility: collapse;
-}
-
-
-.CanChatWithOpponent #ChatWithOpponent
+.IsReplay #ViewOwnDeck
 {
 	visibility: visible;
 }
 
-.CanSendFriendRequest #AddFriend
-{
-	visibility: visible;
-}
-
-.CanAcceptFriendRequest #AcceptFriend
-{
-	visibility: visible;
-}
-
-.HaveSentFriendRequest #HaveSentFriendRequest
-{
-	visibility: visible;
-}
-
-.AIMatch .ChatWithOpponentOption
+#ViewOwnProfile
 {
 	visibility: collapse;
+}
+
+.IsReplay #ViewOwnProfile
+{
+	visibility: visible;
+}
+
+.IsReplay #BackToMenu
+{
+	visibility: collapse;
+}
+
+.PuzzleMatch #ViewDeck,
+.PuzzleMatch #ViewOpponentProfile
+{
+    visibility: collapse;
 }
 
 .CannotContinueGauntlet #FindNextMatch
@@ -290,31 +352,32 @@
 }
 
 #Rematch:hover Label,
+#ViewOpponentProfile:hover Label,
 #ReturnToLobby:hover Label,
 #ViewDeck:hover Label,
 #BackToMenu:hover Label,
-#FindNextMatch:hover Label,
-#AcceptFriend:hover Label,
-#AddFriend:hover Label,
-#ChatWithOpponent:hover Label,
+#ShowMenuOptions:hover Label,
+#ViewOwnDeck:hover Label,
+#ViewOwnProfile:hover Label
 {
-	color: #f6f2fa;
-	opacity: 1;
+    color: #f6f2fa;
+    opacity: 1;
     text-shadow: 0px 0px 6px 2.0 #b87dd150;
 }
 
 #Rematch:active Label,
+#ViewOpponentProfile:active Label,
 #ReturnToLobby:active Label,
 #ViewDeck:active Label,
 #BackToMenu:active Label,
-#AcceptFriend:active Label,
-#AddFriend:active Label,
-#ChatWithOpponent:active Label,
+#ShowMenuOptions:active Label,
+#ViewOwnDeck:active Label,
+#ViewOwnProfile:active Label
 {
-	color: #f6f2fa90;
-	opacity: 1;
+    color: #f6f2fa90;
+    opacity: 1;
     text-shadow: 0px 0px 9px 2.0 #b87dd135;
-	transform: translateY(1px);
+    transform: translateY(1px);
 }
 
 #AncientDestroyed,
@@ -330,7 +393,6 @@
 
 .VictoryText
 {	
-	margin-top: -90px;
 	pre-transform-scale2d: 1;
 	font-weight: light;
 	font-size:162px;
@@ -1035,6 +1097,8 @@
 {
     animation-name: Victory14Anim;
 }
+
+
 @keyframes 'ZoomIn'
 {
 	0%
@@ -1059,14 +1123,8 @@
 	z-index: 100;
 
 	transition-property: pre-transform-scale2d, transform, opacity;
-	transition-duration: 1.8s;	
+	transition-duration: 0.7s;	
 	transition-timing-function: ease-in;
-}
-
-.ShowingLevelProgress #OutcomeWrapper
-{
-	transform: translateY(-230px);
-	pre-transform-scale2d: .6;
 }
 
 .EvenLeft1
@@ -1192,9 +1250,7 @@
 	vertical-align: top;
 	width:100%;
 	height: fit-children;
-
-	margin-top: 450px;
-	margin-top: 250px;
+	margin-top: 50px;
 	z-index: 999;
 	opacity: 1;
 
@@ -1207,29 +1263,227 @@
 {
 	z-index: 999;
 	flow-children: down;
-	height: fit-children;
+	height: 100%;
 	width: 100%;
 	opacity: 0;
-	transform: translateY(100px);
+	transform: translateY(50%);
 	transition-property: opacity, transform;
 	transition-duration: 1.5s;
 	transition-delay: 0.5s;
 	transition-timing-function: ease-in;
 }
 
-.DisplayMenuOptions #ProgressAndOptions
+.DisplayContinueButton #ProgressAndOptions
 {
 	opacity: 1;
+}
+
+.DisplayMenuOptions #PostGameProgress
+{
+	visibility: collapse;
 }
 
 .ShowingLevelProgress #ProgressAndOptions
 {
 	opacity: 1;
-	transform: translateY(0px);
+	transform: translateY(25%);
 }
 
-.ShowingLevelProgressWithRewards .EndReason,
-.ShowingLevelProgressWithRewards #OutcomeWrapper
+.ShowingGauntletProgress #ProgressAndOptions
 {
-	opacity: 0.03;
+	opacity: 1;
+	transform: translateY(5%);
+}
+
+#StatsSection
+{
+	z-index: 999;
+	flow-children: down;
+	height: 100%;
+	width: 100%;
+	margin-top: 150px;
+	horizontal-align: center;
+}
+
+.StatsSectionLabel, .StatsSectionValue, .StatsProgressValue
+{
+	font-weight: light;
+	font-size:35px;
+	letter-spacing: 8px;
+	text-transform: uppercase;
+	color: #86709b;
+	
+	text-shadow: 0px 0px 2px 2.0 #9400D311;
+}
+
+.StatsSectionRow
+{
+	horizontal-align: center;
+	flow-children: right;
+	width: 800px;
+}
+
+.StatsSectionLabel
+{
+	horizontal-align: left;
+	width: 400px;
+}
+
+.ProgressBarLeft, .ProgressBarRight
+{
+}
+
+.ProgressBarLeft .StatsProgressValue
+{
+	horizontal-align: left;
+	margin-left: 10px;
+}
+
+.ProgressBarRight .StatsProgressValue
+{
+	horizontal-align: right;
+	margin-right: 10px;
+}
+
+.StatsSectionValue
+{
+	horizontal-align: right;
+	text-align: right;
+	height: 100%;
+}
+
+.ProgressBarLeft
+{
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( #444f52FF ) );
+}
+
+.ProgressBarRight
+{
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( #444f52FF ) );
+}
+
+.ProgressBarRight Label
+{
+	text-align: right;
+}
+
+#AchievementProgressSection
+{
+    z-index: 999;
+    flow-children: down;
+    horizontal-align: center;
+    vertical-align: center;
+
+    opacity: 0.001;
+    transition-property: opacity;
+    transition-duration: 1.0s;
+    transition-timing-function: ease-in;
+}
+
+#AchievementProgressRow
+{
+	flow-children: right;
+}
+
+.DisplayAchievementProgress #AchievementProgressSection
+{
+    opacity: 1.0;
+}
+
+#AchievementProgressContinue
+{
+	margin-top: 30px;
+	horizontal-align: center;
+
+
+	transition-property: opacity, transform;
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+
+.AchievementContainer
+{
+	width: 300px;
+	height: fit-children;
+	padding: 10px;
+}
+
+.AchievementAndSceneContainer
+{
+	width: 350px;
+	height: 350px;
+	flow-children: none;
+	overflow: noclip;
+	horizontal-align: center;
+}
+
+#AchievementArt
+{
+	width: 200px;
+	height: 200px;
+	z-index: 0;
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+#AchievementProgressText
+{
+	horizontal-align: center;
+	font-size: 36px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+    //font-family: monospaceFont;
+    font-weight: light;
+}
+
+#AchievementName
+{
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	horizontal-align: center;
+	margin-bottom: 6px;
+}
+
+#AchievementText
+{
+	text-align: center;
+	horizontal-align: center;
+	font-weight: light;
+	color: #ad9cbd;
+}
+
+#AchievementScene
+{
+	width: 1024px;
+	height: 1024px;
+	vertical-align: center;
+	horizontal-align: center;
+	z-index: 1;
+}
+
+.AchievementTextContainer
+{
+	width: 250px;
+	flow-children: down;
+	horizontal-align: center;
+	margin-top: 285px;
+}
+
+.ImpCelebrationContainer
+{
+	width: 87%;
+	height: 87%;
+	horizontal-align: center;
+	vertical-align: bottom;
+	//border: 2px solid rgb(58, 29, 126);
+	z-index: 1000;
+
+	//overflow: noclip;
+}
+
+.ImpCelebration
+{
+	width: 100%;
+	height: 100%;
 }

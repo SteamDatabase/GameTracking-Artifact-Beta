@@ -1,4 +1,5 @@
 import "dcg_gcmessages_common.proto";
+import "econ_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -24,10 +25,12 @@ enum EGCDCGServerMessages {
 	k_EMsgServerToGCTestResults = 10033;
 	k_EMsgGCToServerAddTourneySpectator = 10034;
 	k_EMsgGCToServerAddTourneySpectatorResponse = 10035;
+	k_EMsgGCToServerAddSpectator = 10036;
+	k_EMsgGCToServerAddSpectatorResponse = 10037;
 }
 
 enum EGCServerLobbyData {
-	k_EServerLobbyData_DeckValidator = 1;
+	k_EServerLobbyData_GameMode = 1;
 	k_EServerLobbyData_DraftCards = 3;
 	k_EServerLobbyData_PlayerDeck = 4;
 	k_EServerLobbyData_PlayerMMR = 5;
@@ -45,6 +48,7 @@ enum EGCServerSignoutData {
 	k_EServerSignoutData_PerformanceStats = 12;
 	k_EServerSignoutData_Disconnections = 13;
 	k_EServerSignoutData_MatchChatStats = 14;
+	k_EServerSignoutData_EventGrantProgress = 15;
 }
 
 message CMsgServerCrashSentinelFile {
@@ -96,7 +100,15 @@ message CServerLobbyData_DraftCards {
 }
 
 message CServerLobbyData_PlayerDeck {
+	message Starting_items {
+		optional uint32 hero_card_id = 1;
+		optional uint32 equip_item_card_id = 2;
+	}
+
 	optional bytes deck_data = 1;
+	optional uint32 selected_colors = 2;
+	optional uint32 default_cardback = 3;
+	repeated .CServerLobbyData_PlayerDeck.Starting_items starting_items = 4;
 }
 
 message CServerLobbyData_PlayerMMR {
@@ -104,6 +116,7 @@ message CServerLobbyData_PlayerMMR {
 		optional uint32 account_id = 1;
 		optional uint32 mmr = 2;
 		optional uint32 uncertainty = 3;
+		optional uint32 mmr_level_score = 4;
 	}
 
 	repeated .CServerLobbyData_PlayerMMR.Player players = 1;
@@ -113,19 +126,8 @@ message CServerLobbyData_GauntletInfo {
 	optional .CMsgGauntletConfig gauntlet_config = 1;
 }
 
-message CServerLobbyData_DeckValidator {
-	optional .CMsgDeckValidator deck_validator = 1;
-}
-
-message CServerLobbyData_PlayerInfo {
-	optional uint32 account_id = 1;
-	optional uint32 progress_level = 2;
-	optional uint32 progress_xp = 3;
-	optional uint32 mmr_level = 4;
-	optional uint32 last_win_bonus_time = 5;
-	optional uint32 win_streak = 6;
-	optional uint32 bonus_period_wins = 7;
-	optional uint32 player_badge = 8;
+message CServerLobbyData_GameMode {
+	optional uint32 game_mode_id = 1;
 }
 
 message CSODCGServerLobby {
@@ -159,7 +161,8 @@ message CMsgServerSignoutData_LobbyInfo {
 	optional uint32 gauntlet_id = 3;
 	optional uint32 server_version = 4;
 	optional uint32 replay_salt = 5;
-	optional .EDCGMatchMode match_mode = 6 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode match_mode = 6 [default = k_EDCGMatchMode_Invalid];
+	optional uint32 game_mode_id = 7;
 }
 
 message CMsgServerSignoutData_PlayerDecks {
@@ -199,10 +202,28 @@ message CMsgServerSignoutData_PlayerProgress {
 	optional uint32 weekly_bonus_reset_time = 5;
 }
 
+message CMsgServerSignoutData_EventGrantProgress {
+	message Challenge {
+		optional uint32 slot_id = 1;
+		optional uint32 sequence_id = 2;
+		optional uint32 progress = 3;
+	}
+
+	message Currency {
+		optional uint32 currency_id = 1;
+		optional uint32 grant = 2;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint32 event_id = 2;
+	repeated .CMsgServerSignoutData_EventGrantProgress.Currency currencies = 3;
+	repeated .CMsgServerSignoutData_EventGrantProgress.Challenge challenges = 4;
+}
+
 message CMsgServerToGCMatchSignoutPermission {
 	optional uint32 signout_start = 1;
 	optional uint64 match_id = 3;
-	optional .EDCGMatchMode match_mode = 4 [default = k_EDCGMatchMode_Unranked];
+	optional .EDCGMatchMode match_mode = 4 [default = k_EDCGMatchMode_Invalid];
 }
 
 message CMsgServerToGCMatchSignoutPermissionResponse {
@@ -354,6 +375,18 @@ message CMsgServerToGCTestConnection {
 message CMsgServerToGCTestConnectionResponse {
 	optional uint32 state = 1;
 	optional uint64 lobby_id = 2;
+}
+
+message CMsgGCToServerAddSpectator {
+	optional uint64 lobby_id = 1;
+	optional uint32 account_id = 2;
+	optional uint32 account_to_spectate_id = 3;
+	optional bool is_spectator_developer = 4;
+}
+
+message CMsgGCToServerAddSpectatorResponse {
+	optional bool success = 1;
+	optional uint32 account_to_spectate_id = 2;
 }
 
 message CMsgGCToServerAddTourneySpectator {

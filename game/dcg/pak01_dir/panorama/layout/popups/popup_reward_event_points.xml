@@ -1,0 +1,96 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/settings.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_reward_event_points.vcss_c" />
+	</styles>
+  <scripts>
+    <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
+  </scripts>
+  <script>
+    /* Called from C++ to start the progress animation */
+    function StartProgressAnimation( data )
+    {
+    $.Msg("Starting Progress Animation!")
+
+    var iterations = parseInt(data.new_value / data.progress_interval ) - parseInt( data.old_value / data.progress_interval ) + 1;
+    var seq = new RunSequentialActions();
+    var popup = $.GetContextPanel();
+    var progressbar = $('#PlayerLevelProgress');
+    if ( iterations > 1 )
+    {
+      seq.actions.push( new AddClassAction( popup, 'ShowLevelUp' ));
+    }
+    else
+    {
+      seq.actions.push( new AddClassAction( popup, 'ShowXPGained' ));
+    }
+    seq.actions.push( new WaitAction( 0.5 ) );
+    seq.actions.push( new AddClassAction( popup, 'ShowBadge' ));
+    seq.actions.push( new WaitAction( 0.5 ) );
+    seq.actions.push( new AddClassAction( popup, 'ShowLevel' ));
+    seq.actions.push( new WaitAction( 0.5 ) );
+
+    $.Msg("Iterations " + iterations);
+    for (var i = 0; i < iterations; i++)
+      {
+        var remaining = 1.0 * data.progress_interval - (data.old_value % data.progress_interval);
+        $.Msg("Remaining " + remaining);
+        $.Msg("Diff " + (data.progress_interval - data.old_value) );
+        //It means that we will hit the end of this progress bar, so increase our level by one and max out our progress bar.
+        var duration = 0.5 + Math.max(remaining / data.progress_interval, 1.0) * 0.5;
+        $.Msg( "Duration " + duration );
+        $.Msg( "Fraction " + remaining / data.progress_interval );
+        if ( data.new_value - data.old_value >= remaining)
+        {
+          var old_value = data.old_value;
+          var par = new RunParallelActions();
+          par.actions.push( new AnimateDialogVariableIntAction( popup, 'local_progress', old_value % data.progress_interval, data.progress_interval, duration ) );
+          par.actions.push( new AnimateProgressBarAction( progressbar, old_value % data.progress_interval, data.progress_interval, duration ) );
+          par.actions.push( new AnimateDialogVariableIntAction( popup, 'progress_level', old_value / data.progress_interval, old_value / data.progress_interval + 1, duration) );
+          seq.actions.push( new AddClassAction( popup, 'ShowGodRays' ) );
+          seq.actions.push( par );
+          data.old_value = data.old_value + remaining;
+        }
+        //It means that we won't level up, in which case we only move the progress bar forward as much as we have to.
+        else
+        {
+          var par = new RunParallelActions();
+          par.actions.push( new AnimateDialogVariableIntAction( popup, 'local_progress', data.old_value % data.progress_interval, data.new_value % data.progress_interval, duration) );
+          par.actions.push( new AnimateProgressBarAction( progressbar, data.old_value % data.progress_interval, data.new_value % data.progress_interval, duration ) );
+          seq.actions.push( par );
+        }
+      }
+
+    RunSingleAction( seq );
+    
+  }
+ 
+  </script>
+  <PopupRewardEventPoints popupbackground="dim" onpopupdisplayed="DCGPlayRewardEventPointsSequence()" >
+    <Panel class="PopupPanel MainPanel" />
+    <DCGScenePanel id="GodRays" map="scenes/progression/levelup_burst02" camera="levelup_camera" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+    <Panel class="Contents MainPanel" >
+      <Label id="XPGainedLabel" class="RewardTitle TitleFont" text="#DCG_RewardEventPoints_XPGained"/>
+      <Label id="LevelUpLabel" class="RewardTitle TitleFont" text="#DCG_RewardEventPoints_LevelUP"/>
+      <Panel id="LevelBadgeContainer" >
+        <Panel class="SideBar SideBarLeft" />
+        <Panel id="LevelBadge" >
+          <Label id="LevelLabel" text="#DCG_RewardEventPoints_Level"/>      
+        </Panel>
+        <Panel class="SideBar SideBarRight" />
+      </Panel>
+      <Panel class="ProgressPanel Level">
+        <ProgressBar id="PlayerLevelProgress" min="0" max="1000" >
+          <Panel id="PlayerLevelProgress_Left" class="ProgressBarLeft">
+          </Panel>
+        </ProgressBar>
+        <Label class="ProgressLabel" text="{d:local_progress}/{d:threshold}"/>
+      </Panel>
+      <Button class="PopupButton ButtonBevel Level" onactivate="UIPopupButtonClicked();">
+        <Label text="#DCG_RewardEventPoints_Continue"/>
+      </Button>
+    </Panel>
+  </PopupRewardEventPoints>
+</root>

@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -30,6 +30,7 @@
 	m_nMinCPULevel = 1
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			VisibilityInputs = 
@@ -48,21 +49,25 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_fDrag = 0.020000
 		},
+		
 		{
 			_class = "C_OP_FadeOut"
 			m_flFadeOutTimeMax = 0.100000
 			m_flFadeOutTimeMin = 0.100000
 		},
+		
 		{
 			_class = "C_OP_OscillateScalar"
-			m_nField = 16
+			m_nField = "16"
 			m_RateMin = -2.000000
 			m_RateMax = -3.000000
 			m_FrequencyMax = 2.000000
@@ -71,11 +76,13 @@
 			m_flEndTime_min = 0.900000
 			m_flEndTime_max = 0.900000
 		},
+		
 		{
 			_class = "C_OP_FadeIn"
 			m_flFadeInTimeMin = 0.100000
 			m_flFadeInTimeMax = 0.100000
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -103,6 +110,7 @@
 				3.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_OscillateVector"
 			m_RateMin = 
@@ -133,30 +141,18 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 64.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 5.000000
 			m_fLifetimeMin = 4.000000
 		},
-		{
-			_class = "C_INIT_PositionOffset"
-			m_OffsetMin = 
-			[
-				-1000.000000,
-				-1000.000000,
-				32.000000,
-			]
-			m_OffsetMax = 
-			[
-				1000.000000,
-				1000.000000,
-				200.000000,
-			]
-		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -174,19 +170,41 @@
 				255,
 			]
 		},
+		
+		{
+			_class = "C_INIT_PositionOffset"
+			m_OffsetMin = 
+			[
+				-1000.000000,
+				-1000.000000,
+				32.000000,
+			]
+			m_OffsetMax = 
+			[
+				1000.000000,
+				1000.000000,
+				200.000000,
+			]
+		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 18.000000
 			m_flOpFadeOscillatePeriod = 16.000000
 			m_flOpEndFadeOutTime = 1.000000
 			m_flOpStartFadeOutTime = 0.700000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 18.000000
+			}
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_RandomForce"
 			m_MinForce = 
@@ -205,9 +223,12 @@
 	]
 	m_Constraints = 
 	[
+		
 		{
 			_class = "C_OP_ConstrainDistance"
 			m_fMaxDistance = 1400.000000
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 3
 }

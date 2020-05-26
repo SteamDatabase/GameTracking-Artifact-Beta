@@ -1,9 +1,10 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nMaxParticles = 150
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_flTextureVWorldSize = 5.000000
@@ -15,15 +16,19 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
+		
 		{
 			_class = "C_OP_OscillateScalar"
 			m_RateMin = -4.000000
@@ -33,11 +38,13 @@
 			m_flEndTime_min = 999999999.000000
 			m_flEndTime_max = 999999999.000000
 		},
+		
 		{
 			_class = "C_OP_ClampScalar"
 			m_nFieldOutput = "7"
 			m_flOutputMax = 0.500000
 		},
+		
 		{
 			_class = "C_OP_RemapCPtoScalar"
 			m_nCPInput = 10
@@ -47,16 +54,19 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 10.000000
 			m_fLifetimeMin = 10.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 0.300000
 			m_flRadiusMax = 0.300000
 		},
+		
 		{
 			_class = "C_INIT_RingWave"
 			m_flParticlesPerOrbit = 150.000000
@@ -68,17 +78,20 @@
 			m_nControlPointNumber = 3
 			m_nOverrideCP = 4
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 50
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreationNoise"
 			m_flOutputMax = 0.500000
 			m_flNoiseScale = 0.400000
 			m_flNoiseScaleLoc = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_CreationNoise"
 			m_nFieldOutput = "7"
@@ -87,11 +100,13 @@
 			m_flNoiseScaleLoc = 2.000000
 			m_flOutputMax = 0.400000
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nFieldOutput = "7"
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_nFieldOutput = "7"
@@ -99,8 +114,9 @@
 			m_flInputMax = 10.000000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -121,32 +137,45 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 15.000000
-			m_flEmissionDuration = 10.000000
 			m_flOpStartFadeOutTime = 9.000000
 			m_flOpEndFadeOutTime = 10.000000
 			m_flOpFadeOscillatePeriod = 12.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 10.000000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 15.000000
+			}
 		},
 	]
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 	m_nFirstMultipleOverride_BackwardCompat = 6
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/ui/scenes/ui_artifact_sky_layout_dot.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/ui/scenes/ui_artifact_sky_layout_arc_glow.vpcf"
 		},
 	]
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -163,6 +192,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -185,6 +215,7 @@
 	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_nCP1 = 4

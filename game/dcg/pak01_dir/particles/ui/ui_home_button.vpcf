@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -16,6 +16,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_flOverbrightFactor = 8.000000
@@ -28,9 +29,9 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
-			m_flOpStrengthMinScale = 0.000000
 			m_flOpTimeOffsetMax = 1.000000
 			m_fDrag = 0.070000
 			m_Gravity = 
@@ -40,17 +41,19 @@
 				-50.000000,
 			]
 		},
+		
 		{
 			_class = "C_OP_Decay"
-			m_flOpStrengthMinScale = 0.000000
 			m_flOpTimeOffsetMax = 1.000000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.850000
 			m_flEndScale = 0.100000
 			m_nOpEndCapState = 0
 		},
+		
 		{
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = 
@@ -61,62 +64,52 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_flOpStrengthMinScale = 0.000000
 			m_flOpTimeOffsetMax = 1.000000
 			m_fLifetimeMax = 3.000000
 			m_fLifetimeMin = 2.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
-			m_flOpStrengthMinScale = 0.000000
 			m_flOpTimeOffsetMax = 1.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 15.000000
 			m_flRadiusMin = 5.000000
 			m_flRadiusRandExponent = 3.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomRotationSpeed"
 			m_flDegreesMax = 120.000000
 			m_flDegreesMin = 70.000000
 		},
+		
 		{
 			_class = "C_INIT_RandomSequence"
 			m_nSequenceMax = 2
 		},
-		{
-			_class = "C_INIT_InitialVelocityNoise"
-			m_vecOutputMax = 
-			[
-				100.000000,
-				100.000000,
-				150.000000,
-			]
-			m_vecOutputMin = 
-			[
-				-100.000000,
-				-100.000000,
-				-50.000000,
-			]
-			m_flNoiseScaleLoc = 0.440000
-			m_flNoiseScale = 3.000000
-		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -134,6 +127,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 35.000000
@@ -159,36 +153,66 @@
 			m_fSpeedMin = 10.000000
 			m_fSpeedMax = 20.000000
 		},
+		
+		{
+			_class = "C_INIT_InitialVelocityNoise"
+			m_vecOutputMax = 
+			[
+				100.000000,
+				100.000000,
+				150.000000,
+			]
+			m_vecOutputMin = 
+			[
+				-100.000000,
+				-100.000000,
+				-50.000000,
+			]
+			m_flNoiseScaleLoc = 0.440000
+			m_flNoiseScale = 3.000000
+		},
+		
 		{
 			_class = "C_INIT_RemapScalar"
 			m_flInputMin = 2.000000
 			m_flInputMax = 3.000000
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.750000
-			m_bScaleInitialRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 5.000000
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 5.000000
+			}
 		},
+		
 		{
 			_class = "C_OP_NoiseEmitter"
 			m_flOutputMin = -15.000000
 			m_flOutputMax = 20.000000
 			m_flNoiseScale = 4.200000
-			m_flNoiseScaleLoc = 3.000000
 		},
 	]
 	m_ForceGenerators = 
 	[
+		
 		{
 			_class = "C_OP_AttractToControlPoint"
-			m_fForceAmount = -100.000000
+			m_fForceAmount = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = -100.000000
+			}
 			m_fFalloffPower = 0.150000
 		},
+		
 		{
 			_class = "C_OP_TurbulenceForce"
 			m_flNoiseCoordScale0 = 0.100000
@@ -217,17 +241,23 @@
 	]
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/ui/ui_home_rays.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/ui/ui_home_plasma.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/ui/ui_home_flare.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/ui/ui_home_button_logo_burst.vpcf"
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 8
 }

@@ -12,8 +12,19 @@ DCGDashboard
 
 	overflow: clip;
 	background-color: black;
-	
 }
+
+#BackgroundStaticImage
+{
+	width: 100%;
+	height: 100%;
+	background-image: url("s2r://panorama/images/main_menu/openingscreen_png.vtex");
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+
+}
+
 
 .InitialDisplay
 {
@@ -111,14 +122,16 @@ DCGDashboard.GCStatusScary #TopBarStatusMessageContainer Label {
 	visibility: collapse;
 }
 
-#TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
+#TopBarStatusBar.ShowSpinner #TopBarStatusSpinner
+{
 	margin-top: 0px;
 	margin-right: 12px;
 	visibility: visible;
 	wash-color: #aaccff;
 }
 
-DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
+DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner
+{
 	wash-color: #ffaa88;
 }
 
@@ -144,7 +157,7 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 #TopBar.TopBarDraft #DraftTopBar
 {
-	visibility: visible;
+	visibility: collapse;
 }
 
 #TopBarGradient.TopBarModePlay #PlayTopBar
@@ -157,10 +170,16 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 	visibility: visible;
 }
 
+#TopBar.TopBarProfile #PlayTopBar, #TopBar.TopBarLearn #PlayTopBar
+{
+	visibility: visible;
+}
+
 #TopBar.Social #Social .TopBarTabLabel
 ,#TopBar.Casual #Casual .TopBarTabLabel
 ,#TopBar.Competitive #Competitive .TopBarTabLabel
 ,#TopBar.Solo #Solo .TopBarTabLabel
+,#TopBar.Learn #Learn .TopBarTabLabel
 ,#TopBar.Featured #Featured .TopBarTabLabel
 ,#TopBar.BuildDeck #BuildDeck .TopBarTabLabel
 {
@@ -183,7 +202,7 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 	transition-duration: .1s; 
 }
 
-#TopBar.TopBarModePlay #TopBarGradient
+#TopBar.TopBarModePlay #TopBarGradient, #TopBar.TopBarProfile #TopBarGradient, #TopBar.TopBarLearn #TopBarGradient
 {
 	visibility: visible;
 	opacity: 1;
@@ -242,7 +261,9 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 
 #TopBar.TopBarModePlay #PlayTopBar_BG,
-#TopBar.TopBarModeDeckbuilder #PlayTopBar_BG
+#TopBar.TopBarModeDeckbuilder #PlayTopBar_BG,
+#TopBar.TopBarModeProfile #PlayTopBar_BG,
+#TopBar.Learn #PlayTopBar_BG
 {
 	visibility: visible;
 	transition-property: transform;
@@ -284,6 +305,13 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 	transition-duration: 0.24s;
 }
 
+#TopBar.Learn #PlayTopBar_BG
+{
+	transform:  translatex( 693px);
+	transition-property: transform;
+	transition-duration: 0.24s;
+}
+
 .NoFeaturedEvent #TopBar.Solo #PlayTopBar_BG
 {
 	transform:  translatex( 0px);
@@ -305,24 +333,31 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 	transition-duration: 0.24s;
 }
 
+.NoFeaturedEvent #TopBar.Learn #PlayTopBar_BG
+{
+	transform:  translatex( 462px);
+	transition-property: transform;
+	transition-duration: 0.24s;
+}
+
 
 #TopBar.Competitive #PlayTopBar_BG
 {
-	transform:  translatex( 924px);
+	transform:  translatex( 462px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
 
 .NoFeaturedEvent #TopBar.Competitive #PlayTopBar_BG
 {
-	transform:  translatex( 693px);
+	transform:  translatex( 221px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
 
 #TopBar.TopBarModeDeckbuilder #PlayTopBar_BG
 {
-	transform:  translatex( 1155px);
+	transform:  translatex( 462px);
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
@@ -336,7 +371,7 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 .NoCompetitive.NoFeaturedEvent #TopBar.TopBarModeDeckbuilder #PlayTopBar_BG
 {
-	transform:  translatex( 462px);
+	transform:  translatex( 231px );
 	transition-property: transform;
 	transition-duration: 0.24s;
 }
@@ -371,13 +406,6 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 	transition-property: transform;
 	transition-duration: 0s;
 	opacity: 1;
-}
-
-
-
-.NoCompetitive #TopBar.Featured #PlayTopBar_BG
-{
-	transform:  translatex( 470px);
 }
 
 .TopBarTab
@@ -456,6 +484,7 @@ DCGDashboard.GCStatusScary #TopBarStatusBar.ShowSpinner #TopBarStatusSpinner {
 
 #TopBar.Social #Social .TopBarTabLabel,
 #TopBar.Solo #Solo .TopBarTabLabel,
+#TopBar.Learn #Learn .TopBarTabLabel,
 #TopBar.Competitive #Competitive .TopBarTabLabel,
 #TopBar.BuildDeck #Collection .TopBarTabLabel,
 #TopBar.BuyCards #BuyCards .TopBarTabLabel,
@@ -781,18 +810,6 @@ DCGDashboard.InitialDisplay #DashboardForeground
 	opacity: .5;
 }
 
-#BackgroundVideo
-{
-	width: 100%;
-	height: 100%;
-	visibility: collapse;
-}
-
-.IsDashboardRoot #BackgroundVideo
-{
-	visibility: visible;
-}
-
 #RootBackgroundMap
 {
 	width: 100%;
@@ -896,14 +913,16 @@ DCGDashboard.InitialDisplay #DashboardForeground
 .PopupBlurEnabled #MainMenuLogoMap.TopBarModeDeckbuilder,
 .PopupBlurEnabled #MainMenuLogoMap.TopBarModePlay,
 .PopupBlurEnabled #MainMenuLogoMap.TopBarDraft,
-.PopupBlurEnabled #MainMenuLogoMap.SceneLoaded
+.PopupBlurEnabled #MainMenuLogoMap.SceneLoaded,
+.PopupBlurEnabled #MainMenuLogoMap.TopBarModeProfile
 {
 	brightness: 0.14;
 }
 
 .PopupBlurEnabled #MainMenuLogoMap.TopBarModeDeckbuilder,
 .PopupBlurEnabled #MainMenuLogoMap.TopBarModePlay,
-.PopupBlurEnabled #MainMenuLogoMap.TopBarDraft
+.PopupBlurEnabled #MainMenuLogoMap.TopBarDraft,
+.PopupBlurEnabled #MainMenuLogoMap.TopBarModeProfile
 {
 	blur: gaussian( 32 );
 }
@@ -1900,17 +1919,6 @@ DCGContextMenuManager
 	width:1px;
 }
 
-#InitialClaimButton
-{
-	horizontal-align: center;
-	visibility: collapse;
-	margin-top: 8px;
-}
-
-.CanClaimInitialGrant.NotNewPlayer #InitialClaimButton
-{
-	visibility: visible;
-}
 
 #MainLogoRootHitBox,
 #MainMenuLogoMap
@@ -1947,7 +1955,9 @@ DCGContextMenuManager
 
 #MainMenuLogoMap.TopBarModeDeckbuilder,
 #MainMenuLogoMap.TopBarModePlay,
-#MainMenuLogoMap.TopBarDraft
+#MainMenuLogoMap.TopBarDraft,
+#MainMenuLogoMap.TopBarProfile,
+#MainMenuLogoMap.TopBarLearn
 {
 	blur: gaussian(2px);
 	transform: translateX( -31px ) translateY( 66px ) rotateZ(121deg);
@@ -1965,7 +1975,7 @@ DCGContextMenuManager
 	wash-color: white;
 }
 
-#MainMenuLogoMap.TopBarPopup 
+#MainMenuLogoMap.TopBarPopup, #MainMenuLogoMap.TopBarDraft
 {
 	visibility: collapse;
 }
@@ -2077,37 +2087,190 @@ DCGContextMenuManager
 
 /* Miniprofile */
 
-#MiniProfile
+.ShowingPlayerProfile #MiniProfile, .ShowingPlayerProfile #MiniProfileGlow
 {
-	margin-top: 16px;
-	horizontal-align: left;
-	vertical-align: bottom;
-	margin-bottom: 82px;
-	margin-left: 16px;
-	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
-	transition-duration: 0.4s;
-	transition-timing-function: ease-in-out;
-}
-
-#MiniProfileGlow
-{
-	width: 320px;
-	height: 400px;
-
-	brightness: 1;
-	horizontal-align: left;
-	vertical-align: bottom;
-	margin-left: -82px;
-	margin-bottom: -32px;
-	transition-property: transform, wash-color, opacity, blur, saturation, brightness;
-	transition-duration: 0.4s;
-	transition-timing-function: ease-in-out;
+	opacity: 0;
+	transform: translateX(-32px);
 }
 
 #Dashboard.InPackOpening #MiniProfileGlow,
 #Dashboard.InCatalogue #MiniProfileGlow,
 #Dashboard.InLimitedStage #MiniProfileGlow
 {
-    opacity: 0;
+	opacity: 0;
+	transform: translateX(-32px);
 }
 
+.SelectedPageSolo #NavigationControls,
+.SelectedPageCasual #NavigationControls,
+.SelectedPageSocial #NavigationControls,
+.SelectedPageFeatured #NavigationControls,
+.SelectedPageBuildDeck #NavigationControls,
+.ShowingPlayerProfile #NavigationControls
+{
+	visibility: visible;
+	opacity: 1.0;
+	height: 57px;
+}
+
+#NavigationControls
+{
+	margin-left: 40px;
+	flow-children: right;
+	z-index: 2;
+	margin-top: 55px;
+	height: 0px;
+	opacity: 0;
+	transition-property: height, opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in;
+}
+
+#NavigateBackButton
+{
+	background-image: url("s2r://panorama/images/control_icons/arrow_solid_left_png.vtex");
+}
+#NavigateForwardButton
+{
+	background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
+}
+
+#NavigationControls Button
+{
+	margin: 0px;
+	width: 24px;
+	height: 57px;
+	background-size: 18px 28px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	wash-color: #444a55;
+
+	transition-property: background-color, wash-color;
+	transition-delay: 0.0s;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-out;
+}
+
+#NavigationControls Button:enabled:hover { wash-color: #9999aa; }
+#NavigationControls Button:active { wash-color: #ddddff; }
+#NavigationControls Button:disabled { wash-color: #111111; }
+
+
+#EventButton
+{
+	height: 10px;
+	width: 10px;
+	background-color: white;
+}
+
+
+#FriendMenu
+{
+	horizontal-align: left;
+	width: 350px;
+	height: 65%;
+	vertical-align: top;
+	margin-top: 100px;
+	visibility: collapse;
+	margin-left: 32px;
+}
+
+.IsDashboardRoot #FriendMenu
+{
+	visibility: visible;
+}
+
+#PlaytestPanel
+{
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_background_png.vtex");
+	background-size: 100% 100%;
+	visibility: collapse;
+}
+
+DCGDashboard.IsCompanyPlaytest #PlaytestPanel
+{
+	visibility: visible;
+}
+
+DCGDashboard.InLimitedStage.IsCompanyPlaytest #PlaytestPanel
+{
+	visibility: collapse;
+}
+
+#PlaytestContainer
+{
+	height: 100%;
+	width: 100%;
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_panel_png.vtex");
+	background-size: 100% 100%;
+}
+
+.PlaytestButtons
+{
+	pre-transform-scale2d: 0.5;
+	width: 359px;
+	height: 170px;
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_startmatch_button_png.vtex");
+	background-size: 100% 100%;
+	margin-left: 1020px;
+}
+
+.CanReconnect .PlaytestButtons, .HasLobby .PlaytestButtons
+{
+	visibility: collapse;
+}
+
+.CanReconnect #ReconnectGameButton, .HasLobby #ReconnectGameButton
+{
+	visibility: visible;
+}
+
+.PlaytestButtons:hover
+{
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_startmatch_button_rollover_png.vtex");
+}
+
+#BasicGameButton
+{
+	margin-top: 500px;
+}
+
+#AdvancedGameButton
+{
+	margin-top: 610px;
+}
+
+#ReconnectGameButton
+{
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_reconnect_button_png.vtex");
+	margin-top: 550px;
+	visibility: collapse;
+}
+
+#ReconnectGameButton:hover
+{
+	background-image: url("s2r://panorama/images/main_menu/playtest/playest_menu_reconnect_button_rollover_png.vtex");
+}
+
+.AspectRatio16x10 #ReconnectGameButton
+{
+	margin-top: 610px;
+}
+
+.AspectRatio16x10 #BasicGameButton
+{
+	margin-top: 560px;
+}
+
+.AspectRatio16x10 #AdvancedGameButton
+{
+	margin-top: 685px;
+}
+
+#PlaytestPanel #FindingMatchPanel
+{
+	vertical-align: bottom;
+}

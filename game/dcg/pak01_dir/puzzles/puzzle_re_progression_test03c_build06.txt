@@ -54,14 +54,26 @@
 				"intro"
 				{
 					"auto 2.0"					"npehelper #StA_Round_4,0,0,0,n,c,c"
-					"on_message_dismissed"		"goto end"
+					"on_message_dismissed 2.0"		"goto end"
+					">"					"npehelper remove"
 				}
 				
 				"end"
 				{
+					"on_victory"				"goto winner"
+					"on_failure"				"goto loser"
 				}
+				
+				"winner"
+				{
+					"auto 2.5"			"npehelper #StA_What_Do;#StA_r3b6_upgrade_1;#StA_r3b6_upgrade_2,0,0,0,n,c,c"
+					"> 2.6"				"concommand pause"
+					"on_message_dismissed 5.0"	"load_puzzle puzzle_re_progression_test04b_build13"
+					">"				"concommand unpause"
+					"on_message_dismissed2 5.0"	"load_puzzle puzzle_re_progression_test04b_build14"
+					">"				"concommand unpause"
+				}	
 			}
-			
 		}
 	}
 }

@@ -12,25 +12,22 @@ $ORIGIN
 %
 %-120s
 %-120s - %s
+%.18g
 %f %f %f %f
 %hd
 %hu
 %i %i %i %i
-%ld
 %lg
 %lld
 %llu
 %ls [wstring, len = %d]
 %s%d
 %s,
-%s: string format requested %d chars
+%s/
 %u
-'
-(
 ( def. "%s" )
 (%s, v. %3d) '%s'
 (*%s*),
-)
 -consoleapp
 -nofocus
 -vconbuffer
@@ -42,11 +39,11 @@ $ORIGIN
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
 ../public/tier1/utlrbtree.h
+0123456789abcdef
 0x%016llX
 0x%p
 10ConCommand
 10IAppSystem
-12CEmptyConVar
 12CThreadEvent
 13IVConPipeHost
 14CBaseAppSystemI10IAppSystemE
@@ -63,46 +60,41 @@ $ORIGIN
 16ILoggingListener
 17CVConBasePipeHost
 17CVConFocusMessage
+18CPlaceholderConVar
 18CServicePollThread
-18CUtlCharConversion
 18CVConCommThread_PC
-19IKeyValuesErrorSpew
 20CPostConnectCallback
-21CUtlCStringConversion
-21IKeyValuesDumpContext
 21IVConCommDataReceived
 22CSchemaInstallCallback
 22IModuleMappingListener
-23CSplitScreenAddedConVar
 23CVConChannelPokeMessage
 23CVConsoleConVarListener
 23IConCommandBaseAccessor
 24CVConsoleLoggingListener
 25CConCommandMemberAccessorI9CVConCommE
-26CDefaultKeyValuesErrorSpew
 26ICommandCompletionCallback
-27IKeyValuesDumpContextAsText
-29CKeyValuesDumpContextAsDevMsg
 30CVConsoleModuleMappingListener
 32IConfigValueRegistrationListener
 6ConVar
 7IConVar
-8CFmtStrNILi256ELb0EE
-922
 9CVConComm
 9IVConComm
-:
 << NULL >>
 <NULL>
 <Unknown Shutdown Context>
+<deferred>
+<no deferred ref found>
+<no failure reason set>
 <null>
+<unconnected>
 =============== End VConsole Buffered Messages ===============
 =============== Excessive Messages Truncacted - Buffer Size: %d bytes ===============
 =============== VConsole Buffered Messages ===============
 ==========================================================
 ==============================================================
-?
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
+Access of unconnected ConVarRef
+Access of unconnected SplitScreenConVarRef
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -113,16 +105,24 @@ AssetSystem001
 AssetSystemTest001
 Async Message Handler Failed: '%s'
 Async Message Was Unhandled: '%s'
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 BakedLODBuilderMgr001
 BenchmarkService001
 BinaryProperties_GetValue
-C
+CBufferString::AppendFormatV(char const*, __va_list_tag*)
+CBufferString::ComposeFileName(char const*, char const*, char)
+CBufferString::ExtractFileBase(char const*)
+CBufferString::ExtractFileExtension(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
+CBufferString::Format(char const*, ...)
+CBufferString::Insert(int, char const*, int, bool)
+CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
+CBufferString::RemoveAt(int, int)
 CBufferString::RemoveToFileBase()
+CBufferString::SetLength(int, bool, int*)
+CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CMemAllocSystemInitialize
@@ -141,7 +141,7 @@ CThread::~CThread()
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Reset()
 CThreadEvent::Set()
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
@@ -155,21 +155,17 @@ CVirtualMachineCallStackTranslationEncoder::GetLineOffsetBitShift()
 CVirtualMachineCallStackTranslationEncoder::GetLineOffsetPostShiftedSignBitMask()
 CVirtualMachineCallStackTranslationEncoder::GetVMID()
 CXXABI_1.3
-CXXABI_1.3.8
 Cannot recover from failed socket shutdown.
 CloseSocket
 CommandLine
 ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
-Conditional Error: %s
 ConfigurationSystem_001
 ConnectInterfaces
 Connection will timeout in %d seconds...
 CreateInterface
 CreateNonBlockingSocket
-D
-DEMO
 DebugTextureInfo001
 DevMsg
 DevMsg(char const*, ...)
@@ -182,16 +178,11 @@ EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyInit_Tier0
 EconItemToolModel_001
 EngineServiceMgr001
-EnvironmentMapBuilder_001
 EventSystem001
-F
+FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
-FeedData
 FlattenedSerializersVersion001
-FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
-FormatV
-GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
@@ -203,12 +194,10 @@ GameResourceServiceServerV001
 GameUIService_001
 GetResourceManifestCount
 GetResourceManifests
-HIGHDPI
 HammerMapLoader001
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
-I
 IQuickTime001
 Init
 InputService_001
@@ -218,19 +207,11 @@ InstallChangeCallback called with NULL callback, ignoring!!!
 InstallChangeCallback ignoring duplicate change callback!!!
 InstallSchemaBindings
 Intentionally vague touch behavior for %p
+Invalid access of deferred ConVarRef for '%s'
 Invalid connection type.
-K
-KV Conditional Evaluation Error
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
-LINUX
 LOG_GENERAL
-LOWVIOLENCE
-LoadFromBuffer: expected '{', found '%s'
 Localize_001
 LoggingSystem_FindChannel
 LoggingSystem_GetChannel
@@ -242,16 +223,15 @@ LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
+LoggingSystem_LogDirect
 LoggingSystem_RegisterBackdoorLoggingListener
 LoggingSystem_RegisterLoggingChannel
 LoggingSystem_ResetBackdoorLoggingState
 LoggingSystem_SetChannelFlags
 LoggingSystem_SetChannelVerbosity
-Logic Error in CExpressionEvaluator
 MATCHFRAMEWORK_001
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
-Make VConsole Foreground(): ReturnToWindow:0x%p, Timeout:%d, UseHostPath:%d
 MapListService_001
 MaterialUtils_001
 MemAlloc_AllocFunc
@@ -262,7 +242,6 @@ Message Version Mismatch: '%s', Expected %d, Got %d
 Message received for VConsolePipe_t with no registered helper (%s)
 Message received on closed VConsole Pipe! (%s)
 ModelDocUtils001
-Msg
 NULL
 NetworkClientService_001
 NetworkMessagesVersion001
@@ -274,14 +253,10 @@ NetworkSystemVersion001
 NewNode
 No VConsole, Ignoring.
 Not sure how we got here.
-OSX
-POSIX
-PS3
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
 ParticleSystemMgr003
-Physics2 Interface Old v0.5
 PhysicsBuilderMgr001
 Pipe
 Plat_DebugPrint
@@ -290,7 +265,7 @@ Plat_FloatTime
 Plat_GetModuleFilename
 Plat_GetOSType
 Plat_IsHighDPI
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_IsRunningOnCustomerMachine
 Plat_MSTime
 Plat_ShouldCollectMiniDumpsForFatalErrors
@@ -299,13 +274,7 @@ PostProcessingSystem_001
 PropertyEditorSystem_001
 Push
 QueuedLoaderVersion001
-ReadToken overflow
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
+RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Rejecting registering message '%s'. Already registered to an alternate handler.
 Release
@@ -315,11 +284,11 @@ RenderHardwareConfig002
 RenderService_001
 RenderSystemSurface001
 RenderUtils_001
+ResetEndpoint
 ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
-S
 SOCKET_ERR_ACCEPT_FAILED
 SOCKET_ERR_BAD_USER_DATA
 SOCKET_ERR_BIND_OPERATION_FAILED
@@ -376,22 +345,23 @@ StackTools_RemoveModuleMappingListener
 StatsService_001
 SteamAudio001
 Success
+TestFormatA
+TestFormatB
+TestFormatC
+TestFormatD
+TestFormatE
 TestScriptMgr001
 TextLayout_001
-TextMessageMgr_001
 ThreadGetCurrentId
 ThreadSetDebugNameS2
 ThreadSleep
 ToolFramework2_002
-ToolGameSimulationDispatcher_001
-ToolGameSimulationSystem_001
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
 Unknown protocol.
 Unrecognized error.
 UserInfoChangeService_001
-V
 VApplication001
 VAvi001
 VBAllocTracker001
@@ -413,7 +383,6 @@ VConsole pipe (%s): open request denied
 VConsole pipe (%s): open request parried
 VConsole pipes (game-side): %d
 VDebugService_001
-VDmeMakeFileUtils001
 VEngineCvar007
 VFileSystem017
 VGUI_Input005
@@ -427,7 +396,6 @@ VMaterialSystem2_001
 VMediaFoundation001
 VNewAsyncFileSystem001
 VP4003
-VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
@@ -444,7 +412,6 @@ V_GetErrno
 V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
-V_StripTrailingSlash
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -472,14 +439,11 @@ V_strupper_fast
 V_swscanf
 V_tier0_strstr
 V_vsnprintf
-V_vsnprintfRet
 V_vsnprintfSize
 V_wcstod
 V_wcstoi64
+VaPrintf
 VisBuilder_001
-WIN32
-WINDOWS
-WINXP
 WSAEACCES
 WSAEADDRINUSE
 WSAEADDRNOTAVAIL
@@ -529,120 +493,73 @@ Warning:  %s = '%s' is infinite, clamping value.
 WorkshopSetup001
 WorldRendererBuilderMgr001
 WorldRendererMgr001
-X360
 Xbox VDP is not supported on this platform.
 [%.3f server clamped to %.3f]
-\
-_
+\"
+\\
+\n
+\r
+\t
+\u00
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFileExtension
-_V_FileBase
-_V_MakeAbsolutePath
 _V_StringAfterPrefix
-_V_StripExtension
-_V_StripLastDir
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
 __bss_start
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __errno_location
-__errno_location@@GLIBC_2.2.5
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
 __memcpy_chk
-__memcpy_chk@@GLIBC_2.3.4
-__pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
 _edata
 _end
 _fini
 _init
-a
-abort@@GLIBC_2.2.5
 accept
-accept@@GLIBC_2.2.5
-all_projects_common_code.cpp
 archive
 arg%d
 arg0
+binary
+binary_auto
+binary_bc
+binary_lz4
 bind
-bind@@GLIBC_2.2.5
 borrow
-c
-characterset.cpp
 cheat
-checksum_crc.cpp
 clear
 clearall
 client
 clientcmd_can_execute
 close
-close@@GLIBC_2.2.5
 closed
 commandline
-communication.cpp
-communication_pc.cpp
-configvalue.cpp
 connect
-connect@@GLIBC_2.2.5
-convar.cpp
-crtoverride.cpp
-crtstuff.c
 d
 delete
 developer
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
-e
-exprevaluator.cpp
 f
 float( %f )
-free
-free@@GLIBC_2.2.5
-g
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_pMemAlloc
 game
-generichash.cpp
+generic
 gethostbyname
-gethostbyname@@GLIBC_2.2.5
 global
-i
 inet_ntoa
-inet_ntoa@@GLIBC_2.2.5
 int( %d = 0x%X )
-interface.cpp
 interfaces.cpp
 invalid
 ioctl
-ioctl@@GLIBC_2.2.5
-json_parser.c
 keyvalues.cpp
 l
 libc.so.6
@@ -651,84 +568,49 @@ libstdc++.so.6
 libtier0.so
 libvconcomm.so
 listen
-listen@@GLIBC_2.2.5
-m
-malloc
-malloc@@GLIBC_2.2.5
-manifestregistrar.cpp
 max. %f
 memcpy
-memcpy@@GLIBC_2.14
 memmove
-memmove@@GLIBC_2.2.5
-memoverride.cpp
 memset
-memset@@GLIBC_2.2.5
-messages.cpp
 min. %f
-n
 nTries < 10000000
 notconnected
 notify
-o
+null
 open
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
+operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
+operator new[](unsigned long, std::nothrow_t const&)
 poll
-poll@@GLIBC_2.2.5
-pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
-pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
-r
 rb
 recv
-recv@@GLIBC_2.2.5
 replicated
-s
 schemabindings.cpp
 send
-send@@GLIBC_2.2.5
 server_can_execute
 setsockopt
-setsockopt@@GLIBC_2.2.5
 shutdown
-shutdown@@GLIBC_2.2.5
 singleplayer
 socket
-socket@@GLIBC_2.2.5
 socketlib.cpp
-sockettransport_compat.cpp
 ss_added
 strchr
-strchr@@GLIBC_2.2.5
 strcmp
-strcmp@@GLIBC_2.2.5
-strcpy
-strcpy@@GLIBC_2.2.5
 strlen
-strlen@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-t
-tier1.cpp
-tier2.cpp
+text
 typeinfo for CThread
 typeinfo for CThreadSyncObject
-u
 u64( %lld = 0x%llX )
 update
 user
-utlbuffer.cpp
-utlmemory.cpp
 utlstring.cpp
-v
 vc_exit %s
 vcon_pipe_dump
+vconcomm
 vconcomm.cpp
 vstdlib
 vtable for __cxxabiv1::__class_type_info
@@ -736,10 +618,6 @@ vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 wb
 wcscmp
-wcscmp@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
-y
 {
 {}()':
-}

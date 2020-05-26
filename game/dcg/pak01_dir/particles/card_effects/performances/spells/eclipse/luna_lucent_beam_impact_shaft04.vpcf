@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -15,6 +15,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -31,6 +32,7 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_MaintainSequentialPath"
 			m_flNumToAssign = 16.000000
@@ -39,20 +41,24 @@
 				m_nEndControlPointNumber = 1
 			}
 		},
+		
 		{
 			_class = "C_OP_Decay"
 			m_flOpEndFadeInTime = 0.500000
 			m_flOpStartFadeInTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_bEaseInAndOut = true
 			m_flEndScale = 1.200000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.750000
@@ -60,6 +66,7 @@
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 16.000000
@@ -68,50 +75,66 @@
 				m_nStartControlPointNumber = 1
 			}
 		},
+		
+		{
+			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 2.000000
+			m_flRadiusMax = 4.000000
+		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_flOutputMax = 0.600000
 			m_nInputMax = 3
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_bActiveRange = true
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_flOutputMax = 0.600000
 			m_bActiveRange = true
 			m_flOutputMin = 0.600000
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_nInputMax = 12
 			m_nInputMin = 3
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_bActiveRange = true
 			m_flOutputMax = 0.000000
 			m_flOutputMin = 0.600000
 			m_nInputMin = 12
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_nInputMax = 15
 		},
-		{
-			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 2.000000
-			m_flRadiusMax = 4.000000
-		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_flOutputMax = 0.100000
 			m_flOutputMin = 0.500000
-			m_nFieldOutput = 1
+			m_nFieldOutput = "1"
 			m_nInputMax = 15
 		},
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 16
-			m_flStartTime = 0.100000
+			m_flStartTime = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.100000
+			}
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 16.000000
+			}
 		},
 	]
+	m_nBehaviorVersion = 5
+	m_nFirstMultipleOverride_BackwardCompat = 2
 }

@@ -1,11 +1,5 @@
-VSoundStackScript_t
-{
-	Struct m_SoundStacks[17] =
-	[
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_distance_limiter"
-			CResourceString m_StackKV = ""core_distance_limiter"
+// core_distance_limiter
+"core_distance_limiter"
 {
 	"_system_properties"
 	{
@@ -63,12 +57,9 @@ VSoundStackScript_t
 		"input_goto_end"		"true"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_soundevent_blocker"
-			CResourceString m_StackKV = ""core_soundevent_blocker"
+
+// core_soundevent_blocker
+"core_soundevent_blocker"
 {
 	"_system_properties"
 	{
@@ -136,12 +127,9 @@ VSoundStackScript_t
 		"match_entity"		"@public.match_entity"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_stop_at_time"
-			CResourceString m_StackKV = ""core_stop_at_time"
+
+// core_stop_at_time
+"core_stop_at_time"
 {
 	"_system_properties"
 	{
@@ -178,12 +166,9 @@ VSoundStackScript_t
 		"input_stop"		"1.000000"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_start_simple_oneshot"
-			CResourceString m_StackKV = ""core_start_simple_oneshot"
+
+// core_start_simple_oneshot
+"core_start_simple_oneshot"
 {
 	"_system_properties"
 	{
@@ -253,12 +238,9 @@ VSoundStackScript_t
 		"input_memory_type"		"@public.memory_type"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_start_oneshot"
-			CResourceString m_StackKV = ""core_start_oneshot"
+
+// core_start_oneshot
+"core_start_oneshot"
 {
 	"_system_properties"
 	{
@@ -338,12 +320,9 @@ VSoundStackScript_t
 		"input_memory_type"		"@public.memory_type"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_valve_default"
-			CResourceString m_StackKV = ""core_valve_default"
+
+// core_valve_default
+"core_valve_default"
 {
 	"_system_properties"
 	{
@@ -442,12 +421,9 @@ VSoundStackScript_t
 		"input_memory_type"		"@public.memory_type"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_simple_3d"
-			CResourceString m_StackKV = ""core_simple_3d"
+
+// core_simple_3d
+"core_simple_3d"
 {
 	"_system_properties"
 	{
@@ -592,12 +568,9 @@ VSoundStackScript_t
 		"input_memory_type"		"@public.memory_type"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_max_multiple"
-			CResourceString m_StackKV = ""core_max_multiple"
+
+// core_max_multiple
+"core_max_multiple"
 {
 	"_system_properties"
 	{
@@ -689,12 +662,9 @@ VSoundStackScript_t
 		"input_use_namespace"		"true"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_simple_2d"
-			CResourceString m_StackKV = ""core_simple_2d"
+
+// core_simple_2d
+"core_simple_2d"
 {
 	"_system_properties"
 	{
@@ -743,12 +713,68 @@ VSoundStackScript_t
 		"input_memory_type"		"@public.memory_type"
 	}
 }
-"
-		}
-		VSoundStack_t
+
+// core_voip
+"core_voip"
+{
+	"_system_properties"
+	{
+		"display_game"		"core"
+	}
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
 		{
-			CResourceString m_StackName = "core_stop_all_soundevents"
-			CResourceString m_StackKV = ""core_stop_all_soundevents"
+			"volume"
+			{
+				"data_type"		"float"
+				"value"		"1.000000"
+			}
+			"vsnd_files"
+			{
+				"data_type"		"vsnd"
+				"value"		"sounds/misc/null.vsnd"
+			}
+			"memory_type"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+		}
+	}
+	"submix_send"
+	{
+		"operator"		"vmix_mixgraph_send"
+		"input_execute"		"1.000000"
+		"submix_name"		"VOIP"
+		"input"		"1.000000"
+		"send_type"		"named"
+	}
+	"get_event_info"
+	{
+		"operator"		"soundevent_get_info"
+	}
+	"volume_fan"
+	{
+		"operator"		"util_float_to_speakers"
+		"input"		"@public.volume"
+	}
+	"start_vsnd"
+	{
+		"operator"		"vmix_vsnd_start"
+		"input_vsnd"		"@public.vsnd_files"
+		"execute_once"		"false"
+		"input_execute"		"1.000000"
+		"input_start"		"@get_event_info.output_unstopped"
+		"input_speaker_volumes"		"@volume_fan.output"
+		"input_pitch"		"1.000000"
+		"input_memory_type"		"@public.memory_type"
+	}
+}
+
+// core_stop_all_soundevents
+"core_stop_all_soundevents"
 {
 	"_system_properties"
 	{
@@ -762,7 +788,7 @@ VSoundStackScript_t
 			"delay"
 			{
 				"data_type"		"float"
-				"value"		"true"
+				"value"		"0"
 			}
 			"immediate"
 			{
@@ -771,8 +797,13 @@ VSoundStackScript_t
 			}
 			"voice_layer"
 			{
-				"data_type"		"float"
-				"value"		"0"
+				"data_type"		"enum"
+				"enum_field"		"vmix_vsnd_start.voice_layer"
+				"value"		"game"
+			}
+			"exclude_group"
+			{
+				"data_type"		"string"
 			}
 		}
 	}
@@ -780,7 +811,8 @@ VSoundStackScript_t
 	{
 		"operator"		"soundevent_stop_all"
 		"input_wait_time"		"@public.delay"
-		"input_immediate"		"@public.immediate"
+		"input_stop_immediate"		"@public.immediate"
+		"exclude_group_name"		"@public.exclude_group"
 		"voice_layer"		"@public.voice_layer"
 	}
 	"prevent_stop"
@@ -790,12 +822,9 @@ VSoundStackScript_t
 		"input_add_dependent"		"1.000000"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_pause_soundevent"
-			CResourceString m_StackKV = ""core_pause_soundevent"
+
+// core_pause_soundevent
+"core_pause_soundevent"
 {
 	"_system_properties"
 	{
@@ -854,12 +883,9 @@ VSoundStackScript_t
 		"invert_match"		"@public.invert_match"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_stop_soundevent"
-			CResourceString m_StackKV = ""core_stop_soundevent"
+
+// core_stop_soundevent
+"core_stop_soundevent"
 {
 	"_system_properties"
 	{
@@ -907,12 +933,9 @@ VSoundStackScript_t
 		"invert_match"		"@public.invert_match"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_doppler"
-			CResourceString m_StackKV = ""core_doppler"
+
+// core_doppler
+"core_doppler"
 {
 	"_system_properties"
 	{
@@ -1075,12 +1098,9 @@ VSoundStackScript_t
 		"input_use_namespace"		"true"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_global_stack"
-			CResourceString m_StackKV = ""core_global_stack"
+
+// core_global_stack
+"core_global_stack"
 {
 	"prevent_stop"
 	{
@@ -1089,12 +1109,9 @@ VSoundStackScript_t
 		"input_add_dependent"		"1.000000"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_sampler_base"
-			CResourceString m_StackKV = ""core_sampler_base"
+
+// core_sampler_base
+"core_sampler_base"
 {
 	"public"
 	{
@@ -1623,12 +1640,9 @@ VSoundStackScript_t
 		}
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_sampler_event"
-			CResourceString m_StackKV = ""core_sampler_event"
+
+// core_sampler_event
+"core_sampler_event"
 {
 	"public"
 	{
@@ -1668,12 +1682,9 @@ VSoundStackScript_t
 		"input_data2"		"@public.data2"
 	}
 }
-"
-		}
-		VSoundStack_t
-		{
-			CResourceString m_StackName = "core_start_arrangement"
-			CResourceString m_StackKV = ""core_start_arrangement"
+
+// core_start_arrangement
+"core_start_arrangement"
 {
 	"public"
 	{
@@ -1704,6 +1715,129 @@ VSoundStackScript_t
 		"input_arrangement"		"@public.arrangement"
 		"input_bpm"		"@public.bpm"
 	}
+}
+
+// core_set_playerdsp
+"core_set_playerdsp"
+{
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
+		{
+			"dsp_preset"
+			{
+				"data_type"		"string"
+				"value"		"core.null"
+			}
+			"mix"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"enable"
+			{
+				"data_type"		"float"
+				"value"		"1"
+			}
+		}
+	}
+	"get_event_info"
+	{
+		"operator"		"soundevent_get_info"
+	}
+	"set_preset"
+	{
+		"operator"		"vmix_mixgraph_input_dsp_preset"
+		"input_execute"		"@public.enable"
+		"execute_once"		"true"
+		"input_name"		"PlayerDSP"
+		"input_dsp_preset_name"		"@public.dsp_preset"
+	}
+	"set_mix"
+	{
+		"operator"		"vmix_mixgraph_input"
+		"input_execute"		"@public.enable"
+		"execute_once"		"false"
+		"input_name"		"PlayerDSP.mix"
+		"input"		"@public.mix"
+	}
+}
+
+// core_set_mixlayer_amount
+"core_set_mixlayer_amount"
+{
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
+		{
+			"mixlayer"
+			{
+				"data_type"		"string"
+			}
+			"amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+		}
+	}
+	"set_mixlayer_amount"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.amount"
+	}
+}
+
+// core_set_mixlayer_amount_until_stopped
+"core_set_mixlayer_amount_until_stopped"
+{
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
+		{
+			"mixlayer"
+			{
+				"data_type"		"string"
+			}
+			"amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"time"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"stop_amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+		}
+	}
+	"get_event_info"
+	{
+		"operator"		"soundevent_get_info"
+	}
+	"set_mixlayer_amount_unstopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@get_event_info.output_unstopped"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.amount"
+	}
+	"set_mixlayer_amount_stopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@get_event_info.output_stopped"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.stop_amount"
+	}
 	"prevent_stop"
 	{
 		"operator"		"soundevent_control"
@@ -1711,7 +1845,178 @@ VSoundStackScript_t
 		"input_add_dependent"		"1.000000"
 	}
 }
-"
+
+// core_set_mixlayer_amount_timed
+"core_set_mixlayer_amount_timed"
+{
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
+		{
+			"mixlayer"
+			{
+				"data_type"		"string"
+			}
+			"amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"time"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"stop_amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
 		}
-	]
+	}
+	"get_event_info"
+	{
+		"operator"		"soundevent_get_info"
+	}
+	"time_not_elapsed"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"less_than_or_equal"
+		"input1"		"@get_event_info.output_elapsed_time"
+		"input2"		"@public.time"
+	}
+	"time_not_elapsed_and_unstopped"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"min"
+		"input1"		"@time_not_elapsed.output"
+		"input2"		"@get_event_info.output_unstopped"
+	}
+	"time_elapsed_or_stopped"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"sub"
+		"input2"		"@time_not_elapsed_and_unstopped.output"
+		"input1"		"1"
+	}
+	"set_mixlayer_amount_unstopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@time_not_elapsed_and_unstopped.output"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.amount"
+	}
+	"set_mixlayer_amount_stopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@time_elapsed_or_stopped.output"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.stop_amount"
+	}
+	"prevent_stop"
+	{
+		"operator"		"soundevent_control"
+		"input_execute"		"@time_not_elapsed_and_unstopped.output"
+		"input_add_dependent"		"1.000000"
+	}
 }
+
+// core_set_mixlayer_amount_timed_curve
+"core_set_mixlayer_amount_timed_curve"
+{
+	"public"
+	{
+		"operator"		"util_null"
+		"operator_variables"
+		{
+			"mixlayer"
+			{
+				"data_type"		"string"
+			}
+			"amount_curve"
+			{
+				"data_type"		"float6"
+				"soundevent_data"		"true"
+				"value"
+				{
+					"value1"		"[ 0.00, 0.0, 1.083, 1.083, 2.0, 3.0 ]"
+					"value2"		"[ 1.0, 1.0, 0.227125, 0.227125, 2.0, 3.0 ]"
+				}
+				"_system_properties"
+				{
+					"display_group"		"advanced"
+					"display_edit_type"		"field_curve_2d_editor"
+				}
+			}
+			"time"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+			"stop_amount"
+			{
+				"data_type"		"float"
+				"value"		"0"
+			}
+		}
+	}
+	"get_event_info"
+	{
+		"operator"		"soundevent_get_info"
+	}
+	"time_not_elapsed"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"less_than_or_equal"
+		"input1"		"@get_event_info.output_elapsed_time"
+		"input2"		"@public.time"
+	}
+	"time_not_elapsed_and_unstopped"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"min"
+		"input1"		"@time_not_elapsed.output"
+		"input2"		"@get_event_info.output_unstopped"
+	}
+	"time_elapsed_or_stopped"
+	{
+		"operator"		"math_float"
+		"input_execute"		"1"
+		"apply"		"sub"
+		"input2"		"@time_not_elapsed_and_unstopped.output"
+		"input1"		"1"
+	}
+	"amount_curve"
+	{
+		"operator"		"math_curve_2d"
+		"input"		"@get_event_info.output_elapsed_time"
+		"public_field_name"		"public.amount_curve"
+	}
+	"set_mixlayer_amount_unstopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@time_not_elapsed_and_unstopped.output"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@amount_curve.output"
+	}
+	"set_mixlayer_amount_stopped"
+	{
+		"operator"		"soundmixer_set_mixlayer_amount"
+		"input_execute"		"@time_elapsed_or_stopped.output"
+		"mixlayer"		"@public.mixlayer"
+		"input"		"@public.stop_amount"
+	}
+	"prevent_stop"
+	{
+		"operator"		"soundevent_control"
+		"input_execute"		"@time_not_elapsed_and_unstopped.output"
+		"input_add_dependent"		"1.000000"
+	}
+}
+

@@ -1,0 +1,60 @@
+<root>
+	<styles>
+    	<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    	<include src="s2r://panorama/styles/dashboard/dcg_db_page_standard_play.vcss_c" />
+    	<include src="s2r://panorama/styles/play_shared.vcss_c" />
+    	
+ 	</styles>
+
+ 	<DCGStandardPlayPage class="DashboardPage PrimaryCarouselPanel">
+ 		<Panel id="PageBackground">
+			<Image id="PageBackgroundBlur" />
+			<Panel id="PageBackgroundOverlay" />
+	    </Panel>
+		<Image class="BlurBackgroundPanelImage" src="panel-background://{LayoutRoot}" />
+		<Panel class="CarouselPanelContainer">
+			<Panel class="BlurBackgroundPanelOverlay" >
+				<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+			</Panel>
+			<Panel class="TopButtonNav">
+
+
+				<DCGPlayGameSelectButton id="OnlineMatchButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_GlobalMatchMaking ); DCGShowOnlineMatchPage()"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_GlobalMatchMaking )"
+					icon="s2r://panorama/images/main_menu/icon_online_match_psd.vtex"
+					buttontext="#DCG_LoadDeck_SparringMatch" />
+					
+				<DCGPlayGameSelectButton id="FreeConstructedButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_CasualConstructed ); DCGShowConstructedGauntletPage()"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_CasualConstructed )"
+					buttontext="#DCG_LoadDeck_FreeConstructed" />
+					
+				<DCGPlayGameSelectButton id="FreeDraftButton"
+					group="Casual"
+					onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGShowPhantomDraftGauntletPage();"
+					onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_BotMatch )"
+					buttontext="#DCG_LoadDeck_FreeDraft" />
+			</Panel>
+
+			<Panel id="GauntletContainer" class="PlayContents" hittest="false">
+
+				<Panel id="OnlineMatchContainer" hittest="false">
+					<Panel class="ContainerSplashImage" hittest="false"/>
+					<DCGOnlineMatch id="OnlineMatchPanel"/>
+				</Panel>
+				<DCGGauntlet id="FreeConstructedGauntlet" />
+				<DCGGauntlet id="FreeDraftGauntlet" />
+			</Panel>
+		</Panel>
+		<Panel id="RankContainer" onmouseover="DCGShowTextTooltipInXML( '#DCG_RankDescription' )" onmouseout="DCGHideTextTooltip()" >
+			<Label id="RankLabelConstructed" text="#DCG_RankLabel_Constructed" />
+			<Label id="RankLabelDraft" text="#DCG_RankLabel_Draft" />
+			<Panel id="RankLabelInfo"/>
+			<Label id="RankLabelValue_Constructed" text="#DCG_RankLabelValue_Constructed" />
+			<Label id="RankLabelValue_Draft" text="#DCG_RankLabelValue_Draft" />
+		</Panel>
+	</DCGStandardPlayPage>
+</root>

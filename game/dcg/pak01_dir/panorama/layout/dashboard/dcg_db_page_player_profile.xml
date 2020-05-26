@@ -1,0 +1,81 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/dashboard/dcg_db_page_player_profile.vcss_c" />
+
+	</styles>
+
+	<snippets>
+		<snippet name="Achievement">
+			<Panel class="Achievement" onmouseover="DCGProfileHoverAchievement()" onmouseout="DCGProfileUnhoverAchievement()">
+				<CircularProgressBar id="CheeveProgressBar" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<DCGPlayerProfile class="Hidden DashboardPage" acceptsfocus="true" oncancel="DCGNavigateBack()">
+    <Button id="ClosePopupButton" class="CloseButton" onactivate="DCGNavigateBack()" />
+    <Panel id="ColumnContainer">
+      
+      <Panel id="LeftColumn">
+        <Panel id="MiniProfileContainer">
+          <DCGMiniProfile id="MiniProfile" changebadge="true"/>
+          <Panel id="MiniProfileIcon" class="SmallProfileIcon" onactivate="DCGMiniProfileProgressClicked()" />
+          <Panel id="AddFriendIcon" class="SmallProfileIcon" onactivate="DCGMiniProfileAddFriend()" onmouseover="UIShowTextTooltip( #DCG_Profile_AddFriend );" onmouseout="UIHideTextTooltip()" />
+          <Panel id="CopyProfileIcon" class="SmallProfileIcon" onactivate="DCGCopyProfileCode()" onmouseover="UIShowTextTooltip( #DCG_Profile_CopyProfileCode );" onmouseout="UIHideTextTooltip()" />
+        </Panel>
+
+        <Panel id="PlayerStatsContainer" class="SectionContainer">
+          <TextButton class="TitlesButtonText" text="#DCG_DBPlay_PlayerStats" />
+          <Panel id="PlayerStatsSpinner" class="Spinner" />
+          <Panel id="PlayerStatsContent">
+             <Panel class="PlayerStatsRow">
+                <Label class="PlayerStatText" text="#DCG_Profile_GamesPlayed" />
+                <Panel class="PlayerStatMiddle" />
+                <Label class="PlayerStatText PlayerStatRight" text="{i:num_matches}" />
+             </Panel>
+             <Panel class="PlayerStatsRow">
+                <Label class="PlayerStatText" text="#DCG_Profile_NumWins" />
+                <Panel class="PlayerStatMiddle" />
+                <Label class="PlayerStatText PlayerStatRight" text="{i:num_wins}" />
+             </Panel>
+             <Panel class="PlayerStatsRow">
+                <Label class="PlayerStatText" text="#DCG_Profile_FirstMatch" />
+                <Panel class="PlayerStatMiddle" />
+                <Label class="PlayerStatText PlayerStatRight" text="{t:s:first_match}" />
+             </Panel>
+
+			  <Panel id="MMRStat" class="PlayerStatsRow">
+				  <Label class="PlayerStatText" text="#DCG_Profile_Rank" />
+				  <Panel class="PlayerStatMiddle" />
+				  <Label class="PlayerStatText PlayerStatRight" text="{s:RankMajor} {s:RankMinor}" />
+			  </Panel>
+
+			  <Panel id="UnlockPercentageStat" class="PlayerStatsRow">
+				  <Label class="PlayerStatText" text="#DCG_Profile_UnlockPercentage" />
+				  <Panel class="PlayerStatMiddle" />
+				  <Label class="PlayerStatText PlayerStatRight" text="{i:unlock_percentage}%" />
+			  </Panel>
+          </Panel>
+        </Panel>
+
+        <Panel id="RecentAchievementsContainer" class="SectionContainer">
+          <TextButton class="TitlesButtonText" text="#DCG_DBPlay_Recentachievements" />
+          <Panel id="RecentAchievements" >
+            <!-- dynamic -->
+          </Panel>
+        </Panel>
+      </Panel>
+
+      <Panel id="RightColumn">
+        <Panel id="MatchHistoryContainer" class="SectionContainer">
+          <TextButton class="TitlesButtonText" text="#DCG_DBPlay_MatchHistory" />
+					<Panel id="MatchHistorySpinner" class="Spinner" />
+					<Panel id="MatchHistoryContents">
+					</Panel>
+        </Panel>
+      </Panel>
+      
+    </Panel>
+	</DCGPlayerProfile>
+</root>

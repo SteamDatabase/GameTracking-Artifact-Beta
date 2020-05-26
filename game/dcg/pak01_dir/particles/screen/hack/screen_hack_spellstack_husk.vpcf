@@ -1,13 +1,15 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 1.050000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -24,6 +26,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -41,6 +44,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 3
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -63,25 +67,30 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_nControlPointNumber = 4
 			m_bLockRot = true
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 		},
+		
 		{
 			_class = "C_OP_SetControlPointsToModelParticles"
 			m_AttachmentName = "root"
 			m_bSkin = true
 			m_bAttachment = true
 		},
+		
 		{
 			_class = "C_OP_RemapCPOrientationToRotations"
 			m_nCP = 4
@@ -89,10 +98,12 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/card/card_fxshell_00.vmdl"
 				},
@@ -100,10 +111,12 @@
 			m_hOverrideMaterial = resource:"materials/particle/card_effects/status_effects/hack/shell_hack.vmat"
 			m_bIgnoreNormal = true
 			m_bDisableShadows = true
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_nControlPointNumber = 4
@@ -111,9 +124,14 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_nMaxParticles = 1
@@ -122,30 +140,37 @@
 	m_hSnapshot = resource:"particles/models/card/card_fxshell_00_border.vsnap"
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_husk_solid.vpcf"
 			m_flDelay = 0.500000
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_fresnel.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_noise.vpcf"
 			m_bDisableChild = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_rope.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_rope01.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_embers_cycle.vpcf"
 			m_bDisableChild = true
 		},
+		
 		{
 			m_ChildRef = resource:"particles/screen/hack/screen_hack_spellstack_embers.vpcf"
 		},
 	]
-	m_nBehaviorVersion = 7
+	m_nBehaviorVersion = 10
 }

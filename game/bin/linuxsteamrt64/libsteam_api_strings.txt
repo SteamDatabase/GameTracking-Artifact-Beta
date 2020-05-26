@@ -16,6 +16,7 @@
 11CCallResultI22CLobbyCreated_t_result14LobbyCreated_tE
 11CCallResultI23CGSStatsStored_t_result15GSStatsStored_tE
 11CCallResultI24CLobbyMatchList_t_result16LobbyMatchList_tE
+11CCallResultI25CDurationControl_t_result17DurationControl_tE
 11CCallResultI25CGSStatsReceived_t_result17GSStatsReceived_tE
 11CCallResultI26CCreateItemResult_t_result18CreateItemResult_tE
 11CCallResultI26CDeleteItemResult_t_result18DeleteItemResult_tE
@@ -114,6 +115,8 @@ CCreateItemResult_t_RemoveCallResult
 CCreateItemResult_t_SetCallResult
 CDeleteItemResult_t_RemoveCallResult
 CDeleteItemResult_t_SetCallResult
+CDurationControl_t_RemoveCallResult
+CDurationControl_t_SetCallResult
 CEncryptedAppTicketResponse_t_RemoveCallResult
 CEncryptedAppTicketResponse_t_SetCallResult
 CFileDetailsResult_t_RemoveCallResult
@@ -235,8 +238,8 @@ DBG_PATHMATCH
 Dec
 Feb
 Forcing breakpad minidump interfaces to load
-GCC: (Ubuntu 4.8.1-2ubuntu1~12.04+steamrt2+srt1) 4.8.1
-GCC: (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
+GCC: (SteamRT/Linaro 4.6.3-1ubuntu5+steamrt1.2+srt1) 4.6.3
 GLIBCXX_3.4
 GLIBC_2.14
 GLIBC_2.2.5
@@ -274,6 +277,7 @@ SteamAPI_ISteamApps_BIsDlcInstalled
 SteamAPI_ISteamApps_BIsLowViolence
 SteamAPI_ISteamApps_BIsSubscribed
 SteamAPI_ISteamApps_BIsSubscribedApp
+SteamAPI_ISteamApps_BIsSubscribedFromFamilySharing
 SteamAPI_ISteamApps_BIsSubscribedFromFreeWeekend
 SteamAPI_ISteamApps_BIsVACBanned
 SteamAPI_ISteamApps_GetAppBuildId
@@ -310,6 +314,7 @@ SteamAPI_ISteamClient_GetISteamGameServerStats
 SteamAPI_ISteamClient_GetISteamGenericInterface
 SteamAPI_ISteamClient_GetISteamHTMLSurface
 SteamAPI_ISteamClient_GetISteamHTTP
+SteamAPI_ISteamClient_GetISteamInput
 SteamAPI_ISteamClient_GetISteamInventory
 SteamAPI_ISteamClient_GetISteamMatchmaking
 SteamAPI_ISteamClient_GetISteamMatchmakingServers
@@ -317,6 +322,8 @@ SteamAPI_ISteamClient_GetISteamMusic
 SteamAPI_ISteamClient_GetISteamMusicRemote
 SteamAPI_ISteamClient_GetISteamNetworking
 SteamAPI_ISteamClient_GetISteamParentalSettings
+SteamAPI_ISteamClient_GetISteamParties
+SteamAPI_ISteamClient_GetISteamRemotePlay
 SteamAPI_ISteamClient_GetISteamRemoteStorage
 SteamAPI_ISteamClient_GetISteamScreenshots
 SteamAPI_ISteamClient_GetISteamUGC
@@ -338,6 +345,7 @@ SteamAPI_ISteamController_GetAnalogActionData
 SteamAPI_ISteamController_GetAnalogActionHandle
 SteamAPI_ISteamController_GetAnalogActionOrigins
 SteamAPI_ISteamController_GetConnectedControllers
+SteamAPI_ISteamController_GetControllerBindingRevision
 SteamAPI_ISteamController_GetControllerForGamepadIndex
 SteamAPI_ISteamController_GetCurrentActionSet
 SteamAPI_ISteamController_GetDigitalActionData
@@ -563,6 +571,41 @@ SteamAPI_ISteamHTTP_SetHTTPRequestNetworkActivityTimeout
 SteamAPI_ISteamHTTP_SetHTTPRequestRawPostBody
 SteamAPI_ISteamHTTP_SetHTTPRequestRequiresVerifiedCertificate
 SteamAPI_ISteamHTTP_SetHTTPRequestUserAgentInfo
+SteamAPI_ISteamInput_ActivateActionSet
+SteamAPI_ISteamInput_ActivateActionSetLayer
+SteamAPI_ISteamInput_DeactivateActionSetLayer
+SteamAPI_ISteamInput_DeactivateAllActionSetLayers
+SteamAPI_ISteamInput_GetActionOriginFromXboxOrigin
+SteamAPI_ISteamInput_GetActionSetHandle
+SteamAPI_ISteamInput_GetActiveActionSetLayers
+SteamAPI_ISteamInput_GetAnalogActionData
+SteamAPI_ISteamInput_GetAnalogActionHandle
+SteamAPI_ISteamInput_GetAnalogActionOrigins
+SteamAPI_ISteamInput_GetConnectedControllers
+SteamAPI_ISteamInput_GetControllerForGamepadIndex
+SteamAPI_ISteamInput_GetCurrentActionSet
+SteamAPI_ISteamInput_GetDeviceBindingRevision
+SteamAPI_ISteamInput_GetDigitalActionData
+SteamAPI_ISteamInput_GetDigitalActionHandle
+SteamAPI_ISteamInput_GetDigitalActionOrigins
+SteamAPI_ISteamInput_GetGamepadIndexForController
+SteamAPI_ISteamInput_GetGlyphForActionOrigin
+SteamAPI_ISteamInput_GetGlyphForXboxOrigin
+SteamAPI_ISteamInput_GetInputTypeForHandle
+SteamAPI_ISteamInput_GetMotionData
+SteamAPI_ISteamInput_GetRemotePlaySessionID
+SteamAPI_ISteamInput_GetStringForActionOrigin
+SteamAPI_ISteamInput_GetStringForXboxOrigin
+SteamAPI_ISteamInput_Init
+SteamAPI_ISteamInput_RunFrame
+SteamAPI_ISteamInput_SetLEDColor
+SteamAPI_ISteamInput_ShowBindingPanel
+SteamAPI_ISteamInput_Shutdown
+SteamAPI_ISteamInput_StopAnalogActionMomentum
+SteamAPI_ISteamInput_TranslateActionOrigin
+SteamAPI_ISteamInput_TriggerHapticPulse
+SteamAPI_ISteamInput_TriggerRepeatedHapticPulse
+SteamAPI_ISteamInput_TriggerVibration
 SteamAPI_ISteamInventory_AddPromoItem
 SteamAPI_ISteamInventory_AddPromoItems
 SteamAPI_ISteamInventory_CheckResultSteamID
@@ -747,6 +790,13 @@ SteamAPI_ISteamParties_GetNumActiveBeacons
 SteamAPI_ISteamParties_GetNumAvailableBeaconLocations
 SteamAPI_ISteamParties_JoinParty
 SteamAPI_ISteamParties_OnReservationCompleted
+SteamAPI_ISteamRemotePlay_BGetSessionClientResolution
+SteamAPI_ISteamRemotePlay_BSendRemotePlayTogetherInvite
+SteamAPI_ISteamRemotePlay_GetSessionClientFormFactor
+SteamAPI_ISteamRemotePlay_GetSessionClientName
+SteamAPI_ISteamRemotePlay_GetSessionCount
+SteamAPI_ISteamRemotePlay_GetSessionID
+SteamAPI_ISteamRemotePlay_GetSessionSteamID
 SteamAPI_ISteamRemoteStorage_CommitPublishedFileUpdate
 SteamAPI_ISteamRemoteStorage_CreatePublishedFileUpdateRequest
 SteamAPI_ISteamRemoteStorage_DeletePublishedFile
@@ -811,6 +861,13 @@ SteamAPI_ISteamScreenshots_TagPublishedFile
 SteamAPI_ISteamScreenshots_TagUser
 SteamAPI_ISteamScreenshots_TriggerScreenshot
 SteamAPI_ISteamScreenshots_WriteScreenshot
+SteamAPI_ISteamTV_AddBroadcastGameData
+SteamAPI_ISteamTV_AddRegion
+SteamAPI_ISteamTV_AddTimelineMarker
+SteamAPI_ISteamTV_IsBroadcasting
+SteamAPI_ISteamTV_RemoveBroadcastGameData
+SteamAPI_ISteamTV_RemoveRegion
+SteamAPI_ISteamTV_RemoveTimelineMarker
 SteamAPI_ISteamUGC_AddAppDependency
 SteamAPI_ISteamUGC_AddDependency
 SteamAPI_ISteamUGC_AddExcludedTag
@@ -837,6 +894,7 @@ SteamAPI_ISteamUGC_GetNumSubscribedItems
 SteamAPI_ISteamUGC_GetQueryUGCAdditionalPreview
 SteamAPI_ISteamUGC_GetQueryUGCChildren
 SteamAPI_ISteamUGC_GetQueryUGCKeyValueTag
+SteamAPI_ISteamUGC_GetQueryUGCKeyValueTag0
 SteamAPI_ISteamUGC_GetQueryUGCMetadata
 SteamAPI_ISteamUGC_GetQueryUGCNumAdditionalPreviews
 SteamAPI_ISteamUGC_GetQueryUGCNumKeyValueTags
@@ -846,6 +904,7 @@ SteamAPI_ISteamUGC_GetQueryUGCStatistic
 SteamAPI_ISteamUGC_GetSubscribedItems
 SteamAPI_ISteamUGC_GetUserItemVote
 SteamAPI_ISteamUGC_ReleaseQueryUGCRequest
+SteamAPI_ISteamUGC_RemoveAllItemKeyValueTags
 SteamAPI_ISteamUGC_RemoveAppDependency
 SteamAPI_ISteamUGC_RemoveDependency
 SteamAPI_ISteamUGC_RemoveItemFromFavorites
@@ -943,6 +1002,7 @@ SteamAPI_ISteamUser_DecompressVoice
 SteamAPI_ISteamUser_EndAuthSession
 SteamAPI_ISteamUser_GetAuthSessionTicket
 SteamAPI_ISteamUser_GetAvailableVoice
+SteamAPI_ISteamUser_GetDurationControl
 SteamAPI_ISteamUser_GetEncryptedAppTicket
 SteamAPI_ISteamUser_GetGameBadgeLevel
 SteamAPI_ISteamUser_GetHSteamUser
@@ -962,6 +1022,7 @@ SteamAPI_ISteamUser_TrackAppUsageEvent
 SteamAPI_ISteamUser_UserHasLicenseForApp
 SteamAPI_ISteamUtils_BOverlayNeedsPresent
 SteamAPI_ISteamUtils_CheckFileSignature
+SteamAPI_ISteamUtils_FilterText
 SteamAPI_ISteamUtils_GetAPICallFailureReason
 SteamAPI_ISteamUtils_GetAPICallResult
 SteamAPI_ISteamUtils_GetAppID
@@ -972,14 +1033,17 @@ SteamAPI_ISteamUtils_GetEnteredGamepadTextInput
 SteamAPI_ISteamUtils_GetEnteredGamepadTextLength
 SteamAPI_ISteamUtils_GetIPCCallCount
 SteamAPI_ISteamUtils_GetIPCountry
+SteamAPI_ISteamUtils_GetIPv6ConnectivityState
 SteamAPI_ISteamUtils_GetImageRGBA
 SteamAPI_ISteamUtils_GetImageSize
 SteamAPI_ISteamUtils_GetSecondsSinceAppActive
 SteamAPI_ISteamUtils_GetSecondsSinceComputerActive
 SteamAPI_ISteamUtils_GetServerRealTime
 SteamAPI_ISteamUtils_GetSteamUILanguage
+SteamAPI_ISteamUtils_InitFilterText
 SteamAPI_ISteamUtils_IsAPICallCompleted
 SteamAPI_ISteamUtils_IsOverlayEnabled
+SteamAPI_ISteamUtils_IsSteamChinaLauncher
 SteamAPI_ISteamUtils_IsSteamInBigPictureMode
 SteamAPI_ISteamUtils_IsSteamRunningInVR
 SteamAPI_ISteamUtils_IsVRHeadsetStreamingEnabled
@@ -994,6 +1058,7 @@ SteamAPI_ISteamVideo_GetOPFStringForApp
 SteamAPI_ISteamVideo_GetVideoURL
 SteamAPI_ISteamVideo_IsBroadcasting
 SteamAPI_Init
+SteamAPI_InitAnonymousUser
 SteamAPI_InitSafe
 SteamAPI_IsSteamRunning
 SteamAPI_RegisterCallResult
@@ -1012,10 +1077,10 @@ SteamAPI_WriteMiniDump
 SteamAppId
 SteamClient
 SteamClient017
-SteamClient018
+SteamClient020
 SteamController007
 SteamGameId
-SteamGameServer012
+SteamGameServer013
 SteamGameServer_BSecure
 SteamGameServer_GetHSteamPipe
 SteamGameServer_GetHSteamUser
@@ -1024,8 +1089,11 @@ SteamGameServer_GetSteamID
 SteamGameServer_InitSafe
 SteamGameServer_RunCallbacks
 SteamGameServer_Shutdown
+SteamInput001
 SteamInternal_ContextInit
 SteamInternal_CreateInterface
+SteamInternal_FindOrCreateGameServerInterface
+SteamInternal_FindOrCreateUserInterface
 SteamInternal_GameServer_Init
 SteamRealPath
 SteamUser020
@@ -1043,12 +1111,15 @@ Steam_SetMinidumpSteamID:  Caching Steam ID:  %lld [API loaded %s]
 Steam_SetMinidumpSteamID:  Setting Steam ID:  %lld
 Unmatched %s
 Using breakpad crash handler
-[S_API FAIL] SteamAPI_Init() failed
 [S_API FAIL] SteamAPI_Init() failed; connect to global user failed.
 [S_API FAIL] SteamAPI_Init() failed; create pipe failed.
 [S_API FAIL] SteamAPI_Init() failed; no appID found.Either launch the game from Steam, or put the file steam_appid.txt containing the correct appID in your game folder.
 [S_API FAIL] SteamAPI_Init() failed; unable to locate interface factory in %s.
-[S_API FAIL] SteamAPI_Init(): Sys_LoadModule failed to load: %s
+[S_API FAIL] Tried to access Steam interface %s before SteamAPI_Init succeeded.
+[S_API] SteamAPI_Init(): Could not determine Steam client install directory.
+[S_API] SteamAPI_Init(): Loaded '%s' OK.
+[S_API] SteamAPI_Init(): Loaded '%s' OK.  (First tried local '%s')
+[S_API] SteamAPI_Init(): Loaded local '%s' OK.
 [S_API] SteamAPI_Init(): SteamAPI_IsSteamRunning() did not locate a running instance of Steam.
 [S_API] SteamAPI_Init(): Sys_LoadModule failed to load: %s
 _ITM_deregisterTMCloneTable
@@ -1115,6 +1186,7 @@ __wrap_freopen
 __wrap_lchown
 __wrap_link
 __wrap_lstat
+__wrap_lstat64
 __wrap_mkdir
 __wrap_mkfifo
 __wrap_mknod
@@ -1127,6 +1199,9 @@ __wrap_rmdir
 __wrap_scandir
 __wrap_scandir64
 __wrap_stat
+__wrap_stat64
+__wrap_statfs
+__wrap_statfs64
 __wrap_statvfs
 __wrap_statvfs64
 __wrap_symlink
@@ -1161,6 +1236,8 @@ dlopen failed trying to load:
 dlopen@@GLIBC_2.2.5
 dlsym
 dlsym@@GLIBC_2.2.5
+faccessat
+faccessat@@GLIBC_2.4
 false
 fclose
 fclose@@GLIBC_2.2.5
@@ -1235,6 +1312,8 @@ setenv
 setenv@@GLIBC_2.2.5
 sscanf
 sscanf@@GLIBC_2.2.5
+statfs64@@GLIBC_2.2.5
+statfs@@GLIBC_2.2.5
 statvfs64@@GLIBC_2.2.5
 statvfs@@GLIBC_2.2.5
 std::_Rb_tree_increment(std::_Rb_tree_node_base*)

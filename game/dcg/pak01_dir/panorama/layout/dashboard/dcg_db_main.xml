@@ -7,8 +7,15 @@
 		<include src="s2r://panorama/styles/dcg_ui_social.vcss_c" />
 	</styles>
 
-	<DCGDashboard class="InitialDisplay" hittest="false">
-		<Movie id="BackgroundVideo" src="file://{resources}/videos/main_menu/openingscreen.webm" controls="none" repeat="true" autoplay="off" disableactivatepause="true" acceptsfocus="false" />
+	<DCGDashboardOld class="InitialDisplay" hittest="false">
+		<Panel id="PlaytestPanel">
+			<Panel id="PlaytestContainer">
+				<Panel id="BasicGameButton" class="PlaytestButtons" onactivate="DCGPlaytestLaunch( 0 );" />
+				<Panel id="AdvancedGameButton" class="PlaytestButtons" onactivate="DCGPlaytestLaunch( 1 );" />
+				<Panel id="ReconnectGameButton" class="PlaytestButtons" onactivate="DCGReconnectLobby()" />
+			</Panel>
+		</Panel>
+		<Panel id="BackgroundStaticImage" />
 		<DCGScenePanel id="RootBackgroundMap" camera="camera" map="scenes/background/dashboard_play_background_sky" hittest="false" require-composition-layer="true" particleonly="true" renderdeferred="true" deferredalpha="true" antialias="true"/>
 		<DCGScenePanel id="RootBackgroundMapLines" camera="camera" map="scenes/background/dashboard_play_background_sky_lines" hittest="false" require-composition-layer="true" particleonly="true" renderdeferred="true" deferredalpha="true" antialias="true"/>
 		<Movie id="ValveHeadTurn" src="file://{resources}/videos/main_menu/valve_headturn.webm" controls="none" repeat="false" autoplay="off" disableactivatepause="true" />
@@ -19,7 +26,9 @@
 				<Button id="DCGSettingsButton" class="ControlIconButton SettingsButton" onactivate="DCGSettings(); PlaySoundEffect( DCG_UI.MainMenu_Select_Settings )" hittest="true" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Settings )"/>
 				<Panel class="Separator"/>
 				<Button id="DCGQuitButton" class="TopBarSmallButton" onactivate="PlaySoundEffect( DCG_UI.MainMenu_Select_Quit ) DCGQuitGame();" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_Quit )"/>
+				<Panel id="EventButton" onactivate="DCGShowEventPopup()" />
 			</Panel>
+			<DCGFriendMenu id="FriendMenu" />
 
 			<PageManager id="PageManager" hittest="false" />
 			<Panel id="ArtifactLogoFlash"/>
@@ -29,20 +38,23 @@
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
 		<DCGDashboardPopupManager id="DashboardPopupManager" onpopupsdismissed="SetInputFocus( PageManager )" />
-		<ToastManager id="ToastManager" hittest="false" toastduration="5.0s" maxtoastsvisible="3" />
+		<ToastManager id="ToastManager" class="ToastManager" hittest="false" toastduration="5.0s" maxtoastsvisible="3" />
 
 		<!-- Note that z-order is set by .css.  The chat will move here, when the accept match popup is visible. -->
 		<DCGSocialOverlay id="SocialOverlay" />
 		<!-- Note that z-order is set by .css.  The chat will move here, when the accept match popup is visible. -->
 		<DCGContextMenuManager id="ContextMenuManager" />
 		<DCGTooltipManager id="Tooltips" hittest="false" />
-
+		
+		<Panel id="NavigationControls">
+			<Button id="NavigateBackButton" onactivate="DCGNavigateBack()" />
+			<Button id="NavigateForwardButton" onactivate="DCGNavigateForward()" />
+		</Panel>
 		<Panel id="TopBar" hittest="false">
 			<Panel id="TopBarGradient" hittest="false"/>
 			<Panel id="PlayTopBar_BG" hittest="false">
 				<DCGScenePanel id="TopBarFocusMap" camera="camera" map="scenes/mainmenu/mainmenu_focus" hittest="false" require-composition-layer="true" particleonly="true"/>
 			</Panel>
-
 			<Panel id="TopBarStatusBar">
 				<Panel id="TopBarStatusMessageContainer">
 					<Panel id="TopBarStatusSpinner" class="Spinner" />
@@ -55,28 +67,24 @@
 					<Panel class="MainMenuButtonGlow"/>
 				</Button>
 
-				<Button class="TopBarTab HideNoFeaturedEvent" id="Featured" onactivate="DCGShowPlayFeaturedCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Featured ) DCGAcknowledgeViolator( CTAUpdate1 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Featured )">
-					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayFeatured"/>
+				<Button class="TopBarTab HideNoFeaturedEvent" id="Featured" onactivate="DCGShowFeaturedPage() PlaySoundEffect( DCG_UI.Shared_Select_Featured ) DCGAcknowledgeViolator( CTAUpdate1 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Featured )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCampaign"/>
 				</Button>
 
-				<Button class="TopBarTab" id="Solo" onactivate="DCGShowPlaySoloCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo ) DCGAcknowledgeViolator( SoloAIGauntlet )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
-					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySolo"/>
+				<Button class="TopBarTab" id="Solo" onactivate="DCGShowSoloPlayPage() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo ) DCGAcknowledgeViolator( SoloAIGauntlet )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayPractice"/>
 				</Button>
 
-        <Button class="TopBarTab" id="Casual" onactivate="DCGShowPlayCasualCarousel() PlaySoundEffect( DCG_UI.Shared_Select_BotSolo )"  onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotSolo )">
-          <Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCasual"/>
-        </Button>
-        
-        <Button class="TopBarTab" id="Social" onactivate="DCGShowPlaySocialCarousel() PlaySoundEffect( DCG_UI.Shared_Select_SocialPlay ) DCGAcknowledgeViolator( SocialOpenTournaments )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_SocialPlay )">
-					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlaySocial"/>
-				</Button>
-
-				<Button class="TopBarTab HideNoCompetitive" id="Competitive" onactivate="DCGShowPlayCompetitiveCarousel() PlaySoundEffect( DCG_UI.Shared_Select_Gauntlets )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Gauntlets )">
+				<Button class="TopBarTab HideNoCompetitive" id="Competitive" onactivate="DCGShowStandardPlayPage() PlaySoundEffect( DCG_UI.Shared_Select_Gauntlets )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Gauntlets )">
 					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCompetitive"/>
 				</Button>
 
 				<Button class="TopBarTab" id="Collection" onactivate="DCGOpenDeckBuilder()  CatalogueBuildDeck()  PlaySoundEffect( DCG_UI.Shared_Select_Collection )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Collection )">
 					<Label class="TopBarTabLabel" text="#DCG_MainMenu_PlayCollection"/>
+				</Button>
+
+				<Button class="TopBarTab" id="lEARN" onactivate="DCGShowLearnPage() PlaySoundEffect( DCG_UI.Shared_Select_Collection )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_Collection )">
+					<Label class="TopBarTabLabel" text="#DCG_MainMenu_Learn"/>
 				</Button>
 			</Panel>
 
@@ -85,37 +93,13 @@
 			</Panel>
 
 		</Panel>
-		<Panel id="SecondaryBar" hittest="false">
-			<Panel id="SecondaryBarGradient" hittest="false"/>
-			
-
-			<Panel id="SecondaryBarContainer" class="SecondaryBarNavigation" hittest="false">
-
-				<Button class="SecondaryBarTab" id="Packs" onactivate="DCGShowOpenPacksPage()">
-					
-					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_Packs" />
-				</Button>
-				<Button class="SecondaryBarTab" id="BuildDeck" onactivate="DCGOpenDeckBuilder() CatalogueBuildDeck()">
-					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_BuildDeck" />
-				</Button>
-				<Button class="SecondaryBarTab" id="BuyCards" onactivate="DCGOpenDeckBuilder() CatalogueBuyCards()">
-					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_BuyCards" />
-				</Button>
-				<Button class="SecondaryBarTab" id="SellCards" onactivate="DCGOpenDeckBuilder() CatalogueSellCards()">
-					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_SellCards" />
-				</Button>
-				<Button class="SecondaryBarTab" id="RecycleCards" onactivate="DCGOpenDeckBuilder() CatalogueRecycleCards()">
-					<Label class="SecondaryBarTabLabel" text="#DCG_DeckBuilder_RecycleCards" />
-				</Button>
-
-			</Panel>
-		</Panel>
+		
 		<DCGScenePanel id="MiniProfileGlow" camera="camera" map="scenes/mainmenu/mainmenu_miniprofile" hittest="false" require-composition-layer="true" light="model_light" particleonly="true"  renderdeferred="true" deferredalpha="false"  antialias="true"/>
-		<DCGMiniProfile id="MiniProfile"/>
+		<DCGMiniProfile id="MiniProfile" localprofile="true" popupplayerprofile="true" />
 		
 		<DCGScenePanel id="MainMenuLogoMap" camera="camera" map="scenes/mainmenu/mainmenulogo" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="true" antialias="true"/>
-		<Panel id="MainLogoRootHitBox" onactivate="DCGShowPlayCarousel() PlaySoundEffect( DCG_UI.MainMenu_Select_ArtifactLogo )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_ArtifactLogo )" />
+		<Panel id="MainLogoRootHitBox" onactivate="DCGOnPlayArtifactClicked() PlaySoundEffect( DCG_UI.MainMenu_Select_ArtifactLogo )" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover_ArtifactLogo )" />
 		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
 		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
-	</DCGDashboard>
+	</DCGDashboardOld>
 </root>

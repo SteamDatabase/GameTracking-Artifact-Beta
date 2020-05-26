@@ -1,4 +1,3 @@
-
 "%s"
 "%s" = "%s"
 "%s","%s",%s,"%s"
@@ -8,6 +7,7 @@
 #include
 #include is NULL
 #int#
+$@processutils.cpp
 $ORIGIN
 %
 %%-%ds
@@ -19,14 +19,12 @@ $ORIGIN
 %-8.3f
 %-80s : %-16s : %-32s : %s
 %-8i
-%02x
-%d total counted strings.
+%.18g
 %f %f %f %f
 %g
 %hd
 %hu
 %i %i %i %i
-%ld
 %lg
 %lld
 %llu
@@ -36,20 +34,21 @@ $ORIGIN
 %s %s
 %s %s %s %s
 %s %s -nominidumps
+%s not implemented right now
 %s%d
 %s%s
 %s,
+%s/
+%s: Unable to progress %d jobs to finished state (%llums elapsed)
 %s: string format requested %d chars
 %u
 '
-(
 ( def. "%s" )
 (*%s*),
 (main)
 (no name set)
 (none)
 (once).
-)
 *ZN11CThreadPool11GetDummyJobEvE9CDummyJob
 +-
 ,
@@ -63,21 +62,22 @@ $ORIGIN
 -dedicated
 -force_thread_affinity
 -load_string_token_database
+-numpoolqueues
 -testscript
 -testscript_inline
 -teststringtokencollision
 -threads
-...
 ../public/ordered_constructor.h
+../public/tier0/threadtools.h
 ../public/tier0/tslist.h
+../public/tier1/memstack.h
 ../public/tier1/quantizedfloatencoder.h
 ../public/tier1/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
-/content/
-/game/
+../public/tier1/utltshash.h
+/dev/urandom
 0
-0123456789ABCDEF
 0123456789abcdef
 0x%016llX
 0x%08X
@@ -90,7 +90,6 @@ $ORIGIN
 11CThreadPool
 11IRefCounted
 11IThreadPool
-12CEmptyConVar
 12CEventSystem
 12CRefCounted1I11IRefCounted20CRefCountServiceBaseILb1E6CRefMTEE
 12CRefCounted1I11IThreadPool20CRefCountServiceBaseILb1E6CRefMTEE
@@ -128,20 +127,19 @@ $ORIGIN
 17CDefaultCvarQuery
 17CGlobalThreadPool
 17CPooledFunctorJob
-18CCountedStringPool
+18CPlaceholderConVar
 18CUtlCharConversion
+18CUtlJSONConversion
 19CDmSymbolTableLarge
 19CUtlNoEscConversion
 19IKeyValuesErrorSpew
 20CConfigurationSystem
-20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CUniformRandomStream
 20IConfigurationSystem
 20IUniformRandomStream
 21CUtlCStringConversion
 21CUtlStringTokenSystem
-21IKeyValuesDumpContext
 21IUtlStringTokenSystem
 22IFiberThreadWorkerPool
 23CSplitScreenAddedConVar
@@ -150,29 +148,26 @@ $ORIGIN
 25CConCommandMemberAccessorI5CCvarE
 26CDefaultKeyValuesErrorSpew
 26ICommandCompletionCallback
-27IKeyValuesDumpContextAsText
-29CKeyValuesDumpContextAsDevMsg
 30CAsyncScheduledFunctionManager
 5CCvar
 5ICvar
 6ConVar
 7IConVar
-8CFmtStrNILi1024ELb0EE
-8CFmtStrNILi256ELb0EE
 8CProcess
 8IProcess
-922
 9IPipeRead
-:
 ;
 <!--
 </script>
 <<
 << NULL >>
 <NULL>
+<deferred>
 <invalid handle>
 <li>
+<no deferred ref found>
 <null>
+<unconnected>
 <unknown>
 <unspecified>
 >>
@@ -182,6 +177,8 @@ A
 ACCESSIBLE_FROM_THREADS
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 ATTEMPTED TO DECOMMIT OWNED MEMORY STACK SPACE
+Access of unconnected ConVarRef
+Access of unconnected SplitScreenConVarRef
 AddCompletionCallback
 AllocInternal
 AnimGraphEditorUtils001
@@ -209,20 +206,29 @@ Bad expression token: %c
 BakedLODBuilderMgr001
 BenchmarkService001
 BinaryProperties_GetValue
-C
+CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
+CBufferString::EnsureCapacity(int, char**, bool, bool)
+CBufferString::ExtendPath(char const*, char)
+CBufferString::ExtractFileBase(char const*)
+CBufferString::ExtractFileExtension(char const*)
+CBufferString::ExtractFilePath(char const*, bool)
+CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
+CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
-CBufferString::ShortenPath()
+CBufferString::RemoveAt(int, int)
+CBufferString::SetLength(int, bool, int*)
+CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::ShortenPath(bool)
+CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConfigurationSystem::ReadConfiguration: Error parsing configuration file!
-CCvar::FindCommandBase
 CFiber::IsReadyToResume()
 CFiber::ReachedZeroReferences()
 CFiber::ResumeJob(void*)
-CFunctorCallback0
 CGaussianRandomStream::AttachToStream(IUniformRandomStream*)
 CGaussianRandomStream::CGaussianRandomStream(IUniformRandomStream*)
 CGaussianRandomStream::RandomFloat(float, float)
@@ -260,7 +266,7 @@ CThreadEvent::CThreadEvent(char const*, bool, bool)
 CThreadEvent::Check()
 CThreadEvent::Reset()
 CThreadEvent::Set()
-CThreadFastMutex::Lock(unsigned long long, unsigned int) volatile
+CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadMultiWaitEvent::CThreadMultiWaitEvent(bool)
 CThreadMultiWaitEvent::Reset()
 CThreadMultiWaitEvent::Set()
@@ -268,23 +274,22 @@ CThreadMultiWaitEvent::~CThreadMultiWaitEvent()
 CThreadMultiWaitSemaphore::CThreadMultiWaitSemaphore()
 CThreadMultiWaitSemaphore::Release()
 CThreadMultiWaitSemaphore::~CThreadMultiWaitSemaphore()
-CThreadMutex::TryLock()
-CThreadPool::RemoveJob not implemented right now
+CThreadMutex::TryLock(char const*, int)
 CThreadPool::Start called and it was already initialized.
-CThreadRWLock::LockForWrite()
-CThreadRWLock::UnlockWrite()
+CThreadRWLock::LockForWrite(char const*, int)
+CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
-CThreadRWLock_FastRead::CThreadRWLock_FastRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
 CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
-CThreadRWLock_FastRead::UnlockReadAccounting(unsigned int)
-CThreadRWLock_FastRead::UnlockRead_LockForWrite()
-CThreadRWLock_FastRead::WaitForReadLockTransition(unsigned int)
-CThreadSemaphore::Release(int, int*)
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockRead_LockForWrite(char const*, int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
 CThreadSemaphore::~CThreadSemaphore()
-CThreadSpinRWLock::LockForRead()
-CThreadSpinRWLock::SpinLockForWrite(unsigned long long)
-CThreadSpinRWLock::UnlockRead()
-CThreadSpinRWLock::UnlockWrite()
+CThreadSpinRWLock::LockForRead(char const*, int)
+CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
+CThreadSpinRWLock::UnlockRead(char const*, int)
+CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
@@ -295,7 +300,6 @@ CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomFloatExp(float, float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -312,10 +316,10 @@ CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
 CWorkerThread::CWorkerThread()
 CXXABI_1.3
-CXXABI_1.3.8
 Can't open file (%s) passed to -testscript
 Cannot add a thread job already committed to another thread pool
 Cannot mix and match tag specifiers with channel name specifiers.
+ChangePriority
 Channel Name
 CmpJob
 Color
@@ -329,6 +333,7 @@ ConfigurationSystem_001
 ConnectInterfaces
 Console
 Convar %s has conflicting %s flags (child: %s%s, parent: %s%s, parent wins)
+Convars/CCvar::FindCommandBase
 Coroutine_Cancel
 Coroutine_Continue
 Coroutine_Create
@@ -342,12 +347,10 @@ Coroutine_Test
 Coroutine_ValidateGlobals
 Coroutine_YieldToMain
 Could not execute the command:   %sOS error message:   "%s"
-Could not read from pipe associated with command %sOS error message:   "%s"
 Couldn't open '%s' for writing!
 CreateInterface
 CreateNewThreadPool
 CreateSimpleThread
-D
 DEFAULT_WRITE_PATH
 DEMO
 DEVELOPMENTONLY
@@ -359,7 +362,6 @@ DevMsg(char const*, ...)
 DevWarning(char const*, ...)
 DotaCardGameClient_001
 Dumps information about all logging channels.
-EMPTY - ok for slot zero only!
 ENGLISH
 EXECUTE_PER_TICK
 EXPORTSYSTEM_INTERFACE_VERSION_001
@@ -367,19 +369,17 @@ EarlyInit_Tier0
 EconItemToolModel_001
 Enabling flag '%s' on channel '%s'.
 EngineServiceMgr001
-EnvironmentMapBuilder_001
-Error parsing configuration defaults file "%s"!
-Error parsing configuration schema file "%s"!
+Error parsing configuration defaults file "cfg/configdefaults.linux.vcfg"!
+Error parsing configuration schema file "cfg/configschema.vcfg"!
 Error parsing default value for config value "%s", default value "%s"!
 Error parsing value to set configuration value "%s" to ("%s")!
-Error reading configuration defaults file "%s"!
+Error reading configuration defaults file "cfg/configdefaults.linux.vcfg"!
 Error starting testscript '%s'
 ErrorIfNotInitted
 EventSystem001
 Event_CreateHandle
 Event_DestroyHandle
 Event_HandleToData
-F
 FCVAR_ARCHIVE
 FCVAR_ARCHIVE_XBOX
 FCVAR_CHEAT
@@ -393,7 +393,6 @@ Field %s tried to quantize an out-of-range value (%f, range is %f->%f), clamping
 Field %s was flagged QFE_ENCODE_INTEGERS_EXACTLY, but didn't specify enough bits, upping bitcount from %d to %d for range [%f->%f]
 Field %s was flagged to both round up and down, these flags are mutually exclusive [%f->%f]
 Field %s was flagged to encode zero exactly, but min/max range doesn't span zero [%f->%f]
-File change watching failed for '%s', retraversing
 Find concommands by flags.
 Find concommands with the specified string in their name/help text.
 Find help about a convar/concommand.
@@ -402,7 +401,6 @@ FindRegisteredGlobalObjectInternal
 First character of flag specifier must be + or -.
 Flags
 FlattenedSerializersVersion001
-FmtStrVSNPrintf truncated to %d without QUIET_TRUNCATION specified! String: "%s"
 FontManager_001
 Forced execute test failed!
 FormatV
@@ -420,7 +418,12 @@ GameResourceServiceClientV001
 GameResourceServiceServerV001
 GameUIService_001
 GetCPUInformation
+GetCStringCharConversion
+GetDefaultUniformRandomStream
+GetDisableFocusBasedPriorityBoost
 GetDmElementTypeSymbolMap
+GetJSONCharConversion
+GetJobManualEventFromPool
 GetQuantizedFloatEncoderByIndex
 GetQuantizedFloatEncodersSharingIndex
 GetSymbolForString
@@ -434,11 +437,11 @@ Help Text
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
-I
 ID
 IOJob
 IQuickTime001
 ITALIAN
+Indicate to a test script that a checkpoint has been reached
 Init
 InitFromCommandLine
 InputService_001
@@ -448,17 +451,15 @@ InstallChangeCallback called with NULL callback, ignoring!!!
 InstallChangeCallback ignoring duplicate change callback!!!
 InstallUniformRandomStream
 Intentionally vague touch behavior for %p
+Invalid access of deferred ConVarRef for '%s'
 JAPANESE
-K
+JSON error, unterminated element:
 KOREAN
 KV Conditional Evaluation Error
 KV Conditional: Unknown symbol %s
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::RecursiveSaveToFile: TODO, missing code for TYPE_COLOR.
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
-KeyValuesSystem
 LINKED_CONCOMMAND
 LINUX
 LOG_GENERAL
@@ -479,6 +480,7 @@ LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
+LoggingSystem_LogDirect
 LoggingSystem_NextTag
 LoggingSystem_RegisterLoggingChannel
 LoggingSystem_SetChannelColor
@@ -500,8 +502,6 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
-Msg
-N
 N14ThreadPoolTest15CExecuteTestJobE
 N14ThreadPoolTest22CExecuteTestExecuteJobE
 N14ThreadPoolTest9CCountJobE
@@ -521,6 +521,7 @@ NewNode
 Not continuing coroutine due to g_bPreventCoroutineContinue, %s
 OSX
 Out of keyvalue string space
+Out of memory allocation hash_item_t
 POLISH
 PORTUGUESE
 POSIX
@@ -533,7 +534,6 @@ PanoramaUIEngine001
 Parent and child ConVars with different default values! %s child: %s parent: %s (parent wins)
 ParticleSystemMgr003
 Perf warning: Forgot to unregister listeners on event queue %p
-Physics2 Interface Old v0.5
 PhysicsBuilderMgr001
 Plat_DebugPrint
 Plat_DebugString
@@ -543,11 +543,11 @@ Plat_FileIsReadOnly
 Plat_FileSize
 Plat_FloatTime
 Plat_GetEnv
-Plat_GetModuleFilename
+Plat_GetGameDirectory
 Plat_GetOSType
 Plat_GetTime
 Plat_IsHighDPI
-Plat_IsInDebugSessionRaw
+Plat_IsInDebugSession
 Plat_IsRunningOnCustomerMachine
 Plat_RelativeTicks
 Plat_ShouldCollectMiniDumpsForFatalErrors
@@ -567,9 +567,7 @@ RUSSIAN
 RandomFloat
 RandomFloatExp
 RandomGaussianFloat
-RandomInt
 RandomSeed
-ReadToken overflow
 RecursiveLoadFromBuffer:  got EOF instead of keyname
 RecursiveLoadFromBuffer:  got NULL key
 RecursiveLoadFromBuffer:  got conditional between key and value
@@ -580,7 +578,6 @@ RegisterConfigValue: Cannot register two different completion callbacks for conf
 RegisterConfigValue: Error registering config value "%s", the hash of its name collides with another config value %s, rename it!
 RegisterConfigValue: Unknown error constructing config value "%s"!
 RegisterConfigValueInternal
-RegisterGlobalObject
 RegisterKeyValuesSystem
 RegisterStringToken
 Release
@@ -597,13 +594,15 @@ ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
+ReturnJobManualEventToPool
+Run
 RunTSListTests
 RunTSQueueTests
 RunThreadPoolTests
-S
 SCHINESE
 SERVER_CANNOT_QUERY
 SERVER_CAN_EXECUTE
+SKIPPED due to %u job queues in g_pTestThreadPool
 SPANISH
 SPONLY
 SS
@@ -613,12 +612,16 @@ SceneUtils_001
 SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
+SecureRandomBytes
+SecureRandomDouble
+SecureRandomInt
 SerializedEntitiesVersion001
 ServerUploadGameStats001
 Set the color of a logging channel.
 Set the flags on a logging channel.
 Set the spew level of a logging channel.
 Set the verbosity of a logging channel.
+SetDisableFocusBasedPriorityBoost
 Setting channel '%s' color to %08X.
 Setting channel '%s' verbosity to '%s'.
 Severity
@@ -649,14 +652,20 @@ Start a test script running..
 StartLoop
 StatsService_001
 SteamAudio001
-String %d: ref:%d %s
 TCHINESE
 TESTSCRIPT: CheckPoint -> '%s'.
 TESTSCRIPT: waiting for checkpoint '%s'%s
 Tags
 TestForcedExecute
 TestForcedExecute DONE
+TestFormatA
+TestFormatB
+TestFormatC
+TestFormatD
+TestFormatE
 TestScriptMgr001
+Test_Checkpoint
+Test_Checkpoint: requires checkpoint name
 Test_ExitProcess
 Test_ExitProcess <exit code> - immediately kill the process.
 Test_Loop
@@ -683,14 +692,15 @@ Test_Wait: requires seconds parameter.
 Test_WaitForCheckPoint
 Test_WaitForCheckPoint <checkpoint name> [once]: requires checkpoint name.
 TextLayout_001
-TextMessageMgr_001
 ThreadGetCurrentId
-ThreadGetPriority
 ThreadGetProcessExitCode
 ThreadInMainThread
 ThreadIsProcessActive
 ThreadJoin
 ThreadMultiWait
+ThreadMultiWaitObjectSetCreate
+ThreadMultiWaitObjectSetCreate(pollfd const*, ThreadMultiWaitExtra_t const*, int)
+ThreadMultiWaitObjectSetDestroy
 ThreadPoolTest:         %d threads -- %d (%d) jobs processed in %fms, %fms to suspend (%f/%f) [ (main) %d, %d, %d, %d, %d, %d, %d, %d, %d]
 ThreadPoolTest:         Testing with %d jobs! Sleep %d, interleave %d, prioritized %d
 ThreadPoolTest:     Distribute
@@ -702,7 +712,7 @@ ThreadPoolTest:   To completion
 ThreadPoolTest: Job distribution speed
 ThreadPoolTest: Jobs doing work, %s main thread
 ThreadSetAffinity
-ThreadSetPriority
+ThreadSetAffinityPreference
 ThreadSetProcessPriority
 ThreadShellExecuteEx
 ThreadSleep
@@ -711,8 +721,6 @@ ThreadWaitForProcessExit
 ThreadYield
 Too many channel specifiers (max: %d).
 ToolFramework2_002
-ToolGameSimulationDispatcher_001
-ToolGameSimulationSystem_001
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
@@ -721,24 +729,22 @@ Total used memory:      %d KB
 TransferMemory
 Tried to install the same listener on the same event id + queue twice!
 Tst
-U
 UNLOGGED
 UPDATE_STRING_TOKEN_DATABASE
 USERINFO
 UnRegisterGlobalObject
+Unable to create multiwait object set
 Unable to create thread in %s
 Unable to exec '%s'
-Unable to watch '%s'
 Unknown
 UnlockGlobalObjectRegistry
 Unrecognized flag: %s.
 Unrecognized severity: %s.
 Unrecognized verbosity: %s.
-Usage:  find <string>
+Usage:  find <string> [<string>...]
 Usage:  findflags <string>
 Usage:  help <cvarname>
 UserInfoChangeService_001
-V
 VApplication001
 VAvi001
 VBAllocTracker001
@@ -749,7 +755,6 @@ VCONSOLE_SET_FOCUS
 VConComm001
 VCvarQuery001
 VDebugService_001
-VDmeMakeFileUtils001
 VEngineCvar007
 VFileSystem017
 VGAME
@@ -764,7 +769,6 @@ VMaterialSystem2_001
 VMediaFoundation001
 VNewAsyncFileSystem001
 VP4003
-VPhysX Interface ResourceMgr v0.1
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
@@ -774,6 +778,7 @@ VRenderDeviceSetupV001
 VScriptManager010
 VStdLib_GetICVarFactory
 VStringTokenSystem001
+V_CompareNameWithWildcards
 V_FixDoubleSlashes
 V_FixSlashes
 V_GetErrno
@@ -795,7 +800,6 @@ V_SplitWString2
 V_StrTrim
 V_StripAndPreserveHTML
 V_StripAndPreserveHTMLCore
-V_StripTrailingSlash
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -839,13 +843,11 @@ V_strupper_fast
 V_swscanf
 V_tier0_strstr
 V_vsnprintf
-V_vsnprintfRet
 V_vsnprintfSize
 V_wcsistr(wchar_t const*, wchar_t const*)
 V_wcstod
 V_wcstoi64
 VisBuilder_001
-WARNING: CDirWatcher not implemented
 WARNING: unable to link %s and %s because both ConCommands are not marked FCVAR_LINKED_CONCOMMAND
 WIN32
 WINDOWS
@@ -862,6 +864,7 @@ X360HIDEF
 X360LODEF
 X360SPLITSCREEN
 X360WIDE
+YieldWait
 [
 [%.3f server clamped to %.3f]
 [%f %f %f %f]
@@ -873,119 +876,73 @@ X360WIDE
 [ConsoleOnly]
 [DoNotEcho]
 \
-_
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_ComposeFileName
-_V_ExtractFileExtension
 _V_ExtractFilePath
-_V_FileBase
 _V_MakeAbsolutePath
 _V_StrSubst
 _V_StringAfterPrefix
-_V_StripExtension
-_V_StripLastDir
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
 _V_wcsncpy_bytes
-_ZTVN10__cxxabiv117__class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv120__si_class_type_infoE@@CXXABI_1.3
-_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3
 __bss_start
 __ctype_toupper_loc
-__ctype_toupper_loc@@GLIBC_2.3
 __cxa_atexit
-__cxa_atexit@@GLIBC_2.2.5
-__cxa_call_unexpected
-__cxa_call_unexpected@@CXXABI_1.3
 __cxa_finalize
-__cxa_finalize@@GLIBC_2.2.5
-__cxa_guard_abort
-__cxa_guard_abort@@CXXABI_1.3
 __cxa_guard_acquire
-__cxa_guard_acquire@@CXXABI_1.3
 __cxa_guard_release
-__cxa_guard_release@@CXXABI_1.3
 __cxa_pure_virtual
-__cxa_pure_virtual@@CXXABI_1.3
-__cxa_throw_bad_array_new_length
-__cxa_throw_bad_array_new_length@@CXXABI_1.3.8
 __environ
-__environ@@GLIBC_2.2.5
 __errno_location
-__errno_location@@GLIBC_2.2.5
 __fxstat64
-__fxstat64@@GLIBC_2.2.5
 __gmon_start__
-__gxx_personality_v0
-__gxx_personality_v0@@CXXABI_1.3
 __lxstat64
-__lxstat64@@GLIBC_2.2.5
-__pthread_key_create
-__pthread_key_create@@GLIBC_2.2.5
 __stack_chk_fail
-__stack_chk_fail@@GLIBC_2.4
 __tls_get_addr
-__tls_get_addr@@GLIBC_2.3
 __xstat64
-__xstat64@@GLIBC_2.2.5
 _edata
 _end
 _exit
-_exit@@GLIBC_2.2.5
 _fini
-_init
 _setjmp
-_setjmp@@GLIBC_2.2.5
-a
-abort@@GLIBC_2.2.5
 all
-all_projects_common_code.cpp
 alphasort64
-alphasort64@@GLIBC_2.2.5
 app
 appears in lower database
 application
 bin\stringtokendatabase.txt
+binary
+binary_auto
+binary_bc
+binary_lz4
 bool
 borrow
 bounds
 br
-c
-characterset.cpp
+cfg/configdefaults.linux.vcfg
+cfg/configschema.vcfg
 chdir
-chdir@@GLIBC_2.2.5
 cheat
-checksum_crc.cpp
 cl
 cl_language
 client
 clientcmd_can_execute
-close@@GLIBC_2.2.5
 closedir
-closedir@@GLIBC_2.2.5
 cmd
 config
-configdefaults.
-configschema.vcfg
 configurationsystem.cpp
 configvalue.cpp
 consoleonly
-convar.cpp
-coroutine.cpp
 corrupted entry
-crtoverride.cpp
-crtstuff.c
 cvar list--------------
-cvar.cpp
 cvarlist
 cvarlist:  [log logfile] [ partial ]
 d
-datamodelsymboltable.cpp
 default
 defaultValue
 defaults
@@ -996,44 +953,27 @@ developer
 devonly
 differences
 disconnected
-dl_iterate_phdr
-dl_iterate_phdr@@GLIBC_2.2.5
 donotecho
 dup
 dup2
-dup2@@GLIBC_2.2.5
-dup@@GLIBC_2.2.5
 dupe
-e
 english
-environ@@GLIBC_2.2.5
 error
 essential
-eventdispatcherutils.cpp
 eventsystem.cpp
-eventutils.cpp
 execute_per_tick
 execvpe
-execvpe@@GLIBC_2.11
-exprevaluator.cpp
 f
 false
 fcntl
-fcntl@@GLIBC_2.2.5
 fdatasync
-fdatasync@@GLIBC_2.2.5
-fileio.cpp
 find
 findflags
 float( %f )
 float32
 fork
-fork@@GLIBC_2.2.5
 free
-free@@GLIBC_2.2.5
 ftruncate64
-ftruncate64@@GLIBC_2.2.5
-g
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_VCoverage
@@ -1043,21 +983,16 @@ g_pMemAlloc
 g_pScheduledFunctions
 g_pThreadPool
 game
-generichash.cpp
+generic
 getdtablesize
-getdtablesize@@GLIBC_2.2.5
 has
 help
 help text
 help:  no cvar or command named %s
-htmltools.cpp
-i
 img
 int( %d = 0x%X )
-interface.cpp
 interfaces.cpp
 jobthread.cpp
-json_parser.c
 keyvalues.cpp
 keyvaluessystem.cpp
 l
@@ -1070,7 +1005,6 @@ libstdc++.so.6
 libtier0.so
 libvstdlib.so
 linked
-linux
 log_color
 log_dumpchannels
 log_flags
@@ -1078,175 +1012,115 @@ log_level
 log_level is deprecated, please use log_verbosity. Severity '%s' translates to verbosity '%s'.
 log_verbosity
 longjmp
-longjmp@@GLIBC_2.2.5
 lseek64
-lseek64@@GLIBC_2.2.5
-m
 machine
-malloc
-malloc@@GLIBC_2.2.5
 max
 max. %f
 memcmp
-memcmp@@GLIBC_2.2.5
 memcpy
-memcpy@@GLIBC_2.14
-memfunctions.cpp
 memmove
-memmove@@GLIBC_2.2.5
-memoverride.cpp
 mempool.cpp
 memset
-memset@@GLIBC_2.2.5
-memstack.cpp
 min. %f
-n
 nTries < 10000000
 name
 nf
 no
 no results
 nolog
-none
 norecord
 notconnected
 notify
+null
 numeric
-o
 off
 once
 open
 open64
-open64@@GLIBC_2.2.5
 opendir
-opendir@@GLIBC_2.2.5
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
+operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
+operator new[](unsigned long, std::nothrow_t const&)
 out of order
 p4 add -t binary "%s"
 p4 edit -t binary "%s"
 per-user
 pipe
-pipe@@GLIBC_2.2.5
 poll
-poll@@GLIBC_2.2.5
 posix_fadvise64
-posix_fadvise64@@GLIBC_2.2.5
 prctl
-prctl@@GLIBC_2.2.5
 pre
 pread64
-pread64@@GLIBC_2.2.5
 print
-processutils.cpp
 prot
 pthread_mutex_destroy
-pthread_mutex_destroy@@GLIBC_2.2.5
 pthread_mutex_init
-pthread_mutex_init@@GLIBC_2.2.5
 pthread_mutex_lock
-pthread_mutex_lock@@GLIBC_2.2.5
 pthread_mutex_unlock
-pthread_mutex_unlock@@GLIBC_2.2.5
 pthread_mutexattr_init
-pthread_mutexattr_init@@GLIBC_2.2.5
 pthread_mutexattr_settype
-pthread_mutexattr_settype@@GLIBC_2.2.5
-pthread_once
-pthread_once@@GLIBC_2.2.5
 ptr( 0x%p )
 pwrite64
-pwrite64@@GLIBC_2.2.5
 qangle
-quantizedfloatencoderregistry.cpp
-r
 random.cpp
 rb
 rb+
-read@@GLIBC_2.2.5
 readdir64
-readdir64@@GLIBC_2.2.5
 readlink
-readlink@@GLIBC_2.2.5
 release
 reload_materials
 reload_textures
 render_thread
 rep
 replicated
-rnd_down
-rnd_up
-s
+s_dev_urandom_fd >= 0
 scandir64
-scandir64@@GLIBC_2.2.5
 schema
 server_can_execute
 server_cant_query
 singleplayer
 sp
 sqrtf
-sqrtf@@GLIBC_2.2.5
 ss_added
 stderr
-stderr@@GLIBC_2.2.5
 strcasecmp
-strcasecmp@@GLIBC_2.2.5
 strchr
-strchr@@GLIBC_2.2.5
 strcmp
-strcmp@@GLIBC_2.2.5
 strcpy
-strcpy@@GLIBC_2.2.5
 strerror
-strerror@@GLIBC_2.2.5
-stringpool.cpp
 strlen
-strlen@@GLIBC_2.2.5
 strrchr
-strrchr@@GLIBC_2.2.5
-strstr@@GLIBC_2.2.5
-strtools.cpp
 sv
-t
 test string
 testscript_debug
 testscriptmgr.cpp
 threadsafe
-tier1.cpp
 true
 type
 typeinfo for CThread
 typeinfo for CThreadSyncObject
 typeinfo for CUniformRandomStream
 typeinfo name for CUniformRandomStream
-u
 u64( %lld = 0x%llX )
 uint32
 uint64
 unit test
 unknown
 unlink
-unlink@@GLIBC_2.2.5
 update
-utlbuffer.cpp
-utlmemory.cpp
-utlobjectregistry.cpp
+urandom_result > 0 || ( urandom_result < 0 && errno == EINTR )
 utlstring.cpp
-utlstringtoken.cpp
 utlstringtokensystem.cpp
-utlsymbol.cpp
-v
 value
 vconsole_fuzzy
 vconsole_set_focus
-vcover.cpp
 vector2
 vector3
 vector4
 vstdlib
-vstdlib_strtools.cpp
 vtable for CUniformRandomStream
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
@@ -1255,17 +1129,11 @@ warning
 wb
 wb+
 wcscmp
-wcscmp@@GLIBC_2.2.5
 wcslen
-wcslen@@GLIBC_2.2.5
 without
-write@@GLIBC_2.2.5
 xbox_archive
-y
 zD
-zero
 {
 {%d %d %d %d}
 {0 0 0 255}
 {}()':
-}

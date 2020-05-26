@@ -1,120 +1,275 @@
-DCGPlayPage.DashboardPage
-{
-}
-
-#PageBackground
+DCGPlayPage
 {
 	width: 100%;
 	height: 100%;
-	visibility: collapse;
-}
-
-#PageBackgroundBlur
-{
-	width: 100%;
-	height: 100%;
-
-	blur: none;
-
-	transition-property: blur;
-	transition-duration: 0.32s;
-}
-
-.DashboardPage.PageVisible #PageBackgroundBlur
-{
-	//blur: gaussian( 5 );
-}
-
-#PageBackgroundOverlay
-{
-	width: 100%;
-	height: 100%;
-	background-image: url("s2r://panorama/images/main_menu/temp_bg_png.vtex");
-	transition-property: background-color;
-	transition-duration: 0.32s;
-	wash-color: #00000066;
-}
-
-#PageBackgroundMap
-{
-	width: 100%;
-	height: 100%;
-	transition-property: background-color;
-	transition-duration: 0.32s;
-	wash-color: #00000066;
-    opacity-mask: url("s2r://panorama/images/dashboard/topbar/topbar_gradient_opacity_mask_psd.vtex");
-}
-
-.DashboardPage.PageVisible #PageBackgroundOverlay
-{
-	background-color: #000c;
-}
-
-
-
-#TitleContainer
-{
-	margin-top: 32px;
-	width: 1048px;
-	horizontal-align: center;
+	background-image: url("s2r://panorama/images/dashboard_new/play_panel_bg_psd.vtex");
+	background-size: 100% 100%;
 	flow-children: down;
-	padding-left: 5px;
+	margin-top: 8px;
+	margin-right: 5px;
+	padding-left: 20px;
+	box-shadow: 2px 2px 4px black;
+//	blur: gaussian( 7 );
 }
 
-#LoadDeckTitle
+#PlayPageTopPanel
 {
-	font-size: 48px;
-	letter-spacing: 8px;
-	color: #bca180;
+	padding-top: 40px;
+	margin-left: 15px;
 }
 
-#SelectOpponentText
+#PlayPageButtonsPanel
 {
-	color: #949495;
-	letter-spacing: 6px;
-	text-transform: uppercase;
-}
-
-#PlayCarousel
-{
+	flow-children: right;
 	width: 100%;
-	height: 100%;
-	z-index: 3;
-	flow-children: none;
-
-	animation-duration: 0.0s;
-	transition-property: ui-scale, transform;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-in;
+	padding-top: 10px;
+	vertical-align: bottom;
 }
 
-.PopupLoadDeck
+.AspectRatio16x10 #PlayPageButtonsPanel
 {
-	padding: 0px;
-	width: 1048px;
-	height: 846px;
-	vertical-align: center;
-	horizontal-align: left;
+	margin-bottom: 80px;
+}
 
-	border: 0px;
-	box-shadow: none;
+.PageVisible #CampaignButton
+{
+	animation-duration: 0.3s;
+	animation-name: CampaignButtonVisible;
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_campaign_psd.vtex");
+	transition-property: background-image;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
 
-	blur: gaussian( 7 );
-	brightness: 0.2;
-	
-	animation-duration: 0.0s;
-	transition-property: transform, pre-transform-scale2d, ui-scale, opacity, blur, brightness, wash-color;
-	transition-duration: 0.32s;
-	transition-timing-function: ease-in;
-	transition-delay: 0.0s;
+#CampaignButton:hover
+{
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_campaign_hover_psd.vtex");
+}
+
+@keyframes 'CampaignButtonVisible'
+{
+	0%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	33%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	100%
+	{
+		pre-transform-scale2d: 1.0;
+	}
+}
+
+.PageVisible #BotMatchButton
+{
+	animation-duration: 0.45s;
+	animation-name: BotMatchButtonVisible;
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_botmatch_psd.vtex");
+	transition-property: background-image;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+#BotMatchButton:hover
+{
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_botmatch_hover_psd.vtex");
+}
+
+
+@keyframes 'BotMatchButtonVisible'
+{
+	0%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	44%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	100%
+	{
+		pre-transform-scale2d: 1.0;
+	}
+}
+
+
+.PageVisible #PvPMatchButton
+{
+	animation-duration: 0.6s;
+	animation-name: PvPButtonVisible;
+	transition-property: background-image;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_pvp_match_psd.vtex");
+}
+
+#PvPMatchButton:hover
+{
+	background-image: url("s2r://panorama/images/dashboard_new/button_large_pvp_match_hover_psd.vtex");
+}
+
+#PvPMatchAvailable
+{
+	visibility: collapse;
+	width: 400px;
+	font-size: 24px;
+	letter-spacing: 1px;
+	padding: 10px 0px 0px 0px;
+}
+
+.OpponentInUnranked #PvPMatchAvailable
+{
+	visibility: visible;
+	color: rgb(251, 209, 116);
+}
+
+
+@keyframes 'PvPButtonVisible'
+{
+	0%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	66%
+	{
+		pre-transform-scale2d: 0.0;
+	}
+
+	100%
+	{
+		pre-transform-scale2d: 1.0;
+	}
+}
+
+
+.PlayPageButton
+{
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	width: 421px;
+	height: 816px;
+	background-size: 100% 100%;
+	pre-transform-scale2d: 0.0;
+	transition-property: background-color;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+  flow-children: none;
+  overflow: noclip;
+}
+
+
+.PageVisible .PlayPageButton
+{
+	animation-iteration-count: 1;
 	pre-transform-scale2d: 1.0;
 }
 
-.PopupLoadDeck.SelectedPanel
+.PlayPageButton:hover
 {
-	blur: none;
 	brightness: 1.0;
 }
 
+.PlayButtonLabels
+{
+	flow-children: down;
+	horizontal-align: center;
+	margin-top: 110px;
+}
+
+.PlayButtonLabels Label
+{
+	text-align: center;
+	horizontal-align: center;
+	
+	font-size: 35px;
+  letter-spacing: 4px;
+  horizontal-align: center;
+  vertical-align: center;
+  text-align: center;
+  transition-property: text-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+  color: gradient( linear, 0% 0%, 100% 100%, from( #d4c9e1 ), to( #cff2f6 ) );
+  font-weight: light;
+	text-shadow: 1px 2px 6px 4.0 #130f1a80;
+	text-overflow: shrink;
+
+}
+
+.PlayButtonLabels Label:hover
+{
+	text-shadow: 0px 0px 8px 4.0 #7489ff11;
+}
+
+.PlayButtonLabels Label:active
+{
+    text-shadow: 0px 0px 20px 4.0 #71ffff25;
+}
+
+.PlayButtonLabels #TutorialText
+{
+	color: #5d86dd;
+	font-size: 24px;
+	letter-spacing: 0px;
+	text-transform: none;
+	text-shadow: none;
+}
+
+Button:disabled
+{
+	wash-color: grey;
+}
+
+.PlayButtonLabels Label:disabled
+{
+	color: grey;
+}
 
 
+.PlayPageButton:selected .GameSelectButtonHighlight,
+.PlayPageButton:hover .GameSelectButtonHighlightOutline
+{
+	opacity: 1;
+	brightness: 1;
+	transition-duration: .6s;
+}
+
+.PlayPageButton:selected:hover .GameSelectButtonHighlightOutline
+{
+	opacity: 0;
+}
+
+.GameSelectButtonHighlightOutline,
+.GameSelectButtonHighlight,
+.GameSelectButtonHighlightOutline.SceneLoaded,
+.GameSelectButtonHighlight.SceneLoaded
+{
+	opacity: 0;
+	width: 110%;
+	height: 116%;
+	transition-property: opacity, brightness;
+	transition-duration: .42s;
+	transition-timing-function: ease-in-out;
+}
+
+	/*.GameSelectButtonHighlightOutline.SceneLoaded,
+{
+	opacity: 1;
+}*/
+
+.GameSelectButtonHighlight,
+.GameSelectButtonHighlight.SceneLoaded
+{
+	width: 100%;
+	height: 100%;
+	opacity-mask: url("s2r://panorama/images/textures/dashboard_etched_button_pattern_mask_psd.vtex");
+}

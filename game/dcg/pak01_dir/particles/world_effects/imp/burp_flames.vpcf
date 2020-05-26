@@ -1,4 +1,4 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{261b3cba-02c7-424f-854b-c432c6f018d1} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
@@ -15,6 +15,7 @@
 	m_bShouldSort = false
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderSprites"
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
@@ -27,20 +28,26 @@
 			m_hTexture = resource:"materials/particle/fire_particle_4/fire_particle_4_flat.vtex"
 			m_flAnimationRate = 1.000000
 		},
+		
 		{
 			_class = "C_OP_RenderDeferredLight"
 			m_flRadiusScale = 10.000000
-			m_ColorScale = 
-			[
-				255,
-				255,
-				255,
-			]
 			m_bDisableOperator = true
+			m_vecColorScale = 
+			{
+				m_nType = "PVEC_TYPE_LITERAL_COLOR"
+				m_LiteralColor = 
+				[
+					255,
+					255,
+					255,
+				]
+			}
 		},
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_BasicMovement"
 			m_Gravity = 
@@ -51,18 +58,22 @@
 			]
 			m_fDrag = 0.175000
 		},
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
 		},
+		
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.200000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_fl4NoiseScale = 0.001310
@@ -71,6 +82,7 @@
 			m_bAdditive = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_Noise"
 			m_bAdditive = true
@@ -79,6 +91,7 @@
 			m_fl4NoiseScale = 0.001100
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_VectorNoise"
 			m_bAdditive = true
@@ -92,12 +105,15 @@
 			m_fl4NoiseScale = 1.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.750000
 			m_flStartScale = 0.000000
 			m_flEndTime = 0.400000
+			m_flEndScale = 0.700000
 		},
+		
 		{
 			_class = "C_OP_DistanceToCP"
 			m_flInputMin = 128.000000
@@ -105,17 +121,19 @@
 			m_nFieldOutput = "1"
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
 			m_bDisableOperator = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMax = 0.400000
 			m_fLifetimeMin = 0.400000
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -133,6 +151,7 @@
 				255,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_nFieldOutput = "22"
@@ -152,22 +171,18 @@
 			]
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_fRadiusMax = 2.000000
 			m_vecDistanceBias = 
 			[
 				0.000000,
-				-10.000000,
 				0.000000,
-			]
-			m_vecDistanceBiasAbs = 
-			[
-				0.000000,
-				-10.000000,
 				0.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_CreationNoise"
 			m_flOutputMax = 40.000000
@@ -175,19 +190,23 @@
 			m_flNoiseScale = 2.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 		},
+		
 		{
 			_class = "C_INIT_RandomYaw"
 			m_flDegreesMax = 4.000000
 			m_flDegreesMin = -4.000000
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RandomYawFlip"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_InitialVelocityNoise"
 			m_flNoiseScale = 0.200000
@@ -205,11 +224,13 @@
 				78.000000,
 			]
 		},
+		
 		{
 			_class = "C_INIT_RandomAlpha"
 			m_nAlphaMin = 90
 			m_nAlphaMax = 100
 		},
+		
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMin = 3.000000
@@ -218,11 +239,21 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 18.100000
-			m_flEmissionDuration = 0.300000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.300000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 18.100000
+			}
 		},
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
 			m_bDisableOperator = true
@@ -232,10 +263,12 @@
 	m_nFirstMultipleOverride_BackwardCompat = 7
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 

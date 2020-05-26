@@ -1,13 +1,15 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_flConstantRadius = 1.500000
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -24,6 +26,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 1
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -41,6 +44,7 @@
 					]
 					m_entityName = "self"
 				},
+				
 				{
 					m_iControlPoint = 2
 					m_iAttachType = "PATTACH_WORLDORIGIN"
@@ -63,52 +67,58 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_BasicMovement"
 		},
+		
 		{
 			_class = "C_OP_Orient2DRelToCP"
 			m_flRotOffset = 180.000000
 			m_nFieldOutput = "12"
 		},
+		
 		{
 			_class = "C_OP_PositionLock"
 			m_nControlPointNumber = 1
 			m_bLockRot = true
 		},
+		
 		{
 			_class = "C_OP_SetCPOrientationToDirection"
 			m_nOutputControlPoint = 1
 			m_bDisableOperator = true
 		},
-		{
-			_class = "C_OP_SetCPOrientationToPointAtCP"
-			m_bDisableOperator = true
-		},
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderModels"
 			m_ModelList = 
 			[
+				
 				{
 					m_model = resource:"models/particle/spells/smash_their_defences/timbersaw_hook.vmdl"
 				},
 			]
 			m_bIgnoreNormal = true
 			m_bAnimated = true
+			m_bForceLoopingAnimation = true
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_nControlPointNumber = 1
 		},
+		
 		{
 			_class = "C_INIT_RandomRotation"
 			m_bDisableOperator = true
@@ -117,6 +127,7 @@
 			m_bRandomlyFlipDirection = false
 			m_nFieldOutput = "12"
 		},
+		
 		{
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin = 
@@ -136,9 +147,14 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 1
+			m_nParticlesToEmit = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 1.000000
+			}
 		},
 	]
 	m_ConstantColor = 
@@ -152,8 +168,19 @@
 	m_flConstantLifespan = 1.400000
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/spells/smash_their_defenses/smash_their_defenses_retract_trail.vpcf"
 		},
 	]
+	m_PreEmissionOperators = 
+	[
+		
+		{
+			_class = "C_OP_SetCPOrientationToPointAtCP"
+			m_bDisableOperator = true
+		},
+	]
+	m_nBehaviorVersion = 4
+	m_nFirstMultipleOverride_BackwardCompat = 2
 }

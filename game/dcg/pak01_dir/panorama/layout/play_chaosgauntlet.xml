@@ -1,0 +1,224 @@
+<root>
+	<styles>
+    	<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+    	<include src="s2r://panorama/styles/play_chaosgauntlet.vcss_c" />
+    	<include src="s2r://panorama/styles/play_competitive.vcss_c" />
+    	<include src="s2r://panorama/styles/play_shared.vcss_c" />    	
+ 	</styles>
+
+ 	<DCGPlayChaosGauntlet class="PrimaryCarouselPanel" onactivate="DCGChaosGauntletSelected()">
+	<Button class="OnNavigateBackButton" onactivate="DCGNavigateBack()" />
+	<DCGScenePanel id="Astrolabe_Scene" camera="camera" map="scenes/chaos/chaos_astrolabe" hittest="false" require-composition-layer="true" particleonly="false" renderdeferred="true" deferredalpha="false" antialias="true" rendershadows="true" enablegloballightingenvironment="false"/>
+	 	<Panel id="FeaturedBackground"/>
+		<Panel class="NodeLocationLineStart NodeLines"/>
+		<Panel class="NodeLocationLineVertical NodeLines"/>
+		<Panel class="NodeLocationLine NodeLines"/>
+		<Panel id="BasicNodeInfo">
+			<Panel class="BasicNodeInfoHeader">
+				<Panel class="LeftRightFlow DeckColors">
+					<Label id="BasicNodeInfoDeckName" text="{s:selected_node_name}"/>
+					<Panel id="CardColor1" class="CardColors" />
+					<Panel id="CardColor2" class="CardColors" />
+				</Panel>
+				<Label id="BasicNodeInfoShortDesc" text="{s:selected_node_short_desc}"/>
+			</Panel>
+
+			<Panel class="FeaturedEventContent">
+				<Panel class="LockButton" onactivate="DCGChaosUnlockNode()" >
+				        <Image class="LockImage" src="s2r://panorama/images/hud/node_lock_psd.vtex" />
+				        <Image class="LockImageTop" src="s2r://panorama/images/hud/node_lock_top_psd.vtex" />
+				</Panel>
+
+				<Label id="BasicNodeInfoLongDesc" text="{s:selected_node_long_desc}"/>
+				        <Button id="LoreButton2" class="LoreButton" onactivate="DCGOnPlaySetLore()">
+				          <Panel class="LoreVOButtonTextAndIconContainer">
+				            <Label class="LoreButtonText" text="{s:lore_button_text}"/>
+				            <Image class="PlayLoreIcon" src="s2r://panorama/images/catalogue/play_lore_icon_psd.vtex"/>
+				          </Panel>
+				        </Button>
+				<Panel id="StreakStats">
+					<Panel id="CurrentWins" class="StreakContainer">
+						<Label id="CurrentWinsLabel" class="StreakType" text="#DCG_ChaosGauntlet_CurrentStreak" />
+						<Label id="CurrentWinsNumber" class="StreakValue" text="{i:current_wins}" />
+					</Panel>
+					<Panel id="DeckWinStreak" class="StreakContainer">
+						<Label id="DeckWinsLabel" class="StreakType" text="#DCG_ChaosGauntlet_DeckStreak"/>
+						<Label id="DeckWinsNumber" class="StreakValue" text="{i:deck_win_streak}" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+
+
+		<Panel id="CheeveNodeInfo">
+			<Panel class="CheeveNodeInfoHeader">
+				<Panel class="LeftRightFlow DeckColors">
+					<Label id="CheeveNodeInfoDeckName" text="{s:selected_node_name}"/>
+					<Panel id="CardColor1" class="CardColors" />
+					<Panel id="CardColor2" class="CardColors" />
+				</Panel>
+				<Label id="CheeveNodeInfoShortDesc" text="{s:selected_node_short_desc}"/>
+			</Panel>
+
+			<Panel class="FeaturedEventContent">
+				<Panel class="LockButton" onactivate="DCGChaosUnlockNode()" >
+					<Image class="LockImage" src="s2r://panorama/images/hud/node_lock_psd.vtex" />
+					<Image class="LockImageTop" src="s2r://panorama/images/hud/node_lock_top_psd.vtex" />
+				</Panel>
+				<Label id="BasicNodeInfoLongDesc" text="{s:selected_node_long_desc}"/>
+				        <Button id="LoreButton3" class="LoreButton" onactivate="DCGOnPlaySetLore()">
+				          <Panel class="LoreVOButtonTextAndIconContainer">
+				            <Label class="LoreButtonText" text="{s:lore_button_text}"/>
+				            <Image class="PlayLoreIcon" src="s2r://panorama/images/catalogue/play_lore_icon_psd.vtex"/>
+				          </Panel>
+				        </Button>
+				<Panel id="StreakStats">
+					<Panel id="CurrentWins" class="StreakContainer">
+						<Label id="CurrentWinsLabel" class="StreakType" text="#DCG_ChaosGauntlet_CurrentStreak" />
+						<Label id="CurrentWinsNumber" class="StreakValue" text="{i:current_wins}" />
+					</Panel>
+					<Panel id="DeckWinStreak" class="StreakContainer">
+						<Label id="DeckWinsLabel" class="StreakType" text="#DCG_ChaosGauntlet_DeckStreak"/>
+						<Label id="DeckWinsNumber" class="StreakValue" text="{i:deck_win_streak}" />
+					</Panel>
+				</Panel>
+        <Panel class="CardbackImageContainer">
+          <Panel class="CardbackAnimator">
+            <Image class="CardbackImage" src="s2r://panorama/images/events/chaos_gauntlet/harmony_in_chaos_psd.vtex" />
+          </Panel>
+        </Panel>
+				<Label id="AchievementsLabel" class="StreakType" text="#DCG_ChaosGauntlet_AchievementsLabel"/>
+				<Label id="AchievementsCardbackLabel" class="StreakType" text="#DCG_ChaosGauntlet_AchievementsCardbackLabel"/>
+        <Panel id="AchievementStats">
+					<Panel id="Cheeve0" class="Achievement" onmouseover="DCGChaosHoverAchievement(0)" onmouseout="DCGChaosUnhoverAchievement(0)" hittest="true">
+						<Panel class="CheeveImageContainer">
+							<Panel class="CheeveBackground"/>
+							<CircularProgressBar id="CheeveProgressBar" />
+						</Panel>
+						<Panel class="CheeveProgress">
+							<Panel class="CheeveNumbers">
+								<Label class="CheeveNumber" text="{i:achievement_progress}" />
+								<Label class="CheeveNumber" text="/" />
+								<Label class="CheeveNumber" text="{i:achievement_max}" />
+							</Panel>							
+						</Panel>
+					</Panel>
+					<Panel id="Cheeve1" class="Achievement" onmouseover="DCGChaosHoverAchievement(1)" onmouseout="DCGChaosUnhoverAchievement(1)" hittest="true">
+						<Panel class="CheeveImageContainer">
+							<Panel class="CheeveBackground"/>
+							<CircularProgressBar id="CheeveProgressBar" />
+						</Panel>
+						<Panel class="CheeveProgress">
+							<Panel class="CheeveNumbers">
+								<Label class="CheeveNumber" text="{i:achievement_progress}" />
+								<Label class="CheeveNumber" text="/" />
+								<Label class="CheeveNumber" text="{i:achievement_max}" />
+							</Panel>							
+						</Panel>
+					</Panel>
+					<Panel id="Cheeve2" class="Achievement" onmouseover="DCGChaosHoverAchievement(2)" onmouseout="DCGChaosUnhoverAchievement(2)" hittest="true">
+						<Panel class="CheeveImageContainer">
+							<Panel class="CheeveBackground"/>
+							<CircularProgressBar id="CheeveProgressBar" />
+						</Panel>
+						<Panel class="CheeveProgress">
+							<Panel class="CheeveNumbers">
+								<Label class="CheeveNumber" text="{i:achievement_progress}" />
+								<Label class="CheeveNumber" text="/" />
+								<Label class="CheeveNumber" text="{i:achievement_max}" />
+							</Panel>							
+						</Panel>
+					</Panel>
+					<Panel id="Cheeve3" class="Achievement" onmouseover="DCGChaosHoverAchievement(3)" onmouseout="DCGChaosUnhoverAchievement(3)" hittest="true">
+						<Panel class="CheeveImageContainer">
+							<Panel class="CheeveBackground"/>
+							<CircularProgressBar id="CheeveProgressBar" />
+						</Panel>
+						<Panel class="CheeveProgress">
+							<Panel class="CheeveNumbers">
+								<Label class="CheeveNumber" text="{i:achievement_progress}" />
+								<Label class="CheeveNumber" text="/" />
+								<Label class="CheeveNumber" text="{i:achievement_max}" />
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+
+			<Panel class="BasicNodeInfoFooter">
+				<Label class="RulesHeader" text="#DCG_ActiveRules" onmouseover="UIShowTextTooltip('{s:active_rules_long}');" onmouseout="UIHideTextTooltip();" />
+			</Panel>
+		</Panel>
+
+		<Panel id="FeaturedContainer">
+			<Panel id="FeaturedHeaderContainer">
+					<Panel class="FeaturedHeaderLogoContainer">
+						<Panel id="FeaturedEventNameTitle"/>
+						<Label id="FeaturedEventNameLabel" class="FeaturedEventLabel TitleFont" text="#DCG_MainMenu_Event_ChaosGauntlet" html="true" />
+						<Panel class="FeaturedHeaderLogo" />
+					</Panel>
+			</Panel>
+        
+		</Panel>
+
+		<Panel id="FeaturedLeaderboardContainer">
+			<Panel class="FeaturedLeaderboardHeader">
+				<Panel class="FeaturedLeaderboardTitleGroup">
+					<Label id="FeaturedLeaderboardDeckName" text="{s:selected_leaderboard_name}"/>
+				</Panel>
+			</Panel>
+			
+			<DCGLeaderboard id="ScoreLeaderboard" class="HidePrevButton HideNextButton HideLastButton ChaosGauntlet"/>
+		</Panel>
+
+		<Panel id="EventProgressSummary">
+			<Panel class="EventProgressSummaryInterior">
+				<DCGChaosBadge id="ChaosBadge" class="PlayerLevelProgressIcon" size="large" />
+				<Panel class="ProgressContainer">
+					<Label class="ProgressSummaryTitle" text="#DCG_ChaosGauntlet_EventLevel"/>
+					<ProgressBar id="ProgressSummaryBar" class="EventProgressBar">
+						<Label class="ProgressSummaryText" text="{i:currentLevelProgress} / {i:nextLevelProgress}"/>
+					</ProgressBar>
+					<Label class="CurrentStreakLabel" text="#DCG_ChaosGauntlet_ChoasStreak"/>
+				</Panel>
+			</Panel>
+		</Panel>
+	
+		<DCGQuestMap id="QuestMap"/>
+			
+		<Panel id="FeaturedActionsContainer">
+			<Button id="NextSelectionButton"
+				onmouseover="PlaySoundEffectIfPanelEnabled( DCG_UI.Featured_Rollover_Start )"
+				onactivate="PlaySoundEffect( DCG_UI.Featured_Select_Start ); DCGChaosFindNextMatch()"
+			>
+				<Panel class="NextSelectionLabelContainer">
+					<Label id="NextSelectionLabel" text="{s:next_match_text}"/>
+				</Panel>
+			</Button>
+			<Button id="PracticeMatchButton"
+				onmouseover="PlaySoundEffectIfPanelEnabled( DCG_UI.Featured_Rollover_Start )"
+				onactivate="PlaySoundEffect( DCG_UI.Featured_Select_Start ); DCGChaosPracticeMatch()"
+			>
+				<Panel class="NextSelectionLabelContainer">
+					<Label id="NextSelectionLabel" text="#DCG_Gauntlet_PracticeMatch"/>
+				</Panel>
+			</Button>				
+		</Panel>
+
+	</DCGPlayChaosGauntlet>
+</root>
+
+
+<!-- 		<Panel class="CarouselPanelContainer">
+			<Panel class="BlurBackgroundPanelOverlay" >
+				<DCGScenePanel class="PlayBorderFX" camera="camera" map="scenes/mainmenu/mainmenu_edge_shimmer" hittest="false" require-composition-layer="true" light="model_light" particleonly="false"  renderdeferred="true" deferredalpha="true" antialias="true"/>		
+			</Panel>
+			<Panel id="FeaturedEventHeader">
+				<Label class="FeaturedEventHeader" text="#DCG_MainMenu_FeaturedEvent"/>
+				<Label class="FeaturedEventLabel TitleFont" html="true" text="#DCG_MainMenu_Event_CallToArms" allowtextselection="false"  onactivate="DCGShowPlayFeaturedCarousel()" />
+			</Panel>
+
+			<Panel class="PlayContents" hittest="false">
+				<DCGGauntlet id="GauntletContainer" />
+			</Panel>
+		</Panel> -->

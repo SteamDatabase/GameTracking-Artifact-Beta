@@ -1,14 +1,16 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{10b35a8e-b1ee-4f14-87a6-a7b6aae37699} -->
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{26288658-411e-4f14-b698-2e1e5d00dec6} -->
 {
 	_class = "CParticleSystemDefinition"
 	m_nBehaviorVersion = 7
 	m_nMaxParticles = 16
 	m_controlPointConfigurations = 
 	[
+		
 		{
 			m_name = "preview"
 			m_drivers = 
 			[
+				
 				{
 					m_iAttachType = "PATTACH_WORLDORIGIN"
 					m_vecOffset = 
@@ -30,6 +32,7 @@
 	]
 	m_PreEmissionOperators = 
 	[
+		
 		{
 			_class = "C_OP_SetSingleControlPointPosition"
 			m_bSetOnce = true
@@ -44,14 +47,24 @@
 	]
 	m_Emitters = 
 	[
+		
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flEmissionDuration = 0.250000
-			m_flEmitRate = 128.000000
+			m_flEmissionDuration = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 0.250000
+			}
+			m_flEmitRate = 
+			{
+				m_nType = "PF_TYPE_LITERAL"
+				m_flLiteralValue = 128.000000
+			}
 		},
 	]
 	m_Initializers = 
 	[
+		
 		{
 			_class = "C_INIT_CreateSequentialPath"
 			m_flNumToAssign = 16.000000
@@ -60,27 +73,31 @@
 				m_nEndControlPointNumber = 1
 			}
 		},
+		
 		{
 			_class = "C_INIT_RemapInitialDirectionToCPToVector"
 			m_nCP = 2
 			m_nFieldOutput = "21"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMax = 7
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"
 			m_nInputMin = 8
 			m_nInputMax = 15
 			m_flOutputMin = 1.000000
 			m_flOutputMax = 0.000000
-			m_bScaleInitialRange = true
 			m_bActiveRange = true
+			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
 		},
+		
 		{
 			_class = "C_INIT_RandomColor"
 			m_ColorMin = 
@@ -101,13 +118,16 @@
 	]
 	m_Operators = 
 	[
+		
 		{
 			_class = "C_OP_Decay"
 		},
+		
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.800000
 		},
+		
 		{
 			_class = "C_OP_RemapDirectionToCPToVector"
 			m_nCP = 2
@@ -115,11 +135,13 @@
 			m_bNormalize = true
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_NormalizeVector"
 			m_nFieldOutput = "21"
 			m_bDisableOperator = true
 		},
+		
 		{
 			_class = "C_OP_InterpolateRadius"
 			m_flEndTime = 0.100000
@@ -128,6 +150,7 @@
 	]
 	m_Renderers = 
 	[
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_nOrientationType = 2
@@ -135,6 +158,7 @@
 			m_flTextureVWorldSize = 24.000000
 			m_bDisableZBuffering = true
 		},
+		
 		{
 			_class = "C_OP_RenderRopes"
 			m_flTextureVWorldSize = 24.000000
@@ -151,22 +175,28 @@
 	m_flConstantLifespan = 0.400000
 	m_Children = 
 	[
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/bracers_of_sacrifice/bracers_of_sacrifice_impact_slash_front.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/bracers_of_sacrifice/bracers_of_sacrifice_impact_overlay.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/bracers_of_sacrifice/bracers_of_sacrifice_impact_slash_end_overlay.vpcf"
 			m_flDelay = 0.100000
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/bracers_of_sacrifice/bracers_of_sacrifice_impact_slash_end.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/performances/abilities/bracers_of_sacrifice/bracers_of_sacrifice_impact_slash_caster.vpcf"
 		},
+		
 		{
 			m_ChildRef = resource:"particles/card_effects/screen_shakes/shake_light.vpcf"
 		},
