@@ -215,7 +215,6 @@ $tIVScript
 1000000
 10ConCommand
 11CRefCountedI20CRefCountServiceBaseILb1E6CRefMTEE
-11CRenderMesh
 11IVSSequence
 12CThreadEvent
 13CMorphSetData
@@ -241,7 +240,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-05-25 17:58:22.169000
+2020-05-27 15:40:06.979000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -486,6 +485,7 @@ ActiveContactList
 ActiveIndex
 ActivityState
 Adding Intersection Pair Trigger flag, because there are common interaction flags (set on both <font color="red">red</font> and <font color="blue">blue</font></small>)
+AgeingSpeed
 Agg data %d: %p (%d parts, crc 0x%08X)
 Aggregate Count
 AggregateInstance
@@ -727,6 +727,7 @@ CHitBox
 CHitBoxSet
 CHitBoxSetList
 CIntersectionDictionary
+CIrrotationalVortexOnGrid
 CJiggleBoneState
 CL 2131667
 CMaterialDrawDescriptor
@@ -842,6 +843,7 @@ CResourceArray< FeTri_t > FeModelRefl_t::m_TrisArray
 CResourceArray< FeVertexMapDescRefl_t > FeModelRefl_t::m_VertexMaps
 CResourceArray< FeWorldCollisionParams_t > FeModelRefl_t::m_WorldCollisionParamsArray
 CResourceArray< FloatAttrSet_t > RnSoftbodyRefl_t::m_FloatAttrArray
+CResourceArray< IrrotationalVortexOnGridRefl_t > SoftbodyEffectWindRefl_t::m_Vortices
 CResourceArray< NameIndexTokenRefl_t > NameIndexRefl_t::m_Names
 CResourceArray< Pair_t > BroadphaseRefl_t::m_PairBuffer
 CResourceArray< RecordedCaspuleSweepResultRefl_t > RnWorldRefl_t::m_RecordedCapsuleSweepResults
@@ -1012,12 +1014,13 @@ CTSQueue corruption
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
-CThreadMultiWaitEvent::Set()
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
+CThreadedJob::Abort(bool)
+CThreadedJob::Execute()
 CTiltTwistConstraint
 CTransform
 CTransformUnaligned RecordedCaspuleSweepResultRefl_t::m_XForm1
@@ -1346,6 +1349,7 @@ EarlyComputeNodeBaseCount
 EarlyInit_Tier0
 EconItemToolModel_001
 EditorDynamicConfig
+EffectNameHash
 EmptyAnim
 EnableWorldShapeCollision
 EndTime
@@ -1633,6 +1637,7 @@ Invalid request for mesh %d in model %s with no remapping table starts
 Invalid,
 Inverse Multi Quadratic
 Invert Axes;
+IrrotationalVortexOnGridRefl_t
 IslandIndex
 IslandSolve
 IslandStamp
@@ -1688,6 +1693,7 @@ Length;
 Level0
 Level1
 LevelCount
+LifeCycle
 LightingBasis
 LightmapUV
 LightmapUVW
@@ -1796,7 +1802,9 @@ MatrixSize
 Max Contacts Per Thread
 Max Error %g
 MaxAngularConstraintImpulse
+MaxCell
 MaxLinearConstraintImpulse
+MaxSpeed
 Md5 Hash: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x
 MemAlloc_AllocFunc
 MemAlloc_FreeFunc
@@ -1805,7 +1813,6 @@ Merge Faces
 Merged face
 Mesh %d verts %d tris %g diameter
 Mesh Shape[%d]
-Mesh triangle material index %d>=%d is out of bounds
 Mesh%d.obj
 Mesh-Mesh
 MeshCastBox
@@ -1952,6 +1959,7 @@ Overshortened by %.1f in
 Overstretched %.2fx
 Overstretched by %.1f in
 Owner
+P%:
 P@
 PA
 PARENT
@@ -2010,6 +2018,7 @@ PanoramaUIClient001
 PanoramaUIEngine001
 ParticleCount
 ParticleSystemMgr003
+PeakIntensityDivSubdiv
 PeakTime
 PerVertexLighting
 PermModelData_t
@@ -2920,6 +2929,8 @@ V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
+Vector IrrotationalVortexOnGridRefl_t::m_vAxisX
+Vector IrrotationalVortexOnGridRefl_t::m_vAxisY
 Vector ManifoldPointRefl_t::m_vLocalP1
 Vector ManifoldPointRefl_t::m_vLocalP2
 Vector RecordedForceRefl_t::m_vForce
@@ -2972,7 +2983,9 @@ Vector RnWorldRefl_t::m_vGravity
 Vector RnWorldRefl_t::m_vWind
 Vector SoftbodyEffectGravityRefl_t::m_vGravity
 Vector SoftbodyEffectWindRefl_t::m_vWind
+Vector SoftbodyEffectWindRefl_t::m_vWindSpeedWorldSpace
 Vector2D
+Vector2D IrrotationalVortexOnGridRefl_t::m_vOrigin
 Vector4D
 Vector4DAligned
 VectorAligned
@@ -2990,6 +3003,7 @@ VertexSetCount
 VertexUVPosColorNormalAndTangent_t
 VisBuilder_001
 Visited: Nodes/Tris/Mesh
+Vortices
 WARNING: Failed to convert introspected block for file: %s
 WARNING: Invalid resource version (%d): %s
 WARNING: Trying to create a CRenderContextPtr without a valid context.
@@ -3075,6 +3089,7 @@ __cxa_guard_release
 __cxa_pure_virtual
 __gmon_start__
 __memcpy_chk
+__memset_chk
 __oldschema_object_name
 __stack_chk_fail
 __temp_unserialization_member__
@@ -3353,7 +3368,6 @@ fadetime
 false
 ff9966;">Can <b>Not</b> Collide: same body</div><span>Both shapes belong to the same body %d <i>%s</i>. Do not collide.</span>
 ff9966;">Can <b>Not</b> Collide: same shape</div><span>Hm, it's the same shape, it cannot collide with itself</span>
-fff?v%d:%d
 ffffcc
 flAlpha
 flAnimationForceAttraction
@@ -3386,6 +3400,10 @@ flWeight[]
 flWorldFriction
 float
 float FeModelOverlayRefl_t::m_flScale
+float IrrotationalVortexOnGridRefl_t::m_flAgeingSpeed
+float IrrotationalVortexOnGridRefl_t::m_flIntensityDivSubdiv
+float IrrotationalVortexOnGridRefl_t::m_flLifeCycle
+float IrrotationalVortexOnGridRefl_t::m_flPeakIntensityDivSubdiv
 float ManifoldPointRefl_t::m_flImpulse
 float PhysSurfacePropertiesAudioRefl_t::m_flStaticImpactVolume
 float PhysSurfacePropertiesAudioRefl_t::m_hardThreshold
@@ -3626,10 +3644,9 @@ int RnWorldRefl_t::m_nSoftbodyIterations
 int RnWorldRefl_t::m_nSoftbodySubsteps
 int RnWorldRefl_t::m_nTickCount
 int RnWorldRefl_t::m_nVelocityIterations
-int SoftbodyEffectGravityRefl_t::m_nParentNode
 int SoftbodyEffectRefl_t::m_nIndexInWorld
-int SoftbodyEffectWindRefl_t::m_nParentNode
-int SoftbodyEffectWindRefl_t::m_nVertexMapIndex
+int SoftbodyEffectRefl_t::m_nParentNode
+int SoftbodyEffectRefl_t::m_nVertexMapIndex
 int( %d = 0x%X )
 int16 BroadphaseProxyDataRefl_t::m_nPairCount
 int16 BroadphaseProxyNodeRefl_t::m_nHeight
@@ -4105,6 +4122,7 @@ m_flRestLength
 m_flRodVelocitySmoothRate
 m_flRotationOffset
 m_flScalePerParentParticle
+m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
 m_flSplayMinAngle
@@ -4302,6 +4320,7 @@ m_nScaleCPField
 m_nScaleControlPoint
 m_nScaleControlPointField
 m_nSetMethod
+m_nShapeType
 m_nSimdFitMatrixCount1
 m_nSimdFitMatrixCount2
 m_nSimdQuadCount1
@@ -5005,6 +5024,7 @@ uint32 RnSphericalJointRefl_t::m_nMotorMode
 uint32 RnWorldRefl_t::m_Simulation
 uint32 RnWorldRefl_t::m_nDebugRecordFlags
 uint32 RnWorldRefl_t::m_nSoftbodySimulationFlags
+uint32 SoftbodyEffectRefl_t::m_nEffectNameHash
 uint32 SoftbodyEffectRefl_t::m_nVertexMapHash
 uint64
 uint64 NameIndexRefl_t::m_nAcquireMask
@@ -5048,12 +5068,15 @@ utlstring.cpp
 v %f %f %f#%d ComponentIndex %d, queue %d, angle %.1f; ring:
 v %g %g %g
 v %g %g %g%s
+v%d:%d
 v1x
 v2
 v=%.1f
 vAngularImpulse
 vAngularLambda
 vAngularVelocityAtTickStart
+vAxisX
+vAxisY
 vExtents
 vForce
 vForceAccum
@@ -5086,6 +5109,7 @@ vSimOrigin
 vSize
 vTargetPosition
 vTorqueAccum
+vWindSpeedWorldSpace
 vab
 vanmgrph
 vas

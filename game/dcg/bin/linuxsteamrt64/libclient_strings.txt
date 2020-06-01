@@ -182,7 +182,6 @@
 #CardEffect_10111_0
 #CardEffect_10112_0
 #CardEffect_10113_0
-#CardEffect_10116_0
 #CardEffect_10117_0
 #CardEffect_10118_0
 #CardEffect_10119_0
@@ -620,6 +619,7 @@
 #DCG_ActionHint_Unit_Ally_kill
 #DCG_ActionHint_Unit_Ally_modify
 #DCG_ActionHint_Unit_Ally_moveto_AnyLane
+#DCG_ActionHint_Unit_Ally_movetopos
 #DCG_ActionHint_Unit_Ally_swap
 #DCG_ActionHint_Unit_Ally_swapwith
 #DCG_ActionHint_Unit_AnyLane
@@ -1070,6 +1070,7 @@
 #DCG_Glossary_BattleDamage
 #DCG_Glossary_BattleDamageIsPiercing
 #DCG_Glossary_BeforeActionPhase
+#DCG_Glossary_Blocked
 #DCG_Glossary_Blocker
 #DCG_Glossary_Bounce
 #DCG_Glossary_Bounty
@@ -2956,7 +2957,6 @@ $tI
 %s%c%s%c%s%c%g%c%d
 %s%d out of %d waiting jobs printed.
 %s%i
-%s%i:'%s'
 %s%i_%i
 %s%s
 %s%s (%s):
@@ -2987,8 +2987,6 @@ $tI
 %s+--
 %s+-- Schema Class: %s
 %s-%s
-%s.Footstep%s
-%s.RunFootstep%s
 %s.benchdeck
 %s.ctx
 %s.deck
@@ -3330,6 +3328,7 @@ $tI
 (\baura\b)
 (\bbattle damage\b)
 (\bbefore the action phase\b)
+(\bblocked\b)
 (\bblocker\b)
 (\bbounce\b)
 (\bbounty\b)
@@ -3674,7 +3673,6 @@ $tI
 *ZL24Set1_WalrusPunch_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_NoHesitation_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Overgrowther_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
-*ZL25Set1_RavenousMass_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Skullduggery_Effect3P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL26PlayIfNotOpponentSpectatorRK20CScriptPlayListParamEUlRK16CConditionalEvalE_
 *ZL26Set1_TempestDouble_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
@@ -3682,7 +3680,6 @@ $tI
 *ZL31Set1_DiabolicConclusion_Effect3P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL32Set1_InformedConsumption_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL32Set1_InformedConsumption_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
-*ZL33Set1_ActivateRavenousMass_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL33UpdateCardTemplateWithDefaultCodePK19CGameObjectTemplateEUlP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tE0_
 *ZL33UpdateCardTemplateWithDefaultCodePK19CGameObjectTemplateEUlP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tE1_
 *ZL33UpdateCardTemplateWithDefaultCodePK19CGameObjectTemplateEUlP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tE2_
@@ -3763,7 +3760,6 @@ $tI
 *ZN15CPlayCardAction25OutputActivePlayerActionsEiEUlvE0_
 *ZN15CPlayCardAction25OutputActivePlayerActionsEiEUlvE_
 *ZN15CSettingsSystemC4EPN8panorama8CPanel2DEPKcEUlPNS0_12CRadioButtonEE_
-*ZN15C_EnvTimeOfDay29PreRenderE16CSplitScreenSlotEUlvE_
 *ZN16CDCGFountainViewC4EP19CDCGView_WorldScenePK9CFountainEUlR18ClientStateMachineI17IDCGFountainStatePS_ERKS6_E_
 *ZN16CPlayerInfoPanel20EventAboutToCastCardEiEUlPN8panorama8CPanel2DEE0_
 *ZN16CPlayerInfoPanel20EventAboutToCastCardEiEUlPN8panorama8CPanel2DEE_
@@ -4255,7 +4251,9 @@ $tI
 ./google/protobuf/unknown_field_set.h
 ./google/protobuf/wire_format_lite_inl.h
 .3333
+.Footstep
 .PLACEHOLDER_VALUE
+.RunFootstep
 .[\()*+?{|^$
 .[\*^$
 .com
@@ -4333,7 +4331,6 @@ $tI
 0.001
 0.006
 0.00f
-0.01
 0.011f
 0.022
 0.027
@@ -5044,7 +5041,6 @@ $tI
 14IVRFlyListener
 15 0 0
 150
-150.0
 1500.0
 151
 152
@@ -5084,7 +5080,6 @@ $tI
 15CEconItemSchema
 15CEconItemSystem
 15CEntityIONotify
-15CEntityIOOutput
 15CEntityInstance
 15CEventDataCache
 15CFakeSpawnGroup
@@ -5175,7 +5170,6 @@ $tI
 15C_ClientRagdoll
 15C_EnvCubemapBox
 15C_EnvCubemapFog
-15C_EnvTimeOfDay2
 15C_FogController
 15C_Peer2PeerInit
 15C_PropHMDAvatar
@@ -5749,7 +5743,6 @@ $tI
 18CToolObjectFactoryI16CGlobalLightBaseE
 18CToolObjectFactoryI19CEnvSpritePreviewerE
 18CToolObjectFactoryI21CBaseLightProbeVolumeE
-18CToolObjectFactoryI22CEnvTimeOfDayPreviewerE
 18CToolObjectFactoryI24CPointWorldTextPreviewerE
 18CToolObjectFactoryI26CEnvDeferredLightPreviewerE
 18CToolObjectFactoryI37CPointClientUIWorldTextPanelPreviewerE
@@ -6230,7 +6223,6 @@ $tI
 21CSteamCallbackGeneric
 21CSteam_Voice_Encoding
 21CStreakEffectModifier
-21CTimeOfDayDynamicKeys
 21CTraceMsg_CardCreated
 21CTraceMsg_FocusAttack
 21CTraceMsg_TowerHealed
@@ -6308,7 +6300,6 @@ $tI
 22CDCG_UI_Popup_DeckInfo
 22CDCG_UI_Popup_PackInfo
 22CDCG_UI_TooltipManager
-22CDefScriptAccessorBase
 22CDefaultResponseSystem
 22CDemoClassInfo_class_t
 22CDontUseThisGameSystem
@@ -6323,7 +6314,6 @@ $tI
 22CEntityComponentHelper
 22CEntityDebugGameSystem
 22CEntityMessageFixAngle
-22CEnvTimeOfDayPreviewer
 22CGBackpackSortFinished
 22CGCClientJobUnlockNode
 22CGCMsgGetIPASNResponse
@@ -6518,7 +6508,6 @@ $tI
 23CScript_CreepDeployment
 23CScript_ImpactPerDamage
 23CScript_PlaySummonIntro
-23CTimeOfDayDynamicValues
 23CTraceMsg_CardDiscarded
 23CTraceMsg_CasterCasting
 23CTraceMsg_EffectProcced
@@ -6531,7 +6520,6 @@ $tI
 23C_DevtestHierarchyChild
 23C_DynamicPropClientside
 23C_FuncElectrifiedVolume
-23C_MaterialModifyControl
 23C_PostProcessController
 23C_ServerRagdollAttached
 23CardDrawPhaseTransition
@@ -6808,6 +6796,7 @@ $tI
 25CInterpolatedVarArrayBaseI26CCompositeParentSpaceStateLb0ELb1E29CGlobalInterpolationLerpFuncsIS0_EE
 25CInterpolatedVarArrayBaseI27AnimationOperationHistory_tLb0ELb1E28COwnerInterpolationLerpFuncsIS0_25C_BaseAnimatingControllerEE
 25CInterpolatedVarArrayBaseI27AnimationOperationHistory_tLb0ELb1E28COwnerInterpolationLerpFuncsIS0_32C_BaseAnimatingOverlayControllerEE
+25CInterpolatedVarArrayBaseI27AnimationOperationHistory_tLb1ELb1E28COwnerInterpolationLerpFuncsIS0_25C_BaseAnimatingControllerEE
 25CInterpolatedVarArrayBaseI6QAngleLb0ELb0E29CGlobalInterpolationLerpFuncsIS0_EE
 25CInterpolatedVarArrayBaseI6VectorLb0ELb0E29CGlobalInterpolationLerpFuncsIS0_EE
 25CInterpolatedVarArrayBaseIfLb0ELb1E29CGlobalInterpolationLerpFuncsIfEE
@@ -6852,7 +6841,6 @@ $tI
 25CSource1GameConfiguration
 25CSteamBatchedHTTPRequests
 25CSurfacePropDataTableBase
-25CTimeOfDayStaticKeyValues
 25CTraceMsg_CardMovedToDeck
 25CTraceMsg_CardMovedToHand
 25CTraceMsg_DamageAttempted
@@ -7097,7 +7085,6 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19C_EconItemAttribute28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19interactions_data_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI21prevent_interaction_t10CUtlMemoryIS1_iEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI23CTimeOfDayDynamicValues28CNetworkUtlVector_MemoryTypeIS1_Li9EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI35CNetworkedIKProceduralTargetContext28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI40CInterpolatedVarProceduralUsingOwnerLerpI27AnimationOperationHistory_t32C_BaseAnimatingOverlayControllerE10CUtlMemoryIS4_iEES4_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI6QAngle28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
@@ -8054,11 +8041,13 @@ $tI
 39CUserMsg_ParticleManager_UpdateParticle
 39FlopPlayerMakingHeroDeploymentDecisions
 39FlopPreHeroDeploymentChoicesPerformance
+3C
 4
 4'
 4(
 4*
 40 40 40 196
+40.0
 400
 4096
 40CColorCorrectionMaterialOverrideModifier
@@ -8241,7 +8230,6 @@ $tI
 43CScriptPlayTeleportOffsetBasedOnTraceNumber
 43CTraceMsg_UnitReadiedForDeploymentUponDeath
 43PerformanceEvent_ChangeParticleVisibility_t
-440.0
 44CDCGKillTowerBeforeLosingHeroAchievementEval
 44CDCGPreventDamageWithArmorAchievementFactory
 44CDCGWinWithAllHeroesInOneLaneAchievementEval
@@ -8439,6 +8427,7 @@ $tI
 5
 5(
 5*
+50.0
 5000.0
 50CDCGKillingEnemyHeroWithSameHeroAchievementFactory
 50CDCGPerformanceOperator_AssertThatPropertyHasValue
@@ -8631,7 +8620,6 @@ $tI
 55CScriptConfig_Set01_kTylerEstateCensor_CARD_PLAY_SCRIPT
 55CScriptConfig_Set01_kWhispersofMadness_CARD_PLAY_SCRIPT
 55CScriptConfig_Set01_kWisdomoftheElders_CARD_PLAY_SCRIPT
-560.0
 56CScriptConfig_Set00_kDefaultScripts_ACHIEVEMENT_ACHIEVED
 56CScriptConfig_Set00_kDefaultScripts_HERO_LANE_ASSIGNMENT
 56CScriptConfig_Set01_kActivatePhaseBoots_CARD_PLAY_SCRIPT
@@ -8654,6 +8642,7 @@ $tI
 57CMsgClientToGCGetGiftPermissionsResponse_FriendPermission
 57CMsgGameServerToClientInitialGameState_CMsgCombatLogEntry
 57CScriptConfig_Set00_kDefaultScripts_UPDATE_COMBAT_PREVIEW
+57CScriptConfig_Set01_kAThousandCuts_GENERIC_TRIGGER_SCRIPT
 57CScriptConfig_Set01_kActivateBlinkDagger_CARD_PLAY_SCRIPT
 57CScriptConfig_Set01_kActivateEmissaryoftheQuorum_CE_ADDED
 57CScriptConfig_Set01_kActivateSteamCannon_CARD_PLAY_SCRIPT
@@ -8679,6 +8668,7 @@ $tI
 58CScriptConfig_Set01_kActivateRavenousMass_CARD_PLAY_SCRIPT
 58CScriptConfig_Set01_kBerserkeroftheAbyssm_CARD_PLAY_SCRIPT
 58CScriptConfig_Set01_kChampionoftheAncient_CARD_PLAY_SCRIPT
+58CScriptConfig_Set01_kKillerInstinct_GENERIC_TRIGGER_SCRIPT
 58CScriptConfig_Set01_kLancerIllusion_GENERIC_TRIGGER_SCRIPT
 58CScriptConfig_Set01_kLegionStandardBearer_CARD_PLAY_SCRIPT
 58CScriptConfig_Set01_kOglodiCatapult_GENERIC_TRIGGER_SCRIPT
@@ -8698,6 +8688,8 @@ $tI
 59CScriptConfig_Set01_kDemagickingMaul_GENERIC_TRIGGER_SCRIPT
 59CScriptConfig_Set01_kIncarnationofSelemene_CARD_PLAY_SCRIPT
 59CScriptConfig_Set01_kIronFogGoldmine_GENERIC_TRIGGER_SCRIPT
+59CScriptConfig_Set01_kSorlaKhansSpear_GENERIC_TRIGGER_SCRIPT
+59CScriptConfig_Set01_kTheCoverofNight_GENERIC_TRIGGER_SCRIPT
 59CScriptConfig_Set01_kUnsupervisedArtillery_CARD_PLAY_SCRIPT
 5C
 5CCard
@@ -8714,6 +8706,7 @@ $tI
 6*
 60 frames: %5.1f fps, avg time:%5.2fms, abs_range:%7.2fms, min_time:%5.2fms, max_time:%5.2fms
 60 server ticks: %5.1f tps, avg time:%5.2fms, abs_range:%7.2fms, min_time:%5.2fms, max_time:%5.2fms
+60.0
 60.5,27.88,22.4
 600
 600.0
@@ -9077,7 +9070,6 @@ $tI
 >%s%.3f
 >*
 >=
->@
 >J
 >O
 >jm
@@ -11985,6 +11977,7 @@ Buff Hero to 15 Armor
 Buff Hero to 20 attack
 Buff Hero to 30 health
 Buffer error in compressed datastream in %s chunk
+BufferData
 Bug Submitted!
 BugBait
 Buginese
@@ -12076,6 +12069,7 @@ CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (3)
 CAnimationGroup
 CAnimationLayer
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
+CAsyncDataCache::BatchRequestData
 CAsyncDataCache::RequestCurrentData
 CAsyncWriteInProgress::OnComplete( "%s" ) -> %s at %.3f
 CAttachment
@@ -12123,6 +12117,7 @@ CBaseToggle
 CBaseTrigger
 CBaseVRHandAttachment
 CBaseVRHandAttachmentHandle
+CBaseViewModel
 CBaseWorldPanel::Init
 CBeam
 CBitVec
@@ -12173,6 +12168,7 @@ CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
+CBufferString::RemovePartialUTF8Tail(bool)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
@@ -12183,6 +12179,7 @@ CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
+CBufferString::ToUpperFast(int)
 CBufferStringN
 CBulletWhizTimer
 CButtonTimed
@@ -12521,7 +12518,6 @@ CEnvProjectedTexture
 CEnvScreenEffect
 CEnvScreenOverlay
 CEnvSky
-CEnvTimeOfDay2
 CEnvVolumetricFogController
 CEnvVolumetricFogVolume
 CEnvWind
@@ -13010,7 +13006,6 @@ CLoopModeGame::StaticInit-finish
 CLoopModeGame::StaticInit-start
 CLoopModeRegistry::RegisterLoopModes()
 CMaterialDrawDescriptor
-CMaterialModifyControl
 CMemAllocSystemInitialize
 CMemoryStack %s
 CModelPointEntity
@@ -13310,12 +13305,8 @@ CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
+CThreadedJob::Abort(bool)
 CTiltTwistConstraint
-CTimeOfDayDynamicKeyVaules: %s is not a valid slot name or is the wrong type.
-CTimeOfDayDynamicKeys
-CTimeOfDayDynamicKeys: %s is not a valid time-of-day slot or has already been claimed. Ignoring.
-CTimeOfDayDynamicValues
-CTimeOfDayStaticKeyValues
 CTimeline
 CTonemapController2
 CTransform
@@ -13523,7 +13514,6 @@ C_EnvProjectedTexture
 C_EnvScreenEffect
 C_EnvScreenOverlay
 C_EnvSky
-C_EnvTimeOfDay2
 C_EnvVolumetricFogController
 C_EnvVolumetricFogVolume
 C_EnvWind
@@ -13600,7 +13590,6 @@ C_LightEnvironmentEntity
 C_LightOrthoEntity
 C_LightSpotEntity
 C_LocalTempEntity
-C_MaterialModifyControl
 C_ModelPointEntity
 C_MultiplayRules
 C_NetTestBaseCombatCharacter
@@ -13712,7 +13701,6 @@ CalcDistanceToLineSegment2D
 CalcParentSpaceState
 CalcSequenceIndex: can't find '%s'.
 CalcWorldSpaceBones
-CalculateTimeOfDayState
 Call of the Wild
 Call set methods to initialize MapKey.
 Call the Reserves
@@ -14938,6 +14926,7 @@ DCGGeneral.Shotclock_02
 DCGGeneral.Shotclock_03
 DCGGeneral.Shotclock_05
 DCGGeneral.Shotclock_15
+DCGGeneral.Shotclock_30
 DCGGeneral.SiegeGain
 DCGGlossaryTooltip
 DCGHUD
@@ -16591,7 +16580,6 @@ Entity allocation failed since it forced slot %d, which is currently used by ent
 Entity class %s does not have its own datadesc (uses %s)
 Entity class %s is trying to queue for deletion while executing deferred deletions
 Entity component datadesc mismatch, template %s vs. virtual %s
-Entity for controlling time of day and weather effects
 Entity for controlling tonemap values from the map.
 Entity global initializers did not run
 Entity to watch for prediction system changes.
@@ -16630,7 +16618,6 @@ EnumOptions
 EnumValueOptions
 Enums must contain at least one value.
 EnvCubemapFogSystem
-EnvTimeOfDayPreviewerScriptScope
 EnvVolumetricFogControllerSystem
 Environment Change - %s - Object %s
 Environment Change - %s - Params
@@ -17062,7 +17049,6 @@ Failed to save local copy of custom image %s
 Failed to save personal key binding backup!
 Failed to send Hello message to the GC.
 Failed to spawn script entity %s of type %s: script entity instance is null
-Failed to tokenize command "%s"!
 Failed to unpack %s - Code %d
 Failed to update item schema from %s
 Failed to update item schema: HTTP status %d fetching %s
@@ -17291,6 +17277,7 @@ Footstep doesn't have valid sound hash.  Is override sound setup incorrectly, or
 Footstep doesn't have valid sound hash.  Trace missed=%s, or trace didn't hit a surface property, or the sound table for entity %s wasn't setup correctly.
 Footstep sound event invalid: %s (Anim: %s)
 Footstep: %s (Anim: %s, WalkSpeed Parameter: %.2f)
+For debugging. Shows the rope immediately.
 For development: Bind a key to in dcg (ALT+key) allowed.
 For development: List all developer binds.
 For development: Unbind a key to in dota (ALT+key) allowed.
@@ -17608,7 +17595,6 @@ Get the time spent on the server in the last frame
 GetAbsOrigin
 GetActiveSpawnGroupHandle
 GetAmmoType
-GetAngle
 GetAttributeInt
 GetAttributeString
 GetAttributeUInt32
@@ -17616,7 +17602,6 @@ GetBaseDamage
 GetBoneIndexForHitboxForMesh
 GetBool
 GetBool(name) : returns the convar as a boolean flag.
-GetBoolean
 GetCPUFrequencyResults
 GetCPUInformation
 GetCStringCharConversion
@@ -17627,7 +17612,6 @@ GetClassFieldType
 GetClassNameAsCStr
 GetClassNameOverride
 GetClassname
-GetColor
 GetCommandClient
 GetCommandClient() : returns the player who issued this console command.
 GetContentsPanel
@@ -17640,7 +17624,6 @@ GetDamageTaken
 GetDamageType
 GetDeathNoticeName not implemented on client yet
 GetDebugName
-GetDefaultMiniDumpTypeFlags
 GetDesignerNameForScriptClass
 GetDouble
 GetEntityHandle
@@ -17670,7 +17653,6 @@ GetMessage
 GetName
 GetNativeClassForScriptClass
 GetNativeOutputsForClass
-GetNumber
 GetOrCreatePrivateScriptScope
 GetOrCreatePublicScriptScope
 GetOriginalDamage
@@ -17722,7 +17704,6 @@ GetUGCDetails failed? (UGC=%08X%08X nFileSizeInBytes=%d).
 GetUInt32
 GetUInt64
 GetValue
-GetVector
 GetViewRenderInstance() must be implemented by game.
 Gets the value of the given cvar, as a float.
 Ghost Scepter
@@ -18214,7 +18195,6 @@ How much to enlarge ropes in screen space for antialiasing effect
 How much to scale user stick input when the gun is pointing at a valid target.
 How much to slow down backwards motion
 How often a sentence can repeat.
-How often should we run the Think() function for CEnvTimeOfDay2?
 Howling Mind
 Hud isn't loaded, we should have a hud loaded, this is a crash!
 HudChat
@@ -18474,7 +18454,6 @@ Infinite time value
 InfiniteWinGauntlet
 InfoForResourceTypeCAnimData
 InfoForResourceTypeCModel
-InfoForResourceTypeCPostProcessingResource
 InfoForResourceTypeCTextureBase
 InfoForResourceTypeIMaterial2
 InfoForResourceTypeIParticleSystemDefinition
@@ -18539,7 +18518,6 @@ InputForceInactive
 InputForwardingPanel
 InputOnHandEvent
 InputRemoveHealth
-InputRunCommand
 InputRunPrivateScript
 InputService_001
 InputSet2DSkyboxFogFactor
@@ -18839,7 +18817,6 @@ InviteEnabled
 InviteSent
 InviteUserKnown
 Invited
-InvokeMiniDumpHandler
 InvulnChanged
 Ion Shell
 Iron Branch Protection
@@ -19469,16 +19446,6 @@ LookAtList
 LookingForMatch
 LookingToPlayBeaconActive
 Looks at the target player's center, instead of his eye position, in chase came mode
-Lookup dynamic time-of-day float value
-Lookup dynamic time-of-day vector value
-Lookup static angle data for this key
-Lookup static boolean data for this key
-Lookup static color data for this key
-Lookup static float data for this key
-Lookup static int data for this key
-Lookup static number data for this key
-Lookup static string data for this key
-Lookup static vector data for this key
 LookupSequence
 Loop Point
 LoopModeGameStartup
@@ -20318,10 +20285,16 @@ N5GCSDK17CGCClientProtoJobI37CMsgGCToClientTourneySeriesMatchReadyEE
 N5GCSDK17CGCClientProtoJobI39CMsgClientToGCLookupAccountNameResponseEE
 N5GCSDK17CGCClientProtoJobI39CMsgGCToClientTourneyMembersMatchmakingEE
 N5GCSDK17CGCClientProtoJobI40CMsgGCToClientTourneySeriesMatchNotReadyEE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE11CDCGTourneyE16BatchRequestDataEPKS4_iEUlvE_EE
 N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE11CDCGTourneyE18RequestCurrentDataERKS4_EUlvE_EE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE11CDCGTourneyE20ScheduleBatchRequestEfEUlvE_EE
 N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE40CMsgClientToGCTourneyGetOverviewResponseE18RequestCurrentDataERKS4_EUlvE_EE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE43CMsgClientToGCTourneyGetOpenInvitesResponseE16BatchRequestDataEPKS4_iEUlvE_EE
 N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE43CMsgClientToGCTourneyGetOpenInvitesResponseE18RequestCurrentDataERKS4_EUlvE_EE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI13StrongTypedefIy16TourneyIDTypeTagLy0EE43CMsgClientToGCTourneyGetOpenInvitesResponseE20ScheduleBatchRequestEfEUlvE_EE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI19EventDataCacheKey_t23CMsgGCToClientEventInfoE16BatchRequestDataEPKS2_iEUlvE_EE
 N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI19EventDataCacheKey_t23CMsgGCToClientEventInfoE18RequestCurrentDataERKS2_EUlvE_EE
+N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI19EventDataCacheKey_t23CMsgGCToClientEventInfoE20ScheduleBatchRequestEfEUlvE_EE
 N5GCSDK17GCClientJobLambdaIZN15CAsyncDataCacheI9ECurrency16CMsgMarketPricesE18RequestCurrentDataERKS2_EUlvE_EE
 N5GCSDK18COutputToEmitGroupE
 N5GCSDK18CProtoBufNetPacketE
@@ -21292,7 +21265,6 @@ OnFocusAttack
 OnGainedAppliedEffect
 OnGameActivate
 OnGlowColorChanged
-OnGlowTypeChanged
 OnGoldEarned
 OnHeadOffsetChanged
 OnImpDealingCardsOnTheFlop
@@ -21859,7 +21831,6 @@ PPPN_TOP_VIGNETTE_STRENGTH
 PPPN_VIGNETTE_BLUR_STRENGTH
 PPPN_VIGNETTE_END
 PPPN_VIGNETTE_START
-PRECIPITATION
 PRECIPITATIONBLOCKER
 PRECIPITATION_TYPE_DUSTMOTES
 PRECIPITATION_TYPE_PARTICLEASH
@@ -23184,7 +23155,6 @@ Run lessons (Displayed / Success)...
 RunComplete
 RunJavascript
 RunScriptFile
-RunTimeOfDayCommand
 Rune-Lined Garment
 Runic
 Runic Instigation
@@ -24342,7 +24312,6 @@ Starting upload of %s to UFS....
 StatBuffed
 StatDebuffed
 StatNeutral
-State: %s
 StateFindingMatch
 StateIdle
 StateInGame
@@ -24812,8 +24781,6 @@ Tier08Red
 Tifinagh
 Timber Chain
 Timbersaw
-Time Of Day Entity
-Time Of Day Static Key Values
 Time Reward %s: loot_list (%s) does not exist
 Time Reward %s: pctChance (%f) must be greater or equal to 0.0
 Time Reward %s: pctChance (%f) must be less than or equal to 1.0
@@ -24832,8 +24799,6 @@ Time spend frozen in observer freeze cam.
 Time taken to zoom in to frame a target in observer freeze cam.
 Time to crossfade sound effects between soundscapes
 Time,Player 1 Position,Player 2 Position,Smooth FPS,Frame FPS,Smooth MS,Frame MS,Server Frame MS
-Time-of-day previewer VM did not start!
-TimeOfDaySlotNames
 TimeOfTriumphLighting
 Timed out waiting %d secs for reply msg %u (%s) from GC, connection state is %s
 Timed out waiting %d secs for reply msg %u (%s) from GC.  Assuming connection has been disrupted.
@@ -24926,7 +24891,6 @@ ToolObjects/GlobalLight
 ToolObjects/LightProbeVolume
 ToolObjects/env_deferred_light
 ToolObjects/env_sprite
-ToolObjects/env_time_of_day
 ToolObjects/point_clientui_world_text_panel
 ToolObjects/point_worldtext
 ToolSceneNodeFactory_001
@@ -25244,7 +25208,6 @@ Unexpected end of file expanding save game
 Unexpected failure while serializing option submessage
 Unexpected result! Terminating simulation. P1=%d, P2=%d
 Unhallowed Ground
-Unhandled type %d for time-of-day value %d=%s
 Unimplemented Map Reflection API.
 Unique Aggregates: %u
 Unit Ready For Deployment Upon Death (%u)
@@ -25416,6 +25379,7 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
+Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25577,6 +25541,7 @@ V_StringToColor
 V_StringToFloatArray
 V_StringToVector
 V_StripAndPreserveHTMLCore
+V_StripAndPreserveHTMLCoreLength
 V_StripTrailingSlash
 V_StripTrailingWhitespace
 V_URLDecode
@@ -25910,6 +25875,7 @@ When set, this will generate sample data for match signout
 When set, this will print out the protobuf of the match stats in base 64 which is useful for debugging and testing
 When set, this will show the official card text.
 When specifying keyvalues to spawn or precache, you must specify a classname!
+When to start the rope.
 When using smoothing, this is the min screenspace width it lets a rope shrink to
 Whether or not asserts should be collected for sending to the GC
 Whether or not players can abandon from this tournament (admin can kick either way)
@@ -26715,7 +26681,6 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/dcg/grules.c
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/dcg/localgame.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/decalgamesystem.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/entitydebuggamesystem.cpp
-_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/env_time_of_day2.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_particle_manager.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_readwrite.cpp
@@ -26824,6 +26789,7 @@ a world layer in a dota map
 a+t
 a/x
 aB
+aD
 aE
 aZure : voiced postalveolar fricative
 a_fDecodedAlpha >= 0.0f
@@ -27583,7 +27549,6 @@ cc_captiontrace
 cc_combinedusesgender
 cc_delay_time
 cc_disabled
-cc_emit
 cc_findsound
 cc_flush
 cc_lang
@@ -28816,6 +28781,7 @@ dcg_show_pack_opening
 dcg_show_rankup_dialog
 dcg_show_reward_popups
 dcg_show_splash_ads
+dcg_show_timer_rope
 dcg_siege_hits_always
 dcg_simulate_ai_disconnect
 dcg_single_lane_%i
@@ -28853,6 +28819,7 @@ dcg_test_ticket_popup
 dcg_tgod_wrath_post_delay
 dcg_time_to_display_vs
 dcg_time_to_display_vs_switch
+dcg_timer_rope_duration
 dcg_toast_on_partial_progress
 dcg_toggle_auto_pass
 dcg_toggle_hand_during_deployment
@@ -28895,7 +28862,6 @@ debug - disable trace query cache
 debug of origin changes for %d set to %s
 debug_ai
 debug_anim_source
-debug_materialmodifycontrol_client
 debug_shared_random
 debugoverlay
 decalDepth
@@ -28970,6 +28936,7 @@ deleteoldest
 demo.proto
 demo_skip
 demo_start
+demo_stop
 demofile
 depletioncount
 depth_offset
@@ -29848,7 +29815,6 @@ float (%g)
 float Etc::Block4x4Encoding::CalcPixelError(Etc::ColorFloatRGBA, float, Etc::ColorFloatRGBA)
 float Etc::Block4x4Encoding::GetError()
 float differs (net %g pred %g) diff(%g)
-float%d
 float( %f )
 float32
 float32-quantized
@@ -29953,6 +29919,7 @@ forwardmove
 forwards
 found '%s' in %s
 four
+fov %f
 fov_desired
 fow_darkness
 fps_max
@@ -30007,8 +29974,6 @@ g'
 g*
 gO : upper-mid back rounded vowel
 g_GameEventManager.Init()
-g_GameTime
-g_IsToolObject
 g_Language
 g_Mathlib_GammaToLinearByteTable
 g_SoundPatchCount
@@ -30016,8 +29981,6 @@ g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
-g_TimeOfDayEntity
-g_TimeOfDayKeyValues
 g_VProfCurrentProfile
 g_debug_ragdoll_visualize
 g_iStylePropertyIndexNextFree < 255
@@ -30035,7 +29998,6 @@ gained_deathskull_%s_tower_active_lane
 gaingold
 gainsboro
 game time per map in minutes
-game/globalsystems/%s
 gameClock
 gameClockBonusAmount
 gameClockBonusMinutes
@@ -30063,6 +30025,7 @@ game_instructor_counts.txt
 game_interactions
 game_keys
 game_mode
+game_newmap
 game_particle_manager_dump_requeue
 game_particle_manager_list_active
 game_particle_manager_requeue_messages
@@ -30934,6 +30897,7 @@ k
 k'
 k)
 k*
+kAThousandCuts
 kAbyssmFleshRender
 kActivateApotheosisBlade
 kActivateArclightElemental
@@ -31150,6 +31114,7 @@ kJuxtapose
 kKeenfolkGolem
 kKeenfolkMusket
 kKeenfolkTurret
+kKillerInstinct
 kKrakenShell
 kLancerIllusion
 kLaser
@@ -31281,6 +31246,7 @@ kSlumberingBrute
 kSmashTheirDefenses
 kSmeevilArmsmaster
 kSmeevilBlacksmith
+kSorlaKhansSpear
 kSoulofSpring
 kSowVenom
 kSpiritSiphon
@@ -31334,7 +31300,6 @@ kVoidTheft
 kWallofSecrets
 kWalrusPunch
 kWatchtower
-kWhenPurchased
 kWhirlingDeath
 kWhispersofMadness
 kWingfallHammer
@@ -31695,8 +31660,6 @@ m_DefaultSolverSettings
 m_DefaultTargetSettings
 m_DegreesPerSecond
 m_DialogXMLName
-m_DynamicKeys
-m_DynamicValues
 m_Easings
 m_EditItems
 m_EffectName
@@ -31712,9 +31675,7 @@ m_Falloff
 m_Filter
 m_Flags
 m_FlashlightTexture
-m_FloatIDs
 m_FloatVariables
-m_Floats
 m_FogColor
 m_Followup
 m_FontName
@@ -31793,21 +31754,9 @@ m_OnAnimReachedEnd
 m_OnAnimReachedStart
 m_OnAttachedToHand
 m_OnBreak
-m_OnDawnBegin
-m_OnDawnEnd
-m_OnDayBegin
-m_OnDayEnd
 m_OnDetachedFromHand
-m_OnDuskBegin
-m_OnDuskEnd
 m_OnHealthChanged
-m_OnMidDay
-m_OnMidNight
-m_OnNightBegin
-m_OnNightEnd
 m_OnSpawn
-m_OnSunrise
-m_OnSunset
 m_OnTakeDamage
 m_OnTrigger
 m_Operators
@@ -31896,9 +31845,7 @@ m_TimeBetweenEvents
 m_TransitionTransform
 m_VRControllerType
 m_Value
-m_VectorIDs
 m_VectorVariables
-m_Vectors
 m_ViewAngles
 m_ViewOrigin
 m_Weight
@@ -32106,7 +32053,6 @@ m_bHasClickedOnCoin
 m_bHasComputedAttachedParticles
 m_bHasCullingData
 m_bHasExtent
-m_bHasNewAnimationCommands
 m_bHasParent
 m_bHasRotation
 m_bHasSimulatedSinceLastSceneObjectUpdate
@@ -32220,7 +32166,6 @@ m_bNetworkedAnglesChanged
 m_bNetworkedAnimationInputsChanged
 m_bNetworkedPositionChanged
 m_bNetworkedScaleChanged
-m_bNewAnimCommandsSemaphore
 m_bNewDataThisFrame
 m_bNightTime
 m_bNoDepth
@@ -32232,7 +32177,6 @@ m_bNotifyBoneTransformsChanged
 m_bNotifyWhenSequenceFinished
 m_bOffsetExistingPos
 m_bOldActive
-m_bOldAnimCommandsSemaphore
 m_bOldEnableShadows
 m_bOldPoseValueParity
 m_bOnlyDrawInFastShadowPath
@@ -32356,7 +32300,6 @@ m_bUseOffScreenIndicator
 m_bUseParentRenderBounds
 m_bUseScreenAspectRatio
 m_bUseShadowFastPath
-m_bUsed
 m_bUsesIndexedBakedLighting
 m_bValid
 m_bVisible
@@ -32373,7 +32316,6 @@ m_bWillBeCallingPostDataUpdate
 m_bWorldLayerActuallyVisible
 m_bWorldLayerVisible
 m_bWorldSpaceScale
-m_bWrap
 m_baseLayer
 m_baseLayer.m_hSequence
 m_bbox
@@ -32654,9 +32596,6 @@ m_flFingerWeight
 m_flFireTime
 m_flFirstReceivedTime
 m_flFlashlightTime
-m_flFloatLerpEndValue
-m_flFloatLerpStartValue
-m_flFloatLerpTransitionTime
 m_flFoWDarkness
 m_flFogContributionStength
 m_flFogEnd
@@ -32678,7 +32617,6 @@ m_flFrame
 m_flFrameMax
 m_flFrameRate
 m_flFrameTime
-m_flFramerate
 m_flFreezeFrameDistance
 m_flFreezeFrameStartTime
 m_flFreezeZOffset
@@ -32689,7 +32627,7 @@ m_flGlowObstructionScale
 m_flGlowProxySize
 m_flGoal
 m_flGotPriorityTime
-m_flGravity
+m_flGravityScale
 m_flGripAnalogValue
 m_flGroundChangeTime
 m_flGroundScale
@@ -32888,6 +32826,7 @@ m_flShadowFadeMaxDist
 m_flShadowFadeMinDist
 m_flShadowMaxDist
 m_flShadowStrength
+m_flShapeRadius
 m_flSimOrRenderTime
 m_flSimTime
 m_flSimulationTime
@@ -32938,7 +32877,6 @@ m_flTheta
 m_flTickRemainder
 m_flTime
 m_flTimeAttackQueued
-m_flTimeLastUpdate
 m_flTimePingEffect
 m_flTimeToNextGust
 m_flTimeWeaponIdle
@@ -33179,8 +33117,6 @@ m_iFOV
 m_iFOVStart
 m_iFlags
 m_iForcePointMoveCounter
-m_iFrameEnd
-m_iFrameStart
 m_iFrictionAnimState
 m_iGlowTeam
 m_iGlowType
@@ -33529,7 +33465,6 @@ m_nMinGPULevel
 m_nMinParticlesToEmit
 m_nMode
 m_nModelIndex
-m_nModifyMode
 m_nMomentumType
 m_nMuzzleFlashParity
 m_nNameHash
@@ -33606,6 +33541,7 @@ m_nShadowCascadeResolution3
 m_nShadowHeight
 m_nShadowQuality
 m_nShadowWidth
+m_nShapeType
 m_nSimulationTick
 m_nSlaveAxis
 m_nSlaveChannel
@@ -33885,9 +33821,6 @@ m_szGrouping
 m_szLastPlaceName
 m_szLoopingAmbienceName
 m_szMatchingRule
-m_szMaterialName
-m_szMaterialVar
-m_szMaterialVarValue
 m_szName
 m_szResponseName
 m_szScripts
@@ -34254,7 +34187,6 @@ materials/models/props_gameplay/dcg_vignette.vmat
 materials/physics/flat_basic.vmat
 materials/physics/wireframe_basic.vmat
 materials/physics/wireframe_hidden.vmat
-materials/skybox/sky_model.vmat
 materials/sprites/blueglow1.vmat
 materials/sprites/light_glow02_add_noz.vmat
 materials/sun/overlay.vmat
@@ -35497,6 +35429,7 @@ particles/card_effects/performances/triggers/relentless_rebel/relentless_rebel_t
 particles/card_effects/performances/triggers/sadist/sadist_trigger.vpcf
 particles/card_effects/performances/triggers/spirit_siphon/spirit_siphon.vpcf
 particles/card_effects/performances/triggers/static_field/static_field_trigger.vpcf
+particles/card_effects/scheme/scheme_pulse.vpcf
 particles/card_effects/screen_shakes/shake_heavy.vpcf
 particles/card_effects/screen_shakes/shake_light.vpcf
 particles/card_effects/stat_events/bounty/bounty_gain.vpcf
@@ -36167,11 +36100,6 @@ r_ropetranslucent
 r_screen_size_expansion
 r_screenoverlay
 r_screenoverlay: %s
-r_skymodel_moonboost
-r_skymodel_nightambient
-r_skymodel_wavelength_b
-r_skymodel_wavelength_g
-r_skymodel_wavelength_r
 r_ssao
 r_strip_invisible_during_sceneobject_update
 r_swingflashlight
@@ -36206,6 +36134,7 @@ rareitem
 ratchetType
 raw://
 raw://%s%s
+raytrace.cpp
 rb+
 read weapon file '%s'
 readdir64
@@ -36495,7 +36424,6 @@ s_fInitialPlaybackRate
 s_fInterpolationDuration
 s_fInterpolationStartTime
 s_globalCount
-s_kDynamicValuesArraySize
 s_nLatchPermissions
 s_nWatchTransmitEntity
 saa
@@ -36605,7 +36533,7 @@ scripts/mod_textures
 scripts/propdata.txt
 scripts/quests/
 scripts/quests/test_gen.txt
-scripts/soundscapes_%s.txt
+scripts/soundscapes_
 scripts/soundscapes_manifest.txt
 scripts/splash_ads.txt
 scripts/surfaceproperties_game.txt
@@ -36843,7 +36771,6 @@ sm_bDisableTouchFuncs
 sm_nonPrimaryGlobalLights
 sm_pGlobalLight
 sm_pSkyboxSlots
-sm_pTimeOfDay
 small car
 small_icon
 smallbatch0
@@ -37026,14 +36953,14 @@ startsolid
 starttime
 startzoomed
 state buf parser out of sync w/ data
-static const ClassID IAudioAnimTag::MyTypeID()
-static const ClassID IClothSettingsAnimTag::MyTypeID()
-static const ClassID IFootstepLandedAnimTag::MyTypeID()
-static const ClassID IParticleAnimTag::MyTypeID()
-static const ClassID IPostGraphIKChainBlendTag::MyTypeID()
-static const ClassID IPostGraphIKTag::MyTypeID()
-static const ClassID ISequenceFinishedAnimTag::MyTypeID()
-static const ClassID IStatusAnimTag::MyTypeID()
+static const Reflection::ClassID IAudioAnimTag::MyTypeID()
+static const Reflection::ClassID IClothSettingsAnimTag::MyTypeID()
+static const Reflection::ClassID IFootstepLandedAnimTag::MyTypeID()
+static const Reflection::ClassID IParticleAnimTag::MyTypeID()
+static const Reflection::ClassID IPostGraphIKChainBlendTag::MyTypeID()
+static const Reflection::ClassID IPostGraphIKTag::MyTypeID()
+static const Reflection::ClassID ISequenceFinishedAnimTag::MyTypeID()
+static const Reflection::ClassID IStatusAnimTag::MyTypeID()
 static_attributes
 static_recipe
 stats_highlight_interval
@@ -37536,6 +37463,7 @@ std::__once_call
 std::__once_callable
 std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<bool*>(bool*)
 std::__shared_count<(__gnu_cxx::_Lock_policy)2>::operator=(std::__shared_count<(__gnu_cxx::_Lock_policy)2> const&)
+std::__shared_ptr<bool, (__gnu_cxx::_Lock_policy)2>::__shared_ptr(std::__shared_ptr<bool, (__gnu_cxx::_Lock_policy)2> const&)
 std::__throw_bad_alloc()
 std::__throw_bad_cast()
 std::__throw_bad_function_call()
@@ -37939,7 +37867,6 @@ t
 t)
 t*
 t-rex
-t@
 tOO : high back rounded vowel
 tRNS chunk has out-of-range samples for bit_depth
 tRNS chunk not allowed with alpha channel
@@ -37987,6 +37914,10 @@ team_name
 teamplay_broadcast_audio
 teamplay_round_win
 temp
+temp_river_a
+temp_river_b
+temp_river_c
+temp_river_d
 tempent_renderamt
 tenfoot_match
 tenfoot_pickle_dictionaries
@@ -38063,8 +37994,6 @@ timeScale
 time_penalty_for_expired_shot_clock
 timedemo
 timeleft
-timeofday %s
-timeofday_thinkinterval
 timer%u
 timestampUntil
 tint_color
@@ -38196,6 +38125,7 @@ turnClock
 turnClockInitialSeconds
 turnNumber
 turn_rate
+turn_timer01
 turns
 turnsInHand
 turnsLocked
@@ -38416,6 +38346,7 @@ unrecognized character after (?<
 unrecognized character after (?P
 unrecognized character follows \
 unregistered_decks
+unset
 unsigned
 unsigned char (%d)
 unsigned int Etc::Image::IterateThroughWorstBlocks(unsigned int, unsigned int, unsigned int)
@@ -38583,7 +38514,6 @@ vec[0] >= 0
 vec[1] >= 0
 vec[] differs (1st diff) (net %g %g %g - pred %g %g %g) delta(%g %g %g)
 vector (%g %g %g)
-vector%d
 vector2
 vector2d
 vector4

@@ -374,10 +374,8 @@ $tI/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworking
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_client.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_common.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_common.h
-/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_p2p.h
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_snp.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_snp.h
-/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_udp.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/percentile_generator.h
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/steamdatagram_network_config.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/steamdatagram_network_config.h
@@ -656,7 +654,6 @@ Ack range underflow, end=%lld, num=%lld
 AckMessages
 AckStats
 AckTimeout
-ActiveSessionChanged
 Actual    :
 AddBool
 AddDouble
@@ -700,6 +697,8 @@ Assertion Failed: !HasOverlappingRange( range, m_senderState.m_listReadyRetryRel
 Assertion Failed: !IsDevConfigValue( s_vecConfigValueTable[0]->m_eValue )
 Assertion Failed: !IsExternallyAllocated()
 Assertion Failed: !ListenSocket()
+Assertion Failed: !bFoundNextToTimeout
+Assertion Failed: !bFoundPendingAck
 Assertion Failed: !cert.m_authScope.IsEmpty()
 Assertion Failed: !cert.m_signed_data.empty()
 Assertion Failed: !data.m_bLast
@@ -717,6 +716,7 @@ Assertion Failed: !m_bHaveLowLevelRef
 Assertion Failed: !m_bPassive
 Assertion Failed: !m_connection.m_bConnectionInitiatedRemotely
 Assertion Failed: !m_identityRemote.IsInvalid()
+Assertion Failed: !m_mapInFlightPacketsByPktNum.empty()
 Assertion Failed: !m_msgICESessionSummary.has_local_candidate_types()
 Assertion Failed: !m_msgSignedCryptLocal.has_info()
 Assertion Failed: !m_pICESession
@@ -840,9 +840,11 @@ Assertion Failed: cert.m_signature.length() == sizeof(CryptoSignature_t)
 Assertion Failed: cert.m_signed_data == c.m_signed_data
 Assertion Failed: cert.m_timeCreated == c.m_timeCreated
 Assertion Failed: cluster.m_nPenaltyLocal >= 1000
+Assertion Failed: clusterLocal.m_nSortScore < k_nRouteScoreHuge
 Assertion Failed: clusterMetrics.m_nDataCenterPing >= 0
 Assertion Failed: clusterMetrics.m_nFrontPingLocal >= 0
 Assertion Failed: clusterRemote.m_nPingRemote >= 0
+Assertion Failed: clusterRemote.m_pData->m_pConfig && clusterRemote.m_pData->m_pConfig->m_id == popIDRemote
 Assertion Failed: count == 0 || s1 != NULL
 Assertion Failed: count == 0 || s2 != NULL
 Assertion Failed: count >= 0
@@ -903,6 +905,13 @@ Assertion Failed: inFlightPkt->first < nPktNumAckEnd
 Assertion Failed: inFlightPkt->first <= nLatestRecvSeqNum
 Assertion Failed: inFlightPkt->second.m_bNack
 Assertion Failed: info.m_pReplacementString == 0
+Assertion Failed: it->first == INT64_MIN
+Assertion Failed: it.first < it.second.m_nEnd
+Assertion Failed: it.first > nPrevEnd
+Assertion Failed: it.second.m_nEnd == INT64_MAX
+Assertion Failed: it.second.m_usecWhenAckPrior < INT64_MAX
+Assertion Failed: it.second.m_usecWhenAckPrior == INT64_MAX
+Assertion Failed: it.second.m_usecWhenAckPrior >= usecPrevAck
 Assertion Failed: itCur->first < itCur->second.m_nEnd
 Assertion Failed: itCur->second.m_nEnd < nAckEnd
 Assertion Failed: itGap != m_receiverState.m_mapPacketGaps.begin()
@@ -930,7 +939,6 @@ Assertion Failed: m_TotalElements != InvalidIndex()
 Assertion Failed: m_arMarker[n-1].m_nID != m_arMarker[n].m_nID
 Assertion Failed: m_bConnectionInitiatedRemotely
 Assertion Failed: m_bCryptKeysValid
-Assertion Failed: m_bCryptKeysValid && BStateIsActive()
 Assertion Failed: m_bHaveLowLevelRef
 Assertion Failed: m_bufPacketQueue.TellPut() == 0
 Assertion Failed: m_cbMaxEncryptedPayload >= 0
@@ -956,6 +964,8 @@ Assertion Failed: m_idxMapIncomingP2PConnections == -1
 Assertion Failed: m_idxServerMigrationTarget != m_vecActiveSessions[0]->m_pServer->m_idx
 Assertion Failed: m_idxServerMigrationTarget < 0
 Assertion Failed: m_idxServerMigrationTarget == -1
+Assertion Failed: m_itNextInFlightPacketToTimeout != it
+Assertion Failed: m_itNextInFlightPacketToTimeout == m_mapInFlightPacketsByPktNum.end()
 Assertion Failed: m_keyPrivate.IsValid()
 Assertion Failed: m_keyPublic.IsValid()
 Assertion Failed: m_listRelaySessions.IsEmpty()
@@ -1007,16 +1017,16 @@ Assertion Failed: m_pSignaling == nullptr
 Assertion Failed: m_pSock == nullptr
 Assertion Failed: m_pSock->GetRemoteHostAddr() == m_adr
 Assertion Failed: m_pSteamNetworkingMessages == nullptr
+Assertion Failed: m_pSteamNetworkingSocketsSerialized
 Assertion Failed: m_pTransportICE
 Assertion Failed: m_pTransportICE != m_pTransportICEPendingDelete
 Assertion Failed: m_padzero == 0 && x.m_padzero == 0
 Assertion Failed: m_pktNumInFlight == 0 && !m_bPassive
-Assertion Failed: m_primaryMostRecentMetrics.m_hRoutingCluster == m_vecActiveSessions[0]->m_pServer->m_hRoutingCluster
-Assertion Failed: m_primaryMostRecentMetrics.m_nScore < k_nRouteScoreHuge
 Assertion Failed: m_pszNeedToSendSignalReason
 Assertion Failed: m_queueIndex == -1
 Assertion Failed: m_queueIndex >= 0
 Assertion Failed: m_queueRecvMessages.empty()
+Assertion Failed: m_receiverState.m_itPendingAck->first == INT64_MAX
 Assertion Failed: m_receiverState.m_itPendingNack->first < nBegin
 Assertion Failed: m_receiverState.m_mapReliableStreamGaps.rbegin()->second < nExpectNextStreamPos
 Assertion Failed: m_response.m_nStatusCode >= 0
@@ -1058,6 +1068,7 @@ Assertion Failed: m_vecActiveSessions.Count() == 0
 Assertion Failed: m_vecActiveSessions.Count() > 0
 Assertion Failed: m_vecActiveSessions.Count() >= idxCurrentBackup
 Assertion Failed: m_vecActiveSessions.IsEmpty()
+Assertion Failed: m_vecActiveSessions[0]->m_sessionSelectQualityMetrics.m_nScore < k_nRouteScoreHuge
 Assertion Failed: m_vecActiveSessions[i] != m_vecActiveSessions[j]
 Assertion Failed: m_vecAllRelaySessions.Count() == 0
 Assertion Failed: m_vecAllRelaySessions.Count() == i
@@ -1075,6 +1086,7 @@ Assertion Failed: metrics.m_nFrontPingLocal == pClusterData->m_ping.m_nSmoothedP
 Assertion Failed: metrics.m_nFrontPingLocal >= 0
 Assertion Failed: metrics.m_nFrontPingRemote == 0
 Assertion Failed: metrics.m_nFrontPingRemote >= 0
+Assertion Failed: metrics.m_nScore <= sort.m_nPessimisticScore
 Assertion Failed: msg.has_connection_closed()
 Assertion Failed: msg.relay_mode() != CMsgSteamDatagramConnectionClosed_ERelayMode_ClosedByPeer
 Assertion Failed: msg.relay_mode() == CMsgSteamDatagramConnectionClosed_ERelayMode_None
@@ -1094,6 +1106,7 @@ Assertion Failed: n == 0 || s2 != NULL
 Assertion Failed: n >= 0
 Assertion Failed: nAckEnd == m_statsEndToEnd.m_nMaxRecvPktNum+1
 Assertion Failed: nAckEnd > 0
+Assertion Failed: nActiveIndex == INT_MAX
 Assertion Failed: nAddressFamilies & k_nAddressFamily_IPv4
 Assertion Failed: nBackPing >= 0
 Assertion Failed: nBegin < nEnd
@@ -1131,9 +1144,9 @@ Assertion Failed: nPktNum >= 0
 Assertion Failed: nPktNum+1 == m_statsEndToEnd.m_nNextSendSequenceNumber
 Assertion Failed: nPktNumAckBegin >= 0
 Assertion Failed: nPktNumNackBegin >= 0
+Assertion Failed: nPrevEnd == INT64_MAX
 Assertion Failed: nPut + nPutDelta <= outBuf.TellMaxPut()
-Assertion Failed: nRawScore <= k_nRouteScoreHuge
-Assertion Failed: nResult > nRawScore
+Assertion Failed: nRawScore >= 0
 Assertion Failed: nSDR_POPID
 Assertion Failed: nSDR_POPID == k_SteamDatagramPOPID_dev
 Assertion Failed: nSegBegin < gapFilled->second
@@ -1161,7 +1174,6 @@ Assertion Failed: pChild->m_hSelfInParentListenSocketMap == h
 Assertion Failed: pChild->m_pParentListenSocket == this
 Assertion Failed: pClient->m_identityRemote == identity
 Assertion Failed: pClient->m_listRelaySessions.Count() == 1
-Assertion Failed: pClient->m_statsEndToEnd.m_nMaxRecvPktNum > 0
 Assertion Failed: pClient->m_unConnectionIDRemote == unConnectionID
 Assertion Failed: pCluster->m_ping.m_nSmoothedPing >= 0
 Assertion Failed: pConn->GetState() == k_ESteamNetworkingConnectionState_Connecting
@@ -1219,7 +1231,6 @@ Assertion Failed: pQueue->m_pFirst
 Assertion Failed: pQueue->m_pFirst != pSuccessor
 Assertion Failed: pQueue->m_pFirst == pSuccessor
 Assertion Failed: pQueue->m_pLast
-Assertion Failed: pRelay->m_stats.m_nMaxRecvPktNum > 0
 Assertion Failed: pResult->m_identityRemote == identityRemote
 Assertion Failed: pResult->m_links.m_pPrev == nullptr
 Assertion Failed: pResult->m_links.m_pQueue == this
@@ -1249,6 +1260,8 @@ Assertion Failed: pchEncodedData
 Assertion Failed: pchSteam2ID
 Assertion Failed: pcubDecodedData
 Assertion Failed: popid
+Assertion Failed: prevPktNum < it->first
+Assertion Failed: prevWhenSent <= it->second.m_usecWhenSent
 Assertion Failed: pszCode[3] == '\0' || pszCode[4] == '\0'
 Assertion Failed: pszFmt && *pszFmt
 Assertion Failed: pubData
@@ -1257,7 +1270,7 @@ Assertion Failed: q.m_pFirst != this
 Assertion Failed: q.m_pFirst == this
 Assertion Failed: q.m_pLast != this
 Assertion Failed: q.m_pLast == this
-Assertion Failed: r.m_nScoreLocal < 9999
+Assertion Failed: r.m_nSortScoreLocal < 9999
 Assertion Failed: range.m_nBegin < u->first.m_nBegin
 Assertion Failed: remotePublicKey.IsValid()
 Assertion Failed: resizeNumBits >= 0
@@ -1265,6 +1278,7 @@ Assertion Failed: route.m_idxClusterLocal == pClusterData->m_idxInConfig
 Assertion Failed: route.m_nBackPing >= 0
 Assertion Failed: route.m_nScoreLocal == nCheckScore
 Assertion Failed: s.has_string_value()
+Assertion Failed: s.pSession->m_nP2PBestRouteRemotePopID != 0
 Assertion Failed: s_HostedDedicatedServerRouting.GetPopID() == nSDR_POPID
 Assertion Failed: s_hSockWakeThreadRead != INVALID_SOCKET
 Assertion Failed: s_hSockWakeThreadRead == INVALID_SOCKET
@@ -1290,15 +1304,17 @@ Assertion Failed: seg.m_cbSegSize > 0 || ( seg.m_cbSegSize == 0 && seg.m_pMsg->m
 Assertion Failed: seg.m_pMsg->m_links.m_pPrev == nullptr
 Assertion Failed: self->m_callback.m_fnCallback
 Assertion Failed: self->m_socket != INVALID_SOCKET
+Assertion Failed: sendCluster.m_nPriority > 0
+Assertion Failed: sendRoute.m_nPriority > 0
+Assertion Failed: sendRoute.m_nSortScoreLocal < 9999
+Assertion Failed: sendRoute.m_pRoute == &m_routeSelector.m_vecRoutes[ idxRoute ]
 Assertion Failed: server.m_adr == adr
 Assertion Failed: server.m_idx == idxServer
 Assertion Failed: server.m_nChallenge && server.m_unChallengeServerTime
 Assertion Failed: server.m_usecActivePingTimeout > 0
 Assertion Failed: server.m_vecSessions.Count() == 0
 Assertion Failed: server.m_vecSessions.Count() == idx
-Assertion Failed: sort.m_nOptimisticScore <= sort.m_nScore
-Assertion Failed: sort.m_nScore <= sort.m_nPessimisticScore
-Assertion Failed: srcRoute.m_bSendToPeer
+Assertion Failed: sort.m_nOptimisticScore <= metrics.m_nScore
 Assertion Failed: stats.m_flConnectionQualityLocal >= 0.0f
 Assertion Failed: stats.m_flConnectionQualityRemote >= 0.0f
 Assertion Failed: type == NA_IPV6
@@ -2852,7 +2868,7 @@ P2P_Transport_ICE_Enable
 P2P_Transport_ICE_Penalty
 P2P_Transport_SDR_Penalty
 P:
-P?
+P?/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_udp.cpp
 PBE-MD2-DES
 PBE-MD2-RC2-64
 PBE-MD5-DES
@@ -3506,6 +3522,8 @@ We don't have cert, and self-signed certs not allowed
 We don't know our AppID.  Order of init bug?
 We don't know our local identity.
 We don't know the Steam universe.  Order of init bug?
+We have a primary selected for a route, but it isn't in our route selector?
+We have a primary selected, can't locate remote cluster in route selector?
 We have a session on our migration target.  Why haven't we selected it yet?
 We sent an ack that wasn't pending!
 We shouldn't be asking about sending packets when not fully connected
@@ -3629,10 +3647,11 @@ ZLONG
 [%s] %s=%s
 [%s] Abandoning attempt to migrate to %s, relay is shutting down soon.
 [%s] AcceptConnection put the connection into state %d
-[%s] Active sessions changed, triggering route recalculation.
+[%s] Active sessions changed and we are controlling agent.  Triggering rebuild of routes message.
 [%s] After sending stats, we still need to send for %s
 [%s] Cannot accept connection, current state is %d.
 [%s] Cannot accept connection; already closed by remote host.
+[%s] Cannot calculate metrics to %s, but we have a session
 [%s] Cannot use unsigned cert; failing connection.
 [%s] Client switching active relay %s -> %s (msgID %d)
 [%s] ConnectionTimedOut didn't do what it is supposed to! (%d -> %d)
@@ -3670,6 +3689,8 @@ ZLONG
 [%s] Lost all sessions.  Will re-confirm end-to-end connectivity.
 [%s] Lost backup #%d %s.  %s
 [%s] Lost primary session %s %s
+[%s] Message updated, now at revision %d.
+[%s] No relevant changes to routing messsage, revision %d.
 [%s] Not using STUN servers as per P2P_Transport_ICE_Enable
 [%s] P2P route through '%s' now forwarding to '%s%s', revision %d
 [%s] Packet data chunk failed to decrypt!  Could be tampering/spoofing or a bug.
@@ -3681,6 +3702,7 @@ ZLONG
 [%s] Queue reliable signal message %s: { %s }
 [%s] RATELIM QueueTime is %.1fms, SendRate=%.1fk, BytesQueued=%d
 [%s] RX msg %lld offset %d+%d=%d %02x ... %02x
+[%s] Recalculating routes (%s).
 [%s] Received ConnectOK in P2P Rendezvous.
 [%s] Received NoSession from %s, RelaySessionID=%u.  Discarded relay session (remote conn #%u).  %d session(s) remain to talk to this client
 [%s] Received NoSession from %s, RelaySessionID=%u.  Ignoring, since remote client connection ID #%u is incorrect, correct connection ID is #%u
@@ -3697,6 +3719,7 @@ ZLONG
 [%s] Recv UDP stats:%s
 [%s] RecvMessage MsgNum=%lld sz=%d
 [%s] Recvd %s stats from %s:%s
+[%s] Reflexive candidates enabled by P2P_Transport_ICE_Enable, but P2P_STUN_ServerList is empty
 [%s] Relay %s acked routing forwarding revision %u.
 [%s] Relay %s acking wrong routing forwarding revision (%u instead of %u); forcing re-ack.
 [%s] Remote host is using an unsigned cert.  Allowing connection, but it's not secure!
@@ -3704,9 +3727,7 @@ ZLONG
 [%s] Requesting session from %s.  Ping = %d+%d=%d (front+back=total).
 [%s] Route through '%s' is '%s%s'
 [%s] Route through '%s' is now '%s%s' (was '%s%s')
-[%s] Routes recalculated (%s).  No relevant change, revision %d.
 [%s] Routes through '%s' to '%s%s'  lost.  No P2P route available through that cluster
-[%s] Routes updated (%s), now at revision %d.
 [%s] Selected '%s' transport (ping=%d, score=%d+%d)
 [%s] Selecting %s as backup #%d (%s)
 [%s] Selecting %s as primary.  (%s)
@@ -3725,6 +3746,7 @@ ZLONG
 [%s] Sequence number from relay is duplicate or old, but end-to-end sequence number is OK?
 [%s] Set remote auth to %s / %s
 [%s] Should not be trying to acccept this connection, it was not initiated remotely.
+[%s] Shouldn't be rbeuilding routing message - basic routing data is dirty for reason '%s'
 [%s] Started migration to %s at request of current primary %s
 [%s] StatsRouterToServer: Discarding end-to-end packet number %lld (latest %lld), but relay pkt num is OK %lld (last %lld)
 [%s] Switched primary to %s (%s) from %s (%s)
@@ -3734,6 +3756,7 @@ ZLONG
 [%s] Timed out.  Cannot send end-to-end.  %.1fms since last recv, %d consecutive failures
 [%s] Using STUN server list: %s
 [%s] Using loopback for P2P connection to local identity %s on vport %d.  Partner is [%s]
+[%s] We are controlling agent and currently selected route was not first in previously sent routing message. Rebuilding message
 [%s] We are in state %d and have been waiting %.1fs to be cleaned up.  Did you forget to call CloseConnection()?
 [%s] We have sessions and just received valid end-to-end packet, but we cannot select a session as active?
 [%s] closed by peer
@@ -3753,6 +3776,7 @@ ZLONG
 [%s] drop %d pkts [%lld-%lld)
 [%s] encode pkt %lld
 [%s] finding route
+[%s] packet number not properly initialized!
 [%s] pkt %lld %s, queueing retry of reliable range [%lld,%lld)
 [%s] problem detected locally (%d): %s
 [%s] received %s packet from %s which should confirm end-to-end connectivity.
