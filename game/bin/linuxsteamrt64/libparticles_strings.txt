@@ -1234,7 +1234,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
@@ -1243,6 +1242,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -2085,12 +2085,20 @@ InstallSchemaBindings
 Intentionally vague touch behavior for %p
 Invalid Color Control Point
 Invalid access of deferred ConVarRef for '%s'
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid compressed buffer size
 Invalid control point %d in %s
 Invalid data for member '%s'
 Invalid data.
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid member name '%s'
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -4099,7 +4107,6 @@ m_bEndCap
 m_bEvenDistribution
 m_bExplosions
 m_bFireOnEmissionEnd
-m_bFitCycleToLifetime
 m_bFitToModelSize
 m_bFlipBasedOnYaw
 m_bFlipHorizontal
@@ -4189,6 +4196,7 @@ m_bOrientZ
 m_bOriginalModel
 m_bOutline
 m_bOverrideTranslucentMaterials
+m_bParticleFeathering
 m_bParticleShadows
 m_bParticles
 m_bPerParticle

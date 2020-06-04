@@ -2757,6 +2757,7 @@ $tI
 %44s  --- completed jobs (usec)----------------------------------  ------ lock counts----------------------------------  ------ failures -----------
 %44s %12lld %12lld %12lld %12lld %8lld %8lld %8lld %8lld %8lld %8lld %8lld %8lld %8lld %8lld
 %4d
+%5.1f,setpos %0.2f %0.2f %0.2f ; setang %0.2f %0.2f %0.2f,%3i,%3i,%4.1f,%4.1f,%5.1f
 %5.2lf, Lane %d: (%5.2lf) (%5.2lf) (%6.2lf),
 %5.3f:%s: adding layer %d (order %d): %s : cycle %5.3f (weight %5.3f)
 %50.50s %32.32s: %s %s
@@ -2957,6 +2958,7 @@ $tI
 %s%c%s%c%s%c%g%c%d
 %s%d out of %d waiting jobs printed.
 %s%i
+%s%i:'%s'
 %s%i_%i
 %s%s
 %s%s (%s):
@@ -5907,7 +5909,6 @@ $tI
 19CViewAngleAnimation
 19CWeaponScriptParser
 19C_CombatWeaponClone
-19C_DCGGameRulesProxy
 19C_DevtestHierarchy2
 19C_EconItemAttribute
 19C_EnvWindClientside
@@ -11663,7 +11664,7 @@ AvatarImage%d
 AvatarName
 Avernus' Blessing
 Avestan
-Avg FPS %3i, Frame MS %5.1f, Frame Server MS %5.1f
+Avg FPS %3i, Frame MS %5.1f, Frame Server MS %5.1f log: %s
 Avg Job
 Avg/Msg
 Axe
@@ -12173,6 +12174,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -14253,6 +14255,7 @@ Cloak of Alacrity
 Cloak of Endless Carnage
 Close caption delay before showing caption.
 Close caption linger time.
+CloseCaptionPanoramaResources
 CloseCaption_Bold
 CloseCaption_BoldItalic
 CloseCaption_Italic
@@ -14926,7 +14929,6 @@ DCGGeneral.Shotclock_02
 DCGGeneral.Shotclock_03
 DCGGeneral.Shotclock_05
 DCGGeneral.Shotclock_15
-DCGGeneral.Shotclock_30
 DCGGeneral.SiegeGain
 DCGGlossaryTooltip
 DCGHUD
@@ -17278,6 +17280,7 @@ Footstep doesn't have valid sound hash.  Trace missed=%s, or trace didn't hit a 
 Footstep sound event invalid: %s (Anim: %s)
 Footstep: %s (Anim: %s, WalkSpeed Parameter: %.2f)
 For debugging. Shows the rope immediately.
+For debugging. Stops the rope immediately.
 For development: Bind a key to in dcg (ALT+key) allowed.
 For development: List all developer binds.
 For development: Unbind a key to in dota (ALT+key) allowed.
@@ -18680,6 +18683,9 @@ Invalid bit depth for grayscale image
 Invalid bit depth for grayscale+alpha image
 Invalid bit depth for paletted image
 Invalid bit depth in IHDR
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid cHRM after IDAT
 Invalid cHRM blue point
 Invalid cHRM green point
@@ -18719,12 +18725,14 @@ Invalid file id for %s
 Invalid file version for %s
 Invalid filter method in IHDR
 Invalid filter type specified
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid float number:
 Invalid format for pCAL parameter
 Invalid gAMA after IDAT
 Invalid global loadout slot specified: '%s'
 Invalid hIST after IDAT
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid iCCP after IDAT
 Invalid image color type specified
 Invalid image height in IHDR
@@ -18764,6 +18772,9 @@ Invalid property value
 Invalid proto descriptor for file "
 Invalid public dependency index.
 Invalid rarity specified for component!
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -19308,7 +19319,6 @@ Limbu
 Limited Item Timeout
 LimitedStageScenePanel
 LimitedStageToggleSortBy
-Limits the number of visible tracers per frame
 Lina
 Lina 2
 Line %d at "%s":
@@ -21468,7 +21478,7 @@ PA
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1193
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../animgraph_batchupdater.cpp:127
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2463
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2442
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2533
@@ -21909,6 +21919,7 @@ PanoramaUIClient001
 PanoramaUIEngine interface not set up
 PanoramaUIEngine setup failed
 PanoramaUIEngine001
+PanoramaUIStartup
 PanoramaWorldPanelGenerateMips
 Parade Veteran
 ParallelPrizeMode
@@ -23152,6 +23163,7 @@ Rumusque Scythe
 Rumusque Vestments
 Run a named command once connected to a spectator test context. Run with no name to see a lit of valid commands.
 Run lessons (Displayed / Success)...
+Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 RunComplete
 RunJavascript
 RunScriptFile
@@ -24798,7 +24810,7 @@ Time reward %s: Missing required field. Needs "loot_list"
 Time spend frozen in observer freeze cam.
 Time taken to zoom in to frame a target in observer freeze cam.
 Time to crossfade sound effects between soundscapes
-Time,Player 1 Position,Player 2 Position,Smooth FPS,Frame FPS,Smooth MS,Frame MS,Server Frame MS
+Time,Player 1 Position,Smooth FPS,Frame FPS,Smooth MS,Frame MS,Server Frame MS
 TimeOfTriumphLighting
 Timed out waiting %d secs for reply msg %u (%s) from GC, connection state is %s
 Timed out waiting %d secs for reply msg %u (%s) from GC.  Assuming connection has been disrupted.
@@ -25875,6 +25887,7 @@ When set, this will generate sample data for match signout
 When set, this will print out the protobuf of the match stats in base 64 which is useful for debugging and testing
 When set, this will show the official card text.
 When specifying keyvalues to spawn or precache, you must specify a classname!
+When speeding up slowing down, this is how much
 When to start the rope.
 When using smoothing, this is the min screenspace width it lets a rope shrink to
 Whether or not asserts should be collected for sending to the GC
@@ -26771,6 +26784,7 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../fx_tracer.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../fx_water.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../glow_overlay.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../hud.cpp
+_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../hud_closecaption.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../renderingpipeline_dcg.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../rendermicrobenchmark.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../warp_overlay.cpp
@@ -28173,6 +28187,8 @@ cp_position
 cpoint%d
 cpoint%d_value
 cpoint1
+cq_dilation_percentage
+cq_enable
 cr
 crafting
 create client decks
@@ -28796,6 +28812,7 @@ dcg_splash_ad_acknowledged_id
 dcg_stack_duplicate_rules_tiles
 dcg_start_with_creeps
 dcg_status_effect
+dcg_stop_timer_rope
 dcg_suppress_beams_to_dangerous_targets
 dcg_sync_deployment_buttons
 dcg_target_selection_x
@@ -30361,7 +30378,6 @@ hittest
 hittestchildren
 hl2
 hl2_episodic
-hllog.txt
 hltv
 hltv_cameraman
 hltv_chase
@@ -32029,7 +32045,6 @@ m_bForceLoopingAnimation
 m_bForceNoDraw
 m_bForceParentToBeNetworked
 m_bForceRecreateNextUpdate
-m_bForceShadowCastType
 m_bForcedHidden
 m_bFullbright
 m_bGameOver =
@@ -32184,6 +32199,7 @@ m_bOnlyPump
 m_bOnlyRenderToTexture
 m_bOpaque
 m_bOpponentAncientDestroyed
+m_bOpponentRoping
 m_bOtherMustBeHeld
 m_bOverrideCamera
 m_bOverrideFogColor
@@ -32235,6 +32251,7 @@ m_bRequired
 m_bRequiresUseKey
 m_bResampleWaterSurface
 m_bResetFlexWeightsOnModelChange
+m_bRoping
 m_bRunForParentApplyKillList
 m_bScaleCurrent
 m_bScaleInitialRange
@@ -32924,7 +32941,6 @@ m_floatAttributes
 m_floatParams
 m_fog
 m_footstepTimer
-m_forcedShadowCastType
 m_forceupdate
 m_forward
 m_gibDespawnTime
@@ -34681,6 +34697,7 @@ nothing
 nothing to repeat
 notify
 notol
+notreadybehavior
 nowrap
 npc_dota_barracks
 npc_dota_building
@@ -34993,6 +35010,7 @@ panorama/images/card_art/set%02u/full_art/%u_psd.vtex
 panorama/images/card_art/set%02u/full_art/*.vtex_c
 panorama/images/card_art/set%02u/hero_icons/*.vtex_c
 panorama/images/card_art/set%02u/mini_icons/*.vtex_c
+panorama/layout/worldui_text_subtitle.vxml
 panorama/localization/dcg_%language%.txt
 panorama/localization/dcg_glossary_%language%.txt
 panorama/localization/dcg_lore_set_00_%language%.txt
@@ -36055,7 +36073,6 @@ r_drawtracers
 r_drawtracers_firstperson
 r_drawviewmodel
 r_enable_rigid_animation
-r_fade360style
 r_farz
 r_flashlight_topdown
 r_flashlightambient
@@ -37843,7 +37860,6 @@ sv_specspeed
 sv_stepsize
 sv_stopspeed
 sv_suppress_viewpunch
-sv_tracereffects_limit_general
 sv_turbophysics
 sv_wateraccelerate
 sv_waterdist
@@ -38126,6 +38142,9 @@ turnClockInitialSeconds
 turnNumber
 turn_rate
 turn_timer01
+turn_timer02
+turn_timer03
+turn_timer04
 turns
 turnsInHand
 turnsLocked
@@ -38320,6 +38339,7 @@ unknown_variant_type
 unlessExistsMatchList
 unlimited quantity
 unlink
+unload
 unlocalized_name
 unlock_audio
 unlock_camera

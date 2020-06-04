@@ -240,7 +240,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-05-27 15:40:06.979000
+2020-06-02 14:58:10.467000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -485,7 +485,7 @@ ActiveContactList
 ActiveIndex
 ActivityState
 Adding Intersection Pair Trigger flag, because there are common interaction flags (set on both <font color="red">red</font> and <font color="blue">blue</font></small>)
-AgeingSpeed
+AgeSpeed
 Agg data %d: %p (%d parts, crc 0x%08X)
 Aggregate Count
 AggregateInstance
@@ -626,6 +626,7 @@ BroadphaseUpdate
 Buffer overflow
 Build Mass Unit Test centroid/floating-point-induced Max error: %f, %f, %f
 BuildNewContacts
+C
 C->D
 C->E
 CAimConstraint
@@ -669,7 +670,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
@@ -678,6 +678,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -919,6 +920,7 @@ CResourceArray< uint16 > FeModelRefl_t::m_RopesArray
 CResourceArray< uint16 > FeModelRefl_t::m_SourceElemsArray
 CResourceArray< uint16 > FeModelRefl_t::m_TreeCollisionMasksArray
 CResourceArray< uint16 > FeModelRefl_t::m_TreeParentsArray
+CResourceArray< uint16 > FeModelRefl_t::m_VertexMapNodeList
 CResourceArray< uint16 > FeModelRefl_t::m_WorldCollisionNodesArray
 CResourceArray< uint16 > FeMorphLayerRefl_t::m_Nodes
 CResourceArray< uint32 > ConnHierarchyRefl_t::m_BlendsEndArray
@@ -1222,6 +1224,7 @@ ChangeCallbackOnChangeOrCreate
 ChangeSize
 Child1
 Child2
+Choppiness
 Cloth:
 ClothScale
 ClothShapeCapsule
@@ -1347,6 +1350,7 @@ ERROR: Specified path %s could not be made content-relative
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyComputeNodeBaseCount
 EarlyInit_Tier0
+EaseCycle
 EconItemToolModel_001
 EditorDynamicConfig
 EffectNameHash
@@ -1621,16 +1625,24 @@ IntersectSphereHull
 IntersectionDictionaryRefl_t
 Invalid RecordedHitboxState_t
 Invalid access of deferred ConVarRef for '%s'
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid collision attr index %u, must be below %d,
 Invalid collision attribute palette entry %u, expected below %d
 Invalid collision group %s
 Invalid compressed buffer size
 Invalid data for member '%s'
 Invalid data.
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid interaction layer %s
 Invalid layer %s
 Invalid member name '%s'
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -1803,6 +1815,7 @@ Max Contacts Per Thread
 Max Error %g
 MaxAngularConstraintImpulse
 MaxCell
+MaxCellSize
 MaxLinearConstraintImpulse
 MaxSpeed
 Md5 Hash: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x
@@ -1932,6 +1945,8 @@ NoPoseControl
 Node %d
 NodeAnimSource
 NodeBasesUnpacked
+NodeListCount
+NodeListOffset
 NodePool
 NodeWindBases
 Nodes:
@@ -1959,7 +1974,6 @@ Overshortened by %.1f in
 Overstretched %.2fx
 Overstretched by %.1f in
 Owner
-P%:
 P@
 PA
 PARENT
@@ -2018,7 +2032,7 @@ PanoramaUIClient001
 PanoramaUIEngine001
 ParticleCount
 ParticleSystemMgr003
-PeakIntensityDivSubdiv
+PeakIntensityAdj
 PeakTime
 PerVertexLighting
 PermModelData_t
@@ -2995,6 +3009,7 @@ VertexColorPos_t
 VertexMap
 VertexMapHash
 VertexMapIndex
+VertexMapNodeList
 VertexPaintBlendParams
 VertexPaintBlendParams1
 VertexPaintTintColor
@@ -3400,10 +3415,14 @@ flWeight[]
 flWorldFriction
 float
 float FeModelOverlayRefl_t::m_flScale
-float IrrotationalVortexOnGridRefl_t::m_flAgeingSpeed
-float IrrotationalVortexOnGridRefl_t::m_flIntensityDivSubdiv
+float IrrotationalVortexOnGridRefl_t::m_flAgeSpeed
+float IrrotationalVortexOnGridRefl_t::m_flChoppiness
+float IrrotationalVortexOnGridRefl_t::m_flEaseCycle
+float IrrotationalVortexOnGridRefl_t::m_flIntensityAdj
 float IrrotationalVortexOnGridRefl_t::m_flLifeCycle
-float IrrotationalVortexOnGridRefl_t::m_flPeakIntensityDivSubdiv
+float IrrotationalVortexOnGridRefl_t::m_flMaxCellSize
+float IrrotationalVortexOnGridRefl_t::m_flMaxSpeed
+float IrrotationalVortexOnGridRefl_t::m_flPeakIntensityAdj
 float ManifoldPointRefl_t::m_flImpulse
 float PhysSurfacePropertiesAudioRefl_t::m_flStaticImpactVolume
 float PhysSurfacePropertiesAudioRefl_t::m_hardThreshold
@@ -4967,6 +4986,7 @@ uint16 FeModelRefl_t::m_nTreeDepth
 uint16 FeModelRefl_t::m_nTriCount[ 3 ]
 uint16 FeModelRefl_t::m_nWorldCollisionNodeCount
 uint16 FeModelRefl_t::m_nWorldCollisionParamCount
+uint16 FeVertexMapDescRefl_t::nNodeListCount
 uint16 FeVertexMapDescRefl_t::nVertexBase
 uint16 FeVertexMapDescRefl_t::nVertexCount
 uint16 RnContactRefl_t::m_nCollideFlags
@@ -4997,6 +5017,7 @@ uint32 FeMorphLayerRefl_t::m_nNameHash
 uint32 FeVertexMapDescRefl_t::nFlags
 uint32 FeVertexMapDescRefl_t::nMapOffset
 uint32 FeVertexMapDescRefl_t::nNameHash
+uint32 FeVertexMapDescRefl_t::nNodeListOffset
 uint32 ManifoldPointRefl_t::m_nID
 uint32 NameIndexRefl_t::m_nNextFreeIndex
 uint32 PhysSurfacePropertiesRefl_t::m_baseNameHash
@@ -5057,6 +5078,7 @@ uint8 RnSoftbodyRefl_t::m_nStateCounter
 uint8 RnWorldRefl_t::m_nDirtyFlags
 uint8 SoftbodyEffectRefl_t::m_nFlags
 uint8 SoftbodyEffectRefl_t::m_nType
+uint8 SoftbodyEffectRefl_t::m_nVersion
 unsigned short RnBodyRefl_t::m_nBodyFlags
 unsigned short RnBodyRefl_t::m_nGameIndex
 unspecified
@@ -5209,6 +5231,7 @@ zero
 {}()'
 {}()':
 |
+|h:
 } %llu aggs, %s total data
 };
 };*/ReflFieldDesc_t g_ReflFieldDesc[ %d ] = {

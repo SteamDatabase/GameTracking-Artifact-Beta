@@ -819,6 +819,7 @@ $effectSourceObjectID
 %%%d.%ds [%%3.3s] (%%5d) %%%d.%ds:
 %%%d.%ds [%%s::%%s]
 %%%s
+%%-%d.%ds
 %%s  %%c %%10s : %c%%%ds%c %%s
 %%s  %%c %%10s : %c%%-%d.%ds%c %%s
 %(
@@ -889,6 +890,7 @@ $effectSourceObjectID
 %d ('%c')
 %d ((%d:%d))
 %d (s/n %d)
+%d ... %d
 %d : %c %s SPEED %f ( %f %f %f )
 %d : %d : '%s'
 %d : %d : 'null'
@@ -901,11 +903,13 @@ $effectSourceObjectID
 %d areas simplified - %d remain
 %d ents in group %s%u/%s%s
 %d nodes
+%d pkts, %d cmd:
 %d queries, %d misses (%d free) suc spec = %d wasted spec=%d
 %d spawn groups:
 %d |
 %d(%s):  %s because %f %f %f was %s final landmark
 %d(%s):  rejected
+%d->%d
 %d.%d.%d
 %d.%d.%d.%d:%d
 %d/%d
@@ -1219,6 +1223,7 @@ $effectSourceObjectID
 %s: %s%s
 %s: %s( %s %d %d )
 %s: %s(%s) '%s' [%d] thinking for %.02f ms!!!
+%s: '%s' (tick %d)
 %s: AnimGraph Trying to set parameter: "%s" but does not exist
 %s: AnimGraph Variable: "%s" set to "%s" on %s (%d) at %.2f [%d]
 %s: Mass: %.2f kg / %.2f lb (%s)
@@ -1318,6 +1323,7 @@ $effectSourceObjectID
 (%0.2f): %s
 (%d %d %d %d)
 (%d) Name: %s (%s)
+(%d):
 (%f, %f, %f)
 (%g %g %g %g)
 (%g %g %g)
@@ -1325,6 +1331,7 @@ $effectSourceObjectID
 (%s) %i,
 (*%s*),
 (.
+(0)
 (0x%08X)'??'
 (0x%p)       Serialize state (update ID: %d) for player %d, network group %s: %s actions; reason = %s (%d)
 (0x%p) Sending state update to player %d: %u, Reason: %s (%u). Actions: %s - Caller: %s (%u)
@@ -1498,7 +1505,7 @@ $effectSourceObjectID
 *ZN10CTableGame18OutputClickCommandEiP11CGameObjectRKSt8functionIFvvEERK13AttributeListbEUlvE_
 *ZN10CTableGame28ApplyObjectContinuousEffectsEP11CGameObject12EEffectLayerEUlvE_
 *ZN10CTableGame33OutputDragObjectOntoObjectCommandEiP11CGameObjectS1_RKSt8functionIFvvEERK13AttributeListbEUlvE_
-*ZN12CNavDrawArea18DrawConnectedAreasERK8CNavAreaPK6VectorffPK9IPathCostEUlRS0_P19NavSearchAreaInfo_tE_
+*ZN12CNavDrawArea18DrawConnectedAreasERK8CNavAreaPK6VectorffPK12INavPathCostEUlRS0_P19NavSearchAreaInfo_tE_
 *ZN12CNavDrawMesh13DrawJumpLinksER8CNavMesh9NavHull_tRK6VectorffEUlP8CNavAreaE_
 *ZN13CDotaCardGame16DoLaneCombatStepEibEUlP11CGameObjectE_
 *ZN13CDotaCardGame16DoLaneCombatStepEibEUlPK11CGameObjectE0_
@@ -2010,6 +2017,7 @@ $effectSourceObjectID
 12CMsgTEImpact
 12CMsgTESparks
 12CMsgVector2D
+12CMultiDamage
 12CMultiSource
 12CNETMsg_Tick
 12CNavDrawArea
@@ -2047,6 +2055,7 @@ $effectSourceObjectID
 12INavDrawArea
 12INavDrawMesh
 12INavObstacle
+12INavPathCost
 130
 131
 132
@@ -2895,6 +2904,7 @@ $effectSourceObjectID
 19CNavEntityInterface
 19CNavGeneratorAAQuad
 19CNetworkedIKContext
+19CPlayerCommandQueue
 19CPointClientCommand
 19CPointServerCommand
 19CPointValueRemapper
@@ -2933,8 +2943,8 @@ $effectSourceObjectID
 19IEntity2SaveRestore
 19IFakeVRMoveListener
 19IGameEventListener2
-19IKeyValuesErrorSpew
 19INavEntityInterface
+19IPlayerCommandQueue
 19ISource2GameClients
 19IVoiceGameMgrHelper
 19TEDecal_GameEvent_t
@@ -4702,7 +4712,6 @@ $effectSourceObjectID
 9CTimeline
 9IEconTool
 9ILoopMode
-9IPathCost
 9IRegistry
 9ISequence
 :
@@ -6881,7 +6890,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
@@ -6890,6 +6898,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StrFormat(char const*, ...)
@@ -8390,6 +8399,7 @@ CombatCharVisCache
 CombatPreResolution
 Combo(
 ComeToRest
+Command Queue
 CommandLine
 CommandLineCheck
 CommandLineCheck(name) : returns true if the command line param was used, otherwise false.
@@ -9456,6 +9466,7 @@ FIELD_VMATRIX_WORLDSPACE
 FIELD_VOID
 FILTER_AND
 FILTER_OR
+FINAL
 FIRST
 FMod values for pose controller %sTYPE: %iTIME OFFSET: %fRATE: %fAMPLITUDE: %f
 FOV2D
@@ -10933,6 +10944,9 @@ Invalid Deck - Unable to find template for include card ID: %u
 Invalid Path
 Invalid access of deferred ConVarRef for '%s'
 Invalid attach type specified for particle_test in cvar 'particle_test_attach_mode.
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid card ID %i referenced in item rewards
 Invalid challenge config in match reward list: %s %u
 Invalid challenge in match reward list: %s
@@ -10953,9 +10967,11 @@ Invalid file descriptor data passed to EncodedDescriptorDatabase::Add().
 Invalid file id for %s
 Invalid file size for %s
 Invalid file version for %s
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid float number:
 Invalid global loadout slot specified: '%s'
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid item %s referenced in item rewards
 Invalid item %s referenced in virtual item rewards
 Invalid item quality specified for component!
@@ -10972,6 +10988,9 @@ Invalid parameter type in condition for challenge %s
 Invalid proto descriptor for file "
 Invalid public dependency index.
 Invalid rarity specified for component!
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -11113,6 +11132,7 @@ Key in map fields cannot be float/double, bytes or message types.
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
+KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
 Khan's War Tent
 Kieran Yanner
@@ -11229,7 +11249,6 @@ Lightning Strike
 LightningEnd
 LightningStart
 LimitThink
-Limits the number of visible tracers per frame
 Lina
 Lina 2
 Line %d at "%s":
@@ -12301,6 +12320,7 @@ OnAnimationDone
 OnAnimationLoopCycleDone
 OnAttach
 OnBaseLayerSequenceChanged
+OnBufferNotStarved(), resolved starve queue after %u ticks, %.2f
 OnCase%02d
 OnCellChanged
 OnColorChanged
@@ -12338,6 +12358,7 @@ OnPhysCannonAnimatePullStarted
 OnPhysCannonPullAnimFinished
 OnPreDataUpdate: missing ent %d
 OnRenderAttributesChanged
+OnSimulateUserCommands(), commands starved for %u ticks, %.1f ms (limit %.1f ms) not queuing additional command
 OnSoundFinished
 OnSource1LegacyGameEventListenBitsReceived: game event %i not found.
 OnSpriteScaleChanged
@@ -12401,7 +12422,7 @@ P1=%s, P2=%sP1Wins=%d, P2Wins=%d, Ties=%d
 P20CNavSearchHexLattice
 P29CNavBreadthFirstSearchLattice
 P33BreadthFirstSearchVolumeCollector
-P@%s %d
+P@%.6f
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2084
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:108
@@ -13283,6 +13304,7 @@ Rumusque Redeemer
 Rumusque Scythe
 Rumusque Vestments
 Run engine/gameplay test suite (host in server).
+Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 Run the animgraph updates after all the AI
 RunScriptFile
 Rune-Lined Garment
@@ -15305,6 +15327,7 @@ Vengeful Spirit
 Venomancer
 Venomous Nature
 Ventriloquy
+Verbose command queue logging.
 Verbose spew for this entity when doing IsInPVS computation.
 Versatile Occultist
 Version   : %u
@@ -15451,6 +15474,7 @@ When set, this will allow you to play cards of any color (for testing)
 When set, this will generate sample data for match signout
 When set, this will print out the protobuf of the match stats in base 64 which is useful for debugging and testing
 When specifying keyvalues to spawn or precache, you must specify a classname!
+When speeding up slowing down, this is how much
 When true, print amount and type of all damage received by player to console.
 Whether PLAYER physics is actively simulated (ie. noclip)
 Whether or not asserts should be collected for sending to the GC
@@ -15647,6 +15671,7 @@ Zombie Creeps
 [pre-disc]
 [procedural]
 [removed w REMOVED_KEYFIELD]
+[target: %3.2f, current %s] queue[ %s ], [tick %d of %d %s], dilation: %s %s
 [token:%02x] (%s),
 [traces]
 [unassigned]
@@ -16076,6 +16101,8 @@ autoswitchfrom
 autoswitchto
 autoteam
 avelocity
+avg %6.2f
+avg %6.2f [ lo: %6.2f, hi: %6.2f ]
 avginterval
 avi
 b
@@ -16410,6 +16437,7 @@ colortransitiontime
 combat<
 combatPosition
 combo
+command rate %.2f commands per sec vs. ticrate of %.2f at dilation %s
 commandline hook to run a nav_analyze and then quit.
 commentary_auto
 commentary_available
@@ -16472,6 +16500,18 @@ cp0_snapshot
 cp_position
 cpoint%d
 cpoint%d_value
+cq_adjust_deadzone_ticks
+cq_buffer_bloat_msecs
+cq_debug
+cq_dilation_percentage
+cq_dropped_command_msecs
+cq_enable
+cq_force_percent
+cq_max_queue_size
+cq_min_queue_size
+cq_queue_sample_count
+cq_resolve_commands_per_second
+cq_starve_hold_time
 crafting
 createClientOnlyEntities
 createClientSideChild
@@ -16664,6 +16704,7 @@ debug_physimpact
 debug_shared_random
 debug_touchlinks
 debug_visibility_monitor
+debugging, force client tick rate faster/slower by specified percentage.
 debugline
 debugoverlay
 debugoverlay_toggle
@@ -16744,6 +16785,7 @@ dialog_variable_name
 diff buff needs increase
 diff buffer overrun
 difficulty=%s
+dilation: %s [target: %3.2f, current %s], [tick %d of %d], %s
 dimension0
 dimension1
 directionentityname
@@ -16788,6 +16830,7 @@ dmg.explosive
 dmg.fire
 doClientSideAnimation
 dog
+don't adjust rate faster/slower if average queue is this close to goal.
 dormant child
 dota
 double
@@ -17155,6 +17198,7 @@ false
 false,
 fanfriction
 fast
+faster
 fastreload
 faulty context k:v pair in entity io %s
 fc
@@ -17697,6 +17741,7 @@ health_override
 healthbar_position
 healthmax
 healthmin
+here yessiree
 heroDeployment
 heroDestruction
 heroLowHealth
@@ -17766,7 +17811,6 @@ hl2
 hl2_episodic
 hl_dissolve_all_dropped_weapons
 hl_prop_vr_hand
-hllog.txt
 hltv
 hltv_cameraman
 hltv_chase
@@ -17795,6 +17839,7 @@ hostport
 hour
 hourhand
 hourhandentity
+how many frames of samples to store in the buffer sample queue.
 how many seconds you lose each time you don't respond
 hscript
 hscript_lightbinding
@@ -17829,6 +17874,7 @@ icon_replacement_hero
 icon_replacement_hero_minimap
 icon_uncommon
 idle: %s, weight: %.2f
+if we starve, we hold the faster time dilation for at least this long.
 ignite
 ignore socket quality
 ignorePhonemes
@@ -21821,6 +21867,9 @@ matrix3x4
 matrix3x4-world
 matrix3x4_t
 matrix3x4a_t
+max buffer bloat before we reset and discard buffered user commands.
+max buffer queue target size.
+max msecs of starved usercmds to queue before dropping any additional.
 max ragdoll count: %d
 max value: %f
 max( %s, %s )
@@ -21896,6 +21945,7 @@ messagevolume
 metal
 method
 microtxn
+min buffer queue target size.
 min value: %f
 min( %s, %s )
 min. %f
@@ -21981,10 +22031,10 @@ modeldoc6
 modeldoc7
 modeldoc8
 modeldoc9
+modeldoc_preview_ent
 models/%s
 models/%s.vmdl
 models/dev/error.vmdl
-models/extras/info_speech.vmdl
 models/props_plants/claypot03.vmdl
 models/survivors/survivor_gambler.vmdl
 models/ui/arrow_2d.vmdl
@@ -22543,6 +22593,7 @@ on_victory
 on_viewed_card_history
 on_viewed_combat_preview
 onbreak
+once cq_starve_hold_time elapses, we return to cq_min_queue_size over this many commands per second.
 onfirstimpact
 onlaunch
 only_breakable_by
@@ -23117,6 +23168,7 @@ remove
 remove test object
 remove_on_transfer
 remove_price_block_from_store
+removed %d usercmds from queue due to size > %.1f ms (%d ticks) (target %d)
 removing %d (%d): %s : %5.3f (%.3f)
 render_backface
 render_depth_map
@@ -23524,6 +23576,7 @@ slidesoundback
 slidesoundfwd
 slot_token_id
 slow
+slower
 sm_bAccurateTriggerBboxChecks
 sm_bDatadescValidating
 sm_bDisableTouchFuncs
@@ -23695,6 +23748,7 @@ startpos
 startsolid
 starttime
 startvalue
+starved queue [%u ticks], remembering command %d
 static const Reflection::ClassID IAudioAnimTag::MyTypeID()
 static const Reflection::ClassID IChoreoAnimNodeInstance::MyTypeID()
 static const Reflection::ClassID IClothSettingsAnimTag::MyTypeID()
@@ -24090,7 +24144,6 @@ sv_timeout_matchforming
 sv_timeout_nogcconnection
 sv_timeout_nommupdate
 sv_timeout_random_range
-sv_tracereffects_limit_general
 sv_turbophysics
 sv_unlag
 sv_unlag_debug
@@ -24737,6 +24790,7 @@ zero_value
 {}()':
 {}[]:,
 |
+|@
 |p
 |w
 ||| Tower health: %d, previewDamage: %d |||

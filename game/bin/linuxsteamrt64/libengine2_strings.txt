@@ -772,6 +772,7 @@ $tI
 -report
 -reservewarnmb
 -resizing
+-rs_recommend_gen
 -rs_reset
 -safe_mode
 -sdl_displayindex
@@ -915,10 +916,10 @@ $tI
 0.2
 0.4
 0.5
-00000000-0000-0000-0000-000000000000
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEFOut of Memory
 0123456789abcdef
+01:35:24
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0=Off, 1=Surface Wireframe, 2=Transparent Wireframe
@@ -1324,7 +1325,6 @@ $tI
 15IVEngineServer2
 15SignedPayload_t
 16.0
-16:57:20
 16CDefaultAccessor
 16CDemoSpawnGroups
 16CEntityComponent
@@ -1822,6 +1822,7 @@ $tI
 ;
 <
 <!--
+<!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
 </a>
 </font>
 <<null>>
@@ -2356,6 +2357,7 @@ CBufferString::ReplaceAt(int, int, char const*, int, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -3251,6 +3253,8 @@ Cannot quantize to more than %d colors
 Cannot read a file
 Cannot read file
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
+Cannot save KV3 text to a non-text buffer!
+Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Cannot transcode due to multiple use of quantization table %d
 Cannot write a file
 Caps Lock
@@ -4143,6 +4147,7 @@ Failed to parse delta header for Packet Entities, see log for details
 Failed to read attribute.
 Failed to read demo header.
 Failed to read screenshot!
+Failed to save unsupported class
 Failed to serialize KV3 to JSON.  %s
 False
 FastHexToBuffer() wants non-negative integers, not
@@ -4652,6 +4657,9 @@ Invalid bit depth for grayscale image
 Invalid bit depth for grayscale+alpha image
 Invalid bit depth for paletted image
 Invalid bit depth in IHDR
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid cHRM blue point
 Invalid cHRM green point
 Invalid cHRM red point
@@ -4676,9 +4684,11 @@ Invalid escape sequence in string literal.
 Invalid file descriptor data passed to EncodedDescriptorDatabase::Add().
 Invalid filter method in IHDR
 Invalid filter type specified
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid float number:
 Invalid format for pCAL parameter
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid image color type specified
 Invalid image height in IHDR
 Invalid image width in IHDR
@@ -4699,6 +4709,9 @@ Invalid progressive parameters Ss=%d Se=%d Ah=%d Al=%d
 Invalid progressive parameters at scan script entry %d
 Invalid proto descriptor for file "
 Invalid public dependency index.
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -4747,7 +4760,7 @@ Javanese
 Jul
 Jumping to random tick %d (%.2f min)
 Jun
-Jun  1 2020
+Jun  3 2020
 JustInTime Resource Spawn Group
 K
 KEY_0
@@ -6380,6 +6393,7 @@ RenderService_001
 RenderSkeletonBone_t
 RenderSystem
 RenderSystemOptionFlags
+RenderSystemOptionRecommendationGen
 RenderSystemSurface001
 RenderUtils_001
 RenderingBudget
@@ -7401,6 +7415,7 @@ Unsupported
 Unsupported ETC image format %d.
 Unsupported JPEG data precision %d
 Unsupported JPEG process: SOF type 0x%02x
+Unsupported binary encoding id.
 Unsupported color conversion request
 Unsupported marker type 0x%02x
 Unsupported text encoding id.
@@ -8307,6 +8322,7 @@ cloth_collision_layer3
 cloth_enable
 cmd
 cmdline,
+cmdrate
 cntrl
 code lengths %d,
 codes %d
@@ -10193,8 +10209,11 @@ serializing
 server cvars end
 server cvars start
 server_can_execute
+server_cmd_queue
+server_cmd_queue_desired
 server_cvar: "%s" "%s"
 server_query_info
+server_tick
 serverinfo
 serversideclientbase.cpp
 service $0 {
@@ -10311,6 +10330,7 @@ stackstats_dump
 startdemos
 startdemos:  %i demo(s) in loop
 startmovie
+starved_ticks
 staticClientDLLPanel
 staticClientDLLToolsPanel
 staticGameDLLPanel
@@ -10667,12 +10687,14 @@ thisEntity
 threaded_logger.cpp
 tick mark is locked
 tick mark is unlocked
+tick_interval
 tileHorizontally
 tileImage
 tileVertically
 tiles
 time_array
 time_asserts
+time_dilation_percent
 timedemo <demoname> <optional stats.txt> : gets demo speeds
 timedemo_end
 timedemo_start

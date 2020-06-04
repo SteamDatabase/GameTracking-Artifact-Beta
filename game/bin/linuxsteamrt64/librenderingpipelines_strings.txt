@@ -75,7 +75,6 @@ $ORIGIN
 1 = bloom output, 2 = quarter res downsample
 10IAppSystem
 11IVSSequence
-12CThreadEvent
 13IBaseSequence
 14CBaseAppSystemI10IAppSystemE
 14CEmptySequence
@@ -321,7 +320,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
@@ -330,6 +328,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -369,14 +368,7 @@ CRenderSkeleton
 CRenderingPipelinePostProcess::AddLayersToView expects 'tonemapRenderer' attribute! (Explicitly set to NULL to disable tonemapping.)
 CSceneObjectData
 CStrongHandle
-CThreadEvent::CThreadEvent(bool)
-CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
-CThreadRWLock::LockForWrite(char const*, int)
-CThreadRWLock::UnlockWrite(char const*, int)
-CThreadRWLock::WaitForRead()
-CThreadSyncObject::WaitImpl(unsigned int)
-CThreadSyncObject::~CThreadSyncObject()
 CTiltTwistConstraint
 CTwistConstraint
 CUtlBlockMemory overflow!
@@ -668,10 +660,18 @@ InstallSchemaBindings
 Intentionally vague touch behavior for %p
 IntermediateOutputColorResolved
 Invalid access of deferred ConVarRef for '%s'
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid data for member '%s'
 Invalid data.
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid member name '%s'
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -1028,7 +1028,6 @@ UV88
 UVLX8888
 UVWQ8888
 Unable to read resource file %s!
-Unable to write file '%s'
 Unexpected end of file
 Unrecognized flag name '%s'
 Unrecognized resource version (%d): %s
@@ -1730,6 +1729,7 @@ max_angle
 memcmp
 memcpy
 memmove
+mempool.cpp
 memset
 mesh
 mesh.cpp
@@ -1934,7 +1934,6 @@ textures/dev/reflectivity_scale.vtex
 texturescale
 true
 turn_rate
-typeinfo for CThreadSyncObject
 u64( %lld = 0x%llX )
 unspecified
 update

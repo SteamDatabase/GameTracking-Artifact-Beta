@@ -485,6 +485,7 @@ $ORIGIN
 20CCompressedStaticInt
 20CDampedPathAnimMotor
 20CIKRuleContext_Debug
+20CInputStreamAnimNode
 20CLabelledDebugHelper
 20CModelVScriptCompile
 20CMutableRefCountBaseILb1E6CRefMTE
@@ -551,6 +552,7 @@ $ORIGIN
 22CCycleConditionUpdater
 22CFootstepLandedAnimTag
 22CGroundIKSolveAnimNode
+22CInputStreamUpdateNode
 22CMotionMetricEvaluator
 22CParamConditionUpdater
 22CPathAnimMotorInstance
@@ -755,10 +757,12 @@ $ORIGIN
 28CFutureFacingMetricEvaluator
 28CIKJointConstraintData_Hinge
 28CIKJointConstraintData_Plane
+28CInputStreamAnimNodeInstance
 28CLookHeadingConditionUpdater
 28CModelDocAnimResourceSeqBase
 28CMoveHeadingConditionUpdater
 28IAnimMovementManagerInstance
+28IInputStreamAnimNodeInstance
 28ISchemaCollectionManipulator
 29CAnimationGraphVisualizerAxis
 29CAnimationGraphVisualizerLine
@@ -1098,6 +1102,7 @@ AnimVRHand_t
 AnimValueSource
 AnimVectorSource
 AnimVrBoneTransformSource_GripLimit
+AnimVrBoneTransformSource_LiveStream
 AnimVrBoneTransformSource_t
 AnimVrFingerSplay_Index_Middle
 AnimVrFingerSplay_Middle_Ring
@@ -1152,11 +1157,11 @@ Auto Reset
 Auto-Calculate target speed
 B
 B->C
-BIAnimStateMachine
 BLEND_PREALIGNED|
 BREAK: distance to target.
 BREAK: hyperextension. (%.2f degrees vs max of %.2f)
 BREAK: rotated over maximum of %.2f.
+BSpeed Scale node does not have a valid parameter
 Bad AnimEvent, sequence = "%s", AnimEvent = "%s", cycle & frame are both < 0 on model: %s
 Bad KV3 data for '%s': %s
 Bad KV3 data for resource: %s
@@ -1258,6 +1263,11 @@ BoneMask node has invalid weight list
 BoneMask node is missing a child.  Will use t-pose by default.
 BoneMaskBlendSpace
 BoneSetup
+BoneTransformSpace_Invalid
+BoneTransformSpace_Model
+BoneTransformSpace_Parent
+BoneTransformSpace_World
+BoneTransformSpace_t
 Bool Parameter
 BoolParameter
 Boundary Radius
@@ -1393,6 +1403,7 @@ CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
+CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
@@ -1540,6 +1551,9 @@ CIKRuleData_Debug
 CIKRuleData_FollowAnimation
 CIKRuleData_Ground
 CIKRuleData_Ground_VirtualPlanes
+CInputStreamAnimNode
+CInputStreamAnimNodeInstance
+CInputStreamUpdateNode
 CIntAnimParameter
 CJiggleBoneAnimNode
 CJiggleBoneItem
@@ -1548,8 +1562,8 @@ CLIENT: Activity %d is %s
 CLeafUpdateNode
 CLeanMatrixAnimNode
 CLeanMatrixInstanceData
-CLeanMatrixUpdateNode
 CLookAtAnimNode
+CLookAtUpdateNode
 CLookHeadingCondition
 CLookPitchCondition
 CMaterialDrawDescriptor
@@ -1694,7 +1708,6 @@ CVectorAnimParameter
 CVrSkeletalInputSettings
 CWayPointHelperAnimNode
 CWayPointHelperInstanceData
-CWayPointHelperUpdateNode
 CWristBone
 CXXABI_1.3
 C_INIT_AddVectorToVector
@@ -2377,6 +2390,7 @@ IAnimParameter
 IAnimParameterInstance
 IAnimState
 IAnimStateCondition
+IAnimStateMachine
 IAnimStateMachineInstance
 IAnimStateTransition
 IAnimTag
@@ -2399,6 +2413,7 @@ IFootPositionMetricInstance
 IFootstepLandedAnimTag
 IFutureFacingMetricInstance
 IFutureVelocityMetricInstance
+IInputStreamAnimNodeInstance
 IK Chain: %s: LOCK BREAK: distance to target. (Expected < %.2f, got %.2f)
 IK Chain: %s: LOCK BREAK: hyperextension.
 IK Chain: %s: LOCK BREAK: pitch variance between lock and goal too large. (Expected < %.2f degrees, got %.2f degrees: delta %.2f degrees)
@@ -2486,6 +2501,7 @@ InitWeightlist
 Initial tilt bone orientation.
 Inner Angle
 Inner Stopping Radius
+Input Stream
 InputService_001
 InputStackSystemVersion001
 InputSystemVersion001
@@ -2500,13 +2516,21 @@ Internal Tag
 Interpolation
 Invalid Bone
 Invalid access of deferred ConVarRef for '%s'
+Invalid bone and flex counts for model %s, %d meshes but %d counts
+Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
+Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
 Invalid compressed buffer size
 Invalid data for member '%s'
 Invalid data.
+Invalid flex control remap for mesh %d on model %s, meshFlexCtrl[%d] = modelFlexCtrl[%d], valid modelFlexCtrl range[0, %d]
 Invalid header
+Invalid hitbox bone remap for mesh %d on model %s, meshHitboxBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid member name '%s'
 Invalid number of parameters.  Specify a flag you want to toggle.
 Invalid parameter %s for %s = "%s"
+Invalid remapping table for model %s, has %d meshes but %d remapping starts
+Invalid remapping table size for mesh %d on model %s, need %d entries, only %d
+Invalid remapping table starts for mesh %d on model %s, %d expected %d
 Invalid request for mesh %d in model %s with %d entry remapping start table
 Invalid request for mesh %d in model %s with no remapping table
 Invalid request for mesh %d in model %s with no remapping table starts
@@ -2791,6 +2815,7 @@ N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CPathHelperAnim
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CSpeedScaleAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CStopAtGoalAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CTurnHelperAnimNodeEE
+N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI20CInputStreamAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI20CSingleFrameAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI21CCycleControlAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI21CSolveIKChainAnimNodeEE
@@ -2933,6 +2958,7 @@ N10Reflection6Detail11CClassInfoTI19IAnimStateConditionEE
 N10Reflection6Detail11CClassInfoTI19IPathMetricInstanceEE
 N10Reflection6Detail11CClassInfoTI20CAnimStateTransitionEE
 N10Reflection6Detail11CClassInfoTI20CDampedPathAnimMotorEE
+N10Reflection6Detail11CClassInfoTI20CInputStreamAnimNodeEE
 N10Reflection6Detail11CClassInfoTI20CPathStatusConditionEE
 N10Reflection6Detail11CClassInfoTI20CSingleFrameAnimNodeEE
 N10Reflection6Detail11CClassInfoTI20CTimeRemainingMetricEE
@@ -2999,6 +3025,8 @@ N10Reflection6Detail11CClassInfoTI27CFutureFacingMetricInstanceEE
 N10Reflection6Detail11CClassInfoTI27IFootPositionMetricInstanceEE
 N10Reflection6Detail11CClassInfoTI27IFutureFacingMetricInstanceEE
 N10Reflection6Detail11CClassInfoTI28CDampedPathAnimMotorInstanceEE
+N10Reflection6Detail11CClassInfoTI28CInputStreamAnimNodeInstanceEE
+N10Reflection6Detail11CClassInfoTI28IInputStreamAnimNodeInstanceEE
 N10Reflection6Detail11CClassInfoTI29CFutureVelocityMetricInstanceEE
 N10Reflection6Detail11CClassInfoTI29CPlayerInputAnimMotorInstanceEE
 N10Reflection6Detail11CClassInfoTI29CSolveIKChainAnimNodeInstanceEE
@@ -3032,6 +3060,7 @@ N24CAnimNodeInstanceFactory13CFactoryMakerE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI23CChoreoAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI25CFootLockAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI25CSequenceAnimNodeInstanceEE
+N24CAnimNodeInstanceFactory14CFactoryMakerTI28CInputStreamAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI29CSolveIKChainAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI29CStateMachineAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI31CDirectPlaybackAnimNodeInstanceEE
@@ -3365,7 +3394,6 @@ SOLVEIKCHAINANIMNODEDEBUGSETTING_Up
 SOLVEIKCHAINANIMNODEDEBUGSETTING_X_Axis_Circle
 SOLVEIKCHAINANIMNODEDEBUGSETTING_Y_Axis_Circle
 SOLVEIKCHAINANIMNODEDEBUGSETTING_Z_Axis_Circle
-SOLVEIKCHAINANIMNODESETTINGSOURCE_Default
 SOLVEIKCHAINANIMNODESETTINGSOURCE_Override
 SSE and SSE2 are required.
 SameCycleAsSource
@@ -3518,7 +3546,6 @@ Source2Host001
 Source2Server001
 Source2ServerSerializers002
 Speed Function
-Speed Scale node does not have a valid parameter
 Spring
 Spring Constant
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
@@ -4515,6 +4542,7 @@ m_choiceMethod
 m_choicePreviousCycle
 m_clipCycle
 m_clipGroups
+m_clipIndex
 m_clipName
 m_clipSampleIndex
 m_clips
@@ -4760,6 +4788,7 @@ m_flStrideCurveLimitScale
 m_flStrideCurveScale
 m_flTailAlphaScale
 m_flTargetFacing
+m_flTiltPlanePitchSpringStrength
 m_flTiltPlaneRollSpringStrength
 m_flTimingBlend
 m_flTraceAngleBlend
@@ -5453,6 +5482,8 @@ static const Reflection::ClassID CFutureVelocityMetricInstance::MyTypeID()
 static const Reflection::ClassID CGroundCondition::MyTypeID()
 static const Reflection::ClassID CGroundIKSolveAnimNode::MyTypeID()
 static const Reflection::ClassID CHitReactAnimNode::MyTypeID()
+static const Reflection::ClassID CInputStreamAnimNode::MyTypeID()
+static const Reflection::ClassID CInputStreamAnimNodeInstance::MyTypeID()
 static const Reflection::ClassID CIntAnimParameter::MyTypeID()
 static const Reflection::ClassID CJiggleBoneAnimNode::MyTypeID()
 static const Reflection::ClassID CLeanMatrixAnimNode::MyTypeID()
@@ -5541,6 +5572,7 @@ static const Reflection::ClassID IFootPositionMetricInstance::MyTypeID()
 static const Reflection::ClassID IFootstepLandedAnimTag::MyTypeID()
 static const Reflection::ClassID IFutureFacingMetricInstance::MyTypeID()
 static const Reflection::ClassID IFutureVelocityMetricInstance::MyTypeID()
+static const Reflection::ClassID IInputStreamAnimNodeInstance::MyTypeID()
 static const Reflection::ClassID IMotionClip::MyTypeID()
 static const Reflection::ClassID IMotionClipGroup::MyTypeID()
 static const Reflection::ClassID IMotionMatchingAnimNode::MyTypeID()
