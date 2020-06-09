@@ -188,6 +188,7 @@ $tI
 %lu
 %p
 %s
+%s (%s tested)
 %s * %s
 %s + %s
 %s - %s
@@ -247,6 +248,7 @@ $tI
 +++
 +++ %s:
 +++ %s[%d]:
++inf
 +x east
 +y north
 +z up
@@ -489,7 +491,6 @@ $tI
 26CAnimatableSceneObjectDesc
 26CDefaultKeyValuesErrorSpew
 26ICommandCompletionCallback
-26IReadTexturePixelsCallback
 27CDirectionalLightObjectDesc
 27CLightProbeVolumeObjectDesc
 27CMeshBuilderSceneObjectDesc
@@ -501,7 +502,6 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf10CUtlMemoryIfiEEfE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIj10CUtlMemoryIjiEEjE
 28CBindlessFastPathSceneObject
-28CGenerateMipsProceduralLayer
 28CSceneLightProbeVolumeObject
 28CTextureBarrierLayerRenderer
 28CTextureDisplayLayerRenderer
@@ -530,7 +530,6 @@ $tI
 34CSimplePostProcessingLayerRenderer
 35CInputLayoutRegistration_sm_hLayout
 37CAmbientOcclusionProxySceneObjectDesc
-37CCopySkyLightingPixelsProceduralLayer
 38IMaxSwapChainDimensionsChangedListener
 3C
 4
@@ -538,7 +537,6 @@ $tI
 4096.0f
 40CFunctor_SceneSystem_Thread_DrawDrawList
 40ISceneAnimatableProceduralBoneTransforms
-41CCopySkyLightingReadTexturePixelsCallback
 43CFunctor_SceneSystem_Thread_RenderPartition
 4C
 4CMDL
@@ -2272,6 +2270,7 @@ ORIENT
 OSX
 OUT_OF_RANGE
 Object %4d: 0x%p, class=%20s, origin=(%13g,%13g,%13g), bounds=(%13g,%13g,%13g):(%13g,%13g,%13g), desc=0x%p, flags=0x%016llX
+ObjectLists use %ikb w/%ikb waste, reclaimed %ikb of unused
 OccluderVisualization
 Occlusion Cull
 Occlusion render time:
@@ -2544,7 +2543,6 @@ SceneSystem/CsgoLightBinnerMaxLights
 SceneSystem/CsgoLightBinnerSingleLightFastPath
 SceneSystem/CubemapFog
 SceneSystem/DisableShadowFullSort
-SceneSystem/DynamicSkyLighting
 SceneSystem/HDRFrameBuffer
 SceneSystem/MaxAutoPartitions
 SceneSystem/NoSunLightManager
@@ -2630,19 +2628,6 @@ SimplePostProcessingLayer
 Simulated
 SkeletonBoneBounds_t
 SkinnedObject
-SkyLightingSamples
-SkyLightingTransmitterPositions
-SkyMap
-SkyMapForwardLightSetup
-SkyMapGenerateMips
-SkyMapInnerSkyRender
-SkyMapLightingColor
-SkyMapOuterSkyRender
-SkyMapRenderColor
-SkyMapRenderTarget
-SkyMapSampleLighting
-SkyMapSampleLightingReadPixels
-SkyMapSkyRender
 Skybox
 SlopeTrace
 Someone needed to call WaitForRenderingToComplete()!!!!!
@@ -3974,7 +3959,6 @@ materials/dev/occlusionproxy_debugdraw.vmat
 materials/dev/primary_white.vmat
 materials/dev/primary_white_trans.vmat
 materials/dev/reflectivity_90.vmat
-materials/dev/sky_lighting.vmat
 materials/dev/ssao_convert_depth.vmat
 materials/dev/ssao_downsample_depth.vmat
 materials/dev/ssao_scalable_ao.vmat
@@ -4100,7 +4084,7 @@ p
 pA
 pChunk
 pChunk == pList
-pObj->GetRefDataPtr() == nullptr
+pList != nullptr || pObj->GetRefDataPtr() == nullptr
 package $0;
 parameter error
 parent of jiggle bone %u: %s
@@ -4234,7 +4218,6 @@ sc_cache_envmap_lpv_lookup
 sc_check_world
 sc_disableThreading
 sc_disable_culling_boxes
-sc_disable_dynamic_sky_lighting
 sc_disable_procedural_layer_rendering
 sc_disable_shadow_fastpath
 sc_disable_shadow_materials
@@ -4314,8 +4297,8 @@ scenesysCone
 scenesysDodecahedron
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6591): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7901): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
+scenesystem.cpp(6542): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7851): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp
