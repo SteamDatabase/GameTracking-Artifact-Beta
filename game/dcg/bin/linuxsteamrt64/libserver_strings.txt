@@ -833,12 +833,14 @@ $effectSourceObjectID
 %.*s
 %.18g
 %.1f
+%.1f,%d,%s,%d,%.2f,%d,%d,%d,%d,%.2f,%d,%d,%d,%s,%s
 %.2f: server (pre-update)
 %.3d,%.3d,%.3d
 %0.2f
 %02X
 %02i:  %i %s
 %02i:  NULL link
+%04d_%02d_%02d_%02d_%02d_%02d
 %04u%02u%02u
 %04u%02u%02u%02u%02u%02u
 %04u-%02u-%02u
@@ -929,6 +931,7 @@ $effectSourceObjectID
 %f %f %f, %f %f %f
 %f is before m_SimulationState[%d].m_flSimulationTime %f
 %f%%
+%f,%s,%s
 %f: Player %s at [%0.2f %0.2f %0.2f] took %f damage from %s, type %s
 %g
 %g %g %g %g
@@ -1061,6 +1064,7 @@ $effectSourceObjectID
 %s%s: Lock owner: %s (%llu), Reason: %s, Type: %d, %d Waiting
 %s%s: Lock owner: None, Type: %d, %d Waiting
 %s( %s, %s )
+%s(%.1f->%.1f avg %.1f dev %.2f)
 %s(%d), flags (%d), weight: %.2f, cycle: %.2f, order (%d), aim (%d)
 %s(%s)
 %s(%s) could not find scene %d, named %s
@@ -1070,6 +1074,7 @@ $effectSourceObjectID
 %s+-- Schema Class: %s
 %s,
 %s,%ld,%ld,%ld
+%s,%s,%s,%s
 %s.%s
 %s.ctx
 %s.vmat
@@ -1694,7 +1699,6 @@ $effectSourceObjectID
 -curtimewarnings
 -dcg_force_eventid
 -defaultgamedir
--enable_2gb_morphs
 -entkv_use_schema
 -gamestatsfileoutputonly
 -gamestatslogging
@@ -2873,6 +2877,7 @@ $effectSourceObjectID
 19CBulletsTraceFilter
 19CCLCMsg_BaselineAck
 19CCombatCharVisCache
+19CCommandQueueTester
 19CCursorPackModifier
 19CDCGPuzzleModeRules
 19CDecalEmitterSystem
@@ -3417,6 +3422,7 @@ $effectSourceObjectID
 24CGameSystemStaticFactoryI18CVisibilityMonitorS0_E
 24CGameSystemStaticFactoryI19CAmmoDefInitializerS0_E
 24CGameSystemStaticFactoryI19CCombatCharVisCacheS0_E
+24CGameSystemStaticFactoryI19CCommandQueueTesterS0_E
 24CGameSystemStaticFactoryI19CDecalEmitterSystem19IDecalEmitterSystemE
 24CGameSystemStaticFactoryI19CSoundControllerImpS0_E
 24CGameSystemStaticFactoryI19CSoundEmitterSystemS0_E
@@ -6934,6 +6940,7 @@ CColorCorrection
 CColorCorrectionVolume
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CCommandQueueTester
 CCommentaryAuto
 CCommentarySystem
 CCommentaryViewPosition
@@ -8550,6 +8557,7 @@ Create an entity at a specified location and orientaton, orientation is Euler an
 Create an entity at the location of a named entity
 Create an entity at the location of a specified entity instance
 Create an entity at the location of the maker
+Create command queue logging file with metrics if != 0, # of seconds between samples.
 Create(CDCGServerLobby)
 Create(CEconItem)
 CreateByClassname
@@ -12672,7 +12680,6 @@ Plat_IsInDebugSession
 Plat_IsInTestMode
 Plat_MSTime
 Plat_MSTime64
-Plat_NeedsLowFragmentation
 Plat_RegistryDirectoryClose
 Plat_RegistryDirectoryOpenOrCreate
 Plat_RegistryReadInt
@@ -12893,7 +12900,6 @@ Pugna
 Punch it!
 Purification
 Push
-Push computed lag compensation amount by this many ticks.
 PushAndClearDebugOverlayScope
 PushDebugOverlayScope
 PushN
@@ -13487,6 +13493,7 @@ SV:  can't %s, no IEntity2SaveRestore
 SV:  can't autosavedangerousissafe, no IEntity2SaveRestore
 SV:  can't save, no IEntity2SaveRestore
 SV: %s executing %d commands, backlog is %d commands, processing took %.2f msecs
+SV: changing command queue to %s
 Sacred Arrow
 Sadist
 Sam Carr
@@ -14695,6 +14702,7 @@ TestFormatE
 TestRaysToBoundaryZone - pass raw %0.2f, pass grid %0.2f, ratio %0.2f
 TestScriptManager
 TestScriptMgr001
+Tests are disabled in retail builds
 Tests collision detection
 Tests hull collision detection
 Text that team leader from each team must speak for the match to begin
@@ -16117,7 +16125,7 @@ autoswitchto
 autoteam
 avelocity
 avg %6.2f
-avg %6.2f [ lo: %6.2f, hi: %6.2f ]
+avg %6.2f [ lo: %6.2f hi: %6.2f ]
 avginterval
 avi
 b
@@ -16184,6 +16192,7 @@ blendamount
 blendtobackground
 blendweight
 blendweights
+bloat,%d,%.2f,%s
 blob(%u bytes),
 blockLOS
 blocked_colors
@@ -16522,10 +16531,14 @@ cq_dilation_percentage
 cq_dropped_command_msecs
 cq_enable
 cq_force_percent
+cq_logging
+cq_logging/%s_%d_events.csv
+cq_logging/%s_%d_players.csv
 cq_max_queue_size
 cq_min_queue_size
 cq_queue_sample_count
 cq_resolve_commands_per_second
+cq_runtests
 cq_starve_hold_time
 crafting
 createClientOnlyEntities
@@ -16707,6 +16720,7 @@ dcg_tower_damage_reward_threshold
 dcg_tower_damage_reward_threshold_ai
 dcg_tower_destruction_reward_card
 dcg_untargetable_includes_auto_targets
+dcg_use_mini_pulse_in_combat
 dcg_venchatiquism_spam_window
 deadflag
 deaths
@@ -16814,6 +16828,7 @@ disable_dynamic_prop_loading - Skipped door '%s'
 disable_mip_gen
 disable_style_selector
 disableallshadows
+disabled,q=1
 disabledValue
 disablelowviolence
 disablereceiveshadows
@@ -16911,6 +16926,10 @@ enable_limit
 enable_offscreen_indicator
 enableangularconstraint
 enablecollision
+enabled,q=1
+enabled,q=2
+enabled,q=3
+enabled,q=4
 enableexposure
 enablelinearconstraint
 enableshadows
@@ -17757,7 +17776,6 @@ health_override
 healthbar_position
 healthmax
 healthmin
-here yessiree
 heroDeployment
 heroDestruction
 heroLowHealth
@@ -19501,7 +19519,6 @@ m_counter
 m_createdSpawnGroupHandles
 m_current
 m_currentAmp
-m_currentNavArea
 m_currentOp
 m_currentWindVector
 m_customType
@@ -20274,6 +20291,7 @@ m_hCubemapTexture
 m_hCurrLayerSequence
 m_hCurrentBlocker
 m_hCurrentInstance
+m_hCurrentNavArea
 m_hCurrentNode
 m_hDamageEntity
 m_hDamageFilter
@@ -20309,6 +20327,7 @@ m_hKiller
 m_hLastAttacker
 m_hLastCommentaryNode
 m_hLastFogTrigger
+m_hLastValidNavArea
 m_hLastWeapon
 m_hLayerSequence
 m_hLayerSpawnGroup
@@ -20783,7 +20802,6 @@ m_lastOrientation
 m_lastTime
 m_lastUpdate
 m_lastUpdateTickCount
-m_lastValidNavArea
 m_layerName
 m_layerSequence
 m_life
@@ -23766,6 +23784,7 @@ startpos
 startsolid
 starttime
 startvalue
+starve,%d,%.2f,%s
 starved queue [%u ticks], remembering command %d
 static const Reflection::ClassID IAudioAnimTag::MyTypeID()
 static const Reflection::ClassID IChoreoAnimNodeInstance::MyTypeID()
@@ -24073,7 +24092,6 @@ sv_infinite_ammo
 sv_infinite_clips
 sv_lagcompensationforcerestore
 sv_lagflushbonecache
-sv_lagpushticks
 sv_legacy_alwaystransmit
 sv_lightquery_debug
 sv_logsdir
@@ -24245,6 +24263,8 @@ thisEntity
 threads
 tilttime
 time %f %f
+time,name,type,amount,q target size,cl msec,sv msec,latency msec,packet loss %%
+time,userid,name,min q,target q,samples,starve,maxstarve,maxbloat,avgqueue,faster,normal,slower,q info,cl msec,sv msec,latency msec,packet loss %%
 time: %6.3f   sound name: %s   scene: %s
 timeSpoken
 time_penalty_for_expired_shot_clock

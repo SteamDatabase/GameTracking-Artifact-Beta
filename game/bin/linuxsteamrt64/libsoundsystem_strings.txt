@@ -22,6 +22,7 @@ $tI
 %*s(%08x):Stopping: %s (%08x) : elapsed time: %.2fs
 %*sName: %s
 %*sName: %s%*sNameSpace: %s
+%*sOperator Stack: %s%*sOperator: %s
 %*sOperator Stack: %s%*sSize: %i
 %*sSoundEvent Hash: %d
 %*smixgroup: %s
@@ -730,7 +731,7 @@ CSosOperatorSystem::StartSoundEvent Unable to start soundevent %s
 CSosOperatorSystem::StartSoundEvent called with invalid soundevent hash
 CSosSoundEventGroupListSchema
 CSosSoundEventGroupSchema
-CSoundEvent: %sBase: %sStack: %sFields:
+CSoundEvent: %sBase: %sType: %sFields:
 CSoundEvent: Warning, soundevent_data selection field overrun
 CSoundSampler
 CSoundSampler: Key Groups: %i
@@ -1424,10 +1425,12 @@ PreviewPreset
 PreviewPresetList
 Prewview VMIX voice on the game graph, preview will be different!
 Print the data associated with the specified soundevent.
+Print the default public properties of a specified soundevent. Values do not reflect values set on the soundevent. For that see "snd_print_soundevent"
 Prints a list of currently available operators
 Prints a list of currently available stacks
 Prints a list of currently cached strings
 Prints a master list of currently exposed variables
+Prints an operator from a stack
 Prints the current stack execution list
 Prints the current state of the groups system
 Prints the current state of tool properties.
@@ -1738,10 +1741,12 @@ Update SoundEvent: %s
 Usage:  playdelay delay_in_msec (negative to skip ahead) soundname
 Usage:  snd_compare_soundevents soundevent1 soundevent2
 Usage:  snd_print_soundevent <soundeventname>
+Usage:  snd_print_soundevent_default_public_properties <soundeventname>
 Usage:  snd_remove_soundevent <soundeventname>
 Usage:  snd_sos_get_operator_field <stackname> <operator> <field>
 Usage:  snd_sos_print_exec_list
 Usage:  snd_sos_print_operator_stack <stackname>
+Usage:  snd_sos_print_operator_stack <stackname> <operator>
 Usage:  snd_sos_resolve_execute_operator <stackname> <operator>
 Usage:  snd_sos_set_operator_field <stackname> <operator> <field> <index> <float>
 Usage:  snd_sos_start_soundevent <eventname> <ent id)
@@ -3283,6 +3288,7 @@ snd_print_samplers
 snd_print_sequences
 snd_print_soundevent
 snd_print_soundevent %s
+snd_print_soundevent_default_public_properties
 snd_rear_headphone_position
 snd_rear_stereo_speaker_position
 snd_rear_surround_speaker_position
@@ -3318,6 +3324,7 @@ snd_sos_print_field_references
 snd_sos_print_full_field_info
 snd_sos_print_groups
 snd_sos_print_operator_stack
+snd_sos_print_operator_stack_opeator
 snd_sos_print_operator_stacks
 snd_sos_print_operators
 snd_sos_print_stack_exec_list

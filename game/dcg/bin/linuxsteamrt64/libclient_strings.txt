@@ -868,6 +868,8 @@
 #DCG_ConfirmQuitInGame
 #DCG_ConnectingToServer
 #DCG_Console
+#DCG_Constructed_Popup_ConfirmConstructed
+#DCG_Constructed_Popup_Join
 #DCG_CreateTourney_Error_Disabled
 #DCG_CreateTourney_Error_InTooManyTourneys
 #DCG_CreateTourney_Error_InternalError
@@ -879,6 +881,8 @@
 #DCG_CreateTourney_InProgress_Text
 #DCG_CreateTourney_InProgress_Title
 #DCG_CreateTourney_TimerType
+#DCG_DBCollection_LeaveConstructed
+#DCG_DBCollection_PlayConstructed
 #DCG_DBPlay_AbandonConfirm
 #DCG_DBPlay_AbandonGame
 #DCG_DBRanked_FindMatch
@@ -1362,6 +1366,7 @@
 #DCG_PlayerContextMenu_AddFriend
 #DCG_PlayerContextMenu_CancelFriendRequest
 #DCG_PlayerContextMenu_ChallengeFriend
+#DCG_PlayerContextMenu_ChallengeOpponent
 #DCG_PlayerContextMenu_ChatWithPlayer
 #DCG_PlayerContextMenu_Ignore
 #DCG_PlayerContextMenu_IgnoreFriendRequest
@@ -4114,7 +4119,6 @@ $tI
 -defaultgamedir
 -dev
 -duck
--enable_2gb_morphs
 -entkv_use_schema
 -filmgrain
 -find_unlocalized
@@ -4144,6 +4148,7 @@ $tI
 -moveup
 -multiple
 -no_environment_maps
+-no_hierarchical_vpk_memory_mapping
 -noclearsave
 -noforcemaccel
 -noforcemspd
@@ -8842,6 +8847,7 @@ $tI
 9CCallbackI16CDCGRichPresence26FriendRichPresenceUpdate_tLb0EE
 9CCallbackI16CDCG_UI_UserName20PersonaStateChange_tLb0EE
 9CCallbackI16CSteamController22GameOverlayActivated_tLb0EE
+9CCallbackI16CSteamController30GetAuthSessionTicketResponse_tLb0EE
 9CCallbackI19CClientSteamContext23SteamServersConnected_tLb0EE
 9CCallbackI19CClientSteamContext26SteamServersDisconnected_tLb0EE
 9CCallbackI19CClientSteamContext27SteamServerConnectFailure_tLb0EE
@@ -11547,6 +11553,7 @@ ArmorFilter
 Arrow%d
 ArrowPanel
 ArtStyle
+Artifact Lane Map
 ArtifactDevs
 ArtifactDraftBenchList
 ArtifactLevelIcon
@@ -14918,6 +14925,8 @@ DCGGeneral.BountyGain
 DCGGeneral.BountyLoss
 DCGGeneral.CleaveGain
 DCGGeneral.Damage
+DCGGeneral.DecayGain
+DCGGeneral.DecayLoss
 DCGGeneral.Error
 DCGGeneral.Fight
 DCGGeneral.Fight_Armor
@@ -15010,6 +15019,11 @@ DCGJoinChannelSearchResultFocused
 DCGJoinChannelSwitchTab
 DCGJoinChannelToggleHeaderSort
 DCGJoinChatChannel
+DCGJoinConstructedChannel
+DCGJoinConstructedChannel( false )
+DCGJoinConstructedChannel( true )
+DCGJoinConstructedChannelConfirm
+DCGJoinConstructedChannelConfirm( false );
 DCGJoinFeaturedGauntlet
 DCGJoinGauntlet
 DCGJoinGauntlet()
@@ -18113,6 +18127,7 @@ HeroVS
 HeroVSContainer
 HeroValid
 HeroViewer
+Heroes Forward Opaque
 Heroes:
 Heroic Resolve
 Hex and octal numbers must be integers.
@@ -20955,6 +20970,7 @@ NamedPaths
 NativeFunctions
 NavBackward
 NavOpenPacks
+NavPlayConstructed
 NavigateBackButton
 NavigateForwardButton
 Nd
@@ -21624,6 +21640,7 @@ PE_DISARMED_MODIFICATION_GAINED
 PE_DISARMED_MODIFICATION_LOST
 PE_DRAFT_CARD_SELECTED
 PE_DRAFT_CARD_UNSELECTED
+PE_ENEMY_TOWER_DECAY_ENABLED
 PE_ENEMY_TOWER_IMMUNITY_ENABLED
 PE_ENEMY_TOWER_RETALIATE_ENABLED
 PE_EQUIPMENT_CAST_ON_LANE
@@ -21755,6 +21772,8 @@ PE_TOWER_DAMAGED_AMBIENT_DIRE_CREATED
 PE_TOWER_DAMAGED_AMBIENT_DIRE_DESTROYED
 PE_TOWER_DAMAGED_AMBIENT_RADIANT_CREATED
 PE_TOWER_DAMAGED_AMBIENT_RADIANT_DESTROYED
+PE_TOWER_DECAY_DISABLED
+PE_TOWER_DECAY_ENABLED
 PE_TOWER_DRAG_ENTER_TARGET
 PE_TOWER_DRAG_LEAVE_TARGET
 PE_TOWER_DRAG_TARGET_DISABLED
@@ -22191,6 +22210,7 @@ Play named sound on Entity
 Play named sound only on the client for the passed in player
 Play the Card Draw Animation
 PlayCampaign
+PlayConstructedLabel
 PlayHero%d
 PlayHero%dPortait
 PlayHero1Portait
@@ -25419,7 +25439,6 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
-Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25892,7 +25911,6 @@ WebBrowser
 WeeklyWins%d
 WeightForPhoneme:: Unrecognized phoneme %s
 Welcome message contained %s twice
-Welcome to match ID %llu
 WheelCenter
 When connected to hltv or playing a demo, adjust the interp time by this ratio.
 When enabled and collecting asserts for the GC, this will generate stacks for the asserts
@@ -26077,7 +26095,6 @@ Yongjae Choi
 You Are The Product
 You and your opponent see each other's cards.
 You are #%d in line of %d waiting players.
-You are playing in league %u
 You have been waiting for approximately %02d:%02d.
 You have unlocked a door!
 You must provide a deck code
@@ -26787,6 +26804,7 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_fountainstatem
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_handstatemachine.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_view_worldscene.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/game_state_receiver.cpp
+_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/hud/dcg_view_hud.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/panorama/dcg_ui_game_render.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/scripts/dcg_card_scripts_common.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/scripts/dcg_script_config.cpp
@@ -27100,6 +27118,7 @@ array::at: __n (which is %zu) >= _Nm (which is %zu)
 array_ != __null
 array_index
 arroworigin
+artifact_board
 artifact_board_lane%i_origin
 asap
 ascii
@@ -28694,6 +28713,7 @@ dcg_item_rarity
 dcg_join_regional_chat_channel
 dcg_keybindings_cloud_disable
 dcg_lane_info
+dcg_lane_offset_z
 dcg_last_closed_motd
 dcg_last_play_context
 dcg_lightenvironment_fullambient
@@ -28826,6 +28846,7 @@ dcg_show_own_gestures
 dcg_show_pack_opening
 dcg_show_rankup_dialog
 dcg_show_reward_popups
+dcg_show_shot_clock_seconds
 dcg_show_splash_ads
 dcg_show_timer_rope
 dcg_siege_hits_always
@@ -28894,6 +28915,8 @@ dcg_unitchatwheel_dead_zone_radius
 dcg_unitchatwheel_enable_mouse_clamp
 dcg_unitchatwheel_outer_radius
 dcg_untargetable_includes_auto_targets
+dcg_use_mini_pulse_in_combat
+dcg_use_new_board_vmap
 dcg_venchatiquism_spam_window
 dcg_venchatoquist_fake_other_user
 dcg_venchatoquist_menu_mute_button_in_ai_games
@@ -28917,6 +28940,7 @@ decalFadeDuration
 decalScale
 decalScaleVariation
 decalStartFadeTime
+decaymodifier
 december_update
 deck code
 deckCode

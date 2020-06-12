@@ -103,6 +103,7 @@ $tIVScript
 %s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 %u.%u
 %u:0x%08X,
+%:
 &
 &&
 ( + %d more)
@@ -162,7 +163,6 @@ $tIVScript
 -aggs
 -avx
 -cloth
--enable_2gb_morphs
 -inf
 -mem
 -processheap
@@ -240,7 +240,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-06-02 14:58:10.467000
+2020-06-04 15:18:50.957000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -614,7 +614,6 @@ Both aggregates must be present for game notification.-DO NOT Notify
 Bounds3
 Bounds3 BroadphaseProxyNodeRefl_t::m_Bounds
 Bounds3 RnMeshContactRefl_t::m_QueryBounds
-BoxRigidCount
 BreakCommand
 BreakPieceEmbedded
 BreakPieceExternal
@@ -810,7 +809,7 @@ CResourceArray< CUtlPair< uint64, RecordedHitboxDescRefl_t > > WorldDebugPayload
 CResourceArray< FeAabb_t > RnSoftbodyRefl_t::m_AabbArray
 CResourceArray< FeAnimStrayRadius_t > FeModelRefl_t::m_AnimStrayRadiiArray
 CResourceArray< FeAxialEdgeBend_t > FeModelRefl_t::m_AxialEdgesArray
-CResourceArray< FeBoxRigid_t > FeModelRefl_t::m_BoxRigidsArray
+CResourceArray< FeBoxRigid_t > FeModelRefl_t::m_BoxRigids
 CResourceArray< FeCollisionPlane_t > FeModelRefl_t::m_CollisionPlanesArray
 CResourceArray< FeCollisionSphere_t > FeModelRefl_t::m_CollisionSpheresArray
 CResourceArray< FeCtrlOffset_t > FeModelRefl_t::m_CtrlOffsetsArray
@@ -827,7 +826,7 @@ CResourceArray< FeNodeIntegrator_t > FeModelOverlayRefl_t::m_NodeIntegratorArray
 CResourceArray< FeNodeReverseOffset_t > FeModelRefl_t::m_ReverseOffsetsArray
 CResourceArray< FeNodeWindBase_t > FeModelRefl_t::m_NodeWindBases
 CResourceArray< FeQuad_t > FeModelRefl_t::m_QuadsArray
-CResourceArray< FeRigidColliderIndices_t > FeModelRefl_t::m_RigidColliderPrioritiesArray
+CResourceArray< FeRigidColliderIndices_t > FeModelRefl_t::m_RigidColliderPriorities
 CResourceArray< FeRodConstraint_t > FeModelRefl_t::m_RodsArray
 CResourceArray< FeSimdAnimStrayRadius_t > FeModelRefl_t::m_SimdAnimStrayRadiiArray
 CResourceArray< FeSimdFitMatrices_t > FeModelRefl_t::m_SimdFitMatricesArray
@@ -836,9 +835,9 @@ CResourceArray< FeSimdQuad_t > FeModelRefl_t::m_SimdQuadsArray
 CResourceArray< FeSimdRodConstraint_t > FeModelRefl_t::m_SimdRodsArray
 CResourceArray< FeSimdSpringIntegrator_t > FeModelRefl_t::m_SimdSpringIntegratorArray
 CResourceArray< FeSimdTri_t > FeModelRefl_t::m_SimdTrisArray
-CResourceArray< FeSphereRigid_t > FeModelRefl_t::m_SphereRigidsArray
+CResourceArray< FeSphereRigid_t > FeModelRefl_t::m_SphereRigids
 CResourceArray< FeSpringIntegrator_t > FeModelRefl_t::m_SpringIntegratorArray
-CResourceArray< FeTaperedCapsuleRigid_t > FeModelRefl_t::m_TaperedCapsuleRigidsArray
+CResourceArray< FeTaperedCapsuleRigid_t > FeModelRefl_t::m_TaperedCapsuleRigids
 CResourceArray< FeTreeChildren_t > FeModelRefl_t::m_TreeChildrenArray
 CResourceArray< FeTri_t > FeModelRefl_t::m_TrisArray
 CResourceArray< FeVertexMapDescRefl_t > FeModelRefl_t::m_VertexMaps
@@ -942,7 +941,7 @@ CResourceArray< uint8 > RnWorldRefl_t::m_RecordedApiCalls
 CResourceArray< uint8 > WorldDebugPayloadContainerRefl_t::m_DebugOverlay
 CResourceStreamFixed: trying to write past the end of allocated memory (new commit %u, allocated %u)
 CResourceString FeMorphLayerRefl_t::m_Name
-CResourceString FeVertexMapBuildRefl_t::m_Name
+CResourceString FeVertexMapBuildRefl_t::m_VertexMapName
 CResourceString FeVertexMapDescRefl_t::sName
 CResourceString NameIndexRefl_t::m_DebugName
 CResourceString PhysSurfacePropertiesRefl_t::m_description
@@ -1826,6 +1825,7 @@ Merge Faces
 Merged face
 Mesh %d verts %d tris %g diameter
 Mesh Shape[%d]
+Mesh triangle material index %d>=%d is out of bounds
 Mesh%d.obj
 Mesh-Mesh
 MeshCastBox
@@ -2123,7 +2123,6 @@ Plat_GetPlatformError
 Plat_GetThreadIndex
 Plat_IsHighDPI
 Plat_IsInDebugSession
-Plat_NeedsLowFragmentation
 Plat_SetDenormalsAreZero
 Plat_ShouldCollectMiniDumpsForFatalErrors
 Plat_USTime
@@ -2362,7 +2361,6 @@ ReverseOffsetCount
 Right Hand
 RightHand
 Rigid;
-RigidColliderPriorityCount
 RnBlendVertex_t
 RnBlockWeldJointRefl_t
 RnBodyPairRefl_t
@@ -2663,7 +2661,6 @@ Source2ServerSerializers002
 SourceElemsCount
 Sphere Shape[%d]
 Sphere r=%g
-SphereRigidCount
 SpringCount
 Sta
 Stack Frame
@@ -2711,7 +2708,6 @@ Tangent1
 Tangent2
 TangentImpulse1
 TangentImpulse2
-TaperedCapsuleRigidCount
 TestFormatA
 TestFormatB
 TestFormatC
@@ -3005,7 +3001,6 @@ Velocity: %.2f, %.2f, %.2f
 VelocityDamping
 VertexColorPos_t
 VertexMap
-VertexMapHash
 VertexMapNodeList
 VertexPaintBlendParams
 VertexPaintBlendParams1
@@ -3873,6 +3868,7 @@ m_Triangles
 m_Tris
 m_TwistLimit
 m_UserFriendlyName
+m_VertexMapName
 m_VertexMapValues
 m_VertexMaps
 m_VertexSetNames
@@ -4363,6 +4359,7 @@ m_nTwin
 m_nUpType
 m_nVectorComponent
 m_nVertexCount
+m_nVertexMapHash
 m_nWeight0
 m_nWeight1
 m_nWeight2
@@ -4386,7 +4383,6 @@ m_pBlendsEnd
 m_pBody
 m_pBody1
 m_pBody2
-m_pBoxRigids
 m_pCapsules
 m_pColFill
 m_pColFillInvMass
@@ -4430,7 +4426,6 @@ m_pPos0
 m_pPos1
 m_pQuads
 m_pReverseOffsets
-m_pRigidColliderPriorities
 m_pRods
 m_pRopeEnds
 m_pRopeNodeFlips
@@ -4445,11 +4440,9 @@ m_pSimdRods
 m_pSimdSpringIntegrator
 m_pSimdTris
 m_pSourceElems
-m_pSphereRigids
 m_pSpringIntegrator
 m_pSprings
 m_pSpringsEnd
-m_pTaperedCapsuleRigids
 m_pTextureAtlas
 m_pTreeChildren
 m_pTreeCollisionMasks
@@ -4951,7 +4944,6 @@ uint16 FeModelOverlayRefl_t::m_nCtrlCount
 uint16 FeModelOverlayRefl_t::m_nNodeCount
 uint16 FeModelRefl_t::m_nAnimStrayRadiusCount
 uint16 FeModelRefl_t::m_nAxialEdgeCount
-uint16 FeModelRefl_t::m_nBoxRigidCount
 uint16 FeModelRefl_t::m_nCollXformBase[ 6 ]
 uint16 FeModelRefl_t::m_nCollisionPlanes
 uint16 FeModelRefl_t::m_nCollisionSpheres[ 2 ]
@@ -4978,10 +4970,8 @@ uint16 FeModelRefl_t::m_nSimdQuadCount[ 3 ]
 uint16 FeModelRefl_t::m_nSimdRodCount
 uint16 FeModelRefl_t::m_nSimdSpringIntegratorCount
 uint16 FeModelRefl_t::m_nSimdTriCount[ 3 ]
-uint16 FeModelRefl_t::m_nSphereRigidCount
 uint16 FeModelRefl_t::m_nSpringIntegratorCount
 uint16 FeModelRefl_t::m_nStaticNodes
-uint16 FeModelRefl_t::m_nTaperedCapsuleRigidCount
 uint16 FeModelRefl_t::m_nTreeDepth
 uint16 FeModelRefl_t::m_nTriCount[ 3 ]
 uint16 FeModelRefl_t::m_nWorldCollisionNodeCount
@@ -5010,10 +5000,10 @@ uint32 FeModelRefl_t::m_nDynamicNodeFlags
 uint32 FeModelRefl_t::m_nFitWeightCount
 uint32 FeModelRefl_t::m_nKelagerBendCount
 uint32 FeModelRefl_t::m_nReverseOffsetCount
-uint32 FeModelRefl_t::m_nRigidColliderPriorityCount
 uint32 FeModelRefl_t::m_nSourceElemsCount
 uint32 FeModelRefl_t::m_nStaticNodeFlags
 uint32 FeMorphLayerRefl_t::m_nNameHash
+uint32 FeVertexMapBuildRefl_t::m_nNameHash
 uint32 FeVertexMapDescRefl_t::nFlags
 uint32 FeVertexMapDescRefl_t::nMapOffset
 uint32 FeVertexMapDescRefl_t::nNameHash
@@ -5231,7 +5221,6 @@ zero
 {}()'
 {}()':
 |
-|h:
 } %llu aggs, %s total data
 };
 };*/ReflFieldDesc_t g_ReflFieldDesc[ %d ] = {
