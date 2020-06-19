@@ -784,9 +784,11 @@ $tI
 -sse3
 -sse4
 -steam
+-steamhdl_immediatelogin
 -steamhdl_init
 -steamhdl_password
 -steamhdl_steamguard
+-steamhdl_steamguard_email
 -steamhdl_user
 -steamlogin_accesscode
 -steamlogin_authority
@@ -836,7 +838,6 @@ $tI
 ../../public/tier1/utlrbtree.h
 ../../public/tier1/utlsortvector.h
 ../_generated_code/engine2/release/linuxsteamrt64/../../../../engine2/gameeventsystem.cpp
-../common/console_logging.h
 ../common/protobuf_helpers.cpp
 ../public/appframework/materialsystem2app.cpp
 ../public/appframework/tier1app.h
@@ -1127,7 +1128,6 @@ $tI
 14CDemoMessagePBIL13EDemoCommands7E11CDemoPacketE
 14CDemoMessagePBIL13EDemoCommands9E15CDemoConsoleCmdE
 14CEmptySequence
-14CEngineConsole
 14CFloatProperty
 14CGameUIService
 14CHFontProperty
@@ -1349,13 +1349,13 @@ $tI
 16CScriptComponent
 16CUploadGameStats
 16IDebugVisualizer
+16IEngineConsoleUI
 16IGameEventSystem
 16ILoggingListener
 16ILoopModeFactory
 16IMatchEventsSink
 16IProtobufBinding
 16IUploadGameStats
-17:12:41
 17CBaseCmdKeyValuesI20CCLCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI20CSVCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI32CSVCMsg_GameSessionConfigurationE
@@ -1393,6 +1393,7 @@ $tI
 17IEngineServiceMgr
 17IGameEventWatcher
 180.0
+18:14:32
 18CBaseEngineServiceI12IToolServiceE
 18CBaseEngineServiceI13IInputServiceE
 18CBaseEngineServiceI13ISoundServiceE
@@ -1456,7 +1457,6 @@ $tI
 19CTier2AppSystemDict
 19CVConCommandMessage
 19CVariantSaveDataOps
-19IConsoleDisplayFunc
 19IDebugVisualizerMgr
 19INetworkStringTable
 19IScreenshotCallback
@@ -1493,6 +1493,7 @@ $tI
 20CSVCMsg_ServerInfo_t
 20CSVCMsg_TempEntities
 20CVConActivateMessage
+20CVGuiEngineConsoleUI
 20ConVar_ServerBounded
 20IFileLoggingListener
 20IGameResourceService
@@ -1563,7 +1564,6 @@ $tI
 23CBoundedCvar_UpdateRate
 23CCLCMsg_LoadingProgress
 23CClientOnlyServerConfig
-23CConsoleLoggingListener
 23CDebugVisualizerAbsTime
 23CEntityComponentHelperTI16CScriptComponent32CEntityComponentHelperReferencedIS0_EE
 23CEntityResourceManifest
@@ -2419,7 +2419,6 @@ CDmePanelDefinition
 CDragDropHelperPanel
 CDrawCullingData
 CEmptyEntityInstance
-CEngineConsole
 CEngineGameUI::OnLevelLoadingStarted
 CEngineGameUI::Shutdown
 CEngineServer::PrecacheDecal: '%s' overflow, too many decals
@@ -3062,6 +3061,7 @@ CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
 CUtlVector
+CVGuiEngineConsoleUI
 CVGuiInputHandler
 CVGuiTopmostInputHandler
 CVProfNode::EnterScope()
@@ -3631,8 +3631,6 @@ DevMsg(char const*, ...)
 DevWarning(char const*, ...)
 Devanagari
 Developer
-DeveloperConsole
-DeveloperVerbose
 DeviceID
 DialogVariables
 DictSortLessFunc
@@ -3813,6 +3811,7 @@ Engine2/RenderingPipeline/RetinaBurnFx
 Engine2/RenderingPipeline/SkipPostProcessing
 Engine2/SaveClientStateInSaveGames
 Engine2/SuppressNonConsoleVGuiInVR
+EngineConsole
 EngineLoopState_t
 EngineServiceManager
 EngineServiceMgr001
@@ -4763,6 +4762,7 @@ Jul
 Jumping to random tick %d (%.2f min)
 Jun
 Jun 12 2020
+Jun 19 2020
 JustInTime Resource Spawn Group
 K
 KEY_0
@@ -4940,6 +4940,10 @@ LINUX
 LIVE
 LMb#
 LOGDIR
+LOG_CONSOLE
+LOG_DEVELOPER
+LOG_DEVELOPER_CONSOLE
+LOG_DEVELOPER_VERBOSE
 LOG_GENERAL
 LOWVIOLENCE
 Label.BgColor
@@ -5625,6 +5629,7 @@ No HLTV server running
 No IDATs written into file
 No binding for '%s', defautl key already bound to '%s'
 No client connection
+No console available
 No conversion from %s to bool now
 No conversion from %s to float now
 No conversion from %s to int now
@@ -7831,6 +7836,7 @@ Zs
 [$0]
 [%.3f server clamped to %.3f]
 [%d] Changing player name to Steam name '%s'
+[%s]
 [%s] %d:%s
 [%s] %d:%s(%s)
 [%s] %d:%s(%s) compressed from %u down to %u
