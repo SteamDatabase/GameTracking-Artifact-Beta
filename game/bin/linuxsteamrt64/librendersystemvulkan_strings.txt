@@ -1153,7 +1153,6 @@ AcquireVfxShaderFile: Failed to unserialize CVfxShaderFile.  Is your shadercache
 AcquireVfxShaderFile: Failed to unserialize CVfxShaderFileVulkan.  Is your shadercache out-of-date?  Try deleting it.
 AddToTailGetPtr
 Additional fossilize database path: %s
-Address
 Addresses
 Addressing model must be Logical for WebGPU environment.
 Addressing model must be Logical.  Found
@@ -6204,13 +6203,14 @@ VK_LAYER_LUNARG_swapchain
 VK_NOT_READY
 VK_NV_dedicated_allocation
 VK_NV_device_diagnostic_checkpoints
-VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV
+VK_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR
 VK_OBJECT_TYPE_BUFFER
 VK_OBJECT_TYPE_BUFFER_VIEW
 VK_OBJECT_TYPE_COMMAND_BUFFER
 VK_OBJECT_TYPE_COMMAND_POOL
 VK_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT
 VK_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT
+VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR
 VK_OBJECT_TYPE_DESCRIPTOR_POOL
 VK_OBJECT_TYPE_DESCRIPTOR_SET
 VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT
@@ -6224,13 +6224,14 @@ VK_OBJECT_TYPE_FENCE
 VK_OBJECT_TYPE_FRAMEBUFFER
 VK_OBJECT_TYPE_IMAGE
 VK_OBJECT_TYPE_IMAGE_VIEW
-VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX
+VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV
 VK_OBJECT_TYPE_INSTANCE
-VK_OBJECT_TYPE_OBJECT_TABLE_NVX
+VK_OBJECT_TYPE_PERFORMANCE_CONFIGURATION_INTEL
 VK_OBJECT_TYPE_PHYSICAL_DEVICE
 VK_OBJECT_TYPE_PIPELINE
 VK_OBJECT_TYPE_PIPELINE_CACHE
 VK_OBJECT_TYPE_PIPELINE_LAYOUT
+VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT
 VK_OBJECT_TYPE_QUERY_POOL
 VK_OBJECT_TYPE_QUEUE
 VK_OBJECT_TYPE_RENDER_PASS
@@ -9209,6 +9210,7 @@ librendersystemvulkan.so
 libstdc++.so.6
 libtier0.so
 libvstdlib.so
+libvulkan.so
 libvulkan.so.1
 libxcb.so.1
 limitation
@@ -11507,6 +11509,8 @@ virtual void Etc::Block4x4Encoding_RGBA8_Transparent::PerformIteration(float)
 vkAcquireNextImage2KHR
 vkAcquireNextImageKHR
 vkAcquireNextImageKHR returned %s
+vkAcquirePerformanceConfigurationINTEL
+vkAcquireProfilingLockKHR
 vkAllocateCommandBuffers
 vkAllocateCommandBuffers( m_pDeviceVulkan, &cmdBufferCreateinfo, &pCmdBuffer )
 vkAllocateDescriptorSets
@@ -11536,11 +11540,13 @@ vkCmdBeginDebugUtilsLabelEXT
 vkCmdBeginQuery
 vkCmdBeginQueryIndexedEXT
 vkCmdBeginRenderPass
+vkCmdBeginRenderPass2
 vkCmdBeginRenderPass2KHR
 vkCmdBeginTransformFeedbackEXT
 vkCmdBindDescriptorSets
 vkCmdBindIndexBuffer
 vkCmdBindPipeline
+vkCmdBindPipelineShaderGroupNV
 vkCmdBindShadingRateImageNV
 vkCmdBindTransformFeedbackBuffersEXT
 vkCmdBindVertexBuffers
@@ -11565,10 +11571,12 @@ vkCmdDispatchIndirect
 vkCmdDraw
 vkCmdDrawIndexed
 vkCmdDrawIndexedIndirect
+vkCmdDrawIndexedIndirectCount
 vkCmdDrawIndexedIndirectCountAMD
 vkCmdDrawIndexedIndirectCountKHR
 vkCmdDrawIndirect
 vkCmdDrawIndirectByteCountEXT
+vkCmdDrawIndirectCount
 vkCmdDrawIndirectCountAMD
 vkCmdDrawIndirectCountKHR
 vkCmdDrawMeshTasksIndirectCountNV
@@ -11579,19 +11587,21 @@ vkCmdEndDebugUtilsLabelEXT
 vkCmdEndQuery
 vkCmdEndQueryIndexedEXT
 vkCmdEndRenderPass
+vkCmdEndRenderPass2
 vkCmdEndRenderPass2KHR
 vkCmdEndTransformFeedbackEXT
 vkCmdExecuteCommands
+vkCmdExecuteGeneratedCommandsNV
 vkCmdFillBuffer
 vkCmdInsertDebugUtilsLabelEXT
 vkCmdNextSubpass
+vkCmdNextSubpass2
 vkCmdNextSubpass2KHR
 vkCmdPipelineBarrier
-vkCmdProcessCommandsNVX
+vkCmdPreprocessGeneratedCommandsNV
 vkCmdPushConstants
 vkCmdPushDescriptorSetKHR
 vkCmdPushDescriptorSetWithTemplateKHR
-vkCmdReserveSpaceForCommandsNVX
 vkCmdResetEvent
 vkCmdResetQueryPool
 vkCmdResolveImage
@@ -11605,7 +11615,11 @@ vkCmdSetDeviceMaskKHR
 vkCmdSetDiscardRectangleEXT
 vkCmdSetEvent
 vkCmdSetExclusiveScissorNV
+vkCmdSetLineStippleEXT
 vkCmdSetLineWidth
+vkCmdSetPerformanceMarkerINTEL
+vkCmdSetPerformanceOverrideINTEL
+vkCmdSetPerformanceStreamMarkerINTEL
 vkCmdSetSampleLocationsEXT
 vkCmdSetScissor
 vkCmdSetStencilCompareMask
@@ -11655,6 +11669,7 @@ vkCreateFramebuffer( m_pDeviceVulkan, &framebufferCreateInfo, NULL, &pFramebuffe
 vkCreateFramebuffer( m_pDeviceVulkan, &framebufferCreateInfo, NULL, &pSwapChainFramebuffer )
 vkCreateGraphicsPipelines
 vkCreateGraphicsPipelines( m_pDeviceVulkan, pPipelineCache, 1, &pipelineCreateInfo, NULL, &pPipelineOut->m_pPipeline )
+vkCreateHeadlessSurfaceEXT
 vkCreateImage
 vkCreateImage( VulkanDevice(), &imageCreateInfo, NULL, &m_pVulkanImage->m_pImage )
 vkCreateImage( VulkanDevice(), &imageCreateInfo, NULL, &pVulkanImage->m_pImage )
@@ -11674,16 +11689,16 @@ vkCreateImageView( VulkanDevice(), &imageViewCreateInfo, NULL, m_pImageView->Get
 vkCreateImageView( VulkanDevice(), &imageViewCreateInfo, NULL, m_pImageViewSrgb->GetPtr() )
 vkCreateImageView( VulkanDevice(), &imageViewCreateInfoSrgb, NULL, m_ImageViews.m_pImageViewSrgb->GetPtr() )
 vkCreateImageView( VulkanDevice(), &imageViewCreateInfoSrgb, NULL, m_ImageViews.m_ppPerMipLevelImageViewSrgb[ i ]->GetPtr())
-vkCreateIndirectCommandsLayoutNVX
+vkCreateIndirectCommandsLayoutNV
 vkCreateInstance
 vkCreateInstance failed, unable to create instance.
-vkCreateObjectTableNVX
 vkCreatePipelineCache
 vkCreatePipelineCache( m_pDeviceVulkan, &pipelineCacheCreateInfo, NULL, &m_pPerThreadPipelineCache[ nThread ] )
 vkCreatePipelineCache( m_pDeviceVulkan, &pipelineCacheCreateInfo, NULL, &m_pPipelineCache )
 vkCreatePipelineLayout
 vkCreatePipelineLayout( m_pDeviceVulkan, &pipelineLayoutCreateInfo, NULL, &pPipelineLayoutOut->m_pPipelineLayout )
 vkCreatePipelineLayout( m_pDeviceVulkan, &pipelineLayoutCreateInfo, NULL, &pipelineLayout.m_pPipelineLayout )
+vkCreatePrivateDataSlotEXT
 vkCreateQueryPool
 vkCreateQueryPool( VulkanDevice(), &queryPoolCreateInfo, NULL, &m_pVrTimestampQueryPool )
 vkCreateQueryPool( m_pDeviceVulkan, &queryPoolCreateInfo, NULL, &newQueryPool.m_pOcclusionQueryPool )
@@ -11692,6 +11707,7 @@ vkCreateRayTracingPipelinesNV
 vkCreateRenderPass
 vkCreateRenderPass( VulkanDevice(), pRenderPassCreateInfo, nullptr, &pFossilizeRenderPass->m_pExplicitRenderPass )
 vkCreateRenderPass( m_pDeviceVulkan, &renderPassCreateInfo, NULL, &pRenderPass )
+vkCreateRenderPass2
 vkCreateRenderPass2KHR
 vkCreateSampler
 vkCreateSampler( VulkanDevice(), &samplerCreateInfo, NULL, &pSampler )
@@ -11728,12 +11744,12 @@ vkDestroyFence
 vkDestroyFramebuffer
 vkDestroyImage
 vkDestroyImageView
-vkDestroyIndirectCommandsLayoutNVX
+vkDestroyIndirectCommandsLayoutNV
 vkDestroyInstance
-vkDestroyObjectTableNVX
 vkDestroyPipeline
 vkDestroyPipelineCache
 vkDestroyPipelineLayout
+vkDestroyPrivateDataSlotEXT
 vkDestroyQueryPool
 vkDestroyRenderPass
 vkDestroySampler
@@ -11766,6 +11782,7 @@ vkEnumerateInstanceVersion
 vkEnumeratePhysicalDeviceGroups
 vkEnumeratePhysicalDeviceGroupsKHR
 vkEnumeratePhysicalDeviceGroupsKHR: no physical device groups supported.  Using single GPU.
+vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR
 vkEnumeratePhysicalDevices
 vkEnumeratePhysicalDevices failed, unable to enumerate GPUs with Vulkan.
 vkEnumeratePhysicalDevices failed, unable to init and enumerate GPUs with Vulkan.
@@ -11775,9 +11792,14 @@ vkFreeDescriptorSets
 vkFreeMemory
 vkGetAccelerationStructureHandleNV
 vkGetAccelerationStructureMemoryRequirementsNV
+vkGetBufferDeviceAddress
+vkGetBufferDeviceAddressEXT
+vkGetBufferDeviceAddressKHR
 vkGetBufferMemoryRequirements
 vkGetBufferMemoryRequirements2
 vkGetBufferMemoryRequirements2KHR
+vkGetBufferOpaqueCaptureAddress
+vkGetBufferOpaqueCaptureAddressKHR
 vkGetCalibratedTimestampsEXT
 vkGetDescriptorSetLayoutSupport
 vkGetDescriptorSetLayoutSupportKHR
@@ -11786,6 +11808,8 @@ vkGetDeviceGroupPeerMemoryFeaturesKHR
 vkGetDeviceGroupPresentCapabilitiesKHR
 vkGetDeviceGroupSurfacePresentModesKHR
 vkGetDeviceMemoryCommitment
+vkGetDeviceMemoryOpaqueCaptureAddress
+vkGetDeviceMemoryOpaqueCaptureAddressKHR
 vkGetDeviceProcAddr
 vkGetDeviceQueue
 vkGetDeviceQueue2
@@ -11797,6 +11821,7 @@ vkGetDisplayPlaneSupportedDisplaysKHR
 vkGetEventStatus
 vkGetFenceFdKHR
 vkGetFenceStatus
+vkGetGeneratedCommandsMemoryRequirementsNV
 vkGetImageDrmFormatModifierPropertiesEXT
 vkGetImageMemoryRequirements
 vkGetImageMemoryRequirements2
@@ -11805,12 +11830,16 @@ vkGetImageSparseMemoryRequirements
 vkGetImageSparseMemoryRequirements2
 vkGetImageSparseMemoryRequirements2KHR
 vkGetImageSubresourceLayout
+vkGetImageViewAddressNVX
+vkGetImageViewHandleNVX
 vkGetInstanceProcAddr
 vkGetMemoryFdKHR
 vkGetMemoryFdPropertiesKHR
 vkGetMemoryHostPointerPropertiesEXT
 vkGetPastPresentationTimingGOOGLE
+vkGetPerformanceParameterINTEL
 vkGetPhysicalDeviceCalibrateableTimeDomainsEXT
+vkGetPhysicalDeviceCooperativeMatrixPropertiesNV
 vkGetPhysicalDeviceDisplayPlaneProperties2KHR
 vkGetPhysicalDeviceDisplayPlanePropertiesKHR
 vkGetPhysicalDeviceDisplayProperties2KHR
@@ -11828,7 +11857,6 @@ vkGetPhysicalDeviceFeatures2KHR
 vkGetPhysicalDeviceFormatProperties
 vkGetPhysicalDeviceFormatProperties2
 vkGetPhysicalDeviceFormatProperties2KHR
-vkGetPhysicalDeviceGeneratedCommandsPropertiesNVX
 vkGetPhysicalDeviceImageFormatProperties
 vkGetPhysicalDeviceImageFormatProperties failed checking for MSAA support, assuming MSAA can't be supported
 vkGetPhysicalDeviceImageFormatProperties2
@@ -11841,12 +11869,14 @@ vkGetPhysicalDevicePresentRectanglesKHR
 vkGetPhysicalDeviceProperties
 vkGetPhysicalDeviceProperties2
 vkGetPhysicalDeviceProperties2KHR
+vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR
 vkGetPhysicalDeviceQueueFamilyProperties
 vkGetPhysicalDeviceQueueFamilyProperties2
 vkGetPhysicalDeviceQueueFamilyProperties2KHR
 vkGetPhysicalDeviceSparseImageFormatProperties
 vkGetPhysicalDeviceSparseImageFormatProperties2
 vkGetPhysicalDeviceSparseImageFormatProperties2KHR
+vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV
 vkGetPhysicalDeviceSurfaceCapabilities2EXT
 vkGetPhysicalDeviceSurfaceCapabilities2KHR
 vkGetPhysicalDeviceSurfaceCapabilitiesKHR
@@ -11854,17 +11884,24 @@ vkGetPhysicalDeviceSurfaceFormats2KHR
 vkGetPhysicalDeviceSurfaceFormatsKHR
 vkGetPhysicalDeviceSurfacePresentModesKHR
 vkGetPhysicalDeviceSurfaceSupportKHR
+vkGetPhysicalDeviceToolPropertiesEXT
 vkGetPhysicalDeviceXcbPresentationSupportKHR
 vkGetPipelineCacheData
 vkGetPipelineCacheData failed, unable to store pipeline cache to disk.
 vkGetPipelineCacheData( m_pDeviceVulkan, m_pPipelineCache, &nCacheSize, NULL )
 vkGetPipelineCacheData( m_pDeviceVulkan, pPipelineCache, &nCurrentPipelineSize, NULL )
 vkGetPipelineCacheSize failed, unable to store pipeline cache to disk.
+vkGetPipelineExecutableInternalRepresentationsKHR
+vkGetPipelineExecutablePropertiesKHR
+vkGetPipelineExecutableStatisticsKHR
+vkGetPrivateDataEXT
 vkGetQueryPoolResults
 vkGetQueueCheckpointDataNV
 vkGetRayTracingShaderGroupHandlesNV
 vkGetRefreshCycleDurationGOOGLE
 vkGetRenderAreaGranularity
+vkGetSemaphoreCounterValue
+vkGetSemaphoreCounterValueKHR
 vkGetSemaphoreFdKHR
 vkGetShaderInfoAMD
 vkGetSwapchainCounterEXT
@@ -11873,6 +11910,7 @@ vkGetSwapchainStatusKHR
 vkGetValidationCacheDataEXT
 vkImportFenceFdKHR
 vkImportSemaphoreFdKHR
+vkInitializePerformanceApiINTEL
 vkInvalidateMappedMemoryRanges
 vkMapMemory
 vkMapMemory( VulkanDevice(), pStagingMemory, 0, nStagingMemSize, 0, &pLockedData )
@@ -11888,6 +11926,7 @@ vkQueueEndDebugUtilsLabelEXT
 vkQueueInsertDebugUtilsLabelEXT
 vkQueuePresentKHR
 vkQueuePresentKHR failed with error %d
+vkQueueSetPerformanceConfigurationINTEL
 vkQueueSubmit
 vkQueueSubmit( VulkanQueue(), 1, &submitInfo, VK_NULL_HANDLE )
 vkQueueSubmit( VulkanQueue(), 1, &submitInfo, m_pWaitForLeftEyeFenceAMD )
@@ -11899,8 +11938,9 @@ vkQueueWaitIdle( VulkanQueue() )
 vkQueueWaitIdle( m_pQueueVulkan )
 vkRegisterDeviceEventEXT
 vkRegisterDisplayEventEXT
-vkRegisterObjectsNVX
 vkReleaseDisplayEXT
+vkReleasePerformanceConfigurationINTEL
+vkReleaseProfilingLockKHR
 vkResetCommandBuffer
 vkResetCommandBuffer( (*ppCommandBuffer)->m_pCmdBuffer, 0 )
 vkResetCommandBuffer( pCmdBuffer, 0 )
@@ -11910,19 +11950,27 @@ vkResetCommandPool
 vkResetDescriptorPool
 vkResetEvent
 vkResetFences
+vkResetQueryPool
+vkResetQueryPoolEXT
 vkSetDebugUtilsObjectNameEXT
 vkSetDebugUtilsObjectTagEXT
 vkSetEvent
 vkSetHdrMetadataEXT
+vkSetLocalDimmingAMD
+vkSetPrivateDataEXT
+vkSignalSemaphore
+vkSignalSemaphoreKHR
 vkSubmitDebugUtilsMessageEXT
 vkTrimCommandPool
 vkTrimCommandPoolKHR
+vkUninitializePerformanceApiINTEL
 vkUnmapMemory
-vkUnregisterObjectsNVX
 vkUpdateDescriptorSetWithTemplate
 vkUpdateDescriptorSetWithTemplateKHR
 vkUpdateDescriptorSets
 vkWaitForFences
+vkWaitSemaphores
+vkWaitSemaphoresKHR
 vload_half
 vload_halfn
 vloada_halfn
