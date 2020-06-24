@@ -629,6 +629,7 @@ $undefined
 -vulkan_disable_occlusion_queries
 -vulkan_disable_pipeline_cache
 -vulkan_disable_pool_textures
+-vulkan_disable_ray_tracing
 -vulkan_disable_secondary_command_buffers
 -vulkan_disable_steam_app_shader_cache
 -vulkan_disable_steam_downloaded_shader_cache
@@ -1443,6 +1444,7 @@ CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
+CBufferString::Trim(char const*)
 CCIR601 sampling not implemented yet
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -8207,7 +8209,6 @@ file seek failed
 file stat failed
 file too large
 file write failed
-file://
 filename-based #line
 filename-based __FILE__
 filesystem_stdio
@@ -11524,6 +11525,7 @@ vkBeginCommandBuffer( (*ppCommandBuffer)->m_pCmdBuffer, &beginInfo )
 vkBeginCommandBuffer( pCmdBuffer, &beginInfo )
 vkBeginCommandBuffer( pCommandBuffer, &beginInfo )
 vkBeginCommandBuffer( pResetQueriesCommandBuffer, &beginInfo )
+vkBindAccelerationStructureMemoryKHR
 vkBindAccelerationStructureMemoryNV
 vkBindBufferMemory
 vkBindBufferMemory2
@@ -11535,6 +11537,7 @@ vkBindImageMemory( pDeviceVulkan, m_pDepthStencilImage->m_pImage, m_pDepthStenci
 vkBindImageMemory( pDeviceVulkan, m_pIntermediateSwapChainImage->m_pImage, m_pIntermediateSwapChainImage->m_pGPUMemory, 0 )
 vkBindImageMemory2
 vkBindImageMemory2KHR
+vkBuildAccelerationStructureKHR
 vkCmdBeginConditionalRenderingEXT
 vkCmdBeginDebugUtilsLabelEXT
 vkCmdBeginQuery
@@ -11550,16 +11553,22 @@ vkCmdBindPipelineShaderGroupNV
 vkCmdBindShadingRateImageNV
 vkCmdBindTransformFeedbackBuffersEXT
 vkCmdBindVertexBuffers
+vkCmdBindVertexBuffers2EXT
 vkCmdBlitImage
+vkCmdBuildAccelerationStructureIndirectKHR
+vkCmdBuildAccelerationStructureKHR
 vkCmdBuildAccelerationStructureNV
 vkCmdClearAttachments
 vkCmdClearColorImage
 vkCmdClearDepthStencilImage
+vkCmdCopyAccelerationStructureKHR
 vkCmdCopyAccelerationStructureNV
+vkCmdCopyAccelerationStructureToMemoryKHR
 vkCmdCopyBuffer
 vkCmdCopyBufferToImage
 vkCmdCopyImage
 vkCmdCopyImageToBuffer
+vkCmdCopyMemoryToAccelerationStructureKHR
 vkCmdCopyQueryPoolResults
 vkCmdDebugMarkerBeginEXT
 vkCmdDebugMarkerEndEXT
@@ -11608,33 +11617,51 @@ vkCmdResolveImage
 vkCmdSetBlendConstants
 vkCmdSetCheckpointNV
 vkCmdSetCoarseSampleOrderNV
+vkCmdSetCullModeEXT
 vkCmdSetDepthBias
 vkCmdSetDepthBounds
+vkCmdSetDepthBoundsTestEnableEXT
+vkCmdSetDepthCompareOpEXT
+vkCmdSetDepthTestEnableEXT
+vkCmdSetDepthWriteEnableEXT
 vkCmdSetDeviceMask
 vkCmdSetDeviceMaskKHR
 vkCmdSetDiscardRectangleEXT
 vkCmdSetEvent
 vkCmdSetExclusiveScissorNV
+vkCmdSetFrontFaceEXT
 vkCmdSetLineStippleEXT
 vkCmdSetLineWidth
 vkCmdSetPerformanceMarkerINTEL
 vkCmdSetPerformanceOverrideINTEL
 vkCmdSetPerformanceStreamMarkerINTEL
+vkCmdSetPrimitiveTopologyEXT
 vkCmdSetSampleLocationsEXT
 vkCmdSetScissor
+vkCmdSetScissorWithCountEXT
 vkCmdSetStencilCompareMask
+vkCmdSetStencilOpEXT
 vkCmdSetStencilReference
+vkCmdSetStencilTestEnableEXT
 vkCmdSetStencilWriteMask
 vkCmdSetViewport
 vkCmdSetViewportShadingRatePaletteNV
 vkCmdSetViewportWScalingNV
+vkCmdSetViewportWithCountEXT
+vkCmdTraceRaysIndirectKHR
+vkCmdTraceRaysKHR
 vkCmdTraceRaysNV
 vkCmdUpdateBuffer
 vkCmdWaitEvents
+vkCmdWriteAccelerationStructuresPropertiesKHR
 vkCmdWriteAccelerationStructuresPropertiesNV
 vkCmdWriteBufferMarkerAMD
 vkCmdWriteTimestamp
 vkCompileDeferredNV
+vkCopyAccelerationStructureKHR
+vkCopyAccelerationStructureToMemoryKHR
+vkCopyMemoryToAccelerationStructureKHR
+vkCreateAccelerationStructureKHR
 vkCreateAccelerationStructureNV
 vkCreateBuffer
 vkCreateBuffer( m_pDeviceVulkan, &bufferCreateInfo, NULL, &newMemoryPool.m_pVulkanBuffer )
@@ -11649,6 +11676,7 @@ vkCreateComputePipelines( m_pDeviceVulkan, pPipelineCache, 1, &computePipelineCr
 vkCreateDebugReportCallbackEXT
 vkCreateDebugReportCallbackEXT was unsuccessful.
 vkCreateDebugUtilsMessengerEXT
+vkCreateDeferredOperationKHR
 vkCreateDescriptorPool
 vkCreateDescriptorPool( m_pDeviceVulkan, &descriptorPoolCreateInfo, NULL, &pDescriptorPool )
 vkCreateDescriptorSetLayout
@@ -11703,6 +11731,7 @@ vkCreateQueryPool
 vkCreateQueryPool( VulkanDevice(), &queryPoolCreateInfo, NULL, &m_pVrTimestampQueryPool )
 vkCreateQueryPool( m_pDeviceVulkan, &queryPoolCreateInfo, NULL, &newQueryPool.m_pOcclusionQueryPool )
 vkCreateQueryPool( m_pDeviceVulkan, &queryPoolCreateInfo, NULL, &pQueryPoolVulkan )
+vkCreateRayTracingPipelinesKHR
 vkCreateRayTracingPipelinesNV
 vkCreateRenderPass
 vkCreateRenderPass( VulkanDevice(), pRenderPassCreateInfo, nullptr, &pFossilizeRenderPass->m_pExplicitRenderPass )
@@ -11728,12 +11757,15 @@ vkCreateXcbSurfaceKHR
 vkDebugMarkerSetObjectNameEXT
 vkDebugMarkerSetObjectTagEXT
 vkDebugReportMessageEXT
+vkDeferredOperationJoinKHR
+vkDestroyAccelerationStructureKHR
 vkDestroyAccelerationStructureNV
 vkDestroyBuffer
 vkDestroyBufferView
 vkDestroyCommandPool
 vkDestroyDebugReportCallbackEXT
 vkDestroyDebugUtilsMessengerEXT
+vkDestroyDeferredOperationKHR
 vkDestroyDescriptorPool
 vkDestroyDescriptorSetLayout
 vkDestroyDescriptorUpdateTemplate
@@ -11790,7 +11822,9 @@ vkFlushMappedMemoryRanges
 vkFreeCommandBuffers
 vkFreeDescriptorSets
 vkFreeMemory
+vkGetAccelerationStructureDeviceAddressKHR
 vkGetAccelerationStructureHandleNV
+vkGetAccelerationStructureMemoryRequirementsKHR
 vkGetAccelerationStructureMemoryRequirementsNV
 vkGetBufferDeviceAddress
 vkGetBufferDeviceAddressEXT
@@ -11801,8 +11835,11 @@ vkGetBufferMemoryRequirements2KHR
 vkGetBufferOpaqueCaptureAddress
 vkGetBufferOpaqueCaptureAddressKHR
 vkGetCalibratedTimestampsEXT
+vkGetDeferredOperationMaxConcurrencyKHR
+vkGetDeferredOperationResultKHR
 vkGetDescriptorSetLayoutSupport
 vkGetDescriptorSetLayoutSupportKHR
+vkGetDeviceAccelerationStructureCompatibilityKHR
 vkGetDeviceGroupPeerMemoryFeatures
 vkGetDeviceGroupPeerMemoryFeaturesKHR
 vkGetDeviceGroupPresentCapabilitiesKHR
@@ -11897,6 +11934,8 @@ vkGetPipelineExecutableStatisticsKHR
 vkGetPrivateDataEXT
 vkGetQueryPoolResults
 vkGetQueueCheckpointDataNV
+vkGetRayTracingCaptureReplayShaderGroupHandlesKHR
+vkGetRayTracingShaderGroupHandlesKHR
 vkGetRayTracingShaderGroupHandlesNV
 vkGetRefreshCycleDurationGOOGLE
 vkGetRenderAreaGranularity
@@ -11971,6 +12010,7 @@ vkUpdateDescriptorSets
 vkWaitForFences
 vkWaitSemaphores
 vkWaitSemaphoresKHR
+vkWriteAccelerationStructuresPropertiesKHR
 vload_half
 vload_halfn
 vloada_halfn

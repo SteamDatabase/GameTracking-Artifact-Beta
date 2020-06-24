@@ -238,8 +238,7 @@ $tIVScript
 19CSchemaRegistration
 1DBlend
 2
-2000
-2020-06-17 13:37:24.589000
+2020-06-23 16:03:37.622000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -424,6 +423,7 @@ $tIVScript
 =
 > -FLT_EPSILON
 ?
+?U;
 ?a`
 ?unsupported?
 @
@@ -545,7 +545,6 @@ AnimationList
 AnimationSystemUtils_001
 AnimationSystem_001
 AppendDebugMeshInfo
-AqqInv
 Asleep
 Assert(
 AssertMsg_ConditionFailed
@@ -684,6 +683,7 @@ CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
+CBufferString::Trim(char const*)
 CColorGradient
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -813,10 +813,11 @@ CResourceArray< FeBoxRigid_t > FeModelRefl_t::m_BoxRigids
 CResourceArray< FeCollisionPlane_t > FeModelRefl_t::m_CollisionPlanesArray
 CResourceArray< FeCollisionSphere_t > FeModelRefl_t::m_CollisionSpheresArray
 CResourceArray< FeCtrlOffset_t > FeModelRefl_t::m_CtrlOffsetsArray
+CResourceArray< FeCtrlOffset_t > FeModelRefl_t::m_LockToParent
 CResourceArray< FeCtrlOsOffset_t > FeModelRefl_t::m_CtrlOsOffsetsArray
 CResourceArray< FeCtrlSoftOffset_t > FeModelRefl_t::m_CtrlSoftOffsetsArray
-CResourceArray< FeFitMatrix_t > FeModelRefl_t::m_FitMatricesArray
-CResourceArray< FeFitWeight_t > FeModelRefl_t::m_FitWeightsArray
+CResourceArray< FeFitMatrix_t > FeModelRefl_t::m_FitMatrices
+CResourceArray< FeFitWeight_t > FeModelRefl_t::m_FitWeights
 CResourceArray< FeFollowNode_t > FeModelRefl_t::m_FollowNodesArray
 CResourceArray< FeKelagerBend2_t > FeModelRefl_t::m_KelagerBendsArray
 CResourceArray< FeMorphLayerRefl_t > FeModelRefl_t::m_MorphLayers
@@ -824,12 +825,11 @@ CResourceArray< FeNodeBaseUnpacked_t > FeModelRefl_t::m_NodeBasesUnpacked
 CResourceArray< FeNodeBase_t > FeModelRefl_t::m_NodeBasesArray
 CResourceArray< FeNodeIntegrator_t > FeModelOverlayRefl_t::m_NodeIntegratorArray
 CResourceArray< FeNodeReverseOffset_t > FeModelRefl_t::m_ReverseOffsetsArray
-CResourceArray< FeNodeWindBase_t > FeModelRefl_t::m_NodeWindBases
+CResourceArray< FeNodeWindBase_t > FeModelRefl_t::m_DynNodeWindBases
 CResourceArray< FeQuad_t > FeModelRefl_t::m_QuadsArray
 CResourceArray< FeRigidColliderIndices_t > FeModelRefl_t::m_RigidColliderPriorities
 CResourceArray< FeRodConstraint_t > FeModelRefl_t::m_RodsArray
 CResourceArray< FeSimdAnimStrayRadius_t > FeModelRefl_t::m_SimdAnimStrayRadiiArray
-CResourceArray< FeSimdFitMatrices_t > FeModelRefl_t::m_SimdFitMatricesArray
 CResourceArray< FeSimdNodeBase_t > FeModelRefl_t::m_SimdNodeBasesArray
 CResourceArray< FeSimdQuad_t > FeModelRefl_t::m_SimdQuadsArray
 CResourceArray< FeSimdRodConstraint_t > FeModelRefl_t::m_SimdRodsArray
@@ -913,6 +913,7 @@ CResourceArray< uint16 > ConnMatrixFillRefl_t::m_ColFillArray
 CResourceArray< uint16 > ConnMatrixFillRefl_t::m_RopeEndsArray
 CResourceArray< uint16 > FeModelRefl_t::m_AnimSourceNodes
 CResourceArray< uint16 > FeModelRefl_t::m_FreeNodesArray
+CResourceArray< uint16 > FeModelRefl_t::m_LockToGoal
 CResourceArray< uint16 > FeModelRefl_t::m_RopesArray
 CResourceArray< uint16 > FeModelRefl_t::m_SourceElemsArray
 CResourceArray< uint16 > FeModelRefl_t::m_TreeCollisionMasksArray
@@ -925,8 +926,7 @@ CResourceArray< uint32 > ConnHierarchyRefl_t::m_SpringsEndArray
 CResourceArray< uint32 > ConnMatrixFillRefl_t::m_RowStartsArray
 CResourceArray< uint32 > FeModelRefl_t::m_CtrlHashArray
 CResourceArray< uint32 > FeModelRefl_t::m_GoalDampedSpringIntegratorsArray
-CResourceArray< uint32 > FeModelRefl_t::m_RopeNodeFlipsArray
-CResourceArray< uint32 > FeModelRefl_t::m_RopeNodeFlipsStorage
+CResourceArray< uint32 > FeModelRefl_t::m_RopeNodeFlips
 CResourceArray< uint32 > FeModelRefl_t::m_VertexSetNameArray
 CResourceArray< uint32 > HierarchicalBitVectorRefl_t::m_Level0
 CResourceArray< uint32 > HierarchicalBitVectorRefl_t::m_Level1
@@ -1461,7 +1461,6 @@ FeQuad_t
 FeRigidColliderIndices_t
 FeRodConstraint_t
 FeSimdAnimStrayRadius_t
-FeSimdFitMatrices_t
 FeSimdNodeBase_t
 FeSimdQuad_t
 FeSimdRodConstraint_t
@@ -1489,7 +1488,6 @@ FindFirstContact
 FindLessOrEqual
 FindTOI
 First body has no Aggregate.
-FitWeightCount
 FixupResourceName: Illegal full path passed in ("%s")!
 FixupResourceName: Illegal path, missing extension passed in ("%s")!
 FlattenedSerializersVersion001
@@ -1620,6 +1618,7 @@ IntersectSphereHull
 IntersectionDictionaryRefl_t
 Invalid RecordedHitboxState_t
 Invalid access of deferred ConVarRef for '%s'
+Invalid blob for RnMesh_t::%s (%d,%d)
 Invalid bone and flex counts for model %s, %d meshes but %d counts
 Invalid bone remap for mesh %d on model %s, meshBone[%d] = modelBone[%d], valid modelBone range[0, %d]
 Invalid boneAndFlexCounts mesh %d on model %s, %d expected %d
@@ -1941,7 +1940,6 @@ Node %d
 NodeAnimSource
 NodeBasesUnpacked
 NodePool
-NodeWindBases
 Nodes:
 Non-Collideable
 Non-dynamics
@@ -2476,7 +2474,7 @@ RnWorldSnoopEnum_t
 RodVelocitySmoothIterations
 Root
 RopeIndexCount
-RopeNodeFlipsStorage
+RopeNodeFlips
 Rubikon Collsion Group name dictionary
 Rubikon Collsion Layer name dictionary
 Rubikon Intersection Controller dictionary
@@ -2588,7 +2586,6 @@ ShouldCollide tests passed
 SimFlags
 SimStateDisplay
 SimdAnimStrayRadiusCount
-SimdFitMatrixCount
 SimdNodeBaseCount
 SimdQuadCount
 SimdRodCount
@@ -3393,8 +3390,6 @@ flSpringConstant
 flSpringDamping
 flSpringRestLength
 flStickiness
-flStretchMax
-flStretchMin
 flThetaFactor
 flThetaRelaxed
 flWeight0
@@ -3749,6 +3744,7 @@ m_DefaultSolverSettings
 m_DefaultTargetSettings
 m_DynNodeFriction
 m_DynNodeVertexSet
+m_DynNodeWindBases
 m_Edges
 m_Effects
 m_ElementName
@@ -3806,6 +3802,8 @@ m_LocalInertiaInv.c1
 m_LocalInertiaInv.c2
 m_LocalInertiaInv.c3
 m_LocalRotation
+m_LockToGoal
+m_LockToParent
 m_MassProperties
 m_MaterialGroupName
 m_Materials
@@ -3834,7 +3832,6 @@ m_RigidColliderPriorities
 m_Rods
 m_Ropes
 m_SimdAnimStrayRadii
-m_SimdFitMatrices
 m_SimdNodeBases
 m_SimdQuads
 m_SimdRods
@@ -4270,8 +4267,6 @@ m_nExtraPressureIterations
 m_nFace
 m_nFeatheringMode
 m_nFirstMultipleOverride_BackwardCompat
-m_nFitMatrixCount1
-m_nFitMatrixCount2
 m_nFlag
 m_nFlex
 m_nGameFlags
@@ -4327,8 +4322,6 @@ m_nScaleControlPoint
 m_nScaleControlPointField
 m_nSetMethod
 m_nShapeType
-m_nSimdFitMatrixCount1
-m_nSimdFitMatrixCount2
 m_nSimdQuadCount1
 m_nSimdQuadCount2
 m_nSimdTriCount1
@@ -4391,8 +4384,6 @@ m_pD3DSemanticName
 m_pDebugName
 m_pDynNodeVertexSet
 m_pFeModel
-m_pFitMatrices
-m_pFitWeights
 m_pFloatAttr
 m_pFollowNodes
 m_pFreeNodes
@@ -4421,12 +4412,10 @@ m_pQuads
 m_pReverseOffsets
 m_pRods
 m_pRopeEnds
-m_pRopeNodeFlips
 m_pRopes
 m_pRowStarts
 m_pSemantic
 m_pSimdAnimStrayRadii
-m_pSimdFitMatrices
 m_pSimdNodeBases
 m_pSimdQuads
 m_pSimdRods
@@ -4680,7 +4669,6 @@ multiplayer_break
 nBeginDynamic
 nBoneCtrl
 nChildNode
-nCtrl
 nCtrlChild
 nCtrlParent
 nDummy
@@ -4944,7 +4932,6 @@ uint16 FeModelRefl_t::m_nCtrlOffsets
 uint16 FeModelRefl_t::m_nCtrlOsOffsets
 uint16 FeModelRefl_t::m_nCtrlSoftOffsets
 uint16 FeModelRefl_t::m_nEarlyComputeNodeBaseCount
-uint16 FeModelRefl_t::m_nFitMatrixCount[ 3 ]
 uint16 FeModelRefl_t::m_nFollowNodeCount
 uint16 FeModelRefl_t::m_nFreeNodeCount
 uint16 FeModelRefl_t::m_nJiggleBoneCount
@@ -4957,7 +4944,6 @@ uint16 FeModelRefl_t::m_nRopeCount
 uint16 FeModelRefl_t::m_nRopeIndexCount
 uint16 FeModelRefl_t::m_nRotLockStaticNodes
 uint16 FeModelRefl_t::m_nSimdAnimStrayRadiusCount
-uint16 FeModelRefl_t::m_nSimdFitMatrixCount[ 3 ]
 uint16 FeModelRefl_t::m_nSimdNodeBaseCount
 uint16 FeModelRefl_t::m_nSimdQuadCount[ 3 ]
 uint16 FeModelRefl_t::m_nSimdRodCount
@@ -4990,7 +4976,6 @@ uint32 ConnHierarchyRefl_t::m_nTotalBlendsCount
 uint32 ConnHierarchyRefl_t::m_nTotalParentsCount
 uint32 ConnHierarchyRefl_t::m_nTotalSpringsCount
 uint32 FeModelRefl_t::m_nDynamicNodeFlags
-uint32 FeModelRefl_t::m_nFitWeightCount
 uint32 FeModelRefl_t::m_nKelagerBendCount
 uint32 FeModelRefl_t::m_nReverseOffsetCount
 uint32 FeModelRefl_t::m_nSourceElemsCount
