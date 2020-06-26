@@ -567,6 +567,7 @@
 #DCG_ActionHint_Unit_AnyLane
 #DCG_ActionHint_Unit_Enemy
 #DCG_ActionHint_Unit_Enemy_AnyLane
+#DCG_ActionHint_Unit_Enemy_ThisOrAdjacentLane
 #DCG_ActionHint_Unit_Enemy_attack
 #DCG_ActionHint_Unit_Enemy_battle
 #DCG_ActionHint_Unit_Enemy_damage
@@ -575,7 +576,6 @@
 #DCG_ActionHint_Unit_Enemy_movetopos_AnotherLane
 #DCG_ActionHint_Unit_Enemy_movetopos_AnyLane
 #DCG_ActionHint_Unit_Enemy_purge
-#DCG_ActionHint_Unit_Enemy_swap
 #DCG_ActionHint_Unit_Tower_heal_AnyLane
 #DCG_ActionHint_Unit_affect
 #DCG_ActionHint_Unit_control_AnyLane
@@ -1023,6 +1023,7 @@
 #DCG_Glossary_Chain
 #DCG_Glossary_Charges
 #DCG_Glossary_Cleave
+#DCG_Glossary_Clone
 #DCG_Glossary_CombatImmunity
 #DCG_Glossary_CombatPhase
 #DCG_Glossary_Condemn
@@ -3296,6 +3297,7 @@ $tI
 (\bbounty\b)
 (\bburn\b)
 (\bcleave\b)
+(\bclone\b)
 (\bcombat phase(?!\]\])\b)
 (\bcondemn\b)
 (\bcreep(s)?\b)
@@ -3323,7 +3325,7 @@ $tI
 (\bhero(es)?\b)
 (\bhex\b)
 (\bimprovement(s)?\b)
-(\bitem\b)
+(\bitems?\b)
 (\bjump\b)
 (\blethal to creeps\b)
 (\blethal to heroes\b)
@@ -3631,8 +3633,7 @@ $tI
 *ZL22CC_ReloadCardTemplatesRK15CCommandContextRK8CCommandEUlPKcRK13AttributeListE_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
-*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
-*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
+*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -3714,6 +3715,7 @@ $tI
 *ZN13CDotaCardGame24UpdateLaneCombatPreviewsEvEUlP11CGameObjectE_
 *ZN13CDotaCardGame24UpdateLaneCombatPreviewsEvEUlPK11CGameObjectE0_
 *ZN13CDotaCardGame24UpdateLaneCombatPreviewsEvEUlPK11CGameObjectE1_
+*ZN13CDotaCardGame24UpdateLaneCombatPreviewsEvEUlPK11CGameObjectE2_
 *ZN13CDotaCardGame25RunSingleCardAttackEngineEP11CGameObjectS1_bRKSt8functionIFvS1_S1_RK8TagUnionI8TypelistIJNS_14DamageAmount_tENS_15HealingAmount_tEEEE13StrongTypedefIj13CardIDTypeTagLj0EEEEEUlS1_S1_SA_SD_E_
 *ZN13CDotaCardGame26GetAggregateOpposingGroupsERK10CUtlVectorIP11CGameObject10CUtlMemoryIS2_iEEEUlS2_E_
 *ZN13CDotaCardGame45GetDefaultDamageAndHealingApplicationFunctionEvEUlP11CGameObjectS1_RK8TagUnionI8TypelistIJNS_14DamageAmount_tENS_15HealingAmount_tEEEE13StrongTypedefIj13CardIDTypeTagLj0EEE_
@@ -8211,6 +8213,7 @@ $tI
 44CInterpolatedVarProceduralBaseUsingOwnerLerpI27AnimationOperationHistory_t25C_BaseAnimatingControllerLb1EE
 44CInterpolatedVarProceduralBaseUsingOwnerLerpI27AnimationOperationHistory_t32C_BaseAnimatingOverlayControllerLb0EE
 44CMsgClientToGCEventEquipVirtualItemsResponse
+44CMsgClientToGCGetLimitedItemPurchaseQuantity
 44CMsgClientToGCPrivateLobbyInviteUserResponse
 44CMsgClientToGCPrivateLobbyStartMatchResponse
 44CMsgClientToGCTourneyJoinOpenTourneyResponse
@@ -8459,7 +8462,6 @@ $tI
 51CScriptConfig_Set01_kJasperDaggers_CARD_PLAY_SCRIPT
 51CScriptConfig_Set01_kKeenfolkGolem_CARD_PLAY_SCRIPT
 51CScriptConfig_Set01_kMistofAvernus_CARD_PLAY_SCRIPT
-51CScriptConfig_Set01_kMjolnir_GENERIC_TRIGGER_SCRIPT
 51CScriptConfig_Set01_kOgreConscript_CARD_PLAY_SCRIPT
 51CScriptConfig_Set01_kPathoftheBold_CARD_PLAY_SCRIPT
 51CScriptConfig_Set01_kPathoftheWise_CARD_PLAY_SCRIPT
@@ -8477,6 +8479,7 @@ $tI
 51CScriptConfig_Set01_kWhirlingDeath_CARD_PLAY_SCRIPT
 51CUserMsg_ParticleManager_SetSceneObjectTintAndDesat
 52CDCGPerformanceOperator_UpdateAttachEntityVisibility
+52CMsgClientToGCGetLimitedItemPurchaseQuantityResponse
 52CScriptConfig_Set00_kBlinkScroll_TOWER_DAMAGE_REWARD
 52CScriptConfig_Set00_kDefaultScripts_CREEP_DEPLOYMENT
 52CScriptConfig_Set00_kTravelersCloak_CARD_PLAY_SCRIPT
@@ -8492,6 +8495,7 @@ $tI
 52CScriptConfig_Set01_kHymnofStCrella_CARD_PLAY_SCRIPT
 52CScriptConfig_Set01_kKeenfolkMusket_CARD_PLAY_SCRIPT
 52CScriptConfig_Set01_kKeenfolkTurret_CARD_PLAY_SCRIPT
+52CScriptConfig_Set01_kMjollnir_GENERIC_TRIGGER_SCRIPT
 52CScriptConfig_Set01_kNyctashasGuard_CARD_PLAY_SCRIPT
 52CScriptConfig_Set01_kRadiance_GENERIC_TRIGGER_SCRIPT
 52CScriptConfig_Set01_kSelemenesFavor_CARD_PLAY_SCRIPT
@@ -11493,7 +11497,6 @@ Assassin's Shadow
 Assassin's Veil
 Assault Ladders
 AssertMsg_ConditionFailed
-Assert_ConditionFailed
 Assertion Failed in function %s():%s
 Asset Modifiers
 Asset modifier index %d must be greater than or equal to zero
@@ -12056,7 +12059,6 @@ CBaseToggle
 CBaseTrigger
 CBaseVRHandAttachment
 CBaseVRHandAttachmentHandle
-CBaseViewModel
 CBaseWorldPanel::Init
 CBeam
 CBitVec
@@ -17450,7 +17452,7 @@ GauntletNav
 GauntletPointsLeaderboard_%d_%d
 Gaussian
 Gelatinous Vapor
-Gem of Truesight
+Gem of True Sight
 Gem%i
 GemNumber
 General.BurningFlesh
@@ -18056,6 +18058,7 @@ HoldSecretShopCardBinder
 Holy Locket
 Holy Persuasion
 Homefield Advantage
+Homunculus
 Honor Guard
 HookUpConfigValue
 Hooked Net
@@ -21137,6 +21140,7 @@ OnFocusAttack
 OnGainedAppliedEffect
 OnGameActivate
 OnGlowColorChanged
+OnGlowTypeChanged
 OnGoldEarned
 OnHeadOffsetChanged
 OnImpDealingCardsOnTheFlop
@@ -30998,7 +31002,7 @@ kMeleeCreep
 kMercenaryExiles
 kMessengerRookery
 kMistofAvernus
-kMjolnir
+kMjollnir
 kMoveEffect
 kMulticast
 kMurderPlot
@@ -35790,6 +35794,7 @@ public_list_contents
 punct
 purchase
 purchaseQuantity
+purchase_limited_quantity
 purgatory expires after date
 puzzle=%s
 puzzle_name

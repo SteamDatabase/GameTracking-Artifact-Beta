@@ -83,4 +83,10 @@
 		"Tools"			"Forward"
 		"EnvMapBake"	"Forward"
 	}
+
+	ModelDoc
+	{
+		"models_gamedata"	"models_base.fgd"
+		"features"			"animgraph"
+	}
 }
