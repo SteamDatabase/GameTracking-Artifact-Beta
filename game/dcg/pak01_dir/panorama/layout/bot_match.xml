@@ -7,40 +7,36 @@
  </styles>
 
 	<DCGBotMatch hittest="false">
-		<Panel class="PlayBody ButtonsVisible">
-			<Label class="ContentsHeaderLabel" text="{s:contents_header}"/>
-			<Label class="ContentsLabel" text="#DCG_PlayAIGame_SelectYourDeck"/>						
+		<Panel id="TopPanel">
+			<Panel id="PopupBackButton" class="PopupBackButton" onactivate="UIPopupButtonClicked()" />
+			<Label class="DBPageTitleLabel TitleFont" text="#DCG_PlayAIGame_VersusBot"/>
+		</Panel>
+		<Panel class="BotMatchPlayBody">
+			<Panel id="GameModelSelectionContainer">
+				<Label id="GameModeLabel" text="#DCG_PlayAIGame_GameMode" />
+				<DropDown id="GameModeSelector" dropdownbodyposition="100% 100%" initialselection="0">
+					<Label class="DropdownLabel" text="#DCG_PlayAIGame_GameModeConstructed" id="0" />
+					<Label class="DropdownLabel" text="#DCG_Gauntlet_LiveDraftTitle" id="1000" />
+					<Label class="DropdownLabel" text="#DCG_PlayAIGame_Random2Color" id="16" />
+				</DropDown>
+			</Panel>
+			<Label id="ConstructedDesc" class="BotDesc" text="#DCG_PlayAIGame_Desc" />
+			<Label id="LiveDraftDesc" class="BotDesc" text="#DCG_PlayLiveDraft_WelcomeTextAndRules" html="true" />
+			<Label id="Random2ColorDesc" class="BotDesc" text="#DCG_PlayAIGame_Random2ColorDesc" html="true" />
+			<Panel id="DeckSelectionContainer">
+				<Panel class="DeckSelection">
+					<Label class="ContentsBotLabel" text="#DCG_PlayAIGame_SelectYourDeck"/>						
 
-			<DCGDeckLoader id="DeckLoaderPlayer" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseYourDeck )" SoundEventPrefix="DCG_UI.BotSolo" />
+					<DCGDeckLoader id="DeckLoaderPlayer" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseYourDeck )" SoundEventPrefix="DCG_UI.BotSolo" />
+				</Panel>
+				<Panel class="DeckSelection">
+					<Label class="ContentsBotLabel" text="#DCG_PlayAIGame_BotDeck"/>
+
+					<DCGDeckLoader id="DeckLoaderAI" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseAIDeck )" SoundEventPrefix="DCG_UI.BotSolo_Rollover" />
+				</Panel>
+			</Panel>
 			
-			<Panel id="LabelAndChallengeSelectorPanel">
-				<Label class="ContentsLabel ExtraSpacingForLabel" text="#DCG_PlayAIGame_SelectChallenge"/>
-				<DropDown id="ChallengeSelector" dropdownbodyposition="100% 100%" initialselection="0">
-					<Label class="DropdownLabel" text="" id="0" />
-					<Label class="DropdownLabel" text="" id="1" />
-					<Label class="DropdownLabel" text="" id="2" />
-					<Label class="DropdownLabel" text="" id="3" />
-					<Label class="DropdownLabel" text="" id="4" />
-					<Label class="DropdownLabel" text="" id="11" />
-					<Label class="DropdownLabel" text="" id="12" />
-					<Label class="DropdownLabel" text="" id="13" />
-					<Label class="DropdownLabel" text="" id="14" />
-					<Label class="DropdownLabel" text="" id="15" />
-					<Label class="DropdownLabel" text="" id="16" />
-          <Label class="DropdownLabel" text="" id="17" />
-          <Label class="DropdownLabel" text="" id="18" />
-          <Label class="DropdownLabel" text="" id="19" />
-          <Label class="DropdownLabel" text="" id="20" />
-          <Label class="DropdownLabel" text="" id="21" />
-          <Label class="DropdownLabel" text="" id="22" />
-          <Label class="DropdownLabel" text="" id="23" />
-          <Label class="DropdownLabel" text="" id="24" />
-        </DropDown>
-			</Panel>	
-
-			<DCGDeckLoader id="DeckLoaderAI" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseAIDeck )" SoundEventPrefix="DCG_UI.BotSolo_Rollover" />
-
-		  	<Panel id="TimerDifficultyContainer">
+			<Panel id="TimerDifficultyContainer">
 				<Panel id="TimerSelectorPanel" onmouseover="UIShowTextTooltip( #DCG_PlayAIGame_ShotClock ) PlaySoundEffect( DCG_UI.BotSolo_Rollover_Timer )" onmouseout="UIHideTextTooltip()">
 					<ToggleButton id="AITimerToggleButton" onactivate="OnToggleAITimer()" allowtextselection="false">
 						<Label class="ContentsLabel" text="#DCG_PrivateLobby_TimerSelector" />
