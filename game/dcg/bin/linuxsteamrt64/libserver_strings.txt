@@ -185,7 +185,6 @@
 #CardEffect_10177_0
 #CardEffect_10183_0
 #CardEffect_10187_0
-#CardEffect_10193_0
 #CardEffect_10194_0
 #CardEffect_10202_0
 #CardEffect_10203_0
@@ -432,6 +431,7 @@
 #CardEffect_11060_0
 #CardEffect_11061_0
 #CardEffect_11062_0
+#CardEffect_11063_0
 #CardEffect_19001_0
 #CardEffect_19002_0
 #CardEffect_19003_0
@@ -557,6 +557,7 @@
 #DCG_CardType_Armor
 #DCG_CardType_CardBack
 #DCG_CardType_Consumable
+#DCG_CardType_Courier
 #DCG_CardType_Creep
 #DCG_CardType_Deed
 #DCG_CardType_Hero
@@ -1055,16 +1056,14 @@ $effectSourceObjectID
 %s:  %s SaveHeaderCache_t::Reset() trying to cache new .sav (%s)
 %s:  %s WRITE %s in CEntity2SaveRestore::DirectoryCopy
 %s:  %s WRITE %s in CEntity2SaveRestore::EntityPatchWrite
-%s:  %s WRITE CSaveRestoreFileSystemPassthrough::AsyncWrite( %s : %d bytes )
 %s:  %s WRITE DirectoryClear( %s, %s )
-%s:  %s WRITE DirectoryCopy AsyncAppend( %s, %s )
-%s:  %s WRITE DirectoryCopy AsyncFinishAllWrites
-%s:  %s WRITE DirectoryCopy( %s, %s, %s )
+%s:  %s WRITE DirectoryCopy Append( %s [%i] )
+%s:  %s WRITE DirectoryCopy( %s, %p )
 %s:  %s WRITE DirectoryExtract( %s, %s )
 %s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::EntityPatchWrite
 %s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::SaveGame_Finalize
-%s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::StreamEntitiesToFile
 %s:  %s WRITE Queue ClearSaveFile(%s) in CEntity2SaveRestore::SaveGame_Finalize
+%s:  %s WRITE Queue WriteFile(%s) in CEntity2SaveRestore::StreamEntitiesToFile
 %s:  %s async %s in CEntity2SaveRestore::AppendTransitionResources
 %s:  %s async %s in CEntity2SaveRestore::EntityPatchRead
 %s:  %s async %s in CEntity2SaveRestore::LoadAdjacentEnts
@@ -1087,6 +1086,7 @@ $effectSourceObjectID
 %s:  CPhysicsGameSystem::GameShutdown
 %s:  CPhysicsGameSystem::PostSpawnGroupUnload(%s: %s)
 %s:  CPhysicsGameSystem::PreSpawnGroupLoad(%s: %s)
+%s:  CSaveRestoreFileSystemPassthrough::WriteFile( %s : %d bytes )
 %s:  CSpawnGroupMgrGameSystem::AllocateSpawnGroup( %s ):  spawn group already allocated!
 %s:  CSpawnGroupMgrGameSystem::PerformActivateSpawnGroup(%s)
 %s:  EndRestoreEntities( %s%s )
@@ -1171,6 +1171,7 @@ $effectSourceObjectID
 %s: '%s' (tick %d)
 %s: AnimGraph Trying to set parameter: "%s" but does not exist
 %s: AnimGraph Variable: "%s" set to "%s" on %s (%d) at %.2f [%d]
+%s: CSaveRestoreFileSystemPassthrough::WriteFile( %s : %d bytes ) FAILED
 %s: Mass: %.2f kg / %.2f lb (%s)
 %s: Script "%s" loaded.
 %s: entity %d fade layer %s order %d completed at %f
@@ -1280,7 +1281,6 @@ $effectSourceObjectID
 (0x%08X)'??'
 (0x%p)       Serialize state (update ID: %d) for player %d, network group %s: %s actions; reason = %s (%d)
 (0x%p) Sending state update to player %d: %u, Reason: %s (%u). Actions: %s - Caller: %s (%u)
-(@
 (ACTIVE)
 (Dirty Animation)
 (Has breakpieces or commands)
@@ -1478,6 +1478,7 @@ $effectSourceObjectID
 *ZN13CDotaCardGame5CloneEvEUlP11CGameObjectE_
 *ZN13CDotaCardGame7PillageEvEUlP11CGameObjectE_
 *ZN13CDotaCardGame8SetFocusEP11CGameObjectiEUlPS_RK25IAttributeContainerReaderRK17SpecificObjects_tE0_
+*ZN14CBaseGameStats13SaveToFileNOWEbEUlPKvE_
 *ZN14CCombatManager20InsertCardIntoCombatEP11CGameObjectiEUlP13CDotaCardGameRK25IAttributeContainerReaderRK17SpecificObjects_tE_
 *ZN15CPlayCardAction22OutputPlayCardCommandsEP11CGameObjectiS1_EUlvE0_
 *ZN15CPlayCardAction22OutputPlayCardCommandsEP11CGameObjectiS1_EUlvE_
@@ -2345,7 +2346,6 @@ $effectSourceObjectID
 15CLogicGameEvent
 15CLogicProximity
 15CMathColorBlend
-15CMemberFunctor0IP11IFileSystemMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IP19CEntity2SaveRestoreMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorI24QueryCacheUpdateRecord_t21CFuncJobItemProcessorIS2_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorI9PVSWork_t27CMemberFuncJobItemProcessorIS2_20CSource2GameEntitiesS4_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -2354,7 +2354,7 @@ $effectSourceObjectID
 15CMemberFunctor2IP19CEntity2SaveRestoreMS0_KFvP10CCallQueuePKcES3_12CUtlEnvelopeIS5_E12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor2IP19CEntity2SaveRestoreMS0_KFvPKciE12CUtlEnvelopeIS3_Ei12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor3IP19CEntity2SaveRestoreMS0_Fb16SaveGameParams_tP18IGameSpawnGroupMgrS4_ES2_S4_S4_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor7IP22ISaveRestoreFileSystemMS0_F15FSAsyncStatus_tPKcPKvibbPP18FSAsyncControl_t__S4_E12CUtlEnvelopeIS4_EPvibbS9_S4_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor5IP22ISaveRestoreFileSystemMS0_FbPKcPKvibS3_E12CUtlEnvelopeIS3_EPvibS3_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMsgAMSendEmail
 15CMsgClientHello
 15CMsgConVarValue
@@ -3682,7 +3682,6 @@ $effectSourceObjectID
 27CSchemaUtlVectorManipulatorI10CUtlVectorI15CUtlSymbolLarge28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI16ragdollelement_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI17ResponseContext_t10CUtlMemoryIS1_iEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI17SosEditItemInfo_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI18CEconItemAttribute28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19interactions_data_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19magnetted_objects_t10CUtlMemoryIS1_iEES1_E
@@ -4757,7 +4756,6 @@ $effectSourceObjectID
 >
 >%s%.3f
 >=
->@server_cvar
 ?
 ?(
 ???
@@ -6277,7 +6275,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraph Controller
 AnimGraph Controller event on actor w/ no AnimGraph..
@@ -8047,6 +8044,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -8058,6 +8056,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -8308,6 +8307,7 @@ Closing connection [%s] hconn=%d we don't recognize that connection, ignoring.
 Closing connection [%s] hconnn=%d but that user is using hconn=%d now.  Ignoring.
 Closing old connection
 Closing previous connection to %s, hconn=%d, because we have a new one for that player!  This is unusual.
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -8444,7 +8444,6 @@ Count All: %i
 CountdownTimer
 Counter Magic
 Coup de Grace
-Courier
 Court of Ristul
 Crash detection sentinel file '%s' file is present!
 Crash report has been pending to submit for %d seconds
@@ -8548,6 +8547,7 @@ DCG_Spell.Gods_Strength
 DCG_Spell.Grow
 DCG_Spell.Hand_of_God
 DCG_Spell.Headshot_PreCast
+DCG_Spell.Juxtapose
 DCG_Spell.Mana_Void
 DCG_Spell.Multicast
 DCG_Spell.Nether_Blast
@@ -9394,9 +9394,9 @@ FTYPEDESC_GEN_ARRAY_KEYNAMES_0
 FTYPEDESC_GEN_ARRAY_KEYNAMES_1
 FTYPEDESC_GLOBAL
 FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
 FTYPEDESC_KEY
 FTYPEDESC_MODELINDEX
+FTYPEDESC_NETWORKED
 FTYPEDESC_NOERRORCHECK
 FTYPEDESC_NONE
 FTYPEDESC_OUTPUT
@@ -10020,6 +10020,7 @@ Graveyard
 GravityTouch
 Grazing Shot
 Great Cleave
+Great Fortitude
 GreenBlood
 Greevil Bronco
 Greevil Egg
@@ -10344,7 +10345,6 @@ Infinite time value
 Info Data
 InfoForResourceTypeCAnimData
 InfoForResourceTypeCModel
-InfoForResourceTypeCPostProcessingResource
 InfoForResourceTypeCTextureBase
 InfoForResourceTypeIMaterial2
 InfoForResourceTypeIParticleSystemDefinition
@@ -10977,7 +10977,6 @@ Juke
 Jul
 Julie Baroh
 Jun
-Juxtapose
 K
 KB
 KBPS
@@ -12277,6 +12276,7 @@ PARALYZE
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_REPLACE_AMBIENT_EFFECT
 PARTICLE_REPLACE_AUTODETECT
 PARTICLE_REPLACE_NONE
@@ -12360,6 +12360,8 @@ PROVIDER_WEAPON
 PS3
 PSt8functionIF20NavSearchPosResult_tRK6VectorRK8CNavAreaEE
 PSt8functionIF21NavSearchAreaResult_tR8CNavAreaP19NavSearchAreaInfo_tEE
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PVS is shared between teams
@@ -12698,6 +12700,11 @@ PropaneTank.Burst
 PropertyEditorSystem_001
 Proto file starts with 0xEF but not UTF-8 BOM. Only UTF-8 is accepted for proto file.
 Proto type
+ProtoBufHelper::DebugParseBinary: Couldn't find descriptor pool
+ProtoBufHelper::DebugParseBinary: Couldn't find message factory
+ProtoBufHelper::DebugParseBinary: Couldn't find message type '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't find prototype for msg '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't parse message
 ProtoBufHelper::ParseJSON: Array Begin found on invalid field!
 ProtoBufHelper::ParseJSON: Array Begin found on non-repeated field: '%s'!
 ProtoBufHelper::ParseJSON: Array End found on invalid field!
@@ -13211,12 +13218,6 @@ SOLID_OBB
 SOLID_POINT
 SOLID_VPHYSICS
 SONIC
-SOS_EDIT_ITEM_TYPE_FIELD
-SOS_EDIT_ITEM_TYPE_LIBRARYSTACKS
-SOS_EDIT_ITEM_TYPE_OPERATOR
-SOS_EDIT_ITEM_TYPE_SOUNDEVENT
-SOS_EDIT_ITEM_TYPE_SOUNDEVENTS
-SOS_EDIT_ITEM_TYPE_STACK
 SOURCE2 SAVE COMMENT
 SOUTH
 SOUpdated type = %d owner = %s event=%d
@@ -13653,7 +13654,6 @@ SelectResponse
 Selected %d areas.
 Selected Nav Areas
 Selected set saved to %s.  Use 'nav_merge_mesh %s_selected_%4.4d' to merge it into another mesh.
-SelectedEditItemInfo_t
 Selecting move at index: %d %s with score: %6.3lf, object_id: %d, destination_object_id: %d,
 Selects any areas that intersect the given half-space.
 Selects areas with the given attribute.
@@ -14011,8 +14011,6 @@ Some test string
 Sonic Bubble
 Sorla Khan
 Sorla Khan's Spear
-SosEditItemInfo_t
-SosEditItemType_t
 Soul Rip
 Soul of Spring
 Sound material definition %s: Missing required field "value"
@@ -14487,7 +14485,6 @@ TestFormatE
 TestRaysToBoundaryZone - pass raw %0.2f, pass grid %0.2f, ratio %0.2f
 TestScriptManager
 TestScriptMgr001
-Tests are disabled in retail builds
 Tests collision detection
 Tests hull collision detection
 Text that team leader from each team must speak for the match to begin
@@ -14925,6 +14922,7 @@ V
 V(
 VALVt
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -14952,7 +14950,6 @@ VMatrix
 VMatrix-world
 VMediaFoundation001
 VModEnable
-VNewAsyncFileSystem001
 VOTE_FAILED_CANNOT_KICK_ADMIN
 VOTE_FAILED_FAILED_RECENTLY
 VOTE_FAILED_GENERIC
@@ -15342,7 +15339,7 @@ X360
 XAxis
 XBowBolt
 Y
-Y@subject
+Y@
 YAxis
 YYYY
 YYYY-MM-DD
@@ -15372,6 +15369,7 @@ ZN11IndirectAny6AssignIiEEvOT_EUlPvE_
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
 ZN19CMarkupSearchHelper23AddNavAreasForRefVolumeEPK20CMarkupVolumeWithRefEUlR8CNavAreaE_
 ZN19CMarkupSearchHelper26AddNavAreasForTaggedVolumeEPK19CMarkupVolumeTaggedEUlR8CNavAreaE_
+ZN21CAsyncFileReadContext4InitEPKcS1_22AsyncRequestPriority_tP10CUtlBufferEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI30CDCGTeamwipeAchievementFactoryEEv13StrongTypedefIj18AchievementTypeTagLj0EEEUliP13CDotaCardGameE_
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI32CDCGHealHealthAchievementFactoryEEv13StrongTypedefIj18AchievementTypeTagLj0EEEUliP13CDotaCardGameE_
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI32CDCGUpkeepKillAchievementFactoryEEv13StrongTypedefIj18AchievementTypeTagLj0EEEUliP13CDotaCardGameE_
@@ -16388,6 +16386,9 @@ d3_citadel_03
 d3_citadel_04
 d3_citadel_05
 dac
+dac_dof_far_blurry
+dac_dof_far_crisp
+dac_dof_tilt_to_ground
 damageAlreadyDone
 damageForce
 damagePosition
@@ -16448,6 +16449,7 @@ dcg_feeble_simulates_attack_and_checks_for_lethal
 dcg_flank_always_available
 dcg_gamemessages.proto
 dcg_gamerules
+dcg_gcmessages_client.proto
 dcg_gcmessages_server.proto
 dcg_hero_death_duration
 dcg_hero_death_duration_ai
@@ -16638,6 +16640,9 @@ dmg.club
 dmg.explosive
 dmg.fire
 doClientSideAnimation
+dof_enabled
+dof_near_blurry
+dof_near_crisp
 dog
 don't adjust rate faster/slower if average queue is this close to goal.
 dormant child
@@ -17852,11 +17857,6 @@ isbetween
 isbot
 isstairs
 iszString
-itemKVString
-itemName
-itemPos
-itemType
-itemTypeName
 item_ammo_ar2
 item_ammo_ar2_large
 item_ammo_pistol
@@ -18351,7 +18351,6 @@ m_DmgSave
 m_DmgTake
 m_Duration
 m_Easings
-m_EditItems
 m_EffectInterpenetrateName
 m_EffectName
 m_EffectZapName
@@ -18370,6 +18369,9 @@ m_Filter
 m_FilteredAreas
 m_FindMethod
 m_Flags
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_FloatVariables
 m_FogColor
 m_Followup
@@ -18418,6 +18420,8 @@ m_Listeners
 m_LiteralColor
 m_LiteralHandType
 m_Local
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_LocalPredBoolVariables
 m_LocalPredByteVariables
 m_LocalPredFloatVariables
@@ -18891,6 +18895,7 @@ m_bDiscoverable
 m_bDoBonesOrientAlongPositiveX
 m_bDoClientSideAnimation
 m_bDoNotDrawInFastShadowPath
+m_bDofEnabled
 m_bDormant
 m_bDrawLast
 m_bDrawViewmodel
@@ -19387,9 +19392,13 @@ m_fPoseValue
 m_fPrevSampleTime
 m_fPrevVelocity
 m_fRadius
+m_fRadiusMax
+m_fRadiusMin
 m_fRange
 m_fReplayEnd
 m_fSpeed
+m_fSpeedMax
+m_fSpeedMin
 m_fStartFrame
 m_fTimeLastHurt
 m_fTopVignetteStrength
@@ -19532,6 +19541,11 @@ m_flDmgModBullet
 m_flDmgModClub
 m_flDmgModExplosive
 m_flDmgModFire
+m_flDofFarBlurry
+m_flDofFarCrisp
+m_flDofNearBlurry
+m_flDofNearCrisp
+m_flDofTiltToGround
 m_flDrawDistance
 m_flDuration
 m_flDynamicMaximumOcclusion
@@ -19654,7 +19668,10 @@ m_flIndirectStrength
 m_flInfluenceRadius
 m_flInitFromKilledParentParticles
 m_flInitialDelay
+m_flInitialRadius
 m_flInitialRotation
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInitialWindSpeed
 m_flInitialYaw
 m_flInnerRadius
@@ -19826,6 +19843,7 @@ m_flPathingDistanceNormFactor
 m_flPhi
 m_flPickupRadius
 m_flPickupRadiusSqr
+m_flPitch
 m_flPivotMax
 m_flPivotMin
 m_flPlaneOffset
@@ -19870,6 +19888,7 @@ m_flRenderTime
 m_flRespawnDuration
 m_flRestLength
 m_flReturnTime
+m_flRoll
 m_flRotateMax
 m_flRotateMin
 m_flRotation
@@ -19948,6 +19967,7 @@ m_flTargetSpeed
 m_flTargetYaw
 m_flThenAnyMaxDist
 m_flTheta
+m_flThickness
 m_flThreshold
 m_flTickRemainder
 m_flTimeAttackQueued
@@ -19994,6 +20014,7 @@ m_flWindAngleVariation
 m_flWindSpeed
 m_flWindSpeedVariation
 m_flWorldUnitsPerPx
+m_flYaw
 m_flZFar
 m_flZNear
 m_flZOffset
@@ -20856,6 +20877,7 @@ m_nNavObstacleType
 m_nNewSequenceParity
 m_nNextThinkTick
 m_nNoiseRunningGuid
+m_nNoiseType
 m_nNpcEvents
 m_nNumBeamEnts
 m_nNumCrateHudHints
@@ -20874,6 +20896,8 @@ m_nOuterMaxDist
 m_nOutputID
 m_nOutputType
 m_nOutsideWorld
+m_nOverrideCP
+m_nOverrideCP2
 m_nOverrideStyle
 m_nParentAttachmentOrBone
 m_nParticlesToEmit
@@ -21367,6 +21391,7 @@ m_unpressedForward
 m_unpressedMoveLeft
 m_unpressedMoveRight
 m_usSolidFlags
+m_useCurl
 m_userArray
 m_vAngles
 m_vBallOffset
@@ -21376,6 +21401,7 @@ m_vBoxMins
 m_vBoxProjectMaxs
 m_vBoxProjectMins
 m_vBoxSize
+m_vCPValueScale
 m_vCapsuleCenter1
 m_vCapsuleCenter2
 m_vCapsulePos1
@@ -21834,6 +21860,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -22578,6 +22605,7 @@ percent_target
 percentages
 permanently
 permitresponses
+persistent
 pervertexlighting
 pet
 phase not supported
@@ -23581,6 +23609,7 @@ static_attributes
 static_recipe
 stats.txt
 std::_Bvector_base<std::allocator<bool> >::_M_deallocate()
+std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
@@ -24422,6 +24451,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

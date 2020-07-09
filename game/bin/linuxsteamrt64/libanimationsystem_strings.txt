@@ -207,6 +207,7 @@ $ORIGIN
 ***Shared activity collision with private activity! %s<->%s [%i]***
 ***Shared activity collision! %s<->%s***
 ***Shared<->Private Activity collision!***
+***Shared<->Private Event collision!***
 *Cm_TiltBone
 + Already Exists, ignoring
 + Default Morph Ctrl Weight :: %8.4f
@@ -1749,6 +1750,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -1760,6 +1762,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -1841,6 +1844,7 @@ ClientSimulate
 ClipSampleInfo
 ClipSegment
 Cloth Settings Tag
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -2172,9 +2176,9 @@ FTYPEDESC_GEN_ARRAY_KEYNAMES_0
 FTYPEDESC_GEN_ARRAY_KEYNAMES_1
 FTYPEDESC_GLOBAL
 FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
 FTYPEDESC_KEY
 FTYPEDESC_MODELINDEX
+FTYPEDESC_NETWORKED
 FTYPEDESC_NOERRORCHECK
 FTYPEDESC_NONE
 FTYPEDESC_OUTPUT
@@ -3167,6 +3171,7 @@ P@
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -3184,6 +3189,8 @@ POSE_SPACE_BONE
 POSE_SPACE_MORPH
 POSIX
 PS3
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PanoramaTextServices001
@@ -3704,6 +3711,7 @@ User Defined Values
 UserInfoChangeService_001
 Using 16-bit blend indices
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -3724,7 +3732,6 @@ VMaterialSystem2_001
 VMatrix
 VMatrix-world
 VMediaFoundation001
-VNewAsyncFileSystem001
 VP4003
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
@@ -4268,6 +4275,9 @@ m_EndEffectorBone
 m_EndEffectorFixedOffsetAttachment
 m_EndEffectorTargetBone
 m_EventData
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_FootstepType
 m_ForceGenerators
 m_HingeAxis
@@ -4284,6 +4294,8 @@ m_JointName
 m_Joints
 m_LegacyKeyValueText
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_LockBoneInfluenceDriver
 m_MasterBlendAnimgraphParameterName
 m_MovementSettings
@@ -4617,6 +4629,10 @@ m_fMaxTension
 m_fMaxValue
 m_fMinSpeed
 m_fMinValue
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_fSpeedScale
 m_fStartCycle
 m_facingDamping
@@ -4694,6 +4710,9 @@ m_flHysteresisInnerAngle
 m_flHysteresisOuterAngle
 m_flInitFromKilledParentParticles
 m_flInitialMasterBlendAmount
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInitialTiltBoneInfluence
 m_flInnerRadius
 m_flInput0
@@ -4746,6 +4765,7 @@ m_flOuterRadius
 m_flOutput0
 m_flOutput1
 m_flOverrideTiltSpringStrength
+m_flPitch
 m_flPitchLimit
 m_flPosWeight
 m_flPredictionScale
@@ -4760,6 +4780,7 @@ m_flRandomMin
 m_flRaycastHeight
 m_flRaycastRadius
 m_flRealTime
+m_flRoll
 m_flRootMotionBlend
 m_flRotationOffset
 m_flSampleRate
@@ -4796,6 +4817,7 @@ m_flStrideCurveLimitScale
 m_flStrideCurveScale
 m_flTailAlphaScale
 m_flTargetFacing
+m_flThickness
 m_flTiltPlanePitchSpringStrength
 m_flTiltPlaneRollSpringStrength
 m_flTimingBlend
@@ -4813,6 +4835,7 @@ m_flVar2
 m_flWhipDelay
 m_flWhipImpactScale
 m_flWhipSpringStrength
+m_flYaw
 m_flYawLimit
 m_flZSpringStiffness
 m_flags
@@ -4969,9 +4992,12 @@ m_nMaxUniqueFrameIndex
 m_nMinParticlesToEmit
 m_nNameHash
 m_nNodeID
+m_nNoiseType
 m_nNumIterations
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOverrideCP
+m_nOverrideCP2
 m_nParticlesToEmit
 m_nPeakFrame
 m_nPoseControl
@@ -5150,12 +5176,14 @@ m_turnDuration
 m_turnStartTime
 m_updateID
 m_usageDifferences
+m_useCurl
 m_userArray
 m_vAccelerationWS
 m_vBallOffset
 m_vBasePosition
 m_vBoundsMaxLS
 m_vBoundsMinLS
+m_vCPValueScale
 m_vCapsulePos1
 m_vCapsulePos2
 m_vConeApex
@@ -5284,6 +5312,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -5316,6 +5345,7 @@ o Default  Morph Ctrl Weight  :: %f
 o Explicit Morph Ctrl Weights :: %d
 o MorphCtrlWeight[%d] :: %s :: %f
 open_asset %s
+operation
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -5330,6 +5360,7 @@ parent of jiggle bone %u: %s
 parent to constrained
 particles/
 peakframe
+persistent
 pervertexlighting
 phys_res
 physaggregatedata.cpp
@@ -5712,6 +5743,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

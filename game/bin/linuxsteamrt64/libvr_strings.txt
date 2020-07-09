@@ -382,7 +382,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraphEditorUtils001
 AnimIkLockLocal
@@ -621,6 +620,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -632,6 +632,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -677,6 +678,7 @@ Checker.
 Clear Color
 Clip Space Bounds Left Eye  (L/R/T/B):
 Clip Space Bounds Right Eye (L/R/T/B):
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -703,6 +705,7 @@ Controller at tracked device slot: %d %s
 Controller event vr::VREvent_%s, name = %-10s
 ConvertFloatToChannel: Trying to convert to a a float to a destation of byte size %d
 ConvertFloatToChannel: Trying to convert to a a normalized float to a destation of byte size %d
+ConvertGammaToLinear
 Converting display frequency from %f to %d / %d
 CopyAttrFrom
 Couldn't write Frame Timing data.
@@ -717,6 +720,7 @@ D24X4S4
 D24X8
 D24X8_SHADOW
 D32
+D32FS8
 DXT1
 DXT1_ONEBITALPHA
 DXT3
@@ -1129,6 +1133,7 @@ PARALLEL_PROCESS utlsoacontainer.cpp:2533
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -1149,6 +1154,8 @@ POSITION
 PREDICTIVE DROP vr_fidelity_level %d. Last frames = %.2fms, %.2fms, %.2fms > %.2f
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFjjjjEEPS2_jijEE
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFvjjEEPS2_ijEE
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PWL
@@ -1425,6 +1432,7 @@ UserInfoChangeService_001
 Using 10-bit blend indices: are you sure they are supproted on the target hardware?
 Using 16-bit blend indices
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -1442,7 +1450,6 @@ VGUI_ivgui008
 VMDLLIB001
 VMaterialSystem2_001
 VMediaFoundation001
-VNewAsyncFileSystem001
 VP4003
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
@@ -1987,6 +1994,9 @@ m_DefaultTargetSettings
 m_Emitters
 m_EndEffectorBone
 m_EndEffectorTargetBone
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_ForceGenerators
 m_HitBoxSets
 m_HitBoxes
@@ -1999,6 +2009,8 @@ m_JointConstraintPairs
 m_JointName
 m_Joints
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_MotorList
 m_Name
 m_Operators
@@ -2076,6 +2088,10 @@ m_fError >= 0.0f
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_fingers
 m_flBiasParameter
 m_flBindPoseDirectionMS
@@ -2096,6 +2112,9 @@ m_flFingerScaleRatio
 m_flFingerWeight
 m_flFootLength
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInput0
 m_flInput1
 m_flLiteralValue
@@ -2110,11 +2129,13 @@ m_flOpStrengthMaxScale
 m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
+m_flPitch
 m_flRadius
 m_flRadiusScale
 m_flRadiusTaper
 m_flRandomMax
 m_flRandomMin
+m_flRoll
 m_flScalePerParentParticle
 m_flShapeRadius
 m_flSphereRadius
@@ -2123,11 +2144,13 @@ m_flSplayMinAngle
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flThickness
 m_flTraceHeight
 m_flTraceRadius
 m_flUvDensity
 m_flValue
 m_flWeight
+m_flYaw
 m_flags
 m_floatAttributes
 m_floatParams
@@ -2198,8 +2221,11 @@ m_nInstanceCount
 m_nMapType
 m_nMinParticlesToEmit
 m_nNameHash
+m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOverrideCP
+m_nOverrideCP2
 m_nParticlesToEmit
 m_nPrimitiveType
 m_nRandomMode
@@ -2276,9 +2302,11 @@ m_transform
 m_uiAddedBlocks < m_uiImageBlocks
 m_uiAddedBlocks == m_uiImageBlocks
 m_uiEncodingIterations == 0
+m_useCurl
 m_userArray
 m_vBallOffset
 m_vBasePosition
+m_vCPValueScale
 m_vCapsulePos1
 m_vCapsulePos2
 m_vConeApex
@@ -2371,6 +2399,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -2401,6 +2430,7 @@ oculus
 oculus_rifts_controller_
 oculus_touch
 of the back buffer (shrink wrap saved
+operation
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -2420,6 +2450,7 @@ particles_list
 pass %u
 pbucket->plinkLast->GetNext() == nullptr
 perftest_multigpu
+persistent
 pervertexlighting
 phys_res
 physaggregatedata.cpp
@@ -2698,6 +2729,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

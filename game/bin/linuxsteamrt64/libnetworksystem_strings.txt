@@ -718,7 +718,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraphEditorUtils001
 AnimIkLockLocal
@@ -1221,6 +1220,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -1232,6 +1232,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -1309,6 +1310,7 @@ Closing '%s' SDR listen socket
 Closing '%s' UDP listen socket
 Closing '%s' poll group
 Closing Steam Net Connection on socket '%s' to %s, handle #%u (%d %s)
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -1996,6 +1998,7 @@ PACKET_STATUS_INVALID
 PACKET_STATUS_NORMAL
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -2010,6 +2013,8 @@ PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
 PF_TYPE_RANDOM_UNIFORM
 PLACEHOLDER_VALUE
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PanoramaTextServices001
@@ -2092,6 +2097,11 @@ PropertyEditorSystem_001
 Proto
 Proto file starts with 0xEF but not UTF-8 BOM. Only UTF-8 is accepted for proto file.
 Proto type
+ProtoBufHelper::DebugParseBinary: Couldn't find descriptor pool
+ProtoBufHelper::DebugParseBinary: Couldn't find message factory
+ProtoBufHelper::DebugParseBinary: Couldn't find message type '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't find prototype for msg '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't parse message
 ProtoBufHelper::ParseJSON: Array Begin found on invalid field!
 ProtoBufHelper::ParseJSON: Array Begin found on non-repeated field: '%s'!
 ProtoBufHelper::ParseJSON: Array End found on invalid field!
@@ -2400,6 +2410,7 @@ Use lz compression on game packets.
 Use network sockets layer even for listen server local player's packets (multiplayer only).
 UserInfoChangeService_001
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -2428,7 +2439,6 @@ VMDLLIB001
 VMaterialSystem2_001
 VMatrix
 VMediaFoundation001
-VNewAsyncFileSystem001
 VP4003
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
@@ -3015,6 +3025,9 @@ m_DefaultTargetSettings
 m_Emitters
 m_EndEffectorBone
 m_EndEffectorTargetBone
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_ForceGenerators
 m_IKChains
 m_IkChain
@@ -3025,6 +3038,8 @@ m_JointConstraintPairs
 m_JointName
 m_Joints
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_MotorList
 m_Name
 m_Operators
@@ -3056,6 +3071,10 @@ m_bUseHighestEndCP
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_flBiasParameter
 m_flClusterCooldown
 m_flClusterCooldownMax
@@ -3069,6 +3088,9 @@ m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInput0
 m_flInput1
 m_flLiteralValue
@@ -3078,14 +3100,18 @@ m_flOpStrengthMaxScale
 m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
+m_flPitch
 m_flRadiusScale
 m_flRadiusTaper
 m_flRandomMax
 m_flRandomMin
+m_flRoll
 m_flScalePerParentParticle
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flThickness
+m_flYaw
 m_hSnapshot
 m_nAnimationType
 m_nAttributeToWrite
@@ -3103,8 +3129,11 @@ m_nFirstMultipleOverride_BackwardCompat
 m_nIncrement
 m_nMapType
 m_nMinParticlesToEmit
+m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOverrideCP
+m_nOverrideCP2
 m_nParticlesToEmit
 m_nRandomMode
 m_nScaleCP
@@ -3122,6 +3151,8 @@ m_pMovementManager
 m_pParent
 m_pszSnapshotName
 m_snapshotName
+m_useCurl
+m_vCPValueScale
 m_vEndTrailTintFactor
 m_vLiteralValue
 m_vecColorScale
@@ -3174,6 +3205,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -3259,6 +3291,7 @@ numsegments
 o
 of the Protocol Buffer runtime library, but the installed version is
 of the Protocol Buffer runtime library, which is not compatible with the installed version (
+operation
 operator delete(void*)
 operator delete(void*, std::nothrow_t const&)
 operator delete[](void*)
@@ -3285,6 +3318,7 @@ particles/
 pending data
 per client out %.1f, in %.1f kB/s
 per client out %.1f/s, in %.1f/s
+persistent
 physgun_interactions
 physicsmode
 placement_attach
@@ -3600,6 +3634,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

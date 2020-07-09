@@ -118,6 +118,7 @@ $tI
 )
 *
 *SoundEvent Data*
+*ZN14CAsyncWaveData17StartAsyncLoadingERK17asyncwaveparams_tEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 +
 +inf
 ,
@@ -548,7 +549,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraphEditorUtils001
 AnimIkLockLocal
@@ -572,6 +572,7 @@ AssetBrowserSystem_001
 AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
+Async read of %s failed: ERROR_FILEOPEN
 AsyncSoundQueue
 Atomic Type: %i
 Attack time (ms)
@@ -619,7 +620,6 @@ BentNormalData
 BinaryProperties_GetValue
 BlendList
 Block Max Count
-Blocking I/O hitch.  Freed memory while streaming in %s
 Blocks Events
 BodyGroup
 BodyGroupChoice
@@ -819,6 +819,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -830,6 +831,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -883,6 +885,7 @@ Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 ChangeCallbackOnChange
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -1349,6 +1352,7 @@ PARAMDATA COMPARE FAIL: %s->%s : %s
 PARAMINFO COMPARE FAIL: %s->%s
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -1365,6 +1369,8 @@ PHRASE
 PLAINTEXT
 POSIX
 PS3
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PanoramaTextServices001
@@ -1766,6 +1772,7 @@ UserInfoChangeService_001
 V
 VALUES
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -1792,7 +1799,6 @@ VMediaFoundation001
 VMixEditTool001
 VMixStartup
 VMixTableInit
-VNewAsyncFileSystem001
 VP4003
 VPROCESSOR_DELAY
 VPROCESSOR_DYNAMICS
@@ -2003,6 +2009,7 @@ __gmon_start__
 __memcpy_chk
 __move_to_end
 __oldschema_object_name
+__pthread_key_create
 __remap_input
 __remap_input1
 __remap_input2
@@ -2615,6 +2622,9 @@ m_EditorPreview
 m_Emitters
 m_EndEffectorBone
 m_EndEffectorTargetBone
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_ForceGenerators
 m_IKChains
 m_IkChain
@@ -2625,6 +2635,8 @@ m_JointConstraintPairs
 m_JointName
 m_Joints
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_MixCommands
 m_MotorList
 m_Name
@@ -2683,6 +2695,10 @@ m_curves
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_feedbackFilter
 m_flAttackTimeMS
 m_flBandwidth
@@ -2709,6 +2725,9 @@ m_flFreqRangeEnd
 m_flFreqRangeStart
 m_flHoldTimeMS
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInput0
 m_flInput1
 m_flLimiterRatio
@@ -2732,6 +2751,7 @@ m_flRandomMax
 m_flRandomMin
 m_flRatio
 m_flReleaseTimeMS
+m_flRoll
 m_flScalePerParentParticle
 m_flSend
 m_flSendFacingDSP
@@ -2742,11 +2762,13 @@ m_flStartTime
 m_flStartTimeMax
 m_flSystemVolumeFadeRate
 m_flTailAlphaScale
+m_flThickness
 m_flTime
 m_flTimeScale
 m_flValue
 m_flVolume
 m_flWidth
+m_flYaw
 m_fldBModGain
 m_fldBUnvoicedGain
 m_fldbCompressionThreshold
@@ -2792,9 +2814,12 @@ m_nMapType
 m_nMaxCount
 m_nMinParticlesToEmit
 m_nMixGroups
+m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
 m_nOutgoingTangent
+m_nOverrideCP
+m_nOverrideCP2
 m_nParticlesToEmit
 m_nProcType
 m_nProcessorType
@@ -2830,7 +2855,9 @@ m_spline
 m_stages
 m_tangents
 m_trackName
+m_useCurl
 m_vActions
+m_vCPValueScale
 m_vDomainMaxs
 m_vDomainMins
 m_vEndTrailTintFactor
@@ -2937,6 +2964,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -2996,6 +3024,7 @@ numsegments
 o
 occlusion_db_loss
 opFields
+operation
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -3130,6 +3159,7 @@ pass_opvar_args
 path_substring
 paused
 perlin
+persistent
 physgun_interactions
 physicsmode
 pitchScale
@@ -3455,6 +3485,8 @@ startVoice
 start_beat
 start_offset
 start_vsnd
+std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
+std::_Sp_counted_ptr<decltype(nullptr), (__gnu_cxx::_Lock_policy)2>::_M_dispose()
 step
 stopSubvoice
 stopVoice
@@ -3589,6 +3621,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

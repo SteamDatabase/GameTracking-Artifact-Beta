@@ -214,7 +214,6 @@
 #CardEffect_10177_0
 #CardEffect_10183_0
 #CardEffect_10187_0
-#CardEffect_10193_0
 #CardEffect_10194_0
 #CardEffect_10202_0
 #CardEffect_10203_0
@@ -461,6 +460,7 @@
 #CardEffect_11060_0
 #CardEffect_11061_0
 #CardEffect_11062_0
+#CardEffect_11063_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -497,7 +497,6 @@
 #CardModification_%u_%i
 #CardName_%u
 #CardText_%u
-#DCG_AchiementTitle_Missing
 #DCG_Achievement%d_Desc
 #DCG_Achievement%d_Name
 #DCG_ActionHint_CombatPosition_Ally
@@ -627,6 +626,7 @@
 #DCG_CardType_Armor
 #DCG_CardType_CardBack
 #DCG_CardType_Consumable
+#DCG_CardType_Courier
 #DCG_CardType_Creep
 #DCG_CardType_Deed
 #DCG_CardType_Hero
@@ -1501,6 +1501,8 @@
 #DCG_PrivateLobby_Timer_TimeAttack
 #DCG_PrivateLobby_Timer_Tournament
 #DCG_PrivateLobby_Title
+#DCG_Profile_InvalidAccount
+#DCG_Profile_InvalidAccountTitle
 #DCG_Profile_Match_AIMatch
 #DCG_Profile_Match_Draft
 #DCG_Profile_Match_GauntletMatch
@@ -2990,15 +2992,13 @@ $tI
 %s:  %s SaveHeaderCache_t::Reset() invalidating due to new .sav
 %s:  %s SaveHeaderCache_t::Reset() trying to cache new .sav (%s)
 %s:  %s WRITE %s in CEntity2SaveRestore::DirectoryCopy
-%s:  %s WRITE CSaveRestoreFileSystemPassthrough::AsyncWrite( %s : %d bytes )
 %s:  %s WRITE DirectoryClear( %s, %s )
-%s:  %s WRITE DirectoryCopy AsyncAppend( %s, %s )
-%s:  %s WRITE DirectoryCopy AsyncFinishAllWrites
-%s:  %s WRITE DirectoryCopy( %s, %s, %s )
+%s:  %s WRITE DirectoryCopy Append( %s [%i] )
+%s:  %s WRITE DirectoryCopy( %s, %p )
 %s:  %s WRITE DirectoryExtract( %s, %s )
 %s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::SaveGame_Finalize
-%s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::StreamEntitiesToFile
 %s:  %s WRITE Queue ClearSaveFile(%s) in CEntity2SaveRestore::SaveGame_Finalize
+%s:  %s WRITE Queue WriteFile(%s) in CEntity2SaveRestore::StreamEntitiesToFile
 %s:  %s async %s in CEntity2SaveRestore::AppendTransitionResources
 %s:  %s async %s in CEntity2SaveRestore::LoadAdjacentEnts
 %s:  %s async CEntity2SaveRestore::ClearSaveFile(%s)
@@ -3020,6 +3020,7 @@ $tI
 %s:  CPhysicsGameSystem::GameShutdown
 %s:  CPhysicsGameSystem::PostSpawnGroupUnload(%s: %s)
 %s:  CPhysicsGameSystem::PreSpawnGroupLoad(%s: %s)
+%s:  CSaveRestoreFileSystemPassthrough::WriteFile( %s : %d bytes )
 %s:  CSpawnGroupMgrGameSystem::AllocateSpawnGroup( %s ):  spawn group already allocated!
 %s:  CSpawnGroupMgrGameSystem::PerformActivateSpawnGroup(%s)
 %s:  EndRestoreEntities( %s%s )
@@ -3078,6 +3079,8 @@ $tI
 %s: (%d Chars)
 %s: AnimGraph Trying to set parameter: "%s" but does not exist
 %s: AnimGraph Variable: "%s" set to "%s" on %s (%d) at %.2f [%d]
+%s: CSaveRestoreFileSystemPassthrough::WriteFile( %s : %d bytes ) FAILED
+%s: Interp_UpdateRenderTimeType %d/%s defer because entity is becoming predictable
 %s: Out of range control point %d in %s
 %s: Overflowed control point array for point %d in %s
 %s: Particle Event: %s
@@ -3089,6 +3092,7 @@ $tI
 %s: entity %d restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d skipping restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d starting %s
+%s: file too large (%llu bytes)
 %s: nItemToSelect:%d
 %s: nLen:%d
 %s: nLen:%d, nStart:%d, nEnd:%d
@@ -3267,7 +3271,6 @@ $tI
 (1 + n) * 3 <= vecsize
 (>q
 (?R or (?[+-]digits must be followed by )
-(@
 (ACTIVE)
 (Active &#9632;)
 (B)
@@ -3484,6 +3487,7 @@ $tI
 *N5GCSDK17GCClientJobLambdaIZN15CSettingsSystem18EventResetTrainingEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN16CDCGRichPresence25EventSocialPlayJoinBeaconEyEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN16CDCG_UI_BotMatch16EventNextClickedEvEUlvE0_EE
+*N5GCSDK17GCClientJobLambdaIZN16CDCG_UI_BotMatch16EventNextClickedEvEUlvE1_EE
 *N5GCSDK17GCClientJobLambdaIZN16CDCG_UI_BotMatch16EventNextClickedEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN17CDCGReplayManager21RequestReplayDownloadERK12ReplayInfo_tEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN17CDCGReplayManager33RegisterForReplayExistenceUpdatesEPN8panorama8CPanel2DERK12ReplayInfo_tEUlvE_EE
@@ -3494,11 +3498,9 @@ $tI
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_PlayController17InternalFindMatchE13EDCGMatchMode8OptionalI9CDecklistE13StrongTypedefIj17GameModeIDTypeTagLj0EES6_Ij17GauntletIDTypeTagLj0EEEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_PlayController22ReconnectToMatchSearchEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_PlayController31StartProcessRichPresenceConnectEPKcEUlvE_EE
-*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CampaignMap11OnClaimNodeEvEUlvE_EE
-*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CampaignMap16OnClaimChallengeEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CampaignMap17OnDeleteEventDataEvEUlvE_EE
-*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CampaignMap39OnChallengeMapCompleteSelectedChallengeEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_OnlineMatch16EventNextClickedEvEUlvE_EE
+*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_Popup_Event20StartFindingGameModeEvEUlvE0_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_Popup_Event20StartFindingGameModeEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_Popup_Event25CheckForClientManualClaimEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN21CDCG_UI_TourneyPicker27EventJoinOpenTourneyClickedEvEUlvE_EE
@@ -4222,6 +4224,7 @@ $tI
 ./google/protobuf/unknown_field_set.h
 ./google/protobuf/wire_format_lite_inl.h
 .3333
+.@
 .Footstep
 .PLACEHOLDER_VALUE
 .RunFootstep
@@ -4458,9 +4461,7 @@ $tI
 10CMsgIDLinkILj1ELj16ELj9567E34CMsgClientToGCTourneyPlayerAbandonE
 10CMsgIDLinkILj1ELj16ELj9569E32CMsgClientToGCTourneyChangeValueE
 10CMsgIDLinkILj1ELj16ELj9571E36CMsgClientToGCTourneyJoinOpenTourneyE
-10CMsgIDLinkILj1ELj16ELj9583E34CMsgClientToGCClaimChallengeRewardE
 10CMsgIDLinkILj1ELj16ELj9586E34CMsgClientToGCEventRequestInfoSyncE
-10CMsgIDLinkILj1ELj16ELj9590E24CMsgClientToGCEventClaimE
 10CMsgIDLinkILj1ELj16ELj9592E31CMsgClientToGCDevEventOperationE
 10CMsgIDLinkILj1ELj16ELj9594E32CMsgClientToGCPerformAutoActionsE
 10CMsgIDLinkILj1ELj16ELj9598E30CMsgClientToGCSetCardOwnershipE
@@ -4486,6 +4487,7 @@ $tI
 10C_EnvClock
 10C_Func_LOD
 10ConCommand
+10EGamePhase
 10IAppSystem
 10IGameEvent
 10IInputMode
@@ -5062,7 +5064,6 @@ $tI
 15CInfoWorldLayer
 15CItemGeneration
 15CLightComponent
-15CMemberFunctor0IP11IFileSystemMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IP12ISceneSystemMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IP19CEntity2SaveRestoreMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IP20CDynamicLightManagerMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -5075,10 +5076,10 @@ $tI
 15CMemberFunctor2IP19CEntity2SaveRestoreMS0_FvPKcS3_E12CUtlEnvelopeIS3_ES7_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor2IP19CEntity2SaveRestoreMS0_KFvP10CCallQueuePKcES3_12CUtlEnvelopeIS5_E12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor3IP18CDCG_UI_ScenePanelMS0_FbPKcS3_S3_E12CUtlEnvelopeIS3_ES7_S7_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor5IP22ISaveRestoreFileSystemMS0_FbPKcPKvibS3_E12CUtlEnvelopeIS3_EPvibS3_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor7IP13CSOAContainerMS0_FvS1_iiiiiiES1_iiiiii12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor7IP13CSOAContainerMS0_FviiiiPKS0_iiEiiiiS3_ii12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor7IP22ISaveRestoreFileSystemMS0_F15FSAsyncStatus_tPKcPKvibbPP18FSAsyncControl_t__S4_E12CUtlEnvelopeIS4_EPvibbS9_S4_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor8IP21RayTracingEnvironmentMS0_FviPKiiPK16TriangleBounds_t6VectorS7_iP21CUtlMultiJobProcessorEiPiiPS4_S7_S7_iS9_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor8IP21RayTracingEnvironmentMS0_FviPKiiPK16TriangleBounds_t6VectorS7_iP21CUtlMultiJobProcessorEiPiiS6_S7_S7_iS9_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor8IP21RayTracingEnvironmentMS0_KFviiP12SplitStats_tPKiiPK16TriangleBounds_t6VectorS9_EiiS3_S5_iS8_S9_S9_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -5676,9 +5677,7 @@ $tI
 18CMsgIDLinkResponseILj1ELj16ELj9567E34CMsgClientToGCTourneyPlayerAbandonLj9568E42CMsgClientToGCTourneyPlayerAbandonResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9569E32CMsgClientToGCTourneyChangeValueLj9570E40CMsgClientToGCTourneyChangeValueResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9571E36CMsgClientToGCTourneyJoinOpenTourneyLj9572E44CMsgClientToGCTourneyJoinOpenTourneyResponseE
-18CMsgIDLinkResponseILj1ELj16ELj9583E34CMsgClientToGCClaimChallengeRewardLj9584E42CMsgClientToGCClaimChallengeRewardResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9586E34CMsgClientToGCEventRequestInfoSyncLj9587E42CMsgClientToGCEventRequestInfoSyncResponseE
-18CMsgIDLinkResponseILj1ELj16ELj9590E24CMsgClientToGCEventClaimLj9591E32CMsgClientToGCEventClaimResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9592E31CMsgClientToGCDevEventOperationLj9593E39CMsgClientToGCDevEventOperationResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9594E32CMsgClientToGCPerformAutoActionsLj9595E40CMsgClientToGCPerformAutoActionsResponseE
 18CMsgIDLinkResponseILj1ELj16ELj9610E38CMsgClientToGCAttemptClientManualClaimLj9611E46CMsgClientToGCAttemptClientManualClaimResponseE
@@ -6066,6 +6065,7 @@ $tI
 20C_TonemapController2
 20ConVar_ServerBounded
 20ELeaderboardViewMode
+20EPhaseAnnouncement_t
 20EndOfTurnPerformance
 20GameFileWeaponInfo_t
 20GenericPopupResult_t
@@ -6828,7 +6828,6 @@ $tI
 25ClientPerformanceComplete
 25ECombatPreviewDeathResult
 25EVideoPlayerPlaybackError
-25IAssertionFailureListener
 25IAttributeContainerReader
 25IRenderingPipelineFactory
 25IScreenSpaceEffectManager
@@ -6860,6 +6859,7 @@ $tI
 26CDCG_DB_Page_PlayerProfile
 26CDCG_DB_Page_Standard_Play
 26CDCG_PortraitWorldRenderer
+26CDCG_UI_ContextMenuManager
 26CDCG_UI_ContextMenu_Social
 26CDCG_UI_DeckLoader_Tourney
 26CDCG_UI_GameRenderCallback
@@ -6979,6 +6979,7 @@ $tI
 27CDCGRuleEntity_NamedPassive
 27CDCGTeamwipeAchievementEval
 27CDCGWhisperReplyChatCommand
+27CDCG_HUD_PhaseAnnouncements
 27CDCG_Popup_Notification_Bar
 27CDCG_Popup_PurchaseCardList
 27CDCG_UI_GauntletLeaderboard
@@ -7809,9 +7810,7 @@ $tI
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9567E34CMsgClientToGCTourneyPlayerAbandonLj9568E42CMsgClientToGCTourneyPlayerAbandonResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9569E32CMsgClientToGCTourneyChangeValueLj9570E40CMsgClientToGCTourneyChangeValueResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9571E36CMsgClientToGCTourneyJoinOpenTourneyLj9572E44CMsgClientToGCTourneyJoinOpenTourneyResponseE
-35CMsgIDLinkGenericClientToGCResponseILj1ELj9583E34CMsgClientToGCClaimChallengeRewardLj9584E42CMsgClientToGCClaimChallengeRewardResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9586E34CMsgClientToGCEventRequestInfoSyncLj9587E42CMsgClientToGCEventRequestInfoSyncResponseE
-35CMsgIDLinkGenericClientToGCResponseILj1ELj9590E24CMsgClientToGCEventClaimLj9591E32CMsgClientToGCEventClaimResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9592E31CMsgClientToGCDevEventOperationLj9593E39CMsgClientToGCDevEventOperationResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9594E32CMsgClientToGCPerformAutoActionsLj9595E40CMsgClientToGCPerformAutoActionsResponseE
 35CMsgIDLinkGenericClientToGCResponseILj1ELj9610E38CMsgClientToGCAttemptClientManualClaimLj9611E46CMsgClientToGCAttemptClientManualClaimResponseE
@@ -10806,18 +10805,6 @@ ACT_kDCG_CARD_EFFECT_DAMAGE_THUNDERGODSWRATH
 ADC
 ADCFWukuQJeCAsBOF0BAbbeAaEBl0GGVUtnAaYBlqwBewE=
 ADCFeE2uAIUpAFDArhdAafdAZC7AYKMZAFBOQG0AagBlaMBhz==
-ADCJRENergCIgEGiQl4XUFBY90BSEYRR0FaWlBdQUEtAWMBVlVjAUVSSEJvdEJsYWNrR3JlZW4_
-ADCJRsKqH0lvAFEEww4XQFBat0BCwJGQx9pAUJHSQsJCBwKaAFiAUhhAWIBQUVCb3RCbHVlUmVk
-ADCJUMMJX0suwGFUSkBeF1BQWPdAWYBaQF2AUQDZAEKcQFKX0ZBZwFLQUFMQm90Qmx1ZUJsYWNr
-ADCJV0NIH2+uwEEB2sBeF1BQWndAVhEcwFCYgIGAQFgAUNlAU5KVEtDTlFQQm90R3JlZW5CbGFjaw__
-ADCJXQMpX0vuwEOFE94XUFBcN0BZgFBU0hFQUlFREVJUEYIAkljAWUBQ0JHYQFvAUxHREJvdEJsYWNrQmx1ZQ__
-ADCJXULIH0gvAGEBGsBeF1BQWLdAUNQU0RPSVpPSBoFEBVsAUJGRj0BQm90R3JlZW5SZWQ_
-ADCJXkLZX09uwEkAYQMeF1BQWzdAVxPWENFTUJGGAJSDAMLAVFDZQFDTk9MR0ldTkJvdEJsYWNrUmVk
-ADCJYILo31ivAEJCDIPeF1BQWLdAUJQSUtOTVVOCUYYARNCUgRERV1NRG8BWE5WQm90UmVkQmxhY2s_
-ADCJYMMqrkCQg8WAnhdQUFl3QEXXwFETQFjAUVECQsBTQYMBAECeAFEV0kLQk5RTBVCb3RHcmVlbkJsdWU_
-ADCJZ0MMbgCDVYRiXhdQUFg3gFBRkZdCUtDSmMBU2MCQUREQUdPX0lCRl1BRkRCb3RCbHVlR3JlZW4_
-ADCJcAKJrkCAhZHkDhdAQFt3QFKYgFUQgQRAUVOQkIERUMEEgp4AU5BRkhEYwEEBFxQQm90UmVkQmx1ZQ__
-ADCJeILI32ivAFJAiQBOF0BAWrdAQoIQgMuARADQhwBBAUBAQEHIgFrAU4DSENHSEJVQxFLFURCb3RSZWRHcmVlbg__
 ADD_AND_REMOVE_ANIMATION_LAYERS
 ADJACENCY
 AED
@@ -11136,6 +11123,7 @@ Accel/Deaccel (cosine)
 Accepting connection from %s, hconn=%d
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
+AccessDenied
 AccessDropDownMenu
 AccessStopColors
 AccessoryFilter
@@ -11226,6 +11214,8 @@ ActiveArrow
 ActiveBindButton
 ActiveControllerTypeChanged
 ActiveGroupImage
+ActiveLaneIsToTheLeft
+ActiveLaneIsToTheRight
 ActiveModelConfig_t
 ActiveModifiers
 ActivePack
@@ -11405,7 +11395,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraph Controller
 AnimGraph Recording saved to %s
@@ -11664,6 +11653,7 @@ BHasClass
 BHasDescendantKeyFocus
 BHasHoverStyle
 BHasKeyFocus
+BHasLayoutSnippet
 BInit
 BIsParentPanel
 BIsTransparent
@@ -12300,9 +12290,7 @@ CDCG_Tourney_Controller::KickPlayer
 CDCG_Tourney_Controller::SubscribeToTourneyUpdates
 CDCG_Tourney_Controller::ViewPlayerDeck
 CDCG_Tourney_Controller::WatchDraft
-CDCG_UI_AchievementPanel::ClaimAchievement
 CDCG_UI_AvatarImage::LoadAvatarInternal
-CDCG_UI_CampaignMap::OnClaimChallenge
 CDCG_UI_GameRenderManifest
 CDCG_UI_Popup_TourneyShowOpenInvite::Init
 CDCG_UI_TourneyCreate::EventCreateTourneyOk
@@ -12866,6 +12854,7 @@ CInfoParticleTarget
 CInfoTarget
 CInfoVisibilityBox
 CInfoWorldLayer
+CInlineJob_CMsgClientWelcome
 CInlineJob_CMsgGCClientVersionUpdated
 CInlineJob_CMsgGCToClientAvailableGauntlets
 CInlineJob_CMsgGCToClientChatChannelJoined
@@ -13518,6 +13507,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -13539,6 +13529,7 @@ C_MultiplayRules
 C_NetTestBaseCombatCharacter
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -13679,6 +13670,8 @@ CameraLaneRightMouse
 CameraToggleStrategic
 CameraToggleStrategicBinder
 CameraToggleStrategicMouse
+Campaign '%s' contains no missions
+Campaign '%s' is locked by a mission ID that does not exist: %d
 CampaignNode
 Can only purchase a limited quantity, and you've already purchased that amount
 Can only purchase one, and you already own one
@@ -14000,6 +13993,7 @@ ChallengeGroupButton
 ChallengeID
 ChallengeNodes
 ChallengeNotReady
+ChallengePopupVisible
 ChallengeSlotID
 ChallengeTitleImage
 ChallengesContainer
@@ -14125,7 +14119,7 @@ Claim references an invalid challenge slot of name %s
 Claim references an invalid currency of name %s
 Claim response failed event auto actions: %s
 ClaimID
-ClaimPopupVisible
+Claimable
 ClampHealth
 Class: %s (%d)
 Class_T
@@ -14209,6 +14203,7 @@ Closing connection [%s] hconn=%d we don't recognize that connection, ignoring.
 Closing connection [%s] hconnn=%d but that user is using hconn=%d now.  Ignoring.
 Closing old connection
 Closing previous connection to %s, hconn=%d, because we have a new one for that player!  This is unusual.
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -14428,6 +14423,7 @@ Could not find type "
 Could not finish async caption work after %f seconds of processing before caption dictionary init!
 Could not replace defines
 Couldn't insert a texture into our atlas, this will display a bad texture on the client
+Couldn't open captions file '%s'.
 Couldn't parse default value "
 CountdownActive
 CountdownAfterEnd
@@ -14435,7 +14431,6 @@ CountdownBeforeStart
 CountdownTimer
 Counter Magic
 Coup de Grace
-Courier
 CourierAbility%d
 Court of Ristul
 Create
@@ -14502,6 +14497,7 @@ Cube map failed to read file %s
 CubeMapTexture
 Cubemap texture %s is %dx%d - expected %dx%d!
 Cubemap texture %s is wrong format %s - expected %s!
+CuesContainer
 Culling Blade
 Cumulative bytes re-alloced: %s
 Cuneiform
@@ -14557,6 +14553,7 @@ D24X4S4
 D24X8
 D24X8_SHADOW
 D32
+D32FS8
 DACGameManager001
 DAMAGE_EVENTS_ONLY
 DAMAGE_NO
@@ -14614,8 +14611,11 @@ DCGAvatarImageLoaded
 DCGBeginHoverCardInHand
 DCGBotMatch
 DCGBuyCardPanoramaShop
+DCGCChatSetMemberVisibility
 DCGCameraPositionChanged
+DCGCampaignDataUpdated
 DCGCampaignForceStart
+DCGCampaignForceUpdate
 DCGCampaignMap
 DCGCampaignStartMatch
 DCGCancelInProgressPurchase
@@ -14638,18 +14638,9 @@ DCGCartUpdated
 DCGCatalogCollectionFilters
 DCGCataloguePage
 DCGChallengeFriend
-DCGChallengeMapClaimChallenge
-DCGChallengeMapClaimNode
 DCGChallengeMapCompleteSelectedChallenge
-DCGChallengeMapHideChallengePopup
-DCGChallengeMapHideClaimPopup
-DCGChallengeMapReturnToOverview
-DCGChallengeMapSelectChallenge
-DCGChallengeMapSelectClaim
-DCGChallengeMapSelectRegion
 DCGChallengeMapUpdate
 DCGChallengePlayer
-DCGChallengeToggleMap
 DCGChangedHandPlaceDuringFlop
 DCGChannelAutocompleteClicked
 DCGChaosBadge
@@ -14710,7 +14701,7 @@ DCGConfirmAbandonGauntlet
 DCGConfirmAdvancePhase
 DCGConfirmConcedeDialog
 DCGConfirmConcession
-DCGConfirmConcession()
+DCGConfirmConcession();
 DCGConfirmDeckSelection
 DCGConfirmMainMenuDialog
 DCGConfirmPayEntryFee
@@ -14721,7 +14712,7 @@ DCGConnectionStatusUpdated
 DCGContextMenuManager
 DCGContextMenuPlayer
 DCGContextMenuSocial
-DCGContinueToDialog
+DCGContinueToDialogue
 DCGControlsLibrary
 DCGCopyDeckLink
 DCGCopyDeckText
@@ -15036,6 +15027,8 @@ DCGPanoramaShopUpgrade
 DCGPayEntryFee
 DCGPayGlobalEntryFee
 DCGPersonaAvatarHovered
+DCGPhaseAnnouncementWaiting
+DCGPhaseAnnouncements
 DCGPlayButton
 DCGPlayCallToArms
 DCGPlayCard
@@ -15212,6 +15205,7 @@ DCGShowMainMenuPage()
 DCGShowMapClaimTooltip
 DCGShowMatchDetails
 DCGShowMatchInfo
+DCGShowMissionPopup
 DCGShowNextLeaderboardPage
 DCGShowOnlineMatchPage
 DCGShowOpenPacksPage
@@ -15389,7 +15383,6 @@ DCGWhisperAutocompleteClicked( %llu )
 DCGWorldSceneUpdater
 DCG_Abilities.
 DCG_Abilities.GetOuttaHere
-DCG_AchiementDesc_Missing
 DCG_Achievement%i_Desc
 DCG_Achievement%i_Name
 DCG_CHAT
@@ -15452,41 +15445,28 @@ DCG_MMR_RankMinor_%d
 DCG_PackOpening.Card_Flip_Burst
 DCG_PackOpening.DeckHover_lp
 DCG_PackOpening.Outro
-DCG_PhaseAnnouncement_CombatPhase_Left
-DCG_PhaseAnnouncement_CombatPhase_Right
-DCG_PhaseAnnouncement_DeployHeroes_Left
-DCG_PhaseAnnouncement_DeployHeroes_Right
-DCG_PhaseAnnouncement_DeployLeft_Left
-DCG_PhaseAnnouncement_DeployLeft_Right
-DCG_PhaseAnnouncement_DeployMid_Left
-DCG_PhaseAnnouncement_DeployMid_Right
-DCG_PhaseAnnouncement_DeployRight_Left
-DCG_PhaseAnnouncement_DeployRight_Right
-DCG_PhaseAnnouncement_HeroDeployment_Left
-DCG_PhaseAnnouncement_HeroDeployment_Right
-DCG_PhaseAnnouncement_NoActions_Left
-DCG_PhaseAnnouncement_NoActions_Right
-DCG_PhaseAnnouncement_OpponentPass_Left
-DCG_PhaseAnnouncement_OpponentPass_Right
-DCG_PhaseAnnouncement_OpponentTurnAgain_Left
-DCG_PhaseAnnouncement_OpponentTurnAgain_Right
-DCG_PhaseAnnouncement_OpponentTurn_Left
-DCG_PhaseAnnouncement_OpponentTurn_Right
-DCG_PhaseAnnouncement_RoundEnd_Left
-DCG_PhaseAnnouncement_RoundEnd_Right
-DCG_PhaseAnnouncement_RoundStart_Left
-DCG_PhaseAnnouncement_RoundStart_Right
-DCG_PhaseAnnouncement_ShoppingStart_Left
-DCG_PhaseAnnouncement_ShoppingStart_Right
+DCG_PhaseAnnouncement_ActionPhase
+DCG_PhaseAnnouncement_CombatPhase
+DCG_PhaseAnnouncement_DeployHeroes
+DCG_PhaseAnnouncement_DeployLeft
+DCG_PhaseAnnouncement_DeployMid
+DCG_PhaseAnnouncement_DeployRight
+DCG_PhaseAnnouncement_HeroDeployment
+DCG_PhaseAnnouncement_NoActions
+DCG_PhaseAnnouncement_OpponentPass
+DCG_PhaseAnnouncement_OpponentTurn
+DCG_PhaseAnnouncement_OpponentTurnAgain
+DCG_PhaseAnnouncement_PostCombatPhase
+DCG_PhaseAnnouncement_PreActionPhase
+DCG_PhaseAnnouncement_RoundEnd
+DCG_PhaseAnnouncement_RoundStart
+DCG_PhaseAnnouncement_ShoppingStart
 DCG_PhaseAnnouncement_VS
-DCG_PhaseAnnouncement_YourTurnAgain_Left
-DCG_PhaseAnnouncement_YourTurnAgain_Right
-DCG_PhaseAnnouncement_YourTurn_Left
-DCG_PhaseAnnouncement_YourTurn_Right
+DCG_PhaseAnnouncement_YourTurn
+DCG_PhaseAnnouncement_YourTurnAgain
 DCG_PreGame.Hero_Roster_Splash_Screen
 DCG_PrivateLobby_TimerOff
 DCG_PrivateLobby_TimerOn
-DCG_Profile_InvalidAccount
 DCG_Profile_InvalidAccountTitle
 DCG_Shop.Shop_Buy
 DCG_Shop.Shop_Hold
@@ -15512,6 +15492,7 @@ DCG_Spell.Hand_of_God_Hero_02
 DCG_Spell.Hand_of_God_Hero_03
 DCG_Spell.Hand_of_God_Hero_04
 DCG_Spell.Headshot_PreCast
+DCG_Spell.Juxtapose
 DCG_Spell.Mana_Void
 DCG_Spell.Multicast
 DCG_Spell.Nether_Blast
@@ -15854,6 +15835,7 @@ Default Tower Applied Effect: %s - %d
 Default class when joining a game
 Default team when joining a game
 Default value for an enum field must be an identifier.
+DefaultBackground
 DefaultContents
 DefaultKeyBindings
 DefaultLanguage
@@ -15969,6 +15951,7 @@ Difficulty 1
 Difficulty 2
 Difficulty 3
 Difficulty 4
+DifficultySelector
 Dig : voiced alveolar flap or tap
 Dig : voiced bilabial stop
 DimBackground
@@ -16227,6 +16210,7 @@ Duplicate itemset name (%s) found!
 Duplicate kill eater score type index %u.
 Duplicate leveling data block named "%s".
 Duplicate lootlist name (%s) found!
+Duplicate mission id found in campaign '%s': %d
 Duplicate oFFs chunk
 Duplicate pCAL chunk
 Duplicate pHYs chunk
@@ -16848,9 +16832,9 @@ FTYPEDESC_GEN_ARRAY_KEYNAMES_0
 FTYPEDESC_GEN_ARRAY_KEYNAMES_1
 FTYPEDESC_GLOBAL
 FTYPEDESC_INPUT
-FTYPEDESC_INSENDTABLE
 FTYPEDESC_KEY
 FTYPEDESC_MODELINDEX
+FTYPEDESC_NETWORKED
 FTYPEDESC_NOERRORCHECK
 FTYPEDESC_NONE
 FTYPEDESC_OUTPUT
@@ -16895,6 +16879,7 @@ Failed to find JSON header
 Failed to find any valid threshold values for criteria
 Failed to find attachment point specified for particle effect anim event. Trying to spawn effect '%s' on attachment named '%s' on model %s
 Failed to find attachment point specified for particle effect in model '%s' keyvalues section. Trying to spawn effect '%s' on attachment named '%s'
+Failed to find campaigns in file
 Failed to find challenge slot %s for reward!
 Failed to find channel %s
 Failed to find currency with name %s
@@ -16940,6 +16925,7 @@ Failed to parse EXR version
 Failed to parse activate criteria!
 Failed to parse and set new panel event for %s="%s"
 Failed to parse attribute
+Failed to parse campaign
 Failed to parse challenge specifier for challenge slot
 Failed to parse channel info
 Failed to parse channel info.
@@ -16952,6 +16938,7 @@ Failed to parse currencies
 Failed to parse entry in challenge list %s
 Failed to parse initial configuration for slot %s
 Failed to parse internal condition in challenge %s
+Failed to parse mission in campaign '%s'
 Failed to parse nested criteria set!
 Failed to parse no dupe list bodies
 Failed to parse no dupe list names
@@ -16978,7 +16965,6 @@ Failed to save local copy of custom image %s
 Failed to save personal key binding backup!
 Failed to send Hello message to the GC.
 Failed to spawn script entity %s of type %s: script entity instance is null
-Failed to unpack %s - Code %d
 Failed to update item schema from %s
 Failed to update item schema: HTTP status %d fetching %s
 Failed to update item schema: couldn't fetch %s
@@ -17676,6 +17662,7 @@ GraphicsSignalCompute
 GraphicsSignaled
 Grazing Shot
 Great Cleave
+Great Fortitude
 Greek
 GreenBlood
 GreenColorFilter
@@ -17713,6 +17700,7 @@ H(
 H*
 H1
 HAS
+HB
 HD
 HDR Color Scale: %0.3f
 HELPER_BONE
@@ -18014,6 +18002,7 @@ HideHeroes
 HideHistogram
 HideItemCount
 HideMemberCount
+HidePhaseContainer
 HidePreviewType
 HideReplayControls
 HideScrollDown
@@ -18272,6 +18261,7 @@ Improvement Death
 Improvement abilities used: %d, Unit abilities used: %d, Mana used: %d, Upgrade/Downgrades used: %d, Eqp. used: %d, Consumables used: %d Draft Pts. used:%d Improvement cards used: %d, Mana cards used: %d, Cooldowns used: %d
 ImprovementDestroyed
 ImprovementEnteringPlay
+ImprovementPostEffect
 Improvements
 In Full Bloom
 In ai games, 1 = human first, radiant.  0 = human second, dire. -1 is random.
@@ -18351,6 +18341,7 @@ Infinite time value
 InfiniteWinGauntlet
 InfoForResourceTypeCAnimData
 InfoForResourceTypeCModel
+InfoForResourceTypeCPostProcessingResource
 InfoForResourceTypeCTextureBase
 InfoForResourceTypeIMaterial2
 InfoForResourceTypeIParticleSystemDefinition
@@ -18642,6 +18633,7 @@ Invalid magic number
 Invalid manual AI action index.
 Invalid member name '%s'
 Invalid message set extension.
+Invalid mission ID in campaign '%s'
 Invalid no dupe list %s referenced in item rewards
 Invalid number of colors in palette
 Invalid number of histogram entries specified
@@ -19740,6 +19732,9 @@ Missing number of charges specified
 Missing sprite material %s
 Missing token %s (from %s)
 Missing value for currency type %s for price point %u
+Mission %d
+Mission %d Claim
+Mission %d Slot
 MissionCompleted
 MissionDialogContainer
 MissionFailed
@@ -19828,6 +19823,7 @@ Moved from combat position %s %d to new combat position %s %d on lane %d
 Movement will be relative to the camera, eg: left means screen-left
 MovementSettings
 MovieBuffering
+MovieCaptions
 MovieDebug
 MovieError
 MoviePanel
@@ -20434,6 +20430,7 @@ N8panorama14CBaseScrollBarE
 N8panorama14CDelayLoadListE
 N8panorama14CEdgeScrollBarE
 N8panorama14CEngineConsoleE
+N8panorama14CMovieCaptionsE
 N8panorama14CSlottedSliderE
 N8panorama14CStylePropertyE
 N8panorama14CUIPanelEvent0E
@@ -20823,7 +20820,6 @@ Need valid position and texcoord when creating world space tangent lengths!
 Need valid position to calculate face centers!
 NeedDebounce
 NeedsEntryFee
-NeedsToChooseDecklist
 NeedsWarning
 Negative or zero gamma ignored
 NegativeValuesConsideredBeneficial
@@ -20870,7 +20866,6 @@ No Accident
 No Black Caster
 No Blue Caster
 No Buffer
-No Challenge selected.
 No Creeps
 No Green Caster
 No Hesitation
@@ -20955,9 +20950,11 @@ NoHeader
 NoHealthAttribute
 NoLastPlayedTime
 NoLevelNumber
+NoMatchHistory
 NoMembers
 NoMessage
 NoName
+NoNewCards
 NoOutroDialog
 NoPacksInCurrentSet
 NoPlayer
@@ -21003,7 +21000,6 @@ Normalize3ComponentVectorInAttributes
 Normalized3x3SobelEdgeFilterFrom
 Not Enough Mana
 Not Found!
-Not Success
 Not a PNG file
 Not a valid challenge: %s
 Not connected to gameserver
@@ -21348,12 +21344,11 @@ P38CMsgGameServerToClientInitialGameState
 P8
 P8CUI_Page
 P9KeyValues
-P@
 PA
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1193
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../animgraph_batchupdater.cpp:127
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2458
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2467
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2533
@@ -21362,6 +21357,7 @@ PARAM_ERROR
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_EHANDLE__
 PARTICLE_REPLACE_AMBIENT_EFFECT
 PARTICLE_REPLACE_AUTODETECT
@@ -21737,6 +21733,8 @@ PS3
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFjjjjEEPS2_jijEE
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFvjjEEPS2_ijEE
 PURE VIRTUAL CALL - CHECK FOR DUMP!
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 Pack Leader
@@ -21901,16 +21899,11 @@ PhaseAdvanceLimitedAfter
 PhaseAdvanceLimitedAt
 PhaseAdvancePlayAfter
 PhaseAdvancePlayAt
-PhaseContainer
 PhaseContents
 PhaseEditStage
 PhaseEnd
 PhaseID
-PhaseName
-PhaseNameBackground
-PhaseNameContainer
-PhaseNameText1
-PhaseNameText2
+PhaseLabel
 PhaseStateMachine
 PhaseTabs
 PhaseType
@@ -22434,6 +22427,11 @@ PropertySheet.TransitionEffectTime
 PropertyTransitionEnd
 Proto file starts with 0xEF but not UTF-8 BOM. Only UTF-8 is accepted for proto file.
 Proto type
+ProtoBufHelper::DebugParseBinary: Couldn't find descriptor pool
+ProtoBufHelper::DebugParseBinary: Couldn't find message factory
+ProtoBufHelper::DebugParseBinary: Couldn't find message type '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't find prototype for msg '%s'
+ProtoBufHelper::DebugParseBinary: Couldn't parse message
 ProtoBufHelper::ParseJSON: Array Begin found on invalid field!
 ProtoBufHelper::ParseJSON: Array Begin found on non-repeated field: '%s'!
 ProtoBufHelper::ParseJSON: Array End found on invalid field!
@@ -22580,6 +22578,18 @@ RGBX8888
 RMB
 ROTATION
 RTFACT
+RTFACTJQIN-rgCBARH6wEFpB1juwJYRC0BRS0BSUgBRghgAUNlAVhUSy4HPARPQQZCb3RHcmVlbkJsYWNr
+RTFACTJScN+rgCBCIBxgVJiX26AkhGEUdBWlpQXy0BbgJjAUVSSH4GAgFGNQlCb3RCbGFja0dyZWVu
+RTFACTJSwMPrgCZwGD+hIE4AQFe7sCRkZdCUsDSmMBdwJEREFWX0lCYwFBRkRtBkN5CUFCb3RCbHVlR3JlZW4_
+RTFACTJUIL5LkCBMEFiQJkAXa7AkIDfgEDQl0DRkN0Ak5OR0hCVV8iBwEDQm90UmVkR3JlZW4_
+RTFACTJUgM9LgCBE7UBQ+jD2q7AmYBQVNIRU9IQUlQRkhCbAFlAUNCaAF7AQdEKQYHQm90QmxhY2tCbHVl
+RTFACTJWIKLrkCwwWK1QRGL7sCAkYiAXIBSUkLjmoDSGEBYgFBRXUGeglQQUNBQm90Qmx1ZVJlZA__
+RTFACTJWML4rkCBGQBBIz6HgVmuwJcT1tFTUJeQlJMTlJDZQFDTk9MQm90QmxhY2tSZWQ_
+RTFACTJXIMqrkCEdYE6BsFdgF-ugIXXwFEUWABRURJS05WewFEVxRCTlFMFX8FYwNyAmcIQm90R3JlZW5CbHVl
+RTFACTJYAL5bkCBMkFSLIPOQV8ugJCDktLTgMBKAFECV5BCQEMWW8BIgFKfAwNIwY3AUJvdFJlZEJsYWNr
+RTFACTJagL-rgCBMoFHoJ0Eny6AkNjAURPSQ1lAU1DDAIQTnMBQkYjAiMHbQMZRnQGNwJCb3RHcmVlblJlZA__
+RTFACTJeYMdrgC0wShAcQFAn26AmYBaQFmAVAKBSUBQSwBRWkBR3IBQUFKQiwGAiEEOQVCb3RCbHVlQmxhY2s_
+RTFACTJegKJrkCQu0BBPcSBa4HZ7sCSmIBWhEBU0IJRWYDQU4vAVxQcgZBASEDOAZCb3RSZWRCbHVl
 RT_txt
 RUB
 RULE MATCHED!
@@ -22623,7 +22633,7 @@ RandomShopItemCreated
 RandomlySelectedSecondaryTarget
 Randy Vargas
 Ranged Creep
-Rank%d
+RankLeaderboard
 RankMajor
 RankMinor
 Ranking
@@ -22758,6 +22768,7 @@ Relentless Zombie
 Reload all response system scripts. Note: This won't work unless you run with -rr_allow_reload.
 Reload scripts
 Reload the current dashboard page
+Reload the data in Campaign Manager
 ReloadFontGlyphs(): End
 ReloadFontGlyphs(): Start [%s]
 ReloadMOTD
@@ -22956,7 +22967,6 @@ RewardCell
 RewardForInvest
 RewardLevel%d
 RewardList
-RewardRank
 RewardRow
 RewardsContainer
 RewardsRowContainer
@@ -23121,12 +23131,6 @@ SOLID_OBB
 SOLID_POINT
 SOLID_VPHYSICS
 SONIC
-SOS_EDIT_ITEM_TYPE_FIELD
-SOS_EDIT_ITEM_TYPE_LIBRARYSTACKS
-SOS_EDIT_ITEM_TYPE_OPERATOR
-SOS_EDIT_ITEM_TYPE_SOUNDEVENT
-SOS_EDIT_ITEM_TYPE_SOUNDEVENTS
-SOS_EDIT_ITEM_TYPE_STACK
 SOURCE2 SAVE COMMENT
 SPAWNGROUP_HEADER
 SPEED
@@ -23429,12 +23433,9 @@ SelectAccountBadge
 SelectAll
 SelectResponse
 SelectedCardBack
-SelectedChallengeClaimable
-SelectedChallengeCompleted
 SelectedDeckErrors
 SelectedDeckLoader
 SelectedDeckUnowned
-SelectedEditItemInfo_t
 SelectedGauntlet
 SelectedNode%i
 SelectedNodeIsDefault
@@ -23747,6 +23748,7 @@ Show a user's profile card. Use pro name determines whether to use their profess
 Show activities in the (client) animation state display.
 Show all EmitSound calls including their symbolic name and the actual wave file they resolved to. (-1 = for nobody, 0 = for everybody, n = for one entity)
 Show cloth debug info in ent_text display
+Show debug info in player info panel.
 Show entity contexts in ent_text display
 Show fake market prices for items
 Show listening addition/removals
@@ -23772,7 +23774,6 @@ ShowBackButton
 ShowBonusMana
 ShowCarryFromPrior
 ShowCharges
-ShowChatMembers
 ShowChildren
 ShowConcede
 ShowDebugComputed
@@ -23798,6 +23799,7 @@ ShowHeroIncludes
 ShowInspectTakeover
 ShowIntroMovie
 ShowLaneTarget
+ShowMMR
 ShowMute
 ShowMyDecklist
 ShowPackInfoPopup
@@ -23806,6 +23808,7 @@ ShowPaintInfo
 ShowPanelZoo
 ShowPanoramaShopTopPanel
 ShowPanoramaUsageInfo
+ShowPhaseContainer
 ShowPlayerName
 ShowPlayerTurn
 ShowQuit
@@ -23834,7 +23837,7 @@ Showing
 Showing error message %s
 ShowingBasicNodeInfo
 ShowingCheeveNodeInfo
-ShowingDialog
+ShowingDialogue
 ShowingEmptyDeckLabel
 ShowingFeaturedPage
 ShowingLanguage
@@ -23941,8 +23944,6 @@ SortByTime
 SortCardsInHand
 SortDescending
 SortedBy
-SosEditItemInfo_t
-SosEditItemType_t
 Soul Rip
 Soul of Spring
 Sound Positions:
@@ -24140,6 +24141,7 @@ StarsAlignLighting
 Start AI Match
 Start Draft Match
 Start Finding Match From Event Popup
+Start Finding Match From Event Popup with Mission ID
 Start Friend Match
 Start Live Draft Match
 Start Sparring Match
@@ -24222,7 +24224,6 @@ SteamMatchMaking009
 SteamMatchMakingServers002
 SteamNetworking005
 SteamPad
-SteamParties002
 SteamToursHost001
 SteamUnifiedMessages
 SteamUser021
@@ -24893,6 +24894,7 @@ Turn on a particular trace output by table/instance
 Turn on achievement debug msgs.
 Turn on all trace output
 Turn on/off 'Legacy' mapping for control sticks.
+TurnBackground
 TurnOffActiveController
 TurnRow
 Turning off beacon in rich presence to friends
@@ -25259,7 +25261,6 @@ UserInputActive
 UserMessages
 UserNickname
 Using 16-bit blend indices
-Using 8 Bit Effect
 Using a specific item loot list as part of a static recipe. Use the general loot list version instead
 Using already-built %s 0x%p
 Using joystick '%s' configuration
@@ -25281,6 +25282,7 @@ V8ParamToPanoramaType expected object type to convert, but got something else
 V8ParamToPanoramaType expected object type to convert, but got something else (%s)
 VALVt
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -25313,7 +25315,6 @@ VMatrix-world
 VMediaFoundation001
 VModEnable %d
 VND
-VNewAsyncFileSystem001
 VOTE_FAILED_CANNOT_KICK_ADMIN
 VOTE_FAILED_FAILED_RECENTLY
 VOTE_FAILED_GENERIC
@@ -25653,7 +25654,6 @@ WORLDTEXT_VERTICAL_ALIGN_TOP
 WWWWWWWWWWWWWWW
 W_
 Wait ms
-Waiting
 Waiting an amount of time based on card draw speed and owner
 Waiting for Async Children to finish
 Waiting for rendering to complete...
@@ -25910,6 +25910,7 @@ ZN11IndirectAny6AssignIiEEvOT_EUlPKvE0_
 ZN11IndirectAny6AssignIiEEvOT_EUlPvE_
 ZN12CDCGCardView20ToggleEntitiesOfTypeI28CDCGCompositeStateRuleEntityEEvbEUlPS1_E_
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
+ZN18AsyncCaptionData_t9AsyncLoadEPKciEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN18CNewParticleEffect7RestartEvEUlvE_
 ZN18ClientStateMachineI13IDCGHandStateP12CDCGHandViewE7OnEventI12TimerExpiredEEvRKT_EUlvE_
 ZN18ClientStateMachineI13IDCGHandStateP12CDCGHandViewE7OnEventI14BeginFlopPhaseEEvRKT_EUlvE_
@@ -26102,8 +26103,11 @@ ZN18IStateMachineStateI18ClientStateMachineI17IDCGFountainStateP16CDCGFountainVi
 ZN18IStateMachineStateI18ClientStateMachineI17IDCGFountainStateP16CDCGFountainViewEE23RegisterStateTransitionI23HideLocalHandDuringFlop23FountainDeployingHeroesEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI17IDCGFountainStateP16CDCGFountainViewEE23RegisterStateTransitionI23ShowLocalHandDuringFlop17FountainStateIdleEEvvEUlRS4_PKvE_
 ZN20EndOfTurnPerformance7OnEnterER18ClientStateMachineI15IDCGClientStateP8CDCGViewEEUlP28IDCGPerformanceScriptContextE_
+ZN21CAsyncFileReadContext4InitEPKcS1_22AsyncRequestPriority_tP10CUtlBufferEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN21ConCommandPerformance7OnEnterER18ClientStateMachineI15IDCGClientStateP8CDCGViewEEUlP28IDCGPerformanceScriptContextE_
 ZN23SetupPregamePerformance7OnEnterER18ClientStateMachineI15IDCGClientStateP8CDCGViewEEUlP28IDCGPerformanceScriptContextE_
+ZN24CBuildCubemapsGameSystem12GameShutdownERK19EventGameShutdown_tEUlPKvE0_
+ZN24CBuildCubemapsGameSystem12GameShutdownERK19EventGameShutdown_tEUlPKvE_
 ZN24StoreTimedOutPerformance7OnEnterER18ClientStateMachineI15IDCGClientStateP8CDCGViewEEUlP28IDCGPerformanceScriptContextE_
 ZN25CDCGAttachEntityContainerI20CDCGCardAttachEntityE16UpdateVisibilityEvEUlPS0_E_
 ZN25CDCGAttachEntityContainerI20CDCGCardAttachEntityE16UpdateVisibilityI27CDCGCardCombatPreviewEntityEEvvEUlPS3_E_
@@ -27276,6 +27280,7 @@ camera_simple
 camerazoomin
 camerazoomout
 camortho
+campaigns
 can't reach here.
 canScrollLeft
 canScrollRight
@@ -27448,11 +27453,6 @@ cfg/video_defaults_%d.txt
 chainName
 chainfrost
 chainname
-challengeDesc
-challengeMaxProgress
-challengeProgress
-challengeReward
-challengeTitle
 challenge_claim
 challenge_desc
 challenge_description
@@ -27517,6 +27517,7 @@ cl_aggregate_particles
 cl_anglespeedkey
 cl_anim_queue_changes
 cl_anim_sequence_transitioner
+cl_auto_cursor_scale
 cl_axis
 cl_backspeed
 cl_box
@@ -27823,6 +27824,7 @@ cl_yawspeed
 clabelleddebughelper.cpp
 claim_end_time
 claim_gauntlet_reward
+claim_id
 claim_value
 claimcode
 clamp_swiss_rounds
@@ -28067,6 +28069,7 @@ cubemapfogstartdistance
 cubemapfogtexture
 cubic-bezier
 cubic-bezier( %1.3f, %1.3f, %1.3f, %1.3f )
+cue_index
 cull_mode
 cur_val
 curr_uses
@@ -28128,6 +28131,9 @@ d3_citadel_05
 d@
 dOg : lower-mid back rounded vowel
 da_DK
+dac_dof_far_blurry
+dac_dof_far_crisp
+dac_dof_tilt_to_ground
 daisywheel
 damageAlreadyDone
 damageForce
@@ -28282,6 +28288,7 @@ dcg_cta_gauntlet_id
 dcg_current_featured_page
 dcg_cycle_hand_sort_method
 dcg_debug_momentum
+dcg_debug_player_info
 dcg_deck_attachment
 dcg_deck_base
 dcg_deck_card_view
@@ -28384,6 +28391,7 @@ dcg_game_board_light
 dcg_game_board_rotator
 dcg_gamemessages.proto
 dcg_gamerules
+dcg_gcmessages_client.proto
 dcg_gcmessages_server.proto
 dcg_generate_deck_code
 dcg_generate_random_deck
@@ -28536,6 +28544,7 @@ dcg_max_reconnect_time_secs
 dcg_media_match
 dcg_media_mode
 dcg_min_rounds_for_event_progress_in_bot_games
+dcg_new_campaign
 dcg_new_player
 dcg_new_player 0; host_writeconfig
 dcg_new_player_enabled
@@ -28595,6 +28604,7 @@ dcg_recycle_dont_send
 dcg_refresh_card_text
 dcg_refresh_connection
 dcg_refresh_lane
+dcg_reload_campaign_data
 dcg_reload_card_effects
 dcg_reload_current_page
 dcg_remap_deck_code
@@ -28635,6 +28645,7 @@ dcg_show_decklist opponent
 dcg_show_fake_beacons
 dcg_show_hidden_stat_mods
 dcg_show_localization_errors
+dcg_show_mmr_rank_in_account_badge
 dcg_show_opponent_gestures
 dcg_show_own_gestures
 dcg_show_pack_opening
@@ -28917,6 +28928,9 @@ dmg.explosive
 dmg.fire
 doClientSideAnimation
 dodgerblue
+dof_enabled
+dof_near_blurry
+dof_near_crisp
 dollar-sign
 dormant
 dormant child
@@ -29482,6 +29496,7 @@ file://{resources}/layout/hud/inspect_takeover.xml
 file://{resources}/layout/hud/inspect_takeover_card_pip.xml
 file://{resources}/layout/hud/last_card.xml
 file://{resources}/layout/hud/panorama_usage_info.xml
+file://{resources}/layout/hud/phase_announcements.xml
 file://{resources}/layout/hud/player_info.xml
 file://{resources}/layout/ladder/dcg_db_ranked.xml
 file://{resources}/layout/leaderboard.xml
@@ -30598,11 +30613,6 @@ italian
 italic
 itemCount
 itemDeckCardCount
-itemKVString
-itemName
-itemPos
-itemType
-itemTypeName
 item_armor
 item_armor_reversed
 item_class
@@ -31417,7 +31427,9 @@ loadout_default_offset
 loadout_hero_offsets
 loadout_scale
 locToken
+loc_description
 loc_key
+loc_title
 local ang : (%f, %f, %f)
 local pos : (%f, %f, %f)
 local scale : (%f)
@@ -31447,6 +31459,7 @@ lockRotationAlpha
 lockString
 lockbodyfacing
 lockedCard
+locked_by_mission_id
 locks remaining
 locomotive
 locstring
@@ -31538,7 +31551,6 @@ m_DefaultTargetSettings
 m_DegreesPerSecond
 m_DialogXMLName
 m_Easings
-m_EditItems
 m_EffectName
 m_Emitters
 m_EndEffectorBone
@@ -31552,6 +31564,9 @@ m_Falloff
 m_Filter
 m_Flags
 m_FlashlightTexture
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_FloatVariables
 m_FogColor
 m_Followup
@@ -31596,6 +31611,8 @@ m_ListIndex
 m_LiteralColor
 m_LiteralHandType
 m_Local
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_LocalPredBoolVariables
 m_LocalPredByteVariables
 m_LocalPredFloatVariables
@@ -31854,6 +31871,7 @@ m_bDiscontinuity
 m_bDoBonesOrientAlongPositiveX
 m_bDoClientSideAnimation
 m_bDoNotDrawInFastShadowPath
+m_bDofEnabled
 m_bDontRemove
 m_bDormant
 m_bDrawLast
@@ -32303,7 +32321,11 @@ m_fOverrideFogEnd
 m_fOverrideFogStart
 m_fPoseValue
 m_fPrevLockedPoints
+m_fRadiusMax
+m_fRadiusMin
 m_fSpeed
+m_fSpeedMax
+m_fSpeedMin
 m_fStartFrame
 m_fTopVignetteStrength
 m_fVignetteBlurStrength
@@ -32411,6 +32433,11 @@ m_flDmgModBullet
 m_flDmgModClub
 m_flDmgModExplosive
 m_flDmgModFire
+m_flDofFarBlurry
+m_flDofFarCrisp
+m_flDofNearBlurry
+m_flDofNearCrisp
+m_flDofTiltToGround
 m_flDrawDistance
 m_flDuration
 m_flEdgeFadeDist
@@ -32525,6 +32552,9 @@ m_flIkZAdjustAmount
 m_flIndirectStrength
 m_flInfluenceRadius
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInitialWindSpeed
 m_flInitialYaw
 m_flInput0
@@ -32640,6 +32670,7 @@ m_flParticleInnerDist
 m_flParticleSpacing
 m_flPhi
 m_flPhysics
+m_flPitch
 m_flPivotMax
 m_flPivotMin
 m_flPlaceTime
@@ -32679,6 +32710,7 @@ m_flRenderFrameTimeUnscaled
 m_flRenderFxDuration
 m_flRenderFxStartTime
 m_flRenderTime
+m_flRoll
 m_flRotateMax
 m_flRotateMin
 m_flRotation
@@ -32751,6 +32783,7 @@ m_flTailAlphaScale
 m_flTargetYaw
 m_flTempRagdollTransitionTime
 m_flTheta
+m_flThickness
 m_flTickRemainder
 m_flTime
 m_flTimeAttackQueued
@@ -32790,6 +32823,7 @@ m_flWindAngleVariation
 m_flWindSpeed
 m_flWindSpeedVariation
 m_flWorldUnitsPerPx
+m_flYaw
 m_flZFar
 m_flZNear
 m_flexWeight
@@ -33347,6 +33381,7 @@ m_nNewSequenceParity
 m_nNextScriptVarRecordID
 m_nNextThinkTick
 m_nNoInterpolationTick
+m_nNoiseType
 m_nNumBeamEnts
 m_nNumPlanes
 m_nNumPrefixedContexts
@@ -33363,6 +33398,8 @@ m_nOutgoingTangent
 m_nOutputID
 m_nOutputType
 m_nOutsideWorld
+m_nOverrideCP
+m_nOverrideCP2
 m_nOverrideStyle
 m_nOwnerID
 m_nParentAttachmentOrBone
@@ -33746,6 +33783,7 @@ m_unVrCompressedBoneTransformsSize
 m_unVrCompressedGripLimitBoneTransformsSize
 m_usSolidFlags
 m_usable
+m_useCurl
 m_userArray
 m_vAngles
 m_vBallOffset
@@ -33755,6 +33793,7 @@ m_vBoxMins
 m_vBoxProjectMaxs
 m_vBoxProjectMins
 m_vBoxSize
+m_vCPValueScale
 m_vCachedEndPointAttachmentAngle
 m_vCachedEndPointAttachmentPos
 m_vCapsuleCenter1
@@ -34251,6 +34290,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -34385,6 +34425,7 @@ momentumModifier
 momentumType
 month
 mostrecentphase
+mouse_inverty
 mouse_over_drag_target
 mouse_pitchyaw_sensitivity
 mouse_position
@@ -34405,6 +34446,7 @@ moveparent: (%d) Name: %s (%s)
 moverightdistance
 moveto
 movetype: %s
+movieTime
 movie_state
 mp_allowspectators
 mp_chattime
@@ -35207,6 +35249,7 @@ particles/card_effects/performances/spells/gust/gust.vpcf
 particles/card_effects/performances/spells/hand_of_god/hand_of_god_cast.vpcf
 particles/card_effects/performances/spells/hand_of_god/hand_of_god_impact.vpcf
 particles/card_effects/performances/spells/hip_fire/hip_fire.vpcf
+particles/card_effects/performances/spells/hymn_of_st_crella/hymn_st_crella_deploy.vpcf
 particles/card_effects/performances/spells/hymn_of_st_crella/hymn_st_crella_lane.vpcf
 particles/card_effects/performances/spells/hymn_of_st_crella/hymn_st_crella_target.vpcf
 particles/card_effects/performances/spells/intimidation/intimidation.vpcf
@@ -35478,6 +35521,7 @@ percent_target
 percentages
 permanently
 permitresponses
+persistent
 personaAccountID
 persona_updated
 perspective
@@ -35486,8 +35530,7 @@ perspectiveplayerid
 peru
 pervertexlighting
 phase not supported
-phaseName1
-phaseName2
+phase_label_text
 phase_name
 phi
 phonemedelay
@@ -35569,6 +35612,7 @@ playbackRateChanged
 playback_speed
 playback_tick
 playback_time
+playback_volume
 playbackrate
 player%d_skill_rank
 player%d_t%d
@@ -35594,7 +35638,6 @@ player_gauntlet_progress_points
 player_hintmessage
 player_id
 player_incap_use_radius
-player_info
 player_info_individual_updated
 player_level_start
 player_level_up
@@ -35707,6 +35750,7 @@ precomputeposition
 precomputeup
 pred %d:%d
 predelay
+prediction forced re-latch of %s due to prediction error for field marked FTYPEDESC_INTERPOLATEDVAR
 preentitypacket:ack %d cmds
 preentitypacketrec:exec %d->%d [ack %d]
 prefabs
@@ -36037,14 +36081,6 @@ refrigerator
 regeneration
 regenerationAmount
 regenmodifier
-region_0_available
-region_0_complete
-region_1_available
-region_1_complete
-region_2_available
-region_2_complete
-region_3_available
-region_3_complete
 registered:
 regression
 regular expression is too large
@@ -36106,7 +36142,6 @@ replay_single_step
 replay_time_scale
 replays
 replays/
-replays/%llu.dem
 report_cliententitysim
 report_clientthinklist
 report_perf_yields_beyond_s
@@ -36390,6 +36425,7 @@ scripts/dota_card_game/card_effects.txt
 scripts/dota_card_game/card_effects_set%02d.txt
 scripts/emoticons.txt
 scripts/events.json
+scripts/events/campaigns_00.json
 scripts/game_modes/game_modes.txt
 scripts/haptic_curves.txt
 scripts/haptics/audio2haptics_manifest.txt
@@ -36437,8 +36473,6 @@ select_low
 select_node
 selectedTextBackgroundColor
 selected_account_id
-selected_challenge_id
-selected_claim_id
 selected_node
 selected_node_long_desc
 selected_node_name
@@ -36842,12 +36876,16 @@ std::_Deque_base<long, std::allocator<long> >::_M_initialize_map(unsigned long)
 std::_Deque_base<long, std::allocator<long> >::~_Deque_base()
 std::_Deque_base<std::__detail::_StateSeq<std::regex_traits<char> >, std::allocator<std::__detail::_StateSeq<std::regex_traits<char> > > >::_M_initialize_map(unsigned long)
 std::_Deque_base<std::__detail::_StateSeq<std::regex_traits<char> >, std::allocator<std::__detail::_StateSeq<std::regex_traits<char> > > >::~_Deque_base()
+std::_Function_base::_Base_manager<AsyncCaptionData_t::AsyncLoad(char const*, int)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<AsyncCaptionData_t::AsyncLoad(char const*, int)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CBoardGameInstance>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjectCount(ContextFreeAttributeListMatchPattern const&, unsigned int) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::GetMatchingObjects(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<CBuildCubemapsGameSystem::GameShutdown(EventGameShutdown_t const&)::{lambda(void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CBuildCubemapsGameSystem::GameShutdown(EventGameShutdown_t const&)::{lambda(void const*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<CBuildCubemapsGameSystem::GameShutdown(EventGameShutdown_t const&)::{lambda(void const*)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CBuildCubemapsGameSystem::GameShutdown(EventGameShutdown_t const&)::{lambda(void const*)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardArmorEntity>()::{lambda(CDCGCardArmorEntity*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardArmorEntity>()::{lambda(CDCGCardArmorEntity*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardAttackEntity>()::{lambda(CDCGCardAttackEntity*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardAttackEntity>()::{lambda(CDCGCardAttackEntity*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardBattleSleeveEntity>()::{lambda(CDCGCardBattleSleeveEntity*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CDCGAttachEntityContainer<CDCGCardAttachEntity>::GetAttachedSingleEntity<CDCGCardBattleSleeveEntity>()::{lambda(CDCGCardBattleSleeveEntity*)#1}> const&, std::_Manager_operation)
@@ -37309,6 +37347,7 @@ std::__detail::_NFA<std::regex_traits<char> >::_M_insert_subexpr_end()
 std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const
 std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned long) const
 std::__detail::_RegexTranslator<std::regex_traits<char>, false, true>::_M_transform_impl(char, std::integral_constant<bool, true>) const
+std::__detail::_RegexTranslator<std::regex_traits<char>, true, false>::_M_translate(char) const
 std::__detail::_RegexTranslator<std::regex_traits<char>, true, true>::_M_transform_impl(char, std::integral_constant<bool, true>) const
 std::__detail::_RegexTranslator<std::regex_traits<char>, true, true>::_M_translate(char) const
 std::__detail::_Scanner<char>::_M_advance()
@@ -38085,9 +38124,11 @@ typeinfo name for EDCGCardSubType
 typeinfo name for EDCGCardType
 typeinfo name for EDCGEventName
 typeinfo name for EDCGFaction
+typeinfo name for EGamePhase
 typeinfo name for EGameZone
 typeinfo name for ELanguage
 typeinfo name for ELeaderboardViewMode
+typeinfo name for EPhaseAnnouncement_t
 typeinfo name for EReplayExistence
 typeinfo name for ETargetSelectionMethod
 typeinfo name for ETriggerConditionFlags
@@ -38610,6 +38651,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5
@@ -39004,7 +39046,6 @@ zoomwithuiscale
 |'
 |*
 |-
-|@
 |B
 |p
 |w

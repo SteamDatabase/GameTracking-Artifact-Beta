@@ -1071,10 +1071,12 @@ DCGHud.AspectRatio16x9 #Overlay
 	background-position: 50% 50%;
 	wash-color: #444a55;
 }
+
 #DCGSettingsButton:hover
 {
 	wash-color: #9999aa;
 }
+
 #DCGSettingsButton:active
 {
 	sound: "ui_settings_multi";
@@ -1084,8 +1086,9 @@ DCGHud.AspectRatio16x9 #Overlay
 #ScrollLeftButton
 {
 	transform: translateX( -80px );
+	visibility: collapse;
     horizontal-align: left;
-    background-image: url("s2r://panorama/images/hud/left_arrow_psd.vtex");
+//    background-image: url("s2r://panorama/images/hud/right_arrow_psd.vtex");
 	opacity: 0.0;
 	
 	transition-property: transform, opacity;
@@ -1096,7 +1099,7 @@ DCGHud.AspectRatio16x9 #Overlay
 .canScrollLeft #ScrollLeftButton
 {
 	opacity: 1.0;
-	transform: translateX( 0px );
+	transform: translateX( -35px ) scaleX(.5) scaleY(.5);
 	
 	transition-property: transform, opacity;
 	transition-duration: .25s;
@@ -1113,7 +1116,7 @@ DCGHud.AspectRatio16x9 #Overlay
     height: 256px;
     vertical-align: middle;
 
-	background-image: url("s2r://panorama/images/hud/left_arrow_active_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/right_arrow_active_psd.vtex");
 	
 	transition-property: transform, opacity;
 	transition-duration: .5s;
@@ -1160,9 +1163,10 @@ DCGHud.AspectRatio16x9 #Overlay
 
 #ScrollRightButton
 {
-  transform: translateX( 80px );
-  horizontal-align: right;
-  background-image: url("s2r://panorama/images/hud/right_arrow_psd.vtex");
+	transform: translateX( 80px );
+	visibility: collapse;
+  	horizontal-align: right;
+//  	background-image: url("s2r://panorama/images/hud/left_arrow_psd.vtex");
 	opacity: 0.0;
 	
 	transition-property: transform, opacity;
@@ -1198,17 +1202,23 @@ DCGHud.AspectRatio16x9 #Overlay
   height: 256px;
   vertical-align: middle;
 
-	background-image: url("s2r://panorama/images/hud/right_arrow_active_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/left_arrow_active_psd.vtex");
 	
 	transition-property: transform, opacity;
 	transition-duration: .5s;
 	transition-timing-function: ease-in-out;
 }
 
+.ActiveLaneIsToTheRight #ScrollRightButton,
+.ActiveLaneIsToTheLeft #ScrollLeftButton
+{
+	visibility: visible;
+}
+
 .canScrollRight #ScrollRightButton
 {
 	opacity: 1.0;
-  transform: translateX( 0px );
+  	transform: translateX( 35px ) scaleX(.5) scaleY(.5);
 	
 	transition-property: transform, opacity;
 	transition-duration: .25s;
@@ -1217,6 +1227,8 @@ DCGHud.AspectRatio16x9 #Overlay
 
 .ScrollLaneButton
 {
+	tooltip-body-position: 50% 50%;
+	tooltip-arrow-position: 45% 45%;
     margin: 0px;
     width: 72px;
     height: 256px;
@@ -1230,7 +1242,7 @@ DCGHud.AspectRatio16x9 #Overlay
 
 .ScrollLaneButton:hover
 {
-	brightness: 2.5;
+	//brightness: 2.5;
 }
 
 .ScrollLaneButton:active

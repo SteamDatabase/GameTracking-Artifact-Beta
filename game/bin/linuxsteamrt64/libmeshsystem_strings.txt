@@ -319,7 +319,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraphEditorUtils001
 AnimIkLockLocal
@@ -610,6 +609,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -621,6 +621,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -670,6 +671,7 @@ Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 ChangeCallbackOnChange
 ChangeCallbackOnChangeOrCreate
 ChangeSize
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -1176,6 +1178,7 @@ PA
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -1192,6 +1195,8 @@ POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 POSITION
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PanoramaTextServices001
@@ -1394,6 +1399,7 @@ UserInfoChangeService_001
 Using 10-bit blend indices: are you sure they are supproted on the target hardware?
 Using 16-bit blend indices
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -1414,7 +1420,6 @@ VMatrix
 VMediaFoundation001
 VMeshError
 VModelError
-VNewAsyncFileSystem001
 VP4003
 VPhysXAggregateData_t
 VPhysXAggregateData_t::FLAG_IGNORE_SCALE_OBSOLETE_DO_NOT_USE
@@ -1579,7 +1584,6 @@ _fini
 _modelbuilder_phys_%i.vphys
 _root_keyname
 _test_conversion_counter
-`
 abs( %s )
 ai_model_info
 allowstatic
@@ -1874,6 +1878,9 @@ m_FlexControllers
 m_FlexDesc
 m_FlexOps
 m_FlexRules
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_FollowNodes
 m_ForceGenerators
 m_Frame1
@@ -1910,6 +1917,8 @@ m_KelagerBends
 m_LegacyStretchForce
 m_LinearLimit
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_LocalForce
 m_LocalRotation
 m_LockToGoal
@@ -2107,6 +2116,10 @@ m_embeddedKeyvalues
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_fingers
 m_flAddWorldCollisionRadius
 m_flAlongDamping
@@ -2158,6 +2171,9 @@ m_flFogContributionStength
 m_flFootLength
 m_flInertiaScale
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInput0
 m_flInput1
 m_flInternalPressure
@@ -2197,6 +2213,7 @@ m_flOpStrengthMaxScale
 m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
+m_flPitch
 m_flPitchBounce
 m_flPitchDamping
 m_flPitchFriction
@@ -2214,6 +2231,7 @@ m_flRadiusTaper
 m_flRandomMax
 m_flRandomMin
 m_flRodVelocitySmoothRate
+m_flRoll
 m_flRotationOffset
 m_flScalePerParentParticle
 m_flShadowCascadeDistance
@@ -2226,6 +2244,7 @@ m_flStartTime
 m_flStartTimeMax
 m_flStaticImpactVolume
 m_flTailAlphaScale
+m_flThickness
 m_flTipMass
 m_flTraceHeight
 m_flTraceRadius
@@ -2242,6 +2261,7 @@ m_flWindage
 m_flXY
 m_flXZ
 m_flYZ
+m_flYaw
 m_flYawBounce
 m_flYawDamping
 m_flYawFriction
@@ -2379,9 +2399,12 @@ m_nNameHash
 m_nNext
 m_nNode
 m_nNodeCount
+m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
 m_nOrigin
+m_nOverrideCP
+m_nOverrideCP2
 m_nParent
 m_nParticle
 m_nParticlesToEmit
@@ -2548,10 +2571,12 @@ m_twistLowLimitDamping
 m_twistLowLimitRestitution
 m_twistLowLimitSpring
 m_twistLowLimitValue
+m_useCurl
 m_userArray
 m_vAngularTargetVelocity
 m_vBallOffset
 m_vBasePosition
+m_vCPValueScale
 m_vCapsulePos1
 m_vCapsulePos2
 m_vCenter
@@ -2633,7 +2658,7 @@ mesh_index
 meshinstance_imp.cpp
 meshsystem
 meshsystem.cpp
-meshsystem.cpp(152): GetErrorModel() called before error model exists!
+meshsystem.cpp(153): GetErrorModel() called before error model exists!
 meshutils.cpp
 min
 min( %s, %s )
@@ -2666,6 +2691,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -2720,6 +2746,7 @@ notconnected
 notify
 null
 numsegments
+operation
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -2734,6 +2761,7 @@ overlay
 parent of jiggle bone %u: %s
 particles/
 particles_list
+persistent
 pervertexlighting
 phys_data_block
 phys_res
@@ -2886,6 +2914,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5

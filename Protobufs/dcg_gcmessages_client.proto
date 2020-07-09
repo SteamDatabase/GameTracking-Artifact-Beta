@@ -422,6 +422,9 @@ message CMsgClientToGCGetMatchHistoryResponse {
 		eResult_OK = 1;
 		eResult_InvalidAccount = 2;
 		eResult_RateLimited = 3;
+		eResult_AccessDenied = 4;
+		eResult_InternalError = 5;
+		eResult_NoMatchHistory = 6;
 	}
 
 	optional .CMsgClientToGCGetMatchHistoryResponse.EResult result = 1 [default = eResult_OK];
@@ -445,11 +448,14 @@ message CMsgClientToGCGetProfileDataResponse {
 	optional uint32 player_level = 3;
 	optional uint32 player_badge = 4;
 	optional uint32 mmr_level = 5;
-	optional uint32 wins = 6;
-	optional uint32 losses = 7;
-	optional uint32 ties = 8;
-	optional uint32 first_match_date = 9;
-	optional uint32 default_cardback = 10;
+	optional uint32 mmr_level_score = 6;
+	optional uint32 mmr_leaderboard = 7;
+	optional uint32 mmr_leaderboard_best = 8;
+	optional uint32 wins = 9;
+	optional uint32 losses = 10;
+	optional uint32 ties = 11;
+	optional uint32 first_match_date = 12;
+	optional uint32 default_cardback = 13;
 }
 
 message CMsgClientToGCGetMatchDetails {

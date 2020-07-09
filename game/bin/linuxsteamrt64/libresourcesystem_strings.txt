@@ -6,6 +6,8 @@
 #[
 $ORIGIN
 % 5i:  [%32.32s]
+% 5ims [% 5ims async] [% 5i loaded] %s
+% 5ims [% 5ims async] [% 5i loaded] TOTAL
 %-120s
 %-120s - %s
 %.15lf
@@ -33,6 +35,7 @@ $ORIGIN
 *
 ** Forcing all resource loads to fail: "%s"
 *** Bad deletion request: Refcount for %s resource "%s" (%016llX) is greater than zero. (%d)!
+*ZN25CAsyncResourceDataRequest15InitForFileReadEPK21ResourceBindingBase_tb30ResourceManifestLoadPriority_tbPKcEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 + CStrongHandle, %d operations: %s
 + CStrongHandle, operation: %lld)
 + Manifest, %d operations: %s
@@ -78,12 +81,9 @@ $ORIGIN
 0123456789abcdef
 10ConCommand
 10IAppSystem
-11IRefCounted
-12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
 12CThreadEvent
 14CBaseAppSystemI15IResourceSystemE
 14ConCommandBase
-15CMemberFunctor0IP25CAsyncResourceDataRequestMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CResourceSystem
 15CTier0AppSystemI15IResourceSystemE
 15CTier1AppSystemI15IResourceSystemLi0EE
@@ -98,7 +98,6 @@ $ORIGIN
 19CSchemaRegistration
 1DBlend
 20CPostConnectCallback
-20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceConstructor
 20IResourceHandleUtils
 20IResourceSystemUtils
@@ -135,7 +134,6 @@ $ORIGIN
 36CSchemaRegistration_mathlib_extended
 6ConVar
 7IConVar
-8CFunctor
 <!--
 <INVALID>
 <deferred>
@@ -196,7 +194,6 @@ AnimBlendLayerPoseParam
 AnimCommonParams
 AnimCycleOverride
 AnimDelta
-AnimEvent
 AnimFile
 AnimGraphEditorUtils001
 AnimIkLockLocal
@@ -396,6 +393,7 @@ C_INIT_RemapParticleCountToScalar
 C_INIT_RemapScalar
 C_INIT_RemapScalarToVector
 C_INIT_RemapSpeedToScalar
+C_INIT_RingWave
 C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
@@ -407,6 +405,7 @@ C_INIT_VelocityRadialRandom
 C_INIT_VelocityRandom
 C_OP_AttractToControlPoint
 C_OP_ContinuousEmitter
+C_OP_CurlNoiseForce
 C_OP_DistanceBetweenCPsToCP
 C_OP_DriveCPFromGlobalSoundFloat
 C_OP_EnableChildrenFromParentParticleCount
@@ -446,6 +445,7 @@ C_OP_WorldTraceConstraint
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 ChangeCallbackOnChange
 ChangeSize
+ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
 ClothShapeSphere
@@ -627,6 +627,7 @@ Loading Resource %016llX (file "%s") is waiting for an external system to finish
 Loading Resource %016llX (file "%s") is waiting for its file to load.
 Loading Resource %016llX (file "%s") is waiting for streaming bits to load.
 Localize_001
+Log time spent in Allocate for all resource types
 LoggingSystem_GetChannel
 LoggingSystem_GetChannelVerbosity
 LoggingSystem_IsChannelEnabled
@@ -689,6 +690,7 @@ NoPoseControl
 OnAsyncProcessResourceData
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
+PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
@@ -701,6 +703,8 @@ PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
 PF_TYPE_RANDOM_UNIFORM
+PVEC_TYPE_CP_VALUE
+PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PanoramaTextServices001
@@ -774,7 +778,7 @@ RenderSystemSurface001
 RenderUtils_001
 Reporting references for leak tracker error: "%s"
 Reporting references for resource "%s":
-Resource
+Reset tracked time spent in Allocate (see resource_log_allocate_timing)
 Resource "%s" was explicitly loaded with a blocking load.
 Resource "%s" was not precached and could not be loaded by a just in time blocking load.
 Resource "%s" was not precached but was loaded by a just in time blocking load.
@@ -860,6 +864,7 @@ Usage: resource_leaks <resource_name>
 Usage: resource_repeated_reload <count> <resource_name>
 UserInfoChangeService_001
 VApplication001
+VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
 VBaseFileSystem011
@@ -878,7 +883,6 @@ VMDLLIB001
 VMaterialSystem2_001
 VMatrix
 VMediaFoundation001
-VNewAsyncFileSystem001
 VP4003
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
@@ -1000,6 +1004,7 @@ __cxa_pure_virtual
 __gmon_start__
 __memcpy_chk
 __oldschema_object_name
+__pthread_key_create
 __stack_chk_fail
 __temp_unserialization_member__
 _c
@@ -1174,6 +1179,9 @@ m_Emitters
 m_EndEffectorBone
 m_EndEffectorTargetBone
 m_Falloff
+m_FloatComponentX
+m_FloatComponentY
+m_FloatComponentZ
 m_ForceGenerators
 m_IKChains
 m_IkChain
@@ -1184,6 +1192,8 @@ m_JointConstraintPairs
 m_JointName
 m_Joints
 m_LiteralColor
+m_LocalCoordinateSystemSpeedMax
+m_LocalCoordinateSystemSpeedMin
 m_MotorList
 m_Name
 m_Operators
@@ -1224,6 +1234,10 @@ m_bUsesIndexedBakedLighting
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
+m_fRadiusMax
+m_fRadiusMin
+m_fSpeedMax
+m_fSpeedMin
 m_flBakeLightIndexScale
 m_flBiasParameter
 m_flClusterCooldown
@@ -1239,6 +1253,9 @@ m_flEmissionScale
 m_flEmitRate
 m_flFogContributionStength
 m_flInitFromKilledParentParticles
+m_flInitialRadius
+m_flInitialSpeedMax
+m_flInitialSpeedMin
 m_flInput0
 m_flInput1
 m_flLightSourceDim0
@@ -1253,16 +1270,20 @@ m_flOpStrengthMaxScale
 m_flOpStrengthMinScale
 m_flOutput0
 m_flOutput1
+m_flPitch
 m_flPrecomputedMaxRange
 m_flRadiusScale
 m_flRadiusTaper
 m_flRandomMax
 m_flRandomMin
+m_flRoll
 m_flScalePerParentParticle
 m_flShadowCascadeDistance
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flThickness
+m_flYaw
 m_hResource->m_nLoadingResource != LOADING_RESOURCE_INDEX_INVALID
 m_hResource->m_nStreamingResource != STREAMING_RESOURCE_DATA_INDEX_INVALID
 m_hSnapshot
@@ -1287,8 +1308,11 @@ m_nIncrement
 m_nLightGroupCount
 m_nMapType
 m_nMinParticlesToEmit
+m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOverrideCP
+m_nOverrideCP2
 m_nParticlesToEmit
 m_nPriority
 m_nRandomMode
@@ -1310,6 +1334,8 @@ m_pMovementManager
 m_pParent
 m_pszSnapshotName
 m_snapshotName
+m_useCurl
+m_vCPValueScale
 m_vEndTrailTintFactor
 m_vLiteralValue
 m_vMaxBounds
@@ -1359,6 +1385,7 @@ modeldoc25
 modeldoc26
 modeldoc27
 modeldoc28
+modeldoc29
 modeldoc3
 modeldoc4
 modeldoc5
@@ -1377,6 +1404,7 @@ notconnected
 notify
 null
 numsegments
+operation
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -1387,6 +1415,7 @@ origin_max_delta
 origin_relative
 outerconeangle
 particles/
+persistent
 physgun_interactions
 physicsmode
 placement_attach
@@ -1423,10 +1452,12 @@ resource_leaks <resource_name>: Show resource leaks for the named resource
 resource_leaks: Invalid resource name '%s'
 resource_leaks: No resource named '%s'
 resource_list
+resource_log_allocate_timing
 resource_repeated_reload
 resource_repeated_reload <count> <resource_name> (<resource name> ...): Load and unload the specified resource(s)
 resource_repeated_reload(%d)
 resource_repeated_reload: Invalid resource name '%s'
+resource_reset_allocate_timing
 resourcefile
 resourcesystem
 resourcesystem.cpp
@@ -1459,6 +1490,8 @@ speed
 sqrt
 sqrtf
 ss_added
+std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
+std::_Sp_counted_ptr<decltype(nullptr), (__gnu_cxx::_Lock_policy)2>::_M_dispose()
 stop_immediately
 stop_instantly
 stop_on_seq_change
@@ -1510,6 +1543,7 @@ vpcf23
 vpcf24
 vpcf25
 vpcf26
+vpcf27
 vpcf3
 vpcf4
 vpcf5
