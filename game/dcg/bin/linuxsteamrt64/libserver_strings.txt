@@ -162,6 +162,7 @@
 #CardEffect_10133_0
 #CardEffect_10134_0
 #CardEffect_10136_0
+#CardEffect_10137_0
 #CardEffect_10138_0
 #CardEffect_10141_0
 #CardEffect_10148_0
@@ -432,6 +433,7 @@
 #CardEffect_11061_0
 #CardEffect_11062_0
 #CardEffect_11063_0
+#CardEffect_11064_0
 #CardEffect_19001_0
 #CardEffect_19002_0
 #CardEffect_19003_0
@@ -493,7 +495,6 @@
 #DCG_ActionHint_Hero_Ally_return
 #DCG_ActionHint_Hero_AnyLane
 #DCG_ActionHint_Hero_Enemy
-#DCG_ActionHint_Hero_Enemy_kill
 #DCG_ActionHint_Hero_kill
 #DCG_ActionHint_Hero_modify
 #DCG_ActionHint_Hero_move
@@ -533,6 +534,7 @@
 #DCG_ActionHint_Unit_Enemy_attack
 #DCG_ActionHint_Unit_Enemy_battle
 #DCG_ActionHint_Unit_Enemy_damage
+#DCG_ActionHint_Unit_Enemy_kill
 #DCG_ActionHint_Unit_Enemy_modify
 #DCG_ActionHint_Unit_Enemy_move
 #DCG_ActionHint_Unit_Enemy_movetopos_AnotherLane
@@ -626,6 +628,7 @@
 #DCG_Glossary_SpellMunity
 #DCG_Glossary_Stunned
 #DCG_Glossary_Tracked
+#DCG_Glossary_Trample
 #DCG_ResultScreenGraph_AbilitiesActivated
 #DCG_ResultScreenGraph_ArmorAbsorbed
 #DCG_ResultScreenGraph_CardsDrawn
@@ -883,7 +886,6 @@ $effectSourceObjectID
 %i.%i.%i.%i:%i
 %i: %s at %f
 %ld
-%lf
 %lg
 %lld
 %llu
@@ -1057,7 +1059,7 @@ $effectSourceObjectID
 %s:  %s WRITE %s in CEntity2SaveRestore::DirectoryCopy
 %s:  %s WRITE %s in CEntity2SaveRestore::EntityPatchWrite
 %s:  %s WRITE DirectoryClear( %s, %s )
-%s:  %s WRITE DirectoryCopy Append( %s [%i] )
+%s:  %s WRITE DirectoryCopy Append( %s [%u] )
 %s:  %s WRITE DirectoryCopy( %s, %p )
 %s:  %s WRITE DirectoryExtract( %s, %s )
 %s:  %s WRITE Queue AsyncWrite(%s) in CEntity2SaveRestore::EntityPatchWrite
@@ -1430,10 +1432,11 @@ $effectSourceObjectID
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL24Set1_WalrusPunch_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
+*ZL25Set1_Exsanguinate_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_NoHesitation_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Overgrowther_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
-*ZL25Set1_Skullduggery_Effect3P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL26Set1_TempestDouble_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
+*ZL29Set1_PlansWithinPlans_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL31Set1_DiabolicConclusion_Effect3P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL32Set1_InformedConsumption_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL32Set1_InformedConsumption_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
@@ -1474,6 +1477,7 @@ $effectSourceObjectID
 *ZN13CDotaCardGame24UpdateLaneCombatPreviewsEvEUlPK11CGameObjectE2_
 *ZN13CDotaCardGame25RunSingleCardAttackEngineEP11CGameObjectS1_bRKSt8functionIFvS1_S1_RK8TagUnionI8TypelistIJNS_14DamageAmount_tENS_15HealingAmount_tEEEE13StrongTypedefIj13CardIDTypeTagLj0EEEEEUlS1_S1_SA_SD_E_
 *ZN13CDotaCardGame26GetAggregateOpposingGroupsERK10CUtlVectorIP11CGameObject10CUtlMemoryIS2_iEEEUlS2_E_
+*ZN13CDotaCardGame40HealTargetAndDamageAdjacentEnemyThenJumpEP11CGameObjectiiS1_13StrongTypedefIj13CardIDTypeTagLj0EEbEUlPS_RK25IAttributeContainerReaderRK17SpecificObjects_tE_
 *ZN13CDotaCardGame45GetDefaultDamageAndHealingApplicationFunctionEvEUlP11CGameObjectS1_RK8TagUnionI8TypelistIJNS_14DamageAmount_tENS_15HealingAmount_tEEEE13StrongTypedefIj13CardIDTypeTagLj0EEE_
 *ZN13CDotaCardGame5CloneEvEUlP11CGameObjectE_
 *ZN13CDotaCardGame7PillageEvEUlP11CGameObjectE_
@@ -2150,7 +2154,6 @@ $effectSourceObjectID
 13IHLTVDirector
 13IHandleEntity
 13IPoseAccessor
-13IPrerequisite
 13IntervalTimer
 13audioparams_t
 13sky3dparams_t
@@ -2652,6 +2655,7 @@ $effectSourceObjectID
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI12CLightEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI12CSceneEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI17CSceneListManagerE10CUtlMemoryIS3_iEELi13EE
+17CUtlVectorDataOpsI10CUtlVectorI7CHandleI20CPointCommentaryNodeE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI14CUtlStringListLi53EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI10QuaternionN28CAnimGraphNetworkedVariables35NetworkVar_m_NetQuaternionVariablesELin1EELi4EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI15CUtlSymbolLargeN19ActiveModelConfig_t34NetworkVar_m_AssociatedEntityNamesELin1EELi2EE
@@ -3700,6 +3704,7 @@ $effectSourceObjectID
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI16CBaseModelEntityE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI17CBaseCombatWeaponE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI17CSceneListManagerE10CUtlMemoryIS3_iEES3_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI20CPointCommentaryNodeE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CBaseVRHandAttachmentE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CPostProcessingVolumeE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
@@ -7683,6 +7688,8 @@ CPointWorldText
 CPoseController
 CPostProcessController
 CPostProcessingVolume
+CPrerequisiteDescriptionHelper::AnalyzeFileListByExtension(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> > const&, CUtlDict<CPrerequisiteDescriptionHelper::Analysis_t, int>&) const
+CPrerequisiteDescriptionHelper::Append(int, char const*, char const*, ...)
 CProjectedDecal
 CPropHMDAvatar
 CPropVRHand
@@ -9663,7 +9670,6 @@ Flush all .vcds from the cache and reload from disk.
 Flushes entity bone cache on lag compensation
 Flushes the server & client side soundscapes
 Fog Volume %s found at position (%f %f %f)
-Fog of War
 Fog: %s, post process: %s, color correct: %s
 FogName
 FogSystem
@@ -10230,6 +10236,8 @@ INVALID_ARGUMENT
 INVALID_CPPTYPE
 IPhysicsPlayerController
 IPlayerInfo
+IPrerequisite::AddRef()
+IPrerequisite::Release()
 IQuickTime001
 IRagdoll
 ISteamGameServerStats: Failed to clear achievement %s
@@ -11415,6 +11423,7 @@ Member[%d] %u (%s)  team = %d
 Members/numSlots
 Memory trash in SortEntities.. overran the number of entity islands supported!
 Mercenary Exiles
+Merchant Wraith
 MergeGeneratedAreas()
 Merged in (%i) actors, (%i) channels, and (%i) events
 Merges a saved selected set into the current mesh.
@@ -11441,7 +11450,6 @@ MessageSets cannot have fields, only extensions.
 Messages can't have default values!
 Messages can't have default values.
 Messenger Rookery
-Messge Name
 Metal.Large
 Metal.Medium
 Metal.SawbladeStick
@@ -12483,6 +12491,7 @@ Places the selected corner of the currently marked Area on the ground.
 Plague Hex
 Plague Ward
 Plague-Ridden Wolf
+Plans Within Plans
 Plastic.Large
 Plastic.Medium
 Plastic.Small
@@ -14004,7 +14013,6 @@ SndEmitterSystem
 SndSosTriggerOpvarWaitOver
 Sniper
 Software\Valve\%s
-Sogd Wraith
 SolidCone
 SolidType_t
 Some test string
@@ -15020,7 +15028,6 @@ V_UnicodeRepair(char*, EStringConvertErrorPolicy)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
-V_atan2
 V_atan2f
 V_atanf
 V_atof
@@ -15042,6 +15049,7 @@ V_pow
 V_powf
 V_qsort
 V_qsort_s
+V_sin
 V_sincosf
 V_sinf
 V_snprintf
@@ -15170,6 +15178,7 @@ Vladmir's Offering
 VoiceCommands
 Voicecommand script attempting to use unknown concept. Need to define new concepts in code. ( %s )
 Void Theft
+Volatile Fog
 Volume to add tags to the world
 Vulkan
 W
@@ -15851,6 +15860,7 @@ asset_modifiers
 associated_item
 asynchronous
 at console
+atan2
 att(%d:%s)
 attach particle effect
 attach1
@@ -16468,7 +16478,8 @@ dcg_mana_per_turn_ai
 dcg_max_ai_thinks
 dcg_max_hand_size
 dcg_media_mode
-dcg_min_rounds_for_event_progress_in_bot_games
+dcg_min_rounds_for_event_progress_on_loss_in_bot_games
+dcg_min_rounds_for_event_progress_on_loss_in_pvp_games
 dcg_num_tower_damage_rewards
 dcg_old_guid_sequence
 dcg_open_handed
@@ -17053,6 +17064,7 @@ file://{images}/hud/icon_effect_spectral.png
 file://{images}/hud/icon_effect_spell_munity.png
 file://{images}/hud/icon_effect_stunned.png
 file://{images}/hud/icon_effect_tracked.png
+file://{images}/hud/icon_effect_trample.png
 file://{images}/hud/icon_effect_untargetable.png
 file://{resources}/layout/world_hint.xml
 filepos
@@ -18139,6 +18151,7 @@ lfomult
 lforate
 lfotype
 libc.so.6
+libengine2.so
 libm.so.6
 libpthread.so.0
 libserver.so
@@ -19056,6 +19069,7 @@ m_bLastTick
 m_bLerpRestoreMoveType
 m_bLightOnlyTarget
 m_bLightWorld
+m_bListenedTo
 m_bLit
 m_bLocalPlayerOnly
 m_bLocalSpace
@@ -20268,8 +20282,6 @@ m_iClassIgnore
 m_iClearPressedButtons
 m_iClip1
 m_iClip2
-m_iCommentaryNodeCount
-m_iCommentaryNodeNextID
 m_iComponentBits
 m_iComponentPrefixLen
 m_iConnected
@@ -21540,6 +21552,7 @@ m_vecMin
 m_vecMins
 m_vecMoveAng
 m_vecMoveDir
+m_vecNodes
 m_vecOrigin
 m_vecOriginalAngles
 m_vecOverViewpoint
@@ -21871,6 +21884,7 @@ modeldoc9
 models/%s
 models/%s.vmdl
 models/dev/error.vmdl
+models/extras/info_speech.vmdl
 models/props_plants/claypot03.vmdl
 models/survivors/survivor_gambler.vmdl
 models/ui/arrow_2d.vmdl
@@ -22838,7 +22852,6 @@ preferred_carryangles
 preferredcarryangles
 prefix_owner
 premium_only
-prerequisite
 preserve_cycle
 prevent_duplicate_challenges
 prevent_gifting
@@ -24190,6 +24203,7 @@ type_field
 type_value
 typeinfo for CThread
 typeinfo for CThreadSyncObject
+typeinfo for IPrerequisite
 typeinfo for char
 typeinfo for float
 typeinfo for std::_Function_base
@@ -24631,7 +24645,6 @@ yield
 yielding
 yo
 z
-zC
 zD
 zE
 zFar

@@ -23,7 +23,6 @@ $ORIGIN
 %lg
 %lld
 %ls [wstring, len = %d]
-%s %20s %30s = %8.2fms (call count = %d)
 %s%d
 %s%s%s crc=0x%x metadatasz=%d
 %s,
@@ -51,8 +50,6 @@ $ORIGIN
 -fake_workshop_dir
 -log_opened_files
 -no_hierarchical_vpk_memory_mapping
--noasync
--onethreadpool
 -recordPerfStats
 ...
 ../public/ordered_constructor.h
@@ -78,13 +75,8 @@ $ORIGIN
 10ConCommand
 10IAppSystem
 11CFileHandle
-11CRefCountedI20CRefCountServiceBaseILb0E6CRefMTEE
 11IFileSystem
-11IRefCounted
-12CRefCounted1I11IRefCounted20CRefCountServiceBaseILb1E6CRefMTEE
 12CThreadEvent
-12CThreadedJob
-13CFileAsyncJob
 14CBaseAppSystemI11IFileSystemE
 14CBaseAppSystemI17IAsyncFileSystem2E
 14ConCommandBase
@@ -99,17 +91,13 @@ $ORIGIN
 16
 16CDefaultAccessor
 16CFioReadOnlyFile
-17AsyncOpenedFile_t
 17CAsyncFileSystem2
-17CFileAsyncReadJob
 17CFileSystem_Stdio
 17IAsyncFileSystem2
 17IMemoryMappedFile
 18CCountedStringPool
-18CFileAsyncWriteJob
 18CPlaceholderConVar
 18CStdFilesystemFile
-18FileAsyncRequest_t
 18IAsyncCopyRequest2
 18IAsyncReadRequest2
 18IIOCompletionQueue
@@ -117,17 +105,11 @@ $ORIGIN
 19IAsyncWriteRequest2
 19IKeyValuesErrorSpew
 20CPostConnectCallback
-20CRefCountServiceBaseILb0E6CRefMTE
-20CRefCountServiceBaseILb1E6CRefMTE
-21CFileAsyncFileSizeJob
-22CFileAsyncWriteFileJob
 22CSchemaInstallCallback
-23CFileAsyncAppendFileJob
 23IConCommandBaseAccessor
 24CMemoryMappedFileSection
 25CFileSystemReloadFileList
 26CDefaultKeyValuesErrorSpew
-26CFileAsyncDirectoryScanJob
 28CFioReadOnlyMemoryMappedFile
 28CPackedStoreMemoryMappedFile
 35CMemoryMappedFileSection_SelfDelete
@@ -153,7 +135,6 @@ Adding VPK file: %s
 Addreffing existing VPK file: %s
 Alignment
 AllocInternal
-Allow AsyncBegin/EndRead()
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -226,7 +207,6 @@ CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
-CFileAsyncJob
 CFioReadOnlyFile::FS_fread
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
@@ -264,8 +244,6 @@ CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
-CThreadedJob::Abort(bool)
-CThreadedJob::Execute()
 CUtlBlockMemory overflow!
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
@@ -292,9 +270,7 @@ ConnectInterfaces
 CopyAFile: Cannot copy into a VPK or UGC file '%s'
 CopyAFile: Failed to copy file %s.
 CopyAFile: dest '%s' must be absolute path.
-CreateFile
 CreateInterface
-CreateNewThreadPool
 DEFAULT_WRITE_PATH
 DEMO
 DataOffset
@@ -361,15 +337,12 @@ Failed to read %d bytes
 File %s was never closed
 File '%s' was returned by GetFileList, but OpenFile() fails?!
 File Path:
-File System
 FileSystem
 Filename '%s' is invalid to be contained in a VPK
 Filesystem
 FlattenedSerializersVersion001
 FontManager_001
-Fopen
 FormatV
-Fread
 From Steam: [%s]\%s
 GAMECONSOLE
 GAMEROOT
@@ -394,7 +367,6 @@ HangWatchdog_IndicateActivity
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
-IOJob
 IQuickTime001
 InputService_001
 InputStackSystemVersion001
@@ -405,7 +377,6 @@ InstallSchemaBindings
 Intentionally vague touch behavior for %p
 Invalid Path
 Invalid access of deferred ConVarRef for '%s'
-Invalid async read of %s
 JSON error, unterminated element:
 KV Conditional Evaluation Error
 KeyValueCache001
@@ -497,7 +468,6 @@ Plat_SetFileReadOnly
 Plat_ShouldCollectMiniDumpsForFatalErrors
 Plat_TickDiffMicroSec
 Plat_TickDiffMicroSecF
-Plat_TickDiffMilliSecF
 Plat_TranslateSymbolicLinks
 Plat_UnloadModule
 Plat_ctime
@@ -506,8 +476,6 @@ Preload size for '%s' is too big
 PreloadDirectoryEntries
 PropertyEditorSystem_001
 QueuedLoaderVersion001
-RandomInt
-ReadFile
 ReadFileEx
 ReadToBuffer
 Reading UGC %llu that still needs update. Continuing...
@@ -532,7 +500,6 @@ ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
-ReturnJobManualEventToPool
 STATUS_ABORTED
 STATUS_PENDING
 STATUS_UNDEFINED
@@ -547,9 +514,7 @@ Sending Steam API content notification
 SerializedEntitiesVersion001
 ServerUploadGameStats001
 Set fs_report_long_reads 1 before loading to use this. Prints a list of files that were opened more than once and ~how long was spent reading from them.
-Set the async filesystem mode (0 = async, 1 = synchronous)
 Show the filesystem path.
-Simulate a delay of up to a set msec per file operation
 Size mismatch determining size of signed data block (%d vs %d)
 Size of per file buffers. 0 for none
 SoundOpSystem001
@@ -582,7 +547,6 @@ SteamAPI_GetHSteamUser
 SteamAudio001
 SteamInternal_ContextInit
 SteamInternal_FindOrCreateUserInterface
-SyncGetFileSize
 TestFormatA
 TestFormatB
 TestFormatC
@@ -598,7 +562,6 @@ ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
 Total Seconds: %.5f
-TranslateFSAsyncStatus
 Tried to Seek NULL file handle!
 Tried to close unknown file pointer 0x%llX
 Tried to read %i bytes from unknown file pointer 0x%llX
@@ -607,7 +570,6 @@ UNKNOWN VALUE
 Unable to remove %s!
 Unable to rename "%s" to "%s"!
 Unable to watch '%s'
-Unexpected FSAsyncStatus_t: %i
 Unknown Path Class
 Unknown read error %d
 Unknown version %d for vpk %s
@@ -660,7 +622,6 @@ V_PathContainsPath
 V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
-V_StripFilename
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -780,16 +741,8 @@ ab+
 abort
 alphasort64
 archive
-async_allow_held_files
-async_mode
-async_resume
-async_simulate_delay
-async_suspend
-asyncappend
 asyncfilesystem2.cpp
-asyncwrite
 basefilesystem.cpp
-basefilesystemasync.cpp
 binary
 binary_auto
 binary_bc
@@ -847,7 +800,6 @@ g_Tier1_CRC32Table
 g_Tier1_CRC64Table
 g_VProfCurrentProfile
 g_pMemAlloc
-g_pThreadPool
 game
 gameinfo.gi
 gameinfo.txt
@@ -866,7 +818,6 @@ libpthread.so.0
 libstdc++.so.6
 libsteam_api.so
 libtier0.so
-libvstdlib.so
 localtime
 lseek64
 materials/overviews/
@@ -888,6 +839,7 @@ notify
 null
 numberOfTheDiskWithStartOfCentralDirectory
 numberOfThisDisk
+open
 open64
 opendir
 opened_files.txt
@@ -971,9 +923,9 @@ vpk:
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
+wb
 wcscmp
 wcslen
-wt
 zD
 {
 {}()':

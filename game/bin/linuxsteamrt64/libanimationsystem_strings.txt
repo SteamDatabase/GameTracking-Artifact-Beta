@@ -272,9 +272,11 @@ $ORIGIN
 12CAddAnimNode
 12CAnimTagBase
 12CAnimTagSpan
+12CBlend2DItem
 12CCmdSequence
 12CThreadEvent
 12IAnimTagSpan
+12IBlend2DItem
 13CAnimNodeBase
 13CAnimNodeList
 13CAnimPosePool
@@ -369,6 +371,7 @@ $ORIGIN
 16CUnaryUpdateNode
 16IAnimationHelper
 16IAnimationSystem
+16IBlend2DAnimNode
 16ICommentAnimNode
 16IDebugVisualizer
 16IFootFallAnimTag
@@ -605,6 +608,7 @@ $ORIGIN
 23IConCommandBaseAccessor
 23IMotionMatchingAnimNode
 24CAnimStateMachineContext
+24CBlend2DAnimNodeInstance
 24CCompressedReferenceBool
 24CCompressedStaticColor32
 24CCompressedStaticVector3
@@ -615,6 +619,7 @@ $ORIGIN
 24CScriptCreatableSequence
 24CSequenceFinishedAnimTag
 24CSkeletalInputUpdateNode
+24IBlend2DAnimNodeInstance
 24IIKControlRigDescription
 24ISequenceFinishedAnimTag
 25CAnimGraphGeneralSettings
@@ -1162,11 +1167,11 @@ Auto Reset
 Auto-Calculate target speed
 B
 B->C
+BISolveIKChainAnimNodeInstance
 BLEND_PREALIGNED|
 BREAK: distance to target.
 BREAK: hyperextension. (%.2f degrees vs max of %.2f)
 BREAK: rotated over maximum of %.2f.
-BSpeed Scale node does not have a valid parameter
 Bad AnimEvent, sequence = "%s", AnimEvent = "%s", cycle & frame are both < 0 on model: %s
 Bad KV3 data for '%s': %s
 Bad KV3 data for resource: %s
@@ -1365,6 +1370,7 @@ CAuthPhysJoint
 CBaseAnimatingController::SequenceDuration( %d ) out of range
 CBaseConstraint
 CBlend2DAnimNode
+CBlend2DAnimNodeInstance
 CBlend2DInstanceData
 CBlend2DItem
 CBlend2DUpdateNode
@@ -2385,6 +2391,7 @@ HitReact:m_hitCount
 HitReact:m_resetCount
 HookUpConfigValue
 Horizontal Axis
+Horizontal Parameter
 HostStateMgr001
 IAnimGraphSettingsGroup
 IAnimMotor
@@ -2404,6 +2411,9 @@ IAnimationGraph
 IAnimationGraphBuilder
 IAnimationGraphInstance
 IAudioAnimTag
+IBlend2DAnimNode
+IBlend2DAnimNodeInstance
+IBlend2DItem
 IBlendAnimNode
 IChoiceAnimNode
 IChoreoAnimNodeInstance
@@ -2471,7 +2481,6 @@ ISequence
 ISequenceAnimNode
 ISequenceAnimNodeInstance
 ISequenceFinishedAnimTag
-ISolveIKChainAnimNodeInstance
 IStatusAnimTag
 IStringAnimTag
 IVSSequence
@@ -2889,6 +2898,8 @@ N10Reflection6Detail11CClassInfoTI11CPathMetricEE
 N10Reflection6Detail11CClassInfoTI11IMotionClipEE
 N10Reflection6Detail11CClassInfoTI12CAddAnimNodeEE
 N10Reflection6Detail11CClassInfoTI12CAnimTagBaseEE
+N10Reflection6Detail11CClassInfoTI12CBlend2DItemEE
+N10Reflection6Detail11CClassInfoTI12IBlend2DItemEE
 N10Reflection6Detail11CClassInfoTI13CAnimNodeBaseEE
 N10Reflection6Detail11CClassInfoTI13CAudioAnimTagEE
 N10Reflection6Detail11CClassInfoTI13CRootAnimNodeEE
@@ -2923,6 +2934,7 @@ N10Reflection6Detail11CClassInfoTI16CFootFallAnimTagEE
 N10Reflection6Detail11CClassInfoTI16CGroundConditionEE
 N10Reflection6Detail11CClassInfoTI16CMotionClipGroupEE
 N10Reflection6Detail11CClassInfoTI16CParticleAnimTagEE
+N10Reflection6Detail11CClassInfoTI16IBlend2DAnimNodeEE
 N10Reflection6Detail11CClassInfoTI16ICommentAnimNodeEE
 N10Reflection6Detail11CClassInfoTI16IFootFallAnimTagEE
 N10Reflection6Detail11CClassInfoTI16IMotionClipGroupEE
@@ -3013,8 +3025,10 @@ N10Reflection6Detail11CClassInfoTI23IAnimGraphSettingsGroupEE
 N10Reflection6Detail11CClassInfoTI23IAnimationGraphInstanceEE
 N10Reflection6Detail11CClassInfoTI23IChoreoAnimNodeInstanceEE
 N10Reflection6Detail11CClassInfoTI23IMotionMatchingAnimNodeEE
+N10Reflection6Detail11CClassInfoTI24CBlend2DAnimNodeInstanceEE
 N10Reflection6Detail11CClassInfoTI24CDistanceRemainingMetricEE
 N10Reflection6Detail11CClassInfoTI24CSequenceFinishedAnimTagEE
+N10Reflection6Detail11CClassInfoTI24IBlend2DAnimNodeInstanceEE
 N10Reflection6Detail11CClassInfoTI24ISequenceFinishedAnimTagEE
 N10Reflection6Detail11CClassInfoTI25CAnimGraphGeneralSettingsEE
 N10Reflection6Detail11CClassInfoTI25CAnimGraphNetworkSettingsEE
@@ -3068,6 +3082,7 @@ N18CAnimNetVarBinding18CParamLookupHelperIiEE
 N19SkeletalCompression15CVrHandSkeletonE
 N24CAnimNodeInstanceFactory13CFactoryMakerE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI23CChoreoAnimNodeInstanceEE
+N24CAnimNodeInstanceFactory14CFactoryMakerTI24CBlend2DAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI25CFootLockAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI25CSequenceAnimNodeInstanceEE
 N24CAnimNodeInstanceFactory14CFactoryMakerTI28CInputStreamAnimNodeInstanceEE
@@ -3124,7 +3139,6 @@ No IK rig found, can't initialize ground IK node.
 No conversion from %s to int now
 No conversion from %s to string at the moment!
 No free conversion of %s variant to HSCRIPT right now
-No free conversion of %s variant to Quaternion right now
 No free conversion of %s variant to Vector right now
 No valid format conversion from '%s' to '%s'
 NoDamping
@@ -3406,6 +3420,7 @@ SOLVEIKCHAINANIMNODEDEBUGSETTING_Up
 SOLVEIKCHAINANIMNODEDEBUGSETTING_X_Axis_Circle
 SOLVEIKCHAINANIMNODEDEBUGSETTING_Y_Axis_Circle
 SOLVEIKCHAINANIMNODEDEBUGSETTING_Z_Axis_Circle
+SOLVEIKCHAINANIMNODESETTINGSOURCE_Default
 SOLVEIKCHAINANIMNODESETTINGSOURCE_Override
 SSE and SSE2 are required.
 SameCycleAsSource
@@ -3559,6 +3574,7 @@ Source2Host001
 Source2Server001
 Source2ServerSerializers002
 Speed Function
+Speed Scale node does not have a valid parameter
 Spring
 Spring Constant
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
@@ -3823,6 +3839,7 @@ VertexPaintBlendParams
 VertexPaintBlendParams1
 VertexPaintTintColor
 Vertical Axis
+Vertical Parameter
 Virtual 2-bone
 Virtual Joint
 VisBuilder_001
@@ -4605,7 +4622,6 @@ m_drawCullData
 m_duration
 m_dynamicParams
 m_dynamicTextureParams
-m_eBlendNode
 m_eFacingMode
 m_eHand
 m_eRbfType
@@ -4818,7 +4834,6 @@ m_flStrideCurveScale
 m_flTailAlphaScale
 m_flTargetFacing
 m_flThickness
-m_flTiltPlanePitchSpringStrength
 m_flTiltPlaneRollSpringStrength
 m_flTimingBlend
 m_flTraceAngleBlend
@@ -5481,6 +5496,8 @@ static const Reflection::ClassID CAnimationGraph::MyTypeID()
 static const Reflection::ClassID CAnimationGraphInstance::MyTypeID()
 static const Reflection::ClassID CAudioAnimTag::MyTypeID()
 static const Reflection::ClassID CBlend2DAnimNode::MyTypeID()
+static const Reflection::ClassID CBlend2DAnimNodeInstance::MyTypeID()
+static const Reflection::ClassID CBlend2DItem::MyTypeID()
 static const Reflection::ClassID CBlendAnimNode::MyTypeID()
 static const Reflection::ClassID CBoneMaskAnimNode::MyTypeID()
 static const Reflection::ClassID CBonePositionMetric::MyTypeID()
@@ -5597,6 +5614,9 @@ static const Reflection::ClassID IAnimationGraph::MyTypeID()
 static const Reflection::ClassID IAnimationGraphBuilder::MyTypeID()
 static const Reflection::ClassID IAnimationGraphInstance::MyTypeID()
 static const Reflection::ClassID IAudioAnimTag::MyTypeID()
+static const Reflection::ClassID IBlend2DAnimNode::MyTypeID()
+static const Reflection::ClassID IBlend2DAnimNodeInstance::MyTypeID()
+static const Reflection::ClassID IBlend2DItem::MyTypeID()
 static const Reflection::ClassID IBlendAnimNode::MyTypeID()
 static const Reflection::ClassID IChoiceAnimNode::MyTypeID()
 static const Reflection::ClassID IChoreoAnimNodeInstance::MyTypeID()

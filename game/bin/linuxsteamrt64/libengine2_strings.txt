@@ -695,7 +695,6 @@ $tI
 -dev
 -devcontent
 -diff
--dotatestmodels
 -dumpvidmemstats
 -dx11
 -dx9
@@ -928,6 +927,7 @@ $tI
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEFOut of Memory
 0123456789abcdef
+02:51:59
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0=Off, 1=Surface Wireframe, 2=Transparent Wireframe
@@ -1362,7 +1362,6 @@ $tI
 16IMatchEventsSink
 16IProtobufBinding
 16IUploadGameStats
-17:59:06
 17CBaseCmdKeyValuesI20CCLCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI20CSVCMsg_CmdKeyValuesE
 17CBaseCmdKeyValuesI32CSVCMsg_GameSessionConfigurationE
@@ -1628,6 +1627,7 @@ $tI
 25CSVCMsg_ClassInfo_class_t
 25CSVCMsg_CreateStringTable
 25CSVCMsg_UpdateStringTable
+26CAsyncFileLoadPrerequisite
 26CCLCMsg_RespondCvarValue_t
 26CCLCMsg_SplitPlayerConnect
 26CDefaultKeyValuesErrorSpew
@@ -1636,6 +1636,7 @@ $tI
 26CProportionalFloatProperty
 26CSVCMsg_Sounds_sounddata_t
 26GameSessionConfiguration_t
+26IAsyncFileLoadPrerequisite
 26ICommandCompletionCallback
 26IReadTexturePixelsCallback
 26IRenderDeviceEventListener
@@ -1699,6 +1700,7 @@ $tI
 31CGameUIRenderCallbackGroupLayer
 31ISpawnGroupPrerequisiteRegistry
 31ProtoFlattenedSerializerField_t
+32CAsyncFileLoadPrerequisiteLambda
 32CBidirMsg_RebroadcastGameEvent_t
 32CEntityComponentHelperReferencedI16CScriptComponentE
 32CFlattenedSerializerSpewFunc_Log
@@ -2323,6 +2325,7 @@ CAppSystemDict:Unable to create interface %s from %s (Dependency of %s)
 CAppSystemDict:Unable to load interface factory %s from %s (Dependency of %s), error %d
 CAppSystemDict:Unable to load module %s (Dependency of %s), error %d
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
+CAsyncFileLoadPrerequisite
 CAttachment
 CAuthPhysBody
 CAuthPhysJoint
@@ -2946,6 +2949,9 @@ CPlayDemoClientPrerequisite
 CPlayerSlot
 CPointConstraint
 CPostDataUpdateCallList::AddPostDataUpdateCall: overflowed m_PostDataUpdateCalls
+CPrerequisiteDescriptionHelper::AnalyzeFileListByExtension(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> > const&, CUtlDict<CPrerequisiteDescriptionHelper::Analysis_t, int>&) const
+CPrerequisiteDescriptionHelper::Append(int, char const*, char const*, ...)
+CPrerequisiteDescriptionHelper::Spew(int, char const*) const
 CR)
 CRC'd '%s' .
 CReadPacketEntities_ParallelProcessingController
@@ -3503,6 +3509,7 @@ Couldn't unserialize CCompressedResourceManifest
 Couldn't write to read-only file %s, using file _temp_mapcycle.txt instead.
 Crash
 Crash the client. Optional parameter -- type of crash: 0: read from NULL 1: write to NULL 2: force an Assert
+CreateAsyncFileLoadPrerequisite()
 CreateDebuggerWindow
 CreateEntity
 CreateNewControl
@@ -4556,6 +4563,9 @@ IO_ERROR
 IP filter list: %i entries
 IP filter list: %i entry
 IP filter list: empty
+IPrerequisite::AddRef()
+IPrerequisite::Describe(int, CPrerequisiteDescriptionHelper&) const
+IPrerequisite::Release()
 IQuickTime001
 Idle (%s)
 If in replay, jumps back to live
@@ -4732,7 +4742,7 @@ Invalid sCAL width
 Invalid sCAL width ignored
 Invalid sRGB rendering intent specified
 Invalid scan script at entry %d
-Invalid search path specified for 'game_language'. Search path '%s' does not contain '%s'
+Invalid search path specified for '%s'. Search path '%s' does not contain '%s'
 Invalid strings::Substitute() format string: "
 Invalid symbol name:
 Invalid tile size x :
@@ -4767,7 +4777,7 @@ JSON error, unterminated element:
 Jan
 Javanese
 Jul
-Jul  9 2020
+Jul 16 2020
 Jumping to random tick %d (%.2f min)
 Jun
 JustInTime Resource Spawn Group
@@ -5673,6 +5683,7 @@ No valid format conversion from '%s' to '%s'
 NoDefaultModPath
 NoKeyBindings
 NoPoseControl
+Nodes
 Non-repeated Any specified multiple times.
 Non-repeated field "
 Non-windows platforms don't support loading of JPG images
@@ -5818,7 +5829,7 @@ P
 P8
 P?
 P@
-PARALLEL_PROCESS hltvserver.cpp:1801
+PARALLEL_PROCESS hltvserver.cpp:1802
 PARALLEL_PROCESS sv_packedentities.cpp:923
 PARALLEL_PROCESS sv_packedentities.cpp:942
 PARALLEL_PROCESS utlsoacontainer.cpp:2533
@@ -7027,6 +7038,7 @@ Start Of Scan: %d components
 Start of Image
 Start recording bug voice attachment.
 Start recording movie frames.
+StartAsyncFileLoadPrerequisiteLambda(IPrerequisiteRegistry*, char const*, char const*, std::function<bool (IAsyncFileLoadPrerequisite*)>&&)
 StartChangeLevel unable to save game from %s -> %s (landmark %s)
 StartRecording: couldn't open replay file %s.
 StartRelay: not connected.
@@ -7092,6 +7104,7 @@ SteamMatchGameSearch001
 SteamMatchMaking009
 SteamMatchMakingServers002
 SteamNetworking005
+SteamNetworkingUtils_Lib
 SteamRun
 SteamRun failed, error %d
 SteamServersDisconnected
@@ -7833,6 +7846,7 @@ Your current chat group is "%s"
 Z
 Z"0*
 ZEo^
+ZN26CAsyncFileLoadPrerequisite4InitEPKcS1_EUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN26CParallelProcessorAbstractI18CParallelProcessorI11CrashItem_t21CFuncJobItemProcessorIS1_ELi1EEE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI18CParallelProcessorI28ReadPacketEntitiesWorkItem_t27CMemberFuncJobItemProcessorIS1_18CNetworkGameClientS3_ELi1EEE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS2_ELi1EEE3RunEvE13CStackFunctor
@@ -8027,6 +8041,7 @@ addip 0 %i.%i.%i.%i
 addip:  IP filter list is full
 addoninfo.txt
 addonroot
+addonroot_language
 addons : %s
 addons/
 addons/%s.vpk
@@ -8495,7 +8510,6 @@ dmg.explosive
 dmg.fire
 dod
 dota
-dota_models_imported
 double
 downloadables
 downloadlistgenerator.cpp
@@ -9019,6 +9033,7 @@ invalid_hitbox
 invert_orientation
 ioctl
 ipaddress
+iprerequisite.cpp
 is_debris
 isatty
 isgame
@@ -9104,6 +9119,7 @@ libpng version 1.5.2 - March 31, 2011Copyright (c) 1998-2011 Glenn Randers-Pehrs
 libpthread.so.0
 libstdc++.so.6
 libsteam_api.so
+libsteamnetworkingsockets.so
 libtier0.so
 libuuid.so.1
 libvstdlib.so
@@ -9761,6 +9777,7 @@ modeldoc6
 modeldoc7
 modeldoc8
 modeldoc9
+models
 mouse_disableinput
 mouseinputenabled
 movie/%04d_%02d_%02d_%02d_%02d_%02d/%s
@@ -9813,7 +9830,6 @@ no error
 no more split screen slots!
 no_unique_dir
 nocodecprompt
-node
 nomapvalidation
 non-
 non-hex character in \x{} (closing brace missing?)
@@ -10228,7 +10244,7 @@ screenWindowWidth
 screenshot resampling failed (error code %d)
 screenshot.jpg
 screenshot_prefix
-screenshot_service.cpp(271):
+screenshot_service.cpp(273):
 screenshot_subdir
 screenx
 screeny
@@ -10393,6 +10409,7 @@ stats_display
 stats_print
 status map=%s;players=%d
 status_json
+std::_Function_base::_Base_manager<CAsyncFileLoadPrerequisite::Init(char const*, char const*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAsyncFileLoadPrerequisite::Init(char const*, char const*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}> const&, std::_Manager_operation)
 std::_Rb_tree_decrement(std::_Rb_tree_node_base const*)
 std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
 std::_Rb_tree_increment(std::_Rb_tree_node_base const*)
@@ -10842,6 +10859,9 @@ type.googleapis.com/
 type.googleprod.com/
 typeinfo for CThread
 typeinfo for CThreadSyncObject
+typeinfo for IAsyncFileLoadPrerequisite
+typeinfo for IPrerequisite
+typeinfo for IPrerequisiteRegistry
 typeinfo for char
 typeinfo for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
@@ -10851,6 +10871,9 @@ typeinfo for std::exception
 typeinfo for std::string
 typeinfo for std::thread::_Impl_base
 typeinfo for unsigned char
+typeinfo name for IAsyncFileLoadPrerequisite
+typeinfo name for IPrerequisite
+typeinfo name for IPrerequisiteRegistry
 typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_make_shared_tag
@@ -11153,6 +11176,7 @@ vslider
 vsnap
 vsnd_c
 vstdlib
+vtable for IPrerequisite
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__pointer_type_info
 vtable for __cxxabiv1::__si_class_type_info
