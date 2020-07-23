@@ -294,6 +294,7 @@
 #CardEffect_10630_0
 #CardEffect_10634_0
 #CardEffect_10635_0
+#CardEffect_10638_0
 #CardEffect_10641_0
 #CardEffect_10650_0
 #CardEffect_10651_0
@@ -463,6 +464,7 @@
 #CardEffect_11062_0
 #CardEffect_11063_0
 #CardEffect_11064_0
+#CardEffect_11065_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -2677,7 +2679,6 @@ $tI
 %02d: dur(%8.2f) amp(%8.2f) freq(%8.2f)
 %02u/%02u/%04u
 %02u/%02u/%04u %02u:%02u:%02u
-%02x
 %03d
 %04u%02u%02u
 %04u%02u%02u%02u%02u%02u
@@ -2961,6 +2962,7 @@ $tI
 %s/%s/gameevents_%s.txt
 %s/*.*
 %s/models/ui/dioramas/maps/%s/
+%s/using_vulkan
 %s0x%08X %s = "%s"
 %s0x%08X:%s = "%s"
 %s1
@@ -3246,9 +3248,11 @@ $tI
 (
 ( Resource "%s type %lld", handle is%s set
 ( def. "%s" )
+( iSeed ) - Creates a separate random number stream.
 ( modelName, context ) - Manually precache a single model
 ( nOwner & 7 ) == 0 && ( nOwner & 0x8000000000000000ull ) != 0x8000000000000000ull
 ( resourceType, resourcePath, context ) - Manually precache a single resource. Types: "model|model_folder|sound|soundfile|particle|particle_folder"
+( string ) - Returns a 32-bit hash for a string
 ("%s")
 (#1)
 (#2)
@@ -3647,7 +3651,6 @@ $tI
 *ZL22CC_ReloadCardTemplatesRK15CCommandContextRK8CCommandEUlPKcRK13AttributeListE_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
-*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -3762,6 +3765,7 @@ $tI
 *ZN19CDCGCardViewInspect23SetRuleEntityVisibilityEbEUlP28CDCGCompositeStateRuleEntityE_
 *ZN19CDCGPuzzleModeRules24ApplyInitialSectionRulesEvEUlRK19CUtlConstStringBaseIcE15CUtlStringTokenRK7Empty_tE_
 *ZN19CDCGView_WorldScene13CancelCastingEvEUlP12CDCGCardViewE_
+*ZN19CDCGView_WorldScene23CancelAllCardResolutionEvEUlP12CDCGCardViewE_
 *ZN19CDCGView_WorldScene24SetPlayerActionsDisabledEbEUlP12CDCGCardViewE_
 *ZN19CDCG_Popup_LoadDeck18SetupDelayDeckListEvEUlPN8panorama8CPanel2DEiS2_E_
 *ZN19CDCG_UI_CampaignMap7ResetUIEvEUlPN8panorama8CPanel2DEE_
@@ -4349,7 +4353,6 @@ $tI
 0.8
 0.85
 0.9
-00000000-0000-0000-0000-000000000000
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0: Don't draw bounding boxes for framer nodes. 1: Do.
@@ -4563,7 +4566,6 @@ $tI
 11IItemSocket
 11IMoveHelper
 11IPrediction
-11IRefCounted
 11ISpawnGroup
 11IToolObject
 11IVSSequence
@@ -4818,6 +4820,7 @@ $tI
 13IHandleEntity
 13IInputHandler
 13IPoseAccessor
+13IPrerequisite
 13IVModeManager
 13IntervalTimer
 13QuestNodeID_t
@@ -5217,6 +5220,7 @@ $tI
 16CDCGPrivateLobby
 16CDCGRichPresence
 16CDCGStatusEffect
+16CDCG_DB_Page_Zoo
 16CDCG_Play_Button
 16CDCG_UI_BotMatch
 16CDCG_UI_CardLink
@@ -5962,6 +5966,7 @@ $tI
 20CCGCameraNodeFactoryI24C_CG_CameraNodeDOFFramerE
 20CCGCameraNodeFactoryI25C_CG_CameraNodeAABBFramerE
 20CCGCameraNodeFactoryI26C_CG_CameraNodePointSourceE
+20CCGCameraNodeFactoryI27C_CG_CameraNodeCameraAnglesE
 20CCGCameraNodeFactoryI27C_CG_CameraNodeSmoothLookAtE
 20CCGCameraNodeFactoryI27C_CG_CameraNodeStateMachineE
 20CCGCameraNodeFactoryI30C_CG_CameraNodeCameraAnimationE
@@ -6304,6 +6309,7 @@ $tI
 22CDCG_UI_Popup_DeckInfo
 22CDCG_UI_Popup_PackInfo
 22CDCG_UI_TooltipManager
+22CDefScriptAccessorBase
 22CDefaultResponseSystem
 22CDemoClassInfo_class_t
 22CDontUseThisGameSystem
@@ -6866,6 +6872,7 @@ $tI
 25ClientPerformanceComplete
 25ECombatPreviewDeathResult
 25EVideoPlayerPlaybackError
+25IAssertionFailureListener
 25IAttributeContainerReader
 25IRenderingPipelineFactory
 25IScreenSpaceEffectManager
@@ -6969,6 +6976,7 @@ $tI
 26CScriptObjectRef_Neighbors
 26CScriptObjectRef_Singleton
 26CScriptPlayIncreaseCounter
+26CScriptUniformRandomStream
 26CScript_DiabolicRevelation
 26CScript_HeroLaneAssignment
 26CServerLobbyData_PlayerMMR
@@ -7118,6 +7126,7 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP13C_GlobalLight10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP18CViewAngleKeyFrame10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CInfoDynamicShadowHint10CUtlMemoryIS2_iEES2_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorIP26CScriptUniformRandomStream10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIb10CUtlMemoryIbiEEbE
@@ -7144,6 +7153,7 @@ $tI
 27CWrappedInterpolatedVarGutsI24CNetworkViewOffsetVectorLi1ES0_Lb0E16CInterpolatedVarIS0_EE
 27CWrappedInterpolatedVarGutsI6QAngleLi1ES0_Lb0E16CInterpolatedVarIS0_EE
 27CWrappedInterpolatedVarGutsI6VectorLi1ES0_Lb0E16CInterpolatedVarIS0_EE
+27C_CG_CameraNodeCameraAngles
 27C_CG_CameraNodeSmoothLookAt
 27C_CG_CameraNodeStateMachine
 27C_PointHintUIHighlightModel
@@ -7240,6 +7250,7 @@ $tI
 29CBackgroundMapCallbackHandler
 29CBaseRenderingPipelineFactory
 29CBodyComponentBaseModelEntity
+29CCG_CameraNodeAttributeParser
 29CCLCMsg_SplitPlayerDisconnect
 29CCloud_GetFileDetails_Request
 29CDCGHealHealthAchievementEval
@@ -7557,6 +7568,7 @@ $tI
 31CUtlVectorPredictionCopyDataOpsI21CNetworkUtlVectorBaseIhN28CAnimGraphNetworkedVariables33NetworkVar_m_PredNetByteVariablesELin1EELi8EE
 31CUtlVectorPredictionCopyDataOpsI21CNetworkUtlVectorBaseIiN28CAnimGraphNetworkedVariables32NetworkVar_m_PredNetIntVariablesELin1EELi5EE
 31CUtlVectorPredictionCopyDataOpsI28CUtlVectorEmbeddedNetworkVarI15CAnimationLayerN32C_BaseAnimatingOverlayController24NetworkVar_m_AnimOverlayELin1EELi10EE
+31C_DCG_CameraNodeAttributeParser
 31C_DynamicPropAlias_dynamic_prop
 31C_GenericFlexCyclerAlias_cycler
 31InitialFlopCommittedPerformance
@@ -8837,6 +8849,7 @@ $tI
 8itemid_t
 9
 9*
+9+
 9.1.15
 9000
 91
@@ -8967,6 +8980,7 @@ $tI
 ;{};{}DebugPanelParents
 <
 <!--
+<!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
 <%d:%llu>
 <%s%.3f
 <%s:%llu>
@@ -9026,7 +9040,6 @@ $tI
 <iterations> <deck1> <deck2> ...
 <link cmd="%s">
 <no bone transform data>
-<no class info>
 <no deferred ref found>
 <no failure reason set>
 <no model>
@@ -9111,6 +9124,7 @@ $tI
 @B
 @C
 @J
+@Y>)F#DCG_PhaseFormat_FreeForAll
 @Z@
 @keyframes
 @keyframes '%s'{
@@ -9137,6 +9151,7 @@ A protobuf object %s with a repeated field %s was used in a container, this will
 A protocol message was rejected because it was too big (more than
 A specific_item component must define either an exact item to use or a lootlist to select an item from!
 A spot light entity
+A uniform random number generator.
 A(
 A*
 A->B
@@ -10884,9 +10899,6 @@ AE_ATTACK_HIT
 AE_ATTACK_START
 AE_BEGIN_TAUNT_LOOP
 AE_BLIND_ZOMBIE_SNIFF
-AE_CHARGER_POUND_IMPACT
-AE_CHARGER_POUND_SOUND
-AE_CHARGER_POUND_VOCALIZE
 AE_CLIENT_EFFECT_ATTACH
 AE_CLIENT_EJECT_BRASS
 AE_CL_ADD_PARTICLE_EFFECT_CP
@@ -11427,6 +11439,7 @@ An isolated instance of a rulescript database.
 An omnidirectional light entity
 An orthographic spot light entity
 Anastasia Ovchinnikova
+Anchor Smash
 Ancient Health Double Tower
 Ancient Health Equals Tower
 Ancient Rubble
@@ -11524,7 +11537,6 @@ ArtStyle
 Artifact Lane Map
 ArtifactDevs
 ArtifactDraftBenchList
-ArtifactLevelIcon
 Artificer's Mail
 AspectRatio16x10
 AspectRatio16x9
@@ -11616,6 +11628,7 @@ Attribute definition %s: Missing required field "name"
 Attribute definition %s: Not a dynamic storage type but has the propagate from bundle flag set which only applies to dynamic attributes
 Attribute definition %s: Unable to find attribute data type '%s'
 Attribute definition index %d must be greater than or equal to zero
+Attribute name not found: %s
 Attribute type not specified in dynamic recipe definition
 Attribute value not specified in dynamic recipe definition
 AttributeBuffed
@@ -11878,6 +11891,7 @@ Blink Dagger
 Blink Scroll
 Blink Strike
 BlinkScrolls
+BlobBlood
 Block Headers |
 Block size: %-11s Alloc'd: %8d Num blobs: %5d (%s)
 BlogPopup
@@ -12380,6 +12394,7 @@ CDebugPanelStyle::Build
 CDebugPanelStyle::GetStyleBuffer
 CDebugPanelStyle::OnPanelStyleChanged
 CDecalEmitterSystem::LoadDecalsFromScript:  Unable to load '%s'
+CDecalGameSystem::LoopInit
 CDecalInfo
 CDefaultResponseSystem::Init() was called twice! Deleting old system at @%p
 CDeferredLightBase
@@ -12518,6 +12533,7 @@ CFlashlightEffect
 CFlexAnimationTool::OnImportFlexAnimation:  %s, expecting "flexanimations"
 CFogController
 CFootDefinition
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CFuncAreaPortalWindow
 CFuncBrush
 CFuncCombineBarrier
@@ -13142,8 +13158,6 @@ CPrediction::PerformPrediction executed too many commands
 CPrediction::ProcessMovement
 CPrediction::Update
 CPredictionCopy::TransferData:  tried to TRANSFERDATA_COPYONLY from one packed buffer into another.
-CPrerequisiteDescriptionHelper::AnalyzeFileListByExtension(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> > const&, CUtlDict<CPrerequisiteDescriptionHelper::Analysis_t, int>&) const
-CPrerequisiteDescriptionHelper::Append(int, char const*, char const*, ...)
 CProjectedTextureBase
 CPropHMDAvatar
 CPropVRHand
@@ -13219,6 +13233,7 @@ CScriptKeyValues
 CScriptNativeOutputs
 CScriptParticleManager
 CScriptPrecacheContext
+CScriptUniformRandomStream
 CServerOnlyModelEntity
 CShadowControl
 CSimTimer
@@ -13261,6 +13276,11 @@ CSpriteOriented
 CSteamUnifiedMessageDispatcher::SendMethod: Cannot invoke method without first registering listener.
 CStopwatch
 CStopwatchBase
+CStrAutoEncode::Clear()
+CStrAutoEncode::InitEmpty()
+CStrAutoEncode::PopulateUTF32() const
+CStrAutoEncode::PopulateUTF8() const
+CStrAutoEncode::SetCopy(char const*, int)
 CStrongHandle
 CStylePropertyFactory
 CStylePropertyFactory:  Factory for '%s' already exists!!!!
@@ -13317,6 +13337,8 @@ CTimeline
 CTonemapController2
 CTransform
 CTransform-world
+CTransformScaled
+CTransformScaled-world
 CTriggerCamera
 CTriggerVolume
 CTwistConstraint
@@ -13331,6 +13353,7 @@ CURVE_TANGENT_SINE
 CURVE_TANGENT_SPLINE
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
+CUniformRandomStream::RandomFloatExp(float, float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
 CUserMessageAchievementEvent_t
@@ -13839,6 +13862,8 @@ Cannot read file
 Cannot reconstruct lineOffset table in DecodeEXRImage.
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot run script: NULL script name
+Cannot save KV3 text to a non-text buffer!
+Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Cannot write a file
 CannotContinueGauntlet
 CannotEdit
@@ -14095,6 +14120,7 @@ ChannelSearchTextEntry
 ChannelUserContextMenu
 Channels(%d)
 CharacterDecalSystem
+CharacterSetBuild
 Chargeback
 Chargeback Reversed
 Chase cam's ideal distance from target
@@ -14538,6 +14564,7 @@ CreateParticle
 CreateParticleForPlayer
 CreateSimpleThread
 CreateSocketPair failed
+CreateUniformRandomStream
 CreateVideoPlayer
 Created physics for %s
 Creates a cheat mana improvement and sets cheater convars.
@@ -15313,6 +15340,7 @@ DCGShowTextTooltipInXML
 DCGShowTourneyPage
 DCGShowTourneyPickerPage
 DCGShowUnlocalizedTextTooltip
+DCGShowZooPage
 DCGShutOffLastCardGlow
 DCGSingleChallenge
 DCGSkipTutorial
@@ -15457,6 +15485,7 @@ DCGWatchReplay
 DCGWhisperAutocompleteClicked
 DCGWhisperAutocompleteClicked( %llu )
 DCGWorldSceneUpdater
+DCGZooPage
 DCG_Abilities.
 DCG_Abilities.GetOuttaHere
 DCG_Achievement%i_Desc
@@ -16824,6 +16853,8 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
+FIELD_CTRANSFORMSCALED
+FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -17036,6 +17067,7 @@ Failed to run entity framework script
 Failed to save AnimGraph Recording to %s
 Failed to save local copy of custom image %s
 Failed to save personal key binding backup!
+Failed to save unsupported class
 Failed to send Hello message to the GC.
 Failed to spawn script entity %s of type %s: script entity instance is null
 Failed to update item schema from %s
@@ -17311,6 +17343,7 @@ Fountain Flask
 FountainHero%i
 FountainHeros
 FountainRegion
+FovX
 FpsMaxSlider
 Fractured Timeline
 Frame Rate, Number of Frames, Percent of Frames
@@ -17621,6 +17654,7 @@ GetPlayerLimits:  max players limited to %i
 GetPlayerLimits:  min maxplayers %i > max %i
 GetPlayerLimits:  min maxplayers must be >= 1 (%i)
 GetPlayerXPForNextPlayerLevel
+GetPositionWithinAncestor
 GetPositionWithinWindow
 GetQuantizedFloatEncoderByIndex
 GetRadialGradientValues
@@ -18159,8 +18193,6 @@ Howling Mind
 Hud isn't loaded, we should have a hud loaded, this is a crash!
 HudChat
 HudPopupManager
-HunterDamage
-HunterDamage_global_client
 Hymn of St. Crella
 I
 I Deploy Every Turn
@@ -18219,8 +18251,6 @@ INVALID_ARGUMENT
 INVALID_CPPTYPE
 IO_ERROR
 IParticleEffect
-IPrerequisite::AddRef()
-IPrerequisite::Release()
 IQuickTime001
 IRagdoll
 IS1
@@ -21026,7 +21056,6 @@ NoFeaturedEvent
 NoHeader
 NoHealthAttribute
 NoLastPlayedTime
-NoLevelNumber
 NoMatchHistory
 NoMembers
 NoMessage
@@ -21426,7 +21455,7 @@ PA
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1193
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../animgraph_batchupdater.cpp:127
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2467
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2452
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2533
@@ -22713,6 +22742,7 @@ Random Red Hero
 Random Sound %s:Unknown command %s
 RandomAnimation
 RandomFloat
+RandomFloatExp
 RandomInt
 RandomSeed
 RandomShopItemCreated
@@ -23087,6 +23117,7 @@ Robert Simon
 Robes of the Envoy
 Rock
 Rod of Atos
+RollPercentage
 Root Boots
 Root class of all client-side entities
 Root entity class
@@ -23595,7 +23626,6 @@ Set the current quest name.
 Set the current quest phase.
 Set the grayscale intensity from 0 (full color) to 1 (fully desaturated)
 Set the max dimension for the map.  This determines the far clipping plane
-Set the message on this entity.
 Set the name of %s to %s
 Set to 0 to not show on-screen help
 Set to 1 and the game instructor will run EVERY scripted command to uncover errors.
@@ -23973,6 +24003,7 @@ Sk
 SkeletonBoneBounds_t
 Skin:
 Skinned Entity Decals: %d
+SkipBlanks
 SkyStateChanged
 Skywrath Mage
 Sleeping
@@ -24367,6 +24398,7 @@ StorePredictionResults
 StoreTimedOutPerformance
 StoreTransitionToStrategicViewPerformance
 Storm Spirit
+StrReplaceChar
 Strange
 Strange Type:
 StreamEntitiesToFile
@@ -24546,7 +24578,6 @@ Tenaya Sims
 Terrapin Channeler
 Terrapin Greatshell
 Terrapin Placeholder
-TerrorGameRulesListener_Init
 TeslaHitboxes
 TeslaHitboxes_global_client
 Test Item %u
@@ -24560,6 +24591,7 @@ Test the event point reward dialog.
 Test the gauntlet reward dialog.
 Test the rank up dialog.
 Test the reward popup queue with multiple popups.
+Test updating the event data in main menu
 TestFormatA
 TestFormatB
 TestFormatC
@@ -25246,13 +25278,13 @@ Unsupervised Artillery
 Unsupported
 Unsupported ETC image format %d.
 Unsupported KeyValue type for key "%s" (type %s) when parsing connections
+Unsupported binary encoding id.
 Unsupported component value :
 Unsupported compression format
 Unsupported compression type :
 Unsupported escape character '\%c'
 Unsupported field type %s (%d) for conversion from old KeyValues, field %s
 Unsupported field type for entity attribute, field %s
-Unsupported functionality
 Unsupported recipe component type: %s!
 Unsupported text encoding id.
 Unsupported version or scanline
@@ -25329,7 +25361,6 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
-Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25463,6 +25494,7 @@ VStringTokenSystem001
 VSyncToggle
 VTT for std::basic_istringstream<char, std::char_traits<char>, std::allocator<char> >
 VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
+V_AppearsToBeANumber
 V_AreFileNamesEqual
 V_BasicHtmlEntityEncode
 V_CompareNameWithWildcards
@@ -25491,11 +25523,9 @@ V_StringToFloatArray
 V_StringToVector
 V_StripAndPreserveHTML
 V_StripAndPreserveHTMLCore
-V_StripAndPreserveHTMLCoreLength
 V_StripTrailingSlash
 V_StripTrailingWhitespace
 V_URLDecode
-V_UTF16ToUTF32
 V_UTF16ToUTF8
 V_UTF32CharsToUTF8
 V_UTF32ToUTF32
@@ -25533,7 +25563,9 @@ V_fread
 V_frexpf
 V_fwrite
 V_isbreakablewspace32
+V_isdigit_str
 V_isnan
+V_isvalidhex
 V_iswcntrl
 V_iswdigit
 V_iswspace
@@ -26517,6 +26549,9 @@ _V_StrSubst
 _V_StringAfterPrefix
 _V_StripExtension
 _V_StripLastDir
+_V_binarytohex
+_V_hextobinary
+_V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
@@ -27946,6 +27981,7 @@ class, eventToFire
 class, pre-delay
 class_token_id
 classname missing from entity!
+classname_global_index
 clear field track changes.
 cleave
 cleaveAmount
@@ -28201,6 +28237,7 @@ currentGold
 currentLevelProgress
 currentStage
 current_item
+current_level
 current_progress
 current_progress_str
 current_wins
@@ -28236,10 +28273,6 @@ cycler_flex used on model %s without enough flexes.
 czech
 d
 d(
-d3_breen_01
-d3_citadel_03
-d3_citadel_04
-d3_citadel_05
 d@selected_leaderboard_name
 dOg : lower-mid back rounded vowel
 da_DK
@@ -28253,7 +28286,6 @@ damageImmunity
 damagePosition
 damageType
 damage_direction_cp
-damage_hunter
 damage_position_cp
 damage_table
 danish
@@ -28478,6 +28510,7 @@ dcg_force_language
 dcg_force_local_spell_stack
 dcg_force_sets_active_development
 dcg_force_sets_active_staging
+dcg_force_update_event
 dcg_fountain_depth_shift
 dcg_fountain_hovered_x
 dcg_fountain_hovered_y
@@ -28759,7 +28792,6 @@ dcg_show_decklist opponent
 dcg_show_fake_beacons
 dcg_show_hidden_stat_mods
 dcg_show_localization_errors
-dcg_show_mmr_rank_in_account_badge
 dcg_show_opponent_gestures
 dcg_show_own_gestures
 dcg_show_pack_opening
@@ -29392,8 +29424,6 @@ extrazoomout
 extremely_rare
 eye_data_list
 eye_occlusion_renderer
-eyebrows_controller
-eyebrows_mover
 eyelid_right_left
 eyelid_up_down
 eyes_follow
@@ -29460,6 +29490,10 @@ fgetc
 fi
 fi_FI
 fieldName
+fieldname_global_index
+fieldnotes_global_index
+fieldpath_local_index
+fieldtype_global_index
 fieldtype_t
 file error
 file://
@@ -29570,6 +29604,7 @@ file://{resources}/layout/dashboard/dcg_db_page_player_profile.xml
 file://{resources}/layout/dashboard/dcg_db_page_social_play.xml
 file://{resources}/layout/dashboard/dcg_db_page_solo_play.xml
 file://{resources}/layout/dashboard/dcg_db_page_standard_play.xml
+file://{resources}/layout/dashboard/dcg_db_page_zoo.xml
 file://{resources}/layout/dashboard/dcg_db_single_challenge.xml
 file://{resources}/layout/dashboard/dcg_play_button.xml
 file://{resources}/layout/dcg_ui_social_notification.xml
@@ -29802,12 +29837,15 @@ fixedlength
 flAddAmount
 flClip3DSkyBoxNearToWorldFarOffset
 flDamage
+flExponent
 flEyeBlink
 flIn
 flInterval
 flMaxDamage
 flMaxRotation
+flMaxVal
 flMinRotation
+flMinVal
 flMotorMaxTorque
 flMotorTargetAngSpeed
 flOriginalDamage
@@ -29955,7 +29993,13 @@ freecamera_fog_start
 freecamera_max_speed
 freecamera_rotation_mulitplier
 freecamera_zfar
-freedom
+freedomFOV
+freedomLookAtX
+freedomLookAtY
+freedomLookAtZ
+freedomPositionX
+freedomPositionY
+freedomPositionZ
 freezecam_started
 french
 frexp
@@ -30142,6 +30186,8 @@ gl_clear_gray
 gl_clear_randomcolor
 global %s
 global_loadout_slot
+global_start_index
+global_strings
 globalentity_t
 globalentitydatabase_t
 globalname
@@ -30347,7 +30393,6 @@ hex_model
 hh
 hh2
 hide_bodygroups_deployed_only
-hide_freezepanel
 hide_in_inventory
 hide_in_purchase_popup
 hide_in_store
@@ -30364,6 +30409,7 @@ hidehud
 hideitemcount
 hideseperators
 highdpi
+highest_string
 highlight
 highlightherobuttonsonhover
 highlightonhover
@@ -30382,7 +30428,6 @@ hitboxset
 hittest
 hittestchildren
 hl2
-hl2_episodic
 hltv
 hltv_cameraman
 hltv_chase
@@ -30465,6 +30510,9 @@ iGreen1 >= (signed)(0 + a_uiRadius) && iGreen1 <= (signed)(31 - a_uiRadius)
 iGreen2 < 0 || iGreen2 > 31
 iGreen2 >= (signed)(0 + a_uiRadius) && iGreen2 <= (signed)(31 - a_uiRadius)
 iGreen2 >= 0 && iGreen2 <= 31
+iMaxVal
+iMinVal
+iPercentage
 iRed >= 0 && iRed <= 15
 iRed >= 0 && iRed <= 31
 iRed1 >= (signed)(0 + a_uiRadius) && iRed1 <= (signed)(31 - a_uiRadius)
@@ -30638,6 +30686,7 @@ interact_distance
 interactions_data_t
 interactions_t
 interactive
+intermediate_size
 internal
 internal error in map key sorting
 internal error: code overflow
@@ -30837,11 +30886,7 @@ japanese
 javascript:
 jawOpen
 jaw_clencher
-jaw_controller
 jaw_drop
-jaw_open
-jaw_tilt
-jaw_tilt_controller
 jh
 jiggle bone %u
 jklmnopqrstuvwxyzyxwvutsrqponmlkj
@@ -31476,7 +31521,6 @@ levelup_rule
 lfoot
 libc.so.6
 libclient.so
-libengine2.so
 libm.so.6
 libpng error: %s
 libpng version 1.5.2 - March 31, 2011
@@ -31580,6 +31624,7 @@ local_account_id
 local_gravity_cp
 local_player_team
 local_progress
+local_strings
 local_temp_entity
 localhost
 localhost/artifact/
@@ -33089,6 +33134,7 @@ m_hRemapLineEnd
 m_hRemapLineStart
 m_hSceneObjectController
 m_hScriptInstance
+m_hScriptScope
 m_hSecondHand
 m_hSelf
 m_hServerRagdoll
@@ -33479,6 +33525,7 @@ m_nIndirectTextureDimY
 m_nIndirectTextureDimZ
 m_nIndoorOutdoorLevel
 m_nInfluences
+m_nInitialSeed
 m_nInputType
 m_nInstanceCount
 m_nInteractsAs
@@ -34732,8 +34779,6 @@ norepeat_global
 norm
 norwegian
 noscene
-nose_controller
-nose_snarl
 not found
 not in
 not marketable
@@ -34984,6 +35029,7 @@ overridewalktorunspeed
 ownedQuantity
 owner = %s
 owner_context
+owner_entity_index
 ownername
 ownership
 p
@@ -35144,6 +35190,9 @@ particles-per-second
 particles-per-second-variance
 particles/
 particles/beams/default_beam.vpcf
+particles/blood_impact/blob_impact.vpcf
+particles/blood_impact/blob_impact_frozen.vpcf
+particles/blood_impact/blood_impact_antlion_worker_01.vpcf
 particles/blood_impact/blood_impact_green_01.vpcf
 particles/blood_impact/blood_impact_red_01.vpcf
 particles/blood_impact/blood_impact_yellow_01.vpcf
@@ -35870,6 +35919,8 @@ pose_control
 pose_control_type
 pose_param %s: %f
 pose_special_type
+position.y
+position.z
 positionInLocalSpace
 positive_or_null
 posix_fadvise64
@@ -35907,6 +35958,7 @@ preferred_carryangles
 prefix_owner
 prelude
 premium_only
+prerequisite
 present_lane_
 present_lane_%s_%d
 present_lane_%s_faction %s
@@ -36293,6 +36345,7 @@ replays
 replays/
 report_cliententitysim
 report_clientthinklist
+report_counter
 report_perf_yields_beyond_s
 reportedPosition
 reports client-side sound patch count
@@ -36418,6 +36471,9 @@ rotateY(
 rotateZ(
 rotateonhover
 rotateonmousemove
+rotation.pitch
+rotation.roll
+rotation.yaw
 rotationAxis
 rotationSpeed
 rotation_axis0
@@ -36587,7 +36643,6 @@ scripts/instructor_lessons.txt
 scripts/instructor_modtextures
 scripts/instructor_textures
 scripts/items/items_game.txt
-scripts/items/unencrypted/items_master.txt
 scripts/mod_lessons.txt
 scripts/mod_textures
 scripts/propdata.txt
@@ -36822,6 +36877,7 @@ slot7
 slot8
 slot9
 slot_token_id
+sm_UniformStreams
 sm_bAccurateTriggerBboxChecks
 sm_bDatadescValidating
 sm_bDisableTouchFuncs
@@ -36896,6 +36952,7 @@ soundscape_dumpclient
 soundscape_fadetime
 soundscape_message
 soundscape_radius_debug
+source = %s
 sourceMatchList
 sourcePanel
 source_filename
@@ -38234,7 +38291,6 @@ type_field
 type_value
 typeinfo for CThread
 typeinfo for CThreadSyncObject
-typeinfo for IPrerequisite
 typeinfo for bool*
 typeinfo for char
 typeinfo for float
@@ -38571,6 +38627,7 @@ value_is_particle_index
 value_is_percentage
 value_is_replace
 value_list
+value_local_index
 value_max
 value_min
 valve.net

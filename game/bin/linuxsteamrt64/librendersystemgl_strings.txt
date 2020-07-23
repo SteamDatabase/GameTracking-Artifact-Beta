@@ -155,6 +155,8 @@ $ORIGIN
 *** VB "%s": Tried to lock too much memory (%d>%d)!
 *0"Z
 *St19_Sp_counted_deleterIPhZN3Etc13EncodeMipmapsEPfjjNS1_5Image6FormatENS1_11ErrorMetricEfjjjjPNS1_8RawImageEPibEUlS0_E_SaIiELN9__gnu_cxx12_Lock_policyE2EE
+*ZN19CTextureManagerBase26MN_CacheRequestedResourcesER10CUtlVectorINS_15ToCacheHandle_tE10CUtlMemoryIS1_iEEEUlP25IAsyncResourceDataRequestSt10unique_ptrI25IAsyncProcessedDataResultSt14default_deleteIS9_EEE_
+*ZN23CTextureStreamingHelper23IssueTextureLoadRequestEP12CTextureBaseRK22TextureSpecification_tEUlP25IAsyncResourceDataRequestSt10unique_ptrI25IAsyncProcessedDataResultSt14default_deleteIS8_EEE_
 *ZN3Etc13EncodeMipmapsEPfjjNS_5Image6FormatENS_11ErrorMetricEfjjjjPNS_8RawImageEPibEUlPhE_
 +
 +OQv
@@ -346,8 +348,8 @@ $ORIGIN
 15CGLMProgramBase
 15CGLMShaderCache
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS3_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor5IP19CTextureManagerBaseMS0_FvP25IAsyncResourceDataRequest11CWeakHandleI31InfoForResourceTypeCTextureBaseEP12CTextureBase22TextureSpecification_tiES3_S6_S8_S9_i12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor6IP19CTextureManagerBaseMS0_FvP12CTextureBase11CWeakHandleI31InfoForResourceTypeCTextureBaseE12ResourceId_tRKNS0_24AsyncTextureHookupData_tERK22TextureSpecification_t10CUtlStringES3_S6_S7_S8_SB_SE_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor7IP13CSOAContainerMS0_FviiiiPKS0_iiEiiiiS3_ii12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CRenderDeviceGL
 15CRenderPassDesc
@@ -368,7 +370,6 @@ $ORIGIN
 16CFunctorCallback
 16CIndexBufferBase
 16CInputLayoutDictI14CInputLayoutGLE
-16CMemberFunctor11IP19CTextureManagerBaseMS0_FvP12CTextureBase11CWeakHandleI31InfoForResourceTypeCTextureBaseE12ResourceId_tPvjP17IMemoryMappedFile22TextureSpecification_tSB_i23TextureBitsMemoryType_t10CUtlStringES3_S6_S7_S8_iSA_SB_SB_iSC_SD_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 16CRenderContextGL
 16CRenderQueryBase
 16ICommandCallback
@@ -388,7 +389,6 @@ $ORIGIN
 19CSchemaRegistration
 19CTextureManagerBase
 19IKeyValuesErrorSpew
-19IRenderShaderBuffer
 2
 2.0
 2.2
@@ -403,6 +403,7 @@ $ORIGIN
 21CRenderHardwareConfig
 21CTextureInfoChunkBase
 21IRenderHardwareConfig
+21IRenderShaderByteCode
 22CSchemaInstallCallback
 22IStreamBuilderCallbackI14CCommandStreamE
 22IToolsResourceListener
@@ -627,6 +628,8 @@ CDynamicBufferMgrGL
 CDynamicBufferMgrGL::CDynamicBufferMgrGL: Failed creating shared dynamic buffer!
 CDynamicBufferMgrGL::InsertNewDynamicBuffer: Failed creating shared dynamic buffer!
 CEntityIndex
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal(unsigned long long)
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CGLMQuery::GetData(): Occlusion query flush took %3.3fms!
 CGLMQuery::GetData: Failure retrieving occlusion query data! This scenario is not supported in GL.
 CLargeCommandBufferChunk CUtlMemoryPoolMT
@@ -735,6 +738,7 @@ Cannot transcode due to multiple use of quantization table %d
 Cannot write a file
 Caution: quantization tables are too coarse for baseline JPEG
 ChangeCallbackOnChange
+CharacterSetBuild
 CheckBox
 Checked pending presents %s times; waited %s times; abandoned %s times
 ChildOf
@@ -3077,6 +3081,7 @@ Generic
 GenericFloat
 Geometry Shader
 GetCPUInformation
+GetGPUFrameTimeMS called without setting RENDERDEBUGFLAG_ENABLE_GPU_TIMESTAMPS.
 GetNameFromOSType
 GetResourceManifestCount
 GetResourceManifests
@@ -4294,6 +4299,8 @@ _V8U8
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
+_V_binarytohex
+_V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
@@ -4552,7 +4559,7 @@ getenv
 gl/dynamicbuffermgrgl.cpp
 gl/rendercontextgl.cpp
 gl/renderdevicegl.cpp
-gl/renderdevicegl.cpp(2208):
+gl/renderdevicegl.cpp(2206):
 gl/renderdevicegl.cpp(599):
 gl/renderdevicegl.cpp(715):
 gl/renderdevicegl.cpp(733):
@@ -5617,16 +5624,16 @@ tessfactor
 texcoord
 text compression mode is out of range
 texturebase.cpp
-texturebase.cpp(1864):Error loading texture: %s
-texturebase.cpp(2801):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2824):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2835):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2846):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2857):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2878):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2889):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2900):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2911):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(1905):Error loading texture: %s
+texturebase.cpp(2842):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2865):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2876):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2887):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2898):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2919):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2930):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2941):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2952):ResourceHandleToData( %s ) failed! Falling back to error texture!
 three
 tilde
 tiles

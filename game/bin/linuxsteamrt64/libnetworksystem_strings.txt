@@ -152,7 +152,6 @@ $tI
 %d:  %s (%s) [ptr 0x%p] %s%s '%s'
 %g
 %g,
-%hu
 %i %i %i %i
 %i.%i.%i.%i
 %i.%i.%i.%i:%i
@@ -400,6 +399,7 @@ $tI
 0 bit issue, spot 2
 0 bit issue, spot 3
 0 bit issue, spot 4
+00000000-0000-0000-0000-000000000000
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0x%p assigned %d to '%s'
@@ -752,6 +752,22 @@ B
 B->C
 BackUp() can only be called after Next().
 BackUp() can only be called after a successful Next().
+Bad header (unrecognized encoding specifier)
+Bad header format (expected ':'
+Bad header format (expected '<!--'
+Bad header format (expected 'encoding'
+Bad header format (expected 'format'
+Bad header format (expected 'kv3'
+Bad header format (expected 'version'
+Bad header format (expected encoding name)
+Bad header format (expected encoding uuid)
+Bad header format (expected format name)
+Bad header format (expected format uuid)
+Bad header format (malformed UUID)
+Bad header format (no closing marker)
+Bad header: invalid binary marker
+Bad header: invalid compression header
+Bad header: unrecognized encoding id
 BakedLODBuilderMgr001
 BaseIKRig
 BasePhysicsShape
@@ -1164,6 +1180,7 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CThreadedJob::Abort(bool)
 CTransform
+CTransformScaled
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::SetSeed(int)
 CUtlBinaryBlock
@@ -1278,6 +1295,7 @@ Can't get here.
 Can't get here: failed to get default value as string
 Can't match up steam connection user data %lld to netchan.  This can happen due to a race condition, just as we close the connection.  But otherwise it's probably a bug
 Can't open network socket '%s'.  No SteamNetworkingSockets
+Can't write binary data to a text buffer.
 Cannot allocate abstract class
 Cannot allocate buffer larger than kint32max for
 Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You must instead find a way to get your file into the underlying database.
@@ -1290,6 +1308,7 @@ Cannot destruct abstract class
 Cannot get here
 Cannot reconnect loopback after initializing steam networking!
 Cannot register change callback priorities at this stage! Must do it earlier!
+Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Cannot show available settings until SteamNetworkingUtils initialized
@@ -1298,6 +1317,7 @@ Cannot use priority equal to NETWORK_FIELD_CHANGE_DEFAULT_PRIORITY!
 ChangeAccessorFieldPathIndex_t
 ChangeCallbackOnChange
 ChangeCallbackOnChangeOrCreate
+CharacterSetBuild
 CheckForDuplicatedFields
 CloseSocket
 CloseSteamNetConnection handle #%u (userdata %d)
@@ -1337,6 +1357,7 @@ Couldn't write error buffer, delete error###.dat files to make space
 CreateHostedDedicatedServerListenSocket for socket '%s' failed /+/ port %u vport %d
 CreateSerializedEntityBlob:  removing %s from field path list, culled by another change.
 Created poll group for socket '%s'
+Cycle or diamond double-reference to '%s'
 D
 DATA_LOSS
 DEADLINE_EXCEEDED
@@ -1363,6 +1384,7 @@ Don't bother compressing packets below this size.
 Don't lookup extension types if they aren't present (1).
 Don't lookup extension types if they aren't present (2).
 DotaCardGameClient_001
+Double-register of KV3 conversion (from '%s' to '%s')
 Double-save to Member '%s'
 Dump UDP packets summary to console
 Dump non-loopback udp only
@@ -1417,12 +1439,15 @@ Expect a decimal number, got:
 Expected "
 Expected "="after member '%s'
 Expected '#'
+Expected '&' and instance name or 'NULL'
 Expected ',' or '%s'
+Expected '=' after member name '%s'
 Expected '['
 Expected '[' or '('
 Expected '{'
 Expected ( <count> )
 Expected :
+Expected <member name> after type
 Expected []
 Expected double, got:
 Expected eight hex digits up to 10ffff for \U escape sequence
@@ -1462,6 +1487,8 @@ FALSE
 FATAL
 FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
+Failed to assign bool literal value
+Failed to convert KV3 to string; error: %s
 Failed to create poll group for socket '%s'?
 Failed to install message handler for message %s in channel %s!
 Failed to open P2P network socket '%s'
@@ -1643,6 +1670,7 @@ Integer out of range (
 Intentionally vague touch behavior for %p
 Interpreting non ascii codepoint %d.
 Invalid access of deferred ConVarRef for '%s'
+Invalid compressed buffer size
 Invalid control characters encountered in text.
 Invalid data for member '%s'
 Invalid data.
@@ -1677,6 +1705,7 @@ Like net_showmsg, but only spew reliable messages
 Line %d at "%s": %s
 Line %d col %d:
 Line %d: %s
+Line %d: Invalid literal value "%s"
 Line %d: Invalid value "%s"
 List all registered net messages
 Localize_001
@@ -1956,6 +1985,7 @@ No Buffer
 No active net channels.
 No default value
 No field named "uninterpreted_option" in the Options proto.
+No valid format conversion from '%s' to '%s'
 NoPoseControl
 Non-networkables
 Non-repeated Any specified multiple times.
@@ -2151,6 +2181,7 @@ ReceiveDatagram
 RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 RegisterFieldChangeCallbackPriority
+RegisterFormatConversion
 RegisterNetMessageHandlerAbstract: Attempted to register a message handler for a message which is not valid for this category of channel [message %s]!
 RegisterNetMessageHandlerAbstract: Must call StartRegisteringMessageHandlers before, and FinishRegisteringMessageHandlers after [message %s]!
 RegisterNetworkArrayFieldSerializer
@@ -2365,7 +2396,6 @@ ToolFramework2_002
 ToolSceneNodeFactory_001
 ToolScriptManager001
 ToolService_001
-Trailing Data
 Tried to calc delta to a src message of a different type.
 Tried to merge messages of different types
 Tried to register a non-generated type with the generated type registry.
@@ -2373,6 +2403,7 @@ Tried to send ad-hoc to address %s, but address is not in list of steam net conn
 True
 Truncated data
 Two Bone
+Two KV3 format GUIDs with the same human-friendly name ('%s')
 Type appears to be in generated pool but wasn't
 Type is already registered:
 U
@@ -2387,6 +2418,7 @@ UNKNOWN
 UNKNOWN_ENUM_VALUE_%s_%d
 UPDATE_STRING_TOKEN_DATABASE
 UTF-8 data when
+Unable to determine buffer encoding.
 Unable to write file '%s'
 Unexpected end of file
 Unexpected failure while serializing option submessage
@@ -2395,6 +2427,7 @@ Unknown enumeration value of "
 Unrecognized flag name '%s'
 Unrecognized syntax:
 Unrecognized type '%d'
+Unresolved object reference '%s'
 Unsupported
 Unsupported binary encoding id.
 Unsupported text encoding id.
@@ -2626,6 +2659,7 @@ __memcpy_chk
 __oldschema_object_name
 __pthread_key_create
 __stack_chk_fail
+__temp_unserialization_member__
 __tls_get_addr
 _edata
 _end
@@ -2673,6 +2707,7 @@ bUpdate
 backing paths
 badpacket%03i.dat
 basic_string::_S_construct null not valid
+best_priority
 binary
 binary_auto
 binary_bc
@@ -2716,6 +2751,7 @@ center
 char google::protobuf::StringPiece::operator[](google::protobuf::stringpiece_ssize_type) const
 cheat
 children
+classname
 client
 client_interpolation_amount
 clientcmd_can_execute
@@ -2730,6 +2766,7 @@ cloth_collision_layer3
 cmd_info
 collision_group
 collision_prop
+command
 composite
 compressed
 conflicts with an existing enum type.
@@ -2750,6 +2787,7 @@ cull rule %d:  %s
 cull rule %d:  %s -> %s
 culling for client %d of %d rules
 d
+data_bits
 databytes
 deactivated
 decode
@@ -2765,14 +2803,16 @@ dmg.explosive
 dmg.fire
 double
 dropped
+dt_instrumentation.cpp
 dti_client_%02d%02d%02d-%02d%02d%02d.csv
+dti_enabled
 dti_report_stddev_threshold
 duplicate
 dynamic_interaction
 embedded field
 emitFromWorld
+enable
 enable_limit
-enabled
 encoder(%s)
 encoding
 enum
@@ -2801,6 +2841,8 @@ field %s not present in %s
 field is fixed sized array size %d
 field is using array manipulator, current size returned %d
 field not in previous encoding
+field_full
+field_short
 fieldname
 fieldpath_%02d%02d%02d-%02d%02d%02d.csv
 fieldpathpacker.cpp
@@ -2957,6 +2999,7 @@ incoming_sequence
 incoming_sequence_start
 index < 10
 index[%d]
+index_bits
 inet_addr
 inf
 infinity
@@ -3359,6 +3402,7 @@ rb
 read
 reason
 recenter_on_parent_bone
+records
 registered:
 relative_angles
 relative_origin
@@ -3538,6 +3582,7 @@ succeeded
 suppress
 surface_prop
 sv_maxroutable
+symbols
 syntax = "$0";
 t
 test_angles_relative

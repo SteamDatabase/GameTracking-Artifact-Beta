@@ -244,6 +244,7 @@ $undefined
 %s is not a valid flag.  Flag passes should have the form '--pass_name[=pass_args]'. Special flag names also accepted: -O and -Os.
 %s profile; removed in version %d
 %s%d
+%s%s%s
 %s() isn't a known function.
 %s,
 %s/
@@ -474,6 +475,8 @@ $undefined
 *0"Z
 *=
 *St19_Sp_counted_deleterIPhZN3Etc13EncodeMipmapsEPfjjNS1_5Image6FormatENS1_11ErrorMetricEfjjjjPNS1_8RawImageEPibEUlS0_E_SaIiELN9__gnu_cxx12_Lock_policyE2EE
+*ZN19CTextureManagerBase26MN_CacheRequestedResourcesER10CUtlVectorINS_15ToCacheHandle_tE10CUtlMemoryIS1_iEEEUlP25IAsyncResourceDataRequestSt10unique_ptrI25IAsyncProcessedDataResultSt14default_deleteIS9_EEE_
+*ZN23CTextureStreamingHelper23IssueTextureLoadRequestEP12CTextureBaseRK22TextureSpecification_tEUlP25IAsyncResourceDataRequestSt10unique_ptrI25IAsyncProcessedDataResultSt14default_deleteIS8_EEE_
 *ZN3Etc13EncodeMipmapsEPfjjNS_5Image6FormatENS_11ErrorMetricEfjjjjPNS_8RawImageEPibEUlPhE_
 +
 ++
@@ -748,8 +751,8 @@ $undefined
 14IRenderContext
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIN22CFossilizeStateCreator18PipelineWorkItem_tE27CMemberFuncJobItemProcessorIS3_S2_S2_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS3_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor5IP19CTextureManagerBaseMS0_FvP25IAsyncResourceDataRequest11CWeakHandleI31InfoForResourceTypeCTextureBaseEP12CTextureBase22TextureSpecification_tiES3_S6_S8_S9_i12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor6IP19CTextureManagerBaseMS0_FvP12CTextureBase11CWeakHandleI31InfoForResourceTypeCTextureBaseE12ResourceId_tRKNS0_24AsyncTextureHookupData_tERK22TextureSpecification_t10CUtlStringES3_S6_S7_S8_SB_SE_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor7IP13CSOAContainerMS0_FviiiiPKS0_iiEiiiiS3_ii12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CPipelineVulkan
 15CRenderPassDesc
@@ -781,7 +784,6 @@ $undefined
 16CGlslangIncluder
 16CIndexBufferBase
 16CInputLayoutDictI18CInputLayoutVulkanE
-16CMemberFunctor11IP19CTextureManagerBaseMS0_FvP12CTextureBase11CWeakHandleI31InfoForResourceTypeCTextureBaseE12ResourceId_tPvjP17IMemoryMappedFile22TextureSpecification_tSB_i23TextureBitsMemoryType_t10CUtlStringES3_S6_S7_S8_iSA_SB_SB_iSC_SD_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 16CSwapChainVulkan
 16ICommandCallback
 16IRenderDeviceMgr
@@ -802,7 +804,6 @@ $undefined
 19CVertexBufferVulkan
 19CVertexShaderVulkan
 19IKeyValuesErrorSpew
-19IRenderShaderBuffer
 1DBlend
 2
 2 Entry points cannot share the same name and ExecutionMode.
@@ -821,6 +822,7 @@ $undefined
 21CTextureInfoChunkBase
 21CTextureManagerVulkan
 21IRenderHardwareConfig
+21IRenderShaderByteCode
 22CFossilizeStateCreator
 22CPipelineManagerVulkan
 22CRenderDeviceMgrVulkan
@@ -1451,6 +1453,8 @@ CCommandBufferChunk CUtlMemoryPoolMT
 CDescriptorSetVulkan::Rebake - could not allocate descriptor in new pool.
 CENTROID
 CEntityIndex
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal(unsigned long long)
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CLargeCommandBufferChunk CUtlMemoryPoolMT
 CMediumCommandBufferChunk CUtlMemoryPoolMT
 CMemAllocSystemInitialize
@@ -1715,6 +1719,7 @@ Caution: quantization tables are too coarse for baseline JPEG
 Ceil
 Ceiling
 ChangeCallbackOnChange
+CharacterSetBuild
 CheckAccessFullyMapped
 CheckBox
 Checked pending presents %s times; waited %s times; abandoned %s times
@@ -3255,6 +3260,7 @@ GetDefaultQueue
 GetDependence found an unsupported loop form. Assuming <=> for loop.
 GetDependence found source_node || destination_node as CanNotCompute. Abandoning evaluation for this subscript.
 GetDeviceSpecificTexture
+GetGPUFrameTimeMS called without setting RENDERDEBUGFLAG_ENABLE_GPU_TIMESTAMPS.
 GetKernelLocalSizeForSubgroupCount
 GetKernelMaxNumSubgroups
 GetKernelNDrangeMaxSubGroupSize
@@ -5660,7 +5666,7 @@ Subpass %d preserve attachment %d not found in renderpass attachment list.
 SubpassData
 SubpassInput
 SubpassInputMS
-Successfully loaded Steam Shader Pre-cache database %s
+Successfully loaded Steam Shader Pre-cache database.
 Such variables must be identified with a Block decoration
 Such variables must be identified with a Block or BufferBlock decoration
 Such variables must be typed as OpTypeStruct,
@@ -5986,7 +5992,7 @@ UVWQ8888
 Unable to determine buffer encoding.
 Unable to determine source language
 Unable to determine texture heap size, assuming %llu MB.
-Unable to load Steam Shader Pre-cache database %s
+Unable to load Steam Shader Pre-cache database.
 Unable to open Vulkan pipeline cache %s file - might not exist yet.
 Unable to parse Vulkan pipeline cache %s file.  Error: %s
 Unable to parse built-ins
@@ -6114,6 +6120,7 @@ UserSemantic
 UserTypeGOOGLE
 Using '%s' for Vulkan validation reporting.
 Using BuiltIn
+Using Steam Shader Pre-Cache whitelist %s
 Using VK_EXT_memory_budget set texture memory budget to %llu MB.
 Using VK_GOOGLE_display_timing for frame pacing.
 Using a 16-bit floating point
@@ -6685,9 +6692,13 @@ _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _Map_base::at
 _V_ComposeFileName
+_V_ExtractFilePath
+_V_FixupPathName
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
+_V_binarytohex
+_V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
@@ -10643,6 +10654,7 @@ std::_Rb_tree_increment(std::_Rb_tree_node_base const*)
 std::_Rb_tree_increment(std::_Rb_tree_node_base*)
 std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
 std::_Rb_tree_rebalance_for_erase(std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)
+std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
 std::__atomic_futex_unsigned_base::_M_futex_notify_all(unsigned int*)
 std::__atomic_futex_unsigned_base::_M_futex_wait_until(unsigned int*, unsigned int, bool, std::chrono::duration<long, std::ratio<1l, 1l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> >)
 std::__basic_file<char>::~__basic_file()
@@ -10764,6 +10776,7 @@ std::vector<unsigned short, std::allocator<unsigned short> >::vector(unsigned lo
 stderr
 stdout
 steam_pipeline_cache.foz
+steam_pipeline_cache_whitelist.foz
 steamapp_pipeline_cache.foz
 stencilLoadOp
 stencilStoreOp
@@ -11074,16 +11087,16 @@ textureSamples(
 textureSize
 textureSize(
 texturebase.cpp
-texturebase.cpp(1864):Error loading texture: %s
-texturebase.cpp(2801):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2824):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2835):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2846):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2857):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2878):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2889):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2900):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2911):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(1905):Error loading texture: %s
+texturebase.cpp(2842):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2865):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2876):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2887):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2898):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2919):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2930):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2941):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2952):ResourceHandleToData( %s ) failed! Falling back to error texture!
 texturescale
 tgamma
 that allocate pointers must be in Function or Private
@@ -11174,8 +11187,14 @@ type_parameter_specifier_opt
 type_specifier_nonarray
 typedef
 typeinfo for CThreadSyncObject
+typeinfo for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo for std::_Sp_make_shared_tag
 typeinfo for std::__future_base::_Result_base
 typeinfo for std::__future_base::_State_base
+typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo name for std::_Sp_make_shared_tag
 typename
 u
 u16
@@ -11758,7 +11777,7 @@ vkCreatePipelineLayout( m_pDeviceVulkan, &pipelineLayoutCreateInfo, NULL, &pPipe
 vkCreatePipelineLayout( m_pDeviceVulkan, &pipelineLayoutCreateInfo, NULL, &pipelineLayout.m_pPipelineLayout )
 vkCreatePrivateDataSlotEXT
 vkCreateQueryPool
-vkCreateQueryPool( VulkanDevice(), &queryPoolCreateInfo, NULL, &m_pVrTimestampQueryPool )
+vkCreateQueryPool( VulkanDevice(), &queryPoolCreateInfo, NULL, &m_pTimestampQueryPool )
 vkCreateQueryPool( m_pDeviceVulkan, &queryPoolCreateInfo, NULL, &newQueryPool.m_pOcclusionQueryPool )
 vkCreateQueryPool( m_pDeviceVulkan, &queryPoolCreateInfo, NULL, &pQueryPoolVulkan )
 vkCreateRayTracingPipelinesKHR
@@ -12171,7 +12190,7 @@ vulkan/rendercontextvulkan.cpp(513):
 vulkan/renderpassvulkan.cpp
 vulkan/renderpipelinestatsvulkan.cpp
 vulkan/renderthreadvulkan.cpp
-vulkan/renderthreadvulkan.cpp(193): Error! NULL texture pointer sent to OnReadPixels()!
+vulkan/renderthreadvulkan.cpp(194): Error! NULL texture pointer sent to OnReadPixels()!
 vulkan/shadertablevulkan.cpp
 vulkan/texturevulkan.cpp(1451):
 vulkan1.1spv1.4

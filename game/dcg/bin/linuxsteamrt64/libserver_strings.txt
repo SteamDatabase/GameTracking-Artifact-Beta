@@ -265,6 +265,7 @@
 #CardEffect_10630_0
 #CardEffect_10634_0
 #CardEffect_10635_0
+#CardEffect_10638_0
 #CardEffect_10641_0
 #CardEffect_10650_0
 #CardEffect_10651_0
@@ -434,6 +435,7 @@
 #CardEffect_11062_0
 #CardEffect_11063_0
 #CardEffect_11064_0
+#CardEffect_11065_0
 #CardEffect_19001_0
 #CardEffect_19002_0
 #CardEffect_19003_0
@@ -1253,11 +1255,13 @@ $effectSourceObjectID
 ( Entity Player, string EventName, table EventData )
 ( Resource "%s type %lld", handle is%s set
 ( def. "%s" )
+( iSeed ) - Creates a separate random number stream.
 ( int ListnerID ) - Unregister a specific listener
 ( int TeamNumber, string EventName, table EventData )
 ( modelName, context ) - Manually precache a single model
 ( nOwner & 7 ) == 0 && ( nOwner & 0x8000000000000000ull ) != 0x8000000000000000ull
 ( resourceType, resourcePath, context ) - Manually precache a single resource. Types: "model|model_folder|sound|soundfile|particle|particle_folder"
+( string ) - Returns a 32-bit hash for a string
 ( string EventName, func CallbackFunction ) - Register a callback to be called when a particular custom event arrives. Returns a listener ID that can be used to unregister later.
 ( string EventName, table EventData )
 ( vcd file, delay ) - play specified vcd file
@@ -1426,7 +1430,6 @@ $effectSourceObjectID
 *Z40GetTypedAttributeEqualityCompareFunctionIiESt8functionIFT_15CUtlStringTokenS1_EERK18MatchAttributeListEUlS2_iE_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
-*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -2154,6 +2157,7 @@ $effectSourceObjectID
 13IHLTVDirector
 13IHandleEntity
 13IPoseAccessor
+13IPrerequisite
 13IntervalTimer
 13audioparams_t
 13sky3dparams_t
@@ -2733,6 +2737,7 @@ $effectSourceObjectID
 18CEnvInstructorHint
 18CEventsSaveDataOps
 18CFilterMassGreater
+18CFlexExpresserShim
 18CGCMsgMemCachedGet
 18CGCMsgMemCachedSet
 18CGameConfiguration
@@ -3143,6 +3148,7 @@ $effectSourceObjectID
 22CDCGTourney_ConfigVals
 22CDCGTourney_PlayerDeck
 22CDCGTourney_SharedDeck
+22CDefScriptAccessorBase
 22CDefaultResponseSystem
 22CDemoClassInfo_class_t
 22CDevtestHierarchyChild
@@ -3597,6 +3603,7 @@ $effectSourceObjectID
 26CSchemaAttributeType_Float
 26CSchemaRegistration_navlib
 26CSchemaRegistration_server
+26CScriptUniformRandomStream
 26CServerLobbyData_PlayerMMR
 26CSingleUserRecipientFilter
 26CSpaceAgnosticBoneAccessor
@@ -3713,8 +3720,8 @@ $effectSourceObjectID
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP13CAI_Expresser10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP15CTeamSpawnPoint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CInfoDynamicShadowHint10CUtlMemoryIS2_iEES2_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorIP26CScriptUniformRandomStream10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIS0_I7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEES4_IS6_iEES6_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEbE
@@ -4538,6 +4545,7 @@ $effectSourceObjectID
 49CUserMsg_ParticleManager_DestroyParticleInvolving
 49CUserMsg_ParticleManager_SetParticleFoWProperties
 49CUserMsg_ParticleManager_UpdateParticleShouldDraw
+4@
 4C
 5
 5(
@@ -4731,7 +4739,6 @@ $effectSourceObjectID
 <iterations> <deck1> <deck2> ...
 <logical entity>
 <no bone transform data>
-<no class info>
 <no deferred ref found>
 <no failure reason set>
 <none>
@@ -4765,7 +4772,6 @@ $effectSourceObjectID
 ?(
 ???
 ???CRR_Response bogus index
-?@
 ?C
 ?a`
 @
@@ -4786,6 +4792,7 @@ A protobuf object %s with a repeated field %s was used in a container, this will
 A protocol message was rejected because it was too big (more than
 A specific_item component must define either an exact item to use or a lootlist to select an item from!
 A spot light entity
+A uniform random number generator.
 A(
 A->B
 A5fSXbf7
@@ -5858,9 +5865,6 @@ AE_ATTACK_END
 AE_ATTACK_HIT
 AE_ATTACK_START
 AE_BLIND_ZOMBIE_SNIFF
-AE_CHARGER_POUND_IMPACT
-AE_CHARGER_POUND_SOUND
-AE_CHARGER_POUND_VOCALIZE
 AE_CLIENT_EFFECT_ATTACH
 AE_CL_ADD_PARTICLE_EFFECT_CP
 AE_CL_BODYGROUP_SET_VALUE
@@ -6261,6 +6265,7 @@ An isolated instance of a rulescript database.
 An omnidirectional light entity
 An orthographic spot light entity
 Anastasia Ovchinnikova
+Anchor Smash
 Anchor nav_begin_area Z to editing player's feet
 AnchorList
 Ancient Health Double Tower
@@ -6443,7 +6448,6 @@ B
 B(
 B->C
 B-Spline
-B@
 BADFUNCTIONPOINTER
 BEAM_ENTPOINT
 BEAM_ENTS
@@ -6576,6 +6580,7 @@ BlendList
 Blink Dagger
 Blink Scroll
 Blink Strike
+BlobBlood
 Block Headers |
 Block loading of the navmesh. Unplayable, only used for memory sampling.
 Block size: %-11s Alloc'd: %8d Num blobs: %5d (%s)
@@ -6730,7 +6735,6 @@ CBaseDMStart
 CBaseEntity
 CBaseEntity::EmitSound
 CBaseEntity::PhysicsDispatchThink
-CBaseEntity::TakeDamage:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamage:  with inputInfo.GetDamagePosition() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamagePosition() == vec3_origin
@@ -7039,6 +7043,7 @@ CFogController
 CFogTrigger
 CFogVolume
 CFootDefinition
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CFuncAreaPortalBase
 CFuncAreaPortalWindow
 CFuncBrush
@@ -7688,8 +7693,6 @@ CPointWorldText
 CPoseController
 CPostProcessController
 CPostProcessingVolume
-CPrerequisiteDescriptionHelper::AnalyzeFileListByExtension(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> > const&, CUtlDict<CPrerequisiteDescriptionHelper::Analysis_t, int>&) const
-CPrerequisiteDescriptionHelper::Append(int, char const*, char const*, ...)
 CProjectedDecal
 CPropHMDAvatar
 CPropVRHand
@@ -7778,6 +7781,7 @@ CScriptTriggerHurt
 CScriptTriggerMultiple
 CScriptTriggerOnce
 CScriptTriggerPush
+CScriptUniformRandomStream
 CSequenceTransitioner
 CSequenceTransitioner2
 CServerAchievementManager
@@ -7900,6 +7904,8 @@ CTonemapTrigger
 CToolGameSimulationAPI::LoadSavegame:  no such save file '%s'
 CTransform
 CTransform-world
+CTransformScaled
+CTransformScaled-world
 CTriggerActiveWeaponDetect
 CTriggerBrush
 CTriggerCallback
@@ -7928,6 +7934,7 @@ CTriggerVolume
 CTwistConstraint
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
+CUniformRandomStream::RandomFloatExp(float, float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
 CUserMessageAchievementEvent_t
@@ -8228,6 +8235,7 @@ ChangeTeam
 Changed attribute in %d areas
 Changes the GUID behavior to assign continuous incremental object ids (1,2,3,4...)
 Changes's player's model
+CharacterSetBuild
 Cheat Demolish
 Cheat Destroy
 Cheat Disarm
@@ -8481,6 +8489,7 @@ CreateParticleForPlayer
 CreateTrigger( vecMin, vecMax ) : Creates and returns an AABB trigger
 CreateTriggerRadiusApproximate
 CreateTriggerRadiusApproximate( vecOrigin, flRadius ) : Creates and returns an AABB trigger thats bigger than the radius provided
+CreateUniformRandomStream
 Created new fencetop area %d(%x) between %d(%x) and %d(%x)
 Created physics for %s
 Creates a new particle effect
@@ -9317,6 +9326,8 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
+FIELD_CTRANSFORMSCALED
+FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -10236,8 +10247,6 @@ INVALID_ARGUMENT
 INVALID_CPPTYPE
 IPhysicsPlayerController
 IPlayerInfo
-IPrerequisite::AddRef()
-IPrerequisite::Release()
 IQuickTime001
 IRagdoll
 ISteamGameServerStats: Failed to clear achievement %s
@@ -12277,7 +12286,7 @@ P29CNavBreadthFirstSearchLattice
 P33BreadthFirstSearchVolumeCollector
 P@%s %d
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
-PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2085
+PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2076
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:108
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:144
 PARALYZE
@@ -12849,6 +12858,7 @@ Random Green Hero
 Random Red Hero
 RandomAnimation
 RandomFloat
+RandomFloatExp
 RandomInt
 RandomSeed
 Randy Vargas
@@ -13117,6 +13127,7 @@ Robert Simon
 Robes of the Envoy
 Rock
 Rod of Atos
+RollPercentage
 Root Boots
 Root class of all server-side entities
 Root entity class
@@ -14299,6 +14310,7 @@ Stops a sound event with optional delivery
 Stops a sound event with reliable delivery
 Stores the current selected set for later retrieval.
 Storm Spirit
+StrReplaceChar
 Strange
 Strange Type:
 StreamEntitiesToFile
@@ -14493,8 +14505,11 @@ TestFormatE
 TestRaysToBoundaryZone - pass raw %0.2f, pass grid %0.2f, ratio %0.2f
 TestScriptManager
 TestScriptMgr001
-Tests collision detection
-Tests hull collision detection
+Tests box collision detection
+Tests capsule collision detection
+Tests convex hull collision detection
+Tests ray cast
+Tests sphere cast
 Text that team leader from each team must speak for the match to begin
 TextFormat::Parser for Any supports only type.googleapis.com and type.googleprod.com, but found "
 TextLayout_001
@@ -14996,6 +15011,7 @@ VScriptDbg
 VScriptManager010
 VScriptScripts
 VStringTokenSystem001
+V_AppearsToBeANumber
 V_AreFileNamesEqual
 V_CompareNameWithWildcards
 V_FixDoubleSlashes
@@ -15041,6 +15057,7 @@ V_expf
 V_fmodf
 V_fpclassify
 V_frexpf
+V_isdigit_str
 V_isnan
 V_localeconv
 V_log10f
@@ -15523,6 +15540,8 @@ _V_SetExtension
 _V_StringAfterPrefix
 _V_StripExtension
 _V_StripLastDir
+_V_binarytohex
+_V_strEndsWith
 _V_strncat
 _V_strncmp
 _V_strncpy
@@ -15641,7 +15660,6 @@ _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../nav_generate.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../player_lagcompensation.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../soundscape_system.cpp
 `
-`@
 `jF
 a
 a protocol
@@ -16113,7 +16131,9 @@ card_loc_file
 card_sets
 cards_per_turn
 carry_distance_offset
-cast_hull
+cast_aabb
+cast_capsule
+cast_convex
 cast_ray
 cast_sphere
 castingHero
@@ -16391,10 +16411,6 @@ cycler_flex used on model "%s" specified unknown sequence "%s"
 cycler_flex used on model %s without enough flexes.
 d
 d(
-d3_breen_01
-d3_citadel_03
-d3_citadel_04
-d3_citadel_05
 dac
 dac_dof_far_blurry
 dac_dof_far_crisp
@@ -16989,8 +17005,6 @@ extent_origin_right
 extra_cards_on_even_turns
 extractlevelsfromsavegame
 extremely_rare
-eyebrows_controller
-eyebrows_mover
 eyes_follow
 f
 f %d %d %d
@@ -17119,6 +17133,7 @@ flCycle
 flDamage
 flDefault
 flDelay
+flExponent
 flFriction
 flGravity
 flIn
@@ -17126,6 +17141,8 @@ flIntensity
 flInterval
 flMass
 flMaxDamage
+flMaxVal
+flMinVal
 flMotorMaxTorque
 flMotorTargetAngSpeed
 flNoise
@@ -17637,7 +17654,6 @@ hintlimiting
 hitbox_lerp
 hitboxset
 hl2
-hl2_episodic
 hl_dissolve_all_dropped_weapons
 hl_prop_vr_hand
 hltv
@@ -17689,6 +17705,9 @@ iCollide
 iDamageCustom
 iGroup
 iLockedSentence
+iMaxVal
+iMinVal
+iPercentage
 iSkin
 iTeamNum
 iUnlockedSentence
@@ -17837,6 +17856,7 @@ interactions_t
 interactive
 internal error in map key sorting
 interp: %f
+interpolatepositiontoplayer
 interrupt
 invalid!
 invalidAIAction
@@ -17921,11 +17941,7 @@ items_min
 items_per_treasure
 j
 jaw_clencher
-jaw_controller
 jaw_drop
-jaw_open
-jaw_tilt
-jaw_tilt_controller
 jiggle bone %u
 jklmnopqrstuvwxyzyxwvutsrqponmlkj
 job warning: Resuming job '%s (id: %lld)' due to timeout while paused for %s
@@ -18068,6 +18084,7 @@ key
 keyframe_rope
 keyframe_track
 keyframes
+kflPosInterpTime
 kiU8CoIBCAAQABgBIgcIgVEQBgUJBNpODQkEt1ANCQDgERIEp08FEjQGCAAQARgAIgcI0k4QBQU1AKERCRwAEAwYzA0iBwEsAAkFG1ynTxAOGAMiBwjuBxADGAIiBwjRThADGAMFRxgCGEkKeQgBDYQAzhFyALwJaQgHCLERlgCUERIA7AmNAYQICxgBBQgJjAC2EYMApgkJAAgFjATOsAHdBXskBCIHCKlOEAcYBwU2EAIYUApBBXsAAgUQNk4AAcgU6k0iBwiuAa0ACAm/AAcNKwHZAYEBQwAxJUIJQwmJATsUyQciBwjYATsBdgzYThAEDawQAhhHCjAFdikBGXYIBSIHBTsUsS4iBwjDATsABQ1lCEgKQwVlCTIZZQDEAWUAmgHSAAYJoClfBO4HBaklcS53ABSTAQgBEAEllAziTxAKEQkp9gDSMXsA+E5gAQFgLVcAByGCIQEFCQAOBeAA7AGEAAgFrgEaKXoE2tg1egE/AKkB0gGxDO4HEAQtMBACGEgKZ0VNASsA5BGDAKcJCSFiCe0A2CnSAAc2ZwIA0A1OAAMFhE1VRV4B9jr/AAg/Cm8FaSmpOXZBkASnUAW3AAcBCQnRIcMEuxEJRClVANIBvwHIDO4HEAgFNgTSTg0JBKdQGQkBegG4EAIYOQpfJW8JcQgBGAwtFwTynwHsBPhODXMM+E4QDgVPVWgAtgFqQTYuyAEJhQD4IWgABA1hCEgKOQXSSRY20gABwAyMCyIHQh4CEZwAKAWcCTsEARhhsAEzBK1hSXsAB1V7CEIKg0E2AAIloQDeUTYA3nGNAMwpqggHCKwJEgFfAU9JAgTDsmH3BKxPDesArIEJIXB1jkU4AetVHQCmHf1ZJghCCoGBqQmGAKYRdADLGXQ2/gAA0VEvAOAxZgDgIWYBjQHmBJsWMdkBEgDgAXIBlgChAQkBjQDgaa5NQSnAIAIYNQpCCAAQAg0QGXEBMgFWBMsZCTIpqi4vAlkUAC8xTglVCAEYEC0qBNPAAYIAsQnRDAcIyFEtM20sAAcBG2FaBQkADiWNRjACTR4FuAmGVUIAtgnTIZ8QAhhCCncFyin+GcpBMAC+EXoB0wzSICIHwQ8JegDaIUSBpRVWleCFhBAKIgcI2UmhhfsR9wE+CXkYLwo6CAEQAg15CAEYEQ3+BJPpqcgACSWIBLFPjb8yBAUIMgqlQQMAAwX8BLwXjb8EvBeNvwD2UZsA9jFEAK4RCQC7STABgwABBeSVTgHkBLUooeRRowCuQaNh5gD2ERJFrGGyJYsBCRSuTxAIGAkFUAHbhZUADXWWCCAKrmExCagEglANqACCCYQIBwj9qV4IBwizydkBljmCQZnVx2UUQaIAwymUaVQExdoBEwCUEZ8AlAGxIZUuSwPB4gAHMksDqSMAlCFaiT8BugF8GAIYMgpvCAFFMAEQGYwAFwmlASkFrqEZCYME5KpB9ADiEYNViVUYTYkBUAk/DK5OEA2VUxAsClUIABVxKZMcABAMGMMcIgchrQkzBLtQrRil2CF4ANJBXCGcANFJzTp5AQgaCksFV07WAgFfBI8nqQ8pCwDZce0A2QFNYX0AoQGkKR0IAhgaEpUIHqUICAEYHA37BMCmUaohhlWqAP2RaAD9YSQhHgCC0VNFQAFgAP0Rck3X5eQADRJaCDofAQCvQUFhPggHCL5R6QC+UekAkFHXMnIFAB4NoASogQGYHM5QEAMYLSIHAQkpTgDOIU7hLy4nAgADBRIApiFXAbMlvwEJRSfxzgG7AKkhJCGDAMMhJA4MCTqyAACJYZsJsiKxCa2nQQVZVYFjtZ4AsUnYEuUJAA4FjCGoBNohKdoJT5VjAOkONggBhCpMCQncMrkBCBQKlCk+qWIZemHnANIxlQDSIQ8AAy00BMT2AVdGpgYAriGxAe0lw2FkAPgBEiEi5aMNEgmolR5eIwFB9NHRofgW7AkEsxqxrwFX1TUA4gFpIXoA4jF6FWA67gBB9AAEQvQCABINXwS+Mkn0AAdlOAXIAVYFTQEJOk0AAIIpO2lCCAEYOy0hBOTWLvUCAKyBRQAMIbYBCQFGRsgBAM8x2hVzVf41yFYpAQgiCqRBTBZVDAC9Uf4AvVH+IiMKAJupSDZeAgH3td0ikgwA6wkrAAcBRkkyQWcM4jYiBw5CCAkSAMuhRwAGBU/JhYV2YUwlLEEhOiwBAMEhLAmnAJSx5gCUseYAn3GlALMJEgGnCAEYPRaADAE1qUkEysgBYgCUUZYA3rFSAOcxP3WuZZMhdSVRQSwurgOJ041YAWwACQW7AKZhruHDXmsBZbcABUIrAyFHAOuR0gDrgdIWiQwpKyE9DMopIgfhfOEIBQkJGwWdQRI2yQIBr3rJAggPCospUGm3CAEYPi0jBOuPAVAAnzEaAJ8hqIHIZZ0OcggVdGU0CAkiB2GdAAdlnQCgIYYJURWgaa6CGgEAigmOaQqZRQBAPV5GCAMAoAGmAAINuQTGyUE1FZ51AAD9QtIDgo0AEEwIABAFDYwIARgTbdwAySHaIq8JRQ8hKwCagTuVtgESMrkCCA8Kv2FgAAZF00ZeBgCrITMBuRoFEEFNGf8AFQ5WCMFcABQJCSlWAKahTSGUbTQBNGlFJAAQDBiKWiIHCMBR0QCh0W0A0QEJQf4lIkEi9dZ1chJpCUrCAAC4IZ0JwkbIDkbUAACGEdQA7okJAaAIARhALagEgNoBYgDDQpYBAOwhSAGYZXsAGKmnAAcREmlyBbxRYQ6aCHrLAQghCrcJuwk0OVkQRiIHCPMpJIkaBKjLAZYiYwkAs5EjALMhbMF5dQAA4iFJAagAtgEJIYdlCQEkAKYBEgGXMgkDBVkR7xWxALaBLAE1ViwEGCEKZggAEAYNuQgBGBtNhQTwMCVPSQkAq2EAQT0Aq2GmAZSVCATLT216tf8A6xGDNKFOEA0YBCIGCAAQAhgA
 kickid %d CBaseEntity::InputKill()
 kill eater
@@ -18151,7 +18168,6 @@ lfomult
 lforate
 lfotype
 libc.so.6
-libengine2.so
 libm.so.6
 libpthread.so.0
 libserver.so
@@ -18242,7 +18258,6 @@ lockedCard
 locksound_t
 locomotive
 locstring
-log10
 logic_achievement
 logic_active_autosave
 logic_active_autosave (%s, %d) triggered
@@ -19016,6 +19031,7 @@ m_bInValue
 m_bInfluenceRootTransform
 m_bInitFromKilledParentParticles
 m_bInitialized
+m_bInterpolatePosition
 m_bInterpolationReadyToDraw
 m_bInterpolationWrap
 m_bInterruptSceneFinished
@@ -19425,6 +19441,7 @@ m_fadeColor
 m_fadeMaxDist
 m_fadeMinDist
 m_fixupNames
+m_flAbortedPlaybackAt
 m_flAbsScale
 m_flAccelerateExposureDown
 m_flAcceleration
@@ -19696,6 +19713,7 @@ m_flIntensity
 m_flInteractDistance
 m_flInteractionLerp
 m_flIntermissionEndTime
+m_flInterpStartTime
 m_flInterpolatedTime
 m_flInterval
 m_flJoystickAnalogValueX
@@ -19963,6 +19981,7 @@ m_flStartScale
 m_flStartScatterTime
 m_flStartScattering
 m_flStartTime
+m_flStartTimeInCommentary
 m_flStartTimeMax
 m_flStartWeight
 m_flStartWindSpeed
@@ -20198,6 +20217,7 @@ m_hSaveWeapon
 m_hScenes
 m_hScreens
 m_hScriptInstance
+m_hScriptScope
 m_hSecondHand
 m_hSelf
 m_hSkyCamera
@@ -20819,6 +20839,7 @@ m_nIndirectTextureDimY
 m_nIndirectTextureDimZ
 m_nIndoorOutdoorLevel
 m_nInfluences
+m_nInitialSeed
 m_nInputType
 m_nInstanceCount
 m_nInteractsAs
@@ -21433,6 +21454,7 @@ m_vDynamicAttachOffset
 m_vDynamicProxyPoint
 m_vEndPointRelative
 m_vEndPointWorld
+m_vEndPos
 m_vEndTrailTintFactor
 m_vExtent
 m_vFilteredThrowVel
@@ -21884,7 +21906,6 @@ modeldoc9
 models/%s
 models/%s.vmdl
 models/dev/error.vmdl
-models/extras/info_speech.vmdl
 models/props_plants/claypot03.vmdl
 models/survivors/survivor_gambler.vmdl
 models/ui/arrow_2d.vmdl
@@ -22344,8 +22365,6 @@ non-moveable %s '%s' is pushed
 non-networkable
 norm
 noscene
-nose_controller
-nose_snarl
 not found
 not in
 not marketable
@@ -22852,6 +22871,7 @@ preferred_carryangles
 preferredcarryangles
 prefix_owner
 premium_only
+prerequisite
 preserve_cycle
 prevent_duplicate_challenges
 prevent_gifting
@@ -23435,6 +23455,7 @@ slidesoundfwd
 slot_token_id
 slow
 slower
+sm_UniformStreams
 sm_bAccurateTriggerBboxChecks
 sm_bDatadescValidating
 sm_bDisableTouchFuncs
@@ -24203,7 +24224,6 @@ type_field
 type_value
 typeinfo for CThread
 typeinfo for CThreadSyncObject
-typeinfo for IPrerequisite
 typeinfo for char
 typeinfo for float
 typeinfo for std::_Function_base
@@ -24558,6 +24578,7 @@ wait forces async .sav to finish before returning
 waiting for lock
 waiting line %d %s
 walkspeed
+warp_shield_impact
 was modified concurrently during serialization.
 wasneveralive
 water_lod_control
@@ -24660,7 +24681,6 @@ zero_value
 {}()':
 {}[]:,
 |
-|@
 |p
 |w
 ||| Tower health: %d, previewDamage: %d |||

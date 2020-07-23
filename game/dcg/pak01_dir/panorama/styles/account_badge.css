@@ -1,7 +1,7 @@
-#AccountBadge
+DCGAccountBadge
 {
-	width: 100px;
-	height: 133px;
+	width: 150px;
+	height: 150px;
 }
 
 #MMRStat
@@ -18,13 +18,11 @@
 {
 	width: 100%;
 	height: 100%;
-	flow-children: down;
-	background-image: url("s2r://panorama/images/hud/avatar_bg_psd.vtex");
-	img-shadow: 0px 0px 5px 2.0 #333333b0;
-	background-size: 100% 100%;
 }
 
-.Hovered #ArtifactLevelIcon, .Hovered #ArtifactLevelIconAI
+.Hovered #AvatarImage, .Hovered #ArtifactLevelIconAI,
+DCGAccountBadge:hover #AvatarImage,
+DCGAccountBadge:hover #ArtifactLevelIconAI
 {
 	brightness: 1.75;
 	transition-property: brightness;
@@ -33,18 +31,41 @@
 	img-shadow: 0px 0px 10px 0 #ffffff;
 }
 
-#ArtifactLevelIcon, #ArtifactLevelIconAI
+#AvatarImage, #ArtifactLevelIconAI
 {
-	width: 88px;
-	height: 88px;
-	margin-top: 4px;
+	width: 70px;
+	height: 70px;
 	horizontal-align: center;
-	vertical-align: center;
-	box-shadow: inset #000000 0px 0px 12px 0px; // inner
+	vertical-align: top;
+	margin-top: 36px;
+	background-size: 100%;
+	
+	opacity-mask: url("s2r://panorama/images/masks/circle_64_psd.vtex");
 }
 
-#ArtifactLevelIconAI, .IsBot #ArtifactLevelIcon
+.IsBot #AvatarImage
 {
+	visibility: collapse;
+}
+
+.Small #AvatarImage
+{
+	width: 32px;
+	height: 32px;
+	border: 1px solid black;
+}
+
+.SelectionBadge #AvatarImage 
+{
+	width: 128px;
+	height: 128px;
+}
+
+#ArtifactLevelIconAI
+{
+	background-image: url("s2r://panorama/images/dialogs/badges/lvl_00_bot_128px_psd.vtex");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 	visibility: collapse;
 }
 
@@ -53,373 +74,213 @@
 	visibility: visible;
 }
 
-.Small #ArtifactLevelIcon
+#ProgressScreens #AvatarImage
 {
-	width: 32px;
-	height: 32px;
-	border: 1px solid black;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 
-.SelectionBadge #ArtifactLevelIcon 
+.RankFrame
 {
-   width: 128px;
-   height: 128px;
-}
+	width: 100%;
+	height: 100%;
 
-.ArtifactLevelLabel
-{
-	background-image: url("s2r://panorama/images/hud/avatar_bg_orb_psd.vtex");
-	img-shadow: 1px 1px 5px 3.0 #333333b0;
+	background-repeat: no-repeat;
 	background-size: 100% 100%;
-	vertical-align: center;
-	horizontal-align: center;
-	text-align: center;
-//	font-weight: bold;
-//	color: abilityGradient;
-	color: gradient( linear, 0% 0%, 0% 100%, from( #f7f7f7 ), to( #bcbcbc) );
-	text-shadow: 0px 0px 8px 3.0 #000000;
-	transform: translateY( -8px );
-	height: 30px;
-	width: 30px;
-	z-index: 999;
-	padding-top: 8px;
-	font-family: ArtifactNumbers;
+	background-position: center;
 }
 
-.ArtifactLevelLabel:hover
+.RankLabel
 {
-	text-shadow: 0px 0px 8px 3.0 ##6e98d550;
+	color: white;
+	font-size: 14px;
+	horizontal-align: center;
+	vertical-align: bottom;
+	margin-bottom: 22px;
+	visibility: collapse;
+	text-shadow: .5px .5px 2px 2.0 black;
 }
 
-.NoLevelNumber .ArtifactLevelLabel
+.InZoo .Rank_09 .RealRankLabel
 {
 	visibility: collapse;
 }
 
-.Small .ArtifactLevelLabel 
+.Rank_09 .RankLabel
 {
-	width: 32px;
-	height: 12px;
-	font-size: 10px;
-	border: 1px solid black;
-
+	visibility: visible;
 }
 
-
-
-.Small #ArtifactLevelIcon.Tier01Radiant
+.RankFrame,
+.Rank_01_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_01_melee_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_01-1_psd.vtex");
 }
-
-.Large #ArtifactLevelIcon.Tier01Radiant {
-    background-image: url("s2r://panorama/images/dialogs/badges/lvl_01_melee_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier01Dire
+.Rank_01_2 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_01_dire_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_01-2_psd.vtex");
 }
-
-.Large #ArtifactLevelIcon.Tier01Dire {
-    background-image: url("s2r://panorama/images/dialogs/badges/lvl_01_dire_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier02Red
+.Rank_01_3 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_red_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_01-3_psd.vtex");
+}
+.Rank_01_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_01-4_psd.vtex");
+}
+.Rank_01_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_01-5_psd.vtex");
 }
 
-.Large #ArtifactLevelIcon.Tier02Red
+.Rank_02_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_red_128px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_02-1_psd.vtex");
+}
+.Rank_02_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_02-2_psd.vtex");
+}
+.Rank_02_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_02-3_psd.vtex");
+}
+.Rank_02_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_02-4_psd.vtex");
+}
+.Rank_02_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_02-5_psd.vtex");
 }
 
-.Small #ArtifactLevelIcon.Tier02Green
+.Rank_03_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_green_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_03-1_psd.vtex");
+}
+.Rank_03_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_03-2_psd.vtex");
+}
+.Rank_03_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_03-3_psd.vtex");
+}
+.Rank_03_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_03-4_psd.vtex");
+}
+.Rank_03_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_03-5_psd.vtex");
 }
 
-.Large #ArtifactLevelIcon.Tier02Green
+.Rank_04_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_green_128px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_04-1_psd.vtex");
+}
+.Rank_04_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_04-2_psd.vtex");
+}
+.Rank_04_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_04-3_psd.vtex");
+}
+.Rank_04_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_04-4_psd.vtex");
+}
+.Rank_04_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_04-5_psd.vtex");
 }
 
-.Small #ArtifactLevelIcon.Tier02Blue
+.Rank_05_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_blue_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_05-1_psd.vtex");
+}
+.Rank_05_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_05-2_psd.vtex");
+}
+.Rank_05_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_05-3_psd.vtex");
+}
+.Rank_05_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_05-4_psd.vtex");
+}
+.Rank_05_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_05-5_psd.vtex");
 }
 
-.Large #ArtifactLevelIcon.Tier02Blue
+.Rank_06_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_blue_128px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_06-1_psd.vtex");
+}
+.Rank_06_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_06-2_psd.vtex");
+}
+.Rank_06_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_06-3_psd.vtex");
+}
+.Rank_06_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_06-4_psd.vtex");
+}
+.Rank_06_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_06-5_psd.vtex");
 }
 
-.Small #ArtifactLevelIcon.Tier02Black
+.Rank_07_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_black_64px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_07-1_psd.vtex");
+}
+.Rank_07_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_07-2_psd.vtex");
+}
+.Rank_07_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_07-3_psd.vtex");
+}
+.Rank_07_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_07-4_psd.vtex");
+}
+.Rank_07_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_07-5_psd.vtex");
 }
 
-.Large #ArtifactLevelIcon.Tier02Black
+.Rank_08_1 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_02_black_128px_psd.vtex");
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_08-1_psd.vtex");
+}
+.Rank_08_2 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_08-2_psd.vtex");
+}
+.Rank_08_3 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_08-3_psd.vtex");
+}
+.Rank_08_4 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_08-4_psd.vtex");
+}
+.Rank_08_5 .RankFrame
+{
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_08-5_psd.vtex");
 }
 
-.Small #ArtifactLevelIcon.Tier03Red
+.Rank_09 .RankFrame
 {
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier03Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier03Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier03Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier03Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier03Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier03Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier03Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_03_black_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier04Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier04Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier04Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier04Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier04Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier04Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier04Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier04Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_04_black_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier05Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier05Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier05Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier05Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier05Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier05Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier05Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier05Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_05_black_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier06Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier06Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier06Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier06Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier06Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier06Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier06Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier06Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_06_black_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier07Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier07Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier07Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier07Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier07Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier07Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier07Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier07Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_07_black_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier08Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_red_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier08Red
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_red_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier08Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_green_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier08Green
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_green_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier08Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_blue_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier08Blue
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_blue_128px_psd.vtex");
-}
-
-.Small #ArtifactLevelIcon.Tier08Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_black_64px_psd.vtex");
-}
-
-.Large #ArtifactLevelIcon.Tier08Black
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_08_black_128px_psd.vtex");
-}
-
-
-.IsBot #ArtifactLevelIconAI
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_00_bot_64px_psd.vtex");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
-
-.Large .IsBot #ArtifactLevelIconAI
-{
-	background-image: url("s2r://panorama/images/dialogs/badges/lvl_00_bot_128px_psd.vtex");
-}
-
-#ProgressScreens #ArtifactLevelIcon
-{
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_09_psd.vtex");
 }

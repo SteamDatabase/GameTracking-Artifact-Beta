@@ -6,8 +6,6 @@
 #[
 $ORIGIN
 % 5i:  [%32.32s]
-% 5ims [% 5ims async] [% 5i loaded] %s
-% 5ims [% 5ims async] [% 5i loaded] TOTAL
 %-120s
 %-120s - %s
 %.15lf
@@ -54,6 +52,8 @@ $ORIGIN
 - ResourceRelease(), ResourceReferencePairingId_t: %d, operation: %lld
 - Schematized reference, %d operations: %s
 - Schematized reference, Pairing ID: %d, operation: %lld
+-- RESOURCE LOADING STATS ------------------------------------------------
+-- RESOURCE STREAMING STATS ----------------------------------------------
 -->
 -1
 -> Matched %d of %d loaded resources
@@ -94,11 +94,9 @@ $ORIGIN
 16CNullTypeManager
 16ICommandCallback
 18CPlaceholderConVar
-18ITSHashConstructorI21ResourceBindingBase_tE
 19CSchemaRegistration
 1DBlend
 20CPostConnectCallback
-20CResourceConstructor
 20IResourceHandleUtils
 20IResourceSystemUtils
 20IResourceTypeManager
@@ -445,6 +443,7 @@ C_OP_WorldTraceConstraint
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 ChangeCallbackOnChange
 ChangeSize
+CharacterSetBuild
 ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
@@ -901,6 +900,7 @@ V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
 V_PathContainsPath
+V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
 V_StrTrim
@@ -972,6 +972,10 @@ WorkshopSetup001
 WorldRendererBuilderMgr001
 WorldRendererMgr001
 [
+[% 5ims alloc] [% 5ims async] [% 5ims final] [% 5i / %10s] %s
+[% 5ims alloc] [% 5ims async] [% 5ims final] [% 5i / %10s] TOTAL
+[% 5ims cb] [% 5ims async cb] [% 5i / %10s] %s
+[% 5ims cb] [% 5ims async cb] [% 5i / %10s] TOTAL
 [%.3f server clamped to %.3f]
 [refcount % 4d]
 \"
@@ -989,6 +993,7 @@ _Jv_RegisterClasses
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
+_V_strEndsWith
 _V_strncat
 _V_strncmp
 _V_strncpy

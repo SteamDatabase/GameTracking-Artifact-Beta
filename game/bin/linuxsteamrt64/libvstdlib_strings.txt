@@ -32,7 +32,6 @@ $ORIGIN
 %s %c%s
 %s %d
 %s %s
-%s %s %s %s
 %s %s -nominidumps
 %s not implemented right now
 %s%d
@@ -42,7 +41,6 @@ $ORIGIN
 %s: Unable to progress %d jobs to finished state (%llums elapsed)
 %s: string format requested %d chars
 %u
-'
 ( def. "%s" )
 (*%s*),
 (main)
@@ -67,6 +65,7 @@ $ORIGIN
 -testscript_inline
 -teststringtokencollision
 -threads
+...
 ../public/ordered_constructor.h
 ../public/tier0/threadtools.h
 ../public/tier0/tslist.h
@@ -78,7 +77,6 @@ $ORIGIN
 ../public/tier1/utltshash.h
 /dev/urandom
 0
-0123456789abcdef
 0x%016llX
 0x%08X
 0x%p
@@ -128,8 +126,6 @@ $ORIGIN
 17CGlobalThreadPool
 17CPooledFunctorJob
 18CPlaceholderConVar
-18CUtlCharConversion
-18CUtlJSONConversion
 19CDmSymbolTableLarge
 19CUtlNoEscConversion
 19IKeyValuesErrorSpew
@@ -138,7 +134,6 @@ $ORIGIN
 20CUniformRandomStream
 20IConfigurationSystem
 20IUniformRandomStream
-21CUtlCStringConversion
 21CUtlStringTokenSystem
 21IUtlStringTokenSystem
 22IFiberThreadWorkerPool
@@ -157,9 +152,7 @@ $ORIGIN
 8IProcess
 9IPipeRead
 ;
-<!--
 </script>
-<<
 << NULL >>
 <NULL>
 <deferred>
@@ -170,7 +163,6 @@ $ORIGIN
 <unconnected>
 <unknown>
 <unspecified>
->>
 ?
 @
 A
@@ -302,6 +294,7 @@ CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomFloatExp(float, float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
+CUtlCharConversion::CUtlCharConversion(char, char const*, int, CUtlCharConversion::ConversionArray_t const*)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -323,6 +316,7 @@ Cannot add a thread job already committed to another thread pool
 Cannot mix and match tag specifiers with channel name specifiers.
 ChangePriority
 Channel Name
+CharacterSetBuild
 CmpJob
 Color
 CommandLine
@@ -422,7 +416,6 @@ GetCStringCharConversion
 GetDefaultUniformRandomStream
 GetDisableFocusBasedPriorityBoost
 GetDmElementTypeSymbolMap
-GetJSONCharConversion
 GetJobManualEventFromPool
 GetQuantizedFloatEncoderByIndex
 GetQuantizedFloatEncodersSharingIndex
@@ -778,31 +771,18 @@ VRenderDeviceSetupV001
 VScriptManager010
 VStdLib_GetICVarFactory
 VStringTokenSystem001
-V_CompareNameWithWildcards
 V_FixDoubleSlashes
 V_FixSlashes
 V_GetErrno
 V_IsAbsolutePath
-V_LogMultiline
-V_LogMultilineToArray
-V_ParseToken
 V_PathContainsPath
 V_RandomString(int)
 V_RemoveDotSlashes
 V_SetErrno
-V_SplitString(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
-V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_SplitString2(char const*, char const**, int, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_SplitString2InPlace(char*, char const**, int, CUtlVector<char const*, CUtlMemory<char const*, int> >&)
-V_SplitStringInPlace(char*, char const*, CUtlVector<char const*, CUtlMemory<char const*, int> >&)
-V_SplitStringOnSeparators(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
-V_SplitStringOnSeparators(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_SplitWString
-V_SplitWString2
 V_StrTrim
 V_StripAndPreserveHTML
 V_StripAndPreserveHTMLCore
-V_StripAndPreserveHTMLCoreLength
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
@@ -847,7 +827,6 @@ V_swscanf
 V_tier0_strstr
 V_vsnprintf
 V_vsnprintfSize
-V_wcsistr(wchar_t const*, wchar_t const*)
 V_wcstod
 V_wcstoi64
 VisBuilder_001
@@ -878,7 +857,6 @@ YieldWait
 [0 0]
 [ConsoleOnly]
 [DoNotEcho]
-\
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
@@ -887,12 +865,12 @@ _V_ExtractFilePath
 _V_MakeAbsolutePath
 _V_StrSubst
 _V_StringAfterPrefix
+_V_hextobinary
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
 _V_strnistr_fast
-_V_wcsncpy_bytes
 __bss_start
 __ctype_toupper_loc
 __cxa_atexit
@@ -1107,6 +1085,7 @@ type
 typeinfo for CThread
 typeinfo for CThreadSyncObject
 typeinfo for CUniformRandomStream
+typeinfo for CUtlCharConversion
 typeinfo name for CUniformRandomStream
 u64( %lld = 0x%llX )
 uint32

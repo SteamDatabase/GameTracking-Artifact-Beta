@@ -12,6 +12,7 @@ $tI
 %0*llx bytes of %s at %0*llx%s
 %0*llx: address after highest user-space virtual region
 %02d: %u:0x%llx
+%02x
 %12.3f %12.2f
 %14.3f %12.2f
 %14s %10s
@@ -35,6 +36,7 @@ $tI
 %llu,%u,%u,%s
 %s %d: proc %d (group %u:%u)
 %s %i %s
+%s %s %s %s
 %s '%s'
 %s (%d) : %s
 %s (%i) : %s
@@ -286,6 +288,7 @@ $tI
 /tmp/.steam-sem-names
 0
 0123456789ABCDEF
+0123456789abcdef
 0@
 10CTestSuite
 10ITestSuite
@@ -306,8 +309,11 @@ $tI
 17CStdMemAlloc_DataI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEE
 17CThreadSyncObject
 18CThreadManualEvent
+18CUtlCharConversion
+18CUtlJSONConversion
 18IMemAlloc_Internal
 20IMobileEventListener
+21CUtlCStringConversion
 22CPerfTraceDepotDefault
 22CSimpleLoggingListener
 22CStdMemAlloc_Data_Base
@@ -377,6 +383,7 @@ $tI
 </s>
 </u>
 </ul>
+<<
 <b>
 <br>
 <h1>
@@ -388,6 +395,7 @@ $tI
 <u>
 <ul>
 >::operator ()
+>>
 ?
 @
 @X@
@@ -561,6 +569,8 @@ CFiber::SetCurrentFiber(CFiber*)
 CFiber::SetThreadFiberMemoryRange(unsigned long)
 CFiber::WaitForJobCompletion(CEventListNode&)
 CFiber::~CFiber()
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal(unsigned long long)
+CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CLoggingSystem::AllocTag overflowed!
 CMemAllocSystemInitialize
 CMiniDumpComment encountered an error while generating the comment
@@ -598,6 +608,21 @@ CStackTop_ReferenceParentStack::CStackTop_ReferenceParentStack(void const* const
 CStackTop_ReferenceParentStack::ChangeReferencedStack(void const* const*, int)
 CStackTop_ReferenceParentStack::ReleaseParentStackReferences()
 CStackTop_ReferenceParentStack::~CStackTop_ReferenceParentStack()
+CStrAutoEncode::Clear()
+CStrAutoEncode::Copy(CStrAutoEncode const&)
+CStrAutoEncode::InitEmpty()
+CStrAutoEncode::PopulateUTF16() const
+CStrAutoEncode::PopulateUTF32() const
+CStrAutoEncode::PopulateUTF8() const
+CStrAutoEncode::SetCopy(char const*, int)
+CStrAutoEncode::SetCopy(unsigned short const*, int)
+CStrAutoEncode::SetCopy(wchar_t const*, int)
+CStrAutoEncode::SetUTF16Copy(char const*)
+CStrAutoEncode::SetUTF16Copy(wchar_t const*)
+CStrAutoEncode::SetUTF32Copy(char const*)
+CStrAutoEncode::SetUTF32Copy(unsigned short const*)
+CStrAutoEncode::SetUTF8Copy(unsigned short const*)
+CStrAutoEncode::SetUTF8Copy(wchar_t const*)
 CTSList
 CTSQueue
 CTSQueue corruption
@@ -714,6 +739,8 @@ CThreadSyncObject::WaitForMultiple(int, CThreadSyncObject*, bool, unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::operator!() const
 CThreadSyncObject::~CThreadSyncObject()
+CUtlCharConversion::CUtlCharConversion(char, char const*, int, CUtlCharConversion::ConversionArray_t const*)
+CUtlCharConversion::FindConversion(char const*, int*)
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*) const
@@ -811,6 +838,7 @@ CatchAndWriteMiniDumpEx
 CatchAndWriteMiniDumpExForVoidPtrFn
 CatchAndWriteMiniDumpExReturnsInt
 CatchAndWriteMiniDumpForVoidPtrFn
+CharacterSetBuild
 Client Game
 Client Input/Output
 Client Physics
@@ -890,12 +918,14 @@ GenuineIntel
 GetAddressTranslationData
 GetCPUFrequencyResults
 GetCPUInformation
+GetCStringCharConversion
 GetDefaultMiniDumpHandler
 GetDefaultMiniDumpTypeFlags
 GetFileAndLineFromAddress
 GetHardwareClockReliably
 GetInsertPtr
 GetInstructionPointer
+GetJSONCharConversion
 GetLocalHostname
 GetModuleNameFromAddress
 GetNameFromOSType
@@ -1528,6 +1558,7 @@ SetPtr
 SetThreadedLoadLibraryFunc
 SetWin32ConsoleColor
 SetupWin32ConsoleIO
+SkipBlanks
 SoundMix
 SoundOperators
 StackContext_StartData_t::ReplaceReturnContext(JmpBuf_AlternateStack_t*)
@@ -1550,6 +1581,7 @@ StackTools_RemoveModuleMappingListener
 StackTools_VerifyLoadedModuleMappings
 Steam
 Stop has been called on thread.
+StrReplaceChar
 Sum (%s)
 T
 TMPDIR
@@ -1614,6 +1646,7 @@ Tools
 Total virtual bytes: %s
 TracerPid:
 TranslateStackInfo
+TrimRight
 TruncateAt
 UCS-2
 USER
@@ -1645,11 +1678,13 @@ VPROJECT
 VProf spike "%s" from %f to %f ms
 V_AbbreviatePathInPlace
 V_AddBackSlashesToSpecialChars
+V_AppearsToBeANumber
 V_AreFileNamesEqual
 V_AreSlashesCorrect
 V_BBCodeToHTML
 V_BasicHtmlEntityEncode
 V_BoyerMooreSearch
+V_CompareNameWithWildcards
 V_CopyMemory3D
 V_DecodeBackslashSequencesInString
 V_ExtractDomainFromURL
@@ -1676,11 +1711,14 @@ V_IsFakePath
 V_IsMeanSpaceW
 V_IsValidDomainNameCharacter
 V_IsValidURLCharacter
+V_LogMultiline
+V_LogMultilineToArray
 V_MakeAbsolutePathBuffer
 V_MakeAbsoluteVPKPathName
 V_MakeAbsoluteVPKPathNameBuffer
 V_MakeRelativePathBuffer
 V_ParseLine
+V_ParseToken
 V_PathContainsPath
 V_PathNamesAreEquivalent
 V_PathsMatch
@@ -1688,7 +1726,17 @@ V_PrettifyFloat
 V_PrettifyMem
 V_PrettifyNum
 V_RemoveDotSlashes
+V_RemoveFormatSpecifications
 V_SetErrno
+V_SplitString(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
+V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
+V_SplitString2(char const*, char const**, int, CUtlVector<char*, CUtlMemory<char*, int> >&)
+V_SplitString2InPlace(char*, char const**, int, CUtlVector<char const*, CUtlMemory<char const*, int> >&)
+V_SplitStringInPlace(char*, char const*, CUtlVector<char const*, CUtlMemory<char const*, int> >&)
+V_SplitStringOnSeparators(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
+V_SplitStringOnSeparators(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
+V_SplitWString
+V_SplitWString2
 V_StrTrim
 V_StringToColor
 V_StringToFloatArray
@@ -1701,6 +1749,7 @@ V_StripSurroundingWhitespace
 V_StripTrailingSlash
 V_StripTrailingWhitespace
 V_TokenWaiting
+V_TranslateLineFeedsToUnix
 V_URLContainsDomain
 V_URLDecode
 V_URLDecodeRaw
@@ -1766,6 +1815,7 @@ V_atoi
 V_atoi64
 V_atoui64
 V_clearerr
+V_containsWhitespace
 V_cos
 V_cosf
 V_cosh
@@ -1801,10 +1851,14 @@ V_ftell
 V_ftelli64
 V_fwrite
 V_hypot
+V_isalnum_str
+V_isalpha_str
 V_isbreakablewspace
 V_isbreakablewspace32
+V_isdigit_str
 V_isnan
 V_isstrlower_fast
+V_isvalidhex
 V_iswalnum
 V_iswalpha
 V_iswcntrl
@@ -2012,6 +2066,9 @@ _V_StringAfterPrefix
 _V_StringAfterPrefixCaseSensitive
 _V_StripExtension
 _V_StripLastDir
+_V_binarytohex
+_V_hextobinary
+_V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
@@ -2285,6 +2342,7 @@ typeinfo for CThreadEvent
 typeinfo for CThreadFullMutex
 typeinfo for CThreadSemaphore
 typeinfo for CThreadSyncObject
+typeinfo for CUtlCharConversion
 typeinfo for CVProfReporter
 typeinfo for CWorkerThread
 typeinfo for CallStackStatStructDescFuncs
@@ -2296,6 +2354,7 @@ typeinfo name for CThreadEvent
 typeinfo name for CThreadFullMutex
 typeinfo name for CThreadSemaphore
 typeinfo name for CThreadSyncObject
+typeinfo name for CUtlCharConversion
 typeinfo name for CVProfReporter
 typeinfo name for CWorkerThread
 typeinfo name for CallStackStatStructDescFuncs
@@ -2317,6 +2376,7 @@ vtable for CThreadEvent
 vtable for CThreadFullMutex
 vtable for CThreadSemaphore
 vtable for CThreadSyncObject
+vtable for CUtlCharConversion
 vtable for CVProfReporter
 vtable for CWorkerThread
 vtable for __cxxabiv1::__class_type_info
@@ -2334,6 +2394,7 @@ wcstoll
 wcstoull
 windows
 wt
+{}()':
 })
 ~
 ~DSTRCT
