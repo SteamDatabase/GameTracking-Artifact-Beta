@@ -23,7 +23,6 @@ $ORIGIN
 %g
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %s #%d: '%s'/'%s': %d != %d
@@ -41,7 +40,6 @@ $ORIGIN
 %s: %d != %d
 %s: %s
 %s: '%s' != '%s'
-%s: string format requested %d chars
 %s:%s
 %s:%s needs base %s:%s to be registered
 %s< %d >
@@ -86,7 +84,6 @@ $ORIGIN
 -sse4
 -use_tier2_bundle
 -use_tier3_bundle
-...
 ../public/ordered_constructor.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utltshash.h
@@ -236,16 +233,10 @@ CAuthPhysJoint
 CBitVec
 CBufferString
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
@@ -253,7 +244,6 @@ CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::Trim(char const*)
 CBufferStringN
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -274,6 +264,7 @@ CResourceArray
 CResourcePointer
 CResourceString
 CResourceToKV3 encountered a non-array char... (%s)
+CSchemaSystemInternalRegistration
 CSchemaType
 CSplitScreenSlot
 CThreadEvent::CThreadEvent(bool)
@@ -290,10 +281,30 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CTransformScaled
 CUtlIncrementalVector
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
 CUtlReference
+CUtlString::Append(char const*)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
 CUtlStringToken
 CUtlSymbolLarge
 CUtlVector
@@ -482,7 +493,6 @@ Flag: SCHEMA_CF1_HAS_VIRTUAL_MEMBERS
 Flag: SCHEMA_CF1_IS_ABSTRACT
 FlattenedSerializersVersion001
 FontManager_001
-FormatV
 FourVectors
 G->B
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
@@ -570,6 +580,9 @@ Missing file '%s'
 ModelDocUtils001
 Msg
 Multiple instances of schema system are initialized. %p != %p
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
@@ -735,7 +748,6 @@ Two Bone
 Type '%s' was unresolved at local scope, but already exists at global scope!
 Type_DeclaredClass
 Type_DeclaredEnum
-UPDATE_STRING_TOKEN_DATABASE
 Unable to write file '%s'
 Unaccounted
 Unexpected end of file
@@ -747,6 +759,8 @@ Unrecognized type '%d'
 Unsupported text encoding id.
 Unused
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -780,15 +794,8 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 VTable?
-V_FixDoubleSlashes
-V_FixSlashes
 V_PrettifyNum
-V_RemoveDotSlashes
-V_StrTrim
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
-V_UnqualifiedFileName
 V_acosf
 V_asinf
 V_atan2f
@@ -804,7 +811,6 @@ V_cosf
 V_expf
 V_fmodf
 V_fpclassify
-V_frexpf
 V_isnan
 V_logf
 V_powf
@@ -816,19 +822,14 @@ V_snprintf
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_tanf
-V_tier0_strstr
 V_uuid_t
 V_vsnprintf
-V_vsnprintfSize
 ValidateAtomicType
 ValidateModuleLocalTypeScope
 VerifySchemaBindingConsistency
@@ -1271,6 +1272,7 @@ relative_origin
 renderingpipelines
 replicated
 resource
+resourcefile
 resourcesystem
 rnd_down
 rnd_up
@@ -1318,6 +1320,7 @@ strchr
 strcmp
 strcpy
 strlen
+strstr
 suppress
 surface_prop
 test_angles_relative
@@ -1334,7 +1337,6 @@ uint8
 unsigned char
 use_additional_offset
 user
-utlstring.cpp
 vanmgrph
 version
 vmdl

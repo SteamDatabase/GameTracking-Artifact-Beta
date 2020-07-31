@@ -196,12 +196,10 @@ $tI
 %s : %d
 %s [%s]
 %s allocation count overflow( %llu > %llu )
-%s allocation count overflow( %llu >= %llu )
 %s%d
 %s,
 %s/
 %s/%s's viewport (%d,%d - %d,%d) extends outside of the framebuffer (%d,%d)
-%s: string format requested %d chars
 %sLOD Level: %d Draw Calls: %d Triangles: %d
 %u
 &
@@ -287,15 +285,14 @@ $tI
 .
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
-...
 ... }
 ...<truncated>...
 ../common/protobuf_helpers.cpp
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utl3dallocator.h
-../public/tier1/utlblockmemory.h
 ../public/tier1/utlhashdict.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
@@ -794,7 +791,6 @@ AddInt32
 AddInt64
 AddMessage
 AddString
-AddToTailGetPtr
 AddToView
 AddUInt32
 AddUInt64
@@ -949,8 +945,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -958,7 +952,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -969,7 +962,6 @@ CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -1358,12 +1350,44 @@ CUtlBlockMemory overflow!
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlMultiList overflow! (exhausted index range)
 CUtlMultiList overflow! (exhausted memory allocator)
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1745,7 +1769,6 @@ Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d
 Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d %d) - some lighting will be missing from fog - use vr_show_light_fog_clipmap_cb_cost
 FogLightView
 FontManager_001
-FormatV
 Found invalid proto option data for:
 FvP12CSceneObjectE
 G
@@ -1754,7 +1777,7 @@ G channel not found!
 G->B
 GAME
 GAMECONSOLE
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
 GLIBCXX_3.4
@@ -1824,6 +1847,7 @@ Hammer/UsesBakedLighting
 HammerMapLoader001
 Has Collision;
 HasField
+HashString
 HelpSystem_001
 Hex and octal numbers must be integers.
 Hide
@@ -2065,6 +2089,10 @@ MoveLayerToBeAfterLayer
 MovementSettings
 Multiple extension registrations for type "
 Multithreaded translucent
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -2516,7 +2544,6 @@ RenderMeshFile
 RenderPrimitiveType_t
 RenderService_001
 RenderSkeletonBone_t
-RenderSystem/Use32BitDepthBuffer
 RenderSystemSurface001
 RenderUtils_001
 RenderingPipeline
@@ -2668,7 +2695,6 @@ Source2ServerSerializers002
 Spatial partitions: %d
 Spherical %sStrength %.2fExponent %.2f
 SpotLight
-SpotShadowColor
 SpotShadowDepth
 Ss
 Stack depth limit hit (%d)
@@ -2770,7 +2796,6 @@ UNAVAILABLE
 UNIMPLEMENTED
 UNKNOWN
 UNKNOWN_ENUM_VALUE_%s_%d
-UPDATE_STRING_TOKEN_DATABASE
 UTF-8 data when
 UV88
 UVLX8888
@@ -2809,6 +2834,8 @@ Use multiview instancing for stereo rendering.
 Use to set a single indexed light to black
 UserInfoChangeService_001
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -2847,7 +2874,6 @@ VTT for std::basic_ostringstream<char, std::char_traits<char>, std::allocator<ch
 VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 V_CopyMemory3D
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -2857,12 +2883,10 @@ V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -2898,18 +2922,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -3329,6 +3348,7 @@ fwrite
 g
 g default
 g_Mathlib_GammaToLinearByteTable
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -3848,6 +3868,7 @@ m_nUpType
 m_nValue
 m_nVectorComponent
 m_nVertexCount
+m_nViewId
 m_nViewProducerIndex
 m_nVisibleToPlayer
 m_nWidth
@@ -4024,7 +4045,6 @@ memchr
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 mesh
 mesh.cpp
@@ -4333,10 +4353,11 @@ scenesimplevb
 scenesysBox
 scenesysCone
 scenesysDodecahedron
+scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6518): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7795): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
+scenesystem.cpp(6527): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7804): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp
@@ -4554,9 +4575,11 @@ strerror
 string
 strings::Substitute format string invalid: asked for "$
 strlen
+strnlen
 strpbrk
 strrchr
 strspn
+strstr
 strtof
 strtol
 strtoll
@@ -4631,7 +4654,6 @@ utils/sceneutils.h(70): Material %s cannot render in mode %s but is being asked 
 utils/tonemapsystem.cpp
 utils/volumetricfog.cpp
 utlbuffer.cpp
-utlstring.cpp
 uvtangent
 v %g %g %g
 v %g %g %g%s

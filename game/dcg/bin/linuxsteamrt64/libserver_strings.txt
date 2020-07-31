@@ -436,6 +436,7 @@
 #CardEffect_11063_0
 #CardEffect_11064_0
 #CardEffect_11065_0
+#CardEffect_11067_0
 #CardEffect_19001_0
 #CardEffect_19002_0
 #CardEffect_19003_0
@@ -888,7 +889,6 @@ $effectSourceObjectID
 %i.%i.%i.%i:%i
 %i: %s at %f
 %ld
-%lg
 %lld
 %llu
 %llu,
@@ -967,7 +967,6 @@ $effectSourceObjectID
 %s Touching %s %s %s;
 %s allocation count overflow
 %s allocation count overflow( %llu > %llu )
-%s allocation count overflow( %llu >= %llu )
 %s allocation count overflow( add %llu + current %llu > max %llu )
 %s at %.0f %.0f %0.f uses model %s, which has an invalid prop_data type. DELETED.
 %s at %.0f %.0f %0.f uses model %s, which has no propdata which means it must be used on a prop_static. DELETED.
@@ -1183,7 +1182,6 @@ $effectSourceObjectID
 %s: entity %d restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d skipping restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d starting %s
-%s: string format requested %d chars
 %s: unexpected parameter format for InputSetBodyGroup. Had %s, expected <bodygroupname,partnumber>
 %s: unexpected parameter type %s, expected a CString
 %s: unexpected token %s
@@ -1694,10 +1692,10 @@ $effectSourceObjectID
 ../../public/ordered_constructor.h
 ../../public/scenesystem/scenevisibility.h
 ../../public/tier0/tslist.h
+../../public/tier0/utlfixedmemory.h
 ../../public/tier1/eventdispatcher.h
 ../../public/tier1/loggingmetahelpers.h
 ../../public/tier1/memstack.h
-../../public/tier1/utlfixedmemory.h
 ../../public/tier1/utlleanvector.h
 ../../public/tier1/utllinkedlist.h
 ../../public/tier1/utlmultilist.h
@@ -1709,7 +1707,7 @@ $effectSourceObjectID
 ../public/entity2/concreteentitylist.h
 ../public/gcsdk/gcsteamdefines.h
 ../public/networksystem/networkfieldscratchdata.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
@@ -6112,6 +6110,7 @@ Activate (Blink Dagger)
 Activate (Bracers of Sacrifice)
 Activate (Cheating Death)
 Activate (Claddish Archivist)
+Activate (Claszureme Hourglass)
 Activate (Cursed Satyr)
 Activate (Dagon)
 Activate (Emissary of the Quorum)
@@ -6205,7 +6204,6 @@ AddResource
 AddRule
 AddRule(CRule) : Add a CRule object (defined in rulescript_base.nut)
 AddString
-AddToTailGetPtr
 AddUInt32
 AddUInt64
 AddVelocity
@@ -6660,6 +6658,7 @@ BuildCacheSubscribed(CEconItem)
 BuildComponentRecursive
 BuiltRightHanded
 BulletProof
+Bundle has circular reference:
 Burning Oil
 Burning Pitch
 Burrowstrike
@@ -6815,8 +6814,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -6824,7 +6821,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -6936,7 +6932,6 @@ CEconItem
 CEconItem::BAddToMessage::std::string
 CEconItem::DeserializeFromProtoBufItem()
 CEconItemAttribute
-CEconItemSchema
 CEconItemSchema::GetAttributeDefinitionByName
 CEconItemSystem::Init
 CEconItemView
@@ -7102,7 +7097,7 @@ CGameMovement(%s):  %d/%s Got a NaN origin on %s
 CGameMovement(%s):  %d/%s Got a NaN velocity on %s
 CGameMovement(%s):  %d/%s Got a velocity too high (>%.2f) on %s
 CGameMovement(%s):  %d/%s Got a velocity too low (<%.2f) on %s
-CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment %s on model %s
+CGameParticleManager::SetParticleControlEnt: Unable to lookup attachment %s on model %s for entity %s
 CGameParticleManagerSystem
 CGameRules
 CGameRulesProxy
@@ -7983,13 +7978,73 @@ CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlMultiList overflow! (exhausted index range)
 CUtlMultiList overflow! (exhausted memory allocator)
 CUtlOctree
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool()
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::FreeAll()
+CUtlScratchMemoryPool::FreeToAllocPoint(UtlScratchMemoryPoolMark_t)
+CUtlScratchMemoryPool::GetCurrentAllocPoint() const
+CUtlScratchMemoryPool::Init(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::Append(char const*, int)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetBaseFilename() const
+CUtlString::GetEmptyString()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Left(int) const
+CUtlString::Purge()
+CUtlString::RemoveFromStart(char const*, bool) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::Slice(int, int) const
+CUtlString::StripFilename() const
+CUtlString::StripTrailingSlash()
+CUtlString::ToLowerFast()
+CUtlString::ToUpperFast()
+CUtlString::Trim(char const*)
+CUtlString::TrimLeft(char const*)
+CUtlString::TrimRight(char const*)
+CUtlString::operator+(CUtlString const&) const
+CUtlString::operator+(char const*) const
+CUtlString::operator+(int) const
+CUtlString::operator+=(CBufferString const&)
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
+CUtlString::operator[](int) const
+CUtlStringBuilder::Data::SetError(bool)
+CUtlStringBuilder::Data::SetLength(unsigned long)
+CUtlStringBuilder::InternalPrepareBuffer(unsigned long, bool, unsigned long)
+CUtlStringBuilder::RemoveWhitespace()
 CUtlStringToken
 CUtlStringToken(%u)
 CUtlSymbol
@@ -9710,7 +9765,6 @@ Format: ent_find <substring>
 Format: ent_find_index <index>
 Format: ent_orient <entity name> <optional: allangles>
 Format: ent_teleport <entity name>
-FormatV
 Forrest Imel
 Fortress Doctrine
 Found %d matches.
@@ -10145,6 +10199,8 @@ Has Collision;
 HasDamageType
 HasField
 HasTag
+HashString
+HashStringConventional
 HaticsType_Default
 HaticsType_None
 Have 20 Creeps In Lane
@@ -10363,6 +10419,7 @@ Infinite time value
 Info Data
 InfoForResourceTypeCAnimData
 InfoForResourceTypeCModel
+InfoForResourceTypeCPostProcessingResource
 InfoForResourceTypeCTextureBase
 InfoForResourceTypeIMaterial2
 InfoForResourceTypeIParticleSystemDefinition
@@ -10438,6 +10495,7 @@ InputDisableAngularConstraint
 InputDisableCollision
 InputDisableCollisions
 InputDisableCollisionsWith
+InputDisableDOF
 InputDisableDamageForces
 InputDisableFloating
 InputDisableLights
@@ -10456,6 +10514,7 @@ InputEnable
 InputEnableAngularConstraint
 InputEnableCollision
 InputEnableCollisions
+InputEnableDOF
 InputEnableDamageForces
 InputEnableLinearConstraint
 InputEnableMotion
@@ -10571,6 +10630,11 @@ InputSetCompareValue
 InputSetControlPoint
 InputSetCounter
 InputSetCycleFrequency
+InputSetDOFFarBlurry
+InputSetDOFFarCrisp
+InputSetDOFNearBlurry
+InputSetDOFNearCrisp
+InputSetDOFTiltToGround
 InputSetDamageFilter
 InputSetDampingRatio
 InputSetDefaultAnimation
@@ -10948,7 +11012,6 @@ Item definition %s: Unable to find equip region mask for region named "%s"
 Item definition index %u must be greater than or equal to zero
 Item set %s: Attribute definition "%s" was not found
 Item set %s: Bundle definition "%s" was not found
-Item set %s: Bundle definition "%s" was not found but was inferred from the data.
 Item set %s: Item definition "%s" was not found
 Item set %s: No bundle definition specified or found.
 Item set %s: Set contains no items
@@ -11134,6 +11197,7 @@ Line %d: %s
 Line %d: Invalid literal value "%s"
 Line %d: Invalid value "%s"
 Line2D
+Linear
 Linear Interp.
 List all physics component contents of every entity in the game;    -stream [1|0] : initiate|terminate streaming to physics debugger    -allents: include non-physical entities    -classes: print class names    -sdk    : Rubikon build    -world  : current state of the world    -world -touch: list body pairs (bodies in contact)    -world -save <name>: save world to a file    -world -mem: memory dump    -world -snapshots: Start/Stop dumping snapshots of the world into the current directory    -world -profiletraces: ProfileRecordedTraces    -world -agg: current aggregate data registry (loaded resources)
 List all spawn groups
@@ -11541,6 +11605,10 @@ Multiple registration of class %s
 Multisource %s enabled (%d inputs)
 Murder Creep
 Murder Plot
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 Must specify a valid (non-zero) renewal frequency.
 Must specify a valid renewal period.
 MutableMessage
@@ -12287,7 +12355,7 @@ P29CNavBreadthFirstSearchLattice
 P33BreadthFirstSearchVolumeCollector
 P@%s %d
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
-PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2076
+PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2068
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:108
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:144
 PARALYZE
@@ -12619,6 +12687,7 @@ PointWorldTextJustifyVertical_t
 PointWorldTextReorientMode_t
 Poised to Strike
 Poison Attack
+Poison Sting
 Poof
 PoolName                                   Allocated        Free   Est. Size    Hit Rate
 PopAllButOnePlusN
@@ -14862,6 +14931,7 @@ Unrecognized type '%d'
 UnregisterAssertionFailureListener
 UnregisterMobileEventListener
 Unresolved object reference '%s'
+Unserialize
 UnserializeKeys
 Unspeakable Seepage
 Unspecified
@@ -14942,6 +15012,9 @@ Using Ref Pos: no
 Using Ref Pos: yes
 Using a specific item loot list as part of a static recipe. Use the general loot list version instead
 Using model "%s"
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
+UtlStringFastCompareLess
 V
 V(
 VALVt
@@ -15029,17 +15102,16 @@ V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_StringToColor
 V_StringToFloatArray
 V_StringToVector
 V_StripTrailingWhitespace
+V_UChar32ToUTF8
 V_URLDecode
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnicodeRepair(char*, EStringConvertErrorPolicy)
 V_UnqualifiedFileName
@@ -15078,7 +15150,6 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
@@ -15086,11 +15157,9 @@ V_strtoui64
 V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_uuid_t
 V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -16715,7 +16784,6 @@ easing
 easy
 econ
 econ_gcmessages.proto
-econ_memory_optimization
 edge_fade_dist
 edictindex
 effectStateChanged
@@ -17321,6 +17389,7 @@ g default
 g:l4d2,
 g_Language
 g_SoundPatchCount
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -17652,7 +17721,6 @@ hint_vr_offset_y
 hint_vr_offset_z
 hint_vr_panel_type
 hintlimiting
-hitbox_lerp
 hitboxset
 hl2
 hl_dissolve_all_dropped_weapons
@@ -17736,7 +17804,6 @@ ignoremsg
 ignoring %s.HL%s on %s
 ik_abs_origin_height_spring_strength_default
 ik_debug_adjusted_groundheight
-ik_debug_chain_to_filter_by
 ik_debug_groundtraces
 ik_decay_hip_offset_after_x_seconds
 ik_enable_only_this_chain
@@ -20660,7 +20727,6 @@ m_looktime
 m_lookupFilename
 m_mInteractionTransformInit
 m_mInteractionTransformTarget
-m_mNodeToWorld
 m_mPreferredCatchTransform
 m_massScale
 m_matHandOffset
@@ -21057,6 +21123,7 @@ m_next
 m_nextShake
 m_nextSpawnID
 m_noGhostCollision
+m_nodeToWorld
 m_noiseAmplitude
 m_offset
 m_oldLayer
@@ -21800,7 +21867,6 @@ memchr
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 mesh.cpp
 meshUtilsKeyValues
@@ -22954,7 +23020,9 @@ pushdir
 pushdir_islocal
 puzzle
 puzzle=%s
+puzzle_data
 puzzle_name
+puzzle_path
 puzzle_section
 puzzles/%s.txt
 pvp
@@ -23881,6 +23949,7 @@ strlen
 strpbrk
 strptime
 strrchr
+strstr
 strtof
 strtok_r
 strtol
@@ -24338,7 +24407,6 @@ uselocaltime
 user_data_downloaded
 uses_essence
 utlbuffer.cpp
-utlstring.cpp
 utlstringtoken
 v
 v %g %g %g

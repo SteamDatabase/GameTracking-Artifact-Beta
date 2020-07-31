@@ -35,15 +35,28 @@ DCGCampaignMap
 #DeleteEventData
 {
 	z-index: 5;
-color: gradient( linear, 0% 0%, 100% 100%, from( #d4c9e1 ), to( #cff2f660 ) );
+	color: gradient( linear, 0% 0%, 100% 100%, from( #d4c9e1 ), to( #cff2f660 ) );
 	font-weight: light;
 	text-transform: uppercase;
 	font-size: 20px;
-//	border: 1px solid white;
 	horizontal-align: right;
+	vertical-align: top;
 	visibility: collapse;
 	vertical-align: center;
 	margin-right: 50px;
+}
+
+#ForceUpdate
+{
+	color: gradient( linear, 0% 0%, 100% 100%, from( #d4c9e1 ), to( #cff2f660 ) );
+	font-weight: light;
+	text-transform: uppercase;
+	font-size: 20px;
+	horizontal-align: right;
+	vertical-align: top;
+	margin-right: 50px;
+	
+	visibility: collapse;
 }
 
 #CampaignLabel
@@ -172,6 +185,11 @@ DragZoom
 	background-image: url("s2r://panorama/images/campaign/mapnodeglow_psd.vtex");
 }
 
+.ChallengeEdgeContainer.Locked:hover
+{
+	background-image: none;
+}
+
 .ChallengeEdge
 {
 	width: 48px;
@@ -261,14 +279,17 @@ DragZoom
 {
 }
 
-.ChallengeEdgeContainer.Locked .ChallengeEdge
-{
-	visibility: collapse;
-}
-
 .ChallengeEdgeContainer.Completed .ChallengeEdge
 {
 	background-image: url("s2r://panorama/images/campaign/campaignfinishedicon_true_png.vtex");
+}
+
+.ChallengeEdgeContainer.Locked .ChallengeEdge
+{
+	background-image: url("s2r://panorama/images/campaign/campaign_locked_icon_psd.vtex");
+	background-size: 80%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 #node1
@@ -468,7 +489,8 @@ DragZoom
 	transform: translateX(-15px) translateY(-15px);
 }
 
-.AppMain #DeleteEventData
+.AppMain #DeleteEventData,
+.AppMain #ForceUpdate
 {
 	visibility: visible;
 }

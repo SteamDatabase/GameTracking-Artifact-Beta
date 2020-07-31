@@ -20,7 +20,6 @@ $ORIGIN
 %f %f %f %f %f %f %f %f %f
 %g
 %i %i %i %i
-%lg
 %lld
 %llu
 %s (Color)
@@ -34,7 +33,6 @@ $ORIGIN
 %s+--
 %s+-- Schema Class: %s
 %s: %s
-%s: string format requested %d chars
 %s:%s needs base %s:%s to be registered
 %s_color
 %s_matgrp
@@ -63,11 +61,10 @@ $ORIGIN
 -sse2
 -sse3
 -sse4
-...
 ../public/ordered_constructor.h
 ../public/scenesystem/memoryvertex.h(159):
 ../public/tier0/tslist.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utltshash.h
@@ -439,8 +436,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -448,7 +443,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -459,7 +453,6 @@ CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -558,10 +551,39 @@ CUtlBlockMemory overflow!
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -902,7 +924,6 @@ FlattenedSerializersVersion001
 FlexOpCode_t
 Flexible;
 FontManager_001
-FormatV
 FourCovMatrices3
 FourVectors2D
 G->B
@@ -933,6 +954,7 @@ HammerMapLoader001
 HangWatchdogInternal_BeginScope
 HangWatchdogInternal_EndScope
 Has Collision;
+HashString
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
@@ -1134,6 +1156,10 @@ MorphFlexControllerRemapType_t
 MorphLookupType_t
 MorphSetData_t
 MovementSettings
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N17CModelTypeManager23AsyncProcessDataResultsE
 N18CRenderMeshManager22AsyncProcessDataResultE
 N24CFieldPathHuffmanEncoder12InternalNodeE
@@ -1401,6 +1427,8 @@ UpperEyelid(
 UserInfoChangeService_001
 Using 10-bit blend indices: are you sure they are supproted on the target hardware?
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -1471,12 +1499,10 @@ V_PathContainsPath
 V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -1509,18 +1535,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -1998,6 +2019,7 @@ m_WorldCollisionNodes
 m_WorldCollisionParams
 m_aAngOffset
 m_anchor
+m_ankleBoneName
 m_attachments
 m_audioParams
 m_audioSounds
@@ -2156,13 +2178,12 @@ m_flClusterRefireTimeMin
 m_flClusterSize
 m_flDefaultExpAirDrag
 m_flDefaultExpQuadAirDrag
-m_flDefaultExpRodAirDrag
 m_flDefaultGravityScale
 m_flDefaultSurfaceStretch
 m_flDefaultThreadStretch
+m_flDefaultTimeDilation
 m_flDefaultVelAirDrag
 m_flDefaultVelQuadAirDrag
-m_flDefaultVelRodAirDrag
 m_flDistance
 m_flDuration
 m_flEmissionDuration
@@ -2321,6 +2342,7 @@ m_lodGroupSwitchDistances
 m_material
 m_materialGroups
 m_materialName
+m_materials
 m_maxForce
 m_maxTorque
 m_meshGroups
@@ -2342,6 +2364,7 @@ m_nBindOffsetBytes
 m_nBody1
 m_nBody2
 m_nBoneComponent
+m_nBoneHash
 m_nBoneIndex
 m_nBoneNameHash
 m_nBoneWeightCount
@@ -2880,8 +2903,6 @@ useMotionDamping
 useSmoothPaths
 use_additional_offset
 user
-utlbuffer.cpp
-utlstring.cpp
 v %g %g %g
 v %g %g %g%s
 v1x

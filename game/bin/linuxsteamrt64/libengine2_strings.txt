@@ -294,7 +294,6 @@ $tI
 %i:%i:"%s"
 %ld
 %ld%c
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -343,7 +342,6 @@ $tI
 %s [%s]
 %s allocation count overflow
 %s allocation count overflow( %llu > %llu )
-%s allocation count overflow( %llu >= %llu )
 %s allocation count overflow( add %llu + current %llu > max %llu )
 %s appended
 %s client
@@ -455,7 +453,6 @@ $tI
 %s: execute perftest.cfg
 %s: invalid millisecond count
 %s: script is already waiting
-%s: string format requested %d chars
 %s:%d
 %s:%s,
 %s:%s:%s
@@ -853,10 +850,10 @@ $tI
 ../public/ordered_constructor.h
 ../public/scenesystem/scenevisibility.h
 ../public/tier0/tslist.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/eventdispatcher.h
 ../public/tier1/memstack.h
-../public/tier1/utlblockmemory.h
-../public/tier1/utlfixedmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
@@ -904,17 +901,18 @@ $tI
 / %s
 /P8i
 /content/
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
 /dev/null
 /game/
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcSortedBlockList.cpp
 /materials/
 0
 0 - no auto-resize
@@ -1439,7 +1437,6 @@ $tI
 18INetworkStringDict
 18IRenderDeviceSetup
 18MenuItemCheckImage
-19:08:47
 19C2S_CONNECT_Message
 19CBidirMsg_RelayInfo
 19CCLCMsg_BaselineAck
@@ -1508,6 +1505,7 @@ $tI
 20ISource2ServerConfig
 20ISource2WorldSession
 20PacketEntitiesFilter
+21:01:55
 21C2S_CONNECT_Message_t
 21CBidirMsg_RelayPacket
 21CCLCMsg_BaselineAck_t
@@ -1745,6 +1743,7 @@ $tI
 43CScreenshotServiceReadTexturePixelsCallback
 43IGameResourceManifestLoadCompletionCallback
 45CNetworkServerSpawnGroup_AllocatePrerequisite
+47
 48CBidirMsg_RelayPacket_SignedDestinationAddress_t
 48CNetworkClientSpawnGroup_WaitForChildSpawnGroups
 48CNetworkServerSpawnGroup_WaitForChildSpawnGroups
@@ -1886,8 +1885,8 @@ $tI
 @&LH
 @?
 @@
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
 @A
 @Unknown compression type %d
 @hltvclientstate.cpp
@@ -1989,7 +1988,6 @@ AddSpawnMessageToDemoSpawnGroups storing message %s (spawn group %s)
 AddString
 AddSystem
 AddSystems
-AddToTailGetPtr
 AddUGCResources: %s
 AddUInt32
 AddUInt64
@@ -2342,7 +2340,6 @@ CBufferString::DefaultExtension(char const*)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -2351,7 +2348,6 @@ CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
 CBufferString::Purge(int)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -3064,10 +3060,64 @@ CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool()
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::FreeAll()
+CUtlScratchMemoryPool::FreeToAllocPoint(UtlScratchMemoryPoolMark_t)
+CUtlScratchMemoryPool::GetCurrentAllocPoint() const
+CUtlScratchMemoryPool::Init(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetBaseFilename() const
+CUtlString::GetExtensionAlloc() const
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Left(int) const
+CUtlString::PathJoin(char const*, char const*)
+CUtlString::Purge()
+CUtlString::RemoveFromStart(char const*, bool) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Right(int) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::StripExtension() const
+CUtlString::StripFilename() const
+CUtlString::Swap(CUtlString&)
+CUtlString::ToLowerFast()
+CUtlString::Trim(char const*)
+CUtlString::TrimRight(char const*)
+CUtlString::operator+(CUtlString const&) const
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator+=(char)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
+CUtlString::operator[](int) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -3738,6 +3788,7 @@ Dump game events to console. (1 = Show Signaling, 2 = Show Posting also).
 Dump malloc stats to stderr.
 Dump memory stats to log.
 Dump memory stats to text file.
+Dump the contents of the next spawngroup manifest to this file.
 Dump vprof counters to the console
 Dumped stack stats struct "%s" to file "%s"
 Dumps the binary sizes to use for the game in loadaddress.vpc
@@ -3842,6 +3893,7 @@ EngineWatchdogThread
 Engine_Shutdown
 Engine_Start_Looping
 Engine_Startup
+EnsureCapacity
 EnsureInstanceBaseline
 EnsureInstanceBaseline: g_pFlattenedSerializers->Encode false (ent %d : %s).
 EntComponentInfo_t
@@ -4024,7 +4076,7 @@ FAILED_PRECONDITION
 FALSE
 FATAL
 FATAL ERROR: unable to register all schema data: %s
-FB/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
+FB
 FCMOV
 FCVAR_CHEAT cvars reverted to defaults (sv_cheats disabled).
 FCVAR_NEVER_AS_STRING
@@ -4143,7 +4195,6 @@ Failed to CRC %s
 Failed to allocate memory
 Failed to assign bool literal value
 Failed to connect to %s.  Reason code %d.  %s
-Failed to convert KV3 to string; error: %s
 Failed to convert introspected block: %s
 Failed to create temporary file %s
 Failed to determine base game directory from %s
@@ -4287,7 +4338,6 @@ Force uncompressed update
 Force user input to this split screen player.
 Forced by cvar
 Forcing engine to render for the next %d frames
-FormatV
 Forward command to server.
 Found %d lines of sight!
 Found invalid proto option data for:
@@ -4337,7 +4387,7 @@ GAMEBIN
 GAMECONSOLE
 GAME_RESOURCE_MANIFEST_HANDLE_INVALID
 GAME_ROOT
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
 GHz
@@ -4514,6 +4564,7 @@ Has Collision;
 HasField
 HasGameUI
 HasModAppSystems
+HashString
 Heap is corrupt
 HeapCompactionService001
 Hebrew
@@ -4783,7 +4834,7 @@ JSON error, unterminated element:
 Jan
 Javanese
 Jul
-Jul 23 2020
+Jul 30 2020
 Jumping to random tick %d (%.2f min)
 Jun
 JustInTime Resource Spawn Group
@@ -5323,6 +5374,10 @@ Multiple extension registrations for type "
 Multiple registration of class %s
 Multiply requested rate by this value to adjust Dota TV send rate
 Multiply specified convar value.
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -7530,6 +7585,8 @@ UsesPanorama
 UsesVGui
 Using 16-bit blend indices
 Using AVI will bring up a dialog for choosing the codec, which may not show if you are running the engine in fullscreen mode!
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 V
 VApplication001
 VAsyncFileSystem2_001
@@ -7607,7 +7664,6 @@ V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_StringToColor
 V_StringToFloatArray
 V_StringToVector
@@ -7621,7 +7677,6 @@ V_UTF32ToUTF16
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -7665,7 +7720,6 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
@@ -7673,11 +7727,9 @@ V_strtoui64
 V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
+V_tier0_strcmp
 V_uuid_t
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcsicmp
 V_wcsnicmp_cch
 V_wcstod
@@ -8345,6 +8397,7 @@ cl_profilereadpacketentities
 cl_resend
 cl_sendtable_cache_filename
 cl_showdemooverlay
+cl_spawngroup_log_filename
 cl_spawngroup_spewresources
 cl_spewserializers
 cl_team
@@ -8735,6 +8788,7 @@ futimes
 g
 g default
 g_Mathlib_GammaToLinearByteTable
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -9729,7 +9783,6 @@ memcmp
 memcpy
 memmove
 memory_check_limit
-mempool.cpp
 memset
 memtools.cpp
 mesh.cpp
@@ -10594,7 +10647,6 @@ stopdemos: exiting demo loop
 stopevent
 strcasecmp
 strchr
-strcmp
 strcmp( pInfo->m_pCPPClassname, pDataDesc->dataClassName ) == 0
 strcpy
 strdup
@@ -10611,8 +10663,10 @@ string_t_table
 strings::Substitute format string invalid: asked for "$
 stringtables
 strlen
+strnlen
 strpbrk
 strrchr
+strstr
 strtof
 strtol
 strtoll
@@ -10963,7 +11017,6 @@ userinfo
 users
 usetitlesafe
 utlbuffer.cpp
-utlstring.cpp
 utlstringtoken
 uuid_generate
 v
@@ -10993,7 +11046,6 @@ vector
 vector2
 vector2_array
 vector2d
-vector3
 vector3_array
 vector4
 vector4_array

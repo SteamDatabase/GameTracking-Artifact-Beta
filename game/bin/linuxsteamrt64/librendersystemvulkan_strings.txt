@@ -167,7 +167,6 @@ $undefined
 %hu
 %i %i %i %i
 %ld%c
-%lg
 %lld
 %lld (%s)
 %llu
@@ -239,7 +238,7 @@ $undefined
 %s / %s MB (non-evictable: %s MB)
 %s 0..0
 %s allocation count overflow
-%s allocation count overflow( %llu >= %llu )
+%s allocation count overflow( %llu > %llu )
 %s called on an immutable constant buffer
 %s is not a valid flag.  Flag passes should have the form '--pass_name[=pass_args]'. Special flag names also accepted: -O and -Os.
 %s profile; removed in version %d
@@ -254,7 +253,6 @@ $undefined
 %s: __pos (which is %zu) > this->size() (which is %zu)
 %s: __position (which is %zu) >= _Nb (which is %zu)
 %s: offset %d, type %x, size %d, index %d, binding %d, stages %d
-%s: string format requested %d chars
 %s[line %d:%d]
 %u (%s)
 %u iterated blocks
@@ -662,12 +660,12 @@ $undefined
 .
 . Found
 . This may be a bug in the validator.
-...
+..
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/memstack.h
-../public/tier1/utlblockmemory.h
-../public/tier1/utlfixedmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
@@ -691,16 +689,15 @@ $undefined
 /=
 /P8i
 /data/data/source2_main/src/thirdparty/glslang/External/spirv-tools/source/opt/type_manager.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcSortedBlockList.cpp
 /proc/%u/%s
 0
 0.05
@@ -720,6 +717,7 @@ $undefined
 1
 1.#IND
 1.2.5
+1.4.5
 1.5.2
 1.8
 1/4 stride is too large:
@@ -1042,9 +1040,9 @@ $undefined
 @4,S,>S,,,
 @>
 @@
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
-@A
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
+@A/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
 @DZ
 @count
 @data
@@ -1154,7 +1152,6 @@ Acos
 Acosh
 AcquireVfxShaderFile: Failed to unserialize CVfxShaderFile.  Is your shadercache out-of-date?  Try deleting it.
 AcquireVfxShaderFile: Failed to unserialize CVfxShaderFileVulkan.  Is your shadercache out-of-date?  Try deleting it.
-AddToTailGetPtr
 Additional fossilize database path: %s
 Addresses
 Addressing model must be Logical for WebGPU environment.
@@ -1177,12 +1174,14 @@ AllocTextureSlot
 AllocateAndUploadSequenceData
 Allocating a variable containing a 16-bit element in
 Allocating a variable containing a 8-bit element in
+Allocation error : not enough memory
 Allocation falling back to non-device local heap failed.
 Allow
 Allow immediately loading mips of textures (when possible) when their headers are loaded, saving IO & reducing latency.
 Allow%d
 Allow%d(
 AllowRecip
+An I/O error occurred when reading/seeking
 Android SM 4.0 (VULKAN)
 AnimAddLayer
 AnimAlign
@@ -1419,8 +1418,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::ExtractFirstDir(char const*)
 CBufferString::FixSlashes(char)
@@ -1430,7 +1427,6 @@ CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
 CBufferString::Purge(int)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -1549,11 +1545,39 @@ CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
 CUtlStreamBuffer does not support TEXT_BUFFER's use CUtlBuffer
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::Append(char const*, int)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator+=(char)
+CUtlString::operator=(CBufferString const&)
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1677,6 +1701,7 @@ Cannot allocate a variable containing a 8-bit type in
 Cannot attach multiple ES shaders of the same type to a single program
 Cannot copy composites of 8- or 16-bit types
 Cannot copy memory of objects containing 8- or 16-bit types
+Cannot create Dictionary from provided samples
 Cannot create a composite containing 8- or 16-bit types
 Cannot create undefined values with 8- or 16-bit types
 Cannot cross link ES and desktop profiles
@@ -1914,6 +1939,7 @@ Construct vec3
 Construct vec4
 Constu
 ConsumeStructuredBuffer
+Context should be init first
 Continue Target
 ContractionOff
 Contradictory depth layouts
@@ -2093,6 +2119,7 @@ Corrupt JPEG data: bad arithmetic code
 Corrupt JPEG data: found marker 0x%02x instead of RST%d
 Corrupt JPEG data: premature end of data segment
 Corrupt image type definition
+Corrupted block detected
 Cos
 Cosh
 Could not perform requested binary operation
@@ -2262,6 +2289,8 @@ Description
 Descriptor pool allocation failed, reducing descriptors to attempt allocating in pool to %d
 Descriptor set layout
 DescriptorSet
+Destination buffer is too small
+Destination buffer is wrong
 Determinant
 Dev Shader
 DevMsg
@@ -2274,6 +2303,8 @@ DeviceEnqueue
 DeviceGroup
 DeviceMemoryBarrier
 DeviceMemoryBarrierWithGroupSync
+Dictionary is corrupted
+Dictionary mismatch
 Didn't expect more than one scan
 Dim SubpassData requires Fragment execution model:
 Dim SubpassData requires Sampled to be 2
@@ -2366,12 +2397,14 @@ EngineServiceMgr001
 EnqueueKernel
 EnqueueMarker
 EnqueuedWorkgroupSize
+EnsureCapacity
 Entering state %d
 Entry point id '
 Entry point name "
 Entry point not found
 Entry points may not have a call graph with cycles.
 EntryPoint
+Error (generic)
 Error creating compute pipeline containing shader: %s
 Error creating graphics pipeline containing shader: %s
 Error creating renderpass from Vulkan Steam Shader Source pre-cache.
@@ -2938,7 +2971,6 @@ For WebGPU, unreachable merge-blocks cannot be the target of a branch.
 For WebGPU, unreachable merge-blocks must be referenced by a reachable merge instruction.
 For WebGPU, unreachable merge-blocks must only contain an OpLabel and OpUnreachable instruction.
 For WebGPU, unreachable merge-blocks must terminate with OpUnreachable.
-FormatV
 Forward pointers must point to a structure
 Fossilize ERROR: %s handle 0x%016lx is not registered. It has either not been recorded, or it failed to be recorded earlier.
 Fossilize ERROR: Base pipeline index is out of range.
@@ -3023,6 +3055,8 @@ FragmentMaskFetchAMD
 FragmentShaderPixelInterlockEXT
 FragmentShaderSampleInterlockEXT
 FragmentShaderShadingRateInterlockEXT
+Frame index is too large
+Frame requires too much memory for decoding
 FrameSync() - bailing out of vkWaitForFences( fenceCount = %d ) after %f seconds, error = %s
 Freed EMS handle %u
 Freed XMS handle %u
@@ -3061,8 +3095,8 @@ G channel not found!
 G->B
 GAMECONSOLE
 GAMEROOT
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (SteamRT 5.4.0-7.really.6+steamrt1.1+srt2) 5.4.1 20160803
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
 GENERAL
@@ -3376,6 +3410,7 @@ HammerMapLoader001
 HangWatchdogInternal_BeginScope
 HangWatchdogInternal_EndScope
 Hash: %llu
+HashString
 Having
 Header block
 Header size does not contain enough data in pipeline cache file %s.  Deleting.
@@ -4155,6 +4190,10 @@ MultiViewport
 Multiple case constructs have branches to the case construct that targets
 Multiple function bodies in multiple compilation units for the same signature in the same stage:
 Multiply
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
@@ -4437,6 +4476,8 @@ OpenGL ES GLSL 3.20 glslang Khronos. 13.3727
 Opened temporary file %s
 Operand
 Operand type must be a pointer
+Operation not authorized at current processing stage
+Operation on NULL destination buffer
 Optional Image Operands are not allowed in the OpenCL
 Ordered
 OriginLowerLeft
@@ -4553,6 +4594,7 @@ PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
 Parameter Types
+Parameter is out of bound
 ParseEXRHeaderFromMemory failed! Error message: %s
 ParseEXRHeaderFromMemory() failed! Error message: %s
 PartialCount
@@ -5017,6 +5059,7 @@ ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
+Restored data doesn't match checksum
 Restrict
 RestrictPointer
 RestrictPointerEXT
@@ -5425,10 +5468,12 @@ SpecConstantTrue
 SpecId
 Specialization constant must be an integer or floating-point number.
 Specialization constant operation
+Specified maxSymbolValue is too small
 SpvOpCooperativeMatrixLoadNV
 SpvOpCooperativeMatrixLoadNV Result Type <id> '
 SpvOpCooperativeMatrixStoreNV
 SpvOpCooperativeMatrixStoreNV Object type <id> '
+Src size is incorrect
 Sret
 SrgbGammaToLinear
 SrgbLinearToGamma
@@ -6058,6 +6103,7 @@ Unknown compression type.
 Unknown constant
 Unknown filter method in IHDR
 Unknown flag '--%s'. Use --help for a list of valid flags
+Unknown frame descriptor
 Unknown freer parameter in png_data_freer
 Unknown glslang keyword
 Unknown interlace method in IHDR
@@ -6095,6 +6141,7 @@ UnsignedInt16
 UnsignedInt32
 UnsignedInt8
 Unspecified
+Unspecified error code
 Unsupported
 Unsupported ETC image format %d.
 Unsupported JPEG data precision %d
@@ -6105,9 +6152,12 @@ Unsupported color conversion request
 Unsupported component value :
 Unsupported compression format
 Unsupported compression type :
+Unsupported frame parameter
 Unsupported marker type 0x%02x
+Unsupported max Symbol Value : too large
 Unsupported pNext found, cannot hash sType.
 Unsupported pNext found, cannot hash.
+Unsupported parameter
 Unsupported text encoding id.
 Unsupported version or scanline
 UpdateDescriptorSetPool
@@ -6130,6 +6180,8 @@ Using a 64-bit integer type requires the Int64 capability.
 Using an 8-bit integer type requires the Int8 capability, or an extension that explicitly enables 8-bit integers.
 Using pointers with OpPhi requires capability
 Using pointers with OpSelect requires capability
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 V
 V,V,S
 V1
@@ -6299,7 +6351,6 @@ VTT for std::basic_ostringstream<char, std::char_traits<char>, std::allocator<ch
 VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 V_CopyMemory3D
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -6308,12 +6359,10 @@ V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -6331,7 +6380,6 @@ V_exp2f
 V_expf
 V_fmodf
 V_fpclassify
-V_frexpf
 V_isnan
 V_localeconv
 V_log10f
@@ -6350,18 +6398,14 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strspn
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -6400,6 +6444,7 @@ VectorTimesMatrix
 VectorTimesScalar
 Vendor ID mismatch in pipeline cache file (Got: %x Expected: %x).  Deleting %s in order to regenerate it.
 VendorID
+Version not supported
 Vertex Shader
 VertexOrderCcw
 VertexOrderCw
@@ -6649,6 +6694,161 @@ ZIVTest found EQ dependence.
 ZIVTest found independence.
 ZN26CParallelProcessorAbstractI18CParallelProcessorIN22CFossilizeStateCreator18PipelineWorkItem_tE27CMemberFuncJobItemProcessorIS2_S1_S1_ELi1EEE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS2_ELi1EEE3RunEvE13CStackFunctor
+ZSTD_CCtxParams_getParameter
+ZSTD_CCtxParams_init
+ZSTD_CCtxParams_init_advanced
+ZSTD_CCtxParams_reset
+ZSTD_CCtxParams_setParameter
+ZSTD_CCtx_getParameter
+ZSTD_CCtx_loadDictionary
+ZSTD_CCtx_loadDictionary_advanced
+ZSTD_CCtx_loadDictionary_byReference
+ZSTD_CCtx_refCDict
+ZSTD_CCtx_refPrefix
+ZSTD_CCtx_refPrefix_advanced
+ZSTD_CCtx_reset
+ZSTD_CCtx_setParameter
+ZSTD_CCtx_setParametersUsingCCtxParams
+ZSTD_CCtx_setPledgedSrcSize
+ZSTD_CStreamInSize
+ZSTD_CStreamOutSize
+ZSTD_DCtx_loadDictionary
+ZSTD_DCtx_loadDictionary_advanced
+ZSTD_DCtx_loadDictionary_byReference
+ZSTD_DCtx_refDDict
+ZSTD_DCtx_refPrefix
+ZSTD_DCtx_refPrefix_advanced
+ZSTD_DCtx_reset
+ZSTD_DCtx_setFormat
+ZSTD_DCtx_setMaxWindowSize
+ZSTD_DCtx_setParameter
+ZSTD_DStreamInSize
+ZSTD_DStreamOutSize
+ZSTD_adjustCParams
+ZSTD_cParam_getBounds
+ZSTD_checkCParams
+ZSTD_compress
+ZSTD_compress2
+ZSTD_compressBegin
+ZSTD_compressBegin_advanced
+ZSTD_compressBegin_usingCDict
+ZSTD_compressBegin_usingCDict_advanced
+ZSTD_compressBegin_usingDict
+ZSTD_compressBlock
+ZSTD_compressBound
+ZSTD_compressCCtx
+ZSTD_compressContinue
+ZSTD_compressEnd
+ZSTD_compressStream
+ZSTD_compressStream2
+ZSTD_compressStream2_simpleArgs
+ZSTD_compress_advanced
+ZSTD_compress_usingCDict
+ZSTD_compress_usingCDict_advanced
+ZSTD_compress_usingDict
+ZSTD_copyCCtx
+ZSTD_copyDCtx
+ZSTD_createCCtx
+ZSTD_createCCtxParams
+ZSTD_createCCtx_advanced
+ZSTD_createCDict
+ZSTD_createCDict_advanced
+ZSTD_createCDict_byReference
+ZSTD_createCStream
+ZSTD_createCStream_advanced
+ZSTD_createDCtx
+ZSTD_createDCtx_advanced
+ZSTD_createDDict
+ZSTD_createDDict_advanced
+ZSTD_createDDict_byReference
+ZSTD_createDStream
+ZSTD_createDStream_advanced
+ZSTD_dParam_getBounds
+ZSTD_decodingBufferSize_min
+ZSTD_decompress
+ZSTD_decompressBegin
+ZSTD_decompressBegin_usingDDict
+ZSTD_decompressBegin_usingDict
+ZSTD_decompressBlock
+ZSTD_decompressBound
+ZSTD_decompressContinue
+ZSTD_decompressDCtx
+ZSTD_decompressStream
+ZSTD_decompressStream_simpleArgs
+ZSTD_decompress_usingDDict
+ZSTD_decompress_usingDict
+ZSTD_endStream
+ZSTD_estimateCCtxSize
+ZSTD_estimateCCtxSize_usingCCtxParams
+ZSTD_estimateCCtxSize_usingCParams
+ZSTD_estimateCDictSize
+ZSTD_estimateCDictSize_advanced
+ZSTD_estimateCStreamSize
+ZSTD_estimateCStreamSize_usingCCtxParams
+ZSTD_estimateCStreamSize_usingCParams
+ZSTD_estimateDCtxSize
+ZSTD_estimateDDictSize
+ZSTD_estimateDStreamSize
+ZSTD_estimateDStreamSize_fromFrame
+ZSTD_findDecompressedSize
+ZSTD_findFrameCompressedSize
+ZSTD_flushStream
+ZSTD_frameHeaderSize
+ZSTD_freeCCtx
+ZSTD_freeCCtxParams
+ZSTD_freeCDict
+ZSTD_freeCStream
+ZSTD_freeDCtx
+ZSTD_freeDDict
+ZSTD_freeDStream
+ZSTD_getBlockSize
+ZSTD_getCParams
+ZSTD_getDecompressedSize
+ZSTD_getDictID_fromDDict
+ZSTD_getDictID_fromDict
+ZSTD_getDictID_fromFrame
+ZSTD_getErrorCode
+ZSTD_getErrorName
+ZSTD_getErrorString
+ZSTD_getFrameContentSize
+ZSTD_getFrameHeader
+ZSTD_getFrameHeader_advanced
+ZSTD_getFrameProgression
+ZSTD_getParams
+ZSTD_getSequences
+ZSTD_initCStream
+ZSTD_initCStream_advanced
+ZSTD_initCStream_srcSize
+ZSTD_initCStream_usingCDict
+ZSTD_initCStream_usingCDict_advanced
+ZSTD_initCStream_usingDict
+ZSTD_initDStream
+ZSTD_initDStream_usingDDict
+ZSTD_initDStream_usingDict
+ZSTD_initStaticCCtx
+ZSTD_initStaticCDict
+ZSTD_initStaticCStream
+ZSTD_initStaticDCtx
+ZSTD_initStaticDDict
+ZSTD_initStaticDStream
+ZSTD_insertBlock
+ZSTD_isError
+ZSTD_isFrame
+ZSTD_maxCLevel
+ZSTD_minCLevel
+ZSTD_nextInputType
+ZSTD_nextSrcSizeToDecompress
+ZSTD_resetCStream
+ZSTD_resetDStream
+ZSTD_sizeof_CCtx
+ZSTD_sizeof_CDict
+ZSTD_sizeof_CStream
+ZSTD_sizeof_DCtx
+ZSTD_sizeof_DDict
+ZSTD_sizeof_DStream
+ZSTD_toFlushNow
+ZSTD_versionNumber
+ZSTD_versionString
 Zero length tRNS chunk
 ZeroExtend
 Zext
@@ -8468,6 +8668,7 @@ fwidthFine
 fwrite
 g
 g_Mathlib_GammaToLinearByteTable
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -9644,7 +9845,6 @@ memoryBarrierAtomicCounter
 memoryBarrierBuffer
 memoryBarrierImage
 memoryBarrierShared
-mempool.cpp
 memset
 merge block
 merge-blocks
@@ -10811,6 +11011,8 @@ strip-atomic-counter-memory
 strip-debug
 strip-reflect
 strlen
+strnlen
+strstr
 strtol
 strtoll
 strtoul
@@ -10948,6 +11150,7 @@ system.fxc
 t
 tRNS chunk has out-of-range samples for bit_depth
 tRNS chunk not allowed with alpha channel
+tableLog requires too much memory : unsupported
 tag
 tangents
 tangentt
@@ -11426,7 +11629,6 @@ utextureCube
 utextureCubeArray
 utime
 utlbuffer.cpp
-utlstring.cpp
 uvCropped
 uvUncropped
 uvec2 clock2x32ARB();uint64_t clockARB();uvec2 clockRealtime2x32EXT();uint64_t clockRealtimeEXT();
@@ -12240,6 +12442,7 @@ words, but stated word count is
 words, but the limit is
 words.
 words:
+workSpace buffer is not large enough
 workaround-1209
 workgroupcoherent
 wrap-opkill

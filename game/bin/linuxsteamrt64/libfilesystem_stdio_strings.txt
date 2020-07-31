@@ -20,7 +20,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %ls [wstring, len = %d]
 %s%d
@@ -31,7 +30,6 @@ $ORIGIN
 %s/%llu
 %s/%llu.vpk
 %s: file too large
-%s: string format requested %d chars
 %s_%03d.vpk
 %u
 ( def. "%s" )
@@ -54,8 +52,8 @@ $ORIGIN
 ...
 ../public/ordered_constructor.h
 ../public/tier0/threadtools.h
-../public/tier1/utlblockmemory.h
-../public/tier1/utlfixedmemory.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
@@ -128,6 +126,7 @@ $ORIGIN
 <unconnected>
 ???
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
+ASYNC Read: %s
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 Add N ms of delay to every low-level read operation, to simulate a slow disk
@@ -143,6 +142,7 @@ AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
 AsyncCopyFile %s -> %s failed: %s
+AsyncFileSystem2: io threads changed %i -> %i
 AsyncFilesystem Callback
 AsyncFilesystem CopyFile
 AsyncFilesystem Read
@@ -252,9 +252,33 @@ CUtlBlockMemory overflow!
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*, int)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::DirName() const
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetBaseFilename() const
+CUtlString::GetExtensionAlloc() const
+CUtlString::Purge()
+CUtlString::Right(int) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::Slice(int, int) const
+CUtlString::StripTrailingSlash()
+CUtlString::Swap(CUtlString&)
+CUtlString::Trim(char const*)
+CUtlString::UnqualifiedFilenameAlloc() const
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
@@ -347,7 +371,6 @@ Filename '%s' is invalid to be contained in a VPK
 Filesystem
 FlattenedSerializersVersion001
 FontManager_001
-FormatV
 From Steam: [%s]\%s
 GAMECONSOLE
 GAMEROOT
@@ -369,6 +392,7 @@ Grow
 HIGHDPI
 HammerMapLoader001
 HangWatchdog_IndicateActivity
+HashString
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
@@ -413,6 +437,9 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 MustRead
 N17CAsyncFileSystem215CCopyFileHandleE
 N17CAsyncFileSystem216CCompletionQueueE
@@ -581,6 +608,8 @@ Unknown version %d for vpk %s
 UnzipFile
 Use native FS or STDIO
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -616,7 +645,6 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -626,12 +654,10 @@ V_MakeAbsoluteVPKPathNameBuffer
 V_PathContainsPath
 V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
@@ -666,12 +692,8 @@ V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 Valid Content Absolute Path
@@ -781,6 +803,7 @@ fileNameLength
 filenamesymboltable.cpp
 fileno_unlocked
 filesystem_buffer_size
+filesystem_fake_latency
 filesystem_max_stdio_read
 filesystem_native
 filesystem_report_buffered_io
@@ -799,6 +822,7 @@ fs_debug:
 fs_dump_open_duplicate_times
 fs_fake_read_delay_ms
 fs_monitor_read_from_pack
+fs_report_async_io
 fs_report_long_reads
 fs_report_sync_opens
 fs_warning_mode
@@ -833,7 +857,6 @@ max. %f
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 min. %f
 mmap64
@@ -907,6 +930,7 @@ strcmp
 strcpy
 strlen
 strrchr
+strstr
 sysconf
 text
 typeinfo for CThread
@@ -923,7 +947,6 @@ uncompressedSize
 unlink
 update
 user
-utlstring.cpp
 versionMadeBy
 versionNeededToExtract
 vpk:

@@ -72,7 +72,7 @@ $SPECULARSCALE
 %s - %s
 %s / %s
 %s allocation count overflow
-%s allocation count overflow( %llu >= %llu )
+%s allocation count overflow( %llu > %llu )
 %s is trying to get CP object %d but the function read limit is %d
 %s is trying to get CP renderable %d but the function read limit is %d
 %s%d
@@ -81,7 +81,6 @@ $SPECULARSCALE
 %s: %s
 %s: Out of range control point %d in %s
 %s: Overflowed control point array for point %d in %s
-%s: string format requested %d chars
 %s:%s needs base %s:%s to be registered
 %s|  % 2d: %s [Offset: %d]
 %s|  % 2d: [% 3d] %-12s %s
@@ -129,12 +128,11 @@ $SPECULARSCALE
 -sse4
 -vulkan_disable_particle_descriptor_set
 .
-...
 ../_generated_code/particles/release/linuxsteamrt64/../../../../particles/particlecollection.h
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
@@ -1065,7 +1063,6 @@ Add pixels from sequence 0 and 1 together
 Add to Current Value
 Add to Initial Value
 Add vector to vector
-AddToTailGetPtr
 Additive alpha - write alpha during additive
 Address of m_Children.m_pHead: [%p]
 Age - Oldest
@@ -1226,8 +1223,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -1235,7 +1230,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -1246,7 +1240,6 @@ CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -1358,10 +1351,34 @@ CUtlBlockMemory overflow!
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1885,6 +1902,7 @@ Enables/Disables Particle Simulation
 Endcap timed system freeze
 Engine2/SupportsVulkanParticleOptimizations
 EngineServiceMgr001
+EnsureCapacity
 Entire Path
 Entity Hitbox Cache Field (Requires Stick on Collision)
 Error in child list of particle system %s [%p], parent: %p
@@ -1985,7 +2003,6 @@ FontManager_001
 Force Control Point In Pet
 Force Scale
 Force based on distance from plane
-FormatV
 Frames Measured: %d
 Free
 Full 3-Axis Rotation
@@ -2033,6 +2050,7 @@ HSV Shift Control Point
 HSV Shift to control point
 HammerMapLoader001
 Has Collision;
+HashString
 HelpSystem_001
 High
 Hitbox Index
@@ -2290,6 +2308,10 @@ MovementSettings
 Multiplier for falling back to cheaper effects under load.
 Multiply
 Multiply # of rendered particles by this for perf testing
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
@@ -2816,7 +2838,6 @@ RenderMeshFile
 RenderPrimitiveType_t
 RenderService_001
 RenderSkeletonBone_t
-RenderSystem/Use32BitDepthBuffer
 RenderSystemSurface001
 RenderUtils_001
 Rendering filter
@@ -3066,7 +3087,6 @@ Two Bone
 Two KV3 format GUIDs with the same human-friendly name ('%s')
 U
 UNUSED
-UPDATE_STRING_TOKEN_DATABASE
 Ultra
 Unable to determine buffer encoding.
 Unable to find a valid model handle for m_bModelFromRenderer in '%s'
@@ -3096,6 +3116,8 @@ Use scalar attribute for texture coordinate
 Use sequential CP pairs between start and end point
 UserInfoChangeService_001
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 V
 VApplication001
 VAsyncFileSystem2_001
@@ -3140,7 +3162,6 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -3149,12 +3170,10 @@ V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&, bool)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acos
@@ -3188,20 +3207,14 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -5634,6 +5647,7 @@ normalize
 normalize fade times to endcap
 normalize output
 normalize output 0/1
+not obeying particle system stencil of failure to parse stencil comparison string %s
 not rendering particle system because of failure ot parse stencil write string %s
 notconnected
 notify
@@ -6235,8 +6249,6 @@ useMotionDamping
 useSmoothPaths
 use_additional_offset
 user
-utlbuffer.cpp
-utlstring.cpp
 v
 v %g %g %g
 v %g %g %g%s

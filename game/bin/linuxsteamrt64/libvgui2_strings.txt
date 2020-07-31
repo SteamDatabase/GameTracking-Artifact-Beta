@@ -19,7 +19,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -29,7 +28,6 @@ $ORIGIN
 %s%d
 %s,
 %s/
-%s: string format requested %d chars
 %s_%d
 %u
 %x %x
@@ -46,11 +44,9 @@ $ORIGIN
 -vguifocus
 -vguimessages
 .
-...
 ../../public/ordered_constructor.h
 ../../public/tier1/utllinkedlist.h
 ../../public/tier1/utlrbtree.h
-../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
 .>KEY_PERIOD
 .layout
@@ -183,22 +179,16 @@ Button.DepressedBgColor
 Button.DepressedTextColor
 Button.FocusBorderColor
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
-CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CMemAllocSystemInitialize
@@ -215,9 +205,27 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlString::Append(char const*)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::Swap(CUtlString&)
+CUtlString::ToLowerFast()
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator[](int) const
 CXXABI_1.3
 ChangeCallbackOnChange
 ChangeCallbackOnChangeOrCreate
@@ -281,7 +289,6 @@ File change watching failed for '%s', retraversing
 FlattenedSerializersVersion001
 FontManager_001
 Fonts
-FormatV
 Frame.AutoSnapRange
 Frame.BgColor
 Frame.ClientInsetX
@@ -324,6 +331,7 @@ HIGHDPI
 HKEY_CURRENT_USER\Software\Valve\Steam\Language
 HammerMapLoader001
 HangWatchdog_IndicateActivity
+HashString
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
@@ -475,6 +483,9 @@ MouseFocusTicked
 MousePressed
 MouseReleased
 MouseWheeled
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
@@ -685,6 +696,8 @@ UnhandledMouseClick
 Unknown key '%s' set in style '%s' in file '%s'
 UserConfigData
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -716,19 +729,15 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_IsAbsolutePath
 V_PathContainsPath
-V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
@@ -743,16 +752,12 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VisBuilder_001
@@ -944,7 +949,6 @@ max
 max. %f
 memcpy
 memmove
-mempool.cpp
 memset
 min height
 min width
@@ -1080,7 +1084,6 @@ unlink
 update
 user
 uses_appearances
-utlstring.cpp
 vVKEY_V
 vgui.cpp
 vgui/%s

@@ -357,6 +357,19 @@ RemoveClassAction.prototype.update = function ()
 	return false;
 }
 
+// Action to trigger class ( remove and add, cause it to trigger any animations )
+function TriggerClassAction( panel, panelClass )
+{
+	this.panel = panel;
+	this.panelClass = panelClass;
+}
+TriggerClassAction.prototype = new BaseAction();
+TriggerClassAction.prototype.update = function ()
+{
+	this.panel.TriggerClass( this.panelClass );
+	return false;
+}
+
 // Switch a class on a panel
 function SwitchClassAction( panel, panelSlot, panelClass )
 {
@@ -501,6 +514,38 @@ AnimateProgressBarWithMiddleAction.prototype.update = function ()
 AnimateProgressBarWithMiddleAction.prototype.finish = function ()
 {
 	this.progressBar.uppervalue = this.endValue;
+}
+
+
+// ----------------------------------------------------------------------------
+
+function CreatePanelWithSnippetAction( parent, snippetName )
+{
+	this.parent = parent;
+	this.snippetName = snippetName;
+}
+CreatePanelWithSnippetAction.prototype = new BaseAction();
+CreatePanelWithSnippetAction.prototype.update = function ()
+{
+	$.Msg( "CreatePanelWithSnippetAction\n" );
+	this.panel = $.CreatePanel( 'Panel', this.parent, '' );
+	this.panel.BLoadLayoutSnippet( this.snippetName );
+
+	return false;
+}
+
+
+// Action to play a sound effect
+
+function PlaySoundEffectAction( soundName )
+{
+	this.soundName = soundName;
+}
+PlaySoundEffectAction.prototype = new BaseAction();
+PlaySoundEffectAction.prototype.update = function ()
+{
+	$.DispatchEvent( 'PlaySoundEffect', this.soundName );
+	return false;
 }
 
 

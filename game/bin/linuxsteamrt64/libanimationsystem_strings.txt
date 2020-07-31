@@ -58,7 +58,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -86,7 +85,6 @@ $ORIGIN
 %s Target
 %s [%s]
 %s allocation count overflow
-%s allocation count overflow( %llu >= %llu )
 %s failed: expected an array of floats for pose parameters
 %s failure, expected int or string as argument
 %s trace
@@ -183,7 +181,6 @@ $ORIGIN
 %s: sequence "%s" failed, invalid "%s" = %d, valid range [0, %d] on model: %s
 %s: sequence "%s" failed, unknown "%s" = "%s" on model: %s
 %s: sequence "%s", bad "%s" at index %d, mandatory parameter "%s" missing on model: %s
-%s: string format requested %d chars
 %s: unexpected %s parameter: %s, bad %s element %d
 %s: unknown %s specified: %s, bad %s element %d
 %s:%s needs base %s:%s to be registered
@@ -232,9 +229,8 @@ $ORIGIN
 -sse2
 -sse3
 -sse4
-...
 ../public/ordered_constructor.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utlleanvector.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
@@ -290,6 +286,7 @@ $ORIGIN
 13IBaseSequence
 13IMotionMetric
 13IPoseAccessor
+13ISequenceUser
 14CAddUpdateNode
 14CAnimContainer
 14CAnimMotorBase
@@ -1044,7 +1041,6 @@ Access of unconnected SplitScreenConVarRef
 Active While Current
 Add node is missing a child.  Will use t-pose by default
 AddEventTypeFlags
-AddToTailGetPtr
 Adding %d WeightLists SequenceGroup[%d] :: %s
 Adds or merges the pose parameter range of the specified pose paramater
 Adds the the specified type flags for specified event on the sequence
@@ -1142,7 +1138,6 @@ AnimationSystem_001
 Animgraph Parameter
 Animgraph Position Parameter
 Anticipation Distance
-Anticipation Heading Parameter
 Anticipation Position Parameter
 Anticipation Time
 AppendDataChannels( %s, %d, %s )
@@ -1395,7 +1390,6 @@ CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -1404,7 +1398,6 @@ CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
 CBufferString::Purge(int)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -1415,7 +1408,6 @@ CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -1704,11 +1696,45 @@ CUtlBlockMemory overflow!
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlPair
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetEmptyString()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Remove(char const*, bool) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::TrimLeft(char const*)
+CUtlString::TrimRight(char const*)
+CUtlString::operator+(CUtlString const&) const
+CUtlString::operator+(char const*) const
+CUtlString::operator+(int) const
+CUtlString::operator+=(CBufferString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -2296,7 +2322,6 @@ FootstepLanded Tag
 FootstepLandedFootSoundType_t
 Force BatchAnimationDecode to write transformations for all bones
 Force Latest Value
-FormatV
 Forward Speed
 ForwardSpeed
 Future Facing
@@ -2371,6 +2396,7 @@ HSequence
 HammerMapLoader001
 Has Collision;
 Has a Path
+HashString
 Height Decrease Scale
 Height Increase Scale
 HelpSystem_001
@@ -2486,6 +2512,7 @@ ISequence
 ISequenceAnimNode
 ISequenceAnimNodeInstance
 ISequenceFinishedAnimTag
+ISequenceUser
 IStatusAnimTag
 IStringAnimTag
 IVSSequence
@@ -2798,6 +2825,10 @@ Movement Limits
 MovementData
 Mover
 MoverNode
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N10Reflection10CAttributeE
 N10Reflection10CClassInfoE
 N10Reflection12CTypeFactoryI12CAnimTagBaseJEE13CFactoryMakerE
@@ -2911,6 +2942,7 @@ N10Reflection6Detail11CClassInfoTI13CRootAnimNodeEE
 N10Reflection6Detail11CClassInfoTI13CTagConditionEE
 N10Reflection6Detail11CClassInfoTI13IAudioAnimTagEE
 N10Reflection6Detail11CClassInfoTI13IMotionMetricEE
+N10Reflection6Detail11CClassInfoTI13ISequenceUserEE
 N10Reflection6Detail11CClassInfoTI14CAnimMotorBaseEE
 N10Reflection6Detail11CClassInfoTI14CBlendAnimNodeEE
 N10Reflection6Detail11CClassInfoTI14CMoverAnimNodeEE
@@ -3732,6 +3764,8 @@ UseChild2
 User Defined Values
 UserInfoChangeService_001
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -3768,7 +3802,6 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -3777,12 +3810,10 @@ V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -3815,18 +3846,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -4268,7 +4294,6 @@ loop_in_action
 looping
 lowprecisionuv
 lowprecisionuv1
-mWsEndEffectorInitial
 m_AnimOverlay
 m_AnimgraphParameterNamePosition
 m_Bone
@@ -4897,6 +4922,7 @@ m_ikSolverType
 m_includedGroupArray
 m_includedGroupArray_Handle
 m_indexBuffer
+m_influenceFlags
 m_influenceNames
 m_influenceWeights
 m_inputList
@@ -5096,6 +5122,7 @@ m_poseRecipeInstanceData
 m_poseSettingArray
 m_position
 m_prevStateIndex
+m_previewButton
 m_previewModels
 m_previousChoice
 m_previousIndex
@@ -5126,6 +5153,7 @@ m_sBoneName
 m_sChainName
 m_sEventName
 m_sLegacyOptions
+m_sName
 m_sNewParent
 m_sOptions
 m_sPoseParameter
@@ -5294,7 +5322,6 @@ max_angle
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 mesh
 mesh.cpp
@@ -5655,6 +5682,7 @@ static const Reflection::ClassID ISelectorAnimNode::MyTypeID()
 static const Reflection::ClassID ISequenceAnimNode::MyTypeID()
 static const Reflection::ClassID ISequenceAnimNodeInstance::MyTypeID()
 static const Reflection::ClassID ISequenceFinishedAnimTag::MyTypeID()
+static const Reflection::ClassID ISequenceUser::MyTypeID()
 static const Reflection::ClassID ISolveIKChainAnimNodeInstance::MyTypeID()
 static const Reflection::ClassID IStatusAnimTag::MyTypeID()
 static const Reflection::ClassID IStringAnimTag::MyTypeID()
@@ -5678,6 +5706,7 @@ strcpy
 string_t
 strlen
 strrchr
+strstr
 subtract
 suppress
 surface_prop
@@ -5721,7 +5750,6 @@ use_additional_offset
 use_layer_sequence
 user
 utlbuffer.cpp
-utlstring.cpp
 utlstringtoken
 v %g %g %g
 v %g %g %g%s
@@ -5797,6 +5825,7 @@ worldspace
 wt
 xWsTarget
 xfade
+xformWsEndEffectorInitial
 yaw
 yaw_end
 yaw_start

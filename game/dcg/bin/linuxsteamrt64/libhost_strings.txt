@@ -127,7 +127,6 @@ $ORIGIN
 %g
 %i %i %i %i
 %ld
-%lg
 %lld
 %llu
 %lu
@@ -148,7 +147,6 @@ $ORIGIN
 %s:  IGameSystem::LoopPostInitAllSystems(start)
 %s:  } IGameSystem::LoopActivateAllSystems done
 %s:  } IGameSystem::LoopDeactivateAllSystems done
-%s: string format requested %d chars
 %s_tempcontent
 %u
 &
@@ -223,7 +221,6 @@ $ORIGIN
 .
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
-...
 ... }
 ...<truncated>...
 ../../common/protobuf_helpers.cpp
@@ -232,7 +229,7 @@ $ORIGIN
 ../../public/ordered_constructor.h
 ../../public/tier1/utlrbtree.h
 ../gamecore/igamesystem.cpp
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ..\content
@@ -637,7 +634,6 @@ CBufferString::DefaultExtension(char const*)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -645,7 +641,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -963,10 +958,39 @@ CTwistConstraint
 CUtlBlockMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetExtensionAlloc() const
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::PathJoin(char const*, char const*)
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::StripExtension() const
+CUtlString::Swap(CUtlString&)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1294,7 +1318,6 @@ FixupResourceName: Illegal path, missing extension passed in ("%s")!
 FlattenedSerializersVersion001
 Flexible;
 FontManager_001
-FormatV
 Found invalid proto option data for:
 G
 G->B
@@ -1362,6 +1385,7 @@ HammerMapLoader001
 HangWatchdog_IndicateActivity
 Has Collision;
 HasField
+HashString
 HelpSystem_001
 Hex and octal numbers must be integers.
 HookUpConfigValue
@@ -1554,6 +1578,10 @@ MountAddon: Failed to find ADDONS search path.
 MountAddonSearchPaths: Failed to find CONTENTADDONS search path.
 MovementSettings
 Multiple extension registrations for type "
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -2043,7 +2071,6 @@ UNAVAILABLE
 UNIMPLEMENTED
 UNKNOWN
 UNKNOWN_ENUM_VALUE_%s_%d
-UPDATE_STRING_TOKEN_DATABASE
 UTF-8 data when
 Unable to Start Game
 Unable to determine buffer encoding.
@@ -2065,6 +2092,8 @@ Unsupported: type mismatch
 UpperEyelid(
 UserInfoChangeService_001
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -2102,7 +2131,6 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_GetFileExtensionSafe
@@ -2112,12 +2140,10 @@ V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -2150,18 +2176,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 Value must be "true" or "false" for boolean option "
@@ -3300,6 +3321,7 @@ strings::Substitute format string invalid: asked for "$
 strlen
 strpbrk
 strrchr
+strstr
 strtof
 strtol
 strtoll
@@ -3358,7 +3380,6 @@ useMotionDamping
 useSmoothPaths
 use_additional_offset
 user
-utlstring.cpp
 v %g %g %g
 v %g %g %g%s
 value

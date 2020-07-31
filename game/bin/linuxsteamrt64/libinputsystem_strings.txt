@@ -20,7 +20,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -28,7 +27,6 @@ $ORIGIN
 %s%d
 %s,
 %s/
-%s: string format requested %d chars
 %u
 'is NOT active'
 'is active'
@@ -48,7 +46,6 @@ $ORIGIN
 -inputss_update_spew
 -noime
 -pass_vk_processkey
-...
 ../public/ordered_constructor.h
 ../public/tier1/utlrbtree.h
 /cursor.res
@@ -159,15 +156,9 @@ CAPSLOCKTOGGLE
 CARET
 CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
@@ -208,9 +199,16 @@ CURRENCYSUBUNIT
 CURRENCYUNIT
 CURRENCY_SIGN
 CUT
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::Set(char const*)
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
@@ -291,7 +289,6 @@ Failed to load image for cursor from %s: %s
 Failed to scale image for cursor to %d,%d (hot %d,%d; scaling %g): %s
 FlattenedSerializersVersion001
 FontManager_001
-FormatV
 G
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
@@ -536,6 +533,9 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 N
 NOT_SIGN
 NULL
@@ -794,6 +794,8 @@ U_WITH_GRAVE
 UpdateCursorClipOnFocusChange:  %s SDL_SetWindowGrab on 0x%p (%s) %s
 Updates game keyboard layout to current windows keyboard setting.
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -833,19 +835,13 @@ VULGAR_FRACTION_THREE_QUARTERS
 V_AXIS
 V_AXIS_NEG
 V_AXIS_POS
-V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
-V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_atof
 V_atofloat64
 V_atoi
@@ -857,18 +853,13 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tier0_memset
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VisBuilder_001
@@ -992,7 +983,6 @@ libvstdlib.so
 max. %f
 memcpy
 memmove
-mempool.cpp
 min. %f
 mouse %d %s (%d) at %d %d on window %d
 mouse motion %d %d at %d %d with buttons "%s" on window %d
@@ -1035,7 +1025,6 @@ unset
 up
 update
 user
-utlstring.cpp
 v
 visible
 vstdlib

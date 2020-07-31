@@ -32,7 +32,6 @@ $ORIGIN
 %hu
 %i %i %i %i
 %lf
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -52,7 +51,6 @@ $ORIGIN
 %s.so
 %s/
 %s: %p
-%s: string format requested %d chars
 %s:%d: %s
 %s="%d"
 %s="%s"
@@ -101,7 +99,6 @@ $ORIGIN
 -sse3
 -sse4
 ../public/ordered_constructor.h
-../public/tier1/utlrbtree.h
 ./?.lua;/usr/local/share/luajit-2.0.4/?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua
 ./?.so;/usr/local/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so
 .local
@@ -208,19 +205,12 @@ Breakpoint type (%s) not supported.
 C
 C++ exception
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
-CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CDesc
@@ -235,9 +225,25 @@ CThreadRWLock::WaitForRead()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
-CUtlRBTree overflow with %u elements!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator+=(char)
+CUtlString::operator=(CBufferString const&)
 CVirtualMachineCallStackTranslationEncoder::CVirtualMachineCallStackTranslationEncoder(char const*)
 CVirtualMachineCallStackTranslationEncoder::EncodeAsNativePointer(char const*, char const*, unsigned int)
 CVirtualMachineCallStackTranslationEncoder::~CVirtualMachineCallStackTranslationEncoder()
@@ -280,7 +286,6 @@ Failed to find %s
 Failed to read %s
 FlattenedSerializersVersion001
 FontManager_001
-FormatV
 Forward
 GAME
 GCC: (Ubuntu 4.8.1-2ubuntu1~12.04+steamrt2+srt1) 4.8.1
@@ -377,6 +382,9 @@ Message count limit of %d hit. Subsequent duplicate messages will be squelched.
 Missing breakpoint data ( breakpoint with ID %s. )
 Missing breakpoint with given ID %s.
 ModelDocUtils001
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 Must use luaL_newstate() for 64 bit target
 NULL
 NYI: cannot call this C function (yet)
@@ -524,6 +532,8 @@ Unrecognized error.
 Up
 Upvalue
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -556,21 +566,16 @@ VScript Lua: Unhandled variant type %s.
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_FixDoubleSlashes
 V_FixSlashes
 V_GetErrno
 V_IsAbsolutePath
 V_PrettifyNum
-V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_acosf
 V_asinf
 V_atan2f
@@ -592,18 +597,13 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -1176,7 +1176,6 @@ memchr
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 metamethod
 min. %f
@@ -1324,6 +1323,7 @@ string_t
 strlen
 strpbrk
 strrchr
+strstr
 strtol
 strtoul
 struct
@@ -1387,7 +1387,6 @@ user
 userdata
 userdata length overflow
 utlbuffer.cpp
-utlstring.cpp
 utlstringtoken
 u|%d|%s
 va_list

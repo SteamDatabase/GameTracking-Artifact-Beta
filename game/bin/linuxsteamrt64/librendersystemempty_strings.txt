@@ -45,7 +45,6 @@ $ORIGIN
 %hu
 %i %i %i %i
 %ld%c
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -54,7 +53,6 @@ $ORIGIN
 %s%d
 %s,
 %s/
-%s: string format requested %d chars
 &
 '
 (
@@ -105,13 +103,11 @@ $ORIGIN
 -tools
 -vulkan
 .
-...
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/memstack.h
-../public/tier1/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
-../public/tier1/utlrbtree.h
 ../public/tier1/utltshash.h
 .exr
 .jpg
@@ -311,8 +307,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -320,7 +314,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -329,7 +322,6 @@ CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -385,10 +377,23 @@ CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
-CUtlRBTree overflow with %u elements!
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -543,7 +548,6 @@ FixupResourceName: Illegal path, missing extension passed in ("%s")!
 FlattenedSerializersVersion001
 FloatBitMap::QuarterSize
 FontManager_001
-FormatV
 Found %d streaming textures in array, but in-flight count is %d
 Fractional sampling not implemented yet
 Freed EMS handle %u
@@ -552,7 +556,7 @@ G channel not found
 G channel not found!
 GAME
 GAMECONSOLE
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
 GLIBCXX_3.4
@@ -856,6 +860,9 @@ Missing PLTE before cHRM
 Missing PLTE before hIST
 Missing PLTE before tRNS
 ModelDocUtils001
+MurmurHash2
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
@@ -876,7 +883,6 @@ NetworkServerService_001
 NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
-NewNode
 No image in file
 No memory for pCAL params
 No memory for pCAL purpose
@@ -1273,6 +1279,8 @@ Unsupported marker type 0x%02x
 Unsupported version or scanline
 Upper limit on texture pool size.
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 V
 VApplication001
 VAsyncFileSystem2_001
@@ -1310,7 +1318,6 @@ VStringTokenSystem001
 VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 V_CopyMemory3D
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -1318,12 +1325,10 @@ V_PathContainsPath
 V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -1349,19 +1354,14 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -1547,6 +1547,7 @@ fseek
 ftell
 fwrite
 g_Mathlib_GammaToLinearByteTable
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -1604,7 +1605,6 @@ libpthread.so.0
 librendersystemempty.so
 libstdc++.so.6
 libtier0.so
-libvstdlib.so
 lineOrder
 lineartogamma
 localize
@@ -1649,7 +1649,6 @@ mdl
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 min megabytes
 min megahertz
@@ -1829,6 +1828,8 @@ strdup
 stream end
 string
 strlen
+strnlen
+strstr
 sub%dx%d.tga
 submrg%dx%d.tga
 t
@@ -1861,7 +1862,6 @@ unknown header flags set
 update
 user
 utlbuffer.cpp
-utlstring.cpp
 uvCropped
 uvUncropped
 v2f

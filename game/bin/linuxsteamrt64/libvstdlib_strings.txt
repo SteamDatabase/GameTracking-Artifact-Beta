@@ -25,7 +25,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -33,13 +32,10 @@ $ORIGIN
 %s %d
 %s %s
 %s %s -nominidumps
-%s not implemented right now
 %s%d
 %s%s
 %s,
 %s/
-%s: Unable to progress %d jobs to finished state (%llums elapsed)
-%s: string format requested %d chars
 %u
 ( def. "%s" )
 (*%s*),
@@ -47,56 +43,36 @@ $ORIGIN
 (no name set)
 (none)
 (once).
-*ZN11CThreadPool11GetDummyJobEvE9CDummyJob
 +-
 ,
 - %s
 --------------%3i convars/concommands for [%s]
 --------------%3i total convars/concommands
 ----------------------------------------------------------------------------------------------------------------------------------------------------
--->
 -attachtodebugger
 -breakimmediately
--dedicated
--force_thread_affinity
 -load_string_token_database
--numpoolqueues
 -testscript
 -testscript_inline
 -teststringtokencollision
--threads
-...
 ../public/ordered_constructor.h
 ../public/tier0/threadtools.h
 ../public/tier0/tslist.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/memstack.h
-../public/tier1/quantizedfloatencoder.h
-../public/tier1/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utltshash.h
-/dev/urandom
-0
 0x%016llX
 0x%08X
 0x%p
-10CJobThread
 10ConCommand
 10IAppSystem
 10ICvarQuery
-11CFunctorJob
-11CThreadPool
-11IRefCounted
-11IThreadPool
 12CEventSystem
-12CRefCounted1I11IRefCounted20CRefCountServiceBaseILb1E6CRefMTEE
-12CRefCounted1I11IThreadPool20CRefCountServiceBaseILb1E6CRefMTEE
 12CThreadEvent
-12CThreadedJob
 12IEventSystem
-13COneTimeEvent
 13CProcessUtils
-13CWorkerThread
 13IProcessUtils
 14CBaseAppSystemI10ICvarQueryE
 14CBaseAppSystemI12IEventSystemE
@@ -123,27 +99,19 @@ $ORIGIN
 16IGlobalSymbolMap
 16IKeyValuesSystem
 17CDefaultCvarQuery
-17CGlobalThreadPool
-17CPooledFunctorJob
 18CPlaceholderConVar
 19CDmSymbolTableLarge
 19CUtlNoEscConversion
 19IKeyValuesErrorSpew
 20CConfigurationSystem
-20CRefCountServiceBaseILb1E6CRefMTE
-20CUniformRandomStream
 20IConfigurationSystem
-20IUniformRandomStream
 21CUtlStringTokenSystem
 21IUtlStringTokenSystem
-22IFiberThreadWorkerPool
 23CSplitScreenAddedConVar
 23IConCommandBaseAccessor
-24IAsyncScheduledFunctions
 25CConCommandMemberAccessorI5CCvarE
 26CDefaultKeyValuesErrorSpew
 26ICommandCompletionCallback
-30CAsyncScheduledFunctionManager
 5CCvar
 5ICvar
 6ConVar
@@ -152,12 +120,10 @@ $ORIGIN
 8IProcess
 9IPipeRead
 ;
-</script>
 << NULL >>
 <NULL>
 <deferred>
 <invalid handle>
-<li>
 <no deferred ref found>
 <null>
 <unconnected>
@@ -165,7 +131,6 @@ $ORIGIN
 <unspecified>
 ?
 @
-A
 ACCESSIBLE_FROM_THREADS
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 ATTEMPTED TO DECOMMIT OWNED MEMORY STACK SPACE
@@ -181,10 +146,8 @@ AssetBrowserSystem_001
 AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
-AsyncScheduledFunctions
 Attempted to access global configuration value "%s" as if it was a per-user value!
 Attempted to access per-user configuration value "%s" with a bogus slot #!
-Attempted to add job to job queue that has already been completed
 Attempted to apply queued config changes but the queue is locked!
 Attempted to set global configuration value "%s" but specified a splitscreen slot!
 Attempted to set per-user configuration value "%s" for an invalid splitscreen slot!
@@ -202,28 +165,18 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
-CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConfigurationSystem::ReadConfiguration: Error parsing configuration file!
-CFiber::IsReadyToResume()
-CFiber::ReachedZeroReferences()
-CFiber::ResumeJob(void*)
-CGaussianRandomStream::AttachToStream(IUniformRandomStream*)
-CGaussianRandomStream::CGaussianRandomStream(IUniformRandomStream*)
-CGaussianRandomStream::RandomFloat(float, float)
 CKeyValuesSystem::hash_item_t CUtlMemoryPool
 CKeyValuesSystem::m_Strings
 CLIENTCMD_CAN_EXECUTE
@@ -231,8 +184,6 @@ CLIENTDLL
 CMemAllocSystemInitialize
 CMemoryStack %s
 COLORCORRECTION_VERSION_1
-COneTimeEvent::Allocate()
-CPooledFunctorJob CUtlMemoryPool
 CTSQueue corruption
 CTestScriptMgr: not initialized.
 CTestScriptMgr::InsertCommandsBeforeCheckpoint()
@@ -242,32 +193,10 @@ CTestScriptMgr::InsertCommandsBeforeCheckpoint() currently waiting on checkpoint
 CTestScriptMgr::LoopCount( %s ): no loop with this name exists.
 CTestScriptMgr::LoopForNumSeconds( %s ): no loop with this name exists.
 CTestScriptMgr::StartLoop( %s ): loop already exists.
-CThread::GetThreadHandle()
-CThread::Init()
-CThread::IsThreadRunning()
-CThread::Join(unsigned int)
-CThread::OnExit()
-CThread::Resume()
-CThread::SetName(char const*)
-CThread::Start(unsigned int, ThreadPriorityEnum_t)
-CThread::Suspend()
-CThread::WaitForCreateComplete(CThreadEvent*)
-CThread::~CThread()
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::CThreadEvent(char const*, bool, bool)
-CThreadEvent::Check()
-CThreadEvent::Reset()
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
-CThreadMultiWaitEvent::CThreadMultiWaitEvent(bool)
-CThreadMultiWaitEvent::Reset()
-CThreadMultiWaitEvent::Set()
-CThreadMultiWaitEvent::~CThreadMultiWaitEvent()
-CThreadMultiWaitSemaphore::CThreadMultiWaitSemaphore()
-CThreadMultiWaitSemaphore::Release()
-CThreadMultiWaitSemaphore::~CThreadMultiWaitSemaphore()
-CThreadMutex::TryLock(char const*, int)
-CThreadPool::Start called and it was already initialized.
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
@@ -285,22 +214,43 @@ CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
-CThreadedJob::Abort(bool)
-CThreadedJob::Execute()
-CUniformRandomStream had an array overrun: tried to write to element %d of 0..31.
-CUniformRandomStream::CUniformRandomStream()
-CUniformRandomStream::GenerateRandomNumber()
-CUniformRandomStream::RandomFloat(float, float)
-CUniformRandomStream::RandomFloatExp(float, float, float)
-CUniformRandomStream::RandomInt(int, int)
-CUniformRandomStream::SetSeed(int)
 CUtlCharConversion::CUtlCharConversion(char, char const*, int, CUtlCharConversion::ConversionArray_t const*)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::SetErrorReportFunc(void (*)(char const*, ...))
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool()
+CUtlScratchMemoryPool::Init(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
+CUtlString::Append(char const*)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::Purge()
+CUtlString::Replace(char, char) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::Swap(CUtlString&)
+CUtlString::ToLowerFast()
+CUtlString::TrimLeft(char const*)
+CUtlString::TrimRight(char const*)
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
 CUtlStringTokenSystem could not open database file "%s" for writing. Aborting update operation
 CUtlStringTokenSystem could not update token database "%s" because the file is read-only.
 CUtlStringTokenSystem: Encountered string token collision: "%s" and "%s" both hash to %X!
@@ -309,15 +259,11 @@ CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
-CWorkerThread::CWorkerThread()
 CXXABI_1.3
 Can't open file (%s) passed to -testscript
-Cannot add a thread job already committed to another thread pool
 Cannot mix and match tag specifiers with channel name specifiers.
-ChangePriority
 Channel Name
 CharacterSetBuild
-CmpJob
 Color
 CommandLine
 ConCommand %s has conflicting %s flags (child: %s%s, parent: %s%s, parent wins)
@@ -344,14 +290,11 @@ Coroutine_YieldToMain
 Could not execute the command:   %sOS error message:   "%s"
 Couldn't open '%s' for writing!
 CreateInterface
-CreateNewThreadPool
-CreateSimpleThread
 DEFAULT_WRITE_PATH
 DEMO
 DEVELOPMENTONLY
 Debug test scripts.
 DebugTextureInfo001
-DestroyThreadPool
 DevMsg
 DevMsg(char const*, ...)
 DevWarning(char const*, ...)
@@ -372,32 +315,19 @@ Error reading configuration defaults file "cfg/configdefaults.linux.vcfg"!
 Error starting testscript '%s'
 ErrorIfNotInitted
 EventSystem001
-Event_CreateHandle
-Event_DestroyHandle
-Event_HandleToData
 FCVAR_ARCHIVE
 FCVAR_CHEAT
 FCVAR_DONTRECORD
 FCVAR_NEVER_AS_STRING
 FCVAR_REPLICATED
 FRENCH
-Field %s has inverted min/max values![%f->%f]
-Field %s tried to quantize an out-of-range value (%f, range is %f->%f) clamping.
-Field %s tried to quantize an out-of-range value (%f, range is %f->%f), clamping.
-Field %s was flagged QFE_ENCODE_INTEGERS_EXACTLY, but didn't specify enough bits, upping bitcount from %d to %d for range [%f->%f]
-Field %s was flagged to both round up and down, these flags are mutually exclusive [%f->%f]
-Field %s was flagged to encode zero exactly, but min/max range doesn't span zero [%f->%f]
 Find concommands by flags.
 Find concommands with the specified string in their name/help text.
 Find help about a convar/concommand.
-FindOrCreateQuantizedFloatEncoder
-FindRegisteredGlobalObjectInternal
 First character of flag specifier must be + or -.
 Flags
 FlattenedSerializersVersion001
 FontManager_001
-Forced execute test failed!
-FormatV
 GAMECONSOLE
 GAMEDLL
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
@@ -411,17 +341,11 @@ GNU
 GameResourceServiceClientV001
 GameResourceServiceServerV001
 GameUIService_001
-GetCPUInformation
 GetCStringCharConversion
-GetDefaultUniformRandomStream
 GetDisableFocusBasedPriorityBoost
 GetDmElementTypeSymbolMap
-GetJobManualEventFromPool
-GetQuantizedFloatEncoderByIndex
-GetQuantizedFloatEncodersSharingIndex
 GetSymbolForString
 GetSymbolForStringCaseSensitive
-GlobPool
 Grow
 HIGHDPI
 HammerMapLoader001
@@ -431,18 +355,15 @@ HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
 ID
-IOJob
 IQuickTime001
 ITALIAN
 Indicate to a test script that a checkpoint has been reached
-Init
 InitFromCommandLine
 InputService_001
 InputStackSystemVersion001
 InputSystemVersion001
 InstallChangeCallback called with NULL callback, ignoring!!!
 InstallChangeCallback ignoring duplicate change callback!!!
-InstallUniformRandomStream
 Intentionally vague touch behavior for %p
 Invalid access of deferred ConVarRef for '%s'
 JAPANESE
@@ -461,7 +382,6 @@ LOWVIOLENCE
 LoadConfigSchema
 LoadFromBuffer: expected '{', found '%s'
 Localize_001
-LockGlobalObjectRegistry
 Log Function Help:     log_verbosity <channel specifiers> <verbosity>    log_color <channel specifiers> <hex color>    log_flags <channel specifiers> <+/-flag>All functions are case insensitive.A channel specifier is either:1) tag specifiers: +/-tag1 +/-tag2 ...      // Narrows down to channels with & without given tags.2) channel names: name1 name2 ...           // Lists channels by name.verbosity: off, essential, default,         // Sets how verbose a channel is allowed to be.           detailed, max                     // 'off' turns all spew off                                            // 'essential' turns on vital logs                                            // 'default' turns on most messages                                            // 'detailed' allows for walls of text that are usually useful                                            // 'max' allows everythinghex color: RRGGBBAA                         // A hexadecimal color value in the order RGBA.flag: <+/->DoNotEcho                        // Enable/disable a flag to turn off echoing to the console.      <+/->ConsoleOnly                      // Enable/disable a flag to send text only to the console.e.g.    log_verbosity +console -developer verbose   // Sets minimum spew level of channels with the tag                                            // 'console' but without the tag 'developer' to 'verbose'.    log_color renderdebug bsp FFC08040      // Sets the 'renderdebug' and 'bsp' channels to the RGBA color (64, 128, 192, 255).    log_flags +developer +donotecho         // Turns on the LCF_DO_NOT_ECHO flag for all channels with the 'developer' tag.
 LoggingSystem_FirstTag
 LoggingSystem_GetChannel
@@ -495,9 +415,9 @@ MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
-N14ThreadPoolTest15CExecuteTestJobE
-N14ThreadPoolTest22CExecuteTestExecuteJobE
-N14ThreadPoolTest9CCountJobE
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 N5CCvar21CCVarIteratorInternalE
 N5ICvar21ICVarIteratorInternalE
 NOTIFY
@@ -538,14 +458,11 @@ Plat_FloatTime
 Plat_GetEnv
 Plat_GetGameDirectory
 Plat_GetOSType
-Plat_GetTime
 Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_IsRunningOnCustomerMachine
 Plat_RelativeTicks
 Plat_ShouldCollectMiniDumpsForFatalErrors
-Plat_TickDiffMilliSec
-Plat_TickDiffMilliSecF
 Plat_TickDiffSecF
 Plat_VirtualAlloc
 Plat_VirtualFree
@@ -558,9 +475,6 @@ RELOAD_MATERIALS
 RELOAD_TEXTURES
 RUSSIAN
 RandomFloat
-RandomFloatExp
-RandomGaussianFloat
-RandomSeed
 RecursiveLoadFromBuffer:  got EOF instead of keyname
 RecursiveLoadFromBuffer:  got NULL key
 RecursiveLoadFromBuffer:  got conditional between key and value
@@ -574,7 +488,6 @@ RegisterConfigValueInternal
 RegisterKeyValuesSystem
 RegisterStringToken
 Release
-ReleaseThreadHandle
 Removing string token database entry "%s" for reason "%s"
 RenderDevice003
 RenderDeviceMgr001
@@ -587,15 +500,9 @@ ResourceCompilerSystem001
 ResourceHandleUtils001
 ResourceManifestRegistry001
 ResourceSystem013
-ReturnJobManualEventToPool
-Run
-RunTSListTests
-RunTSQueueTests
-RunThreadPoolTests
 SCHINESE
 SERVER_CANNOT_QUERY
 SERVER_CAN_EXECUTE
-SKIPPED due to %u job queues in g_pTestThreadPool
 SPANISH
 SPONLY
 SS
@@ -605,9 +512,6 @@ SceneUtils_001
 SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
-SecureRandomBytes
-SecureRandomDouble
-SecureRandomInt
 SerializedEntitiesVersion001
 ServerUploadGameStats001
 Set the color of a logging channel.
@@ -640,7 +544,6 @@ SpecialCommand_Test_SetEvent
 SpecialCommand_Test_SetEvent <event name> : requires an event name.
 SpecialCommand_Test_Wait
 SpecialCommand_Test_WaitForCheckPoint
-Start
 Start a test script running..
 StartLoop
 StatsService_001
@@ -649,8 +552,6 @@ TCHINESE
 TESTSCRIPT: CheckPoint -> '%s'.
 TESTSCRIPT: waiting for checkpoint '%s'%s
 Tags
-TestForcedExecute
-TestForcedExecute DONE
 TestFormatA
 TestFormatB
 TestFormatC
@@ -687,31 +588,12 @@ Test_WaitForCheckPoint <checkpoint name> [once]: requires checkpoint name.
 TextLayout_001
 ThreadGetCurrentId
 ThreadGetProcessExitCode
-ThreadInMainThread
 ThreadIsProcessActive
-ThreadJoin
-ThreadMultiWait
-ThreadMultiWaitObjectSetCreate
-ThreadMultiWaitObjectSetCreate(pollfd const*, ThreadMultiWaitExtra_t const*, int)
-ThreadMultiWaitObjectSetDestroy
-ThreadPoolTest:         %d threads -- %d (%d) jobs processed in %fms, %fms to suspend (%f/%f) [ (main) %d, %d, %d, %d, %d, %d, %d, %d, %d]
-ThreadPoolTest:         Testing with %d jobs! Sleep %d, interleave %d, prioritized %d
-ThreadPoolTest:     Distribute
-ThreadPoolTest:     Distribute NO Sleep
-ThreadPoolTest:     NO Sleep
-ThreadPoolTest:     Non-distribute
-ThreadPoolTest:   NOT to completion
-ThreadPoolTest:   To completion
-ThreadPoolTest: Job distribution speed
-ThreadPoolTest: Jobs doing work, %s main thread
-ThreadSetAffinity
-ThreadSetAffinityPreference
 ThreadSetProcessPriority
 ThreadShellExecuteEx
 ThreadSleep
 ThreadTerminateProcessCode
 ThreadWaitForProcessExit
-ThreadYield
 Too many channel specifiers (max: %d).
 ToolFramework2_002
 ToolSceneNodeFactory_001
@@ -719,18 +601,12 @@ ToolScriptManager001
 ToolService_001
 Total committed memory: %d KB
 Total used memory:      %d KB
-TransferMemory
 Tried to install the same listener on the same event id + queue twice!
-Tst
 UNLOGGED
 UPDATE_STRING_TOKEN_DATABASE
 USERINFO
-UnRegisterGlobalObject
-Unable to create multiwait object set
-Unable to create thread in %s
 Unable to exec '%s'
 Unknown
-UnlockGlobalObjectRegistry
 Unrecognized flag: %s.
 Unrecognized severity: %s.
 Unrecognized verbosity: %s.
@@ -738,6 +614,8 @@ Usage:  find <string> [<string>...]
 Usage:  findflags <string>
 Usage:  help <cvarname>
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -772,23 +650,15 @@ VScriptManager010
 VStdLib_GetICVarFactory
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_IsAbsolutePath
 V_PathContainsPath
-V_RandomString(int)
-V_RemoveDotSlashes
 V_SetErrno
 V_SplitString2(char const*, char const**, int, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
-V_StripAndPreserveHTML
-V_StripAndPreserveHTMLCore
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
-V_UTF8CharsToUTF32
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
@@ -804,10 +674,7 @@ V_freopen
 V_fseek
 V_ftell
 V_fwrite
-V_iswspace
 V_localeconv
-V_logf
-V_powf
 V_qsort
 V_qsort_s
 V_snprintf
@@ -818,15 +685,11 @@ V_stricmp_fast_NegativeForUnequal
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VisBuilder_001
@@ -834,7 +697,6 @@ WARNING: unable to link %s and %s because both ConCommands are not marked FCVAR_
 WIN32
 WINDOWS
 WINXP
-WITH
 Warning
 Warning:  %s = '%s' is infinite, clamping value.
 WorkshopSetup001
@@ -846,7 +708,6 @@ X360HIDEF
 X360LODEF
 X360SPLITSCREEN
 X360WIDE
-YieldWait
 [
 [%.3f server clamped to %.3f]
 [%f %f %f %f]
@@ -905,7 +766,6 @@ binary_lz4
 bool
 borrow
 bounds
-br
 cfg/configdefaults.linux.vcfg
 cfg/configschema.vcfg
 chdir
@@ -918,7 +778,6 @@ closedir
 cmd
 config
 configurationsystem.cpp
-configvalue.cpp
 consoleonly
 corrupted entry
 cvar list--------------
@@ -954,16 +813,13 @@ findflags
 float( %f )
 float32
 fork
+frame_end
 free
 ftruncate64
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
-g_VCoverage
 g_VProfCurrentProfile
-g_pFiberJobPool
 g_pMemAlloc
-g_pScheduledFunctions
-g_pThreadPool
 game
 generic
 getdtablesize
@@ -971,17 +827,14 @@ has
 help
 help text
 help:  no cvar or command named %s
-img
 int( %d = 0x%X )
 interfaces.cpp
-jobthread.cpp
 keyvalues.cpp
 keyvaluessystem.cpp
 l
 launch
 ld-linux-x86-64.so.2
 libc.so.6
-libm.so.6
 libpthread.so.0
 libstdc++.so.6
 libtier0.so
@@ -1001,7 +854,6 @@ max. %f
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 min. %f
 nTries < 10000000
@@ -1034,7 +886,6 @@ pipe
 poll
 posix_fadvise64
 prctl
-pre
 pread64
 print
 prot
@@ -1047,7 +898,6 @@ pthread_mutexattr_settype
 ptr( 0x%p )
 pwrite64
 qangle
-random.cpp
 rb
 rb+
 readdir64
@@ -1058,14 +908,12 @@ reload_textures
 render_thread
 rep
 replicated
-s_dev_urandom_fd >= 0
 scandir64
 schema
 server_can_execute
 server_cant_query
 singleplayer
 sp
-sqrtf
 ss_added
 stderr
 strcasecmp
@@ -1082,11 +930,8 @@ testscriptmgr.cpp
 threadsafe
 true
 type
-typeinfo for CThread
 typeinfo for CThreadSyncObject
-typeinfo for CUniformRandomStream
 typeinfo for CUtlCharConversion
-typeinfo name for CUniformRandomStream
 u64( %lld = 0x%llX )
 uint32
 uint64
@@ -1094,8 +939,6 @@ unit test
 unknown
 unlink
 update
-urandom_result > 0 || ( urandom_result < 0 && errno == EINTR )
-utlstring.cpp
 utlstringtokensystem.cpp
 value
 vconsole_fuzzy
@@ -1104,7 +947,6 @@ vector2
 vector3
 vector4
 vstdlib
-vtable for CUniformRandomStream
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
@@ -1113,8 +955,6 @@ wb
 wb+
 wcscmp
 wcslen
-without
-zD
 {
 {%d %d %d %d}
 {0 0 0 255}

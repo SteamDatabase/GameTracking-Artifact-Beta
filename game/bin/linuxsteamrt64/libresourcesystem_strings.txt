@@ -16,7 +16,6 @@ $ORIGIN
 %d Strong handle references (Still holding onto a CStrongHandle somewhere)
 %g
 %i %i %i %i
-%lg
 %lld
 %lld,
 %llu
@@ -24,7 +23,6 @@ $ORIGIN
 %s%d
 %s%s%s%sFinal operation count %llu
 %s.%s
-%s: string format requested %d chars
 %sResource System profile stats unavailable. Compile with RESOURCE_SYSTEM_GATHER_STATS as 1 to gather stats.
 &
 (
@@ -68,12 +66,10 @@ $ORIGIN
 -sse3
 -sse4
 -start_resource_profiling
-...
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utllinkedlist.h
-../public/tier1/utlrbtree.h
 ../public/tier1/utlreferencetracker.h
 ../public/tier1/utlsortvector.h
 ../public/tier1/utltshash.h
@@ -257,7 +253,6 @@ CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -340,11 +335,33 @@ CUtlBlockMemory overflow!
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
-CUtlRBTree overflow with %u elements!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlReferenceTracker::Release() release counts for group outnumber addref counts for the same group
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -527,7 +544,6 @@ FlattenedSerializersVersion001
 FontManager_001
 ForceSynchronizationAndBlockUntilManifestLoaded
 Forgot to remove resource type manager for type %s!
-FormatV
 G->B
 GAME
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
@@ -617,6 +633,7 @@ LOG_GENERAL
 Leaked reference to ERROR resource for type %s!
 Leaked resource: Refcount %s for %s%s resource "%s" (%016llX).  This may result in a crash.
 LightSourceShape_t
+LightType_t
 Line %d at "%s": %s
 Line %d: %s
 Line %d: Invalid literal value "%s"
@@ -667,6 +684,10 @@ MeshSystem001
 MeshUtils001
 Missing file '%s'
 ModelDocUtils001
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
@@ -680,7 +701,6 @@ NetworkServerService_001
 NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
-NewNode
 Newline in string literal
 No Buffer
 No DATA block for resource
@@ -862,6 +882,8 @@ Update_Internal
 Usage: resource_leaks <resource_name>
 Usage: resource_repeated_reload <count> <resource_name>
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -895,7 +917,6 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
@@ -903,12 +924,10 @@ V_PathContainsPath
 V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -925,7 +944,6 @@ V_cosf
 V_expf
 V_fmodf
 V_fpclassify
-V_frexpf
 V_isnan
 V_localeconv
 V_logf
@@ -938,19 +956,14 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -1351,7 +1364,6 @@ m_vecUp
 malloc
 master_morph_weight
 material
-mathlib.cpp
 mathlib_extended
 matrix3x4_t
 matrix3x4a_t
@@ -1518,8 +1530,6 @@ ugc:
 uint64
 use_additional_offset
 user
-utlbuffer.cpp
-utlstring.cpp
 value
 vanmgrph
 version

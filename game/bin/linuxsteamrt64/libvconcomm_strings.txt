@@ -17,7 +17,6 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -109,20 +108,13 @@ BakedLODBuilderMgr001
 BenchmarkService001
 BinaryProperties_GetValue
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveToFileBase()
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
-CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CMemAllocSystemInitialize
@@ -147,6 +139,13 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlRBTree overflow with %u elements!
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
 CVirtualMachineCallStackTranslationEncoder::EnumerateEncodingIndices(bool (*)(CVirtualMachineCallStackTranslationEncoder*, unsigned int, char const*, char const*, unsigned int, void*), void*)
 CVirtualMachineCallStackTranslationEncoder::GetIndexBitMask()
 CVirtualMachineCallStackTranslationEncoder::GetIndexBitShift()
@@ -243,6 +242,7 @@ Message Version Mismatch: '%s', Expected %d, Got %d
 Message received for VConsolePipe_t with no registered helper (%s)
 Message received on closed VConsole Pipe! (%s)
 ModelDocUtils001
+MurmurHash2LowerCase(char const*, unsigned int)
 NULL
 NetworkClientService_001
 NetworkMessagesVersion001
@@ -363,6 +363,8 @@ ToolService_001
 Unknown protocol.
 Unrecognized error.
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -407,19 +409,13 @@ VScript
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
-V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_atof
 V_atofloat64
 V_atoi
@@ -430,17 +426,12 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -509,7 +500,6 @@ _V_StringAfterPrefix
 _V_strncat
 _V_strncmp
 _V_strncpy
-_V_strnicmp_fast
 _V_strnistr_fast
 __bss_start
 __cxa_atexit
@@ -608,7 +598,6 @@ typeinfo for CThreadSyncObject
 u64( %lld = 0x%llX )
 update
 user
-utlstring.cpp
 vc_exit %s
 vcon_pipe_dump
 vconcomm

@@ -1,7 +1,6 @@
 "></img>
 $@
 $ORIGIN
-$tI
 %
 %%.%if
 %%.%if%s
@@ -33,6 +32,7 @@ $tI
 %i
 %i%s
 %lf
+%lg
 %llu,%u,%u,%s
 %s %d: proc %d (group %u:%u)
 %s %i %s
@@ -41,6 +41,7 @@ $tI
 %s (%d) : %s
 %s (%i) : %s
 %s bytes used out of %s bytes available (%.2f%%)
+%s not implemented right now
 %s slot %d combined mask %u:0x%llx
 %s specified, allocating %d MB%s
 %s test: multithread interleaved push/pop, %s
@@ -54,10 +55,12 @@ $tI
 %s total bytes in user-space regions (%s bytes in kernel-space regions)
 %s(%d%%) %s
 %s():%s
+%s/%d
 %s/source_engine_%u.lock
 %s: %s
 %s: Unable to get executable filename (%d byte buffer).
 %s: Unable to load SDL
+%s: Unable to progress %d jobs to finished state (%llums elapsed)
 %s: added string size %d overflows (added to %d)
 %s: capacity request for %d can't be satisfied (max %d)
 %s: different number of names and flags
@@ -171,6 +174,7 @@ $tI
 &para;
 &plusmn;
 &pound;
+&quot;
 &raquo;
 &rdquo;
 &reg;
@@ -202,6 +206,7 @@ $tI
 ***** OUT OF MEMORY! /+/ attempted allocation size: %llu ****
 ******** BEGIN VPROF REPORT ********
 ******** END VPROF REPORT ********
+*ZN11CThreadPool11GetDummyJobEvE9CDummyJob
 ,%03d
 -- Hierarchical Call Graph --
 -- Profile scopes sorted by average time (including children) --
@@ -217,6 +222,7 @@ $tI
 ------------ ------------
 -------------------------------------------
 ---------------------------------------------------- ----------- ----------- ----------- ------ ----------- ------ ----------- ----------- ----------- -----------
+-->
 --hint
 -allowmultiple
 -assertbreak
@@ -230,6 +236,7 @@ $tI
 -force_battery_level
 -force_battery_level_battery
 -force_dpi
+-force_thread_affinity
 -i
 -ignorecontentasserts
 -inset_bottom
@@ -249,12 +256,14 @@ $tI
 -nocustomermachine
 -nohibernate
 -nowatchdog
+-numpoolqueues
 -phased_window_create
 -profile
 -retail
 -start_resource_profiling
 -t
 -testmode
+-threads
 -uselmv
 .%c
 ............|
@@ -262,8 +271,11 @@ $tI
 ../public/ordered_constructor.h
 ../public/tier0/globallist.h
 ../public/tier0/tslist.h
+../public/tier1/quantizedfloatencoder.h
+../public/tier1/utlrbtree.h
 .\
 //
+/dev/urandom
 /e%s%s
 /etc/SUSE-release
 /etc/debian_release
@@ -290,14 +302,23 @@ $tI
 0123456789ABCDEF
 0123456789abcdef
 0@
+10CJobThread
 10CTestSuite
 10ITestSuite
+11CFunctorJob
+11CThreadPool
+11IRefCounted
+11IThreadPool
 12CCommandLine
+12CRefCounted1I11IRefCounted20CRefCountServiceBaseILb1E6CRefMTEE
+12CRefCounted1I11IThreadPool20CRefCountServiceBaseILb1E6CRefMTEE
 12CStdMemAllocI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEE
 12CStdMemAllocI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEE
 12CThreadEvent
+12CThreadedJob
 12ICommandLine
 13CFiberJobPool
+13COneTimeEvent
 13CWorkerThread
 13IFiberJobPool
 14CVProfReporter
@@ -305,20 +326,26 @@ $tI
 16CThreadFullMutex
 16CThreadSemaphore
 16ILoggingListener
+17CGlobalThreadPool
+17CPooledFunctorJob
 17CStdMemAlloc_DataI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesEE
 17CStdMemAlloc_DataI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesEE
 17CThreadSyncObject
-18CThreadManualEvent
 18CUtlCharConversion
 18CUtlJSONConversion
 18IMemAlloc_Internal
+20CRefCountServiceBaseILb1E6CRefMTE
+20CUniformRandomStream
 20IMobileEventListener
+20IUniformRandomStream
 21CUtlCStringConversion
 22CPerfTraceDepotDefault
 22CSimpleLoggingListener
 22CStdMemAlloc_Data_Base
+22IFiberThreadWorkerPool
 22ILoggingResponsePolicy
 24BasicStatStructFieldDesc
+24IAsyncScheduledFunctions
 2500
 25CColorizedLoggingListener
 25CVProfileOutputColumn_Sum
@@ -331,6 +358,7 @@ $tI
 28CStdMemAlloc_Data_StackStatsI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesELb0EE
 28CallStackStatStructDescFuncs
 29CDefaultLoggingResponsePolicy
+30CAsyncScheduledFunctionManager
 31CTier0MasterMobileEventListener
 31IForceSignalNumberIntoCallStack
 40CVProfileOutputColumn_AverageTimePerCall
@@ -375,12 +403,14 @@ $tI
 :
 ::<lambda_
 ::_CAssertFastInternal::AssertionFailed
+<!--
 </a>
 </b>
 </h1>
 </i>
 </pre>
 </s>
+</script>
 </u>
 </ul>
 <<
@@ -440,6 +470,8 @@ AssertValidWStringPtr
 Assertion Failed
 Assertion Failed in function %s():%s
 AssertionFailureListenerMiniDumpContext_t
+AsyncScheduledFunctions
+Attempted to add job to job queue that has already been completed
 AuthenticAMD
 Average %.2f fps, %.2f ms per frame
 Avg Time/Call (%s)
@@ -571,6 +603,9 @@ CFiber::WaitForJobCompletion(CEventListNode&)
 CFiber::~CFiber()
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal(unsigned long long)
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
+CGaussianRandomStream::AttachToStream(IUniformRandomStream*)
+CGaussianRandomStream::CGaussianRandomStream(IUniformRandomStream*)
+CGaussianRandomStream::RandomFloat(float, float)
 CLoggingSystem::AllocTag overflowed!
 CMemAllocSystemInitialize
 CMiniDumpComment encountered an error while generating the comment
@@ -593,7 +628,9 @@ CMiniDumpCommentBuilderBase::CMiniDumpCommentBuilderBase()
 CMiniDumpCommentBuilderBase::GetNextCommentBuilder()
 CMiniDumpCommentBuilderBase::~CMiniDumpCommentBuilderBase()
 COM_TimestampedLog
+COneTimeEvent::Allocate()
 CPU_MHZ
+CPooledFunctorJob CUtlMemoryPool
 CRecursionCallStackMarker::CRecursionCallStackMarker(bool)
 CStackTop_Base::CStackTop_Base()
 CStackTop_Base::ChangeMarker(CCallStackMarkerBase const&)
@@ -688,6 +725,7 @@ CThreadMultiWaitSemaphore::CThreadMultiWaitSemaphore()
 CThreadMultiWaitSemaphore::Release()
 CThreadMultiWaitSemaphore::~CThreadMultiWaitSemaphore()
 CThreadMutex::TryLock(char const*, int)
+CThreadPool::Start called and it was already initialized.
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::TryLockForWrite(char const*, int)
 CThreadRWLock::UnlockRead_LockForWrite(char const*, int)
@@ -739,8 +777,128 @@ CThreadSyncObject::WaitForMultiple(int, CThreadSyncObject*, bool, unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::operator!() const
 CThreadSyncObject::~CThreadSyncObject()
+CThreadedJob::Abort(bool)
+CThreadedJob::Execute()
+CUniformRandomStream had an array overrun: tried to write to element %d of 0..31.
+CUniformRandomStream::CUniformRandomStream()
+CUniformRandomStream::GenerateRandomNumber()
+CUniformRandomStream::RandomFloat(float, float)
+CUniformRandomStream::RandomFloatExp(float, float, float)
+CUniformRandomStream::RandomInt(int, int)
+CUniformRandomStream::SetSeed(int)
 CUtlCharConversion::CUtlCharConversion(char, char const*, int, CUtlCharConversion::ConversionArray_t const*)
 CUtlCharConversion::FindConversion(char const*, int*)
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::FindPageWithSpace(unsigned int) const
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase
+CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryPoolBase::AddNewBlob()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::AllocZero()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::InternalClear(CUtlMemoryPoolBase::CBlob*, CUtlMemoryPoolBase::FreeList_t*)
+CUtlMemoryPoolBase::IsAllocationWithinPool(void*) const
+CUtlMemoryPoolBase::ResetAllocationCounts()
+CUtlMemoryPoolBase::SetErrorReportFunc(void (*)(char const*, ...))
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
+CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AddNewBlock(int)
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::AllocSize() const
+CUtlScratchMemoryPool::AllocationCount() const
+CUtlScratchMemoryPool::CUtlScratchMemoryPool()
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::FreeAll()
+CUtlScratchMemoryPool::FreeToAllocPoint(UtlScratchMemoryPoolMark_t)
+CUtlScratchMemoryPool::GetCurrentAllocPoint() const
+CUtlScratchMemoryPool::Init(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::TotalMemFree() const
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
+CUtlString::AbsPath(char const*) const
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::AllocMemoryBlock(unsigned int)
+CUtlString::Append(char const*)
+CUtlString::Append(char const*, int)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Convert(wchar_t const*)
+CUtlString::DirName() const
+CUtlString::Ellipsify(int)
+CUtlString::FixSlashes(char)
+CUtlString::FixupPathName()
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetBaseFilename() const
+CUtlString::GetEmptyString()
+CUtlString::GetExtensionAlloc() const
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Left(int) const
+CUtlString::MatchesPattern(CUtlString const&, int) const
+CUtlString::PathJoin(char const*, char const*)
+CUtlString::Purge()
+CUtlString::Remove(char const*, bool) const
+CUtlString::RemoveDotSlashes(char)
+CUtlString::RemoveFromStart(char const*, bool) const
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Replace(char, char const*) const
+CUtlString::Replace(char, char) const
+CUtlString::Right(int) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::Slice(int, int) const
+CUtlString::StripExtension() const
+CUtlString::StripFilename() const
+CUtlString::StripTrailingSlash()
+CUtlString::Swap(CUtlString&)
+CUtlString::ToLowerFast()
+CUtlString::ToUpperFast()
+CUtlString::Trim(char const*)
+CUtlString::Trim(char)
+CUtlString::TrimLeft(char const*)
+CUtlString::TrimLeft(char)
+CUtlString::TrimRight(char const*)
+CUtlString::TrimRight(char)
+CUtlString::UnicodeCaseConvert(int, EStringConvertErrorPolicy)
+CUtlString::UnqualifiedFilenameAlloc() const
+CUtlString::operator+(CUtlString const&) const
+CUtlString::operator+(char const*) const
+CUtlString::operator+(int) const
+CUtlString::operator+=(CBufferString const&)
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator+=(char)
+CUtlString::operator+=(double)
+CUtlString::operator+=(int)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CBufferString const&) const
+CUtlString::operator==(CUtlString const&) const
+CUtlString::operator[](int) const
+CUtlStringBuilder::Data::ClearError()
+CUtlStringBuilder::Data::MoveToHeap()
+CUtlStringBuilder::Data::SetError(bool)
+CUtlStringBuilder::Data::SetLength(unsigned long)
+CUtlStringBuilder::Data::SetPtr(char*, unsigned long)
+CUtlStringBuilder::IndexOf(char const*) const
+CUtlStringBuilder::InternalPrepareBuffer(unsigned long, bool, unsigned long)
+CUtlStringBuilder::RemoveWhitespace()
+CUtlStringBuilder::Replace(char const*, char const*)
+CUtlStringBuilder::ReplaceFastCaseless(char const*, char const*)
+CUtlStringBuilder::ReplaceInternal(char const*, char const*, char const* (*)(char const*, char const*))
+CUtlStringBuilder::SetLength(unsigned long)
+CUtlStringBuilder::TakeOwnership(unsigned long*, unsigned long*)
+CUtlStringBuilder::TrimWhitespace()
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*) const
@@ -830,6 +988,7 @@ CWorkerThread::WaitForReply(unsigned int)
 CWorkerThread::WaitForReply(unsigned int, unsigned int (*)(unsigned int, CThreadEvent**, int, unsigned int))
 CXXABI_1.3
 Called Resume() on a thread that is not suspended!
+Cannot add a thread job already committed to another thread pool
 Cannot flush timstamped event log with no listener!
 Cannot register two timestamped event listeners!
 Capture
@@ -838,6 +997,7 @@ CatchAndWriteMiniDumpEx
 CatchAndWriteMiniDumpExForVoidPtrFn
 CatchAndWriteMiniDumpExReturnsInt
 CatchAndWriteMiniDumpForVoidPtrFn
+ChangePriority
 CharacterSetBuild
 Client Game
 Client Input/Output
@@ -846,6 +1006,7 @@ Client Rendering
 Client Simulation
 Client VScript
 Client_Animation
+CmpJob
 Comment unavailable. CMiniDumpComment encountered an error while generating the comment
 ConColorMsg(Color const&, char const*, ...)
 ConDMsg
@@ -856,11 +1017,13 @@ Count
 CrackSmokingCompiler
 CreateCommandLine
 CreateInterface
+CreateNewThreadPool
 CreateSimpleProcess
 CreateSimpleThread
 DEBUG_EXITPROCESS
 DWARF_LOCAL_TRANSLATE
 DeclareCurrentThreadIsMainThread
+DestroyThreadPool
 DevMsg
 DevMsg(char const*, ...)
 DevWarning
@@ -884,6 +1047,9 @@ EarlyInit_Tier0
 EnsureAddedCapacity
 EnsureCapacity
 Error reading args file
+Event_CreateHandle
+Event_DestroyHandle
+Event_HandleToData
 Exit Process
 Exiting due to logging LR_ABORT request.
 F
@@ -891,9 +1057,19 @@ FAIL: !IsEmpty()
 FAIL: !Validate()
 FAIL: Not all items popped
 Fatal Error
+Field %s has inverted min/max values![%f->%f]
+Field %s tried to quantize an out-of-range value (%f, range is %f->%f) clamping.
+Field %s tried to quantize an out-of-range value (%f, range is %f->%f), clamping.
+Field %s was flagged QFE_ENCODE_INTEGERS_EXACTLY, but didn't specify enough bits, upping bitcount from %d to %d for range [%f->%f]
+Field %s was flagged to both round up and down, these flags are mutually exclusive [%f->%f]
+Field %s was flagged to encode zero exactly, but min/max range doesn't span zero [%f->%f]
 File: %sLine: %iExpr: %s
 FileSystem
+FindOrCreateQuantizedFloatEncoder
+FindRegisteredGlobalObjectInternal
 FlushBuffer
+Forced execute test failed!
+FormatV
 Found Application AutoArgs file '%s'
 Frame Boundary
 FreeCommandLine
@@ -921,22 +1097,27 @@ GetCPUInformation
 GetCStringCharConversion
 GetDefaultMiniDumpHandler
 GetDefaultMiniDumpTypeFlags
+GetDefaultUniformRandomStream
 GetFileAndLineFromAddress
 GetHardwareClockReliably
 GetInsertPtr
 GetInstructionPointer
 GetJSONCharConversion
+GetJobManualEventFromPool
 GetLocalHostname
 GetModuleNameFromAddress
 GetNameFromOSType
 GetOSDetailString
 GetPerfSortedLogicalProcessors
 GetPlatformName
+GetQuantizedFloatEncoderByIndex
+GetQuantizedFloatEncodersSharingIndex
 GetReplacePtr
 GetSymbolNameFromAddress
 GetThreadedLoadLibraryFunc
 GetUnitTest
 GetWin32ConsoleCursorColumnIndex
+GlobPool
 H
 H@
 HEAP WARNING: memory block at %p is unexpectedly allocated
@@ -953,6 +1134,8 @@ HangWatchdog_Initialize
 HangWatchdog_SetHangImageRGBA
 HangWatchdog_SetMainThreadWindow
 HangWatchdog_Shutdown
+HashString
+HashStringConventional
 Heap: standard allocator
 I
 IAssertionFailureListener::AssertionFailure()
@@ -960,13 +1143,16 @@ IMemAlloc::DumpStats: could not open output file %s
 IMobileEventListener::OnEnterHibernationState()
 IMobileEventListener::OnExitHibernationState()
 IMobileEventListener::OnLowMemoryNotification()
+IOJob
 Ignore All Asserts
 Ignore For 24 Hours
 Ignore This File
 Illegal char string format specifier '%c' (%d) in '%s'
 Illegal wchar_t string format specifier '%c' (%d) in '%s'
+Init
 InitWin32ConsoleColorContext
 InstallProgressReportHandler
+InstallUniformRandomStream
 Intentionally vague touch behavior for %p
 Interpolation
 InvokeMiniDumpHandler
@@ -974,6 +1160,7 @@ IterateCapturedStackAnnotations
 J
 JmpToAlternateStack
 Jobs/Coroutines
+JsonEscape(char const*)
 KB
 L
 LOADING
@@ -999,6 +1186,7 @@ Linux 4.0
 Linux 4.18
 Linux 4.5
 Linux 5.0
+LockGlobalObjectRegistry
 LoggingSystem_AddTagToChannel
 LoggingSystem_CurrentStateIndex
 LoggingSystem_EnableBackdoorLoggingListeners
@@ -1087,15 +1275,23 @@ MinidumpUserStreamInfoAppend
 MinidumpUserStreamInfoGet
 MinidumpUserStreamInfoSetHeader
 Module %s is a debug build
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N11TSListTests8CListOpsE
 N11TSListTests8CTestOpsE
 N11TSListTests9CQueueOpsE
+N14ThreadPoolTest15CExecuteTestJobE
+N14ThreadPoolTest22CExecuteTestExecuteJobE
+N14ThreadPoolTest9CCountJobE
 NOTE: this is the total bytes of the regions above, not the growth since the old snapshot
 NO_GAME_ASSERT_DIALOG
 NO_RAISE_ON_ASSERT
 NPCs
 NavMesh
 Networking
+NewNode
 NextBot
 No samples
 NoteAlloc
@@ -1349,8 +1545,11 @@ Prediction
 Push
 PushMiniProfilerTS
 PushPopThread
-PushThread
 Qt_GetCustomAllocators
+RandomFloat
+RandomFloatExp
+RandomGaussianFloat
+RandomSeed
 RegisterAssertionFailureListener
 RegisterKeyValuesSystem
 RegisterLoggingChannel
@@ -1365,10 +1564,13 @@ ReplaceAt
 ReportProgress
 Resident virtual bytes: %s
 RestoreWin32ConsoleColor
+ReturnJobManualEventToPool
 ReverseChars
 Root
+Run
 RunTSListTests
 RunTSQueueTests
+RunThreadPoolTests
 RunWithAlternateStack
 Running %s...
 S
@@ -1537,9 +1739,12 @@ SIGVTALRM
 SIGWINCH
 SIGXCPU
 SIGXFSZ
+SKIPPED due to %u job queues in g_pTestThreadPool
 STEAM_RUNTIME=0 LD_LIBRARY_PATH="$SYSTEM_LD_LIBRARY_PATH" PATH="$SYSTEM_PATH" /usr/bin/xdg-open
-STUB_GetStatStructName
 Scope                                                      Calls Calls/Frame  Time+Child    Pct        Time    Pct   Avg/Frame    Avg/Call Avg-NoChild        Peak
+SecureRandomBytes
+SecureRandomDouble
+SecureRandomInt
 SendActionToAssertDialog
 SeriousWarning
 SeriousWarning(int, Color, char const*, ...)
@@ -1579,6 +1784,7 @@ StackTools_EnumerateVirtualMachineEncoders
 StackTools_InstallModuleMappingListener
 StackTools_RemoveModuleMappingListener
 StackTools_VerifyLoadedModuleMappings
+Start
 Steam
 Stop has been called on thread.
 StrReplaceChar
@@ -1587,6 +1793,8 @@ T
 TMPDIR
 TSList cannot hold more that %d nodes
 Test bucket %d has an invalid value %d
+TestForcedExecute
+TestForcedExecute DONE
 Testing %d threads:
 Tests done, purging test memory...
 Thread failed to initialize
@@ -1612,6 +1820,16 @@ ThreadMultiWaitObjectSetCreate
 ThreadMultiWaitObjectSetCreate(pollfd const*, ThreadMultiWaitExtra_t const*, int)
 ThreadMultiWaitObjectSetDestroy
 ThreadNanoSleep
+ThreadPoolTest:         %d threads -- %d (%d) jobs processed in %fms, %fms to suspend (%f/%f) [ (main) %d, %d, %d, %d, %d, %d, %d, %d, %d]
+ThreadPoolTest:         Testing with %d jobs! Sleep %d, interleave %d, prioritized %d
+ThreadPoolTest:     Distribute
+ThreadPoolTest:     Distribute NO Sleep
+ThreadPoolTest:     NO Sleep
+ThreadPoolTest:     Non-distribute
+ThreadPoolTest:   NOT to completion
+ThreadPoolTest:   To completion
+ThreadPoolTest: Job distribution speed
+ThreadPoolTest: Jobs doing work, %s main thread
 ThreadScopeChangeEventHandler_ThreadID
 ThreadSetAffinity
 ThreadSetAffinityPreference
@@ -1645,14 +1863,19 @@ ToUpperFast
 Tools
 Total virtual bytes: %s
 TracerPid:
+TransferMemory
 TranslateStackInfo
 TrimRight
 TruncateAt
+Tst
 UCS-2
 USER
 UTF-8
+UnRegisterGlobalObject
 Unable to create event, error %d
+Unable to create multiwait object set
 Unable to create semaphore, error %d
+Unable to create thread in %s
 Unable to determine CPU Frequency
 Unable to load SDL2
 Unaccounted
@@ -1662,8 +1885,13 @@ UnitTestInstallTestCase
 Unknown
 Unknown (invalid)
 UnknownOS
+UnlockGlobalObjectRegistry
 UnregisterAssertionFailureListener
 UnregisterMobileEventListener
+UtlMemory_Alloc
+UtlMemory_AllocAligned
+UtlMemory_CalcNewAllocationCount
+UtlStringFastCompareLess
 V
 VALVE_DISABLE_CLOCK_SPEED_CALCULATION
 VALVE_TESTMODE
@@ -1725,6 +1953,7 @@ V_PathsMatch
 V_PrettifyFloat
 V_PrettifyMem
 V_PrettifyNum
+V_RandomString(int)
 V_RemoveDotSlashes
 V_RemoveFormatSpecifications
 V_SetErrno
@@ -1742,6 +1971,8 @@ V_StringToColor
 V_StringToFloatArray
 V_StringToIntArray
 V_StringToVector
+V_StripAndPreserveHTML
+V_StripAndPreserveHTMLCore
 V_StripFilename
 V_StripLeadingWhitespace
 V_StripSurroundingQuotes
@@ -1750,6 +1981,8 @@ V_StripTrailingSlash
 V_StripTrailingWhitespace
 V_TokenWaiting
 V_TranslateLineFeedsToUnix
+V_UChar32ToUTF16
+V_UChar32ToUTF8
 V_URLContainsDomain
 V_URLDecode
 V_URLDecodeRaw
@@ -1757,16 +1990,20 @@ V_URLEncode
 V_URLEncodeRaw
 V_UTF16CharsToUTF32
 V_UTF16CharsToUTF8
+V_UTF16ToUChar32
 V_UTF16ToUTF16
 V_UTF16ToUTF32
 V_UTF16ToUTF8
 V_UTF32CharsToUTF16
 V_UTF32CharsToUTF8
+V_UTF32ToUChar32
 V_UTF32ToUTF16
 V_UTF32ToUTF32
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8CharsToUTF32
+V_UTF8LenFromFirst
+V_UTF8ToUChar32
 V_UTF8ToUTF16
 V_UTF8ToUTF32
 V_UnicodeAdvance(char*, int)
@@ -1984,6 +2221,7 @@ WARNING: total wall clock time was %.2f seconds, results may be invalid
 WARNING: truncated input line
 WARNING: unable to parse line: '%s'
 WARNING: zero-length line in maps
+WITH
 Warning: Fell out of small block heap!
 WatchDog! Server took too long to process (probably infinite loop)
 Windows
@@ -2007,6 +2245,7 @@ Windows XP
 Working set: %s
 Y
 Y@-2GB
+YieldWait
 [   func+child         func ]
 [   func+child       func ]
 [ func+child         func ]
@@ -2117,6 +2356,7 @@ assert_dialog.cpp
 at+
 backtrace
 bin/linuxsteamrt64/libtier0.so
+br
 buffer_string.cpp
 bytes
 calloc
@@ -2137,6 +2377,7 @@ epoll_create1
 epoll_ctl
 epoll_wait
 error
+eventdispatcherutils.cpp
 eventfd
 execlp
 exitprocess_%d
@@ -2155,6 +2396,7 @@ freopen64
 fseeko64
 ftello64
 g_Mathlib_GammaToLinearByteTable
+g_TSPointerListNodes
 g_Tier1_BitWriteMasks
 g_Tier1_CRC32Table
 g_Tier1_CRC64Table
@@ -2176,6 +2418,8 @@ g_pLastMiniProfiler
 g_pMemAlloc
 g_pPerfTraceDepot
 g_pRootMiniProfiler
+g_pScheduledFunctions
+g_pThreadPool
 game
 game/
 game/bin
@@ -2201,8 +2445,10 @@ higher
 i
 iOS
 ignored_assertions.txt
+img
 int:transient:1
 isspace
+jobthread.cpp
 k
 ld-linux-x86-64.so.2
 lib
@@ -2215,11 +2461,11 @@ libstdc++.so.6
 libtier0.so
 linux
 localtime_r
-logging.cpp
 lower
 macos
 malloc
 malloc_usable_size
+mempool.cpp
 memstats_%d.txt
 memstd.cpp
 message
@@ -2253,6 +2499,7 @@ platform_sdl.cpp
 popen
 posix_memalign
 prctl
+pre
 processor
 pthread_attr_destroy
 pthread_attr_init
@@ -2290,7 +2537,9 @@ realloc
 rename
 rmdir
 round
+s_dev_urandom_fd >= 0
 sched_setaffinity
+script
 semctl
 semget
 semop
@@ -2342,6 +2591,7 @@ typeinfo for CThreadEvent
 typeinfo for CThreadFullMutex
 typeinfo for CThreadSemaphore
 typeinfo for CThreadSyncObject
+typeinfo for CUniformRandomStream
 typeinfo for CUtlCharConversion
 typeinfo for CVProfReporter
 typeinfo for CWorkerThread
@@ -2354,6 +2604,7 @@ typeinfo name for CThreadEvent
 typeinfo name for CThreadFullMutex
 typeinfo name for CThreadSemaphore
 typeinfo name for CThreadSyncObject
+typeinfo name for CUniformRandomStream
 typeinfo name for CUtlCharConversion
 typeinfo name for CVProfReporter
 typeinfo name for CWorkerThread
@@ -2362,7 +2613,10 @@ ugc:
 uname -mrsv
 unknown
 unlink
+urandom_result > 0 || ( urandom_result < 0 && errno == EINTR )
 usleep
+utlobjectregistry.cpp
+utlstring.cpp
 vfscanf
 vpk:
 vprof.cpp
@@ -2376,6 +2630,7 @@ vtable for CThreadEvent
 vtable for CThreadFullMutex
 vtable for CThreadSemaphore
 vtable for CThreadSyncObject
+vtable for CUniformRandomStream
 vtable for CUtlCharConversion
 vtable for CVProfReporter
 vtable for CWorkerThread
@@ -2393,7 +2648,9 @@ wcsncpy
 wcstoll
 wcstoull
 windows
+without
 wt
+zD
 {}()':
 })
 ~

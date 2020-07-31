@@ -12,9 +12,8 @@ $ORIGIN
 %d:  '%s'
 %hu
 %i %i %i %i
-%lg
 %s allocation count overflow
-%s allocation count overflow( %llu >= %llu )
+%s allocation count overflow( %llu > %llu )
 %s%20s : %40s %5.3f
 %s%d
 %s%s
@@ -26,7 +25,6 @@ $ORIGIN
 ,
 , score %4.2f
 ->
-...
 ../../public/tier1/utlleanvector.h
 ../../public/tier1/utlrbtree.h
 ../public/ordered_constructor.h
@@ -90,7 +88,6 @@ AI_ResponseSystem:  Unxpected TokenWaiting() with NULL buffer in %s
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
-AddToTailGetPtr
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
 AnimationSystem_001
@@ -104,15 +101,9 @@ BenchmarkService001
 Bezier
 BinaryProperties_GetValue
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
@@ -148,10 +139,28 @@ CThreadSyncObject::~CThreadSyncObject()
 CTransform
 CUniformRandomStream::CUniformRandomStream()
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::StripExtension() const
+CUtlString::ToLowerFast()
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -192,6 +201,7 @@ EconItemToolModel_001
 Embedded criteria Generated: rule '%s' pointing to response '%s'.
 Embedded response receiving name: '%s'.
 EngineServiceMgr001
+EnsureCapacity
 EventSystem001
 Expecting '{' in enumeration '%s', got '%s'
 Expecting '{' in rule '%s', got '%s'
@@ -219,6 +229,8 @@ GetSceneDataFromImage( %s ) called with %u byte buffer, but compressed file is %
 GetSceneDataFromImage( %s ) called with %u byte buffer, but file data is %u bytes
 GetSceneDataFromImage( %s ) lzma decompression failed
 HammerMapLoader001
+HashString
+HashStringConventional
 HelpSystem_001
 Hold
 HookUpConfigValue
@@ -267,6 +279,9 @@ ModelDocUtils001
 Msg
 Multiple definitions for criteria '%s' [%u]
 Multiple responses with same name '%s'
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
@@ -422,6 +437,8 @@ ToolService_001
 UPDATE_STRING_TOKEN_DATABASE
 Unable to load #included script %s
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -454,13 +471,7 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_AppearsToBeANumber
-V_FixDoubleSlashes
 V_FixSlashes
-V_RemoveDotSlashes
-V_StrTrim
-V_UTF32ToUTF8
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
-V_UnqualifiedFileName
 V_atof
 V_atofloat32
 V_atofloat64
@@ -472,15 +483,11 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 VaPrintf
 Vector2D
 Vector4D
@@ -611,7 +618,6 @@ matrix3x4a_t
 max. %f
 memcpy
 memmove
-mempool.cpp
 memset
 min. %f
 nodelay
@@ -681,7 +687,6 @@ then
 thensimple
 typeinfo for CThreadSyncObject
 user
-utlstring.cpp
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info

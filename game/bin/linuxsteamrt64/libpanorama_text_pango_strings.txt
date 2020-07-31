@@ -426,22 +426,16 @@ CAST5-CFB
 CAST5-ECB
 CAST5-OFB
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
-CBufferString::StripExtension()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
@@ -719,9 +713,19 @@ CUITextLayoutPango::GetCharacterRangeCoordinates
 CUITextLayoutPango::HitTestPoint
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlString::Format(char const*, ...)
+CUtlString::FreeMemoryBlock()
+CUtlString::Purge()
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::Swap(CUtlString&)
+CUtlString::operator+=(char const*)
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
@@ -1133,6 +1137,8 @@ Missing field: FileDescriptorProto.name.
 Missing name.
 ModelDocUtils001
 Multiple extension registrations for type "
+MurmurHash2
+MurmurHash2LowerCase(char const*, unsigned int)
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -1611,6 +1617,8 @@ Unrecognized syntax:
 Unsupported
 Unsupported: type mismatch
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 V
 VApplication001
 VAsyncFileSystem2_001
@@ -1648,15 +1656,13 @@ V_FixSlashes
 V_GetErrno
 V_IsAbsolutePath
 V_PathContainsPath
-V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
+V_UTF8ToUChar32
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
@@ -1672,15 +1678,11 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
-V_tier0_strstr
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 Value must be "true" or "false" for boolean option "
@@ -2671,7 +2673,6 @@ memcmp
 memcpy
 memmove
 memory buffer routines
-mempool.cpp
 memset
 merchant initiated auth
 message
@@ -3315,6 +3316,7 @@ strlen
 strncasecmp
 strpbrk
 strrchr
+strstr
 strtof
 strtol
 strtoll

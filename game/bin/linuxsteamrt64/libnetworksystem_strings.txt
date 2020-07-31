@@ -156,7 +156,6 @@ $tI
 %i.%i.%i.%i
 %i.%i.%i.%i:%i
 %ld
-%lg
 %lld
 %llu
 %lu
@@ -175,7 +174,6 @@ $tI
 %s SendMessage unreliable failed with EResult: %d, bytes written %d
 %s allocation count overflow
 %s allocation count overflow( %llu > %llu )
-%s allocation count overflow( %llu >= %llu )
 %s allocation count overflow( add %llu + current %llu > max %llu )
 %s depth %d
 %s encoding as %d bits '
@@ -237,7 +235,6 @@ $tI
 %s: SendMessage unreliable failed with k_EResultLimitExceeded, crashing connection.
 %s: rebasing delegate [ 0x%p -> 0x%p ]
 %s: shrinking removes delegate [0x%p]
-%s: string format requested %d chars
 %s:%d
 %s:%d reliable sequence
 %s:%s needs base %s:%s to be registered
@@ -354,7 +351,6 @@ $tI
 .
 .  Please update your library.  If you compiled the program yourself, make sure that your headers are from the same version of Protocol Buffers as your link-time library.  (Version verification failed in "
 . This will make the proto fail to compile for some languages, such as C#.
-...
 ... }
 ...<truncated>...
 ../common/protobuf_helpers.cpp
@@ -696,7 +692,6 @@ AddMultipleToTail
 AddOrUpdateFieldMetadata:  adding/updating %s with invalid array count %d!
 AddString
 AddToTail
-AddToTailGetPtr
 AddUInt32
 AddUInt64
 Adding 0--%dms of additional latency to %g%% packets, for random reordering
@@ -808,16 +803,11 @@ CAnimMovementManager
 CAuthPhysBody
 CAuthPhysJoint
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::ComposeFileName(char const*, char const*, char)
+CBufferString::AppendRepeat(char, int, bool)
 CBufferString::Concat(char const*, char const*, ...)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
-CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
@@ -825,7 +815,6 @@ CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -1187,10 +1176,39 @@ CUtlBinaryBlock
 CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::Clear()
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlString
+CUtlString::Append(char const*)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::Trim(char const*)
+CUtlString::TrimRight(char const*)
+CUtlString::TrimRight(char)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1562,7 +1580,6 @@ FontManager_001
 For network encoding stats, provide a notes field if field change count is above this many standard deviations for the average field change counts for the serializer.
 For servers behind NAT/DHCP meant to be exposed to the public internet, this is the public facing ip address string: ("x.x.x.x" )
 Forces larger payloads.
-FormatV
 Found invalid proto option data for:
 G
 G->B
@@ -1623,6 +1640,7 @@ Groups are not supported in proto3 syntax.
 H
 HammerMapLoader001
 HasField
+HashString
 HelpSystem_001
 Hex and octal numbers must be integers.
 HookUpConfigValue
@@ -1803,6 +1821,9 @@ Missing name.
 ModelDocUtils001
 Multiple extension registrations for type "
 Multiple steam net connections from %s
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -2436,6 +2457,8 @@ Usage: sdr <setting> [<value>]
 Use lz compression on game packets.
 Use network sockets layer even for listen server local player's packets (multiplayer only).
 UserInfoChangeService_001
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -2478,21 +2501,15 @@ VScript
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_FixDoubleSlashes
-V_FixSlashes
 V_GetErrno
-V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_SplitStringOnSeparators(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_acosf
 V_asinf
 V_atan2f
@@ -2521,20 +2538,15 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_uuid_t
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -2732,7 +2744,6 @@ break_uniform_burst
 breakable_count
 breakable_model
 breakable_skin
-broadcast
 buffer. Use the 'bytes' type if you intend to send raw
 builtin()
 burst_randomize
@@ -2809,6 +2820,7 @@ dti_enabled
 dti_report_stddev_threshold
 duplicate
 dynamic_interaction
+e
 embedded field
 emitFromWorld
 enable
@@ -3572,6 +3584,7 @@ strings::Substitute format string invalid: asked for "$
 strlen
 strpbrk
 strrchr
+strstr
 strtof
 strtol
 strtoll
@@ -3623,7 +3636,6 @@ usage:  net_spewserializer <name>
 use_additional_offset
 user
 utlbuffer.cpp
-utlstring.cpp
 utlvector count
 value
 valve
@@ -3705,6 +3717,7 @@ yaw_end
 yaw_start
 yes
 z
+zD
 zero
 {
 { ... };

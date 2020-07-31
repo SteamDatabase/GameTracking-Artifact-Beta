@@ -8,16 +8,67 @@
 		<include src="s2r://panorama/styles/popups/popup_rankup.vcss_c" />
 	</styles>
 
+	<scripts>
+		<include src="s2r://panorama/scripts/util.vjs_c" />
+		<include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
+		<include src="s2r://panorama/scripts/rank_change.vjs_c" />
+	</scripts>
+
+	<snippets>
+		<snippet name="EffectsPanel">
+			<Panel class="Boo">
+				<DCGScenePanel camera="camera" map="maps/scenes/progression/progression_rankup.vmap" hittest="false" light="model_light" require-composition-layer="true" particleonly="true"  renderdeferred="true" deferredalpha="true" antialias="true"/>
+			</Panel>
+		</snippet>
+	</snippets>
+
 	<PopupRankUp popupbackground="dim" >
 		<Panel class="Contents PopupPanel">
-			<Panel class="MainBody">
+			<Panel class="MainBody PositiveNoRank">
+				<Label class="Subheading" text="#DCG_RankProgressUp_Subheading" />
+			</Panel>
+			<Panel class="MainBody NegativeNoRank">
+				<Label class="Subheading" text="#DCG_RankProgressDown_Subheading" />
+			</Panel>
+			<Panel class="MainBody PositiveRank">
 				<Label class="Title" text="#DCG_RankUp_Title" />
 				<Label class="Subheading" text="#DCG_RankUp_Subheading" />
 			</Panel>
+			<Panel class="MainBody NegativeRank">
+				<Label class="Subheading" text="#DCG_RankUp_Negative" />
+			</Panel>
+			<Panel class="MainBody PositiveLeaderboard">
+				<Label class="Title" text="#DCG_RankUp_Title" />
+				<Label class="Subheading" text="#DCG_LeaderboardUp_Subheading" />
+			</Panel>
+			<Panel class="MainBody NegativeLeaderboard">
+				<Label class="Subheading" text="#DCG_LeaderboardDown_Subheading" />
+			</Panel>
+			<Panel class="RankDisplayContents">
+				<Panel id="OldBadgeContainer" class="AccountBadgeContainer">
+					<DCGAccountBadge id="OldAccountBadge" class="AccountBadge" />
+					<Label text="{s:OldRankMajor} {s:OldRankMinor}" />
+				</Panel>
+
+				<Panel id="NewBadgeContainer" class="AccountBadgeContainer">
+					<DCGAccountBadge id="NewAccountBadge" class="AccountBadge" />
+					<Label text="{s:NewRankMajor} {s:NewRankMinor}" />
+				</Panel>
+				<Panel id="LeaderboardFlash" />
+				<ProgressBar id="Progress" class="FillBar">
+					<Label class="ProgressLabel" text="{d:progress_value}%"/>
+				</ProgressBar>
+				
+			</Panel>
+			<Panel class="HorizRule" />
 			<Panel class="PopupBottomContainer">
+
+				<!-- <Button id="AnimButton" class="PopupButton" onactivate="DCGPlayRankSequence()">
+					<Label text="#Rarity_Rare"/>
+				</Button> -->
 				<Button id="ContinueButton" class="PopupButton" onmouseover="DCGClaimRewardMouseover()" onactivate="UIPopupButtonClicked()">
-					<Label text="#DCG_RankUp_Continue"/>
-					</Button>
+					<Label text="#OK"/>
+				</Button>
 			</Panel>	
 		</Panel>
 		<Panel id="KeyArtLevelUp" hittest="false"/>
@@ -28,6 +79,6 @@
 				<Label id="RankConstructedLabelBig" class="RankLabelBig" text="#DCG_RankLabelValue"/>
 			</Panel>
 		</Panel>
-		<DCGScenePanel id="EffectsPanel" camera="camera" map="maps/scenes/progression/progression_rankup.vmap" hittest="false" light="model_light" require-composition-layer="true" particleonly="true"  renderdeferred="true" deferredalpha="true" antialias="true"/>
+
 	</PopupRankUp>
 </root>

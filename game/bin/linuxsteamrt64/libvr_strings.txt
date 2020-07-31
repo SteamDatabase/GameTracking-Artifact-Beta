@@ -79,7 +79,6 @@ $tI
 %hd
 %hu
 %i %i %i %i
-%lg
 %lld
 %llu
 %ls [wstring, len = %d]
@@ -95,7 +94,6 @@ $tI
 %s.vtex
 %s/
 %s:
-%s: string format requested %d chars
 %s_%s_%u
 %s_%u.vmdl
 %u iterated blocks
@@ -176,12 +174,11 @@ $tI
 .
 . Pixels per eye after stencil mask:
 . Renderer now requires
-...
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
-../public/tier1/utlblockmemory.h
-../public/tier1/utlfixedmemory.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlfixedmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 .exr
@@ -191,15 +188,15 @@ $tI
 .psd
 .tif
 //-----------------------------------------------------------------------------------------
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
-/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_ETC1.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGBA8.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcIndividualTrys.cpp
+/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcSortedBlockList.cpp
 /user/hand/left
 /user/hand/right
 /user/head
@@ -313,9 +310,9 @@ $tI
 ?a`
 @
 @@
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
-@@/data/source2_main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcDifferentialTrys.cpp
-@A
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
+@@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
+@A/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RG11.cpp
 A
 A->B
 ACT_IDLE
@@ -478,8 +475,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -487,7 +482,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -498,7 +492,6 @@ CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -565,9 +558,36 @@ CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetBaseFilename() const
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::PathJoin(char const*, char const*)
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(char const*)
+CUtlString::operator+=(int)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlVector
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
 CVr::GetOutputDevice not supported for this rendersystem API.
@@ -839,7 +859,6 @@ FloatBitMap_t::LoadFromBuffer: Unsupported color format, skipping!
 FloatBitMap_t::LoadFromFloatBitmap: Received improper bitmap size, skipping!
 FloatBitMap_t::WriteToBuffer: Received improper buffer size %s (expecting %s), skipping!
 FontManager_001
-FormatV
 Found overlay %s is invalid
 Found unknown controller product id: 0x%04x, using default WindowsMR controller.
 Foveated 2x.
@@ -850,7 +869,7 @@ G channel not found!
 G->B
 GAME
 GAMEROOT
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
 GLIBCXX_3.4
@@ -898,6 +917,7 @@ HMD Serial Number:
 HTC VIVE
 HammerMapLoader001
 Has Collision;
+HashString
 HelpSystem_001
 Hitbox indexing is incorrect for set %s, hitbox %s. Hitboxes will not be setup properly.
 HookUpConfigValue
@@ -1018,7 +1038,6 @@ Length;
 LightingBasis
 LightmapUV
 LightmapUVW
-Line %d at "%s":
 Line %d at "%s": %s
 Line %d:
 Line %d: %s
@@ -1072,6 +1091,10 @@ Model conversion: %d conversions in %.3fsec (%.3fms each)
 ModelCompile/UseShadowFastPathHeuristic
 ModelDocUtils001
 MovementSettings
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N3Etc16Block4x4EncodingE
 N3Etc20Block4x4Encoding_R11E
 N3Etc21Block4x4Encoding_ETC1E
@@ -1435,6 +1458,9 @@ Use: vr_dump_render_model <obj_filename> <tga_filename>
 UserInfoChangeService_001
 Using 10-bit blend indices: are you sure they are supproted on the target hardware?
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
+UtlStringFastCompareLess
 VApplication001
 VAsyncFileSystem2_001
 VAvi001
@@ -1524,7 +1550,6 @@ VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<cha
 V_CopyMemory3D
 V_FixDoubleSlashes
 V_FixInvalidPathCharacters
-V_FixSlashes
 V_FixupPathCharToUnderscore
 V_GetErrno
 V_GetFileExtension
@@ -1534,12 +1559,11 @@ V_PrettifyMem
 V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
-V_StrTrim
+V_UChar32ToUTF8
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -1571,19 +1595,13 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -2361,7 +2379,6 @@ max_angle
 memcmp
 memcpy
 memmove
-mempool.cpp
 memset
 menu
 mesh.cpp
@@ -2613,6 +2630,8 @@ stream end
 stream error
 string
 strlen
+strnlen
+strstr
 strtol
 sub%dx%d.tga
 submrg%dx%d.tga
@@ -2647,7 +2666,6 @@ useMotionDamping
 useSmoothPaths
 use_additional_offset
 user
-utlstring.cpp
 v %.6g, %.6g, %.6g
 v %g %g %g
 v %g %g %g%s

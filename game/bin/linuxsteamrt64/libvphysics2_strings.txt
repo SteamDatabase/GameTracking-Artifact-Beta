@@ -49,7 +49,6 @@ $tIVScript
 %f %f %f %f
 %hd
 %i %i %i %i
-%lg
 %lld
 %llu
 %llx
@@ -88,7 +87,6 @@ $tIVScript
 %s/%s
 %s: %llu casts, %.1f ticks/cast
 %s: %s
-%s: string format requested %d chars
 %s:%s needs base %s:%s to be registered
 %s:%s:%s
 %s_%d
@@ -179,11 +177,10 @@ $tIVScript
 -unittest
 -ut
 -validate
-...
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
-../public/tier1/utlblockmemory.h
+../public/tier0/utlblockmemory.h
 ../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
@@ -212,7 +209,6 @@ $tIVScript
 1.0f
 1.2
 1000
-1000000
 10ConCommand
 11CRefCountedI20CRefCountServiceBaseILb1E6CRefMTEE
 11IVSSequence
@@ -240,7 +236,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-07-14 17:34:46.038000
+2020-07-28 14:14:05.750000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -333,7 +329,6 @@ $tIVScript
 36CModelConfigElement_SetMaterialGroup
 3C
 4
-5B<
 6ConVar
 7IConVar
 99ccff;"><b>No</b> Collision
@@ -431,6 +426,7 @@ $tIVScript
 @
 @ %.2f, %.2f, %.2f
 @@
+@A
 A
 A->B
 AABB_t
@@ -478,6 +474,7 @@ API Calls
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 ATTACHMENT_INFLUENCE_FLAGS_NONE
 AbsolutePoseControl
+Accelerate
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 AcquireMask
@@ -660,8 +657,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -669,18 +664,17 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::Replace(char const*, char const*, bool)
+CBufferString::Replace(char, char)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -1010,6 +1004,7 @@ CSoftbodyEffectGravity
 CSoftbodyEffectPressurize
 CSoftbodyEffectProperty
 CSoftbodyEffectSkinnedCollider
+CSoftbodyEffectSpeedup
 CSoftbodyEffectWind
 CStrongHandle
 CTSQueue corruption
@@ -1042,11 +1037,38 @@ CUtlIncrementalVector< CRnSoftbody, CRnSoftbody::CWorldIndexPred >
 CUtlIncrementalVector< CSoftbodyEffect >
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlSharedArray
 CUtlString
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::GetExtensionAlloc() const
+CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::IsEqual_FastCaseInsensitive(char const*) const
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::SetLength(int)
+CUtlString::operator+(CUtlString const&) const
+CUtlString::operator+(char const*) const
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlStringToken RnFrictionNotificationRefl_t::m_MaterialIndex[ 2 ]
 CUtlSymbol
@@ -1509,7 +1531,6 @@ FollowNodeCount
 FontManager_001
 For Hitbox Test
 ForcedUpdates
-FormatV
 FourCovMatrices3
 FourQuaternions
 FourVectors
@@ -1551,6 +1572,7 @@ HammerMapLoader001
 HandAttachment
 Has Collision;
 HasOverrideAttributes
+HashString
 HelpSystem_001
 HierarchicalBitVectorRefl_t
 HierarchicalBitVectorRefl_t BroadphaseRefl_t::m_MoveBuffer
@@ -1895,6 +1917,10 @@ MoveProxies
 MovementSettings
 Multiply air drag
 Multithreaded test:
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 N24CFieldPathHuffmanEncoder12InternalNodeE
 N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
@@ -2632,6 +2658,7 @@ SoftbodyEffectPressurizeRefl_t
 SoftbodyEffectPropertyRefl_t
 SoftbodyEffectPropertyRefl_t RnSoftbodyRefl_t::m_Effects
 SoftbodyEffectSkinnedColliderRefl_t
+SoftbodyEffectSpeedupRefl_t
 SoftbodyEffectStiffenRefl_t
 SoftbodyEffectWindRefl_t
 SoftbodyEffects
@@ -2735,6 +2762,7 @@ Thin Plate
 ThreadGetCurrentId
 ThreadSleep
 TickCount
+TimeStepMultiplier
 ToolFramework2_002
 ToolSceneNodeFactory_001
 ToolScriptManager001
@@ -2816,6 +2844,8 @@ Used Layers:
 UserData
 UserInfoChangeService_001
 Using 16-bit blend indices
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2896,12 +2926,10 @@ V_PrettifyNum
 V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
-V_StrTrim
 V_UTF16ToUTF8
 V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
@@ -2936,18 +2964,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
-V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 VaPrintf
@@ -3278,8 +3301,6 @@ cl_jiggle_bone_invert
 cl_jiggle_bone_sanity
 client
 clientcmd_can_execute
-cloth_airdrag
-cloth_airdrag_override
 cloth_approximate_collide
 cloth_batch
 cloth_collide
@@ -3292,8 +3313,6 @@ cloth_damping_multiplier
 cloth_debug
 cloth_debug_draw_nodepth_alpha
 cloth_enable
-cloth_expairdrag
-cloth_expquadairdrag
 cloth_ground_offset
 cloth_ground_plane_thickness
 cloth_guard_threshold
@@ -3303,10 +3322,8 @@ cloth_legacy_stretch_force
 cloth_legacy_support
 cloth_max_ticks_per_frame
 cloth_node_debug_axis_length
-cloth_node_velocity_limit
 cloth_quad_smooth_iterations
 cloth_quad_smooth_rate
-cloth_quadairdrag
 cloth_quasistatic_iters
 cloth_reload_immediately
 cloth_resim_after
@@ -3511,16 +3528,15 @@ float RnSoftbodyRefl_t::m_flClothScale
 float RnSoftbodyRefl_t::m_flDampingMultiplier
 float RnSoftbodyRefl_t::m_flExpAirDrag
 float RnSoftbodyRefl_t::m_flExpQuadAirDrag
-float RnSoftbodyRefl_t::m_flExpRodAirDrag
 float RnSoftbodyRefl_t::m_flGravityScale
 float RnSoftbodyRefl_t::m_flLastTimestep
 float RnSoftbodyRefl_t::m_flModelScale
 float RnSoftbodyRefl_t::m_flQuadVelocitySmoothRate
 float RnSoftbodyRefl_t::m_flRodVelocitySmoothRate
 float RnSoftbodyRefl_t::m_flSurfaceStretch
+float RnSoftbodyRefl_t::m_flTimeStepMultiplier
 float RnSoftbodyRefl_t::m_flVelAirDrag
 float RnSoftbodyRefl_t::m_flVelQuadAirDrag
-float RnSoftbodyRefl_t::m_flVelRodAirDrag
 float RnSphericalJointRefl_t::m_flMotorDampingRatio
 float RnSphericalJointRefl_t::m_flMotorFrequency
 float RnSphericalJointRefl_t::m_flMotorMaxTorque
@@ -3546,6 +3562,7 @@ float SoftbodyEffectRefl_t::m_flIntensity
 float SoftbodyEffectRefl_t::m_flLifeTime
 float SoftbodyEffectRefl_t::m_flPeakTime
 float SoftbodyEffectRefl_t::m_flTailTime
+float SoftbodyEffectSpeedupRefl_t::m_flSpeedup
 float SoftbodyEffectStiffenRefl_t::m_flStiffenBias
 float SoftbodyEffectWindRefl_t::m_flAirToClothDensity
 float abap = Dot( ab, ap );
@@ -3563,13 +3580,12 @@ float32
 float32 FeModelRefl_t::m_flAddWorldCollisionRadius
 float32 FeModelRefl_t::m_flDefaultExpAirDrag
 float32 FeModelRefl_t::m_flDefaultExpQuadAirDrag
-float32 FeModelRefl_t::m_flDefaultExpRodAirDrag
 float32 FeModelRefl_t::m_flDefaultGravityScale
 float32 FeModelRefl_t::m_flDefaultSurfaceStretch
 float32 FeModelRefl_t::m_flDefaultThreadStretch
+float32 FeModelRefl_t::m_flDefaultTimeDilation
 float32 FeModelRefl_t::m_flDefaultVelAirDrag
 float32 FeModelRefl_t::m_flDefaultVelQuadAirDrag
-float32 FeModelRefl_t::m_flDefaultVelRodAirDrag
 float32 FeModelRefl_t::m_flInternalPressure
 float32 FeModelRefl_t::m_flLocalForce
 float32 FeModelRefl_t::m_flLocalRotation
@@ -3755,7 +3771,6 @@ m_ConeCutoff
 m_Configs
 m_Constraints
 m_ControlRigData
-m_CtrlHash
 m_CtrlName
 m_CtrlOffsets
 m_CtrlOsOffsets
@@ -3896,6 +3911,7 @@ m_WorldCollisionNodes
 m_WorldCollisionParams
 m_aAngOffset
 m_anchor
+m_ankleBoneName
 m_attachments
 m_audioParams
 m_audioSounds
@@ -4061,13 +4077,12 @@ m_flDamping
 m_flDampingRatio
 m_flDefaultExpAirDrag
 m_flDefaultExpQuadAirDrag
-m_flDefaultExpRodAirDrag
 m_flDefaultGravityScale
 m_flDefaultSurfaceStretch
 m_flDefaultThreadStretch
+m_flDefaultTimeDilation
 m_flDefaultVelAirDrag
 m_flDefaultVelQuadAirDrag
-m_flDefaultVelRodAirDrag
 m_flDefaultVolumetricSolveAmount
 m_flDistance
 m_flDuration
@@ -4090,6 +4105,7 @@ m_flInput0
 m_flInput1
 m_flInternalPressure
 m_flK
+m_flLength
 m_flLinearDamping
 m_flLinearDampingRatio
 m_flLinearDampingRatios
@@ -4244,6 +4260,7 @@ m_lodGroupSwitchDistances
 m_material
 m_materialGroups
 m_materialName
+m_materials
 m_maxForce
 m_maxTorque
 m_meshGroups
@@ -4267,6 +4284,7 @@ m_nBody2
 m_nBodyCount
 m_nBodyType
 m_nBoneComponent
+m_nBoneHash
 m_nBoneIndex
 m_nBoneNameHash
 m_nBoneWeightCount
@@ -5101,7 +5119,6 @@ useMotionDamping
 useSmoothPaths
 use_additional_offset
 user
-utlstring.cpp
 v %f %f %f#%d ComponentIndex %d, queue %d, angle %.1f; ring:
 v %g %g %g
 v %g %g %g%s

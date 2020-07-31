@@ -1,166 +1,375 @@
 PopupRankUp
 {
-    width: 100%;
-    height: 100%;
-    flow-children: none;
-    sound: "DCG_Progression.Ranked_Tier_01";
+	width: 100%;
+	height: 100%;
+	flow-children: none;
 }
 
-#EffectsPanel
+DCGScenePanel
 {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .Contents
 {
-    width: 900px;
-    height: fit-children;
-    background-image: url("s2r://panorama/images/dialogs/popup_bg_mmr_psd.vtex");
-    background-repeat: no-repeat;
+	width: 900px;
+	height: fit-children;
+	background-image: url("s2r://panorama/images/dialogs/popup_rank_bg_png.vtex");
+	background-repeat: no-repeat;
+	background-size: 100%;
+
+	background-color: none;
 }
 
 .MainBody
 {
-    width: 100%;
-    margin-top: 32px;
-    min-height: 400px;
-    flow-children: down;
+	width: 100%;
+	margin-top: 32px;
+	flow-children: down;
+	visibility: collapse;
+}
+
+.PositiveRank .MainBody.PositiveRank,
+.NegativeRank .MainBody.NegativeRank,
+.PositiveProgress .MainBody.PositiveNoRank,
+.NegativeProgress .MainBody.NegativeNoRank,
+.PositiveLeaderboard .MainBody.PositiveLeaderboard,
+.NegativeLeaderboard .MainBody.NegativeLeaderboard
+{
+	visibility: visible;
 }
 
 .Title
 {
-    horizontal-align: center;
-    color: uiLightGrey;
-    font-size: 48px;
-    font-weight: light;
-    text-shadow: 0px 0px 6px 3.0 #00000033;
+	horizontal-align: center;
+	font-size: 48px;
+	font-weight: light;
+	letter-spacing: 4px;
+	text-shadow: 0px 0px 6px 3.0 #00000033;
+
+	text-transform: uppercase;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #ecdda6 ), to( #d07527 ) );
+	text-shadow: 2px 2px 4px 1.0 #000000;
 }
 
 .Subheading
 {
-    horizontal-align: center;
-    color: uiStandardGrey;
-    font-weight: light;
-    font-size: 20px;
-    text-shadow: 0px 0px 6px 3.0 #00000033;
+	horizontal-align: center;
+	color: uiStandardGrey;
+	font-weight: light;
+	font-size: 20px;
+	text-shadow: 0px 0px 6px 3.0 #00000033;
+	text-transform: uppercase;
+}
+
+.RankDisplayContents
+{
+	height: 250px;
+	width: 100%;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.AccountBadgeContainer
+{
+	vertical-align: center;
+	horizontal-align: center;
+	flow-children: down;
+
+	height: fit-children;
+	
+	transform: translateX( -190px );
+	transition-property: transform, opacity;
+
+	ui-scale: 130%;
+
+	opacity: 0;
+}
+
+.AccountBadgeContainer Label
+{
+	horizontal-align: center;
+	font-size: 28px;
+
+	transform: translateY( -12px );
+
+	color: gradient( linear, 0% 0%, 0% 100%, from( #c6c8eb ), to( #8b90ed ) );
+}
+
+.AccountBadgeContainer.FadeIn
+{
+	opacity: 1;
+}
+
+.AccountBadgeContainer.Animating
+{
+	transition-duration: 0.5s;
+	transition-timing-function: ease-in;
+}
+
+.AccountBadgeContainer.Centered
+{
+	transform: translateX( 0px );
+}
+
+.PositiveLeaderboard .AccountBadgeContainer,
+.NegativeLeaderboard .AccountBadgeContainer
+{
+	transform: translateX( 0px );
+	transition-property: none;
+}
+
+DCGAccountBadge
+{
+	vertical-align: top;
+
+	transform: translateY( 0px );
+	transition-duration: 1s;
+	transition-property: transform;
+	
+	animation-duration: 0.3s;
+}
+
+@keyframes 'LeaveBelow'
+{
+	0%
+	{
+		transform: translateY( 0px );
+	}
+	100%
+	{
+		transform: translateY( 40px );
+	}
+}
+
+@keyframes 'LeaveAbove'
+{
+	0%
+	{
+		transform: translateY( 0px );
+	}
+	100%
+	{
+		transform: translateY( -40px );
+	}
+}
+
+.LeaveAbove DCGAccountBadge
+{
+	animation-name: LeaveAbove;
+
+}
+
+.LeaveBelow DCGAccountBadge
+{
+	animation-name: LeaveBelow;
+}
+
+@keyframes 'ArriveFromAbove'
+{
+	0%
+	{
+		transform: translateY( -40px );
+	}
+	100%
+	{
+		transform: translateY( 0px );
+	}
+}
+
+@keyframes 'ArriveFromBelow'
+{
+	0%
+	{
+		transform: translateY( 40px );
+	}
+	100%
+	{
+		transform: translateY( 0px );
+	}
+}
+
+.ArriveFromAbove DCGAccountBadge
+{
+	animation-name: ArriveFromAbove;
+}
+
+.ArriveFromBelow DCGAccountBadge
+{
+	animation-name: ArriveFromBelow;
+}
+
+
+@keyframes 'LeaderboardFlashAnim'
+{
+	0%
+	{
+        opacity: 0;
+    }
+
+    50%
+    {
+        opacity: 0.7;
+    }
+
+    100%
+    {
+        opacity: 0;
+    }
+}
+
+#LeaderboardFlash
+{	
+	background-image: url("s2r://panorama/images/hud/avatar_badge/avatar_rank_badge_09_glowy-frame_psd.vtex");
+	background-size: 100%;
+
+	width: 150px;
+	height: 150px;
+	ui-scale: 130%;
+
+	opacity: 0.6;
+
+	vertical-align: center;
+	horizontal-align: center;
+
+	visibility: collapse;
+}
+
+#LeaderboardFlash.Visible
+{
+	visibility: visible;
+
+	animation-name: LeaderboardFlashAnim;
+	animation-duration: 1.5s;
+
+	opacity: 0;
+}
+
+.NewRankIsMax #NewBadgeContainer Label,
+.OldRankIsMax #OldBadgeContainer Label
+{
+	visibility: collapse;
 }
 
 .RankBox
 {
-    width: 800px;
-    height: 250px;
-    margin-top: 440px;
-    padding-left: 48px;   
-    padding-right: 48px;
-    flow-children: down;
-    horizontal-align: center;
+	width: 800px;
+	height: 250px;
+	margin-top: 440px;
+	padding-left: 48px;   
+	padding-right: 48px;
+	flow-children: down;
+	horizontal-align: center;
+
+	visibility: collapse;
 }
 
 #RankIcon
 {
-    width: 256px;
-    height: 256px;
-    background-color: green;
-    vertical-align: center;
-    horizontal-align: left;
+	width: 256px;
+	height: 256px;
+	background-color: green;
+	vertical-align: center;
+	horizontal-align: left;
 }
 
 .RankLabel
 {
-    vertical-align: center;
-    horizontal-align: center;
-    font-size: 20px;
-    //text-shadow: 0px 0px 6px 4.0 #71ffff11;
-    text-overflow: shrink;
-    text-transform: uppercase;
-    font-weight: light;
-    letter-spacing: 2px;
-    color: uiStandardGrey;
-    text-shadow: 0px 0px 6px 3.0 #00000033;
+	vertical-align: center;
+	horizontal-align: center;
+	font-size: 20px;
+	//text-shadow: 0px 0px 6px 4.0 #71ffff11;
+	text-overflow: shrink;
+	text-transform: uppercase;
+	font-weight: light;
+	letter-spacing: 2px;
+	color: uiStandardGrey;
+	text-shadow: 0px 0px 6px 3.0 #00000033;
 }
 
 .RankLabelBig
 {
-    horizontal-align: center;
-    font-size: 104px;
-    text-overflow: shrink;
-    font-weight: light;
-    color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, #c8cdd6 ), color-stop( .3, #c8cdd6 ), color-stop( .8, #8b97a6 ), to( #8b97a6 ) );
+	horizontal-align: center;
+	font-size: 104px;
+	text-overflow: shrink;
+	font-weight: light;
+	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, #c8cdd6 ), color-stop( .3, #c8cdd6 ), color-stop( .8, #8b97a6 ), to( #8b97a6 ) );
 }
 
 #RankDraftLabelBig
 {
-    text-shadow: 0px 0px 4px 1.0 #dd6bad44;
+	text-shadow: 0px 0px 4px 1.0 #dd6bad44;
 }
 
 #RankConstructedLabelBig
 {
-    text-shadow: 0px 0px 4px 1.0 #5da9d466;
+	text-shadow: 0px 0px 4px 1.0 #5da9d466;
 }
 
 .ConstructedMMR #RankDraftLabel,
 .ConstructedMMR #RankDraftLabelBig
 {
-    visibility: collapse;
+	visibility: collapse;
 }
 
 .DraftMMR #RankConstructedLabel,
 .DraftMMR #RankConstructedLabelBig
 {
-    visibility: collapse;
+	visibility: collapse;
 }
 
 
 .BottomButtonContainer
 {
-    vertical-align: bottom;
-    width: 100%;
-    padding-bottom: 10px;
+	vertical-align: bottom;
+	width: 100%;
+	padding-bottom: 10px;
 }
 
 .BottomButtonContainer Button
 {
-    vertical-align: center;
-    horizontal-align: center;
+	vertical-align: center;
+	horizontal-align: center;
 }
 
 .BottomButtonContainer Button Label
 {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 32px;
-    text-shadow: 0px 0px 3px 4.0 #00000088;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 32px;
+	text-shadow: 0px 0px 3px 4.0 #00000088;
 }
 
 .BottomButtonContainer Button:hover
 {
-    brightness: 1.2;
+	brightness: 1.2;
 }
 
 .BottomButtonContainer Button:hover Label
 {
-    text-shadow: 0px 0px 6px 4.0 #71ffff11;
+	text-shadow: 0px 0px 6px 4.0 #71ffff11;
 }
 
 .BottomButtonContainer Button:disabled
 {
-    brightness: 0.1;
+	brightness: 0.1;
 }
 .BottomButtonContainer Button:hover:disabled
 {
-    brightness: 0.15;
+	brightness: 0.15;
 }
 .BottomButtonContainer Button:disabled Label
 {
-    text-shadow: none;
+	text-shadow: none;
 }
 .BottomButtonContainer Button:hover:disabled Label
 {
-    text-shadow: none;
+	text-shadow: none;
 }
 
-#ContinueButton
+#ContinueButton,
+#AnimButton
 {
 	border: 1px solid rgb(19, 13, 31);
 	height: 64px;
@@ -176,19 +385,22 @@ PopupRankUp
 	horizontal-align: right;
 }
 
-#ContinueButton:hover
+#ContinueButton:hover,
+#AnimButton:hover
 {
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( rgb(197, 233, 255) ), color-stop( .06, rgba(161, 244, 255, 0.76) ), color-stop( .5, rgba(70, 133, 182, 0.308) ), to( rgb(61, 65, 124) ) );
 }
 
-#ContinueButton Label
+#ContinueButton Label,
+#AnimButton Label
 {
 	color: rgb(184, 217, 255);
 	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, rgb(233, 243, 255) ), color-stop( .3, rgb(224, 238, 255) ), color-stop( .8, rgb(184, 217, 255) ), to( rgb(184, 217, 255) ) );
 	text-shadow: 0px 0px 12px 1 rgba(89, 182, 189, 0.733);
 }
 
-#ContinueButton:hover Label
+#ContinueButton:hover Label,
+#AnimButton:hover Label
 {
 	color: rgb(255, 255, 255);
 	color: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .3, rgb(255, 255, 255) ), color-stop( .3, rgb(255, 255, 255) ), color-stop( .8, rgb(255, 255, 255) ), to( rgb(255, 255, 255) ) );
@@ -198,32 +410,39 @@ PopupRankUp
 
 #KeyArtLevelUp
 {
-	  background-image: url("s2r://panorama/images/dialogs/popup_rankup_psd.vtex");
-	  horizontal-align: left;
-    vertical-align: top;
-		background-size: 60%;
-		background-repeat: no-repeat;
-    width: 600px;
-    height: 734px;
-    margin-left: 320px;
-    margin-top: 180px;
+	background-image: url("s2r://panorama/images/dialogs/popup_rankup_psd.vtex");
+	horizontal-align: left;
+	vertical-align: top;
+	background-size: 60%;
+	background-repeat: no-repeat;
+	width: 600px;
+	height: 734px;
+	margin-left: 320px;
+	margin-top: 180px;
+
+	visibility: collapse;
+}
+
+.PositiveChange #KeyArtLevelUp
+{
+	visibility: visible;
 }
 
 .RankBox2
 {
-    flow-children: right;
-    horizontal-align: center;
+	flow-children: right;
+	horizontal-align: center;
 }
 
 .RankIcon
 {
-    width: 72px;
-    height: 72px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    visibility: collapse;
-    margin: 30px 8px 0px 0px;
-    border-radius: 50%;
+	width: 72px;
+	height: 72px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	visibility: collapse;
+	margin: 30px 8px 0px 0px;
+	border-radius: 50%;
 	animation-duration: 2.5s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;	
@@ -250,7 +469,7 @@ PopupRankUp
 
 .DraftMMR .RankIcon
 {
-    animation-name: SkillPulseFreeDraft;
+	animation-name: SkillPulseFreeDraft;
 }
 
 @keyframes 'SkillPulseFreeDraft'
@@ -272,20 +491,66 @@ PopupRankUp
 
 .ConstructedMMR #RankConstructedIcon
 {
-    visibility: visible;
+	visibility: visible;
 }
 
 #RankConstructedIcon
 {
-    background-image: url("s2r://panorama/images/tournaments/constructed_skill_icon_large_psd.vtex");
+	background-image: url("s2r://panorama/images/tournaments/constructed_skill_icon_large_psd.vtex");
 }
 
 .DraftMMR #RankDraftIcon
 {
-    visibility: visible;
+	visibility: visible;
 }
 
 #RankDraftIcon
 {
-    background-image: url("s2r://panorama/images/tournaments/draft_skill_icon_large_psd.vtex");
+	background-image: url("s2r://panorama/images/tournaments/draft_skill_icon_large_psd.vtex");
+}
+
+.PopupBottomContainer
+{
+	background-color: #0000;
+	background-image: none;
+}
+
+.HorizRule
+{
+	width: 100%;
+	height: 4px;
+	margin-left: 20px;
+	margin-right: 20px;
+
+	background-image: url("s2r://panorama/images/dialogs/popup_horiz_rule_png.vtex");
+	background-size: 100%;
+}
+
+#Progress
+{
+	vertical-align: top;
+	horizontal-align: right;
+	margin-top: 105px;
+	margin-right: 210px;
+}
+
+.ProgressLabel
+{
+	vertical-align: center;
+	horizontal-align: center;
+	font-size: 15px;
+
+	transition-property: opacity;
+	transition-duration: 0.4s;
+}
+
+#Progress.FadeOut
+{
+	opacity: 0;
+}
+
+.Boo
+{
+	width: 100%;
+	height: 100%;
 }

@@ -302,7 +302,6 @@ $tI
 %ld
 %ld bytes leaked in %d chunks
 %ld%c
-%lg
 %lld
 %lli
 %llu
@@ -329,7 +328,7 @@ $tI
 %s PRIVATE KEY
 %s algorithm "%s" unsupported
 %s allocation count overflow
-%s allocation count overflow( %llu >= %llu )
+%s allocation count overflow( %llu > %llu )
 %s called on fill brush type %d
 %s clamping dimensions of panorama composition layer from %f x %f to %f x %f!
 %s is trying to import %s, but that file has already been included either from the layout file directly, or from a different @import.
@@ -351,7 +350,6 @@ $tI
 %s: %d
 %s: %d, %d (%s)
 %s: (%d bit)
-%s: string format requested %d chars
 %s:%d: rec->data != rec->input
 %s://%s%s
 %s://%s.valvesoftware.com%s
@@ -632,7 +630,6 @@ $tI
 17IPanoramaUIEngine
 18CPlaceholderConVar
 18CValidatableThread
-19:03:07
 19CDragStartCallbacks
 1g*
 2
@@ -640,6 +637,7 @@ $tI
 2.0
 2.2
 2048
+20:54:32
 20CMultipleCallResultsIN8panorama16CLoadFileURLTaskE22HTTPRequestCompleted_tE
 20CMultipleCallResultsIN8panorama16CReloadStyleFileE22HTTPRequestCompleted_tE
 20CMultipleCallResultsIN8panorama18CJSAsyncWebRequestE22HTTPRequestCompleted_tE
@@ -1056,7 +1054,6 @@ AddStyle
 AddStyleAfterDelay
 AddStyleToEachChild
 AddTimedStyle
-AddToTailGetPtr
 AddUInt32
 AddUInt64
 AddonLayoutPath
@@ -1326,8 +1323,6 @@ CBufferString::Concat(char const*, char const*, ...)
 CBufferString::EndsWith_FastCaseInsensitive(char const*)
 CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
-CBufferString::ExtractFileBase(char const*)
-CBufferString::ExtractFileExtension(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
@@ -1335,7 +1330,6 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
-CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -1344,7 +1338,6 @@ CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
-CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
 CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
@@ -1741,7 +1734,6 @@ CMS_stream
 CMS_uncompress
 CMS_verify
 CMemAllocSystemInitialize
-CMemoryStack %s
 COLLECT_DATA
 COLORCORRECTION_VERSION_1
 COMPLEMENTOFALL
@@ -1892,9 +1884,49 @@ CUIWindowInput::SetInputFocus
 CUtlBlockMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryPoolBase
-CUtlMemoryPoolBase: Cannot specify 0 elements to grow each time!
+CUtlMemoryBlockAllocator::Alloc(unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::MemUsage() const
+CUtlMemoryBlockAllocator::Purge()
+CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
+CUtlMemoryPoolBase::Alloc()
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
+CUtlMemoryPoolBase::Free(void*)
+CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
+CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::FreeAll()
+CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
+CUtlString::Acquire(CBufferString*, bool)
+CUtlString::Append(char const*)
+CUtlString::CUtlString(CBufferString const&)
+CUtlString::FixSlashes(char)
+CUtlString::Format(char const*, ...)
+CUtlString::FormatV(char const*, __va_list_tag*)
+CUtlString::FreeMemoryBlock()
+CUtlString::IsEqual_CaseSensitive(char const*) const
+CUtlString::PathJoin(char const*, char const*)
+CUtlString::Purge()
+CUtlString::Replace(char const*, char const*, bool) const
+CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
+CUtlString::StripExtension() const
+CUtlString::StripFilename() const
+CUtlString::Swap(CUtlString&)
+CUtlString::Trim(char const*)
+CUtlString::UnicodeCaseConvert(int, EStringConvertErrorPolicy)
+CUtlString::operator+=(CUtlString const&)
+CUtlString::operator+=(char const*)
+CUtlString::operator=(CBufferString const&)
+CUtlString::operator==(CUtlString const&) const
+CUtlString::operator[](int) const
+CUtlStringBuilder::Data::SetError(bool)
+CUtlStringBuilder::Data::SetLength(unsigned long)
+CUtlStringBuilder::IndexOf(char const*) const
+CUtlStringBuilder::InternalPrepareBuffer(unsigned long, bool, unsigned long)
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
@@ -2737,7 +2769,6 @@ FontManager_001
 Forbidden
 Force style invalidation of the entire panel subtree when adding / removing classes.
 Force style invalidation of the entire panel subtree when adding / removing style flags.
-FormatV
 Found duplicate panel description
 Found include outside of a styles/scripts element
 Found invalid proto option data for:
@@ -2754,8 +2785,8 @@ G channel not found
 G channel not found!
 G:
 GAME
+GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 4.8.1-2ubuntu1~12.04+steamrt2+srt1) 4.8.1
-GCC: (Ubuntu 4.8.4-1ubuntu15~12.04+steamrt1+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
 GCC: (crosstool-NG 1.17.0) 4.6.3
@@ -2893,6 +2924,7 @@ HammerMapLoader001
 HangWatchdog_IndicateActivity
 HasField
 Hash Algorithm:
+HashString
 HelpSystem_001
 Hex and octal numbers must be integers.
 Hg*
@@ -3179,7 +3211,7 @@ JSScheduledFunction
 Jan
 Jg*
 Jul
-Jul 23 2020
+Jul 30 2020
 Jun
 K
 K-163
@@ -3413,6 +3445,10 @@ Moved Permanently
 Multiple Choices
 Multiple extension registrations for type "
 Multiplier for flick velocity off of actual measured velocity
+MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
+MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash64
 MutableMessage
 MutableRawRepeatedField
 MutableRepeatedMessage
@@ -5335,6 +5371,9 @@ Use Proxy
 UserInfoChangeService_001
 UserInputActive
 UsesSvg
+UtlMemory_Alloc
+UtlMemory_CalcNewAllocationCount
+UtlStringFastCompareLess
 V
 V2I_ASIDENTIFIERS
 V2I_AUTHORITY_INFO_ACCESS
@@ -5423,7 +5462,6 @@ V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
 V_UnicodeAdvance(char*, int)
-V_UnicodeCaseConvert(char const*, char*, int, int, EStringConvertErrorPolicy)
 V_UnicodeLength(char const*)
 V_UnicodeLength(unsigned short const*)
 V_UnicodeLength(wchar_t const*)
@@ -5466,17 +5504,13 @@ V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnchr
-V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_strupper_fast
 V_swscanf
 V_tanf
-V_tier0_strstr
 V_vscprintf
 V_vsnprintf
-V_vsnprintfSize
 V_wcstod
 V_wcstoi64
 ValidateMaxSize
@@ -8373,7 +8407,6 @@ libtier0.so
 libv8.so
 libv8_libplatform.so
 libvideo.so
-libvstdlib.so
 lightblue
 lightcoral
 lightcyan
@@ -10027,12 +10060,14 @@ strings::Substitute format string invalid: asked for "$
 strlen
 strlen(objstr) + 23 + 2 * enc->iv_len + 13 <= sizeof buf
 strncasecmp
+strnlen
 stroke-linecap
 stroke-linejoin
 stroke-opacity
 stroke-width
 strpbrk
 strrchr
+strstr
 strtof
 strtol
 strtoll
@@ -10404,7 +10439,6 @@ userId
 userNotice
 userPassword
 utf8only
-utlstring.cpp
 v
 v1(0)
 v2f
