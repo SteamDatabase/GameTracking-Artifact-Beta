@@ -43,6 +43,7 @@ $ORIGIN
 ---FS%s:  close %s 0x%llX %i (%.3f)
 ---FS%s:  read %s %i 0x%llX (%.3f)
 ---FS%s:  write %s %i 0x%llX
+-1
 -async_memory_map
 -disable_auto_vpk_loading
 -fake_workshop_dir
@@ -54,7 +55,7 @@ $ORIGIN
 ../public/tier0/threadtools.h
 ../public/tier0/utlblockmemory.h
 ../public/tier0/utlfixedmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
 ../public/tier2/fileutils.h
@@ -62,7 +63,6 @@ $ORIGIN
 .\
 .bsp
 .zip
-/content/
 0:Off, 1:All (for tracking accumulated duplicate read times), >1:Microsecond threashold
 0:Off, 1:Always, 2:Not during load
 0:Off, 1:Any, 2:Sync only
@@ -137,6 +137,7 @@ AllocInternal
 AnimGraphEditorUtils001
 AnimationSystemUtils_001
 AnimationSystem_001
+AssertMsg_ConditionFailed
 AssetBrowserSystem_001
 AssetPreviewSystem_001
 AssetSystem001
@@ -197,25 +198,28 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CDirIterator::CDirIterator(char const*, unsigned int)
+CDirIterator::NextFile()
+CDirIterator::~CDirIterator()
 CFioReadOnlyFile::FS_fread
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
 CONTENTROOT
 CPackedStore
+CRC32_ProcessBuffer
 CThread::CThread()
 CThread::Init()
 CThread::IsThreadRunning()
@@ -249,6 +253,31 @@ CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBlockMemory overflow!
+CUtlBuffer::ActivateByteSwapping(bool)
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::GetString(char*, int)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -268,13 +297,11 @@ CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::GetBaseFilename() const
 CUtlString::GetExtensionAlloc() const
-CUtlString::Purge()
 CUtlString::Right(int) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::Slice(int, int) const
 CUtlString::StripTrailingSlash()
-CUtlString::Swap(CUtlString&)
 CUtlString::Trim(char const*)
 CUtlString::UnqualifiedFilenameAlloc() const
 CUtlString::operator=(CBufferString const&)
@@ -296,6 +323,7 @@ ConVarRef %s doesn't point to an existing ConVar
 Conditional Error: %s
 ConfigurationSystem_001
 ConnectInterfaces
+Content being marked corrupt.  bMissingFilesOnly = %s, pFile specified as '%s', reason: '%s'
 CopyAFile: Cannot copy into a VPK or UGC file '%s'
 CopyAFile: Failed to copy file %s.
 CopyAFile: dest '%s' must be absolute path.
@@ -362,6 +390,7 @@ FS:  Tried to Write NULL file pointer inside valid file handle!
 FS: Specified two path IDs (%s, %s).
 Failed
 Failed to load module %s
+Failed to read
 Failed to read %d bytes
 File %s was never closed
 File '%s' was returned by GetFileList, but OpenFile() fails?!
@@ -369,6 +398,14 @@ File Path:
 FileSystem
 Filename '%s' is invalid to be contained in a VPK
 Filesystem
+FioClose(int)
+FioCreateFile(char const*, EFioAccessFlags, EFioShareFlags, EFioCreateMode, unsigned int, int*)
+FioFileTimeToTimeT(unsigned long long)
+FioFindFileInDirCaseInsensitive(char const*, CBufferString*)
+FioGetBaseFileInfo(char const*, FioBaseFileInfo_t*, unsigned int)
+FioGetSize(int, unsigned long long*)
+FioIsDotDir(char const*)
+FioReadAt(int, unsigned long long, void*, int, int*)
 FlattenedSerializersVersion001
 FontManager_001
 From Steam: [%s]\%s
@@ -385,13 +422,13 @@ GNU
 GameResourceServiceClientV001
 GameResourceServiceServerV001
 GameUIService_001
+GetCPUInformation
 GetResourceManifestCount
 GetResourceManifests
 GetWaitForResourcesProgress (stdio)
 Grow
 HIGHDPI
 HammerMapLoader001
-HangWatchdog_IndicateActivity
 HashString
 HelpSystem_001
 HookUpConfigValue
@@ -427,10 +464,15 @@ LoggingSystem_RegisterLoggingChannel
 Logic Error in CExpressionEvaluator
 Loose
 MATCHFRAMEWORK_001
+MD5Final
+MD5Init
+MD5Update
+MD5_ProcessSingleBuffer
 MOD
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
 MapListService_001
+MarkContentCorrupt
 MaterialUtils_001
 MemAlloc_AllocFunc
 MemAlloc_FreeFunc
@@ -462,7 +504,7 @@ NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
 NewNode
-Number of IO threads in async filesystem
+Number of IO threads in async filesystem (-1 == auto)
 OK
 OSX
 Open( %llu microsecs, %s )
@@ -601,7 +643,6 @@ Tried to write %i bytes from unknown file pointer 0x%llX
 UNKNOWN VALUE
 Unable to remove %s!
 Unable to rename "%s" to "%s"!
-Unable to watch '%s'
 Unknown Path Class
 Unknown read error %d
 Unknown version %d for vpk %s
@@ -687,7 +728,6 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
-V_strnchr
 V_strnlen
 V_strtod
 V_strtoi64
@@ -733,33 +773,25 @@ _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_ComposeFileName
 _V_ExtractFilePath
-_V_MakeAbsolutePath
-_V_StrSubst
 _V_StringAfterPrefix
 _V_StripLastDir
-_V_binarytohex
 _V_strEndsWith
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
-__ctype_toupper_loc
 __cxa_atexit
 __cxa_finalize
 __cxa_guard_acquire
 __cxa_guard_release
 __cxa_pure_virtual
 __errno_location
-__fxstat64
 __gmon_start__
-__lxstat64
 __pthread_key_create
 __stack_chk_fail
 __strcpy_chk
 __tls_get_addr
-__xstat64
 _addons
 _edata
 _end
@@ -768,7 +800,6 @@ _flt.vpk
 a+
 ab+
 abort
-alphasort64
 archive
 asyncfilesystem2.cpp
 basefilesystem.cpp
@@ -782,9 +813,9 @@ cheat
 chmod
 client
 clientcmd_can_execute
-closedir
 commentLength
 compressionMethod
+configvalue.cpp
 console.log
 content
 crc32
@@ -792,15 +823,12 @@ d
 delete
 developer
 diskNumberStart
-dup
 externalFileAttribs
 extraFieldLength
 f
-fcntl
-fdatasync
+false
 fileCommentLength
 fileNameLength
-filenamesymboltable.cpp
 fileno_unlocked
 filesystem_buffer_size
 filesystem_fake_latency
@@ -814,7 +842,6 @@ flags
 float( %f )
 flock
 fnumber=%d ofs=0x%x sz=%d
-free
 fs_async_threads
 fs_clear_open_duplicate_times
 fs_debug
@@ -826,9 +853,6 @@ fs_report_async_io
 fs_report_long_reads
 fs_report_sync_opens
 fs_warning_mode
-ftruncate64
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_VProfCurrentProfile
 g_pMemAlloc
 game
@@ -850,11 +874,9 @@ libstdc++.so.6
 libsteam_api.so
 libtier0.so
 localtime
-lseek64
 materials/overviews/
 materials/vgui/hud/
 max. %f
-memcmp
 memcpy
 memmove
 memset
@@ -870,8 +892,6 @@ null
 numberOfTheDiskWithStartOfCentralDirectory
 numberOfThisDisk
 open
-open64
-opendir
 opened_files.txt
 operator delete(void*)
 operator delete[](void*)
@@ -883,9 +903,6 @@ packedstore.cpp
 pak%02d.vpk
 pak%02d_dir.vpk
 path
-pipe
-posix_fadvise64
-pread64
 pthread_mutex_destroy
 pthread_mutex_init
 pthread_mutex_lock
@@ -893,11 +910,8 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr( 0x%p )
-pwrite64
 rb
 rb+
-readdir64
-readlink
 relativeOffsetOfLocalHeader
 replicated
 resource/cursor/
@@ -905,7 +919,6 @@ resource/flash3/images/
 resource/flash3/videos/
 rewind
 rw+
-scandir64
 schemabindings.cpp
 scripts/game_sounds_heroes/
 scripts/music/
@@ -924,7 +937,6 @@ startOfCentralDirOffset
 stat
 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
 std::__throw_bad_alloc()
-strcasecmp
 strchr
 strcmp
 strcpy
@@ -933,6 +945,7 @@ strrchr
 strstr
 sysconf
 text
+true
 typeinfo for CThread
 typeinfo for CThreadSyncObject
 typeinfo for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
@@ -944,7 +957,6 @@ typeinfo name for std::_Sp_make_shared_tag
 u64( %lld = 0x%llX )
 ugc:
 uncompressedSize
-unlink
 update
 user
 versionMadeBy

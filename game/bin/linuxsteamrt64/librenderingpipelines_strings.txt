@@ -168,16 +168,15 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -186,8 +185,30 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CPostProcessRenderer needs to use a layer which has had a render attribute called "ColorBuffer" set!
+CRC32_ProcessBuffer
 CRenderingPipelinePostProcess::AddLayersToView expects 'tonemapRenderer' attribute! (Explicitly set to NULL to disable tonemapping.)
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
 CUtlString::Acquire(CBufferString*, bool)
 CUtlString::CUtlString(CBufferString const&)
 CUtlString::Format(char const*, ...)
@@ -665,7 +686,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -721,10 +741,8 @@ _V_StringAfterPrefix
 _V_StripLastDir
 _V_strEndsWith
 _V_strncat
-_V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
 __cxa_atexit
 __cxa_finalize
@@ -758,8 +776,6 @@ floor
 floorf
 fogAccumulation
 fullsort the opaque pass when there wasn't a depth prepass
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_pMemAlloc
 game
 gaussian_bloom_blur.cpp

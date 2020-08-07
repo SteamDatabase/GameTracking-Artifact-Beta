@@ -120,7 +120,6 @@ $ORIGIN
 %.*s
 %.15lf
 %.1f
-%02X
 %c
 %d
 %d.%d.%d
@@ -230,7 +229,7 @@ $ORIGIN
 ../../public/tier1/utlrbtree.h
 ../gamecore/igamesystem.cpp
 ../public/tier0/utlblockmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ..\content
 ..\src\shaders\
@@ -572,7 +571,6 @@ Bad header format (expected format name)
 Bad header format (expected format uuid)
 Bad header format (malformed UUID)
 Bad header format (no closing marker)
-Bad header: invalid binary marker
 Bad header: invalid compression header
 Bad header: unrecognized encoding id
 Bad keyname
@@ -631,7 +629,6 @@ CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
 CBufferString::DefaultExtension(char const*)
-CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
 CBufferString::ExtractFilePath(char const*, bool)
@@ -641,6 +638,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -653,7 +651,6 @@ CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -936,6 +933,7 @@ CPPTYPE_UINT64
 CParentConstraint
 CParticleSystemDefinition
 CPointConstraint
+CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
@@ -948,6 +946,12 @@ CThreadMutex::TryLock(char const*, int)
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
@@ -956,6 +960,33 @@ CTiltTwistConstraint
 CTransform
 CTwistConstraint
 CUtlBlockMemory overflow!
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -986,7 +1017,6 @@ CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::SetLength(int)
 CUtlString::StripExtension() const
-CUtlString::Swap(CUtlString&)
 CUtlString::operator+(char const*) const
 CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
@@ -1311,6 +1341,7 @@ FileOptions
 FileSystem
 Files that do not use optimize_for = LITE_RUNTIME cannot import files which do use this option.  This file is not lite, but it imports "
 Files with optimize_for = LITE_RUNTIME cannot define services unless you set both options cc_generic_services and java_generic_sevices to false.
+FioReadFileToBuffer(char const*, CUtlBuffer*, int)
 First argument to Swap() (of type "
 First argument to SwapFields() (of type "
 FixupResourceName: Illegal full path passed in ("%s")!
@@ -1382,7 +1413,6 @@ HBm_influenceFlags
 HELPER_BONE
 HO
 HammerMapLoader001
-HangWatchdog_IndicateActivity
 Has Collision;
 HasField
 HashString
@@ -1820,7 +1850,6 @@ Plat_DebugString
 Plat_DisableIOBuffering
 Plat_ExitProcess
 Plat_FileExists
-Plat_FileSize
 Plat_GetCurrentDirectory
 Plat_GetDefaultMonitorIndex
 Plat_GetDesktopBounds
@@ -2174,8 +2203,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -2246,11 +2273,7 @@ _
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFilePath
-_V_MakeAbsolutePath
 _V_SetExtension
-_V_StrSubst
 _V_StringAfterPrefix
 _V_StripLastDir
 _V_strEndsWith
@@ -2258,10 +2281,8 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __assert_fail
 __bss_start
-__ctype_toupper_loc
 __cxa_allocate_exception
 __cxa_atexit
 __cxa_begin_catch
@@ -2280,7 +2301,6 @@ __errno_location
 __fxstat64
 __gmon_start__
 __gxx_personality_v0
-__lxstat64
 __memcpy_chk
 __oldschema_object_name
 __printf_chk
@@ -2304,7 +2324,6 @@ addonroot_language
 ai_model_info
 allowed in proto3.
 allowstatic
-alphasort64
 anchor_angles
 anchor_position
 anim_name
@@ -2374,7 +2393,6 @@ children
 client
 clientcmd_can_execute
 close() failed:
-closedir
 cloth_collide
 cloth_collision_layer0
 cloth_collision_layer1
@@ -2414,7 +2432,6 @@ dmg.club
 dmg.explosive
 dmg.fire
 double
-dup
 dynamic_interaction
 emitFromWorld
 enable_limit
@@ -2439,8 +2456,6 @@ f == __null || dynamic_cast<To>(f) != __null
 faceMergeAngle
 false
 fclose
-fcntl
-fdatasync
 fflush
 fileno
 filesystem_stdio
@@ -2458,13 +2473,10 @@ fprintf
 frame
 free
 friction
-ftruncate64
 fwrite
 g
 g default
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_pMemAlloc
 game/bin
@@ -2618,7 +2630,6 @@ looping
 lowprecisionuv
 lowprecisionuv1
 lseek
-lseek64
 m
 m_Bone
 m_ChainData
@@ -3082,7 +3093,6 @@ numsegments
 o
 of the Protocol Buffer runtime library, but the installed version is
 of the Protocol Buffer runtime library, which is not compatible with the installed version (
-opendir
 operation
 operator delete(void*)
 operator delete(void*, std::nothrow_t const&)
@@ -3108,7 +3118,6 @@ phys_res
 physgun_interactions
 physib
 physicsmode
-pipe
 placement_attach
 placement_bone
 placement_mode
@@ -3118,9 +3127,7 @@ point0
 point1
 pose_control
 pose_control_type
-posix_fadvise64
 posxyz
-pread64
 preferred_carryangles
 prev
 prop_data
@@ -3143,13 +3150,10 @@ pthread_sigmask
 ptr_ != __null
 publish_data
 publish_data.txt
-pwrite64
 q
 radius0
 radius1
 read
-readdir64
-readlink
 recenter_on_parent_bone
 registered:
 relative_angles
@@ -3167,7 +3171,6 @@ runright
 runspeed
 s
 s offg cMeshusemtl initialShadingGroup
-scandir64
 sched_yield
 schema
 schemabindings.cpp
@@ -3310,7 +3313,6 @@ stdout
 stop_immediately
 stop_instantly
 stop_on_seq_change
-strcasecmp
 strchr
 strcmp
 strcpy
@@ -3320,7 +3322,6 @@ string
 strings::Substitute format string invalid: asked for "$
 strlen
 strpbrk
-strrchr
 strstr
 strtof
 strtol
@@ -3374,7 +3375,6 @@ uint64
 unexpected for field
 uninterpreted_option
 unknown
-unlink
 unspecified
 useMotionDamping
 useSmoothPaths

@@ -40,7 +40,6 @@ $ORIGIN
 %-120s
 %-120s - %s
 %.18g
-%02X
 %1
 %10s
 %15.15s
@@ -326,12 +325,12 @@ $ORIGIN
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/utlleanvector.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlntree.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
-../public/tier1/utltshash.h
 ./
 .ini
 .vcs
@@ -355,7 +354,6 @@ $ORIGIN
 0.075 0.15 0.3
 00000000-0000-0000-0000-000000000000
 0123456789)"
-0123456789abcdef
 0<
 0=
 0C
@@ -770,7 +768,6 @@ Bad header format (expected format name)
 Bad header format (expected format uuid)
 Bad header format (malformed UUID)
 Bad header format (no closing marker)
-Bad header: invalid binary marker
 Bad header: invalid compression header
 Bad header: unrecognized encoding id
 BakedLODBuilderMgr001
@@ -827,6 +824,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
@@ -835,13 +833,11 @@ CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -878,6 +874,7 @@ COMMON
 CONTENT
 CONTENTROOT
 CParticleSystemDefinition
+CRC32_ProcessBuffer
 CS
 CStrAutoEncode::Clear()
 CStrAutoEncode::Copy(CStrAutoEncode const&)
@@ -904,17 +901,54 @@ CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volat
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
 CThreadSpinRWLock::LockForRead(char const*, int)
 CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
 CThreadSpinRWLock::UnlockRead(char const*, int)
 CThreadSpinRWLock::UnlockWrite(char const*, int)
+CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CThreadedJob::Abort(bool)
 CTransform
 CUtlBinaryBlock
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::GetString(char*, int)
+CUtlBuffer::IsBigEndian()
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBigEndian(bool)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -1429,6 +1463,9 @@ MATCHFRAMEWORK_001
 MClassHasCustomAlignedNewDelete
 MD5 match on %s, loading from vcs
 MD5 mismatch on %s, will load from vfx instead.
+MD5Final
+MD5Init
+MD5Update
 MH
 MNetworkBitCount
 MNetworkChangeCallback
@@ -1889,7 +1926,6 @@ UH
 UI_Font_New_Face_Override
 UNICODE_ESC
 UNKNOWN
-UPDATE_STRING_TOKEN_DATABASE
 UU
 UV88
 UVLX8888
@@ -1927,6 +1963,7 @@ UtlMemory_CalcNewAllocationCount
 Uv scale variable %s referenced by texture %s doesn't evaluate to a constant value at material load time (%s).
 V
 V1
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2017,7 +2054,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strspn
 V_strtod
 V_strtoi64
@@ -2029,7 +2065,6 @@ V_towupper32
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector2D
 Vector4D
 VectorAligned
@@ -2280,7 +2315,6 @@ ZSTD_versionString
 \q
 \r
 \t
-\u00
 ]
 ]!
 ]7
@@ -2300,14 +2334,12 @@ _O
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
-_V_binarytohex
 _V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 _W
 __Attribute__
 __Expression__
@@ -2539,8 +2571,6 @@ g;
 g>
 gA
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_bFogTypeEnabled
 g_bOtherFxEnabled

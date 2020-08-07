@@ -107,7 +107,7 @@
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
-#%s/RenderAView/RenderAView
+#%s/RenderAView/LightSetup
 #%s/SetupLightingForView/SetupLightingForView
 #%s/UpdatePerViewConstantBuffers
 #%s/UpdatePerViewConstantBuffers%d
@@ -151,7 +151,6 @@ $tI
 %.1f
 %.2f ms
 %01d
-%02X
 %02d
 %03d
 %04d
@@ -292,14 +291,14 @@ $tI
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
+../public/tier0/utlhashdict.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/utl3dallocator.h
-../public/tier1/utlhashdict.h
 ../public/tier1/utlleanvector.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlmultilist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
-../public/tier1/utltshash.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -334,6 +333,7 @@ $tI
 0.25
 0.5
 0.85
+00000000-0000-0000-0000-000000000000
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0x%016llX
@@ -952,6 +952,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -963,7 +964,6 @@ CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -1270,6 +1270,8 @@ CPointLightObjectDesc
 CPointLightObjectDescCsgo
 CPointLightObjectDescVr
 CProjectedDecalSceneObjectDesc
+CRC32_ProcessBuffer
+CRC64_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
@@ -1347,7 +1349,36 @@ CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::SetSeed(int)
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetOverflow(int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBigEndian(bool)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -2921,7 +2952,6 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -2931,7 +2961,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Value must be "true" or "false" for boolean option "
 Value must be identifier for boolean option "
 Value must be identifier for enum-valued option "
@@ -3037,7 +3066,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __assert_fail
 __bss_start
 __cxa_allocate_exception
@@ -3350,8 +3378,6 @@ g default
 g_Mathlib_GammaToLinearByteTable
 g_TSPointerListNodes
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
@@ -4356,8 +4382,8 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6527): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7804): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
+scenesystem.cpp(6539): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7816): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp
@@ -4653,7 +4679,6 @@ utils/sceneutils.cpp
 utils/sceneutils.h(70): Material %s cannot render in mode %s but is being asked to
 utils/tonemapsystem.cpp
 utils/volumetricfog.cpp
-utlbuffer.cpp
 uvtangent
 v %g %g %g
 v %g %g %g%s

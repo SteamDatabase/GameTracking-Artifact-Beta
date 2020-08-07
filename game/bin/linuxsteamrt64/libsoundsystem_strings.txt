@@ -29,7 +29,6 @@ $tI
 %-120s
 %-120s - %s
 %.18g
-%02X
 %08x %s size %08x
 %d %s %s
 %d) %s
@@ -154,7 +153,7 @@ $tI
 0.55
 0.8
 0.9
-0123456789abcdef
+00000000-0000-0000-0000-000000000000
 0x%016llX
 0x%p
 1
@@ -645,19 +644,18 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StartsWith_FastCaseInsensitive(char const*)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -673,6 +671,7 @@ COLORCORRECTION_VERSION_1
 COM_TimestampedLog
 CONTENTROOT
 CParticleSystemDefinition
+CRC32_ProcessBuffer
 CSequence: %s
 CSosGroupActionLimitSchema
 CSosGroupActionSchema
@@ -741,6 +740,12 @@ CThreadMutex::TryLock(char const*, int)
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
@@ -756,7 +761,35 @@ CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetLine(char*, int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::GetString(char*, int)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlMemoryArena
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
@@ -1124,7 +1157,6 @@ G->B
 GAME
 GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
-GLIBCXX_3.4
 GLIBC_2.14
 GLIBC_2.2.5
 GLIBC_2.3.4
@@ -1923,7 +1955,6 @@ V_tier0_ispunct
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Value Operator Offset: %i
 Value Stack Offset: %i
 Vector2D
@@ -1985,9 +2016,7 @@ Z
 \'
 \\
 \n
-\r
 \t
-\u00
 ]
 ^
 ^@
@@ -2005,7 +2034,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 _V_wcsncpy_bytes
 __UNKNOWN__
 __bss_start
@@ -2291,8 +2319,6 @@ friction
 function
 g
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_mastermixlayer:
@@ -3513,7 +3539,6 @@ start_offset
 start_vsnd
 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
 std::_Sp_counted_ptr<decltype(nullptr), (__gnu_cxx::_Lock_policy)2>::_M_dispose()
-std::__throw_length_error(char const*)
 step
 stopSubvoice
 stopVoice
@@ -3575,14 +3600,12 @@ util_print_string
 util_print_vsnd
 util_timer
 util_timer_ramp
-utlbuffer.cpp
 utlmemoryarena.cpp
 v
 value%d
 value1
 value2
 vanmgrph
-vector::_M_default_append
 vector_facing_point
 velocity_zones
 vgraph_name

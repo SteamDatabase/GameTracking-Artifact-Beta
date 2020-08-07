@@ -254,10 +254,10 @@ $ORIGIN
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
 ../public/tier0/utlfixedmemory.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/memstack.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
-../public/tier1/utltshash.h
 ./inputlayoutbase.h
 ./renderresource.h
 .[\()*+?{|^$
@@ -293,7 +293,6 @@ $ORIGIN
 0.5
 0.90
 0123456789)"
-0123456789abcdef
 0: Bilinear, 1: Trilinear, 2: Aniso 2x, 3: Aniso 4x, 4: Aniso 8x, 5: Aniso 16x
 0A
 0x%016llX
@@ -606,18 +605,17 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::Purge(int)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCIR601 sampling not implemented yet
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -642,6 +640,7 @@ COMMON
 CONTENT
 CONTENTROOT
 CRC error
+CRC32_ProcessBuffer
 CRenderContextGL:: Cannot resolve from a non-MSAA buffer to an MSAA buffer!
 CRenderContextGL:: Tried to resolve 2 textures of differing sizes!
 CRenderContextGL:: Trying to resolve from a rect that is outside of the src rendertarget
@@ -704,7 +703,34 @@ CUBEMAP_FACE_POSITIVE_X
 CUBEMAP_FACE_POSITIVE_Y
 CUBEMAP_FACE_POSITIVE_Z
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetOverflow(int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::GetString(char*, int)
+CUtlBuffer::IsBigEndian()
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBigEndian(bool)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -3385,6 +3411,9 @@ M0@
 MAC
 MATCHFRAMEWORK_001
 MAX_ALLOC_CHUNK is wrong, please fix
+MD5Final
+MD5Init
+MD5Update
 MEDIUM
 MGiI
 MNG features are not allowed in a PNG datastream
@@ -4245,7 +4274,6 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
-V_strnchr
 V_strspn
 V_strtod
 V_strtoi64
@@ -4256,7 +4284,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Valid Content Absolute Path
 Valid External Path
 Valid Game Absolute Path
@@ -4470,14 +4497,12 @@ Zero length tRNS chunk
 [
 [%.3f server clamped to %.3f]
 [%s %s %dx%dx%d mips=%d slices=%d flags=%02lX%s]
-\"
 \*
 \\
 \n
 \q
 \r
 \t
-\u00
 ]
 ^
 ^$\.*+?()[]{}|
@@ -4513,14 +4538,12 @@ _V8U8
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
-_V_binarytohex
 _V_strEndsWith
 _V_strcspn
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 _X8R8G8B8
 _X8R8G8B8_SRGB
 __Attribute__
@@ -4760,8 +4783,6 @@ g_
 g_Mathlib_GammaToLinearByteTable
 g_TSPointerListNodes
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
@@ -5857,6 +5878,7 @@ texturebase.cpp(2930):ResourceHandleToData( %s ) failed! Falling back to error t
 texturebase.cpp(2941):ResourceHandleToData( %s ) failed! Falling back to error texture!
 texturebase.cpp(2952):ResourceHandleToData( %s ) failed! Falling back to error texture!
 three
+tier0
 tilde
 tiles
 too many length or distance symbols
@@ -5933,7 +5955,6 @@ unsigned int Etc::Image::IterateThroughWorstBlocks(unsigned int, unsigned int, u
 update
 upper
 user
-utlbuffer.cpp
 uvCropped
 uvUncropped
 v%d

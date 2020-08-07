@@ -379,6 +379,7 @@ $tI/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworking
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_client.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_common.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_common.h
+/home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_sdr_hostedserver.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/clientlib/steamnetworkingsockets_snp.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/steamdatagram_network_config.cpp
 /home/buildbot/buildslave/sdr_public_ubuntu64_linux/build/src/steamnetworkingsockets/steamdatagram_network_config.h
@@ -616,7 +617,7 @@ AES-256-CTR
 AES-256-ECB
 AES-256-OFB
 AES-256-XTS
-ALinkStatsTrackerRelayOutside
+AIgnoring unsolicited/spoofed/late packet from %s.
 ANSI X9.62
 ANY PRIVATE KEY
 ASCII
@@ -695,7 +696,7 @@ Application closed connection
 Application closed connection in an unusual way
 Application didn't accept or close incoming connection in a reasonable amount of time.  This is probably a bug.
 Apr
-Assertion Failed: !( m_recvPktNumberMask[ idxRecvBitmask ] & bit )
+Assertion Failed: !( TLinkStatsTracker::m_recvPktNumberMask[ idxRecvBitmask ] & bit )
 Assertion Failed: !( msgStatsIn.flags() & msgStatsIn.ACK_REQUEST_E2E )
 Assertion Failed: !(pQueue->m_pLast->*pMbrLinks).m_pNext
 Assertion Failed: !HasOverlappingRange( range, m_senderState.m_listInFlightReliableRange )
@@ -745,7 +746,6 @@ Assertion Failed: !m_status_msg.empty()
 Assertion Failed: !m_steamNetworkingSockets.m_mapListenSocketsByVirtualPort.HasElement( k_nVirtualPort_Messages )
 Assertion Failed: !m_unConnectionIDRemote
 Assertion Failed: !m_value.m_pInherit
-Assertion Failed: !msg.has_connection_closed()
 Assertion Failed: !msg.has_from_connection_id() || msg.from_connection_id() == pInfo->m_unConnectionIDSrc
 Assertion Failed: !msg.has_to_connection_id()
 Assertion Failed: !msgStatsIn.has_quality_e2e()
@@ -889,6 +889,7 @@ Assertion Failed: g_eAvailNetworkConfig != k_ESteamNetworkingAvailability_Previo
 Assertion Failed: g_mapMessagesInterfaceByListenSocket[idx] == this
 Assertion Failed: g_mapP2PConnectionsByRemoteInfo.Key( m_idxMapP2PConnectionsByRemoteInfo ) == key
 Assertion Failed: g_mapP2PConnectionsByRemoteInfo[ m_idxMapP2PConnectionsByRemoteInfo ] == this
+Assertion Failed: g_mapRelayServersByAddr.Count() == 0
 Assertion Failed: g_mapRelayServersByAddr.Find( adr ) == g_mapRelayServersByAddr.InvalidIndex()
 Assertion Failed: g_mapRelayServersByAddr[idxServer]->m_adr == adr
 Assertion Failed: g_mapRelayServersByAddr[idxServer]->m_hRoutingCluster == hCluster
@@ -898,6 +899,7 @@ Assertion Failed: g_nRouteSelectionDataRevisionNumber != 0
 Assertion Failed: g_nRoutingSecret
 Assertion Failed: g_nRoutingSecret != 0
 Assertion Failed: g_vecCachedCachedDataCenterRoutes.size() == m_vecClusters.size()
+Assertion Failed: g_vecSDRClients.empty()
 Assertion Failed: g_vecSharedClusterDataInConfigOrder.size() == g_SteamDatagramNetwork.m_vecPOPs.size()
 Assertion Failed: gapFilled->first < gapFilled->second
 Assertion Failed: gapFilled->first <= nSegBegin
@@ -1012,7 +1014,6 @@ Assertion Failed: m_nAppID == 0 || m_nAppID == nAppID
 Assertion Failed: m_nEnd >= m_nBegin
 Assertion Failed: m_nFrontPingLocal <= m_nFrontPingLocalMax
 Assertion Failed: m_nFrontPingLocalMin <= m_nFrontPingLocal
-Assertion Failed: m_nPktsRecvWeirdSequenceCurrentInterval <= m_nPktsRecvSequencedCurrentInterval
 Assertion Failed: m_nSamples > 0
 Assertion Failed: m_nSupressStateChangeCallbacks >= 0
 Assertion Failed: m_pConnection->m_hConnectionSelf == pInfo->m_hConn
@@ -1153,7 +1154,7 @@ Assertion Failed: nFrontPingLocalMax < 5000
 Assertion Failed: nFrontPingLocalMin <= nFrontPingLocal && nFrontPingLocal <= nFrontPingLocalMax
 Assertion Failed: nFrontPingRemote >= 0 && nFrontPingRemote < 5000
 Assertion Failed: nGap != 0
-Assertion Failed: nGap >= -8 * (int64)sizeof(m_recvPktNumberMask)
+Assertion Failed: nGap >= -8 * (int64)sizeof(TLinkStatsTracker::m_recvPktNumberMask)
 Assertion Failed: nGrowSize >= 0
 Assertion Failed: nLastRefCount > 0
 Assertion Failed: nLocalVirtualPort >= 0
@@ -1166,7 +1167,7 @@ Assertion Failed: nPingEstimateFromRouting >= 0 && nPingEstimateFromRouting < 10
 Assertion Failed: nPingMS >= 0
 Assertion Failed: nPktNum == nWirePktNum
 Assertion Failed: nPktNum > 0
-Assertion Failed: nPktNum > 0 && nPktNum < m_nMaxRecvPktNum
+Assertion Failed: nPktNum > 0 && nPktNum < TLinkStatsTracker::m_nMaxRecvPktNum
 Assertion Failed: nPktNum >= 0
 Assertion Failed: nPktNum+1 == m_statsEndToEnd.m_nNextSendSequenceNumber
 Assertion Failed: nPktNumAckBegin >= 0
@@ -1183,6 +1184,7 @@ Assertion Failed: nSegEnd < gapFilled->second
 Assertion Failed: nSize >= 0
 Assertion Failed: nTotalPenalty >= 0
 Assertion Failed: nUpper3Bits <= 4
+Assertion Failed: nWeirdSequenceCurrentInterval <= m_seqPktCounters.m_nRecv
 Assertion Failed: nWirePktNum > 0 && nWirePktNum == msgSessionEstablished.seq_num_r2c()
 Assertion Failed: num > 0
 Assertion Failed: num >= 0
@@ -1317,6 +1319,7 @@ Assertion Failed: s_nHostedDedicatedServerPort
 Assertion Failed: s_nLocked > 0
 Assertion Failed: s_nLowLevelSupportRefCount.load(std::memory_order_acquire) == 0 || s_bManualPollMode
 Assertion Failed: s_nLowLevelSupportRefCount.load(std::memory_order_acquire) > 0
+Assertion Failed: s_nSDRNetworkRefCount == 0
 Assertion Failed: s_nSDRNetworkRefCount > 0
 Assertion Failed: s_pConfigFetchInProgress
 Assertion Failed: s_pSDRPhsyicalSocket == nullptr
@@ -1419,7 +1422,7 @@ BackUp() can only be called after a successful Next().
 Backup router %s going offline in %d seconds; seeking replacement
 Backup router: %s  Ping = %d+%d=%d (front+back=total)
 Bad IV size
-Bad P2P signal from '%s': no connect_request or (
+Bad P2P signal from '%s': neither from/to connection IDs present
 Bad P2P signal: invalid from_identity '%s'
 Bad P2P signal: no from_identity
 Bad boolean
@@ -1724,6 +1727,7 @@ CSteamNetworkConnectionToSDRServer received e2e stats while in Connecting state.
 CSteamNetworkConnectionlocalhostLoopback::BInitConnection failed.  %s
 CSteamNetworkingMessages::ConnectionStatusChangedCallback
 CSteamNetworkingMessages::DestroySession
+CSteamNetworkingMessages::FreeResources
 CSteamNetworkingSockets::Destroy
 CSteamNetworkingSockets::KillConnections
 CSteamNetworkingSocketsSDR::Destroy
@@ -1953,6 +1957,7 @@ Deduced universe %d from certificate
 Default value for an enum field must be an identifier.
 Destroy() not used properly
 DestroyPollGroup
+Destroying relay '%s' because %s
 Dg*
 Didn't find quality metrics for old primary?
 Didn't send valid connection ID
@@ -2351,6 +2356,7 @@ Ignoring P2P CMsgSteamDatagramConnectRequest from %s; we're not listening on vir
 Ignoring P2P connect request through Steam backend from %s; no virual_port!
 Ignoring P2P connection request from %s.  We cannot accept it since we don't have a cert yet!
 Ignoring P2P signal from %s.  For our cxn #%u, they first used remote cxn #%u, not using #%u
+Ignoring P2P signal from '%s', unknown remote connection #%u
 Ignoring P2PFailure notification about unknown ConnectionID %u from %s
 Ignoring P2PRendezvous from %s to unknown connection #%u
 Ignoring bad ping time override '%s'
@@ -2360,7 +2366,6 @@ Ignoring nonsensical migration request from %s to migrate to %s, which is his ow
 Ignoring ping override for unknown cluster '%s'
 Ignoring request by %s to migrate to %s.  Can't locate requesting relay shared cluster data???
 Ignoring stray packet from %s received on port %d.  Should only be talking to %s on that port.
-Ignoring unsolicited/spoofed/late packet from %s.
 Ignoring weird timestamp %llu in ChallengeReply, current time is %llu.
 Ignoring weird timestamp %llu in ConnectOK, current time is %llu, remote delay was %lld.
 Import "
@@ -2591,8 +2596,8 @@ N25SteamNetworkingSocketsLib13CSharedSocket10RemoteHostE
 N25SteamNetworkingSocketsLib15CSDRHTTPRequestE
 N25SteamNetworkingSocketsLib15IBoundUDPSocketE
 N25SteamNetworkingSocketsLib16LinkStatsTrackerINS_24LinkStatsTrackerEndToEndEEE
-N25SteamNetworkingSocketsLib16LinkStatsTrackerINS_28LinkStatsTrackerRelayOutsideEEE
 N25SteamNetworkingSocketsLib16LinkStatsTrackerINS_34LinkStatsTrackerClientRelaySessionEEE
+N25SteamNetworkingSocketsLib16LinkStatsTrackerINS_34LinkStatsTrackerRelayServerSessionEEE
 N25SteamNetworkingSocketsLib18CHTTPRequest_SteamE
 N25SteamNetworkingSocketsLib20CConnectionTransportE
 N25SteamNetworkingSocketsLib20LinkStatsTrackerBaseE
@@ -2617,8 +2622,6 @@ N25SteamNetworkingSocketsLib27CConnectionTransportUDPBaseE
 N25SteamNetworkingSocketsLib27CSteamNetworkConnectionBaseE
 N25SteamNetworkingSocketsLib27CSteamNetworkConnectionPipeE
 N25SteamNetworkingSocketsLib28CSteamNetworkListenSocketP2PE
-N25SteamNetworkingSocketsLib28LinkStatsTrackerRelayOutsideE
-N25SteamNetworkingSocketsLib29CSteamNetworkListenSocketBaseE
 N25SteamNetworkingSocketsLib30CSteamNetworkingUtilsSteamBaseE
 N25SteamNetworkingSocketsLib30SteamNetworkingMessagesSessionE
 N25SteamNetworkingSocketsLib31CSteamNetworkingSocketsCallbackI23SteamServersConnected_tEE
@@ -2632,9 +2635,9 @@ N25SteamNetworkingSocketsLib33CSteamNetworkingSocketsCallResultI28SteamNetworkin
 N25SteamNetworkingSocketsLib33CSteamNetworkingUtilsSteamPartnerE
 N25SteamNetworkingSocketsLib34CSteamNetworkConnectionToSDRServerE
 N25SteamNetworkingSocketsLib34CSteamNetworkListenSocketDirectUDPE
-N25SteamNetworkingSocketsLib34CSteamNetworkListenSocketSDRServerE
 N25SteamNetworkingSocketsLib34ISteamNetworkingSocketsRunWithLockE
 N25SteamNetworkingSocketsLib34LinkStatsTrackerClientRelaySessionE
+N25SteamNetworkingSocketsLib34LinkStatsTrackerRelayServerSessionE
 N25SteamNetworkingSocketsLib35CSteamNetworkingSocketsCallbackBaseE
 N25SteamNetworkingSocketsLib35CSteamNetworkingSocketsSteamPartnerE
 N25SteamNetworkingSocketsLib36CP2PConnectionSignaling_SteamBackendE
@@ -3135,7 +3138,7 @@ Received redundant ConnectOK for ConnectionID %u to %s.
 Received successful communication from Steam Datagram routing cluster.
 Received unexpected 'no connection'
 Received unexpected 'no connection' from peer
-Received unexpected P2P 'non connection' signal
+Received unexpected P2P 'no connection' signal
 Received unknown control message %d from %s
 Received unreliable msg %lld offset %d twice.  Sizes %d,%d
 ReceivedP2PSignal
@@ -3215,6 +3218,8 @@ SDRClient_ForceProxyAddr
 SDRClient_ForceRelayCluster
 SDRClient_MinPingsBeforePingAccurate
 SDRClient_SingleSocket
+SDRNetworkCleanup
+SDRNetworkInit
 SDR_CERT
 SDR_IP
 SDR_IP = '%s'
@@ -6326,6 +6331,7 @@ zlib compression
 zone
 {
 {$0$1}
+{%s %s}
 |
 }
 } routes:{

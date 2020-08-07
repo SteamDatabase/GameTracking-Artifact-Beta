@@ -106,9 +106,9 @@ $ORIGIN
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
 ../public/tier0/utlfixedmemory.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/memstack.h
-../public/tier1/utllinkedlist.h
-../public/tier1/utltshash.h
 .exr
 .jpg
 .pfm
@@ -118,7 +118,6 @@ $ORIGIN
 /
 /P8i
 0
-0123456789abcdef
 0: Bilinear, 1: Trilinear, 2: Aniso 2x, 3: Aniso 4x, 4: Aniso 8x, 5: Aniso 16x
 0A
 0x%016llX
@@ -314,16 +313,15 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CCIR601 sampling not implemented yet
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -338,6 +336,7 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CRC error
+CRC32_ProcessBuffer
 CRenderDeviceBase::FindOrCreateTexture: Trying to load multiple mipmaps into 3d or array texture: %s
 CRenderDeviceBase::InitPerFrameMemoryStack
 CResourceArray
@@ -373,7 +372,32 @@ CUBEMAP_FACE_POSITIVE_X
 CUBEMAP_FACE_POSITIVE_Y
 CUBEMAP_FACE_POSITIVE_Z
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetOverflow(int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBigEndian(bool)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -1354,7 +1378,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -1364,7 +1387,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector2D
 Vector4D
 VectorAligned
@@ -1410,12 +1432,6 @@ ZFP compression is not supported.
 Zero length tRNS chunk
 [
 [%.3f server clamped to %.3f]
-\"
-\\
-\n
-\r
-\t
-\u00
 ^oEZ
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
@@ -1425,10 +1441,8 @@ _V_StringAfterPrefix
 _V_StripLastDir
 _V_strEndsWith
 _V_strncat
-_V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __assert_fail
 __bss_start
 __cxa_atexit
@@ -1549,8 +1563,6 @@ fwrite
 g_Mathlib_GammaToLinearByteTable
 g_TSPointerListNodes
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
@@ -1848,6 +1860,7 @@ texturebase.cpp(2919):ResourceHandleToData( %s ) failed! Falling back to error t
 texturebase.cpp(2930):ResourceHandleToData( %s ) failed! Falling back to error texture!
 texturebase.cpp(2941):ResourceHandleToData( %s ) failed! Falling back to error texture!
 texturebase.cpp(2952):ResourceHandleToData( %s ) failed! Falling back to error texture!
+tier0
 tiles
 too many length or distance symbols
 transparency
@@ -1861,7 +1874,6 @@ unknown critical chunk
 unknown header flags set
 update
 user
-utlbuffer.cpp
 uvCropped
 uvUncropped
 v2f

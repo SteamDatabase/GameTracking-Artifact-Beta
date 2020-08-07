@@ -846,7 +846,6 @@ $effectSourceObjectID
 %d : %d has %d samples
 %d : %s
 %d == false
-%d Hand Attachments:
 %d areas added to selection
 %d areas chopped into %d
 %d areas simplified - %d remain
@@ -1306,7 +1305,6 @@ $effectSourceObjectID
 (enum EEffectDuration) %s,
 (hInflictor, hAttacker, flDamage) - Allocate a damageinfo object, used as an argument to TakeDamage(). Call DestroyDamageInfo( hInfo ) to free the object.
 (ignoring failure)
-(inactive)
 (int iIndex, int iPoint, Vector vecForward ) - Set the forward direction for a control on a particle effect
 (int iIndex, int iPoint, Vector vecForward, Vector vecLeft, Vector vecUp) - Set the orientation for a control on a particle effect
 (int iIndex, int iPoint, Vector vecForward, Vector vecRight, Vector vecUp) - Set the orientation for a control on a particle effect (NOTE: This is left handed -- bad!!)
@@ -1323,6 +1321,7 @@ $effectSourceObjectID
 (script)
 (src %d)
 (unavailable)
+(unknown lock type)
 (vector,float) constructs a quaternion representing a rotation by angle around the specified vector axis
 (vector,vector) cross product between two vectors
 (vector,vector,float) lerp between two vectors by a float factor returning new vector
@@ -1342,9 +1341,6 @@ $effectSourceObjectID
 ** Think STOP ** Considiered %d Moves **
 ** Total Think Time Exceeded ** Considered %d of %d Moves ** %dms
 ** YOU MUST CHECK IT OUT FROM PERFORCE!  **
-*** End Throw Data *****************************************************
-*** Server Calc Throw From Postions ***
-*** SteamVR Pose Data ***
 *** trigger_playermovement using obsolete spawnflag. Remove and reset with new value for "Disable auto player movement"
 ****** DRAW CARD BONUS ******
 ****** LESS IMPORTANT LANE - %d - ******
@@ -1623,9 +1619,6 @@ $effectSourceObjectID
 -11.0f
 -2
 -30.0
--39.45 179.76 1.23
--6.49 -1.34 1.44
--6.49 1.34 1.44
 ->
 -> %s '%s'
 -> Could not find an item definition named '%s'
@@ -1693,27 +1686,27 @@ $effectSourceObjectID
 ../../public/scenesystem/scenevisibility.h
 ../../public/tier0/tslist.h
 ../../public/tier0/utlfixedmemory.h
+../../public/tier0/utllinkedlist.h
+../../public/tier0/utltshash.h
 ../../public/tier1/eventdispatcher.h
 ../../public/tier1/loggingmetahelpers.h
 ../../public/tier1/memstack.h
 ../../public/tier1/utlleanvector.h
-../../public/tier1/utllinkedlist.h
 ../../public/tier1/utlmultilist.h
 ../../public/tier1/utlrbtree.h
 ../../public/tier1/utlsignalslot.h
 ../../public/tier1/utlsortvector.h
-../../public/tier1/utltshash.h
 ../../public/tier2/fieldpath.h
 ../public/entity2/concreteentitylist.h
 ../public/gcsdk/gcsteamdefines.h
 ../public/networksystem/networkfieldscratchdata.h
 ../public/tier0/utlblockmemory.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/utlleanvector.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
 ../public/tier1/utlsymboltable.h
-../public/tier1/utltshash.h
 ../public/tier2/fieldpath.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
@@ -1766,12 +1759,9 @@ $effectSourceObjectID
 0 = standard sampling, 1 = fast sampling, 2 = ultra-fast sampling
 0 == ( pInstance->GetOwnerGameEntity()->GetEntityIdentity()->GetFlags() & EF_IN_STAGING_LIST )
 0.006f
-0.011f
 0.01f
 0.02
 0.05
-0.05f
-0.07f
 0.2
 0.22
 0.25
@@ -1779,12 +1769,9 @@ $effectSourceObjectID
 0.30
 0.375
 0.4
-0.40f
-0.4f
 0.5
 0.6
 0.7
-0.75f
 0.9
 0.98
 0.99
@@ -1902,7 +1889,6 @@ $effectSourceObjectID
 11CPhysTorque
 11CPlayerInfo
 11CPlayerMove
-11CPropVRHand
 11CRefCountedI20CRefCountServiceBaseILb1E6CRefMTEE
 11CSODCGLobby
 11CSOEconItem
@@ -1965,7 +1951,6 @@ $effectSourceObjectID
 12CFilterEnemy
 12CFilterModel
 12CGlobalState
-12CHapticRelay
 12CHintMessage
 12CItemGeneric
 12CKeepUpright
@@ -1978,6 +1963,7 @@ $effectSourceObjectID
 12CMsgTEImpact
 12CMsgTESparks
 12CMsgVector2D
+12CMultiDamage
 12CMultiSource
 12CNETMsg_Tick
 12CNavDrawArea
@@ -2012,6 +1998,7 @@ $effectSourceObjectID
 12EDCGCardType
 12FilterHealth
 12IAchievement
+12IMotionEvent
 12INavDrawArea
 12INavDrawMesh
 12INavObstacle
@@ -2095,7 +2082,6 @@ $effectSourceObjectID
 13CNetMessagePBILi144E26CUserMessageAudioParameterL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi145E24CUserMsg_ParticleManagerL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi148E17CBaseCmdKeyValuesI24CUserMsg_CustomGameEventEL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
-13CNetMessagePBILi150E31CUserMessageHapticsManagerPulseL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi205E30CMsgSource1LegacyGameEventListL13SignonGroup_t10EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi207E26CMsgSource1LegacyGameEventL13SignonGroup_t5EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi208E22CMsgSosStartSoundEventL13SignonGroup_t4EL19NetChannelBufType_t1ELb1EE
@@ -2193,7 +2179,6 @@ $effectSourceObjectID
 14CEmptySequence
 14CEntityBlocker
 14CEntitySpawnerI11CBaseEntityE
-14CEntitySpawnerI11CPropVRHandE
 14CEntitySpawnerI12CDynamicPropE
 14CEntitySpawnerI12CPhysicsPropE
 14CEntitySpawnerI12CRagdollPropE
@@ -2203,7 +2188,6 @@ $effectSourceObjectID
 14CEntitySpawnerI15CEntityDissolveE
 14CEntitySpawnerI16CTriggerMultipleE
 14CEntitySpawnerI18CSimplePhysicsPropE
-14CEntitySpawnerI20CVRHandModelOverrideE
 14CEntitySpawnerI22CDevtestHierarchyChildE
 14CEntitySpawnerI25CItemGenericTriggerHelperE
 14CEntitySpawnerI5CBeamE
@@ -2250,7 +2234,6 @@ $effectSourceObjectID
 14CPhysExplosion
 14CPhysicsSpring
 14CPointTemplate
-14CPropHMDAvatar
 14CRagdollMagnet
 14CResponseQueue
 14CSOPhantomItem
@@ -2299,7 +2282,6 @@ $effectSourceObjectID
 14CUserMessagePBILi144E26CUserMessageAudioParameterL19NetChannelBufType_t1EE
 14CUserMessagePBILi145E24CUserMsg_ParticleManagerL19NetChannelBufType_t1EE
 14CUserMessagePBILi148E17CBaseCmdKeyValuesI24CUserMsg_CustomGameEventEL19NetChannelBufType_t1EE
-14CUserMessagePBILi150E31CUserMessageHapticsManagerPulseL19NetChannelBufType_t1EE
 14ConCommandBase
 14CountdownTimer
 14IBaseInterface
@@ -2308,7 +2290,6 @@ $effectSourceObjectID
 14ISequenceSetup
 14IServerGCLobby
 14ISource2Server
-14IVRFlyListener
 150
 1500000
 151
@@ -2648,9 +2629,7 @@ $effectSourceObjectID
 17CUtlVectorDataOpsI10CUtlVectorI16ragdollelement_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI17ResponseContext_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI17modifiedconvars_t10CUtlMemoryIS1_iEELi10EE
-17CUtlVectorDataOpsI10CUtlVectorI19interactions_data_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI19magnetted_objects_t10CUtlMemoryIS1_iEELi10EE
-17CUtlVectorDataOpsI10CUtlVectorI21prevent_interaction_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI24SaveRestoreBlockHeader_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI11CBasePlayerE10CUtlMemoryIS3_iEELi13EE
@@ -2673,7 +2652,6 @@ $effectSourceObjectID
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI16CBaseModelEntityEN19ActiveModelConfig_t31NetworkVar_m_AssociatedEntitiesELin1EELi13EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI16CBaseModelEntityENS2_54NetworkVar_m_ConfigEntitiesToPropagateMaterialDecalsToELin1EELi13EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI17CBaseCombatWeaponEN20CBaseCombatCharacter23NetworkVar_m_hMyWeaponsELin1EELi13EE
-17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI21CBaseVRHandAttachmentEN11CPropVRHand25NetworkVar_m_hAttachmentsELin1EELi13EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI21CPostProcessingVolumeEN16CPlayerLocalData34NetworkVar_m_PostProcessingVolumesELin1EELi13EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseI7CHandleI9CBaseFlexEN12CSceneEntity23NetworkVar_m_hActorListELin1EELi13EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseIbN17CPathParticleRope33NetworkVar_m_PathNodes_PinEnabledELin1EELi6EE
@@ -2718,7 +2696,6 @@ $effectSourceObjectID
 18CEnableMotionFixup
 18CEntityLumpRequest
 18CEntitySpawnerBaseI11CBaseEntityE
-18CEntitySpawnerBaseI11CPropVRHandE
 18CEntitySpawnerBaseI12CDynamicPropE
 18CEntitySpawnerBaseI12CPhysicsPropE
 18CEntitySpawnerBaseI12CRagdollPropE
@@ -2728,7 +2705,6 @@ $effectSourceObjectID
 18CEntitySpawnerBaseI15CEntityDissolveE
 18CEntitySpawnerBaseI16CTriggerMultipleE
 18CEntitySpawnerBaseI18CSimplePhysicsPropE
-18CEntitySpawnerBaseI20CVRHandModelOverrideE
 18CEntitySpawnerBaseI22CDevtestHierarchyChildE
 18CEntitySpawnerBaseI25CItemGenericTriggerHelperE
 18CEntitySpawnerBaseI5CBeamE
@@ -2847,7 +2823,6 @@ $effectSourceObjectID
 19CGCUpdateItemSchema
 19CInfoGameEventProxy
 19CInfoParticleTarget
-19CInteractionManager
 19CItemSocket_Strange
 19CLogicCollisionPair
 19CLogicNPCCounterOBB
@@ -2901,7 +2876,6 @@ $effectSourceObjectID
 19IDecalEmitterSystem
 19IEconItemDefinition
 19IEntity2SaveRestore
-19IFakeVRMoveListener
 19IGameEventListener2
 19INavEntityInterface
 19IPlayerCommandQueue
@@ -2910,7 +2884,6 @@ $effectSourceObjectID
 19TEDecal_GameEvent_t
 19TESmoke_GameEvent_t
 19TonemapParameters_t
-19interactions_data_t
 1DBlend
 2
 2) Blue : %i
@@ -2992,7 +2965,6 @@ $effectSourceObjectID
 20CPointCommentaryNode
 20CPointVelocitySensor
 20CPostConnectCallback
-20CPropVRTrackedObject
 20CRagdollPropAttached
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResponseCriteriaSet
@@ -3029,7 +3001,6 @@ $effectSourceObjectID
 20CUserMessageShakeDir
 20CUserMessageShowMenu
 20CUserMessageVGUIMenu
-20CVRHandModelOverride
 20GameFileWeaponInfo_t
 20IChoreoEventCallback
 20IMobileEventListener
@@ -3044,7 +3015,6 @@ $effectSourceObjectID
 20ISource2GameEntities
 20ISource2ServerConfig
 20ITableGameTimeSource
-20IVRHandSkeletonProxy
 20TEImpact_GameEvent_t
 20TESparks_GameEvent_t
 20TransitioningLayer_t
@@ -3054,7 +3024,6 @@ $effectSourceObjectID
 21CBaseAttributableItem
 21CBaseGameStats_Driver
 21CBaseLightProbeVolume
-21CBaseVRHandAttachment
 21CBidirMsg_RelayPacket
 21CCLCMsg_ClientMessage
 21CDCGTourney_EntryItem
@@ -3128,7 +3097,6 @@ $effectSourceObjectID
 21IPhysicsCollisionData
 21IPlayerPickupVPhysics
 21TEBubbles_GameEvent_t
-21prevent_interaction_t
 22CAchievementActionBase
 22CAchievementActionFail
 22CAnimTagListenerHelperI15IPostGraphIKTagE
@@ -3389,8 +3357,6 @@ $effectSourceObjectID
 24CGameSystemStaticFactoryI22CDefaultResponseSystem15IResponseSystemE
 24CGameSystemStaticFactoryI23CCustomGameEventManagerS0_E
 24CGameSystemStaticFactoryI23CLagCompensationManager23ILagCompensationManagerE
-24CGameSystemStaticFactoryI25CControllerHapticsManagerS0_E
-24CGameSystemStaticFactoryI25CTrackedControllerManagerS0_E
 24CGameSystemStaticFactoryI26CGameParticleManagerSystemS0_E
 24CGameSystemStaticFactoryI28CCleanupDefaultRelationshipsS0_E
 24CGameSystemStaticFactoryI28CResourcePrecacherGameSystemS0_E
@@ -3479,7 +3445,6 @@ $effectSourceObjectID
 25CConCommandMemberAccessorI18CSoundOpGameSystemE
 25CConCommandMemberAccessorI22CEntityDebugGameSystemE
 25CConCommandMemberAccessorI24CSpawnGroupMgrGameSystemE
-25CControllerHapticsManager
 25CCustomKillEffectModifier
 25CDCGTourney_PaidEntryItem
 25CDemoStringTables_items_t
@@ -3534,7 +3499,6 @@ $effectSourceObjectID
 25CTraceMsg_DamageAttempted
 25CTraceMsg_DeathShieldUsed
 25CTraceMsg_ShopCardRemoved
-25CTrackedControllerManager
 25CUserMessageColoredText_t
 25CUserMessageKeyHintText_t
 25CUserMessageVGUIMenu_Keys
@@ -3693,9 +3657,7 @@ $effectSourceObjectID
 27CSchemaUtlVectorManipulatorI10CUtlVectorI16ragdollelement_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI17ResponseContext_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI18CEconItemAttribute28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI19interactions_data_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19magnetted_objects_t10CUtlMemoryIS1_iEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI21prevent_interaction_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI35CNetworkedIKProceduralTargetContext28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI6QAngle28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI6Vector10CUtlMemoryIS1_iEES1_E
@@ -3711,7 +3673,6 @@ $effectSourceObjectID
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI17CBaseCombatWeaponE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI17CSceneListManagerE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI20CPointCommentaryNodeE10CUtlMemoryIS3_iEES3_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CBaseVRHandAttachmentE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CPostProcessingVolumeE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN17CAttributeManager24cached_attribute_float_tE10CUtlMemoryIS2_iEES2_E
@@ -4136,7 +4097,6 @@ $effectSourceObjectID
 33CTraceMsg_CardReturnedToGuardDeck
 33CTraceMsg_ImprovementEnteringPlay
 33CTraceMsg_UnitChangedCombatTarget
-33CUserMessageHapticsManagerPulse_t
 33CWorkshop_GetContributors_Request
 33IEconItemUntypedAttributeIterator
 33IStreamEntitiesFromFileCompletion
@@ -4339,7 +4299,6 @@ $effectSourceObjectID
 38CTraceMsg_StateBasedEffectsUpdateStart
 38CWorkshop_GetItemDailyRevenue_Response
 38CWorkshop_SetItemPaymentRules_Response
-39.20 -2.54 178.41
 39CCommunity_GetClanAnnouncements_Request
 39CDCGBuyEntireItemDeckAchievementFactory
 39CDCGExactTowerDamageKillAchievementEval
@@ -4413,6 +4372,7 @@ $effectSourceObjectID
 40CUserMsg_ParticleManager_SetParticleText
 40CWorkshop_GetPackageDailyRevenue_Request
 40ISceneAnimatableProceduralBoneTransforms
+41
 41CAttributeIterator_GetTypedAttributeValueI17CAttribute_SocketS0_E
 41CAttributeIterator_GetTypedAttributeValueI17CAttribute_StringPKcE
 41CAttributeIterator_GetTypedAttributeValueI17CAttribute_StringS0_E
@@ -4767,6 +4727,7 @@ $effectSourceObjectID
 >
 >%s%.3f
 >=
+>@
 ?
 ?(
 ???
@@ -6084,6 +6045,7 @@ Access of EHANDLE/CHandle for class %s:%p in destructor!
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 Account %u has abandoned the game
+AcculumatePlayTimeThink
 Accumulated Pigeon Rage
 Accumulator in challenge %s is missing a name
 Achievement award called but already achieved: %s
@@ -6110,7 +6072,6 @@ Activate (Blink Dagger)
 Activate (Bracers of Sacrifice)
 Activate (Cheating Death)
 Activate (Claddish Archivist)
-Activate (Claszureme Hourglass)
 Activate (Cursed Satyr)
 Activate (Dagon)
 Activate (Emissary of the Quorum)
@@ -6161,14 +6122,12 @@ Actually Dota
 Add
 Add a filter to the game debug overlay
 Add a line to the debug history. Format: <category id> <line>
-Add a model override for this hand
 Add a rule to the decision database.
 Add a watch to the game debug overlay
 Add an output
 Add current area to the selected set.
 Add linear and angular velocity to the physics object
 Add specified area id to the selected set.
-Add the attachment to this hand
 AddAllocatedMessage
 AddBool
 AddBroadcastTeamTarget
@@ -6248,7 +6207,6 @@ AllocateEntityIdentity
 Allow Interrupt
 AllowFlipping
 Allowing
-Allows anchor teleportation onto walls and ceiling. NOTE: WIP, mostly broken!
 Allows team members to injure other members of their team
 Already saw decimal point or exponent; can't have another one.
 Altar of the Mad Moon
@@ -6345,7 +6303,6 @@ Arcane Flux
 Archon Investigation
 Arclight Elemental
 Arctic Burn
-AreChaperoneBoundsVisible
 Area #%d(%d), %d verts, %d connections, %s
 Area %d didn't get any nodes!
 Area %d has area %d on both 2-way and incoming list, should only be on one
@@ -6565,6 +6522,7 @@ Best candidates
 Better Late Than Never
 Beyond the Veil
 Bezier
+BigShot
 Billy Christian
 BinaryProperties_GetValue
 Binding_AddRuleFromScript
@@ -6726,7 +6684,6 @@ CBaseAnimatingOverlayController::AddGesture:  model %s missing activity %s
 CBaseAttributableItem
 CBaseClientUIEntity
 CBaseCombatCharacter
-CBaseCombatCharacter::DamageHistory
 CBaseCombatCharacter::UpdateLastKnownArea
 CBaseCombatWeapon
 CBaseCombatWeapon::Operator_FrameUpdate one or both of the ModelPtrs is NULL w:%s v:%s
@@ -6779,8 +6736,6 @@ CBaseProp
 CBaseTempEntity::StaticInitTempEnts()
 CBaseToggle
 CBaseTrigger
-CBaseVRHandAttachment
-CBaseVRHandAttachmentHandle
 CBaseViewModel
 CBeam
 CBitVec
@@ -6821,6 +6776,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -6834,7 +6790,6 @@ CBufferString::StartsWith(char const*)
 CBufferString::StrFormat(char const*, ...)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CBufferStringN
@@ -6866,7 +6821,6 @@ CConstantForceController
 CConstraintAnchor
 CConstraintSlave
 CConstraintTarget
-CControllerHapticsManager
 CCopyRecipientFilter
 CCredits
 CCustomGameEventManager
@@ -7369,7 +7323,6 @@ CHLTVServer: failed to serialize chat '%s'.
 CHLTVServer: failed to serialize event '%s'.
 CHLTVServer: failed to serialize title '%s'.
 CHLTVServer::StartMaster: game event %s not found.
-CHandDataHistory::Update Ignoreing Update, Sample is Zerod
 CHandle
 CHandle< CBaseCombatCharacter>
 CHandle< CBaseCombatWeapon >
@@ -7379,20 +7332,12 @@ CHandle< CBaseEntity>
 CHandle< CBaseFlex >
 CHandle< CBaseModelEntity >
 CHandle< CBasePlayer >
-CHandle< CBaseVRHandAttachment >
-CHandle< CBaseVRHandAttachment>
 CHandle< CBaseViewModel >
 CHandle< CColorCorrection>
 CHandle< CEconWearable >
 CHandle< CFogController>
-CHandle< CPointHMDAnchor>
-CHandle< CPointWorldText>
 CHandle< CPostProcessController>
-CHandle< CPropHMDAvatar>
-CHandle< CPropVRHand >
-CHandle< CPropVRHand>
 CHandle<CPostProcessingVolume>
-CHapticRelay
 CHealthComponent
 CHealthComponentReferenced
 CHealthComponentReferencedPtr
@@ -7429,7 +7374,6 @@ CInlineJob_CMsgGCToServerRequestPing
 CInlineJob_CMsgGCToServerRunTests
 CInstancedSceneEntity
 CInstructorEventEntity
-CInteractionManager
 CItem
 CItemGeneration
 CItemGeneric
@@ -7690,16 +7634,14 @@ CPoseController
 CPostProcessController
 CPostProcessingVolume
 CProjectedDecal
-CPropHMDAvatar
-CPropVRHand
-CPropVRHand::AttachmentsThink
-CPropVRTrackedObject
 CProtoBufMsg::BAsyncSendProto
 CProtoBufMsg::BAsyncSendWithPreSerializedBody
 CProtoBufMsg::CProtoBufMsg( MsgType_t )
 CProtoBufMsg::InitFromPacket( IMsgNetPacket )
 CProtoBufMsgMemoryPoolMgr:
 CPushable
+CRC32_ProcessBuffer
+CRC64_ProcessBuffer
 CREATE_FOR_CLIENTS_WHO_CONNECT_LATER
 CREATE_FOR_CURRENTLY_CONNECTED_CLIENTS_ONLY
 CRR_Response
@@ -7974,7 +7916,39 @@ CUserMsg_HudError_t
 CUserMsg_ParticleManager_t
 CUtlBinaryBlock
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, char*, int)
+CUtlBuffer::GetLine(char*, int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::GetString(char*, int)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekDelimitedStringLength(CUtlCharConversion*, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::Scanf(char const*, ...)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
+CUtlBuffer::VaPrintf(char const*, __va_list_tag*)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -8056,8 +8030,8 @@ CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVProfile::AssignNextTimespanId()
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
-CVRHandAttachmentInput
-CVRHandModelOverride
+CVariableBitStringBase::FreeInts()
+CVariableBitStringBase::Resize(int)
 CVariant
 CVariantBase
 CVariantDefaultAllocator
@@ -9102,6 +9076,7 @@ Enable to skip game animations
 Enable/Disable Parallel Island Solving
 Enable/disable dynamic vs dynamic continuous collision traces
 Enabled.
+Enabled: %s
 Enables player lag compensation
 Enchant
 Enchantress
@@ -9641,7 +9616,6 @@ FilterDamageType
 FilterHealth
 Find
 Find a key in the VM
-Find a specific model override for this hand
 Find all entities by name. Returns an array containing all the found entities in it.
 Find and list all entities with classnames or targetnames that contain the specified substring.Format: find_ent <substring>
 Find entities by class name nearest to a point.
@@ -9700,8 +9674,6 @@ Fire Entity's Action Input with passed Vector - you own the memory
 Fire Trigger
 Fire a game event without broadcasting to the client.
 Fire a game event.
-Fire a haptic pulse on this hand. Specify the duration in micro seconds.
-Fire a haptic pulse on this hand. [0,2] for strength.
 Fire an entity output
 FireEntityIOInputNameOnly
 FireEntityIOInputString
@@ -9892,7 +9864,6 @@ Get Base? velocity.
 Get Entity relative velocity.
 Get Integer Attribute
 Get Qangles (with no roll) for a Vector.
-Get VR hand by ID
 Get Velocity for VPHYS or normal object
 Get a random float within a range
 Get a random int within a range
@@ -9905,14 +9876,11 @@ Get entity local origin as a Vector
 Get entity local pitch, yaw, roll as a QAngle
 Get entity pitch, yaw, roll as a vector.
 Get float value for an entity attribute.
-Get hand ID
 Get int value for an entity attribute.
-Get literal type for this hand
 Get scale of entity's model.
 Get the attachment id's angles as a p,y,r vector.
 Get the attachment id's forward vector.
 Get the attachment id's origin vector.
-Get the attachment on this hand
 Get the camera
 Get the combat character faction.
 Get the current local time
@@ -9922,7 +9890,6 @@ Get the entities parented to this entity.
 Get the entity as an EHANDLE
 Get the entity name
 Get the entity name w/help if not defined (i.e. classname/etc)
-Get the filtered controller velocity.
 Get the forward vector of the entity.
 Get the health of this entity.
 Get the local angular velocity - returns a vector of pitch,yaw,roll
@@ -9934,7 +9901,6 @@ Get the maximum health of this entity.
 Get the name of the map.
 Get the named attachment id.
 Get the owner entity, if there is one
-Get the player for this hand
 Get the qangles that this entity is looking at.
 Get the right vector of the entity.
 Get the team number of this entity.
@@ -10019,7 +9985,6 @@ GetOrigin
 GetOriginalDamage
 GetOwner
 GetParticleReplacement
-GetPlayer
 GetPlayerLimits:  default maxplayers must be >= 1 (%i)
 GetPlayerLimits:  max players limited to %i
 GetPlayerLimits:  min maxplayers %i > max %i
@@ -10057,7 +10022,7 @@ GetTeam
 GetUInt32
 GetUInt64
 GetUpVector
-GetVRControllerType
+GetVelocity
 GetWeaponCount
 GetWeaponCount() : Gets the number of weapons currently equipped
 Gets the value of the given cvar, as a float.
@@ -10128,7 +10093,6 @@ H(
 H*
 H:%x
 HA
-HACK: Manual offset for windows MR controllers
 HB
 HD
 HDR Color Scale: %0.3f
@@ -10151,7 +10115,6 @@ HITGROUP_RIGHTLEG
 HITGROUP_SPECIAL
 HITGROUP_STOMACH
 HLTVDirector: Inserted game event %s at tick %d (%d total)
-HMD Avatar that owns the VR hands
 HMaterial
 HMaterialStrong
 HModel
@@ -10184,11 +10147,6 @@ Half-Life 2
 HammerMapLoader001
 Hand of God
 Hand of the Dead God
-HandAttachThink
-HandHistoryInfo_t
-HandInteractionFailed
-HandInteractionStarted
-HandInteractionSucceeded
 HandleObstacleTopAreas()
 Handmaiden of the Dead God
 HangWatchdogInternal_BeginScope
@@ -10296,7 +10254,6 @@ INFO
 INSERT_INTO_CURRENTLY_ACTIVE_SPAWN_GROUP
 INSERT_INTO_NEWLY_CREATED_SPAWN_GROUP
 INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP
-INTERACTION_NONE
 INTERACTIVE
 INTERNAL
 INVALID CGameEventStartTouchCollideAdaptor
@@ -10569,9 +10526,7 @@ InputMultiplayerSpawned
 InputMultiply
 InputNoise
 InputOnBreak
-InputOnHandEvent
 InputOpen
-InputOutsideTransition
 InputPauseAtNextInterrupt
 InputPausePlayback
 InputPauseSound
@@ -10963,7 +10918,6 @@ Invalid wire type for CPPTYPE_UINT32:
 Invalid wire type for CPPTYPE_UINT64:
 Inverse Multi Quadratic
 Invert Axes;
-Invisible physics body for: %s
 Invite
 Ion Shell
 Iron Fog Goldmine
@@ -10992,7 +10946,6 @@ IsPlayer
 IsPublicUniverse
 IsSequenceFinished
 IsSpeaking() %f
-IsVRControllerButtonPressed
 IsValidEntity
 Item %d contains both a team + corporation brand which is illegal!
 Item %s fell out of level at %f,%f,%f
@@ -11120,15 +11073,7 @@ LIFE_DYING
 LIFE_RESPAWNABLE
 LIFE_RESPAWNING
 LINUX
-LITERAL_HAND_TYPE_COUNT
-LITERAL_HAND_TYPE_LEFT
-LITERAL_HAND_TYPE_RIGHT
-LITERAL_HAND_TYPE_UNKNOWN
 LOGDIR
-LOGICAL_HAND_TYPE_COUNT
-LOGICAL_HAND_TYPE_OFF_HAND
-LOGICAL_HAND_TYPE_PRIMARY_HAND
-LOGICAL_HAND_TYPE_UNKNOWN
 LOG_CONSOLE
 LOG_GENERAL
 LOSSpeculativeMuzzle_t
@@ -11307,6 +11252,7 @@ MATERIAL_MODIFY_MODE_NONE
 MATERIAL_MODIFY_MODE_SETVAR
 MAX_PATTACH_TYPES
 MClassHasCustomAlignedNewDelete
+MD5_PseudoRandom
 MDefaultString
 MEDIUM_HULL
 MEDIUM_TALL_HULL
@@ -11343,9 +11289,6 @@ MNetworkVarsAtomic
 MOD
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
-MOD_HAND_LEFT
-MOD_HAND_NONE
-MOD_HAND_RIGHT
 MOVECOLLIDE_COUNT
 MOVECOLLIDE_DEFAULT
 MOVECOLLIDE_FLY_BOUNCE
@@ -11378,7 +11321,6 @@ Main level world does not exist?!
 MainThread
 Make props solid to nav generation/editing
 MakeAIPick
-Makes local player HMD avatar visible slightly in front of its actual position.
 Malchanted Mango
 Malformed count value: %s
 Malignant Notion
@@ -12043,7 +11985,6 @@ NULL Ent in GiveNamedItem: %s!
 NULL entity in global entity list!
 NULL output boolean given.
 NUM_DIRECTIONS
-NUM_HAND_INTERACTIONS
 NUM_HULLS
 NUM_PETLEVELUPRULES
 NUM_PRECIPITATION_TYPES
@@ -12227,6 +12168,7 @@ O'
 OBSTRUCTED
 OK
 OLD info_spawngroup_landmark(%s) in %s: %f %f %f
+OPRECIPITATION
 ORIENT
 OSCILLATE_POSE_PARAMETERS
 OSType
@@ -12267,8 +12209,6 @@ OnFactor2
 OnFactor3
 OnGlowColorChanged
 OnGlowTypeChanged
-OnHandDroppedObject
-OnHandPickedUpObject
 OnLightGroupChanged
 OnLightOff
 OnLightOn
@@ -12333,6 +12273,7 @@ OutputType_AnimationCycle
 OutputType_RotationX
 OutputType_RotationY
 OutputType_RotationZ
+OutsideTransition
 Outworld Devourer
 Overcharged Artificer
 Overdraw
@@ -12353,7 +12294,7 @@ P1=%s, P2=%sP1Wins=%d, P2Wins=%d, Ties=%d
 P20CNavSearchHexLattice
 P29CNavBreadthFirstSearchLattice
 P33BreadthFirstSearchVolumeCollector
-P@%s %d
+P@%.6f
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2068
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../animgraph_gamesystem.cpp:108
@@ -12383,7 +12324,6 @@ PATTACH_RENDERORIGIN_FOLLOW
 PATTACH_ROOTBONE_FOLLOW
 PATTACH_WORLDORIGIN
 PAphysaggregatedata.cpp
-PCG
 PERMISSION_DENIED
 PETLEVELFROM_COMPENDIUM_LEVEL
 PETLEVELFROM_KILLEATER
@@ -12428,7 +12368,6 @@ POSECONTROLLER_FMODTYPE_TRIANGLE
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 POSIX
-PRECIPITATION
 PRECIPITATIONBLOCKER
 PRECIPITATION_TYPE_DUSTMOTES
 PRECIPITATION_TYPE_PARTICLEASH
@@ -12650,7 +12589,6 @@ Player.FallGib
 Player.PickupWeapon
 Player.PlasmaDamage
 Player.SonicDamage
-Player.Swim
 Player.UseTrain
 Player.Wade
 PlayerConnected
@@ -12702,7 +12640,6 @@ PopOnePlusN
 PopOnePlusOne
 Pops the identifier used to group overlays. Overlays marked with this identifier can be deleted in a big batch.
 PortraitBackground
-PosThrow : %f, %f, %f - Speed: %f
 PosXYZ
 PoseController_FModType_t
 Position: %0.3f, %0.3f, %0.3f
@@ -13024,21 +12961,16 @@ RemapValClamped(
 Remote Detonation
 Remove CSS class(es) from the panel
 Remove a filter from the game debug overlay
-Remove a model override for this hand
 Remove a watch from the game debug overlay
-Remove all model overrides for this hand
 Remove current area from the selected set.
 Remove given nav attribute from all areas in the selected set.
-Remove hand attachment by handle
 Remove the C proxy for a script-based spawn group filter
 Remove updater
-RemoveAllHandModelOverrides
 RemoveAllInScope
 RemoveBoneAndChildren
 RemoveBroadcastTeamTarget
 RemoveCSSClasses
 RemoveEffects( int ): Removes the render effect flag.
-RemoveHandAttachmentByHandle
 RemoveOpponentsImprovement
 RemoveSelf
 RemoveSpawnGroupFilterProxy
@@ -13140,9 +13072,6 @@ Returns a sequence id given a name
 Returns a table containing the criteria that would be used for response queries on this entity. This is the same as the table that is passed to response rule script function callbacks.
 Returns float duration of the sound. Takes soundname and optional actormodelname.
 Returns length of this scene in seconds.
-Returns the HMD Avatar entity for this player if it exists.
-Returns the HMD anchor entity for this player if it exists.
-Returns the Vector position of the point you ask for. Pass 0-3 to get the four points.
 Returns the active sequence
 Returns the currently active spawn group handle
 Returns the duration in seconds of the active sequence.
@@ -13160,19 +13089,14 @@ Returns the number of seconds the player has been continuously speaking.
 Returns the player's user id.
 Returns the shoot position eyes (or hand in VR).
 Returns the spawn group handle of this entity
-Returns the type of controller being used while in VR.
-Returns true if the SteamVR dashboard is showing for this player.
-Returns true if the controller button is pressed.
 Returns true if the entity is valid and marked for deletion.
 Returns true if the player is in noclip mode.
-Returns true if the use key is pressed.
 Returns true if this is lua running from the client.dll.
 Returns true if this is lua running from the server.dll.
 Returns true if this is lua running within tools mode.
 Returns true if this server is a dedicated server.
 Returns whether the player specified is speaking.
 Returns whether this entity is grabbable.
-Returns whether this player's chaperone bounds are visible.
 Reversal [%d]
 Reversal accel is %f/%f
 ReverseMove
@@ -13213,7 +13137,6 @@ RotatePosition
 RotateQuaternionByAxisAngle
 Rotates an entity by a specified # of degrees
 RotatingUse
-Rotation offset from the base Attachment point (for testing)
 RotationDeltaAsAngularVelocity
 RoundEnd
 RoundStart
@@ -13248,8 +13171,6 @@ SCRIPT_ERROR
 SCRIPT_RUNNING
 SDR port  : %u
 SERVER: AnimGraph Status Tag: "%s" %s at %.2f (tag fired at %.2f)
-SERVER::FireHapticPulsePrecise %f %f %f
-SERVER::FireHapticPulsePrecise STOPPED
 SERVERSIDE
 SERVER_DLL
 SHADOWS_NONE
@@ -13460,9 +13381,6 @@ Script not found (%s)
 Script:
 Script: %s
 ScriptAddEffects
-ScriptAddHandAttachment
-ScriptAddHandModelOverride
-ScriptAreChaperoneBoundsVisible
 ScriptCancelPlayback
 ScriptCreateSceneEntity
 ScriptDebugAddTextFilter( "%s" )
@@ -13492,12 +13410,9 @@ ScriptEnable
 ScriptEyeAngles
 ScriptEyePosition
 ScriptFindCamera
-ScriptFindHandModelOverride
 ScriptFindNamedEntity
 ScriptFireGameEvent
 ScriptFireGameEventLocal
-ScriptFireHapticPulse
-ScriptFireHapticPulsePrecise
 ScriptFireOutput
 ScriptFirstMoveChild
 ScriptForceSpawn
@@ -13518,11 +13433,6 @@ ScriptGetEntityIndex
 ScriptGetEquippedWeapons
 ScriptGetForward
 ScriptGetGraphParameter
-ScriptGetHMDAnchor
-ScriptGetHMDAvatar
-ScriptGetHandAttachment
-ScriptGetHandID
-ScriptGetLiteralHandType
 ScriptGetLocalAngles
 ScriptGetLocalAngularVelocity
 ScriptGetLocalOrigin
@@ -13535,9 +13445,6 @@ ScriptGetOldestScene
 ScriptGetOrCreatePrivateScriptScope
 ScriptGetOrCreatePublicScriptScope
 ScriptGetOwnerEntity
-ScriptGetPlayArea
-ScriptGetPlayArea argument is out of range. It needs to be 0-3
-ScriptGetPlayerOwner
 ScriptGetPlayerSpeechDuration
 ScriptGetPrivateScriptScope
 ScriptGetPublicScriptScope
@@ -13550,25 +13457,17 @@ ScriptGetSpawnGroupHandle
 ScriptGetSpawnedEntities
 ScriptGetUp
 ScriptGetUserID
-ScriptGetVRHand
-ScriptGetVelocity
 ScriptHasAttribute
 ScriptInputKill
 ScriptIsPlayerNoclipping
 ScriptIsPlayerSpeaking
-ScriptIsUsePressed
-ScriptIsVRControllerButtonPressed
-ScriptIsVRDashboardShowing
 ScriptListenToGameEvent
 ScriptListenToGameEvent error: event %s given a nil function.
 ScriptLoadSceneFromString
 ScriptLookupAttachment
 ScriptNextMovePeer
 ScriptPlayScene
-ScriptRemoveAllHandModelOverrides
 ScriptRemoveEffects
-ScriptRemoveHandAttachmentByHandle
-ScriptRemoveHandModelOverride
 ScriptSetAbsAngles
 ScriptSetAngles
 ScriptSetAttributeFloatValue
@@ -13585,7 +13484,6 @@ ScriptSetGraphParameterEnum
 ScriptSetGraphParameterFloat
 ScriptSetGraphParameterInt
 ScriptSetGraphParameterVector
-ScriptSetHandAttachment
 ScriptSetLightGroup
 ScriptSetLinearAttenuation
 ScriptSetLocalAngles
@@ -13816,7 +13714,6 @@ Set nav attribute for all areas in the selected set.
 Set rendering on/off for an ehandle
 Set scale of entity's model.
 Set skin (int).
-Set the attachment for this hand
 Set the control point data for a control on a particle effect
 Set the current quest name.
 Set the current quest phase.
@@ -14235,7 +14132,6 @@ Spring stiffness for slide constraint
 Spring the Trap
 SquareUpAreas()
 Squirmified-Straps
-SrvCalc [%d] %f, %f, %f - SPEED %f
 Ss
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
 St14_Function_base
@@ -14412,7 +14308,6 @@ Suzanne Helmigh
 Sven
 Svetlin Velinov
 Swap
-Swaps which hand is considered 'primary' and 'secondary' (ie. dominant/off-hand)
 SweptBox
 Switches to navmesh for the specified spawngroup
 Switching local lobby state to %s from %s
@@ -14423,7 +14318,6 @@ Synchronously spawns a single entity from a table
 Syntax Error at offset: %d
 System %s failed to init
 T
-TEArmorRicochet_GameEvent_t
 TEBSPDecal_GameEvent_t
 TEBeamEntPoint_GameEvent_t
 TEBeamEnts_GameEvent_t
@@ -14645,7 +14539,6 @@ ThreadSleep
 ThreadingMain
 ThreeState_t
 Threshold when hinge is considered moving [deg/s]
-Throw : %f, %f, %f - Speed: %f
 Throw Down
 Thundergod's Wrath
 Thunderhide Alpha
@@ -14745,7 +14638,6 @@ Trace Events
 Trace a ray against the nav mesh.  - Inputs: vStart, vEnd, nNavHull  -- Outputs: bStartsInMesh, bExitsMesh, vTraceEndPos (= vStart if not bStartsInMesh)
 Trace using: %s
 Track
-TrackedControllerManager
 TransformPointEntityToWorld
 TransformPointWorldToEntity
 TransitioningLayer_t
@@ -14989,7 +14881,6 @@ Usage:  setpos_exact x y <z optional>
 Usage: %s <attribute>
 Usage: %s <markup_group name>
 Usage: fake_achievement <achievement id> <player id> <times achieved>
-Usage: global_set <globalname> <state>: Sets the state of the given env_global (0 = OFF, 1 = ON, 2 = DEAD).
 Usage: induce <start|stop|action id>
 Usage: mp_disable_autokick <userid>
 Usage: nav_merge_mesh filename
@@ -15069,8 +14960,6 @@ VPhysics2_Interface_001
 VPhysicsCollisionAttribute_t
 VProcessUtils002
 VProfService_001
-VR hand that controls poses and controller state
-VRFly also is noclip
 VR_001
 VRenderDeviceSetupV001
 VRigHost001
@@ -15162,7 +15051,6 @@ V_vscprintf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vacuum
 Valid Content Absolute Path
 Valid External Path
@@ -15213,8 +15101,6 @@ VectorAligned
 VectorText3D
 VectorToAngles
 Veiled Sisterhood
-VelThrow - PoseData is Zero
-VelThrow : %f, %f, %f - Speed: %f
 Velocity: %.3f
 VelocitySampler
 Vendetta
@@ -15348,7 +15234,6 @@ WeaponState_t
 Weather Type:
 Weave
 Welcome message contained %s twice
-Weld Joint: %s -> %s
 When -gamestatsfileoutputonly is specified, file will be emitted here instead of to modpath
 When computing respondents for a 'THEN ANY' rule, all rule-matching scores within this much of the best score will be considered.
 When enabled and collecting asserts for the GC, this will generate stacks for the asserts
@@ -15511,10 +15396,8 @@ Zombie Creeps
 [%.3f] Event "%s"
 [%03d] Found: %s, firing
 [%03d] Found: %s, firing (%s)
-[%d] (%d) %s (%s) %s%s
 [%d] -> gsn(%s)
 [%d] Decode %.3f:
-[%d] NULL
 [%d]: '%s'
 [%f, %f]
 [%g %g %g]
@@ -15616,7 +15499,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 _V_wcsncpy_bytes
 __DefaultScriptThinkContext
 __DumpScope
@@ -15837,7 +15719,6 @@ allangles
 allow_bundles
 allow_count_reset
 allow_different_config_dupes
-allow_flip
 allow_incremental_progress
 allow_interaction_from_all_scene_worlds
 allow_overhead
@@ -15873,11 +15754,10 @@ ang: (%f, %f, %f)
 angImpulse
 angle_normalize_positive
 anglechange
+angles: %g %g %g
 anglesX
 anglesY
 anglesZ
-angles_left
-angles_right
 angular_damping_ratio_x
 angular_damping_ratio_y
 angular_damping_ratio_z
@@ -16031,7 +15911,6 @@ basePos
 basePos NaN
 baseVel
 baseVel NaN
-base_vr_hand_attachment
 baseanimating
 baseanimating_overlay
 baseitem
@@ -16362,7 +16241,6 @@ conflicts with an existing enum type.
 conflicts with an existing field.
 conflicts with an existing nested message type.
 conflicts with an existing oneof type.
-conform_fingers
 const google::protobuf::UnknownFieldSet& google::protobuf::UnknownField::group() const
 const string& google::protobuf::UnknownField::length_delimited() const
 constrainedEventID
@@ -16696,9 +16574,6 @@ dilation: %s [target: %3.2f, current %s], [tick %d of %d], %s
 dimension0
 dimension1
 directionentityname
-directionx
-directiony
-directionz
 disableRandomCreepSpawns
 disable_delete
 disable_dynamic_prop_loading
@@ -16773,8 +16648,6 @@ e
 e(
 eEconItemOrigin
 eKeypoints
-eLiteralHandType
-eLogicalHandType
 ease-in
 ease-in-ease-out
 easein
@@ -17067,10 +16940,7 @@ exposurespeedup
 expressions
 expressions/%s.vfe
 extend .$0 {
-extent_origin_left
-extent_origin_min_left
-extent_origin_min_right
-extent_origin_right
+extent
 extra_cards_on_even_turns
 extractlevelsfromsavegame
 extremely_rare
@@ -17175,11 +17045,6 @@ filterclass
 filtermass
 filterteam
 final
-finger_index
-finger_middle
-finger_pinky
-finger_ring
-finger_thumb
 fire a response concept directly at a given character.USAGE: rr_forceconcept <target> <concept> "criteria1:value1,criteria2:value2,..."criteria values are optional.
 fire_interactions
 fireinterval
@@ -17391,8 +17256,6 @@ g_Language
 g_SoundPatchCount
 g_TSPointerListNodes
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_VProfSignalSpike
@@ -17617,7 +17480,6 @@ gustdirchange
 gustduration
 h
 hActivator
-hAttachment
 hAttacker
 hCallbackFunc
 hCallbackScope
@@ -17629,11 +17491,9 @@ hInfo
 hParent
 hResult
 hThinkFunc
-hack_no_hand_skeleton
 halfhealth
 hammerUniqueId
 hammerid
-hand_pose_list
 handforce_inner
 handforce_outer
 handforce_scale
@@ -17641,11 +17501,8 @@ handindex
 handles
 handposepair_t
 handshake
-haptic_relay
 hapticsType
 hardstopspeakevent
-has_extent
-has_rotation
 has_store_custom_item_details_panel
 hbar
 head_pitch
@@ -17919,8 +17776,6 @@ int( %d = 0x%X )
 int32
 int64
 interact_distance
-interactions_data_t
-interactions_t
 interactive
 internal error in map key sorting
 interp: %f
@@ -17963,7 +17818,6 @@ item_ammo_pistol
 item_ammo_pistol_large
 item_ammo_smg1
 item_ammo_smg1_large
-item_attachment
 item_battery
 item_box_buckshot
 item_box_flare_rounds
@@ -18493,7 +18347,6 @@ m_IkChains
 m_Initializers
 m_InnerAngle
 m_IntVariables
-m_InteractionMgr
 m_Item
 m_JointConstraintData
 m_JointConstraintPairs
@@ -18514,7 +18367,6 @@ m_LightStyle
 m_Line
 m_Listeners
 m_LiteralColor
-m_LiteralHandType
 m_Local
 m_LocalCoordinateSystemSpeedMax
 m_LocalCoordinateSystemSpeedMin
@@ -18569,7 +18421,6 @@ m_OnAllTrue
 m_OnAnimReachedEnd
 m_OnAnimReachedStart
 m_OnAsleep
-m_OnAttachedToHand
 m_OnAwake
 m_OnAwakened
 m_OnBackgroundMap
@@ -18592,7 +18443,6 @@ m_OnDamaged
 m_OnDeath
 m_OnDefault
 m_OnDemoMapSpawn
-m_OnDetachedFromHand
 m_OnDetectedBulletFire
 m_OnDetectedExplosion
 m_OnDisengage
@@ -18832,7 +18682,6 @@ m_TiltTime
 m_TouchType
 m_TriggerHitPoints
 m_Type
-m_VRControllerType
 m_Value
 m_VecNormPos
 m_VectorVariables
@@ -18894,7 +18743,6 @@ m_bActivated
 m_bActive
 m_bAdrenalineActive
 m_bAlive
-m_bAllInteractionsDisabled
 m_bAllowAutoMovement
 m_bAllowFadeInView
 m_bAllowFlip
@@ -18919,7 +18767,6 @@ m_bApplyStressDamage
 m_bAsynchronouslySpawnEntities
 m_bAtMaxLimit
 m_bAtMinLimit
-m_bAttachedToTrackedBody
 m_bAutoAimTarget
 m_bAutoDisable
 m_bAutoStart
@@ -18937,7 +18784,6 @@ m_bCameraSpace
 m_bCanBatchWithDynamicShaderConstants
 m_bCanBeBlocked
 m_bCanHeadshot
-m_bCanPerformUse
 m_bCancelAtNextInterrupt
 m_bCastShadows
 m_bCheatState
@@ -18945,7 +18791,6 @@ m_bCheckCough
 m_bChildIsDynamic
 m_bClamp
 m_bClientClothCreationSuppressed
-m_bClientIsAuthoritativeForTransform
 m_bClientSide
 m_bClientSideAnimation
 m_bClientSidePredicted
@@ -19043,7 +18888,6 @@ m_bForceParentToBeNetworked
 m_bForceServerRagdoll
 m_bForceUpdate
 m_bForcedObserverMode
-m_bFoundInitialSafeLocation
 m_bFullbright
 m_bGameOver =
 m_bGamePaused
@@ -19113,7 +18957,6 @@ m_bInvertState_3
 m_bInvokePostDataUpdates
 m_bIsActive
 m_bIsAnimationEnabled
-m_bIsAttached
 m_bIsAttachment
 m_bIsAxisLocal
 m_bIsBackground
@@ -19122,13 +18965,8 @@ m_bIsGeneratingLatchedParentSpaceState
 m_bIsGesture
 m_bIsGroup
 m_bIsHoldingAnimation
-m_bIsInContact
-m_bIsInContactSolidPostTeleportClip
-m_bIsInContactTeleportClip
 m_bIsInGroup
 m_bIsInSimulation
-m_bIsInView
-m_bIsInteractionsDisabled
 m_bIsJiggleBonesEnabled
 m_bIsLooking
 m_bIsLowViolence
@@ -19142,9 +18980,7 @@ m_bIsOverrideProp
 m_bIsPlayingBack
 m_bIsRenderingEnabled
 m_bIsRenderingWithViewModels
-m_bIsSelfInteractionRequirementMet
 m_bIsStoreItem
-m_bIsTracking
 m_bIsTradeItem
 m_bIsValid
 m_bLagCompensate
@@ -19194,7 +19030,6 @@ m_bOnlyPump
 m_bOnlyRenderToTexture
 m_bOpaque
 m_bOriginalBlockLOS
-m_bOtherMustBeHeld
 m_bOverrideOnAppend
 m_bPadding
 m_bParticleFeathering
@@ -19224,9 +19059,6 @@ m_bPushDirIsLocal
 m_bPvsModifyEntity
 m_bRandomAnimator
 m_bRandomizeCycle
-m_bReceivedInitialAnchorPos
-m_bReleaseOtherOnSuccess
-m_bReleaseSelfOnSuccess
 m_bReloadHudHintDisplayed
 m_bReloadsSingly
 m_bRemapPullForceToLife
@@ -19256,7 +19088,6 @@ m_bScalePerParticle
 m_bSceneMissing
 m_bScriptedMovement
 m_bSelected
-m_bSelfMustBeHeld
 m_bSequenceChangeNetworked
 m_bSequenceFinished
 m_bSessionPersister
@@ -19265,7 +19096,6 @@ m_bSetValueOnDisable
 m_bShapeChanged
 m_bShouldAnimateDuringGameplayPause
 m_bShouldAutoConvertBackFromDebris
-m_bShouldBePhysicallyConstrained
 m_bShouldDeleteActivationRecord
 m_bShouldDeleteAttachedActivationRecord
 m_bShouldDestroyImmediately
@@ -19304,7 +19134,6 @@ m_bThinkDangerous
 m_bThreadsActive
 m_bThrownByPlayer
 m_bTimeoutFired
-m_bTipTransformInitialized
 m_bToLocalPlayer
 m_bTookPhysicsDamage
 m_bTouched
@@ -19340,17 +19169,14 @@ m_bUseShadowFastPath
 m_bUseVelocity
 m_bUseable
 m_bUsesIndexedBakedLighting
-m_bVRControllerSupportsSkeleton
 m_bValidatePoweredRagdollPose
 m_bVisible
 m_bVolIs2D
 m_bVolumetric
-m_bVrSkeletonActive
 m_bWaitForRefire
 m_bWaitingForActor
 m_bWaitingForInterrupt
 m_bWaitingForResumeScene
-m_bWaitingToAttach
 m_bWearingSuit
 m_bWillBeCallingPostDataUpdate
 m_bWorldLayerVisible
@@ -19508,6 +19334,7 @@ m_fWidth
 m_fadeColor
 m_fadeMaxDist
 m_fadeMinDist
+m_fingers
 m_fixupNames
 m_flAbortedPlaybackAt
 m_flAbsScale
@@ -19517,7 +19344,6 @@ m_flAllowResponsesEndTime
 m_flAlternateTicksFix
 m_flAmbient
 m_flAmmoMod
-m_flAmplitude
 m_flAngleSpeed
 m_flAngleSpeedThreshold
 m_flAngularDampingRatio
@@ -19694,16 +19520,7 @@ m_flFarFocusDepth
 m_flFarZ
 m_flFieldOfView
 m_flFinalValue
-m_flFinger0
-m_flFinger1
-m_flFinger2
-m_flFinger3
-m_flFinger4
 m_flFingerScaleRatio
-m_flFingerSplay0
-m_flFingerSplay1
-m_flFingerSplay2
-m_flFingerSplay3
 m_flFingerWeight
 m_flFinishedTime
 m_flFireInterval
@@ -19743,14 +19560,12 @@ m_flGlowBackfaceMult
 m_flGlowProxySize
 m_flGoal
 m_flGravityScale
-m_flGripAnalogValue
 m_flGroundChangeTime
 m_flGroundSpeed
 m_flGustDuration
 m_flHDRColorScale
 m_flHaloScale
 m_flHandPoseParams
-m_flHapticPulseTime
 m_flHeight
 m_flHeightOffset
 m_flHudHintMinDisplayTime
@@ -19779,13 +19594,10 @@ m_flInput1
 m_flInputOffset
 m_flIntensity
 m_flInteractDistance
-m_flInteractionLerp
 m_flIntermissionEndTime
 m_flInterpStartTime
 m_flInterpolatedTime
 m_flInterval
-m_flJoystickAnalogValueX
-m_flJoystickAnalogValueY
 m_flKillDelay
 m_flKillRate
 m_flLODBias
@@ -19993,7 +19805,6 @@ m_flRotateMax
 m_flRotateMin
 m_flRotation
 m_flRotationSpeed
-m_flSampleTime
 m_flSaveTime
 m_flSavedElapsedTime
 m_flScale
@@ -20086,15 +19897,11 @@ m_flTotalMass
 m_flTouchOutputPerEntityDelay
 m_flTraceHeight
 m_flTraceRadius
-m_flTrackpadAnalogValueX
-m_flTrackpadAnalogValueY
 m_flTransitionTime
 m_flTranslucencyLimit
-m_flTriggerAnalogValue
 m_flTriggerRadius
 m_flTriggerRadiusSqr
 m_flUnlockTime
-m_flUntilTime
 m_flUpperRandomBound
 m_flUseAnglesRange
 m_flUvDensity
@@ -20157,7 +19964,6 @@ m_groundNormal
 m_guid
 m_hActivator
 m_hActiveCommentaryNode
-m_hActiveHandAttachment
 m_hActiveWeapon
 m_hActor
 m_hActorList
@@ -20165,10 +19971,8 @@ m_hAlternateModel
 m_hAlternateParent
 m_hAmbientSound
 m_hAttachEntity
-m_hAttachedHand
 m_hAttachedObject
 m_hAttachedToEntity
-m_hAttachments
 m_hAttacker
 m_hBaseMaterial
 m_hBaseSequence
@@ -20179,7 +19983,6 @@ m_hCamera
 m_hCarryingPlayer
 m_hChild
 m_hClientSideChildModel
-m_hCloseCaption
 m_hColorCorrectionController
 m_hColorCorrectionCtrl
 m_hConstrainedPlayers
@@ -20213,12 +20016,10 @@ m_hFogCubemapTexture
 m_hFogIndirectTexture
 m_hGoalSequence
 m_hGroundEntity
-m_hHMDAvatar
 m_hHeldEntity
 m_hHourHand
 m_hIdealSequence
 m_hInflictor
-m_hInteractionTarget
 m_hInterruptScene
 m_hIssuer
 m_hJoint
@@ -20238,9 +20039,7 @@ m_hLightProbeDirectLightScalarsTexture
 m_hLightProbeTexture
 m_hListManagers
 m_hListenFilter
-m_hLiteralControllerSlots
 m_hLocker
-m_hLogicalControllerSlots
 m_hLookTarget
 m_hMeasureReference
 m_hMeasureTarget
@@ -20261,19 +20060,16 @@ m_hOwner
 m_hOwnerEntity
 m_hParentItem
 m_hPendingSequence
-m_hPhysicallyConstrainedWeldJoint
 m_hPhysicsAttacker
 m_hPhysicsBlocker
 m_hPickupFilter
 m_hPickupParticleEffect
 m_hPlayer
 m_hPlayerProxy
-m_hPointHMDAnchor
 m_hPollGroup != k_HSteamNetPollGroup_Invalid
 m_hPostProcessController
 m_hPostProcessCtrl
 m_hPostSettings
-m_hPropHMDAvatar
 m_hProps
 m_hProxySoundscape
 m_hRagdollSource
@@ -20287,7 +20083,6 @@ m_hScreens
 m_hScriptInstance
 m_hScriptScope
 m_hSecondHand
-m_hSelf
 m_hSkyCamera
 m_hSkyMaterial
 m_hSnapshot
@@ -20319,13 +20114,11 @@ m_hTimeoutParticleEffect
 m_hTonemapController
 m_hTouchingEntities
 m_hTouchingPlayers
-m_hTrackedPositionPhysicsBody
 m_hTriggerFogList
 m_hTriggerHelper
 m_hTriggerSoundscapeList
 m_hUseEntity
 m_hUsingPlayer
-m_hVRControllers
 m_hVehicle
 m_hViewEntity
 m_hViewModel
@@ -20432,7 +20225,6 @@ m_iInitialTeamNum
 m_iInitialWindDir
 m_iInputFilter
 m_iInstanceType
-m_iInteractionType
 m_iInteractions
 m_iInventoryPosition
 m_iItemDefinitionIndex
@@ -20719,20 +20511,13 @@ m_localHAnimArray
 m_localHAnimArray_Handle
 m_localOrigin
 m_localTestAxis
-m_localTipAngles
-m_localTipOrigin
 m_location
 m_lookTarget
 m_looktime
 m_lookupFilename
-m_mInteractionTransformInit
-m_mInteractionTransformTarget
 m_mPreferredCatchTransform
 m_massScale
 m_matHandOffset
-m_matHoldTransform
-m_matHoverTransform
-m_matUseTransform
 m_material
 m_materialGroup
 m_materialName
@@ -20757,7 +20542,6 @@ m_moveDistance
 m_movementCollisionNormal
 m_movementType
 m_nAABBDirection
-m_nActiveInteraction
 m_nActivity
 m_nAddDecal
 m_nAngularMotionX
@@ -20765,11 +20549,7 @@ m_nAngularMotionY
 m_nAngularMotionZ
 m_nAnimationParity
 m_nAnimationType
-m_nAttachHoldIndex
-m_nAttachHoverIndex
 m_nAttachIndex
-m_nAttachOriginIndex
-m_nAttachUseIndex
 m_nAttachedParticleIndex
 m_nAttachment
 m_nAttachmentIndex
@@ -20794,7 +20574,6 @@ m_nBoneWeightCount
 m_nBrightness
 m_nBucketCount
 m_nButtons
-m_nButtonsUsedOnPickup
 m_nCP
 m_nCPField
 m_nCascades
@@ -20878,12 +20657,9 @@ m_nGlowRange
 m_nGlowRangeMin
 m_nGroupId
 m_nGroupType
-m_nHMDTeleportFrame
 m_nHaloIndex
 m_nHaloSprite
-m_nHandID
 m_nHandshake
-m_nHapticPulseInterval
 m_nHapticsType
 m_nHierarchicalDepth
 m_nHierarchyId
@@ -20930,7 +20706,6 @@ m_nLightChoice
 m_nLinearMotionX
 m_nLinearMotionY
 m_nLinearMotionZ
-m_nLiteralHand
 m_nLogicBranchNames
 m_nMagnitude
 m_nMapCycleTimeStamp
@@ -21104,7 +20879,6 @@ m_nVertexCount
 m_nVerticalSize
 m_nViewModelIndex
 m_nVisibilitySamples
-m_nVrBoneCount
 m_nWaterLevel
 m_nWaterTouch
 m_nWaterType
@@ -21172,7 +20946,6 @@ m_pFollowup
 m_pGameDirFilter
 m_pGameRules
 m_pGameSceneNode
-m_pHand
 m_pId
 m_pInflictorClassNameFilter
 m_pInflictorEntityNameFilter
@@ -21274,33 +21047,19 @@ m_pszComponentNames
 m_pszComponentPrefix
 m_pszGrayedOutReason
 m_pszName
-m_pszOtherAttachmentAdvance
-m_pszOtherAttachmentRetreat
-m_pszOtherAttachmentStart
-m_pszOtherAttachmentStartAlternate
-m_pszOtherClassname
-m_pszSelfAttachmentAdvance
-m_pszSelfAttachmentRetreat
-m_pszSelfAttachmentStart
-m_pszSelfAttachmentStartAlternate
-m_pszSelfClassname
 m_pszSnapshotName
 m_qAimOffset
 m_qAlignment
 m_qAngle
 m_qBaseOrientation
 m_qChildBindRotation
-m_qLocalAngles
 m_qOffset
 m_qParentBindRotation
 m_qPausedAngles
-m_qPhysicallyConstrainedAngles
 m_qSaveLoadAngles
 m_qStartRot
 m_qTargetOrientation
-m_qTrackedAngles
 m_qTransitionAngles
-m_qWeldTransformAngles
 m_quat
 m_radius
 m_ragAngles
@@ -21483,8 +21242,6 @@ m_unOrientation
 m_unOverrideOrigin
 m_unOwnerContext
 m_unVerticalAlign
-m_unVrCompressedBoneTransformsSize
-m_unVrCompressedGripLimitBoneTransformsSize
 m_unpressedAttack
 m_unpressedAttack2
 m_unpressedBack
@@ -21525,8 +21282,6 @@ m_vEndPointWorld
 m_vEndPos
 m_vEndTrailTintFactor
 m_vExtent
-m_vFilteredThrowVel
-m_vFilteredVelocity
 m_vForcedOrigin
 m_vForwardLS
 m_vHeelOffset
@@ -21536,7 +21291,6 @@ m_vInnerMaxs
 m_vInnerMins
 m_vLightDirection
 m_vLiteralValue
-m_vLocalPosition
 m_vMark
 m_vMaxExtentOrigin
 m_vMaxs
@@ -21556,8 +21310,6 @@ m_vOuterMins
 m_vPathingListenerPos
 m_vPathingSourcePos
 m_vPausedPos
-m_vPhysicallyConstrainedPosition
-m_vPosition
 m_vPrecomputeDirection
 m_vPrecomputePosition
 m_vPrecomputeUp
@@ -21570,7 +21322,6 @@ m_vRotationAxisEndpoints
 m_vSampler
 m_vSaveLoadPosition
 m_vServerControlPoints
-m_vSolidPostTeleportClipPos
 m_vSplayHingeAxis
 m_vSpotlightCurrentPos
 m_vSpotlightDir
@@ -21579,17 +21330,13 @@ m_vSpotlightTargetPos
 m_vStart
 m_vStartPos
 m_vTargetPosition
-m_vTeleportClipPos
 m_vTintColor
 m_vTipOffset
 m_vTraceOffset
 m_vTraceScale
-m_vTrackedPosition
 m_vTransitionPosition
 m_vUpLS
 m_vUpVector
-m_vVelocity
-m_vWeldTransformPosition
 m_valueOverride
 m_variantValue
 m_vecAbsOrigin
@@ -21621,11 +21368,9 @@ m_vecFinalDest
 m_vecFinishAngles
 m_vecFinishOrigin
 m_vecForce
-m_vecHandInteractions
 m_vecLadderNormal
 m_vecLandmarkAngles
 m_vecLandmarkOrigin
-m_vecLastAnchorPosition
 m_vecLastFacing
 m_vecLastOrigin
 m_vecLerpingObjects
@@ -21648,7 +21393,6 @@ m_vecOriginalAngles
 m_vecOverViewpoint
 m_vecPosition1
 m_vecPosition2
-m_vecPreventionEntities
 m_vecPreviousTestPoint
 m_vecPreviouslyPredictedOrigin
 m_vecPunchAngle
@@ -21682,8 +21426,6 @@ m_viewtarget
 m_voicePitch
 m_volume
 m_vphysicsCollisionState
-m_vrCompressedBoneTransforms
-m_vrCompressedGripLimitBoneTransforms
 m_wasRestored
 m_windRadius
 m_worldGoalAxis
@@ -21970,6 +21712,7 @@ modeldoc6
 modeldoc7
 modeldoc8
 modeldoc9
+modeldoc_preview_ent
 models/%s
 models/%s.vmdl
 models/dev/error.vmdl
@@ -22052,12 +21795,10 @@ n
 n(
 n)
 nAlpha
-nButton
 nDamageTaken
 nDefault
 nFlags
 nHand
-nHandID
 nHash
 nHealth
 nMeshGroupMask
@@ -22066,11 +21807,8 @@ nMuzzle
 nObjects
 nPitch
 nPlanes
-nPoint
 nPriority != NETWORK_FIELD_CHANGE_DEFAULT_PRIORITY
-nPulseDuration
 nSaved
-nStrength
 nTries < 10000000
 nValue
 name
@@ -22574,8 +22312,6 @@ originY
 originZ
 origin_max_delta
 origin_relative
-originy
-originz
 ortholightheight
 ortholightwidth
 other
@@ -22774,7 +22510,6 @@ physics_add_test
 physics_debug_entity
 physics_entity_solver
 physics_highlight_active
-physics_origin
 physics_prop_ragdoll
 physics_remove_test
 physics_report_active
@@ -22793,10 +22528,6 @@ pitchVel
 pitchfrac
 pitchrun
 pitchstart
-pivot_max
-pivot_min
-pivot_origin_left
-pivot_origin_right
 pkgitem
 placement_attach
 placement_bone
@@ -22910,7 +22641,6 @@ pos: (%f, %f, %f)
 poseParametersChanged
 pose_control
 pose_control_type
-pose_special_type
 position%d
 positionInLocalSpace
 positive_or_null
@@ -22943,7 +22673,6 @@ preserve_cycle
 prevent_duplicate_challenges
 prevent_gifting
 prevent_impact_damage
-prevent_interaction_t
 prevent_movement
 previouslevel
 price
@@ -22972,7 +22701,6 @@ prop_dynamic_create
 prop_dynamic_ornament
 prop_dynamic_override
 prop_fuel_barrel
-prop_hmd_avatar
 prop_physics
 prop_physics_clientside
 prop_physics_create
@@ -22981,7 +22709,6 @@ prop_physics_respawnable
 prop_ragdoll_attached
 prop_talker
 prop_vehicle_jeep
-prop_vr_tracked_object
 propagate_from_bundle
 propdata
 propername
@@ -23219,14 +22946,11 @@ rollVel
 roll_criteria
 roll_criteria_set
 roll_numbers
+root
 rootNode
 rootbone_follow
 rotationAxis
 rotationSpeed
-rotation_axis0
-rotation_axis1
-rotation_max
-rotation_min
 round_end
 round_start_pre_entity
 rr_AddDecisionRule
@@ -23411,6 +23135,7 @@ serialize
 serializing
 server_
 server_can_execute
+server_cvar
 server_dump_lobby
 server_dump_state
 server_entities
@@ -23658,8 +23383,6 @@ sql
 sqrt
 sqrt( %s )
 sqrtf
-squeezable
-squeeze_target
 src
 src/public/tier0/platform.h
 srcid
@@ -24229,7 +23952,6 @@ towerDestructionChance
 towerNetPercentDamage
 tower_kills_victory
 tracer_particle
-tracked object %d: server pos = %f %f %f
 tradable after date
 trade cooldown until date
 transitioning
@@ -24322,7 +24044,6 @@ u)
 u64( %lld = 0x%llX )
 uint16
 uint32
-uint32_t
 uint64
 uint8
 ultra_rare
@@ -24406,7 +24127,6 @@ usehelper
 uselocaltime
 user_data_downloaded
 uses_essence
-utlbuffer.cpp
 utlstringtoken
 v
 v %g %g %g
@@ -24568,69 +24288,12 @@ vpost
 vprof_scope_entity_gamephys
 vprof_scope_entity_thinks
 vprof_think_limit
-vr_always_teleport_player
-vr_anchor_allow_non_up_floor
 vr_aperture_main
 vr_carry_type
-vr_controller_gg_hold
-vr_controller_hold
-vr_controller_root
-vr_controller_root_left
-vr_controller_root_right
-vr_controller_use
-vr_debug_velocity
-vr_hand_debug
-vr_hand_disable_item_pickup_events
-vr_hand_knuckles_use_grip
-vr_hand_left_attachment_rotation
-vr_hand_left_offset_angles
-vr_hand_left_offset_origin
-vr_hand_model
-vr_hand_model_override
-vr_hand_origin
-vr_hand_right_attachment_offset
-vr_hand_right_offset_angles
-vr_hand_right_offset_origin
-vr_hand_use_compression_locally
-vr_hand_velocity_window
-vr_hand_verify_debug
-vr_handinfo_history_ignore_size
-vr_handinfo_history_size
-vr_haptic_pulse_light
-vr_haptic_pulse_medium
-vr_haptic_pulse_strong
-vr_haptics_debug_fire
-vr_haptics_single_frame_frequency
-vr_haptics_single_pulse_duration_max
-vr_haptics_single_pulse_duration_min
-vr_hide_viewmodel
-vr_hmd_positions_debug
-vr_hmd_tracking_passthrough
-vr_interaction_anglediff
-vr_interaction_debug
-vr_interaction_deltaspeed
-vr_interaction_dist_break
-vr_interaction_dist_search
-vr_interaction_dist_start
-vr_panel_view_focus_max_distance
 vr_pickup_ignore_mass_and_size
-vr_proto_overlay
-vr_shake_gesture_speed
 vr_spawn_at_player_start
-vr_swap_logical_hands
 vr_throw_ang_scale
-vr_throw_calculation_debug
 vr_throw_velocity_scale
-vr_throw_velocity_type
-vr_throw_wmr_velocity_scale
-vr_track_lost_hand_bug_debug
-vr_tracked_object_client_can_be_authoritative_for_transform
-vr_tracked_object_positions_debug
-vr_tracked_object_post_projection
-vr_tracked_objects_solid
-vr_vrfly_does_noclip
-vr_vrfly_does_noclip: %d
-vr_world_scale
 vscripts
 vsnap
 vtable for __cxxabiv1::__class_type_info
@@ -24735,6 +24398,7 @@ yield
 yielding
 yo
 z
+zC
 zD
 zE
 zFar

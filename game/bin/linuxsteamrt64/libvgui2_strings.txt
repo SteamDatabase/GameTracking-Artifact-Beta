@@ -45,7 +45,7 @@ $ORIGIN
 -vguimessages
 .
 ../../public/ordered_constructor.h
-../../public/tier1/utllinkedlist.h
+../../public/tier0/utllinkedlist.h
 ../../public/tier1/utlrbtree.h
 ../public/tier1/utlsymboltable.h
 .>KEY_PERIOD
@@ -54,8 +54,6 @@ $ORIGIN
 .res
 //KEY_PAD_DIVIDE
 /?KEY_SLASH
-/content/
-/game/
 0
 0 0 0 0
 0 0 0 196
@@ -179,21 +177,19 @@ Button.DepressedBgColor
 Button.DepressedTextColor
 Button.FocusBorderColor
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
-CBufferString::EnsureCapacity(int, char**, bool, bool)
-CBufferString::ExtendPath(char const*, char)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::RemoveAt(int, int)
-CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
-CBufferString::ShortenPath(bool)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CDirWatcher::CDirWatcher()
+CDirWatcher::GetChangedFile(CUtlString*, bool)
+CDirWatcher::SetDirToWatch(char const*, unsigned int, bool)
+CDirWatcher::Stop()
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
 COM_TimestampedLog
+CRC32_ProcessBuffer
 CScheme::LoadFromFile( %s )
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
@@ -203,6 +199,26 @@ CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -220,8 +236,6 @@ CUtlString::GetForModify()
 CUtlString::IsEqual_CaseSensitive(char const*) const
 CUtlString::Purge()
 CUtlString::Set(char const*)
-CUtlString::SetDirect(char const*, int)
-CUtlString::Swap(CUtlString&)
 CUtlString::ToLowerFast()
 CUtlString::operator+=(CUtlString const&)
 CUtlString::operator+=(char const*)
@@ -285,7 +299,6 @@ EventSystem001
 FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
 FgColorDim
-File change watching failed for '%s', retraversing
 FlattenedSerializersVersion001
 FontManager_001
 Fonts
@@ -317,7 +330,6 @@ GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
-GLIBC_2.3
 GLIBC_2.4
 GNU
 GameResourceServiceClientV001
@@ -330,7 +342,6 @@ GraphPanel.FgColor
 HIGHDPI
 HKEY_CURRENT_USER\Software\Valve\Steam\Language
 HammerMapLoader001
-HangWatchdog_IndicateActivity
 HashString
 HelpSystem_001
 HookUpConfigValue
@@ -535,7 +546,6 @@ Plat_CheckSDL
 Plat_DebugPrint
 Plat_DebugString
 Plat_ExitProcess
-Plat_FileSize
 Plat_FloatTime
 Plat_GetOSType
 Plat_IsHighDPI
@@ -691,7 +701,6 @@ Tooltip.BgColor
 Tooltip.TextColor
 Top
 TreeView.BgColor
-Unable to watch '%s'
 UnhandledMouseClick
 Unknown key '%s' set in style '%s' in file '%s'
 UserConfigData
@@ -728,10 +737,7 @@ VScript
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_FixDoubleSlashes
 V_GetErrno
-V_IsAbsolutePath
-V_PathContainsPath
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_UTF16ToUTF8
@@ -739,7 +745,6 @@ V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_atof
 V_atofloat64
 V_atoi
@@ -750,8 +755,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -761,7 +764,6 @@ V_vsnprintf
 V_wcstod
 V_wcstoi64
 VisBuilder_001
-WARNING: CDirWatcher not implemented
 WIN32
 WINDOWS
 WINXP
@@ -788,29 +790,19 @@ You need to name the scheme (%s)!
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFilePath
-_V_MakeAbsolutePath
-_V_StrSubst
 _V_StringAfterPrefix
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
-__ctype_toupper_loc
 __cxa_atexit
 __cxa_finalize
 __cxa_guard_acquire
 __cxa_guard_release
 __cxa_pure_virtual
-__errno_location
-__fxstat64
 __gmon_start__
-__lxstat64
 __stack_chk_fail
-__xstat64
 _edata
 _end
 _fini
@@ -822,7 +814,6 @@ allow-both
 allow-horizontal
 allow-vertical
 alpha
-alphasort64
 antialias
 archive
 bBKEY_B
@@ -844,12 +835,9 @@ cheat
 cl_hud_minmode
 client
 clientcmd_can_execute
-close
-closedir
 code
 colors
 command
-configvalue.cpp
 control
 controls
 corner
@@ -864,7 +852,6 @@ dir
 draw_corner_height
 draw_corner_width
 dropshadow
-dup
 dutch
 eEKEY_E
 enabled
@@ -875,20 +862,14 @@ error loading file '%s', %s
 event
 f
 fFKEY_F
-fcntl
-fdatasync
 file
 filesystem_stdio
 finnish
 float( %f )
 font
-free
 french
-ftruncate64
 gGKEY_G
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_pMemAlloc
 game
@@ -924,7 +905,6 @@ korean
 koreana
 l
 lLKEY_L, L
-ld-linux-x86-64.so.2
 left inset
 left-center
 libc.so.6
@@ -934,7 +914,6 @@ libtier0.so
 libvgui2.so
 localize
 localtime
-lseek64
 mMKEY_M
 margin
 margin-bottom
@@ -966,8 +945,6 @@ notify
 null
 oOKEY_O
 only
-open64
-opendir
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -991,12 +968,9 @@ parse render key : Expected [x0 y0 x1 y1], found '%s' in '%s'
 parse render key : Expected command token, found '%s' in '%s'
 parsing render key : Expected [, )], found '%s' in '%s'
 passthrough
-pipe
 place
 polish
 portuguese
-posix_fadvise64
-pread64
 proportional_base
 pthread_mutex_destroy
 pthread_mutex_init
@@ -1005,15 +979,11 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr( 0x%p )
-pwrite64
 qQKEY_Q
 rRKEY_R
 r_screen_size_expansion
 range
 rb
-read
-readdir64
-readlink
 region
 registry
 removing kb focus %s
@@ -1028,7 +998,6 @@ sSKEY_S
 scalable_image
 scalex
 scaley
-scandir64
 scanlines
 schemabindings.cpp
 scheme.cpp
@@ -1053,14 +1022,12 @@ ss_added
 start
 state
 statfs64
-strcasecmp
 strchr
 strcmp
 strcpy
 strikeout
 string
 strlen
-strrchr
 strtol
 style
 styles
@@ -1080,7 +1047,6 @@ underline
 unichar
 unknown color '%s' referenced by style key '%s'
 unknown pseudoclass on style %s in file %s
-unlink
 update
 user
 uses_appearances
@@ -1098,7 +1064,6 @@ wb
 wcscmp
 wcslen
 weight
-write
 xXKEY_X
 xpos
 yYKEY_Y

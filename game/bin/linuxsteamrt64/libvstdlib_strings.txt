@@ -39,9 +39,6 @@ $ORIGIN
 %u
 ( def. "%s" )
 (*%s*),
-(main)
-(no name set)
-(none)
 (once).
 +-
 ,
@@ -59,23 +56,20 @@ $ORIGIN
 ../public/tier0/threadtools.h
 ../public/tier0/tslist.h
 ../public/tier0/utlfixedmemory.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/memstack.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlrbtree.h
-../public/tier1/utltshash.h
 0x%016llX
 0x%08X
 0x%p
 10ConCommand
 10IAppSystem
 10ICvarQuery
-12CEventSystem
 12CThreadEvent
-12IEventSystem
 13CProcessUtils
 13IProcessUtils
 14CBaseAppSystemI10ICvarQueryE
-14CBaseAppSystemI12IEventSystemE
 14CBaseAppSystemI13IProcessUtilsE
 14CBaseAppSystemI14ITestScriptMgrE
 14CBaseAppSystemI20IConfigurationSystemE
@@ -84,11 +78,9 @@ $ORIGIN
 14CTestScriptMgr
 14ConCommandBase
 14ITestScriptMgr
-15CTier0AppSystemI12IEventSystemE
 15CTier0AppSystemI13IProcessUtilsE
 15CTier0AppSystemI14ITestScriptMgrE
 15CTier0AppSystemI20IConfigurationSystemE
-15CTier1AppSystemI12IEventSystemLi0EE
 15CTier1AppSystemI13IProcessUtilsLi0EE
 15CTier1AppSystemI14ITestScriptMgrLi0EE
 15CTier1AppSystemI20IConfigurationSystemLi0EE
@@ -96,11 +88,9 @@ $ORIGIN
 16CKeyValuesSystem
 16CProcessPipeRead
 16ICommandCallback
-16IGlobalSymbolMap
 16IKeyValuesSystem
 17CDefaultCvarQuery
 18CPlaceholderConVar
-19CDmSymbolTableLarge
 19CUtlNoEscConversion
 19IKeyValuesErrorSpew
 20CConfigurationSystem
@@ -163,17 +153,11 @@ BenchmarkService001
 BinaryProperties_GetValue
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
-CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
-CBufferString::RemoveAt(int, int)
-CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
-CBufferString::ShortenPath(bool)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConfigurationSystem::ReadConfiguration: Error parsing configuration file!
@@ -184,6 +168,7 @@ CLIENTDLL
 CMemAllocSystemInitialize
 CMemoryStack %s
 COLORCORRECTION_VERSION_1
+CRC32_ProcessBuffer
 CTSQueue corruption
 CTestScriptMgr: not initialized.
 CTestScriptMgr::InsertCommandsBeforeCheckpoint()
@@ -214,12 +199,34 @@ CThreadSpinRWLock::UnlockWrite(char const*, int)
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlCharConversion::CUtlCharConversion(char, char const*, int, CUtlCharConversion::ConversionArray_t const*)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
-CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
 CUtlMemoryBlockAllocator::MemUsage() const
 CUtlMemoryBlockAllocator::Purge()
@@ -245,7 +252,6 @@ CUtlString::Replace(char, char) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::SetLength(int)
-CUtlString::Swap(CUtlString&)
 CUtlString::ToLowerFast()
 CUtlString::TrimLeft(char const*)
 CUtlString::TrimRight(char const*)
@@ -255,9 +261,6 @@ CUtlStringTokenSystem could not open database file "%s" for writing. Aborting up
 CUtlStringTokenSystem could not update token database "%s" because the file is read-only.
 CUtlStringTokenSystem: Encountered string token collision: "%s" and "%s" both hash to %X!
 CVAR_
-CVProfNode::EnterScope()
-CVProfNode::ExitScope()
-CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
 CXXABI_1.3
 Can't open file (%s) passed to -testscript
@@ -275,18 +278,6 @@ ConfigurationSystem_001
 ConnectInterfaces
 Convar %s has conflicting %s flags (child: %s%s, parent: %s%s, parent wins)
 Convars/CCvar::FindCommandBase
-Coroutine_Cancel
-Coroutine_Continue
-Coroutine_Create
-Coroutine_DebugBreak
-Coroutine_GetCurrentlyActive
-Coroutine_GetStackDepth
-Coroutine_IsActive
-Coroutine_IsAddressInOurStack
-Coroutine_ReleaseThreadMemory
-Coroutine_Test
-Coroutine_ValidateGlobals
-Coroutine_YieldToMain
 Could not execute the command:   %sOS error message:   "%s"
 Couldn't open '%s' for writing!
 CreateInterface
@@ -324,6 +315,12 @@ FRENCH
 Find concommands by flags.
 Find concommands with the specified string in their name/help text.
 Find help about a convar/concommand.
+FioClose(int)
+FioCreatePipe(int*, int*, int)
+FioDuplicate(int, bool, int*)
+FioRead(int, void*, int, int*)
+FioReadFileToMemory(char const*, void**, int*, bool, int)
+FioWrite(int, void const*, int, int*)
 First character of flag specifier must be + or -.
 Flags
 FlattenedSerializersVersion001
@@ -343,13 +340,11 @@ GameResourceServiceServerV001
 GameUIService_001
 GetCStringCharConversion
 GetDisableFocusBasedPriorityBoost
-GetDmElementTypeSymbolMap
 GetSymbolForString
 GetSymbolForStringCaseSensitive
 Grow
 HIGHDPI
 HammerMapLoader001
-HangWatchdog_IndicateActivity
 Help Text
 HelpSystem_001
 HookUpConfigValue
@@ -431,7 +426,6 @@ NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
 NewNode
-Not continuing coroutine due to g_bPreventCoroutineContinue, %s
 OSX
 Out of keyvalue string space
 Out of memory allocation hash_item_t
@@ -446,14 +440,11 @@ PanoramaUIClient001
 PanoramaUIEngine001
 Parent and child ConVars with different default values! %s child: %s parent: %s (parent wins)
 ParticleSystemMgr003
-Perf warning: Forgot to unregister listeners on event queue %p
 PhysicsBuilderMgr001
 Plat_DebugPrint
-Plat_DebugString
 Plat_ExitProcess
 Plat_FileExists
 Plat_FileIsReadOnly
-Plat_FileSize
 Plat_FloatTime
 Plat_GetEnv
 Plat_GetGameDirectory
@@ -601,12 +592,10 @@ ToolScriptManager001
 ToolService_001
 Total committed memory: %d KB
 Total used memory:      %d KB
-Tried to install the same listener on the same event id + queue twice!
 UNLOGGED
 UPDATE_STRING_TOKEN_DATABASE
 USERINFO
 Unable to exec '%s'
-Unknown
 Unrecognized flag: %s.
 Unrecognized severity: %s.
 Unrecognized verbosity: %s.
@@ -649,10 +638,7 @@ VRenderDeviceSetupV001
 VScriptManager010
 VStdLib_GetICVarFactory
 VStringTokenSystem001
-V_FixDoubleSlashes
 V_GetErrno
-V_IsAbsolutePath
-V_PathContainsPath
 V_SetErrno
 V_SplitString2(char const*, char const**, int, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_UTF16ToUTF8
@@ -660,7 +646,6 @@ V_UTF32ToUTF8
 V_UTF8CharsToUTF16
 V_UTF8ToUTF32
 V_UnicodeLength(char const*)
-V_UnqualifiedFileName
 V_atof
 V_atofloat32
 V_atofloat64
@@ -683,8 +668,6 @@ V_sscanf
 V_stricmp_fast
 V_stricmp_fast_NegativeForUnequal
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -721,19 +704,13 @@ X360WIDE
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFilePath
-_V_MakeAbsolutePath
-_V_StrSubst
 _V_StringAfterPrefix
 _V_hextobinary
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
-__ctype_toupper_loc
 __cxa_atexit
 __cxa_finalize
 __cxa_guard_acquire
@@ -741,19 +718,14 @@ __cxa_guard_release
 __cxa_pure_virtual
 __environ
 __errno_location
-__fxstat64
 __gmon_start__
-__lxstat64
 __stack_chk_fail
 __tls_get_addr
-__xstat64
 _edata
 _end
 _exit
 _fini
-_setjmp
 all
-alphasort64
 app
 appears in lower database
 application
@@ -774,7 +746,6 @@ cl
 cl_language
 client
 clientcmd_can_execute
-closedir
 cmd
 config
 configurationsystem.cpp
@@ -795,29 +766,22 @@ devonly
 differences
 disconnected
 donotecho
-dup
 dup2
 dupe
 english
 error
 essential
-eventsystem.cpp
 execute_per_tick
 execvpe
 f
 false
 fcntl
-fdatasync
 find
 findflags
 float( %f )
 float32
 fork
 frame_end
-free
-ftruncate64
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_VProfCurrentProfile
 g_pMemAlloc
 game
@@ -846,8 +810,6 @@ log_flags
 log_level
 log_level is deprecated, please use log_verbosity. Severity '%s' translates to verbosity '%s'.
 log_verbosity
-longjmp
-lseek64
 machine
 max
 max. %f
@@ -870,8 +832,6 @@ numeric
 off
 once
 open
-open64
-opendir
 operator delete(void*)
 operator delete[](void*)
 operator new(unsigned long)
@@ -882,11 +842,8 @@ out of order
 p4 add -t binary "%s"
 p4 edit -t binary "%s"
 per-user
-pipe
 poll
-posix_fadvise64
 prctl
-pread64
 print
 prot
 pthread_mutex_destroy
@@ -896,19 +853,15 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr( 0x%p )
-pwrite64
 qangle
 rb
 rb+
-readdir64
-readlink
 release
 reload_materials
 reload_textures
 render_thread
 rep
 replicated
-scandir64
 schema
 server_can_execute
 server_cant_query
@@ -916,19 +869,16 @@ singleplayer
 sp
 ss_added
 stderr
-strcasecmp
 strchr
 strcmp
 strcpy
 strerror
+string
 strlen
-strrchr
 sv
-test string
 testscript_debug
 testscriptmgr.cpp
 threadsafe
-true
 type
 typeinfo for CThreadSyncObject
 typeinfo for CUtlCharConversion
@@ -937,7 +887,6 @@ uint32
 uint64
 unit test
 unknown
-unlink
 update
 utlstringtokensystem.cpp
 value

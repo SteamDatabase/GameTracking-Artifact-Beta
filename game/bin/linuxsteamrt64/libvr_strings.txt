@@ -56,7 +56,6 @@ $tI
 %.3f
 %.4f
 %01d
-%02X
 %02d
 %03d
 %04d
@@ -179,7 +178,7 @@ $tI
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
 ../public/tier0/utlfixedmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 .exr
 .jpg
@@ -209,7 +208,6 @@ $tI
 0.7
 0.85
 0.9
-0123456789abcdef
 0=Off, 1=VerticalSplit, 2=Checker, 3=FixedFoveated2x
 0x%016llX
 0x%08X %s,
@@ -482,6 +480,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -493,7 +492,6 @@ CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
@@ -524,6 +522,7 @@ COrientConstraint
 CParentConstraint
 CParticleSystemDefinition
 CPointConstraint
+CRC32_ProcessBuffer
 CRITICAL DROP vr_fidelity_level %d. Last frames = %.2fms, %.2fms, %.2fms > %.2f
 CRenderBufferBinding
 CRenderMesh
@@ -554,7 +553,36 @@ CThreadedJob::Abort(bool)
 CTiltTwistConstraint
 CTwistConstraint
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetOverflow(int)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBigEndian(bool)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
@@ -1461,7 +1489,6 @@ Using 16-bit blend indices
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
 UtlStringFastCompareLess
-VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -1595,7 +1622,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -1604,7 +1630,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Valve
 VertexColorPos_t
 VertexPaintBlendParams
@@ -1686,10 +1711,8 @@ ZN26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcess
 \'
 \\
 \n
-\r
 \t
 \u must be followed by exactly 4 hex digits
-\u00
 _
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
@@ -1703,7 +1726,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __assert_fail
 __bss_start
 __cxa_atexit
@@ -1912,8 +1934,6 @@ ftell
 fwrite
 g default
 g_Mathlib_GammaToLinearByteTable
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_VProfCurrentProfile
 g_pMemAlloc
 g_pThreadPool

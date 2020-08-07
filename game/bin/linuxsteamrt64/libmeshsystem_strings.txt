@@ -13,7 +13,6 @@ $ORIGIN
 %-120s - %s
 %.15lf
 %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f
-%02X
 %d
 %d tris
 %f %f %f
@@ -65,14 +64,12 @@ $ORIGIN
 ../public/scenesystem/memoryvertex.h(159):
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/utlrbtree.h
-../public/tier1/utltshash.h
 ../public/tier2/fileutils.h
 0.0
 0.1
-00000000-0000-0000-0000-000000000000
-0123456789abcdef
 0x%08X %s,
 1 1 1
 1.0
@@ -443,6 +440,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -454,7 +452,6 @@ CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CBufferString::TruncateAt(char const*, bool)
@@ -521,6 +518,7 @@ CPhysSurfacePropertiesAudio
 CPhysSurfacePropertiesPhysics
 CPhysSurfacePropertiesSoundNames
 CPointConstraint
+CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
@@ -537,10 +535,17 @@ CThreadMultiWaitEvent::~CThreadMultiWaitEvent()
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
 CThreadSpinRWLock::LockForRead(char const*, int)
 CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
 CThreadSpinRWLock::UnlockRead(char const*, int)
 CThreadSpinRWLock::UnlockWrite(char const*, int)
+CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CThreadedJob::Abort(bool)
@@ -548,7 +553,33 @@ CTiltTwistConstraint
 CTransform
 CTwistConstraint
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -909,6 +940,7 @@ FeSoftParent_t
 FeSourceEdge_t
 FeSphereRigid_t
 FeSpringIntegrator_t
+FeStiffHingeBuild_t
 FeTaperedCapsuleRigid_t
 FeTaperedCapsuleStretch_t
 FeTreeChildren_t
@@ -1411,7 +1443,6 @@ Trying to override the same draw call with two different materials!Only the last
 Two Bone
 Two KV3 format GUIDs with the same human-friendly name ('%s')
 TypeManager
-UPDATE_STRING_TOKEN_DATABASE
 Unable to determine buffer encoding.
 Unable to read resource file %s!
 Unable to write file '%s'
@@ -1534,7 +1565,6 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -1544,7 +1574,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector2D
 Vector4D
 VectorAligned
@@ -1575,9 +1604,7 @@ ZN37CTypesafeIntrospectedToKV3TypeManagerILy440006569334E13CMorphSetDataE24Deall
 \'
 \\
 \n
-\r
 \t
-\u00
 _@
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
@@ -1590,7 +1617,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
 __cxa_atexit
 __cxa_finalize
@@ -1784,8 +1810,6 @@ frame
 free
 g default
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_hSkeletonMeshLayout
 g_pMemAlloc

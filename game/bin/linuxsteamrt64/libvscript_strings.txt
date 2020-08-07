@@ -207,15 +207,14 @@ C++ exception
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::RemoveAt(int, int)
-CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CDesc
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
+CRC32_ProcessBuffer
+CRC64_ProcessBuffer
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
@@ -224,7 +223,28 @@ CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
 CUtlMemoryBlockAllocator::MemUsage() const
@@ -244,6 +264,8 @@ CUtlString::operator+=(CUtlString const&)
 CUtlString::operator+=(char const*)
 CUtlString::operator+=(char)
 CUtlString::operator=(CBufferString const&)
+CVariableBitStringBase::FreeInts()
+CVariableBitStringBase::Resize(int)
 CVirtualMachineCallStackTranslationEncoder::CVirtualMachineCallStackTranslationEncoder(char const*)
 CVirtualMachineCallStackTranslationEncoder::EncodeAsNativePointer(char const*, char const*, unsigned int)
 CVirtualMachineCallStackTranslationEncoder::~CVirtualMachineCallStackTranslationEncoder()
@@ -597,7 +619,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -606,7 +627,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector
 Vector2D
 Vector4D
@@ -668,12 +688,6 @@ Xbox VDP is not supported on this platform.
 [%.3f server clamped to %.3f]
 [%d]
 [none]
-\"
-\\
-\n
-\r
-\t
-\u00
 ^$*+?.([%-
 _
 _%x%llx_%s
@@ -697,7 +711,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __add
 __alignof
 __alignof__
@@ -928,8 +941,6 @@ function or level expected
 function too long for return fixup
 function: builtin#%d
 fwrite
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_pMemAlloc
 game
 get length of
@@ -1386,7 +1397,6 @@ urn:debugger_protocol_v1
 user
 userdata
 userdata length overflow
-utlbuffer.cpp
 utlstringtoken
 u|%d|%s
 va_list

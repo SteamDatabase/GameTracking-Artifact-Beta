@@ -35,7 +35,6 @@ $tIVScript
 %.18g
 %.2f -> %.2f @ %.2f
 %.3f behind, %d nodes, FeModel %s bytes, %s
-%02X
 %14s %-30s[%u]%s
 %6.2f %s
 %d "%s"
@@ -165,7 +164,6 @@ $tIVScript
 -mem
 -processheap
 -profiletraces
--reset
 -rndebug
 -save
 -snapshots
@@ -181,7 +179,7 @@ $tIVScript
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
 ../public/tier1/utlrbtree.h
 ../public/tier1/utlsortvector.h
 .vmdl
@@ -197,7 +195,7 @@ $tIVScript
 0.1
 0.5
 0.7f
-0123456789abcdef
+00000000-0000-0000-0000-000000000000
 0x%016llX
 0x%08X
 0x%08X %s,
@@ -664,6 +662,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
@@ -676,7 +675,6 @@ CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CColorGradient
@@ -788,6 +786,7 @@ CPointConstraint
 CPool<>
 CPool<> Free Node
 CPoolRefl< BroadphaseProxyNodeRefl_t > RnDynamicTreeRefl_t::m_NodePool
+CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
@@ -1014,6 +1013,13 @@ CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volat
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
+CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CThreadedJob::Abort(bool)
@@ -1028,7 +1034,34 @@ CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::Scanf(char const*, ...)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlHashtable
 CUtlIncrementalVector< CRnBody, CRnBody::CWorldIndexPred >
 CUtlIncrementalVector< CRnContact, CRnContact::CWorldIndexPred >
@@ -1300,7 +1333,6 @@ Could not create phys debug VB for %d elements
 Could not lock phys debug IB for %d elements
 Could not lock phys debug VB for %d elements
 Couldn't load KV3 for resource: %s
-Counter reset
 CovMatrix3
 Create Flags
 CreateInterface
@@ -1329,7 +1361,6 @@ DebugTextureInfo001
 Decompression failure
 Default
 DegreeEuler
-Delayed Build Mass Bodies: %u
 DelayedAttrQueue
 DelayedBuildMassBodies
 DelayedDeleteBodies
@@ -1502,6 +1533,7 @@ FeSoftParent_t
 FeSourceEdge_t
 FeSphereRigid_t
 FeSpringIntegrator_t
+FeStiffHingeBuild_t
 FeTaperedCapsuleRigid_t
 FeTaperedCapsuleStretch_t
 FeTreeChildren_t
@@ -1768,6 +1800,9 @@ MASS_PRIORITY_DEFAULT
 MASS_PRIORITY_TRIGGER
 MATCHFRAMEWORK_001
 MClassHasCustomAlignedNewDelete
+MD5Final
+MD5Init
+MD5Update
 MDefaultString
 MESH_DRAW_FLAGS_CAN_BATCH_WITH_DYNAMIC_SHADER_CONSTANTS
 MESH_DRAW_FLAGS_DRAW_LAST
@@ -1818,7 +1853,6 @@ Manifold_t
 Manifolds
 MapListService_001
 Mass Priority Shift %d
-Mass delay-built %s %.2f to %.2f
 Mass: %.1f (inv %.3f)
 MassPriority
 MassPriorityShift
@@ -2805,7 +2839,6 @@ Two non-dynamics do NOT have a Trigger flag
 Two non-dynamics have a Trigger flag
 Type                              _____Count    _____Bytes
 TypeManager
-UPDATE_STRING_TOKEN_DATABASE
 Unable to determine buffer encoding.
 Unable to read resource file %s!
 Unable to write file '%s'
@@ -2963,7 +2996,6 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -2973,7 +3005,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector IrrotationalVortexOnGridRefl_t::m_vAxisX
 Vector IrrotationalVortexOnGridRefl_t::m_vAxisY
 Vector ManifoldPointRefl_t::m_vLocalP1
@@ -3110,22 +3141,18 @@ Yaw;
 \'
 \\
 \n
-\r
 \t
-\u00
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_SetExtension
 _V_StringAfterPrefix
 _V_StripLastDir
-_V_binarytohex
 _V_strEndsWith
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 _____Bytes %-30s[body]
 __bss_start
 __cxa_atexit
@@ -3606,8 +3633,6 @@ from {%.2f,%.2f,%.2f} delta {%.2f,%.2f,%.2f}
 frozen
 g default
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_pMemAlloc
 g_pThreadPool
@@ -5257,6 +5282,7 @@ yaw_end
 yaw_start
 zD
 zero
+{
 {%.3f,%.3f,%.3f}
 {%.3f,%.3f,%.3f} v=%.3f
 {%.3f,%.3f,%.3f}, {%.3f,%.3f,%.3f}

@@ -121,7 +121,6 @@ $U
 %-120s - %s
 %.15lf
 %.18g
-%02X
 %04d
 %04d_%02d_%02d_%02d_%02d_%02d
 %f %f %f %f
@@ -148,7 +147,7 @@ $U
 (%s from %u files; %s not file-based)
 (*%s*),
 (None)
-*.*
+*
 *.txt
 +inf
 ,
@@ -163,11 +162,8 @@ $U
 -textsublanguage
 ../public/ordered_constructor.h
 ../public/tier0/utlblockmemory.h
-../public/tier1/utllinkedlist.h
 ../public/tier1/utlsymboltable.h
-//
-/content/
-/game/
+/resource/valve_
 04
 0x%016llX
 0x%p
@@ -189,6 +185,9 @@ $U
 7IConVar
 9CLocalize
 9ILocalize
+:help
+:name_ref
+:shorthelp
 <!--
 << NULL >>
 <NULL>
@@ -250,6 +249,7 @@ AbsolutePoseControl
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 Add
+AddTokenMiss
 AnimAddLayer
 AnimAlign
 AnimAutoLayer
@@ -306,18 +306,15 @@ CAuthPhysJoint
 CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::Concat(char const*, char const*, ...)
-CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::FixSlashes(char)
 CBufferString::Format(char const*, ...)
 CBufferString::GetInsertPtr(int, int, bool, int*)
 CBufferString::Insert(int, char const*, int, bool)
-CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemovePartialUTF8Tail(bool)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
-CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
@@ -325,6 +322,10 @@ CBufferString::StartsWith(char const*)
 CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CDirWatcher::CDirWatcher()
+CDirWatcher::GetChangedFile(CUtlString*, bool)
+CDirWatcher::SetDirToWatch(char const*, unsigned int, bool)
+CDirWatcher::Stop()
 CHF
 CLP$
 CLocalize::InstallChangeCallback: Attempted to add the same callback twice!
@@ -336,17 +337,50 @@ COLLISION_MODE_PER_PARTICLE_TRACE
 COLLISION_MODE_USE_NEAREST_TRACE
 COLORCORRECTION_VERSION_1
 CParticleSystemDefinition
+CRC32_ProcessBuffer
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
+CThreadSemaphore::~CThreadSemaphore()
+CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CUtlBlockMemory overflow!
-CUtlLinkedList overflow! (exhausted index range)
-CUtlLinkedList overflow! (exhausted memory allocator)
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
@@ -358,12 +392,13 @@ CUtlString::Append(char const*)
 CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::IsEqual_CaseSensitive(char const*) const
-CUtlString::Purge()
 CUtlString::Replace(char const*, char const*, bool) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
-CUtlString::Swap(CUtlString&)
 CUtlString::operator+=(char const*)
+CVariableBitStringBase::AllocInts(int)
+CVariableBitStringBase::FreeInts()
+CVariableBitStringBase::Resize(int)
 CXXABI_1.3
 C_INIT_AddVectorToVector
 C_INIT_AgeNoise
@@ -503,7 +538,6 @@ Expected value or ']'
 FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
 Failed to read localization file %s
-File change watching failed for '%s', retraversing
 FindPluralCompatibleImpl
 FindPluralImpl
 FindSafe
@@ -515,7 +549,6 @@ GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
-GLIBC_2.3
 GLIBC_2.4
 GNU
 GameResourceServiceClientV001
@@ -528,7 +561,6 @@ GetResourceManifests
 HIGHDPI
 HK$
 HammerMapLoader001
-HangWatchdog_IndicateActivity
 HelpSystem_001
 HookUpConfigValue
 HostStateMgr001
@@ -679,9 +711,7 @@ PhysicsShapeHull
 PhysicsShapeMesh
 PhysicsShapeSphere
 Plat_DebugPrint
-Plat_DebugString
 Plat_ExitProcess
-Plat_FileSize
 Plat_GetEnv
 Plat_GetOSType
 Plat_GetTime
@@ -772,7 +802,6 @@ Trailing Data
 Truncated data
 Two Bone
 Unable to find localization token '%s'
-Unable to watch '%s'
 Unable to write file '%s'
 Unexpected end of file
 Unrecognized flag name '%s'
@@ -811,10 +840,8 @@ VSNAPFile
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_FixDoubleSlashes
 V_GetErrno
 V_IsAbsolutePath
-V_PathContainsPath
 V_PathsMatch
 V_PrettifyNum
 V_SetErrno
@@ -844,8 +871,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strlower_fast
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -858,7 +883,6 @@ Valve_TestGendersEnglishOnly_A:g
 Valve_TestGendersEnglishOnly_N:n
 Valve_TestPluralsEnglishOnly:p
 VisBuilder_001
-WARNING: CDirWatcher not implemented
 WARNING: Duplicate string token '%s' found in %s (original in %s)
 WINDOWS
 WINXP
@@ -870,8 +894,6 @@ WorldRendererBuilderMgr001
 WorldRendererMgr001
 X360
 [
-[!$
-[$
 [%.3f server clamped to %.3f]
 [english]
 [unknown string]
@@ -881,41 +903,31 @@ X360
 \'
 \\
 \n
+\resource\valve_
 \t
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_ComposeFileName
-_V_ExtractFilePath
-_V_MakeAbsolutePath
-_V_StrSubst
 _V_StringAfterPrefix
 _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 __bss_start
-__ctype_toupper_loc
 __cxa_atexit
 __cxa_finalize
 __cxa_guard_acquire
 __cxa_guard_release
 __cxa_pure_virtual
-__errno_location
-__fxstat64
 __gmon_start__
-__lxstat64
 __oldschema_object_name
 __stack_chk_fail
-__xstat64
 _edata
 _end
 _fini
 _test_conversion_counter
 ai_model_info
 allowstatic
-alphasort64
 anchor_angles
 anchor_position
 anim_name
@@ -959,8 +971,6 @@ cheat
 children
 client
 clientcmd_can_execute
-close
-closedir
 cloth_collide
 cloth_collision_layer0
 cloth_collision_layer1
@@ -987,7 +997,6 @@ dmg.club
 dmg.explosive
 dmg.fire
 dump_localization_files
-dup
 dutch
 dynamic_interaction
 el_GR
@@ -1011,8 +1020,6 @@ explosive_radius
 eye
 faceMergeAngle
 false
-fcntl
-fdatasync
 fi
 fi_FI
 finnish
@@ -1025,9 +1032,6 @@ frame
 free
 french
 friction
-ftruncate64
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_pMemAlloc
 game
 game_class
@@ -1082,7 +1086,6 @@ loop_break_on_damage
 loop_break_on_flashlight
 loop_in_action
 looping
-lseek64
 m_Bone
 m_ChainData
 m_Children
@@ -1287,8 +1290,6 @@ notconnected
 notify
 null
 numsegments
-open64
-opendir
 operation
 operator delete(void*)
 operator delete[](void*)
@@ -1302,7 +1303,6 @@ particles/
 persistent
 physgun_interactions
 physicsmode
-pipe
 pl
 pl_PL
 placement_attach
@@ -1317,8 +1317,6 @@ polish
 portuguese
 pose_control
 pose_control_type
-posix_fadvise64
-pread64
 preferred_carryangles
 prop_data
 pt_BR
@@ -1330,21 +1328,15 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr( 0x%p )
-pwrite64
 radius0
 radius1
 rb
-read
-readdir64
-readlink
 recenter_on_parent_bone
 relative_angles
 relative_origin
 replicated
 resource
-resource/valve_
 resource/valve_%language%.txt
-resource\valve_
 ro
 ro_RO
 romanian
@@ -1352,7 +1344,6 @@ rootNode
 ru
 ru_RU
 russian
-scandir64
 schema
 schemabindings.cpp
 schinese
@@ -1371,7 +1362,6 @@ ss_added
 stop_immediately
 stop_instantly
 stop_on_seq_change
-strcasecmp
 strchr
 strcmp
 strcpy
@@ -1402,7 +1392,6 @@ uk
 uk_UA
 ukrainian
 unknown
-unlink
 update
 use_additional_offset
 user
@@ -1454,7 +1443,6 @@ wb
 wcscmp
 wcslen
 width
-write
 yaw
 yaw_end
 yaw_start

@@ -9,7 +9,6 @@ $ORIGIN
 %-120s
 %-120s - %s
 %.15lf
-%02X
 %d General references (More ResourceAddRef() calls than ResourceRelease())
 %d Manifest references (Still holding onto a HResourceManifest somewhere)
 %d Schema references (Most likely a resource referring to another resource)
@@ -69,12 +68,11 @@ $ORIGIN
 ../public/ordered_constructor.h
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
-../public/tier1/utllinkedlist.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utltshash.h
 ../public/tier1/utlreferencetracker.h
 ../public/tier1/utlsortvector.h
-../public/tier1/utltshash.h
 00000000-0000-0000-0000-000000000000
-0123456789abcdef
 10ConCommand
 10IAppSystem
 12CThreadEvent
@@ -224,6 +222,7 @@ Bad header format (expected format name)
 Bad header format (expected format uuid)
 Bad header format (malformed UUID)
 Bad header format (no closing marker)
+Bad header: invalid binary marker
 Bad header: invalid compression header
 Bad header: unrecognized encoding id
 BakedLODBuilderMgr001
@@ -260,6 +259,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
+CBufferString::MoveFrom(CBufferString&)
 CBufferString::Purge(int)
 CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
@@ -268,13 +268,11 @@ CBufferString::RemoveFirstDir(CBufferString*)
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
-CBufferString::SetPtr(char*, int, int, bool, bool)
 CBufferString::SetUnusable()
 CBufferString::ShortenPath(bool)
 CBufferString::StartsWith(char const*)
 CBufferString::StripExtension()
 CBufferString::StripTrailingSlash()
-CBufferString::Swap(CBufferString&)
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCallStackCapture::CCallStackCapture(int (*)(void**, int, int), unsigned int, unsigned int)
@@ -290,6 +288,7 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CParticleSystemDefinition
+CRC32_ProcessBuffer
 CResourceArray
 CResourcePointer
 CResourceString
@@ -321,8 +320,14 @@ CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volat
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
+CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
+CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
+CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
+CThreadRWLock_FastRead::UnlockReadAccounting(char const*, int, unsigned int)
+CThreadRWLock_FastRead::UnlockWrite(char const*, int)
 CThreadSemaphore::CThreadSemaphore(int, int, char const*, bool)
 CThreadSemaphore::Release(int, int*)
+CThreadSemaphore::~CThreadSemaphore()
 CThreadSpinRWLock::LockForRead(char const*, int)
 CThreadSpinRWLock::SpinLockForWrite(char const*, int, unsigned long long)
 CThreadSpinRWLock::UnlockRead(char const*, int)
@@ -332,7 +337,33 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CTransform
 CUtlBlockMemory overflow!
-CUtlBuffer::VaPrintf: String overflowed buffer [%llu]
+CUtlBuffer::AddNullTermination()
+CUtlBuffer::AssumeMemory(void*, int, int, int)
+CUtlBuffer::CUtlBuffer(int, int, int)
+CUtlBuffer::CUtlBuffer(void const*, int, int)
+CUtlBuffer::CheckArbitraryPeekGet(int, int&)
+CUtlBuffer::CheckGet(int)
+CUtlBuffer::CheckPut(int)
+CUtlBuffer::EatCComment(int*)
+CUtlBuffer::EatCPPComment()
+CUtlBuffer::EatWhiteSpace()
+CUtlBuffer::EnsureCapacity(int)
+CUtlBuffer::Get(void*, int)
+CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
+CUtlBuffer::GetString(CBufferString*)
+CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::PeekGet(int, int)
+CUtlBuffer::PeekStringLength()
+CUtlBuffer::Printf(char const*, ...)
+CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
+CUtlBuffer::PutJSONString(char const*)
+CUtlBuffer::PutString(char const*)
+CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
+CUtlBuffer::SetBufferType(bool, bool)
+CUtlBuffer::SetExternalBuffer(void*, int, int, int)
+CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
 CUtlMemoryBlockAllocator::Alloc(unsigned int)
@@ -368,6 +399,8 @@ CUtlSymbolLarge
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
+CVariableBitStringBase::FreeInts()
+CVariableBitStringBase::Resize(int)
 CWeakHandle
 CWeakHandleVoid
 CXXABI_1.3
@@ -884,7 +917,6 @@ Usage: resource_repeated_reload <count> <resource_name>
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
-VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -956,7 +988,6 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
-V_strnchr
 V_strtod
 V_strtoi64
 V_strtok
@@ -966,7 +997,6 @@ V_tanf
 V_vsnprintf
 V_wcstod
 V_wcstoi64
-VaPrintf
 Vector2D
 Vector4D
 VectorAligned
@@ -996,9 +1026,7 @@ WorldRendererMgr001
 \'
 \\
 \n
-\r
 \t
-\u00
 _GetCallStack
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
@@ -1011,7 +1039,6 @@ _V_strncat
 _V_strncmp
 _V_strncpy
 _V_strnicmp_fast
-_V_strnistr_fast
 ___error_resource__
 __bss_start
 __cxa_atexit
@@ -1132,8 +1159,6 @@ frame
 free
 friction
 g_Tier1_BitWriteMasks
-g_Tier1_CRC32Table
-g_Tier1_CRC64Table
 g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
@@ -1522,6 +1547,7 @@ surface_prop
 test_angles_relative
 text
 texturescale
+tier0
 true
 turn_rate
 typeinfo for CThread
@@ -1569,7 +1595,6 @@ vpcf9
 vr_carry_type
 vrgrp
 vsnap
-vstdlib
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
