@@ -147,13 +147,10 @@ $tI
 %d total.
 %d,'%s','%s',%d
 %d.%d.%d
-%d.%d.%d.%d:%d
 %d:  %s (%s) [ptr 0x%p] %s%s '%s'
 %g
 %g,
 %i %i %i %i
-%i.%i.%i.%i
-%i.%i.%i.%i:%i
 %ld
 %lld
 %llu
@@ -355,16 +352,16 @@ $tI
 ../common/protobuf_helpers.cpp
 ../public/networksystem/serializedentity.h
 ../public/ordered_constructor.h
+../public/tier0/eventdispatcher.h
+../public/tier0/quantizedfloatencoder.h
 ../public/tier0/tslist.h
+../public/tier0/utlleanvector.h
 ../public/tier0/utllinkedlist.h
+../public/tier0/utlrbtree.h
+../public/tier0/utlsignalslot.h
+../public/tier0/utlsortvector.h
+../public/tier0/utlsymboltable.h
 ../public/tier0/utltshash.h
-../public/tier1/eventdispatcher.h
-../public/tier1/quantizedfloatencoder.h
-../public/tier1/utlleanvector.h
-../public/tier1/utlrbtree.h
-../public/tier1/utlsignalslot.h
-../public/tier1/utlsortvector.h
-../public/tier1/utlsymboltable.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -412,7 +409,6 @@ $tI
 11IRefCounted
 120
 1200
-127.0.0.1
 12CCLCMsg_Move
 12CMsgVector2D
 12CNETMsg_Tick
@@ -442,12 +438,12 @@ $tI
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIN37CBuildNetworkSerializerHierarchyOrder12BuildEntry_tE27CMemberFuncJobItemProcessorIS3_S2_S2_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMsg_CVars_CVar
 15CSVCMsg_SetView
-15CTier0AppSystemI14INetworkSystemE
-15CTier0AppSystemI19INetworkSystemUtilsE
-15CTier1AppSystemI14INetworkSystemLi0EE
-15CTier1AppSystemI19INetworkSystemUtilsLi0EE
-15CTier2AppSystemI14INetworkSystemLi0EE
-15CTier2AppSystemI19INetworkSystemUtilsLi0EE
+15CTier0AppSystemI14INetworkSystemLx0EE
+15CTier0AppSystemI19INetworkSystemUtilsLx0EE
+15CTier1AppSystemI14INetworkSystemLx0EE
+15CTier1AppSystemI19INetworkSystemUtilsLx0EE
+15CTier2AppSystemI14INetworkSystemLx0EE
+15CTier2AppSystemI19INetworkSystemUtilsLx0EE
 15INetChannelInfo
 15SignedPayload_t
 16CDefaultAccessor
@@ -610,7 +606,6 @@ $tI
 <!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
 <%d>
 <>
-<deferred>
 <no deferred ref found>
 <no failure reason set>
 <null>
@@ -800,6 +795,7 @@ CAnimMotorList
 CAnimMovementManager
 CAuthPhysBody
 CAuthPhysJoint
+CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::AppendRepeat(char, int, bool)
 CBufferString::Concat(char const*, char const*, ...)
@@ -818,6 +814,15 @@ CDeltaCalculator::FieldCalcDelta fromBits
 CDeltaCalculator::FieldCalcDelta toBits
 CEntityIndex
 CEntitySystem::BuildEntityNetworking (%s build of %s) took %.3f msecs for %d out of %d classes
+CEventDispatcher_Base::CEventDispatcher_Base()
+CEventDispatcher_Base::IterateListener(CEventDispatcher_Base::DelegateIterator_Base_t&)
+CEventDispatcher_Base::IterateListeners_End(CEventDispatcher_Base::DelegateIterator_Base_t&)
+CEventDispatcher_Base::IterateListeners_Start(CEventDispatcher_Base::DelegateIterator_Base_t&, bool)
+CEventDispatcher_Base::RegisterEventListener_Base(CUtlAbstractDelegate const&, unsigned int, bool, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&, int, char const*)
+CEventDispatcher_Base::UnregisterEventListener_Base(CUtlAbstractDelegate const&, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&)
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CFieldPath tracing ended
 CFieldPath tracing started
 CFlattenedSerializer::ApplyOverrides_R
@@ -1144,6 +1149,7 @@ CSerializedEntities::CompareSerializedEntities from field %s not present in to
 CSerializedEntities::CompareSerializedEntities to field %s not present in from
 CSerializedEntities::CompareSerializedEntities:  to pointer is %s and from pointer is %s
 CSplitScreenSlot
+CSplitString::Construct(char const*, char const**, int)
 CStackPair
 CStrongHandle
 CTSQueue corruption
@@ -1173,6 +1179,8 @@ CTransformScaled
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::SetSeed(int)
 CUtlBinaryBlock
+CUtlBinaryBlock::Set(void const*, int)
+CUtlBinaryBlock::SetLength(int)
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
@@ -1180,20 +1188,18 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCComment(int*)
 CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
@@ -1202,12 +1208,8 @@ CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
-CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
 CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
@@ -1238,6 +1240,12 @@ CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::RemoveAll()
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
 CUtlVector
 CXXABI_1.3
 C_INIT_AddVectorToVector
@@ -1387,7 +1395,7 @@ ConfigAttachedModel
 ConfigurationSystem_001
 ConfirmAllMessageHandlersInstalled
 ConnectByIPv4Address(%s) failed
-ConnectInterfaces
+ConnectInterfaceSingletons
 ConnectP2P(%s) failed
 ConnectToHostedDedicatedServer(%s) failed
 Connected loopback %s=%x@%s <-> %s=%x@%s
@@ -2030,6 +2038,7 @@ NewNode
 Newline in string literal
 No Buffer
 No active net channels.
+No closing */ before end of file
 No default value
 No field named "uninterpreted_option" in the Options proto.
 No valid format conversion from '%s' to '%s'
@@ -2122,10 +2131,7 @@ PhysicsShapeSphere
 Plat_DebugPrint
 Plat_ExitProcess
 Plat_FloatTime
-Plat_GetEnv
 Plat_GetLocalTime
-Plat_GetOSType
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_IsInTestMode
 Plat_MSTime
@@ -2463,7 +2469,6 @@ UNAVAILABLE
 UNIMPLEMENTED
 UNKNOWN
 UNKNOWN_ENUM_VALUE_%s_%d
-UPDATE_STRING_TOKEN_DATABASE
 UTF-8 data when
 Unable to determine buffer encoding.
 Unable to write file '%s'
@@ -2485,7 +2490,6 @@ Use network sockets layer even for listen server local player's packets (multipl
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
-VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2564,6 +2568,7 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
+V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
@@ -2901,8 +2906,9 @@ from
 from array size %d != to size %d
 from missing
 g
-g_Tier1_BitWriteMasks
-g_Tier1_ExtraMasks
+g_BitBuf_BitWriteMasks
+g_BitBuf_ExtraMasks
+g_bUpdateStringTokenDatabase
 g_pFlattenedSerialized->Decode() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pFlattenedSerialized->Encode() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pFlattenedSerialized->GetFieldNameProcedural() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
@@ -2923,7 +2929,6 @@ generated_proto/linuxsteamrt64/networksystem_protomessages.pb.cc
 generic
 gethostbyname
 gethostname
-getsockname
 glow
 google.protobuf.
 google.protobuf.Any
@@ -3039,7 +3044,6 @@ inpacket.message
 int google::protobuf::CalculateBase64EscapedLen(int, bool)
 int32
 int64
-interfaces.cpp
 internal error in map key sorting
 invalid
 invalid_address
@@ -3068,9 +3072,7 @@ libstdc++.so.6
 libsteam_api.so
 libsteamnetworkingsockets.so
 libtier0.so
-libvstdlib.so
 listen
-localhost
 lockRotationAlpha
 loop
 loop_break_on_damage
@@ -3329,6 +3331,21 @@ net_status
 net_usesocketsforloopback
 net_validatemessages
 net_validatemessages = %d
+netadr_t::Clear()
+netadr_t::CompareAdr(netadr_t const&, bool) const
+netadr_t::GetIPHostByteOrder() const
+netadr_t::GetPort() const
+netadr_t::GetType() const
+netadr_t::IsLocalhost() const
+netadr_t::IsValid() const
+netadr_t::SetFromString(char const*, bool)
+netadr_t::SetIP(unsigned int)
+netadr_t::SetPort(unsigned short)
+netadr_t::SetType(netadrtype_t)
+netadr_t::ToSockadr(sockaddr*) const
+netadr_t::ToString(bool) const
+netadr_t::ToString(char*, unsigned int, bool) const
+netadr_t::operator<(netadr_t const&) const
 netchan.cpp
 netmessages.proto
 network_connection.proto
@@ -3475,6 +3492,7 @@ shapeType
 shutdown
 simple
 singleplayer
+singletons.cpp
 sint32
 sint64
 size too big:
@@ -3741,7 +3759,6 @@ zero
 {
 { ... };
 {$0$1}
-{}()':
 |
 ||
 }

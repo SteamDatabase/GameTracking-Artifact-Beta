@@ -120,7 +120,6 @@ $U
 %-120s
 %-120s - %s
 %.15lf
-%.18g
 %04d
 %04d_%02d_%02d_%02d_%02d_%02d
 %f %f %f %f
@@ -139,7 +138,6 @@ $U
 %s tokens; %s instances
 %s%d
 %s,
-%s/
 %s_[%s]
 &
 (
@@ -162,7 +160,7 @@ $U
 -textsublanguage
 ../public/ordered_constructor.h
 ../public/tier0/utlblockmemory.h
-../public/tier1/utlsymboltable.h
+../public/tier0/utlsymboltable.h
 /resource/valve_
 04
 0x%016llX
@@ -172,9 +170,9 @@ $U
 12CThreadEvent
 14CBaseAppSystemI9ILocalizeE
 14ConCommandBase
-15CTier0AppSystemI9ILocalizeE
-15CTier1AppSystemI9ILocalizeLi0EE
-15CTier2AppSystemI9ILocalizeLi0EE
+15CTier0AppSystemI9ILocalizeLx0EE
+15CTier1AppSystemI9ILocalizeLx0EE
+15CTier2AppSystemI9ILocalizeLx0EE
 16CDefaultAccessor
 18CPlaceholderConVar
 1DBlend
@@ -185,13 +183,13 @@ $U
 7IConVar
 9CLocalize
 9ILocalize
+:
 :help
 :name_ref
 :shorthelp
 <!--
 << NULL >>
 <NULL>
-<deferred>
 <floating-point value out of range>
 <invalid currency %d>
 <invalid date format %d>
@@ -249,7 +247,6 @@ AbsolutePoseControl
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 Add
-AddTokenMiss
 AnimAddLayer
 AnimAlign
 AnimAutoLayer
@@ -280,9 +277,6 @@ AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
 B->C
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 BakedLODBuilderMgr001
 BaseIKRig
 BasePhysicsShape
@@ -303,6 +297,7 @@ CAnimMotorList
 CAnimMovementManager
 CAuthPhysBody
 CAuthPhysJoint
+CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::Concat(char const*, char const*, ...)
@@ -326,6 +321,9 @@ CDirWatcher::CDirWatcher()
 CDirWatcher::GetChangedFile(CUtlString*, bool)
 CDirWatcher::SetDirToWatch(char const*, unsigned int, bool)
 CDirWatcher::Stop()
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CHF
 CLP$
 CLocalize::InstallChangeCallback: Attempted to add the same callback twice!
@@ -338,6 +336,7 @@ COLLISION_MODE_USE_NEAREST_TRACE
 COLORCORRECTION_VERSION_1
 CParticleSystemDefinition
 CRC32_ProcessBuffer
+CSplitString::Construct(char const*, char const**, int)
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
@@ -353,6 +352,7 @@ CThreadSemaphore::~CThreadSemaphore()
 CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
+CUtlBinaryBlock::SetLength(int)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
@@ -361,32 +361,26 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCComment(int*)
 CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::Swap(CUtlBuffer&)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
-CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlString::Append(char const*)
 CUtlString::Format(char const*, ...)
@@ -396,6 +390,13 @@ CUtlString::Replace(char const*, char const*, bool) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::operator+=(char const*)
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::AddString(char const*, int)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::SetPageSize(unsigned int)
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
 CVariableBitStringBase::AllocInts(int)
 CVariableBitStringBase::FreeInts()
 CVariableBitStringBase::Resize(int)
@@ -498,12 +499,10 @@ CommandProcedureList
 ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
-Conditional Error: %s
 ConfigAttachedModel
 ConfigurationSystem_001
-ConnectInterfaces
+ConnectInterfaceSingletons
 CreateInterface
-DEMO
 DH
 DebugTextureInfo001
 Decompression failure
@@ -545,7 +544,6 @@ FlattenedSerializersVersion001
 FontManager_001
 Full paths not allowed in localization file specification '%s'
 G->B
-GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
@@ -558,7 +556,6 @@ GenericGameData
 GetCStringCharConversion
 GetResourceManifestCount
 GetResourceManifests
-HIGHDPI
 HK$
 HammerMapLoader001
 HelpSystem_001
@@ -589,7 +586,6 @@ KeyValueCache001
 KeyValuesSystem
 LANG
 LC_ALL
-LINUX
 LOCFAIL %s: '%s' gives multiple variants for :n
 LOCFAIL %s: '%s' has variants but does not have any token name variant flags (:g, :n, :p, etc.)
 LOCFAIL %s: '%s' indicates %u %s but needs %u valid %s
@@ -620,7 +616,6 @@ LOC_Ordinal_Prefix_Default
 LOC_Ordinal_Suffix_%u
 LOC_Ordinal_Suffix_Default
 LOG_GENERAL
-LOWVIOLENCE
 Language
 Latam_Spanish
 Line %d at "%s": %s
@@ -628,6 +623,7 @@ Line %d: %s
 Line %d: Invalid value "%s"
 List all loaded localization files
 Loaded localization files:
+Localization System
 Localization key '%s' has a conditional that is too long. Truncating.
 Localization key '%s' has a value that is too long. Truncating.
 Localization key '%s' is too long. Truncating.
@@ -638,17 +634,15 @@ Localize
 Localize_001
 Localize_Create
 LoggingSystem_IsChannelEnabled
+LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
-Logic Error in CExpressionEvaluator
 MATCHFRAMEWORK_001
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
 MapListService_001
 MaterialUtils_001
-MemAlloc_AllocFunc
-MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 Mex$
@@ -672,7 +666,6 @@ Newline in string literal
 No Buffer
 NoPoseControl
 None
-OSX
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
@@ -688,8 +681,6 @@ PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
 PF_TYPE_RANDOM_UNIFORM
-POSIX
-PS3
 PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
@@ -712,10 +703,7 @@ PhysicsShapeMesh
 PhysicsShapeSphere
 Plat_DebugPrint
 Plat_ExitProcess
-Plat_GetEnv
-Plat_GetOSType
 Plat_GetTime
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_MessageBox
 Plat_ShouldCollectMiniDumpsForFatalErrors
@@ -810,7 +798,6 @@ Unsupported text encoding id.
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
-VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -863,7 +850,6 @@ V_atoi64
 V_atoui64
 V_fpclassify
 V_isnan
-V_localeconv
 V_pow
 V_qsort_s
 V_snprintf
@@ -871,6 +857,7 @@ V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
+V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -884,15 +871,12 @@ Valve_TestGendersEnglishOnly_N:n
 Valve_TestPluralsEnglishOnly:p
 VisBuilder_001
 WARNING: Duplicate string token '%s' found in %s (original in %s)
-WINDOWS
-WINXP
 Warning
 Warning:  %s = '%s' is infinite, clamping value.
 WeightList
 WorkshopSetup001
 WorldRendererBuilderMgr001
 WorldRendererMgr001
-X360
 [
 [%.3f server clamped to %.3f]
 [english]
@@ -1032,6 +1016,7 @@ frame
 free
 french
 friction
+g_bUpdateStringTokenDatabase
 g_pMemAlloc
 game
 game_class
@@ -1052,7 +1037,6 @@ hurt_me
 hurt_them
 ikdata
 int( %d = 0x%X )
-interfaces.cpp
 invert_orientation
 is_debris
 it_IT
@@ -1077,7 +1061,6 @@ liblocalize.so
 libpthread.so.0
 libstdc++.so.6
 libtier0.so
-libvstdlib.so
 localize
 localize_imp.cpp
 lockRotationAlpha
@@ -1353,6 +1336,7 @@ sequence_number
 server_can_execute
 shapeType
 singleplayer
+singletons.cpp
 size
 source_filename
 spanish
@@ -1450,6 +1434,5 @@ zh
 zh_CN
 zh_TW
 {
-{}()':
 }
 }}

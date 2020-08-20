@@ -32,7 +32,6 @@ $tIVScript
 %-120s - %s
 %-30s%14s%14s
 %.15lf
-%.18g
 %.2f -> %.2f @ %.2f
 %.3f behind, %d nodes, FeModel %s bytes, %s
 %14s %-30s[%u]%s
@@ -48,7 +47,6 @@ $tIVScript
 %f %f %f %f
 %hd
 %i %i %i %i
-%lld
 %llu
 %llx
 %llx:
@@ -82,7 +80,6 @@ $tIVScript
 %s+--
 %s+-- Schema Class: %s
 %s,
-%s/
 %s/%s
 %s: %llu casts, %.1f ticks/cast
 %s: %s
@@ -180,8 +177,8 @@ $tIVScript
 ../public/tier0/tslist.h
 ../public/tier0/utlblockmemory.h
 ../public/tier0/utllinkedlist.h
-../public/tier1/utlrbtree.h
-../public/tier1/utlsortvector.h
+../public/tier0/utlrbtree.h
+../public/tier0/utlsortvector.h
 .vmdl
 /%u.rnsave
 /*const char *g_ReflFieldNames[ %d ] ={
@@ -352,7 +349,6 @@ $tIVScript
 <INVALID_RBF_TYPE>
 <NULL>
 <No schemasystem>
-<deferred>
 <div align=center style="padding:3px;font-size:15px;text-align:center;background-color:#
 <div align=center style="padding:3px;font-size:15px;text-align:center;background-color:#ff9966;">
 <font color = "red">as</font>-<font color="blue">with</font>:
@@ -425,6 +421,7 @@ $tIVScript
 @ %.2f, %.2f, %.2f
 @@
 @A
+@spawn
 A
 A->B
 AABB_t
@@ -640,6 +637,7 @@ CAttachment
 CAuthPhysBody
 CAuthPhysJoint
 CBaseConstraint
+CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceBone::Input_t
@@ -691,6 +689,9 @@ CEntIndexPair
 CEntIndexPair RnStartTouchEventRefl_t::m_Entities
 CEntPairTouchTracker
 CEntityIndex
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CFeIndexedJiggleBone
 CFeJiggleBone
 CFeModel
@@ -1005,14 +1006,12 @@ CSoftbodyEffectProperty
 CSoftbodyEffectSkinnedCollider
 CSoftbodyEffectSpeedup
 CSoftbodyEffectWind
+CSplitString::Construct(char const*, char const**, int)
+CStableSymbolTable::GetId(char const*, bool*)
+CStableSymbolTable::Insert(int, char const*)
 CStrongHandle
 CTSQueue corruption
-CThreadEvent::CThreadEvent(bool)
-CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
-CThreadRWLock::LockForWrite(char const*, int)
-CThreadRWLock::UnlockWrite(char const*, int)
-CThreadRWLock::WaitForRead()
 CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
 CThreadRWLock_FastRead::EncounteredComplexReadLockOperation(unsigned int, bool, char const*, int)
 CThreadRWLock_FastRead::HandleFirstWriteLockTransition()
@@ -1033,6 +1032,9 @@ CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
+CUtlBinaryBlock::Set(void const*, int)
+CUtlBinaryBlock::SetLength(int)
+CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
@@ -1041,20 +1043,18 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCComment(int*)
 CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::Scanf(char const*, ...)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
@@ -1070,12 +1070,8 @@ CUtlIncrementalVector< CRnSoftbody, CRnSoftbody::CWorldIndexPred >
 CUtlIncrementalVector< CSoftbodyEffect >
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
-CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
 CUtlScratchMemoryPool::AllocAligned(int, int)
@@ -1106,6 +1102,11 @@ CUtlStringToken
 CUtlStringToken RnFrictionNotificationRefl_t::m_MaterialIndex[ 2 ]
 CUtlSymbol
 CUtlSymbolLarge
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
 CUtlVector
 CUtlVector< CFeMorphLayer >
 CUtlVector< CRnBody* >
@@ -1138,6 +1139,8 @@ CUtlVectorFixedGrowable<CSoftbodyEffect*, 1>
 CUtlVectorSIMDPaddedVector
 CVPhys2AggregateInstance::OnReallocate( new: 0x%p, old: 0x%p )
 CVPhysXSurfacePropertiesList
+CVertexKDTree::BuildMidpoint(float const*, int, int)
+CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
 CWristBone
 CXXABI_1.3
@@ -1316,7 +1319,7 @@ ConfigAttachedModel
 ConfigurationSystem_001
 ConnHierarchyRefl_t
 ConnMatrixFillRefl_t
-ConnectInterfaces
+ConnectInterfaceSingletons
 Connected
 Contact Notification: "Would Have?" Analysis:
 ContactArrayRefl_t
@@ -1485,6 +1488,7 @@ Failed to allocate an instance of a class
 Failed to allocate an instance of class '%s'
 Failed to assign bool literal value
 Failed to call CBaseIntrospectedToKV3TypeManager::Init
+Failed to convert KV3 to string; error: %s
 Failed to convert introspected block: %s
 Failed to save unsupported class
 Failed to transfer KV3 data for resource '%s' - %s
@@ -1576,7 +1580,6 @@ GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GEAR
 GENERIC_JOINT
 GLIBCXX_3.4
-GLIBCXX_3.4.14
 GLIBC_2.14
 GLIBC_2.2.5
 GLIBC_2.3.4
@@ -1881,8 +1884,6 @@ MaxCellSize
 MaxLinearConstraintImpulse
 MaxSpeed
 Md5 Hash: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x
-MemAlloc_AllocFunc
-MemAlloc_FreeFunc
 Memory used in Rubikon: %s bytes / %s 4K pages = %.1f%%
 Merge Faces
 Merged face
@@ -2003,6 +2004,7 @@ No DATA block for resource '%s'
 No Reason To Hit
 No Self Collision
 No Touch event enabled on either shape: GetCollisionFunctionMask() = {<font color = "red">%d</font>, <font color = "blue">%d</font>} does not include FCOLLISION_FUNC_ENABLE_TOUCH_EVENT = %d
+No closing */ before end of file
 No common interaction as-with flags, so no (trigger) flag is added
 No matching exclude flags
 No valid format conversion from '%s' to '%s'
@@ -2186,10 +2188,8 @@ Plat_FloatTime
 Plat_GetCPUFrequency
 Plat_GetEnv
 Plat_GetModuleFilename
-Plat_GetOSType
 Plat_GetPlatformError
 Plat_GetThreadIndex
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_SetDenormalsAreZero
 Plat_ShouldCollectMiniDumpsForFatalErrors
@@ -2408,6 +2408,7 @@ RenderSystemSurface001
 RenderUtils_001
 ReportClassError
 ReportEvents
+Reported
 Reported Hit Point (0,0,0)
 ReserveVirtualMemory
 Resolve
@@ -2879,6 +2880,7 @@ UserInfoChangeService_001
 Using 16-bit blend indices
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2913,6 +2915,7 @@ VPhysXAggregateData_t
 VPhysXAggregateData_t::FLAG_IGNORE_SCALE_OBSOLETE_DO_NOT_USE
 VPhysXAggregateData_t::FLAG_IS_POLYSOUP_GEOMETRY
 VPhysXAggregateData_t::FLAG_LEVEL_COLLISION
+VPhysXAggregateData_t::VPhysXFlagEnum_t
 VPhysXBodyPart_t
 VPhysXBodyPart_t::FLAG_ALWAYS_DYNAMIC_ON_CLIENT
 VPhysXBodyPart_t::FLAG_JOINT
@@ -2981,7 +2984,6 @@ V_fmodf
 V_fpclassify
 V_frexpf
 V_isnan
-V_localeconv
 V_log10f
 V_log2
 V_logf
@@ -2996,6 +2998,7 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
+V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
@@ -3370,7 +3373,6 @@ collision_group_override
 collision_prop
 composite
 config_state
-configvalue.cpp
 contact_indices
 contact_manifolds
 contact_points
@@ -3632,8 +3634,9 @@ free
 from {%.2f,%.2f,%.2f} delta {%.2f,%.2f,%.2f}
 frozen
 g default
-g_Tier1_BitWriteMasks
-g_Tier1_ExtraMasks
+g_BitBuf_BitWriteMasks
+g_BitBuf_ExtraMasks
+g_bUpdateStringTokenDatabase
 g_pMemAlloc
 g_pThreadPool
 game
@@ -3732,7 +3735,6 @@ interactExclude
 interactWith
 interactive
 interactive_debris
-interfaces.cpp
 introspectedtokv3typemanager.cpp
 invA
 invert_orientation
@@ -3756,7 +3758,6 @@ libpthread.so.0
 libstdc++.so.6
 libtier0.so
 libvphysics2.so
-libvstdlib.so
 lightingbasis
 lightmap
 lightmapuv
@@ -4865,8 +4866,6 @@ proxies
 ptestbed
 pthread_mutex_destroy
 pthread_mutex_init
-pthread_mutex_lock
-pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr( 0x%p )
@@ -4938,6 +4937,7 @@ shape_edges
 sharpStartAngle
 sin( %s )
 singleplayer
+singletons.cpp
 sky
 slime
 so, Intersection flags = Default (Resolve(1))
@@ -4961,7 +4961,6 @@ ss_added
 static
 staticImpactVolume
 static_bodies
-std::__throw_bad_function_call()
 std::ios_base::Init::Init()
 std::ios_base::Init::~Init()
 stiffness=%g damping=%g

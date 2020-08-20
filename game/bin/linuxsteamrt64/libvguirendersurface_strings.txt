@@ -39,7 +39,6 @@ $ORIGIN
 %%%s%%
 %-120s
 %-120s - %s
-%.18g
 %d %d %d %d
 %d_hidden
 %d_width
@@ -68,11 +67,9 @@ $ORIGIN
 %s, string progress, string variable
 %s, string text, bool scrollbar
 %s, string title
-%s/
 %s: '%s'
 %s:hscroll
 %s:vscroll
-%u
 &Apply
 &Cut
 &Exit
@@ -98,12 +95,11 @@ $ORIGIN
 -vguimessages
 ...
 ../../public/tier0/utllinkedlist.h
-../../public/tier1/utlrbtree.h
-../../public/tier1/utlsortvector.h
+../../public/tier0/utlrbtree.h
+../../public/tier0/utlsortvector.h
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/utllinkedlist.h
-../public/tier1/utlsymboltable.h
 0 - no auto-resize
 0 - top-left
 0x%016llX
@@ -124,10 +120,10 @@ $ORIGIN
 14ISchemeSurface
 15CSmallTextEntry
 15CStringProperty
-15CTier0AppSystemI18IVGuiRenderSurfaceE
-15CTier1AppSystemI18IVGuiRenderSurfaceLi0EE
-15CTier2AppSystemI18IVGuiRenderSurfaceLi0EE
-15CTier3AppSystemI18IVGuiRenderSurfaceLi0EE
+15CTier0AppSystemI18IVGuiRenderSurfaceLx0EE
+15CTier1AppSystemI18IVGuiRenderSurfaceLx0EE
+15CTier2AppSystemI18IVGuiRenderSurfaceLx0EE
+15CTier3AppSystemI18IVGuiRenderSurfaceLx0EE
 16CDefaultAccessor
 16CRSEmbeddedPanel
 17IVGuiPaintSurface
@@ -169,14 +165,13 @@ $ORIGIN
 << NULL >>
 <NULL>
 <a href=
-<deferred>
 <no deferred ref found>
 <no failure reason set>
 <null>
 <unconnected>
 <unknown>
 >
-?../public/tier1/utlrbtree.h
+?../public/tier0/utlrbtree.h
 ???
 @
 @A
@@ -207,9 +202,6 @@ AssetSystem001
 AssetSystemTest001
 AutoResize
 Backspace
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 BakedLODBuilderMgr001
 Baseclass unpack
 BenchmarkService001
@@ -264,8 +256,16 @@ CCommand::Tokenize: Encountered command which overflows the argument buffer.. Cl
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CDmePanelDefinition
 CDragDropHelperPanel
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CMatSystemTexture::SetMaterial
 CMemAllocSystemInitialize
+CMemoryStack::CMemoryStack()
+CMemoryStack::CommitTo(unsigned char*)
+CMemoryStack::FreeAll(bool)
+CMemoryStack::Init(char const*, unsigned int, unsigned int, unsigned int, unsigned int)
+CMemoryStack::~CMemoryStack()
 COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
@@ -291,6 +291,8 @@ CThreadRWLock::WaitForRead()
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CTreeViewListControl
+CUtlBinaryBlock::Set(void const*, int)
+CUtlBinaryBlock::SetLength(int)
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
@@ -307,14 +309,12 @@ CUtlBuffer::GetDelimitedString(CUtlCharConversion*, char*, int)
 CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::GetString(char*, int)
 CUtlBuffer::ParseToken(char const*, char const*, char*, int)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekDelimitedStringLength(CUtlCharConversion*, bool)
 CUtlBuffer::PeekGet(int, int)
-CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::Scanf(char const*, ...)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
@@ -324,12 +324,8 @@ CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
-CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
 CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
@@ -337,7 +333,6 @@ CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
 CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
 CUtlString::Acquire(CBufferString*, bool)
-CUtlString::Append(char const*)
 CUtlString::CUtlString(CBufferString const&)
 CUtlString::FixSlashes(char)
 CUtlString::Format(char const*, ...)
@@ -351,6 +346,13 @@ CUtlString::SetLength(int)
 CUtlString::ToLowerFast()
 CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::AddString(char const*, int)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::SetPageSize(unsigned int)
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
 CVGuiPaintSurfaceQueued::DrawFilledRectArray
 CVGuiPaintSurfaceQueued::DrawFilledRectFade
 CVGuiPaintSurfaceQueued::DrawOutlinedCircle
@@ -371,7 +373,6 @@ Candidate
 Cannot Apply
 Caps Lock
 Caps Lock Toggle
-CharacterSetBuild
 CheckButton.ArmedBgColor
 CheckButton.BgColor
 CheckButton.Border1
@@ -402,14 +403,14 @@ CommandLine
 ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
-Conditional Error: %s
 ConfigurationSystem_001
-ConnectInterfaces
+ConnectInterfaceSingletons
 ControlFactory
 ControlModified
 ControlName
 ControlText
 ConversionModeMenu
+CopyUniqueId
 Couldn't find script file %s
 Couldn't parse script file: expected 'event', found '%s'
 Couldn't parse script file: expected <event name>, found nothing
@@ -417,6 +418,7 @@ Couldn't parse script sequence '%s': expected '{', found '%s'
 Couldn't parse script sequence '%s': expected <anim command>, found '%s'
 CreateInterface
 CreateNewControl
+CreateUniqueId
 Ctrl
 CurrentDefaultButtonSet
 CursorEntered
@@ -427,7 +429,6 @@ CursorExited
 CursorExitedChild
 CursorExitedMenuItem
 CvarToggleCheckButton
-DEMO
 Deaccel
 DebugTextureInfo001
 Default
@@ -554,7 +555,6 @@ FrameTitleButton.DisabledBgColor
 FrameTitleButton.DisabledFgColor
 FrameTitleButton.FgColor
 GAME
-GAMECONSOLE
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GLIBC_2.14
 GLIBC_2.2.5
@@ -576,7 +576,6 @@ GetText
 GraphPanel
 GraphPanel.BgColor
 GraphPanel.FgColor
-HIGHDPI
 HKEY_CURRENT_USER\Software\Valve\Steam\Language
 HammerMapLoader001
 HelpSystem_001
@@ -602,7 +601,8 @@ Intentionally vague touch behavior for %p
 Invalid access of deferred ConVarRef for '%s'
 Invalid parent region %s specified for region %s in panel %s
 Invalidate
-JSON error, unterminated element:
+InvalidateUniqueId
+IsUniqueIdEqual
 KEY_0
 KEY_1
 KEY_2
@@ -737,11 +737,8 @@ KeyTyped
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
-LINUX
 LOG_GENERAL
-LOWVIOLENCE
 Label.BgColor
 Label.DisabledFgColor1
 Label.DisabledFgColor2
@@ -773,7 +770,6 @@ LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
-Logic Error in CExpressionEvaluator
 MATCHFRAMEWORK_001
 MATSURFACE
 MOD
@@ -784,8 +780,6 @@ Marlett
 MarlettSmall
 MaterialUtils_001
 MathLib_Init
-MemAlloc_AllocFunc
-MemAlloc_FreeFunc
 Menu.ArmedBgColor
 Menu.ArmedTextColor
 Menu.BgColor
@@ -819,7 +813,6 @@ Move
 MoveScrollBar
 MoveScrollBarDirect
 MurmurHash2
-MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
 N
@@ -901,7 +894,6 @@ None
 Num Lock
 Num Lock Toggle
 NumericInputOnly
-OSX
 OnCancel
 OnChangeChild
 OnCursorMoved
@@ -915,8 +907,6 @@ OnScreenSizeChanged
 OpenColumnChoiceMenu
 OpenContextMenu
 P@
-POSIX
-PS3
 Panel::ReloadKeyBindings:  Can't find entry for panel '%s'
 Panel::SaveKeyBindings '%s' is read-only!!!
 PanelListEmbedded
@@ -927,6 +917,7 @@ PanelSelected
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
+ParseTokenFromCharString
 ParticleSystemMgr003
 PdDn
 PgUp
@@ -942,11 +933,9 @@ Plat_FlashWindow
 Plat_FloatTime
 Plat_GetEnv
 Plat_GetModuleFilename
-Plat_GetOSType
 Plat_GetThreadIndex
 Plat_GetWindowBounds
 Plat_GetWindowClientSize
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_IsWindowMinimized
 Plat_IsWindowVisible
@@ -958,8 +947,6 @@ Plat_SetWindowSize
 Plat_SetWindowTitleW
 Plat_ShouldCollectMiniDumpsForFatalErrors
 Plat_ShowWindow
-Plat_VirtualAlloc
-Plat_VirtualFree
 Plat_WindowToOsSpecificHandle
 PopMakeCurrent
 PostProcessingSystem_001
@@ -1056,6 +1043,7 @@ ScrollBar_Vertical
 ScrollButtonPressed
 SelectedImage
 SentenceModeMenu
+Serialize
 SerializedEntitiesVersion001
 ServerUploadGameStats001
 SetActiveControl
@@ -1160,9 +1148,9 @@ TreeViewItemSelected
 TreeViewItemSelectionCleared
 TreeViewStartRangeSelection
 URLLabel
-UUID_1.0
 Unable to create panel %s!
 Unable to read panel %s! UtlBuffer is the wrong type!
+UniqueIdFromString
 UnpinnedCornerOffsetX
 UnpinnedCornerOffsetY
 UpArrow
@@ -1237,7 +1225,6 @@ V_cosf
 V_expf
 V_fmodf
 V_iswspace
-V_localeconv
 V_logf
 V_powf
 V_qsort_s
@@ -1270,12 +1257,9 @@ VguiPaint3D
 VguiRenderSurfaceInit
 VisBuilder_001
 WARNING: Trying to create a CRenderContextPtr without a valid context.
-WIN32
 WIN32HIDEF
 WIN32LODEF
 WIN32WIDE
-WINDOWS
-WINXP
 Warning
 Warning:  %s = '%s' is infinite, clamping value.
 WindowDisabledBgColor
@@ -1283,7 +1267,6 @@ Windows
 WorkshopSetup001
 WorldRendererBuilderMgr001
 WorldRendererMgr001
-X360
 [
 [ no resource file associated with dialog ]
 [$
@@ -1464,7 +1447,6 @@ infocus_bgcolor_override
 inputsystem
 int( %d = 0x%X )
 int_array
-interfaces.cpp
 iswalnum
 iswcntrl
 iswdigit
@@ -1486,7 +1468,6 @@ libm.so.6
 libpthread.so.0
 libstdc++.so.6
 libtier0.so
-libuuid.so.1
 libvguirendersurface.so
 localize
 m_bAutoHideButtons
@@ -1534,7 +1515,6 @@ northeast
 northwest
 notconnected
 notify
-null
 nw
 oldtall
 oldwide
@@ -1615,6 +1595,7 @@ showScrollBar
 sin
 sincos
 singleplayer
+singletons.cpp
 sound_armed
 sound_depressed
 sound_released
@@ -1695,7 +1676,6 @@ use scheme colors
 use_proportional_insets
 user
 usetitlesafe
-uuid_generate
 variable
 vector2
 vector2_array
@@ -1728,5 +1708,4 @@ wcslen
 www.
 zpos
 {
-{}()':
 }

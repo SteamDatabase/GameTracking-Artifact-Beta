@@ -239,6 +239,7 @@
 #CardEffect_10260_0
 #CardEffect_10262_0
 #CardEffect_10263_0
+#CardEffect_10272_0
 #CardEffect_10274_0
 #CardEffect_10290_0
 #CardEffect_10291_0
@@ -466,6 +467,9 @@
 #CardEffect_11064_0
 #CardEffect_11065_0
 #CardEffect_11067_0
+#CardEffect_11068_0
+#CardEffect_11069_0
+#CardEffect_11072_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -1127,6 +1131,7 @@
 #DCG_Glossary_Trample
 #DCG_Glossary_Unblocked
 #DCG_Glossary_Unit
+#DCG_Glossary_Unopposed
 #DCG_Glossary_WeaponItem
 #DCG_Glossary_WeaponItem_Title
 #DCG_Glossary_ZToken
@@ -2643,7 +2648,6 @@ $spriteRenderMode
 $tI
 %
 %% 4d=[%%%d.%ds] at cycle %%6.4f weight %%5.3f
-%%%d.%ds
 %%%d.%ds %%%d.%ds
 %%%d.%ds [%%3.3s] (%%5d) %%%d.%ds:
 %%%d.%ds [%%s::%%s]
@@ -2753,6 +2757,7 @@ $tI
 %d %d %d %d
 %d %s
 %d %s %d %02d:%02d:%02d +0000
+%d %s '%s' (%s)
 %d %s is interpolating on %s %s
 %d (%d) : %.2f %.2f : %.2f %.2f : %.3f %.3f
 %d (%d): %s : %5.3f (%.3f)
@@ -2782,7 +2787,6 @@ $tI
 %d+
 %d, %s, %s, %s
 %d.%d.%d
-%d.%d.%d.%d:%d
 %d/%d: '%s' %s
 %d:
 %d:  %s [flat %d] [sort %d] %d bytes
@@ -2818,8 +2822,6 @@ $tI
 %i
 %i %i %i %i
 %i,%i,%i:%i,%i,%i
-%i.%i.%i.%i
-%i.%i.%i.%i:%i
 %i: %s - %s - %i
 %ix
 %language%
@@ -3268,6 +3270,7 @@ $tI
 (%d)  EffectName "%s"  Dormant? %s  Emission Stopped? %s
 (%d) Name: %s (%s)
 (%d/%d)%s
+(%f, %f, %f)
 (%g %g)
 (%s) %i,
 (%s,%s)
@@ -3335,6 +3338,7 @@ $tI
 (\bdispel\b)
 (\bdrain\b)
 (\benchant\b)
+(\benchantment(s)?\b)
 (\benter lane effect\b)
 (\bephemeral\b)
 (\bfeeble\b)
@@ -3346,7 +3350,6 @@ $tI
 (\bhealth\b)
 (\bhero(es)?\b)
 (\bhex\b)
-(\bimprovement(s)?\b)
 (\bitems?\b)
 (\bjump\b)
 (\blethal to creeps\b)
@@ -3392,6 +3395,7 @@ $tI
 (\btrample\b)
 (\bunblocked\b)
 (\bunit\b)
+(\bunopposed\b)
 (\buntargetable\b)
 (broken)
 (cannot determine missing fields for lite message)
@@ -3424,7 +3428,6 @@ $tI
 (script)
 (set ID=-1) (card name='') (asset='') (asset type='') Lists all of the razzle dazzle scripts that reference assets. This can search for specific assets or for specific cards or entire sets
 (unavailable)
-(unknown lock type)
 (vector,float) constructs a quaternion representing a rotation by angle around the specified vector axis
 (vector,vector) cross product between two vectors
 (vector,vector,float) lerp between two vectors by a float factor returning new vector
@@ -3469,8 +3472,9 @@ $tI
 *15CMemberFunctor0IPN12_GLOBAL__N_119CParticleJobUpdaterEMS1_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 *15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN12C_BaseEntity16PerformLatchWorkE22InterpolatedVarPhase_t38InterpolatedVarInterpolationTimeType_tiP11LatchWork_tEUliE0_EEMS9_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 *15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN12_GLOBAL__N_119CParticleJobUpdater21UpdateNewEffectsJobFnEvEUliE_EEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-*15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN17CRenderGameSystem17OnClientPreOutputERK22EventClientPreOutput_tEUliE0_EEMS8_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-*15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN22CAnimGraphBatchUpdaterC4EPP12C_BaseEntityiEUliE0_EEMS8_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+*15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN17CRenderGameSystem17OnClientPreOutputERK22EventClientPreOutput_tEUliE_EEMS8_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+*15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN20CAnimGraphGameSystem16ServerTickUpdateEvEUliE0_EEMS5_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+*15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN20CAnimGraphGameSystem23ParallelHierarchyUpdateEMS2_FvP17GraphUpdateNode_tEEUliE0_EEMS9_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 *15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZNK13FloatBitMap_t20WriteInMemoryEXRFastER10CUtlBufferEUliE_EEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 *28CUI_Canvas_DrawCommandLambdaIZN10CUI_Canvas14DrawLineCircleERK8Vector2DfRK5ColorEUlR14IRenderContextE_E
 *28CUI_Canvas_DrawCommandLambdaIZN10CUI_Canvas16DrawFilledCircleERK8Vector2DfRK5ColorEUlR14IRenderContextE_E
@@ -3482,6 +3486,7 @@ $tI
 *BaseAnimating::C_BodyComponentBaseAnimating
 *BaseEntity::CBodyComponent
 *BaseModelEntity::CBodyComponentBaseModelEntity
+*DCGShowGlossaryTextTooltip( %i )*
 *Finalize Constraints: %6.3f [ms]
 *Found next step of multistep move*
 *Looking for next step in multistep move*
@@ -3660,6 +3665,7 @@ $tI
 *ZL24PlayChangeDeckVisibilityibEUl13StrongTypedefIj15ObjectIDTypeTagLj0EEP28IDCGPerformanceScriptContextE_
 *ZL24Set1_WalrusPunch_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Exsanguinate_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
+*ZL25Set1_GoldenTicket_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
 *ZL25Set1_NoHesitation_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Overgrowther_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL26PlayIfNotOpponentSpectatorRK20CScriptPlayListParamEUlRK16CConditionalEvalE_
@@ -3793,8 +3799,9 @@ $tI
 *ZN26CDCG_DB_Page_PlayerProfile23EventExpandMatchHistoryE13StrongTypedefIy14MatchIDTypeTagLy0EEEUlP23CDCG_UI_MatchHistoryRowE_
 *ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN12C_BaseEntity16PerformLatchWorkE22InterpolatedVarPhase_t38InterpolatedVarInterpolationTimeType_tiP11LatchWork_tEUliE0_EE3RunEvE13CStackFunctor
 *ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN12_GLOBAL__N_119CParticleJobUpdater21UpdateNewEffectsJobFnEvEUliE_EE3RunEvE13CStackFunctor
-*ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN17CRenderGameSystem17OnClientPreOutputERK22EventClientPreOutput_tEUliE0_EE3RunEvE13CStackFunctor
-*ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN22CAnimGraphBatchUpdaterC4EPP12C_BaseEntityiEUliE0_EE3RunEvE13CStackFunctor
+*ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN17CRenderGameSystem17OnClientPreOutputERK22EventClientPreOutput_tEUliE_EE3RunEvE13CStackFunctor
+*ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN20CAnimGraphGameSystem16ServerTickUpdateEvEUliE0_EE3RunEvE13CStackFunctor
+*ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN20CAnimGraphGameSystem23ParallelHierarchyUpdateEMS1_FvP17GraphUpdateNode_tEEUliE0_EE3RunEvE13CStackFunctor
 *ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZNK13FloatBitMap_t20WriteInMemoryEXRFastER10CUtlBufferEUliE_EE3RunEvE13CStackFunctor
 *ZN26IDCGYieldingPerformanceJob16YieldForDurationEfEUlvE_
 *ZN26IDCGYieldingPerformanceJob17YieldWaitOneFrameEvEUlvE_
@@ -3866,6 +3873,7 @@ $tI
 +++ %s:
 +++ %s[%d]:
 ++CLoopModeGame::SetWorldSession
++-
 +OQv
 +alt1
 +alt2
@@ -4177,19 +4185,19 @@ $tI
 ../../public/steam/steammessages_oauth.steamworkssdk.pb.cc
 ../../public/steam/steammessages_player.steamworkssdk.pb.cc
 ../../public/steam/steammessages_publishedfile.steamworkssdk.pb.cc
+../../public/tier0/eventdispatcher.h
+../../public/tier0/loggingmetahelpers.h
+../../public/tier0/memstack.h
 ../../public/tier0/tslist.h
 ../../public/tier0/utlblockmemory.h
 ../../public/tier0/utlfixedmemory.h
+../../public/tier0/utlleanvector.h
 ../../public/tier0/utllinkedlist.h
+../../public/tier0/utlmultilist.h
+../../public/tier0/utlrbtree.h
+../../public/tier0/utlsignalslot.h
+../../public/tier0/utlsortvector.h
 ../../public/tier0/utltshash.h
-../../public/tier1/eventdispatcher.h
-../../public/tier1/loggingmetahelpers.h
-../../public/tier1/memstack.h
-../../public/tier1/utlleanvector.h
-../../public/tier1/utlmultilist.h
-../../public/tier1/utlrbtree.h
-../../public/tier1/utlsignalslot.h
-../../public/tier1/utlsortvector.h
 ../../public/tier2/fieldpath.h
 ../public/entity2/concreteentitylist.h
 ../public/gcsdk/gcsteamdefines.h
@@ -4197,12 +4205,12 @@ $tI
 ../public/panorama/controls/../layout/fillbrush.h
 ../public/tier0/threadtools.h
 ../public/tier0/utlblockmemory.h
+../public/tier0/utlleanvector.h
 ../public/tier0/utllinkedlist.h
+../public/tier0/utlrbtree.h
+../public/tier0/utlsortvector.h
+../public/tier0/utlsymboltable.h
 ../public/tier0/utltshash.h
-../public/tier1/utlleanvector.h
-../public/tier1/utlrbtree.h
-../public/tier1/utlsortvector.h
-../public/tier1/utlsymboltable.h
 ../public/tier2/fieldpath.h
 ../public/tier2/fileutils.h
 ./c_baseentity.h
@@ -4310,6 +4318,7 @@ $tI
 0.07
 0.075
 0.08
+0.1
 0.15
 0.2
 0.22
@@ -4562,7 +4571,6 @@ $tI
 125
 126
 127
-127.0.0.1
 128
 129
 12CBaseCubemap
@@ -4633,7 +4641,6 @@ $tI
 12CTraceFilter
 12CViewEffects
 12CVoiceStatus
-12C_AI_BaseNPC
 12C_BaseButton
 12C_BaseEntity
 12C_BasePlayer
@@ -5051,7 +5058,6 @@ $tI
 15CMemberFunctor0IP20CDynamicLightManagerMS0_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor0IPN8panorama9IUIWindowEMS1_FvvE12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIN23IWrappedInterpolatedVar10WorkItem_tE21CFuncJobItemProcessorIS3_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS3_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI22CParallelLoopProcessorI13FloatBitMap_t31CLoopMemberFuncJobItemProcessorIS2_S2_S2_EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI26CFunctorParallelControllerIZN34CEntityKeyValuesSaveRestoreOpsBase19BuildKeyValuesCacheEP20CGameSaveRestoreInfoEUliE_EEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI77CRestoreLastSimulationValuesForInterpolationList_ParallelProcessingControllerEMS2_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
@@ -5091,30 +5097,30 @@ $tI
 15CTEBeamEntPoint
 15CTEEnergySplash
 15CTakeDamageInfo
-15CTier0AppSystemI11IPredictionE
-15CTier0AppSystemI14ISource2ClientE
-15CTier0AppSystemI17IPanoramaUIClientE
-15CTier0AppSystemI18IGameClientExportsE
-15CTier0AppSystemI18IGameConfigurationE
-15CTier0AppSystemI9IClientUIE
-15CTier1AppSystemI11IPredictionLi0EE
-15CTier1AppSystemI14ISource2ClientLi0EE
-15CTier1AppSystemI17IPanoramaUIClientLi0EE
-15CTier1AppSystemI18IGameClientExportsLi0EE
-15CTier1AppSystemI18IGameConfigurationLi0EE
-15CTier1AppSystemI9IClientUILi0EE
-15CTier2AppSystemI11IPredictionLi0EE
-15CTier2AppSystemI14ISource2ClientLi0EE
-15CTier2AppSystemI17IPanoramaUIClientLi0EE
-15CTier2AppSystemI18IGameClientExportsLi0EE
-15CTier2AppSystemI18IGameConfigurationLi0EE
-15CTier2AppSystemI9IClientUILi0EE
-15CTier3AppSystemI11IPredictionLi0EE
-15CTier3AppSystemI14ISource2ClientLi0EE
-15CTier3AppSystemI17IPanoramaUIClientLi0EE
-15CTier3AppSystemI18IGameClientExportsLi0EE
-15CTier3AppSystemI18IGameConfigurationLi0EE
-15CTier3AppSystemI9IClientUILi0EE
+15CTier0AppSystemI11IPredictionLx0EE
+15CTier0AppSystemI14ISource2ClientLx0EE
+15CTier0AppSystemI17IPanoramaUIClientLx0EE
+15CTier0AppSystemI18IGameClientExportsLx0EE
+15CTier0AppSystemI18IGameConfigurationLx0EE
+15CTier0AppSystemI9IClientUILx0EE
+15CTier1AppSystemI11IPredictionLx0EE
+15CTier1AppSystemI14ISource2ClientLx0EE
+15CTier1AppSystemI17IPanoramaUIClientLx0EE
+15CTier1AppSystemI18IGameClientExportsLx0EE
+15CTier1AppSystemI18IGameConfigurationLx0EE
+15CTier1AppSystemI9IClientUILx0EE
+15CTier2AppSystemI11IPredictionLx0EE
+15CTier2AppSystemI14ISource2ClientLx0EE
+15CTier2AppSystemI17IPanoramaUIClientLx0EE
+15CTier2AppSystemI18IGameClientExportsLx0EE
+15CTier2AppSystemI18IGameConfigurationLx0EE
+15CTier2AppSystemI9IClientUILx0EE
+15CTier3AppSystemI11IPredictionLx0EE
+15CTier3AppSystemI14ISource2ClientLx0EE
+15CTier3AppSystemI17IPanoramaUIClientLx0EE
+15CTier3AppSystemI18IGameClientExportsLx0EE
+15CTier3AppSystemI18IGameConfigurationLx0EE
+15CTier3AppSystemI9IClientUILx0EE
 15CTier4AppSystemI11IPredictionLi0EE
 15CTier4AppSystemI18IGameConfigurationLi0EE
 15CUI_PageManager
@@ -5707,6 +5713,7 @@ $tI
 18CVScriptGameSystem
 18CViewAngleKeyFrame
 18C_BaseCombatWeapon
+18C_CG_CameraNodeAdd
 18C_DevtestHierarchy
 18C_EnvDeferredLight
 18C_EnvScreenOverlay
@@ -5909,13 +5916,17 @@ $tI
 20CAbilityIconModifier
 20CAbilityNameModifier
 20CAchievementActionIf
+20CAnimGraphGameSystem
 20CArcanaLevelModifier
 20CBaseAnimatingCamera
 20CBoundedCvar_Predict
 20CCGCameraNodeFactoryI15C_CG_CameraNodeE
+20CCGCameraNodeFactoryI18C_CG_CameraNodeAddE
 20CCGCameraNodeFactoryI20C_CG_CameraNodeShakeE
 20CCGCameraNodeFactoryI23C_CG_CameraNodeAISearchE
+20CCGCameraNodeFactoryI23C_CG_CameraNodeOverrideE
 20CCGCameraNodeFactoryI23C_CG_CameraNodePlaybackE
+20CCGCameraNodeFactoryI23C_CG_CameraNodeSubtractE
 20CCGCameraNodeFactoryI23C_DCG_CameraNodeStartupE
 20CCGCameraNodeFactoryI24C_CG_CameraNodeDOFFramerE
 20CCGCameraNodeFactoryI25C_CG_CameraNodeAABBFramerE
@@ -6050,6 +6061,7 @@ $tI
 20CUserMessageShowMenu
 20CUserMessageVGUIMenu
 20C_BaseClientUIEntity
+20C_CG_CameraNodeShake
 20C_FuncCombineBarrier
 20C_PhysPropClientside
 20C_PointValueRemapper
@@ -6222,6 +6234,7 @@ $tI
 22CAnimTagListenerHelperI15IPostGraphIKTagE
 22CAnimTagListenerHelperI16IParticleAnimTagE
 22CAnimTagListenerHelperI21IClothSettingsAnimTagE
+22CAnimTagListenerHelperI22IFootstepLandedAnimTagE
 22CAnimTagListenerHelperI24ISequenceFinishedAnimTagE
 22CAnimTagListenerHelperI25IPostGraphIKChainBlendTagE
 22CAudioEventTagListener
@@ -6480,6 +6493,7 @@ $tI
 23CUserMessageVoiceMask_t
 23C_CG_CameraNodeAISearch
 23C_CG_CameraNodePlayback
+23C_CG_CameraNodeSubtract
 23C_ColorCorrectionVolume
 23C_DCG_CameraNodeStartup
 23C_DevtestHierarchyChild
@@ -6865,7 +6879,6 @@ $tI
 26CDotaCardGameDraftInstance
 26CEconTool_BackpackExpander
 26CEnvDeferredLightPreviewer
-26CFootstepLandedTagListener
 26CGCClientJobGetQuestStatus
 26CGCClientJobSubmitFeedback
 26CGCMsgMemCachedGetResponse
@@ -7042,7 +7055,6 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorI15CAnimationLayer28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI15CUtlSymbolLarge10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI15CUtlSymbolLarge28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI16CTransformScaled10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI16ragdollelement_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19C_EconItemAttribute28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI35CNetworkedIKProceduralTargetContext28CNetworkUtlVector_MemoryTypeIS1_Lin1EEES1_E
@@ -7329,6 +7341,7 @@ $tI
 30CGameSystemReallocatingFactoryI19CDCGCardGameUpdaterS0_E
 30CGameSystemReallocatingFactoryI19CPrecacheGameSystemS0_E
 30CGameSystemReallocatingFactoryI19CStepSimulationHookS0_E
+30CGameSystemReallocatingFactoryI20CAnimGraphGameSystemS0_E
 30CGameSystemReallocatingFactoryI20CDCGLightEnvironmentS0_E
 30CGameSystemReallocatingFactoryI20CDynamicLightManagerS0_E
 30CGameSystemReallocatingFactoryI20CGameRulesGameSystemS0_E
@@ -8337,6 +8350,7 @@ $tI
 48CScriptConfig_Set01_kBurningOil_CARD_PLAY_SCRIPT
 48CScriptConfig_Set01_kBuyingTime_CARD_PLAY_SCRIPT
 48CScriptConfig_Set01_kChainFrost_CARD_PLAY_SCRIPT
+48CScriptConfig_Set01_kGush_GENERIC_TRIGGER_SCRIPT
 48CScriptConfig_Set01_kHonorGuard_CARD_PLAY_SCRIPT
 48CScriptConfig_Set01_kMurderPlot_CARD_PLAY_SCRIPT
 48CScriptConfig_Set01_kNetherWard_CARD_PLAY_SCRIPT
@@ -8716,6 +8730,7 @@ $tI
 63CScriptConfig_Set01_kActivateFracturedTimeline_CARD_PLAY_SCRIPT
 63CScriptConfig_Set01_kClaszuremeHourglass_GENERIC_TRIGGER_SCRIPT
 63CScriptConfig_Set01_kDestroyedfromWithin_GENERIC_TRIGGER_SCRIPT
+63CWorkshop_SetItemPaymentRules_Request_WorkshopDirectPaymentRule
 64CScriptConfig_Set01_kActivateBracersofSacrifice_CARD_PLAY_SCRIPT
 64CScriptConfig_Set01_kActivateHelmoftheDominator_CARD_PLAY_SCRIPT
 64CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription
@@ -8868,7 +8883,6 @@ $tI
 9CTEImpact
 9CTESparks
 9CTempEnts
-9CTimeline
 9CUI_Popup
 9C_EnvWind
 9C_PhysBox
@@ -8928,6 +8942,7 @@ $tI
 <%s:%s>
 <'
 <*
+<+
 </%s>
 </cameras>    <transform>      <rotation locked="true">1 0 0 0 1 0 0 0 1</rotation>      <translation locked="true">0 0 0</translation>      <scale locked="true">1</scale>    </transform>    <reference>LOCAL_CS["Local Coordinates (m)",LOCAL_DATUM["Local Datum",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]</reference>    <region>      <center>0 0 0</center>      <size>10 10 10</size>      <R>1 0 0 0 1 0 0 0 1</R>    </region>  </chunk></document>
 </code>
@@ -8966,7 +8981,6 @@ $tI
 <custom>
 <deck 1> <deck 2> Has two AI players play against each other
 <deck1> <deck2> [iterations=1]
-<deferred>
 <effect function()>,
 <embedded>
 <empty>
@@ -9041,6 +9055,7 @@ $tI
 >
 >%s%.3f
 >*
+>+
 >=
 >J
 >jm
@@ -9049,6 +9064,7 @@ $tI
 ?(
 ?(3w
 ?*
+?+
 ???
 ???CRR_Response bogus index
 ?C
@@ -9057,6 +9073,7 @@ $tI
 @
 @'
 @*
+@+
 @@
 @@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
 @@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding_RGB8A1.cpp
@@ -11088,7 +11105,6 @@ ATTACHED_NONE
 ATTACHED_OFF_HAND
 ATTACHED_PRIMARY_HAND
 ATTACHMENT_INFLUENCE_FLAGS_NONE
-ATTEMPTED TO DECOMMIT OWNED MEMORY STACK SPACE
 AUD
 AWARDED
 A_txt
@@ -11406,6 +11422,7 @@ AnimGraph Recording saved to %s
 AnimGraph Recording started on entity %s (%s):%i
 AnimGraph Recording stopped on entity %s (%s):%i
 AnimGraphEditorUtils001
+AnimGraphUpdate
 AnimIkLockLocal
 AnimLayer
 AnimLayerBase
@@ -11702,9 +11719,6 @@ Bad KV3 data for '%s': %s
 Bad date format on item %u: %s
 Bad entity index %d
 Bad entity serial number %d
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 Bad field in entity!!
 Bad field type
 Bad field type in entity (%s::%s)!!
@@ -11992,7 +12006,6 @@ C->E
 C-side of entity framework
 C1
 CAD
-CAI_BaseNPC
 CAN
 CANCEL
 CANCELLED
@@ -12063,6 +12076,7 @@ CBaseViewModel
 CBaseWorldPanel::Init
 CBeam
 CBitVec
+CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoardGameInstance::KillBoardGameInstanceForGameID(%s,%llu)
 CBoardGameInstance::KillBoardGameInstanceForGameID(%s,%llu) - not found; nothing done
 CBoardGameInstance::ShutdownBoardGame(%llu)
@@ -12125,6 +12139,7 @@ CBufferString::Trim(char const*)
 CBufferStringN
 CBulletWhizTimer
 CButtonTimed
+CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
 CCameraManagerGameSystem
 CCardCollection::OnPurchaseItemFromStore
 CCatalogue::OnLoadDeck
@@ -12454,6 +12469,15 @@ CEnvVolumetricFogController
 CEnvVolumetricFogVolume
 CEnvWind
 CEventDataCache
+CEventDispatcher_Base::CEventDispatcher_Base()
+CEventDispatcher_Base::IterateListener(CEventDispatcher_Base::DelegateIterator_Base_t&)
+CEventDispatcher_Base::IterateListeners_End(CEventDispatcher_Base::DelegateIterator_Base_t&)
+CEventDispatcher_Base::IterateListeners_Start(CEventDispatcher_Base::DelegateIterator_Base_t&, bool)
+CEventDispatcher_Base::RegisterEventListener_Base(CUtlAbstractDelegate const&, unsigned int, bool, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&, int, char const*)
+CEventDispatcher_Base::UnregisterEventListener_Base(CUtlAbstractDelegate const&, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&)
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CFailableAchievement
 CFiber::ReachedZeroReferences()
 CFingerBone
@@ -12569,6 +12593,15 @@ CGrid::OnLayoutTraverse
 CGrid::SetFocusedChild
 CGrid::UpdateChildPositions
 CGrid::UpdateVecVisible
+CGridStringPrinter::Clear()
+CGridStringPrinter::GetLines(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&) const
+CGridStringPrinter::NumRows() const
+CGridStringPrinter::SetColumnHeader(int, char const*)
+CGridStringPrinter::SetColumnJustification(int, bool)
+CGridStringPrinter::SetMaxStringLengthAllColumns(int)
+CGridStringPrinter::SetString(int, int, char const*)
+CGridStringPrinter::SetWordWrapColumn(int, bool, bool)
+CGridStringPrinter::SimpleSpew(int, char const*) const
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
 CHECK failed: !aggregate_value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()):
 CHECK failed: !checkpoints_.empty():
@@ -12818,9 +12851,7 @@ CHandle< CBaseEntity>
 CHandle< CBaseModelEntity >
 CHandle< CColorCorrection>
 CHandle< CFogController>
-CHandle< CPointHMDAnchor>
 CHandle< CPostProcessController>
-CHandle< CPropHMDAvatar>
 CHandle< C_BaseCombatWeapon >
 CHandle< C_BaseCombatWeapon>
 CHandle< C_BaseEntity>
@@ -12913,6 +12944,9 @@ CLIENT_DLL
 CLIENT_SIDE_RAGDOLL
 CLP
 CLUB
+CLZSS::Compress(unsigned char*, int, unsigned int*, bool)
+CLZSS::GetActualSize(unsigned char*)
+CLZSS::SafeUncompress(unsigned char*, unsigned char*, unsigned int)
 CLightComponent::Storage_t
 CLightComponentReferenced
 CLightComponentReferencedPtr
@@ -12932,6 +12966,7 @@ CLogicRelay
 CLogicalEntity
 CLoopModeGame::InitAllSystems()
 CLoopModeGame::LoopInit
+CLoopModeGame::OnClientAdvanceTick
 CLoopModeGame::OnClientFrameSimulate
 CLoopModeGame::OnClientPauseSimulate
 CLoopModeGame::OnClientPostOutput
@@ -12949,7 +12984,11 @@ CLoopModeGame::StaticInit-start
 CLoopModeRegistry::RegisterLoopModes()
 CMaterialDrawDescriptor
 CMemAllocSystemInitialize
-CMemoryStack %s
+CMemoryStack::CMemoryStack()
+CMemoryStack::CommitTo(unsigned char*)
+CMemoryStack::FreeAll(bool)
+CMemoryStack::Init(char const*, unsigned int, unsigned int, unsigned int, unsigned int)
+CMemoryStack::~CMemoryStack()
 CModelPointEntity
 CModelState
 CModelState::DoSetupPhysics
@@ -13185,6 +13224,8 @@ CSoundPatch::Update:  Removing CSoundPatch (%s) with NULL EHandle
 CSource1LegacyGameEventGameSystem
 CSource2Client::Disconnect
 CSource2Client::Shutdown
+CSparseMatrix::SetDimensions(int, int)
+CSparseMatrix::SetElement(int, int, float)
 CSpawnGroupMgrGameSystem::ActivateSpawnGroup:  no such group %s
 CSpawnGroupMgrGameSystem::FrameBoundary:  invoking unload of spawn group %s(%s)
 CSpawnGroupMgrGameSystem::UnloadSpawnGroup:  queueing unload of spawn group %s(%s)
@@ -13195,6 +13236,7 @@ CSpeechScriptBridge::Script_CommitAIResponse
 CSpeechScriptBridge::Script_FindBestResponse
 CSpeechScriptBridge::Script_GetExpressers
 CSplitScreenSlot
+CSplitString::Construct(char const*, char const**, int)
 CSprite
 CSpriteOriented
 CSteamUnifiedMessageDispatcher::SendMethod: Cannot invoke method without first registering listener.
@@ -13205,6 +13247,15 @@ CStrAutoEncode::InitEmpty()
 CStrAutoEncode::PopulateUTF32() const
 CStrAutoEncode::PopulateUTF8() const
 CStrAutoEncode::SetCopy(char const*, int)
+CStringPool::Allocate(char const*)
+CStringPool::CStringPool(StringPoolCase_t)
+CStringPool::Find(char const*)
+CStringPool::FreeAll()
+CStringPool::~CStringPool()
+CStringRegistry::AddString(char const*, int, ERBTreeInsertBehavior)
+CStringRegistry::CStringRegistry()
+CStringRegistry::GetStringID(char const*)
+CStringRegistry::~CStringRegistry()
 CStrongHandle
 CStylePropertyFactory
 CStylePropertyFactory:  Factory for '%s' already exists!!!!
@@ -13315,6 +13366,9 @@ CUserMsg_CustomGameEvent_t
 CUserMsg_HudError_t
 CUserMsg_ParticleManager_t
 CUtlBinaryBlock
+CUtlBinaryBlock::Set(void const*, int)
+CUtlBinaryBlock::SetLength(int)
+CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
@@ -13324,7 +13378,6 @@ CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
 CUtlBuffer::DetachMemory()
-CUtlBuffer::EatCComment(int*)
 CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
@@ -13333,13 +13386,12 @@ CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetOverflow(int)
 CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::GetString(char*, int)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
@@ -13352,12 +13404,9 @@ CUtlBuffer::VaPrintf(char const*, __va_list_tag*)
 CUtlFixedMemory overflow!
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
 CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
 CUtlMemoryPoolBase::AllocZero()
@@ -13437,6 +13486,14 @@ CUtlStringToken
 CUtlStringToken(%u)
 CUtlSymbol
 CUtlSymbolLarge
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::AddString(char const*, int)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::RemoveAll()
+CUtlSymbolTable::SetPageSize(unsigned int)
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
 CUtlVector
 CUtlVector< CEconItemAttribute >
 CUtlVector< QAngle >
@@ -13456,6 +13513,8 @@ CVariableBitStringBase::Resize(int)
 CVariant
 CVariantBase
 CVariantDefaultAllocator
+CVertexKDTree::BuildMidpoint(float const*, int, int)
+CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CViewAngleAnimation
 CViewAngleAnimation::LoadViewAnimFile failed to load script %s
 CViewAngleAnimation::RunAnimation called on an empty view animation
@@ -13482,7 +13541,6 @@ CXXABI_1.3.3
 CXXABI_1.3.5
 CXXABI_1.3.8
 C_%s
-C_AI_BaseNPC
 C_BaseAnimating
 C_BaseAnimating::InitBoneSetupThreadPool
 C_BaseAnimatingController
@@ -13714,7 +13772,6 @@ C_PoseController
 C_PostProcessController
 C_PostProcessingVolume
 C_PrecipitationBlocker
-C_PropHMDAvatar
 C_PropVRHand
 C_RagdollManager
 C_RopeKeyframe
@@ -13766,6 +13823,8 @@ Callback for event "%s" is NULL!!!
 Caller should provide us with *buffer_ when buffer is non-empty
 Calming Vines
 Camera Animation
+Camera Graph: State %s not found in State Machine Node %s
+Camera Graph: State Machine Node %s not found in Graph
 Camera Node
 CameraAnimation
 CameraFountain
@@ -14424,7 +14483,6 @@ Concussive Shot
 ConditionContainer
 ConditionLabels
 ConditionValue
-Conditional Error: %s
 Conection 0x%x was closed, which wasn't the one to the server.  Code %d (%s)
 ConfigAttachedModel
 ConfigName
@@ -14444,7 +14502,7 @@ ConfirmationCodeEnabled
 ConfirmationText
 Connect the vscript VM to the script debugger
 ConnectGameInterfaces
-ConnectInterfaces
+ConnectInterfaceSingletons
 ConnectOutput
 ConnectOutputToScript
 ConnectOutputToScriptSelf
@@ -14500,7 +14558,7 @@ Controls texture sampling mode for the panel. Set to alpha-only to use the textu
 Controls the horizontal and vertical placement of the background image, with the format: &lt;left|center|right&gt; &lt;horizontal length&gt; &lt;top|center|bottom&gt; &lt;vertical length&gt;<br><br>If length is a percent, the specified location within the image is positioned over that same specified position in the background. If the length is pixels, the top left corner is placed relative to the provided alignment keywords (left, bottom, etc.). See examples for more details.<br><br>If 1 value is specified, the other value is assumed to be center. If 2 values are specified, the first value must be for horizontal placement and the second for vertical.<br><br><b>Examples:</b><pre>// aligns the top left corner of the image with the top left corner of the panel (default)background-position: 0% 0%;// centers the image within the background (same as "center center")background-position: center;// aligns the bottom right corner of the image with the bottom right corner of the panel (same as "100% 100%")background-position: right bottom;// the top left corner of the image is placed 10px to the right of, 40px below the top left corner of the panelbackground-position: left 10px top 40px;</pre>
 Controls the rate of replay playback when playing back at normal time
 Controls the speed when matching offset to ideal angles in thirdperson view
-Controls truncation of text that doesn't fit in a panel.  "clip" means to simply truncate (on char boundaries), "ellipsis" means to end with '...', and "shrink" means to a We default to ellipsis, which is contrary to the normal CSS spec.<br><br><b>Examples:</b><pre>text-overflow: ellipsis;text-overflow: clip;text-overflow: shrink;</pre>
+Controls truncation of text that doesn't fit in a panel.  "clip" means to simply truncate (on char boundaries), "ellipsis" means to end with '...', and "shrink" means lower the font size to fit.  "noclip" allows the text to overflow based on the "overflow" style.We default to ellipsis, which is contrary to the normal CSS spec.<br><br><b>Examples:</b><pre>text-overflow: ellipsis;text-overflow: clip;text-overflow: shrink;text-overflow: noclip;</pre>
 Controls white-space wrapping on rendered text.  "normal" means wrap on whitespace, "nowrap" means do no wrapping at all.<br><br><b>Examples:</b><pre>white-space: normal;white-space: nowrap;</pre>
 Convars
 Convert SteamID into multiple formats
@@ -14579,12 +14637,14 @@ CreateEntity
 CreateEntity failed for slot %d
 CreateEntityToSpawn
 CreateEvent: event '%s' not registered.
+CreateGameRulesObject
 CreatePanelWithCurrentContext
 CreateParticle
 CreateParticleForPlayer
 CreateSimpleThread
 CreateSocketPair failed
 CreateUniformRandomStream
+CreateUniqueId
 CreateVideoPlayer
 Created physics for %s
 Creates a cheat mana improvement and sets cheater convars.
@@ -14629,6 +14689,7 @@ Currency %u has an invalid starting level %u
 Currency %u is missing a name
 CurrencyContainer
 CurrencyGrantSnippet
+Current Camera Pos: %s, Ang: %s
 Current close caption language (emtpy = use game UI language)
 Current item schema is up-to-date with version %08X.
 Current name of the skybox texture
@@ -15712,6 +15773,7 @@ DCG_dashboard
 DCG_purchase_force_failure
 DEADLINE_EXCEEDED
 DEBRIS
+DECONSTRUCTING Camera Node '%s'
 DEFAULT_WRITE_PATH
 DEFINE
 DEFINE group contains more than one branch
@@ -16143,6 +16205,7 @@ Displays the entity name
 Displays the entity name for all entities that have ShouldDisplayInActorNames true in code
 Dist   %.2f
 Divided We Stand
+Divine Favor
 Divine Intervention
 Divine Purpose
 Division or mod by zero: dividend.hi=
@@ -16547,6 +16610,7 @@ Encountered a no dupe item list %s without any entries!
 Encountered a reward (%s) that is specified as no dupe but is granting all items
 Encountered a reward (%s) that specified granting %u grants, but only %u are available
 Encountered an active duration for an event that was more than a year!
+Encountered an invalid currency %s on a regional price. Item definition %s(%u)
 Encountered an invalid price that cannot be stored in the price field for an item. Item definition %s(%u)
 Encountered bad enum value "%s" for type %s, entity "%s" field "%s"!
 Encountered entity that cannot be used in portrait maps - %s
@@ -16555,6 +16619,7 @@ Encountered invalid currency grant amount of %s %u
 Encountered malformed keys in call to CallScriptFunction : "%s"!
 Encountered message and was unable to parse the wrapper. Possibly corrupt message
 Encountered message for job %s (message ID %d) sent by %s called within an invalid context of %d. Dropping the message.
+Encountered missing currencies. Item definition %s(%u)
 Encountered more thresholds than times that this claim can be claimed
 Encountered multiple challenge lists that share the name %s
 Encountered multiple challenges with ID %u and config %u
@@ -16604,7 +16669,9 @@ Entities/Thinks
 Entity "%s" encountered an error in RunPrivateScript()
 Entity %d: %s became %s on client
 Entity %s [%s]: Invalid keyvalue type for 'parentname' key of skeleton instance!
+Entity '%s'
 Entity Dump
+Entity Hierarchy For %d:
 Entity I/O attempted to invoke unknown global script function "%s"!
 Entity I/O attempted to invoke unknown private or global script function "%s" on entity "%s"!
 Entity I/O attempted to invoke unknown private script function "%s" on entity "%s"!
@@ -17362,6 +17429,7 @@ Found multiple claims using the same name of %s
 Found multiple currencies that share the same id %u
 Found multiple currencies that share the same name %s
 Found no entity at %d.
+Found node called %s but type was unexpected.
 Fountain Flask
 FountainHero%i
 FountainHeros
@@ -17459,7 +17527,6 @@ G->B
 G1
 GACUpdated
 GAME INSTRUCTOR:
-GAMECONSOLE
 GAMEROOT
 GAME_HEADER
 GBP
@@ -17820,7 +17887,6 @@ Guardian Greaves
 Guerrilla Tactics
 Gujarati
 Gurmukhi
-Gush
 H
 H'
 H(
@@ -17828,6 +17894,7 @@ H*
 H1
 HAS
 HB
+HC
 HD
 HDR Color Scale: %0.3f
 HELPER_BONE
@@ -17837,7 +17904,6 @@ HIERARCHY_BONE
 HIERARCHY_BONE_MERGE
 HIERARCHY_NONE
 HIERARCHY_TYPE_COUNT
-HIGHDPI
 HKD
 HLine
 HMDHint
@@ -19060,7 +19126,6 @@ JSConsoleText
 JSCreatePanelWithCurrentContext first param must be a panel to parent to
 JSCreatePanelWithCurrentContext takes 1 optional argument: panel to parent created panel to
 JSCreatePanelWithCurrentContext was not called within a context
-JSON error, unterminated element:
 JSONWebAPIResponse
 Jakub Kasper
 James Paick
@@ -19126,6 +19191,8 @@ KeyBinderNewBind
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
+KeyValuesFromJSON
+KeyValuesSystem
 Kharoshthi
 Khmer
 Kieran Yanner
@@ -19170,13 +19237,11 @@ LINEAR_I8
 LINEAR_RGB888
 LINEAR_RGBA16161616
 LINEAR_RGBA8888
-LINUX
 LMb#
 LOG_CONSOLE
 LOG_GENERAL
 LOOKSPIN
 LOSSpeculativeMuzzle_t
-LOWVIOLENCE
 LT_txt
 LWIN
 L_%u_%u
@@ -19427,9 +19492,7 @@ LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ..
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, char const*, ...)
 LoggingSystem_LogDirect
-LoggingSystem_LogDirect(int, LoggingSeverity_t, Color, char const*)
 LoggingSystem_RegisterLoggingChannel
-Logic Error in CExpressionEvaluator
 Logic problem? szsrc =
 LongLanguage
 Look At
@@ -19665,7 +19728,6 @@ MaterialParam_t
 MaterialResourceData_t
 MaterialUtils_001
 Max Mana
-Max committed memory: %u KB out of %d KB
 Max mouse move scale factor, 0 for no limit
 Max number of video resolutions to show in UI.
 Max time to attempt a reconnect after a crash.
@@ -19830,6 +19892,7 @@ Missing PLTE before tRNS
 Missing Scripts
 Missing an event name
 Missing caption for '%s'
+Missing currency %s for a regional priced item. Item definition %s(%u)
 Missing field: FileDescriptorProto.name.
 Missing file '%s'
 Missing item name in recipe component
@@ -19839,7 +19902,6 @@ Missing number of charges specified
 Missing sprite material %s
 Missing token %s (from %s)
 Missing value for currency type %s for price point %u
-Mission %d
 Mission %d Claim
 Mission %d Slot
 MissionCompleted
@@ -19971,6 +20033,7 @@ Murder Plot
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
+MurmurHash3_32
 MurmurHash64
 Music: %s
 Must be in tools mode!
@@ -20000,6 +20063,7 @@ N'
 N(
 N1
 N10Reflection10CClassInfoE
+N10Reflection19CAttributeContainerE
 N10Reflection6Detail11CClassInfoTI11IToolObjectEE
 N11C_SkyCamera23NetworkVar_m_skyboxDataE
 N12C_BaseEntity25Cm_vecVelocityInitializerE
@@ -20853,15 +20917,6 @@ NOTE: We were already waiting on %s to join via beacon!
 NOT_FOUND
 NO_AUTO_POSSESS)
 NO_START_OPT)
-NPC_STATE_ALERT
-NPC_STATE_COMBAT
-NPC_STATE_DEAD
-NPC_STATE_IDLE
-NPC_STATE_INVALID
-NPC_STATE_NONE
-NPC_STATE_PLAYDEAD
-NPC_STATE_PRONE
-NPC_STATE_SCRIPT
 NPEHasButton%i
 NPEHasButton1
 NPEHelperButton%i
@@ -21001,6 +21056,7 @@ No active game found.
 No cached payment method
 No cards found.
 No case for Muzzleflash type: %d
+No closing */ before end of file
 No conversion from %s to bool now
 No conversion from %s to float now
 No conversion from %s to int now
@@ -21182,7 +21238,6 @@ OK
 OKButton
 ORIENT
 OSCILLATE_POSE_PARAMETERS
-OSX
 OUTBUFF_FULL
 OUT_OF_RANGE
 Obj
@@ -21433,6 +21488,7 @@ Overflow %d temporary ents!
 Overflow in total point cost for levels!
 Overgrowther
 OverlayGamepadInputMsg
+Overload
 Overpower2
 Override of field %s::%s, flags changed from %s to %s
 Override the far clipping plane. -1 means to use the value in env_fog_controller.
@@ -21467,13 +21523,14 @@ P38CMsgGameServerToClientInitialGameState
 P8
 P8CUI_Page
 P9KeyValues
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:234
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:563
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1193
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../animgraph_batchupdater.cpp:127
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2461
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1168
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2455
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
-PARALLEL_PROCESS utlsoacontainer.cpp:2533
+PARALLEL_PROCESS utlsoacontainer.cpp:2531
 PARALYZE
 PARAM_ERROR
 PARENT
@@ -21820,7 +21877,6 @@ POSECONTROLLER_FMODTYPE_TOTAL
 POSECONTROLLER_FMODTYPE_TRIANGLE
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
-POSIX
 POSIX collating elements are not supported
 POSIX named classes are supported only within a class
 POST_PROCESS_PARAMETER_COUNT
@@ -21836,6 +21892,7 @@ PPPN_TOP_VIGNETTE_STRENGTH
 PPPN_VIGNETTE_BLUR_STRENGTH
 PPPN_VIGNETTE_END
 PPPN_VIGNETTE_START
+PRECIPITATION
 PRECIPITATIONBLOCKER
 PRECIPITATION_TYPE_DUSTMOTES
 PRECIPITATION_TYPE_PARTICLEASH
@@ -21851,7 +21908,6 @@ PREVENT_PHYSICS_FORCE
 PROVIDER_GENERIC
 PROVIDER_WEAPON
 PRUNE
-PS3
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFjjjjEEPS2_jijEE
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFvjjEEPS2_ijEE
 PURE VIRTUAL CALL - CHECK FOR DUMP!
@@ -21859,7 +21915,7 @@ PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
-Pack Leader
+Pack Leadership
 Pack%i
 PackCardScene
 PackCards
@@ -22101,7 +22157,6 @@ Plat_GetModuleFilename
 Plat_GetModuleInterfaceFactory
 Plat_GetModuleProcAddress
 Plat_GetMonitorContentsScale
-Plat_GetOSType
 Plat_GetRawCallStack
 Plat_GetThreadIndex
 Plat_GetTime
@@ -22127,8 +22182,6 @@ Plat_USTime
 Plat_UUIDFromString
 Plat_UUIDToString
 Plat_UnloadModule
-Plat_VirtualAlloc
-Plat_VirtualFree
 Plat_WindowToScreenCoords
 Plat_ctime
 Plat_gmtime
@@ -22301,6 +22354,7 @@ PlusTwo
 Pneumonic Spray
 Po
 Poaching Knife
+Point entity.
 Point value:
 PointSource
 PointWorldTextJustifyHorizontal_t
@@ -22500,6 +22554,8 @@ Print simple description of prediction copy fields for entindex
 PrintLinkedConsoleMessage
 Prints current volume of radius sounds
 Prints info about decals currently in the scene
+Prints the entity hierarchy tree rooted at the specified ent(s)
+Prints the entity scenenode hierarchy tree rooted at the specified ent(s)
 Priority changed from
 Privacy
 Private Lobby
@@ -22667,8 +22723,6 @@ R32_UINT
 R8G8B8A8_ETC2_EAC
 R8G8B8_ETC2
 RADIATION
-RAGDOLL_BLEND_IN
-RAGDOLL_BLEND_OUT
 RBLegend
 REMOVENORAGDOLL
 RESET_SEQUENCES
@@ -22682,7 +22736,6 @@ RESPONSE_RESPONSE
 RESPONSE_RULES
 RESPONSE_SCENE
 RESPONSE_SCRIPT
-RESPONSE_SENTENCE
 RESPONSE_SPEAK
 RG11_EAC
 RG1616
@@ -22729,7 +22782,6 @@ RadioButton.SelectedTextColor
 RadioButton.TextColor
 RadioButtonContainer
 RadioSelected
-RagdollBlendDirection
 RagdollImpact
 RagdollImpact_global_client
 RagdollLowViolenceManager
@@ -23001,7 +23053,6 @@ Reports: %d
 RequestMarketEligibility
 Requested size is too large to fit into size_t.
 Requiem of Souls
-RequireKeyValuesSystem
 RequireSchemeFromFile
 Required fields are not allowed in proto3.
 Required key "attributes" missing.
@@ -23350,6 +23401,7 @@ Scene Objects/Rigid Body Scene Object Updates
 Scene Objects/Skeleton Scene Object Updates
 Scene: %s
 SceneFileCache002
+SceneNode Hierarchy For %d:
 ScenePrint
 SceneSystem_002
 SceneUtils_001
@@ -24188,7 +24240,7 @@ Specifies the target font face height in pixels.<br><br><b>Example:</b><pre>font
 Specifies the text alignment for text within this panel, defaults to left.<br><br><b>Examples:</b><pre>text-align: left;text-align: right;text-align: center;text-align: justify;text-align: justify-letter-spacing;</pre>
 Specifies the timing function to use for transition properties on this panel, if more than one comma delimited value is specified then the values are applied to each property specified in 'transition-property' in order.  If only one value is specified then it applies to all the properties specified in transition-property. Valid timing functions are: ease, ease-in, ease-out, ease-in-out, linear.<br><br><b>Examples:</b><pre>transition-timing-function: ease-in-out;transition-timing-function: ease-in-out, linear;transition-timing-function: cubic-bezier( 0.785, 0.385, 0.555, 1.505 );</pre>
 Specifies the transform for text within this panel, defaults to none. Possible values: none, uppercase, lowercase.<br><br><b>Example:</b><pre>text-transform: uppercase;</pre>
-Specifies what to do with contents that overflow the available space for the panel. Possible values:<br>"squish" - Children are squished to fit within the panel's bounds if needed (default)<br>"clip" - Children maintain their desired size but their contents are clipped<br>"scroll" - Children maintain their desired size and a scrollbar is added to this panel<br><br><b>Examples:</b><pre>overflow: squish squish; // squishes contents in horizontal and vertical directionsoverflow: squish scroll; // scrolls contents in the Y direction</pre>
+Specifies what to do with contents that overflow the available space for the panel. Possible values:<br>"squish" - Children are squished to fit within the panel's bounds if needed (default)<br>"clip" - Children maintain their desired size but their contents are clipped<br>"scroll" - Children maintain their desired size and a scrollbar is added to this panel<br><br>"noclip" - Children maintain their desired size and content is allowed to overflow this panel<br><br><b>Examples:</b><pre>overflow: squish squish; // squishes contents in horizontal and vertical directionsoverflow: squish scroll; // scrolls contents in the Y direction</pre>
 Specifies where to point the arrow of a context menu at on this panel. The first value controls how the arrow is positioned horizontally when the context menu is to the top or bottom of the panel, and the second value controls how the arrow is positioned vertically when the context menu is to the left or right of the panel. Default is '50% 50%'.<br><br><b>Example:</b><pre>context-menu-arrow-position: 25% 50%;</pre>
 Specifies where to point the arrow of a tooltip at on this panel. The first value controls how the arrow is positioned horizontally when the tooltip is to the top or bottom of the panel, and the second value controls how the arrow is positioned vertically when the tooltip is to the left or right of the panel. Default is '50% 50%'.<br><br><b>Example:</b><pre>tooltip-arrow-position: 25% 50%;</pre>
 Specifies where to position a context menu relative to this panel. Valid options include 'left', 'top', 'right', and 'bottom'. List up to 4 positions to determine the order that positions are tried if the context menu doesn't fully fit on screen. Default is 'right left bottom top'. If less than 4 positions are specified, the context menu first tries the opposite of the specified position along the same axis before switching to the other axis.<br><br><b>Examples:</b><pre>context-menu-position: bottom;context-menu-position: left bottom;</pre>
@@ -24410,6 +24462,7 @@ StrReplaceChar
 Strange
 Strange Type:
 StreamEntitiesToFile
+Strength in Numbers
 String field
 String literals cannot cross line boundaries.
 StringOutputStream.
@@ -24573,6 +24626,7 @@ TeamChanged
 Teleport other splitscreen player to my location.
 Tells camera to change modes
 Telugu
+Tempest Clone
 Tempest Double
 Template for Card %u
 Template:%sInstance:%sCalculated:%s
@@ -24912,9 +24966,7 @@ Total %d entities (%d empty)
 Total Frames : %3i
 Total achievements: %d  Total possible points: %d
 Total client think time: %f
-Total committed memory: %d KB
 Total job count: %d
-Total used memory:      %d KB
 Total: %s
 TotalLossCount%d
 TotalLossCount0
@@ -25120,7 +25172,6 @@ UTF8)
 UTIL_ReadEncryptedKVFile(%s)
 UTIL_Remove
 UTIL_RemoveImmediate
-UUID_1.0
 UV88
 UVLX8888
 UVWQ8888
@@ -25194,6 +25245,7 @@ Unexpected failure while serializing option submessage
 Unexpected result! Terminating simulation. P1=%d, P2=%d
 Unimplemented Map Reflection API.
 Unique Aggregates: %u
+UniqueIdToString
 Unit Ready For Deployment Upon Death (%u)
 UnitCallout
 UnitReadiedForDeploymentUponDeath
@@ -25330,6 +25382,7 @@ UpdateNewEffects
 UpdatePanelInfo
 UpdatePanelInfo - update
 UpdatePanelPaintInfo
+UpdatePlayer
 UpdatePlayerName with bogus slot %d
 UpdateQueryCache
 UpdateStyleInMemory
@@ -25375,6 +25428,7 @@ UseGenericContinuousEffect
 UseGenericDeathEffect
 UseGenericReactiveEffect
 UseNativeResolutionButton
+Useage: dcg_camera_state <state_machine_name> <desired_state_name> <optional: cross_fade_duration> <optional: delay>
 Used by the create_card console command. When set to a value, it will prefer cards from that set in the case of reprints
 User Messages
 User declined the transaction
@@ -25576,6 +25630,7 @@ V_iswcntrl
 V_iswdigit
 V_iswspace
 V_localeconv
+V_log2_uint
 V_logf
 V_longjmp
 V_pow
@@ -25713,7 +25768,6 @@ ViewAIDeckButton
 ViewBoardButton
 ViewDeckButton
 ViewDeckIcon
-ViewEffects
 ViewEffectsGameSystem
 ViewFocus
 ViewLastCard
@@ -25769,8 +25823,6 @@ WEAPON2
 WEAPON_IS_ACTIVE
 WEAPON_IS_CARRIED_BY_PLAYER
 WEAPON_NOT_CARRIED
-WINDOWS
-WINXP
 WOL: 0x%p (%s)
 WON
 WORLDTEXT_HORIZONTAL_ALIGN_CENTER
@@ -25833,6 +25885,7 @@ WebVTT Parse Error %d: %s:%u:%u - %s.
 WeeklyWins%d
 WeightForPhoneme:: Unrecognized phoneme %s
 Welcome message contained %s twice
+Werewolf
 WheelCenter
 When connected to hltv or playing a demo, adjust the interp time by this ratio.
 When enabled and collecting asserts for the GC, this will generate stacks for the asserts
@@ -25966,7 +26019,6 @@ Writing zero-length unknown chunk
 X
 X(
 X*
-X360
 X360_DST16
 X360_DST24
 X360_DST24F
@@ -26279,7 +26331,6 @@ ZN26CDCGCardAchievementManager21RegisterAchievementFnI47CDCGWinWithAllHeroesInOn
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI50CDCGKillingEnemyHeroWithSameHeroAchievementFactoryEEv13StrongTypedefIj18AchievementTypeTagLj0EEEUliP13CDotaCardGameE_
 ZN26CDCGCardAchievementManager21RegisterAchievementFnI58CDCGInitialMeleeCreepSurvivesUntilMana10AchievementFactoryEEv13StrongTypedefIj18AchievementTypeTagLj0EEEUliP13CDotaCardGameE_
 ZN26CParallelProcessorAbstractI18CParallelProcessorIN23IWrappedInterpolatedVar10WorkItem_tE21CFuncJobItemProcessorIS2_ELi1EEE3RunEvE13CStackFunctor
-ZN26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS2_ELi1EEE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI22CParallelLoopProcessorI13FloatBitMap_t31CLoopMemberFuncJobItemProcessorIS1_S1_S1_EEE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI26CFunctorParallelControllerIZN34CEntityKeyValuesSaveRestoreOpsBase19BuildKeyValuesCacheEP20CGameSaveRestoreInfoEUliE_EE3RunEvE13CStackFunctor
 ZN26CParallelProcessorAbstractI77CRestoreLastSimulationValuesForInterpolationList_ParallelProcessingControllerE3RunEvE13CStackFunctor
@@ -26647,6 +26698,7 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../gamecore/gameconfig
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../gamecore/igamesystem.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/ai_responsesystem.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animationlayer.cpp
+_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/baseentity_shared.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/baseflex_shared.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/collisionproperty.cpp
@@ -26694,7 +26746,6 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/te/te_player
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/te/te_smoke.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/voice_status.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/weapon_parse_base.cpp
-_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../animgraph_batchupdater.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../base_world_panel.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseflex.cpp
@@ -27142,6 +27193,8 @@ bakelightindexscale
 ball_lightning
 base-position
 base-position-variance
+base64_decode
+base64_encode
 baseAccel
 baseAccel NaN
 baseAnimBaseLayerChanged
@@ -27313,7 +27366,6 @@ breakable_count
 breakable_model
 breakable_skin
 breakpiece_name_token
-broadcast
 bspline
 bucket
 bucket1
@@ -27581,6 +27633,7 @@ cg_camera_aabb_framer_draw_bounds
 cg_camera_nearplane_collision
 cg_camera_playback
 cg_camera_test
+cg_debug_graph
 cg_gameplay_camera_fov
 cg_gameplay_camera_fov_4x3
 cg_orbit_cam_zoom_increments
@@ -27705,6 +27758,7 @@ cl_ent_clear_debug_overlays
 cl_ent_find
 cl_ent_find_index
 cl_ent_grab
+cl_ent_hierarchy
 cl_ent_hitbox
 cl_ent_joint_axis_size
 cl_ent_joint_names
@@ -27718,6 +27772,7 @@ cl_ent_pivot_size
 cl_ent_remove
 cl_ent_remove_all
 cl_ent_scale
+cl_ent_scenehierarchy
 cl_ent_script_dump
 cl_ent_select
 cl_ent_setang
@@ -27846,7 +27901,6 @@ cl_pitchdown
 cl_pitchspeed
 cl_pitchup
 cl_playerspraydisable
-cl_poweredragdoll_transition_time
 cl_pred_checkstuck
 cl_pred_error_verbose
 cl_pred_optimize
@@ -27938,8 +27992,6 @@ cl_ss_origin
 cl_steamcontroller
 cl_stuff_keys
 cl_team
-cl_tempragdoll_transition_time
-cl_tempragdoll_unragdoll_time
 cl_tracer_whiz_distance
 cl_tree_sway_dir
 cl_update_spatial_entities_before_latchwork
@@ -27996,6 +28048,7 @@ clip_3D_skybox_near_to_world_far
 clip_3D_skybox_near_to_world_far_offset
 clip_size
 close() failed:
+closecaption
 closed for reason:
 closing ) for (?C expected
 clothScale
@@ -28349,9 +28402,17 @@ dcg_camera lane1
 dcg_camera lane2
 dcg_camera lane3
 dcg_camera toggle_strategic
-dcg_camera_graph_load
+dcg_camera_graph_hot_reload
+dcg_camera_graph_legacy
+dcg_camera_graph_position_offset_x
+dcg_camera_graph_position_offset_y
+dcg_camera_graph_position_offset_z
+dcg_camera_graph_rotation_offset_x
+dcg_camera_graph_rotation_offset_y
+dcg_camera_graph_rotation_offset_z
 dcg_camera_lane%i
 dcg_camera_rig
+dcg_camera_state
 dcg_camera_strategic_view
 dcg_cancel_casting
 dcg_card
@@ -28677,7 +28738,6 @@ dcg_media_match
 dcg_media_mode
 dcg_min_rounds_for_event_progress_on_loss_in_bot_games
 dcg_min_rounds_for_event_progress_on_loss_in_pvp_games
-dcg_new_campaign
 dcg_new_player
 dcg_new_player 0; host_writeconfig
 dcg_new_player_enabled
@@ -29227,6 +29287,7 @@ enemytowerhealth
 engine2
 english
 english,brazilian,french,german,italian,japanese,koreana,russian,schinese,spanish,tchinese,latam
+ensureExistsMatchList
 ent yaw: %.2f, body_yaw: %.2f, body_pitch: %.2f, move_x: %.2f, move_y: %.2f
 ent yaw: %.2f, body_yaw: %.2f, move_yaw: %.2f, gait_yaw: %.2f, body_pitch: %.2f
 ent_actornames font name
@@ -29350,6 +29411,7 @@ exclamation-mark
 exclude_from_save_games
 execifexists 360controller.cfg
 execifexists undo360controller.cfg
+executeOnHierarchy
 exp( %s )
 expanded
 expected newline
@@ -29841,6 +29903,7 @@ float
 float (%g)
 float Etc::Block4x4Encoding::CalcPixelError(Etc::ColorFloatRGBA, float, Etc::ColorFloatRGBA)
 float Etc::Block4x4Encoding::GetError()
+float __gnu_cxx::__stoa<float, float, char>(float (*)(char const*, char**), char const*, char const*, unsigned long*)
 float differs (net %g pred %g) diff(%g)
 float( %f )
 float32
@@ -30008,14 +30071,15 @@ g default
 g'
 g*
 gO : upper-mid back rounded vowel
+g_BitBuf_BitWriteMasks
+g_BitBuf_ExtraMasks
 g_GameEventManager.Init()
 g_Language
 g_Mathlib_GammaToLinearByteTable
 g_SoundPatchCount
 g_TSPointerListNodes
-g_Tier1_BitWriteMasks
-g_Tier1_ExtraMasks
 g_VProfCurrentProfile
+g_bUpdateStringTokenDatabase
 g_debug_ragdoll_visualize
 g_iStylePropertyIndexNextFree < 255
 g_pMemAlloc
@@ -30134,10 +30198,8 @@ generic_popup_body
 generic_popup_title
 german
 getenv
-gethostbyname
 getpos
 getpos_exact
-getsockname
 ggx_cubemap_blur_accumulation_pass_count
 ghostwhite
 gif
@@ -30407,6 +30469,7 @@ horizontal-align
 horizontal_align
 horizontalalign
 horizontalcount
+host
 host_timescale
 host_writeconfig
 hostname
@@ -30619,7 +30682,6 @@ inputnamespace
 inputs
 inset
 inspect_type
-instanceID
 instance_data
 instancebaseline
 instant_replay
@@ -31104,6 +31166,7 @@ kGodsStrength
 kGoldenTicket
 kGrazingShot
 kGrow
+kGush
 kGust
 kHandofGod
 kHeadshot
@@ -31278,6 +31341,7 @@ kStartCardDraw
 kStartCardPlay
 kStartCombatResolution
 kStartEndTurn
+kStartPlayerTurn
 kStartShopping
 kStartTurn
 kStaticField
@@ -31480,10 +31544,8 @@ libpthread.so.0
 libstdc++.so.6
 libsteam_api.so
 libtier0.so
-libuuid.so.1
 libv8.so
 libvideo.so
-libvstdlib.so
 light_*
 light_directional
 light_environment
@@ -31501,7 +31563,6 @@ lightgray
 lightgreen
 lightgrey
 lightgroup
-lighting_origin
 lightingbasis
 lightmap
 lightmapuv
@@ -31574,11 +31635,11 @@ localBits
 localSound
 local_account_id
 local_gravity_cp
+local_player_planning_camera_angle
 local_player_team
 local_progress
 local_strings
 local_temp_entity
-localhost
 localhost/artifact/
 localhost/community/
 localonly
@@ -31603,7 +31664,6 @@ log10
 log2f
 logic_relay
 lookAt
-lookat
 lookbehind assertion is not fixed length
 looking_to_play
 lookstrafe
@@ -31764,7 +31824,6 @@ m_MotorList
 m_MoveCollide
 m_MoveType
 m_MuzzleFlashTexture
-m_NPCState
 m_Name
 m_NetBoolVariables
 m_NetByteVariables
@@ -31828,7 +31887,6 @@ m_Providers
 m_QuaternionVariables
 m_QueuedEvents
 m_Radius
-m_RagdollTransform
 m_Range
 m_Receivers
 m_Recipients
@@ -31867,8 +31925,6 @@ m_TextureHeight
 m_TextureScale
 m_Theta
 m_TimeBetweenEvents
-m_TransitionTransform
-m_VRControllerType
 m_Value
 m_VectorVariables
 m_ViewAngles
@@ -32025,7 +32081,6 @@ m_bExcludeFromSaveGames
 m_bExclusive
 m_bExplicitMode
 m_bExposureControl
-m_bFadeCorpse
 m_bFadeOut
 m_bFadingIn
 m_bFadingOut
@@ -32087,7 +32142,6 @@ m_bHovered
 m_bIgnoreInput
 m_bIgnoreRotation
 m_bImportant
-m_bImportantRagdoll
 m_bInDuckJump
 m_bInLanding
 m_bInReload
@@ -32211,13 +32265,11 @@ m_bParticlesVisible
 m_bPassthoughCaller
 m_bPathingDeck
 m_bPaused
-m_bPerformAvoidance
 m_bPerformanceVisible
 m_bPhysicsInitted
 m_bPlayerUnderwater
 m_bPoisoned
 m_bPoseValueParity
-m_bPoweredRagdoll
 m_bPredictable
 m_bPredictionEligible
 m_bPrevEndPointPos
@@ -32773,8 +32825,6 @@ m_flPlaceTime
 m_flPlaneOffset
 m_flPlaybackRate
 m_flPoseParameter
-m_flPoweredRagdoll_BlendWeight
-m_flPoweredRagdoll_TransitionStartTime
 m_flPrecomputedMaxRange
 m_flPredictionErrorTime
 m_flPressureDelay
@@ -32867,14 +32917,12 @@ m_flStartWindSpeed
 m_flStepSize
 m_flStepSoundTime
 m_flStrength
-m_flStunUntilTime
 m_flSunDistance
 m_flSwayTime
 m_flSwimSoundTime
 m_flSwitchTime
 m_flTailAlphaScale
 m_flTargetYaw
-m_flTempRagdollTransitionTime
 m_flTheta
 m_flThickness
 m_flTickRemainder
@@ -33015,11 +33063,9 @@ m_hParentView
 m_hParticleEffect
 m_hPendingSequence
 m_hPhysicsAttacker
-m_hPointHMDAnchor
 m_hPostProcessCtrl
 m_hPostSettings
 m_hProjectedDecal
-m_hPropHMDAvatar
 m_hProps
 m_hRagdollSource
 m_hRemapLineEnd
@@ -33028,7 +33074,6 @@ m_hSceneObjectController
 m_hScriptInstance
 m_hScriptScope
 m_hSecondHand
-m_hServerRagdoll
 m_hSkyMaterial
 m_hSnapshot
 m_hSplitOwner
@@ -33080,8 +33125,6 @@ m_iCurrentMaxRagdollCount
 m_iCurrentOverlay
 m_iCurrentThinkContext
 m_iDamageCustom
-m_iDeathFrame
-m_iDeathPose
 m_iDeaths
 m_iDefaultFOV
 m_iDesiredOverlay
@@ -33138,7 +33181,6 @@ m_iOpvarIndex
 m_iPacketloss
 m_iPing
 m_iPointValue
-m_iPoweredRagdoll_TransitionDirection
 m_iPrimaryAmmoCount
 m_iPrimaryAmmoType
 m_iPriority
@@ -33198,7 +33240,6 @@ m_iszOpvarName
 m_iszOverlayNames
 m_iszPhysicsDamageTableName
 m_iszPrivateVScripts
-m_iszSentence
 m_iszSoundScriptName
 m_iszStackName
 m_iv_AnimOpHistory
@@ -33362,7 +33403,6 @@ m_nFlags
 m_nFlickerFrame
 m_nFogLightingMode
 m_nFogType
-m_nFootstepType
 m_nForceBone
 m_nForceLOD
 m_nForceRefreshCount
@@ -33725,7 +33765,6 @@ m_sVMName
 m_saveId
 m_sceneNode
 m_sceneObjects
-m_sentence
 m_shaderName
 m_shadowColor
 m_shadowDirection
@@ -34542,6 +34581,16 @@ need steamid
 needsprocessing
 net_showusercmd
 net_test_basecombatcharacter
+netadr_t::Clear()
+netadr_t::CompareAdr(netadr_t const&, bool) const
+netadr_t::GetIPHostByteOrder() const
+netadr_t::GetPort() const
+netadr_t::IsValid() const
+netadr_t::SetFromString(char const*, bool)
+netadr_t::SetIP(unsigned int)
+netadr_t::SetPort(unsigned short)
+netadr_t::SetType(netadrtype_t)
+netadr_t::ToString(char*, unsigned int, bool) const
 netmsg
 netupdate
 network
@@ -34810,6 +34859,7 @@ opponentAccountID
 opponent_card_%i
 opponent_count
 opponent_id
+opponent_planning_camera_angle
 opponenttoweralive
 opponenttowerdeathskull
 opponenttowerhealth
@@ -35506,7 +35556,6 @@ particles/store/packs/pack_opening_intro.vpcf
 particles/store/packs/pack_opening_training.vpcf
 particles/store/packs/pack_purchase.vpcf
 particles/store/packs/pack_training_hover.vpcf
-particles/strider/muzzleflash_strider.vpcf
 particles/tracer_fx/weapon_tracers.vpcf
 particles/ui/mainmenu/ui_mainmenu_logo.vpcf
 particles/water_fx/water_trail_directional.vpcf
@@ -35557,14 +35606,21 @@ perspectiveplayerid
 peru
 pervertexlighting
 phase not supported
+phase_card_draw
+phase_card_play
+phase_combat
+phase_end_match
+phase_end_turn
+phase_initial_flop
 phase_label_text
 phase_name
+phase_pregame
+phase_shop_and_flop
 phi
 phonemedelay
 phonemefilter
 phonemes
 phonemes_strong
-phonemes_weak
 phonemesnap
 phonenumber
 phrase
@@ -35743,8 +35799,6 @@ poseParametersChanged
 pose_control
 pose_control_type
 pose_param %s: %f
-position.y
-position.z
 positionInLocalSpace
 positive_or_null
 post-initialized
@@ -36096,6 +36150,7 @@ refrigerator
 regeneration
 regenerationAmount
 regenmodifier
+regional_prices
 registered:
 regression
 regular expression is too large
@@ -36263,6 +36318,9 @@ roll_criteria_set
 roll_numbers
 romanian
 room_name
+root.shake_node.aspect_ratio_adjustment_node.simple_or_complex_camera_state_machine
+root.shake_node.aspect_ratio_adjustment_node.simple_or_complex_camera_state_machine.game_phase_state_machine
+root.shake_node.aspect_ratio_adjustment_node.simple_or_complex_camera_state_machine.game_phase_state_machine.phase_card_play
 rootNode
 rope_averagelight
 rope_collide
@@ -36283,9 +36341,6 @@ rotateY(
 rotateZ(
 rotateonhover
 rotateonmousemove
-rotation.pitch
-rotation.roll
-rotation.yaw
 rotationAxis
 rotationSpeed
 round_end
@@ -36631,12 +36686,14 @@ sienna
 silence
 silver
 simple_cubic
+simple_graph
 simulationTimeSerializer
 sin( %s )
 sincos
 single_shot
 single_shot_npc
 singleplayer
+singletons.cpp
 sint32
 sint64
 six
@@ -37390,8 +37447,10 @@ std::__throw_bad_alloc()
 std::__throw_bad_cast()
 std::__throw_bad_function_call()
 std::__throw_future_error(int)
+std::__throw_invalid_argument(char const*)
 std::__throw_length_error(char const*)
 std::__throw_logic_error(char const*)
+std::__throw_out_of_range(char const*)
 std::__throw_out_of_range_fmt(char const*, ...)
 std::__throw_regex_error(std::regex_constants::error_type)
 std::__throw_system_error(int)
@@ -37623,6 +37682,7 @@ stick_snd_select_ang_0
 stick_snd_select_dist_0
 stick_snd_select_dist_1
 sticky_tooltips
+stof
 stop_building
 stop_fullscreen_movie
 stop_immediately
@@ -38335,7 +38395,6 @@ usermessages.proto
 uses_essence
 utlstring (%s)
 utlstringtoken
-uuid_generate
 uw
 v
 v %g %g %g
@@ -38425,7 +38484,6 @@ value_local_index
 value_max
 value_min
 valve.net
-valveextensions.proto
 vanmgrph
 variant
 vb phys
@@ -38850,6 +38908,7 @@ width-percentage
 width-percentage( %s )
 win_count
 windradius
+windranger_arcana_anim_run_rare
 with %.1fs delay.
 with a type that does not implement MergeFrom. This is unsafe;
 with type

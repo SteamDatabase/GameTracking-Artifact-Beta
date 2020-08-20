@@ -147,7 +147,6 @@ $tI
 %.*g
 %.*s
 %.15lf
-%.18g
 %.1f
 %.2f ms
 %01d
@@ -197,7 +196,6 @@ $tI
 %s allocation count overflow( %llu > %llu )
 %s%d
 %s,
-%s/
 %s/%s's viewport (%d,%d - %d,%d) extends outside of the framebuffer (%d,%d)
 %sLOD Level: %d Draw Calls: %d Triangles: %d
 %u
@@ -234,6 +232,7 @@ $tI
 *N6google8protobuf12_GLOBAL__N_133FastFieldValuePrinterUtf8EscapingE
 *Z29InitForFrustum_DebugRenderingyyP10CSceneViewEUlP25CSceneLightObjectInternalE_
 *Z33InitForFrustum_DebugRenderingCsgoyyP10CSceneViewEUlP25CSceneLightObjectInternalE_
+*ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneViewP11ISceneLayerP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
 *ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneViewyyEUlP18CEnvMapSceneObjectE_
 *ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneViewyyEUlP28CSceneLightProbeVolumeObjectE_
 *ZN14CLightBinnerVr19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustumyyEUlP25CSceneLightObjectInternalE_
@@ -290,15 +289,15 @@ $tI
 ../public/ordered_constructor.h
 ../public/scenesystem/vertexformat.h
 ../public/tier0/tslist.h
+../public/tier0/utl3dallocator.h
 ../public/tier0/utlblockmemory.h
 ../public/tier0/utlhashdict.h
+../public/tier0/utlleanvector.h
 ../public/tier0/utllinkedlist.h
+../public/tier0/utlmultilist.h
+../public/tier0/utlrbtree.h
+../public/tier0/utlsymboltable.h
 ../public/tier0/utltshash.h
-../public/tier1/utl3dallocator.h
-../public/tier1/utlleanvector.h
-../public/tier1/utlmultilist.h
-../public/tier1/utlrbtree.h
-../public/tier1/utlsymboltable.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -333,7 +332,6 @@ $tI
 0.25
 0.5
 0.85
-00000000-0000-0000-0000-000000000000
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0x%016llX
@@ -387,17 +385,16 @@ $tI
 14ITonemapSystem
 14IVolumetricFog
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIP12CSceneObject21CFuncJobItemProcessorIS3_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
-15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS3_ELi1EEEMS6_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMsg_CVars_CVar
-15CTier0AppSystemI11ISceneUtilsE
-15CTier0AppSystemI12ISceneSystemE
-15CTier1AppSystemI11ISceneUtilsLi0EE
-15CTier1AppSystemI12ISceneSystemLi0EE
-15CTier2AppSystemI11ISceneUtilsLi0EE
-15CTier2AppSystemI12ISceneSystemLi0EE
-15CTier3AppSystemI11ISceneUtilsLi0EE
-15CTier3AppSystemI12ISceneSystemLi0EE
+15CTier0AppSystemI11ISceneUtilsLx0EE
+15CTier0AppSystemI12ISceneSystemLx0EE
+15CTier1AppSystemI11ISceneUtilsLx0EE
+15CTier1AppSystemI12ISceneSystemLx0EE
+15CTier2AppSystemI11ISceneUtilsLx0EE
+15CTier2AppSystemI12ISceneSystemLx0EE
+15CTier3AppSystemI11ISceneUtilsLx0EE
+15CTier3AppSystemI12ISceneSystemLx0EE
 160
 16CDefaultAccessor
 16CLightBinnerCsgo
@@ -578,7 +575,6 @@ $tI
 <NULL>
 <UNKNOWN ID: %d>
 <b>Viewport X</b>=%d <b>Y</b>=%d <b>Width</b>=%d <b>Height</b>=%d  <b>MinZ</b>=%.3f <b>MaxZ</b>=%.3f
-<deferred>
 <font color="red">Display lists discarded</font>
 <hashed>
 <i>Display lists discarded because of unmet stencil bit dependency</i>
@@ -871,9 +867,6 @@ BGRX8888_LINEAR
 BackUp() can only be called after Next().
 BackUp() can only be called after a successful Next().
 Bad KV3 data for '%s': %s
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 BakedLODBuilderMgr001
 Base Spring;
 BaseIKRig
@@ -935,6 +928,7 @@ CBaseConstraint
 CBindlessFastPathPartition::EnsureEnvironmentMaps() - Number of environment maps exceeds maximum (%d), skipping additional environment maps.
 CBindlessFastPathPartition::EnsureGPUResources - insufficient descriptor set support. CWorldNode::CanUseBindlessDesc() needs to filter before getting here.
 CBindlessFastPathSceneObjectDesc
+CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceMorph
@@ -966,6 +960,7 @@ CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
+CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConstraintSlave
@@ -976,6 +971,9 @@ CDirectionalLightObjectDesc
 CDrawCullingData
 CEntityIndex
 CEnvMapLightObjectDesc
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CFingerBone
 CFingerChain
 CFingerSource
@@ -1310,6 +1308,9 @@ CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid other view target 
 CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid texture handle for "%s"!
 CScratchRenderTargetSystem::GetRenderTargetInfo cannot work until FinishRenderingViews is called!
 CSimpleQuadRenderer
+CSparseMatrix::SetDimensions(int, int)
+CSparseMatrix::SetElement(int, int, float)
+CSplitString::Construct(char const*, char const**, int)
 CSpotLightObjectDesc
 CSpotLightObjectDescCsgo
 CSpotLightObjectDescVr
@@ -1348,6 +1349,15 @@ CTwistConstraint
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::SetSeed(int)
+CUtl3DAllocator2::Allocate3D(int, int, int, Rect3D_t*)
+CUtl3DAllocator2::CUtl3DAllocator2()
+CUtl3DAllocator2::Free3D(Rect3D_t const&)
+CUtl3DAllocator2::Reset(int, int, int)
+CUtl3DAllocator::Allocate3D(int, int, int, bool, Rect3D_t*)
+CUtl3DAllocator::Reset(int, int, int)
+CUtlBinaryBlock::Set(void const*, int)
+CUtlBinaryBlock::SetLength(int)
+CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
@@ -1356,7 +1366,6 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCComment(int*)
 CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
@@ -1364,13 +1373,12 @@ CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetOverflow(int)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
@@ -1381,12 +1389,8 @@ CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int
 CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
-CUtlMemoryBlockAllocator::Alloc(unsigned int)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
-CUtlMemoryBlockAllocator::MemUsage() const
-CUtlMemoryBlockAllocator::Purge()
-CUtlMemoryBlockAllocator::SetPageSize(unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
 CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
@@ -1422,10 +1426,19 @@ CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
+CUtlSymbolTable::AddString(char const*)
+CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
+CUtlSymbolTable::Find(char const*) const
+CUtlSymbolTable::String(CUtlSymbol) const
+CUtlSymbolTable::~CUtlSymbolTable()
+CUtlTSRowAllocator::AllocateDataIgnoreHoles(int, int*, int*, int)
+CUtlTSRowAllocator::Reset(int, int)
 CUtlVector
 CVProfNode::EnterScope()
 CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
+CVertexKDTree::BuildMidpoint(float const*, int, int)
+CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
 CWristBone
 CXXABI_1.3
@@ -1567,10 +1580,9 @@ ComputeLayerInfo
 ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
-Conditional Error: %s
 ConfigAttachedModel
 ConfigurationSystem_001
-ConnectInterfaces
+ConnectInterfaceSingletons
 ConvertGammaToLinear
 Copy
 CopyAttrFrom
@@ -1600,7 +1612,6 @@ D32FS8
 DATA_LOSS
 DEADLINE_EXCEEDED
 DEFAULT_WRITE_PATH
-DEMO
 DXT1
 DXT1_ONEBITALPHA
 DXT3
@@ -1807,7 +1818,6 @@ G channel not found
 G channel not found!
 G->B
 GAME
-GAMECONSOLE
 GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
@@ -1871,7 +1881,6 @@ H
 HC
 HD
 HELPER_BONE
-HIGHDPI
 HW Does not support occlusion queries!
 Hammer/BakeOnlyCubemaps
 Hammer/UsesBakedLighting
@@ -1965,7 +1974,6 @@ Invalid wire type for CPPTYPE_UINT64:
 Inverse Multi Quadratic
 Invert Axes;
 JIGGLE_BONE
-JSON error, unterminated element:
 K
 KMeansQuantization
 KV Conditional Evaluation Error
@@ -1992,9 +2000,7 @@ LINEAR_I8
 LINEAR_RGB888
 LINEAR_RGBA16161616
 LINEAR_RGBA8888
-LINUX
 LOG_GENERAL
-LOWVIOLENCE
 Layer Plane
 Layer Specific:
 Leaked drawlists : %d!!!!!
@@ -2032,7 +2038,6 @@ LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, Color, char 
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, char const*, ...)
 LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
-Logic Error in CExpressionEvaluator
 Logic problem? szsrc =
 LookAtList
 Low level command to set the flags byte associated with an object class. sc_SetClassFlags <classname> <value>
@@ -2336,7 +2341,6 @@ Number of world traversals:
 Numbers starting with leading zero must be in octal.
 OK
 ORIENT
-OSX
 OUT_OF_RANGE
 Object %4d: 0x%p, class=%20s, origin=(%13g,%13g,%13g), bounds=(%13g,%13g,%13g):(%13g,%13g,%13g), desc=0x%p, flags=0x%016llX
 ObjectLists use %ikb w/%ikb waste, reclaimed %ikb of unused
@@ -2367,7 +2371,7 @@ Overrides the map's fog settings (-1 populates fog_ vars with map's values)
 P
 P8
 P@
-PARALLEL_PROCESS utlsoacontainer.cpp:2533
+PARALLEL_PROCESS utlsoacontainer.cpp:2531
 PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
@@ -2392,8 +2396,6 @@ POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 POSITION
-POSIX
-PS3
 PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
@@ -2435,9 +2437,7 @@ Plat_FloatTime
 Plat_GetCPUFrequency
 Plat_GetEnv
 Plat_GetModuleFilename
-Plat_GetOSType
 Plat_GetThreadIndex
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_MSTime
 Plat_SetDenormalsAreZero
@@ -2952,6 +2952,7 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
+V_strnlen
 V_strtod
 V_strtoi64
 V_strtok
@@ -3000,9 +3001,6 @@ W
 WARNING
 WARNING: Directional lights not supported by the light binner!
 WARNING: Trying to create a CRenderContextPtr without a valid context.
-WIN32
-WINDOWS
-WINXP
 Warning
 Warning parsing text-format
 Warning:  %s = '%s' is infinite, clamping value.
@@ -3021,7 +3019,6 @@ WorldRenderer/LightProbeVolumeUncompressedFormat
 WorldRendererBuilderMgr001
 WorldRendererMgr001
 X
-X360
 X360_DST16
 X360_DST24
 X360_DST24F
@@ -3029,7 +3026,6 @@ Y
 Yaw;
 Z
 ZN26CParallelProcessorAbstractI18CParallelProcessorIP12CSceneObject21CFuncJobItemProcessorIS2_ELi1EEE3RunEvE13CStackFunctor
-ZN26CParallelProcessorAbstractI18CParallelProcessorIi27CMemberFuncJobItemProcessorIi10CCallQueueS2_ELi1EEE3RunEvE13CStackFunctor
 [
 [$0]
 [%.3f server clamped to %.3f]
@@ -3375,11 +3371,12 @@ ftell
 fwrite
 g
 g default
+g_BitBuf_BitWriteMasks
+g_BitBuf_ExtraMasks
 g_Mathlib_GammaToLinearByteTable
 g_TSPointerListNodes
-g_Tier1_BitWriteMasks
-g_Tier1_ExtraMasks
 g_VProfCurrentProfile
+g_bUpdateStringTokenDatabase
 g_pMemAlloc
 g_pThreadPool
 game
@@ -3455,7 +3452,6 @@ google/protobuf/message.cc
 google/protobuf/message_lite.cc
 google/protobuf/reflection_ops.cc
 google/protobuf/repeated_field.cc
-google/protobuf/stubs/common.cc
 google/protobuf/stubs/stringpiece.cc
 google/protobuf/stubs/stringprintf.cc
 google/protobuf/stubs/strutil.cc
@@ -3494,7 +3490,6 @@ int google::protobuf::CalculateBase64EscapedLen(int, bool)
 int( %d = 0x%X )
 int32
 int64
-interfaces.cpp
 internal error in map key sorting
 invert_orientation
 irradvolumescreenquad
@@ -3521,7 +3516,6 @@ libpthread.so.0
 libscenesystem.so
 libstdc++.so.6
 libtier0.so
-libvstdlib.so
 lightbinner.cpp
 lightbinner_total_data_%d.vtex
 lightcookie
@@ -4383,7 +4377,7 @@ scenesysPyramid
 scenesystem
 scenesystem.cpp
 scenesystem.cpp(6539): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7816): Waited 500 ms for jobs to complete. Attempt to drain windows message queue. Jobs in queue = %d
+scenesystem.cpp(7811): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp
@@ -4423,6 +4417,7 @@ sharpStartAngle
 sin
 sin( %s )
 singleplayer
+singletons.cpp
 sint32
 sint64
 size
@@ -4601,7 +4596,6 @@ strerror
 string
 strings::Substitute format string invalid: asked for "$
 strlen
-strnlen
 strpbrk
 strrchr
 strspn
@@ -4833,7 +4827,6 @@ zF
 {
 { ... };
 {$0$1}
-{}()':
 |
 }
 } %llu aggs, %s total data

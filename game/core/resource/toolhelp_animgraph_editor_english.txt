@@ -1609,5 +1609,30 @@ Set this to less than 1 to have the Stretch activate before the leg is fully str
 		"Attribute.CSingleFrameAnimNode.m_networkMode:help"		"Note used by this node"
 		"Attribute.CBlend2DAnimNode.m_bLockWhenWaning"		"Lock Blend When Waning"
 		"Attribute.CBlend2DAnimNode.m_bLockWhenWaning:help"		"When true, the blend value will not get update while this node is being blended out of (aka: \"Waning\")"
+		"Element.CFootStepTriggerAnimNode"		"Foot Step Trigger"
+		"Element.CFootStepTriggerAnimNode:help"		"Fires tags based on the status of foot steps, using the Strider System foot step data.  Does not affect the pose of the character.  "
+		"Attribute.CFootStepTriggerAnimNode.m_sName"		"Name"
+		"Attribute.CFootStepTriggerAnimNode.m_sName:help"		"The name of the anim graph node.  Shown in the header bar of the node in the graph editor.  If no name is set, or the name is \"Unnamed\", then the graph editor will show the type of the node and the name of the parameter used to control it as its name.  "
+		"Attribute.CFootStepTriggerAnimNode.m_networkMode"		"Network Mode"
+		"Attribute.CFootStepTriggerAnimNode.m_networkMode:help"		"Defines where the logic for this graph node is evaluated:
+
+<UL>
+<LI> <b>Server Authoritative: </b> The logic for this node runs on the server, and the results are networked down to the client
+<LI> <b>Client Simulate: </b> The logic for this node runs on the client, and its state is not networked
+</UL>
+
+<p/>
+
+<em>Note: When a node is set to <b>Client Simulate</b> all of its children are forced to also be Client Simulate, regardless of what their Network Mode setting is </em>"
+		"Attribute.CFootStepTriggerAnimNode.m_flTolerance"		"Tolerance"
+		"Attribute.CFootStepTriggerAnimNode.m_flTolerance:help"		"This node uses the trajectory offset height from the stride data to determine if the foot is on the ground.  When blending multiple animations that lift the feet at slightly different times, the height might not always go to zero.  So this value allows the node to account for and blend-based errors by considering the foot to be \"on the ground\" as long as its height is less than this amount.  "
+		"Attribute.CFootStepTriggerAnimNode.m_items"		"Feet"
+		"Attribute.CFootStepTriggerAnimNode.m_items:help"		"The feet to track"
+		"Attribute.CFootStepTriggerItem.m_footName"		"Foot"
+		"Attribute.CFootStepTriggerItem.m_footName:help"		"The foot that this trigger is watching"
+		"Attribute.CFootStepTriggerItem.m_triggerPhase"		"Trigger Phase"
+		"Attribute.CFootStepTriggerItem.m_triggerPhase:help"		"Choose between triggering the tag event when the foot is on the ground or in the air.  "
+		"Attribute.CFootStepTriggerItem.m_tags"		"Tags"
+		"Attribute.CFootStepTriggerItem.m_tags:help"		"List of tags to fire when the trigger criteria are met"
 	}
 }

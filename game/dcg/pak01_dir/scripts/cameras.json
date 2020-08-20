@@ -1,8 +1,415 @@
 {
-	"root": {  
-		"class": "PointSource",
-		"source": "dcg_camera_strategic_view",
-		"debugName": "Simple Camera"
-	}
+  //This node is defined outside of the root, and can therefore be reused by the "root" graph.
+  "dummy_camera_angles": {
+    "class": "CameraAngles",
+    "debugName": "A Dummy CameraPosition for use by many nodes.",
+
+    "position": [ 0.0, 0.0, 122.0 ],
+    "rotation": [ 90.0, 90.0, 0.0 ],
+
+    "FovX": "45",
+    "ZNear": "8",
+    "ZFar": "2000",
+
+    "DofNearBlurry": "8",
+    "DofNearCrisp": "200",
+    "DofFarCrisp": "1000",
+    "DofFarBlurry": "2000",
+
+    "DofTiltToGround": "1",
+
+    "DofEnabled": "true"
+  },
+
+  //any node definitions listed inside the root is included as part of the graph.
+  "root": {
+    "class": "StateMachine",
+
+    "debugName": "Root of Artifact Camera Graph.",
+
+    "shake_node": {
+      "class": "Shake",
+      "debugName": "Adds shake due to View System.",
+
+      "aspect_ratio_adjustment_node": {
+        "class": "AspectRatioAdjustment",
+
+        "debugName": "Adjusts FOV based on the aspect ratio",
+
+        "simple_or_complex_camera_state_machine": {
+          "class": "StateMachine",
+
+          "debugName": "Controls whether the fancy state machine is seen or not.",
+
+          "simple_graph": {
+            "class": "CameraNode",
+            "debugName": "Simple Overview Camera",
+            "inputs": [ "dummy_camera_angles" ]
+          },
+       
+          //input 1:
+          "game_phase_state_machine": {
+            "class": "StateMachine",
+
+            "debugName": "Move between game phases.",
+
+            "phase_pregame": {
+              "class": "CameraNode",
+              "debugName": "Pregame State",
+              "inputs": [ "dummy_camera_angles" ]
+            },
+
+            "phase_initial_flop": {
+              "class": "CameraNode",
+              "debugName": "Flop State",
+              "inputs": [ "dummy_camera_angles" ]
+            },
+            "phase_card_draw": {
+              "class": "CameraNode",
+              "debugName": "Card Draw State",
+              "inputs": [ "dummy_camera_angles" ]
+            },
+            "phase_card_play": {
+
+              //it would be good to do a tilt modifier here to suggest which side combat will begin on.
+
+              "class": "StateMachine",
+
+              "debugName": "Move between player and opponent turns.",
+
+              "local_player_planning_camera_angle": {
+                "class": "CameraAngles",
+                "local_player_planning_camera_angle": null,
+                "debugName": "Overview Position for Player",
+
+                "position": [ 0.0, -5.0, 120.0 ],
+                "rotation": [ 88.0, 90.0, 0.0 ],
+
+                "FovX": "45",
+                "ZNear": "8",
+                "ZFar": "2000",
+
+                "DofNearBlurry": "8",
+                "DofNearCrisp": "200",
+                "DofFarCrisp": "1000",
+                "DofFarBlurry": "2000",
+
+                "DofTiltToGround": "1",
+
+                "DofEnabled": "true"
+              },
+
+              "opponent_planning_camera_angle": {
+                "class": "CameraAngles",
+
+                "debugName": "Overview Position for Opponent",
+
+                "position": [ 0.0, 5.0, 120.0 ],
+                "rotation": [ 92.0, 90.0, 0.0 ],
+
+                "FovX": "45",
+                "ZNear": "8",
+                "ZFar": "2000",
+
+                "DofNearBlurry": "8",
+                "DofNearCrisp": "200",
+                "DofFarCrisp": "1000",
+                "DofFarBlurry": "2000",
+
+                "DofTiltToGround": "1",
+
+                "DofEnabled": "true"
+
+
+              }
+
+            },
+            "phase_end_turn": {
+              "class": "CameraNode",
+              "debugName": "End Turn State",
+              "inputs": [ "dummy_camera_angles" ]
+            },
+            "phase_combat": {
+              "class": "CameraNode",
+              "debugName": "Combat State",
+              "inputs": [ "dummy_camera_angles" ]
+
+              //here it would be fun to tilt the camera as we go into each lane.
+
+            },
+            "phase_shop_and_flop": {
+              "class": "CameraNode",
+              "debugName": "Shop And Flop State",
+              "inputs": [ "dummy_camera_angles" ]
+              //needs fleshing out for substates
+            },
+
+            "phase_end_match": {
+              "class": "StateMachine",
+
+              "debugName": "Becomes active when the game finishes.",
+
+              "victory_state_machine": {
+                "class": "StateMachine",
+
+                "debugName": "Active state when the local player has won",
+
+
+                "local_opponent_tower_left_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+
+                  "position": [ -20.0, -40.0, 40.0 ],
+                  "rotation": [ 35.0, 120.0, 0.0 ],
+
+                  "FovX": "60",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+                },
+
+                "local_opponent_tower_center_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+                  "position": [ 4.0, -50.0, 40.0 ],
+                  "rotation": [ 40.0, 94.0, 0.0 ],
+
+                  "FovX": "60",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+
+                },
+
+                "local_opponent_tower_right_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+                  "position": [ 70.0, -30.0, 20.0 ],
+                  "rotation": [ 20.0, 140.0, 0.0 ],
+
+                  "FovX": "60",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+                }
+
+              },
+
+              "defeat_state_machine": {
+                "class": "StateMachine",
+
+                "debugName": "Active state when the local opponent has won",
+
+                "local_player_tower_left_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+                  "position": [ 90.0, -45.0, 40.0 ],
+                  "rotation": [ 35.0, 30.0, 0.0 ],
+
+                  "FovX": "45",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+
+
+                },
+
+                "local_player_tower_center_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+                  "position": [ 30.0, -65.0, 40.0 ],
+                  "rotation": [ 35.0, 60.0, 0.0 ],
+
+                  "FovX": "45",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+
+
+                },
+
+                "local_player_tower_right_camera": {
+                  "class": "CameraAngles",
+
+                  "debugName": "Position of camera when the game is a draw",
+
+
+                  "position": [ 90.0, -45.0, 40.0 ],
+                  "rotation": [ 30.0, 140.0, 0.0 ],
+
+                  "FovX": "45",
+                  "ZNear": "8",
+                  "ZFar": "2000",
+
+                  "DofNearBlurry": "8",
+                  "DofNearCrisp": "200",
+                  "DofFarCrisp": "1000",
+                  "DofFarBlurry": "2000",
+
+                  "DofTiltToGround": "1",
+
+                  "DofEnabled": "true"
+                }
+
+              },
+
+              "draw_camera": {
+                "class": "CameraAngles",
+
+                "debugName": "Position of camera when the game is a draw",
+
+                "position": [ 0.0, 0.0, 124.0 ],
+                "rotation": [ 90.0, 90.0, 0.0 ],
+
+                "FovX": "45",
+                "ZNear": "8",
+                "ZFar": "2000",
+
+                "DofNearBlurry": "8",
+                "DofNearCrisp": "200",
+                "DofFarCrisp": "1000",
+                "DofFarBlurry": "2000",
+
+                "DofTiltToGround": "1",
+
+                "DofEnabled": "true"
+              },
+
+              "surrender_camera": {
+                "class": "CameraAngles",
+
+                "debugName": "Position of camera when a player surrenders",
+
+                "position": [ 0.0, 0.0, 124.0 ],
+                "rotation": [ 90.0, 90.0, 0.0 ],
+
+                "FovX": "45",
+                "ZNear": "8",
+                "ZFar": "2000",
+
+                "DofNearBlurry": "8",
+                "DofNearCrisp": "200",
+                "DofFarCrisp": "1000",
+                "DofFarBlurry": "2000",
+
+                "DofTiltToGround": "1",
+
+                "DofEnabled": "true"
+
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    /*    Some old Things
+    "legacy_cameras_state_machine": {
+      "class": "StateMachine",
+
+      "debugName": "Some Old Camera Positions for lanes",
+
+      "legacy_camera_lane_left": {
+        "class": "PointSource",
+
+        "debugName": "Left Lane Camera Position.",
+
+        "source": "dcg_camera_lane1"
+      },
+
+      "legacy_camera_lane_center": {
+        "class": "PointSource",
+
+        "debugName": "Center Lane Camera Position.",
+
+        "source": "dcg_camera_lane2"
+      },
+
+      "legacy_camera_lane_right": {
+        "class": "PointSource",
+
+        "debugName": "Right Lane Camera Position.",
+
+        "source": "dcg_camera_lane3"
+      }
+    }
+  */
+
+
+  }
+
+
+
+
 }
 
+
+/*
+
+	This is a quick reference to the useable class names for nodes, and what enum/class they refer to. You should be able to read the for implementation
+	AddClass( "CameraNode", (uint32)ECGCameraClass::k_ECGCameraClass_CameraNode );//Root: tends to be extended from but can be used to arbitrarily set up a node that does nothing but blend.
+	AddClass( "AABBFramer", (uint32)ECGCameraClass::k_ECGCameraClass_AABBFramer );
+	AddClass( "AISearch", (uint32)ECGCameraClass::k_ECGCameraClass_AISearch );
+	AddClass( "AspectRatioAdjustment", (uint32)ECGCameraClass::k_ECGCameraClass_AspectRatioAdjustment );
+	AddClass( "CameraAnimation", (uint32)ECGCameraClass::k_ECGCameraClass_CameraAnimation );
+	AddClass( "ConstrainToColliders", (uint32)ECGCameraClass::k_ECGCameraClass_ConstrainToColliders );
+	AddClass( "DOFFramer", (uint32)ECGCameraClass::k_ECGCameraClass_DOFFramer );
+	AddClass( "Playback", (uint32)ECGCameraClass::k_ECGCameraClass_Playback );
+	AddClass( "PlayerControlledOrbit", (uint32)ECGCameraClass::k_ECGCameraClass_PlayerControlledOrbit );
+	AddClass( "PointSource", (uint32)ECGCameraClass::k_ECGCameraClass_PointSource );
+	AddClass( "RecenterToPanel", (uint32)ECGCameraClass::k_ECGCameraClass_RecenterToPanel );
+	AddClass( "Shake", (uint32)ECGCameraClass::k_ECGCameraClass_Shake );
+	AddClass( "SmoothLookAt", (uint32)ECGCameraClass::k_ECGCameraClass_SmoothLookAt );
+	AddClass( "StateMachine", (uint32)ECGCameraClass::k_ECGCameraClass_StateMachine );
+	AddClass( "CameraAngles", (uint32)ECGCameraClass::k_ECGCameraClass_CameraAngles );
+	
+	*/

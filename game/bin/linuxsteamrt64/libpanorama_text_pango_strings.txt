@@ -187,7 +187,7 @@ $g*
 ../common/protobuf_helpers.cpp
 ../public/ordered_constructor.h
 ../public/tier0/utllinkedlist.h
-../public/tier1/utlrbtree.h
+../public/tier0/utlrbtree.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -229,10 +229,10 @@ $g*
 13CUIFontFilePB
 14CBaseAppSystemIN8panorama15IUITextServicesEE
 14ConCommandBase
-15CTier0AppSystemIN8panorama15IUITextServicesEE
-15CTier1AppSystemIN8panorama15IUITextServicesELi0EE
-15CTier2AppSystemIN8panorama15IUITextServicesELi0EE
-15CTier3AppSystemIN8panorama15IUITextServicesELi0EE
+15CTier0AppSystemIN8panorama15IUITextServicesELx0EE
+15CTier1AppSystemIN8panorama15IUITextServicesELx0EE
+15CTier2AppSystemIN8panorama15IUITextServicesELx0EE
+15CTier3AppSystemIN8panorama15IUITextServicesELx0EE
 16CDefaultAccessor
 18CPlaceholderConVar
 1g*
@@ -280,7 +280,6 @@ $g*
 <<ERROR>>
 <INVALID>
 <NULL>
-<deferred>
 <g*
 <no deferred ref found>
 <no failure reason set>
@@ -436,6 +435,9 @@ CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. S
 CDirIterator::CDirIterator(char const*, char const*, unsigned int)
 CDirIterator::NextFile()
 CDirIterator::~CDirIterator()
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
 CHECK failed: !aggregate_value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()):
 CHECK failed: !checkpoints_.empty():
@@ -723,11 +725,10 @@ CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
@@ -763,7 +764,6 @@ Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You m
 Cannot copy json_name to a proto of a different size.
 Cannot get here
 Cg*
-CharacterSetBuild
 CheckDeepLoadModule
 Code Signing
 Comment started here.
@@ -771,7 +771,7 @@ ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
 ConfigurationSystem_001
-ConnectInterfaces
+ConnectInterfaceSingletons
 Could not create an instance of
 Could not find type "
 Couldn't parse default value "
@@ -1394,10 +1394,7 @@ Pg*
 PhysicsBuilderMgr001
 Plat_DebugPrint
 Plat_ExitProcess
-Plat_GetEnv
 Plat_GetModuleProcAddress
-Plat_GetOSType
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_LoadModule
 Plat_LoadModuleRaw
@@ -2203,6 +2200,7 @@ fwrite
 g
 g*
 g_VProfCurrentProfile
+g_bUpdateStringTokenDatabase
 g_free
 g_object_unref
 g_pMemAlloc
@@ -2582,7 +2580,6 @@ int32
 int64
 int_err_get (err.c)
 int_thread_get (err.c)
-interfaces.cpp
 internal error
 internal error in map key sorting
 international-organizations
@@ -2632,7 +2629,6 @@ libpanorama_text_pango.so
 libpthread.so.0
 libstdc++.so.6
 libtier0.so
-libvstdlib.so
 listen
 localKeyID
 localityName
@@ -3174,6 +3170,7 @@ signingTime
 simpleSecurityObject
 singleLevelQuality
 singleplayer
+singletons.cpp
 sint32
 sint64
 size too big:
@@ -3440,7 +3437,6 @@ zlib compression
 {
 { ... };
 {$0$1}
-{}()':
 |
 }
 ~

@@ -30,7 +30,6 @@ $ORIGIN
 %
 %-120s
 %-120s - %s
-%.18g
 %01d
 %02d
 %03d
@@ -52,7 +51,6 @@ $ORIGIN
 %s / %s MB (non-evictable: %s MB)
 %s%d
 %s,
-%s/
 &
 '
 (
@@ -104,11 +102,11 @@ $ORIGIN
 -vulkan
 .
 ../public/ordered_constructor.h
+../public/tier0/memstack.h
 ../public/tier0/tslist.h
 ../public/tier0/utlfixedmemory.h
 ../public/tier0/utllinkedlist.h
 ../public/tier0/utltshash.h
-../public/tier1/memstack.h
 .exr
 .jpg
 .pfm
@@ -147,12 +145,12 @@ $ORIGIN
 15CMemberFunctor6IP19CTextureManagerBaseMS0_FvP12CTextureBase11CWeakHandleI31InfoForResourceTypeCTextureBaseE12ResourceId_tRKNS0_24AsyncTextureHookupData_tERK22TextureSpecification_t10CUtlStringES3_S6_S7_S8_SB_SE_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CRenderPassDesc
 15CSwapChainEmpty
-15CTier0AppSystemI12IRenderUtilsE
-15CTier0AppSystemI16IRenderDeviceMgrE
-15CTier1AppSystemI12IRenderUtilsLi0EE
-15CTier1AppSystemI16IRenderDeviceMgrLi0EE
-15CTier2AppSystemI12IRenderUtilsLi0EE
-15CTier2AppSystemI16IRenderDeviceMgrLi0EE
+15CTier0AppSystemI12IRenderUtilsLx0EE
+15CTier0AppSystemI16IRenderDeviceMgrLx0EE
+15CTier1AppSystemI12IRenderUtilsLx0EE
+15CTier1AppSystemI16IRenderDeviceMgrLx0EE
+15CTier2AppSystemI12IRenderUtilsLx0EE
+15CTier2AppSystemI16IRenderDeviceMgrLx0EE
 1600
 16CDefaultAccessor
 16CDeviceFenceBase
@@ -210,7 +208,6 @@ $ORIGIN
 <
 << NULL >>
 <NULL>
-<deferred>
 <invalid %d>
 <no deferred ref found>
 <no failure reason set>
@@ -279,9 +276,6 @@ BGRA8888_LINEAR
 BGRX8888_LINEAR
 Backing store not supported
 Bad VTEX data for '%s'
-Bad expression operator: '%c%c', expected C style boolean expression operator.
-Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
-Bad expression token: %c
 BakedLODBuilderMgr001
 BenchmarkService001
 Biases the mip level the texture streaming system choses to stream for each texture.
@@ -324,14 +318,23 @@ CBufferString::ShortenPath(bool)
 CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CCIR601 sampling not implemented yet
+CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CCommandBufferChunk CUtlMemoryPoolMT
 CEntityIndex
+CExpressionEvaluator::CExpressionEvaluator()
+CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
+CExpressionEvaluator::~CExpressionEvaluator()
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CLargeCommandBufferChunk CUtlMemoryPoolMT
 CMediumCommandBufferChunk CUtlMemoryPoolMT
 CMemAllocSystemInitialize
+CMemoryStack::CMemoryStack()
+CMemoryStack::CommitTo(unsigned char*)
+CMemoryStack::FreeAll(bool)
+CMemoryStack::Init(char const*, unsigned int, unsigned int, unsigned int, unsigned int)
+CMemoryStack::~CMemoryStack()
 COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
@@ -341,6 +344,8 @@ CRenderDeviceBase::FindOrCreateTexture: Trying to load multiple mipmaps into 3d 
 CRenderDeviceBase::InitPerFrameMemoryStack
 CResourceArray
 CResourceString
+CSparseMatrix::SetDimensions(int, int)
+CSparseMatrix::SetElement(int, int, float)
 CTSQueue corruption
 CTextureManagerBase::MarkAsyncUpdatedThisFrame - Invalid texture handle.
 CTextureManagerBase::WasAsyncUpdatedThisFrame - Invalid texture handle.
@@ -386,11 +391,10 @@ CUtlBuffer::Get(void*, int)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetOverflow(int)
 CUtlBuffer::GetString(CBufferString*)
-CUtlBuffer::ParseToken(characterset_t*, char*, int, bool)
+CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
-CUtlBuffer::PutJSONString(char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
@@ -442,7 +446,6 @@ Cannot transcode due to multiple use of quantization table %d
 Cannot write a file
 Caution: quantization tables are too coarse for baseline JPEG
 ChangeCallbackOnChange
-CharacterSetBuild
 Clearing TEXTURE_WAITING_FOR_IO flag because it's has no streaming request id anymore
 Closed temporary file %s
 CommandLine
@@ -453,9 +456,8 @@ Compressed texture decoded in %.2f ms
 ConMsg(char const*, ...)
 ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
-Conditional Error: %s
 ConfigurationSystem_001
-ConnectInterfaces
+ConnectInterfaceSingletons
 CopyAttrFrom
 Copyright (C) 2010, Thomas G. Lane, Guido Vollbeding
 Corrupt JPEG data: %u extraneous bytes before marker 0x%02x
@@ -477,7 +479,6 @@ D32
 D32FS8
 DCT coefficient out of range
 DCT scaled block size %dx%d not supported
-DEMO
 DX11
 DX9
 DXT1
@@ -579,7 +580,6 @@ Freed XMS handle %u
 G channel not found
 G channel not found!
 GAME
-GAMECONSOLE
 GCC: (SteamRT 4.8.4-1ubuntu15~12.04+steamrt1.2+srt2) 4.8.4
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GCC: (crosstool-NG 1.17.0) 4.6.3
@@ -609,7 +609,6 @@ GetResourceManifestCount
 GetResourceManifests
 Graphics Device changed, resetting video config
 Grow
-HIGHDPI
 HammerMapLoader001
 HelpSystem_001
 HookUpConfigValue
@@ -781,7 +780,6 @@ JFIF extension marker: type 0x%02x, length %u
 JPEG datastream contains no image
 JPEG parameter struct mismatch: library thinks size is %u, caller expects %u
 JPEGMEM
-JSON error, unterminated element:
 Jan
 Jul
 Jun
@@ -791,6 +789,7 @@ KV Conditional Evaluation Error
 KeyValueCache001
 KeyValues Error: %s in file %s
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
+KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
 KeyValuesSystem
 LE_BGRA8888
 LE_BGRX8888
@@ -805,10 +804,8 @@ LINEAR_I8
 LINEAR_RGB888
 LINEAR_RGBA16161616
 LINEAR_RGBA8888
-LINUX
 LMb#
 LOG_GENERAL
-LOWVIOLENCE
 Linear
 LoadEXRImageFromMemory() failed! Error message: %s
 LoadFromBuffer: expected '{', found '%s'
@@ -820,7 +817,6 @@ LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
-Logic Error in CExpressionEvaluator
 M0@
 MATCHFRAMEWORK_001
 MAX_ALLOC_CHUNK is wrong, please fix
@@ -852,8 +848,6 @@ MaxDeviceID
 Maximum resolution for top mip level in streaming textures. -1 = ignored.
 Maximum supported image dimension is %u pixels
 May
-MemAlloc_AllocFunc
-MemAlloc_FreeFunc
 Memory allocation failed while processing sCAL
 MeshSystem001
 MeshUtils001
@@ -930,7 +924,6 @@ Not implemented yet
 Nov
 O
 O*9y
-OSX
 OUTSTANDING_HOOKUP_REQUEST
 Obtained EMS handle %u
 Obtained XMS handle %u
@@ -960,8 +953,6 @@ PERF WARNING: Texture pool size set to more than 80%% of total GPU memory.
 PF%d %d-1.000000
 PNG file corrupted by ASCII conversion
 PNG unsigned integer out of range
-POSIX
-PS3
 PWL
 PanoramaTextServices001
 PanoramaUIClient001
@@ -980,11 +971,9 @@ Plat_GetDesktopResolution
 Plat_GetEnv
 Plat_GetModuleFilename
 Plat_GetMonitorResolution
-Plat_GetOSType
 Plat_GetThreadIndex
 Plat_GetWindowMonitorIndex
 Plat_GlobalMemoryStatus
-Plat_IsHighDPI
 Plat_IsInDebugSession
 Plat_MessageBox
 Plat_NeedsLowFragmentation
@@ -992,8 +981,6 @@ Plat_OsSpecificHandleToPlatWindow
 Plat_ReconfigureWindow
 Plat_SetDenormalsAreZero
 Plat_ShouldCollectMiniDumpsForFatalErrors
-Plat_VirtualAlloc
-Plat_VirtualFree
 Plat_WindowToOsSpecificHandle
 PooledDynamicConstantBuffer
 PostProcessingSystem_001
@@ -1365,7 +1352,7 @@ V_atoi
 V_cosf
 V_expf
 V_fmodf
-V_localeconv
+V_log2_uint
 V_logf
 V_pow
 V_powf
@@ -1401,9 +1388,6 @@ Vulkan
 WAITING_FOR_HOOKUP_JOB
 WAITING_FOR_IO
 WARNING: Trying to create a CRenderContextPtr without a valid context.
-WIN32
-WINDOWS
-WINXP
 Warning:  %s = '%s' is infinite, clamping value.
 Warning: have %d in use and %d free per-frame memory stacks outstanding. The oldest stack was created at present %d, and we're now on present %d
 Warning: have oustanding per-frame memory stack with %d allocations
@@ -1418,7 +1402,6 @@ Write to EMS failed
 Write to XMS failed
 Wrong JPEG library version: library is %d, caller expects %d
 X
-X360
 X360_DST16
 X360_DST24
 X360_DST24F
@@ -1560,10 +1543,10 @@ frexp
 fseek
 ftell
 fwrite
+g_BitBuf_BitWriteMasks
+g_BitBuf_ExtraMasks
 g_Mathlib_GammaToLinearByteTable
 g_TSPointerListNodes
-g_Tier1_BitWriteMasks
-g_Tier1_ExtraMasks
 g_VProfCurrentProfile
 g_pMemAlloc
 g_pThreadPool
@@ -1586,7 +1569,6 @@ incorrect gamma=(%d/100000)
 incorrect header check
 incorrect length check
 int( %d = 0x%X )
-interfaces.cpp
 invalid background gamma type
 invalid bit length repeat
 invalid block type
@@ -1673,7 +1655,6 @@ need dictionary
 none
 notconnected
 notify
-null
 occlusionquerymgr.cpp
 okOP
 operator delete(void*)
@@ -1773,6 +1754,7 @@ sheetcachetexture_.vtex
 sin
 single
 singleplayer
+singletons.cpp
 sqrt
 sqrtf
 srgbgammatolinear
@@ -1889,7 +1871,6 @@ void std::vector<unsigned char, std::allocator<unsigned char> >::_M_emplace_back
 void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > > >(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, __gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, std::forward_iterator_tag)
 void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<char*>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, char*, char*, std::forward_iterator_tag)
 void std::vector<unsigned char, std::allocator<unsigned char> >::_M_range_insert<unsigned char const*>(__gnu_cxx::__normal_iterator<unsigned char*, std::vector<unsigned char, std::allocator<unsigned char> > >, unsigned char const*, unsigned char const*, std::forward_iterator_tag)
-vstdlib
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__pointer_type_info
 vtable for __cxxabiv1::__si_class_type_info
@@ -1911,7 +1892,7 @@ zlib memory error
 zlib stream error
 zlib version error
 {
-{}()':
 |B
+}
 
 C
