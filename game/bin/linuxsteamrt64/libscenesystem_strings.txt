@@ -92,7 +92,6 @@
 "MapSize"
 "MutableRawRepeatedField"
 "e" must be followed by exponent.
-# objects moves for partition optimization: %d
 # of channels is zero.
 #%d: %s 0x%p @ (%g,%g,%g)
 #%s/%s/%s
@@ -148,7 +147,6 @@ $tI
 %.*s
 %.15lf
 %.1f
-%.2f ms
 %01d
 %02d
 %03d
@@ -162,10 +160,8 @@ $tI
 %d
 %d "No animation data"
 %d (%d depth-only, %d depth-only alpha-tested)
-%d (target %d per view, originally %d with cost per job %d)
 %d draw calls for particles
 %d initial materials (%d initial depth-only), %d copy material changes
-%d kb
 %d material Vfx evals, %d material Vfx rule checks, %i cb updates (%ikb)
 %d material binds for particles
 %d material computes, %d full material sets, %d similar sets, %d texture-only sets
@@ -335,7 +331,6 @@ $tI
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0x%016llX
-0x%016llX : %s
 0x%08X %s,
 0x%p
 1
@@ -435,11 +430,9 @@ $tI
 20CBaseSceneObjectDesc
 20CDebugTextObjectDesc
 20CFilterLayerRenderer
-20COccluderSceneObject
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CSpotLightObjectDesc
-20ISceneObjectDescBaseI20COccluderSceneObjectE
 20ISceneObjectDescBaseI21CSceneDebugTextObjectE
 20ISceneObjectDescBaseI25CSceneLightObjectInternalE
 20ISceneObjectDescBaseI28CBindlessFastPathSceneObjectE
@@ -472,7 +465,6 @@ $tI
 23IConCommandBaseAccessor
 23ISceneViewDebugOverlays
 240
-24COccluderSceneObjectDesc
 24CSVCMsgList_UserMessages
 24CSpotLightObjectDescCsgo
 24CVConCommandMessageScene
@@ -531,6 +523,7 @@ $tI
 40CFunctor_SceneSystem_Thread_DrawDrawList
 40ISceneAnimatableProceduralBoneTransforms
 43CFunctor_SceneSystem_Thread_RenderPartition
+49CFunctor_SceneSystem_Thread_QueueRenderPartitions
 4C
 4CMDL
 4IPVS
@@ -538,7 +531,6 @@ $tI
 50CFunctor_SceneSystem_Thread_ProcessProceduralLayer
 6
 64
-67CFunctor_SceneSystem_Thread_RenderOccludersAndQueueRenderPartitions
 6ConVar
 7
 7IConVar
@@ -616,7 +608,6 @@ $tI
 <td>IS_LIGHT</td>
 <td>IS_LIGHT_VOLUME</td>
 <td>IS_LOADED</td>
-<td>IS_OCCLUDER</td>
 <td>IS_OPAQUE</td>
 <td>IS_SUN_LIGHT</td>
 <td>IS_TRANSLUCENT</td>
@@ -981,7 +972,7 @@ CFootDefinition
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CFunctor_SceneSystem_Thread_DrawDrawList CUtlMemoryPoolMT
 CFunctor_SceneSystem_Thread_ProcessProceduralLayer CUtlMemoryPoolMT
-CFunctor_SceneSystem_Thread_RenderOccludersAndQueueRenderPartitions CUtlMemoryPoolMT
+CFunctor_SceneSystem_Thread_QueueRenderPartitions CUtlMemoryPoolMT
 CFunctor_SceneSystem_Thread_RenderPartition CUtlMemoryPoolMT
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
 CHECK failed: !aggregate_value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()):
@@ -1247,7 +1238,6 @@ COLLISION_MODE_PER_FRAME_PLANESET
 COLLISION_MODE_PER_PARTICLE_TRACE
 COLLISION_MODE_USE_NEAREST_TRACE
 COLORCORRECTION_VERSION_1
-COccluderSceneObjectDesc
 COrientConstraint
 CPPTYPE_BOOL
 CPPTYPE_DOUBLE
@@ -1289,7 +1279,7 @@ CSceneObjectData
 CSceneObjectExtraData_t
 CSceneObjectReference_t
 CSceneSystem::SetLightCookieTexture, trying to set texture %s that has no sheet data!
-CSceneSystem::Thread_RenderOccludersAndQueueRenderPartitions
+CSceneSystem::Thread_QueueRenderPartitions
 CSceneSystem::Thread_RenderPartition
 CSceneSystem::m_hDefaultPerLayerConstants
 CSceneView::CreateRenderPasses
@@ -1562,7 +1552,6 @@ ChooseEnvironmentMap
 ChooseLightProbeVolume
 ClearHistory
 Client Rendering
-Clip Plane
 ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
@@ -1583,7 +1572,6 @@ ConVarRef %s doesn't point to an existing ConVar
 ConfigAttachedModel
 ConfigurationSystem_001
 ConnectInterfaceSingletons
-ConvertGammaToLinear
 Copy
 CopyAttrFrom
 CopyRenderTargetOutputsAndViewportFromPreviousLayer
@@ -1598,7 +1586,6 @@ CreatePerViewLightingConstantBufferCsgo
 CsgoLightCookieSettings
 CubeMapDebugColors
 Cubic
-Cull Boxes
 D
 D15S1
 D16
@@ -1618,7 +1605,6 @@ DXT3
 DXT5
 DXT5_NM
 Data size too short
-Debug
 DebugInfoLayerRenderBuffers
 DebugInfoLayerRenderColorizeSplits
 DebugLevel:
@@ -1634,12 +1620,10 @@ Default value for an enum field must be an identifier.
 DegreeEuler
 DeleteObjectForReal
 DeleteSceneObject
-DepthPassBatchID
 DevMsg
 DevMsg(char const*, ...)
 Directional lights are not supported by the LightBinner
 DirectionalLight
-Dist Cull
 Distance to cull the AO proxy as a factor of size
 Division or mod by zero: dividend.hi=
 Dominate(
@@ -1738,9 +1722,6 @@ Extensions to non-lite types can only be declared in non-lite files.  Note that 
 FAILED_PRECONDITION
 FATAL
 FATAL ERROR: unable to register all schema data: %s
-F_ALPHA_TEST
-F_MORPH_SUPPORTED
-F_TRANSLUCENT
 Failed to allocate space for morph!
 Failed to convert introspected block: %s
 Failed to parse EXR version
@@ -2001,8 +1982,6 @@ LINEAR_RGB888
 LINEAR_RGBA16161616
 LINEAR_RGBA8888
 LOG_GENERAL
-Layer Plane
-Layer Specific:
 Leaked drawlists : %d!!!!!
 Length;
 LightBinnerVr_%d
@@ -2011,13 +1990,13 @@ LightProbeVolumeDebugColors
 LightProbeVolumeDesc
 LightSourceShape_t
 LightType_t
-LightingBasis
 LightmapUV
 LightmapUVW
 Line %d at "%s": %s
 Line %d col %d:
 Line %d: %s
 Line %d: Invalid value "%s"
+Linear
 List all the active sceneworlds
 List the object class names known by scenesystem
 LoadEXRImageFromMemory failed! Error message: %s
@@ -2046,7 +2025,6 @@ M
 MATCHFRAMEWORK_001
 MDefaultString
 MESH_DRAW_FLAGS_DRAW_LAST
-MESH_DRAW_FLAGS_IS_OCCLUDER
 MESH_DRAW_FLAGS_NONE
 MNetworkBitCount
 MNetworkChangeCallback
@@ -2078,7 +2056,6 @@ MapValueRef::GetStringValue
 MapValueRef::GetUInt32Value
 MapValueRef::GetUInt64Value
 MapValueRef::type MapValueRef is not initialized.
-Match ID
 Material changes:
 MaterialParamBuffer_t
 MaterialParamFloat_t
@@ -2115,7 +2092,6 @@ Missing field: FileDescriptorProto.name.
 Missing file '%s'
 Missing name.
 Model %s missing bone and flex counts (%d < %d), init %d
-ModelCompile/UseShadowFastPathHeuristic
 ModelDocUtils001
 Monitor
 Monitor View
@@ -2307,28 +2283,20 @@ Not Used
 Not implemented field number
 Not implemented.
 Note that enum values use C++ scoping rules, meaning that enum values are siblings of their type, not children of it.  Therefore, "
-Num occluder tris being clipped:
-Num occluder tris:
-Num occluders being clipped:
-Num occluders:
-Num tris created from clipping:
-Num tris rasterized:
 Number of cull boxes: %d
 Number of display lists submitted:
 Number of draws backface-culled:
-Number of jobs used for partitions:
+Number of jobs used for partitions: %i
 Number of jobs used to render:
 Number of objects culled by cull boxes: %d
 Number of objects culled by distance fade:
 Number of objects culled by screen-size test:
 Number of objects culled by vis:
 Number of objects fast-culled by bounds index:
-Number of objects occlusion-culled:
 Number of objects passing cull check:
 Number of objects pre-cull check:
 Number of objects starting to fade:
 Number of objects tested against cull boxes: %d (%lluus)
-Number of occlusion renders:
 Number of pushconstant sets:
 Number of render batch contexts created:
 Number of rendertarget binds:
@@ -2344,16 +2312,11 @@ ORIENT
 OUT_OF_RANGE
 Object %4d: 0x%p, class=%20s, origin=(%13g,%13g,%13g), bounds=(%13g,%13g,%13g):(%13g,%13g,%13g), desc=0x%p, flags=0x%016llX
 ObjectLists use %ikb w/%ikb waste, reclaimed %ikb of unused
-OccluderVisualization
-Occlusion Cull
-Occlusion render time:
-Occlusion system scratch mem use:
 OmniLight
 Oneof must have at least one field.
 OneofOptions
 Only DXT1/DXT5 online texture compression supported.
 Opaque
-Optimize the partition assignment of objects based on the next frame's render
 Option "
 Option field "
 Option must have a name.
@@ -2395,7 +2358,6 @@ PLACEHOLDER_VALUE
 POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
-POSITION
 PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
@@ -2409,7 +2371,6 @@ ParseEXRHeaderFromMemory failed! Error message: %s
 ParseFromString failed
 ParseRenderTargetTokens
 ParticleSystemMgr003
-Partition optimization time: %f secs
 PerVertexLighting
 Pf%d %d-1.000000
 Physics
@@ -2444,11 +2405,9 @@ Plat_SetDenormalsAreZero
 Plat_ShouldCollectMiniDumpsForFatalErrors
 Plat_UUIDFromString
 Plat_UUIDToString
-Player Vis
 Pos: %2.3f, %2.3f, %2.3fRange: %2.3f, Falloff: %2.3fAtten0: %2.3f Atten1: %2.3f Atten2: %2.3fColor: %1.3f, %1.3f, %1.3f
 Pos: %2.3f, %2.3f, %2.3fRange: %2.3f, Falloff: %2.3fAtten0: %2.3f Atten1: %2.3f Atten2: %2.3fColor: %1.3f, %1.3f, %1.3fTheta: %3.1f Phi: %3.1f
 PosColorUVNormalTangentVertexLayout
-PosXYZ
 Position2D
 Position4D
 PostProcessVertexLayout
@@ -2654,7 +2613,6 @@ Scenesystem/VrShadowDepthMasks
 SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
-Screen Size Cull
 Second argument to Swap() (of type "
 Second argument to SwapFields() (of type "
 SequenceMarkup
@@ -2696,9 +2654,7 @@ Show
 Show cost of lights in fog clipmap constant buffer. yellow = 1 cost, red = 6 cost
 Show light priority values. 1 = normal lights, 2 = cached lights.
 Show lights using the cached shadow atlas solely for transmissive lighting, rather than fog.
-Show occluder
 Show the indices of indexed lights
-Show the occluder depth buffer mip level. 0=off, 1=1st mip, 2=2nd mip, etc...
 Show the origin for LOD computation
 SimplePostProcessingLayer
 Simulated
@@ -2798,6 +2754,9 @@ Tokenizer::ParseStringAppend() passed text that could not have been tokenized as
 ToneMapping
 TonemapManifest
 TonemappingVRForward
+Tonemapping_DefaultAutoExposureMax
+Tonemapping_DefaultAutoExposureMin
+Tonemapping_DefaultRate
 Tonemapping_UseAlphaChannelForAutoExposure
 Tonemapping_UseLogLuminance
 Too many cached shadows requested (max %d) this frame (%d).
@@ -2838,7 +2797,6 @@ Unbatchable material draws:
 Unexpected end of file
 Unexpected failure while serializing option submessage
 Unimplemented Map Reflection API.
-Unknown
 Unknown Transform Texture Format: %i
 Unknown compression type.
 Unknown enumeration value of "
@@ -2994,7 +2952,6 @@ View "%s": %d layers
 View "%s": %d render target usage
 View "%s": %d render targets
 VisBuilder_001
-Volume Cull
 VolumetricFogManifest
 VrLightCookieSettings
 W
@@ -3008,7 +2965,6 @@ When enum name is stripped and label is PascalCased (
 Wireframe2DLayout
 Wireframe3DLayout
 WorkshopSetup001
-World Filter
 WorldRenderer/EnvironmentMapCacheSize
 WorldRenderer/EnvironmentMapColorSpace
 WorldRenderer/EnvironmentMapFaceSize
@@ -3016,7 +2972,6 @@ WorldRenderer/EnvironmentMapUseCubeArray
 WorldRenderer/LightProbeVolumeAlgorithm
 WorldRenderer/LightProbeVolumeColorSpace
 WorldRenderer/LightProbeVolumeUncompressedFormat
-WorldRendererBuilderMgr001
 WorldRendererMgr001
 X
 X360_DST16
@@ -3100,7 +3055,6 @@ _setjmp
 _test_conversion_counter
 _z0
 `
-`@
 `jF
 a protocol
 abs( %s )
@@ -3374,7 +3328,6 @@ g default
 g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
 g_Mathlib_GammaToLinearByteTable
-g_TSPointerListNodes
 g_VProfCurrentProfile
 g_bUpdateStringTokenDatabase
 g_pMemAlloc
@@ -3521,7 +3474,6 @@ lightbinner_total_data_%d.vtex
 lightcookie
 lighting_array_fog_RT1.vtex
 lighting_array_fog_RT2.vtex
-lightingbasis
 lightmap
 lightmapuv
 lightsourceshape
@@ -3607,12 +3559,10 @@ m_bClamp
 m_bDisableChild
 m_bDisableOperator
 m_bDoBonesOrientAlongPositiveX
-m_bDoNotDrawInFastShadowPath
 m_bDrawLast
 m_bEnableRetarget
 m_bFitCycleToLifetime
 m_bForceLoopingAnimation
-m_bHasBakedLightingBasisInVertex
 m_bHasBakedLightingFromLightMap
 m_bHasBakedLightingFromVertexStream
 m_bHasCullingData
@@ -3623,11 +3573,9 @@ m_bInitFromKilledParentParticles
 m_bInverse
 m_bIsAttachment
 m_bIsNotMatchedToMaterial
-m_bIsOccluder
 m_bLightingOriginIsInWorldSpace
 m_bLocalSpace
 m_bOffsetExistingPos
-m_bOnlyDrawInFastShadowPath
 m_bParticleFeathering
 m_bRemapPullForceToLife
 m_bRenderDiffuse
@@ -4138,7 +4086,6 @@ null material
 numsegments
 nxnstripped
 o
-occludersceneobject.cpp
 occlusionproxyvb
 of the Protocol Buffer runtime library, but the installed version is
 of the Protocol Buffer runtime library, which is not compatible with the installed version (
@@ -4161,6 +4108,7 @@ outerconeangle
 output specified is NULL
 outputcolor
 outputdepth
+overlay
 p
 pA
 package $0;
@@ -4227,12 +4175,10 @@ r_indirect_specular_force_scale
 r_lightBinnerFarPlane
 r_light_probe_volume_debug_colors
 r_morphing_enabled
-r_occluder_overlay
 r_pixelvisibility_partial
 r_pixelvisibility_spew
 r_reset_character_decals
 r_shadows
-r_show_occluders
 r_size_cull_threshold_shadow
 r_skinning_enabled
 r_ssao_bias
@@ -4284,13 +4230,11 @@ sRGB
 s_flSizeCullBloatScale
 sc_allow_dynamic_constant_batching
 sc_allow_secondary_contexts
-sc_allow_shadow_only_draws
 sc_animatable_disable_materials
 sc_animatable_fastpath_always_bind_materials
 sc_animatable_fastpath_enable_sort
 sc_aux_cameras_enabled
 sc_aux_cameras_single_submit
-sc_batch_cb_updates_for_view
 sc_batch_layer_cb_updates
 sc_bounds_group_cull
 sc_cache_envmap_lpv_lookup
@@ -4318,7 +4262,6 @@ sc_force_lod_level
 sc_force_materials_batchable
 sc_force_push_constant_update_every_draw
 sc_force_single_display_list_per_layer
-sc_force_submit_count
 sc_force_translation_in_projection
 sc_keep_all_layers
 sc_list_extradata_allocations
@@ -4327,22 +4270,19 @@ sc_lod_distance_scale_override
 sc_log_stats
 sc_log_submits
 sc_max_framebuffer_copies_per_layer
+sc_mesh_backface_culling
 sc_multithread_sorted_layers
 sc_new_morph_atlasing
 sc_no_cull
 sc_no_vis
 sc_only_render_opaque
 sc_only_render_shadowcasters
-sc_optimize_partitions_every_frame
-sc_optimizepartitions
 sc_override_shadow_fade_max_dist
 sc_override_shadow_fade_min_dist
 sc_partitions_per_job
-sc_perdrawculling
 sc_precise_projection_to_world
 sc_queue_reflection_views_to_layers
 sc_reject_all_objects
-sc_rr_partitions_to_jobs
 sc_schedule_fullsort_early
 sc_setclassflags
 sc_setclassflags %s %d
@@ -4376,8 +4316,8 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6539): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7811): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(6291): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7522): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp

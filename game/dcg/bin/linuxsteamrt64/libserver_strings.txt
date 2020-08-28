@@ -452,6 +452,7 @@
 #CardEffect_19009_0
 #CardEffect_19010_0
 #CardEffect_19011_0
+#CardEffect_19012_0
 #CardEffect_3000_0
 #CardEffect_3001_0
 #CardEffect_3002_0
@@ -1430,7 +1431,7 @@ $effectSourceObjectID
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL24Set1_WalrusPunch_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Exsanguinate_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
-*ZL25Set1_GoldenTicket_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
+*ZL25Set1_GoldenTicket_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE0_
 *ZL25Set1_NoHesitation_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL25Set1_Overgrowther_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL26Set1_TempestDouble_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
@@ -5483,7 +5484,6 @@ ACT_RANGE_ATTACK_SMG2
 ACT_RANGE_ATTACK_SNIPER_RIFLE
 ACT_RANGE_ATTACK_THROW
 ACT_RANGE_ATTACK_TRIPWIRE
-ACT_RAPPEL_LOOP
 ACT_READINESS_AGITATED_TO_STIMULATED
 ACT_READINESS_PISTOL_AGITATED_TO_STIMULATED
 ACT_READINESS_PISTOL_RELAXED_TO_STIMULATED
@@ -5919,7 +5919,6 @@ AE_NPC_BECOME_TEMPORARY_RAGDOLL
 AE_NPC_BODYDROP_HEAVY
 AE_NPC_BODYDROP_LIGHT
 AE_NPC_DRAW
-AE_NPC_END_POWERED_RAGDOLL
 AE_NPC_GIB
 AE_NPC_HOLSTER
 AE_NPC_HURT_INTERACTION_PARTNER
@@ -6682,6 +6681,7 @@ CBaseAnimatingOverlayController::AddGesture:  model %s missing activity %s
 CBaseAttributableItem
 CBaseClientUIEntity
 CBaseCombatCharacter
+CBaseCombatCharacter::DamageHistory
 CBaseCombatCharacter::UpdateLastKnownArea
 CBaseCombatWeapon
 CBaseCombatWeapon::Operator_FrameUpdate one or both of the ModelPtrs is NULL w:%s v:%s
@@ -6690,6 +6690,7 @@ CBaseDMStart
 CBaseEntity
 CBaseEntity::EmitSound
 CBaseEntity::PhysicsDispatchThink
+CBaseEntity::TakeDamage:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamage:  with inputInfo.GetDamagePosition() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamagePosition() == vec3_origin
@@ -8343,6 +8344,7 @@ Chen
 Children of Necrophos
 Chops all selected areas into their component 1x1 areas
 Chops all selected areas into their component 1x1 areas and re-merges them together into larger areas
+Choreo IKLockLeftArmSceneEvent is unavailable in Left4Dead.
 Choreo LOOKAT is unavailable in Left4Dead.
 Choreo MOVETO is unavailable in Left4Dead.
 Choreo MoveRelativeSceneEvent is unavailable in Left4Dead.
@@ -8773,7 +8775,6 @@ DeployHeroes
 DeployLeft
 DeployMid
 DeployRight
-DepthPassBatchID
 Desired commentary mode state.
 DestinationID
 Destroy Immediately
@@ -9506,9 +9507,6 @@ FTYPEDESC_SAVE
 FTYPEDESC_SCHEMA_INITIALIZED
 FTYPEDESC_WAS_INPUT
 FTYPEDESC_WAS_OUTPUT
-F_ALPHA_TEST
-F_MORPH_SUPPORTED
-F_TRANSLUCENT
 Face
 Facedown
 Facial Expression
@@ -10986,6 +10984,7 @@ IsGrabbable
 IsInPVS
 IsKeyValueUsed
 IsMarkedForDeletion
+IsNPC
 IsNoclipping
 IsPaused
 IsPc
@@ -11170,7 +11169,6 @@ LightShapeChanged
 LightSourceShape_t
 LightStyles
 LightType_t
-LightingBasis
 LightmapUV
 LightmapUVW
 Lightning Strike
@@ -11224,6 +11222,8 @@ LocalWeaponExclusive
 Localize_001
 Location %f %f %f
 Lock %s, acquired %s(%d)
+Lock IK Left Arm
+Lock IK Right Arm
 Lock the pathfinding goal to the current intersection point.
 Lock the pathfinding start to the current intersection point.
 LockOpponentsCard
@@ -11299,7 +11299,6 @@ MDefaultString
 MEDIUM_HULL
 MEDIUM_TALL_HULL
 MESH_DRAW_FLAGS_DRAW_LAST
-MESH_DRAW_FLAGS_IS_OCCLUDER
 MESH_DRAW_FLAGS_NONE
 MM
 MNetworkAlias
@@ -11545,7 +11544,6 @@ Mode Rules
 Model %s missing bone and flex counts (%d < %d), init %d
 Model: %s
 Model:%s
-ModelCompile/UseShadowFastPathHeuristic
 ModelConfigHandle_t
 ModelDocUtils001
 Modified
@@ -12338,8 +12336,8 @@ P20CNavSearchHexLattice
 P29CNavBreadthFirstSearchLattice
 P33BreadthFirstSearchVolumeCollector
 P@%.6f
-PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:234
-PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:563
+PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:222
+PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:542
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2068
 PARALYZE
@@ -12679,7 +12677,6 @@ PopOnePlusN
 PopOnePlusOne
 Pops the identifier used to group overlays. Overlays marked with this identifier can be deleted in a big batch.
 PortraitBackground
-PosXYZ
 PoseController_FModType_t
 Position: %0.3f, %0.3f, %0.3f
 Possessed Blade
@@ -14320,6 +14317,7 @@ StrReplaceChar
 Strange
 Strange Type:
 StreamEntitiesToFile
+Strength Potion Twin Pack
 Strength in Numbers
 Stress: %.2f (%.2f / %.2f)
 StrikeThink
@@ -14667,7 +14665,7 @@ Toss
 Total %d entities (%d empty)
 Total job count: %d
 Total: %s
-Touch Extension pickup volume
+Touch Expansion: %s(%d)
 Touch_t
 Touring Quoidge
 Tower Barrage
@@ -15343,7 +15341,6 @@ World-space text
 WorldGameSystem
 WorldGroupId_t
 WorldRenderer/EnvironmentMapFaceSize
-WorldRendererBuilderMgr001
 WorldRendererMgr001
 WorldSpaceCenter
 WorldTextAttachmentType_t
@@ -15377,6 +15374,7 @@ You are #%d in line of %d waiting players.
 You have been waiting for approximately %02d:%02d.
 You must be a server admin to use mp_disable_autokick
 You must now restart to use Grunt-o-matic.
+Your Heroes Rapid Deploy
 YourTurn
 YourTurnAgain
 Z
@@ -15596,10 +15594,10 @@ _root_keyname
 _selected_
 _test_conversion_counter
 _to_curve_
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/release/linuxsteamrt64/../../../../game/server/basecombatweapon.cpp
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/release/linuxsteamrt64/../../../../game/server/client.cpp
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/release/linuxsteamrt64/../../../../game/server/player.cpp
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/release/linuxsteamrt64/../../../../game/shared/econ/econ_wearable.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/server/basecombatweapon.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/server/client.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/server/player.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/shared/econ/econ_wearable.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../gamecore/gameconfiguration.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../gamecore/igamesystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/ai_responsesystem.cpp
@@ -17619,7 +17617,6 @@ hint_vr_offset_x
 hint_vr_offset_y
 hint_vr_offset_z
 hint_vr_panel_type
-hintlimiting
 hitboxset
 hl2
 hl_dissolve_all_dropped_weapons
@@ -17718,6 +17715,8 @@ ik_toggle_chain: No chain name specified.  #%d Chains available on entity '%s'
 ik_toggle_chain: no chains available on entity '%s'
 ik_toggle_chain: no valid entities found in picker.
 ikdata
+iklockleftarm
+iklockrightarm
 image_banner
 image_inventory
 image_inventory_overlay
@@ -18154,7 +18153,6 @@ lightcolor
 lightcookie
 lightfov
 lightgroup
-lightingbasis
 lightmap
 lightmapuv
 lightonlytarget
@@ -18873,7 +18871,6 @@ m_bDiscontinuity
 m_bDiscoverable
 m_bDoBonesOrientAlongPositiveX
 m_bDoClientSideAnimation
-m_bDoNotDrawInFastShadowPath
 m_bDofEnabled
 m_bDormant
 m_bDrawLast
@@ -18942,7 +18939,6 @@ m_bHadOwner
 m_bHandPoseEntityData
 m_bHasArrived
 m_bHasAttachedParticles
-m_bHasBakedLightingBasisInVertex
 m_bHasBakedLightingFromLightMap
 m_bHasBakedLightingFromVertexStream
 m_bHasBeenAwakened
@@ -18958,7 +18954,6 @@ m_bHasPickupRadius
 m_bHasRotation
 m_bHasTriggerRadius
 m_bHideUntilAchieved
-m_bHintGroupNavLimiting
 m_bHitMax
 m_bHitMin
 m_bHitboxEnabled
@@ -19010,9 +19005,7 @@ m_bIsLooking
 m_bIsLowViolence
 m_bIsMaster
 m_bIsMoving
-m_bIsNPC
 m_bIsNotMatchedToMaterial
-m_bIsOccluder
 m_bIsOn
 m_bIsOverrideProp
 m_bIsPlayingBack
@@ -19063,7 +19056,6 @@ m_bNotifyBoneTransformsChanged
 m_bNotifyWhenSequenceFinished
 m_bOffsetExistingPos
 m_bOnChangeLevelFired
-m_bOnlyDrawInFastShadowPath
 m_bOnlyPump
 m_bOnlyRenderToTexture
 m_bOpaque
@@ -20782,6 +20774,7 @@ m_nMuzzleFlashParity
 m_nNPCState_1
 m_nNPCState_2
 m_nNPCState_3
+m_nNPCType
 m_nNameHash
 m_nNavHullIdx
 m_nNavObstacleType

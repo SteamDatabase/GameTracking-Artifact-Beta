@@ -142,6 +142,7 @@ $tI
 0.01
 0.010
 0.023
+0.1
 0.15
 0.2
 0.5
@@ -958,6 +959,7 @@ Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 ChangeCallbackOnChange
 CharacterSetBuild
+Clear the list of deferred soundevents for loading.
 ClothEffectAnimEvent
 ClothShapeCapsule
 ClothShapeList
@@ -1018,6 +1020,7 @@ Decompression failure
 Default
 Default: %s
 Default_Mix
+Deferred Sound Event %s has timed out and will be removed from the deferred list
 DegreeEuler
 Delay Count
 Delay Scale
@@ -1280,6 +1283,7 @@ List all available samplers
 List all available sequence arrangments
 List all available soundevents
 List all available soundevents using specified stack name
+List all current deferred load soundevents
 List all known sounds.
 List all mix groups to dev console.
 List all mix layers to dev console.
@@ -1289,6 +1293,7 @@ LoadFromBuffer: expected '{', found '%s'
 LoadKV3Object error: %s
 LoadKV3ObjectInPlace error: %s
 LoadVMixList
+Loading deferred Sound Event %s
 Loading mapping from %s file.
 Localize_001
 LoggingSystem_AddTagToChannel
@@ -1513,8 +1518,8 @@ ProcessSoundEvent: %s field %s has a different number of atomic elements than th
 ProcessSoundEvent: %s field %s has more elements than stack %s has allocated and the field is not specified as soundevent_data. Element count constrained.
 ProcessSoundEvent: %s found field %s with "data_type" during conversion comparison, which is no longer supported. Please add "soundevent_data" to stack %s
 ProcessSoundEvent: %s unable to find field name %s either in public or event data on stack %s.
-ProcessSoundEvent: %s unable to get "base" sound event %s
-ProcessSoundEvent: %s unable to get referenced stack %s. Soundevent deleted and removed.
+ProcessSoundEvent: %s unable to get "base" sound event %s, deferring load.
+ProcessSoundEvent: %s unable to get referenced stack %s. Soundevent load deferred.
 ProcessSoundEvent: Sound Event %s field %s data count doesn't match field type.
 ProcessSoundEvent: Sound Event %s field %s illegal empty array detected.
 PropertyEditorSystem_001
@@ -1988,7 +1993,6 @@ WeightList
 Width Reflectivity
 Won't age handle!
 WorkshopSetup001
-WorldRendererBuilderMgr001
 WorldRendererMgr001
 X
 X@
@@ -2062,6 +2066,7 @@ __remap_input
 __remap_input1
 __remap_input2
 __stack_chk_fail
+__strcpy_chk
 __temp_unserialization_member__
 __toolspreview__
 _edata
@@ -2222,6 +2227,7 @@ debug.solo
 debug_visualizer.cpp
 defaultValue
 default_to_max
+deferred Sound Events:
 delay count
 denominator
 developer
@@ -3349,6 +3355,7 @@ snd_get_physics_surface_properties
 snd_headphone_pan_exponent
 snd_headphone_pan_radial_weight
 snd_list
+snd_list_deferred_soundevents
 snd_list_soundevents
 snd_list_soundevents_by_stack
 snd_mergemethod
@@ -3442,7 +3449,9 @@ snd_sos_show_queuetotrack
 snd_sos_show_soundevent_param_overwrite
 snd_sos_show_soundevent_start
 snd_sos_show_voice_elapsed_time
+snd_sos_soundevent_deferred_interval_time
 snd_sos_soundevent_filter
+snd_sos_soundevent_max_deferred_time
 snd_sos_soundevent_profile
 snd_sos_start_soundevent
 snd_sos_start_soundevent_at_pos
@@ -3451,6 +3460,7 @@ snd_sos_stop_soundevent_guid
 snd_sos_stop_soundevent_index
 snd_sos_test_soundmessage
 snd_sos_use_case_sensitive_soundevents
+snd_soundevent_clear_deferred
 snd_soundmixer
 snd_soundmixer_flush
 snd_soundmixer_list_mix_groups

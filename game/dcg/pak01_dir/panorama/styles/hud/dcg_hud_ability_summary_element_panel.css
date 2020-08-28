@@ -1,22 +1,43 @@
-DCGOnBoardAbilitySummaryElement,
+DCGOnBoardAbilitySummaryElement
 {
 	flow-children: down;
 	width: 360px;
-	box-shadow: #000000 0px 0px 2px 4px;
-	border: 1px solid grey;
 }
 
-.AbilitiesActivePlayer .IsOffCooldown DCGOnBoardAbilitySummaryElement
+.AbilitiesActivePlayer .IsOffCooldown #AbilityElementContainer
 {
-	box-shadow: #509bff88 -2px -2px 5px 5px;
 	border: 1px solid #82ccff88;
+	box-shadow: #509bff88 -2px -2px 5px 5px;
+	//animation-name: AbilityActiveReady;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
 	transition-property: box-shadow, brightness;
 	transition-duration: 0.15s;
 	transition-timing-function: ease-in;
 }
 
-.AbilitiesActivePlayer .IsOffCooldown DCGOnBoardAbilitySummaryElement:hover
+@keyframes 'AbilityActiveReady'
 {
+	0%
+	{
+		box-shadow: #509bff88 -2px -2px 5px 5px;
+	}
+
+	50%
+	{
+		box-shadow: #509bff88 -5px -5px 10px 10px;
+	}
+
+	100%
+	{
+		box-shadow: #509bff88 -2px -2px 5px 5px;
+	}
+
+}
+
+.AbilitiesActivePlayer .IsOffCooldown #AbilityElementContainer:hover
+{
+	animation-name: none;
 	box-shadow: #509bff88 -5px -5px 10px 10px;
 	border: 1px solid #82ccff88;
 	brightness: 1.4;
@@ -50,8 +71,8 @@ DCGOnBoardAbilitySummaryElement.TextOnly
 
 .IsOffCooldown #AbilityHeader
 {
-//	background-color: gradient( linear, 0% 0%, 100% 0%, from( #a08b3b ), to( #000000 ) );
-	background-color: gradient( linear, 0% 0%, 100% 0%, from( #2f3035 ), to( #3a3b42 ) );
+	// background-color: gradient( linear, 0% 0%, 100% 0%, from( #a08b3b ), to( #000000 ) );
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #4162ac ), to( #293047 ) );
 }
 
 .InCatalogue #AbilityHeader
@@ -87,6 +108,7 @@ DCGOnBoardAbilitySummaryElement.TextOnly
 {
 	flow-children: down;
 	width: 100%;
+	background-color: #242424;
 }
 
 .InCatalogue #AbilityElementContainer
@@ -136,12 +158,13 @@ DCGOnBoardAbilitySummaryElement.TextOnly
 	margin-right: 12px;
 	vertical-align: center;
 	flow-children: none;
-	border: 1px solid white;
+	border: 1px solid #fbfdff;
 }
 
 .IsOffCooldown #AbilityImage
 {
-	border: 1px solid #f0cd69;
+	border: 1px solid #abd3ef;
+	box-shadow: #509bff -4px -4px 8px 8px;
 }
 
 .InCatalogue #AbilityImage
@@ -194,7 +217,15 @@ DCGOnBoardAbilitySummaryElement.TextOnly
 //	letter-spacing: 1px;
 	margin-bottom: 3px;
 	margin-left: 3px;
+	text-overflow: shrink;
+	max-width: 250px;
+	max-height: 22px;
 	//temp
+}
+
+.IsOffCooldown #AbilityName
+{
+	text-shadow: 0px 0px 6px 1.0 #509bff88;
 }
 
 .InCatalogue #AbilityName
@@ -259,6 +290,11 @@ DCGOnBoardAbilitySummaryElement.TextOnly
   	background-repeat: repeat-x;
   	height: 8px;
   	width: 100%;
+}
+
+.IsOffCooldown #AbilityHeaderShadow
+{
+	opacity: 0;
 }
 
 .InCatalogue #AbilityHeaderShadow
