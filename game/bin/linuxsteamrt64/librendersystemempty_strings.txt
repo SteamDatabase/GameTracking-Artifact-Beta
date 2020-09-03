@@ -18,12 +18,6 @@
 #RenderSystem_CannotCreateDevice
 #RenderSystem_UnableToStartGame
 #bML
-#base
-#base is NULL
-#empty#
-#include
-#include is NULL
-#int#
 $
 $@
 $ORIGIN
@@ -39,25 +33,17 @@ $ORIGIN
 %3d %3d %3d %3d %3d %3d %3d %3d
 %4u %4u %4u %4u %4u %4u %4u %4u
 %d %s %d %02d:%02d:%02d +0000
-%f %f %f %f
-%hd
-%hu
 %i %i %i %i
 %ld%c
-%lld
-%llu
-%ls [wstring, len = %d]
 %s / %s MB
 %s / %s MB (non-evictable: %s MB)
 %s%d
-%s,
 &
 '
 (
 ( def. "%s" )
 (%s): ADD %s = %s
 (%s): Setting %s to %s
-(*%s*),
 (>q
 )
 *
@@ -118,8 +104,6 @@ $ORIGIN
 0
 0: Bilinear, 1: Trilinear, 2: Aniso 2x, 3: Aniso 4x, 4: Aniso 8x, 5: Aniso 16x
 0A
-0x%016llX
-0x%p
 1
 1.0
 1.2.5
@@ -163,7 +147,6 @@ $ORIGIN
 19CRenderContextEmpty
 19CSchemaRegistration
 19CTextureManagerBase
-19IKeyValuesErrorSpew
 2
 2.0
 2.2
@@ -182,7 +165,6 @@ $ORIGIN
 23IConCommandBaseAccessor
 25CConCommandMemberAccessorI17CRenderDeviceBaseE
 25CConCommandMemberAccessorI19CTextureManagerBaseE
-26CDefaultKeyValuesErrorSpew
 26ICommandCompletionCallback
 27CSchemaUtlVectorManipulatorI10CUtlVectorI25VsInputSignatureElement_t10CUtlMemoryIS1_iEES1_E
 28ISchemaCollectionManipulator
@@ -206,8 +188,6 @@ $ORIGIN
 :X1:
 ;
 <
-<< NULL >>
-<NULL>
 <invalid %d>
 <no deferred ref found>
 <no failure reason set>
@@ -323,13 +303,10 @@ CCommand::Tokenize: Encountered command which overflows the argument buffer.. Cl
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CCommandBufferChunk CUtlMemoryPoolMT
 CEntityIndex
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
+CKeyValues_Data::Internal_GetInt() const
 CLargeCommandBufferChunk CUtlMemoryPoolMT
 CMediumCommandBufferChunk CUtlMemoryPoolMT
-CMemAllocSystemInitialize
 CMemoryStack::CMemoryStack()
 CMemoryStack::CommitTo(unsigned char*)
 CMemoryStack::FreeAll(bool)
@@ -339,7 +316,6 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CRC error
-CRC32_ProcessBuffer
 CRenderDeviceBase::FindOrCreateTexture: Trying to load multiple mipmaps into 3d or array texture: %s
 CRenderDeviceBase::InitPerFrameMemoryStack
 CResourceArray
@@ -378,19 +354,14 @@ CUBEMAP_FACE_POSITIVE_Y
 CUBEMAP_FACE_POSITIVE_Z
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
-CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
 CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetOverflow(int)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::Printf(char const*, ...)
@@ -399,7 +370,6 @@ CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SetBigEndian(bool)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlFixedMemory overflow!
@@ -499,8 +469,6 @@ Define Quantization Table %d  precision %d
 Define Restart Interval %u
 DegreeEuler
 Deleting texture with outstanding streaming request (%s)
-DevMsg
-DevMsg(char const*, ...)
 DevWarning(char const*, ...)
 Didn't expect more than one scan
 Direct3D 11
@@ -620,10 +588,9 @@ IA88
 IB: %d buffers, %.2f MB
 INPUT_LAYOUT_VARIATION_DEFAULT
 INPUT_LAYOUT_VARIATION_MAX
+INPUT_LAYOUT_VARIATION_STREAM1_DRAWINDIRECT_ID
 INPUT_LAYOUT_VARIATION_STREAM1_INSTANCEID
-INPUT_LAYOUT_VARIATION_STREAM1_INSTANCEID_LIGHTMAP_PARAMS
 INPUT_LAYOUT_VARIATION_STREAM1_INSTANCEID_MORPH_VERT_ID
-INPUT_LAYOUT_VARIATION_STREAM1_MAT3X4
 IQuickTime001
 Ignoring PLTE chunk in grayscale PNG
 Ignoring attempt to set cHRM RGB triangle with zero area
@@ -785,11 +752,32 @@ Jul
 Jun
 KMeansQuantization
 KNQ
-KV Conditional Evaluation Error
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
+KeyValues::FindKey(HKeySymbol) const
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetColor(char const*, Color const&)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstSubKey() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNextKey() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::GetWString(char const*, wchar_t const*, wchar_t*, unsigned long)
+KeyValues::KeyValues(char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::RecursiveSaveToFile(CUtlBuffer&, int, bool, bool)
+KeyValues::SetColor(char const*, Color)
+KeyValues::SetFloat(char const*, float)
+KeyValues::SetInt(char const*, int)
+KeyValues::SetPtr(char const*, void*)
+KeyValues::SetString(char const*, char const*)
+KeyValues::SetWString(char const*, wchar_t const*)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::~KeyValues()
 KeyValuesSystem
 LE_BGRA8888
 LE_BGRX8888
@@ -808,14 +796,12 @@ LMb#
 LOG_GENERAL
 Linear
 LoadEXRImageFromMemory() failed! Error message: %s
-LoadFromBuffer: expected '{', found '%s'
 Loaded video settings config from '%s'
 Loading multipart or DeepImage is not supported  in LoadEXR() API
 Localize_001
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 M0@
 MATCHFRAMEWORK_001
@@ -878,8 +864,8 @@ Missing PLTE before cHRM
 Missing PLTE before hIST
 Missing PLTE before tRNS
 ModelDocUtils001
+Msg
 MurmurHash2
-MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
@@ -1101,12 +1087,6 @@ RandomSeed
 Read failed on temporary file
 Read from EMS failed
 Read from XMS failed
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
 RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Release
@@ -1329,18 +1309,11 @@ VStringTokenSystem001
 VTT for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 V_CopyMemory3D
 V_FixDoubleSlashes
-V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
 V_PathContainsPath
 V_PrettifyNum
 V_RemoveDotSlashes
-V_SetErrno
-V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -1361,7 +1334,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -1369,11 +1341,8 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Vector2D
 Vector4D
 VectorAligned
@@ -1419,7 +1388,6 @@ _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_SetExtension
-_V_StringAfterPrefix
 _V_StripLastDir
 _V_strEndsWith
 _V_strncat
@@ -1471,7 +1439,6 @@ binary_auto
 binary_bc
 binary_lz4
 blocking issue in occlusion queries!!
-borrow
 box2i
 buf error
 c
@@ -1500,7 +1467,6 @@ client
 clientcmd_can_execute
 compression
 configvalue.cpp
-d
 data error
 data height too large.
 data width or data height is negative.
@@ -1508,8 +1474,6 @@ data width too large.
 dataWindow
 data_height =
 data_with or data_height too large. data_width:
-delete
-developer
 dir=%d %d %d, err=%f
 displayWindow
 dl_iterate_phdr
@@ -1517,7 +1481,6 @@ dxsupport.cfg
 eaFO
 eikonal
 error in user chunk
-f
 false
 fclose
 fff?fff?fff?fff?
@@ -1527,7 +1490,6 @@ filterinY
 filterinZ
 fixed point overflow ignored
 float
-float( %f )
 floatbitmap.cpp
 floor
 floorf
@@ -1567,7 +1529,6 @@ incorrect data check
 incorrect gamma=(%d/100000)
 incorrect header check
 incorrect length check
-int( %d = 0x%X )
 invalid background gamma type
 invalid bit length repeat
 invalid block type
@@ -1583,9 +1544,7 @@ invalid literal/length code
 invalid literal/lengths set
 invalid stored block lengths
 invalid window size
-keyvalues.cpp
 kh9F
-l
 l!;b
 ld-linux-x86-64.so.2
 libc.so.6
@@ -1681,7 +1640,6 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 pthread_once
-ptr( 0x%p )
 q>(
 queued
 r_fullscreen_gamma
@@ -1849,11 +1807,9 @@ trunc
 typeinfo for CThreadSyncObject
 typeinfo for std::__future_base::_Result_base
 typeinfo for std::__future_base::_State_base
-u64( %lld = 0x%llX )
 unknown compression method
 unknown critical chunk
 unknown header flags set
-update
 user
 uvCropped
 uvUncropped
@@ -1881,8 +1837,6 @@ vtable for std::basic_stringbuf<char, std::char_traits<char>, std::allocator<cha
 vtable for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 w3(?
 wb
-wcscmp
-wcslen
 with %d x %d thumbnail image
 wx=%d, wy=%d, rx=%d, ry=%d
 y9*O
@@ -1890,8 +1844,6 @@ zD
 zlib memory error
 zlib stream error
 zlib version error
-{
 |B
-}
 
 C

@@ -129,6 +129,7 @@ $ORIGIN
 %s: requested conversion of %d chars
 %s: string format requested %d chars
 %s: string length overflows (is %d, adding %d)
+%s: string length overflows (is %d, need %d unused)
 %s: unable to find %s in '%s'
 %s: unable to load '%s', error %d
 %u - %u
@@ -267,6 +268,7 @@ $ORIGIN
 (no name set)
 (none)
 (once).
+)
 ***** OUT OF MEMORY! /+/ attempted allocation size: %llu ****
 ******** BEGIN VPROF REPORT ********
 ******** END VPROF REPORT ********
@@ -471,6 +473,7 @@ $ORIGIN
 20IUniformRandomStream
 21CUtlCStringConversion
 21CUtlStringTokenSystem
+21IKeyValuesDumpContext
 21IUtlStringTokenSystem
 22CPerfTraceDepotDefault
 22CSimpleLoggingListener
@@ -492,13 +495,17 @@ $ORIGIN
 26ICommandCompletionCallback
 27CMiniDumpCommentBuilderBase
 27CVProfileOutputColumn_Count
+27IKeyValuesDumpContextAsText
 28CStdMemAlloc_Data_StackStatsI9MemConfigILb0ELb0E27DefaultAdditionalPropertiesELb0EE
 28CStdMemAlloc_Data_StackStatsI9MemConfigILb0ELb0E27RuntimeAdditionalPropertiesELb0EE
 28CallStackStatStructDescFuncs
 29CDefaultLoggingResponsePolicy
+29CKeyValuesDumpContextAsDevMsg
 30CAsyncScheduledFunctionManager
 31CTier0MasterMobileEventListener
 31IForceSignalNumberIntoCallStack
+35CKeyValuesDumpContextToBufferString
+37CKeyValuesDumpContextToLoggingChannel
 40CVProfileOutputColumn_AverageTimePerCall
 41CVProfileOutputColumn_AverageTimePerFrame
 5CCvar
@@ -700,6 +707,7 @@ CBufferString::Format(char const*, ...)
 CBufferString::GetAllocChars(int, int)
 CBufferString::GetInsertPtr(int, int, bool, int*)
 CBufferString::GetReplacePtr(int, int, int, bool, int*)
+CBufferString::GrowByChunks(int, int)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
@@ -899,8 +907,49 @@ CGridStringPrinter::SetWordWrapColumn(int, bool, bool)
 CGridStringPrinter::SimpleSpew(int, char const*) const
 CGridStringPrinter::SimpleSpewColor(int, Color const&, char const*) const
 CIntFormatter::FormatData(IOutputStream*) const
+CKeyValuesDumpContextAsDevMsg::KvBeginKey(KeyValues*, int)
+CKeyValuesDumpContextAsDevMsg::KvWriteText(char const*)
+CKeyValuesDumpContextToBufferString::KvWriteText(char const*)
+CKeyValuesDumpContextToLoggingChannel::KvWriteText(char const*)
 CKeyValuesSystem::hash_item_t CUtlMemoryPool
 CKeyValuesSystem::m_Strings
+CKeyValues_Data::Internal_ClearAll()
+CKeyValues_Data::Internal_ClearData()
+CKeyValues_Data::Internal_CopyData(CKeyValues_Data const&)
+CKeyValues_Data::Internal_CopyName(CKeyValues_Data const&)
+CKeyValues_Data::Internal_GetColor(Color) const
+CKeyValues_Data::Internal_GetFloat() const
+CKeyValues_Data::Internal_GetInt() const
+CKeyValues_Data::Internal_GetName() const
+CKeyValues_Data::Internal_GetNameSymbol() const
+CKeyValues_Data::Internal_GetNameSymbolCaseSensitive() const
+CKeyValues_Data::Internal_GetPtr() const
+CKeyValues_Data::Internal_GetString(char const*, char*, unsigned long)
+CKeyValues_Data::Internal_GetSubKey() const
+CKeyValues_Data::Internal_GetUint64() const
+CKeyValues_Data::Internal_GetWString(wchar_t const*, wchar_t*, unsigned long)
+CKeyValues_Data::Internal_HasEscapeSequences() const
+CKeyValues_Data::Internal_IsEqual(CKeyValues_Data*)
+CKeyValues_Data::Internal_SetColor(Color)
+CKeyValues_Data::Internal_SetFloat(float)
+CKeyValues_Data::Internal_SetFromString(CKeyValues_Data::types_t, char const*)
+CKeyValues_Data::Internal_SetHasEscapeSequences(bool)
+CKeyValues_Data::Internal_SetInt(int)
+CKeyValues_Data::Internal_SetName(char const*)
+CKeyValues_Data::Internal_SetNameFrom(CKeyValues_Data const&)
+CKeyValues_Data::Internal_SetPtr(void*)
+CKeyValues_Data::Internal_SetString(char const*)
+CKeyValues_Data::Internal_SetSubKey(KeyValues*)
+CKeyValues_Data::Internal_SetUint64(unsigned long long)
+CKeyValues_Data::Internal_SetWString(wchar_t const*)
+CKeyValues_Data::ResolveColorValue() const
+CKeyValues_Data::ResolveFloatValue() const
+CKeyValues_Data::ResolveIntValue() const
+CKeyValues_Data::ResolvePtrValue() const
+CKeyValues_Data::ResolveStringValue() const
+CKeyValues_Data::ResolveSubKeyValue() const
+CKeyValues_Data::ResolveUint64Value() const
+CKeyValues_Data::ResolveWStringValue() const
 CLIENTCMD_CAN_EXECUTE
 CLIENTDLL
 CLZMA::GetActualSize(unsigned char const*)
@@ -1553,6 +1602,7 @@ CreateNewThreadPool
 CreateSimpleProcess
 CreateSimpleThread
 CreateUniqueId
+D
 DEBUG_EXITPROCESS
 DEFAULT_WRITE_PATH
 DEMO
@@ -1565,7 +1615,6 @@ DeclareCurrentThreadIsMainThread
 DefaultConditionalErrorProc
 DefaultConditionalSymbolProc
 DestroyThreadPool
-DevMsg
 DevMsg(char const*, ...)
 DevWarning
 DevWarning(char const*, ...)
@@ -1732,6 +1781,7 @@ GetUnitTest
 GetWin32ConsoleCursorColumnIndex
 GlobPool
 Grow
+GrowByChunks
 H
 H@
 HEAP WARNING: memory block at %p is unexpectedly allocated
@@ -1761,6 +1811,10 @@ HookUpConfigValue
 HostStateMgr001
 I
 IAssertionFailureListener::AssertionFailure()
+IKeyValuesDumpContextAsText::KvBeginKey(KeyValues*, int)
+IKeyValuesDumpContextAsText::KvEndKey(KeyValues*, int)
+IKeyValuesDumpContextAsText::KvWriteIndent(int)
+IKeyValuesDumpContextAsText::KvWriteValue(KeyValues*, int)
 IMemAlloc::DumpStats: could not open output file %s
 IMobileEventListener::OnEnterHibernationState()
 IMobileEventListener::OnExitHibernationState()
@@ -1796,10 +1850,10 @@ IsUniqueIdValid
 IterateCapturedStackAnnotations
 J
 JAPANESE
-JSON error, unterminated element:
 JmpToAlternateStack
 Jobs/Coroutines
 JsonEscape(char const*)
+K
 KB
 KOREAN
 KV Conditional Evaluation Error
@@ -1808,7 +1862,96 @@ KVPacker::ReadAsBinary(KeyValues*, CUtlBuffer&)
 KVPacker::WriteAsBinary(KeyValues*, CUtlBuffer&)
 KeyValueCache001
 KeyValues Error: %s in file %s
+KeyValues::AddFloat(char const*, float)
+KeyValues::AddInt(char const*, int)
+KeyValues::AddKey(char const*)
+KeyValues::AddPtr(char const*, void*)
+KeyValues::AddString(char const*, char const*)
+KeyValues::AddSubKey(KeyValues*)
+KeyValues::AddSubkeyUsingKnownLastChild(KeyValues*, KeyValues*)
+KeyValues::AddUint64(char const*, unsigned long long)
+KeyValues::Clear()
+KeyValues::ContainsSubKey(KeyValues*)
+KeyValues::CopySubkeys(KeyValues*) const
+KeyValues::Count() const
+KeyValues::CreateKeyUsingKnownLastChild(char const*, KeyValues*)
+KeyValues::CreateNewKey()
+KeyValues::CreatePeerKey(char const*)
+KeyValues::Dump(IKeyValuesDumpContext*, int)
+KeyValues::Element(int) const
+KeyValues::ElideSubKey(KeyValues*)
+KeyValues::FindAndDeleteSubKey(char const*)
+KeyValues::FindKey(HKeySymbol) const
+KeyValues::FindKey(char const*, bool)
+KeyValues::FindKeyAndParent(char const*, KeyValues**, bool)
+KeyValues::FindLastSubKey() const
+KeyValues::FromString(char const*, char const*, char const**)
+KeyValues::GetColor(char const*, Color const&)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstSubKey() const
+KeyValues::GetFirstTrueSubKey() const
+KeyValues::GetFirstValue() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNameSymbol() const
+KeyValues::GetNameSymbolCaseSensitive() const
+KeyValues::GetNextKey() const
+KeyValues::GetNextTrueSubKey() const
+KeyValues::GetNextValue() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::GetWString(char const*, wchar_t const*, wchar_t*, unsigned long)
+KeyValues::InsertSubKey(int, KeyValues*)
+KeyValues::IsEmpty(char const*)
+KeyValues::IsEqual(KeyValues*)
+KeyValues::KeyValues(KeyValues const*, bool)
+KeyValues::KeyValues(char const*)
+KeyValues::KeyValues(char const*, char const*, char const*)
+KeyValues::KeyValues(char const*, char const*, char const*, char const*, char const*)
+KeyValues::KeyValues(char const*, char const*, int)
+KeyValues::KeyValues(char const*, char const*, int, char const*, int)
+KeyValues::KeyValues(char const*, char const*, wchar_t const*)
+KeyValues::LoadFromBuffer(char const*, CUtlBuffer&, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
+KeyValues::LoadFromBuffer(char const*, char const*, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::LoadTemporaryFromBuffer(bool, char const*, CUtlBuffer&, IBaseFileSystem*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::LoadTemporaryFromBuffer(bool, char const*, char const*, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
+KeyValues::LoadTemporaryFromFile(bool, IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::MakeCopy() const
+KeyValues::MergeFrom(KeyValues const*, KeyValues::MergeKeyValuesOp_t)
+KeyValues::MergeFromTemporary(KeyValues const*, KeyValues::MergeKeyValuesOp_t) const
 KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
+KeyValues::ProcessResolutionKeys(char const*)
+KeyValues::ReadAsBinary(CUtlBuffer&)
+KeyValues::ReadAsBinaryFiltered(CUtlBuffer&)
+KeyValues::ReadTemporaryAsBinary(bool, CUtlBuffer&)
+KeyValues::RecursiveSaveToFile(CUtlBuffer&, int, bool, bool)
+KeyValues::RecursiveSaveToLocalizationFile(IBaseFileSystem*, void*, int, bool)
+KeyValues::RemoveSubKey(KeyValues*, bool, bool)
+KeyValues::SaveToFile(IBaseFileSystem*, char const*, char const*, bool)
+KeyValues::SetColor(char const*, Color)
+KeyValues::SetFloat(char const*, float)
+KeyValues::SetFromString(char const*, CKeyValues_Data::types_t, char const*)
+KeyValues::SetInt(char const*, int)
+KeyValues::SetName(char const*)
+KeyValues::SetNextKey(KeyValues*)
+KeyValues::SetPtr(char const*, void*)
+KeyValues::SetString(char const*, char const*)
+KeyValues::SetUint64(char const*, unsigned long long)
+KeyValues::SetWString(char const*, wchar_t const*)
+KeyValues::SwapSubKey(KeyValues*, KeyValues*)
+KeyValues::UnpackIntoStructure(KeyValuesUnpackStructure const*, void*)
+KeyValues::UsesEscapeSequences(bool)
+KeyValues::WriteAsBinary(CUtlBuffer&)
+KeyValues::WriteAsBinaryFiltered(CUtlBuffer&)
+KeyValues::operator delete(void*)
+KeyValues::operator delete(void*, int, char const*, int)
+KeyValues::operator new(unsigned long)
+KeyValues::operator new(unsigned long, int, char const*, int)
+KeyValues::operator=(KeyValues const&)
+KeyValues::~KeyValues()
 KeyValuesFromJSON
 KeyValuesJSONParser::KeyValuesJSONParser(CUtlBuffer const&)
 KeyValuesJSONParser::KeyValuesJSONParser(char const*, int)
@@ -3291,6 +3434,7 @@ br
 broadcast
 buffer_string.cpp
 bytes
+c
 calloc
 cfg/configdefaults.linux.vcfg
 cfg/configschema.vcfg
@@ -3338,6 +3482,7 @@ donotecho
 dup
 dup2
 dupe
+e
 english
 epoll_create1
 epoll_ctl
@@ -3374,6 +3519,7 @@ freopen64
 fseeko64
 ftello64
 ftruncate64
+g
 g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
 g_BitStringEndMasks
@@ -3436,7 +3582,6 @@ int:transient:1
 isspace
 jobthread.cpp
 k
-keyvalues.cpp
 keyvaluessystem.cpp
 l
 launch
@@ -3463,6 +3608,7 @@ log_verbosity
 loopback
 lower
 lseek64
+m
 macos
 malloc
 malloc_usable_size
@@ -3478,6 +3624,7 @@ mmap64
 mprotect
 ms
 munmap
+n
 nOffset < m_nAllocationSize
 nTries < 10000000
 name
@@ -3522,6 +3669,7 @@ notify
 notify-send
 null
 numeric
+o
 off
 once
 open
@@ -3589,6 +3737,7 @@ qangle
 qsort_r
 queue force advance
 queue max wait
+r
 raise
 rb
 rb+
@@ -3600,6 +3749,7 @@ rep
 replicated
 rmdir
 round
+s
 s_dev_urandom_fd >= 0
 scandir64
 sched_setaffinity
@@ -3663,6 +3813,9 @@ true
 tsc
 type
 typeinfo for BasicStatStructFieldDesc
+typeinfo for CKeyValuesDumpContextAsDevMsg
+typeinfo for CKeyValuesDumpContextToBufferString
+typeinfo for CKeyValuesDumpContextToLoggingChannel
 typeinfo for CTestCase
 typeinfo for CTestSuite
 typeinfo for CThread
@@ -3675,7 +3828,11 @@ typeinfo for CUtlCharConversion
 typeinfo for CVProfReporter
 typeinfo for CWorkerThread
 typeinfo for CallStackStatStructDescFuncs
+typeinfo for IKeyValuesDumpContextAsText
 typeinfo name for BasicStatStructFieldDesc
+typeinfo name for CKeyValuesDumpContextAsDevMsg
+typeinfo name for CKeyValuesDumpContextToBufferString
+typeinfo name for CKeyValuesDumpContextToLoggingChannel
 typeinfo name for CTestCase
 typeinfo name for CTestSuite
 typeinfo name for CThread
@@ -3688,6 +3845,8 @@ typeinfo name for CUtlCharConversion
 typeinfo name for CVProfReporter
 typeinfo name for CWorkerThread
 typeinfo name for CallStackStatStructDescFuncs
+typeinfo name for IKeyValuesDumpContextAsText
+u
 u64( %lld = 0x%llX )
 ugc:
 uint32
@@ -3704,6 +3863,7 @@ utlobjectregistry.cpp
 utlstring.cpp
 utlstringtokensystem.cpp
 uuid_generate
+v
 value
 vconsole_fuzzy
 vconsole_set_focus
@@ -3717,6 +3877,9 @@ vsscanf
 vswprintf
 vswscanf
 vtable for BasicStatStructFieldDesc
+vtable for CKeyValuesDumpContextAsDevMsg
+vtable for CKeyValuesDumpContextToBufferString
+vtable for CKeyValuesDumpContextToLoggingChannel
 vtable for CTestCase
 vtable for CTestSuite
 vtable for CThread
@@ -3728,6 +3891,7 @@ vtable for CUniformRandomStream
 vtable for CUtlCharConversion
 vtable for CVProfReporter
 vtable for CWorkerThread
+vtable for IKeyValuesDumpContextAsText
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
@@ -3746,13 +3910,13 @@ wcstoull
 windows
 without
 wt
+y
 zD
 {
 {%d %d %d %d}
 {0 0 0 255}
 {}()':
 |
-}
 })
 ~
 ~DSTRCT

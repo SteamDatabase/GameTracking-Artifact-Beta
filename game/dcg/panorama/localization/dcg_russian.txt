@@ -494,7 +494,7 @@
 	"DCG_DBCollection_EnterTournament"				"Войти в турнир"
 	"DCG_DBCollection_PlayConstructed"				"Чат личных колод"
 	"DCG_Constructed_Popup_Join"					"Войти в чат личных колод"
-	"DCG_Constructed_Popup_ConfirmConstructed"		"Подтвердите, что хотите войти в чат личных колод. Это позволит пользователям не из списка ваших друзей отправлять вам вызовы для игр с личными колодами"	
+	"DCG_Constructed_Popup_ConfirmConstructed"		"В чате личных колод вы можете отправлять вызов на игру в закрытом лобби игрокам, не являющимся вашими друзьями. Чтобы использовать карты в закрытом лобби, они необязательно должны быть разблокированными."	
 	"DCG_DBCollection_LeaveConstructed"				"Выйти из чата личных колод"
 
 	"DCG_ManagePacks_UnopenedPacks"					"Неоткрытых комплектов: {d:pack_count}"
@@ -955,7 +955,7 @@
 	"DCG_DeckBuilder_Item"			                "Предметов: {i:itemDeckCardCount}"
 	"DCG_DeckBuilder_Hero_DeckRestriction"			"Колода должна содержать ровно {i:deckRestrictionHeroCount} героев. В личной колоде все герои должны быть разными."
 	"DCG_DeckBuilder_Main_DeckRestriction"			"Колода должна содержать хотя бы {i:deckRestrictionMainCount} карт. В личную колоду можно поместить до трёх копий одной карты."
-	"DCG_DeckBuilder_Item_DeckRestriction"			"Колода может содержать не больше {i:deckRestrictionItemCount} предметов. В личную колоду можно поместить до трёх копий одного предмета."
+	"DCG_DeckBuilder_Item_DeckRestriction"			"Колода может содержать не больше {i:deckRestrictionItemCount} предметов. В личную колоду можно поместить до двух копий одного предмета."
 	"DCG_DeckBuilder_Draft_Hero_DeckRestriction"	"Колода должна содержать ровно {i:deckRestrictionHeroCount} героев. В драфтовую колоду можно поместить несколько копий одного героя или до трёх копий каждого из базовых героев."
 	"DCG_DeckBuilder_Draft_Main_DeckRestriction"	"Колода должна содержать хотя бы {i:deckRestrictionMainCount} карт. В драфтовую колоду можно поместить сколько угодно копий карты."
 	"DCG_DeckBuilder_Draft_Item_DeckRestriction"	"Колода должна содержать хотя бы {i:deckRestrictionItemCount} предметов. В драфтовую колоду можно поместить сколько угодно копий предмета или до трёх копий каждого из базовых предметов."
@@ -1755,7 +1755,7 @@
 	"DCG_PrivateLobby_Timer_TimeAttack"							"Ускоренный"
 
 	"DCG_PrivateLobby_GameMode_Label"							"Колоды:"
-	"DCG_PrivateLobby_GameMode_Default"							"Стандартные"
+	"DCG_PrivateLobby_GameMode_Default"							"Личные колоды"
 	"DCG_PrivateLobby_GameMode_CommonsOnly"						"Обычные"
 	"DCG_PrivateLobby_GameMode_CommonsUncommons"				"Обычные и необычные"
 	"DCG_PrivateLobby_GameMode_Monocolors"						"Один цвет"
@@ -1958,6 +1958,7 @@
 	"DCG_LoadDeck_SharedDeck"									"Чужая:"
 	"DCG_LoadDeck_CallToArmsAbbreviation"						"Зов битвы:"
 	"DCG_LoadDeck_QuickBotAbbreviation"							"Быстрая колода:"
+	"DCG_LoadDeck_StarterAbbreviation"							"Стартовая колода:"
 	"DCG_LoadDeck_UserDeckType"									"{s:deckName}"
 	"DCG_LoadDeck_Delete"										"Del"
 	"DCG_LoadDeck_ConfirmDeleteTitle"							"Удалить колоду"
@@ -2271,6 +2272,8 @@
 	"DCG_CardUnplayable_NotEnoughGold"			"Недостаточно золота"
 	"DCG_CardUnplayable_Oathed"					"На линии находятся чары «Клятва»"
 	"DCG_CardUnplayable_CantPlay"				"Сейчас нельзя разыгрывать карты"
+	"DCG_CardUnplayable_AbililtyOnCooldownOneRound"		"Способность будет перезаряжаться ещё 1 раунд"
+	"DCG_CardUnplayable_AbililtyOnCooldown"		"Способность будет перезаряжаться ещё {i:ability_cooldown} раунда"
 
 	// Settings
 	"DCG_Settings_Hotkeys"			                      "Управление"
@@ -3103,6 +3106,14 @@
 	"DCG_QuickBotDeck11"					"Бот (сине-чёрная)"
 	"DCG_QuickBotDeck12"					"Бот (чёрно-синяя)"
 
+	"DCG_BasicDeck1"						"Сила природы"
+	"DCG_BasicDeck2"						"Устраняй и сохраняй"
+	"DCG_BasicDeck3"						"Магические убийцы"
+	"DCG_BasicDeck4"						"Хладнокровие"
+	"DCG_BasicDeck5"						"Хозяин миньонов"
+	"DCG_BasicDeck6"						"Жестокое чародейство"
+
+
 	"DCG_DeckBuilder_MarketRestrict_Buy_Title"		"Ограничение Торговой площадки"
 	"DCG_DeckBuilder_MarketRestrict_Buy_Body"		"Ваш аккаунт Steam не может покупать карты на Торговой площадке."
 	"DCG_DeckBuilder_MarketRestrict_Sell_Title"		"Ограничение Торговой площадки"
@@ -3756,10 +3767,17 @@
 	"DCG_LiveDraft_OpponentConceded"		"Противник вышел"
 
 	"DCG_PlayPage_Campaign"					"КАМПАНИЯ"
-	"DCG_PlayPage_vsBots"					"ИГРА<br> С БОТАМИ"
-	"DCG_PlayPage_vsHuman"					"ЖИВОЙ ДРАФТ<br>ПРОТИВ ЛЮДЕЙ"
+	"DCG_PlayPage_vsBots"					"против БОТОВ"
+	"DCG_PlayPage_vsHuman"					"против ЛЮДЕЙ"
 	"DCG_PlayPage_vsHumanMatchAailable"		"Есть желающие сыграть!"
 	"DCG_PlayPage_StartTutorial"			"Здесь вы найдёте обучение"
+
+	"DCG_PopupPlayPage_VsBot"				"против бота"
+	"DCG_PopupPlayPage_VsHuman"				"против человека"
+	"DCG_PopupPlayPage_LiveDraft"			"Живой драфт"
+	"DCG_PopupPlayPage_Constructed"			"Личные колоды"
+	"DCG_PopupPlayPage_Random2Color"		"Два случайных цвета"
+	"DCG_PopupPlayPage_Play"				"Играть"
 
 	"DCG_PlayLiveDraftPopup_vsBots"			"Геройский драфт против ботов"
 	"DCG_PlayLiveDraftPopup_vsHuman"		"Живой геройский драфт против людей"

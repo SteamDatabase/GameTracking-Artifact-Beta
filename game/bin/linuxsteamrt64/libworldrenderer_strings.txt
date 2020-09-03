@@ -236,7 +236,6 @@ $ORIGIN
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19voxel_vis_cluster_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI20EntityKeyValueData_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI21CStrongHandleCopyableI30InfoForResourceTypeCEntityLumpE10CUtlMemoryIS3_iEES3_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorI21CStrongHandleCopyableI31InfoForResourceTypeCTextureBaseE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI21voxel_vis_mergelist_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI24EntityIOConnectionData_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI24RenderInputLayoutField_t10CUtlMemoryIS1_iEES1_E
@@ -549,9 +548,6 @@ CEntityScriptFramework
 CEntitySystem
 CEntitySystem::BuildComponentUnserializer '%s'
 CEntitySystem::PrecacheEntity: Classname missing from entity!
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFingerBone
 CFingerChain
 CFingerSource
@@ -642,13 +638,9 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetOverflow(int)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::GetString(char*, int)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
@@ -660,7 +652,6 @@ CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SetBigEndian(bool)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlBuffer::Swap(CUtlBuffer&)
@@ -1088,6 +1079,7 @@ Failed to allocate an instance of a class
 Failed to assign bool literal value
 Failed to call CBaseIntrospectedToKV3TypeManager::Init
 Failed to compute channel layout.
+Failed to convert KV3 to string; error: %s
 Failed to convert introspected block: %s
 Failed to get material pointer for world node draw call. (material name: %s)
 Failed to include script "%s"
@@ -1294,7 +1286,26 @@ KMeansQuantization
 KV3 load transfer failed for resource '%s': %s
 KV3 load transfer failed: %s
 KeyValueCache001
-KeyValuesSystem
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetColor(char const*, Color const&)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstTrueSubKey() const
+KeyValues::GetFirstValue() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNextTrueSubKey() const
+KeyValues::GetNextValue() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::KeyValues(char const*)
+KeyValues::KeyValues(char const*, char const*, char const*)
+KeyValues::LoadFromBuffer(char const*, char const*, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::operator=(KeyValues const&)
+KeyValues::~KeyValues()
 LE_BGRA8888
 LE_BGRX8888
 LINEAR_ABGR8888
@@ -1333,7 +1344,6 @@ LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Long grass load frame: %f ms for %d grass tiles
 LookAtList
@@ -1784,6 +1794,7 @@ UserInfoChangeService_001
 Using 16-bit blend indices
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -1837,10 +1848,6 @@ V_StringToColor
 V_StringToFloatArray
 V_StringToVector
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -1866,7 +1873,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -1875,12 +1881,9 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_uuid_t
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Vector-dir
 Vector-quantized
 Vector2D
@@ -2376,7 +2379,6 @@ m_element
 m_elems
 m_entityKeyValues
 m_entityLumps
-m_externalTextures
 m_extraBufferBinding
 m_extraVertexStreamOverrides
 m_extraVertexStreams
@@ -2576,6 +2578,7 @@ m_nLightmapGameVersionNumber
 m_nLightmapVersionNumber
 m_nMapType
 m_nMaxTexScaleSlots
+m_nMeshID
 m_nMinParticlesToEmit
 m_nNameHash
 m_nNodeCount
@@ -3208,8 +3211,6 @@ vtable for std::basic_stringbuf<char, std::char_traits<char>, std::allocator<cha
 vtable for std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >
 walkspeed
 wb
-wcscmp
-wcslen
 width
 world renderer -
 world_dump_loaded_worlds

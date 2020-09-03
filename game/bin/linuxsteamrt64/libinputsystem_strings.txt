@@ -4,31 +4,16 @@
 "%s"
 "%s" = "%s"
 #
-#base
-#base is NULL
-#empty#
-#include
-#include is NULL
-#int#
 $
 $ORIGIN
-%
 %-120s
 %-120s - %s
-%f %f %f %f
-%hd
-%hu
 %i %i %i %i
-%lld
-%llu
-%ls [wstring, len = %d]
 %s
 %s%d
-%s,
 'is NOT active'
 'is active'
 ( def. "%s" )
-(*%s*),
 *
 ,
 ,%d
@@ -49,8 +34,6 @@ $ORIGIN
 /cursor.res
 0
 0.3
-0x%016llX
-0x%p
 1
 10ConCommand
 10IAppSystem
@@ -68,12 +51,10 @@ $ORIGIN
 17CInputStackSystem
 17IInputStackSystem
 18CPlaceholderConVar
-19IKeyValuesErrorSpew
 2
 20CPostConnectCallback
 22CSchemaInstallCallback
 23IConCommandBaseAccessor
-26CDefaultKeyValuesErrorSpew
 5
 6
 6ConVar
@@ -84,8 +65,6 @@ $ORIGIN
 :
 ;
 <
-<< NULL >>
-<NULL>
 <no deferred ref found>
 <no failure reason set>
 <null>
@@ -150,7 +129,6 @@ CARET
 CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::FixSlashes(char)
-CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
@@ -161,9 +139,6 @@ CBufferString::ToLowerFast(int)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CENT_SIGN
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CInputStackSystem:  %s IME %s
 CInputStackSystem:  %s capture set to 0x%p
 CInputStackSystem:  %s cursor %s
@@ -180,34 +155,16 @@ COLORCORRECTION_VERSION_1
 COMPUTER
 COPY
 COPYRIGHT_SIGN
-CRC32_ProcessBuffer
 CRSEL
-CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CURRENCYSUBUNIT
 CURRENCYUNIT
 CURRENCY_SIGN
 CUT
-CUtlBuffer::AddNullTermination()
-CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
 CUtlBuffer::CUtlBuffer(void const*, int, int)
-CUtlBuffer::CheckArbitraryPeekGet(int, int&)
-CUtlBuffer::CheckGet(int)
-CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
-CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
-CUtlBuffer::PutString(char const*)
-CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
-CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlRBTree overflow with %u elements!
-CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::Set(char const*)
 CUtlSymbolTable::AddString(char const*)
@@ -237,8 +194,6 @@ DIVISION_SIGN
 DOLLAR
 DOWNARROW
 DebugTextureInfo001
-DevMsg
-DevMsg(char const*, ...)
 DotaCardGameClient_001
 E
 EJECT
@@ -479,12 +434,14 @@ KP_SPACE
 KP_TAB
 KP_VERTICALBAR
 KP_XOR
-KV Conditional Evaluation Error
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
-KeyValuesSystem
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetInt(char const*, int)
+KeyValues::KeyValues(char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::~KeyValues()
 L
 LEFTARROW
 LEFT_CURLY_BRACKET
@@ -493,12 +450,10 @@ LOG_GENERAL
 LWIN
 L_SHOULDER
 L_TRIGGER
-LoadFromBuffer: expected '{', found '%s'
 Localize_001
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 M
 MACRON
@@ -528,10 +483,10 @@ MaterialUtils_001
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
+Msg
 MurmurHash2LowerCase(char const*, unsigned int)
 N
 NOT_SIGN
-NULL
 NUMLOCK
 NUMLOCKTOGGLE
 N_WITH_TILDE
@@ -617,12 +572,6 @@ R_AXIS_NEG
 R_AXIS_POS
 R_SHOULDER
 R_TRIGGER
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
 RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 RegisterStringToken
@@ -822,31 +771,17 @@ VULGAR_FRACTION_THREE_QUARTERS
 V_AXIS
 V_AXIS_NEG
 V_AXIS_POS
-V_GetErrno
-V_SetErrno
-V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_atof
 V_atofloat64
 V_atoi
 V_powf
 V_qsort_s
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
-V_stristr_fast(char const*, char const*)
-V_strtod
-V_strtoi64
-V_strtoui64
-V_swscanf
 V_tier0_memset
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 VisBuilder_001
 WWW
 Warning
@@ -882,7 +817,6 @@ _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_FileBase
-_V_StringAfterPrefix
 _V_strncat
 _V_strncpy
 _V_strnicmp_fast
@@ -909,7 +843,6 @@ binary
 binary_auto
 binary_bc
 binary_lz4
-borrow
 c
 cheat
 cl_auto_cursor_scale
@@ -918,8 +851,6 @@ client
 clientcmd_can_execute
 configvalue.cpp
 d
-delete
-developer
 disabled
 disabling
 disallowed
@@ -928,7 +859,6 @@ e
 enabled
 enabling
 f
-float( %f )
 g
 g_VProfCurrentProfile
 g_bUpdateStringTokenDatabase
@@ -941,7 +871,6 @@ hotx
 hoty
 initializing SDL joystick %d %s
 inputsystem
-int( %d = 0x%X )
 j
 joy_axisbutton_threshold
 joy_wingmanwarrior_centerhack
@@ -949,8 +878,6 @@ joy_wingmanwarrior_turnhack
 joystick not found -- driver not present
 key_updatelayout
 keyc
-keyvalues.cpp
-l
 libc.so.6
 libinputsystem.so
 libpthread.so.0
@@ -972,7 +899,6 @@ operator new(unsigned long)
 operator new(unsigned long, std::nothrow_t const&)
 operator new[](unsigned long)
 operator new[](unsigned long, std::nothrow_t const&)
-ptr( 0x%p )
 q
 rb
 replicated
@@ -989,20 +915,14 @@ strcmp
 strlen
 text
 tier0
-u64( %lld = 0x%llX )
+u
 unknown event
 unset
 up
-update
 user
 v
 visible
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
-wb
-wcscmp
-wcslen
 z
-{
-}

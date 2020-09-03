@@ -2,6 +2,7 @@
 "%s"
 "%s" = "%s"
 "lang"{"Language" "English""Tokens"{
+#
 #GameUI_Language_Brazilian
 #GameUI_Language_Bulgarian
 #GameUI_Language_Czech
@@ -108,12 +109,6 @@
 #Valve_SelectLanguage_Ukrainian
 #Valve_SelectLanguage_Vietnamese
 #[
-#base
-#base is NULL
-#empty#
-#include
-#include is NULL
-#int#
 #|
 $ORIGIN
 $U
@@ -122,28 +117,23 @@ $U
 %.15lf
 %04d
 %04d_%02d_%02d_%02d_%02d_%02d
-%f %f %f %f
 %g
-%hd
 %hu
 %i %i %i %i
 %language%
 %lld
 %llu
-%ls [wstring, len = %d]
 %s
 %s (path ID '%s')
 %s bytes for token lookup; %s bytes for instance info
 %s failed to localize: %s
 %s tokens; %s instances
 %s%d
-%s,
 %s_[%s]
 &
 (
 ( def. "%s" )
 (%s from %u files; %s not file-based)
-(*%s*),
 (None)
 *
 *.txt
@@ -163,8 +153,6 @@ $U
 ../public/tier0/utlsymboltable.h
 /resource/valve_
 04
-0x%016llX
-0x%p
 10ConCommand
 10IAppSystem
 12CThreadEvent
@@ -188,8 +176,6 @@ $U
 :name_ref
 :shorthelp
 <!--
-<< NULL >>
-<NULL>
 <floating-point value out of range>
 <invalid currency %d>
 <invalid date format %d>
@@ -339,7 +325,6 @@ CRC32_ProcessBuffer
 CSplitString::Construct(char const*, char const**, int)
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
-CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadRWLock::LockForWrite(char const*, int)
 CThreadRWLock::UnlockWrite(char const*, int)
 CThreadRWLock::WaitForRead()
@@ -361,14 +346,9 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
@@ -376,7 +356,6 @@ CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::Swap(CUtlBuffer&)
 CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
@@ -506,7 +485,6 @@ CreateInterface
 DH
 DebugTextureInfo001
 Decompression failure
-DevMsg
 DevMsg(char const*, ...)
 DotaCardGameClient_001
 DuplicateTokensAssert
@@ -583,7 +561,12 @@ Invalid header
 Invalid member name '%s'
 KD
 KeyValueCache001
-KeyValuesSystem
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetFirstValue() const
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNextValue() const
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
 LANG
 LC_ALL
 LOCFAIL %s: '%s' gives multiple variants for :n
@@ -636,7 +619,6 @@ Localize_Create
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 MATCHFRAMEWORK_001
 MODEL_PROCESSING_SCRIPT_INTERFACE_001
@@ -648,6 +630,7 @@ MeshUtils001
 Mex$
 Missing file '%s'
 ModelDocUtils001
+Msg
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
@@ -672,6 +655,7 @@ PARTICLE_DIR_NOISE_CURL
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PERF WARNING: '%s' is in UTF-16 format, converting to UTF-8 will allow faster loading of it
 PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
@@ -798,6 +782,7 @@ Unsupported text encoding id.
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -827,19 +812,15 @@ VSNAPFile
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_GetErrno
 V_IsAbsolutePath
 V_PathsMatch
 V_PrettifyNum
-V_SetErrno
 V_UChar32ToUTF8
 V_UTF16ToUChar32
 V_UTF16ToUTF8
 V_UTF32ToUTF8
-V_UTF8CharsToUTF16
 V_UTF8ToUChar32
 V_UTF8ToUTF16
-V_UTF8ToUTF32
 V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
@@ -853,7 +834,6 @@ V_isnan
 V_pow
 V_qsort_s
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -861,10 +841,7 @@ V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
-V_swscanf
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Valve_Test
 Valve_TestGendersEnglishOnly_A:g
 Valve_TestGendersEnglishOnly_N:n
@@ -891,7 +868,6 @@ WorldRendererMgr001
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_StringAfterPrefix
 _V_strncat
 _V_strncmp
 _V_strncpy
@@ -936,7 +912,6 @@ body_type
 bone_name
 bone_names
 bonemerge
-borrow
 brazilian
 break_create_joint_revolute
 break_uniform_burst
@@ -973,8 +948,6 @@ da_DK
 danish
 de_DE
 default
-delete
-developer
 dmg.bullets
 dmg.club
 dmg.explosive
@@ -1006,7 +979,6 @@ false
 fi
 fi_FI
 finnish
-float( %f )
 force
 format
 fr
@@ -1035,7 +1007,6 @@ hungarian
 hurt_me
 hurt_them
 ikdata
-int( %d = 0x%X )
 invert_orientation
 is_debris
 it_IT
@@ -1043,7 +1014,6 @@ italian
 ja
 ja_JP
 japanese
-keyvalues.cpp
 ko
 ko_KR
 korean
@@ -1309,7 +1279,6 @@ pthread_mutex_lock
 pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
-ptr( 0x%p )
 radius0
 radius1
 rb
@@ -1370,12 +1339,10 @@ true
 turkish
 turn_rate
 typeinfo for CThreadSyncObject
-u64( %lld = 0x%llX )
 uk
 uk_UA
 ukrainian
 unknown
-update
 use_additional_offset
 user
 value
@@ -1423,8 +1390,6 @@ vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
 wb
-wcscmp
-wcslen
 width
 yaw
 yaw_end

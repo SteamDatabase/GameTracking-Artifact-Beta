@@ -659,9 +659,6 @@ CConstraintSlave
 CConstraintTarget
 CDrawCullingData
 CEntityIndex
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFingerBone
 CFingerChain
 CFingerSource
@@ -971,14 +968,9 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
@@ -1170,7 +1162,6 @@ Default
 Default value for an enum field must be an identifier.
 Default_Keys
 DegreeEuler
-DevMsg
 DevMsg(char const*, ...)
 Division or mod by zero: dividend.hi=
 Dominate(
@@ -1497,6 +1488,32 @@ KV3 load transfer failed: %s
 Key in map fields cannot be enum types.
 Key in map fields cannot be float/double, bytes or message types.
 KeyValueCache001
+KeyValues::CreateNewKey()
+KeyValues::FindAndDeleteSubKey(char const*)
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstSubKey() const
+KeyValues::GetFirstValue() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNextKey() const
+KeyValues::GetNextValue() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::KeyValues(char const*)
+KeyValues::LoadFromBuffer(char const*, CUtlBuffer&, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::MergeFrom(KeyValues const*, KeyValues::MergeKeyValuesOp_t)
+KeyValues::SetFloat(char const*, float)
+KeyValues::SetInt(char const*, int)
+KeyValues::SetString(char const*, char const*)
+KeyValues::SetUint64(char const*, unsigned long long)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::operator=(KeyValues const&)
+KeyValues::~KeyValues()
 KeyValuesSystem
 L
 LAYEREDGAMEROOT
@@ -1524,7 +1541,6 @@ LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_PopLoggingState
 LoggingSystem_PushLoggingState
 LoggingSystem_RegisterBackdoorLoggingListener
@@ -1605,6 +1621,7 @@ ModelDocUtils001
 MountAddon: Failed to find ADDONS search path.
 MountAddonSearchPaths: Failed to find CONTENTADDONS search path.
 MovementSettings
+Msg
 Multiple extension registrations for type "
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
@@ -2164,10 +2181,6 @@ V_RemoveDotSlashes
 V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -2193,7 +2206,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -2202,11 +2214,8 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Value must be "true" or "false" for boolean option "
 Value must be identifier for boolean option "
 Value must be identifier for enum-valued option "
@@ -2871,6 +2880,7 @@ m_nIndexCount
 m_nInfluences
 m_nInstanceCount
 m_nMapType
+m_nMeshID
 m_nMinParticlesToEmit
 m_nNameHash
 m_nNoiseType
@@ -3440,8 +3450,6 @@ walkleft
 walkright
 walkspeed
 was modified concurrently during serialization.
-wcscmp
-wcslen
 width
 with a type that does not implement MergeFrom. This is unsafe;
 with type

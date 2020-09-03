@@ -9,6 +9,58 @@
  </styles>
 
 	<PopupPlayPage class="PopupLoadDeck PopupPanel" popupbackground="dim" oncancel="UIPopupButtonClicked()" acceptsfocus="true">
-		<DCGBotMatch id="BotMatchContainer" />
+	<Panel id="MainContent">
+			<Panel id="PopupBackButton" class="PopupBackButton" onactivate="UIPopupButtonClicked()" />
+			<Panel id="ContentContainer">
+				<Panel id="TopPanel">
+					<Panel id="TitlePanel">
+						<Label id="VsBotTitle" class="DBPageTitleLabel TitleFont" text="#DCG_PopupPlayPage_VsBot" />
+						<Label id="VsHumanTitle" class="DBPageTitleLabel TitleFont" text="#DCG_PopupPlayPage_VsHuman" />
+					</Panel>
+					<Panel id="NavButtons">
+						<Button id="HeroDraftButton" class="NavButton" onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGSelectGameMode( 1000 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotMatch )">
+							<Panel id="HeroDraftButtonImage" class="ButtonImage" />
+							<Label text="#DCG_PopupPlayPage_LiveDraft" class="ButtonLabel" />
+						</Button>
+						<Button id="ConstructedButton" class="NavButton" onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGSelectGameMode( 0 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotMatch )">
+							<Panel id="ConstructedButtonImage" class="ButtonImage" />
+							<Label text="#DCG_PopupPlayPage_Constructed" class="ButtonLabel"/>
+						</Button>
+						<Button id="Random2ColorButton" class="NavButton" onactivate="PlaySoundEffect( DCG_UI.BotSolo_Select_BotMatch ); DCGSelectGameMode( 17 )" onmouseover="PlaySoundEffect( DCG_UI.Shared_Rollover_BotMatch )">
+							<Panel id="Random2ColorButtonImage" class="ButtonImage" />
+							<Label text="#DCG_PopupPlayPage_Random2Color" class="ButtonLabel"/>
+						</Button>
+					</Panel>
+				</Panel>
+				<Panel id="ModeDetailsContainer">
+					<Panel class="MatchPlayBody">
+						<Label id="ConstructedBotDesc" class="BotDesc" text="#DCG_PlayAIGame_Desc" />
+						<Label id="ConstructedHumanDesc" class="BotDesc" text="#DCG_LoadDeckSelect_AboutSparringMatch" />
+						<Label id="LiveDraftDesc" class="BotDesc" text="#DCG_PlayLiveDraft_WelcomeTextAndRules" html="true" />
+						<Label id="Random2ColorDesc" class="BotDesc" text="#DCG_PlayAIGame_Random2ColorDesc" html="true" />
+						<Panel id="DeckSelectionContainer">
+							<Panel class="DeckSelection">
+								<Label class="ContentsBotLabel" text="#DCG_PlayAIGame_SelectYourDeck"/>
+
+								<DCGDeckLoader id="DeckLoaderPlayer" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseYourDeck )" />
+							</Panel>
+							<Panel id="BotDeckSelection" class="DeckSelection">
+								<Label class="ContentsBotLabel" text="#DCG_PlayAIGame_BotDeck"/>
+
+								<DCGDeckLoader id="DeckLoaderAI" onmouseover="PlaySoundEffect( DCG_UI.BotSolo_Rollover_ChooseAIDeck )" />
+							</Panel>
+						</Panel>
+
+					</Panel>
+				</Panel>
+			</Panel>      
+		</Panel>
+		<Panel id="BottomPanel" >
+			<Panel id="Divider" />
+			<Button id="PlayButton" class="PopupButton" onactivate="DCGPlayMatch()">
+				<Label text="#DCG_PopupPlayPage_Play" />
+			</Button>
+		</Panel>
+
 	</PopupPlayPage>
 </root>

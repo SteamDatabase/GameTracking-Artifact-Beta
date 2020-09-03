@@ -148,7 +148,7 @@ function _DeepToString(debugInstance, prefix)
             elseif type(data_value) == 'userdata' then
                 local mtable = getmetatable(data_value)
 
-                if mtable ~= nil then
+                if mtable ~= nil and mtable['__name'] ~= nil then
                     local name = mtable['__name']
                     string_value = '(userdata: ' .. name .. ')'
                 else

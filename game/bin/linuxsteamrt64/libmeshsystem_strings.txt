@@ -79,6 +79,7 @@ $ORIGIN
 10IMeshUtils
 11CMeshSystem
 11CRefCountedI20CRefCountServiceBaseILb1E6CRefMTEE
+11CRenderMesh
 11IMeshSystem
 11IRefCounted
 11IVSSequence
@@ -463,9 +464,6 @@ CConstraintTarget
 CCycleBase
 CDrawCullingData
 CEntityIndex
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFeIndexedJiggleBone
 CFeJiggleBone
 CFeMorphLayer
@@ -561,14 +559,9 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
@@ -576,7 +569,6 @@ CUtlBuffer::PutDelimitedString(CUtlCharConversion*, char const*)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::Swap(CUtlBuffer&)
 CUtlLinkedList overflow! (exhausted index range)
@@ -1049,7 +1041,16 @@ KV3 load transfer failed for mesh '%s': %s
 KV3 load transfer failed: %s
 KeyValueCache001
 KeyValues3
-KeyValuesSystem
+KeyValues::GetFirstSubKey() const
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNextKey() const
+KeyValues::KeyValues(char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::operator=(KeyValues const&)
+KeyValues::~KeyValues()
 LOG_GENERAL
 LOOKUP_TYPE_COUNT
 LOOKUP_TYPE_TEXCOORD
@@ -1073,7 +1074,6 @@ LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 LookAtList
 LowerEyelid(
@@ -1518,10 +1518,6 @@ V_PrettifyMem
 V_RemoveDotSlashes
 V_SetErrno
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -1546,7 +1542,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -1556,11 +1551,8 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Vector2D
 Vector4D
 VectorAligned
@@ -2424,6 +2416,7 @@ m_nInstanceCount
 m_nJiggleParent
 m_nLookupType
 m_nMapType
+m_nMeshID
 m_nMinParticlesToEmit
 m_nNameHash
 m_nNext
@@ -2958,8 +2951,6 @@ vtable for __cxxabiv1::__vmi_class_type_info
 w1
 w2
 walkspeed
-wcscmp
-wcslen
 wt
 yaw
 yaw_end

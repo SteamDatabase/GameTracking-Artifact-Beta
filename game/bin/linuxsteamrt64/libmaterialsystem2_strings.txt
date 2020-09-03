@@ -20,13 +20,8 @@
 #O
 #[
 #_
-#base
-#base is NULL
 #define
-#empty#
 #include
-#include is NULL
-#int#
 #line
 #undef
 $
@@ -62,9 +57,7 @@ $ORIGIN
 %hd
 %hu
 %i %i %i %i
-%lld
 %llu
-%ls [wstring, len = %d]
 %s
 %s --------------------------------
 %s 0..0
@@ -80,7 +73,6 @@ $ORIGIN
 %s(): Trying to add an empty VS input signature
 %s+--
 %s+-- Schema Class: %s
-%s,
 %s:
 %s: %s
 %s: Input vector has incorrect length
@@ -138,7 +130,6 @@ $ORIGIN
 (
 ( %d references )
 ( def. "%s" )
-(*%s*),
 (7
 (<
 (C
@@ -357,8 +348,6 @@ $ORIGIN
 0C
 0I
 0Q
-0x%016llX
-0x%p
 1
 1#
 1-
@@ -569,13 +558,11 @@ $ORIGIN
 ;P
 <
 <!--
-<< NULL >>
 <<unknown_mod>>\
 <=
 <DOWN>
 <EOR>
 <I
-<NULL>
 <No schemasystem>
 <UP>
 <Unknown font>
@@ -765,6 +752,7 @@ Bad header format (expected format name)
 Bad header format (expected format uuid)
 Bad header format (malformed UUID)
 Bad header format (no closing marker)
+Bad header: invalid binary marker
 Bad header: invalid compression header
 Bad header: unrecognized encoding id
 BakedLODBuilderMgr001
@@ -842,12 +830,10 @@ CBufferString::Trim(char const*)
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CEntityIndex
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal(unsigned long long)
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CI
+CKeyValues_Data::Internal_GetInt() const
 CLZMA::GetActualSize(unsigned char const*)
 CLZMA::IsCompressed(unsigned char const*)
 CLZMA::Uncompress(unsigned char const*, unsigned char*, void (*)())
@@ -934,12 +920,8 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::GetString(char*, int)
 CUtlBuffer::IsBigEndian()
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
@@ -952,7 +934,6 @@ CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SetBigEndian(bool)
-CUtlBuffer::SetBufferType(bool, bool)
 CUtlBuffer::SetExternalBuffer(void*, int, int, int)
 CUtlBuffer::SetOverflowFuncs(bool (CUtlBuffer::*)(int), bool (CUtlBuffer::*)(int))
 CUtlBuffer::Swap(CUtlBuffer&)
@@ -1180,7 +1161,6 @@ Description
 Destination buffer is too small
 Destination buffer is wrong
 Dev Shader
-DevMsg
 DevMsg(char const*, ...)
 DevShader
 Dictionary is corrupted
@@ -1421,6 +1401,13 @@ K
 K!
 K:
 KeyValueCache001
+KeyValues::FindKey(HKeySymbol) const
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetColor(char const*, Color const&)
+KeyValues::GetFirstValue() const
+KeyValues::GetName() const
+KeyValues::GetNextValue() const
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
 KeyValuesSystem
 L
 L!
@@ -1462,7 +1449,6 @@ LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, Color, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 M
 M/
@@ -1539,6 +1525,7 @@ Mobile SM 3.0 (GLES 3.1)
 Mode "%s", Layer %d:
 ModelDocUtils001
 More than 8 active color correction lookup textures!
+Msg
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
@@ -1546,6 +1533,7 @@ MurmurHash64
 N
 N10CMaterial224AsyncStaticComboResult_tE
 N24CFieldPathHuffmanEncoder12InternalNodeE
+N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
 N33CBaseIntrospectedToKV3TypeManager18AsyncProcessResultE
 N37CTypesafeIntrospectedToKV3TypeManagerILy1952542070E22MaterialResourceData_tE26IKV3ResourceAllocatorUtilsE
@@ -1972,6 +1960,7 @@ UtlMemory_CalcNewAllocationCount
 Uv scale variable %s referenced by texture %s doesn't evaluate to a constant value at material load time (%s).
 V
 V1
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2018,17 +2007,11 @@ VScriptDbg
 VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
-V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
 V_PathContainsPath
 V_RemoveDotSlashes
-V_SetErrno
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -2057,7 +2040,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -2067,12 +2049,9 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_towupper32
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Vector2D
 Vector4D
 VectorAligned
@@ -2443,7 +2422,6 @@ bool
 bool2
 bool3
 bool4
-borrow
 break_create_joint_revolute
 break_uniform_burst
 breakable_count
@@ -2490,10 +2468,8 @@ dC
 dD
 dH
 default
-delete
 dev/materialsystem2utils/pixel.vtex
 dev/vgui/materials/renderui.vmat
-developer
 dmg.bullets
 dmg.club
 dmg.explosive
@@ -2547,7 +2523,6 @@ features
 filesystem_stdio
 firstrenderstatelement < 0 : i = %d, frse = %d
 float
-float( %f )
 float2
 float3
 float3x3
@@ -2730,7 +2705,6 @@ iOS SM 4.0 (VULKAN)
 iX
 ikdata
 int
-int( %d = 0x%X )
 int2
 int3
 int4
@@ -2749,7 +2723,6 @@ k"
 k.
 k4
 kT
-keyvalues.cpp
 kv3
 kv3format_manager.cpp
 l
@@ -3225,7 +3198,6 @@ pthread_mutex_lock
 pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
-ptr( 0x%p )
 q
 q,
 q/
@@ -3250,7 +3222,6 @@ r`
 radius0
 radius1
 random
-rb
 realloc
 recenter_on_parent_bone
 relative_angles
@@ -3369,9 +3340,7 @@ typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_make_shared_tag
 u
-u64( %lld = 0x%llX )
 u`
-update
 use_additional_offset
 user
 using substring "%s"
@@ -3454,9 +3423,6 @@ wG
 wP
 w\
 w`
-wb
-wcscmp
-wcslen
 width
 workSpace buffer is not large enough
 x

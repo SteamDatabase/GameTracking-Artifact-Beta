@@ -1,36 +1,21 @@
-"
 "%s"
 "%s" = "%s"
-#base
-#base is NULL
-#empty#
-#include
-#include is NULL
-#int#
 $ORIGIN
-%
 %-120s
 %-120s - %s
 %-20s "%s" %s%s
 %-20s %s
 %d_%d_%d_%d_%d.tmp
-%f %f %f %f
 %f elapsed w/o i/o
-%hd
-%hu
 %i %i %i %i
-%lld
-%ls [wstring, len = %d]
 %s%d
 %s%s%s crc=0x%x metadatasz=%d
-%s,
 %s, %s, %s
 %s/%llu
 %s/%llu.vpk
 %s: file too large
 %s_%03d.vpk
 ( def. "%s" )
-(*%s*),
 (Unique   ): [%s]\%s
 (vpk)
 *.*
@@ -64,8 +49,6 @@ $ORIGIN
 0:Off, 1:Always, 2:Not during load
 0:Off, 1:Any, 2:Sync only
 0:Off, 1:Warn main thread, 2:Warn other threads
-0x%016llX
-0x%p
 10CStdioFile
 10ConCommand
 10IAppSystem
@@ -97,13 +80,11 @@ $ORIGIN
 18IIOCompletionQueue
 19CIODelayAlarmThread
 19IAsyncWriteRequest2
-19IKeyValuesErrorSpew
 20CPostConnectCallback
 22CSchemaInstallCallback
 23IConCommandBaseAccessor
 24CMemoryMappedFileSection
 25CFileSystemReloadFileList
-26CDefaultKeyValuesErrorSpew
 28CFioReadOnlyMemoryMappedFile
 28CPackedStoreMemoryMappedFile
 35CMemoryMappedFileSection_SelfDelete
@@ -112,9 +93,7 @@ $ORIGIN
 7IConVar
 9IFileList
 ;
-<< NULL >>
 <Invalid file time %lld>
-<NULL>
 <no deferred ref found>
 <no failure reason set>
 <null>
@@ -138,7 +117,6 @@ AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
 AsyncCopyFile %s -> %s failed: %s
-AsyncFileSystem2: io threads changed %i -> %i
 AsyncFilesystem Callback
 AsyncFilesystem CopyFile
 AsyncFilesystem Read
@@ -155,6 +133,7 @@ BenchmarkService001
 BinaryProperties_GetValue
 Blocked change to read-only path %s!
 BuildHashTables
+CAsyncFilesystem2::Shutdown wasn't called before destructor!
 CBaseFileSystem::Close
 CBaseFileSystem::EnableWhitelistFileTracking called more than once.
 CBaseFileSystem::FPrintf
@@ -209,9 +188,6 @@ CCountedStringPool::~CCountedStringPool()
 CDirIterator::CDirIterator(char const*, unsigned int)
 CDirIterator::NextFile()
 CDirIterator::~CDirIterator()
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFioReadOnlyFile::FS_fread
 CMemAllocSystemInitialize
 COLORCORRECTION_VERSION_1
@@ -249,21 +225,13 @@ CThreadSyncObject::~CThreadSyncObject()
 CUtlBlockMemory overflow!
 CUtlBuffer::ActivateByteSwapping(bool)
 CUtlBuffer::AddNullTermination()
-CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
 CUtlBuffer::CUtlBuffer(void const*, int, int)
-CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
-CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
 CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
@@ -284,7 +252,6 @@ CUtlString::Acquire(CBufferString*, bool)
 CUtlString::Append(char const*, int)
 CUtlString::CUtlString(CBufferString const&)
 CUtlString::DirName() const
-CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::GetBaseFilename() const
 CUtlString::GetExtensionAlloc() const
@@ -328,8 +295,6 @@ DEFAULT_WRITE_PATH
 DataOffset
 DebugTextureInfo001
 Destroying Completion Queue with %zu pending results!
-DevMsg
-DevMsg(char const*, ...)
 DotaCardGameClient_001
 ERROR_ALIGNMENT
 ERROR_ALREADYSERVICED
@@ -436,20 +401,16 @@ InstallSchemaBindings
 Intentionally vague touch behavior for %p
 Invalid Path
 Invalid access of deferred ConVarRef for '%s'
-KV Conditional Evaluation Error
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
-KeyValues::SaveToFile: couldn't open file "%s" in path "%s".
-KeyValuesSystem
+KeyValues::KeyValues(char const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::operator new(unsigned long)
 LOG_GENERAL
 LengthOfMatchingPaths
-LoadFromBuffer: expected '{', found '%s'
 Localize_001
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Loose
 MATCHFRAMEWORK_001
@@ -466,8 +427,8 @@ MaterialUtils_001
 MeshSystem001
 MeshUtils001
 ModelDocUtils001
+Msg
 MurmurHash2
-MurmurHash2LowerCase(char const*, unsigned int)
 MustRead
 N17CAsyncFileSystem215CCopyFileHandleE
 N17CAsyncFileSystem216CCompletionQueueE
@@ -534,12 +495,6 @@ QueuedLoaderVersion001
 ReadFileEx
 ReadToBuffer
 Reading UGC %llu that still needs update. Continuing...
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
 RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Release
@@ -675,11 +630,6 @@ V_MakeAbsolutePathBuffer
 V_MakeAbsoluteVPKPathNameBuffer
 V_PathContainsPath
 V_SetErrno
-V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_atof
 V_atofloat64
@@ -702,19 +652,13 @@ V_qsort
 V_qsort_s
 V_setvbuf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
 V_strnlen
-V_strtod
-V_strtoi64
 V_strtoui64
-V_swscanf
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Valid Content Absolute Path
 Valid External Path
 Valid Game Absolute Path
@@ -780,7 +724,6 @@ binary
 binary_auto
 binary_bc
 binary_lz4
-borrow
 centralDirectorySize
 cheat
 chmod
@@ -792,13 +735,9 @@ configvalue.cpp
 console.log
 content
 crc32
-d
-delete
-developer
 diskNumberStart
 externalFileAttribs
 extraFieldLength
-f
 false
 fileCommentLength
 fileNameLength
@@ -812,7 +751,6 @@ filesystem_stdio
 filesystem_unbuffered_io
 filetime
 flags
-float( %f )
 flock
 fnumber=%d ofs=0x%x sz=%d
 fs_async_threads
@@ -832,10 +770,7 @@ game
 gameinfo.gi
 gameinfo.txt
 generic
-int( %d = 0x%X )
 internalFileAttribs
-keyvalues.cpp
-l
 lastModifiedDate
 lastModifiedTime
 ld-linux-x86-64.so.2
@@ -880,7 +815,6 @@ pthread_mutex_lock
 pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
-ptr( 0x%p )
 rb
 rb+
 relativeOffsetOfLocalHeader
@@ -926,10 +860,8 @@ typeinfo for std::_Sp_make_shared_tag
 typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_make_shared_tag
-u64( %lld = 0x%llX )
 ugc:
 uncompressedSize
-update
 user
 versionMadeBy
 versionNeededToExtract
@@ -937,10 +869,7 @@ vpk:
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
 vtable for __cxxabiv1::__vmi_class_type_info
+w
 wb
-wcscmp
-wcslen
 zD
-{
-}
 ~CCompletionQueue

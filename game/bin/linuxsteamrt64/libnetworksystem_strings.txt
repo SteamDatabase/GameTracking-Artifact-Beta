@@ -820,9 +820,6 @@ CEventDispatcher_Base::IterateListeners_End(CEventDispatcher_Base::DelegateItera
 CEventDispatcher_Base::IterateListeners_Start(CEventDispatcher_Base::DelegateIterator_Base_t&, bool)
 CEventDispatcher_Base::RegisterEventListener_Base(CUtlAbstractDelegate const&, unsigned int, bool, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&, int, char const*)
 CEventDispatcher_Base::UnregisterEventListener_Base(CUtlAbstractDelegate const&, CUtlVector<CEventDispatcher_Base::EventListenerInfo_t, CUtlMemory<CEventDispatcher_Base::EventListenerInfo_t, int> >&)
-CExpressionEvaluator::CExpressionEvaluator()
-CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
-CExpressionEvaluator::~CExpressionEvaluator()
 CFieldPath tracing ended
 CFieldPath tracing started
 CFlattenedSerializer::ApplyOverrides_R
@@ -1188,14 +1185,9 @@ CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
-CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
-CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::PeekStringLength()
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
@@ -1425,7 +1417,6 @@ Default
 Default value for an enum field must be an identifier.
 DegreeEuler
 DetermineFieldSerializerGroup
-DevMsg
 DevMsg(char const*, ...)
 Direct UDP connect
 Disassociating NetChan %s (%s) from Steam Net Connection handle #%u (userdata %d)
@@ -1749,7 +1740,22 @@ K
 Key in map fields cannot be enum types.
 Key in map fields cannot be float/double, bytes or message types.
 KeyValueCache001
-KeyValuesSystem
+KeyValues::CreateNewKey()
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstSubKey() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetNextKey() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::KeyValues(char const*)
+KeyValues::SetFloat(char const*, float)
+KeyValues::SetInt(char const*, int)
+KeyValues::SetString(char const*, char const*)
+KeyValues::SetUint64(char const*, unsigned long long)
+KeyValues::operator new(unsigned long)
 L
 LOG_GENERAL
 Leaked channel %s remote %s
@@ -1769,7 +1775,6 @@ LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 Logic problem? szsrc =
 M
@@ -1853,6 +1858,7 @@ Missing field: FileDescriptorProto.name.
 Missing file '%s'
 Missing name.
 ModelDocUtils001
+Msg
 Multiple extension registrations for type "
 Multiple steam net connections from %s
 MurmurHash2
@@ -2490,6 +2496,7 @@ Use network sockets layer even for listen server local player's packets (multipl
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -2531,15 +2538,9 @@ VScript
 VScriptDbg
 VScriptManager010
 VStringTokenSystem001
-V_GetErrno
-V_SetErrno
 V_SplitString(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_SplitStringOnSeparators(char const*, char const*, CUtlVector<char*, CUtlMemory<char*, int> >&)
 V_UTF16ToUTF8
-V_UTF32ToUTF8
-V_UTF8CharsToUTF16
-V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_acosf
 V_asinf
 V_atan2f
@@ -2564,7 +2565,6 @@ V_qsort_s
 V_sincosf
 V_sinf
 V_snprintf
-V_snwprintf_cch
 V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
@@ -2573,12 +2573,9 @@ V_strtod
 V_strtoi64
 V_strtok
 V_strtoui64
-V_swscanf
 V_tanf
 V_uuid_t
 V_vsnprintf
-V_wcstod
-V_wcstoi64
 Validate
 ValidateSerializedEntity:  %s [ent %d] invalid change '%s' for field %s (value '%s') on array that has metadata with only %d array elements!
 ValidateSerializedEntity:  metadata incorrect entry for %s [%d expected %d]
@@ -2669,7 +2666,6 @@ _
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
-_V_StringAfterPrefix
 _V_strncat
 _V_strncmp
 _V_strncpy
@@ -3738,8 +3734,6 @@ w
 warning
 was modified concurrently during serialization.
 wb
-wcscmp
-wcslen
 width
 with a type that does not implement MergeFrom. This is unsafe;
 with type

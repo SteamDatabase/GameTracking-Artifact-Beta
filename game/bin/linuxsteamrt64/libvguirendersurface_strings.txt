@@ -19,12 +19,6 @@
 #TextEntry_PrependText
 #TextEntry_ReplaceText
 #TextEntry_SentenceMode
-#base
-#base is NULL
-#empty#
-#include
-#include is NULL
-#int#
 #var_
 #var_%s
 #vgui_TimeLeftMinuteSecond
@@ -43,12 +37,7 @@ $ORIGIN
 %d_hidden
 %d_width
 %f %f %f %f
-%hd
-%hu
 %i %i %i %i
-%lld
-%llu
-%ls [wstring, len = %d]
 %s
 %s %s
 %s moved to front
@@ -102,8 +91,6 @@ $ORIGIN
 ../public/tier0/utllinkedlist.h
 0 - no auto-resize
 0 - top-left
-0x%016llX
-0x%p
 1 - resize right
 1 - top-right
 10CheckImage
@@ -136,7 +123,6 @@ $ORIGIN
 18ITextureDictionary
 18IVGuiRenderSurface
 18MenuItemCheckImage
-19IKeyValuesErrorSpew
 2 - bottom-left
 2 - resize down
 20CDragDropHelperPanel
@@ -148,7 +134,6 @@ $ORIGIN
 255 255 255 255
 25CProportionalXPosProperty
 25CProportionalYPosProperty
-26CDefaultKeyValuesErrorSpew
 26CProportionalFloatProperty
 27CVGuiPaintSurfaceMainThread
 28CVguiProceduralLayerRenderer
@@ -162,8 +147,6 @@ $ORIGIN
 7Dragger
 7IConVar
 </a>
-<< NULL >>
-<NULL>
 <a href=
 <no deferred ref found>
 <no failure reason set>
@@ -234,7 +217,6 @@ CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFilePath(char const*, bool)
 CBufferString::FixSlashes(char)
 CBufferString::FixupPathName(char)
-CBufferString::Format(char const*, ...)
 CBufferString::Insert(int, char const*, int, bool)
 CBufferString::MakeAbsolutePath(char const*, char const*)
 CBufferString::MakeRelativePath(char const*, char const*)
@@ -259,6 +241,7 @@ CDragDropHelperPanel
 CExpressionEvaluator::CExpressionEvaluator()
 CExpressionEvaluator::Evaluate(bool&, char const*, bool (*)(char const*, void*), void (*)(char const*, void*), void*, void*)
 CExpressionEvaluator::~CExpressionEvaluator()
+CKeyValues_Data::Internal_SetString(char const*)
 CMatSystemTexture::SetMaterial
 CMemAllocSystemInitialize
 CMemoryStack::CMemoryStack()
@@ -294,19 +277,15 @@ CTreeViewListControl
 CUtlBinaryBlock::Set(void const*, int)
 CUtlBinaryBlock::SetLength(int)
 CUtlBuffer::AddNullTermination()
-CUtlBuffer::AssumeMemory(void*, int, int, int)
 CUtlBuffer::CUtlBuffer(int, int, int)
 CUtlBuffer::CUtlBuffer(void const*, int, int)
 CUtlBuffer::CheckArbitraryPeekGet(int, int&)
 CUtlBuffer::CheckGet(int)
 CUtlBuffer::CheckPut(int)
-CUtlBuffer::EatCPPComment()
 CUtlBuffer::EatWhiteSpace()
 CUtlBuffer::EnsureCapacity(int)
 CUtlBuffer::Get(void*, int)
-CUtlBuffer::GetDelimitedString(CUtlCharConversion*, CBufferString*)
 CUtlBuffer::GetDelimitedString(CUtlCharConversion*, char*, int)
-CUtlBuffer::GetString(CBufferString*)
 CUtlBuffer::GetString(char*, int)
 CUtlBuffer::ParseToken(char const*, char const*, char*, int)
 CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
@@ -335,7 +314,6 @@ CUtlRBTree overflow with %u elements!
 CUtlString::Acquire(CBufferString*, bool)
 CUtlString::CUtlString(CBufferString const&)
 CUtlString::FixSlashes(char)
-CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::GetForModify()
 CUtlString::IsEqual_CaseSensitive(char const*) const
@@ -440,8 +418,6 @@ Delete
 DeletePanel
 DeletePanelButton
 DestStructType_t::BaseClass
-DevMsg
-DevMsg(char const*, ...)
 DialogVariables
 DisarmItem
 Divider
@@ -710,7 +686,6 @@ KEY_W
 KEY_X
 KEY_Y
 KEY_Z
-KV Conditional Evaluation Error
 Key Pad *
 Key Pad +
 Key Pad -
@@ -735,8 +710,47 @@ KeyFocusTicked
 KeyModeSet
 KeyTyped
 KeyValueCache001
-KeyValues Error: %s in file %s
-KeyValues::ParseIncludedKeys: Couldn't load included keyvalue file %s
+KeyValues::AddSubKey(KeyValues*)
+KeyValues::CopySubkeys(KeyValues*) const
+KeyValues::FindKey(HKeySymbol) const
+KeyValues::FindKey(char const*, bool)
+KeyValues::GetColor(char const*, Color const&)
+KeyValues::GetDataType(char const*)
+KeyValues::GetFirstSubKey() const
+KeyValues::GetFirstValue() const
+KeyValues::GetFloat(char const*, float)
+KeyValues::GetInt(char const*, int)
+KeyValues::GetName() const
+KeyValues::GetNameSymbol() const
+KeyValues::GetNextKey() const
+KeyValues::GetNextValue() const
+KeyValues::GetPtr(char const*, void*)
+KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::GetUint64(char const*, unsigned long long)
+KeyValues::GetWString(char const*, wchar_t const*, wchar_t*, unsigned long)
+KeyValues::IsEmpty(char const*)
+KeyValues::IsEqual(KeyValues*)
+KeyValues::KeyValues(KeyValues const*, bool)
+KeyValues::KeyValues(char const*)
+KeyValues::KeyValues(char const*, char const*, char const*)
+KeyValues::KeyValues(char const*, char const*, char const*, char const*, char const*)
+KeyValues::KeyValues(char const*, char const*, int)
+KeyValues::KeyValues(char const*, char const*, int, char const*, int)
+KeyValues::KeyValues(char const*, char const*, wchar_t const*)
+KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
+KeyValues::MakeCopy() const
+KeyValues::ProcessResolutionKeys(char const*)
+KeyValues::SaveToFile(IBaseFileSystem*, char const*, char const*, bool)
+KeyValues::SetColor(char const*, Color)
+KeyValues::SetFloat(char const*, float)
+KeyValues::SetInt(char const*, int)
+KeyValues::SetPtr(char const*, void*)
+KeyValues::SetString(char const*, char const*)
+KeyValues::SetUint64(char const*, unsigned long long)
+KeyValues::SetWString(char const*, wchar_t const*)
+KeyValues::operator delete(void*)
+KeyValues::operator new(unsigned long)
+KeyValues::~KeyValues()
 KeyValuesSystem
 LOG_GENERAL
 Label.BgColor
@@ -762,13 +776,11 @@ ListPanel.TextColor
 ListViewItem
 ListViewItemSelected
 ListViewPanel
-LoadFromBuffer: expected '{', found '%s'
 Localize_001
 LoggingSystem_IsChannelEnabled
 LoggingSystem_Log
 LoggingSystem_Log(int, LoggingSeverity_t, Color, char const*, ...)
 LoggingSystem_Log(int, LoggingSeverity_t, LeafCodeInfo_t const&, char const*, ...)
-LoggingSystem_LogDirect
 LoggingSystem_RegisterLoggingChannel
 MATCHFRAMEWORK_001
 MATSURFACE
@@ -812,8 +824,8 @@ MouseWheeled
 Move
 MoveScrollBar
 MoveScrollBarDirect
+Msg
 MurmurHash2
-MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
 N
 N4vgui10BuildGroupE
@@ -963,12 +975,6 @@ RadioButton
 RadioButtonChecked
 RandomFloat
 RandomSeed
-RecursiveLoadFromBuffer:  got EOF instead of keyname
-RecursiveLoadFromBuffer:  got NULL key
-RecursiveLoadFromBuffer:  got conditional between key and value
-RecursiveLoadFromBuffer:  got empty keyname
-RecursiveLoadFromBuffer:  got } in key
-RecursiveLoadFromBuffer:  recursion overflow
 RegisterAllModuleData
 RegisterConfigValue: Unknown error constructing config value "%s"!
 Release
@@ -1201,18 +1207,13 @@ VScriptManager010
 VStringTokenSystem001
 V_FixDoubleSlashes
 V_FixSlashes
-V_GetErrno
 V_GetFileExtension
 V_IsAbsolutePath
 V_PathContainsPath
 V_RemoveDotSlashes
-V_SetErrno
-V_UTF16ToUTF8
 V_UTF32ToUTF16
 V_UTF32ToUTF8
-V_UTF8CharsToUTF16
 V_UTF8ToUTF32
-V_UnicodeLength(char const*)
 V_UnqualifiedFileName
 V_acosf
 V_asinf
@@ -1239,13 +1240,10 @@ V_strlower_fast
 V_strtod
 V_strtoi64
 V_strtoui64
-V_swscanf
 V_tanf
 V_vsnprintf
 V_wcsicmp
 V_wcsnicmp_cch
-V_wcstod
-V_wcstoi64
 Valve Client
 VarsButton
 VarsMenu
@@ -1281,7 +1279,6 @@ _ITM_registerTMCloneTable
 _Jv_RegisterClasses
 _V_ComposeFileName
 _V_SetExtension
-_V_StringAfterPrefix
 _V_StripLastDir
 _V_strEndsWith
 _V_strncat
@@ -1338,7 +1335,6 @@ binary_lz4
 blinkFgColor_override
 bool
 bool_array
-borrow
 bottom
 brighttext
 build mode flags
@@ -1374,13 +1370,11 @@ defaultBgColor_override
 defaultFgColor_override
 defaultPanel
 defaultSelectionBG2Color_override
-delete
 delta
 depressedBgColor_override
 depressedFgColor_override
 dev/vgui/materials/renderui_stencilmask.vmat
 dev/vgui/materials/white.vtex
-developer
 disabled
 disabledBgColor_override
 disabledFgColor_override
@@ -1398,7 +1392,6 @@ element
 element_array
 elementid
 english
-f
 f%d
 fg_image
 fgcolor
@@ -1407,7 +1400,6 @@ fillColor
 fillcolor
 fillcolor_override
 filtered
-float( %f )
 float_array
 floor
 floorf
@@ -1444,7 +1436,6 @@ imagecolor
 index
 infocus_bgcolor_override
 inputsystem
-int( %d = 0x%X )
 int_array
 iswalnum
 iswcntrl
@@ -1455,9 +1446,7 @@ keybindings
 keyboardFocusColor_override
 keyboardinputenabled
 keycode
-keyvalues.cpp
 keyvalues2_flat
-l
 labelText
 labeltext
 lastBarWidth
@@ -1556,7 +1545,6 @@ pthread_mutex_unlock
 pthread_mutexattr_init
 pthread_mutexattr_settype
 ptr
-ptr( 0x%p )
 qangle
 qangle_array
 qsort
@@ -1564,7 +1552,6 @@ quaternion
 quaternion_array
 r%d
 r_screen_size_expansion
-rb
 replace
 replaceSelection
 replicated
@@ -1627,6 +1614,7 @@ style
 subFocus
 subtabposition
 sw
+swscanf
 tab position
 tabPosition
 tan
@@ -1658,7 +1646,6 @@ towlower
 towupper
 true
 typeinfo for CThreadSyncObject
-u64( %lld = 0x%llX )
 uint64
 uint64_array
 uint8
@@ -1669,7 +1656,6 @@ unicode
 unknown
 unnamed
 unused
-update
 url
 use scheme colors
 use_proportional_insets
