@@ -335,7 +335,6 @@ $tI
 %s client
 %s down %s impdown %s impup %s
 %s executing script: %s
-%s is a Source1 demo, invoking request UI
 %s is not a valid demo file
 %s kicked by %s
 %s kicked by %s : %s
@@ -742,6 +741,7 @@ $tI
 -nosound
 -nostartupmenu
 -notoolsdev
+-novalveds
 -novconsole
 -novpk
 -novr
@@ -806,6 +806,7 @@ $tI
 -useappid
 -uselogdir
 -usercon
+-valveserver
 -vconport
 -vconsole
 -vguiconsole
@@ -1382,6 +1383,7 @@ $tI
 17IEngineServiceMgr
 17IGameEventWatcher
 180.0
+18:16:47
 18CBaseEngineServiceI12IToolServiceE
 18CBaseEngineServiceI13IInputServiceE
 18CBaseEngineServiceI13ISoundServiceE
@@ -1547,7 +1549,6 @@ $tI
 22IToolsResourceListener
 22IUserInfoChangeService
 22SerializedNetAddress_t
-23:09:18
 23CBaseGameUIInputHandler
 23CBoundedCvar_UpdateRate
 23CCLCMsg_LoadingProgress
@@ -1725,7 +1726,6 @@ $tI
 43CScreenshotServiceReadTexturePixelsCallback
 43IGameResourceManifestLoadCompletionCallback
 45CNetworkServerSpawnGroup_AllocatePrerequisite
-47
 48CBidirMsg_RelayPacket_SignedDestinationAddress_t
 48CNetworkClientSpawnGroup_WaitForChildSpawnGroups
 48CNetworkServerSpawnGroup_WaitForChildSpawnGroups
@@ -1754,6 +1754,7 @@ $tI
 59CNetworkClientSpawnGroup_WaitForOwnerSpawnGroupPrerequisite
 59CNetworkServerSpawnGroup_WaitForOwnerSpawnGroupPrerequisite
 6
+60
 64-bit
 6ConVar
 7
@@ -1859,7 +1860,6 @@ $tI
 ?"N
 ?(3w
 ???
-?a`
 @
 @ Current  :  %s
 @&LH
@@ -3063,8 +3063,6 @@ CTiltTwistConstraint
 CToolService
 CTransform
 CTransform-world
-CTransformScaled
-CTransformScaled-world
 CTreeViewListControl
 CTwistConstraint
 CUserInfoChangeService::AddValueToWatch: only CONFIG_USER is supported (%s)
@@ -3573,6 +3571,7 @@ Controls VTune's sampling.
 Convar %s is already registered but not as user info value
 Convar %s is marked as cheat and cheats are off
 ConversionModeMenu
+ConvertGammaToLinear
 Coptic
 CopyAttrFrom
 CopyEntityBaseline
@@ -4140,8 +4139,6 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
-FIELD_CTRANSFORMSCALED
-FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -4864,7 +4861,6 @@ Invert Axes;
 Is the server pausable.
 IsInPVS
 IsKeyValueUsed
-IsSource1DemoFile:  failed to read demo header from %s
 IsUniqueIdEqual
 J
 JFIF APP0 marker: version %d.%02d, density %dx%d  %d
@@ -6039,7 +6035,6 @@ PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
 PVS cluster %d
 PVS origin %s
-PWL
 PackEntity
 PackEntity: SnagChangeFrameList returned null
 PackEntity: ent(%d) at tick %d Encountered field %s in diff change that was not in the incremental change. This can lead to values not making it down to the client
@@ -6437,10 +6432,8 @@ RENDER_SYSTEM_DLL_DX11
 RENDER_SYSTEM_DLL_DX9
 RENDER_SYSTEM_DLL_EMPTY
 RENDER_SYSTEM_DLL_GL
-RENDER_SYSTEM_DLL_MANTLE
 RENDER_SYSTEM_DLL_NONE
 RENDER_SYSTEM_DLL_VULKAN
-RENDER_SYSTEM_DLL_X360
 REPLAY
 RESOURCE_EXHAUSTED
 RESOURCE_TYPE_POST_PROCESSING
@@ -6885,7 +6878,7 @@ Sending harvesting protocol upload request.
 Sending voice from: %s - playerslot: %d [ xuid %llx ]
 SentenceModeMenu
 Sep
-Sep  2 2020
+Sep 10 2020
 SequenceMarkup
 SequenceMarkupList
 Serialize
@@ -8549,6 +8542,7 @@ cpu_level
 cpu_level,
 cpu_usage
 cpuinfo
+cq disabled, re-syncing usercmd and simulation clock remainders
 crash
 crash_error
 crash_error forcing error
@@ -8777,14 +8771,14 @@ float32-quantized
 float64
 float_array
 floatbitmap.cpp
-floatbitmap.cpp(141): Unknown gamma type "%s"!
-floatbitmap.cpp(2486): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2497): Error loading %s
-floatbitmap.cpp(2520): Error! Unknown file type for %s
-floatbitmap.cpp(2539): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(338): Conversion not supported yet!
-floatbitmap.cpp(438): Conversion not supported yet!
-floatbitmap.cpp(901): Unsupported color format "%s", skipping!
+floatbitmap.cpp(121): Unknown gamma type "%s"!
+floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2310): Error loading %s
+floatbitmap.cpp(2333): Error! Unknown file type for %s
+floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(299): Conversion not supported yet!
+floatbitmap.cpp(383): Conversion not supported yet!
+floatbitmap.cpp(846): Unsupported color format "%s", skipping!
 floor
 floorf
 fltx4
@@ -10414,6 +10408,7 @@ server_cmd_queue_desired
 server_cvar: "%s" "%s"
 server_query_info
 server_tick
+server_valve
 serverinfo
 serversideclientbase.cpp
 service $0 {
@@ -11088,7 +11083,6 @@ vQO+
 valid  : %s
 value
 value { %s }
-valve
 valveextensions.proto
 vanmgrph
 variable
@@ -11379,4 +11373,3 @@ zpos
 ~CServerChangelevelState with non empty m_Clients, failed change level to %s!!!
 
 C
-D

@@ -96,7 +96,6 @@ $ORIGIN
 (spew)
 *St19_Sp_counted_deleterIPhZN3Etc13EncodeMipmapsEPfjjNS1_5Image6FormatENS1_11ErrorMetricEfjjjjPNS1_8RawImageEPibEUlS0_E_SaIiELN9__gnu_cxx12_Lock_policyE2EE
 *ZN17CWorldRendererMgr22HandleGrassLoadRequestEP18GrassLoadRequest_tEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
-*ZN3Etc13EncodeMipmapsEPfjjNS_5Image6FormatENS_11ErrorMetricEfjjjjPNS_8RawImageEPibEUlPhE_
 +inf
 ,
 , %s
@@ -233,10 +232,12 @@ $ORIGIN
 27CSchemaUtlVectorManipulatorI10CUtlVectorI13SceneObject_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI17InfoOverlayData_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI18MaterialOverride_t10CUtlMemoryIS1_iEES1_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorI19AggregateMeshInfo_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19voxel_vis_cluster_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI20EntityKeyValueData_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI21CStrongHandleCopyableI30InfoForResourceTypeCEntityLumpE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI21voxel_vis_mergelist_t10CUtlMemoryIS1_iEES1_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorI22AggregateSceneObject_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI24EntityIOConnectionData_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI24RenderInputLayoutField_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI27ExtraVertexStreamOverride_t10CUtlMemoryIS1_iEES1_E
@@ -304,7 +305,6 @@ $ORIGIN
 >
 ?
 ???
-?a`
 @
 @@
 @@/home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/Etc/EtcImage.cpp
@@ -363,6 +363,9 @@ Add an output
 AddOutput
 AddResource
 Adding animation group resource in replace animations: %s
+AggregateMeshInfo_t
+AggregateSceneObjectDesc
+AggregateSceneObject_t
 AllocateAndLoad failed for '%s'
 AllocateAndLoad failed for '%s' (%s)
 AllocateResource: Cannot find DATA block in resource %s!
@@ -623,8 +626,6 @@ CThreadedJob::Abort(bool)
 CTiltTwistConstraint
 CTransform
 CTransform-world
-CTransformScaled
-CTransformScaled-world
 CTwistConstraint
 CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
@@ -850,7 +851,6 @@ ConnectInterfaceSingletons
 ConnectOutput
 ConnectOutputToScript
 ConnectOutputToScriptSelf
-ConvertGammaToLinear
 CopyAttrFrom
 Couldn't ReadTexturePixels when creating grass.
 CreateEntity
@@ -991,8 +991,6 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
-FIELD_CTRANSFORMSCALED
-FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -1216,7 +1214,6 @@ InfoForResourceTypeCModel
 InfoForResourceTypeCRenderMesh
 InfoForResourceTypeCTextureBase
 InfoForResourceTypeIMaterial2
-InfoForResourceTypeVMapResourceData_t
 InfoOverlayData_t
 Input %s for %s entity dropped because the entity is in stasis.
 InputRunPrivateScript
@@ -1494,6 +1491,7 @@ OBJECT_TYPE_DISABLED_IN_LOW_QUALITY
 OBJECT_TYPE_GEOMETRY_LOD
 OBJECT_TYPE_IMAGE_LOD
 OBJECT_TYPE_MODEL
+OBJECT_TYPE_NONE
 OBJECT_TYPE_NO_SHADOWS
 OBJECT_TYPE_NO_SUN_SHADOWS
 OBJECT_TYPE_PRECOMPUTED_VISMEMBERS
@@ -1536,7 +1534,6 @@ PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
-PWL
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
@@ -1678,7 +1675,6 @@ SRGB8
 SRGB8A1
 SRGBA8
 SSE and SSE2 are required.
-SceneObject_t
 SceneSystem_002
 SceneUtils_001
 SchemaSystem_001
@@ -1979,6 +1975,7 @@ _c
 _edata
 _end
 _fini
+_pad
 _root_keyname
 _setjmp
 _test_conversion_counter
@@ -2019,6 +2016,7 @@ binary_bc
 binary_lz4
 bindlessfastpath: Missing cubemap precomputed handshake for world geometry (%s)
 blendamount
+blendindices
 blendweight
 blendweights
 blockLOS
@@ -2143,14 +2141,14 @@ float32
 float32-quantized
 float64
 floatbitmap.cpp
-floatbitmap.cpp(141): Unknown gamma type "%s"!
-floatbitmap.cpp(2486): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2497): Error loading %s
-floatbitmap.cpp(2520): Error! Unknown file type for %s
-floatbitmap.cpp(2539): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(338): Conversion not supported yet!
-floatbitmap.cpp(438): Conversion not supported yet!
-floatbitmap.cpp(901): Unsupported color format "%s", skipping!
+floatbitmap.cpp(121): Unknown gamma type "%s"!
+floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2310): Error loading %s
+floatbitmap.cpp(2333): Error! Unknown file type for %s
+floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(299): Conversion not supported yet!
+floatbitmap.cpp(383): Conversion not supported yet!
+floatbitmap.cpp(846): Unsupported color format "%s", skipping!
 floor
 floorf
 fltx4
@@ -2305,7 +2303,11 @@ m_TargetSettingSource
 m_TargetSource
 m_Value
 m_VisClusterMemberBits
+m_aggregateMeshes
+m_aggregateSceneObjects
+m_allFlags
 m_ankleBoneName
+m_anyFlags
 m_attachments
 m_bApplyMinForce
 m_bBuildBakedLighting
@@ -2552,6 +2554,7 @@ m_nControlPointNumber
 m_nCubeMapPrecomputedHandshake
 m_nD3DSemanticIndex
 m_nDrawCallIndex
+m_nDrawDescriptorIndex
 m_nElement
 m_nElementCount
 m_nElementIndexArray
@@ -2572,6 +2575,7 @@ m_nInfluences
 m_nInstanceCount
 m_nInstanceStepRate
 m_nLODOverride
+m_nLayer
 m_nLightGroup
 m_nLightProbeVolumePrecomputedHandshake
 m_nLightmapGameVersionNumber
@@ -2630,8 +2634,11 @@ m_nUniqueTextureSizeY
 m_nUpType
 m_nVectorComponent
 m_nVertexCount
+m_nVisClusterMemberCount
+m_nVisClusterMemberOffset
 m_nameStringableIndex
 m_nodeLightingInfo
+m_objectFlags
 m_outerKnuckle1
 m_outerKnuckle2
 m_outputMorph
@@ -2750,6 +2757,7 @@ m_vUVEnd
 m_vUVStart
 m_vUpLS
 m_vUpVector
+m_vWorldBounds
 m_vWorldUnitsPerTile
 m_value
 m_valueOverride
@@ -2869,6 +2877,7 @@ out of memory
 outputid
 overlay
 pA
+panorama
 parameter error
 parent of jiggle bone %u: %s
 particles/
@@ -3227,4 +3236,3 @@ yaw_start
 yes
 |B
 } %llu aggs, %s total data
-D

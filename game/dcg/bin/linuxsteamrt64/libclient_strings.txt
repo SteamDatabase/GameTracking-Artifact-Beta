@@ -646,6 +646,8 @@
 #DCG_CardText_AbilityCooldown
 #DCG_CardText_AbilityNoCooldown
 #DCG_CardText_Charges
+#DCG_CardText_Repeated
+#DCG_CardText_RepeatedCharges
 #DCG_CardType_Ability
 #DCG_CardType_Accessory
 #DCG_CardType_Armor
@@ -2903,6 +2905,7 @@ $tI
 %s has %d prior disconnections, but all were resolved.  We cannot match up this connection to any prior disconnection.
 %s has %d variants
 %s has a health specified in model '%s'. Use prop_physics or prop_dynamic instead.
+%s has an invalid size (%lld). May be unable to create items.
 %s has no variants
 %s leaving the server as local player index %u
 %s not found
@@ -3091,6 +3094,7 @@ $tI
 %s:  variants # %d of %d
 %s:  } IGameSystem::LoopActivateAllSystems done
 %s:  } IGameSystem::LoopDeactivateAllSystems done
+%s: %s [%d/%d] %.2f%%
 %s: %s%s
 %s: %s( %s %d %d )
 %s: %s(%s) '%s' [%d] thinking for %.02f ms!!!
@@ -3119,6 +3123,8 @@ $tI
 %s: nPos:%d
 %s: nPos:%d, nLen:%d, highlightStyle:%d
 %s: nStart:%d, nEnd:%d
+%s: non-conforming:  cl(%s) -> sv(%s)
+%s: summary:
 %s: unexpected parameter format for InputSetBodyGroup. Had %s, expected <bodygroupname,partnumber>
 %s: unexpected parameter type %s, expected a CString
 %s: unexpected token %s
@@ -3311,6 +3317,7 @@ $tI
 (WIPE AND EXTRACT)
 (Yielding)
 (\b(battling|battles?(?! damage))\b)
+(\b(repeated|repeatable)\b)
 (\bCleaving\b)
 (\bSilenced\b)
 (\babsorption\b)
@@ -3380,7 +3387,6 @@ $tI
 (\brapid deployment\b)
 (\breflect\b)
 (\bregeneration\b)
-(\brepeatable\b)
 (\bretaliate\b)
 (\broot\b)
 (\brooted\b)
@@ -4117,6 +4123,7 @@ $tI
 -moveright
 -moveup
 -multiple
+-network_class_conform_check
 -no_environment_maps
 -no_hierarchical_vpk_memory_mapping
 -noclearsave
@@ -5054,6 +5061,7 @@ $tI
 15CEconItemSchema
 15CEconItemSystem
 15CEntityIONotify
+15CEntityIOOutput
 15CEntityInstance
 15CEventDataCache
 15CFakeSpawnGroup
@@ -5768,7 +5776,6 @@ $tI
 199
 19BeginEndOfTurnPhase
 19CAbandonGauntletJob
-19CAmmoDefInitializer
 19CAttributeContainer
 19CBidirMsg_RelayInfo
 19CBodyComponentPoint
@@ -6592,7 +6599,6 @@ $tI
 24CGameSystemStaticFactoryI17CUIRootGameSystemS0_E
 24CGameSystemStaticFactoryI18CDCGClientGCSystemS0_E
 24CGameSystemStaticFactoryI18CGlowOverlaySystemS0_E
-24CGameSystemStaticFactoryI19CAmmoDefInitializerS0_E
 24CGameSystemStaticFactoryI19CColorCorrectionMgrS0_E
 24CGameSystemStaticFactoryI19CCombatCharVisCacheS0_E
 24CGameSystemStaticFactoryI19CDecalEmitterSystem19IDecalEmitterSystemE
@@ -9069,7 +9075,6 @@ $tI
 ???CRR_Response bogus index
 ?C
 ?J
-?a`
 @
 @'
 @*
@@ -9080,11 +9085,13 @@ $tI
 @A
 @B
 @C
+@DCGEquipSubSlot_t
 @J
 @Y>)F
 @Z@
 @console_max_autocomplete
 @console_max_history
+@console_max_lines
 @console_position_and_size
 @keyframes
 @keyframes '%s'{
@@ -10995,14 +11002,8 @@ AE_RELOAD_EMPTY_CLIPOUT
 AE_RELOAD_PUMPEND
 AE_RELOAD_SHELL_INSERT
 AE_REMOVE_CLIENT_AIM
-AE_SCRIPT_EVENT_CANINTERRUPT
-AE_SCRIPT_EVENT_CUSTOMINTERRUPT_END
-AE_SCRIPT_EVENT_CUSTOMINTERRUPT_START
-AE_SCRIPT_EVENT_DEAD
 AE_SCRIPT_EVENT_FIREEVENT
 AE_SCRIPT_EVENT_FIRE_INPUT
-AE_SCRIPT_EVENT_NOINTERRUPT
-AE_SCRIPT_EVENT_NOT_DEAD
 AE_SCRIPT_EVENT_SENTENCE
 AE_SCRIPT_EVENT_SENTENCE_RND1
 AE_SCRIPT_EVENT_SOUND
@@ -11388,7 +11389,6 @@ AlternateActions
 Ambassador of Quoidge
 Ambient %s:Unknown command %s
 AmbientCubes
-AmmoDefInitializer
 Amount of lag used when matching offset to ideal angles in thirdperson view
 Amount to adjust the chase cam's distance on a zoom request
 An RR_Concept couldn't find its string in the symbol table!
@@ -11600,7 +11600,6 @@ AttributeList* std::__uninitialized_copy<false>::__uninit_copy<AttributeList*, A
 AttributeList* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, AttributeList*>(__gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, __gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, AttributeList*)
 AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*)
 AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*)
-AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*)
 AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*)
 AttributeName
 AttributeNeutral
@@ -12114,6 +12113,7 @@ CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
 CBufferString::Concat(char const*, char const*, ...)
+CBufferString::EnsureCapacity(int, char**, bool, bool)
 CBufferString::ExtendPath(char const*, char)
 CBufferString::ExtractFileBase(char const*)
 CBufferString::ExtractFileExtension(char const*)
@@ -12131,6 +12131,7 @@ CBufferString::Relinquish(CBufferString::EAllocationOption_t)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
+CBufferString::RemoveWhitespace()
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
@@ -13322,8 +13323,6 @@ CTimeline
 CTonemapController2
 CTransform
 CTransform-world
-CTransformScaled
-CTransformScaled-world
 CTriggerCamera
 CTriggerVolume
 CTwistConstraint
@@ -13485,10 +13484,6 @@ CUtlString::operator+=(char)
 CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
 CUtlString::operator[](int) const
-CUtlStringBuilder::Data::SetError(bool)
-CUtlStringBuilder::Data::SetLength(unsigned long)
-CUtlStringBuilder::InternalPrepareBuffer(unsigned long, bool, unsigned long)
-CUtlStringBuilder::RemoveWhitespace()
 CUtlStringToken
 CUtlStringToken(%u)
 CUtlSymbol
@@ -14072,6 +14067,7 @@ CardTypeHero
 CardTypeIcon
 CardTypeImprovement
 CardTypeSpell
+Cardback:
 CardsOwnedHidden
 Carian
 CarouselAutoScroll
@@ -16565,7 +16561,6 @@ Emoticon%d
 Emoticon%u
 EmoticonAlias
 EmoticonsContainer
-Empty Diff, group=%s
 Empty Slot
 Empty language field in iTXt chunk
 EmptyAnim
@@ -16958,8 +16953,6 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
-FIELD_CTRANSFORMSCALED
-FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -21617,7 +21610,7 @@ PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../sh
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:542
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1168
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2452
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2441
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2531
@@ -23735,7 +23728,6 @@ Send msg %u (%s), %u bytes
 SendCustomMessage
 SendCustomMessageBinder
 SendMessageToPlayer
-SendNetworkGroupStateUpdateToPlayer player=%d, group=%s, size=%d:
 SendToConsole
 SenderName
 Sending ping request %d/4.
@@ -24770,6 +24762,8 @@ TextEntry.SelectedBgColor
 TextEntry.SelectedTextColor
 TextEntry.TextColor
 TextEntryAutocomplete
+TextEntryAutocompleteEntryActivated
+TextEntryAutocompleteEntryFocused
 TextEntryChanged
 TextEntryCopyToClipboard
 TextEntryCopyToClipboard()
@@ -25512,6 +25506,7 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
+Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25752,7 +25747,6 @@ V_strtoui64
 V_strupper_fast
 V_tanf
 V_uuid_t
-V_vscprintf
 V_vsnprintf
 Vai
 Val : voiced labialdental fricative
@@ -26629,7 +26623,6 @@ Zs
 [sub str] Lists all of the razzle dazzle scripts that use the named traces
 [token:%02x] (%s),
 [traces]
-[unassigned]
 [unknown]
 [winning player (1 or 2)] [dire player (1 or 2)] Test the postgame stats popup.
 \
@@ -27507,6 +27500,7 @@ bzip2/libbzip2: internal error number %d.This is a bug in bzip2/libbzip2, %s.Ple
 c
 c'
 c(
+c/c_ variants
 cAt : semi-low front unrounded vowel
 cHRM Blue X
 cHRM Green X
@@ -30017,15 +30011,14 @@ float32-quantized
 float64
 float64 (%g)
 float64 differs (net %g pred %g) diff(%g)
-floatbitmap.cpp
-floatbitmap.cpp(141): Unknown gamma type "%s"!
-floatbitmap.cpp(2486): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2497): Error loading %s
-floatbitmap.cpp(2520): Error! Unknown file type for %s
-floatbitmap.cpp(2539): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(338): Conversion not supported yet!
-floatbitmap.cpp(438): Conversion not supported yet!
-floatbitmap.cpp(901): Unsupported color format "%s", skipping!
+floatbitmap.cpp(121): Unknown gamma type "%s"!
+floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2310): Error loading %s
+floatbitmap.cpp(2333): Error! Unknown file type for %s
+floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(299): Conversion not supported yet!
+floatbitmap.cpp(383): Conversion not supported yet!
+floatbitmap.cpp(846): Unsupported color format "%s", skipping!
 floor
 floorf
 floralwhite
@@ -34756,6 +34749,7 @@ noheader
 noise
 noise_maker
 non-
+non-confirming
 non-hex character in \x{} (closing brace missing?)
 non-networkable
 non-octal character in \o{} (closing brace missing?)
@@ -38619,6 +38613,7 @@ vector::_M_default_append
 vector::_M_emplace_back_aux
 vector::_M_fill_insert
 vector::_M_insert_aux
+vector::_M_range_check: __n (which is %zu) >= this->size() (which is %zu)
 vector::_M_range_insert
 vector::reserve
 vehicleRole %i

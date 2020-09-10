@@ -21,6 +21,7 @@
 #%s/%s/+MultiGpu-TransferRenderTarget( To: %dx%d @ x: %d y: %d, From: %dx%d @ x: %d y: %d )
 #%s/%s/+SteamVrCompositor-TransferLeftEye( %dx%d @ (x: %d y: %d) )
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
+#%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
 #%s/RenderAView/LightSetup
@@ -90,15 +91,15 @@ $tI
 (unnamed light)
 *
 *** Skip layer '%s'
-*Z29InitForFrustum_DebugRenderingyyP10CSceneViewEUlP25CSceneLightObjectInternalE_
-*Z33InitForFrustum_DebugRenderingCsgoyyP10CSceneViewEUlP25CSceneLightObjectInternalE_
+*Z29InitForFrustum_DebugRendering17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
+*Z33InitForFrustum_DebugRenderingCsgo17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
 *ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneViewP11ISceneLayerP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
-*ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneViewyyEUlP18CEnvMapSceneObjectE_
-*ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneViewyyEUlP28CSceneLightProbeVolumeObjectE_
-*ZN14CLightBinnerVr19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustumyyEUlP25CSceneLightObjectInternalE_
-*ZN14CLightBinnerVr34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK17FrustumGeometry_tyyiEUlP25CSceneLightObjectInternalE_
-*ZN16CLightBinnerCsgo19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustumyyEUlP25CSceneLightObjectInternalE_
-*ZN16CLightBinnerCsgo34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK21FrustumGeometryCSGO_tyyiEUlP25CSceneLightObjectInternalE_
+*ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP18CEnvMapSceneObjectE_
+*ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP28CSceneLightProbeVolumeObjectE_
+*ZN14CLightBinnerVr19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
+*ZN14CLightBinnerVr34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsSA_iEUlP25CSceneLightObjectInternalE_
+*ZN16CLightBinnerCsgo19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
+*ZN16CLightBinnerCsgo34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK21FrustumGeometryCSGO_t17ESceneObjectFlagsSA_iEUlP25CSceneLightObjectInternalE_
 *ZN26CBindlessFastPathPartition21EnsureEnvironmentMapsEvEUlP18CEnvMapSceneObjectE_
 *ZN32CBindlessFastPathSceneObjectDesc35EnsureLightProbeVolumeDescriptorSetEvEUlP28CSceneLightProbeVolumeObjectE_
 +inf
@@ -151,7 +152,6 @@ $tI
 0.25
 0.5
 0.85
-00000000-0000-0000-0000-000000000000
 0x%08X %s,
 1 1 1
 1 = visualize bounds, 2 = visualize sceneobject mesh materials, 3 = required texture size, 4 = bounds group, 5 = LOD
@@ -240,6 +240,7 @@ $tI
 20ISceneObjectDescBaseI28CSceneLightProbeVolumeObjectE
 20ISceneObjectDescBaseI33CAmbientOcclusionProxySceneObjectE
 20ISceneObjectDescBaseIN23CCharacterDecalRenderer26CCharacterDecalSceneObjectEE
+21CAggregateSceneObject
 21CPointLightObjectDesc
 21CResolveLayerRenderer
 21CSceneDebugTextObject
@@ -265,6 +266,7 @@ $tI
 24CSpotLightObjectDescCsgo
 24CVConCommandMessageScene
 24IProceduralLayerRenderer
+25CAggregateSceneObjectDesc
 25CConCommandMemberAccessorI12CSceneSystemE
 25CPointLightObjectDescCsgo
 25CSceneLightObjectInternal
@@ -409,6 +411,7 @@ $tI
 <td>NO_OCCLUSION_CULLING</td>
 <td>NO_PVS_CULLING</td>
 <td>NO_Z_PREPASS</td>
+<td>PIPELINE_SPECIFIC_0</td>
 <td>REFLECTS</td>
 <td>STATIC_OBJECT</td>
 <td>TOOLSCENE_OVERLAY_LAYER</td>
@@ -416,8 +419,6 @@ $tI
 <td>TRACK_LAST_DRAW_FRAME</td>
 <td>VIEWMODEL_LAYER</td>
 <td>WANTS_FRAMEBUFFER_COPY_TEXTURE</td>
-<td>emissive</td>
-<td>expensive</td>
 <tr><td><b>Excluded obj flags</b></td><td>0x%llx</td>
 <tr><td><b>Frustum Override Count</b></td><td>%d</td></tr>
 <tr><td><b>Required obj flags</b><td>0x%llx</td>
@@ -454,7 +455,7 @@ $tI
 >
 >C
 ?
-?a`
+?Stack depth limit hit (%d)
 @
 @@
 @A
@@ -860,6 +861,7 @@ CUtlMultiList overflow! (exhausted memory allocator)
 CUtlRBTree overflow with %u elements!
 CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
+CUtlScratchMemoryPool::FreeAll()
 CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
 CUtlString
 CUtlString::Acquire(CBufferString*, bool)
@@ -1091,6 +1093,7 @@ Dump a list of the objects in a sceneworld (Usage: sc_dumpworld <world_index>)
 Dump debug info
 Dump the objects in a sceneworld into a 3d geoview buffer (Usage: sc_dumpworld3d <world_index>)
 DynamicConfigList
+ESceneObjectFlags
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyInit_Tier0
 EconItemToolModel_001
@@ -1156,6 +1159,7 @@ Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d
 Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d %d) - some lighting will be missing from fog - use vr_show_light_fog_clipmap_cb_cost
 FogLightView
 FontManager_001
+FragmentIndex
 FvP12CSceneObjectE
 G
 G channel not found
@@ -1351,7 +1355,6 @@ MaterialParamVector_t
 MaterialParam_t
 MaterialResourceData_t
 MaterialUtils_001
-MathLib_Init
 MeshBuilderObject
 MeshSystem001
 MeshUtils001
@@ -1482,7 +1485,6 @@ PVEC_TYPE_CP_VALUE
 PVEC_TYPE_FLOAT_COMPONENTS
 PVEC_TYPE_LITERAL
 PVEC_TYPE_LITERAL_COLOR
-PWL
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
@@ -2015,6 +2017,7 @@ adding views while previous rendering is running. Someone needed to call WaitFor
 advanced to state %d at %f
 after solve err=%f
 after sort
+aggregate
 ai_model_info
 allowstatic
 ambientocclusionproxy.cpp
@@ -2205,14 +2208,14 @@ filterinY
 filterinZ
 float
 floatbitmap.cpp
-floatbitmap.cpp(141): Unknown gamma type "%s"!
-floatbitmap.cpp(2486): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2497): Error loading %s
-floatbitmap.cpp(2520): Error! Unknown file type for %s
-floatbitmap.cpp(2539): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(338): Conversion not supported yet!
-floatbitmap.cpp(438): Conversion not supported yet!
-floatbitmap.cpp(901): Unsupported color format "%s", skipping!
+floatbitmap.cpp(121): Unknown gamma type "%s"!
+floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2310): Error loading %s
+floatbitmap.cpp(2333): Error! Unknown file type for %s
+floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(299): Conversion not supported yet!
+floatbitmap.cpp(383): Conversion not supported yet!
+floatbitmap.cpp(846): Unsupported color format "%s", skipping!
 floor
 floorf
 fltx4
@@ -2883,7 +2886,6 @@ null
 null material
 numsegments
 nxnstripped
-occlusionproxyvb
 offset_angles
 offset_origin
 operation
@@ -2902,6 +2904,7 @@ outputcolor
 outputdepth
 overlay
 pA
+panorama
 parameter error
 parent of jiggle bone %u: %s
 particles/
@@ -3026,7 +3029,6 @@ sc_dumpworld
 sc_dumpworld %d
 sc_dumpworld3d
 sc_dumpworld3d %d
-sc_dupe_simple_meshes_count
 sc_dynamic_job_scheduling
 sc_enable_discard
 sc_extended_stats
@@ -3089,8 +3091,8 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6277): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7508): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(6213): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7444): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp
@@ -3108,8 +3110,6 @@ sequence_name
 sequence_number
 server_can_execute
 setting m_SimulationState[%d].m_flSimulationTime=%f
-shader_roughness_cone
-shader_roughness_ellipse
 shadow_atlas_mask_%d.vtex
 shadowcache.cpp
 shadowcascadecount
@@ -3381,6 +3381,7 @@ yaw
 yaw_end
 yaw_start
 yes
+z>
 zC
 zD
 zF

@@ -768,6 +768,7 @@ $0}
 $@
 $ORIGIN
 $effectSourceObjectID
+$tI
 %
 %% 4d=[%%%d.%ds] at cycle %%6.4f weight %%5.3f
 %%%d.%ds [%%3.3s] (%%5d) %%%d.%ds:
@@ -982,6 +983,7 @@ $effectSourceObjectID
 %s executing script: %s
 %s has %d prior disconnections, but all were resolved.  We cannot match up this connection to any prior disconnection.
 %s has a health specified in model '%s'. Use prop_physics or prop_dynamic instead.
+%s has an invalid size (%lld). May be unable to create items.
 %s leaving the server as local player index %u
 %s missing from scenes.vcdlist_c
 %s overrides identical base gameevent in '%s'
@@ -1165,6 +1167,7 @@ $effectSourceObjectID
 %s:  } IGameSystem::LoopDeactivateAllSystems done
 %s: %d volumes found
 %s: %f %f %f %f %f %f %f;
+%s: %s [%d/%d] %.2f%%
 %s: %s could not find viewposition %s.
 %s: %s could not find viewtarget %s.
 %s: %s has no commentary file.
@@ -1182,6 +1185,8 @@ $effectSourceObjectID
 %s: entity %d restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d skipping restarting %s: start delta is %.3f seconds, fraction of sequence is %.3f, allowable fraction is %.3f
 %s: entity %d starting %s
+%s: non-conforming:  cl(%s) -> sv(%s)
+%s: summary:
 %s: unexpected parameter format for InputSetBodyGroup. Had %s, expected <bodygroupname,partnumber>
 %s: unexpected parameter type %s, expected a CString
 %s: unexpected token %s
@@ -1654,6 +1659,7 @@ $effectSourceObjectID
 -maxplayers
 -more
 -multiple
+-network_class_conform_check
 -noclearsave
 -noscripting
 -pressdemo
@@ -2176,6 +2182,7 @@ $effectSourceObjectID
 14CDemoClassInfo
 14CEconStyleInfo
 14CEmptySequence
+14CEntityBlocker
 14CEntitySpawnerI11CBaseEntityE
 14CEntitySpawnerI12CDynamicPropE
 14CEntitySpawnerI12CPhysicsPropE
@@ -2658,6 +2665,7 @@ $effectSourceObjectID
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseIfN9CBaseFlex23NetworkVar_m_flexWeightELin1EELi1EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseIhN28CAnimGraphNetworkedVariables29NetworkVar_m_NetByteVariablesELin1EELi8EE
 17CUtlVectorDataOpsI21CNetworkUtlVectorBaseIiN28CAnimGraphNetworkedVariables28NetworkVar_m_NetIntVariablesELin1EELi5EE
+17CWaterTraceFilter
 17IActionDescriptor
 17IDotaCardGameList
 17IEntityFindFilter
@@ -2793,7 +2801,6 @@ $effectSourceObjectID
 1960/00/00
 199
 19CAI_ChangeHintGroup
-19CAmmoDefInitializer
 19CAttributeContainer
 19CBaseClientUIEntity
 19CBidirMsg_RelayInfo
@@ -3337,7 +3344,6 @@ $effectSourceObjectID
 24CGameSystemStaticFactoryI18CDCGServerGCSystemS0_E
 24CGameSystemStaticFactoryI18CPostProcessSystemS0_E
 24CGameSystemStaticFactoryI18CVisibilityMonitorS0_E
-24CGameSystemStaticFactoryI19CAmmoDefInitializerS0_E
 24CGameSystemStaticFactoryI19CCombatCharVisCacheS0_E
 24CGameSystemStaticFactoryI19CCommandQueueTesterS0_E
 24CGameSystemStaticFactoryI19CDecalEmitterSystem19IDecalEmitterSystemE
@@ -4728,7 +4734,6 @@ $effectSourceObjectID
 ???
 ???CRR_Response bogus index
 ?C
-?a`
 @
 @?
 @@
@@ -5941,14 +5946,7 @@ AE_RELOAD_EMPTY_CLIPOUT
 AE_RELOAD_PUMPEND
 AE_RELOAD_SHELL_INSERT
 AE_REMOVE_CLIENT_AIM
-AE_SCRIPT_EVENT_CANINTERRUPT
-AE_SCRIPT_EVENT_CUSTOMINTERRUPT_END
-AE_SCRIPT_EVENT_CUSTOMINTERRUPT_START
-AE_SCRIPT_EVENT_DEAD
 AE_SCRIPT_EVENT_FIREEVENT
-AE_SCRIPT_EVENT_FIRE_INPUT
-AE_SCRIPT_EVENT_NOINTERRUPT
-AE_SCRIPT_EVENT_NOT_DEAD
 AE_SHEATHE_WEAPONS
 AE_SHOW_WEAPON
 AE_SOUND_EMITTED
@@ -6209,7 +6207,6 @@ Alternate icon definition index %d must be greater than or equal to zero
 Ambassador of Quoidge
 AmbientCubes
 Ambiguous
-AmmoDefInitializer
 An RR_Concept couldn't find its string in the symbol table!
 An environment light entity
 An invalid weight is specified for this challenge list entry: %.2f
@@ -6514,6 +6511,7 @@ Best candidates
 Better Late Than Never
 Beyond the Veil
 Bezier
+BigShot
 Billy Christian
 BinaryProperties_GetValue
 Binding_AddRuleFromScript
@@ -6684,7 +6682,6 @@ CBaseDMStart
 CBaseEntity
 CBaseEntity::EmitSound
 CBaseEntity::PhysicsDispatchThink
-CBaseEntity::TakeDamage:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamage:  with inputInfo.GetDamagePosition() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamageForce() == vec3_origin
 CBaseEntity::TakeDamageOld:  with inputInfo.GetDamagePosition() == vec3_origin
@@ -6774,6 +6771,7 @@ CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
+CBufferString::RemoveWhitespace()
 CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
@@ -7539,7 +7537,6 @@ CNetworkFieldScratchData.m_MemoryStacks[ 0 ]
 CNetworkFieldScratchData::Alloc created buffer %s of size %s
 CNetworkFieldScratchData::Alloc, failed to add new CMemoryStack at slot %d of size %u bytes.
 CNetworkFieldScratchData::Init failed on buffer of %u bytes.
-CNetworkOriginCellCoordQuantizedVector
 CNetworkOriginCellCoordQuantizedVector m_cell%c cell %d is outside of cell bounds (0->%d) @(%f %f %f)
 CNetworkOriginQuantizedVector
 CNetworkTransmitComponent
@@ -7880,8 +7877,6 @@ CTouchExpansionComponentReferenced
 CTouchExpansionComponentReferencedPtr
 CTransform
 CTransform-world
-CTransformScaled
-CTransformScaled-world
 CTriggerActiveWeaponDetect
 CTriggerBrush
 CTriggerCallback
@@ -8045,10 +8040,6 @@ CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
 CUtlString::operator[](int) const
-CUtlStringBuilder::Data::SetError(bool)
-CUtlStringBuilder::Data::SetLength(unsigned long)
-CUtlStringBuilder::InternalPrepareBuffer(unsigned long, bool, unsigned long)
-CUtlStringBuilder::RemoveWhitespace()
 CUtlStringToken
 CUtlStringToken(%u)
 CUtlSymbol
@@ -8090,6 +8081,7 @@ CWristBone
 CXXABI_1.3
 CXXABI_1.3.5
 CXXABI_1.3.8
+C_
 C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
@@ -9098,7 +9090,6 @@ ElectrocuteThink
 Emissary of the Quorum
 Emit an overhead particle effect on receiving an item from an ally.
 Empty %s (%s) at %.2f, %.2f, %.2f
-Empty Diff, group=%s
 Empty Slot
 EmptyAnim
 Enable all physics simulation
@@ -9399,8 +9390,6 @@ FIELD_CMOTIONTRANSFORM_WORLDSPACE
 FIELD_COLOR32
 FIELD_CSTRING
 FIELD_CTRANSFORM
-FIELD_CTRANSFORMSCALED
-FIELD_CTRANSFORMSCALED_WORLDSPACE
 FIELD_CTRANSFORM_WORLDSPACE
 FIELD_CUSTOM
 FIELD_DIRECTION_VECTOR_WORLDSPACE
@@ -9761,7 +9750,6 @@ Force AI into beginner mode.
 Force Display:
 Force Staff
 Force a busy wait for the specified number of milliseconds during save to simulate a hitch
-Force local angles for object %s to %s
 Force the height to something.  -1 to ignore
 ForceOff
 ForceRefresh
@@ -11411,7 +11399,6 @@ Mana Void
 Mana gained per round.
 Mana to start with.
 ManhackCut
-Mantle
 ManuallyTriggerSpawnGroupCompletion
 Map has no trigger_transition volumes for landmark %s
 MapKey::GetBoolValue
@@ -13730,7 +13717,6 @@ Send a string to the console as a client command
 Send a string to the console as a server command
 Send msg %u (%s), %u bytes
 SendMessageToPlayer
-SendNetworkGroupStateUpdateToPlayer player=%d, group=%s, size=%d:
 SendToConsole
 SendToServerConsole
 Send_ServerToAllClients
@@ -14269,7 +14255,6 @@ Starting Debug History Dump of Category %d
 Starting analysis steps.
 Starting match signout process.
 Starts/stops a timespan with an ever increasing name.
-State: %s
 State: Disabled
 State: Enabled
 Static Field
@@ -15125,7 +15110,6 @@ V_strtoui64
 V_strupper_fast
 V_tanf
 V_uuid_t
-V_vscprintf
 V_vsnprintf
 Vacuum
 Valid Content Absolute Path
@@ -15525,7 +15509,6 @@ Zombie Creeps
 [target: %3.2f, current %s] queue[ %s ], [tick %d of %d %s], dilation: %s %s
 [token:%02x] (%s),
 [traces]
-[unassigned]
 [unknown]
 \
 \"
@@ -16113,6 +16096,7 @@ bytes).  To increase the limit (or to disable these warnings), see CodedInputStr
 bytes.
 c
 c(
+c/c_ variants
 cable
 cable_dynamic
 caller
@@ -17719,6 +17703,7 @@ icon_replacement
 icon_replacement_hero
 icon_replacement_hero_minimap
 icon_uncommon
+identical
 idle: %s, weight: %.2f
 if we starve, we hold the faster time dilation for at least this long.
 ignite
@@ -22238,6 +22223,7 @@ nodmgforce
 noheader
 noise_maker
 non-
+non-confirming
 non-entity blocked area %d
 non-moveable %s '%s' is pushed
 non-networkable
@@ -22448,6 +22434,7 @@ paintsplat
 panel_class_name
 panel_dpi
 panel_id
+panorama
 panorama_class
 param "%s"
 param2
@@ -23694,7 +23681,6 @@ std::string::swap(std::string&)
 std::terminate()
 std::tr1::__detail::__prime_list
 std::vector<ECardColor, std::allocator<ECardColor> >::~vector()
-std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>(std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::move_iterator<std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*>, std::vector<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u>, std::allocator<StrongTypedef<unsigned int, ObjectIDTypeTag, 0u> > >*)
 std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
 std::vector<unsigned char, std::allocator<unsigned char> >::operator=(std::vector<unsigned char, std::allocator<unsigned char> > const&)
 std::vector<unsigned char, std::allocator<unsigned char> >::~vector()
