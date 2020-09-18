@@ -478,6 +478,7 @@
 #CardEffect_11081_0
 #CardEffect_11083_0
 #CardEffect_11084_0
+#CardEffect_11085_0
 #CardEffect_19000_0
 #CardEffect_19001_0
 #CardEffect_19002_0
@@ -3674,7 +3675,6 @@ $tI
 *ZL22CC_ReloadCardTemplatesRK15CCommandContextRK8CCommandEUlPKcRK13AttributeListE_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
-*ZL23Set1_SpellSteal_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -3742,6 +3742,13 @@ $tI
 *ZN12StateBuilder32ISimulatedGameInteractionContext11PerformPassE8OptionalIiEEUlvE_
 *ZN12StateBuilder32ISimulatedGameInteractionContext23PerformGameObjectActionENS_16GameObjectHandleE8OptionalIiEEUlvE_
 *ZN12StateBuilder32ISimulatedGameInteractionContext23PerformGameObjectActionENS_16GameObjectHandleES1_8OptionalIiEEUlvE_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE0_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE1_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE2_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE3_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE4_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE5_
+*ZN12StateBuilderL12CardFromTextENS_12TextObject_tEEUlRNS_4CardE10CUtlStringE_
 *ZN13CDCGTowerView10EnterStateE17ETowerDamageStateEUlP21CDCGTowerAttachEntityE_
 *ZN13CDCGTowerView10UpdateViewEvEUlP21CDCGTowerAttachEntityE_
 *ZN13CDCGTowerView15OnFrameBoundaryEvEUlP18CDCGTowerTopEntityE_
@@ -4289,6 +4296,7 @@ $tI
 /actions/move/in/Teleport
 /actions/move/in/TurnLeft
 /actions/move/in/TurnRight
+/boards/
 /high
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
@@ -4354,6 +4362,7 @@ $tI
 0.8
 0.85
 0.9
+0.99
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
 0=off, 1=on, 2=debug visualization
@@ -4801,6 +4810,7 @@ $tI
 13C_PointCamera
 13C_PointEntity
 13C_PointHintUi
+13C_RagdollProp
 13C_SceneEntity
 13EChatRoomType
 13EDCGEventName
@@ -5153,7 +5163,7 @@ $tI
 15C_EnvCubemapFog
 15C_FogController
 15C_Peer2PeerInit
-15C_ServerRagdoll
+15C_Precipitation
 15C_ShadowControl
 15C_TriggerCamera
 15C_TriggerVolume
@@ -5980,7 +5990,6 @@ $tI
 20CDCGTooltipEventInfo
 20CDCGTowerArmorEntity
 20CDCG_DB_PopupManager
-20CDCG_UI_AbilityPanel
 20CDCG_UI_AccountBadge
 20CDCG_UI_FriendPicker
 20CDCG_UI_Popup_RankUp
@@ -6120,6 +6129,7 @@ $tI
 20TransitioningLayer_t
 21
 210
+2160
 21BeginInitialFlopPhase
 21CAnimGraphTraceFilter
 21CBaseLightProbeVolume
@@ -6128,7 +6138,6 @@ $tI
 21CCLCMsg_ClientMessage
 21CCharacterDecalSystem
 21CClientModeGameSystem
-21CClient_Precipitation
 21CCloud_Delete_Request
 21CDCGActiveAbilityView
 21CDCGCardBackContainer
@@ -6234,6 +6243,7 @@ $tI
 21C_EnvLightProbeVolume
 21C_EnvProjectedTexture
 21C_PointClientUIDialog
+21C_RagdollPropAttached
 21CombatPhaseTransition
 21ConCommandPerformance
 21DoFlopHeroPerformance
@@ -6379,7 +6389,6 @@ $tI
 22CViewEffectsGameSystem
 22CWeatherEffectModifier
 22C_BaseAnimatingOverlay
-22C_BaseAttributableItem
 22C_DCG_CameraAttributes
 22C_FuncAreaPortalWindow
 22C_PostProcessingVolume
@@ -6450,7 +6459,6 @@ $tI
 23CEntityComponentHelperTI30CBodyComponentDCGBaseAnimating32CEntityComponentHelperReferencedIS0_EE
 23CEntityComponentHelperTI30CBodyComponentSkeletonInstance32CEntityComponentHelperReferencedIS0_EE
 23CEntityComponentHelperTI35C_BodyComponentBaseAnimatingOverlay32CEntityComponentHelperReferencedIS0_EE
-23CEntityDataInstantiatorI10ModelScaleE
 23CEntityDataInstantiatorI12CWatcherListE
 23CEntityDataInstantiatorI12groundlink_tE
 23CEntityDataInstantiatorI17physicspushlist_tE
@@ -6515,7 +6523,6 @@ $tI
 23C_DynamicPropClientside
 23C_FuncElectrifiedVolume
 23C_PostProcessController
-23C_ServerRagdollAttached
 23CardDrawPhaseTransition
 23CardIsTargetingFountain
 23CardPlayPhaseTransition
@@ -9038,7 +9045,7 @@ $tI
 <unknown item>
 <unknown>
 <unnamed challenge>
-<ununsed>
+<unused>
 <vec:%s>
 <{ composite state block }>
 =
@@ -10840,29 +10847,11 @@ ADCFeE2uAIUpAFDArhdAafdAZC7AYKMZAFBOQG0AagBlaMBhz==
 ADD_AND_REMOVE_ANIMATION_LAYERS
 ADJACENCY
 AED
-AE_ABILITY_END_EVENT
-AE_ABILITY_START_EVENT
-AE_ABILITY_TICK
 AE_ACTION_ALLOW_COMBO
-AE_ACTION_ALLOW_DODGE
-AE_ACTION_ALLOW_MOVE_INTERRUPT
-AE_ACTION_AVOID_DAMAGE
-AE_ACTION_DROP_ITEM
-AE_ACTION_END_TURN
-AE_ACTION_ENTERING_IDLE
-AE_ACTION_OVERLAP_MOVE
 AE_ACTION_PREVENT_COMBO
-AE_ACTION_PREVENT_DODGE
 AE_ACTION_SET_TURN_RATE_SCALE
-AE_ACTION_START_TURN
-AE_ACTION_STOP_AVOIDING_DAMAGE
-AE_ACTION_USE
 AE_ALYX_EMPTOOL_ATTACHMENT
 AE_ALYX_EMPTOOL_SEQUENCE
-AE_AMMOCRATE_PICKUP_AMMO
-AE_ATTACK_END
-AE_ATTACK_HIT
-AE_ATTACK_START
 AE_BEGIN_TAUNT_LOOP
 AE_BLIND_ZOMBIE_SNIFF
 AE_CLIENT_EFFECT_ATTACH
@@ -10899,7 +10888,6 @@ AE_CL_STOPSOUND
 AE_CL_STOP_PARTICLE_EFFECT
 AE_CL_SUPPRESS_EVENTS_WITH_TAG
 AE_COMPANION_PRODUCE_FLARE
-AE_DEFIBRILLATOR_SHOCK
 AE_DOG_CATCH
 AE_DOG_PICKUP
 AE_DOG_PICKUP_NOEFFECT
@@ -10907,40 +10895,11 @@ AE_DOG_THROW
 AE_DOTA_PET_ITEM_PICKUP
 AE_DOTA_PLAY_SOUND_ATTACK
 AE_DOTA_SUPPRESS_CONSTANT_LAYER
-AE_DRAW_WEAPONS
-AE_DROP_ITEM
-AE_DROP_PRIMARY_WEAPON
-AE_EF_DRAW
-AE_EF_NODRAW
 AE_EMPTY
 AE_FIRE_INPUT
 AE_FOOTSTEP
-AE_FOOTSTEP_LEFT
-AE_FOOTSTEP_RIGHT
 AE_HAPTIC_PULSE
 AE_HIDE_WEAPON
-AE_HIT_ARM_LEFT_SEVERED
-AE_HIT_ARM_RIGHT_SEVERED
-AE_HIT_BACK
-AE_HIT_BACK_LOWER
-AE_HIT_BACK_UPPER
-AE_HIT_CHEST
-AE_HIT_FRONT
-AE_HIT_HEAD_BACK
-AE_HIT_HEAD_FRONT
-AE_HIT_LEFT
-AE_HIT_LEG_LEFT_BACK
-AE_HIT_LEG_LEFT_FRONT
-AE_HIT_LEG_LEFT_SEVERED
-AE_HIT_LEG_RIGHT_BACK
-AE_HIT_LEG_RIGHT_FRONT
-AE_HIT_LEG_RIGHT_SEVERED
-AE_HIT_RIGHT
-AE_HIT_SHOULDER_LEFT_BACK
-AE_HIT_SHOULDER_LEFT_FRONT
-AE_HIT_SHOULDER_RIGHT_BACK
-AE_HIT_SHOULDER_RIGHT_FRONT
-AE_HIT_STOMACH
 AE_HUNTER_END_EXPRESSION
 AE_HUNTER_SPRAY_BLOOD
 AE_HUNTER_START_EXPRESSION
@@ -10949,114 +10908,46 @@ AE_IK_SET_CHAIN_BLEND_AMOUNT
 AE_IK_SET_LOCK_ROTATION_ALPHA
 AE_IK_SET_MASTER_BLEND_AMOUNT
 AE_KEYFIELD_SOUND
-AE_LOCK_STATE_CHANGED
-AE_MANTLE_GRAB
-AE_MANTLE_LEAP
-AE_MARINE_FOOTSTEP
-AE_MARINE_RELOAD_SOUND_A
-AE_MARINE_RELOAD_SOUND_B
-AE_MARINE_RELOAD_SOUND_C
 AE_MELEE_DAMAGE
-AE_MELEE_FORCE_START_WEAPON_TRAIL
-AE_MELEE_FORCE_STOP_WEAPON_TRAIL
 AE_MELEE_START_COLLISION_DAMAGE
-AE_MELEE_STOP_COLLISION_DAMAGE
 AE_MUZZLEFLASH
-AE_NPC_180TURN
 AE_NPC_ADDGESTURE
-AE_NPC_ATTACK_BROADCAST
 AE_NPC_BECOME_TEMPORARY_RAGDOLL
-AE_NPC_BODYDROP_HEAVY
-AE_NPC_BODYDROP_LIGHT
-AE_NPC_DRAW
-AE_NPC_GIB
-AE_NPC_HOLSTER
 AE_NPC_HURT_INTERACTION_PARTNER
 AE_NPC_ITEM_PICKUP
-AE_NPC_LEFTFOOT
 AE_NPC_MUZZLEFLASH
-AE_NPC_RAGDOLL
 AE_NPC_RESTARTGESTURE
-AE_NPC_RIGHTFOOT
 AE_NPC_SET_INTERACTION_CANTDIE
 AE_NPC_START_POWERED_RAGDOLL
-AE_NPC_SWISHSOUND
 AE_NPC_WEAPON_DROP
 AE_NPC_WEAPON_FIRE
-AE_NPC_WEAPON_FIRE_SHARED
 AE_NPC_WEAPON_SET_ACTIVITY
 AE_NPC_WEAPON_SET_SEQUENCE_NAME
 AE_NPC_WEAPON_SET_SEQUENCE_NUMBER
-AE_OPTIONAL_END
 AE_PASSENGER_PHYSICS_PUSH
-AE_PICKUP_CHARGING
-AE_PICKUP_CLIPIN
-AE_PICKUP_FASSIST
-AE_PICK_UP_ITEM
 AE_RAGDOLL
-AE_RELOAD_CLIPIN
-AE_RELOAD_CLIPOUT
-AE_RELOAD_EMPTY_CLIPIN
-AE_RELOAD_EMPTY_CLIPIN2
-AE_RELOAD_EMPTY_CLIPOUT
-AE_RELOAD_PUMPEND
-AE_RELOAD_SHELL_INSERT
-AE_REMOVE_CLIENT_AIM
 AE_SCRIPT_EVENT_FIREEVENT
 AE_SCRIPT_EVENT_FIRE_INPUT
 AE_SCRIPT_EVENT_SENTENCE
 AE_SCRIPT_EVENT_SENTENCE_RND1
 AE_SCRIPT_EVENT_SOUND
 AE_SCRIPT_EVENT_SOUND_VOICE
-AE_SHEATHE_WEAPONS
-AE_SHOW_WEAPON
-AE_SOUND_EMITTED
 AE_START_SCRIPTED_EFFECT
 AE_STOP_SCRIPTED_EFFECT
 AE_STRIDER_SHOOTMINIGUN
 AE_SV_BODYGROUP_SET_VALUE
 AE_SV_DUSTTRAIL
-AE_SV_FOOTSTEP_LEFT
-AE_SV_FOOTSTEP_RIGHT
 AE_SV_PLAYSOUND
-AE_THUMPER_THUMP
 AE_TOSS_ITEM
-AE_TUG_INCAP
 AE_VORTIGAUNT_START_HEAL_GLOW
 AE_VORTIGAUNT_START_HURT_GLOW
 AE_VORTIGAUNT_ZAP_POWERUP
 AE_VORTIGAUNT_ZAP_SHOOT
-AE_WEAPON_AR1
-AE_WEAPON_AR2
-AE_WEAPON_AR2_ALTFIRE
-AE_WEAPON_AR2_GRENADE
-AE_WEAPON_HMG1
-AE_WEAPON_MELEE_HIT
-AE_WEAPON_MELEE_SWISH
-AE_WEAPON_MISSILE_FIRE
-AE_WEAPON_PISTOL_FIRE
-AE_WEAPON_RELOAD
-AE_WEAPON_RELOAD_FILL_CLIP
-AE_WEAPON_RELOAD_SOUND
-AE_WEAPON_SEQUENCE_FINISHED
-AE_WEAPON_SHOTGUN_FIRE
-AE_WEAPON_SLAM_GROUND
-AE_WEAPON_SMG1
-AE_WEAPON_SMG1_BURST1
-AE_WEAPON_SMG1_BURSTN
-AE_WEAPON_SMG2
-AE_WEAPON_SNIPER_RIFLE_FIRE
-AE_WEAPON_THROW
-AE_WEAPON_THROW2
-AE_WEAPON_THROW3
 AE_WPN_CLIP_TO_POSEPARAM
 AE_WPN_EMPTYSHOTS_TO_POSEPARAM
-AE_WPN_HIDE
-AE_WPN_INCREMENTAMMO
 AE_WPN_NEXTCLIP_TO_POSEPARAM
 AE_WPN_PLAYWPNSOUND
 AE_WPN_PRIMARYATTACK
-AE_WPN_UNHIDE
 AE_ZOMBIE_POPHEADCRAB
 AE_ZOMBIE_POPHEADCRAB event format missing velocity parameter! Usage: event AE_ZOMBIE_POPHEADCRAB "<BoneName> <Speed>"
 AE_ZOMBIE_TOGGLE_HEAD
@@ -11220,7 +11111,7 @@ Activate (Sheep Stick)
 Activate (Silver Edge)
 Activate (Sister of the Void)
 Activate (Spirit Vessel)
-Activate (Spoink Springers Mk.23)
+Activate (Sproink Springers Mk.23)
 Activate (Steam Cannon)
 Activate (Summoning Circle)
 Activate (Temple of War)
@@ -11553,6 +11444,7 @@ AtMinimum
 Ate : upper-mid front unrounded vowel
 Atrophy Aura
 Attach to a named initial game environment for spectating. Run with no name to see a list of valid configurations.
+AttachmentHandle_t
 Attempt to set buffer size beyond max ignored
 Attempt to update inventory position failure: %s
 Attempt to update inventory position failure: %s.
@@ -12055,7 +11947,6 @@ CBaseAnimatingEasingFloat_t
 CBaseAnimatingOverlay
 CBaseAnimatingOverlayController
 CBaseAnimatingOverlayController::AddGesture:  model %s missing activity %s
-CBaseAttributableItem
 CBaseButton
 CBaseClientUIEntity
 CBaseCombatCharacter
@@ -12078,7 +11969,6 @@ CBasePropDoor
 CBaseTempEntity::StaticInitTempEnts()
 CBaseToggle
 CBaseTrigger
-CBaseViewModel
 CBaseWorldPanel::Init
 CBeam
 CBitVec
@@ -12169,7 +12059,6 @@ CClientSteamContext OnSteamServersConnected logged on = %d
 CClientSteamContext OnSteamServersDisconnected logged on = %d
 CClientUIDialogManager
 CClientUIScheme::LoadFromFile( %s )
-CClient_Precipitation
 CCoJobMgr::BResumeSleepingJobs
 CCoJobMgr::BResumeYieldingJobs
 CCoJobMgr::CheckForJobTimeouts
@@ -13324,6 +13213,7 @@ CTonemapController2
 CTransform
 CTransform-world
 CTriggerCamera
+CTriggerLerpObject
 CTriggerVolume
 CTwistConstraint
 CUBE
@@ -13458,6 +13348,7 @@ CUtlString::Remove(char const*, bool) const
 CUtlString::RemoveFromStart(char const*, bool) const
 CUtlString::Replace(char const*, char const*, bool) const
 CUtlString::Replace(char, char const*) const
+CUtlString::Replace(char, char) const
 CUtlString::Right(int) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
@@ -13548,7 +13439,6 @@ C_BaseAnimating::InitBoneSetupThreadPool
 C_BaseAnimatingController
 C_BaseAnimatingOverlay
 C_BaseAnimatingOverlayController
-C_BaseAttributableItem
 C_BaseButton
 C_BaseClientUIEntity
 C_BaseCombatCharacter
@@ -13773,15 +13663,16 @@ C_PortraitWorldCallbackHandler
 C_PoseController
 C_PostProcessController
 C_PostProcessingVolume
+C_Precipitation
 C_PrecipitationBlocker
 C_PropVRHand
 C_RagdollManager
+C_RagdollProp
+C_RagdollPropAttached
 C_RopeKeyframe
 C_RopeKeyframe::CPhysicsDelegate
 C_SceneEntity
 C_SceneEntity::QueuedEvents_t
-C_ServerRagdoll
-C_ServerRagdollAttached
 C_ServerVoiceInit
 C_ShadowControl
 C_SingleplayRules
@@ -16444,6 +16335,7 @@ EB
 ECON_ENTITY_PARTICLES_DISABLED
 ECON_ENTITY_PARTICLES_DISABLED_BUT_PLAY_ENDCAPS_TO_STOP
 ECON_ENTITY_PARTICLES_ENABLED
+EF_NODRAW
 EGM
 EGameZone
 EHANDLE2
@@ -16945,6 +16837,7 @@ FFADE_OUT
 FFADE_PURGE
 FFADE_STAYOUT
 FFALayout
+FIELD_ATTACHMENT_HANDLE
 FIELD_BOOLEAN
 FIELD_CHARACTER
 FIELD_CLASSPTR
@@ -17055,6 +16948,7 @@ FXAA (Copy)
 FXAA (Stencil)
 FX_RicochetSound.Ricochet
 Face
+Face Transition
 Facial Expression
 Fade %d: [%d,%d,%d,%d] -> %d  %s
 Fades: %d ------------------------------------
@@ -18009,6 +17903,7 @@ HasCharges
 HasChargesAndCooldown
 HasCleave
 HasClickAction
+HasColorSet
 HasCreator
 HasDamageType
 HasDeathShield
@@ -18940,7 +18835,9 @@ IsAttack
 IsAttackTooltip
 IsBasicCard
 IsBeingDragged
+IsBlackCard
 IsBlue
+IsBlueCard
 IsBotOwned
 IsBotPlayer
 IsBright
@@ -18991,6 +18888,7 @@ IsFacedown
 IsFlop
 IsGauntlet
 IsGreen
+IsGreenCard
 IsGrey
 IsHeal
 IsHealth
@@ -19013,6 +18911,7 @@ IsInspectCard
 IsInvite
 IsInvuln
 IsItem
+IsItemPanel
 IsKeyValueUsed
 IsLethal
 IsLive
@@ -19060,6 +18959,7 @@ IsReasonIncluded
 IsReasonReferenced
 IsRecycleCardsMode
 IsRed
+IsRedCard
 IsReplay
 IsRevealed
 IsSell
@@ -19067,6 +18967,7 @@ IsSellCardsMode
 IsSet0
 IsShop
 IsShowExcessMode
+IsShowingAbilitySummary
 IsShowingIncludeCard
 IsShowingMax
 IsSingleUse
@@ -19629,6 +19530,7 @@ Lycan
 Lycian
 Lydian
 M
+M+
 M1
 MARK
 MATCHFRAMEWORK_001
@@ -21405,6 +21307,7 @@ OnFocusAttack
 OnGainedAppliedEffect
 OnGameActivate
 OnGlowColorChanged
+OnGlowTypeChanged
 OnGoldEarned
 OnHeadOffsetChanged
 OnImpDealingCardsOnTheFlop
@@ -21606,11 +21509,11 @@ P38CMsgGameServerToClientInitialGameState
 P8
 P8CUI_Page
 P9KeyValues
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:222
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:542
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:227
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:536
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1168
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2441
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2390
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2531
@@ -23297,6 +23200,7 @@ Rule file isn't whitelisted.
 Rule is disabled.
 RulesContainer
 Rumusque Blessing
+Rumusque Choir
 Rumusque Consecration Ritual
 Rumusque Faithful
 Rumusque Redeemer
@@ -23344,6 +23248,7 @@ SHAKE_START
 SHAKE_START_NORUMBLE
 SHAKE_START_RUMBLEONLY
 SHAKE_STOP
+SHOCK
 SHe : voiceless postalveolar fricative
 SI
 SIGNED_R11
@@ -24369,10 +24274,10 @@ Spitting Greevil
 Split screen users mimic base player's CUserCmds
 SplitContext:  warning, ignoring context '%s', missing colon separator!
 SplitContext:  warning, ignoring context '%s', missing comma separator!  Entire context was '%s'.
-Spoink Springers Mk.23
 Spot Weakness
 Spriggan Mischief
 Spring the Trap
+Sproink Springers Mk.23
 Squirmified-Straps
 Ss
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
@@ -24444,6 +24349,7 @@ Startup Root Node
 StatBuffed
 StatDebuffed
 StatNeutral
+StateBuilder::CombatUnit* std::__uninitialized_copy<false>::__uninit_copy<StateBuilder::CombatUnit const*, StateBuilder::CombatUnit*>(StateBuilder::CombatUnit const*, StateBuilder::CombatUnit const*, StateBuilder::CombatUnit*)
 StateFindingMatch
 StateIdle
 StateInGame
@@ -24726,8 +24632,6 @@ Tenaya Sims
 Terrapin Channeler
 Terrapin Greatshell
 Terrapin Placeholder
-TeslaHitboxes
-TeslaHitboxes_global_client
 Test Item %u
 Test a punch-style screen shake.
 Test a social notification
@@ -25023,7 +24927,6 @@ ToolObjects/env_sprite
 ToolObjects/point_clientui_world_text_panel
 ToolObjects/point_worldtext
 ToolSceneNodeFactory_001
-ToolScriptManager001
 ToolService_001
 ToolsUtil Opaque
 ToolsUtil Translucent
@@ -25127,7 +25030,6 @@ Tried to destroy (from script) a networked entity (%d/%s) on the client, the ser
 Tried to merge messages of different types
 Tried to register a non-generated type with the generated type registry.
 Trigger %s triggered - Source %s - Event %s
-Trigger( hActivator, hCaller ) : Triggers the logic_relay
 TriggerClass
 TriggerOnce: %s
 TriggerStyle
@@ -26190,6 +26092,32 @@ ZN12CDCGCardView31GetPassiveAbilitiesRuleEntitiesI29CDCGRuleEntity_UnnamedPassiv
 ZN12CDCGCardView31GetPassiveAbilitiesRuleEntitiesI30CDCGRuleEntity_EnterLaneEffectEEvR10CUtlVectorIPT_10CUtlMemoryIS4_iEEEUlP20CDCGCardAttachEntityE_
 ZN12CDCGCardView31GetPassiveAbilitiesRuleEntitiesI30CDCGRuleEntity_GrantedReactiveEEvR10CUtlVectorIPT_10CUtlMemoryIS4_iEEEUlP20CDCGCardAttachEntityE_
 ZN12CDCGCardView31GetPassiveAbilitiesRuleEntitiesI30CDCGRuleEntity_UnnamedReactiveEEvR10CUtlVectorIPT_10CUtlMemoryIS4_iEEEUlP20CDCGCardAttachEntityE_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE0_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE10_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE11_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE1_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE2_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE3_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE4_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE5_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE6_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE7_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE8_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE9_
+ZN12StateBuilder12UnitFromTextINS_10CombatUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE0_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE10_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE11_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE1_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE2_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE3_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE4_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE5_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE6_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE7_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE8_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE9_
+ZN12StateBuilder12UnitFromTextINS_12FountainUnitEEET_NS_12TextObject_tEEUlRS1_10CUtlStringE_
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
 ZN18AsyncCaptionData_t9AsyncLoadEPKciEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN18CNewParticleEffect7RestartEvEUlvE_
@@ -26942,6 +26870,7 @@ ability_name
 ability_prefix
 ability_text
 ability_type
+abilitycooldown
 about:blank
 aboveMaxPlayable
 abs( %s )
@@ -27150,6 +27079,7 @@ animgraph_debug_entindex
 animgraph_debug_tags
 animgraph_debug_variables
 animgraph_enable
+animgraph_enable_parallel_update
 animgraph_trace_ignore_prop_physics
 animgraph_update
 animgraphcontroller
@@ -27241,6 +27171,8 @@ audioparams_t
 auto_style_reason
 auto_style_rule
 auto_unragdoll_duration
+autoaim_max_deflect
+autoaim_max_dist
 autocomplete_title
 autocompletetext
 autograph
@@ -28191,6 +28123,9 @@ color_count
 color_name
 color_tint
 colorblind_mode_changed
+combat 1
+combat 2
+combat 3
 combat<
 combatDamage
 combatPosition
@@ -28426,6 +28361,7 @@ damageType
 damage_direction_cp
 damage_position_cp
 damage_table
+damageimmune
 danish
 darkblue
 darkcyan
@@ -29198,6 +29134,7 @@ disabledoubleclick
 disableifoutofrange
 disablenav
 disallowed Unicode code point (>= 0xd800 && <= 0xdfff)
+disarmed
 discarded_card
 displayName
 displayStageMsg
@@ -29388,7 +29325,6 @@ enemytowerhealth
 engine2
 english
 english,brazilian,french,german,italian,japanese,koreana,russian,schinese,spanish,tchinese,latam
-ensureExistsMatchList
 ent yaw: %.2f, body_yaw: %.2f, body_pitch: %.2f, move_x: %.2f, move_y: %.2f
 ent yaw: %.2f, body_yaw: %.2f, move_yaw: %.2f, gait_yaw: %.2f, body_pitch: %.2f
 ent_actornames font name
@@ -29592,6 +29528,7 @@ fa
 faceMergeAngle
 face_center_top
 faceposermodel
+facetransition
 fade a player's screen to black when he dies
 fadeSpeed
 fade_debug_splitscreen_slot
@@ -30334,6 +30271,7 @@ goldAndBounty
 goldCost
 goldIncomePerRound
 gold_cost_to_hold_item
+goldcost
 golf ball
 google.protobuf.
 google.protobuf.Any
@@ -30711,6 +30649,9 @@ import_from
 importance
 improvementCount
 improvements
+improvements 1
+improvements 2
+improvements 3
 improvements_max
 improvements_min
 impulse
@@ -34148,6 +34089,7 @@ manaCost
 manaModifier
 manaRemaining
 mana_left
+manacost
 manage_packs_test_pack_count
 manifest
 manual
@@ -35566,7 +35508,6 @@ particles/entity/env_explosion/explosion_smokegrenade.vpcf
 particles/entity/env_explosion/explosion_tripmine.vpcf
 particles/error/error.vpcf
 particles/fire_01/burning_gib_01.vpcf
-particles/fx/fx_tesla_hitbox.vpcf
 particles/fx/fx_tracer.vpcf
 particles/gameui/particle_line_ui.vpcf
 particles/generic_fx/bubble_trail.vpcf
@@ -35758,6 +35699,7 @@ picked_item_transition_time
 pickup_item
 piece_name
 pierce
+piercing
 pinStateChanged
 ping-pong ball
 pitchmax
@@ -35795,6 +35737,8 @@ playback_tick
 playback_time
 playback_volume
 playbackrate
+player 0
+player 1
 player%d_skill_rank
 player%d_t%d
 player%i_skill_rating
@@ -36046,6 +35990,7 @@ quaternion (%g %g %g %g)
 quaternion[] differs (1st diff) (net %g %g %g %g - pred %g %g %g %g) delta(%g %g %g %g)
 question-mark
 questions
+quick
 quit
 quotation-mark
 r
@@ -36779,6 +36724,7 @@ siegeAmount
 siegemodifier
 sienna
 silence
+silenced
 silver
 simple_cubic
 simple_graph
@@ -37371,6 +37317,32 @@ std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitLeavingCom
 std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitUserTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitUserTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<SetupPregamePerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<SetupPregamePerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#10}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#10}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#11}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#11}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#12}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#12}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#13}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#13}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#2}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#3}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#4}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#5}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#5}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#6}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#6}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#7}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#7}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#8}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#8}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#9}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::CombatUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::CombatUnit&, CUtlString)#9}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#10}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#10}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#11}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#11}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#12}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#12}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#13}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#13}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#2}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#3}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#4}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#5}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#5}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#6}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#6}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#7}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#7}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#8}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#8}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#9}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::UnitFromText<StateBuilder::FountainUnit>(StateBuilder::TextObject_t)::{lambda(StateBuilder::FountainUnit&, CUtlString)#9}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StoreCloseAndGoToFlopPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StoreCloseAndGoToFlopPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StoreTimedOutPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StoreTimedOutPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StoreTransitionToStrategicViewPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StoreTransitionToStrategicViewPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
@@ -37646,8 +37618,6 @@ std::ostream::operator<<(std::ios_base& (*)(std::ios_base&))
 std::ostream::operator<<(unsigned long)
 std::ostream::put(char)
 std::ostream::write(char const*, long)
-std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>* std::__copy_move<false, false, std::random_access_iterator_tag>::__copy_m<std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>*>(std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>*)
-std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>* std::__uninitialized_copy<false>::__uninit_copy<std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>*>(std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit> const*, std::pair<StateBuilder::CombatUnit, StateBuilder::CombatUnit>*)
 std::pair<std::__detail::_Node_iterator<char const*, true, false>, bool> std::_Hashtable<char const*, char const*, std::allocator<char const*>, std::__detail::_Identity, std::equal_to<char const*>, std::hash<char const*>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, true, true> >::_M_emplace<char const (&) [44]>(std::integral_constant<bool, true>, char const (&) [44])
 std::pair<std::__detail::_Node_iterator<std::pair<float const, int>, false, false>, bool> std::_Hashtable<float, std::pair<float const, int>, std::allocator<std::pair<float const, int> >, std::__detail::_Select1st, std::equal_to<float>, std::hash<float>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::_M_emplace<std::pair<float, int> >(std::integral_constant<bool, true>, std::pair<float, int>&&)
 std::pair<std::string, std::string>::~pair()
@@ -37852,6 +37822,7 @@ strtoq
 strtoul
 strtoull
 strtouq
+stunned
 style_index_t
 style_unlock
 stylefile
@@ -38160,6 +38131,9 @@ tourney_stage
 tourney_status
 tourney_test_update
 tourney_ui_test_live
+tower 1
+tower 2
+tower 3
 tower%i_health%s
 tower%i_improvements_ai
 tower%i_improvements_player
@@ -38220,6 +38194,7 @@ turn_timer03
 turn_timer04
 turnsInHand
 turnsLocked
+turnsuntildeployment
 tutorial2.
 tutorial3
 tv_listen_voice_indices

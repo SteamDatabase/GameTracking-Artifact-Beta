@@ -80,6 +80,9 @@ $tI
 &
 ( def. "%s" )
 (%3.3f - %3.3f)(%3.3f - %3.3f)(%3.3f - %3.3f)%3.3f x %3.3f
+(%s agg)
+(%s anim)
+(%s base)
 (MSAA)
 (No MSAA)
 (None)
@@ -473,6 +476,8 @@ AE_CL_BODYGROUP_SET_VALUE
 AE_CL_CREATE_PARTICLE_BRASS
 AE_CL_CREATE_PARTICLE_EFFECT
 AE_CL_CREATE_PARTICLE_EFFECT_CFG
+AE_CL_DISABLE_BODYGROUP
+AE_CL_ENABLE_BODYGROUP
 AE_CL_PLAYSOUND_LOOPING
 AE_CL_STOP_PARTICLE_EFFECT
 AE_DOTA_SUPPRESS_CONSTANT_LAYER
@@ -490,6 +495,7 @@ AE_NPC_WEAPON_FIRE
 AE_NPC_WEAPON_SET_SEQUENCE_NUMBER
 AE_PASSENGER_PHYSICS_PUSH
 AE_SCRIPT_EVENT_FIREEVENT
+AE_SV_BODYGROUP_SET_VALUE
 AE_SV_DUSTTRAIL
 AE_VORTIGAUNT_START_HEAL_GLOW
 AE_VORTIGAUNT_START_HURT_GLOW
@@ -723,8 +729,6 @@ COLLISION_MODE_PER_PARTICLE_TRACE
 COLLISION_MODE_USE_NEAREST_TRACE
 COLORCORRECTION_VERSION_1
 COrientConstraint
-CPVSData
-CPVSData::pvsmask_t
 CParentConstraint
 CParticleSystemDefinition
 CPointConstraint
@@ -748,10 +752,7 @@ CSSDSMsg_ViewRender
 CSSDSMsg_ViewTarget
 CSSDSMsg_ViewTargetList
 CSceneLayer::AddToRenderPassDesc
-CSceneObject
 CSceneObjectData
-CSceneObjectExtraData_t
-CSceneObjectReference_t
 CSceneSystem::SetLightCookieTexture, trying to set texture %s that has no sheet data!
 CSceneSystem::Thread_QueueRenderPartitions
 CSceneSystem::Thread_RenderPartition
@@ -1093,7 +1094,6 @@ Dump a list of the objects in a sceneworld (Usage: sc_dumpworld <world_index>)
 Dump debug info
 Dump the objects in a sceneworld into a 3d geoview buffer (Usage: sc_dumpworld3d <world_index>)
 DynamicConfigList
-ESceneObjectFlags
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyInit_Tier0
 EconItemToolModel_001
@@ -1104,9 +1104,11 @@ EncodeRGBM
 Engine2
 Engine2/RenderingPipeline/AmbientOcclusionProxies
 Engine2/RenderingPipeline/OpaqueFade
+Engine2/RenderingPipeline/ShadowDepthCullFront
 EngineServiceMgr001
 EnsureCapacity
 EnvMap
+EnvmapInfoStoredInExtraShaderData
 Error: View "%s", layer "%s", render target "%s": Attempted to bind the back buffers of two different swap chains in a single layer!
 Error: View "%s", layer "%s", render target "%s": Attempted to resolve a non-MSAA render target to a MSAA texture!
 EventSystem001
@@ -1221,10 +1223,8 @@ IKRigBug
 IKRigSimple
 INVALID
 IQuickTime001
-ISceneObjectDesc
 If enabled, the camera's translation will be included in the projection matrix.
 InfoForResourceTypeCAnimData
-Init
 InitForFrustum
 InputService_001
 InputStackSystemVersion001
@@ -1277,8 +1277,6 @@ KeyValues::GetNextKey() const
 KeyValues::GetString(char const*, char const*, char*, unsigned long)
 KeyValues::KeyValues(char const*)
 KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
-KeyValues::operator delete(void*)
-KeyValues::operator new(unsigned long)
 KeyValues::operator=(KeyValues const&)
 KeyValues::~KeyValues()
 LE_BGRA8888
@@ -1665,7 +1663,6 @@ SceneSystem/SunLightMaxCascadeSizeTools
 SceneSystem/SunLightMaxShadowBufferSize
 SceneSystem/SunLightMaxShadowBufferSizeTools
 SceneSystem/SunLightShadowRenderMode
-SceneSystem/TransformFormat
 SceneSystem/TransformTextureRowCount
 SceneSystem/VolumetricFog
 SceneSystem/VrDefaultShadowTextureHeight
@@ -1758,8 +1755,6 @@ SunShadowClear
 Syntax Error at offset: %d
 T: %7.3f
 TILT_TWIST
-TINTRGBA32
-TINTRGBA8_ENVMAPIDX
 Tell debugoverlay to not draw any entries that have aged out by the time of rendering. Useful if sim runs more often than rendering.
 Template view factory "%s" was registered twice!
 TestFormatA
@@ -1778,6 +1773,7 @@ ThreadSleep
 Thread_ProcessProceduralLayer
 Timer took %.4f
 Toggle display of box around text
+Toggles drawing of aggregate meshes
 ToneMapping
 TonemapManifest
 TonemappingVRForward
@@ -1790,7 +1786,6 @@ Too many cached shadows requested (max %d) this frame (%d).
 Too many shadowed spot lights in the scene!  Some will be removed!
 ToolFramework2_002
 ToolSceneNodeFactory_001
-ToolScriptManager001
 ToolService_001
 Total : %d (%ukb)
 Trailing Data
@@ -1810,7 +1805,6 @@ Unable to read resource file %s!
 Unable to write file '%s'
 Unbatchable material draws:
 Unexpected end of file
-Unknown Transform Texture Format: %i
 Unknown compression type.
 Unknown object class type %s
 Unrecognized command %d in scene system debugger command
@@ -2383,7 +2377,6 @@ m_bInitFromKilledParentParticles
 m_bInverse
 m_bIsAttachment
 m_bIsNotMatchedToMaterial
-m_bLightingOriginIsInWorldSpace
 m_bLocalSpace
 m_bOffsetExistingPos
 m_bParticleFeathering
@@ -2430,7 +2423,6 @@ m_eHand
 m_eRbfType
 m_element
 m_elems
-m_fAlpha
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
@@ -2449,14 +2441,12 @@ m_flClusterRefireTime
 m_flClusterRefireTimeMax
 m_flClusterRefireTimeMin
 m_flClusterSize
-m_flDepthSortBias
 m_flDistance
 m_flDuration
 m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
 m_flFalloff
-m_flFarCullDistanceSquared
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFogContributionStength
@@ -2498,7 +2488,6 @@ m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
 m_flSplayMinAngle
-m_flStartFadeDistanceSquared
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
@@ -2533,7 +2522,6 @@ m_invTransform
 m_lightCookie
 m_localHAnimArray
 m_localHAnimArray_Handle
-m_masks
 m_material
 m_materialName
 m_metacarpalBoneName
@@ -2551,8 +2539,6 @@ m_nBoneHash
 m_nBoneIndex
 m_nBoneNameHash
 m_nBoneWeightCount
-m_nBoundsGroupIndex
-m_nBoundsType
 m_nCP
 m_nCPField
 m_nChainIndex
@@ -2564,10 +2550,7 @@ m_nClusterSizeMin
 m_nCollisionMode
 m_nControlPoint
 m_nControlPointNumber
-m_nCurrentLOD
-m_nCurrentMeshGroupMask
 m_nD3DSemanticIndex
-m_nDebugLevel
 m_nDepth
 m_nElement
 m_nElementIndexArray
@@ -2582,23 +2565,17 @@ m_nFlags
 m_nFogLightingMode
 m_nFormat
 m_nFrameCount
-m_nGameRenderCounter
 m_nGroupId
 m_nGroupType
 m_nHeight
 m_nHitBoxIndex
-m_nID
 m_nIncrement
 m_nIndexCount
 m_nInfluences
 m_nInstanceCount
-m_nLayerForceID
 m_nLayerId
 m_nLayerIndex
-m_nLayerMatchID
 m_nMapType
-m_nMask
-m_nMeshGroupMaskSmall
 m_nMeshID
 m_nMinParticlesToEmit
 m_nMultisampleNumSamples
@@ -2607,21 +2584,14 @@ m_nNoiseType
 m_nNumMipLevels
 m_nNumObjects <= V_ARRAYSIZE( m_objectReferences )
 m_nNumObjects >= 0
-m_nObjectClass
-m_nObjectTypeFlags
-m_nOffset
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
-m_nOriginalRenderableFlags
 m_nOverrideCP
 m_nOverrideCP2
-m_nPVSFlags
-m_nPVSMasks
 m_nParticlesToEmit
 m_nPrimitiveType
 m_nPriority
 m_nRandomMode
-m_nRenderableFlags
 m_nRequestedHeight
 m_nRequestedWidth
 m_nRetargetStyle
@@ -2636,7 +2606,6 @@ m_nShadowCascadeResolution
 m_nShadowHeight
 m_nShadowWidth
 m_nShapeType
-m_nSizeCullBloat
 m_nSlaveAxis
 m_nSlaveChannel
 m_nStartIndex
@@ -2648,8 +2617,6 @@ m_nValue
 m_nVectorComponent
 m_nVertexCount
 m_nViewId
-m_nViewProducerIndex
-m_nVisibleToPlayer
 m_nWidth
 m_outerKnuckle1
 m_outerKnuckle2
@@ -2658,15 +2625,10 @@ m_outputTransformList
 m_outputWeightList
 m_pBody
 m_pD3DSemanticName
-m_pDesc
 m_pJointConstraintData
 m_pMovementManager
 m_pName
-m_pNext
-m_pObject
-m_pPVSData
 m_pParent
-m_pRefData
 m_pSemantic
 m_pValue
 m_parent
@@ -2723,7 +2685,6 @@ m_vForwardLS
 m_vHeelOffset
 m_vInfluenceOffsets
 m_vInfluenceRotations
-m_vLightingOrigin
 m_vLiteralValue
 m_vMaxBounds
 m_vMinBounds
@@ -2736,8 +2697,6 @@ m_vTraceScale
 m_vUpLS
 m_vUpVector
 m_value
-m_vecAABBMaxes
-m_vecAABBMins
 m_vecCenter
 m_vecColorScale
 m_vecMax
@@ -2826,7 +2785,6 @@ mesh.cpp
 mesh_calculate_curvature_smooth_invert
 mesh_calculate_curvature_smooth_pass_count
 mesh_calculate_curvature_smooth_weight
-meshes
 meshsystem
 min( %s, %s )
 min. %f
@@ -3004,7 +2962,6 @@ rt_bakecubemap_depthstencil.vtex
 runspeed
 s offg cMeshusemtl initialShadingGroup
 sRGB
-s_flSizeCullBloatScale
 sc_allow_dynamic_constant_batching
 sc_allow_secondary_contexts
 sc_animatable_disable_materials
@@ -3024,6 +2981,7 @@ sc_disable_shadow_materials
 sc_disable_spotlight_shadows
 sc_disable_world_materials
 sc_double_submit
+sc_draw_aggregate_meshes
 sc_dump_lists
 sc_dumpworld
 sc_dumpworld %d
@@ -3091,8 +3049,8 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6213): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7444): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(6202): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(7438): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 sceneviewdebugoverlays.cpp

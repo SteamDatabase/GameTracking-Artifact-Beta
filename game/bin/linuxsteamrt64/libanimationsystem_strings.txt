@@ -190,6 +190,7 @@ $ORIGIN
 ***Shared activity collision with private activity! %s<->%s [%i]***
 ***Shared activity collision! %s<->%s***
 ***Shared<->Private Activity collision!***
+***Shared<->Private Event collision!***
 *Cm_TiltBone
 + Already Exists, ignoring
 + Default Morph Ctrl Weight :: %8.4f
@@ -420,6 +421,7 @@ $ORIGIN
 18IEnumAnimParameter
 18IIKRuleDescription
 18IParamLookupHelper
+19CAnimGraphFixedData
 19CAnimUpdateNodeBase
 19CBoneMaskUpdateNode
 19CBonePositionMetric
@@ -439,7 +441,6 @@ $ORIGIN
 19CMoveSpeedCondition
 19CPathHelperAnimNode
 19CPathMetricInstance
-19CPoseOpInstanceData
 19CSchemaRegistration
 19CSelectorUpdateNode
 19CSequenceUpdateNode
@@ -457,7 +458,6 @@ $ORIGIN
 20CAnimGraphLogManager
 20CAnimMovementManager
 20CAnimStateTransition
-20CAnimUpdateFixedData
 20CCompressedFullFloat
 20CCompressedFullShort
 20CCompressedReferenceI5ColorE
@@ -527,6 +527,7 @@ $ORIGIN
 21ISolveIKChainAnimNode
 21ISolveIKChainSettings
 21IVConCommDataReceived
+22CAnimGraphInstanceData
 22CAnimGraphModelBinding
 22CAnimParameterInstance
 22CCompressedAnimVector3
@@ -546,6 +547,7 @@ $ORIGIN
 22CSeqResourceS1Sequence
 22CSingleFrameUpdateNode
 22CSkeletalInputAnimNode
+22IAnimGraphInstanceData
 22IAnimGraphModelBinding
 22IAnimParameterInstance
 22IAnimationGraphBuilder
@@ -554,7 +556,6 @@ $ORIGIN
 23CAnimGraphUpdateContext
 23CAnimStateConditionBase
 23CAnimTagManagerInstance
-23CAnimUpdateInstanceData
 23CAnimationGraphInstance
 23CAnimationGroupResource
 23CAnimationTypeManagerV0
@@ -608,6 +609,7 @@ $ORIGIN
 24IIKControlRigDescription
 24ISequenceFinishedAnimTag
 25CAnimGraphGeneralSettings
+25CAnimGraphInstanceContext
 25CAnimGraphNetworkSettings
 25CAnimGraphSettingsManager
 25CCompressedAnimQuaternion
@@ -863,7 +865,7 @@ $ORIGIN
 <unable to determine stacktrace>
 <unconnected>
 <unknown>
-<ununsed>
+<unused>
 =
 ==
 >
@@ -1043,7 +1045,6 @@ AimMatrixBlendMode
 AimMatrixBlendMode_Additive
 AimMatrixBlendMode_BoneMask
 AimMtx:m_resetCount
-AllocInternal
 AllocateAndLoad failed for '%s'
 AllocateAndLoad failed for '%s' (%s)
 AllocateResourceFromAsyncResult
@@ -1115,7 +1116,6 @@ AnimationSnapshotBase_t
 AnimationSnapshotType_t
 AnimationSnapshot_t
 AnimationSystem
-AnimationSystem/%s
 AnimationSystem/DecodeCacheMemoryKB
 AnimationSystem/DisableAnimationScript
 AnimationSystem/DisableMoveMgrNetworkVars
@@ -1141,6 +1141,7 @@ AssetPreviewSystem_001
 AssetSystem001
 AssetSystemTest001
 AtFootCycleStart
+AttachmentHandle_t
 Attempted to ConvertToCopiedData for unsupported type (%d)
 Attempting to get the Skeletal Input settings from model %s, which doesn't have any.  Please add a Skeletal Input Settings node to the model in ModelDoc
 Attempting to get the movement settings from model %s, for which movement settings have not been set.  Please add a MovementSettings node to the model in ModelDoc
@@ -1900,7 +1901,6 @@ ClearHistory
 Clears the flags given the specified flag mask
 Client Predicted
 Client Simulate
-ClientPoseRecipeHistorySize
 ClientPredicted
 ClientSimulate
 ClipSampleInfo
@@ -2131,6 +2131,7 @@ F: %.2f deg
 FABRIK
 FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
+FIELD_ATTACHMENT_HANDLE
 FIELD_BOOLEAN
 FIELD_CHARACTER
 FIELD_CLASSPTR
@@ -2579,7 +2580,6 @@ InstanceData:m_flLastTimeStep
 InstanceData:m_flNextAnimTime
 InstanceData:m_flPrevAnimTime
 InstanceData:m_vRotationDelta
-InstanceData:m_vTranslationDelta
 Int Parameter
 IntParameter
 Intentionally vague touch behavior for %p
@@ -2645,7 +2645,6 @@ KeyValues::GetString(char const*, char const*, char*, unsigned long)
 KeyValues::KeyValues(char const*)
 KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
 KeyValues::MakeCopy() const
-KeyValues::operator delete(void*)
 KeyValues::operator new(unsigned long)
 KeyValues::operator=(KeyValues const&)
 KeyValues::~KeyValues()
@@ -3567,7 +3566,6 @@ SequenceNode
 SerializedEntitiesVersion001
 Server Authoritative
 ServerAuthoritative
-ServerPoseRecipeHistorySize
 ServerUploadGameStats001
 Set Facing
 Set Facing:
@@ -3717,7 +3715,6 @@ Timing Blend
 Timing Control
 ToolFramework2_002
 ToolSceneNodeFactory_001
-ToolScriptManager001
 ToolService_001
 Total Translation (Source State)
 Total Translation (Target State)
@@ -3725,6 +3722,7 @@ Transition from state %s connected to looping animation %s has finished conditio
 Transition from state %s has an almost finished condition, but the duration of the transition's blend is longer than the node's duration. Sequence: %s  Sequence Duration: %g  Transition Duration: %g
 TranslateStackInfo
 Treat Translation Separately
+Tried to load a polymorphic pointer with no '%s' key
 Tried to load resource reference '%s' from a value without a resource reference flag.
 Trigger Parameter
 Trigger Phase
@@ -5101,9 +5099,9 @@ m_posError
 m_poseKeyArray0
 m_poseKeyArray1
 m_poseParams
-m_poseRecipeInstanceData
 m_poseSettingArray
 m_position
+m_prevLocalToWorld
 m_prevStateIndex
 m_previewButton
 m_previewModels
@@ -5499,7 +5497,6 @@ static const Reflection::ClassID Attribute::Group::MyTypeID()
 static const Reflection::ClassID Attribute::Icon::MyTypeID()
 static const Reflection::ClassID CAddAnimNode::MyTypeID()
 static const Reflection::ClassID CAimMatrixAnimNode::MyTypeID()
-static const Reflection::ClassID CAnimGraphGeneralSettings::MyTypeID()
 static const Reflection::ClassID CAnimGraphNetworkSettings::MyTypeID()
 static const Reflection::ClassID CAnimGraphSettingsGroup::MyTypeID()
 static const Reflection::ClassID CAnimMotorBase::MyTypeID()
