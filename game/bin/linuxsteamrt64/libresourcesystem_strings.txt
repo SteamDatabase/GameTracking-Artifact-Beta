@@ -130,6 +130,7 @@ $ORIGIN
 <unconnected>
 <unknown>
 =
+?
 A->B
 AE_ACTION_SET_TURN_RATE_SCALE
 AE_BLIND_ZOMBIE_SNIFF
@@ -236,12 +237,19 @@ BreakPieceEmbedded
 BreakPieceExternal
 C->D
 C->E
-CAnimMotorList
+CAddAnimNode
+CAimMatrixAnimNode
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
+CAnimState
+CAnimationGraph
 CAsyncResourceDataRequest
 CAuthPhysBody
 CAuthPhysJoint
+CBlendAnimNode
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
+CBoneMaskAnimNode
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::ComposeFileName(char const*, char const*, char)
@@ -272,10 +280,23 @@ CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCallStackCapture::CCallStackCapture(int (*)(void**, int, int), unsigned int, unsigned int)
+CChoiceAnimNode
+CChoreoAnimNode
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
+CCycleControlAnimNode
+CDirectPlaybackAnimNode
 CEntityIndex
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
+CFootLockAnimNode
+CFootStepTriggerAnimNode
+CGroundIKSolveAnimNode
+CHitReactAnimNode
+CJiggleBoneAnimNode
+CLookAtAnimNode
 CMemAllocSystemInitialize
+CMoverAnimNode
 COLLISION_MODE_INITIAL_TRACE_DOWN
 COLLISION_MODE_PER_FRAME_PLANESET
 COLLISION_MODE_PER_PARTICLE_TRACE
@@ -284,6 +305,7 @@ COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
 CParticleSystemDefinition
+CPathHelperAnimNode
 CRC32_ProcessBuffer
 CResourceArray
 CResourcePointer
@@ -294,14 +316,22 @@ CResourceSystem Shutdown
 CResourceSystem::BlockingFinishAllCurrentlyLoadingManifests is blocking
 CResourceSystem::FindOrCreateProceduralResource: Passed in an empty name for a procedural resource!
 CResourceSystem::ForceSynchronizationAndBlockUntilManifestLoaded blocked for %.3f ms on %s [%s]
+CRootAnimNode
+CSelectorAnimNode
+CSetFacingAnimNode
+CSlowDownOnSlopesAnimNode
+CSolveIKChainAnimNode
+CSpeedScaleAnimNode
 CSplitString::Construct(char const*, char const**, int)
 CStableSymbolTable::GetId(char const*, bool*)
 CStackTop_Base::CStackTop_Base()
 CStackTop_Base::~CStackTop_Base()
+CStopAtGoalAnimNode
 CStrongHandle
 CStrongHandleCopyable
 CStrongHandleVoid
 CStrongHandleVolatile
+CSubtractAnimNode
 CTSQueue corruption
 CThread::CThread()
 CThread::Init()
@@ -331,6 +361,8 @@ CThreadSyncObject::Wait(unsigned int)
 CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CTransform
+CTurnHelperAnimNode
+CTwoBoneIKAnimNode
 CUtlBinaryBlock::SetLength(int)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
@@ -391,6 +423,7 @@ CVProfNode::ExitScope()
 CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVariableBitStringBase::FreeInts()
 CVariableBitStringBase::Resize(int)
+CWayPointHelperAnimNode
 CWeakHandle
 CWeakHandleVoid
 CXXABI_1.3
@@ -458,9 +491,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -720,9 +757,28 @@ OnAsyncProcessResourceData
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
@@ -818,6 +874,17 @@ ResourceSystem
 ResourceSystem/SpewBlockingLoads
 ResourceSystem013
 ResourceSystemWaitingForFutureWork
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SceneSystem_002
 SceneUtils_001
 SchemaSystem_001
@@ -1013,6 +1080,7 @@ anim_name_a
 anim_name_b
 animgraph0
 animgraph1
+animgraph2
 anonymous
 archive
 attach_point
@@ -1044,7 +1112,6 @@ calloc
 cantdie
 center
 cheat
-children
 client
 clientcmd_can_execute
 cloth_collide
@@ -1167,6 +1234,11 @@ m_SolverSettingSource
 m_SolverType
 m_TargetSettingSource
 m_TargetSource
+m_TextureControls
+m_additiveChildID
+m_additiveInput
+m_bAdditive
+m_bAdditiveAlpha
 m_bApplyMinForce
 m_bDisableChild
 m_bDisableOperator
@@ -1174,7 +1246,12 @@ m_bDoBonesOrientAlongPositiveX
 m_bFitCycleToLifetime
 m_bForceLoopingAnimation
 m_bInitFromKilledParentParticles
+m_bLightenMode
 m_bLocalSpace
+m_bMaxLuminanceBlendingSequence1
+m_bMod2X
+m_bMotionVectors
+m_bNormalMap
 m_bOffsetExistingPos
 m_bParticleFeathering
 m_bRemapPullForceToLife
@@ -1185,6 +1262,14 @@ m_bScaleInitialValue
 m_bScalePerParticle
 m_bTrailBias
 m_bUseHighestEndCP
+m_baseChildID
+m_baseInput
+m_baseInputConnection
+m_child1ID
+m_child2ID
+m_childID
+m_childNodeID
+m_children
 m_fForceAmount
 m_fForceAmountMin
 m_fLifespanScaleExp
@@ -1192,6 +1277,8 @@ m_fRadiusMax
 m_fRadiusMin
 m_fSpeedMax
 m_fSpeedMin
+m_flAnimationRate
+m_flAnimationRate2
 m_flBiasParameter
 m_flClusterCooldown
 m_flClusterCooldownMax
@@ -1204,6 +1291,9 @@ m_flDuration
 m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flInitFromKilledParentParticles
 m_flInitialRadius
 m_flInitialSpeedMax
@@ -1224,14 +1314,30 @@ m_flRandomMax
 m_flRandomMin
 m_flRoll
 m_flScalePerParentParticle
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flTextureBlend
 m_flThickness
 m_flYaw
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
+m_hMotionVectorsTexture
+m_hNormalTexture
 m_hResource->m_nLoadingResource != LOADING_RESOURCE_INDEX_INVALID
 m_hResource->m_nStreamingResource != STREAMING_RESOURCE_DATA_INDEX_INVALID
 m_hSnapshot
+m_hTexture
+m_id
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_nAnimationType
 m_nAttributeToWrite
 m_nBehaviorVersion
@@ -1245,12 +1351,15 @@ m_nControlPoint
 m_nControlPointNumber
 m_nFeatheringMode
 m_nFirstMultipleOverride_BackwardCompat
+m_nHand
 m_nIncrement
+m_nLightType
 m_nMapType
 m_nMinParticlesToEmit
 m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOutputBlendMode
 m_nOverrideCP
 m_nOverrideCP2
 m_nParticlesToEmit
@@ -1260,15 +1369,25 @@ m_nScaleCPComponent
 m_nScaleCPField
 m_nScaleControlPoint
 m_nScaleControlPointField
+m_nSequenceCombineMode
 m_nSetMethod
+m_nSortMethod
+m_nTextureChannels
+m_nTextureType
 m_nType
 m_nVectorComponent
+m_nodeID
+m_nodeManager
+m_nodes
+m_outputID
 m_pBody
 m_pJointConstraintData
 m_pMovementManager
 m_pParent
 m_pszSnapshotName
 m_snapshotName
+m_subtractChildID
+m_subtractInputConnection
 m_useCurl
 m_vCPValueScale
 m_vEndTrailTintFactor
@@ -1277,9 +1396,11 @@ m_vMaxBounds
 m_vMinBounds
 m_vecColorScale
 m_vecTailColorScale
+m_vecTexturesInput
 malloc
 master_morph_weight
 material
+materials/particle/base_sprite.vtex
 mathlib_extended
 matrix3x4_t
 matrix3x4a_t
@@ -1463,6 +1584,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5

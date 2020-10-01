@@ -246,6 +246,7 @@ $tIVScript
 27CSchemaUtlVectorManipulatorI10CUtlVectorI12RnMeshDesc_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI12matrix3x4a_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI13CFingerSource10CUtlMemoryIS1_iEES1_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorI13CStrongHandleI25InfoForResourceTypeCModelE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI13CStrongHandleI29InfoForResourceTypeIMaterial2E10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI13CStrongHandleI30InfoForResourceTypeCRenderMeshE10CUtlMemoryIS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI13CStrongHandleI34InfoForResourceTypeCAnimationGroupE10CUtlMemoryIS3_iEES3_E
@@ -609,29 +610,36 @@ BuildNewContacts
 C
 C->D
 C->E
+CAddAnimNode
 CAimConstraint
+CAimMatrixAnimNode
 CAnimBone
 CAnimCycle
 CAnimDataChannelDesc
 CAnimKeyData
-CAnimMotorList
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimState
 CAnimUser
+CAnimationGraph
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
 CAuthPhysBody
 CAuthPhysJoint
 CBaseConstraint
+CBlendAnimNode
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceBone::Input_t
 CBoneConstraintPoseSpaceMorph
 CBoneConstraintPoseSpaceMorph::Input_t
+CBoneMaskAnimNode
 CBroadphase
 CBroadphaseProxyData
 CBroadphaseProxyNode
@@ -664,6 +672,8 @@ CBufferString::StartsWith(char const*)
 CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
+CChoiceAnimNode
+CChoreoAnimNode
 CColorGradient
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -673,6 +683,8 @@ CConstraintSlave
 CConstraintTarget
 CContactArray
 CCycleBase
+CCycleControlAnimNode
+CDirectPlaybackAnimNode
 CDrawCullingData
 CEntIndexPair
 CEntIndexPair RnStartTouchEventRefl_t::m_Entities
@@ -693,23 +705,31 @@ CFlexDesc
 CFlexOp
 CFlexRule
 CFloatAttr
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
 CFootCycle
 CFootCycleDefinition
 CFootDefinition
+CFootLockAnimNode
 CFootMotion
+CFootStepTriggerAnimNode
 CFootStride
 CFootTrajectories
 CFootTrajectory
 CFrustum
 CFrustum RnWorldRefl_t::m_DebugCamera
+CGroundIKSolveAnimNode
 CHierarchicalBitVector
 CHitBox
 CHitBoxSet
 CHitBoxSetList
+CHitReactAnimNode
 CIntersectionDictionary
 CIrrotationalVortexOnGrid
+CJiggleBoneAnimNode
 CJiggleBoneState
 CL 2131667
+CLookAtAnimNode
 CMaterialDrawDescriptor
 CMemAllocSystemInitialize
 CModelConfig
@@ -728,6 +748,7 @@ CMorphConstraint
 CMorphData
 CMorphRectData
 CMorphSetData
+CMoverAnimNode
 CNameIndex
 COLLISION_MODE_INITIAL_TRACE_DOWN
 COLLISION_MODE_PER_FRAME_PLANESET
@@ -748,6 +769,7 @@ COrientConstraint
 CParallelForAndPostProcessor
 CParentConstraint
 CParticleSystemDefinition
+CPathHelperAnimNode
 CPhysSurfaceProperties
 CPhysSurfacePropertiesAudio
 CPhysSurfacePropertiesPhysics
@@ -983,7 +1005,11 @@ CRnSpringJoint
 CRnWeldJoint
 CRnWorld
 CRnWorld::RecordApiCall
+CRootAnimNode
 CSceneObjectData
+CSelectorAnimNode
+CSetFacingAnimNode
+CSlowDownOnSlopesAnimNode
 CSoftbodyEffect
 CSoftbodyEffectDampenVelocity
 CSoftbodyEffectGravity
@@ -992,10 +1018,14 @@ CSoftbodyEffectProperty
 CSoftbodyEffectSkinnedCollider
 CSoftbodyEffectSpeedup
 CSoftbodyEffectWind
+CSolveIKChainAnimNode
+CSpeedScaleAnimNode
 CSplitString::Construct(char const*, char const**, int)
 CStableSymbolTable::GetId(char const*, bool*)
 CStableSymbolTable::Insert(int, char const*)
+CStopAtGoalAnimNode
 CStrongHandle
+CSubtractAnimNode
 CTSQueue corruption
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadRWLock_FastRead::CThreadRWLock_FastRead(bool)
@@ -1013,7 +1043,9 @@ CTiltTwistConstraint
 CTransform
 CTransformUnaligned RecordedCaspuleSweepResultRefl_t::m_XForm1
 CTransformUnaligned RecordedCaspuleSweepResultRefl_t::m_XForm2
+CTurnHelperAnimNode
 CTwistConstraint
+CTwoBoneIKAnimNode
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomInt(int, int)
@@ -1122,6 +1154,7 @@ CVPhysXSurfacePropertiesList
 CVertexKDTree::BuildMidpoint(float const*, int, int)
 CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
+CWayPointHelperAnimNode
 CWristBone
 CXXABI_1.3
 C_INIT_AddVectorToVector
@@ -1188,9 +1221,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -2019,9 +2056,28 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
 PF_MAP_TYPE_REMAP
@@ -2530,6 +2586,12 @@ Rubikon Release non-SIMD
 Rubikon%s
 SATCacheHit
 SATQuery
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
 SHAPE_CAPSULE
 SHAPE_HULL
 SHAPE_MESH
@@ -2598,6 +2660,11 @@ SOFTBODY_SIM_WARMSTART
 SOFTBODY_SOLVER_QUASISTATIC
 SOFTBODY_SOLVER_RELAXATION
 SPHERICAL_JOINT
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SSE and SSE2 are required.
 STATE_FAILED
 STATE_OVERLAPPED
@@ -3151,6 +3218,7 @@ anim_name_a
 anim_name_b
 animgraph0
 animgraph1
+animgraph2
 archive
 attach_point
 attachment_offset
@@ -3283,7 +3351,6 @@ center
 cg
 char *
 cheat
-children
 cl_jiggle_bone_debug_pitch_constraints
 cl_jiggle_bone_debug_yaw_constraints
 cl_jiggle_bone_invert
@@ -3869,6 +3936,7 @@ m_TaperedCapsuleRigids
 m_TaperedCapsuleStretches
 m_TargetSettingSource
 m_TargetSource
+m_TextureControls
 m_Transform
 m_TreeChildren
 m_TreeCollisionMasks
@@ -3886,6 +3954,8 @@ m_Weights
 m_WorldCollisionNodes
 m_WorldCollisionParams
 m_aAngOffset
+m_additiveChildID
+m_additiveInput
 m_anchor
 m_ankleBoneName
 m_attachments
@@ -3894,6 +3964,7 @@ m_audioSounds
 m_axes
 m_bAcceptParentMaterialDrivenDecals
 m_bAdditive
+m_bAdditiveAlpha
 m_bApplyMinForce
 m_bCanBatchWithDynamicShaderConstants
 m_bClamp
@@ -3928,7 +3999,12 @@ m_bIsActive
 m_bIsAttachment
 m_bIsAxisAligned
 m_bIsNotMatchedToMaterial
+m_bLightenMode
 m_bLocalSpace
+m_bMaxLuminanceBlendingSequence1
+m_bMod2X
+m_bMotionVectors
+m_bNormalMap
 m_bOffsetExistingPos
 m_bOverrideMassCenter
 m_bParticleFeathering
@@ -3950,6 +4026,9 @@ m_bUseShadowFastPath
 m_bUserSpecifiedColor
 m_bUserSpecifiedMaterialGroup
 m_bVisible
+m_baseChildID
+m_baseInput
+m_baseInputConnection
 m_baseNameHash
 m_bbox
 m_bindPose
@@ -3971,6 +4050,11 @@ m_bundleTypes
 m_cRenderColor
 m_capsules
 m_chain
+m_child1ID
+m_child2ID
+m_childID
+m_childNodeID
+m_children
 m_collisionAttributes
 m_constraints
 m_constraints2
@@ -4024,6 +4108,8 @@ m_flAngularDampingRatios
 m_flAngularDrag
 m_flAngularFrequencies
 m_flAngularFrequency
+m_flAnimationRate
+m_flAnimationRate2
 m_flBaseDamping
 m_flBaseForwardFriction
 m_flBaseLeftFriction
@@ -4062,6 +4148,9 @@ m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
 m_flFalloff
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFootLength
@@ -4149,6 +4238,10 @@ m_flRodVelocitySmoothRate
 m_flRoll
 m_flRotationOffset
 m_flScalePerParentParticle
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
@@ -4160,6 +4253,7 @@ m_flStaticImpactVolume
 m_flStiffness
 m_flSwingLimit
 m_flTailAlphaScale
+m_flTextureBlend
 m_flThickness
 m_flTipMass
 m_flTraceHeight
@@ -4182,6 +4276,10 @@ m_flYawBounce
 m_flYawDamping
 m_flYawFriction
 m_flYawStiffness
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
 m_flags
 m_flexController
 m_flexControllerToken
@@ -4196,13 +4294,17 @@ m_goalAngularVelocity
 m_goalOrientation
 m_goalPosition
 m_hModel
+m_hMotionVectorsTexture
+m_hNormalTexture
 m_hSnapshot
+m_hTexture
 m_hardThreshold
 m_hardVelocityThreshold
 m_hardnessFactor
 m_hingeAxis
 m_hitboxsets
 m_hulls
+m_id
 m_impactHard
 m_impactSoft
 m_includedGroupArray
@@ -4213,6 +4315,9 @@ m_indexNames
 m_influenceFlags
 m_influenceNames
 m_influenceWeights
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_inputList
 m_inputValue
 m_intAttributes
@@ -4301,6 +4406,7 @@ m_nGameFlags
 m_nGameIndex
 m_nGroupId
 m_nGroupType
+m_nHand
 m_nHeight
 m_nHitBoxIndex
 m_nIncrement
@@ -4312,6 +4418,7 @@ m_nIndexCount
 m_nInfluences
 m_nInstanceCount
 m_nJiggleParent
+m_nLightType
 m_nLinearMotions
 m_nLookupType
 m_nMapType
@@ -4328,6 +4435,7 @@ m_nOldPointer
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
 m_nOrigin
+m_nOutputBlendMode
 m_nOverrideCP
 m_nOverrideCP2
 m_nParent
@@ -4352,6 +4460,7 @@ m_nScaleCPComponent
 m_nScaleCPField
 m_nScaleControlPoint
 m_nScaleControlPointField
+m_nSequenceCombineMode
 m_nSetMethod
 m_nShapeType
 m_nSimdQuadCount1
@@ -4360,6 +4469,7 @@ m_nSimdTriCount1
 m_nSimdTriCount2
 m_nSlaveAxis
 m_nSlaveChannel
+m_nSortMethod
 m_nSphereRigidIndex
 m_nStartIndex
 m_nStartInstance
@@ -4369,6 +4479,8 @@ m_nSurfacePropertyIndex
 m_nTaperedCapsuleRigidIndex
 m_nTargetAxis
 m_nTargetIndex
+m_nTextureChannels
+m_nTextureType
 m_nTranslateMotion
 m_nTreeDepth
 m_nTriCount1
@@ -4386,11 +4498,15 @@ m_nWidth
 m_nXLeftDst
 m_nYTopDst
 m_nameHash
+m_nodeID
+m_nodeManager
+m_nodes
 m_objectList
 m_offsets
 m_orientation
 m_outerKnuckle1
 m_outerKnuckle2
+m_outputID
 m_outputMorph
 m_outputTransformList
 m_outputWeightList
@@ -4487,6 +4603,7 @@ m_qParentBindRotation
 m_quat
 m_ranges
 m_refAnimGroups
+m_refAnimIncludeModels
 m_refLODGroupMasks
 m_refMeshGroupMasks
 m_refMeshes
@@ -4524,6 +4641,8 @@ m_strParentBone
 m_strain
 m_strides
 m_stringAttributes
+m_subtractChildID
+m_subtractInputConnection
 m_surfacePropertiesList
 m_surfacePropertyHashes
 m_swing1LimitDamping
@@ -4617,6 +4736,7 @@ m_vecMax
 m_vecMin
 m_vecSize
 m_vecTailColorScale
+m_vecTexturesInput
 m_vectorAttributes
 m_vectorParams
 m_vertexBuffers
@@ -4632,6 +4752,7 @@ materials/dev/debug_physics_translucent.vmat
 materials/dev/debug_physics_translucent_seethrough.vmat
 materials/dev/debug_physics_wireframe.vmat
 materials/error.vmat
+materials/particle/base_sprite.vtex
 matrix3x4_t
 matrix3x4_t RecordedHitboxStateRefl_t::m_Transform
 matrix3x4_t RnHullRefl_t::m_MassProperties
@@ -5165,6 +5286,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5

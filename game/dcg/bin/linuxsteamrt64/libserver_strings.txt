@@ -450,6 +450,15 @@
 #CardEffect_11083_0
 #CardEffect_11084_0
 #CardEffect_11085_0
+#CardEffect_11086_0
+#CardEffect_11088_0
+#CardEffect_11089_0
+#CardEffect_11092_0
+#CardEffect_11093_0
+#CardEffect_11094_0
+#CardEffect_11095_0
+#CardEffect_11096_0
+#CardEffect_11097_0
 #CardEffect_14003_0
 #CardEffect_14005_0
 #CardEffect_19001_0
@@ -864,6 +873,7 @@ $tI
 %d ents in group %s%u/%s%s
 %d nodes
 %d pkts, %d cmd:
+%d queries, %d misses (%d free) suc spec = %d wasted spec=%d
 %d spawn groups:
 %d |
 %d(%s):  %s because %f %f %f was %s final landmark
@@ -921,12 +931,7 @@ $tI
 %s (%.2f, %.2f, %.2f)
 %s (%d) prepared to speak %s (%f)
 %s (%s) at (%.3f %.3f %.3f) using obsolete or unknown material type.
-%s (%s) has an invalid spotlight length <= 0, setting to 500
-%s (%s) has an invalid spotlight width %.1f (max %.1f).
-%s (%s) has an invalid spotlight width <= 0, setting to 10
 %s (%s) has no particle system name specified!
-%s (%s) received StartAnimSequence input without correct parameters. Syntax: <Frame Start> <Frame End> <Frame Rate> <Loop>Setting <Frame End> to -1 uses the last frame of the texture. <Loop> should be 1 or 0.
-%s (%s) received StartFloatLerp input without correct parameters. Syntax: <Start Value> <End Value> <Transition Time> <Loop><Loop> should be 1 or 0.
 %s (%s) removing class relationships due to level transition
 %s (%s) was unable to point at an entity named: %s
 %s (%x) spoke %s (%f)
@@ -993,6 +998,7 @@ $tI
 %s overrides identical base gameevent in '%s'
 %s prior disconnection #%d at %s, reconnected after %d seconds
 %s prior disconnection #%d at %s, we are reconnecting after %d seconds
+%s removed itself!
 %s restored from text format, should be converted to keyvalues3 text format using sceneimagebuilder -kv3convert -game <dota, etc.>
 %s skel=%p agg=%p[%d] %s
 %s took %0.2f seconds
@@ -1356,7 +1362,6 @@ $tI
 ******FINISHED LOOKAHEAD******
 ******START LOOKAHEAD******  %d moves
 ***ERROR***Bad relationship type (%s) to unknown entity (%s)!
-**Attempting to update point_spotlight but target ent is NULL
 **COULD NOT CREATE SOUNDENT**
 **ERROR - Unspecified gib dir method in func_breakable!
 **WARNING** Failed to apply item schema, falling back to local copy!
@@ -1431,6 +1436,7 @@ $tI
 *Z40GetTypedAttributeEqualityCompareFunctionI13StrongTypedefIj15ObjectIDTypeTagLj0EEESt8functionIFT_15CUtlStringTokenS4_EERK18MatchAttributeListEUlS5_S2_E_
 *Z40GetTypedAttributeEqualityCompareFunctionIiESt8functionIFT_15CUtlStringTokenS1_EERK13AttributeListEUlS2_iE_
 *Z40GetTypedAttributeEqualityCompareFunctionIiESt8functionIFT_15CUtlStringTokenS1_EERK18MatchAttributeListEUlS2_iE_
+*ZL17Set1_Raid_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -1476,6 +1482,7 @@ $tI
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE5_
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE_
 *ZN12StateBuilderL17GetTowerFunctionsERNS_5TowerEEUl10CUtlStringE0_
+*ZN12StateBuilderL17GetTowerFunctionsERNS_5TowerEEUl10CUtlStringE1_
 *ZN12StateBuilderL17GetTowerFunctionsERNS_5TowerEEUl10CUtlStringE_
 *ZN12StateBuilderL18GetCombatFunctionsERNS_10CombatUnitEEUl10CUtlStringE_
 *ZN12StateBuilderL18GetPlayerFunctionsERNS_18StatePlayerBuilderEEUl10CUtlStringE0_
@@ -1783,11 +1790,10 @@ $tI
 /user/hand/right
 0
 0 0 0
-0 0 0 30
 0 <= i
 0 = none, 1 = non-autosave, 2 = always, 3 = bug_only
 0 = standard sampling, 1 = fast sampling, 2 = ultra-fast sampling
-0 == ( pInstance->GetOwnerGameEntity()->GetEntityIdentity()->GetFlags() & EF_IN_STAGING_LIST )
+0 == ( pInstance->GetOwnerEntity()->GetEntityIdentity()->GetFlags() & EF_IN_STAGING_LIST )
 0.006f
 0.01f
 0.02
@@ -1803,7 +1809,6 @@ $tI
 0.6
 0.7
 0.9
-0.98
 0.99
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789abcdef
@@ -1844,7 +1849,6 @@ $tI
 10CGunTarget
 10CIPASNInfo
 10CLightGlow
-10CLightSpot
 10CLocalGame
 10CLogicAuto
 10CLogicCase
@@ -1883,7 +1887,6 @@ $tI
 118
 119
 11CAnchorList
-11CAreaPortal
 11CBaseEntity
 11CBaseFilter
 11CBasePlayer
@@ -1897,7 +1900,6 @@ $tI
 11CFilterName
 11CFlexCycler
 11CFogTrigger
-11CGameEntity
 11CGameObject
 11CInfoTarget
 11CLogicRelay
@@ -1910,6 +1912,7 @@ $tI
 11CNETMsg_NOP
 11CNullEntity
 11CPVSManager
+11CPathCorner
 11CPhysImpact
 11CPhysLength
 11CPhysMagnet
@@ -1949,6 +1952,7 @@ $tI
 11TItemSocketI26CProtoItemSocket_AutographE
 11TItemSocketI26CProtoItemSocket_SpectatorE
 11TItemSocketI30CProtoItemSocket_AssetModifierE
+11fogparams_t
 11locksound_t
 120
 120.0
@@ -1979,7 +1983,6 @@ $tI
 12CFilterEnemy
 12CFilterModel
 12CGlobalState
-12CHintMessage
 12CItemGeneric
 12CKeepUpright
 12CLightEntity
@@ -1991,6 +1994,7 @@ $tI
 12CMsgTEImpact
 12CMsgTESparks
 12CMsgVector2D
+12CMultiDamage
 12CMultiSource
 12CNETMsg_Tick
 12CNavDrawArea
@@ -2060,7 +2064,6 @@ $tI
 13CEntitySystem
 13CEnvExplosion
 13CFuncConveyor
-13CFuncOccluder
 13CFuncRotating
 13CGameMovement
 13CGlowProperty
@@ -2084,7 +2087,6 @@ $tI
 13CNetMessagePBILi104E28CUserMessageCurrentTimescaleL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi105E28CUserMessageDesiredTimescaleL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi106E16CUserMessageFadeL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
-13CNetMessagePBILi109E20CUserMessageHintTextL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi110E18CUserMessageHudMsgL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi111E19CUserMessageHudTextL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi112E23CUserMessageKeyHintTextL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
@@ -2102,7 +2104,6 @@ $tI
 13CNetMessagePBILi129E25CUserMessageVoiceSubtitleL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi133E26CUserMessageCrosshairAngleL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi135E22CUserMessageCreditsMsgL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
-13CNetMessagePBILi137E27CEntityMessageScreenOverlayL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi138E29CEntityMessageRemoveAllDecalsL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi139E28CEntityMessagePropagateForceL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
 13CNetMessagePBILi141E22CEntityMessageFixAngleL13SignonGroup_t13EL19NetChannelBufType_t1ELb1EE
@@ -2155,7 +2156,6 @@ $tI
 13CScriptScopeTI22CDefScriptAccessorBaseLb1EE
 13CSimThinkHook
 13CSpotlightEnd
-13CStripWeapons
 13CTEBeamPoints
 13CTEGlowSprite
 13CTEWorldDecal
@@ -2217,7 +2217,6 @@ $tI
 14CEntitySpawnerI18CSimplePhysicsPropE
 14CEntitySpawnerI22CDevtestHierarchyChildE
 14CEntitySpawnerI25CItemGenericTriggerHelperE
-14CEntitySpawnerI5CBeamE
 14CEntitySpawnerI6CWorldE
 14CEnvCubemapBox
 14CEnvCubemapFog
@@ -2256,7 +2255,6 @@ $tI
 14CMsgVoiceAudio
 14CNavGameSystem
 14CNotifyManager
-14CParticleLight
 14CPathOptimizer
 14CPhysExplosion
 14CPhysicsSpring
@@ -2265,7 +2263,6 @@ $tI
 14CResponseQueue
 14CSOPhantomItem
 14CSVCMsg_Sounds
-14CShadowControl
 14CSoundModifier
 14CSource2Server
 14CStopwatchBase
@@ -2275,7 +2272,6 @@ $tI
 14CTEMuzzleFlash
 14CTEPhysicsProp
 14CTEPlayerDecal
-14CTextureToggle
 14CTriggerCamera
 14CTriggerImpact
 14CTriggerRemove
@@ -2284,7 +2280,6 @@ $tI
 14CUserMessagePBILi104E28CUserMessageCurrentTimescaleL19NetChannelBufType_t1EE
 14CUserMessagePBILi105E28CUserMessageDesiredTimescaleL19NetChannelBufType_t1EE
 14CUserMessagePBILi106E16CUserMessageFadeL19NetChannelBufType_t1EE
-14CUserMessagePBILi109E20CUserMessageHintTextL19NetChannelBufType_t1EE
 14CUserMessagePBILi110E18CUserMessageHudMsgL19NetChannelBufType_t1EE
 14CUserMessagePBILi111E19CUserMessageHudTextL19NetChannelBufType_t1EE
 14CUserMessagePBILi112E23CUserMessageKeyHintTextL19NetChannelBufType_t1EE
@@ -2302,7 +2297,6 @@ $tI
 14CUserMessagePBILi129E25CUserMessageVoiceSubtitleL19NetChannelBufType_t1EE
 14CUserMessagePBILi133E26CUserMessageCrosshairAngleL19NetChannelBufType_t1EE
 14CUserMessagePBILi135E22CUserMessageCreditsMsgL19NetChannelBufType_t1EE
-14CUserMessagePBILi137E27CEntityMessageScreenOverlayL19NetChannelBufType_t1EE
 14CUserMessagePBILi138E29CEntityMessageRemoveAllDecalsL19NetChannelBufType_t1EE
 14CUserMessagePBILi139E28CEntityMessagePropagateForceL19NetChannelBufType_t1EE
 14CUserMessagePBILi141E22CEntityMessageFixAngleL19NetChannelBufType_t1EE
@@ -2385,7 +2379,6 @@ $tI
 15CPlayCardAction
 15CPlayerResource
 15CPointHMDAnchor
-15CPointSpotlight
 15CPointWorldText
 15CPoseController
 15CProjectedDecal
@@ -2443,7 +2436,6 @@ $tI
 15SignedPayload_t
 15TSocketIteratorI25CItemSocket_AssetModifierE
 162
-16384
 164
 165
 166
@@ -2461,11 +2453,9 @@ $tI
 16CDemoSpawnGroups
 16CDraftGameObject
 16CEntityComponent
-16CEntityMessagePBILi137E27CEntityMessageScreenOverlayL19NetChannelBufType_t1EE
 16CEntityMessagePBILi138E29CEntityMessageRemoveAllDecalsL19NetChannelBufType_t1EE
 16CEntityMessagePBILi139E28CEntityMessagePropagateForceL19NetChannelBufType_t1EE
 16CEntityMessagePBILi141E22CEntityMessageFixAngleL19NetChannelBufType_t1EE
-16CEnvScreenEffect
 16CFilterProximity
 16CFuncIllusionary
 16CFuncVehicleClip
@@ -2491,6 +2481,7 @@ $tI
 16CNavPrecacheInfo
 16CNavVolumeSphere
 16CNavVolumeVector
+16CPathCornerCrash
 16CPlayerInventory
 16CPlayerLocalData
 16CProtoItemSocket
@@ -2574,23 +2565,19 @@ $tI
 17CEconTool_Default
 17CEconTool_DescTag
 17CEconTool_NameTag
-17CEnvDOFController
 17CEnvDeferredLight
 17CEnvScreenOverlay
 17CFuncVPhysicsClip
 17CGameEntitySystem
 17CGameEventManager
 17CHexModelModifier
-17CInfoIntermission
 17CInventoryManager
 17CItemSocket_Color
 17CItemSocket_Empty
-17CLightDirectional
 17CLightOrthoEntity
 17CLogicAchievement
 17CLogicPlayerProxy
 17CModelPointEntity
-17CMovementSpeedMod
 17CMsgAMGetLicenses
 17CMsgClientWelcome
 17CMsgDeckValidator
@@ -2656,7 +2643,6 @@ $tI
 17CUtlVectorDataOpsI10CUtlVectorI24SaveRestoreBlockHeader_t10CUtlMemoryIS1_iEELi10EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI11CBasePlayerE10CUtlMemoryIS3_iEELi13EE
-17CUtlVectorDataOpsI10CUtlVectorI7CHandleI11CVGuiScreenE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI12CLightEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI12CSceneEntityE10CUtlMemoryIS3_iEELi13EE
 17CUtlVectorDataOpsI10CUtlVectorI7CHandleI17CSceneListManagerE10CUtlMemoryIS3_iEELi13EE
@@ -2731,7 +2717,6 @@ $tI
 18CEntitySpawnerBaseI18CSimplePhysicsPropE
 18CEntitySpawnerBaseI22CDevtestHierarchyChildE
 18CEntitySpawnerBaseI25CItemGenericTriggerHelperE
-18CEntitySpawnerBaseI5CBeamE
 18CEntitySpawnerBaseI6CWorldE
 18CEnvInstructorHint
 18CEventsSaveDataOps
@@ -2777,7 +2762,6 @@ $tI
 18CPlaceholderConVar
 18CPlayAbilityAction
 18CPointEntityFinder
-18CPostProcessSystem
 18CRagdollConstraint
 18CReloadMatchFilter
 18CSOCardAchievement
@@ -2837,7 +2821,6 @@ $tI
 19CEntitySpawnerAsyncI12CPhysicsPropE
 19CEnvSoundscapeProxy
 19CFlexAnimationTrack
-19CFuncAreaPortalBase
 19CFuncCombineBarrier
 19CFuncNavObstruction
 19CGCMsgGetIPLocation
@@ -2948,7 +2931,6 @@ $tI
 20CGameParticleManager
 20CGameRulesGameSystem
 20CGameSceneNodeHandle
-20CInfoOverlayAccessor
 20CInterpolatedVarBaseI19MeshGroupMaskInfo_tLb0ELb1E29CGlobalInterpolationLerpFuncsIS0_EE
 20CInterpolatedVarBaseI21EnableRenderingInfo_tLb0ELb1E29CGlobalInterpolationLerpFuncsIS0_EE
 20CLabelledDebugHelper
@@ -3006,7 +2988,6 @@ $tI
 20CSoundOpvarSetEntity
 20CSource2EntitySystem
 20CSource2GameEntities
-20CTargetChangeGravity
 20CTraceFilterPushMove
 20CTraceMsg_CardBought
 20CTraceMsg_CardKilled
@@ -3064,7 +3045,6 @@ $tI
 21CEntityOutputTemplateIyE
 21CEnvDeferredSpotLight
 21CFlexSceneFileManager
-21CFuncAreaPortalWindow
 21CGCMsgMemCachedDelete
 21CGCToGCMsgRoutedReply
 21CGameConfigurationDCG
@@ -3159,7 +3139,6 @@ $tI
 22CLoadingEntityListener
 22CLoadingScreenModifier
 22CLogicDistanceAutosave
-22CMaterialModifyControl
 22CMsgAMGetUserGameStats
 22CMsgClientServerHeader
 22CMsgClientToGCNameItem
@@ -3188,7 +3167,6 @@ $tI
 22CPhysicsPushedEntities
 22CPointGamestatsCounter
 22CPortraitModifier_Game
-22CPostProcessController
 22CProtoItemSocket_Color
 22CProtoItemSocket_Empty
 22CRespawnEntitiesFilter
@@ -3216,7 +3194,6 @@ $tI
 22CTriggerPlayerMovement
 22CUserMessageAmmoDenied
 22CUserMessageCreditsMsg
-22CUserMessageHintText_t
 22CUserMessageItemPickup
 22CUserMessageResetHUD_t
 22CUserMessageSayText2_t
@@ -3357,7 +3334,6 @@ $tI
 24CGameSystemStaticFactoryI14CGameTimescaleS0_E
 24CGameSystemStaticFactoryI15CItemGenerationS0_E
 24CGameSystemStaticFactoryI18CDCGServerGCSystemS0_E
-24CGameSystemStaticFactoryI18CPostProcessSystemS0_E
 24CGameSystemStaticFactoryI18CVisibilityMonitorS0_E
 24CGameSystemStaticFactoryI19CCombatCharVisCacheS0_E
 24CGameSystemStaticFactoryI19CDecalEmitterSystem19IDecalEmitterSystemE
@@ -3691,14 +3667,11 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI21CPostProcessingVolumeE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHandleI9CBaseFlexE28CNetworkUtlVector_MemoryTypeIS3_Lin1EEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN17CAttributeManager24cached_attribute_float_tE10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIP12CHintMessage10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP13CAI_Expresser10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIP15CTeamSpawnPoint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CInfoDynamicShadowHint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP26CScriptUniformRandomStream10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEES2_E
-27CSchemaUtlVectorManipulatorI10CUtlVectorIPc10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEbE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf28CNetworkUtlVector_MemoryTypeIfLin1EEEfE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIh28CNetworkUtlVector_MemoryTypeIhLin1EEEhE
@@ -3724,7 +3697,6 @@ $tI
 28CGCMsgGetSystemStatsResponse
 28CGCMsgMemCachedStatsResponse
 28CGCToGCMsgMasterAck_Response
-28CLightSpotAlias_light_glspot
 28CMsgAMAddFreeLicenseResponse
 28CMsgClientToGCGetProfileData
 28CMsgClientToGCSetPlayerBadge
@@ -3790,7 +3762,6 @@ $tI
 29CEntFireAutoCompletionFunctor
 29CEntityMessageFixAngleEvent_t
 29CEntityMessageRemoveAllDecals
-29CEntityMessageScreenOverlay_t
 29CGCStorePurchaseInit_LineItem
 29CMsgClientToGCAbandonGauntlet
 29CMsgClientToGCGetMatchDetails
@@ -4193,7 +4164,6 @@ $tI
 35CMsgIDLinkGenericClientToGCResponseILj3ELj7000E24CMsgAnyToGCReportAssertsLj7001E32CMsgAnyToGCReportAssertsResponseE
 35CMsgSerializedSOCache_Cache_Version
 35CNetworkedIKProceduralTargetContext
-35CPointEntityAlias_water_lod_control
 35CPortraitBackgroundParticleModifier
 35CSosFilterSetSoundEventFieldsInfo_t
 35CSurfacePropReloadableDataTableBase
@@ -4517,7 +4487,6 @@ $tI
 49CUserMsg_ParticleManager_DestroyParticleInvolving
 49CUserMsg_ParticleManager_SetParticleFoWProperties
 49CUserMsg_ParticleManager_UpdateParticleShouldDraw
-4@
 4Bff&?
 4C
 4fff>fff>fff>fff>
@@ -4572,7 +4541,6 @@ $tI
 63CWorkshop_SetItemPaymentRules_Request_WorkshopDirectPaymentRule
 64CWorkshop_PopulateItemDescriptions_Request_SingleItemDescription
 6CCoJob
-6CLight
 6CWorld
 6ConVar
 6Vector
@@ -4636,11 +4604,9 @@ $tI
 9CDCGLobby
 9CDemoStop
 9CEconItem
-9CEnvClock
 9CEnvShake
 9CEnvSpark
 9CFuncWall
-9CFunc_LOD
 9CGameInfo
 9CInfoData
 9CMsg_Card
@@ -4697,6 +4663,7 @@ $tI
 <SpecialPosition: %s>
 <Unknown>
 <Unspecified>
+<b></b>
 <card ID> Dumps out the debug string of the template for the card ID
 <ce merge function()>,
 <classptr>
@@ -4708,6 +4675,7 @@ $tI
 <empty>
 <function()>,
 <function>
+<i></i>
 <input>
 <iterations> <deck1> <deck2> ...
 <logical entity>
@@ -4774,6 +4742,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
 ABORTED
 ACHIEVEMENT_EVENT_
 ACID
+ACInfoDynamicShadowHint
 ACTIVATE_TYPE_DATAUPDATE_CREATION
 ACTIVATE_TYPE_INITIAL_CREATION
 ACTIVATE_TYPE_ONRESTORE
@@ -5879,7 +5848,6 @@ AE_WPN_PLAYWPNSOUND
 AE_WPN_PRIMARYATTACK
 AE_ZOMBIE_POPHEADCRAB
 AE_ZOMBIE_TOGGLE_HEAD
-AEnable : %d SplitScreen %X
 AI CONTROL MENU. induce <start|stop|action id>
 AI Difficulty modifier
 AI Sensing: No slot for InsertSound() (Game DLL)
@@ -6177,6 +6145,7 @@ Arc Warden
 Arcane Assault
 Arcane Aura
 Arcane Flux
+Archer's Parapet
 Archon Investigation
 Arclight Elemental
 Arctic Burn
@@ -6303,7 +6272,6 @@ BYield
 Back For More
 BackUp() can only be called after Next().
 BackUp() can only be called after a successful Next().
-BackgroundBModel
 Backtrack failed completely, bad starting position
 Backtrack got most of the way
 BacktrackEntity
@@ -6403,6 +6371,7 @@ Binding_FindAllMatches
 Binding_FindAllMatches(query,leeway) : Returns an array of all matching responses. If leeway is nonzero, all results scoring within 'leeway' of the best score return.
 Binding_FindBestMatch
 Binding_FindBestMatch(query) : Query the database and return the best result found. If multiple of equal score found, an arbitrary one returns.
+Birds of Paradox
 Bitter Enemies
 Blacklist of items to appear in the shop. Empty means nothing..
 Blade of the Vigil
@@ -6490,6 +6459,7 @@ BuildComponentRecursive
 BuiltRightHanded
 BulletProof
 Bundle has circular reference:
+Burning Lesions
 Burning Oil
 Burning Pitch
 Burrowstrike
@@ -6515,24 +6485,28 @@ CAI_ChangeTarget
 CAI_Expresser
 CAI_ExpresserWithFollowup
 CANCELLED
+CAddAnimNode
 CAimConstraint
+CAimMatrixAnimNode
 CAmbientGeneric
 CAnimBone
 CAnimDataChannelDesc
 CAnimGraphNetworkedVariables
 CAnimKeyData
-CAnimMotorList
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimState
 CAnimUser
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (1)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (2)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (3)
+CAnimationGraph
 CAnimationGroup
 CAnimationLayer
-CAreaPortal
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
 CAttributeContainer
@@ -6609,6 +6583,7 @@ CBaseTrigger
 CBaseViewModel
 CBeam
 CBitVec
+CBlendAnimNode
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBodyComponent::Storage_t
 CBodyComponentBaseAnimating
@@ -6631,6 +6606,7 @@ CBodyComponentSkeletonInstanceReferencedPtr
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceMorph
+CBoneMaskAnimNode
 CBreakable
 CBreakableProp
 CBufferString
@@ -6667,6 +6643,8 @@ CBufferString::Trim(char const*)
 CBufferStringN
 CC_ResetGameStats : Server cleared game stats
 CChangeLevel
+CChoiceAnimNode
+CChoreoAnimNode
 CChoreoScene::ImportEventFromKV3( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::ParseEvent( %s ):  discarding invalid event of type '%s' [%f -> %f]
 CChoreoScene::RestoreFromBinaryBuffer( %s ):  discarding invalid event of type '%s' [%f -> %f]
@@ -6701,6 +6679,7 @@ CCustomGameEventManager::Script_RegisterListener - Invalid callback
 CCustomGameEventManager::Script_RegisterListener - Invalid event name
 CCustomGameEventManager::Script_UnregisterListener - ID %d not found.
 CCustomGameEventManager::Script_UnregisterListener - Invalid ID
+CCycleControlAnimNode
 CDCGGameRules
 CDCGGameRules *
 CDCGGameRulesProxy
@@ -6720,6 +6699,7 @@ CDefaultResponseSystem::Init() was called twice! Deleting old system at @%p
 CDevtestHierarchy
 CDevtestHierarchy2
 CDevtestHierarchyChild
+CDirectPlaybackAnimNode
 CDotaCardGame::OnCardDrawBegin( turn=%d )
 CDotaCardGame::OnCardDrawEnd( turn=%d )
 CDotaCardGame::OnCardPlayBegin( turn=%d, acting_player=%d )
@@ -6801,13 +6781,10 @@ CEntitySystem
 CEntitySystem::BuildComponentUnserializer '%s'
 CEntitySystem::PrecacheEntity: Classname missing from entity!
 CEnvBeam
-CEnvClock
-CEnvClock::Activate( ActivateType_t activateType ) call to Plat_gmtime failed!
 CEnvCombinedLightProbeVolume
 CEnvCubemap
 CEnvCubemapBox
 CEnvCubemapFog
-CEnvDOFController
 CEnvDeferredLight
 CEnvDeferredSpotLight
 CEnvDetailController
@@ -6821,7 +6798,6 @@ CEnvLightProbeVolume
 CEnvMicrophone
 CEnvPlayerSurfaceTrigger
 CEnvProjectedTexture
-CEnvScreenEffect
 CEnvScreenOverlay
 CEnvShake
 CEnvSky
@@ -6863,10 +6839,12 @@ CFlexExpresserShim
 CFogController
 CFogTrigger
 CFogVolume
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
 CFootDefinition
+CFootLockAnimNode
+CFootStepTriggerAnimNode
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
-CFuncAreaPortalBase
-CFuncAreaPortalWindow
 CFuncBrush
 CFuncCombineBarrier
 CFuncConveyor
@@ -6875,7 +6853,6 @@ CFuncIllusionary
 CFuncInteractionLayerClip
 CFuncNavBlocker
 CFuncNavObstruction
-CFuncOccluder
 CFuncPropRespawnZone
 CFuncRotating
 CFuncTimescale
@@ -6883,7 +6860,6 @@ CFuncVPhysicsClip
 CFuncVehicleClip
 CFuncWall
 CFuncWallToggle
-CFunc_LOD
 CGCClient
 CGCClient - BSendGCMsgToClient (ProtoBuf)
 CGCClientSystem - failed to init GCClient!
@@ -6907,7 +6883,6 @@ CGCSOUpdateJob(owner=%s, type=%d)
 CGCSOUpdateMultipleJob
 CGCToClientPollConvarJob
 CGCUpdateItemSchema
-CGameEntity
 CGameEntitySystem::CreateEntities: NULL binding for entity %s.
 CGameEventManager: couldn't register event '%s', limit reached (%i).
 CGameEventManager: unknown type %i for key '%s' [%s].
@@ -6952,6 +6927,7 @@ CGridStringPrinter::SetColumnJustification(int, bool)
 CGridStringPrinter::SetMaxStringLengthAllColumns(int)
 CGridStringPrinter::SetString(int, int, char const*)
 CGridStringPrinter::SetWordWrapColumn(int, bool, bool)
+CGroundIKSolveAnimNode
 CGunTarget
 CHANGE LEVEL: %s
 CHANGE LEVEL: %s %s
@@ -7203,7 +7179,6 @@ CHLTVServer: failed to serialize event '%s'.
 CHLTVServer: failed to serialize title '%s'.
 CHLTVServer::StartMaster: game event %s not found.
 CHandle
-CHandle< CBaseCombatCharacter>
 CHandle< CBaseCombatWeapon >
 CHandle< CBaseCombatWeapon>
 CHandle< CBaseEntity >
@@ -7215,23 +7190,19 @@ CHandle< CBaseViewModel >
 CHandle< CColorCorrection>
 CHandle< CEconWearable >
 CHandle< CFogController>
-CHandle< CPostProcessController>
 CHandle<CPostProcessingVolume>
-CHintMessageQueue
 CHitBox
 CHitBoxSet
 CHitBoxSetList
+CHitReactAnimNode
 CHitboxComponent::Storage_t
 CHitboxComponentReferenced
 CHitboxComponentReferencedPtr
 CInfoData
-CInfoDynamicShadowHint
 CInfoDynamicShadowHintBox
 CInfoGameEventProxy
 CInfoInstructorHintTarget
-CInfoIntermission
 CInfoLandmark
-CInfoOverlayAccessor
 CInfoParticleTarget
 CInfoPlayerStart
 CInfoSpawnGroupLandmark
@@ -7254,6 +7225,7 @@ CItem
 CItemGeneration
 CItemGeneric
 CItemGenericTriggerHelper
+CJiggleBoneAnimNode
 CJiggleBones
 CJobImplClassMgr -- Dispatch completed work items
 CJobImplClassMgr::BRouteMsgToJob() - continue job
@@ -7278,11 +7250,9 @@ CLZSS::Compress(unsigned char*, int, unsigned int*, bool)
 CLZSS::GetActualSize(unsigned char*)
 CLZSS::SafeUncompress(unsigned char*, unsigned char*, unsigned int)
 CLagCompensationManager::StartLagCompensation with NULL CUserCmd!!!
-CLight
 CLightComponent::Storage_t
 CLightComponentReferenced
 CLightComponentReferencedPtr
-CLightDirectional
 CLightDirectionalEntity
 CLightEntity
 CLightEnvironmentEntity
@@ -7290,8 +7260,6 @@ CLightGlow
 CLightOrthoEntity
 CLightQueryGameSystem::OnPostSimulate
 CLightQueryGameSystem::UpdateKeyLights
-CLightSpot
-CLightSpotAlias_light_glspot
 CLightSpotEntity
 CLocalGame::OnGameOver
 CLocalGame::PlayerDisconnected
@@ -7324,6 +7292,7 @@ CLogicProximity
 CLogicRelay
 CLogicScript
 CLogicalEntity
+CLookAtAnimNode
 CLoopModeGame::InitAllSystems()
 CLoopModeGame::OnFrameBoundary
 CLoopModeGame::OnServerPostSimulate
@@ -7343,7 +7312,6 @@ CMarkupVolumeTagged_NavHLVR
 CMarkupVolumeTagged_NavL4D
 CMarkupVolumeWithRef
 CMaterialDrawDescriptor
-CMaterialModifyControl
 CMathColorBlend
 CMathCounter
 CMathRemap
@@ -7362,7 +7330,7 @@ CMorphConstraint
 CMotionTransform
 CMotionTransform-world
 CMotorController
-CMovementSpeedMod
+CMoverAnimNode
 CMsgClientWelcome subscribed: %d up-to-date, %d out-of-date
 CMsgSosSetLibraryStackFields_t
 CMsgSosSetSoundEventParams_t
@@ -7446,8 +7414,10 @@ CPPTYPE_STRING
 CPPTYPE_UINT32
 CPPTYPE_UINT64
 CParentConstraint
-CParticleLight
 CParticleSystemDefinition
+CPathCorner
+CPathCornerCrash
+CPathHelperAnimNode
 CPathKeyFrame
 CPathParticleRope
 CPhysBallSocket
@@ -7500,7 +7470,6 @@ CPointClientUIWorldTextPanel
 CPointCommentaryNode
 CPointConstraint
 CPointEntity
-CPointEntityAlias_water_lod_control
 CPointEntityFinder
 CPointGamestatsCounter
 CPointGamestatsCounter::InputIncrement:  No stat name specified for point_gamestats_counter @%f, %f, %f [ent index %d]
@@ -7511,13 +7480,11 @@ CPointPlayerMoveConstraint
 CPointPrefab
 CPointPush
 CPointServerCommand
-CPointSpotlight
 CPointTemplate
 CPointValueRemapper
 CPointVelocitySensor
 CPointWorldText
 CPoseController
-CPostProcessController
 CPostProcessingVolume
 CProjectedDecal
 CProtoBufMsg::BAsyncSendProto
@@ -7559,6 +7526,7 @@ CResponseCriteriaSet
 CResponseQueue
 CResponseQueue::CDeferredResponse
 CRevertSaved
+CRootAnimNode
 CRopeKeyframe
 CRopeKeyframe::Precache:: path '%s' is a vmt! Fixing for now.
 CRopeKeyframeAlias_move_rope
@@ -7609,6 +7577,7 @@ CScriptTriggerMultiple
 CScriptTriggerOnce
 CScriptTriggerPush
 CScriptUniformRandomStream
+CSelectorAnimNode
 CSequenceTransitioner
 CSequenceTransitioner2
 CServerAchievementManager
@@ -7619,7 +7588,7 @@ CServerOnlyEntity
 CServerOnlyModelEntity
 CServerOnlyPointEntity
 CServerRagdollTrigger
-CShadowControl
+CSetFacingAnimNode
 CShower
 CSimTimer
 CSimplePhysicsBrush
@@ -7630,7 +7599,9 @@ CSkeletonInstance
 CSkeletonInstance::SetAnimationController can only be called once!
 CSkyCamera
 CSkyboxReference
+CSlowDownOnSlopesAnimNode
 CSmoothFunc
+CSolveIKChainAnimNode
 CSound
 CSoundEnt
 CSoundEnt pool is low on sounds due to high number of clients.
@@ -7667,6 +7638,7 @@ CSpeechScriptBridge::Script_AddDecisionRule
 CSpeechScriptBridge::Script_CommitAIResponse
 CSpeechScriptBridge::Script_FindBestResponse
 CSpeechScriptBridge::Script_GetExpressers
+CSpeedScaleAnimNode
 CSplitScreenSlot
 CSplitString::Construct(char const*, char const**, int)
 CSpotlightEnd
@@ -7675,6 +7647,7 @@ CSprite
 CSpriteAlias_env_glow
 CSpriteOriented
 CSteamWorksGameStatsServer
+CStopAtGoalAnimNode
 CStopwatch
 CStopwatchBase
 CStringPool::Allocate(char const*)
@@ -7694,18 +7667,15 @@ CStringRegistry::GetStringText(int)
 CStringRegistry::InvalidIndex() const
 CStringRegistry::Next(unsigned short) const
 CStringRegistry::~CStringRegistry()
-CStripWeapons
 CStrongHandle
+CSubtractAnimNode
 CTEFizz_server
 CTEGlowSprite_server
 CTELargeFunnel_server
 CTFWearableItem
 CTSQueue corruption
 CTakeDamageInfo
-CTargetChangeGravity
 CTeam
-CTeamSpawnPoint
-CTextureToggle
 CThread::CThread()
 CThread::GetName()
 CThread::Init()
@@ -7778,7 +7748,9 @@ CTriggerSoundscape
 CTriggerTeleport
 CTriggerToggleSave
 CTriggerVolume
+CTurnHelperAnimNode
 CTwistConstraint
+CTwoBoneIKAnimNode
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomFloatExp(float, float, float)
@@ -7947,6 +7919,7 @@ CVoiceGameMgr::ClientCommand: VModEnable (%d)
 CVoiceGameMgr::ClientCommand: cmd %s from invalid client (%d)
 CVoiceGameMgr::ClientCommand: vban (0x%x) (0x%x) from %d
 CVrSkeletalInputSettings
+CWayPointHelperAnimNode
 CWeakHandle
 CWorkThread -- Sleep
 CWorkThreadPool::StartWorkThread: Thread creation failed.
@@ -8023,9 +7996,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -8111,6 +8088,7 @@ Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot run script: NULL script name
 Cannot save KV3 text to a non-text buffer!
 Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
+Captured Thunderhide
 Card Bought - %s
 Card Draw
 Card Draw 1 Per Turn
@@ -8208,6 +8186,7 @@ Chen
 Children of Necrophos
 Chops all selected areas into their component 1x1 areas
 Chops all selected areas into their component 1x1 areas and re-merges them together into larger areas
+Choreo AimAtSceneEvent is unavailable in Left4Dead.
 Choreo IKLockLeftArmSceneEvent is unavailable in Left4Dead.
 Choreo LOOKAT is unavailable in Left4Dead.
 Choreo MOVETO is unavailable in Left4Dead.
@@ -8241,7 +8220,6 @@ Clear all message text from all clients.
 Clear all message text on one client.
 Clear all nav attributes of selected area.
 Clear all watches from the game debug overlay
-Clear memory of server side hints displayed to the player.
 Clear the Deck
 Clear the selected set.
 ClearFlagsThink
@@ -8256,8 +8234,6 @@ ClientMessages
 ClientPrecacheGameSystem
 ClientPrecacheRegistry_server
 ClientServerSharedHelpers::ConditionalDamageBonusResult_t
-ClientSetupVisibility
-ClientSetupVisibility: portal number (%d) too large
 ClientSideRagdollThink
 Clientside physics push away (0=off, 1=only localplayer, 1=all players)
 Clint Cearley
@@ -8382,11 +8358,11 @@ Coroutine_Continue
 Coroutine_Create
 Coroutine_DebugBreak
 Coroutine_YieldToMain
+Corpse Horde
 Corrosive Breath
 Corrosive Mist
 Could not create an instance of
 Could not find type "
-Couldn't alloc player sound slot!
 Couldn't find HLTV client player.
 Couldn't find a local game that matched up with [%s] hconn=%d
 Couldn't find any entity named '%s'
@@ -8613,6 +8589,7 @@ DecreaseOpponentsUnits
 DecreaseOwnTowerDamage
 DecreaseOwnUnitHealth
 DecreaseOwnUnits
+Default Game Description
 Default value for an enum field must be an identifier.
 DefaultResponseSystem
 DefaultTouch
@@ -8683,7 +8660,6 @@ Disable's the trigger
 Disabled: %s
 Disabling motion on phys prop
 Disallow backtracking a player for lag compensation if it will cause them to become stuck
-DisappearDist
 Discarding incoming message; simulating connection failure
 Discarding replay %s
 Disciple of Nevermore
@@ -8827,12 +8803,10 @@ Duplicate rarity value (%d)
 Duplicate roll number of %d which is not allowed
 Duplicate sound material value (%d)
 Dur ms
-Duration in seconds to show nav area ID and attributes while editing. (-1 = never hide)
 Dynamic - Asleep
 Dynamic - Awake
 Dynamic Attribute Flags: 0x%08x
 Dynamic prop %s: no sequence named:%s
-Dynamic, shadow casting light source.
 DynamicAtr:%s
 DynamicConfigList
 DynamicLightThink
@@ -8975,6 +8949,7 @@ Emit an overhead particle effect on receiving an item from an ally.
 Empty %s (%s) at %.2f, %.2f, %.2f
 Empty Slot
 EmptyAnim
+Enable : %d SplitScreen %X
 Enable all physics simulation
 Enable animation graph
 Enable animation sequence transitioner.
@@ -9336,7 +9311,6 @@ FILTER_AND
 FILTER_OR
 FINAL
 FIRST
-FMod values for pose controller %sTYPE: %iTIME OFFSET: %fRATE: %fAMPLITUDE: %f
 FOV2D
 FRAME_NET_BLOCKING_LOAD_SPAWN_GROUP
 FRAME_NET_POST_PROCESS_NETWORKING
@@ -9384,7 +9358,6 @@ Factor All: %f
 Factories - Finish
 Factories - Start
 FadeInThink
-FadeThink
 Fae Haunt
 Failable achievement %s has been evaluated (%s), now inactive
 Failable achievement %s now active
@@ -9394,7 +9367,6 @@ Failed to assign bool literal value
 Failed to change directory for replay %s:
 Failed to convert introspected block: %s
 Failed to convert replay path to full path. szReplaysPath = %s
-Failed to create Bot.
 Failed to create ragdoll for %s
 Failed to create/update SO
 Failed to execute replay upload script for replay %s:
@@ -9617,7 +9589,6 @@ FlexSceneFileManager
 FlexThink
 Flexible;
 Flips the selected ladder's direction.
-Floor %d ('%s') of elevator at ( %3.2f, %3.2f, %3.2f ) has no matching navigation areas
 Flow through spawn groups for vis (0 == default, 1 == always visible, 2 == never visible.
 Flush all .vcds from the cache and reload from disk.
 Flushes entity bone cache on lag compensation
@@ -9691,6 +9662,7 @@ FullWalkMovePostMove
 FullWalkMovePreMove
 Fully Equip All Heroes
 Function              %10s %10s %10s %10s
+Fungal Horror
 Fury Swipes
 FvP11CGameObjectS0_RK8TagUnionI8TypelistIJN13CDotaCardGame14DamageAmount_tENS3_15HealingAmount_tEEEE13StrongTypedefIj13CardIDTypeTagLj0EEE
 FvP13CDotaCardGameP13CCardResolverRK17SpecificObjects_tE
@@ -9959,6 +9931,7 @@ Goal found in Challenge ID: %u config %u without reward data
 Goal found in challenge ID: %u config %u with an unexpected required progress: %u
 God's Strength
 Gold cost to hold the random item for a round
+Gold-Plated Golem
 Golden Ticket
 Golem Power
 Golem Tourist
@@ -10004,7 +9977,6 @@ H
 H(
 H*
 H:%x
-HA
 HB
 HD
 HDR Color Scale: %0.3f
@@ -10261,7 +10233,6 @@ In logon queue; waiting for GC to confirm connection.
 In multiplayer games, don't repeat captions more often than this many seconds.
 In-Game Scale:
 In-world UI panel
-InPass
 Incarnation of Selemene
 IncludeScript Warning - Script %s either missing or empty
 IncludeScript stack overflow
@@ -10274,7 +10245,6 @@ IncreaseOwnMana
 IncreaseOwnTowerDamage
 IncreaseOwnUnitHealth
 IncreaseOwnUnits
-IncrementTextureIndex
 Incrementing %s by %f at pos (%d, %d, %d)
 Index must be -1 for non-repeated fields
 Index must be -1 for singular fields.
@@ -10343,14 +10313,12 @@ InputCancelAtNextInterrupt
 InputCancelPending
 InputCancelPlayback
 InputChangeFOV
-InputChangeGrav
 InputChangeLevel
 InputChangeOpvarValue
 InputChangeOpvarValueAndSet
 InputClearAllSequenceLayers
 InputClearContext
 InputClearParent
-InputClose
 InputColor
 InputColorBlueValue
 InputColorGreenValue
@@ -10402,7 +10370,6 @@ InputFade
 InputFadeAndRemove
 InputFadeIn
 InputFadeOut
-InputFadeToPattern
 InputFindEntity
 InputFireEvent
 InputFireTimer
@@ -10417,7 +10384,6 @@ InputForceInactive
 InputForceScale
 InputForceSpawn
 InputForceSpawnAtEntityOrigin
-InputForceUpdate
 InputFrequency
 InputGenerateGameEvent
 InputGetCounter
@@ -10429,18 +10395,15 @@ InputIgnite
 InputIgniteLifetime
 InputIgnoreUserInput
 InputImpact
+InputInPass
 InputIncrement
-InputIncrementBrushTexIndex
 InputInsertSound
 InputInterjectResponse
 InputKillHierarchy
-InputLightOff
-InputLightOn
 InputMultiplayerSpawned
 InputMultiply
 InputNoise
 InputOnBreak
-InputOpen
 InputPauseAtNextInterrupt
 InputPausePlayback
 InputPauseSound
@@ -10458,7 +10421,6 @@ InputRemoveCSSClass
 InputRemoveContext
 InputRemoveHealth
 InputReset
-InputResetGrav
 InputResetShuffle
 InputResetTimer
 InputResumePlayback
@@ -10489,7 +10451,6 @@ InputSetAutoConvertBackFromDebris
 InputSetBarrierState
 InputSetBodyGroup
 InputSetBrightnessDelta
-InputSetBrushTexIndex
 InputSetCameraSpace
 InputSetColor
 InputSetColorLerpTo
@@ -10520,26 +10481,16 @@ InputSetFModRate
 InputSetFModTimeOffset
 InputSetFModType
 InputSetFOV
-InputSetFadeEndDistance
 InputSetFadeInDuration
 InputSetFadeOutDuration
 InputSetFadeSpeed
-InputSetFadeStartDistance
-InputSetFadeTime
-InputSetFadeToBlackStrength
-InputSetFarBlurDepth
-InputSetFarBlurRadius
-InputSetFarFocusDepth
 InputSetFarZ
 InputSetFloatValue
-InputSetFocusTarget
-InputSetFocusTargetRange
 InputSetFogController
 InputSetForce
 InputSetFrequency
 InputSetGlowOverride
 InputSetGlowRange
-InputSetGrainStrength
 InputSetHUDVisibility
 InputSetHealth
 InputSetHingeFriction
@@ -10557,8 +10508,6 @@ InputSetLightsBrightnessMultiplier
 InputSetLinearDampingRatio
 InputSetLinearForcePointAt
 InputSetLinearFrequency
-InputSetLocalContrastEdgeStrength
-InputSetLocalContrastStrength
 InputSetLogoLength
 InputSetMagnitude
 InputSetMass
@@ -10581,9 +10530,7 @@ InputSetMotorTargetVelocity
 InputSetMotorTorqueFactor
 InputSetName
 InputSetNavIgnore
-InputSetNearBlurDepth
-InputSetNearBlurRadius
-InputSetNearFocusDepth
+InputSetNextPathCorner
 InputSetNonsolid
 InputSetOff
 InputSetOffset
@@ -10597,7 +10544,6 @@ InputSetParamName
 InputSetParent
 InputSetParentAttachment
 InputSetParentAttachmentMaintainOffset
-InputSetPattern
 InputSetPercentBrightPixels
 InputSetPercentTarget
 InputSetPlaybackRate
@@ -10635,15 +10581,11 @@ InputSetTargetScale
 InputSetTargetSpeed
 InputSetTeam
 InputSetToDefaults
-InputSetTopVignetteStrength
 InputSetValue
 InputSetValueCompare
 InputSetValueNoFire
 InputSetValueTest
 InputSetVelocity
-InputSetVignetteBlurStrength
-InputSetVignetteEnd
-InputSetVignetteStart
 InputShowHint
 InputShowLogo
 InputShowMessage
@@ -10654,15 +10596,11 @@ InputSleep
 InputSnapToStartPos
 InputSparkOnce
 InputSpeakResponseConcept
-InputSpeedMod
 InputStackSystemVersion001
 InputStart
 InputStartAmbientSound
-InputStartAnimSequence
 InputStartBackward
 InputStartCommentary
-InputStartEffect
-InputStartFloatLerp
 InputStartFogTransition
 InputStartForward
 InputStartGlowing
@@ -10681,7 +10619,6 @@ InputStop
 InputStopAISound
 InputStopAmbientSound
 InputStopAtStartPos
-InputStopEffect
 InputStopEndCap
 InputStopGlowing
 InputStopOverlay
@@ -10691,10 +10628,6 @@ InputStopSpark
 InputStopTilt
 InputStopWaitingForActor
 InputStrikeOnce
-InputStripActiveWeapon
-InputStripWeaponByClassname
-InputStripWeapons
-InputStripWeaponsAndSuit
 InputSubtract
 InputSubtractFromTimer
 InputSwitchOverlay
@@ -11033,12 +10966,10 @@ LIFE_DEAD
 LIFE_DYING
 LIFE_RESPAWNABLE
 LIFE_RESPAWNING
-LOGDIR
 LOG_CONSOLE
 LOG_GENERAL
 LOST
 Ladder #%d
-Ladder #%d (Team %s)
 LagCompensationManager
 Laguna Blade
 Lake Hurwitz
@@ -11200,9 +11131,6 @@ Luna
 Lycan
 M
 MATCHFRAMEWORK_001
-MATERIAL_MODIFY_MODE_FLOAT_LERP
-MATERIAL_MODIFY_MODE_NONE
-MATERIAL_MODIFY_MODE_SETVAR
 MAX_PATTACH_TYPES
 MClassHasCustomAlignedNewDelete
 MD5_PseudoRandom
@@ -11331,7 +11259,6 @@ MatchID   : (none)
 MatchID:%llu
 MatchID:%llu Addons:%s
 Matched rule '%s',
-MaterialModifyMode_t
 MaterialParamBuffer_t
 MaterialParamFloat_t
 MaterialParamInt_t
@@ -11353,7 +11280,6 @@ Max area size created in nav generation
 Max detour = %0.2f
 Max number of array entries to spew when using SaveRestoreIO spewing.
 Max number of entities to transmit to player
-Max size in x/y of any auto-generated nav area
 Max view roll angle
 MaxAnimTime
 MaxDelay
@@ -11365,7 +11291,6 @@ Maximum frametime to still play background expressions.
 Maximum lag compensation in seconds
 Maximum of how hard the player is pushed away from physics objects.
 Maximum prop breakable piece count per frame (-1 = model default)
-Maximum range for precomputed nav mesh visibility (0 = default 1500 units)
 Maximum speed any ballistically moving object is allowed to attain per axis.
 Maximum think time in milliseconds, warning is printed if this is exceeded.
 May
@@ -11460,7 +11385,6 @@ ModelScaleThink
 Modified
 ModifiedTimer
 Modify
-ModifySpeed
 Molotov.Explode
 Moment of Courage
 MomentumType_Friction
@@ -11488,7 +11412,6 @@ MultiSrc: Used by non member %s.
 MultiTouch
 MultiWaitOver
 Multiple components in same entity instance not supported (%s in class %s)
-Multiple elevators overlap navigation area #%d
 Multiple entity classes have the same designer name "%s" ( alias class %s and class %s )
 Multiple entity classes have the same designer name "%s" ( class %s and class %s )
 Multiple event definitions for event '%s'.
@@ -12119,11 +12042,11 @@ Numbers starting with leading zero must be in octal.
 Nyctasha's Guard
 Nyx Assassin
 O
-O    limit to: %s
 O'
 OBSTRUCTED
 OK
 OLD info_spawngroup_landmark(%s) in %s: %f %f %f
+OPRECIPITATION
 ORIENT
 OSCILLATE_POSE_PARAMETERS
 OSType
@@ -12164,8 +12087,6 @@ OnFactor3
 OnGlowColorChanged
 OnGlowTypeChanged
 OnLightGroupChanged
-OnLightOff
-OnLightOn
 OnMaxCount1
 OnMaxCount2
 OnMaxCount3
@@ -12260,6 +12181,19 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_REPLACE_AMBIENT_EFFECT
 PARTICLE_REPLACE_AUTODETECT
 PARTICLE_REPLACE_NONE
@@ -12267,6 +12201,12 @@ PARTICLE_REPLACE_SPELL_EFFECT
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PASSABLE
 PATTACH_ABSORIGIN
 PATTACH_ABSORIGIN_FOLLOW
@@ -12323,7 +12263,6 @@ POSECONTROLLER_FMODTYPE_TOTAL
 POSECONTROLLER_FMODTYPE_TRIANGLE
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
-PRECIPITATION
 PRECIPITATIONBLOCKER
 PRECIPITATION_TYPE_DUSTMOTES
 PRECIPITATION_TYPE_PARTICLEASH
@@ -12424,7 +12363,6 @@ PhysEnableEntityCollisions called on entities in two different scene worlds (%s 
 PhysEntityCollisionsAreDisabled called on entities in two different scene worlds (%s - %u vs %s - %u)
 PhysFrictionEffectPrecache_server
 PhysObjectHeader_t
-Phys_motor %s does not have a valid axis helper, and self-destructed!
 Physics Game System is not initialized
 Physics Prop
 Physics props
@@ -12452,11 +12390,11 @@ Pickup Item:
 Pierpont
 Pigeon
 Pigeon Rage Power
+Pincer
 Pistol
 Pit Fighter of Quoidge
 Pitch;
 PitchShift
-Place
 Place a message in the telemetry timeline
 Placed %d areas on the ground
 Places the selected corner of the currently marked Area on the ground.
@@ -12539,7 +12477,6 @@ Player.DrownStart
 Player.FallDamage
 Player.FallGib
 Player.PickupWeapon
-Player.PlasmaDamage
 Player.SonicDamage
 Player.Swim
 Player.UseTrain
@@ -12573,7 +12510,6 @@ Pneumonic Spray
 Poaching Knife
 Point entity.
 PointAtEntity
-PointTemplateClientOnlyEntityBehavior_t
 PointTemplateOwnerSpawnGroupType_t
 PointWorldTextJustifyHorizontal_t
 PointWorldTextJustifyVertical_t
@@ -12603,7 +12539,6 @@ Post custom...
 PostCombatPhase
 PostDataUpdate
 PostProcessName
-PostProcessSystem
 PostProcessingSystem_001
 PostSpawnDirectionVariance
 PostSpawnInheritAngles
@@ -12616,7 +12551,6 @@ PreActionPhase
 PreConcedeTowerHealth_%u
 PreSave(%d):  entity identity is missing, may cause a crash
 PreSave(%d):  entity instance is missing for (%s, %s), may cause a crash
-Precache Warning: %s at %.0f %.0f %0.f missing modelname
 Precache a list of entity KeyValues tables
 Precache a sound for later playing.
 Precache an entity from KeyValues in table
@@ -12792,7 +12726,6 @@ RESPONSE_RULES
 RESPONSE_SCENE
 RESPONSE_SCRIPT
 RESPONSE_SPEAK
-RGBA color to draw as the background color for nav areas while editing.
 ROTATION
 RR: could not apply operator %s to prior value %s
 RTFACT
@@ -12808,6 +12741,7 @@ RagdollImpact
 RagdollLowViolenceManager
 RagdollTouch
 Ragdoll_Prop with %d bones != %d shapes (%s)
+Raid
 Rainbow Tragic
 Raise the bottom of the drag select volume.
 Raise the selected corner of the currently marked Area.
@@ -13000,6 +12934,7 @@ Response rule with a 'self' target specified negative delay, which isn't legal b
 Response was entityio but had bad value %s
 ResponseContext_t
 ResponseFollowup
+ResponseGroup
 ResponseParams
 ResponseQueueManager
 ResponseRulesCache001
@@ -13115,14 +13050,17 @@ SAVE\animgraph
 SAVE_HEADER
 SCENE_ONPLAYERDEATH_CANCEL
 SCENE_ONPLAYERDEATH_DO_NOTHING
-SCREENEFFECT_EP1_INTRO
-SCREENEFFECT_EP2_ADVISOR_STUN
-SCREENEFFECT_EP2_GROGGY
 SCRIPT UNKNOWN STATUS
 SCRIPT_DONE
 SCRIPT_ERROR
 SCRIPT_RUNNING
 SDR port  : %u
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
 SERVER: AnimGraph Status Tag: "%s" %s at %.2f (tag fired at %.2f)
 SERVERSIDE
 SERVER_DLL
@@ -13199,6 +13137,11 @@ SPEECH_PRIORITY_LOW
 SPEECH_PRIORITY_MANUAL
 SPEECH_PRIORITY_NORMAL
 SPEECH_PRIORITY_UNINTERRUPTABLE
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SQL
 SSE and SSE2 are required.
 STANCE_CROUCHING
@@ -13327,7 +13270,6 @@ Scout Qamis
 Scout Ur Maq
 Scrapper
 Screeching Harpy
-ScreenEffectType_t
 Script Lock
 Script failed to LoadKeyValues
 Script failed to LoadKeyValues %s
@@ -13588,6 +13530,7 @@ Search criteria:
 Searching for entities with class/target name containing substring: '%s'
 Second argument to Swap() (of type "
 Second argument to SwapFields() (of type "
+Seconds
 Secret key for authenticating with the GC
 Section Pause
 See if an entity has a particular attribute.
@@ -13636,7 +13579,6 @@ Server Physics
 Server Simulation
 Server event "%s", Tick %i:
 Server failed to get reply from the GC
-Server game time: %f
 Server not running, command ignored.
 Server received reply from the GC. State: %u, Lobby: %llu
 Server state transitioned to state %s
@@ -13694,7 +13636,6 @@ Set to 1 to start or restart the WaitingForPlayers period.
 Set to change selection trace to be an arc instead of a line.  Value 1 should give a reasonable arc.
 Set to one to interactively edit the Navigation Mesh. Set to zero to leave edit mode.
 Set to one to skip the time consuming phases of the analysis.  Useful for data collection and testing.
-Set to values other than 0 to select a bonus map challenge type.
 Set which ent_text filters you want:
 Set2DSkyboxFogFactorLerpTo
 SetAbsOrigin
@@ -13733,7 +13674,6 @@ SetDamageTaken
 SetDamageType
 SetDebrisThink
 SetDisengageistance
-SetDistance
 SetDouble
 SetDynamicVsDynamicContinuous
 SetEngageDistance
@@ -13763,14 +13703,11 @@ SetLightGroup( string ): Sets the light group of the entity.
 SetLightGroups
 SetLightsBrightnessMultiplier
 SetLinearForce
-SetLocalContrastEdgeStrength
 SetLocalScale
 SetMaterialGroup( string ): Set the material group of this entity.
 SetMaterialGroupHash( uint32 ): Set the material group hash of this entity.
 SetMaterialGroupMask
 SetMaterialGroupMask( uint64 ): Set the mesh group mask of this entity.
-SetMaterialVar
-SetMaterialVarToCurrentTime
 SetMaxDamage
 SetMaxHealth
 SetMomentumModifier
@@ -13809,8 +13746,6 @@ SetRepeatedUInt64
 SetReportedPosition
 SetScale
 SetScriptOwnerEntity
-SetShadowsDisabled
-SetShadowsFromLocalLightsEnabled
 SetSingleMeshGroup( string ): Set a single mesh group for this entity.
 SetSnapValue
 SetSoundEventGUID
@@ -13821,7 +13756,6 @@ SetStr
 SetStr(name, val) : sets the value of the convar to the string.
 SetString
 SetTargetPlayerToActivator
-SetTextureIndex
 SetUInt32
 SetUInt64
 SetVelocityDamping
@@ -13859,6 +13793,7 @@ Sheep Stick
 Shifting Loyalties
 Shifting mesh by %f,%f
 Shifts the selected areas by the specified amount
+Shock Trooper
 Shoots a phys object.
 Shop
 Shopping or Deployment:
@@ -13879,7 +13814,6 @@ Show listening addition/removals
 Show missing closecaption entries.
 Show status of all spawn groups.
 Show the (server) animation state for the specified entity (-1 for none).
-Show the axis-aligned split line.
 Show the floor height that we'd adjust based on ground IK rules.
 Show the free split line.
 Show verbose matching output (1 for simple, 2 for rule scoring, 3 for noisy). If set to 4, it will only show response success/failure for npc_selected NPCs.
@@ -14045,7 +13979,6 @@ Specify the card ID to display
 Specify the decks to play. Try again.
 SpeechPriorityType
 Speed cur (target): %3.2f (%3.2f)
-Speed up or slow down the env_clock rate
 Spell Effect
 Spell Slingers
 Spell Steal
@@ -14060,6 +13993,8 @@ SpinDownMove
 SpinThink
 SpinUpMove
 Spirit Bound
+Spirit Guardian
+Spirit Guardian (P)
 Spirit Siphon
 Spirit Strike
 Spirit Swordsman
@@ -14073,9 +14008,6 @@ SplitAreasUnderOverhangs()
 SplitContext:  warning, ignoring context '%s', missing colon separator!
 SplitContext:  warning, ignoring context '%s', missing comma separator!  Entire context was '%s'.
 Spot Weakness
-SpotlightLength
-SpotlightThink
-SpotlightWidth
 SprayCan.Paint
 Spriggan Mischief
 Spring damping ratio for length constraint
@@ -14131,7 +14063,6 @@ Start scene playback, takes activatorEntity as param
 Start: %3.0f
 StartGravity
 StartMap
-StartOpen
 StartOverlays
 StartParticleSystemThink
 StartSoundEvent
@@ -14243,7 +14174,6 @@ String field
 String literals cannot cross line boundaries.
 StringOutputStream.
 StringPrintfVector currently only supports up to
-Strip
 Strips all Hiding Spots, Approach Points, and Encounter Spots from the current Area.
 Subdivides all selected areas.
 Subject
@@ -14395,6 +14325,8 @@ TS_AT_TOP
 TS_GOING_DOWN
 TS_GOING_UP
 Takes duration, value for a temporary override.
+Target:   -
+Target: %s
 TargetEntityName
 TargetNode
 Team Fight
@@ -14544,7 +14476,6 @@ To see unlit areas:
 To splice, mark an area, highlight a second area, then invoke the splice command to create a new, connected area between them.
 To splice, mark an area, highlight a second area, then invoke the splice command to create an area between them
 To split an Area into two, align the split line using your cursor and invoke the split command.
-To split an area into two, align the split line using your cursor and invoke the split command.
 Toggle Auto Pass Until Combat
 Toggle by default, or 0 to disable and 1 to enable. Player becomes invulnerable.
 Toggle prop debug mode. If on, props will show colorcoded bounding boxes. Red means ignore all damage. White means respond physically to damage but never break. Green maps health in the range of 100 down to 1.
@@ -14660,7 +14591,6 @@ Type appears to be in generated pool but wasn't
 Type is already registered:
 U
 U: %.2f deg
-UBgffA
 UDP port  : %d
 UNAUTHENTICATED
 UNAVAILABLE
@@ -14814,7 +14744,6 @@ Update(CEconItem)
 Update: %6.3f [ms] for %d worlds
 UpdateBlocked: Area %d is already blocked with a different team id! This may cause flow bugs.
 UpdateMaterialThink
-UpdateParamBlend
 UpdateQueryCache
 UpdateViewPostThink
 UpdateViewThink
@@ -14841,6 +14770,7 @@ Usage:  setpos_exact x y <z optional>
 Usage: %s <attribute>
 Usage: %s <markup_group name>
 Usage: fake_achievement <achievement id> <player id> <times achieved>
+Usage: global_set <globalname> <state>: Sets the state of the given env_global (0 = OFF, 1 = ON, 2 = DEAD).
 Usage: induce <start|stop|action id>
 Usage: mp_disable_autokick <userid>
 Usage: nav_merge_mesh filename
@@ -15536,8 +15466,6 @@ _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/server/baseplayer.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/server/client.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../../_generated_code/server_dota_card_game/linuxsteamrt64/release/../../../../game/shared/econ/econ_wearable.cpp
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../gamecore/gameconfiguration.cpp
-_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../gamecore/igamesystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/ai_responsesystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animationlayer.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp
@@ -15555,11 +15483,13 @@ _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/dcg/localgam
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/entitydebuggamesystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_readwrite.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gameconfiguration.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gameentitysystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gameeventmanager.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gameevents.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gamerules_register.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/gamescenenode.cpp
+_vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/igamesystem.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/loopmodegame.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/networktransmitcomponent.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/particle_parse.cpp
@@ -15598,8 +15528,6 @@ a world layer in a dota map
 a+t
 aB
 aC
-aD
-aE
 aaaaaaaazzzzzzzz
 aabb_max
 aabb_min
@@ -15770,6 +15698,7 @@ animevent_debug
 animevents_dump
 animgraph0
 animgraph1
+animgraph2
 animgraph_debug_entindex
 animgraph_debug_tags
 animgraph_debug_variables
@@ -16094,6 +16023,7 @@ center_on_damage_point
 centersize
 chainName
 chainname
+challenge
 challenge_claim
 challenge_grants
 challenge_instance
@@ -16228,6 +16158,7 @@ conflicts with an existing oneof type.
 const google::protobuf::UnknownFieldSet& google::protobuf::UnknownField::group() const
 const string& google::protobuf::UnknownField::length_delimited() const
 constrainedEventID
+constraint_axislimit_t
 constraint_breakableparams_t
 constraint_hingeparams_t
 contains invalid
@@ -16449,6 +16380,7 @@ dcg_server_network_sendbuffersize
 dcg_setup_board_from_clipboard
 dcg_shop_blacklist
 dcg_shop_blacklist_ai
+dcg_shop_exists
 dcg_shop_whitelist
 dcg_shop_whitelist_ai
 dcg_siege_hits_always
@@ -16471,7 +16403,6 @@ deaths
 debug - disable trace query cache
 debug of origin changes for %d set to %s
 debug_ai
-debug_materialmodifycontrol
 debug_overlay_fullposition
 debug_physimpact
 debug_shared_random
@@ -16509,7 +16440,6 @@ default_env_map
 default_idle_expression
 default_rewards
 defaultcurvetype
-defaultstyle
 defenderMatchList
 demo.proto
 demorestart
@@ -16566,7 +16496,6 @@ disable_dynamic_prop_loading
 disable_dynamic_prop_loading - Skipped door '%s'
 disable_mip_gen
 disable_style_selector
-disableallshadows
 disabledValue
 disablelowviolence
 disablereceiveshadows
@@ -16670,7 +16599,6 @@ enablecollision
 enableexposure
 enablelinearconstraint
 enableshadows
-enableshadowsfromlocallights
 enablesignout
 encoding
 end  : (%.2f,%.2f,%.2f)
@@ -16681,6 +16609,7 @@ endloop
 endpos
 engine2
 english
+ensureExistsMatchList
 ent yaw: %.2f, body_yaw: %.2f, body_pitch: %.2f, move_x: %.2f, move_y: %.2f
 ent yaw: %.2f, body_yaw: %.2f, move_yaw: %.2f, gait_yaw: %.2f, body_pitch: %.2f
 ent_absbox
@@ -16797,8 +16726,6 @@ enum
 env_beam
 env_beam: unknown entity "%s"
 env_beams cannot have the end entity be the beam itselfunless the start entity is also the beam itself!
-env_clock
-env_clock_timescale
 env_combined_light_probe_volume
 env_credits
 env_cubemap
@@ -16808,7 +16735,6 @@ env_debughistory
 env_deferred_light
 env_deferred_spot_light
 env_detail_controller
-env_dof_controller
 env_entity_dissolver
 env_entity_maker
 env_entity_maker %s failed to find template %s.
@@ -16825,13 +16751,11 @@ env_lightglow maxdist too large (%d should be %d).
 env_lightglow outermaxdist too large (%d should be %d).
 env_message
 env_microphone
-env_particlelight
 env_physexplosion
 env_physimpact
 env_player_surface_trigger
 env_projectedtexture
 env_render
-env_screeneffect
 env_screenoverlay
 env_screenoverlay %s has no overlays to display.
 env_shake
@@ -16940,6 +16864,7 @@ fRadius
 fRoll
 fValue
 fYaw
+f_aim_at_intensity
 fa
 faceMergeAngle
 faceposermodel
@@ -16958,7 +16883,6 @@ fadeoutsav
 fadeoutsecs
 fadescale
 fadetime
-fadetoblackstrength
 failed (+exclude rule)
 failed to restore %s
 fake_particle_system
@@ -17183,7 +17107,6 @@ fro
 full_round
 fullbright
 funcRotatingSimulationTimeSerializer
-func_areaportal
 func_areaportalwindow
 func_break_max_pieces
 func_break_reduction_factor
@@ -17203,20 +17126,17 @@ func_door
 func_door*
 func_door_rotating
 func_electrified_volume
-func_elevator
 func_guntarget
 func_hlvr_nav_markup
 func_illusionary
 func_interaction_layer_clip: invalid interact-as attribute %s
 func_interaction_layer_clip: invalid interact-with attribute %s
 func_l4d_nav_markup
-func_lod
 func_nav_avoidance_obstacle
 func_nav_blocker
 func_nav_connection_blocker
 func_nav_markup
 func_nav_markup_citadel
-func_occluder
 func_physbox
 func_physbox '%s' at (%.2f, %.2f, %.2f) with model '%s' has no physics!
 func_plat*
@@ -17224,7 +17144,6 @@ func_playerinfected_clip
 func_proprrespawnzone
 func_pushable
 func_rotating
-func_simpleladder
 func_timescale
 func_tracktrain
 func_train
@@ -17443,7 +17362,6 @@ gpGlocals->curtime() called while IsInSimulation() is false
 gpGlocals->rendertime() called while IsInSimulation() is true
 grabbable
 grabs the object in front of the player. Options: -loose -multiple -toggle
-grainstrength
 grant
 grant_cards
 grant_in_order
@@ -17593,8 +17511,6 @@ hostname
 hostname_changed
 hostport
 hour
-hourhand
-hourhandentity
 how many frames of samples to store in the buffer sample queue.
 how many seconds you lose each time you don't respond
 hscript
@@ -17721,11 +17637,8 @@ info_data
 info_dynamic_shadow_hint
 info_dynamic_shadow_hint_box
 info_game_event_proxy
-info_intermission
 info_landmark
-info_mass_center
 info_null
-info_overlay_accessor
 info_particle_system
 info_particle_target
 info_player_coop
@@ -18032,6 +17945,7 @@ labelled_debug_helper_show_text
 labelled_debug_helper_skeleton_show_bone_names
 landmarkModelSpace
 landmarkname
+laneaffinity
 language
 large car
 lastUpdate NaN
@@ -18087,16 +18001,13 @@ libsteam_api.so
 libtier0.so
 light_class
 light_directional
-light_directional_s1
 light_dynamic
 light_dynamic at [%d %d %d] has invalid exponent value (%d must be between %d and %d).
 light_environment
 light_name
 light_omni
 light_ortho
-light_s1
 light_spot
-light_spot_s1
 lightchoice
 lightcolor
 lightcookie
@@ -18115,6 +18026,7 @@ lightquery_key_light_max_traces_per_frame
 lightstyle
 lightworld
 limbs
+limit to: %s
 limit_to_material_group
 limit_to_piece
 limittoentity
@@ -18153,8 +18065,6 @@ local.scales
 localBits
 localSound
 local_gravity_cp
-localcontrastedgestrength
-localcontraststrength
 localonly
 locationproxy
 lock:%s locked line %d %s
@@ -18225,7 +18135,6 @@ m_Amplitude
 m_Angles
 m_AngularVelocity
 m_AnimOverlay
-m_AreaPortalsElement
 m_ArmorValue
 m_AssociatedEntities
 m_AssociatedEntityNames
@@ -18275,9 +18184,7 @@ m_DefaultSolverSettings
 m_DefaultTargetSettings
 m_DegreesPerSecond
 m_DialogXMLName
-m_DmgOrigin
 m_DmgSave
-m_DmgTake
 m_Duration
 m_Easings
 m_EffectInterpenetrateName
@@ -18370,6 +18277,7 @@ m_ModelName
 m_ModifiedConvars
 m_MotionEnabled
 m_MotorList
+m_MoveActivityName
 m_MoveCollide
 m_MoveType
 m_MoveTypeOverride
@@ -18485,8 +18393,6 @@ m_OnNPCPickup
 m_OnNewGame
 m_OnNotEqualTo
 m_OnNotTouching
-m_OnOff
-m_OnOn
 m_OnOutOfWorld
 m_OnPass
 m_OnPaused
@@ -18571,7 +18477,6 @@ m_OutColor1
 m_OutColor2
 m_OutValue
 m_OuterAngle
-m_PSName
 m_PainFinished
 m_PanelClassName
 m_PanelID
@@ -18647,6 +18552,7 @@ m_Tags
 m_TargetFOV
 m_TargetSettingSource
 m_TargetSource
+m_TextureControls
 m_TextureScale
 m_TiltTime
 m_TouchType
@@ -18661,12 +18567,13 @@ m_Width
 m_WindAveQueue
 m_WindVariationQueue
 m_aPlayers
-m_aSpawnPoints
 m_aThinkFunctions
 m_acceleration
 m_active
 m_addLength
 m_additionalAcceleration
+m_additiveChildID
+m_additiveInput
 m_afButtonDisabled
 m_afButtonForced
 m_afButtonLast
@@ -18690,7 +18597,6 @@ m_animationController.m_bClientSideAnimation
 m_animationController.m_flPlaybackRate
 m_animationQueue
 m_ankleBoneName
-m_args
 m_attachName
 m_attachedObject
 m_attachmentPointBoneSpace
@@ -18709,13 +18615,14 @@ m_bAchieved
 m_bActivateWhenAtRest
 m_bActivated
 m_bActive
+m_bAdditive
+m_bAdditiveAlpha
 m_bAdrenalineActive
 m_bAlive
 m_bAllowAutoMovement
 m_bAllowFadeInView
 m_bAllowFlip
 m_bAllowFriendlyFire
-m_bAllowInstantSpawn
 m_bAllowInteractionFromAllSceneWorlds
 m_bAllowMultipleScenes
 m_bAllowNewGibs
@@ -18781,12 +18688,10 @@ m_bCreateNavObstacle
 m_bCreateNonSolid
 m_bCreatedFromMapFile
 m_bCustomCubemapTexture
-m_bDOFEnabled
 m_bDampAllRotation
 m_bDebugAbsOriginChanges
 m_bDefaultEnvMap
 m_bDeveloperOnly
-m_bDirectional
 m_bDirtyBoneMergeBoneToRoot
 m_bDirtyBoneMergeInfo
 m_bDirtyHierarchy
@@ -18796,7 +18701,6 @@ m_bDisableLowViolence
 m_bDisableMipGen
 m_bDisableOperator
 m_bDisablePropLookup
-m_bDisableShadows
 m_bDisableSolidCollisionsForHierarchy
 m_bDisabled
 m_bDiscontinuity
@@ -18811,13 +18715,11 @@ m_bDroppedByPlayer
 m_bDuckToggled
 m_bDucked
 m_bDucking
-m_bEfficientSpotlight
 m_bEnableAngularConstraint
 m_bEnableCollision
 m_bEnableIK
 m_bEnableIndirect
 m_bEnableLinearConstraint
-m_bEnableLocalLightShadows
 m_bEnableRendering
 m_bEnableRetarget
 m_bEnableShadows
@@ -18954,6 +18856,7 @@ m_bLastTick
 m_bLerpRestoreMoveType
 m_bLightOnlyTarget
 m_bLightWorld
+m_bLightenMode
 m_bListenedTo
 m_bLit
 m_bLocalPlayerOnly
@@ -18962,10 +18865,13 @@ m_bLooping
 m_bLowerHemisphereIsBlack
 m_bMarkedForRemoval
 m_bMaster
+m_bMaxLuminanceBlendingSequence1
 m_bMirrorPlayer
 m_bMixedShadows
+m_bMod2X
 m_bModelHasNoPoseParams
 m_bModelOverrodeBlockLOS
+m_bMotionVectors
 m_bMoveable
 m_bMultiplayer
 m_bMuteImpactEffects
@@ -18975,7 +18881,6 @@ m_bNetworkedAnglesChanged
 m_bNetworkedAnimationInputsChanged
 m_bNetworkedPositionChanged
 m_bNetworkedScaleChanged
-m_bNewAnimCommandsSemaphore
 m_bNewChapter
 m_bNoDepth
 m_bNoDmgForce
@@ -18985,6 +18890,7 @@ m_bNoReflectionFog
 m_bNoSave
 m_bNoSky
 m_bNoTouch
+m_bNormalMap
 m_bNotSolidToWorld
 m_bNotifyBoneTransformsChanged
 m_bNotifyWhenSequenceFinished
@@ -18999,7 +18905,6 @@ m_bPadding
 m_bParticleFeathering
 m_bPassthoughCaller
 m_bPauseAtNextInterrupt
-m_bPauseBonusProgress
 m_bPaused
 m_bPausedViaInput
 m_bPerformScreenFade
@@ -19011,7 +18916,6 @@ m_bPlayerCounterListenerAdded
 m_bPlayerFireOnly
 m_bPlayerInTriggerRadius
 m_bPlayerUnderwater
-m_bPoisoned
 m_bPoseValueParity
 m_bPostSpawnUseAngles
 m_bPredictWeapons
@@ -19042,7 +18946,6 @@ m_bReversed
 m_bRolledOutroCredits
 m_bRunForParentApplyKillList
 m_bSaveImportant
-m_bSaveLoad
 m_bSaveRestore
 m_bSavedIsPlaying
 m_bScaleCurrent
@@ -19075,7 +18978,6 @@ m_bSlowMovement
 m_bSnapToGoal
 m_bSolidBsp
 m_bSplitScreenPlayer
-m_bSpotlightOn
 m_bSqueezable
 m_bSqueezeTarget
 m_bStartActive
@@ -19122,7 +19024,6 @@ m_bUseHelper
 m_bUseHighestEndCP
 m_bUseHitboxesForRenderBox
 m_bUseLandmarkAngles
-m_bUseLocalTime
 m_bUseOffScreenIndicator
 m_bUseParentRenderBounds
 m_bUsePuntSound
@@ -19144,14 +19045,14 @@ m_bWearingSuit
 m_bWillBeCallingPostDataUpdate
 m_bWorldLayerVisible
 m_bWorldSpaceScale
-m_bWrap
+m_baseChildID
+m_baseInput
+m_baseInputConnection
 m_baseLayer
 m_baseLayer.m_hSequence
 m_bbox
-m_bhasHaptics
 m_bitsDamageInflict
 m_bitsDamageType
-m_bitsHUDDamage
 m_blinktime
 m_blinktoggle
 m_bloodColor
@@ -19175,6 +19076,11 @@ m_chPoseIndex
 m_chPreviousTextureType
 m_chTextureType
 m_chain
+m_child1ID
+m_child2ID
+m_childID
+m_childNodeID
+m_children
 m_clientOnlyEntityBehavior
 m_clrRender
 m_collisionAttribute
@@ -19231,7 +19137,6 @@ m_fBrightness
 m_fCycleFrequency
 m_fDangerousTimer
 m_fDataObjectTypes
-m_fDelay
 m_fDispatchTime
 m_fEffects
 m_fEndWidth
@@ -19240,8 +19145,6 @@ m_fFModAmplitude
 m_fFModRate
 m_fFModTimeOffset
 m_fFadeLength
-m_fFadeTime
-m_fFadeToBlackStrength
 m_fFilterMass
 m_fFireDuration
 m_fFlags
@@ -19249,7 +19152,6 @@ m_fForceAmount
 m_fForceAmountMin
 m_fGameHUDInitialized
 m_fGlowColor
-m_fGrainStrength
 m_fHaloScale
 m_fIconOffset
 m_fIdealSampleRate
@@ -19259,8 +19161,6 @@ m_fIsRunning
 m_fLastPlayerTalkTime
 m_fLerpTime
 m_fLifespanScaleExp
-m_fLocalContrastEdgeStrength
-m_fLocalContrastStrength
 m_fLockedPoints
 m_fLooping
 m_fMatchScore
@@ -19271,7 +19171,6 @@ m_fMinRange1
 m_fMinRange2
 m_fNextCheckDisableMotionContactsTime
 m_fNextSuicideTime
-m_fOnTarget
 m_fPitch
 m_fPoseValue
 m_fPrevSampleTime
@@ -19280,17 +19179,11 @@ m_fRadius
 m_fRadiusMax
 m_fRadiusMin
 m_fRange
-m_fReplayEnd
 m_fSpeed
 m_fSpeedMax
 m_fSpeedMin
 m_fStartFrame
 m_fTimeLastHurt
-m_fTopVignetteStrength
-m_fVignetteBlurStrength
-m_fVignetteEnd
-m_fVignetteStart
-m_fWeapon
 m_fWidth
 m_fadeColor
 m_fadeMaxDist
@@ -19318,6 +19211,8 @@ m_flAngularFrequencyZ
 m_flAnimEndTime
 m_flAnimStartTime
 m_flAnimTime
+m_flAnimationRate
+m_flAnimationRate2
 m_flAnimationStartTime
 m_flAnisotropy
 m_flAreaCaptureScoreAccumulator
@@ -19452,7 +19347,6 @@ m_flExposureFadeSpeedUp
 m_flFOVRate
 m_flFOVTime
 m_flFacingYaw
-m_flFadeDist
 m_flFadeDuration
 m_flFadeEndDist
 m_flFadeInDuration
@@ -19475,11 +19369,11 @@ m_flFallVelocity
 m_flFalloff
 m_flFalloffExponent
 m_flFanFriction
-m_flFarBlurDepth
-m_flFarBlurRadius
-m_flFarFocusDepth
 m_flFarZ
 m_flFieldOfView
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flFinalValue
 m_flFingerScaleRatio
 m_flFingerWeight
@@ -19488,11 +19382,7 @@ m_flFireInterval
 m_flFireTime
 m_flFlashTime
 m_flFlashlightTime
-m_flFloatLerpEndValue
-m_flFloatLerpStartValue
-m_flFloatLerpTransitionTime
 m_flFloatValue
-m_flFocusTargetRange
 m_flFogContributionStength
 m_flFogEnd
 m_flFogFalloffExponent
@@ -19516,7 +19406,6 @@ m_flForwardMove
 m_flFrame
 m_flFrameRate
 m_flFrameTime
-m_flFramerate
 m_flFrequency
 m_flFriction
 m_flGlowBackfaceMult
@@ -19527,7 +19416,6 @@ m_flGroundChangeTime
 m_flGroundSpeed
 m_flGustDuration
 m_flHDRColorScale
-m_flHaloScale
 m_flHandPoseParams
 m_flHeight
 m_flHeightOffset
@@ -19564,7 +19452,6 @@ m_flInterval
 m_flKillDelay
 m_flKillRate
 m_flLODBias
-m_flLaggedMovementValue
 m_flLastAccess
 m_flLastAngVelocity
 m_flLastAttackTime
@@ -19647,10 +19534,7 @@ m_flMoveDistance
 m_flMoveDoneTime
 m_flMultFactor
 m_flNavIgnoreUntilTime
-m_flNearBlurDepth
-m_flNearBlurRadius
 m_flNearClipPlane
-m_flNearFocusDepth
 m_flNearZ
 m_flNewEnd
 m_flNewFarZ
@@ -19666,7 +19550,6 @@ m_flNextRandAnim
 m_flNextSecondaryAttack
 m_flNextSoundTime
 m_flNextSuckTime
-m_flNextTauntTime
 m_flNextTeleportTime
 m_flNextTime
 m_flNoise
@@ -19773,13 +19656,16 @@ m_flScattering
 m_flScrollSpeed
 m_flSearchDist
 m_flSensitivity
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flShadowCascadeDistance0
 m_flShadowCascadeDistance1
 m_flShadowCascadeDistance2
 m_flShadowCascadeDistance3
 m_flShadowFadeMaxDist
 m_flShadowFadeMinDist
-m_flShadowMaxDist
 m_flShadowStrength
 m_flShapeRadius
 m_flSideMove
@@ -19800,23 +19686,18 @@ m_flSphereRadius
 m_flSplayMaxAngle
 m_flSplayMinAngle
 m_flSpotFoV
-m_flSpotlightCurLength
-m_flSpotlightGoalWidth
-m_flSpotlightMaxLength
 m_flSpriteFramerate
 m_flSpriteScale
 m_flStabilityDamage
 m_flStartAnimTime
 m_flStartAnisoTime
 m_flStartAnisotropy
-m_flStartClockSeconds
 m_flStartDistance
 m_flStartDrawDistance
 m_flStartDrawDistanceTime
 m_flStartFadeInWeight
 m_flStartFadeOutWeight
 m_flStartFalloff
-m_flStartGameTime
 m_flStartScale
 m_flStartScatterTime
 m_flStartScattering
@@ -19838,6 +19719,7 @@ m_flTailAlphaScale
 m_flTargetBrightnessMultiplier
 m_flTargetSpeed
 m_flTargetYaw
+m_flTextureBlend
 m_flThenAnyMaxDist
 m_flTheta
 m_flThickness
@@ -19859,7 +19741,6 @@ m_flTouchOutputPerEntityDelay
 m_flTraceHeight
 m_flTraceRadius
 m_flTransitionTime
-m_flTranslucencyLimit
 m_flTriggerRadius
 m_flTriggerRadiusSqr
 m_flUnlockTime
@@ -19887,12 +19768,14 @@ m_flYaw
 m_flZFar
 m_flZNear
 m_flZOffset
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
 m_flexWeight
 m_flexnum
 m_flextarget
 m_flextime
-m_flgeigerDelay
-m_flgeigerRange
 m_float
 m_floatAttributes
 m_floatParams
@@ -19970,14 +19853,12 @@ m_hEntityIgnore
 m_hFilter
 m_hFlareEnt
 m_hFn
-m_hFocusTarget
 m_hFogController
 m_hFogCubemapTexture
 m_hFogIndirectTexture
 m_hGoalSequence
 m_hGroundEntity
 m_hHeldEntity
-m_hHourHand
 m_hIdealSequence
 m_hInflictor
 m_hInterruptScene
@@ -19993,6 +19874,7 @@ m_hLayerSpawnGroup
 m_hLerpTarget
 m_hLerpTargetAttachment
 m_hLight
+m_hLightCookie
 m_hLightProbeDirectLightIndicesTexture
 m_hLightProbeDirectLightScalarsTexture
 m_hLightProbeTexture
@@ -20002,11 +19884,12 @@ m_hLocker
 m_hLookTarget
 m_hMeasureReference
 m_hMeasureTarget
-m_hMinuteHand
 m_hModel
+m_hMotionVectorsTexture
 m_hMovingEntity
 m_hMyWeapons
 m_hMyWearables
+m_hNormalTexture
 m_hNotifySceneCompletion
 m_hObserverTarget
 m_hOldLayerSequence
@@ -20026,8 +19909,6 @@ m_hPickupParticleEffect
 m_hPlayer
 m_hPlayerProxy
 m_hPollGroup != k_HSteamNetPollGroup_Invalid
-m_hPostProcessController
-m_hPostProcessCtrl
 m_hPostSettings
 m_hProps
 m_hProxySoundscape
@@ -20038,10 +19919,8 @@ m_hRemapLineStart
 m_hRemoveActorList
 m_hSaveWeapon
 m_hScenes
-m_hScreens
 m_hScriptInstance
 m_hScriptScope
-m_hSecondHand
 m_hSkyCamera
 m_hSkyMaterial
 m_hSnapshot
@@ -20052,8 +19931,6 @@ m_hSpawnParticleEffect
 m_hSpeaker
 m_hSplitOwner
 m_hSplitScreenPlayers
-m_hSpotlight
-m_hSpotlightTarget
 m_hSpriteMaterial
 m_hStartPoint
 m_hTarget
@@ -20069,6 +19946,7 @@ m_hTargetEnt
 m_hTargetEntity
 m_hTargetPlayer
 m_hTargetReference
+m_hTexture
 m_hTimeoutParticleEffect
 m_hTonemapController
 m_hTouchingEntities
@@ -20094,7 +19972,6 @@ m_hinge.worldAxisDirection
 m_hinge.worldPosition
 m_hingeAxis
 m_hingeFriction
-m_hintString
 m_hitboxsets
 m_hurtEntities
 m_hurtThinkPeriod
@@ -20109,12 +19986,8 @@ m_iAssetAwardID
 m_iAttachType
 m_iAttachmentIndex
 m_iAttributeDefinitionIndex
-m_iBackgroundBModelName
-m_iBackgroundModelIndex
 m_iBalanceScore
 m_iBone
-m_iBonusChallenge
-m_iBonusProgress
 m_iChangedVariables
 m_iClassIgnore
 m_iClearPressedButtons
@@ -20125,7 +19998,6 @@ m_iComponentPrefixLen
 m_iConnected
 m_iCount
 m_iCurrentConcept
-m_iCurrentFade
 m_iCurrentGameMaterial
 m_iCurrentMaxPieces
 m_iCurrentMaxRagdollCount
@@ -20136,7 +20008,6 @@ m_iDamageCustom
 m_iDamageType
 m_iDeaths
 m_iDefaultFOV
-m_iDefaultStyle
 m_iDesiredOverlay
 m_iDirection
 m_iDisabled
@@ -20162,14 +20033,11 @@ m_iFilterName
 m_iFilterTeam
 m_iFlags
 m_iFrags
-m_iFrameEnd
-m_iFrameStart
 m_iFreeSound
 m_iGlobalname
 m_iGlowTeam
 m_iGlowType
 m_iGoal
-m_iGravity
 m_iGustDirChange
 m_iHammerID
 m_iHealth
@@ -20189,7 +20057,6 @@ m_iItemID
 m_iLandmark
 m_iLastFrame
 m_iLastRoutedFrame
-m_iLastSpawn
 m_iLayer
 m_iLayoutFileType
 m_iMagnitude
@@ -20211,16 +20078,12 @@ m_iNodeNumberMax
 m_iNumComponents
 m_iObserverLastMode
 m_iObserverMode
-m_iOldGrav
 m_iOldOwnerClass
 m_iOpvarIndex
-m_iOverlayID
 m_iPing
 m_iPlayerDeathBehavior
 m_iPlayerLocked
-m_iPlayerSound
 m_iPointValue
-m_iPortalVersion
 m_iPositionInterpolator
 m_iPrimaryAmmoCount
 m_iPrimaryAmmoType
@@ -20235,7 +20098,6 @@ m_iReapplyProvisionParity
 m_iRecord
 m_iRefName
 m_iReloadHudHintCount
-m_iReplayEntity
 m_iRespawnFrames
 m_iRopeMaterialModelIndex
 m_iRotationInterpolator
@@ -20256,22 +20118,17 @@ m_iSoundType
 m_iSpeakerDSPPreset
 m_iStartAttachment
 m_iState
-m_iStyle
 m_iSubType
-m_iSuicideCustomKillFlags
-m_iTargetFade
 m_iTargetGameMaterial
 m_iTargetVolume
 m_iTeam
 m_iTeamNum
 m_iTeleportStage
-m_iTextureFrameIndex
 m_iTimeout
 m_iTotal
 m_iTrain
 m_iTransitionDirection
 m_iType
-m_iUpdateTime
 m_iUseRandomTime
 m_iVehicleAnalogBias
 m_iViewModelIndex
@@ -20281,7 +20138,6 @@ m_iWindSeed
 m_iWorldModelIndex
 m_idrowndmg
 m_idrownrestored
-m_igeigerRangePrev
 m_impactEnergyScale
 m_includedGroupArray
 m_includedGroupArray_Handle
@@ -20295,6 +20151,9 @@ m_initialOffset
 m_initialOwner
 m_initialSpeed
 m_initialstate
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_inputList
 m_inputValue
 m_int
@@ -20340,7 +20199,6 @@ m_iszGameEventName
 m_iszGustSound
 m_iszHammerUniqueId
 m_iszHintTargetEntity
-m_iszHourHandName
 m_iszIcon_Offscreen
 m_iszIcon_Onscreen
 m_iszInitialAnim
@@ -20356,7 +20214,6 @@ m_iszLightNameFilter
 m_iszListenFilter
 m_iszMeasureTarget
 m_iszMessage
-m_iszMinuteHandName
 m_iszNPCClassname_1
 m_iszNPCClassname_2
 m_iszNPCClassname_3
@@ -20370,7 +20227,6 @@ m_iszOutputEntity4Name
 m_iszOutputEntityName
 m_iszOverlayNames
 m_iszParamName
-m_iszPattern
 m_iszPhysicsDamageTableName
 m_iszPlayerName
 m_iszPoseParameterName
@@ -20392,7 +20248,6 @@ m_iszReversalSounds[1]
 m_iszReversalSounds[2]
 m_iszSceneFile
 m_iszScenes
-m_iszSecondHandName
 m_iszSound
 m_iszSoundDisengage
 m_iszSoundEngage
@@ -20436,10 +20291,7 @@ m_jiggleBoneState
 m_keyPoints
 m_keyPoints[0]
 m_keyPoints[1]
-m_ladderSurfaceProps
-m_lastDamageAmount
 m_lastEntitySteadyState
-m_lastHeldVoteTimer
 m_lastNetworkChange
 m_lastOrientation
 m_lastTime
@@ -20449,7 +20301,6 @@ m_layerName
 m_layerSequence
 m_life
 m_lifeState
-m_lightCookie
 m_limitToEntity
 m_linear
 m_linearDamping
@@ -20479,7 +20330,6 @@ m_maxInterval
 m_maxTorque
 m_maxs
 m_messageText
-m_messages
 m_metacarpalBoneName
 m_minHitPoints
 m_minHitPointsToCommit
@@ -20492,7 +20342,6 @@ m_morphArray
 m_morphSet
 m_motor
 m_moveDistance
-m_movementCollisionNormal
 m_movementType
 m_nAABBDirection
 m_nActivity
@@ -20567,8 +20416,6 @@ m_nDamageType
 m_nDepletionCount
 m_nDestBrightness
 m_nDirectLight
-m_nDisappearMaxDist
-m_nDisappearMinDist
 m_nDissolveType
 m_nDoNotSetAnimTimeInInvalidatePhysicsCount
 m_nDrownDmgRate
@@ -20610,7 +20457,7 @@ m_nGlowRangeMin
 m_nGroupId
 m_nGroupType
 m_nHaloIndex
-m_nHaloSprite
+m_nHand
 m_nHandshake
 m_nHapticsType
 m_nHierarchicalDepth
@@ -20655,6 +20502,7 @@ m_nLatchAbsOrigin
 m_nLayer
 m_nLayerIndex
 m_nLightChoice
+m_nLightType
 m_nLinearMotionX
 m_nLinearMotionY
 m_nLinearMotionZ
@@ -20693,7 +20541,6 @@ m_nMinGPULevel
 m_nMinParticlesToEmit
 m_nMode
 m_nModelIndex
-m_nModifyMode
 m_nMomentumType
 m_nMuzzleFlashParity
 m_nNPCState_1
@@ -20709,8 +20556,6 @@ m_nNoiseRunningGuid
 m_nNoiseType
 m_nNpcEvents
 m_nNumBeamEnts
-m_nNumCrateHudHints
-m_nNumCrouches
 m_nNumPlanes
 m_nNumPrefixedContexts
 m_nOldButtons
@@ -20722,6 +20567,7 @@ m_nOpvarIndex
 m_nOpvarType
 m_nOrder
 m_nOuterMaxDist
+m_nOutputBlendMode
 m_nOutputID
 m_nOutputType
 m_nOutsideWorld
@@ -20736,10 +20582,6 @@ m_nPlatWindowWidth
 m_nPlayerButtons
 m_nPlayerIndex
 m_nPlayers =
-m_nPoisonAmtFXIndex
-m_nPoisonDmg
-m_nPoisonPulseFXIndex
-m_nPoisonRestored
 m_nPredictionRandomSeed
 m_nPrimitiveType
 m_nPriority
@@ -20766,6 +20608,7 @@ m_nScaleControlPointField
 m_nSceneFlushCounter
 m_nSceneStringIndex
 m_nSegments
+m_nSequenceCombineMode
 m_nSetMethod
 m_nShadowCascadeResolution0
 m_nShadowCascadeResolution1
@@ -20783,6 +20626,7 @@ m_nSlaveChannel
 m_nSlimeTouch
 m_nSmoothDir
 m_nSolidType
+m_nSortMethod
 m_nSound
 m_nSoundMask
 m_nSoundSourceEntIndex
@@ -20806,9 +20650,10 @@ m_nTargetType
 m_nTestIndex
 m_nTestMode
 m_nTexture
+m_nTextureChannels
+m_nTextureType
 m_nTickBase
 m_nTickCount
-m_nTimeZone
 m_nTimesToFire
 m_nTotalTicks
 m_nTotalTicksThisFrame
@@ -20849,7 +20694,10 @@ m_netlookupFilename
 m_next
 m_nextShake
 m_noGhostCollision
+m_nodeID
+m_nodeManager
 m_nodeToWorld
+m_nodes
 m_noiseAmplitude
 m_offset
 m_oldLayer
@@ -20867,6 +20715,7 @@ m_origin
 m_outCounter
 m_outerKnuckle1
 m_outerKnuckle2
+m_outputID
 m_outputMorph
 m_outputTransformList
 m_outputWeightList
@@ -20930,7 +20779,6 @@ m_pPhysicsController
 m_pPickupFilterName
 m_pPickupScriptFunction
 m_pPickupSoundEffect
-m_pPlayer
 m_pPostKeyFrame
 m_pPostponedFollowup
 m_pPreKeyFrame
@@ -20945,8 +20793,6 @@ m_pSceneNode
 m_pSceneObject
 m_pSemantic
 m_pSequenceList != nullptr
-m_pShadowCrouch
-m_pShadowStand
 m_pShakeController
 m_pSink
 m_pSkeletonInstance
@@ -20980,7 +20826,6 @@ m_player
 m_playerInPVS
 m_playerOff
 m_playerOn
-m_portalNumber
 m_pos
 m_poseParameterName
 m_poseSequenceName
@@ -21008,11 +20853,8 @@ m_qBaseOrientation
 m_qChildBindRotation
 m_qOffset
 m_qParentBindRotation
-m_qPausedAngles
-m_qSaveLoadAngles
 m_qStartRot
 m_qTargetOrientation
-m_qTransitionAngles
 m_quat
 m_radius
 m_ragAngles
@@ -21038,7 +20880,6 @@ m_reversalSoundThresholds[2]
 m_rgEntities
 m_rgItems
 m_rgTriggered
-m_rgbTimeBasedDamage
 m_sAnimationPrefix
 m_sAttachmentName
 m_sBlockName
@@ -21068,8 +20909,6 @@ m_sceneNode
 m_sceneObjects
 m_separationDuration
 m_shaderName
-m_shadowColor
-m_shadowDirection
 m_shakeCallback
 m_shutdownTime
 m_skeleton
@@ -21112,7 +20951,6 @@ m_stackNameChar
 m_start
 m_state
 m_stopTime
-m_strFocusTargetName
 m_strMeasureReference
 m_strMeasureTarget
 m_strNewHintGroup
@@ -21123,7 +20961,8 @@ m_strSourceClassName
 m_strStatisticName
 m_strTargetReference
 m_stringAttributes
-m_stuckCharacter
+m_subtractChildID
+m_subtractInputConnection
 m_succeeded
 m_surfaceFriction
 m_surfaceProps
@@ -21138,9 +20977,6 @@ m_szInstanceFilename
 m_szLastPlaceName
 m_szLastSound
 m_szMatchingRule
-m_szMaterialName
-m_szMaterialVar
-m_szMaterialVarValue
 m_szNetname
 m_szNetworkIDString
 m_szQuestName
@@ -21167,10 +21003,8 @@ m_textureParams
 m_think
 m_thinkAlways
 m_time
-m_timeSinceCommandSimulated
 m_timestamp
 m_tipParentBoneName
-m_tmMessageEnd
 m_toeBoneName
 m_toggle_state
 m_tonemapControllerName
@@ -21217,7 +21051,6 @@ m_vCapsuleCenter2
 m_vCapsulePos1
 m_vCapsulePos2
 m_vCenter
-m_vColor
 m_vConeApex
 m_vDamageForce
 m_vDecalForwardAxis
@@ -21260,7 +21093,6 @@ m_vOuterMaxs
 m_vOuterMins
 m_vPathingListenerPos
 m_vPathingSourcePos
-m_vPausedPos
 m_vPrecomputeDirection
 m_vPrecomputePosition
 m_vPrecomputeUp
@@ -21271,13 +21103,10 @@ m_vRenderOrigin
 m_vRotationAxis
 m_vRotationAxisEndpoints
 m_vSampler
-m_vSaveLoadPosition
 m_vServerControlPoints
 m_vSplayHingeAxis
-m_vSpotlightCurrentPos
 m_vSpotlightDir
 m_vSpotlightOrg
-m_vSpotlightTargetPos
 m_vStart
 m_vStartPos
 m_vTargetPosition
@@ -21285,24 +21114,20 @@ m_vTintColor
 m_vTipOffset
 m_vTraceOffset
 m_vTraceScale
-m_vTransitionPosition
 m_vUpLS
 m_vUpVector
 m_valueOverride
 m_variantValue
 m_vecAbsOrigin
 m_vecAbsVelocity
-m_vecAdditionalPVSOrigin
 m_vecAngVelocity
 m_vecAngle1
 m_vecAngle2
 m_vecAttach
-m_vecAutoAim
 m_vecAxis
 m_vecBaseVelocity
 m_vecBlockerOrigin
 m_vecCSSClasses
-m_vecCameraPVSOrigin
 m_vecCenter
 m_vecClientAngles
 m_vecClientOrigin
@@ -21359,6 +21184,7 @@ m_vecSurroundingMaxs
 m_vecSurroundingMins
 m_vecTailColorScale
 m_vecTeleportOrigin
+m_vecTexturesInput
 m_vecVehicleViewAngles
 m_vecVehicleViewOrigin
 m_vecVelocity
@@ -21375,7 +21201,6 @@ m_vertexBuffers
 m_viewtarget
 m_voicePitch
 m_volume
-m_vphysicsCollisionState
 m_wasRestored
 m_windRadius
 m_worldGoalAxis
@@ -21467,9 +21292,7 @@ match_signout_puzzles
 matcher:  !=%s
 matcher:  %s
 matcher:  ==%s
-materialVar
 material_group_name
-material_modify_control
 materials/
 materials/cable/cable.vmat
 materials/cable/chain.vmat
@@ -21478,15 +21301,12 @@ materials/cable/rope_shadowdepth.vmat
 materials/correction/cc_c1_main.vtex
 materials/correction/ghost.vtex
 materials/correction/infected.vtex
-materials/effects/introblur
-materials/effects/stun
 materials/error.vmat
+materials/particle/base_sprite.vtex
 materials/physics/flat_basic.vmat
 materials/physics/wireframe_basic.vmat
 materials/physics/wireframe_hidden.vmat
 materials/sprites/blueglow1.vmat
-materials/sprites/glow_test02.vmat
-materials/sprites/light_glow03.vmat
 materials/sprites/redglow1.vmat
 materials/tools/show_collision_geometry.vmat
 materials/tools/show_collision_geometry_wire.vmat
@@ -21610,8 +21430,6 @@ minlogexposure
 mins
 minusone
 minute
-minutehand
-minutehandentity
 minwind
 mirror_player
 mismatched!!!
@@ -21691,6 +21509,7 @@ move_x
 move_y
 move_yaw
 moveable
+moveactivity
 movedir
 moveforwarddistance
 moveparent: (%d) Name: %s (%s)
@@ -21815,7 +21634,6 @@ nav_disconnect
 nav_displacement_test
 nav_drag_selection_volume_zmax_offset
 nav_drag_selection_volume_zmin_offset
-nav_draw_area_bgcolor
 nav_draw_area_filled
 nav_draw_area_ground
 nav_draw_area_vert_order
@@ -21835,6 +21653,7 @@ nav_draw_mesh_grid
 nav_draw_mesh_offset
 nav_draw_should_be_destroyed
 nav_draw_show_light_intensity
+nav_draw_split_by_nav_link_mgr
 nav_draw_split_by_obstacle_mgr
 nav_draw_vert_hotspots
 nav_edit
@@ -21870,8 +21689,6 @@ nav_lower_drag_volume_min
 nav_mark
 nav_mark_attribute
 nav_mark_walkable
-nav_max_auto_area_size
-nav_max_view_distance
 nav_merge
 nav_merge_mesh
 nav_no_jump
@@ -21893,6 +21710,7 @@ nav_path_draw_connected_areas
 nav_path_draw_ground_segments
 nav_path_draw_jump_segments
 nav_path_draw_ladder_segments
+nav_path_draw_link_segments
 nav_path_draw_tick
 nav_path_fixup_climb_up_segments
 nav_path_fixup_gap_segments
@@ -21908,7 +21726,6 @@ nav_pathfind_debug_draw_errors
 nav_pathfind_debug_draw_total_costs
 nav_pathfind_debug_log
 nav_pathfind_inadmissable_heuristic_factor
-nav_potentially_visible_dot_tolerance
 nav_precise
 nav_progress
 nav_quicksave
@@ -21934,13 +21751,11 @@ nav_select_with_attribute
 nav_set_place_mode
 nav_shift
 nav_show_area_connections
-nav_show_area_info
 nav_show_area_info_font
 nav_show_area_info_font_size
 nav_show_area_info_font_voffset
 nav_show_compass
 nav_show_connectionblockers
-nav_show_edit_pos
 nav_show_node_grid
 nav_show_node_id
 nav_show_nodes
@@ -21981,10 +21796,8 @@ nav_snap_to_grid
 nav_solid_props
 nav_splice
 nav_split
-nav_split_aa
 nav_split_place_on_ground
-nav_split_show_aa
-nav_split_show_free
+nav_split_show_line
 nav_store_selected_set
 nav_strip
 nav_subdivide
@@ -22305,7 +22118,6 @@ ownership
 p
 p'
 p(
-pAconstraint_axislimit_t
 pAttachmentName
 pAttachmentname
 pB
@@ -22392,6 +22204,7 @@ path(%u = '%s/')
 pathNodes
 path_*
 path_corner
+path_corner_crash
 path_particle_rope
 pathing_types
 pctChance
@@ -22404,7 +22217,6 @@ permanently
 permitresponses
 persistent
 pervertexlighting
-pet
 phase not supported
 phi
 phonemes_strong
@@ -22530,18 +22342,15 @@ player_loadsaved
 player_manager
 player_mutations
 player_mutations=%s
-player_old_armor
 player_regenerates_health
 player_server
 player_spawn
-player_speedmod
 player_team
 player_thrown
 player_use_miss
 player_use_radius
 player_validator
 player_vehicle
-player_weaponstrip
 playeractivity
 playerhealth
 playerhealthfrac
@@ -22578,7 +22387,6 @@ point_prefab
 point_push
 point_servercommand
 point_soundevent
-point_spotlight
 point_template
 point_value_remapper
 point_velocitysensor
@@ -22591,7 +22399,6 @@ points_per_level
 popularity_seed
 population
 population_distribution_debug
-portalnumber
 portrait_activity
 portrait_background_camera
 portrait_background_light
@@ -22611,7 +22418,6 @@ positive_or_null
 post-initialized
 post_processing_volume
 postcommands
-postprocess_controller
 postprocessing
 posx
 posxyz
@@ -23080,8 +22886,6 @@ sdktools/bin/vprojUI.exe
 second
 secondary
 secondary_ammo
-secondhand
-secondhandentity
 sections
 select_high
 select_low
@@ -23123,7 +22927,6 @@ setpos_player
 setting m_SimulationState[%d].m_flSimulationTime=%f
 sfixed32
 sfixed64
-shadow_control
 shadowcascadedistance0
 shadowcascadedistance1
 shadowcascadedistance2
@@ -23371,7 +23174,6 @@ start_disabled
 start_drag_sound
 start_enabled
 start_falloff
-startclockseconds
 startdelay
 startdisabled
 starting_items
@@ -23395,7 +23197,6 @@ static const Reflection::ClassID IStatusAnimTag::MyTypeID()
 static const Reflection::ClassID IToolObject::MyTypeID()
 static_attributes
 static_recipe
-stats.txt
 std::_Bvector_base<std::allocator<bool> >::_M_deallocate()
 std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAsyncFileReadContext::Init(char const*, char const*, AsyncRequestPriority_t, CUtlBuffer*)::{lambda(IAsyncReadRequest2*, AsyncRequestStatus_t)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<CAttributeMatcher<CTableGame>::BMatchingObjectsExist(ContextFreeAttributeListMatchPattern const&) const::{lambda(CGameObject*)#1}> const&, std::_Manager_operation)
@@ -23692,11 +23493,9 @@ sv_anim_queue_changes
 sv_anim_sequence_transitioner
 sv_autosave
 sv_backspeed
-sv_bonus_challenge
 sv_bounce
 sv_can_quit_from_script
 sv_cheats must be set to 1
-sv_clearhinthistory
 sv_client_max_interp_ratio
 sv_client_min_interp_ratio
 sv_clockcorrection_msecs
@@ -23835,7 +23634,6 @@ tank
 tank_projectile
 target entity not found
 target input not found
-target_changegravity
 target_scan_use_query_cache
 targetattachment
 targetclassname
@@ -23871,7 +23669,6 @@ test_existing_item
 test_occlusion
 test_restoreonnewmodel
 texcoord
-texframeindex
 text format contains deprecated field "
 textureframe
 texturename
@@ -23897,7 +23694,6 @@ timeoutInterval
 timeout_particles
 timeout_script_func
 timeout_sound
-timezone
 tint_color
 tint_cp
 tipAccel
@@ -23916,7 +23712,6 @@ took %d bits, %d bytes
 tool
 tool escrow until date
 tooltip_banner
-topvignettestrength
 torquelimit
 torquelimit_x
 torquelimit_y
@@ -24114,7 +23909,6 @@ use_string
 useable
 usedmana
 usehelper
-uselocaltime
 user_data_downloaded
 uses_essence
 utlstringtoken
@@ -24176,7 +23970,6 @@ vector::_M_insert_aux
 vector::_M_range_check: __n (which is %zu) >= this->size() (which is %zu)
 vector::_M_range_insert
 vector::reserve
-vehicleRole
 vel: %.2f, time: %.2f, max: %.2f, animspeed: %.2f
 versus_screen
 vertical_align
@@ -24191,9 +23984,6 @@ viewmodel_offset_x
 viewmodel_offset_y
 viewmodel_offset_z
 viewposition
-vignetteblurstrength
-vignetteend
-vignettestart
 violence_ablood
 violence_agibs
 violence_hblood
@@ -24265,6 +24055,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5
@@ -24278,7 +24070,6 @@ vpost
 vprof_scope_entity_gamephys
 vprof_scope_entity_thinks
 vprof_think_limit
-vr_aperture_main
 vr_carry_type
 vr_pickup_ignore_mass_and_size
 vr_spawn_at_player_start
@@ -24304,13 +24095,13 @@ walkspeed
 warp_shield_impact
 was modified concurrently during serialization.
 wasneveralive
-water_lod_control
 water_material_override
 water_wake
 waterlevel
 wb
 wcschr
 wcslen
+wcsncmp
 weapon entry scripts/%s.txt missing or not in scripts/weapons_manifest.txt
 weapon pistol rifle survivor common_male
 weapon_

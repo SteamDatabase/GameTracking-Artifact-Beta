@@ -916,7 +916,7 @@ $tI
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEFOut of Memory
 0123456789abcdef
-05:29:45
+04:28:28
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0=Off, 1=Surface Wireframe, 2=Transparent Wireframe
@@ -2282,16 +2282,21 @@ C-side of entity framework
 C2S_CONNECTION_Message_t::GetProtobufBinding()->WriteToBuffer failed
 CANCELLED
 CActivateMainMenuPanel
+CAddAnimNode
 CAimConstraint
+CAimMatrixAnimNode
 CAnimBone
 CAnimDataChannelDesc
 CAnimKeyData
-CAnimMotorList
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimState
 CAnimUser
+CAnimationGraph
 CAnimationGroup
 CAppSystemDict::Connect( %-32s ) %8.3f msec
 CAppSystemDict::Init   ( %-32s ) %8.3f msec
@@ -2307,10 +2312,12 @@ CBaseClient::ProcessCreateStringTable(%s)-done
 CBaseConstraint
 CBenchmarkService
 CBitmapImagePanel
+CBlendAnimNode
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceMorph
+CBoneMaskAnimNode
 CBufferString
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
 CBufferString::AppendFormat(char const*, ...)
@@ -2357,6 +2364,8 @@ CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
 CCallStackCapture::CCallStackCapture(int (*)(void**, int, int), unsigned int, unsigned int)
 CChangeFrameList CUtlMemoryPoolMT
 CChangelevelGameClientPrerequisite
+CChoiceAnimNode
+CChoreoAnimNode
 CClockDriftMgr: SetClientTickInterval with bad tick interval %f!
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
@@ -2373,6 +2382,7 @@ CConsolePanel
 CConstraintSlave
 CConstraintTarget
 CCreateGameClientPrerequisite
+CCycleControlAnimNode
 CDemo::Play: failed to create demo net channel
 CDemoFile: %s DemoCommand:%s tick:%d
 CDemoFile: %s FullPacketGoto returned NULL!
@@ -2403,6 +2413,7 @@ CDemoFile::ReadMessage() snappy::RawUncompress failed.
 CDemoPlayer::LoadSpawnGroups Preloading spawngroup %s
 CDemoPlayer::LoadSpawnGroups Premanifest update spawngroup %s
 CDemoRecorder::OnCrashed:  Finalizing demo file due to crash!
+CDirectPlaybackAnimNode
 CDmePanelDefinition
 CDragDropHelperPanel
 CDrawCullingData
@@ -2444,7 +2455,11 @@ CFinalizeConnectionPrerequisite
 CFingerBone
 CFingerChain
 CFingerSource
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
 CFootDefinition
+CFootLockAnimNode
+CFootStepTriggerAnimNode
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
 CFrameSnapshot CUtlMemoryPoolMT
 CGameClientConnectPrerequisite
@@ -2459,6 +2474,7 @@ CGameResourceService::BuildResourceManifest(start)
 CGameResourceService::DescribeContents:  manifest handle == GAME_RESOURCE_MANIFEST_HANDLE_INVALID
 CGameUIService
 CGameUIService::OnAppShutdown
+CGroundIKSolveAnimNode
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
 CHECK failed: !aggregate_value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()):
 CHECK failed: !checkpoints_.empty():
@@ -2740,6 +2756,7 @@ CHeapCompactionService
 CHitBox
 CHitBoxSet
 CHitBoxSetList
+CHitReactAnimNode
 CHostStateMgr::Activate(%s)
 CHostStateMgr::QueueNewRequest( %s, %u )
 CHostStateMgr::StartNewRequest:  Discarding pending request '%s, %u'
@@ -2747,6 +2764,7 @@ CInputService
 CInputService:  mouse focus %s, active %s
 CInputService::OnAppShutdown
 CInputService::OnProfileStorageAvailable
+CJiggleBoneAnimNode
 CKeyValues_Data::Internal_SetString(char const*)
 CL
 CL:
@@ -2833,6 +2851,7 @@ CL_GetPrecacheUserData(%d,%d) - length (%d) invalid.
 CL_InstallAndInvokeClientStringTableCallbacks
 CLoadStartupResourcePrerequisite
 CLog::Print: string too long (>1024 bytes).
+CLookAtAnimNode
 CLoopModeConsole::LoopInit
 CLoopModeLevelLoad
 CLoopModeLevelLoad::LoopInit
@@ -2864,6 +2883,7 @@ CMiniDumpComment::~CMiniDumpComment()
 CMorphConstraint
 CMotionTransform
 CMotionTransform-world
+CMoverAnimNode
 CNativeOutputs
 CNetworkClientService
 CNetworkClientSpawnGroup_AllocateEntitiesPrerequisite
@@ -2945,6 +2965,7 @@ CPUs: %s
 CPanoramaInputHandler
 CParentConstraint
 CParticleSystemDefinition
+CPathHelperAnimNode
 CPlayDemoClientPrerequisite
 CPlayerSlot
 CPointConstraint
@@ -2962,6 +2983,7 @@ CRenderingWorldSession::OnClientPreOutput
 CRenderingWorldSession::OnFrameBoundary
 CRenderingWorldSession::OnLoopActivate
 CResourceManifestPrerequisite
+CRootAnimNode
 CSOAContainer::SetAttributeType - ERROR, trying to change type of previously-defined attribute %d!
 CSceneObjectData
 CScreenshotService
@@ -2971,6 +2993,7 @@ CScriptComponentReferencedPtr
 CScriptKeyValues
 CScriptNativeOutputs
 CScriptPrecacheContext
+CSelectorAnimNode
 CSequentialPrerequisite
 CSequentialPrerequisite:  Bogus PrerequisiteStatus_t detected!
 CServerSideClient::ActivatePlayer -end
@@ -2988,7 +3011,10 @@ CServerSideClientBase::SendSignonData
 CServerSideClientBase::SendSnapshot
 CServerSideClientBase::ShouldSendMessages: Send delayed due to !CanPacket, tick=%d
 CServerSideClientBase::SpawnPlayer
+CSetFacingAnimNode
+CSlowDownOnSlopesAnimNode
 CSmallTextEntry
+CSolveIKChainAnimNode
 CSoundService
 CSoundService::OnAppShutdown
 CSoundService::OnClientOutput
@@ -2997,6 +3023,7 @@ CSource2SaveRestore::OnLoad:  no such save file '%s'
 CSparseMatrix::SetDimensions(int, int)
 CSparseMatrix::SetElement(int, int, float)
 CSpawnServerPrerequisite
+CSpeedScaleAnimNode
 CSplitScreenService::OnProfileStorageAvailable
 CSplitScreenService::WriteConfigShutdown
 CSplitScreenSlot
@@ -3010,12 +3037,14 @@ CSteam3Client::Activate succeeded.  SteamID is %s (%llu), AppID is %d
 CSteam3Client::OnGameServerChangeRequested:  no password ConVar!!!
 CSteam3Client::Shutdown
 CSteam3ServerS1::ShutdownGameServer
+CStopAtGoalAnimNode
 CStrAutoEncode::Clear()
 CStrAutoEncode::InitEmpty()
 CStrAutoEncode::PopulateUTF32() const
 CStrAutoEncode::SetCopy(char const*, int)
 CStrAutoEncode::SetCopy(wchar_t const*, int)
 CStrongHandle
+CSubtractAnimNode
 CTSQueue corruption
 CTelemetryService
 CThread::CThread()
@@ -3064,7 +3093,9 @@ CToolService
 CTransform
 CTransform-world
 CTreeViewListControl
+CTurnHelperAnimNode
 CTwistConstraint
+CTwoBoneIKAnimNode
 CUserInfoChangeService::AddValueToWatch: only CONFIG_USER is supported (%s)
 CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
@@ -3209,6 +3240,7 @@ CVirtualMemorySnapshot::~CVirtualMemorySnapshot()
 CVrSkeletalInputSettings
 CWaitForGameServerStartupPrerequisite
 CWaitForInitialSpawnGroupsPrerequisite
+CWayPointHelperAnimNode
 CWristBone
 CXXABI_1.3
 CXXABI_1.3.3
@@ -3276,9 +3308,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -5885,6 +5921,7 @@ OUT_OF_RANGE
 Obtained EMS handle %u
 Obtained XMS handle %u
 Oct
+Oct  1 2020
 Ogham
 Ol_Chiki
 Old_Italic
@@ -5992,9 +6029,28 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PASS
 PBDEMS2
 PBUFDEM
@@ -6019,7 +6075,6 @@ PLAYBACK: At end of data
 PLAYBACK: ReadReplayMessage returning deltaFrame clientTick=%d tick=%d delta=%d
 PLAYBACK: ReadReplayMessage waiting for next tick at clientTick=%d
 PM
-POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 POSIX collating elements are not supported
@@ -6660,6 +6715,12 @@ SAVE/%s.hl2
 SAVE/%s.hl3
 SDL reports monitor %u current DPI as %f (horz %f, vert %f)
 SDL_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
 SEQUENCE_ERROR
 SHADER_SOURCE
 SHADER_SOURCE_MOD
@@ -6685,6 +6746,11 @@ SPAWN_GROUP_GAMESYSTEMS_PRECACHE_START
 SPAWN_GROUP_READY_TO_SPAWN_ENTITIES
 SPAWN_GROUP_WORLD_LOADED
 SPLIT%d
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SRGB8
 SRGB8A1
 SRGBA8
@@ -6877,8 +6943,6 @@ Sending harvesting protocol upload request.
 Sending voice from: %s - playerslot: %d [ xuid %llx ]
 SentenceModeMenu
 Sep
-Sep 18 2020
-Sep 24 2020
 SequenceMarkup
 SequenceMarkupList
 Serialize
@@ -8195,6 +8259,7 @@ animationcontroller.cpp
 animationsystem
 animgraph0
 animgraph1
+animgraph2
 application
 appsystemdict.cpp
 archive
@@ -8402,7 +8467,6 @@ cheat_codes
 check "sv_logfile", "sv_logecho"
 check_dpi
 checksum_engine.cpp
-children
 chlist
 choices
 chunkCount
@@ -9342,9 +9406,14 @@ m_SolverType
 m_SourceFilename
 m_TargetSettingSource
 m_TargetSource
+m_TextureControls
 m_Value
+m_additiveChildID
+m_additiveInput
 m_ankleBoneName
 m_attachments
+m_bAdditive
+m_bAdditiveAlpha
 m_bApplyMinForce
 m_bAutoHideButtons
 m_bCanBatchWithDynamicShaderConstants
@@ -9368,8 +9437,13 @@ m_bInvokePostDataUpdates
 m_bIsAttachment
 m_bIsNotMatchedToMaterial
 m_bLastTick
+m_bLightenMode
 m_bLocalSpace
 m_bMarkedForRemoval
+m_bMaxLuminanceBlendingSequence1
+m_bMod2X
+m_bMotionVectors
+m_bNormalMap
 m_bOffsetExistingPos
 m_bParticleFeathering
 m_bRemapPullForceToLife
@@ -9387,6 +9461,9 @@ m_bUseCompressedNormalTangent
 m_bUseHighestEndCP
 m_bUseShadowFastPath
 m_bVisible
+m_baseChildID
+m_baseInput
+m_baseInputConnection
 m_bbox
 m_boneArray
 m_boneName
@@ -9397,6 +9474,11 @@ m_boolDiff
 m_boolDiff == true
 m_cRenderColor
 m_chain
+m_child1ID
+m_child2ID
+m_childID
+m_childNodeID
+m_children
 m_constraints
 m_dataChannelArray
 m_decodeKey
@@ -9422,6 +9504,8 @@ m_fSpeedMax
 m_fSpeedMin
 m_fingers
 m_flAlpha
+m_flAnimationRate
+m_flAnimationRate2
 m_flBiasParameter
 m_flBindPoseDirectionMS
 m_flClusterCooldown
@@ -9438,6 +9522,9 @@ m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
 m_flFalloff
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFireTime
@@ -9474,6 +9561,10 @@ m_flRenderFrameTimeUnscaled
 m_flRenderTime
 m_flRoll
 m_flScalePerParentParticle
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
@@ -9481,6 +9572,7 @@ m_flSplayMinAngle
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flTextureBlend
 m_flThickness
 m_flTickRemainder
 m_flTraceHeight
@@ -9489,6 +9581,10 @@ m_flUvDensity
 m_flValue
 m_flWeight
 m_flYaw
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
 m_flags
 m_float
 m_floatAttributes
@@ -9498,9 +9594,12 @@ m_hBuffer
 m_hCaller
 m_hEntTarget
 m_hEntity
+m_hMotionVectorsTexture
+m_hNormalTexture
 m_hParentSpawnGroup != m_hSpawnGroupHandle
 m_hSnapshot
 m_hTarget
+m_hTexture
 m_hingeAxis
 m_hitboxsets
 m_iEventListCount
@@ -9512,6 +9611,9 @@ m_includedGroupArray_Handle
 m_indexBuffer
 m_influenceNames
 m_influenceWeights
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_inputList
 m_inputValue
 m_int
@@ -9573,11 +9675,13 @@ m_nFirstMultipleOverride_BackwardCompat
 m_nFlags
 m_nGroupId
 m_nGroupType
+m_nHand
 m_nHitBoxIndex
 m_nIncrement
 m_nIndexCount
 m_nInfluences
 m_nInstanceCount
+m_nLightType
 m_nMapType
 m_nMeshID
 m_nMinParticlesToEmit
@@ -9585,6 +9689,7 @@ m_nNameHash
 m_nNoiseType
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOutputBlendMode
 m_nOutputID
 m_nOverrideCP
 m_nOverrideCP2
@@ -9604,6 +9709,7 @@ m_nScaleCPComponent
 m_nScaleCPField
 m_nScaleControlPoint
 m_nScaleControlPointField
+m_nSequenceCombineMode
 m_nServerCount:%d demofile:'%s'
 m_nServerCount:%d ishltv:%s
 m_nServerCount:%d ishltv:%s m_nRetryNum:%d szRetryAddress:%s
@@ -9611,11 +9717,14 @@ m_nSetMethod
 m_nShapeType
 m_nSlaveAxis
 m_nSlaveChannel
+m_nSortMethod
 m_nSplitScreenSlot
 m_nStartIndex
 m_nStartInstance
 m_nTargetAxis
 m_nTargetType
+m_nTextureChannels
+m_nTextureType
 m_nTickCount
 m_nTimesToFire
 m_nTotalTicks
@@ -9626,8 +9735,12 @@ m_nVRDisplayID
 m_nVectorComponent
 m_nVertexCount
 m_nameStringableIndex
+m_nodeID
+m_nodeManager
+m_nodes
 m_outerKnuckle1
 m_outerKnuckle2
+m_outputID
 m_outputMorph
 m_outputTransformList
 m_outputWeightList
@@ -9684,6 +9797,8 @@ m_skeleton
 m_slaves
 m_snapshotName
 m_stringAttributes
+m_subtractChildID
+m_subtractInputConnection
 m_szChannelClass
 m_szDescription
 m_szElementNameArray
@@ -9737,6 +9852,7 @@ m_vecMax
 m_vecMin
 m_vecSize
 m_vecTailColorScale
+m_vecTexturesInput
 m_vectorAttributes
 m_vectorParams
 m_vertexBuffers
@@ -9792,6 +9908,7 @@ materials/dev/generalfilter_additive.vmat
 materials/error.vmat
 materials/loading_background.vmat
 materials/loading_background_vr.vmat
+materials/particle/base_sprite.vtex
 materials/startup_background.vmat
 materials/startup_background_cn.vmat
 materials/vgui/hud/800corner1.vmat
@@ -11238,6 +11355,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5

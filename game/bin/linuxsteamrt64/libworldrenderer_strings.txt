@@ -477,26 +477,34 @@ C
 C->D
 C->E
 C-side of entity framework
+CAddAnimNode
 CAimConstraint
+CAimMatrixAnimNode
 CAnimBone
 CAnimDataChannelDesc
 CAnimKeyData
 CAnimMotorList
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimState
 CAnimUser
+CAnimationGraph
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
 CAuthPhysBody
 CAuthPhysJoint
 CBaseConstraint
+CBlendAnimNode
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceMorph
+CBoneMaskAnimNode
 CBufferString
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
 CBufferString::AppendFormat(char const*, ...)
@@ -527,10 +535,14 @@ CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
+CChoiceAnimNode
+CChoreoAnimNode
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConstraintSlave
 CConstraintTarget
+CCycleControlAnimNode
+CDirectPlaybackAnimNode
 CDrawCullingData
 CEmptyEntityInstance
 CEntityClass::Unserialize( %d:%s:%s ){
@@ -555,12 +567,20 @@ CEntitySystem::PrecacheEntity: Classname missing from entity!
 CFingerBone
 CFingerChain
 CFingerSource
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
 CFootDefinition
+CFootLockAnimNode
+CFootStepTriggerAnimNode
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
+CGroundIKSolveAnimNode
 CHandle
 CHitBox
 CHitBoxSet
 CHitBoxSetList
+CHitReactAnimNode
+CJiggleBoneAnimNode
+CLookAtAnimNode
 CMaterialDrawDescriptor
 CMemAllocSystemInitialize
 CMemoryStack::CMemoryStack()
@@ -571,6 +591,7 @@ CMemoryStack::~CMemoryStack()
 CMorphConstraint
 CMotionTransform
 CMotionTransform-world
+CMoverAnimNode
 CNativeOutputs
 CNetworkFieldScratchData.m_MemoryStacks[ %d ]
 CNetworkFieldScratchData.m_MemoryStacks[ 0 ]
@@ -588,12 +609,14 @@ CONTENTROOT
 COrientConstraint
 CParentConstraint
 CParticleSystemDefinition
+CPathHelperAnimNode
 CPlayerSlot
 CPointConstraint
 CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
+CRootAnimNode
 CSOAContainer::SetAttributeType - ERROR, trying to change type of previously-defined attribute %d!
 CSceneObjectData
 CScriptComponent::Storage_t
@@ -602,13 +625,19 @@ CScriptComponentReferencedPtr
 CScriptKeyValues
 CScriptNativeOutputs
 CScriptPrecacheContext
+CSelectorAnimNode
+CSetFacingAnimNode
+CSlowDownOnSlopesAnimNode
 CSolveIKChainAnimNode
 CSparseMatrix::SetDimensions(int, int)
 CSparseMatrix::SetElement(int, int, float)
+CSpeedScaleAnimNode
 CSplitScreenSlot
 CSplitString::Construct(char const*, char const**, int)
+CStopAtGoalAnimNode
 CStrongHandle
 CStrongHandleCopyable
+CSubtractAnimNode
 CTSQueue corruption
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
 CThreadMultiWaitEvent::CThreadMultiWaitEvent(bool)
@@ -627,7 +656,9 @@ CThreadedJob::Abort(bool)
 CTiltTwistConstraint
 CTransform
 CTransform-world
+CTurnHelperAnimNode
 CTwistConstraint
+CTwoBoneIKAnimNode
 CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
 CUtlBinaryBlock::SetLength(int)
@@ -716,6 +747,7 @@ CVertexKDTree::BuildMidpoint(float const*, int, int)
 CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVoxelVisibility
 CVrSkeletalInputSettings
+CWayPointHelperAnimNode
 CWorld::CacheNodes
 CWorldNode::GrassFileCreateManifest
 CWorldRendererMgr::CreateWorld
@@ -788,9 +820,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -1497,6 +1533,7 @@ OBJECT_TYPE_MODEL_HAS_LODS
 OBJECT_TYPE_NONE
 OBJECT_TYPE_NO_SHADOWS
 OBJECT_TYPE_NO_SUN_SHADOWS
+OBJECT_TYPE_NO_ZPREPASS
 OBJECT_TYPE_PRECOMPUTED_VISMEMBERS
 OBJECT_TYPE_RENDER_TO_CUBEMAPS
 OBJECT_TYPE_RENDER_WITH_DYNAMIC
@@ -1514,9 +1551,28 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PEvent
 PF%d %d-1.000000
 PF_BIAS_TYPE_EXPONENTIAL
@@ -1528,7 +1584,6 @@ PF_TYPE_CONTROL_POINT_COMPONENT
 PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
 PF_TYPE_RANDOM_UNIFORM
-POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 PSt12_Bind_simpleIFSt7_Mem_fnIMN3Etc5ImageEFjjjjEEPS2_jijEE
@@ -1672,8 +1727,19 @@ Rigid;
 Root entity class
 RunScriptCode
 RunScriptFile
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
 SIGNED_R11
 SIGNED_RG11
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SRGB8
 SRGB8A1
 SRGBA8
@@ -1999,6 +2065,7 @@ anim_name_a
 anim_name_b
 animgraph0
 animgraph1
+animgraph2
 archive
 attach_point
 attachment
@@ -2049,7 +2116,6 @@ char
 char* std::string::_S_construct<char*>(char*, char*, std::allocator<char> const&, std::forward_iterator_tag)
 character
 cheat
-children
 chlist
 choices
 chunkCount
@@ -2302,14 +2368,19 @@ m_SolverType
 m_SourceFilename
 m_TargetSettingSource
 m_TargetSource
+m_TextureControls
 m_Value
 m_VisClusterMemberBits
+m_additiveChildID
+m_additiveInput
 m_aggregateMeshes
 m_aggregateSceneObjects
 m_allFlags
 m_ankleBoneName
 m_anyFlags
 m_attachments
+m_bAdditive
+m_bAdditiveAlpha
 m_bApplyMinForce
 m_bBuildBakedLighting
 m_bCanBatchWithDynamicShaderConstants
@@ -2332,8 +2403,13 @@ m_bInverse
 m_bInvokePostDataUpdates
 m_bIsAttachment
 m_bIsNotMatchedToMaterial
+m_bLightenMode
 m_bLocalSpace
 m_bMarkedForRemoval
+m_bMaxLuminanceBlendingSequence1
+m_bMod2X
+m_bMotionVectors
+m_bNormalMap
 m_bOffsetExistingPos
 m_bParticleFeathering
 m_bRemapPullForceToLife
@@ -2350,6 +2426,9 @@ m_bUseHighestEndCP
 m_bUseShadowFastPath
 m_bVisible
 m_bWrapInAtlas
+m_baseChildID
+m_baseInput
+m_baseInputConnection
 m_bbox
 m_blockOffset
 m_boneArray
@@ -2363,7 +2442,12 @@ m_boundsGroups
 m_builderParams
 m_cRenderColor
 m_chain
+m_child1ID
+m_child2ID
+m_childID
 m_childLumps
+m_childNodeID
+m_children
 m_clusters
 m_connections
 m_constraints
@@ -2397,6 +2481,8 @@ m_fRadiusMin
 m_fSpeedMax
 m_fSpeedMin
 m_fingers
+m_flAnimationRate
+m_flAnimationRate2
 m_flBiasParameter
 m_flBindPoseDirectionMS
 m_flClusterCooldown
@@ -2416,6 +2502,9 @@ m_flEmitRate
 m_flFadeEndDistance
 m_flFadeStartDistance
 m_flFalloff
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFireTime
@@ -2456,6 +2545,10 @@ m_flRandomMax
 m_flRandomMin
 m_flRoll
 m_flScalePerParentParticle
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
@@ -2463,6 +2556,7 @@ m_flSplayMinAngle
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flTextureBlend
 m_flThickness
 m_flTraceHeight
 m_flTraceRadius
@@ -2472,6 +2566,10 @@ m_flValue
 m_flWeight
 m_flWidth
 m_flYaw
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
 m_flags
 m_float
 m_floatAttributes
@@ -2482,8 +2580,11 @@ m_hBuffer
 m_hCaller
 m_hEntTarget
 m_hEntity
+m_hMotionVectorsTexture
+m_hNormalTexture
 m_hSnapshot
 m_hTarget
+m_hTexture
 m_hammerUniqueId
 m_hingeAxis
 m_hitboxsets
@@ -2496,6 +2597,9 @@ m_influenceFlags
 m_influenceNames
 m_influenceWeights
 m_infoOverlays
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_inputLayoutFields
 m_inputList
 m_inputName
@@ -2570,6 +2674,7 @@ m_nFirstMultipleOverride_BackwardCompat
 m_nFlags
 m_nGroupId
 m_nGroupType
+m_nHand
 m_nHitBoxIndex
 m_nIncrement
 m_nIndexCount
@@ -2581,6 +2686,7 @@ m_nLODOverride
 m_nLayer
 m_nLightGroup
 m_nLightProbeVolumePrecomputedHandshake
+m_nLightType
 m_nLightmapGameVersionNumber
 m_nLightmapVersionNumber
 m_nMapType
@@ -2595,6 +2701,7 @@ m_nOffset
 m_nOffsetIntoBlock
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOutputBlendMode
 m_nOutputID
 m_nOverlayRenderOrder
 m_nOverrideCP
@@ -2617,6 +2724,7 @@ m_nScaleControlPoint
 m_nScaleControlPointField
 m_nSceneObjectIndex
 m_nSemanticIndex
+m_nSequenceCombineMode
 m_nSequenceOverride
 m_nSetMethod
 m_nShapeType
@@ -2624,11 +2732,14 @@ m_nSlaveAxis
 m_nSlaveChannel
 m_nSlot
 m_nSlotType
+m_nSortMethod
 m_nStartIndex
 m_nStartInstance
 m_nSubSceneObject
 m_nTargetAxis
 m_nTargetType
+m_nTextureChannels
+m_nTextureType
 m_nTimesToFire
 m_nTreeSize
 m_nType
@@ -2640,10 +2751,14 @@ m_nVertexCount
 m_nVisClusterMemberCount
 m_nVisClusterMemberOffset
 m_nameStringableIndex
+m_nodeID
 m_nodeLightingInfo
+m_nodeManager
+m_nodes
 m_objectFlags
 m_outerKnuckle1
 m_outerKnuckle2
+m_outputID
 m_outputMorph
 m_outputName
 m_outputTransformList
@@ -2709,6 +2824,8 @@ m_skyVisibilityCluster
 m_slaves
 m_snapshotName
 m_stringAttributes
+m_subtractChildID
+m_subtractInputConnection
 m_szChannelClass
 m_szDescription
 m_szElementNameArray
@@ -2772,6 +2889,7 @@ m_vecMax
 m_vecMin
 m_vecSize
 m_vecTailColorScale
+m_vecTexturesInput
 m_vectorAttributes
 m_vectorParams
 m_vertexBuffers
@@ -2791,6 +2909,7 @@ maps\
 master_morph_weight
 materials/error.vmat
 materials/grass/grasstile.vmat
+materials/particle/base_sprite.vtex
 matrix3x4
 matrix3x4-world
 matrix3x4_t
@@ -3204,6 +3323,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5

@@ -22,7 +22,6 @@
 #%s/%s/+MultiGpu-TransferRenderTarget( To: %dx%d @ x: %d y: %d, From: %dx%d @ x: %d y: %d )
 #%s/%s/+SteamVrCompositor-TransferLeftEye( %dx%d @ (x: %d y: %d) )
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
-#%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
 #%s/RenderAView/LightSetup
@@ -128,7 +127,6 @@ $tI
 -1.0
 -avx
 -inf
--scene_system_partitions
 -shadowTargetSize
 -shadowTargetSize Adjusting shadow target size to %d from %d
 -shadowTargetSize psys jba Adjusting nMaxShadowBufferSize size to %d from %d
@@ -180,6 +178,7 @@ $tI
 11ISceneWorld
 11IVSSequence
 125 130 135
+128
 12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
 12CSceneObject
 12CSceneSystem
@@ -198,7 +197,10 @@ $tI
 14ConCommandBase
 14ITonemapSystem
 14IVolumetricFog
+15CMemberFunctor1IP12CSceneSystemMS0_FvP10CSceneViewES3_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIP12CSceneObject21CFuncJobItemProcessorIS3_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor1IP26CParallelProcessorAbstractI22CParallelLoopProcessorI13CViewDrawList31CLoopMemberFuncJobItemProcessorIS2_12CSceneSystemS4_EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor5IP12CSceneSystemMS0_FvSt10shared_ptrI13CViewDrawListEP11CSceneLayerP16CRenderBatchList18EBatchStartFlags_tRK10CUtlVectorIP14CSceneDrawList10CUtlMemoryISC_iEEES4_S6_S8_S9_SF_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CTier0AppSystemI11ISceneUtilsLx0EE
 15CTier0AppSystemI12ISceneSystemLx0EE
@@ -317,10 +319,8 @@ $tI
 3C
 4.0
 4096.0f
-40CFunctor_SceneSystem_Thread_DrawDrawList
 40ISceneAnimatableProceduralBoneTransforms
-43CFunctor_SceneSystem_Thread_RenderPartition
-49CFunctor_SceneSystem_Thread_QueueRenderPartitions
+43CFunctor_SceneSystem_Thread_RenderViewLayer
 4C
 4CMDL
 4IPVS
@@ -400,7 +400,7 @@ $tI
 <td>LAYERFLAGS_DOESNT_MODIFY_COLOR_BUFFERS</td>
 <td>LAYERFLAGS_DOESNT_MODIFY_DEPTH_STENCIL_BUFFER</td>
 <td>LAYERFLAGS_DO_NOT_SORT</td>
-<td>LAYERFLAGS_INGNORE_LAYER_MATCH_ID</td>
+<td>LAYERFLAGS_IGNORE_LAYER_MATCH_ID</td>
 <td>LAYERFLAGS_IS_DEPTH_RENDERING_PASS</td>
 <td>LAYERFLAGS_LIGHT_BINNER_SETUP_LAYER</td>
 <td>LAYERFLAGS_MATCH_TARGET_VIEWPORT_SIZE</td>
@@ -466,7 +466,6 @@ $tI
 >
 >C
 ?
-?Stack depth limit hit (%d)
 @
 @@
 @A
@@ -636,20 +635,25 @@ BreakPieceExternal
 C->D
 C->E
 C6FaceSkyboxObjectDesc
+CAddAnimNode
 CAimConstraint
+CAimMatrixAnimNode
 CAmbientOcclusionProxySceneObjectDesc
 CAnimBone
 CAnimDataChannelDesc
 CAnimKeyData
-CAnimMotorList
 CAnimMovementManager
+CAnimNodeConnection
+CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimState
 CAnimUser
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (1)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (2)
 CAnimationDecodeContext::AddAnimationDecodeDesc ran out of allocator memory (3)
+CAnimationGraph
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
@@ -660,11 +664,13 @@ CBaseSceneObjectDesc
 CBindlessFastPathPartition::EnsureEnvironmentMaps() - Number of environment maps exceeds maximum (%d), skipping additional environment maps.
 CBindlessFastPathPartition::EnsureGPUResources - insufficient descriptor set support. CWorldNode::CanUseBindlessDesc() needs to filter before getting here.
 CBindlessFastPathSceneObjectDesc
+CBlendAnimNode
 CBlitTextureToBackBufferLayer
 CBlockCompress::FastDecompress(unsigned char const*, unsigned int, unsigned char*, unsigned int)
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
 CBoneConstraintPoseSpaceMorph
+CBoneMaskAnimNode
 CBufferString
 CBufferString::AppendConcat(int, char const* const*, int const*, bool)
 CBufferString::AppendFormat(char const*, ...)
@@ -694,12 +700,16 @@ CBufferString::StripTrailingSlash()
 CBufferString::ToLowerFast(int)
 CBufferString::Trim(char const*)
 CCallQueue::ParallelCallQueued(char const*, IThreadPool*)
+CChoiceAnimNode
+CChoreoAnimNode
 CCommand::Tokenize: Encountered command which overflows the argument buffer.. Clamped!
 CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. Skipping!
 CConstraintSlave
 CConstraintTarget
+CCycleControlAnimNode
 CDebugLayerRenderer::ShowRenderTargets GetMode("Default") == NULL? Can't Render with material %s!
 CDebugTextObjectDesc
+CDirectPlaybackAnimNode
 CDirectionalLightObjectDesc
 CDrawCullingData
 CEntityIndex
@@ -707,15 +717,20 @@ CEnvMapLightObjectDesc
 CFingerBone
 CFingerChain
 CFingerSource
+CFollowAttachmentAnimNode
+CFollowPathAnimNode
 CFootDefinition
+CFootLockAnimNode
+CFootStepTriggerAnimNode
 CFormatNumber_DontUseDirectly_UseFormatNumberMacro::FormatNumberInternal64(long long)
-CFunctor_SceneSystem_Thread_DrawDrawList CUtlMemoryPoolMT
 CFunctor_SceneSystem_Thread_ProcessProceduralLayer CUtlMemoryPoolMT
-CFunctor_SceneSystem_Thread_QueueRenderPartitions CUtlMemoryPoolMT
-CFunctor_SceneSystem_Thread_RenderPartition CUtlMemoryPoolMT
+CFunctor_SceneSystem_Thread_RenderViewLayer CUtlMemoryPoolMT
+CGroundIKSolveAnimNode
 CHitBox
 CHitBoxSet
 CHitBoxSetList
+CHitReactAnimNode
+CJiggleBoneAnimNode
 CLightBinner::UpdateBinTexture
 CLightBinnerCsgo: Unsupported CSGONumBakedLights %d
 CLightBinnerCsgo: Unsupported CsgoMaxLights %d
@@ -724,6 +739,7 @@ CLightBinnerVr: Unsupported NumBakedLights %d
 CLightBinnerVr: Unsupported VrMaxLights %d
 CLightBinnerVr: Unsupported VrNumBakedLights %d
 CLightProbeVolumeObjectDesc
+CLookAtAnimNode
 CMT usage is %.2f percent (%d texels) in %fms
 CMTNormalWrinkle
 CMTPositionSpeed
@@ -731,14 +747,18 @@ CMTatlastexture_.vtex
 CMaterialDrawDescriptor
 CMemAllocSystemInitialize
 CMorphConstraint
+CMoverAnimNode
 COLLISION_MODE_INITIAL_TRACE_DOWN
 COLLISION_MODE_PER_FRAME_PLANESET
 COLLISION_MODE_PER_PARTICLE_TRACE
 COLLISION_MODE_USE_NEAREST_TRACE
 COLORCORRECTION_VERSION_1
+CONTENT
+CONTENTROOT
 COrientConstraint
 CParentConstraint
 CParticleSystemDefinition
+CPathHelperAnimNode
 CPointConstraint
 CPointLightObjectDesc
 CPointLightObjectDescCsgo
@@ -749,6 +769,7 @@ CRC64_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
+CRootAnimNode
 CSGO
 CSOAContainer::SetAttributeType - ERROR, trying to change type of previously-defined attribute %d!
 CSSDSEndFrameViewInfo
@@ -762,8 +783,6 @@ CSSDSMsg_ViewTargetList
 CSceneLayer::AddToRenderPassDesc
 CSceneObjectData
 CSceneSystem::SetLightCookieTexture, trying to set texture %s that has no sheet data!
-CSceneSystem::Thread_QueueRenderPartitions
-CSceneSystem::Thread_RenderPartition
 CSceneSystem::m_hDefaultPerLayerConstants
 CSceneView::CreateRenderPasses
 CSceneViewDebugOverlays: Cannot call AddToViewAndRetireStaleOverlays and pass in no abs time unless the overlay was created with the SCENE_VIEW_DEBUG_OVERLAY_TYPE_RELATIVE_TIMING flag!
@@ -780,18 +799,25 @@ CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid other view render 
 CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid other view target for "%s"!
 CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid texture handle for "%s"!
 CScratchRenderTargetSystem::GetRenderTargetInfo cannot work until FinishRenderingViews is called!
+CSelectorAnimNode
+CSetFacingAnimNode
 CSimpleQuadRenderer
+CSlowDownOnSlopesAnimNode
+CSolveIKChainAnimNode
 CSparseMatrix::SetDimensions(int, int)
 CSparseMatrix::SetElement(int, int, float)
+CSpeedScaleAnimNode
 CSplitString::Construct(char const*, char const**, int)
 CSpotLightObjectDesc
 CSpotLightObjectDescCsgo
 CSpotLightObjectDescVr
+CStopAtGoalAnimNode
 CStrAutoEncode::Clear()
 CStrAutoEncode::Copy(CStrAutoEncode const&)
 CStrAutoEncode::InitEmpty()
 CStrAutoEncode::SetCopy(char const*, int)
 CStrongHandle
+CSubtractAnimNode
 CTSQueue corruption
 CTextureDisplayer
 CThreadEvent::CThreadEvent(bool)
@@ -818,7 +844,9 @@ CTiltTwistConstraint
 CTonemapRenderer needs to use a layer which has had a render attribute called "ColorBuffer" set!
 CTonemapSystem::GenerateRendererData ran out of buckets!!
 CTransform
+CTurnHelperAnimNode
 CTwistConstraint
+CTwoBoneIKAnimNode
 CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::SetSeed(int)
@@ -909,6 +937,7 @@ CVProfNode::GetSubNode(char const*, int, char const*, int)
 CVertexKDTree::BuildMidpoint(float const*, int, int)
 CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
+CWayPointHelperAnimNode
 CWristBone
 CXXABI_1.3
 CXXABI_1.3.3
@@ -976,9 +1005,13 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
+C_OP_RemapSpeedtoCP
 C_OP_RenderModels
+C_OP_RenderRopes
 C_OP_RenderSprites
+C_OP_RenderStandardLight
 C_OP_RenderTrails
+C_OP_RenderVRHapticEvent
 C_OP_RepeatedTriggerChildGroup
 C_OP_SetCPOrientationToPointAtCP
 C_OP_SetControlPointFieldToWater
@@ -1048,9 +1081,9 @@ Courier New
 CreateInterface
 CreatePerViewLightingConstantBuffer
 CreatePerViewLightingConstantBufferCsgo
-CsgoLightCookieSettings
 CubeMapDebugColors
 Cubic
+CullView
 D15S1
 D16
 D16_SHADOW
@@ -1096,12 +1129,14 @@ Draw calls:
 Draw everything normal and ignore the source for rendering
 DrawDepth Fade
 DrawDepth%s
-DrawList :
 DrawShadowMapsForLight
 Dump a list of the objects in a sceneworld (Usage: sc_dumpworld <world_index>)
 Dump debug info
 Dump the objects in a sceneworld into a 3d geoview buffer (Usage: sc_dumpworld3d <world_index>)
 DynamicConfigList
+ERROR: Resource name "%s" has the incorrect extension "%s" for the specified resource type (expected "%s")!
+ERROR: Specified full path %s does not lie under the mod search path!)
+ERROR: Specified path %s could not be made content-relative
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EarlyInit_Tier0
 EconItemToolModel_001
@@ -1152,6 +1187,8 @@ FindOrCreateRenderTarget: Does not work to pass pOtherView == this!
 Finish to complete : %f
 FinishRenderingViews
 FinishRenderingViews has been called without a call to begin!!!
+FixupResourceName: Illegal full path passed in ("%s")!
+FixupResourceName: Illegal path, missing extension passed in ("%s")!
 FlattenedSerializersVersion001
 Flexible;
 FloatBitMap::DownsampleNiceFiltered
@@ -1202,6 +1239,7 @@ Gaussian
 GenerateCompositeMorphTextureAtlas
 GenerateDecalNormals
 GenerateDistanceField
+GenerateResourceNameFromFileName: Invalid extension specified in file name "%s"!
 GenericGameData
 GetCPUInformation
 GetCStringCharConversion
@@ -1302,6 +1340,7 @@ LINEAR_RGBA8888
 LOG_GENERAL
 Leaked drawlists : %d!!!!!
 Length;
+Light Cookies
 LightBinnerVr_%d
 LightProbeVolumeDebugColors
 LightProbeVolumeDesc
@@ -1374,7 +1413,6 @@ MonitorSceneObjectDesc
 MoveLayerToBeAfterLabel
 MoveLayerToBeAfterLayer
 MovementSettings
-Multithreaded translucent
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
@@ -1426,7 +1464,6 @@ Not Used
 Number of cull boxes: %d
 Number of display lists submitted:
 Number of draws backface-culled:
-Number of jobs used for partitions: %i
 Number of jobs used to render:
 Number of objects culled by cull boxes: %d
 Number of objects culled by distance fade:
@@ -1456,7 +1493,6 @@ Opaque
 Original
 OrthoLight
 Output memory size is zero
-Override of %i partitions specified, scene system using %i partitions
 Override. Old default was 3.0
 Override. Old default was 45.
 Override. Old value was 1.0
@@ -1469,9 +1505,28 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_LIGHT_TYPE_FX
+PARTICLE_LIGHT_TYPE_POINT
+PARTICLE_LIGHT_TYPE_SPOT
+PARTICLE_ORIENTATION_ALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_FULL_3AXIS_ROTATION
+PARTICLE_ORIENTATION_SCREENALIGN_TO_PARTICLE_NORMAL
+PARTICLE_ORIENTATION_SCREEN_ALIGNED
+PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED
+PARTICLE_ORIENTATION_WORLD_Z_ALIGNED
+PARTICLE_OUTPUT_BLEND_MODE_ADD
+PARTICLE_OUTPUT_BLEND_MODE_ALPHA
+PARTICLE_OUTPUT_BLEND_MODE_LIGHTEN
+PARTICLE_OUTPUT_BLEND_MODE_MOD2X
 PARTICLE_SET_REPLACE_VALUE
 PARTICLE_SET_SCALE_CURRENT_VALUE
 PARTICLE_SET_SCALE_INITIAL_VALUE
+PARTICLE_SORTING_CREATION_TIME
+PARTICLE_SORTING_NEAREST
+PARTICLE_VRHAND_CP
+PARTICLE_VRHAND_CP_OBJECT
+PARTICLE_VRHAND_LEFT
+PARTICLE_VRHAND_RIGHT
 PF%d %d-1.000000
 PF_BIAS_TYPE_EXPONENTIAL
 PF_MAP_TYPE_MULT
@@ -1483,7 +1538,6 @@ PF_TYPE_LITERAL
 PF_TYPE_PARTICLE_AGE_NORMALIZED
 PF_TYPE_RANDOM_UNIFORM
 PFvP12CSceneObjectE
-POINT
 POSE_SPACE_BONE
 POSE_SPACE_MORPH
 PVEC_TYPE_CP_VALUE
@@ -1601,7 +1655,6 @@ RemapValClamped(
 RemoveBoneAndChildren
 Render
 Render %d specific objects
-Render pending translucent drawlist
 Render world : %s
 Render2DLineOverlays
 Render2DTextOverlays
@@ -1632,6 +1685,17 @@ Rigid;
 S: %7.3f
 SCENESYSTEMMAT_OCCLUSION_PROXY material has pass count %d, expected 1!
 SCENESYSTEMMAT_OCCLUSION_PROXY_COUNT_DRAW material has pass count %d, expected 1!
+SEQUENCE_COMBINE_MODE_ALPHA_FROM0_RGB_FROM_1
+SEQUENCE_COMBINE_MODE_ALPHA_FROM1_RGB_FROM_0
+SEQUENCE_COMBINE_MODE_REPLICATEALPHA1
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0
+SEQUENCE_COMBINE_MODE_USE_SEQUENCE_1
+SEQUENCE_COMBINE_MODE_WEIGHTED_BLEND
+SPRITECARD_TEXTURE_ANIMMOTIONVEC
+SPRITECARD_TEXTURE_CHANNEL_MIX_A
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGB
+SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA
+SPRITECARD_TEXTURE_NORMALMAP
 SSAOManifest
 SSE and SSE2 are required.
 S_BINDLESS_RUNTIME
@@ -1657,7 +1721,6 @@ SceneSystem/CsgoLightBinnerSingleLightFastPath
 SceneSystem/CubemapFog
 SceneSystem/DisableShadowFullSort
 SceneSystem/HDRFrameBuffer
-SceneSystem/MaxAutoPartitions
 SceneSystem/NoSunLightManager
 SceneSystem/NonTexturedGradientFog
 SceneSystem/PointLightShadowsEnabled
@@ -1678,6 +1741,7 @@ SceneSystem/VrLightBinnerCachedShadowMapWidth
 SceneSystem/VrLightBinnerMaxLights
 SceneSystem/VrLightBinnerShadowViewsNeedPerViewLightingConstants
 SceneSystem/VrLightBinnerSingleLightFastPath
+SceneSystem/WellKnownLightCookies
 SceneSystemInit
 SceneSystem_002
 SceneUtils_001
@@ -1698,7 +1762,6 @@ Set a float attribute which will be visible to all rendering (Usage: sc_setfloat
 Set an integer attribute which will be visible to all rendering (Usage: sc_setintattr <attrname> <value>)
 SetupConstantBuffer
 SetupLightingForViewCsgo
-SetupLightingForViewVr
 ShadowMap "
 Shadowed spot lights in view: %d
 Show
@@ -1730,10 +1793,13 @@ Source2GameEntities001
 Source2Host001
 Source2Server001
 Source2ServerSerializers002
-Spatial partitions: %d
 Spherical %sStrength %.2fExponent %.2f
 SpotLight
 SpotShadowDepth
+St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
+St16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE
+St19_Sp_make_shared_tag
+St23_Sp_counted_ptr_inplaceI13CViewDrawListSaIS0_ELN9__gnu_cxx12_Lock_policyE2EE
 StatsService_001
 SteamAudio001
 Stencil Reflection Render View
@@ -1768,12 +1834,13 @@ TestFormatE
 TestScriptMgr001
 TextLayout_001
 Thin Plate
-Thread pool has %i threads, scene system using %i partitions
 ThreadGetCurrentId
 ThreadMultiWait
 ThreadMultiWaitObjectSetDestroy
 ThreadSleep
 Thread_ProcessProceduralLayer
+Thread_RenderSceneDrawList
+Thread_RenderViewLayer
 Timer took %.4f
 Toggle display of box around text
 Toggles drawing of aggregate meshes
@@ -1934,7 +2001,6 @@ View "%s": %d render target usage
 View "%s": %d render targets
 VisBuilder_001
 VolumetricFogManifest
-VrLightCookieSettings
 WARNING: Directional lights not supported by the light binner!
 WARNING: Trying to create a CRenderContextPtr without a valid context.
 Warning
@@ -1958,6 +2024,7 @@ Y
 Yaw;
 Z
 ZN26CParallelProcessorAbstractI18CParallelProcessorIP12CSceneObject21CFuncJobItemProcessorIS2_ELi1EEE3RunEvE13CStackFunctor
+ZN26CParallelProcessorAbstractI22CParallelLoopProcessorI13CViewDrawList31CLoopMemberFuncJobItemProcessorIS1_12CSceneSystemS3_EEE3RunEvE13CStackFunctor
 [
 [%.3f server clamped to %.3f]
 [DUMP: Scene World %d: 0x%p '%s': %d objects]
@@ -2034,6 +2101,7 @@ animationLifeSpan
 animationScale
 animgraph0
 animgraph1
+animgraph2
 ao_proxy_box_list
 ao_proxy_capsule_list
 archive
@@ -2088,7 +2156,6 @@ center
 channels
 char* std::string::_S_construct<char*>(char*, char*, std::allocator<char> const&, std::forward_iterator_tag)
 cheat
-children
 chlist
 chunkCount
 client
@@ -2172,7 +2239,6 @@ drawmaterialquad2
 drawspotlights
 dynamic_interaction
 eikonal
-elements
 emitFromWorld
 enable_limit
 encoding
@@ -2333,11 +2399,16 @@ m_SourceFilename
 m_TargetSettingSource
 m_TargetSource
 m_Targets
+m_TextureControls
 m_TextureId
 m_ViewName
 m_Views
+m_additiveChildID
+m_additiveInput
 m_ankleBoneName
 m_attachments
+m_bAdditive
+m_bAdditiveAlpha
 m_bApplyMinForce
 m_bBonesInWorldSpace
 m_bCanBatchWithDynamicShaderConstants
@@ -2359,7 +2430,12 @@ m_bInitFromKilledParentParticles
 m_bInverse
 m_bIsAttachment
 m_bIsNotMatchedToMaterial
+m_bLightenMode
 m_bLocalSpace
+m_bMaxLuminanceBlendingSequence1
+m_bMod2X
+m_bMotionVectors
+m_bNormalMap
 m_bOffsetExistingPos
 m_bParticleFeathering
 m_bRemapPullForceToLife
@@ -2375,6 +2451,9 @@ m_bUseCompressedNormalTangent
 m_bUseHighestEndCP
 m_bUseShadowFastPath
 m_bVisible
+m_baseChildID
+m_baseInput
+m_baseInputConnection
 m_bbox
 m_boneArray
 m_boneName
@@ -2384,6 +2463,11 @@ m_boneTransforms
 m_bones
 m_cRenderColor
 m_chain
+m_child1ID
+m_child2ID
+m_childID
+m_childNodeID
+m_children
 m_constantBufferData.m_nNumFogVolumeBoundingBoxes[0] <= 128
 m_constraints
 m_dataChannelArray
@@ -2409,6 +2493,8 @@ m_fRadiusMin
 m_fSpeedMax
 m_fSpeedMin
 m_fingers
+m_flAnimationRate
+m_flAnimationRate2
 m_flBiasParameter
 m_flBindPoseDirectionMS
 m_flClusterCooldown
@@ -2424,6 +2510,9 @@ m_flEmissionDuration
 m_flEmissionScale
 m_flEmitRate
 m_flFalloff
+m_flFinalTextureScaleU
+m_flFinalTextureScaleV
+m_flFinalTextureUVRotation
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFootLength
@@ -2454,6 +2543,10 @@ m_flRandomMin
 m_flRealTime
 m_flRoll
 m_flScalePerParentParticle
+m_flSequence0AlphaWeight
+m_flSequence0RGBWeight
+m_flSequence1AlphaWeight
+m_flSequence1RGBWeight
 m_flShapeRadius
 m_flSphereRadius
 m_flSplayMaxAngle
@@ -2461,6 +2554,7 @@ m_flSplayMinAngle
 m_flStartTime
 m_flStartTimeMax
 m_flTailAlphaScale
+m_flTextureBlend
 m_flThickness
 m_flTraceHeight
 m_flTraceRadius
@@ -2468,20 +2562,31 @@ m_flUvDensity
 m_flValue
 m_flWeight
 m_flYaw
+m_flZoomAmount0
+m_flZoomAmount1
+m_flZoomMax
+m_flZoomScale
 m_flags
 m_flexControllers
 m_floatAttributes
 m_floatParams
 m_hBuffer
+m_hMotionVectorsTexture
+m_hNormalTexture
 m_hSnapshot
+m_hTexture
 m_hingeAxis
 m_hitboxsets
+m_id
 m_includedGroupArray
 m_includedGroupArray_Handle
 m_indexBuffer
 m_influenceFlags
 m_influenceNames
 m_influenceWeights
+m_inputConnection
+m_inputConnection1
+m_inputConnection2
 m_inputList
 m_inputValue
 m_intAttributes
@@ -2534,6 +2639,7 @@ m_nFormat
 m_nFrameCount
 m_nGroupId
 m_nGroupType
+m_nHand
 m_nHeight
 m_nHitBoxIndex
 m_nIncrement
@@ -2542,6 +2648,7 @@ m_nInfluences
 m_nInstanceCount
 m_nLayerId
 m_nLayerIndex
+m_nLightType
 m_nMapType
 m_nMeshID
 m_nMinParticlesToEmit
@@ -2553,6 +2660,7 @@ m_nNumObjects <= V_ARRAYSIZE( m_objectReferences )
 m_nNumObjects >= 0
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOutputBlendMode
 m_nOverrideCP
 m_nOverrideCP2
 m_nParticlesToEmit
@@ -2566,13 +2674,17 @@ m_nScaleCPComponent
 m_nScaleCPField
 m_nScaleControlPoint
 m_nScaleControlPointField
+m_nSequenceCombineMode
 m_nSetMethod
 m_nShapeType
 m_nSlaveAxis
 m_nSlaveChannel
+m_nSortMethod
 m_nStartIndex
 m_nStartInstance
 m_nTargetAxis
+m_nTextureChannels
+m_nTextureType
 m_nType
 m_nUpType
 m_nValue
@@ -2580,8 +2692,12 @@ m_nVectorComponent
 m_nVertexCount
 m_nViewId
 m_nWidth
+m_nodeID
+m_nodeManager
+m_nodes
 m_outerKnuckle1
 m_outerKnuckle2
+m_outputID
 m_outputMorph
 m_outputTransformList
 m_outputWeightList
@@ -2622,6 +2738,8 @@ m_skeleton
 m_slaves
 m_snapshotName
 m_stringAttributes
+m_subtractChildID
+m_subtractInputConnection
 m_szChannelClass
 m_szDescription
 m_szElementNameArray
@@ -2665,6 +2783,7 @@ m_vecMax
 m_vecMin
 m_vecSize
 m_vecTailColorScale
+m_vecTexturesInput
 m_vectorAttributes
 m_vectorParams
 m_vertexBuffers
@@ -2721,9 +2840,9 @@ materials/dev/ssao_downsample_depth.vmat
 materials/dev/ssao_scalable_ao.vmat
 materials/dev/tonemap_query.vmat
 materials/effects/aoproxy_splat.vmat
-materials/effects/lightcookies.txt
 materials/effects/lightcookies.vtex
 materials/error.vmat
+materials/particle/base_sprite.vtex
 materials/tools/copy_texture_with_gamma.vmat
 materials/tools/copy_to_backbuffer.vmat
 materialsystem2
@@ -2801,9 +2920,9 @@ norm
 notconnected
 notify
 null
-null material
 numsegments
 nxnstripped
+occlusionproxyvb
 offset_angles
 offset_origin
 operation
@@ -2923,7 +3042,6 @@ sc_animatable_disable_materials
 sc_animatable_fastpath_always_bind_materials
 sc_animatable_fastpath_enable_sort
 sc_aux_cameras_enabled
-sc_aux_cameras_single_submit
 sc_batch_layer_cb_updates
 sc_bounds_group_cull
 sc_cache_envmap_lpv_lookup
@@ -2942,7 +3060,6 @@ sc_dumpworld
 sc_dumpworld %d
 sc_dumpworld3d
 sc_dumpworld3d %d
-sc_dynamic_job_scheduling
 sc_enable_discard
 sc_extended_stats
 sc_force_camera
@@ -2952,6 +3069,7 @@ sc_force_push_constant_update_every_draw
 sc_force_single_display_list_per_layer
 sc_force_translation_in_projection
 sc_keep_all_layers
+sc_layer_batch_threshold
 sc_list_extradata_allocations
 sc_listworlds
 sc_lod_distance_scale_override
@@ -2959,7 +3077,6 @@ sc_log_stats
 sc_log_submits
 sc_max_framebuffer_copies_per_layer
 sc_mesh_backface_culling
-sc_multithread_sorted_layers
 sc_new_morph_atlasing
 sc_no_cull
 sc_no_vis
@@ -2967,11 +3084,9 @@ sc_only_render_opaque
 sc_only_render_shadowcasters
 sc_override_shadow_fade_max_dist
 sc_override_shadow_fade_min_dist
-sc_partitions_per_job
 sc_precise_projection_to_world
 sc_queue_reflection_views_to_layers
 sc_reject_all_objects
-sc_schedule_fullsort_early
 sc_setclassflags
 sc_setclassflags %s %d
 sc_setfloatattr
@@ -3004,11 +3119,12 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(6200): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(7436): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(3277):
+scenesystem.cpp(5585): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(6803): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
-scenetexturearray_%d
+scenetextureset_%d
 sceneviewdebugoverlays.cpp
 schema
 schemabindings.cpp
@@ -3049,6 +3165,7 @@ srgb
 srgbgammatolinear
 ss_added
 std::_Function_base::_Base_manager<void (*)(CSceneObject*)>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
+std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
 std::__exception_ptr::exception_ptr::exception_ptr(std::__exception_ptr::exception_ptr const&)
 std::__exception_ptr::exception_ptr::swap(std::__exception_ptr::exception_ptr&)
 std::__exception_ptr::exception_ptr::~exception_ptr()
@@ -3089,6 +3206,7 @@ std::locale::locale()
 std::locale::~locale()
 std::ostream& std::ostream::_M_insert<double>(double)
 std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long)
+std::ostream& std::ostream::_M_insert<void const*>(void const*)
 std::ostream::flush()
 std::ostream::operator<<(int)
 std::ostream::put(char)
@@ -3153,8 +3271,14 @@ trying to move layer %s after unfound layer %s
 trying to move non existent layer
 turn_rate
 typeinfo for CThreadSyncObject
+typeinfo for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo for std::_Sp_make_shared_tag
 typeinfo for std::__future_base::_Result_base
 typeinfo for std::__future_base::_State_base
+typeinfo name for std::_Mutex_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
+typeinfo name for std::_Sp_make_shared_tag
 unrecognized string in token spec %s
 unspecified
 useMotionDamping
@@ -3226,6 +3350,8 @@ vpcf24
 vpcf25
 vpcf26
 vpcf27
+vpcf28
+vpcf29
 vpcf3
 vpcf4
 vpcf5
