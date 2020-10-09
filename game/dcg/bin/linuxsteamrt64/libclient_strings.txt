@@ -570,6 +570,7 @@
 #DCG_ActionHint_Improvement_kill
 #DCG_ActionHint_Improvement_kill_AnyLane
 #DCG_ActionHint_Improvement_move
+#DCG_ActionHint_Lane
 #DCG_ActionHint_LaneOnly
 #DCG_ActionHint_NoValidTargets
 #DCG_ActionHint_SelectALaneToModify
@@ -1147,6 +1148,7 @@
 #DCG_Glossary_SpellImmunity
 #DCG_Glossary_SpellMunity
 #DCG_Glossary_Spell_Title
+#DCG_Glossary_Strike
 #DCG_Glossary_Stun
 #DCG_Glossary_Stunned
 #DCG_Glossary_Summon
@@ -1687,6 +1689,8 @@
 #DCG_StartMatchmaking_TournamentNoMatches
 #DCG_StatusEffectSummaryTooltip_Desc
 #DCG_StatusEffectSummaryTooltip_Header
+#DCG_SteamLogIn_FailedGeneric
+#DCG_SteamLogIn_FailedPassword
 #DCG_SwissRoundLabel
 #DCG_System_ClientVersionOutOfDate
 #DCG_System_ClientVersionOutOfDateTitle
@@ -2698,7 +2702,6 @@ $tI
 %.1f
 %.1f %.1f %.1f
 %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f
-%.2f (client: post update)
 %.2f: client (pre-update)
 %.2fs - %s - %s - Job ID: %llu
 %.2f|%.2f|%.2f|%.2f
@@ -2827,7 +2830,6 @@ $tI
 %d:%s::%s %s
 %d=%s:  pos[ %8.3f %8.3f %8.3f ] ang[ %8.3f %8.3f %8.3f ]
 %dd_%s
-%dg
 %dp
 %dx%d
 %dx%d%s
@@ -3389,7 +3391,7 @@ $tI
 (\bminion\b)
 (\bmodify\b)
 (\bneighbors?\b)
-(\bpassed\b)
+(\bpassed(?! this)\b)
 (\bpierce\b)
 (\bpiercing\b)
 (\bpillager\b)
@@ -3412,6 +3414,9 @@ $tI
 (\bsneak attacks?\b)
 (\bsoulbound\b)
 (\bspell(s)?\b)
+(\bstrike\b)
+(\bstrikes\b)
+(\bstriking\b)
 (\bstun\b)
 (\bsummon\b)
 (\bswap(?! their colors?)(?! colors?)\b)
@@ -3737,6 +3742,7 @@ $tI
 *ZN12CDCGCardView26UpdateStatusEffectEntitiesEvEUlP16CDCGStatusEffectE_
 *ZN12CDCGCardView27BHasActivatableRuleEntitiesEvEUlP20CDCGCardAttachEntityE_
 *ZN12CDCGCardView27SetAttachedEntityVisibilityEbEUlP28CDCGCompositeStateRuleEntityE_
+*ZN12CDCGCardView28GetTilePositionForCardEffectE13StrongTypedefIj13CardIDTypeTagLj0EER6VectorEUlP20CDCGCardAttachEntityE_
 *ZN12CDCGCardView29BChildrenHaveActiveAnimationsEvEUlP28CDCGCompositeStateRuleEntityE_
 *ZN12CDCGCardView29GetChildEntityBasedOnObjectIDE13StrongTypedefIj15ObjectIDTypeTagLj0EEEUlP20CDCGCardAttachEntityE0_
 *ZN12CDCGCardView29GetChildEntityBasedOnObjectIDE13StrongTypedefIj15ObjectIDTypeTagLj0EEEUlP20CDCGCardAttachEntityE_
@@ -4528,6 +4534,7 @@ $tI
 10CTableGame
 10CUI_Canvas
 10CUtlVectorI13EGlossaryTerm10CUtlMemoryIS0_iEE
+10CUtlVectorI15CUtlStringToken10CUtlMemoryIS0_iEE
 10CUtlVectorI26TourneyPlayerSeedingInfo_t10CUtlMemoryIS0_iEE
 10CUtlVectorIN17CDCGDeckValidator17ValidationError_tE10CUtlMemoryIS1_iEE
 10CUtlVectorIj10CUtlMemoryIjiEE
@@ -6786,6 +6793,7 @@ $tI
 25CDCG_SettingsEnumDropDown
 25CDCG_UI_Popup_ManagePacks
 25CDCG_UI_Popup_MiniProfile
+25CDCG_UI_Popup_Steam_Login
 25CDCG_UI_SettingsKeyBinder
 25CDCG_UI_TourneyPhaseSwiss
 25CDCG_UI_TourneySeriesNode
@@ -8793,6 +8801,7 @@ $tI
 7CTEDust
 7CTEFizz
 7C_World
+7EResult
 7ICamera
 7IConVar
 7INotify
@@ -11421,7 +11430,8 @@ Assassin's Apprentice
 Assassin's Shadow
 Assassin's Veil
 Assault Ladders
-AssertMsg_ConditionFailed
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 Assertion Failed in function %s():%s
 Asset Modifiers
 Asset modifier index %d must be greater than or equal to zero
@@ -11765,6 +11775,11 @@ Block size: %-11s Alloc'd: %8d Num blobs: %5d (%s)
 BlogPopup
 BloodImpact
 BloodImpact_global_client
+Bloodlvl2
+Bloodlvl3
+Bloodlvl4
+Bloodlvl5
+Bloodlvl6
 Bloodseeker
 BlueColorFilter
 BlurBackground
@@ -11993,7 +12008,6 @@ CBasePropDoor
 CBaseTempEntity::StaticInitTempEnts()
 CBaseToggle
 CBaseTrigger
-CBaseViewModel
 CBaseWorldPanel::Init
 CBeam
 CBitVec
@@ -13573,6 +13587,7 @@ C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
+C_INIT_CreateOnModel
 C_INIT_CreateOnModelAtHeight
 C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
@@ -13611,6 +13626,7 @@ C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
 C_INIT_SetHitboxToClosest
+C_INIT_SetHitboxToModel
 C_INIT_SetRigidAttachment
 C_INIT_VelocityFromCP
 C_INIT_VelocityFromNormal
@@ -13643,7 +13659,6 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
-C_OP_RemapSpeedtoCP
 C_OP_RenderModels
 C_OP_RenderRopes
 C_OP_RenderSprites
@@ -14729,6 +14744,7 @@ DCGCampaignMap
 DCGCampaignStartMatch
 DCGCancelInProgressPurchase
 DCGCancelJoinChatChannel
+DCGCancelSteamLogin
 DCGCapabilitiesChanged
 DCGCardAttributeTooltip
 DCGCardBack
@@ -14979,6 +14995,7 @@ DCGHeroButtonRow
 DCGHeroButtonSwapped
 DCGHeroZoneChanged
 DCGHideAllTooltips
+DCGHideCardStatusTooltip
 DCGHideCardTooltip
 DCGHideDeckErrorsTooltip
 DCGHideDeckInfoTooltip
@@ -15079,6 +15096,7 @@ DCGMiniProfile
 DCGMiniProfileAddFriend
 DCGMiniProfileClicked
 DCGMiniProfileProgressClicked
+DCGMobileSteamLogin
 DCGMusic.CaravanFull
 DCGMusic.Catalogue
 DCGMusic.Defeat_01
@@ -15283,6 +15301,7 @@ DCGShowBotMatchPage
 DCGShowCallToArmsPage
 DCGShowCampaignPage
 DCGShowCardInfo
+DCGShowCardStatusTooltip
 DCGShowCardTemplatedTooltipInGame
 DCGShowCardTooltip
 DCGShowCataloguePage
@@ -15352,6 +15371,7 @@ DCGShowSocialPlayPage
 DCGShowSoloPlayPage
 DCGShowSplashAdPopup
 DCGShowStandardPlayPage
+DCGShowSteamPasswordClicked
 DCGShowSubmitFeedback
 DCGShowSwissTieBreakersTooltip
 DCGShowTextForThingCopiedSuccessfully
@@ -15378,6 +15398,13 @@ DCGStartEventSoundLoop
 DCGStartSuppressingPopups
 DCGSteamChatButtonClicked
 DCGSteamChatContextMenu
+DCGSteamLoginCreateAccount
+DCGSteamLoginHelp
+DCGSteamLoginResultFailed
+DCGSteamLoginResultSteamGuard
+DCGSteamLoginStart
+DCGSteamLoginSubmitSteamGuard
+DCGSteamLoginSubmitUsernamePassword
 DCGStopEventSoundLoop
 DCGStopHoverSummary
 DCGStopSuppressingPopups
@@ -16991,6 +17018,7 @@ Fade %d: [%d,%d,%d,%d] -> %d  %s
 Fades: %d ------------------------------------
 Fae Haunt
 Fail
+FailMessage
 Failable achievement %s has been evaluated (%s), now inactive
 Failable achievement %s now active
 Failed command: %s
@@ -17931,6 +17959,7 @@ HasActiveAbility
 HasActiveConditionalDamageBonus
 HasArmor
 HasAttack
+HasAttackPowerModifier
 HasBattleDamageIsLethalToCreeps
 HasBattleDamageIsLethalToHeroes
 HasBattleDamageIsPiercing
@@ -17943,22 +17972,27 @@ HasChallenge
 HasCharges
 HasChargesAndCooldown
 HasCleave
+HasCleaveModifier
 HasClickAction
 HasColorSet
 HasCreator
 HasDamageType
 HasDeathShield
+HasDeathShieldModifier
+HasDecayModifier
 HasDeck
 HasDeckCode
 HasDeckErrors
 HasDeckSelection
 HasDescription
+HasDisarmedModifier
 HasEditStage
 HasEnoughCurrency
 HasEntryFee
 HasEntryFeePacks
 HasEntryFeeTickets
 HasExtra
+HasFeebleModifier
 HasField
 HasFinalRank
 HasFriendsInArtifact
@@ -17969,6 +18003,7 @@ HasGoldCost
 HasHealth
 HasHeroAssigned
 HasHighScore
+HasImmuneModifier
 HasIncludeCard
 HasInitiative
 HasInput
@@ -17999,31 +18034,42 @@ HasPerfectRuns
 HasPhantomAccess
 HasPhantomCards
 HasPiercing
+HasPiercingModifier
 HasPowerCounters
 HasPrice
 HasPrivateLobby
+HasQuickstrikeModifier
 HasRank
+HasRapidDeployModifier
 HasRapidDeployment
 HasRegeneration
+HasRegenerationModifier
 HasRegisterGauntlet
 HasRegisteredDeck
 HasRemainingPacks
 HasRetaliate
+HasRetaliateModifier
 HasRevealed
 HasRewardPacks
 HasRewardTickets
+HasRootedModifier
 HasSaveAndReturnButton
 HasSeedStage
 HasSiege
+HasSiegeModifier
 HasSilenced
+HasSilencedModifier
 HasStacks
 HasStageMsg
 HasStunned
+HasStunnedModifier
 HasText
 HasTicketReward
 HasTicketRewards
 HasTitleImage
 HasTournamentEntryFee
+HasTrackedModifier
+HasTrampleModifier
 HasTrialCards
 HasTwoIncludeCards
 HasUnaccountedGoldSpend
@@ -18031,6 +18077,7 @@ HasUnlockedBadges
 HasUnowned
 HasUnownedCards
 HasUnreadMessages
+HasUntargetableModifier
 HasValidCard
 HasWin
 HashString
@@ -18120,6 +18167,7 @@ Hide the profile card tooltip.
 Hide the set tooltip.
 Hide the tile if it's a tile
 Hide/reveal the UI while in game
+HideBattleSleeve
 HideCardCount
 HideChatRoom
 HideCollectionFilters
@@ -18405,6 +18453,7 @@ In-Game Scale:
 In:%f Out:%f Frametime:%f
 InCatalogue
 InFountain
+InFountainOrDeploy
 InHandCard
 InInspectView
 InInvitePhase
@@ -18893,6 +18942,7 @@ IsChaosGauntlet
 IsClaimed
 IsClosed
 IsClosing
+IsColorless
 IsCombatLane
 IsCompleted
 IsCornerNode
@@ -18962,6 +19012,7 @@ IsLiveDraft
 IsLocal
 IsLocalProfile
 IsLossButton
+IsLowMemoryDevice
 IsMana
 IsMarkedForDeletion
 IsMember
@@ -18983,6 +19034,8 @@ IsOutro
 IsPartialProgress
 IsPassiveAbility
 IsPathingDeck
+IsPlatformMobile
+IsPlatformPC
 IsPlayer
 IsPlaying
 IsPlayingAIPlayer
@@ -19400,6 +19453,7 @@ Line %d: %s
 Line %d: Invalid literal value "%s"
 Line %d: Invalid value "%s"
 Line2D
+Linear
 Linear Interp.
 Linear_B
 LinkAvailable
@@ -19517,6 +19571,7 @@ LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, Color, char 
 LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, char const*, ...)
 LoggingSystem_RegisterLoggingChannel
 Logic problem? szsrc =
+LoginFailedOKButton
 LongLanguage
 Look At
 Look At Transition
@@ -19717,7 +19772,6 @@ MarkInterpolationLatchFlagsDirty:  C_BaseEntity::IsLatchedPermissible() == false
 MarkSurroundingBoundsDirty
 MarkerNotValid
 Markers
-MarketDataUpdated
 MarketPricesVisible
 Marrow Rust
 Marrowfell Brawler
@@ -20647,6 +20701,7 @@ N8panorama14CUIPanelEvent1IfEE
 N8panorama14CUIPanelEvent1IiEE
 N8panorama14CUIPanelEvent1IjEE
 N8panorama14CUIPanelEvent1IyEE
+N8panorama14CUIPanelEvent2I10CUtlVectorI15CUtlStringToken10CUtlMemoryIS2_iEE13StrongTypedefIj15ObjectIDTypeTagLj0EEEE
 N8panorama14CUIPanelEvent2I20GenericPopupResult_tPKcEE
 N8panorama14CUIPanelEvent2INS_16ScrollBehavior_tEbEE
 N8panorama14CUIPanelEvent2INS_18HtmlFormHasFocus_tEPKcEE
@@ -20830,6 +20885,7 @@ N8panorama9CUIEvent1I15ECameraPositionEE
 N8panorama9CUIEvent1I16PrivateLobbyID_tEE
 N8panorama9CUIEvent1I20ELeaderboardViewModeEE
 N8panorama9CUIEvent1I20TourneySelectEvent_tEE
+N8panorama9CUIEvent1I7EResultEE
 N8panorama9CUIEvent1I8itemid_tEE
 N8panorama9CUIEvent1I9EventID_tEE
 N8panorama9CUIEvent1I9QuestID_tEE
@@ -21260,7 +21316,6 @@ O'
 O*9y
 O+
 OK
-OKButton
 ORIENT
 OSCILLATE_POSE_PARAMETERS
 OUTBUFF_FULL
@@ -21296,7 +21351,6 @@ Old_South_Arabian
 Old_Turkic
 Omniknight
 OnAbandonLobby
-OnAmmoChanged
 OnAnimTimeChanged
 OnAnimationBegun
 OnAnimationDone
@@ -21347,6 +21401,7 @@ OnFocusAttack
 OnGainedAppliedEffect
 OnGameActivate
 OnGlowColorChanged
+OnGlowTypeChanged
 OnGoldEarned
 OnHeadOffsetChanged
 OnImpDealingCardsOnTheFlop
@@ -21555,7 +21610,7 @@ PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../sh
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:536
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
 PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../../shared/rendergamesystem.cpp:1168
-PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2375
+PARALLEL_PROCESS _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../c_baseentity.cpp:2388
 PARALLEL_PROCESS particlemgr.cpp:975
 PARALLEL_PROCESS tinyexr_impl.cpp:163
 PARALLEL_PROCESS utlsoacontainer.cpp:2531
@@ -21566,6 +21621,9 @@ PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
 PARTICLE_EHANDLE__
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_LIGHT_TYPE_FX
 PARTICLE_LIGHT_TYPE_POINT
 PARTICLE_LIGHT_TYPE_SPOT
@@ -21752,14 +21810,20 @@ PE_MOUSE_CLICK_PURCHASABLE_ITEM
 PE_MOUSE_END_CARD_DRAG
 PE_MOUSE_END_CARD_DRAG_CROSSLANE
 PE_MOUSE_END_CARD_DRAG_HERO_DEPLOYMENT
+PE_MOUSE_ENTER_CARD_ARMOR
+PE_MOUSE_ENTER_CARD_ATTACK
 PE_MOUSE_ENTER_CARD_DRAGGABLE
 PE_MOUSE_ENTER_CARD_DRAGGABLE_CROSSLANE
 PE_MOUSE_ENTER_CARD_DRAGGABLE_HACKED
 PE_MOUSE_ENTER_CARD_HAS_ACTION
+PE_MOUSE_ENTER_CARD_HEALTH
 PE_MOUSE_ENTER_PURCHASABLE_ITEM
+PE_MOUSE_EXIT_CARD_ARMOR
+PE_MOUSE_EXIT_CARD_ATTACK
 PE_MOUSE_EXIT_CARD_DRAGGABLE
 PE_MOUSE_EXIT_CARD_DRAGGABLE_CROSSLANE
 PE_MOUSE_EXIT_CARD_HAS_ACTION
+PE_MOUSE_EXIT_CARD_HEALTH
 PE_MOUSE_EXIT_PURCHASABLE_ITEM
 PE_MOUSE_TARGET_CHOSEN
 PE_PREVIEW_CARD_COMBAT_EFFECT_CLEAVE_ACTIVE_ENABLE
@@ -22463,6 +22527,7 @@ PopupSelectCardBack--SelectingDefault
 PopupSettings
 PopupShowAsync
 PopupSimulateCollection
+PopupSteamLogin
 PopupSubmitFeedback
 PopupTest
 PopupTickets
@@ -23742,6 +23807,7 @@ Set the message on this entity.
 Set the name of %s to %s
 Set to 1 and the game instructor will run EVERY scripted command to uncover errors.
 Set to 1 for standard debugging or 2 (in combo with gameinstructor_verbose_lesson) to show update actions.
+Set to 1 to see animgraph variable changes for non-player entities. Set to 2 to see it for players as well. Set to 3 to see all sets, even if the value is the same.
 Set to 1 to use mouse for look, 0 for keyboard look. Cannot be set while connected to a server.
 Set to draw...
 Set to not draw...
@@ -23786,6 +23852,7 @@ SetDamageType
 SetDebugTarget
 SetDialogVariable
 SetDialogVariableInt
+SetDialogVariableLocString
 SetDialogVariableTime
 SetDirection
 SetDisableFocusOnMouseDown
@@ -24414,9 +24481,15 @@ StatBuffed
 StatDebuffed
 StatNeutral
 StateBuilder::CombatUnit* std::__uninitialized_copy<false>::__uninit_copy<StateBuilder::CombatUnit const*, StateBuilder::CombatUnit*>(StateBuilder::CombatUnit const*, StateBuilder::CombatUnit const*, StateBuilder::CombatUnit*)
+StateConnecting
+StateEnterSteamGuard
+StateEnterUsernamePassword
 StateFindingMatch
 StateIdle
 StateInGame
+StateIntro
+StateLoginFailed
+StateWorking
 Static Decal VB Slots Used: %d out of %d
 Static Field
 Static Remnant
@@ -24430,6 +24503,8 @@ Status:
 StatusEffectArtwork
 StatusEffectElement
 StatusEffectName
+StatusModifier
+StatusModifier%i
 Steal Strength
 Steam Cannon
 Steam Failed State Mismatch
@@ -24708,6 +24783,7 @@ Test the event point reward dialog.
 Test the gauntlet reward dialog.
 Test the rank up dialog. <optional old rank> <optional new rank> <optional old leaderboard> <optional new leaderboard>
 Test the reward popup queue with multiple popups.
+Test the steam login popup.
 Test updating the event data in main menu
 TestFormatA
 TestFormatB
@@ -25510,6 +25586,7 @@ UserInfoChangeService_001
 UserInputActive
 UserMessages
 UserNickname
+Username
 Using 16-bit blend indices
 Using a specific item loot list as part of a static recipe. Use the general loot list version instead
 Using already-built %s 0x%p
@@ -26686,7 +26763,6 @@ _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _InGame
 _Jv_RegisterClasses
-_Lane
 _NOT_A_REAL_CARD_
 _PrecacheGlowMaterial_client
 _Strategy
@@ -26770,6 +26846,7 @@ _attr_
 _buildcubemaps.vpk
 _buildcubemaps/env_cubemap_%d
 _buildcubemaps/env_cubemap_array
+_builtins
 _dir.vpk
 _edata
 _end
@@ -27129,7 +27206,6 @@ angular_fog_max_start
 angular_fog_min_end
 angular_fog_min_start
 angular_velocity_cp
-animTimeSerializer
 anim_disable
 anim_name
 anim_name_a
@@ -27174,6 +27250,7 @@ any
 apostrophe
 application/json
 apply_if_card_id_is
+apply_to_all_attribute_modifier_sources
 apply_to_all_automatic_targets
 apply_to_all_click_action_targets
 apply_to_all_drag_action_targets
@@ -28286,7 +28363,6 @@ contextual_hints
 contrast
 control_point_number
 control_points
-control_points_list
 controls
 controlsnotfullscreen
 convar
@@ -28322,7 +28398,6 @@ country_code
 courier_flying
 cp0_model
 cp0_snapshot
-cp_number
 cp_position
 cpoint%d
 cpoint%d_value
@@ -28759,6 +28834,7 @@ dcg_hero_light_offset
 dcg_hero_light_radius
 dcg_heroes_can_be_displaced_by_heroes
 dcg_hide_ai_deck
+dcg_hide_battle_sleeve
 dcg_hold_secret_shop_card
 dcg_hud_chat_wheel_debug
 dcg_hud_reload
@@ -28826,6 +28902,7 @@ dcg_join_regional_chat_channel
 dcg_keybindings_cloud_disable
 dcg_lane_info
 dcg_last_closed_motd
+dcg_last_paste_board_text
 dcg_last_play_context
 dcg_lightenvironment_fullambient
 dcg_lightenvironment_output_overrides
@@ -28932,7 +29009,7 @@ dcg_set_camera_override
 dcg_set_card_unlock_level
 dcg_set_charges
 dcg_set_tower_health
-dcg_setup_board_from_clipboard
+dcg_setup_board_from_text
 dcg_shop
 dcg_shop_blacklist
 dcg_shop_blacklist_ai
@@ -28964,6 +29041,7 @@ dcg_show_rankup_dialog
 dcg_show_reward_popups
 dcg_show_shot_clock_seconds
 dcg_show_splash_ads
+dcg_show_steam_login
 dcg_show_timer_rope
 dcg_show_tutorial_welcome_message
 dcg_siege_hits_always
@@ -28982,6 +29060,7 @@ dcg_stack_duplicate_rules_tiles
 dcg_start_with_creeps
 dcg_status_effect
 dcg_stop_timer_rope
+dcg_suppress_aura_source_beams
 dcg_suppress_beams_to_dangerous_targets
 dcg_sync_deployment_buttons
 dcg_target_selection_x
@@ -29495,6 +29574,7 @@ error in user chunk
 error opening required file %s
 error-text
 errorCutoff
+error_code
 es-419
 es_419
 es_ES
@@ -29696,6 +29776,24 @@ file://{images}/main_menu/icon_friends_ingame.psd
 file://{images}/main_menu/icon_notification_generic.psd
 file://{resources}/browser/webkit.css
 file://{resources}/dcg_keybinds.cfg
+file://{resources}/images/status_modifiers/statusfxicon_cleave.psd
+file://{resources}/images/status_modifiers/statusfxicon_dammageimmune.psd
+file://{resources}/images/status_modifiers/statusfxicon_deathshield.psd
+file://{resources}/images/status_modifiers/statusfxicon_decay.psd
+file://{resources}/images/status_modifiers/statusfxicon_disarmed.psd
+file://{resources}/images/status_modifiers/statusfxicon_feeble.psd
+file://{resources}/images/status_modifiers/statusfxicon_pierce.psd
+file://{resources}/images/status_modifiers/statusfxicon_quick.psd
+file://{resources}/images/status_modifiers/statusfxicon_rapiddeploy.psd
+file://{resources}/images/status_modifiers/statusfxicon_regeneration.psd
+file://{resources}/images/status_modifiers/statusfxicon_retaliate.psd
+file://{resources}/images/status_modifiers/statusfxicon_rooted.psd
+file://{resources}/images/status_modifiers/statusfxicon_siege.psd
+file://{resources}/images/status_modifiers/statusfxicon_silenced.psd
+file://{resources}/images/status_modifiers/statusfxicon_stunned.psd
+file://{resources}/images/status_modifiers/statusfxicon_tracked.psd
+file://{resources}/images/status_modifiers/statusfxicon_trample.psd
+file://{resources}/images/status_modifiers/statusfxicon_untargetable.psd
 file://{resources}/layout/account_badge.xml
 file://{resources}/layout/base.xml
 file://{resources}/layout/base_hud.xml
@@ -29871,6 +29969,7 @@ file://{resources}/layout/popups/popup_reward_event_points.xml
 file://{resources}/layout/popups/popup_select_card_back.xml
 file://{resources}/layout/popups/popup_select_player.xml
 file://{resources}/layout/popups/popup_settings.xml
+file://{resources}/layout/popups/popup_steam_login.xml
 file://{resources}/layout/popups/popup_test.xml
 file://{resources}/layout/popups/popup_tickets.xml
 file://{resources}/layout/popups/popup_tourney_add_phase.xml
@@ -30601,6 +30700,7 @@ http://replay%u.%s/%u/%llu.dem.bz2
 http://replay%u.%s/%u/%llu_%d.dem.bz2
 https://
 https://%s
+https://help.steampowered.com/%s/wizard/HelpWithLogin
 https://localhost/store/account/preferences#CommunityContentPreferences
 https://playartifact.com/latestpost/?l=%s
 https://steamcommunity.com/games/1269260/announcements
@@ -32807,6 +32907,8 @@ m_flGustDuration
 m_flHDRColorScale
 m_flHandPoseParams
 m_flHeight
+m_flHitBoxScale
+m_flHitboxScale
 m_flHorzSize
 m_flHudHintMinDisplayTime
 m_flHudHintPollTime
@@ -33349,6 +33451,7 @@ m_iszPhysicsDamageTableName
 m_iszPrivateVScripts
 m_iszSoundScriptName
 m_iszStackName
+m_iszWeaponParseDataNameOverride
 m_iv_AnimOpHistory
 m_iv_AnimOverlay
 m_iv_AnimOverlay[ %d ]
@@ -33590,9 +33693,11 @@ m_nOldManaCost
 m_nOldMuzzleFlashParity
 m_nOldOwnerID
 m_nOldTickBase
+m_nOpEndCapState
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
 m_nOrder
+m_nOrientationType
 m_nOutputBlendMode
 m_nOutputID
 m_nOutputType
@@ -33868,6 +33973,7 @@ m_sRequiredAddons
 m_sSpawnGroupName
 m_sSurfaceProperty
 m_sTargetMorph
+m_sUniqueHammerID
 m_sUseString
 m_sUseSubString
 m_sVMName
@@ -34003,6 +34109,7 @@ m_vInfluenceRotations
 m_vLastCollisionOrigin
 m_vLightDirection
 m_vLiteralValue
+m_vLookTargetPosition
 m_vMaxExtentOrigin
 m_vMinExtentOrigin
 m_vModelScale
@@ -34062,6 +34169,7 @@ m_vecFlashlightRight
 m_vecFlashlightUp
 m_vecForce
 m_vecFreezeFrameStart
+m_vecHitBoxScale
 m_vecImpulse
 m_vecLadderNormal
 m_vecLandmarkAngles
@@ -34116,7 +34224,6 @@ m_vectorAttributes
 m_vectorParams
 m_version
 m_vertexBuffers
-m_viewtarget
 m_volume
 m_waterIdleParticleEffect
 m_waterWakeRunningParticleEffect
@@ -34325,6 +34432,7 @@ mediumvioletred
 medkit
 meepos united
 melee_hit
+melee_hit_player
 melee_hit_world
 melee_immune
 melee_miss
@@ -34836,12 +34944,14 @@ on_2_step_action
 on_ability_used
 on_action_cancelled
 on_all_heroes_deployed
+on_any_hero_killed
 on_card_cast
 on_card_drawn
 on_card_play_begin
 on_card_played
 on_cards_flop_start
 on_deploy_start
+on_dire_hero_killed
 on_dire_tower_destroyed
 on_equipment_card_ready
 on_failure
@@ -34849,6 +34959,7 @@ on_hand_scrollable
 on_hero_deployed
 on_improvement_played
 on_local_ability_ready
+on_local_actions_available
 on_local_crosslane_card_ready
 on_message_dismissed
 on_message_dismissed2
@@ -35129,6 +35240,7 @@ parentheses are too deeply nested (stack check)
 parentheses nested too deeply
 parentname
 parse
+parse_name_override
 parsing
 part%i
 part_name
@@ -35151,6 +35263,7 @@ particle-system
 particle-system( ... )
 particle-velocity-max
 particle-velocity-min
+particle_cfg_list
 particle_combined
 particle_control_point
 particle_create
@@ -36236,6 +36349,7 @@ recycleConversion
 recycleProgress
 recycleResultingPoints
 recycle_list
+recycle_recipes
 recycledCardCount
 recycledTicketCount
 reference to non-existent subpattern
@@ -38323,6 +38437,7 @@ typeinfo name for ELanguage
 typeinfo name for ELeaderboardViewMode
 typeinfo name for EPhaseAnnouncement_t
 typeinfo name for EReplayExistence
+typeinfo name for EResult
 typeinfo name for ETargetSelectionMethod
 typeinfo name for ETriggerConditionFlags
 typeinfo name for EVideoPlayerEvent
@@ -38844,6 +38959,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6

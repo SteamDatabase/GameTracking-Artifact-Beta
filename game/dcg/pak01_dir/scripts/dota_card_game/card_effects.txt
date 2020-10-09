@@ -2917,6 +2917,59 @@
 		}
 	}
 
+
+	"card_attribute_modifier_source_beam"
+	{
+		"particle_system"   "particles/card_effects/generic_link/generic_link_v3.vpcf"//new one please!
+		"attach_type"       "pattach_point_follow"
+		"attach_point"      "card_origin"
+		"destroy_immediately"	"0"
+		"play_endcap"		"1"
+		"apply_to_all_attribute_modifier_sources" "1" //This bit of code selects visible modifiers of the health/armor/attack when hovering over the card
+
+		"create_events"
+		{
+			"PE_MOUSE_ENTER_CARD_ATTACK"	"1"
+			"PE_MOUSE_ENTER_CARD_ARMOR"		"1"
+			"PE_MOUSE_ENTER_CARD_HEALTH"	"1"
+		}
+
+		"destroy_events"
+		{
+			"PE_MOUSE_EXIT_CARD_ATTACK"	"1"
+			"PE_MOUSE_EXIT_CARD_ARMOR"	"1"
+			"PE_MOUSE_EXIT_CARD_HEALTH"	"1"
+		}
+
+		"control_points"
+		{
+			"0"
+			{
+				//Attach point of the "home" point of the rope. This is the individual attachment being hovered over.
+				"type"			"target_orientation"
+				"attach_point"	"card_origin"
+			}
+			"1"
+			{
+				//Attach point of the "target" point of the rope. Probably wants to be tile!
+				"type"			"custom"
+				"x" 			"255"
+				"y" 			"0" 
+				"z" 			"0"
+			}
+			"2"
+			{
+				//Quality of the modifying effect
+				"type"			"custom"
+				"x" 			"255" //This value will be replaced with 0 for "negative" and 1 for "positive" aura values.
+				"y" 			"0" //Bonus! This value will be replaced with the actual value of the aura - i.e. -3, +1 etc.
+				"z" 			"0"
+			}
+
+		}
+	}
+
+
 	"card_action_target_beam"
 	{
 		"particle_system"   "particles/card_effects/generic_link/generic_link_v2.vpcf"

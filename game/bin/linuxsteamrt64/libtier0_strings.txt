@@ -418,7 +418,6 @@ $ORIGIN
 13CNoRefFunctor
 13COneTimeEvent
 13CProcessUtils
-13CWorkerThread
 13IFiberJobPool
 13IProcessUtils
 14CBaseAppSystemI10ICvarQueryE
@@ -555,7 +554,6 @@ $ORIGIN
 9ITestCase
 :
 ::<lambda_
-::_CAssertFastInternal::AssertionFailed
 <!--
 </a>
 </b>
@@ -642,6 +640,11 @@ Assert
 AssertMsg_ConditionFailed
 AssertValidStringPtr
 AssertValidWStringPtr
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, int*, char const*, ...)
+Assert_ConditionFailed(char const*, unsigned int, char const*, char const*, AssertionType_t, unsigned int)
+Assert_ConditionFailed(char const*, unsigned int, char const*, char const*, AssertionType_t, unsigned int, char const*, ...)
 Assertion Failed
 Assertion Failed in function %s():%s
 AssertionFailureListenerMiniDumpContext_t
@@ -1116,6 +1119,9 @@ CThread::Terminate(int)
 CThread::ThreadProc(void*)
 CThread::WaitForCreateComplete(CThreadEvent*)
 CThread::~CThread()
+CThreadBarrier::ArriveAndWait()
+CThreadBarrier::CThreadBarrier(unsigned int)
+CThreadBarrier::~CThreadBarrier()
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::CThreadEvent(char const*, bool, bool)
 CThreadEvent::Check()
@@ -1512,18 +1518,6 @@ CVirtualMemorySnapshot::IsEqualRegion(CVirtualMemorySnapshot const*, CVirtualMem
 CVirtualMemorySnapshot::Purge()
 CVirtualMemorySnapshot::Report(int) const
 CVirtualMemorySnapshot::~CVirtualMemorySnapshot()
-CWorkerThread::CWorkerThread()
-CWorkerThread::Call(unsigned int, unsigned int, bool, unsigned int (*)(unsigned int, CThreadEvent**, int, unsigned int))
-CWorkerThread::CallMaster(unsigned int, unsigned int)
-CWorkerThread::CallWorker(unsigned int, unsigned int, bool)
-CWorkerThread::GetCallHandle()
-CWorkerThread::GetCallParam() const
-CWorkerThread::PeekCall(unsigned int*)
-CWorkerThread::Reply(unsigned int)
-CWorkerThread::WaitForCall(unsigned int*)
-CWorkerThread::WaitForCall(unsigned int, unsigned int*)
-CWorkerThread::WaitForReply(unsigned int)
-CWorkerThread::WaitForReply(unsigned int, unsigned int (*)(unsigned int, CThreadEvent**, int, unsigned int))
 CXXABI_1.3
 Called Resume() on a thread that is not suspended!
 Can't open file (%s) passed to -testscript
@@ -1715,6 +1709,7 @@ GAMEDLL
 GCC: (Ubuntu 5.4.0-7steamrt1+srt1) 5.4.1 20160803
 GERMAN
 GLIBCXX_3.4
+GLIBCXX_3.4.11
 GLIBCXX_3.4.14
 GLIBCXX_3.4.15
 GLIBC_2.11
@@ -2310,6 +2305,7 @@ Plat_RelativeTickFrequency
 Plat_RelativeTicks
 Plat_ReleaseMouseCapture
 Plat_RemoveDirectory
+Plat_RemoveDirectoryTree
 Plat_RemoveFile
 Plat_RenameFile
 Plat_RequireSDL
@@ -2752,7 +2748,6 @@ Testing %d threads:
 Tests done, purging test memory...
 TextLayout_001
 Thread failed to initialize
-Thread failed to respond, probably exited
 Thread(%p/0x%llx)
 ThreadCloseProcess
 ThreadGetCurrentHandle
@@ -3400,7 +3395,6 @@ application
 archive
 asctime
 asctime_r
-assert_dialog.cpp
 at+
 backtrace
 base64_decode
@@ -3764,7 +3758,12 @@ std::__detail::_List_node_base::_M_hook(std::__detail::_List_node_base*)
 std::__detail::_List_node_base::_M_unhook()
 std::__throw_bad_alloc()
 std::__throw_bad_function_call()
+std::__throw_system_error(int)
 std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned long, char, std::allocator<char> const&)
+std::condition_variable::condition_variable()
+std::condition_variable::notify_all()
+std::condition_variable::wait(std::unique_lock<std::mutex>&)
+std::condition_variable::~condition_variable()
 std::ios_base::Init::Init()
 std::ios_base::Init::~Init()
 std::pair<std::_Rb_tree_iterator<std::pair<char const* const, unsigned long long> >, bool> std::_Rb_tree<char const*, std::pair<char const* const, unsigned long long>, std::_Select1st<std::pair<char const* const, unsigned long long> >, std::less<char const*>, std::allocator<std::pair<char const* const, unsigned long long> > >::_M_insert_unique<std::pair<char const*, unsigned long> >(std::pair<char const*, unsigned long>&&)
@@ -3810,7 +3809,6 @@ typeinfo for CThreadSyncObject
 typeinfo for CUniformRandomStream
 typeinfo for CUtlCharConversion
 typeinfo for CVProfReporter
-typeinfo for CWorkerThread
 typeinfo for CallStackStatStructDescFuncs
 typeinfo for IKeyValuesDumpContextAsText
 typeinfo name for BasicStatStructFieldDesc
@@ -3827,7 +3825,6 @@ typeinfo name for CThreadSyncObject
 typeinfo name for CUniformRandomStream
 typeinfo name for CUtlCharConversion
 typeinfo name for CVProfReporter
-typeinfo name for CWorkerThread
 typeinfo name for CallStackStatStructDescFuncs
 typeinfo name for IKeyValuesDumpContextAsText
 u
@@ -3874,7 +3871,6 @@ vtable for CThreadSyncObject
 vtable for CUniformRandomStream
 vtable for CUtlCharConversion
 vtable for CVProfReporter
-vtable for CWorkerThread
 vtable for IKeyValuesDumpContextAsText
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info

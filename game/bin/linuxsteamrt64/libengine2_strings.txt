@@ -916,7 +916,6 @@ $tI
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEFOut of Memory
 0123456789abcdef
-04:28:28
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0=Off, 1=Surface Wireframe, 2=Transparent Wireframe
@@ -1384,6 +1383,7 @@ $tI
 17IEngineServiceMgr
 17IGameEventWatcher
 180.0
+18:33:13
 18CBaseEngineServiceI12IToolServiceE
 18CBaseEngineServiceI13IInputServiceE
 18CBaseEngineServiceI13ISoundServiceE
@@ -1667,7 +1667,6 @@ $tI
 3 - bottom-right
 3 - down & right
 3.0
-30
 30000
 30CBidirMsg_RebroadcastGameEvent
 30CConnectGameClientPrerequisite
@@ -2064,11 +2063,12 @@ As the clock offset goes from cl_clock_correction_adjustment_min_offset to this 
 Assert if peak memory use is over the limit.
 AssertMsgTest( %s ) end
 AssertMsgTest( %s ) start
-AssertMsg_ConditionFailed
 AssertOnceTest( %s ) end
 AssertOnceTest( %s ) start
 AssertTest( %s ) end
 AssertTest( %s ) start
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 Assertion Failed in function %s():%s
 AssetBrowserSystem_001
 AssetPreviewSystem_001
@@ -3248,6 +3248,7 @@ C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
+C_INIT_CreateOnModel
 C_INIT_CreateOnModelAtHeight
 C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
@@ -3286,6 +3287,7 @@ C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
 C_INIT_SetHitboxToClosest
+C_INIT_SetHitboxToModel
 C_INIT_SetRigidAttachment
 C_INIT_VelocityFromCP
 C_INIT_VelocityFromNormal
@@ -3308,7 +3310,6 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
-C_OP_RemapSpeedtoCP
 C_OP_RenderModels
 C_OP_RenderRopes
 C_OP_RenderSprites
@@ -5921,7 +5922,7 @@ OUT_OF_RANGE
 Obtained EMS handle %u
 Obtained XMS handle %u
 Oct
-Oct  1 2020
+Oct  9 2020
 Ogham
 Ol_Chiki
 Old_Italic
@@ -6029,6 +6030,9 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_LIGHT_TYPE_FX
 PARTICLE_LIGHT_TYPE_POINT
 PARTICLE_LIGHT_TYPE_SPOT
@@ -9530,6 +9534,8 @@ m_flFingerWeight
 m_flFireTime
 m_flFootLength
 m_flFrameTime
+m_flHitBoxScale
+m_flHitboxScale
 m_flInitFromKilledParentParticles
 m_flInitialRadius
 m_flInitialSpeedMax
@@ -9687,8 +9693,10 @@ m_nMeshID
 m_nMinParticlesToEmit
 m_nNameHash
 m_nNoiseType
+m_nOpEndCapState
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOrientationType
 m_nOutputBlendMode
 m_nOutputID
 m_nOverrideCP
@@ -9848,6 +9856,7 @@ m_valueOverride
 m_variantValue
 m_vecCenter
 m_vecColorScale
+m_vecHitBoxScale
 m_vecMax
 m_vecMin
 m_vecSize
@@ -11358,6 +11367,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6

@@ -512,7 +512,6 @@ $SPECULARSCALE
 28C_OP_SetControlPointToCenter
 28C_OP_SetControlPointToPlayer
 28C_OP_SetPerChildControlPoint
-28IRefCountedParticleAttribute
 28ISchemaCollectionManipulator
 29CSchemaRegistration_particles
 29C_INIT_CreateSequentialPathV2
@@ -529,7 +528,6 @@ $SPECULARSCALE
 3
 3.0
 3.3f
-30
 30.0
 30C_INIT_RandomNamedModelElement
 30C_OP_LockToSavedSequentialPath
@@ -1073,6 +1071,7 @@ Alpha fade out simple
 Alpha random
 Alpha window threshold random
 Alpha with RGB as Alpha
+Always Enabled
 Amount of simulation time that can elapse before new systems start falling back to cheaper versions
 Anchor point source
 Angle;
@@ -1112,7 +1111,8 @@ Apply fog to particle
 Apply global light to color
 Arc Duration Maximum
 Arc Speed
-AssertMsg_ConditionFailed
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 AssetBrowse( vmat )
 AssetBrowse( vmdl )
 AssetBrowse( vpcf )
@@ -1908,6 +1908,7 @@ DevMsg(char const*, ...)
 Diffuse Infinite Zoom
 Diffuse Texture
 Disable to get a better look at what's happening offscreen
+Disabled During Endcap
 Distance - Nearest
 Distance to Both of Two Control Points
 Distance to Control Point
@@ -1925,6 +1926,7 @@ Do Nothing
 Do not repeat cycle
 Dominate(
 Don't Break
+Don't Set
 DotaCardGameClient_001
 Double-register of KV3 conversion (from '%s' to '%s')
 Double-save to Member '%s'
@@ -2384,7 +2386,6 @@ NETWORK_FIELD_DEFAULT_PRIORITY
 NETWORK_FIELD_HIGHEST_PRIORITY
 NETWORK_FIELD_LOWEST_PRIORITY
 NONE/Disabled
-NORMAL
 NULL
 NWay(
 Named model body part random
@@ -2438,6 +2439,7 @@ Offset vector to vector
 Omni Light
 On (If Possible)
 On (Required)
+Only Enabled During Endcap
 Only Render in effects bloom pass
 Operator Fade
 Operator Name
@@ -2488,6 +2490,9 @@ PARTICLE_DIR_NOISE_CURL
 PARTICLE_DIR_NOISE_PERLIN
 PARTICLE_DIR_NOISE_WORLEY_BASIC
 PARTICLE_EHANDLE__
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_FALLOFF_CONSTANT
 PARTICLE_FALLOFF_EXPONENTIAL
 PARTICLE_FALLOFF_LINEAR
@@ -2519,6 +2524,9 @@ PARTICLE_PIN_DISTANCE_LAST
 PARTICLE_PIN_DISTANCE_NEIGHBOR
 PARTICLE_PIN_DISTANCE_NONE
 PARTICLE_PIN_SPEED
+PARTICLE_ROTATION_LOCK_NONE
+PARTICLE_ROTATION_LOCK_NORMAL
+PARTICLE_ROTATION_LOCK_ROTATIONS
 PARTICLE_SELECTION_FIRST
 PARTICLE_SELECTION_LAST
 PARTICLE_SELECTION_NUMBER
@@ -2672,6 +2680,7 @@ ParticleControlPointDriver_t
 ParticleDepthFeatheringMode_t
 ParticleDetailLevel_t
 ParticleDirectionNoiseType_t
+ParticleEndcapMode_t
 ParticleFalloffFunction_t
 ParticleFloatBiasType_t
 ParticleFloatInputMode_t
@@ -2685,6 +2694,7 @@ ParticleOutputBlendMode_t
 ParticlePinDistance_t
 ParticlePreviewBodyGroup_t
 ParticlePreviewState_t
+ParticleRotationLockType_t
 ParticleSelection_t
 ParticleSetMethod_t
 ParticleSortingChoiceList_t
@@ -3065,6 +3075,8 @@ Set Float
 Set Frames Manually
 Set Normal
 Set Radius
+Set Rotations
+Set Rotations to Bones
 Set Simulation Timescale
 Set System-Wide Float
 Set Value
@@ -4058,6 +4070,7 @@ local space control point
 local space control point number
 local space scale
 lock rotation
+lock rotations to bone orientation
 lockRotationAlpha
 loop_break_on_damage
 loop_break_on_flashlight
@@ -4255,7 +4268,6 @@ m_bEndCap
 m_bEvenDistribution
 m_bExplosions
 m_bFireOnEmissionEnd
-m_bFitCycleToLifetime
 m_bFitToModelSize
 m_bFlipBasedOnYaw
 m_bFlipHorizontal
@@ -4344,6 +4356,7 @@ m_bOrientZ
 m_bOriginalModel
 m_bOutline
 m_bOverrideTranslucentMaterials
+m_bParticleFeathering
 m_bParticleShadows
 m_bParticles
 m_bPerParticle
@@ -4376,6 +4389,7 @@ m_bReverseOrder
 m_bReverseZBuffering
 m_bRightEye
 m_bRigid
+m_bRigidRotationLock
 m_bRopeDecay
 m_bRopes
 m_bRopesZOnly
@@ -4678,6 +4692,7 @@ m_flFreezeTime
 m_flFrequencyScale
 m_flHeadAlphaScale
 m_flHitBoxScale
+m_flHitboxScale
 m_flHueAdjust
 m_flIncrement
 m_flInitFromKilledParentParticles
@@ -4851,6 +4866,7 @@ m_flRemapTime
 m_flRestLength
 m_flRimLightScale
 m_flRoll
+m_flRotLerp
 m_flRotOffset
 m_flRotRate
 m_flRotRateMax
@@ -5275,6 +5291,7 @@ m_nRefCP2
 m_nRefractBlurRadius
 m_nRefractBlurType
 m_nRetargetStyle
+m_nRotationSetType
 m_nRoundness
 m_nScalarAttribute
 m_nScalarFieldForTextureCoordinate
@@ -5521,6 +5538,7 @@ m_vecDistanceScale
 m_vecForceAtMaxDist
 m_vecForceAtMinDist
 m_vecHeadColorScale
+m_vecHitBoxScale
 m_vecInput
 m_vecLocalCoordinateSystemSpeedScale
 m_vecMax
@@ -6066,6 +6084,9 @@ reverse order
 reverse point order
 reverse warp (0/1)
 reverse z-buffer test
+rigid rotation interpolation
+rigid rotation offset pitch/yaw/roll
+rigid set rotation from bones
 rnd_down
 rnd_up
 rootNode
@@ -6411,6 +6432,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6

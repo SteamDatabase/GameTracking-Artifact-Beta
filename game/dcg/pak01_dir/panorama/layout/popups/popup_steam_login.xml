@@ -1,0 +1,83 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_generic.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_steam_login.vcss_c" />
+	</styles>
+
+	<PopupSteamLogin popupbackground="dim">
+		<Panel class="BackgroundSteamLogo"/>
+
+		<Panel id="Intro" class="MainPage">
+			<Label class="Header" text="#DCG_SteamLogIn_Title"/>
+			<Label class="SubHeader" text="#DCG_SteamLogIn_Subheader"/>
+			<Panel class="SteamButton" onactivate="DCGSteamLoginStart()">
+				<Label text="#DCG_SteamAccountLogin"/>
+			</Panel>
+			<Panel class="Separator"/>
+			<Label class="NoAccount" text="#DCG_SteamCreateNewAccount"/>
+			<Panel class="SteamButtonOutline" onactivate="DCGSteamLoginCreateAccount()">
+				<Panel class="TextAndLogo">
+					<Label text="#DCG_SteamLogIn_CreateFree"/>
+					<Panel class="ExternalLinkIcon"/>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="EnterUsernamePassword" class="MainPage">
+			<Label class="Header" text="#DCG_SteamLogIn_Title"/>
+			<Panel class="Forms">
+				<Panel class="Form" tabindex="0">
+					<Label class="FormHeader" text="#DCG_SteamAccountName"/>
+					<TextEntry id="Username" class="FormEntry"/>
+					<Label class="FormFooter" text="#DCG_SteamLogIn_Help" acceptsfocus="false" onactivate="DCGSteamLoginHelp()"/>
+				</Panel>
+				<Panel class="Form" tabindex="1">
+					<Label class="FormHeader" text="#DCG_SteamAccountPassword"/>
+					<TextEntry id="Password" textmode="password" class="FormEntry" />
+				</Panel>
+				<Panel class="SteamButton" id="SubmitUsernamePasswordButton" onactivate="DCGSteamLoginSubmitUsernamePassword()">
+					<Label text="#DCG_SteamAccountLogin"/>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="EnterSteamGuard" class="MainPage">
+			<Label class="Header" text="#DCG_SteamLogIn_Title"/>
+			<Panel class="Forms">
+				<Panel class="Form">
+					<Label class="FormHeader" text="#DCG_SteamGuardCode"/>
+					<TextEntry id="SteamGuard" class="FormEntry"/>
+				</Panel>
+				<Panel class="SteamButton" onactivate="DCGSteamLoginSubmitSteamGuard()">
+					<Label text="#DCG_SteamAccountLogin"/>
+				</Panel>
+			</Panel>	
+		</Panel>
+
+		<Panel id="LoginFailed" class="MainPage">
+			<Label class="Header" text="#DCG_SteamLogIn_Title"/>
+			<Label id="FailMessage" text="#DCG_SteamLogIn_FailedGeneric"/>
+
+			<Panel class="SteamButton" id="LoginFailedOKButton" onactivate="DCGSteamLoginStart()">
+				<Label text="#OK"/>
+			</Panel>
+		</Panel>
+
+		<Panel id="Working" class="MainPage">
+			<Label class="Header" id="ConnectingToSteam" text="#DCG_ConnectingToSteam"/>
+			<Panel id="SteamLogoThrobber">
+				<Panel id="steamlogothrobber_bg" class="SteamLogoAnimated"/>
+				<Panel id="radialMask" class="SteamLogoAnimated">
+					<Panel id="radial3" class="SteamLogoAnimated"/>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="CloseButton" onactivate="UIPopupButtonClicked()">
+			<Panel class="ThinX"/>
+		</Panel>
+
+	</PopupSteamLogin>
+</root>

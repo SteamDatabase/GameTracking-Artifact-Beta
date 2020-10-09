@@ -244,6 +244,7 @@ $tI
 19CHRTFAudioProcessor
 19CNullAudioSubsystem
 19CSchemaRegistration
+19CSosOperatorBuiltIn
 19CSosOperatorFalloff
 19CSosOperatorGlobals
 19CSosOperatorPosVec8
@@ -305,6 +306,7 @@ $tI
 22CSosOperatorRemapValue
 22CSosOperatorSourceInfo
 22CSosOperatorStartVMix8
+22CSosOperatorStartVoice
 22CSosOperatorSteamAudio
 22CVocoderAudioProcessor
 23CDynamicsAudioProcessor
@@ -322,6 +324,7 @@ $tI
 23CSosOperatorPointOnLine
 23CSosOperatorPrintFloat3
 23CSosOperatorPrintString
+23CSosOperatorSetBuiltins
 23IConCommandBaseAccessor
 24CPresetDSPAudioProcessor
 24CSosGroupActionTimeLimit
@@ -536,7 +539,7 @@ AnimationSystem_001
 Application is not loaded.
 Apply cos(angle) * weight before pan law
 Arrangement: %s
-AssertMsg_ConditionFailed
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 AssetBrowserSystem_001
 AssetPreviewSystem_001
 AssetSystem001
@@ -863,6 +866,7 @@ C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
+C_INIT_CreateOnModel
 C_INIT_CreateOnModelAtHeight
 C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
@@ -901,6 +905,7 @@ C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
 C_INIT_SetHitboxToClosest
+C_INIT_SetHitboxToModel
 C_INIT_SetRigidAttachment
 C_INIT_VelocityFromCP
 C_INIT_VelocityFromNormal
@@ -923,7 +928,6 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
-C_OP_RemapSpeedtoCP
 C_OP_RenderModels
 C_OP_RenderRopes
 C_OP_RenderSprites
@@ -1288,7 +1292,9 @@ KeyValues::GetNextKey() const
 KeyValues::GetNextTrueSubKey() const
 KeyValues::GetNextValue() const
 KeyValues::GetString(char const*, char const*, char*, unsigned long)
+KeyValues::InsertSubKey(int, KeyValues*)
 KeyValues::KeyValues(char const*)
+KeyValues::KeyValues(char const*, char const*, char const*)
 KeyValues::LoadFromFile(IBaseFileSystem*, char const*, char const*, bool (*)(char const*, void*), void*, char const*)
 KeyValues::LoadTemporaryFromBuffer(bool, char const*, char const*, IBaseFileSystem*, char const*, bool (*)(char const*, void*), IKeyValuesErrorSpew*, void*, char const*)
 KeyValues::MakeCopy() const
@@ -1458,6 +1464,9 @@ PARAMINFO COMPARE FAIL: %s->%s
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_LIGHT_TYPE_FX
 PARTICLE_LIGHT_TYPE_POINT
 PARTICLE_LIGHT_TYPE_SPOT
@@ -1702,6 +1711,7 @@ Show async memory stats for just non-streamed music
 Show brief async memory stats
 Sine
 Size in bytes
+SndOperators
 Sort Type
 SosActionSortType_t
 SosActionStopType_t
@@ -1888,6 +1898,7 @@ Usage: movie_fixwave wavname
 Usage: snd_get_physics_surface_properties <all|null|assigned|default|material-name>.
 Usage: snd_set_physics_surface_properties <diffmaterials|diffmapping|set|overwrite|single> <mapping-file|material-name,material,...>
 Usage: snd_steamaudio_probes_nearby <radius_inches> <display_duration> <mapname>. Set radius_inches to -1 to use influence radius per probe.
+Used main graph %s on voice %s
 Used stack: %s
 UserInfoChangeService_001
 UtlMemory_Alloc
@@ -2031,7 +2042,8 @@ Warning
 Warning:  %s = '%s' is infinite, clamping value.
 Warning: %s (error %s)!
 Warning: Can't find sos strings file: %s!
-Warning: Failed to get mix layer %s!
+Warning: Soundevent %s, failed to get mix layer %s!
+Warning: Stack %s has %i VSND operators
 Warning: Unable to acquire convar value: %s
 Warning: Unable to set convar value: %s
 Warning: cannot sync to soundevent %s on track %s, because it has no start/end points defined
@@ -2047,7 +2059,7 @@ X
 X@
 XC
 Y
-Y@sos_import_stack
+Y@sos_set_builtins
 Yes
 Z
 [
@@ -2250,6 +2262,7 @@ construction_stack
 control_point
 convar_get
 convar_set
+core.default
 core.null
 core.voip
 core_update_default
@@ -2509,6 +2522,7 @@ input_listener_position
 input_listener_up
 input_loop_end
 input_loop_start
+input_looped_vsnd_defeats_restart
 input_map_max
 input_map_min
 input_master_volume
@@ -2553,6 +2567,7 @@ input_rand_max
 input_rand_min
 input_rear_stereo_scale
 input_restart_fade_in
+input_restart_loop_fade_out
 input_restart_start_time
 input_restart_time
 input_retrigger_on_finish
@@ -2628,6 +2643,7 @@ input_update_opvar_args
 input_use_namespace
 input_use_parent_seed
 input_vec_forward
+input_voicegraph
 input_volume_pos_max
 input_volume_pos_min
 input_vsnd
@@ -2769,6 +2785,7 @@ m_bForceLoopingAnimation
 m_bInitFromKilledParentParticles
 m_bInvertMatch
 m_bIsBlocking
+m_bIsMainGraph
 m_bIsPaused
 m_bIsUnderwater
 m_bLightenMode
@@ -2842,6 +2859,8 @@ m_flFinalTextureScaleV
 m_flFinalTextureUVRotation
 m_flFreqRangeEnd
 m_flFreqRangeStart
+m_flHitBoxScale
+m_flHitboxScale
 m_flHoldTimeMS
 m_flInitFromKilledParentParticles
 m_flInitialRadius
@@ -2952,8 +2971,10 @@ m_nMaxCount
 m_nMinParticlesToEmit
 m_nMixGroups
 m_nNoiseType
+m_nOpEndCapState
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOrientationType
 m_nOutgoingTangent
 m_nOutputBlendMode
 m_nOverrideCP
@@ -3016,6 +3037,7 @@ m_vOrigin
 m_valueArrays
 m_values
 m_vecColorScale
+m_vecHitBoxScale
 m_vecTailColorScale
 m_vecTexturesInput
 m_vsndName
@@ -3289,6 +3311,8 @@ output_velocity_vector_z
 output_velocity_xy
 output_vgraph_finished
 output_vgraph_playing
+output_voice_finished
+output_voice_playing
 output_volume
 output_vsnd_finished
 output_vsnd_looping
@@ -3588,6 +3612,7 @@ sndtool
 solo: %3.2f
 soloname
 sos_goto
+sos_import_stack
 sos_set_info
 sound/
 sound_device_override
@@ -3675,6 +3700,7 @@ time slice ms
 tools/
 tools_no_extraction
 total preset slots used: %d
+track_01
 track_queue
 tri
 true
@@ -3732,8 +3758,12 @@ vmix_mixgraph_send
 vmix_pitch_shift_desc_t
 vmix_processor_type_t
 vmix_start_vmix_8track has empty vsnd string
+vmix_start_vmix_8track: Unable to create pSfx from vsnd path
+vmix_start_voice: %s invalid track name %s, using default track
+vmix_start_voice: %s specified invalid voicegraph %s, using default voicegraph
 vmix_start_vsnd: %s Voice count >= MAX_VOICES, aborting starting vsnd %s
 vmix_vocoder_desc_t
+vmix_voice_start
 vmix_voicegraph_input
 vmix_voicegraph_inputarray
 vmix_voicegraph_start_8track
@@ -3777,6 +3807,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6

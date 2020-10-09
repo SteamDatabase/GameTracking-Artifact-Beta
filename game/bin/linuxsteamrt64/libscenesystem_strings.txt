@@ -22,9 +22,9 @@
 #%s/%s/+MultiGpu-TransferRenderTarget( To: %dx%d @ x: %d y: %d, From: %dx%d @ x: %d y: %d )
 #%s/%s/+SteamVrCompositor-TransferLeftEye( %dx%d @ (x: %d y: %d) )
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
+#%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
-#%s/RenderAView/LightSetup
 #%s/SetupLightingForView/SetupLightingForView
 #%s/UpdatePerViewConstantBuffers
 #%s/UpdatePerViewConstantBuffers%d
@@ -304,7 +304,6 @@ $tI
 2Way_1( %s )
 2_BONE_IK
 3
-30
 30CProjectedDecalSceneObjectDesc
 30ISceneLightProbeVolumeListener
 31CBlitTextureToRenderTargetLayer
@@ -414,7 +413,6 @@ $tI
 <td>LAYERFLAGS_PRIMARY_TARGET_OUTPUT</td>
 <td>LAYERFLAGS_READONLY_DEPTH_STENCIL</td>
 <td>LAYERFLAGS_READONLY_DEPTH_STENCIL_NORESOLVE</td>
-<td>LAYERFLAGS_SORT_ACROSS_PARTITIONS</td>
 <td>MATERIAL_SUPPORTS_SHADOWS</td>
 <td>NEEDS_DIRTY_UPDATE</td>
 <td>NEEDS_DYNAMIC_REFLECTION_MAP</td>
@@ -462,7 +460,6 @@ $tI
 <tr><td><b>m_viewConstantBufferData.m_vFogColor</b></td><td>[%.3f %.3f %.3f]</td></tr>
 <tr><td><b>m_viewConstantBufferData.m_vInvProjRow3</b></td><td>[%.3f %.3f %.3f %.3f]</td></tr>
 <unconnected>
-=
 >
 >C
 ?
@@ -578,7 +575,8 @@ AnimationSnapshot_t
 AnimationSystemUtils_001
 AnimationSystem_001
 ApplyNewState %d at %f
-AssertMsg_ConditionFailed
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 Assertion Failed in function %s():%s
 AssetBrowserSystem_001
 AssetGridWidget_ClearLayer
@@ -594,7 +592,6 @@ Attempted to register duplicate rendering pipeline name %s
 Attempted to unregister unknown rendering pipeline name %s
 Attempting to get the Skeletal Input settings from model %s, which doesn't have any.  Please add a Skeletal Input Settings node to the model in ModelDoc
 Attempting to get the movement settings from model %s, for which movement settings have not been set.  Please add a MovementSettings node to the model in ModelDoc
-B
 B channel not found
 B channel not found!
 B->C
@@ -782,7 +779,6 @@ CSSDSMsg_ViewTarget
 CSSDSMsg_ViewTargetList
 CSceneLayer::AddToRenderPassDesc
 CSceneObjectData
-CSceneSystem::SetLightCookieTexture, trying to set texture %s that has no sheet data!
 CSceneSystem::m_hDefaultPerLayerConstants
 CSceneView::CreateRenderPasses
 CSceneViewDebugOverlays: Cannot call AddToViewAndRetireStaleOverlays and pass in no abs time unless the overlay was created with the SCENE_VIEW_DEBUG_OVERLAY_TYPE_RELATIVE_TIMING flag!
@@ -945,6 +941,7 @@ C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
+C_INIT_CreateOnModel
 C_INIT_CreateOnModelAtHeight
 C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
@@ -983,6 +980,7 @@ C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
 C_INIT_SetHitboxToClosest
+C_INIT_SetHitboxToModel
 C_INIT_SetRigidAttachment
 C_INIT_VelocityFromCP
 C_INIT_VelocityFromNormal
@@ -1005,7 +1003,6 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
-C_OP_RemapSpeedtoCP
 C_OP_RenderModels
 C_OP_RenderRopes
 C_OP_RenderSprites
@@ -1208,7 +1205,6 @@ FogLightView
 FontManager_001
 FragmentIndex
 FvP12CSceneObjectE
-G
 G channel not found
 G channel not found!
 G->B
@@ -1505,6 +1501,9 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_LIGHT_TYPE_FX
 PARTICLE_LIGHT_TYPE_POINT
 PARTICLE_LIGHT_TYPE_SPOT
@@ -1964,7 +1963,6 @@ V_frexpf
 V_isnan
 V_log2f
 V_logf
-V_modf
 V_pow
 V_powf
 V_qsort
@@ -2097,8 +2095,6 @@ anim_name
 anim_name_a
 anim_name_b
 animatable.cpp
-animationLifeSpan
-animationScale
 animgraph0
 animgraph1
 animgraph2
@@ -2516,6 +2512,8 @@ m_flFinalTextureUVRotation
 m_flFingerScaleRatio
 m_flFingerWeight
 m_flFootLength
+m_flHitBoxScale
+m_flHitboxScale
 m_flInitFromKilledParentParticles
 m_flInitialRadius
 m_flInitialSpeedMax
@@ -2658,8 +2656,10 @@ m_nNoiseType
 m_nNumMipLevels
 m_nNumObjects <= V_ARRAYSIZE( m_objectReferences )
 m_nNumObjects >= 0
+m_nOpEndCapState
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
+m_nOrientationType
 m_nOutputBlendMode
 m_nOverrideCP
 m_nOverrideCP2
@@ -2779,6 +2779,7 @@ m_vUpVector
 m_value
 m_vecCenter
 m_vecColorScale
+m_vecHitBoxScale
 m_vecMax
 m_vecMin
 m_vecSize
@@ -2840,7 +2841,6 @@ materials/dev/ssao_downsample_depth.vmat
 materials/dev/ssao_scalable_ao.vmat
 materials/dev/tonemap_query.vmat
 materials/effects/aoproxy_splat.vmat
-materials/effects/lightcookies.vtex
 materials/error.vmat
 materials/particle/base_sprite.vtex
 materials/tools/copy_texture_with_gamma.vmat
@@ -2922,7 +2922,6 @@ notify
 null
 numsegments
 nxnstripped
-occlusionproxyvb
 offset_angles
 offset_origin
 operation
@@ -3119,9 +3118,9 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(3277):
-scenesystem.cpp(5585): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(6803): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(3291):
+scenesystem.cpp(5611): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(6830): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 scenetextureset_%d
@@ -3353,6 +3352,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6
@@ -3417,7 +3417,6 @@ yes
 z>
 zC
 zD
-zF
 {
 }
 } %llu aggs, %s total data

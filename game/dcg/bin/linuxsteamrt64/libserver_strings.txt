@@ -534,6 +534,7 @@
 #DCG_ActionHint_Improvement_kill
 #DCG_ActionHint_Improvement_kill_AnyLane
 #DCG_ActionHint_Improvement_move
+#DCG_ActionHint_Lane
 #DCG_ActionHint_LaneOnly
 #DCG_ActionHint_SelectALaneToModify
 #DCG_ActionHint_SelectALaneToModify_AnyLane
@@ -2254,6 +2255,7 @@ $tI
 14CMsgTEBeamRing
 14CMsgVoiceAudio
 14CNavGameSystem
+14CNavLinkEntity
 14CNotifyManager
 14CPathOptimizer
 14CPhysExplosion
@@ -2373,6 +2375,7 @@ $tI
 15CMsgTEExplosion
 15CMsg_CVars_CVar
 15CMultiplayRules
+15CNavLinkManager
 15CParticleSystem
 15CPhysBallSocket
 15CPhysConstraint
@@ -2428,6 +2431,7 @@ $tI
 15IEconItemSystem
 15IEntityIONotify
 15IEntityListener
+15INavLinkManager
 15IResponseFilter
 15IResponseSystem
 15ISaveRestoreOps
@@ -6166,7 +6170,8 @@ Assassin's Shadow
 Assassin's Veil
 Assassinate
 Assault Ladders
-AssertMsg_ConditionFailed
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&)
+Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, ...)
 Assertion Failed in function %s():%s
 Asset Modifiers
 Asset modifier index %d must be greater than or equal to zero
@@ -6386,6 +6391,11 @@ Block size: %-11s Alloc'd: %8d Num blobs: %5d (%s)
 BlockSpeechUntil(%f) %f
 Blocking load of scene from '%s'
 Blocking nav: %s
+Bloodlvl2
+Bloodlvl3
+Bloodlvl4
+Bloodlvl5
+Bloodlvl6
 Bloodseeker
 Bodega Wraith
 Bodies: %d (%d)
@@ -7354,6 +7364,7 @@ CNavGameSystem::SpawnGroupPrecache (%s)
 CNavGenParams - Nav mesh requests project default generation parameters but actual parameters  used during construction differ from defaults. Please re-export the map.
 CNavGenRt
 CNavGenRt - Thread pool = %s, tasks = %d, active job = %s, active obstacle = %s, blocks = %d (%d areas)
+CNavLinkEntity
 CNavMesh::AddNavArea - Adding nav area to mesh with no grid extents defined.
 CNavMesh::ForAllAreasOverlappingExtent
 CNavMesh::GetGroundHeight
@@ -7536,11 +7547,10 @@ CRuleScriptBridge was double-initialized: tearing down and rebuilding
 CSaveMemory
 CSaveRestoreBuffer::TokenHash() is COMPLETELY FULL!
 CSceneEntity
+CSceneEntity %s (event %s) unable to find actor named "%s"
 CSceneEntity %s :"%s" failed to start sequence "%s"
 CSceneEntity %s :"%s" unable to find gesture "%s"
 CSceneEntity %s :"%s" unable to find sequence "%s"
-CSceneEntity %s FaceTransition unable to find actor named "%s"
-CSceneEntity %s LookAtTransition unable to find actor named "%s"
 CSceneEntity %s unable to find a camera (point_viewcontrol) in this map!
 CSceneEntity %s unable to find actor "%s"
 CSceneEntity %s unable to find actor named "%s"
@@ -7936,6 +7946,7 @@ C_INIT_AddVectorToVector
 C_INIT_AgeNoise
 C_INIT_CreateFromCPs
 C_INIT_CreateInEpitrochoid
+C_INIT_CreateOnModel
 C_INIT_CreateOnModelAtHeight
 C_INIT_CreateSequentialPath
 C_INIT_CreateWithinSphere
@@ -7974,6 +7985,7 @@ C_INIT_RtEnvCull
 C_INIT_SequenceFromCP
 C_INIT_SequenceLifeTime
 C_INIT_SetHitboxToClosest
+C_INIT_SetHitboxToModel
 C_INIT_SetRigidAttachment
 C_INIT_VelocityFromCP
 C_INIT_VelocityFromNormal
@@ -7996,7 +8008,6 @@ C_OP_RemapAverageScalarValuetoCP
 C_OP_RemapBoundingVolumetoCP
 C_OP_RemapCPtoCP
 C_OP_RemapModelVolumetoCP
-C_OP_RemapSpeedtoCP
 C_OP_RenderModels
 C_OP_RenderRopes
 C_OP_RenderSprites
@@ -8188,7 +8199,6 @@ Chops all selected areas into their component 1x1 areas
 Chops all selected areas into their component 1x1 areas and re-merges them together into larger areas
 Choreo AimAtSceneEvent is unavailable in Left4Dead.
 Choreo IKLockLeftArmSceneEvent is unavailable in Left4Dead.
-Choreo LOOKAT is unavailable in Left4Dead.
 Choreo MOVETO is unavailable in Left4Dead.
 Choreo MoveRelativeSceneEvent is unavailable in Left4Dead.
 Choreographed scene which controls animation and/or dialog on one or more actors.
@@ -8369,7 +8379,6 @@ Couldn't find any entity named '%s'
 Couldn't find entity named '%s'.
 Couldn't find output named '%s' on entity '%s'.
 Couldn't parse default value "
-Couldn't resolve response target %s
 Couldn't set relationship to unknown entity or class (%s)!
 Couldn't test if nav file was writable, file name pointer is null!
 Couldn't test if nav file was writable, file name too short!
@@ -12181,6 +12190,9 @@ PARENT
 PARTICLE_DEPTH_FEATHERING_OFF
 PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL
 PARTICLE_DIR_NOISE_CURL
+PARTICLE_ENDCAP_ALWAYS_ON
+PARTICLE_ENDCAP_ENDCAP_OFF
+PARTICLE_ENDCAP_ENDCAP_ON
 PARTICLE_LIGHT_TYPE_FX
 PARTICLE_LIGHT_TYPE_POINT
 PARTICLE_LIGHT_TYPE_SPOT
@@ -13012,6 +13024,7 @@ Rock
 Rod of Atos
 RollPercentage
 Root Boots
+Root class of all server-side entities
 Root entity class
 RopeMaterial
 RopeShader
@@ -13632,6 +13645,7 @@ Set to 1 and restart the map to be warned if the map has no trigger_transition v
 Set to 1 to autosave game on level transition. Does not affect autosave triggers.
 Set to 1 to end the WaitingForPlayers period.
 Set to 1 to have autosaves execute completely on the save thread, forces 'render only' mode while the save completes
+Set to 1 to see animgraph variable changes for non-player entities. Set to 2 to see it for players as well. Set to 3 to see all sets, even if the value is the same.
 Set to 1 to start or restart the WaitingForPlayers period.
 Set to change selection trace to be an arc instead of a line.  Value 1 should give a reasonable arc.
 Set to one to interactively edit the Navigation Mesh. Set to zero to leave edit mode.
@@ -14356,7 +14370,6 @@ TestFormatE
 TestRaysToBoundaryZone - pass raw %0.2f, pass grid %0.2f, ratio %0.2f
 TestScriptManager
 TestScriptMgr001
-Tests are disabled in retail builds
 Tests box collision detection
 Tests capsule collision detection
 Tests convex hull collision detection
@@ -15125,7 +15138,6 @@ When moving, show the end location.
 When on, draws lines to all env_soundscape entities. Green lines show the active soundscape, red lines show soundscapes that aren't in range, and white lines show soundscapes that are in range, but not the active soundscape.
 When playing back a scene, print timing and event info to console.
 When playing back, force use of combined .wav files even in english.
-When playing back, show the directions of look events.
 When selecting an area under nav_edit, allow area marked as blocked.
 When set, auto launches into a match and hides the main menu UI
 When set, development card sets will be considered for auto complete, otherwise only released and staging card sets
@@ -15450,6 +15462,7 @@ __tls_get_addr
 __vsprintf_chk
 _addons
 _attr_
+_builtins
 _edata
 _end
 _fini
@@ -15602,6 +15615,7 @@ ai_gold_per_turn
 ai_lookahead_limit
 ai_markup_hlvr
 ai_model_info
+ai_nav_link
 ai_network
 ai_sequence_debug
 ai_shot_bias_max
@@ -16377,7 +16391,7 @@ dcg_server_dump_template
 dcg_server_full_network_buffer_sleep_time
 dcg_server_max_resend_attempt_count_for_full_network_buffer
 dcg_server_network_sendbuffersize
-dcg_setup_board_from_clipboard
+dcg_setup_board_from_text
 dcg_shop_blacklist
 dcg_shop_blacklist_ai
 dcg_shop_exists
@@ -16929,6 +16943,24 @@ file://{images}/hud/icon_effect_stunned.png
 file://{images}/hud/icon_effect_tracked.png
 file://{images}/hud/icon_effect_trample.png
 file://{images}/hud/icon_effect_untargetable.png
+file://{resources}/images/status_modifiers/statusfxicon_cleave.psd
+file://{resources}/images/status_modifiers/statusfxicon_dammageimmune.psd
+file://{resources}/images/status_modifiers/statusfxicon_deathshield.psd
+file://{resources}/images/status_modifiers/statusfxicon_decay.psd
+file://{resources}/images/status_modifiers/statusfxicon_disarmed.psd
+file://{resources}/images/status_modifiers/statusfxicon_feeble.psd
+file://{resources}/images/status_modifiers/statusfxicon_pierce.psd
+file://{resources}/images/status_modifiers/statusfxicon_quick.psd
+file://{resources}/images/status_modifiers/statusfxicon_rapiddeploy.psd
+file://{resources}/images/status_modifiers/statusfxicon_regeneration.psd
+file://{resources}/images/status_modifiers/statusfxicon_retaliate.psd
+file://{resources}/images/status_modifiers/statusfxicon_rooted.psd
+file://{resources}/images/status_modifiers/statusfxicon_siege.psd
+file://{resources}/images/status_modifiers/statusfxicon_silenced.psd
+file://{resources}/images/status_modifiers/statusfxicon_stunned.psd
+file://{resources}/images/status_modifiers/statusfxicon_tracked.psd
+file://{resources}/images/status_modifiers/statusfxicon_trample.psd
+file://{resources}/images/status_modifiers/statusfxicon_untargetable.psd
 file://{resources}/layout/world_hint.xml
 filepos
 filesystem_stdio
@@ -17395,8 +17427,6 @@ hParent
 hResult
 hThinkFunc
 halfhealth
-hammerUniqueId
-hammerid
 handforce_inner
 handforce_outer
 handforce_scale
@@ -19419,6 +19449,8 @@ m_flHDRColorScale
 m_flHandPoseParams
 m_flHeight
 m_flHeightOffset
+m_flHitBoxScale
+m_flHitboxScale
 m_flHudHintMinDisplayTime
 m_flHudHintPollTime
 m_flIKGroundContactTime
@@ -20039,7 +20071,6 @@ m_iGlowTeam
 m_iGlowType
 m_iGoal
 m_iGustDirChange
-m_iHammerID
 m_iHealth
 m_iHealthMax
 m_iHealthMin
@@ -20197,7 +20228,6 @@ m_iszFilterName
 m_iszGameEventItem
 m_iszGameEventName
 m_iszGustSound
-m_iszHammerUniqueId
 m_iszHintTargetEntity
 m_iszIcon_Offscreen
 m_iszIcon_Onscreen
@@ -20286,6 +20316,7 @@ m_iszViewPosition
 m_iszViewTarget
 m_iszWeaponClassName
 m_iszWeaponName
+m_iszWeaponParseDataNameOverride
 m_iszWorldName
 m_jiggleBoneState
 m_keyPoints
@@ -20549,6 +20580,7 @@ m_nNPCState_3
 m_nNPCType
 m_nNameHash
 m_nNavHullIdx
+m_nNavLinkId
 m_nNavObstacleType
 m_nNewSequenceParity
 m_nNextThinkTick
@@ -20561,11 +20593,13 @@ m_nNumPrefixedContexts
 m_nOldButtons
 m_nOldTakeDamage
 m_nOldTickBase
+m_nOpEndCapState
 m_nOpScaleCP
 m_nOpStrengthScaleSeed
 m_nOpvarIndex
 m_nOpvarType
 m_nOrder
+m_nOrientationType
 m_nOuterMaxDist
 m_nOutputBlendMode
 m_nOutputID
@@ -21015,6 +21049,7 @@ m_transform
 m_transitioningLayers
 m_triggerBloat
 m_triggermode
+m_typeName
 m_ubInterpolationFrame
 m_uchShuffleCaseMap
 m_uint
@@ -21066,6 +21101,7 @@ m_vEndPointRelative
 m_vEndPointWorld
 m_vEndPos
 m_vEndTrailTintFactor
+m_vEndpointLocal
 m_vExtent
 m_vForcedOrigin
 m_vForwardLS
@@ -21076,6 +21112,7 @@ m_vInnerMaxs
 m_vInnerMins
 m_vLightDirection
 m_vLiteralValue
+m_vLookTargetPosition
 m_vMaxExtentOrigin
 m_vMaxs
 m_vMinExtentOrigin
@@ -21144,6 +21181,7 @@ m_vecFinalDest
 m_vecFinishAngles
 m_vecFinishOrigin
 m_vecForce
+m_vecHitBoxScale
 m_vecLadderNormal
 m_vecLandmarkAngles
 m_vecLandmarkOrigin
@@ -21198,7 +21236,6 @@ m_vectorAttributes
 m_vectorParams
 m_version
 m_vertexBuffers
-m_viewtarget
 m_voicePitch
 m_volume
 m_wasRestored
@@ -21371,6 +21408,7 @@ mayBeHeldBackFromDeploymentWhenReady
 measuretarget
 medium car
 melee_hit
+melee_hit_player
 melee_hit_world
 melee_immune
 melee_miss
@@ -21484,6 +21522,7 @@ modeldoc_preview_ent
 models/%s
 models/%s.vmdl
 models/dev/error.vmdl
+models/extras/info_speech.vmdl
 models/props_plants/claypot03.vmdl
 models/survivors/survivor_gambler.vmdl
 models/ui/arrow_2d.vmdl
@@ -21680,6 +21719,8 @@ nav_genrt_no_split
 nav_genrt_step
 nav_jump
 nav_ladder_flip
+nav_link_endpoint
+nav_link_type_name
 nav_load
 nav_load_aaquad
 nav_load_polyclip
@@ -22011,12 +22052,14 @@ on_2_step_action
 on_ability_used
 on_action_cancelled
 on_all_heroes_deployed
+on_any_hero_killed
 on_card_cast
 on_card_drawn
 on_card_play_begin
 on_card_played
 on_cards_flop_start
 on_deploy_start
+on_dire_hero_killed
 on_dire_tower_destroyed
 on_equipment_card_ready
 on_failure
@@ -22024,6 +22067,7 @@ on_hand_scrollable
 on_hero_deployed
 on_improvement_played
 on_local_ability_ready
+on_local_actions_available
 on_local_crosslane_card_ready
 on_message_dismissed
 on_message_dismissed2
@@ -22164,6 +22208,7 @@ parentMatchList
 parent_piece
 parentname
 parse
+parse_name_override
 parsing
 part_name
 particle_combined
@@ -22586,6 +22631,7 @@ really freaking heavy
 recenter_on_parent_bone
 recipe component
 recycle_list
+recycle_recipes
 ref_aim_
 ref_shoot_
 referencename
@@ -22808,7 +22854,6 @@ scene_maxcaptionradius
 scene_playvcd
 scene_print
 scene_ramp
-scene_showlook
 scene_showmoveto
 scene_showunlock
 scenefilecache
@@ -23984,6 +24029,7 @@ viewmodel_offset_x
 viewmodel_offset_y
 viewmodel_offset_z
 viewposition
+viewtarget
 violence_ablood
 violence_agibs
 violence_hblood
@@ -24058,6 +24104,7 @@ vpcf27
 vpcf28
 vpcf29
 vpcf3
+vpcf30
 vpcf4
 vpcf5
 vpcf6
