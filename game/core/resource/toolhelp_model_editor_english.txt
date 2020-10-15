@@ -452,7 +452,9 @@ p, td {padding:3px;}
 		"clothchain.stray_radius:shorthelp"		"How far cloth vertex may stray from animated goal position. Range: 0..inf"
 		"clothchain.stray_radius:help"		"<p>Every cloth vertex has the animated position, defined by animation</p>
 <p>If stray radius is set, it defines how far it can stray from that position. If you want cloth to move freely, but within some bounds away from the animation, set this to the distance</p>
-<p>Unlike goal strength, stray radius has no effect when the vertex is within the range of its animated goal. If it strays beyond the range, it's yanked back hard (or rather with hardness determined by stray radius stretchiness)</p>"
+<p>Unlike goal strength, stray radius has no effect when the vertex is within the range of its animated goal. If it strays beyond the range, it's yanked back hard (or rather with hardness determined by stray radius stretchiness)</p>
+<p>Here's an example of restraining the range of sudden movement with stray radius. Note that the cloth stays well within the stray radius. In this case, it happens because stray radius restricted previous movement so the cloth doesn't have a long way to swing back from it. Cloth particles are not affected by stray radius at all when they're inside the stray radius sphere. They're only affected when they hit against the sphere boundary.</p>
+<p><img src='toolimages:modeldoc_editor/cloth_stray_radius.png' /></p>"
 		"clothchain.goal_damping"		"Goal Damping"
 		"clothchain.goal_damping:shorthelp"		"How fast the goal strength pulls "
 		"clothchain.goal_damping:help"		"<p>Cloth generally is driven by animation. Animation represents the \"goal\" for cloth. Every cloth node has corresponding animated position, and goal strength is the strength of the magnet that pulls cloth to its animated goal shape. Goal damping is how fast that magnet works.</p>

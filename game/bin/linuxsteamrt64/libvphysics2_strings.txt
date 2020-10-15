@@ -46,7 +46,6 @@ $tIVScript
 %p
 %p: %s
 %s ! %s:%u:%u:%u
-%s %f %f %f %f %f %f %f %f %f
 %s %g %g %g %g %g %g %g %g %g
 %s %s
 %s %s %s 0
@@ -220,7 +219,7 @@ $tIVScript
 1DBlend
 2
 2000
-2020-07-28 14:14:05.750000
+2020-10-01 21:45:45.749000
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -457,7 +456,6 @@ API Calls
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 ATTACHMENT_INFLUENCE_FLAGS_NONE
 AbsolutePoseControl
-Accelerate
 Access of unconnected ConVarRef
 Access of unconnected SplitScreenConVarRef
 AcquireMask
@@ -1151,6 +1149,8 @@ CUtlVectorFixedGrowable<CSoftbodyEffect*, 1>
 CUtlVectorSIMDPaddedVector
 CVPhys2AggregateInstance::OnReallocate( new: 0x%p, old: 0x%p )
 CVPhysXSurfacePropertiesList
+CVScrubSystem::ReleaseBlob(unsigned long long)
+CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
 CVertexKDTree::BuildMidpoint(float const*, int, int)
 CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
@@ -1609,6 +1609,7 @@ GenerateResourceNameFromFileName: Invalid extension specified in file name "%s"!
 GenericGameData
 GetCPUInformation
 GetCStringCharConversion
+GetCurrentThreadScrubber
 GetResourceManifestCount
 GetResourceManifests
 GetStackTraceSymbolReflDesc
@@ -1897,6 +1898,9 @@ MaxCellSize
 MaxLinearConstraintImpulse
 MaxSpeed
 Md5 Hash: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x
+MemAlloc_AllocFunc
+MemAlloc_CallocFunc
+MemAlloc_FreeFunc
 Memory used in Rubikon: %s bytes / %s 4K pages = %.1f%%
 Merge Faces
 Merged face
@@ -2707,7 +2711,6 @@ Should we straighten face island if the displacement is this much? (inches)
 Should we try to straighten an island of faces deviating from their average normal (tangent)?
 Should we try to straighten two faces connected to this edge? (tangent)
 ShouldCollide tests passed
-SimFlags
 SimStateDisplay
 SimdAnimStrayRadiusCount
 SimdNodeBaseCount
@@ -3014,6 +3017,7 @@ V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
+V_cos
 V_cosf
 V_expf
 V_fmodf
@@ -3176,6 +3180,7 @@ Yaw;
 \\
 \n
 \t
+_GetCallStack_Fast
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
 _Jv_RegisterClasses
@@ -3235,6 +3240,7 @@ audioroughnessfactor
 audiosounds
 auto_unragdoll_duration
 awake_bodies
+bAccelerate
 bAnimTransformChanged
 bAutoSleeping
 bColliderTransformsValid
@@ -3322,6 +3328,7 @@ bool RnWorldRefl_t::m_bParallelIslands
 bool RnWorldRefl_t::m_bParallelSolver
 bool RnWorldRefl_t::m_bSleeping
 bool SoftbodyEffectPressurizeRefl_t::m_bAdditive
+bool SoftbodyEffectSpeedupRefl_t::m_bAccelerate
 both sides of collision in the same hierarchy must have self-collision and solid contacts enabled.Intersection disabled.
 break_create_joint_revolute
 break_list
@@ -3344,7 +3351,6 @@ ca
 caap
 cable
 cacp
-calloc
 cancp
 cantdie
 capsule
@@ -3407,7 +3413,6 @@ contact_indices
 contact_manifolds
 contact_points
 control_point
-cos
 cos( %s )
 create_particle
 curvature
@@ -3655,12 +3660,12 @@ fltx4
 format
 formats.cpp
 fraction
-free
 from {%.2f,%.2f,%.2f} delta {%.2f,%.2f,%.2f}
 frozen
 g default
 g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
+g_ScrubSystem
 g_bUpdateStringTokenDatabase
 g_pMemAlloc
 g_pThreadPool
@@ -3738,6 +3743,7 @@ int SoftbodyEffectDampenVelocityRefl_t::m_nAlgo
 int SoftbodyEffectRefl_t::m_nIndexInWorld
 int SoftbodyEffectRefl_t::m_nParentNode
 int SoftbodyEffectRefl_t::m_nVertexMapIndex
+int SoftbodyEffectWindRefl_t::m_nAlgo
 int16 BroadphaseProxyDataRefl_t::m_nPairCount
 int16 BroadphaseProxyNodeRefl_t::m_nHeight
 int16 BroadphaseProxyNodeRefl_t::m_nType
@@ -3773,7 +3779,6 @@ kv3format_manager.cpp
 ladder
 last_sniff
 layer
-ld-linux-x86-64.so.2
 libc.so.6
 libm.so.6
 libpthread.so.0
@@ -4750,7 +4755,6 @@ m_vectorAttributes
 m_vectorParams
 m_vertexBuffers
 m_wristBones
-malloc
 mapbuilder.nodraw
 mapbuilder.occluder
 master_morph_weight
@@ -5170,7 +5174,6 @@ uint32 RnShapeRefl_t::m_nDebugShapeSerial
 uint32 RnSoftbodyRefl_t::m_nActivityState
 uint32 RnSoftbodyRefl_t::m_nAnimSpace
 uint32 RnSoftbodyRefl_t::m_nFloatAttrStepping
-uint32 RnSoftbodyRefl_t::m_nSimFlags
 uint32 RnSoftbodyRefl_t::m_nStepsSimulated
 uint32 RnSolverJointRefl_t::m_nType
 uint32 RnSphericalJointRefl_t::m_nMotorMode

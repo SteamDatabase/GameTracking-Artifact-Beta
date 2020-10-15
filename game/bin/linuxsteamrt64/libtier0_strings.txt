@@ -27,6 +27,7 @@ $ORIGIN
 %.0f pct of time accounted for
 %.18g
 %.2f
+%.2fGHz %s
 %0*llx bytes at %0*llx is the largest open user-space VA region%s
 %0*llx bytes of %s at %0*llx%s
 %0*llx: address after highest user-space virtual region
@@ -46,6 +47,8 @@ $ORIGIN
 %9d
 %d
 %d frames sampled for %.2f seconds
+%d known frame functions:
+%d segments in history, total capacity %lld MBytes
 %d total counted strings.
 %d.
 %d.%d.%d.%d:%d
@@ -64,6 +67,7 @@ $ORIGIN
 %lld
 %llu
 %llu,%u,%u,%s
+%llx "%s" activated. %d KB prologue, %d KB commited, %d KB capacity, %d blobs with %d MB
 %ls [wstring, len = %d]
 %p::%p:%d
 %s %c%s
@@ -359,6 +363,7 @@ $ORIGIN
 ../public/tier0/utlrbtree.h
 ../public/tier0/utltshash.h
 .\
+.vscrub
 //
 /content/
 /dev/urandom
@@ -1155,6 +1160,7 @@ CThreadMultiWaitSemaphore
 CThreadMultiWaitSemaphore::CThreadMultiWaitSemaphore()
 CThreadMultiWaitSemaphore::Release()
 CThreadMultiWaitSemaphore::~CThreadMultiWaitSemaphore()
+CThreadMutex::CThreadMutex(char const*)
 CThreadMutex::TryLock(char const*, int)
 CThreadMutex::~CThreadMutex()
 CThreadPool::CSerialJobExecutor CUtlMemoryPoolMT
@@ -1483,6 +1489,23 @@ CVProfile::SumTimes(CVProfNode const*, int, CVProfSummingContext&)
 CVProfile::SumTimes(char const*, int, CVProfSummingContext&)
 CVProfile::Term()
 CVProfile::~CVProfile()
+CVScrubSystem::AssignBlob(unsigned long long, CScrubBlobData*)
+CVScrubSystem::BeginRootFrame(unsigned int)
+CVScrubSystem::BlobExists(unsigned long long)
+CVScrubSystem::CVScrubSystem()
+CVScrubSystem::Clear()
+CVScrubSystem::Enable(bool)
+CVScrubSystem::Execute(char const*, char const*, char const*)
+CVScrubSystem::FreeSegment(CScrubRecordSegment*)
+CVScrubSystem::GetBlobSize(unsigned long long)
+CVScrubSystem::GetBlobStats(CVScrubSystem::BlobStats_t&) const
+CVScrubSystem::GetSnapshot(ScrubSnapshot_t&)
+CVScrubSystem::RecordCallstack(CVScrubber*)
+CVScrubSystem::RegisterFrameFunction(char const*)
+CVScrubSystem::ReleaseBlob(unsigned long long)
+CVScrubSystem::SaveToFile(ScrubSnapshot_t&, char const*)
+CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
+CVScrubSystem::~CVScrubSystem()
 CVariableBitStringBase::AllocInts(int)
 CVariableBitStringBase::FreeInts()
 CVariableBitStringBase::ReallocInts(int)
@@ -1523,6 +1546,7 @@ Called Resume() on a thread that is not suspended!
 Can't open file (%s) passed to -testscript
 Cannot flush timstamped event log with no listener!
 Cannot mix and match tag specifiers with channel name specifiers.
+Cannot open file "%s" for writing
 Cannot register two timestamped event listeners!
 Capture
 CatchAndWriteMiniDump
@@ -1553,6 +1577,7 @@ ConVarRef %s doesn't point to an existing ConVar
 Conditional Error: %s
 ConfigurationSystem_001
 ConnectInterfaceSingletons
+Controls the scrub system
 Convar %s has conflicting %s flags (child: %s%s, parent: %s%s, parent wins)
 Convars/CCvar::FindCommandBase
 CopyPending
@@ -1632,6 +1657,7 @@ Error parsing value to set configuration value "%s" to ("%s")!
 Error reading args file
 Error reading configuration defaults file "cfg/configdefaults.linux.vcfg"!
 Error starting testscript '%s'
+Error: %d of %d segments were written, unrecognized threads?
 ErrorIfNotInitted
 EventSystem001
 Event_CreateHandle
@@ -1733,6 +1759,7 @@ GetAddressTranslationData
 GetCPUFrequencyResults
 GetCPUInformation
 GetCStringCharConversion
+GetCurrentThreadScrubber
 GetDefaultMiniDumpHandler
 GetDefaultMiniDumpTypeFlags
 GetDefaultUniformRandomStream
@@ -1824,6 +1851,7 @@ Interpolation
 Invalid access of deferred ConVarRef for '%s'
 Invalid number starting with '%s'
 InvalidateUniqueId
+Invariant TSC supported
 InvokeMiniDumpHandler
 IsUniqueIdEqual
 IsUniqueIdValid
@@ -2389,6 +2417,7 @@ PushThread
 Qt_GetCustomAllocators
 QueuedLoaderVersion001
 RELEASE
+RUNNING
 RUSSIAN
 RandomFloat
 RandomFloatExp
@@ -2617,6 +2646,7 @@ SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
 Scope                                                      Calls Calls/Frame  Time+Child    Pct        Time    Pct   Avg/Frame    Avg/Call Avg-NoChild        Peak
+Scrub System is %s
 SecureRandomBytes
 SecureRandomDouble
 SecureRandomInt
@@ -2863,6 +2893,7 @@ Unserialize
 Usage:  find <string> [<string>...]
 Usage:  findflags <string>
 Usage:  help <cvarname>
+Usage: scrubber [start|stop|status|save <filename>]
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_AllocAligned
@@ -3420,6 +3451,7 @@ chdir
 cheat
 cl
 cl_language
+clear
 client
 clientcmd_can_execute
 clock_gettime
@@ -3502,6 +3534,7 @@ g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
 g_BitStringEndMasks
 g_Mathlib_GammaToLinearByteTable
+g_ScrubSystem
 g_TSPointerListNodes
 g_VProfCurrentProfile
 g_VProfNodeSpikeMinimumMs
@@ -3557,6 +3590,7 @@ ignored_assertions.txt
 img
 int( %d = 0x%X )
 int:transient:1
+invariant TSC unavailable, timing readings unreliable
 isspace
 jobthread.cpp
 k
@@ -3729,9 +3763,11 @@ rmdir
 round
 s
 s_dev_urandom_fd >= 0
+save
 scandir64
 sched_setaffinity
 schema
+scrubber
 semctl
 semget
 semop
@@ -3749,6 +3785,7 @@ sprintf
 srand
 ss_added
 stacktools.cpp
+start
 std::_Rb_tree<char const*, std::pair<char const* const, unsigned long long>, std::_Select1st<std::pair<char const* const, unsigned long long> >, std::less<char const*>, std::allocator<std::pair<char const* const, unsigned long long> > >::_M_erase(std::_Rb_tree_node<std::pair<char const* const, unsigned long long> >*)
 std::_Rb_tree_decrement(std::_Rb_tree_node_base*)
 std::_Rb_tree_increment(std::_Rb_tree_node_base*)
@@ -3772,6 +3809,8 @@ std::string::_Rep::_M_destroy(std::allocator<char> const&)
 std::string::_Rep::_S_empty_rep_storage
 steam://openurl/
 steam://openurl_external/
+stop
+stopped
 strcasecmp
 strerror
 stringpool.cpp
@@ -3790,6 +3829,7 @@ testscriptmgr.cpp
 threadsafe
 threadtools.cpp
 tier0
+tier0: file system not initialized
 tier0_strtools.cpp
 timestamped.log
 true

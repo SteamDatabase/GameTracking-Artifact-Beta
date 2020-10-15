@@ -837,14 +837,6 @@
 		"input_use_namespace"		"false"
 		"array_selection_type"		"random_exclusive"
 	}
-	"invert_pitch_granular"
-	{
-		"operator"		"math_float"
-		"apply"		"sub"
-		"input1"		"1.000000"
-		"input2"		"@public.pitch_granular"
-		"execute_once"		"true"
-	}
 	"speaker_volumes"
 	{
 		"operator"		"math_speakers"
@@ -852,26 +844,16 @@
 		"input1"		"@public.pan"
 		"input2"		"@dcg_base_3d::speakers_spatialize.output"
 	}
-	"start_vsnd"
+	"set_builtins"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@get_vsnd.output"
-		"execute_once"		"false"
-		"input_execute"		"@invert_pitch_granular.output"
-		"input_start"		"@dcg_base_3d::stop_time_and_unstopped.output"
-		"input_speaker_volumes"		"@speaker_volumes.output"
-		"input_pitch"		"@dcg_base_3d::pitch_adjustment.output"
-		"input_delay"		"@dcg_base_3d::delay_total.output"
-		"input_fade_out"		"@public.volume_fade_out"
-		"input_memory_type"		"@public.memory_type"
-		"input_time_scale"		"@public.time_scale"
-		"input_restart_time"		"@public.restart_time"
+		"operator"		"sos_set_builtins"
+		"input_execute"		"@public.pitch_granular"
+		"input_voicegraph"		"DCG_granular_pitch"
 	}
 	"start_vmix"
 	{
-		"operator"		"vmix_voicegraph_start_8track"
-		"input_execute"		"@public.pitch_granular"
-		"vgraph_name"		"DCG_granular_pitch"
+		"operator"		"vmix_voice_start"
+		"input_execute"		"1"
 		"input_track1"		"track_01"
 		"input_start2"		"0.000000"
 		"input_start3"		"0.000000"
@@ -888,6 +870,8 @@
 		"input_fade_out"		"@public.volume_fade_out"
 		"input_delay"		"@dcg_base_3d::delay_total.output"
 		"input_memory_type"		"@public.memory_type"
+		"input_time_scale"		"@public.time_scale"
+		"input_restart_time"		"@public.restart_time"
 	}
 	"send_voicegraph_pitchscale"
 	{
@@ -1116,8 +1100,8 @@
 	}
 	"start_vsnd"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@public.vsnd_files"
+		"operator"		"vmix_voice_start"
+		"input_vsnd1"		"@public.vsnd_files"
 		"execute_once"		"false"
 		"input_execute"		"1.000000"
 		"input_start"		"@get_event_info.output_unstopped"
@@ -1192,8 +1176,8 @@
 	}
 	"start_vsnd"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@get_vsnd.output"
+		"operator"		"vmix_voice_start"
+		"input_vsnd1"		"@get_vsnd.output"
 		"execute_once"		"false"
 		"input_execute"		"1.000000"
 		"input_start"		"@dcg_base_3d::stop_time_and_unstopped.output"
@@ -1285,8 +1269,8 @@
 	}
 	"start_vsnd"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@get_vsnd.output"
+		"operator"		"vmix_voice_start"
+		"input_vsnd1"		"@get_vsnd.output"
 		"execute_once"		"false"
 		"input_execute"		"1.000000"
 		"input_start"		"@dcg_base_3d::stop_time_and_unstopped.output"
@@ -1366,8 +1350,8 @@
 	}
 	"start_vsnd"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@public.vsnd_files"
+		"operator"		"vmix_voice_start"
+		"input_vsnd1"		"@public.vsnd_files"
 		"execute_once"		"false"
 		"input_execute"		"1.000000"
 		"input_start"		"@get_event_info.output_unstopped"

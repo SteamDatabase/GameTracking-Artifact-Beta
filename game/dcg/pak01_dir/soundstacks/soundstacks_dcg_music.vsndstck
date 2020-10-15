@@ -851,26 +851,16 @@
 		"input2"		"@public.pitch_granular"
 		"execute_once"		"true"
 	}
-	"start_vsnd"
+	"set_builtins"
 	{
-		"operator"		"vmix_vsnd_start"
-		"input_vsnd"		"@get_vsnd.output"
-		"execute_once"		"false"
-		"input_execute"		"@invert_pitch_granular.output"
-		"input_start"		"@dcg_base_music_3d::stop_time_and_unstopped.output"
-		"input_speaker_volumes"		"@dcg_base_music_3d::speakers_spatialize.output"
-		"input_pitch"		"@dcg_base_music_3d::pitch_adjustment.output"
-		"input_delay"		"@dcg_base_music_3d::delay_total.output"
-		"input_fade_out"		"@public.volume_fade_out"
-		"input_memory_type"		"@public.memory_type"
-		"input_time_scale"		"@dcg_base_music_3d::speed_from_winning_momentum.output"
-		"input_restart_time"		"@public.restart_time"
+		"operator"		"sos_set_builtins"
+		"input_execute"		"@public.pitch_granular"
+		"input_voicegraph"		"DCG_granular_pitch"
 	}
 	"start_vmix"
 	{
-		"operator"		"vmix_voicegraph_start_8track"
-		"input_execute"		"@public.pitch_granular"
-		"vgraph_name"		"DCG_granular_pitch"
+		"operator"		"vmix_voice_start"
+		"input_execute"		"1"
 		"input_track1"		"track_01"
 		"input_start2"		"0.000000"
 		"input_start3"		"0.000000"
@@ -887,6 +877,8 @@
 		"input_fade_out"		"@public.volume_fade_out"
 		"input_delay"		"@dcg_base_music_3d::delay_total.output"
 		"input_memory_type"		"@public.memory_type"
+		"input_time_scale"		"@dcg_base_music_3d::speed_from_winning_momentum.output"
+		"input_restart_time"		"@public.restart_time"
 	}
 	"send_voicegraph_pitchscale"
 	{

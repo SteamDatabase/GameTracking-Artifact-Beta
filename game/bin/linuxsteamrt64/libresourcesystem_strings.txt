@@ -83,6 +83,8 @@ $ORIGIN
 16CLoadingResource
 16CNullTypeManager
 16ICommandCallback
+17CVDataTypeManager
+17IVDataTypeManager
 18CPlaceholderConVar
 19CSchemaRegistration
 1DBlend
@@ -93,12 +95,10 @@ $ORIGIN
 21IVConCommDataReceived
 22CSchemaInstallCallback
 22CStreamingResourceData
-23CGenericDataTypeManager
 23CKV3ResourceBlockHelper
 23CKV3ResourceTypeManagerILy418564367478EE
 23CResourceSystemProfiler
 23IConCommandBaseAccessor
-23IGenericDataTypeManager
 23IResourceSystemProfiler
 25CAsyncResourceDataRequest
 25CConCommandMemberAccessorI23CResourceSystemProfilerE
@@ -119,7 +119,10 @@ $ORIGIN
 32CSchemaRegistration_resourcefile
 34CSchemaRegistration_resourcesystem
 34CVConResourceProfileCommandHandler
+35CExampleSchemaVData_PolymorphicBase
 36CSchemaRegistration_mathlib_extended
+39CExampleSchemaVData_PolymorphicDerivedA
+39CExampleSchemaVData_PolymorphicDerivedB
 6ConVar
 7IConVar
 <!--
@@ -288,6 +291,10 @@ CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. S
 CCycleControlAnimNode
 CDirectPlaybackAnimNode
 CEntityIndex
+CExampleSchemaVData_Monomorphic
+CExampleSchemaVData_PolymorphicBase
+CExampleSchemaVData_PolymorphicDerivedA
+CExampleSchemaVData_PolymorphicDerivedB
 CFollowAttachmentAnimNode
 CFollowPathAnimNode
 CFootLockAnimNode
@@ -549,6 +556,7 @@ Deleting empty loading resource
 DevMsg(char const*, ...)
 DotaCardGameClient_001
 Double-register of KV3 conversion (from '%s' to '%s')
+Double-save to Member '%s'
 DynamicConfigList
 ENABLED
 ERROR: %s resource %016llX is the wrong resource type!
@@ -644,7 +652,6 @@ InfoForResourceTypeCChoreoSceneFileData
 InfoForResourceTypeCDOTAPatchNotesList
 InfoForResourceTypeCDotaItemDefinitionResource
 InfoForResourceTypeCEntityLump
-InfoForResourceTypeCGenericDataResource
 InfoForResourceTypeCModel
 InfoForResourceTypeCMorphSetData
 InfoForResourceTypeCPanoramaDynamicImages
@@ -656,6 +663,7 @@ InfoForResourceTypeCPostProcessingResource
 InfoForResourceTypeCRenderMesh
 InfoForResourceTypeCSequenceGroupData
 InfoForResourceTypeCTextureBase
+InfoForResourceTypeCVDataResource
 InfoForResourceTypeCVMixListResource
 InfoForResourceTypeCVPhysXSurfacePropertiesList
 InfoForResourceTypeCVSoundEventScriptList
@@ -727,6 +735,9 @@ MResourceTypeForInfoType
 MapListService_001
 MaterialUtils_001
 MaybeExitBecauseOfResourceLoadFailure
+MemAlloc_AllocFunc
+MemAlloc_CallocFunc
+MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 Missing file '%s'
@@ -838,9 +849,9 @@ QAngle
 Quaternion
 QueuedLoaderVersion001
 RESOURCE_MANIFEST_HANDLE_INVALID
-RESOURCE_TYPE_GENERIC_DATA
 RESOURCE_TYPE_NONE
 RESOURCE_TYPE_RESOURCE_MANIFEST
+RESOURCE_TYPE_VDATA
 RKS_DEFAULT
 RKS_DISABLE_GROUP_CLEARING
 RKS_KEEP_ALL_RECORDS
@@ -1113,7 +1124,6 @@ breakable_skin
 burst_randomize
 burst_scale
 cable
-calloc
 cantdie
 center
 cheat
@@ -1160,7 +1170,6 @@ fltx4
 force
 format
 frame
-free
 friction
 g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
@@ -1189,7 +1198,6 @@ keepall
 kv3
 kv3format_manager.cpp
 last_sniff
-ld-linux-x86-64.so.2
 length
 libc.so.6
 libpthread.so.0
@@ -1356,6 +1364,10 @@ m_nClusterSizeMin
 m_nCollisionMode
 m_nControlPoint
 m_nControlPointNumber
+m_nDerivedA
+m_nDerivedB
+m_nExample1
+m_nExample2
 m_nFeatheringMode
 m_nFirstMultipleOverride_BackwardCompat
 m_nHand
@@ -1407,7 +1419,6 @@ m_vecColorScale
 m_vecHitBoxScale
 m_vecTailColorScale
 m_vecTexturesInput
-malloc
 master_morph_weight
 material
 materials/particle/base_sprite.vtex
