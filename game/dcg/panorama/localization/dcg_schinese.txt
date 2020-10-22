@@ -85,7 +85,10 @@
 
 	// Paste Board
 	"DCG_PasteBoard_Title"							"粘贴游戏板"
+	"DCG_PasteBoard_Button"							"粘贴"
 	"DCG_PasteBoard_Submit"							"开始游戏"
+	"DCG_PasteBoard_Zoo"							"动物园"
+	"DCG_PasteBoard_Min"							"最小"
 
 	// Dashboard
 	"DCG_Dashboard_BuildVersion"					"武装号召版 - {d:majorVersionNumber}.{d:minorVersionNumber}.{s:buildNumber}"
@@ -416,6 +419,7 @@
 	"DCG_EventTickets_Tooltip"						"{d:event_tickets}张活动门票"
 	"DCG_UnopenedPacks_Tooltip"						"{d:unopened_packs}包未开的卡牌包"
 	"DCG_DeckBuilderUnopenedPacks_Tooltip"			"打开牌组构建中心"
+	"DCG_DeckBuilder_TryCardDemo"					"试用卡牌"
 
 	"DCG_FindingMatch_Unlock"						"解锁"
 	"DCG_FindingMatch_Searching"					"正在搜索……"
@@ -680,6 +684,7 @@
 	"DCG_OpponentHandTooltip_TurnsLocked_1"			"继续锁定1回合。"
 	"DCG_OpponentHandTooltip_TurnsLocked_N"			"继续锁定{d:turnsLocked}回合。"
 	"DCG_OpponentHandTooltip_CardIsHacked"			"卡牌文字已被修改。"
+	"DCG_OpponentHandTooltip_ItemTier"				"第 {i:ItemTier} 梯队物品"
 	"DCG_ResultScreenUnits_Gold"					"金钱"
 	"DCG_ResultScreenUnits_Life"					"生命"
 	"DCG_ResultScreenUnits_Damage"					"伤害"
@@ -1221,13 +1226,25 @@
 	"DCG_UI_Maximize"						"查看商店"
 	"DCG_UI_RerollPanoramaShop"				"重新选择"
 	"DCG_UI_RerollPanoramaShop_Cost"		"2"
-	"DCG_UI_ClosePanoramaShop"				"关闭商店"
-	"DCG_UI_InvestShop"						"获得<font color=\"gold\">+{d:RewardForInvest}金钱</font>"
-	"DCG_UI_UpgradeShop"					"升级商店"
+	"DCG_UI_ClosePanoramaShop"				"继续" 
+	"DCG_UI_InvestShop"						"跳过"
+	"DCG_UI_UpgradeShop"					"升级"
+	"DCG_UI_UpgradeShop_Title"				"升级神秘商店？"
 	"DCG_UI_UpgradeShop_Cost"				"{d:CostToLevelShop}"
+	"DCG_UI_UpgradeShop_Desc"				"获取更高梯队物品的访问权"
+
+	"DCG_UI_ShopCardSlot_1_Title"			"最高梯队"
+	"DCG_UI_ShopCardSlot_2_Title"			"随机货架"
+	"DCG_UI_ShopCardSlot_3_Title"			"打折区"
+	
+	"DCG_UI_ShopCardSlot_1_ToolTip"			"从最高可用梯队中选出的卡牌（升级以增加）"
+	"DCG_UI_ShopCardSlot_2_ToolTip"			"从你的物品牌组中随机挑选"
+	"DCG_UI_ShopCardSlot_3_ToolTip"			"从最低可用梯队中选出的卡牌"
+
+	"DCG_UI_InvestShop_Reward"				"{d:RewardForInvest}"
 
 	"DCG_UI_TooltipShopTiers"				"剩余物品"
-	"DCG_UI_TooltipShopTiers_Desc"			"每个梯队可供购买的剩余物品的数量。升级以解锁更为昂贵的物品。<br><br>左边的槽位显示已解锁的最高梯队物品。中间的槽位给予物品池中所有物品相等权重。右边的槽位显示可能的情况下，你买得起的物品。"
+	"DCG_UI_TooltipShopTiers_Desc"			"每个梯队中剩余的物品数量。升级至更高梯队以解锁更昂贵的物品。"
 	"DCG_UI_TooltipShopTiers_Tier1_Name"	"等级1："
 	"DCG_UI_TooltipShopTiers_Tier1_Count"	"{d:ShopItemCountTier1}"
 	"DCG_UI_TooltipShopTiers_Tier2_Name"	"等级2："
@@ -1239,6 +1256,12 @@
 	"DCG_UI_TooltipShopTiers_Tier5_Name"	"等级5："
 	"DCG_UI_TooltipShopTiers_Tier5_Count"	"{d:ShopItemCountTier5}"
 	
+	"DCG_UI_TooltipShopTierPip1"				"等级1剩余卡牌数：{d:ShopItemCountTier1}"
+	"DCG_UI_TooltipShopTierPip2"				"等级2剩余卡牌数：{d:ShopItemCountTier2}"
+	"DCG_UI_TooltipShopTierPip3"				"等级3剩余卡牌数：{d:ShopItemCountTier3}"
+	"DCG_UI_TooltipShopTierPip4"				"等级4剩余卡牌数：{d:ShopItemCountTier4}"
+	"DCG_UI_TooltipShopTierPip5"				"等级5剩余卡牌数：{d:ShopItemCountTier5}"
+
 	"DCG_UI_ShopHeader"						"商店等级：{d:ShopLevel}"
 	"DCG_UI_DeployLane1"					"部署左路"
 	"DCG_UI_DeployLane2"					"部署中路"
@@ -1256,10 +1279,19 @@
 	"DCG_UI_Buy"							"购买"
 	"DCG_UI_ShopGold"						"金钱"
 	"DCG_UI_ShopGold_Amt"					"{d:ShopGoldAvailable}"
-	"DCG_UI_TooltipInvest"					"投资而不是购买。每升级一次商店，即增加1金钱。"
-	"DCG_UI_TooltipUpgrade"					"升级商店可解锁下一梯队物品（需多消耗5金钱），并可增加1金钱投资奖励。"
+	"DCG_UI_TooltipInvest"					"跳过购买并免费获得{d:RewardForInvest}金钱。"
+	"DCG_UI_TooltipUpgrade_Tier1Costs"		"10-15金钱"
+	"DCG_UI_TooltipUpgrade_Tier2Costs"		"20-25金钱"
+	"DCG_UI_TooltipUpgrade_Tier3Costs"		"30-35金钱"
+	"DCG_UI_TooltipUpgrade_Tier4Costs"		"40-45金钱"
+	"DCG_UI_TooltipUpgrade_Tier5Costs"		"50金钱"
+	"DCG_UI_TooltipUpgradeButton"			"获得下个梯队的物品（{s:NextTierCosts}）并刷新商店槽位。"
+	"DCG_UI_TooltipBuyButton"				"购买此物品。"
 	"DCG_UI_TooltipReroll"					"查看3个新物品。"
+	"DCG_UI_ShopCardCost"					"{d:CardCost}"
 
+	
+	
 	"DCG_PlayerInfo_MatchClock"				"你的比赛剩余时间"
 	"DCG_PlayerInfo_MatchClockOpponent"		"对手的比赛剩余时间"
 	"DCG_PlayerInfo_CurrentGold"			"你当前的金钱"
@@ -1392,6 +1424,7 @@
 	"DCG_ActionHint_CombatPosition_movetopos_AnyLane"			"<font color=\"gold\">（任意兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
 
 	"DCG_ActionHint_CombatPosition_movetopos_AnotherLane"				"<font color=\"gold\">（另一条兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
+	"DCG_ActionHint_CombatPosition_ThisOrAdjacentLane"	"<font color=\"gold\">（同一或毗邻兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_ThisOrAdjacentLane"	"<font color=\"gold\">（同一或毗邻兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_AdjacentLane"			"<font color=\"gold\">（毗邻兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
 	"DCG_ActionHint_CombatPosition_movetopos_ThisOrAdjacentLane"		"<font color=\"gold\">（毗邻兵线）</font>选择欲移往的<font color=\"gold\">战斗位置</font>"
@@ -1491,6 +1524,9 @@
 	"DCG_CardEffectDuration_TwoRounds"			"两回合"
 	"DCG_CardEffectDuration_OneAction"			"一次行动"
 	"DCG_CardEffectDuration_UntilRoundStart"	"直至回合开始"
+	
+	"DCG_CardEffectDuration_Item"				"物品"
+	"DCG_CardEffectDuration_Aura"				"灵气"
 
 	"DCG_CardType_Hero"						"英雄"
 	"DCG_CardType_Creep"					"小兵"
@@ -2304,6 +2340,7 @@
 	"DCG_Settings_AmbientOcclusion"				"环境光遮蔽"
 	"DCG_Settings_AntiAliasing"					"抗锯齿"
 	"DCG_Settings_VSync"						"垂直同步"
+	"DCG_Settings_EnglishCardNames"					"使用英文名称"
 	"DCG_Settings_EnableAdvancedConfiguration"  "启用高级配置"
 	"DCG_Settings_RenderQuality"				"游戏画面渲染品质"
 	"DCG_Settings_ShadowQuality"				"阴影品质"
@@ -2417,6 +2454,8 @@
 
 	"DCG_System_Tooltip_AdvancedConfiguration"  "警告：仅用于低性能情况。"
 	"DCG_System_Tooltip_AnonymousMode"			"你的对手在比赛期间看不见你的名称。"
+	"DCG_System_Tooltip_EnglishCardNames"  	 "以英文显示卡牌名称。"
+
 	"DCG_ConfirmReconnect"				"重新连接至比赛"
 	"DCG_ConfirmReconnectDesc" 			"你与之前比赛的连接已经断开。要重新连接吗？"
 	"DCG_YesReconnect"					"重新连接"
@@ -3111,6 +3150,8 @@
 	"DCG_PlaytestDeck4"						"蓝色/黑色腐朽"
 	"DCG_PlaytestDeck5"						"绿色/蓝色虫群"
 	"DCG_PlaytestDeck6"						"红色/蓝色通杀"
+	"DCG_PlaytestDeck7"						"红色/蓝色装备"
+
 	"DCG_DeckBuilder_MarketRestrict_Buy_Title"		"市场功能受限"
 	"DCG_DeckBuilder_MarketRestrict_Buy_Body"		"你的Steam帐户不能在市场上购买卡牌。"
 	"DCG_DeckBuilder_MarketRestrict_Sell_Title"		"市场功能受限"
@@ -3851,7 +3892,10 @@
 
 	//Steam login panel
 	"DCG_SteamLogIn_Title"								"登录 Steam"
+	"DCG_SteamLogIn_SubHeader"							"进行多人玩家比赛，提升你的霸主等级，获得勇士令状和街头闯荡中的奖励。"
 	"DCG_SteamLogIn_CreateFree"							"创建免费帐户"
+	"DCG_SteamLogIn_Desc1"								"登录至 Steam 来进行多人玩家比赛，提升你的霸主等级，在移动设备和 PC 上跨平台追踪个人进度。"
+	"DCG_SteamLogIn_Desc2"								"提升你的霸主等级，并在移动设备、平板电脑和 PC 上跨平台追踪个人进度。"
 	"DCG_SteamLogIn_Desc3"								"获得成就并访问勇士令状功能。"
 	"DCG_SteamLogIn_Desc4"								"登录 Steam 来进行此游戏模式。"
 	"DCG_SteamPlayOffline"								"取消"

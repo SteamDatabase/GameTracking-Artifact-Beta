@@ -62,7 +62,7 @@ $tI
 %s: %s (%i : %i)
 %s: Has a failed library stack message.
 %s: Has a failed sound event message.
-%s: Sound event executionlist has exceeded MAX_VOICES. Index %i : %s
+%s: Sound event executionlist has too many active voices (%d). Index %i : %s
 %s: params.pSfx is NULL.
 %s:%i
 %s:%s needs base %s:%s to be registered
@@ -1363,7 +1363,7 @@ MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
 MORPHS
 MPropertyAttributeChoiceEnumName
-MPropertyAutoExpandGroup
+MPropertyAutoExpandSelf
 MPropertyElementNameFn
 MPropertyFriendlyName
 MPropertySuppressField
@@ -1380,9 +1380,6 @@ MaterialUtils_001
 MathLib_Init
 Max Time
 Medium
-MemAlloc_AllocFunc
-MemAlloc_CallocFunc
-MemAlloc_FreeFunc
 MeshSystem001
 MeshUtils001
 Mirror
@@ -1411,6 +1408,7 @@ MurmurHash64
 Music volume
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
+N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
 N29CVSoundStackScriptTypeManager19CAsyncProcessResultE
 N@
@@ -1966,6 +1964,14 @@ VStringTokenSystem001
 V_FixDoubleSlashes
 V_GetFileExtension
 V_IsAbsolutePath
+V_LZ4_compressBound
+V_LZ4_compress_HC_continue
+V_LZ4_createStreamHC
+V_LZ4_decoderRingBufferSize
+V_LZ4_decompress_safe
+V_LZ4_decompress_safe_continue
+V_LZ4_freeStreamHC
+V_LZ4_resetStreamHC_fast
 V_ParseToken
 V_PathContainsPath
 V_PrettifyMem
@@ -2963,7 +2969,6 @@ m_nGrainSampleCount
 m_nGraphOutputChannels
 m_nGuid
 m_nHand
-m_nIncomingTangent
 m_nIncrement
 m_nLayer
 m_nLightType
@@ -3762,7 +3767,7 @@ vmix_start_vmix_8track has empty vsnd string
 vmix_start_vmix_8track: Unable to create pSfx from vsnd path
 vmix_start_voice: %s invalid track name %s, using default track
 vmix_start_voice: %s specified invalid voicegraph %s, using default voicegraph
-vmix_start_vsnd: %s Voice count >= MAX_VOICES, aborting starting vsnd %s
+vmix_start_vsnd: %s No available voices (%d in use), aborting starting vsnd %s
 vmix_vocoder_desc_t
 vmix_voice_start
 vmix_voicegraph_input

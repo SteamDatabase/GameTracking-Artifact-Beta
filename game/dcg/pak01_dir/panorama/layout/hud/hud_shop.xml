@@ -1,0 +1,112 @@
+<root>
+  <styles>
+    <include src="s2r://panorama/styles/dota_card_game_styles.vcss_c" />
+    <include src="s2r://panorama/styles/hud/hud_shop.vcss_c" />
+  </styles>
+
+  <DCGHUDShop hittest="true" hittestchildren="true">
+
+    <Panel id="BackgroundFade"/>
+
+    <Panel id="ViewBoardGroup" class="ShopMainColumnsGroup AnimateViewBoard">
+  	   <TextButton id="ViewBoardButton" class="ShopButton" text="#DCG_UI_Minimize" onactivate="DCGHUDToggleShopState();" >
+         <Panel class="LeftArrow"/>
+       </TextButton>
+    </Panel>
+  	<Panel id="ShopMainPanel" class= "ShopMainColumnsGroup AnimateWithVisibility"> 
+
+  		<Panel id="ShopTitleBar" class="ShopTopRow"> 
+
+        <Label id="ShopHeaderLabel" class="TitleFont " text="#DCG_UI_SecretShop"/>          
+  		  <Panel id="TitleDivider" class="Divider HorizontalDivider"/>
+  		  <Label id="ShopHeaderLevel" text="#DCG_UI_SecretShopLevel"/>
+        <Label id="ShopHeaderLevelAmt" text="#DCG_UI_SecretShopLevel_Amt" onmouseover="UIShowCustomLayoutTooltip( ShopTierTooltip, file://{resources}/layout/tooltips/shop_tooltip_tiers.xml )" onmouseout="UIHideCustomLayoutTooltip( ShopTierTooltip )"/>  
+
+  	  	<Panel id="ShopGoldCount" class ="MainShopShadow" >
+          <Panel id="ShopGoldCountBrassBG" > <!--todo: 9 slice-->         
+        	 <Label id="GoldCountLabel" class="TitleFont" text="#DCG_UI_ShopGold" />
+          </Panel>
+        	<Label id="GoldCountAmount" html="true" text="#DCG_UI_ShopGold_Amt" />
+      	</Panel>
+
+  		</Panel> 
+
+  		<Panel id="ShopOptions" class="MainShopShadow">
+
+  			<Panel id="ShopUpgradeContainer">
+          
+          <Panel id="ShopKeeperImage">
+            <Label id="UpgradeTitleLabel" class="MonoFont" text="#DCG_UI_UpgradeShop_Title"/>  
+            <Panel class="Divider VerticalDivider"/>
+            <Label id="UpgradeBodyTextLabel" class="MonoFont" text="#DCG_UI_UpgradeShop_Desc"/>
+          </Panel>
+
+          <Panel id="UpgradeInfo" onmouseover="UIShowCustomLayoutTooltip( ShopTierTooltip, file://{resources}/layout/tooltips/shop_tooltip_tiers.xml )" onmouseout="UIHideCustomLayoutTooltip( ShopTierTooltip )"/>
+
+          <Panel id="UpgradeLevelPipsGroup">
+            <Panel class="ShopTierContainer" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipShopTierPip1, ShopTooltip" onmouseout="UIHideTextTooltip()">
+              <Panel id="TierIcon1" class="Tier" />
+            </Panel>
+
+            <Panel class="TierLinker"/>
+
+            <Panel class="ShopTierContainer" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipShopTierPip2, ShopTooltip" onmouseout="UIHideTextTooltip()">
+              <Panel id="TierIcon2" class="Tier" />              
+            </Panel>
+
+            <Panel class="TierLinker"/>
+
+            <Panel class="ShopTierContainer" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipShopTierPip3, ShopTooltip" onmouseout="UIHideTextTooltip()">
+              <Panel id="TierIcon3" class="Tier" />
+            </Panel>
+
+            <Panel class="TierLinker"/>
+
+            <Panel class="ShopTierContainer" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipShopTierPip4, ShopTooltip" onmouseout="UIHideTextTooltip()">
+              <Panel id="TierIcon4" class="Tier" />
+            </Panel>
+
+            <Panel class="TierLinker"/>
+
+            <Panel class="ShopTierContainer" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipShopTierPip5, ShopTooltip" onmouseout="UIHideTextTooltip()">
+              <Panel id="TierIcon5" class="Tier" />
+            </Panel>
+
+          </Panel>
+
+    			<TextButton id="UpgradeButton" text="#DCG_UI_UpgradeShop" class="ShopButton" onactivate="DCGPanoramaShopUpgrade();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipUpgradeButton, ShopTooltip" onmouseout="UIHideTextTooltip()" >
+            <Panel class="UpgradeIcon"/>
+          </TextButton>
+
+          <TextButton id="RerollButton" text="#DCG_UI_RerollPanoramaShop" class="ShopButton" onactivate="DCGPanoramaShopReroll();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipReroll, ShopTooltip )" onmouseout="UIHideTextTooltip()">
+            <Image class="ShopActionCostImage">
+              <Label class="ShopActionCostLabel MonoFont" text="#DCG_UI_RerollPanoramaShop_Cost"/>
+            </Image>
+          </TextButton>
+
+        </Panel>
+
+  			<Panel id="CardSlotContainer" class="ShopRow" hittest="false" hittestchildren="true"/>  <!--DCGShopCardSlot s get inserted here-->
+      </Panel>
+
+  	</Panel>
+  	 
+  	<Panel id="ContinueGroup" class="ShopMainColumnsGroup AnimateWithVisibility">
+
+    	<TextButton id="InvestButton" text="#DCG_UI_InvestShop" html="true" class="ShopButton" onactivate="DCGPanoramaShopInvest();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipInvest, ShopTooltip )" onmouseout="UIHideTextTooltip()">
+    		<Panel class="ShopActionCostImage">
+          		<Label class="ShopActionCostLabel MonoFont" text="#DCG_UI_InvestShop_Reward"/>
+       	</Panel>
+         <Panel class="RightArrow"/>
+    	</TextButton>
+ 
+    	<TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ShopButton" onactivate="DCGPanoramaShopCloseShop();" >      
+        <Panel id="RightArrow"/>
+      </TextButton>
+   	</Panel>
+    
+ 		<!-- Handsom new shop end-->
+  </DCGHUDShop>
+
+    
+</root>

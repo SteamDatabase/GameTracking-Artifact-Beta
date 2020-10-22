@@ -407,7 +407,6 @@
 		{
 			"PE_MOUSE_END_CARD_DRAG"	"1"
 			"PE_MOUSE_END_CARD_DRAG_CROSSLANE"	"1"
-			"PE_CARD_TARGETED_END"	"1"
 		}
 
 		"control_points"
@@ -456,7 +455,25 @@
 
 	////// State: CARD is a viable target for a targeting action (be it drag or click) in progress. //////
 
-	"card_targeting_enabled"
+	"card_targeting_enabled_click"
+	{
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_CLICK_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
+		}
+	}
+
+	"card_targeting_enabled_drag"
 	{
 		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement.vpcf"
 		"attach_type"       "pattach_point_follow"
@@ -467,16 +484,50 @@
 		"create_events"
 		{
 			"PE_CARD_DRAG_TARGET_ENABLED"	"1"
-			"PE_CARD_CLICK_ACTION_ENABLED"	"1"
 		}
 		"destroy_events"
 		{
 			"PE_CARD_DRAG_TARGET_DISABLED"	"1"
-			"PE_CARD_CLICK_ACTION_DISABLED"	"1"
 		}
 	}
 
-	"tower_targeting_enabled"
+	"card_hover_highlight"
+	{
+		"particle_system"   "particles/card_effects/inhand/buff/card_inhand_buff_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_HOVER_HIGHLIGHT_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_CARD_HOVER_HIGHLIGHT_DISABLED"	"1"
+		}
+	}
+
+	"tower_targeting_enabled_click"
+	{
+		"particle_system"   "particles/card_effects/inhand/tower_inhand_buff_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_TOWER_CLICK_ACTION_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
+			"PE_TOWER_CLICK_ACTION_DISABLED"	"1"
+		}
+	}
+
+	"tower_targeting_enabled_drag"
 	{
 		"particle_system"   "particles/card_effects/inhand/tower_inhand_buff_placement.vpcf"
 		"attach_type"       "pattach_point_follow"
@@ -487,12 +538,10 @@
 		"create_events"
 		{
 			"PE_TOWER_DRAG_TARGET_ENABLED"	"1"
-			"PE_TOWER_CLICK_ACTION_ENABLED"	"1"
 		}
 		"destroy_events"
 		{
 			"PE_TOWER_DRAG_TARGET_DISABLED"	"1"
-			"PE_TOWER_CLICK_ACTION_DISABLED"	"1"
 		}
 	}
 
@@ -604,7 +653,7 @@
 		}
 	}
 
-	"creep_placement_enabled"
+	"creep_placement_enabled_drag"
 	{
 		"particle_system"   "particles/card_effects/inhand/card_placement.vpcf"
 		"attach_type"       "pattach_point_follow"
@@ -615,16 +664,32 @@
 		"create_events"
 		{
 			"PE_CARD_DRAG_CREEP_PLACEMENT_ENABLED"	"1"
-			"PE_CARD_CLICK_ACTION_ON_PATHING_CARD_ENABLED"	"1"
 		}
 		"destroy_events"
 		{
 			"PE_CARD_DRAG_CREEP_PLACEMENT_DISABLED"	"1"
+		}
+	}
+
+	"creep_placement_enabled_click"
+	{
+		"particle_system"   "particles/card_effects/inhand/card_placement.vpcf"
+		"attach_type"       "pattach_point_follow"
+		"attach_point"             "card_origin"
+		"destroy_immediately"      "1"
+		"play_endcap"		"0"
+
+		"create_events"
+		{
+			"PE_CARD_CLICK_ACTION_ON_PATHING_CARD_ENABLED"	"1"
+		}
+		"destroy_events"
+		{
 			"PE_CARD_CLICK_ACTION_ON_PATHING_CARD_DISABLED"	"1"
 		}
 	}
 	
-		"flop_placement_enabled"
+	"flop_placement_enabled"
 	{
 		"particle_system"   "particles/card_effects/flop/card_flop_placement.vpcf"
 		"attach_type"       "pattach_point_follow"

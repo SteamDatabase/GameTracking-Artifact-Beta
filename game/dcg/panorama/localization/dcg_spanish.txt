@@ -85,7 +85,10 @@
 
 	// Paste Board
 	"DCG_PasteBoard_Title"							"Tablón de anuncios"
+	"DCG_PasteBoard_Button"							"Pegar"
 	"DCG_PasteBoard_Submit"							"Jugar"
+	"DCG_PasteBoard_Zoo"							"Zoo"
+	"DCG_PasteBoard_Min"							"Mín."
 
 	// Dashboard
 	"DCG_Dashboard_BuildVersion"					"Compilación del Llamamiento a las armas - {d:majorVersionNumber}.{d:minorVersionNumber}.{s:buildNumber}"
@@ -416,6 +419,7 @@
 	"DCG_EventTickets_Tooltip"						"{d:event_tickets} tickets para eventos"
 	"DCG_UnopenedPacks_Tooltip"						"{d:unopened_packs} paquetes sin abrir"
 	"DCG_DeckBuilderUnopenedPacks_Tooltip"			"Abrir el creador de barajas"
+	"DCG_DeckBuilder_TryCardDemo"					"Probar la demo de la carta"
 
 	"DCG_FindingMatch_Unlock"						"Desbloquear"
 	"DCG_FindingMatch_Searching"					"Buscando..."
@@ -680,6 +684,7 @@
 	"DCG_OpponentHandTooltip_TurnsLocked_1"			"Carta deshabilitada durante 1 ronda más."
 	"DCG_OpponentHandTooltip_TurnsLocked_N"			"Carta deshabilitada durante {d:turnsLocked} rondas más."
 	"DCG_OpponentHandTooltip_CardIsHacked"			"Se ha modificado el texto de esta carta."
+	"DCG_OpponentHandTooltip_ItemTier"				"Objeto de nivel: {i:ItemTier}"
 	"DCG_ResultScreenUnits_Gold"					"Oro"
 	"DCG_ResultScreenUnits_Life"					"Vida"
 	"DCG_ResultScreenUnits_Damage"					"Daño"
@@ -1221,13 +1226,25 @@
 	"DCG_UI_Maximize"						"Ver tienda"
 	"DCG_UI_RerollPanoramaShop"				"Reelegir"
 	"DCG_UI_RerollPanoramaShop_Cost"		"2"
-	"DCG_UI_ClosePanoramaShop"				"Cerrar tienda"
-	"DCG_UI_InvestShop"						"OBTÉN <font color=\"gold\">+{d:RewardForInvest} DE ORO</font>"
-	"DCG_UI_UpgradeShop"					"MEJORAR TIENDA"
+	"DCG_UI_ClosePanoramaShop"				"Continuar" 
+	"DCG_UI_InvestShop"						"Omitir"
+	"DCG_UI_UpgradeShop"					"Mejorar"
+	"DCG_UI_UpgradeShop_Title"				"¿Quieres mejorar la Tienda Secreta?"
 	"DCG_UI_UpgradeShop_Cost"				"{d:CostToLevelShop}"
+	"DCG_UI_UpgradeShop_Desc"				"Accede a objetos de nivel alto"
+
+	"DCG_UI_ShopCardSlot_1_Title"			"Nivel alto"
+	"DCG_UI_ShopCardSlot_2_Title"			"Surtidos"
+	"DCG_UI_ShopCardSlot_3_Title"			"Gangas"
+	
+	"DCG_UI_ShopCardSlot_1_ToolTip"			"Carta elegida del nivel superior disponible (mejora para subir de nivel)"
+	"DCG_UI_ShopCardSlot_2_ToolTip"			"Elección aleatoria de tu baraja de objetos"
+	"DCG_UI_ShopCardSlot_3_ToolTip"			"Carta elegida del nivel inferior disponible"
+
+	"DCG_UI_InvestShop_Reward"				"{d:RewardForInvest}"
 
 	"DCG_UI_TooltipShopTiers"				"OBJETOS RESTANTES"
-	"DCG_UI_TooltipShopTiers_Desc"			"El número de artículos restantes para comprar en cada nivel. Actualiza para desbloquear artículos más caros.<br> <br>La casilla izquierda muestra un artículo del nivel desbloqueado más alto. La casilla del medio valora todos los artículos contenidos por igual. La casilla derecha muestra un artículo que te puedas permitir, si es posible."
+	"DCG_UI_TooltipShopTiers_Desc"			"El número de objetos que quedan en cada nivel. Mejora a niveles superiores para debloquear objetos más caros."
 	"DCG_UI_TooltipShopTiers_Tier1_Name"	"NIVEL 1: "
 	"DCG_UI_TooltipShopTiers_Tier1_Count"	"{d:ShopItemCountTier1}"
 	"DCG_UI_TooltipShopTiers_Tier2_Name"	"NIVEL 2: "
@@ -1239,6 +1256,12 @@
 	"DCG_UI_TooltipShopTiers_Tier5_Name"	"NIVEL 5: "
 	"DCG_UI_TooltipShopTiers_Tier5_Count"	"{d:ShopItemCountTier5}"
 	
+	"DCG_UI_TooltipShopTierPip1"				"Cartas restantes de nivel 1: {d:ShopItemCountTier1}"
+	"DCG_UI_TooltipShopTierPip2"				"Cartas restantes de nivel 2: {d:ShopItemCountTier2}"
+	"DCG_UI_TooltipShopTierPip3"				"Cartas restantes de nivel 3: {d:ShopItemCountTier3}"
+	"DCG_UI_TooltipShopTierPip4"				"Cartas restantes de nivel 4: {d:ShopItemCountTier4}"
+	"DCG_UI_TooltipShopTierPip5"				"Cartas restantes de nivel 5: {d:ShopItemCountTier5}"
+
 	"DCG_UI_ShopHeader"						"Nivel de la tienda: {d:ShopLevel}"
 	"DCG_UI_DeployLane1"					"Desplegar a la izquierda"
 	"DCG_UI_DeployLane2"					"Desplegar en el centro"
@@ -1256,10 +1279,19 @@
 	"DCG_UI_Buy"							"COMPRAR"
 	"DCG_UI_ShopGold"						"ORO"
 	"DCG_UI_ShopGold_Amt"					"{d:ShopGoldAvailable}"
-	"DCG_UI_TooltipInvest"					"Invierte en lugar de comprar. Aumenta en 1 cada vez que mejoras la tienda."
-	"DCG_UI_TooltipUpgrade"					"Al mejorar la tienda se desbloquea el nivel siguiente de objetos (5 de oro más) y se aumenta en 1 la recompensa de invertir."
+	"DCG_UI_TooltipInvest"					"No compres y obtén {d:RewardForInvest} de oro gratis."
+	"DCG_UI_TooltipUpgrade_Tier1Costs"		"10-15 de oro"
+	"DCG_UI_TooltipUpgrade_Tier2Costs"		"20-25 de oro"
+	"DCG_UI_TooltipUpgrade_Tier3Costs"		"30-35 de oro"
+	"DCG_UI_TooltipUpgrade_Tier4Costs"		"40-45 de oro"
+	"DCG_UI_TooltipUpgrade_Tier5Costs"		"50 de oro"
+	"DCG_UI_TooltipUpgradeButton"			"Obtén acceso al siguiente nivel de objetos ({s:NextTierCosts}) y renueva las casillas de la tienda."
+	"DCG_UI_TooltipBuyButton"				"Comprar este objeto."
 	"DCG_UI_TooltipReroll"					"Ver 3 nuevos objetos."
+	"DCG_UI_ShopCardCost"					"{d:CardCost}"
 
+	
+	
 	"DCG_PlayerInfo_MatchClock"				"Tiempo de la partida que te queda"
 	"DCG_PlayerInfo_MatchClockOpponent"		"Tiempo de la partida que le queda al rival"
 	"DCG_PlayerInfo_CurrentGold"			"Tu oro actual"
@@ -1392,6 +1424,7 @@
 	"DCG_ActionHint_CombatPosition_movetopos_AnyLane"			"<font color=\"gold\">(CUALQUIER SENDA)</font> Elige una <font color=\"gold\">posición de combate</font> para desplazarte."
 
 	"DCG_ActionHint_CombatPosition_movetopos_AnotherLane"				"<font color=\"gold\">(OTRA SENDA)</font> Elige una <font color=\"gold\">posición de combate</font> a la que moverse"
+	"DCG_ActionHint_CombatPosition_ThisOrAdjacentLane"	"<font color=\"gold\">(SENDA ACTUAL O ADYACENTE)</font> Elige una <font color=\"gold\">posición de combate</font> a la que moverse"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_ThisOrAdjacentLane"	"<font color=\"gold\">(SENDA ACTUAL O ADYACENTE)</font> Elige una <font color=\"gold\">posición de combate</font> a la que moverse"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_AdjacentLane"			"<font color=\"gold\">(SENDA ADYACENTE)</font> Elige una <font color=\"gold\">posición de combate</font> a la que moverse"
 	"DCG_ActionHint_CombatPosition_movetopos_ThisOrAdjacentLane"		"<font color=\"gold\">(SENDA ADYACENTE)</font> Elige una <font color=\"gold\">posición de combate</font> a la que moverse"
@@ -1491,6 +1524,9 @@
 	"DCG_CardEffectDuration_TwoRounds"			"Dos rondas"
 	"DCG_CardEffectDuration_OneAction"			"Una acción"
 	"DCG_CardEffectDuration_UntilRoundStart"	"Hasta que empieza la ronda"
+	
+	"DCG_CardEffectDuration_Item"				"Objeto"
+	"DCG_CardEffectDuration_Aura"				"Aura"
 
 	"DCG_CardType_Hero"						"Héroe"
 	"DCG_CardType_Creep"					"Críptido"
@@ -3110,10 +3146,12 @@
 
 	"DCG_PlaytestDeck1"						"Incursión Negra / Roja"
 	"DCG_PlaytestDeck2"						"Devorar Verde / Negra"
-	"DCG_PlaytestDeck3"						"DEFENSA Verde / Roja"
+	"DCG_PlaytestDeck3"						"Defensa Verde / Roja"
 	"DCG_PlaytestDeck4"						"Descomponer Azul / Negra"
 	"DCG_PlaytestDeck5"						"Enjambre Verde / Azul"
 	"DCG_PlaytestDeck6"						"Atómica Roja / Azul"
+	"DCG_PlaytestDeck7"						"Equipamiento Roja/Azul"
+
 	"DCG_DeckBuilder_MarketRestrict_Buy_Title"		"Mercado restringido"
 	"DCG_DeckBuilder_MarketRestrict_Buy_Body"		"Tu cuenta de Steam no tiene permiso para comprar cartas en el Mercado."
 	"DCG_DeckBuilder_MarketRestrict_Sell_Title"		"Mercado restringido"

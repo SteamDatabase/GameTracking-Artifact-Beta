@@ -1,0 +1,666 @@
+
+
+@define buttonGradient: gradient( linear, 0% 0%, 0% 100%, from( #9a905f ), to( #7c713f ) );
+@define shopTextGradient: gradient( linear, 0% 0%, 0% 100%, from( #EAE0AF ),  color-stop( .3, #EAE0AF ), to( #EFE7B8 ) );
+@define goldLabelTextGradient: gradient( linear, 0% 0%, 0% 100%, from( #2e280a ), to( #2e280a ) );
+@define shopUpgradeTextGradient: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .1, #ffffff ), color-stop( .3, #ffffff ), color-stop( .8, #ffffff ), to( #ffffff ) );
+
+@define shopUpgradeBGGradient: gradient( linear, 0% 0%, 0% 100%, from( #e4dfc644 ), color-stop( .1, #e4dfc644 ), color-stop( .3, #e4dfc644 ), color-stop( .8, #b2aea144 ), to( #b2aea144 ) );
+@define shopBGGradient: gradient( linear, 0% 0%, 0% 100%, from( #FAF7EA24 ), color-stop( .6, #b9a95515 ), to( #6e5d2410 ) );
+@define shopGoldCountGradient: gradient( linear, 0% 0%, 0% 100%, from( #ffefa825 ), color-stop( .3, #9c850f25 ), to( #29260bff ) );
+
+@define goldBorder: #efe9ca24;
+@define goldInner: #AB9E53FF;
+
+
+@define fadeInDuration: 0.25s;
+
+//old
+
+//New shop stuff
+
+//important classes for visibility
+//.Shopping - we are in the shopping phase at all
+//.ShopMaximized - we are not viewing the board
+//.ShoppingComplete - we have clicked continue or skip and are exiting the shopping phase
+
+
+DCGHUDShop
+{
+	
+	width: 100%;
+	height: 100%;
+
+	vertical-align: center;
+	horizontal-align: center;
+	visibility: collapse;
+
+}
+
+DCGHUDShop Panel
+{
+	tooltip-position:top;
+}
+
+DCGHUDShop TextButton
+
+{
+	tooltip-position:bottom;
+}
+
+.Shopping DCGHUDShop
+{
+	visibility: visible;
+}
+
+#BackgroundFade
+{
+	//Background transparency layer. Fades in when we start viewing the shop.
+	width: 100%;
+	height: 100%;
+
+	background-color: #000000EE;//make some cool gradients to ease in
+	opacity: 0;
+	transition-property:  opacity;
+	transition-duration: fadeInDuration;
+}
+
+.Shopping.ShopMaximized #BackgroundFade
+{
+	opacity: 1;
+}
+.ShoppingComplete #BackgroundFade
+{
+	opacity: 0;
+}
+.Shopping.ShopMaximized DCGHUDShop 
+{
+	opacity: 1;//temp. will tween in from right, and tween out from left.
+}
+
+
+//
+// Anim classes
+//
+
+
+@define offScreenPercentage: 800%;
+@define offScreenPercentageLeft: -800%;
+
+.AnimateWithVisibility
+{
+	transform: translateX( offScreenPercentage );//stage right
+
+	transition-property: transform;
+	transition-duration: fadeInDuration;
+	transition-timing-function: ease-in-out;
+
+	
+}
+
+.Shopping.ShopMaximized .AnimateWithVisibility
+{
+	transform: translateX( 0% );//bring to center
+}
+
+
+.Shopping .ShoppingComplete .AnimateWithVisibility
+{
+	transform: translateX( offScreenPercentageLeft );//move stage left
+}
+
+.AnimateViewBoard
+{
+	transition-property: transform;
+	transition-duration: fadeInDuration;
+	transition-timing-function: ease-in-out;
+
+	transform: translateX( offScreenPercentage );//stage right - when board is mini
+}
+
+.Shopping .AnimateViewBoard
+{
+	transform: translateX( 0% );//bring to center
+}
+.Shopping.ShopMaximized .AnimateViewBoard
+{
+	transform: translateX( 0% );//bring to center
+}
+
+.Shopping .ShoppingComplete .AnimateViewBoard
+{
+	transform: translateX( offScreenPercentageLeft );//move stage left
+}
+
+//
+// Main Body of shop
+//
+#ShopMainPanel
+{
+	margin-top: 10px;
+	width: fit-children;
+}
+
+#ShopOptions
+{
+	min-width: 500px;
+	width: fit-children;
+	height: fit-children;
+	flow-children: right;
+  
+	background-color: shopBGGradient;
+	//background-color: #ffffff00;
+	//background-image: url("s2r://panorama/images/shop/shop_main_bg_png.vtex");
+	//background-blend-mode: multiply;
+	background-size: 100% 100%;
+
+	border-top: 1px solid #9d987b55;
+	border-left: 1px solid #9d987b55;
+	border-right:  1px solid #a4a18855;
+	border-bottom: 1px solid #a4a18855;
+}
+
+
+.ShopMainColumnsGroup
+{
+
+	width: 20%;
+	flow-children: down;
+	vertical-align: center;
+	horizontal-align:center;
+
+	background-color: #22000000;
+
+}
+
+#ViewBoardGroup
+{
+	horizontal-align:left;
+
+}
+
+.Shopping #ViewBoardGroup
+{
+	visibility: visible;
+}
+
+#ContinueGroup
+{
+	horizontal-align:right;
+}
+
+
+//
+// Button Section
+//
+
+.ShopButton
+{
+	margin: 7px;
+	background-color: buttonGradient;
+	width: 208px;
+	height: 50px;
+	horizontal-align: center;
+	transition-property: background-color, text-shadow, opacity, brightness;
+	transition-duration: 0.1s;
+	transition-timing-function: linear;
+	
+	border-top: 1px solid #bbb490;
+	border-left: 1px solid #bbb490;
+	border-right:  1px solid #7b703e;
+	border-bottom: 1px solid #7b703e;
+
+	box-shadow: -3px -2px 6px 8px fill #0009;
+}
+
+.ShopButton:enabled:hover
+{
+	//background-color: gradient( linear, 0% 0%, 0% 100%, from( #4c5561 ), to( #6c7d88 ) );
+	brightness: 1.5;
+
+	border-top: 1px solid #ffe77b;
+	border-left: 1px solid #ffe77b;
+	border-right:  1px solid #ffe77b;
+	border-bottom: 1px solid #ffe77b;
+
+	//box-shadow: -1px -2px 2px 4px fill #0009;
+	box-shadow: -1px -1px 2px 2px fill #e9e2c2;
+}
+
+.ShopButton:disabled
+{
+	wash-color: #999999;
+	saturation: 0;
+}
+
+.ShopButton:disabled Label
+{
+	color: #888888;
+}
+
+.ShopButton:active
+{
+	margin-top: 10px;
+	//background-color: gradient( linear, 0% 0%, 0% 100%, from( #393939), to( #555555 ) );
+	brightness: 0.5;
+	sound: "ui_generic_button_click";
+	
+	box-shadow: -2px -2px 4px 4px fill #e9e2c2;
+}
+
+.ShopButton Label
+{
+	margin-top: 2px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: shopTextGradient;//todo: better gradient;
+	horizontal-align: center;
+	text-align: center;
+	vertical-align: middle;
+	text-shadow: 2px 2px 4px 1.0 #000000;
+}
+
+
+Label.ShopActionCostLabel
+{
+	font-stretch: condensed;
+	vertical-align: center;
+	horizontal-align: center;
+	text-align: center;
+	margin-top: 11px;
+	margin-right: 2px;
+	font-size: 25px;
+	letter-spacing: 0px;
+}
+
+
+.ShopActionCostImage
+{
+	background-image: url("s2r://panorama/images/shop/goldcoin_minus_psd.vtex");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: 50% 50%;
+
+	//margin-left: -14px;//can't. Panorama bug while hovering
+	margin-left: 0px;
+
+	height: 59px;
+	width: 59px;
+	
+	vertical-align: center;
+	overflow: noclip;
+}
+
+.NoCost .ShopActionCostImage
+{
+	visibility: collapse;
+}
+
+#InvestButton .ShopActionCostImage
+{
+	background-image: url("s2r://panorama/images/shop/goldcoin_add_psd.vtex");
+}
+
+#UpgradeButton
+{
+	height: 70px;
+	vertical-align: bottom;
+	//background-color: #0000;
+}
+
+#UpgradeLevelPipsGroup
+{
+	vertical-align: bottom;
+	horizontal-align: center;
+
+	margin-bottom: 100px;
+	height: fit-children;
+	width: fit-children;
+	flow-children: right;
+}
+
+
+.ShopTierContainer
+{
+	//padding: 10px;
+}
+
+.TierLinker,
+.Tier
+{
+    width: 18px;
+    height: 18px;
+    color: uiBrightGrey;
+    
+    background-size: 100% 100%;
+    border: 1px solid goldBorder;
+
+    box-shadow: -6px -6px 16px 16px fill #0005;
+}
+
+/*
+#TierIcon1
+{
+    background-color: grey;
+}
+
+#TierIcon2
+{
+    background-color: green;
+}
+
+#TierIcon3
+{
+    background-color: blue;
+}
+
+#TierIcon4
+{
+    background-color: purple;
+}
+
+#TierIcon5
+{
+    background-color: orange;
+}
+*/
+
+.Tier.HasUpgradeTier
+{
+	background-color: goldInner;
+}
+
+.TierLinker
+{
+	//do gradient for inbetween ones?
+	width: 18px;
+	height: 1px;
+	vertical-align: center;
+}
+
+.TierLinker.HasUpgradeTier
+{
+	background-color: goldInner;
+}
+
+//
+// Top Row
+//
+.ShopTopRow
+{
+	margin-bottom: 20px;
+	width:100%;
+	flow-children: right;
+	vertical-align: center;
+	horizontal-align: left;
+}
+
+#ShopHeaderLabel
+{
+	margin-left: -5px;
+	margin-right: 20px;
+	width: fit-children;
+	horizontal-align: left;
+	vertical-align: center;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #e1d7a7 ),  color-stop( .3, #e1d7a7 ), to( #ac9e70 ) );
+	text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 35px;
+	text-align: center;
+}
+
+#ShopHeaderLevel
+{
+	margin: 15px;
+	margin-top: 16px;
+
+	horizontal-align: left;
+	vertical-align: center;
+	color: shopTextGradient;
+	text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 20px;
+	letter-spacing: 4.0px;
+	font-weight: light;
+	text-align: center;
+}
+
+#ShopHeaderLevelAmt
+{
+	horizontal-align: left;
+	vertical-align: center;
+	color: shopTextGradient;
+	text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 40px;
+	text-align: center;
+}
+
+#ShopGoldCount
+{
+	
+	vertical-align: bottom;
+	horizontal-align: right;
+	flow-children: right;
+	width: fit-children;
+
+	border: 1px solid goldBorder;
+	//border-left: 1px solid #efe9ca24;
+	//border-right: 1px solid #efe9ca24;
+	//border-bottom: : 1px solid #efe9ca24;
+	//border-top: : 1px solid #efe9ca24;
+
+//	padding: 20px;
+	background-color: shopGoldCountGradient;
+
+	
+	
+}
+
+.MainShopShadow
+{
+	box-shadow: -8px -8px 16px 16px fill #0004;
+}
+
+#ShopGoldCountBrassBG
+{
+	margin: 10px;
+	width: 107px;
+	height:40px;
+	background-image: url("s2r://panorama/images/shop/panel_gold_panel_png.vtex");
+	background-size: 100% 100%;
+}
+
+#GoldCountLabel
+{
+	width: 100%;
+	height: 100%;
+
+	margin-top: 2px;
+	horizontal-align: center;
+	vertical-align: center;
+	color: goldLabelTextGradient;
+	//text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 30px;
+	text-align: center;	
+}
+
+#GoldCountAmount
+{
+	min-width: 50px;
+	margin-right: 15px;
+	margin-left: 5px;
+	horizontal-align: center;
+	vertical-align: center;
+	color: shopTextGradient;
+	//text-shadow: 0px 2px 4px 2.0 #000000;
+	font-size: 40px;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+
+
+#RerollButton
+{
+  	visibility: collapse;
+}
+
+#CardSlotContainer
+{
+	padding-left: 15px;
+	padding-right: 15px;
+
+	flow-children: right;
+	width: fit-children;	
+}
+
+#ShopUpgradeContainer
+{
+	padding: 5px;
+	//take dimensions from shop keeper image
+	width: fit-children;
+	height: fit-children;
+	//background-color: #ffefa805;
+
+	background-color: shopBGGradient;
+
+	//background-color: shopUpgradeBGGradient;
+	//background-image: url("s2r://panorama/images/shop/shop_panel_png.vtex");
+	//background-size: 100% 100%;
+
+	box-shadow: -10px -10px 20px 20px fill #0008;
+
+	//border-top: 1px solid #9d987b55;
+	border-left: 1px solid #9d987b55;
+	border-right:  1px solid #a4a18855;
+	//border-bottom: 1px solid #a4a18855;
+}
+
+#UpgradeInfo
+{
+	padding: 4px;
+	width: 24px;
+	height: 24px;
+
+	horizontal-align: right;
+	vertical-align: top;
+
+	background-image: url("s2r://panorama/images/shop/button_info_psd.vtex");
+	background-size: 100% 100%;
+}
+#ShopKeeperImage
+{
+	width: 239px;
+	height: 468px;
+
+	background-image: url("s2r://panorama/images/shop/shop_keeper_png.vtex");
+	background-size: 100% 100%;
+
+	flow-children: down;
+}
+
+
+#UpgradeTitleLabel
+{
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-top: 20px;
+	margin-bottom: 2px;
+
+	horizontal-align: center;
+	vertical-align: center;
+	color: shopUpgradeTextGradient;
+	text-transform: uppercase;
+	text-shadow: 0px 2px 4px 2.0 #00000080;
+	font-size: 20px;
+	text-align: center;
+	overflow: clip noclip;
+}
+
+#UpgradeBodyTextLabel
+{
+	margin-top: 2px;
+	margin-left: 5px;
+	margin-right: 5px;
+
+	color: shopUpgradeTextGradient;//todo: better gradient;
+	vertical-align: top;
+	horizontal-align: center;
+	font-size: 16px;
+	text-align: center;
+	text-shadow: 0px 2px 4px 2.0 #00000080;
+}
+
+.Divider
+{
+	margin: 5px;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #959062 ), to( #78704B ) );
+	vertical-align: center;
+	horizontal-align: center;
+}
+
+.HorizontalDivider
+{
+	width: 1px;
+	height: 100%;
+}
+
+.VerticalDivider
+{
+	width: 100%;
+	height: 1px;
+}
+
+//skip or continue buttons
+#InvestButton:disabled,
+#CloseShopButton:disabled
+{
+	visibility: collapse;
+}
+
+
+
+.ShoppingComplete #InvestButton,
+.ShoppingComplete #CloseShopButton
+{
+	visibility: collapse;
+}
+
+.LeftArrow,
+.RightArrow
+{
+
+	width: 49px;
+	height: 49px;
+	
+	background-image: url("s2r://panorama/images/shop/button_skip_or_continue_arrow_png.vtex");
+	background-size: 100% 100%;
+
+	horizontal-align: right;
+
+}
+
+.LeftArrow
+{
+	horizontal-align: left;
+	transform: scaleX(-1);
+}
+
+.UpgradeIcon
+{
+	width: 49px;
+	height: 49px;
+	
+	background-image: url("s2r://panorama/images/shop/button_upgrade_up_icon_png.vtex");
+	background-size: 100% 100%;
+
+	vertical-align: center;
+	horizontal-align: right;
+
+}
+
+//move to lhs if there is no cost label active
+.NoCost .UpgradeIcon
+{
+	horizontal-align: left;
+	transform: scaleX(-1);
+}
+

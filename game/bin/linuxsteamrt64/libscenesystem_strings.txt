@@ -22,9 +22,9 @@
 #%s/%s/+MultiGpu-TransferRenderTarget( To: %dx%d @ x: %d y: %d, From: %dx%d @ x: %d y: %d )
 #%s/%s/+SteamVrCompositor-TransferLeftEye( %dx%d @ (x: %d y: %d) )
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
-#%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
+#%s/RenderAView/LightSetup
 #%s/SetupLightingForView/SetupLightingForView
 #%s/UpdatePerViewConstantBuffers
 #%s/UpdatePerViewConstantBuffers%d
@@ -98,13 +98,14 @@ $tI
 *** Skip layer '%s'
 *Z29InitForFrustum_DebugRendering17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
 *Z33InitForFrustum_DebugRenderingCsgo17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
-*ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneViewP11ISceneLayerP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
+*ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneView17ESceneObjectFlagsP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
+*ZN13CLightBinner222GatherBarnLightsInViewEPK10ISceneView17ESceneObjectFlagsS3_EUlP21CSceneBarnLightObjectE_
 *ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP18CEnvMapSceneObjectE_
 *ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP28CSceneLightProbeVolumeObjectE_
 *ZN14CLightBinnerVr19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
-*ZN14CLightBinnerVr34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsSA_iEUlP25CSceneLightObjectInternalE_
+*ZN14CLightBinnerVr34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
 *ZN16CLightBinnerCsgo19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
-*ZN16CLightBinnerCsgo34AllocateMixedShadowsForLocalLightsEP10CSceneViewP11ISceneLayerRK8CFrustumRK21FrustumGeometryCSGO_t17ESceneObjectFlagsSA_iEUlP25CSceneLightObjectInternalE_
+*ZN16CLightBinnerCsgo34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK21FrustumGeometryCSGO_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
 *ZN26CBindlessFastPathPartition21EnsureEnvironmentMapsEvEUlP18CEnvMapSceneObjectE_
 *ZN32CBindlessFastPathSceneObjectDesc35EnsureLightProbeVolumeDescriptorSetEvEUlP28CSceneLightProbeVolumeObjectE_
 +inf
@@ -238,12 +239,14 @@ $tI
 2.13
 2.2
 2.5
+20CBarnLightObjectDesc
 20CBaseSceneObjectDesc
 20CDebugTextObjectDesc
 20CFilterLayerRenderer
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CSpotLightObjectDesc
+20ISceneObjectDescBaseI21CSceneBarnLightObjectE
 20ISceneObjectDescBaseI21CSceneDebugTextObjectE
 20ISceneObjectDescBaseI25CSceneLightObjectInternalE
 20ISceneObjectDescBaseI28CBindlessFastPathSceneObjectE
@@ -253,6 +256,7 @@ $tI
 21CAggregateSceneObject
 21CPointLightObjectDesc
 21CResolveLayerRenderer
+21CSceneBarnLightObject
 21CSceneDebugTextObject
 21CUtlMultiJobProcessor
 21IVConCommDataReceived
@@ -608,6 +612,8 @@ BGRA8888_LINEAR
 BGRX8888_LINEAR
 Bad KV3 data for '%s': %s
 BakedLODBuilderMgr001
+BarnLight
+BarnLightObjectDesc
 Base Spring;
 BaseIKRig
 BasePhysicsShape
@@ -727,6 +733,7 @@ CHitBoxSet
 CHitBoxSetList
 CHitReactAnimNode
 CJiggleBoneAnimNode
+CLightBinner2: Unsupported barn light count %d
 CLightBinner::UpdateBinTexture
 CLightBinnerCsgo: Unsupported CSGONumBakedLights %d
 CLightBinnerCsgo: Unsupported CsgoMaxLights %d
@@ -1074,6 +1081,7 @@ CopyAttrFrom
 CopyRenderTargetOutputsAndViewportFromPreviousLayer
 Coudn't read pixels for texture %s
 Courier New
+CreateBarnLightConstantBuffer
 CreateInterface
 CreatePerViewLightingConstantBuffer
 CreatePerViewLightingConstantBufferCsgo
@@ -1266,7 +1274,7 @@ INVALID
 IQuickTime001
 If enabled, the camera's translation will be included in the projection matrix.
 InfoForResourceTypeCAnimData
-InitForFrustum
+InitForView
 InputService_001
 InputStackSystemVersion001
 InputSystemVersion001
@@ -1393,7 +1401,6 @@ MaterialParam_t
 MaterialResourceData_t
 MaterialUtils_001
 MemAlloc_AllocFunc
-MemAlloc_CallocFunc
 MemAlloc_FreeFunc
 MeshBuilderObject
 MeshSystem001
@@ -1576,6 +1583,7 @@ Plat_DebugPrint
 Plat_ExitProcess
 Plat_FloatTime
 Plat_GetCPUFrequency
+Plat_GetCrtEnv
 Plat_GetEnv
 Plat_GetModuleFilename
 Plat_GetThreadIndex
@@ -1740,6 +1748,7 @@ SceneSystem/VrLightBinnerCachedShadowMapHeight
 SceneSystem/VrLightBinnerCachedShadowMapTileSize
 SceneSystem/VrLightBinnerCachedShadowMapWidth
 SceneSystem/VrLightBinnerMaxLights
+SceneSystem/VrLightBinnerNumBarnLights
 SceneSystem/VrLightBinnerShadowViewsNeedPerViewLightingConstants
 SceneSystem/VrLightBinnerSingleLightFastPath
 SceneSystem/WellKnownLightCookies
@@ -1763,6 +1772,7 @@ Set a float attribute which will be visible to all rendering (Usage: sc_setfloat
 Set an integer attribute which will be visible to all rendering (Usage: sc_setintattr <attrname> <value>)
 SetupConstantBuffer
 SetupLightingForViewCsgo
+SetupLightingForViewVr
 ShadowMap "
 Shadowed spot lights in view: %d
 Show
@@ -1888,6 +1898,7 @@ Unsupported ETC image format %d.
 Unsupported binary encoding id.
 Unsupported text encoding id.
 Update
+UpdateBarnLightConstantBuffer
 UpdateBinTexture
 UpdateDirtyObjects
 UpperEyelid(
@@ -1941,6 +1952,14 @@ V_CopyMemory3D
 V_FixDoubleSlashes
 V_GetFileExtension
 V_IsAbsolutePath
+V_LZ4_compressBound
+V_LZ4_compress_HC_continue
+V_LZ4_createStreamHC
+V_LZ4_decoderRingBufferSize
+V_LZ4_decompress_safe
+V_LZ4_decompress_safe_continue
+V_LZ4_freeStreamHC
+V_LZ4_resetStreamHC_fast
 V_PathContainsPath
 V_PrettifyMem
 V_PrettifyNum
@@ -2079,7 +2098,6 @@ _fini
 _setjmp
 _test_conversion_counter
 _z0
-`
 `jF
 abort
 abs( %s )
@@ -2265,14 +2283,14 @@ filterinY
 filterinZ
 float
 floatbitmap.cpp
-floatbitmap.cpp(121): Unknown gamma type "%s"!
-floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2310): Error loading %s
-floatbitmap.cpp(2333): Error! Unknown file type for %s
-floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(299): Conversion not supported yet!
-floatbitmap.cpp(383): Conversion not supported yet!
-floatbitmap.cpp(846): Unsupported color format "%s", skipping!
+floatbitmap.cpp(122): Unknown gamma type "%s"!
+floatbitmap.cpp(2300): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2311): Error loading %s
+floatbitmap.cpp(2334): Error! Unknown file type for %s
+floatbitmap.cpp(2353): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(300): Conversion not supported yet!
+floatbitmap.cpp(384): Conversion not supported yet!
+floatbitmap.cpp(847): Unsupported color format "%s", skipping!
 floor
 floorf
 fltx4
@@ -2333,6 +2351,7 @@ libscenesystem.so
 libstdc++.so.6
 libtier0.so
 lightbinner.cpp
+lightbinner_2.cpp
 lightbinner_total_data_%d.vtex
 lightbinner_vr.cpp
 lighting_array_fog_RT1.vtex
@@ -3120,9 +3139,9 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(3291):
-scenesystem.cpp(5611): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(6830): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(3300):
+scenesystem.cpp(5616): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(6850): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 scenetextureset_%d

@@ -363,6 +363,7 @@ $tI
 %s, string command, int default
 %s, string image
 %s, string image, string border, string fillcolor, bool scaleImage
+%s, string image, string imagecolor, alignment imageAlignment, int preserveAspectRatio, int filtered
 %s, string progress, string variable
 %s, string text, bool scrollbar
 %s, string title
@@ -916,7 +917,7 @@ $tI
 00010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899
 0123456789ABCDEFOut of Memory
 0123456789abcdef
-02:55:30
+05:15:08
 0: Force z prepass off. 1: Force on. -1: Don't force
 0: Use normals reconstructed from depth. 1: Output correct normals in z prepass.
 0=Off, 1=Surface Wireframe, 2=Transparent Wireframe
@@ -1339,6 +1340,7 @@ $tI
 16CScriptAccessorTI22CDefScriptAccessorBaseLb1EE
 16CScriptComponent
 16CUploadGameStats
+16ICommandCallback
 16IDebugVisualizer
 16IEngineConsoleUI
 16IGameEventSystem
@@ -2828,7 +2830,6 @@ CL:  Signon traffic "%s":  incoming %s [%d pkts], outgoing %s [%d pkts]
 CL:  Skipping suppress INetchannel::Transmit() in loopmode( %s )
 CL:  Successfully connected to %s
 CL:  Suppress INetchannel::Transmit() in loopmode( %s )
-CL:  TransmitNetChannel
 CL:  Unexpected authentication protocol %i!
 CL:  WARNING! User command buffer overflow (start:%i, current:%i, end:%i), buffer size %d bytes
 CL:  WARNING:  Connection Problem, not requesting uncompressed update due to sv_snapshot_unlimited == true
@@ -5402,7 +5403,6 @@ Mc
 Me
 Meetei_Mayek
 MemAlloc_AllocFunc
-MemAlloc_CallocFunc
 MemAlloc_FreeFunc
 MemTools_BeginFrame
 Members/numSlots
@@ -5923,7 +5923,7 @@ OUT_OF_RANGE
 Obtained EMS handle %u
 Obtained XMS handle %u
 Oct
-Oct 15 2020
+Oct 22 2020
 Ogham
 Ol_Chiki
 Old_Italic
@@ -6208,6 +6208,7 @@ Plat_FloatTime
 Plat_GetCPUFrequency
 Plat_GetCPUUsage
 Plat_GetComputerName
+Plat_GetCrtEnv
 Plat_GetCurrentDirectory
 Plat_GetCurrentFrame
 Plat_GetCurrentHibernationState
@@ -6244,6 +6245,7 @@ Plat_GetWindowMonitorIndex
 Plat_GetWindowSafeAreaInsets
 Plat_GlobalMemoryStatus
 Plat_HasDefaultMonitorIndexChanged
+Plat_HasEnv
 Plat_IgnoreContentAsserts
 Plat_InitializeCOM
 Plat_InstallUrlHandler
@@ -6281,6 +6283,7 @@ Plat_SetCurrentFrame
 Plat_SetDefaultMonitorIndex
 Plat_SetDenormalsAreZero
 Plat_SetDesktopNotifyIconPath
+Plat_SetEnv
 Plat_SetFullscreenMinimizeOnFocusLoss
 Plat_SetGameDirectories
 Plat_SetVirtualReserveWarnLimit
@@ -6465,6 +6468,7 @@ Quantizing to %d colors
 QuarterSizeAttrWithBoxFilter
 Quaternion
 Quaternion-world
+QuaternionAligned
 QueryPort
 Queued   :  %s
 QueuedLoaderVersion001
@@ -7802,6 +7806,14 @@ V_GetFileExtension
 V_GetFileExtensionSafe
 V_Get_stdout
 V_IsAbsolutePath
+V_LZ4_compressBound
+V_LZ4_compress_HC_continue
+V_LZ4_createStreamHC
+V_LZ4_decoderRingBufferSize
+V_LZ4_decompress_safe
+V_LZ4_decompress_safe_continue
+V_LZ4_freeStreamHC
+V_LZ4_resetStreamHC_fast
 V_LogMultiline
 V_ParseToken
 V_PathContainsPath
@@ -8002,6 +8014,7 @@ Windowed
 Windows
 Wireframe
 WireframeDecal
+WireframeReflective
 WorkshopSetup001
 WorldRendererMgr001
 Write buffered voice attachment data to file.
@@ -8604,7 +8617,6 @@ convars.txt
 convars_echo_toggle_changes
 core
 core.stop_all_soundevents
-cos
 cos( %s )
 cpu_level
 cpu_level,
@@ -8839,18 +8851,17 @@ float32-quantized
 float64
 float_array
 floatbitmap.cpp
-floatbitmap.cpp(121): Unknown gamma type "%s"!
-floatbitmap.cpp(2299): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2310): Error loading %s
-floatbitmap.cpp(2333): Error! Unknown file type for %s
-floatbitmap.cpp(2352): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
-floatbitmap.cpp(299): Conversion not supported yet!
-floatbitmap.cpp(383): Conversion not supported yet!
-floatbitmap.cpp(846): Unsupported color format "%s", skipping!
+floatbitmap.cpp(122): Unknown gamma type "%s"!
+floatbitmap.cpp(2300): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2311): Error loading %s
+floatbitmap.cpp(2334): Error! Unknown file type for %s
+floatbitmap.cpp(2353): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(300): Conversion not supported yet!
+floatbitmap.cpp(384): Conversion not supported yet!
+floatbitmap.cpp(847): Unsupported color format "%s", skipping!
 floor
 floorf
 fltx4
-fmod
 fog_enable
 fog_override_color
 fog_override_enable
@@ -9306,6 +9317,7 @@ libm.so.6
 libpng error: %s
 libpng version 1.5.2 - March 31, 2011
 libpng version 1.5.2 - March 31, 2011Copyright (c) 1998-2011 Glenn Randers-PehrsonCopyright (c) 1996-1997 Andreas DilgerCopyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.
+libpng warning: %s
 libpthread.so.0
 libstdc++.so.6
 libsteam_api.so
@@ -10305,7 +10317,6 @@ punct
 pure_server.cpp
 pure_server_whitelist.txt
 push_var_values
-putchar
 pvs.cpp
 q
 q&

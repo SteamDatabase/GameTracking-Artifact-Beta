@@ -100,6 +100,12 @@ $SPECULARSCALE
 *
 *ZN18CNewParticleEffect12StopEmissionEbbbbEUlvE_
 +
++Color and alpha adjustments
++Material
++Orientation
++Renderer Modifiers
++Rope Global UV Controls
++Trail Length
 +inf
 +r_stereo_mode_crossed
 ,
@@ -1830,7 +1836,8 @@ Collision via traces
 CollisionGroupContext_t
 Color Adjust
 Color Gem Enable control point number
-Color and alpha adjustments
+Color and alpha adjustments/Alpha Reference
+Color and alpha adjustments/Dota Fog & Light
 Color fade
 Color fade random
 Color light from control point
@@ -2230,6 +2237,7 @@ Lifetime from time to impact
 Lifetime pre-age noise
 Lifetime random
 Lighten
+Lighting and Shadows
 LightmapUV
 LightmapUVW
 Line %d at "%s": %s
@@ -2292,10 +2300,11 @@ MParticleRequireDefaultArrayEntry
 MPropertyAttributeChoiceName
 MPropertyAttributeEditor
 MPropertyAttributeRange
-MPropertyAutoExpandGroup
+MPropertyAutoExpandSelf
 MPropertyColorPlusAlpha
 MPropertyFriendlyName
 MPropertyGroupName
+MPropertySortPriority
 MPropertySuppressField
 MVectorIsCoordinate
 MVectorIsSometimesCoordinate
@@ -2337,6 +2346,7 @@ Model Helper Pointer
 Model Helper Pointer 2
 Model Helper Pointer 3
 Model Helper Pointer 4
+Model Scale
 ModelDocUtils001
 ModelReference_t
 Move particles between 2 control points
@@ -2373,7 +2383,6 @@ MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
 N
 N24CFieldPathHuffmanEncoder12InternalNodeE
-N24CFieldPathHuffmanEncoder5INodeE
 N24CFieldPathHuffmanEncoder8LeafNodeE
 NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
 NETWORK_FIELD_CHANGED_NO_VALUE
@@ -2949,7 +2958,10 @@ Right Hand
 Rigid;
 Roll Speed
 Rope
+Rope Global UV Controls/CP Scaling
+Rope Order Controls
 Rope Spring constraint
+Rope Tesselation
 Rotate vector random
 Rotation basic
 Rotation from CP forward orientation
@@ -3050,6 +3062,7 @@ Screen
 Screen & Particle Normal Align
 Screen Align
 Screen-Z Align
+Screenspace Fading and culling
 Screenspace Player-View Force
 Second Control point to set
 Second Sequence Number / Alpha Window Threshold
@@ -3184,7 +3197,6 @@ Texel Alpha & Alpha Reference
 Texel Alpha & Particle Alpha & Alpha Reference
 TextLayout_001
 Texture Controls
-Texture Coordinates
 Texture Type
 TextureControls_t
 TextureGroup_t
@@ -3210,7 +3222,8 @@ Total Sim (us)
 Trace Caching
 Trace along particle normal
 Trace cache efficiency = %.2f%% (%d traces for %d tests)
-Trail Length
+Trail Head & Tail
+Trail UV Controls
 Trail forward shift (fraction)
 Trail length random
 Treat path as a loop
@@ -3253,7 +3266,6 @@ Use Quaternians Internally
 Use Random Children in Group
 Use local coordinates for offset
 Use local space offset
-Use particle system topology
 Use scalar attribute for texture coordinate
 Use sequential CP pairs between start and end point
 UserInfoChangeService_001
@@ -3306,6 +3318,14 @@ VStringTokenSystem001
 V_FixDoubleSlashes
 V_GetFileExtension
 V_IsAbsolutePath
+V_LZ4_compressBound
+V_LZ4_compress_HC_continue
+V_LZ4_createStreamHC
+V_LZ4_decoderRingBufferSize
+V_LZ4_decompress_safe
+V_LZ4_decompress_safe_continue
+V_LZ4_freeStreamHC
+V_LZ4_resetStreamHC_fast
 V_PathContainsPath
 V_PrettifyMem
 V_RemoveDotSlashes
@@ -3468,7 +3488,7 @@ abs( %s )
 accelerate position
 activity
 activity override
-add self amount for combined additive and alpha blended
+add self amount over alphablend
 aggregation radius
 ai_model_info
 alloc_particles
@@ -3786,6 +3806,7 @@ end alpha
 end control point
 end control point number
 end dot product value for fading as the particle normal becomes aligned with the view vector
+end fade and cull screen-size
 end fade in time
 end fade out time
 end fade time
@@ -4463,7 +4484,6 @@ m_bUseRawMeshGroup
 m_bUseScalarForTextureCoordinate
 m_bUseShadowFastPath
 m_bUseTexture
-m_bUseTopology
 m_bUseVelocity
 m_bUseWaterHeight
 m_bUseWithContEmit
@@ -5651,6 +5671,7 @@ maximum steps between particles
 maximum time step
 maximum trace length
 maximum velocity
+maximum visual screen-size
 maximum visual size
 memcmp
 memcpy
@@ -5695,6 +5716,7 @@ minimum speed
 minimum speed to kill on collision
 minimum steps between particles
 minimum velocity
+minimum visual screen-size
 minimum visual size
 minium number of quads per render segment
 model LOD
@@ -6245,6 +6267,7 @@ start dot product value for fading as the particle normal becomes aligned with t
 start fade distance
 start fade in time
 start fade out time
+start fade screen-size
 start fade time
 start fadeout exponent
 start fadeout max

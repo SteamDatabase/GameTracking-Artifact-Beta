@@ -85,7 +85,10 @@
 
 	// Paste Board
 	"DCG_PasteBoard_Title"							"Incolla tabellone"
+	"DCG_PasteBoard_Button"							"Incolla"
 	"DCG_PasteBoard_Submit"							"Gioca"
+	"DCG_PasteBoard_Zoo"							"Zoo"
+	"DCG_PasteBoard_Min"							"Minimo"
 
 	// Dashboard
 	"DCG_Dashboard_BuildVersion"					"Versione di Chiamata alle armi - {d:majorVersionNumber}.{d:minorVersionNumber}.{s:buildNumber}"
@@ -416,6 +419,7 @@
 	"DCG_EventTickets_Tooltip"						"{d:event_tickets} biglietti evento"
 	"DCG_UnopenedPacks_Tooltip"						"Pacchetti non aperti: {d:unopened_packs}"
 	"DCG_DeckBuilderUnopenedPacks_Tooltip"			"Apri Creazione del mazzo"
+	"DCG_DeckBuilder_TryCardDemo"					"Prova la demo della carta"
 
 	"DCG_FindingMatch_Unlock"						"Sblocca"
 	"DCG_FindingMatch_Searching"					"Ricerca..."
@@ -680,6 +684,7 @@
 	"DCG_OpponentHandTooltip_TurnsLocked_1"			"Incatenata per 1 altro round."
 	"DCG_OpponentHandTooltip_TurnsLocked_N"			"Incatenata per altri {d:turnsLocked} round."
 	"DCG_OpponentHandTooltip_CardIsHacked"			"Il testo di questa carta è stata modificato."
+	"DCG_OpponentHandTooltip_ItemTier"				"Oggetto di livello {i:ItemTier}"
 	"DCG_ResultScreenUnits_Gold"					"Oro"
 	"DCG_ResultScreenUnits_Life"					"Vita"
 	"DCG_ResultScreenUnits_Damage"					"Danni"
@@ -1222,13 +1227,25 @@
 	"DCG_UI_Maximize"						"Mostra il negozio"
 	"DCG_UI_RerollPanoramaShop"				"Cambia"
 	"DCG_UI_RerollPanoramaShop_Cost"		"2"
-	"DCG_UI_ClosePanoramaShop"				"Chiudi negozio"
-	"DCG_UI_InvestShop"						"OTTIENI <font color=\"gold\">+{d:RewardForInvest} ORO</font>"
-	"DCG_UI_UpgradeShop"					"MIGLIORA NEGOZIO"
+	"DCG_UI_ClosePanoramaShop"				"Continua" 
+	"DCG_UI_InvestShop"						"Salta"
+	"DCG_UI_UpgradeShop"					"Migliora"
+	"DCG_UI_UpgradeShop_Title"				"Migliorare il negozio segreto?"
 	"DCG_UI_UpgradeShop_Cost"				"{d:CostToLevelShop}"
+	"DCG_UI_UpgradeShop_Desc"				"Ottieni l'accesso a oggetti di livello più alto"
+
+	"DCG_UI_ShopCardSlot_1_Title"			"Livello superiore"
+	"DCG_UI_ShopCardSlot_2_Title"			"Scaffale casuale"
+	"DCG_UI_ShopCardSlot_3_Title"			"Cestino degli affari"
+	
+	"DCG_UI_ShopCardSlot_1_ToolTip"			"Carta scelta dal livello più alto disponibile (migliora per incrementarlo)"
+	"DCG_UI_ShopCardSlot_2_ToolTip"			"Scelta casuale dal tuo mazzo degli oggetti"
+	"DCG_UI_ShopCardSlot_3_ToolTip"			"Carta scelta dal livello più basso disponibile"
+
+	"DCG_UI_InvestShop_Reward"				"{d:RewardForInvest}"
 
 	"DCG_UI_TooltipShopTiers"				"OGGETTI RIMASTI"
-	"DCG_UI_TooltipShopTiers_Desc"			"Il numero di oggetti rimasti per l'acquisto a ogni livello. Sali di livello per sbloccare oggetti più costosi. <br><br>Lo slot sinistro mostra un oggetto del livello sbloccato più alto. Lo slot intermedio mostra tutti gli oggetti della selezione distribuiti uniformemente. Lo slot destro mostra un oggetto che puoi permetterti, se possibile."
+	"DCG_UI_TooltipShopTiers_Desc"			"Il numero di oggetti ancora disponibili a ciascun livello. Migliora per sbloccare livelli più alti o oggetti più costosi."
 	"DCG_UI_TooltipShopTiers_Tier1_Name"	"LIVELLO 1: "
 	"DCG_UI_TooltipShopTiers_Tier1_Count"	"{d:ShopItemCountTier1}"
 	"DCG_UI_TooltipShopTiers_Tier2_Name"	"LIVELLO 2: "
@@ -1240,6 +1257,12 @@
 	"DCG_UI_TooltipShopTiers_Tier5_Name"	"LIVELLO 5: "
 	"DCG_UI_TooltipShopTiers_Tier5_Count"	"{d:ShopItemCountTier5}"
 	
+	"DCG_UI_TooltipShopTierPip1"				"Carte di livello 1 rimanenti: {d:ShopItemCountTier1}"
+	"DCG_UI_TooltipShopTierPip2"				"Carte di livello 2 rimanenti: {d:ShopItemCountTier2}"
+	"DCG_UI_TooltipShopTierPip3"				"Carte di livello 3 rimanenti: {d:ShopItemCountTier3}"
+	"DCG_UI_TooltipShopTierPip4"				"Carte di livello 4 rimanenti: {d:ShopItemCountTier4}"
+	"DCG_UI_TooltipShopTierPip5"				"Carte di livello 5 rimanenti: {d:ShopItemCountTier5}"
+
 	"DCG_UI_ShopHeader"						"Livello negozio: {d:ShopLevel}"
 	"DCG_UI_DeployLane1"					"Schiera a sinistra"
 	"DCG_UI_DeployLane2"					"Schiera al centro"
@@ -1257,10 +1280,19 @@
 	"DCG_UI_Buy"							"COMPRA"
 	"DCG_UI_ShopGold"						"ORO"
 	"DCG_UI_ShopGold_Amt"					"{d:ShopGoldAvailable}"
-	"DCG_UI_TooltipInvest"					"Investi invece di fare acquisti. Aumenta di 1 ogni volta che migliori il negozio."
-	"DCG_UI_TooltipUpgrade"					"Potenziando il negozio sblocchi la serie successiva di oggetti (superiore di 5 monete d'oro) e aumenti le ricompense per ogni moneta d'oro investita."
+	"DCG_UI_TooltipInvest"					"Salta la fase di acquisto e ottieni {d:RewardForInvest} monete d'oro."
+	"DCG_UI_TooltipUpgrade_Tier1Costs"		"10-15 monete d'oro"
+	"DCG_UI_TooltipUpgrade_Tier2Costs"		"20-25 monete d'oro"
+	"DCG_UI_TooltipUpgrade_Tier3Costs"		"30-35 monete d'oro"
+	"DCG_UI_TooltipUpgrade_Tier4Costs"		"40-45 monete d'oro"
+	"DCG_UI_TooltipUpgrade_Tier5Costs"		"50 monete d'oro"
+	"DCG_UI_TooltipUpgradeButton"			"Ottieni l'accesso al prossimo livello di oggetti ({s:NextTierCosts}) e sostituisci gli slot nel negozio."
+	"DCG_UI_TooltipBuyButton"				"Acquista questo oggetto."
 	"DCG_UI_TooltipReroll"					"Vedi 3 nuovi oggetti."
+	"DCG_UI_ShopCardCost"					"{d:CardCost}"
 
+	
+	
 	"DCG_PlayerInfo_MatchClock"				"Il tempo che ti rimane per giocare"
 	"DCG_PlayerInfo_MatchClockOpponent"		"Il tempo che rimane all'avversario per giocare"
 	"DCG_PlayerInfo_CurrentGold"			"Il tuo oro"
@@ -1393,6 +1425,7 @@
 	"DCG_ActionHint_CombatPosition_movetopos_AnyLane"			"<font color=\"gold\">(QUALSIASI CORSIA)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostare l'unità"
 
 	"DCG_ActionHint_CombatPosition_movetopos_AnotherLane"				"<font color=\"gold\">(UN'ALTRA CORSIA)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostarti"
+	"DCG_ActionHint_CombatPosition_ThisOrAdjacentLane"	"<font color=\"gold\">(STESSA CORSIA O CORSIA ADIACENTE)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostarti"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_ThisOrAdjacentLane"	"<font color=\"gold\">(STESSA CORSIA O CORSIA ADIACENTE)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostarti"
 	"DCG_ActionHint_CombatPosition_Ally_movetopos_AdjacentLane"			"<font color=\"gold\">(CORSIA ADIACENTE)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostarti"
 	"DCG_ActionHint_CombatPosition_movetopos_ThisOrAdjacentLane"		"<font color=\"gold\">(CORSIA ADIACENTE)</font> Scegli una <font color=\"gold\">posizione di combattimento</font> in cui spostarti"
@@ -1492,6 +1525,9 @@
 	"DCG_CardEffectDuration_TwoRounds"			"Due round"
 	"DCG_CardEffectDuration_OneAction"			"Un'azione"
 	"DCG_CardEffectDuration_UntilRoundStart"	"Fino all'inizio del round"
+	
+	"DCG_CardEffectDuration_Item"				"Oggetto"
+	"DCG_CardEffectDuration_Aura"				"Aura"
 
 	"DCG_CardType_Hero"						"Eroe"
 	"DCG_CardType_Creep"					"Creep"

@@ -196,6 +196,7 @@ $tIVScript
 11CRenderMesh
 11IVSSequence
 12CThreadEvent
+13CAnimSkeleton
 13CMorphSetData
 13IBaseSequence
 14CAimConstraint
@@ -212,6 +213,7 @@ $tIVScript
 17CParentConstraint
 17CResourceStreamVM
 18CBreakLegacyParser
+18CMutableRefCountedI20CMutableRefCountBaseILb1E6CRefMTEE
 18CPlaceholderConVar
 19CBoneConstraintBase
 19CModelConfigElement
@@ -220,6 +222,7 @@ $tIVScript
 2
 2000
 2020-10-01 21:45:45.749000
+20CMutableRefCountBaseILb1E6CRefMTE
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20CResourceStreamFixed
@@ -277,6 +280,7 @@ $tIVScript
 27CSchemaUtlVectorManipulatorI10CUtlVectorI6Vector10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CFlexOp10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI7CHitBox10CUtlMemoryIS1_iEES1_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorI9CAnimFoot10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI9CFlexDesc10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI9CFlexRule10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIN28CBoneConstraintPoseSpaceBone7Input_tE10CUtlMemoryIS2_iEES2_E
@@ -285,6 +289,7 @@ $tIVScript
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP15CBaseConstraint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP19CModelConfigElement10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CPhysSurfaceProperties10CUtlMemoryIS2_iEES2_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorIS0_Ii10CUtlMemoryIiiEES1_IS3_iEES3_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf10CUtlMemoryIfiEEfE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIh10CUtlMemoryIhiEEhE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIi10CUtlMemoryIiiEEiE
@@ -614,6 +619,7 @@ CAimMatrixAnimNode
 CAnimBone
 CAnimCycle
 CAnimDataChannelDesc
+CAnimFoot
 CAnimKeyData
 CAnimMovementManager
 CAnimNodeConnection
@@ -621,6 +627,7 @@ CAnimNodeManager
 CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
+CAnimSkeleton
 CAnimState
 CAnimUser
 CAnimationGraph
@@ -1899,7 +1906,6 @@ MaxLinearConstraintImpulse
 MaxSpeed
 Md5 Hash: %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x
 MemAlloc_AllocFunc
-MemAlloc_CallocFunc
 MemAlloc_FreeFunc
 Memory used in Rubikon: %s bytes / %s 4K pages = %.1f%%
 Merge Faces
@@ -3000,6 +3006,14 @@ V_FixDoubleSlashes
 V_FixSlashes
 V_GetFileExtension
 V_IsAbsolutePath
+V_LZ4_compressBound
+V_LZ4_compress_HC_continue
+V_LZ4_createStreamHC
+V_LZ4_decoderRingBufferSize
+V_LZ4_decompress_safe
+V_LZ4_decompress_safe_continue
+V_LZ4_freeStreamHC
+V_LZ4_resetStreamHC_fast
 V_PathContainsPath
 V_PrettifyMem
 V_PrettifyNum
@@ -3966,6 +3980,7 @@ m_aAngOffset
 m_additiveChildID
 m_additiveInput
 m_anchor
+m_ankleBoneIndex
 m_ankleBoneName
 m_attachments
 m_audioParams
@@ -4106,6 +4121,7 @@ m_fRadiusMax
 m_fRadiusMin
 m_fSpeedMax
 m_fSpeedMin
+m_feet
 m_fingers
 m_flAddWorldCollisionRadius
 m_flAlongDamping
@@ -4344,6 +4360,7 @@ m_linearLimitSpring
 m_linearLimitValue
 m_localHAnimArray
 m_localHAnimArray_Handle
+m_localSpaceTransforms
 m_lodGroupSwitchDistances
 m_material
 m_materialGroups
@@ -4356,6 +4373,7 @@ m_meshes
 m_metacarpalBoneName
 m_modelInfo
 m_modelSkeleton
+m_modelSpaceTransforms
 m_morphArray
 m_morphDatas
 m_morphRectDatas
@@ -4435,6 +4453,7 @@ m_nLookupType
 m_nMapType
 m_nMeshID
 m_nMinParticlesToEmit
+m_nMorphCount
 m_nMotorMode
 m_nNameHash
 m_nNext
@@ -4511,6 +4530,7 @@ m_nWidth
 m_nXLeftDst
 m_nYTopDst
 m_nameHash
+m_names
 m_nodeID
 m_nodeManager
 m_nodes
@@ -4598,6 +4618,7 @@ m_pWorldCollisionParams
 m_params
 m_parent
 m_parentName
+m_parents
 m_parts
 m_physics
 m_pos
@@ -4680,6 +4701,7 @@ m_textureAttributes
 m_textureParams
 m_thickness
 m_tipParentBoneName
+m_toeBoneIndex
 m_toeBoneName
 m_trajectories
 m_transform
