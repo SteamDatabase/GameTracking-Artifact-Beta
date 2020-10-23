@@ -23,7 +23,7 @@
         <Label id="ShopHeaderLevelAmt" text="#DCG_UI_SecretShopLevel_Amt" onmouseover="UIShowCustomLayoutTooltip( ShopTierTooltip, file://{resources}/layout/tooltips/shop_tooltip_tiers.xml )" onmouseout="UIHideCustomLayoutTooltip( ShopTierTooltip )"/>  
 
   	  	<Panel id="ShopGoldCount" class ="MainShopShadow" >
-          <Panel id="ShopGoldCountBrassBG" > <!--todo: 9 slice-->         
+          <Panel id="ShopGoldCountBrassBG" > <!--todo: 9 slice aka border-image-->         
         	 <Label id="GoldCountLabel" class="TitleFont" text="#DCG_UI_ShopGold" />
           </Panel>
         	<Label id="GoldCountAmount" html="true" text="#DCG_UI_ShopGold_Amt" />
@@ -93,15 +93,26 @@
   	 
   	<Panel id="ContinueGroup" class="ShopMainColumnsGroup AnimateWithVisibility">
 
+      <!--
     	<TextButton id="InvestButton" text="#DCG_UI_InvestShop" html="true" class="ShopButton" onactivate="DCGPanoramaShopInvest();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipInvest, ShopTooltip ) PlaySoundEffect( DCG_Shop.Mouseover )" onmouseout="UIHideTextTooltip()">
-    		<Panel class="ShopActionCostImage">
+    		<Panel class="RightArrow"/>
+        <Panel class="ShopActionCostImage">
           		<Label class="ShopActionCostLabel MonoFont" text="#DCG_UI_InvestShop_Reward"/>
        	</Panel>
-         <Panel class="RightArrow"/>
+         
     	</TextButton>
- 
-    	<TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ShopButton" onactivate="DCGPanoramaShopCloseShop()" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >      
-        <Panel id="RightArrow"/>
+      Switch to a button, because i can't sandwhich the text between icons, otherwise-->
+
+      <Button id="InvestButton" class="ShopButton" onactivate="DCGPanoramaShopInvest();" onmouseover="UIShowTextTooltipStyled( #DCG_UI_TooltipInvest, ShopTooltip ) PlaySoundEffect( DCG_Shop.Mouseover )" onmouseout="UIHideTextTooltip()">
+       <Panel class="RightArrow"/>
+        <Label text="#DCG_UI_InvestShop" html="true"/>
+        <Panel class="ShopActionCostImage">
+          <Label class="ShopActionCostLabel MonoFont" text="#DCG_UI_InvestShop_Reward"/>
+        </Panel> 
+      </Button>
+
+    	<TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ShopButton FlowRight" onactivate="DCGPanoramaShopCloseShop()" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >      
+        <Panel class="RightArrow"/>
       </TextButton>
    	</Panel>
     

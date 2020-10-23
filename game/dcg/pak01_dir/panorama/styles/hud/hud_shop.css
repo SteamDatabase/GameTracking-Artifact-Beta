@@ -198,8 +198,9 @@ DCGHUDShop TextButton
 {
 	margin: 7px;
 	background-color: buttonGradient;
-	width: 208px;
+	width: fit-children;
 	height: 50px;
+	flow-children:left;
 	horizontal-align: center;
 	transition-property: background-color, text-shadow, opacity, brightness;
 	transition-duration: 0.1s;
@@ -211,7 +212,9 @@ DCGHUDShop TextButton
 	border-bottom: 1px solid #7b703e;
 
 	box-shadow: -3px -2px 6px 8px fill #0009;
+
 }
+
 
 .ShopButton:enabled:hover
 {
@@ -234,11 +237,6 @@ DCGHUDShop TextButton
 	saturation: 0;
 }
 
-.ShopButton:disabled Label
-{
-	color: #888888;
-}
-
 .ShopButton:active
 {
 	margin-top: 10px;
@@ -251,7 +249,10 @@ DCGHUDShop TextButton
 
 .ShopButton Label
 {
+	min-width: 120px;
 	margin-top: 2px;
+	padding-left: 20px;
+	padding-right: 20px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	color: shopTextGradient;//todo: better gradient;
@@ -262,16 +263,26 @@ DCGHUDShop TextButton
 }
 
 
-Label.ShopActionCostLabel
+.ShopButton:disabled Label
 {
+	color: #888888;
+}
+
+Label.ShopActionCostLabel
+{ 
+	min-width: 0px;
 	font-stretch: condensed;
 	vertical-align: center;
 	horizontal-align: center;
 	text-align: center;
 	margin-top: 11px;
-	margin-right: 2px;
+	margin-right: 0px;
+	margin-left: 0px;
 	font-size: 25px;
 	letter-spacing: 0px;
+
+	padding-left: 0px;
+	padding-right: 5px;//make the text line up with the center of the image better
 }
 
 
@@ -284,7 +295,7 @@ Label.ShopActionCostLabel
 
 	//margin-left: -14px;//can't. Panorama bug while hovering
 	margin-left: 0px;
-
+	margin-right: -16px;
 	height: 59px;
 	width: 59px;
 	
@@ -307,8 +318,13 @@ Label.ShopActionCostLabel
 	height: 70px;
 	vertical-align: bottom;
 	//background-color: #0000;
+	padding-right: 20px;
+	padding-left:  20px;
 }
-
+#UpgradeButton Label
+{
+	margin-left: -20px;
+}
 #UpgradeLevelPipsGroup
 {
 	vertical-align: bottom;
@@ -463,18 +479,27 @@ Label.ShopActionCostLabel
 #ShopGoldCountBrassBG
 {
 	margin: 10px;
-	width: 107px;
+	width: fit-children;
+	min-width: 107px;//from png
 	height:40px;
 	background-image: url("s2r://panorama/images/shop/panel_gold_panel_png.vtex");
 	background-size: 100% 100%;
+
+	//If only
+	//border-image: url("s2r://panorama/images/shop/panel_gold_panel_png.vtex");
+  	//border-image-slice: 10%;
 }
 
 #GoldCountLabel
 {
-	width: 100%;
+	width: fit-children;
+
 	height: 100%;
 
 	margin-top: 2px;
+	margin-left: 10px;
+	margin-right: 10px;
+
 	horizontal-align: center;
 	vertical-align: center;
 	color: goldLabelTextGradient;
@@ -491,7 +516,6 @@ Label.ShopActionCostLabel
 	horizontal-align: center;
 	vertical-align: center;
 	color: shopTextGradient;
-	//text-shadow: 0px 2px 4px 2.0 #000000;
 	font-size: 40px;
 	text-align: center;
 	letter-spacing: 1px;
@@ -630,7 +654,7 @@ Label.ShopActionCostLabel
 .RightArrow
 {
 
-	width: 49px;
+	width: 38px;
 	height: 49px;
 	
 	background-image: url("s2r://panorama/images/shop/button_skip_or_continue_arrow_png.vtex");
@@ -656,13 +680,17 @@ Label.ShopActionCostLabel
 
 	vertical-align: center;
 	horizontal-align: right;
-
+	transform: scaleX(-1);
 }
 
 //move to lhs if there is no cost label active
 .NoCost .UpgradeIcon
 {
 	horizontal-align: left;
-	transform: scaleX(-1);
+	
 }
 
+.FlowRight
+{
+	flow-children: right;
+}
