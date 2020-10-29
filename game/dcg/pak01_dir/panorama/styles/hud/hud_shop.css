@@ -1,7 +1,12 @@
 
 
 @define buttonGradient: gradient( linear, 0% 0%, 0% 100%, from( #9a905f ), to( #7c713f ) );
-@define shopTextGradient: gradient( linear, 0% 0%, 0% 100%, from( #EAE0AF ),  color-stop( .3, #EAE0AF ), to( #EFE7B8 ) );
+@define shopTextGradient: gradient( linear, 0% 0%, 0% 100%, from( #EAE0AF ),  color-stop( .5, #EAE0AF ), to( #EFE7B8 ) );
+@define shopTextGradientPreviewGoldChange: gradient( linear, 0% 0%, 0% 100%, from( #EAE0AF ),  color-stop( .5, #FFFFFF ), to( #EAE0AF ) );
+@define shopTextGradientPreviewGoldChangeNegative: gradient( linear, 0% 0%, 0% 100%, from( #EAE0AF ),  color-stop( .5, #E67E18 ), to( #EAE0AF ) );
+@define shopTextGradientTooExpensive: gradient( linear, 0% 0%, 0% 100%, from( #FA8E04 ),  color-stop( .5, #EE2E10 ), to( #E78E17 ) );
+
+
 @define goldLabelTextGradient: gradient( linear, 0% 0%, 0% 100%, from( #2e280a ), to( #2e280a ) );
 @define shopUpgradeTextGradient: gradient( linear, 0% 0%, 0% 100%, from( white ), color-stop( .1, #ffffff ), color-stop( .3, #ffffff ), color-stop( .8, #ffffff ), to( #ffffff ) );
 
@@ -48,6 +53,12 @@ DCGHUDShop TextButton
 	tooltip-position:bottom;
 }
 
+
+.Shopping.ShopMaximized DCGHUDShop 
+{
+	opacity: 1;//temp. will tween in from right, and tween out from left.
+}
+
 .Shopping DCGHUDShop
 {
 	visibility: visible;
@@ -69,13 +80,9 @@ DCGHUDShop TextButton
 {
 	opacity: 1;
 }
-.ShoppingComplete #BackgroundFade
+.Shopping.ShopMaximized .ShoppingComplete #BackgroundFade
 {
 	opacity: 0;
-}
-.Shopping.ShopMaximized DCGHUDShop 
-{
-	opacity: 1;//temp. will tween in from right, and tween out from left.
 }
 
 
@@ -230,7 +237,7 @@ DCGHUDShop TextButton
 	box-shadow: -1px -1px 2px 2px fill #e9e2c2;
 }
 
-.PreviewLosingSkipBonus #InvestButton,
+.PreviewRemoveSkipBonus #InvestButton,
 .ShopButton:disabled
 {
 	wash-color: #999999;
@@ -414,7 +421,7 @@ Label.ShopActionCostLabel
 
 #ShopHeaderLabel
 {
-	margin-left: -5px;
+	//margin-left: -5px;// Many rugs also contain intentional mistakes, symbolic that human beings are imperfect and perfection can only be attained by the creator.
 	margin-right: 20px;
 	width: fit-children;
 	horizontal-align: left;
@@ -519,9 +526,30 @@ Label.ShopActionCostLabel
 	font-size: 40px;
 	text-align: center;
 	letter-spacing: 1px;
+
+	text-shadow: 0px 0px 0px 0.0 #00000080;
+	transition-property: color, text-shadow;
+	transition-timing-function: ease-in-out;
+	transition-duration: 0.25s;
 }
 
+.PreviewGoldChange.PreviewGoldChangeIsNonZero #GoldCountAmount
+{
+	text-shadow: 0px 0px 10px 2.0 #E5D7B280;
+	color: shopTextGradientPreviewGoldChange;
+}
 
+.PreviewGoldChange.PreviewGoldChangeIsNonZero.PreviewGoldChangeIsNegative #GoldCountAmount
+{
+	text-shadow: 0px 0px 10px 4.0 #8E281FFF;
+	color: shopTextGradientPreviewGoldChangeNegative;
+}
+
+.CardIsTooExpensive.PreviewGoldChangeIsNonZero #GoldCountAmount
+{
+	text-shadow: 0px 2px 4px 2.0 #00000080;
+	color: shopTextGradientTooExpensive;
+}
 
 #RerollButton
 {
