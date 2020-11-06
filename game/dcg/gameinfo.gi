@@ -40,6 +40,7 @@
 			Write				dcg
 
 			LayeredGameRoot		"../game_otherplatforms/etc" [$MOBILE || $ETC_TEXTURES] //Some platforms do not support DXT compression. ETC is a well-supported alternative.
+			LayeredGameRoot		"../game_otherplatforms/etc/low_bitrate" [$MOBILE]
 		}
 	}
 

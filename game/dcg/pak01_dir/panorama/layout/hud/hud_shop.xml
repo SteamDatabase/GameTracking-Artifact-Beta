@@ -6,13 +6,13 @@
 
   <DCGHUDShop hittest="true" hittestchildren="true">
 
-    <Panel id="BackgroundFade"/>
+    <Panel id="BackgroundFade" hittest="true"/>
 
     <Panel id="ViewBoardGroup" class="ShopMainColumnsGroup AnimateViewBoard">
-  	   <TextButton id="ViewBoardButton" class="ShopButton" text="#DCG_UI_Minimize" onactivate="DCGHUDToggleShopState();" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >
+  	   <TextButton id="ViewBoardButton" class="ShopButton" text="#DCG_UI_Minimize" onactivate="DCGTogglePanoramaShopVisibility();" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >
          <Panel class="LeftArrow"/>
        </TextButton>
-    </Panel>
+    </Panel> 
   	<Panel id="ShopMainPanel" class= "ShopMainColumnsGroup AnimateWithVisibility"> 
 
   		<Panel id="ShopTitleBar" class="ShopTopRow"> 
@@ -26,7 +26,9 @@
           <Panel id="ShopGoldCountBrassBG" > <!--todo: 9 slice aka border-image-->         
         	 <Label id="GoldCountLabel" class="TitleFont" text="#DCG_UI_ShopGold" />
           </Panel>
-        	<Label id="GoldCountAmount" html="true" text="#DCG_UI_ShopGold_Amt" />
+          <Panel id="GoldCountAmountContainer" >
+        	 <Label id="GoldCountAmount" html="true" text="#DCG_UI_ShopGold_Amt" />
+          </Panel>
       	</Panel>
 
   		</Panel> 
@@ -111,7 +113,7 @@
         </Panel> 
       </Button>
 
-    	<TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ShopButton FlowRight" onactivate="DCGPanoramaShopCloseShop()" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >      
+    	<TextButton id="CloseShopButton" text="#DCG_UI_ClosePanoramaShop" class="ShopButton FlowRight" onactivate="DCGPanoramaShopButtonCloseShop()" onmouseover="PlaySoundEffect( DCG_Shop.Mouseover )" >      
         <Panel class="RightArrow"/>
       </TextButton>
    	</Panel>

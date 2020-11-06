@@ -2,10 +2,15 @@
 !
 "
 """
+"%f"
+"%lld"
+"%llu"
 "%s"
 "%s" = "%s"
 "%s","%s",%s,"%s"
 "></img>
+"[ARRAY]"
+"[BINARY BLOB]"
 #
 #[
 #base
@@ -32,7 +37,6 @@ $ORIGIN
 %-80s : %-16s : %-32s : %s
 %-8i
 %.0f pct of time accounted for
-%.15lf
 %.18g
 %.2f
 %.2fGHz %s
@@ -110,6 +114,7 @@ $ORIGIN
 %s test: single thread push/pop, interleaved...
 %s total bytes in user-space regions (%s bytes in kernel-space regions)
 %s unable to allocate %u bytes
+%s#%d
 %s%d
 %s%s
 %s(%d%%) %s
@@ -405,7 +410,6 @@ $ORIGIN
 /tmp
 /tmp/.steam-sem-names
 0
-00000000-0000-0000-0000-000000000000
 0123456789ABCDEF
 0123456789abcdef
 0@
@@ -586,6 +590,7 @@ $ORIGIN
 ::<lambda_
 ;
 <!--
+<!-- kv3 encoding:%s:version{%s} format:%s:version{%s} -->
 </a>
 </b>
 </h1>
@@ -647,7 +652,6 @@ AE_NPC_HURT_INTERACTION_PARTNER
 AE_NPC_SET_INTERACTION_CANTDIE
 AE_NPC_START_POWERED_RAGDOLL
 AE_NPC_WEAPON_FIRE
-AE_NPC_WEAPON_SET_SEQUENCE_NUMBER
 AE_PASSENGER_PHYSICS_PUSH
 AE_SCRIPT_EVENT_FIREEVENT
 AE_SV_DUSTTRAIL
@@ -764,7 +768,24 @@ Bad exponent in floating point number
 Bad expression operator: '%c%c', expected C style boolean expression operator.
 Bad expression syntax: '%s', expected a single matching pair of enclosing braces.
 Bad expression token: %c
+Bad header (unrecognized encoding specifier)
+Bad header format (expected ':'
+Bad header format (expected '<!--'
+Bad header format (expected 'encoding'
+Bad header format (expected 'format'
+Bad header format (expected 'kv3'
+Bad header format (expected 'version'
+Bad header format (expected encoding name)
+Bad header format (expected encoding uuid)
+Bad header format (expected format name)
+Bad header format (expected format uuid)
+Bad header format (malformed UUID)
+Bad header format (no closing marker)
+Bad header: invalid compression header
+Bad header: unrecognized encoding id
+Bad keyname
 Bad node link detected
+Bad value
 BakedLODBuilderMgr001
 BaseIKRig
 BasePhysicsShape
@@ -1779,6 +1800,8 @@ Cannot mix and match tag specifiers with channel name specifiers.
 Cannot open file "%s" for writing
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot register two timestamped event listeners!
+Cannot save KV3 text to a non-text buffer!
+Cannot save as KV3_FORMAT_LOAD_WITH_NO_UPCONVERSION.
 Capture
 CatchAndWriteMiniDump
 CatchAndWriteMiniDumpEx
@@ -1846,6 +1869,7 @@ CreateNewThreadPool
 CreateSimpleProcess
 CreateSimpleThread
 CreateUniqueId
+Cycle or diamond double-reference to '%s'
 D
 DEBUG_EXITPROCESS
 DEFAULT_WRITE_PATH
@@ -1854,6 +1878,7 @@ DEVELOPMENTONLY
 DWARF_LOCAL_TRANSLATE
 Debug test scripts.
 DebugPrintBitStringBits
+DebugPrintKV3(KeyValues3 const*)
 DebugTextureInfo001
 DeclareCurrentThreadIsMainThread
 Decompression failure
@@ -1920,17 +1945,27 @@ Exit Process
 Exiting due to logging LR_ABORT request.
 Expected "="after member '%s'
 Expected '#'
+Expected '&' and instance name or 'NULL'
 Expected ',' or '%s'
+Expected ':' after member name '%s'
+Expected '=' after member name '%s'
 Expected '['
 Expected '[' or '('
 Expected '{'
 Expected ( <count> )
+Expected <member name> after type
 Expected []
 Expected hex byte (eg. 00-FF)
 Expected member name or '}'
+Expected object member name to be a string literal.
+Expected string (member name) or '}'
 Expected token
 Expected type of next member
+Expected value after =
 Expected value or ']'
+Expected value.
+Expected {
+Expected }
 F
 FAIL: !IsEmpty()
 FAIL: !Validate()
@@ -1941,6 +1976,8 @@ FCVAR_DONTRECORD
 FCVAR_NEVER_AS_STRING
 FCVAR_REPLICATED
 FRENCH
+Failed to assign bool literal value
+Failed to convert KV3 to string; error: %s
 Fatal Error
 Field %s has inverted min/max values![%f->%f]
 Field %s tried to quantize an out-of-range value (%f, range is %f->%f) clamping.
@@ -2042,6 +2079,7 @@ GetInsertPtr
 GetInstructionPointer
 GetJSONCharConversion
 GetJobManualEventFromPool
+GetKV3LoadFlags()
 GetLocalHostname
 GetModuleNameFromAddress
 GetNameFromOSType
@@ -2126,6 +2164,8 @@ InstallUniformRandomStream
 Intentionally vague touch behavior for %p
 Interpolation
 Invalid access of deferred ConVarRef for '%s'
+Invalid code point \u%04x
+Invalid compressed buffer size
 Invalid data for member '%s'
 Invalid data.
 Invalid header
@@ -2134,6 +2174,8 @@ Invalid number starting with '%s'
 InvalidateUniqueId
 Invariant TSC supported
 InvokeMiniDumpHandler
+IsKV3Data(CUtlBuffer const*, KV3ID_t*)
+IsKV3Data(void const*, int, KV3ID_t*)
 IsModelDocFormat
 IsUniqueIdEqual
 IsUniqueIdValid
@@ -2265,8 +2307,11 @@ Launch Debugger
 LengthOfMatchingPaths
 Lightweight memory verifier is ON (allocation sizes %s, %uMiB reserved, %s, %s)
 Lightweight verifier:
+Line %d at "%s":
 Line %d at "%s": %s
+Line %d:
 Line %d: %s
+Line %d: Invalid literal value "%s"
 Line %d: Invalid value "%s"
 Linux
 Linux 2.2
@@ -2283,6 +2328,19 @@ Linux 5.0
 LoadBitString
 LoadConfigSchema
 LoadFromBuffer: expected '{', found '%s'
+LoadKV3(CKeyValues3Context*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
+LoadKV3(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
+LoadKV3(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
+LoadKV3FromFile(CKeyValues3Context*, CUtlString*, char const*, char const*, KV3ID_t const&)
+LoadKV3FromFile(KeyValues3*, CUtlString*, char const*, char const*, KV3ID_t const&)
+LoadKV3FromJSON(KeyValues3*, CUtlString*, char const*, char const*)
+LoadKV3FromJSONFile(KeyValues3*, CUtlString*, char const*, char const*)
+LoadKV3FromKV1File(KeyValues3*, CUtlString*, char const*, char const*, KV1TextEscapeBehavior_t)
+LoadKV3FromKV1Text(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, char const*)
+LoadKV3FromKV1Text_Translated(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, KV1ToKV3Translation_t const*, int, char const*)
+LoadKV3FromKV3OrKV1(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
+LoadKV3FromOldSchemaText(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
+LoadKV3Text_NoHeader(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
 Localize_001
 LockGlobalObjectRegistry
 Log Function Help:     log_verbosity <channel specifiers> <verbosity>    log_color <channel specifiers> <hex color>    log_flags <channel specifiers> <+/-flag>All functions are case insensitive.A channel specifier is either:1) tag specifiers: +/-tag1 +/-tag2 ...      // Narrows down to channels with & without given tags.2) channel names: name1 name2 ...           // Lists channels by name.verbosity: off, essential, default,         // Sets how verbose a channel is allowed to be.           detailed, max                     // 'off' turns all spew off                                            // 'essential' turns on vital logs                                            // 'default' turns on most messages                                            // 'detailed' allows for walls of text that are usually useful                                            // 'max' allows everythinghex color: RRGGBBAA                         // A hexadecimal color value in the order RGBA.flag: <+/->DoNotEcho                        // Enable/disable a flag to turn off echoing to the console.      <+/->ConsoleOnly                      // Enable/disable a flag to send text only to the console.e.g.    log_verbosity +console -developer verbose   // Sets minimum spew level of channels with the tag                                            // 'console' but without the tag 'developer' to 'verbose'.    log_color renderdebug bsp FFC08040      // Sets the 'renderdebug' and 'bsp' channels to the RGBA color (64, 128, 192, 255).    log_flags +developer +donotecho         // Turns on the LCF_DO_NOT_ECHO flag for all channels with the 'developer' tag.
@@ -2336,6 +2394,9 @@ LoggingSystem_SetLoggingResponsePolicy
 LoggingSystem_TagName
 LoggingSystem_UnregisterLoggingListener
 Logic Error in CExpressionEvaluator
+LooksLikeKV3BinaryData(void const*, int, KV3ID_t*)
+LooksLikeKV3TextData(void const*, int, KV3ID_t*)
+LooksLikeOldSchemaText(void const*, int, KV3ID_t*)
 LoopCount
 LoopForNumSeconds
 M
@@ -2429,6 +2490,7 @@ NewNode
 Newline in string literal
 NextBot
 No Buffer
+No closing */ before end of file
 No error detected
 No samples
 No valid format conversion from '%s' to '%s'
@@ -3013,6 +3075,14 @@ SPRITECARD_TEXTURE_NORMALMAP
 SS_ADDED
 STEAM_RUNTIME=0 LD_LIBRARY_PATH="$SYSTEM_LD_LIBRARY_PATH" PATH="$SYSTEM_PATH" /usr/bin/xdg-open
 SaveBitString
+SaveKV3(KV3ID_t const&, KV3ID_t const&, KeyValues3 const*, CUtlString*, CUtlBuffer*)
+SaveKV3AsJSON(KeyValues3 const*, CUtlString*, CUtlBuffer*)
+SaveKV3AsJSON(KeyValues3 const*, CUtlString*, CUtlString*)
+SaveKV3AsKV1Text(KeyValues3 const*, CUtlString*, CUtlBuffer*, KV1TextEscapeBehavior_t)
+SaveKV3Text_NoHeader(KeyValues3 const*, CUtlString*, CUtlBuffer*)
+SaveKV3Text_NoHeader(KeyValues3 const*, CUtlString*, CUtlString*)
+SaveKV3Text_ToString(KV3ID_t const&, KeyValues3 const*, CUtlString*, CUtlString*)
+SaveKV3ToFile(KV3ID_t const&, KV3ID_t const&, KeyValues3 const*, CUtlString*, char const*, char const*)
 SceneSystem_002
 SceneUtils_001
 SchemaSystem_001
@@ -3046,6 +3116,7 @@ SetAssertionPrompt
 SetCPUMonitoringInterval
 SetDefaultMiniDumpHandler
 SetDisableFocusBasedPriorityBoost
+SetKV3LoadFlags(unsigned int)
 SetListener
 SetPtr
 SetThreadedLoadLibraryFunc
@@ -3226,7 +3297,6 @@ Total committed memory: %d KB
 Total used memory:      %d KB
 Total virtual bytes: %s
 TracerPid:
-Trailing Data
 TransferMemory
 TranslateStackInfo
 Tried to install the same listener on the same event id + queue twice!
@@ -3249,10 +3319,10 @@ Unable to create event, error %d
 Unable to create semaphore, error %d
 Unable to create thread in %s
 Unable to determine CPU Frequency
+Unable to determine buffer encoding.
 Unable to exec '%s'
 Unable to load SDL2
 Unable to watch '%s'
-Unable to write file '%s'
 Unaccounted
 Unexpected EOF while parsing number
 Unexpected character 0x%02x
@@ -3274,8 +3344,11 @@ Unrecognized type '%d'
 Unrecognized verbosity: %s.
 UnregisterAssertionFailureListener
 UnregisterMobileEventListener
+Unresolved object reference '%s'
 Unserialize
 Unspecified error code
+Unsupported binary encoding id.
+Unsupported escape character '\%c'
 Unsupported frame parameter
 Unsupported max Symbol Value : too large
 Unsupported parameter
@@ -3287,12 +3360,12 @@ Usage: scrubber [start|stop|status|save <filename>]
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_AllocAligned
-UtlMemory_CalcNewAllocationCount
+UtlMemory_AllocAtLeast
+UtlMemory_CalcNewAllocationCount2
 UtlStringFastCompareLess
 V
 VALVE_DISABLE_CLOCK_SPEED_CALCULATION
 VALVE_TESTMODE
-VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -3914,6 +3987,7 @@ ZSTD_versionString
 \n
 \r
 \t
+\u must be followed by exactly 4 hex digits
 \u00
 ]
 ^
@@ -3992,6 +4066,7 @@ _edata
 _end
 _exit
 _fini
+_root_keyname
 _test_conversion_counter
 `
 a
@@ -4707,7 +4782,6 @@ semctl
 semget
 semop
 sequence_name
-sequence_number
 server_can_execute
 server_cant_query
 setpriority
@@ -4836,7 +4910,6 @@ utlstring.cpp
 utlstringtokensystem.cpp
 uuid_generate
 v
-value
 vanmgrph
 vconsole_fuzzy
 vconsole_set_focus
@@ -4933,6 +5006,7 @@ zD
 {%d %d %d %d}
 {0 0 0 255}
 {}()':
+{}[]:,
 |
 }
 })

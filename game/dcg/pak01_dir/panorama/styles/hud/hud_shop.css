@@ -54,12 +54,8 @@ DCGHUDShop TextButton
 }
 
 
-.Shopping.ShopMaximized DCGHUDShop 
-{
-	opacity: 1;//temp. will tween in from right, and tween out from left.
-}
 
-.Shopping DCGHUDShop
+DCGHUDShop.Shopping
 {
 	visibility: visible;
 }
@@ -72,15 +68,17 @@ DCGHUDShop TextButton
 
 	background-color: #000000EE;//make some cool gradients to ease in
 	opacity: 0;
-	transition-property:  opacity;
-	transition-duration: fadeInDuration;
+	transition-property: opacity, background-color;
+	transition-duration: 0.5s;
 }
 
 .Shopping.ShopMaximized #BackgroundFade
 {
 	opacity: 1;
+	background-color: #000000EE;
 }
-.Shopping.ShopMaximized .ShoppingComplete #BackgroundFade
+
+.Shopping.ShopMaximized.ShoppingComplete #BackgroundFade
 {
 	opacity: 0;
 }
@@ -91,8 +89,8 @@ DCGHUDShop TextButton
 //
 
 
-@define offScreenPercentage: 800%;
-@define offScreenPercentageLeft: -800%;
+@define offScreenPercentage: 80%;
+@define offScreenPercentageLeft: -80%;
 
 .AnimateWithVisibility
 {
@@ -111,7 +109,7 @@ DCGHUDShop TextButton
 }
 
 
-.Shopping .ShoppingComplete .AnimateWithVisibility
+.Shopping.ShoppingComplete .AnimateWithVisibility
 {
 	transform: translateX( offScreenPercentageLeft );//move stage left
 }
@@ -129,12 +127,13 @@ DCGHUDShop TextButton
 {
 	transform: translateX( 0% );//bring to center
 }
+
 .Shopping.ShopMaximized .AnimateViewBoard
 {
 	transform: translateX( 0% );//bring to center
 }
 
-.Shopping .ShoppingComplete .AnimateViewBoard
+.Shopping.ShoppingComplete .AnimateViewBoard
 {
 	transform: translateX( offScreenPercentageLeft );//move stage left
 }
@@ -146,12 +145,14 @@ DCGHUDShop TextButton
 {
 	margin-top: 10px;
 	width: fit-children;
+
 }
 
 #ShopOptions
 {
-	min-width: 500px;
+	
 	width: fit-children;
+
 	height: fit-children;
 	flow-children: right;
   
@@ -209,9 +210,9 @@ DCGHUDShop TextButton
 	height: 50px;
 	flow-children:left;
 	horizontal-align: center;
-	transition-property: background-color, text-shadow, opacity, brightness;
-	transition-duration: 0.1s;
-	transition-timing-function: linear;
+	transition-property: background-color, text-shadow, opacity, brightness, saturation, wash-color;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in;
 	
 	border-top: 1px solid #bbb490;
 	border-left: 1px solid #bbb490;
@@ -219,6 +220,8 @@ DCGHUDShop TextButton
 	border-bottom: 1px solid #7b703e;
 
 	box-shadow: -3px -2px 6px 8px fill #0009;
+
+	saturation: 1;
 
 }
 
@@ -310,10 +313,13 @@ Label.ShopActionCostLabel
 	overflow: noclip;
 }
 
+.Purchased .ShopActionCostImage,
 .NoCost .ShopActionCostImage
 {
 	visibility: collapse;
 }
+
+
 
 #InvestButton .ShopActionCostImage
 {
@@ -414,6 +420,7 @@ Label.ShopActionCostLabel
 {
 	margin-bottom: 20px;
 	width:100%;
+
 	flow-children: right;
 	vertical-align: center;
 	horizontal-align: left;
@@ -464,6 +471,7 @@ Label.ShopActionCostLabel
 	horizontal-align: right;
 	flow-children: right;
 	width: fit-children;
+	min-width: 200px;
 
 	border: 1px solid goldBorder;
 	//border-left: 1px solid #efe9ca24;
@@ -515,9 +523,17 @@ Label.ShopActionCostLabel
 	text-align: center;	
 }
 
+//This ensures a minimum size for the gold label is contributed to the layout
+#GoldCountAmountContainer
+{
+	
+	
+	height: 100%;
+}
+
 #GoldCountAmount
 {
-	min-width: 50px;
+	
 	margin-right: 15px;
 	margin-left: 5px;
 	horizontal-align: center;
@@ -563,6 +579,7 @@ Label.ShopActionCostLabel
 
 	flow-children: right;
 	width: fit-children;	
+	min-width: 400px;
 }
 
 #ShopUpgradeContainer
