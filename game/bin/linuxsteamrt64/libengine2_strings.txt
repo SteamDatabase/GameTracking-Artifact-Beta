@@ -205,6 +205,7 @@ $tI
 %03d
 %03i:  %s (%s):
 %04d
+%04i_%02i_%02i_%02i%02i%02i
 %05d
 %06d
 %128.128s : %8d bits (%8.3f bytes)
@@ -342,7 +343,6 @@ $tI
 %s string image, int src_corner_height, int src_corner_width, int draw_corner_height, int draw_corner_width
 %s | %s | %s
 %s%03i.dem
-%s%03i.log
 %s%04d.jpg
 %s%04d.png
 %s%04d.tga
@@ -373,8 +373,8 @@ $tI
 %s/
 %s/%s
 %s/%s%4.4d
+%s/%s_
 %s/*.*
-%s/L%03i_%03i_%03i_%03i_%i_%04i%02i%02i%02i%02i_
 %s/loadaddress.txt
 %s/overflow
 %s/screenshot%04d.jpg
@@ -450,6 +450,7 @@ $tI
 %s[ %d ] changing from '%s' to '%s'
 %s[%d] = %s
 %s\%s
+%s_%03i.log
 %s_%04d%s%s
 %s_%u_slot%d
 %s_tempcontent
@@ -1064,6 +1065,7 @@ $tI
 13IPrerequisite
 13ISoundService
 13IStatsService
+13IVProfService
 14CAppSystemDict
 14CBaseAppSystemI10IAppSystemE
 14CBaseAppSystemI10ICvarQueryE
@@ -1077,6 +1079,7 @@ $tI
 14CBaseAppSystemI13IInputServiceE
 14CBaseAppSystemI13ISoundServiceE
 14CBaseAppSystemI13IStatsServiceE
+14CBaseAppSystemI13IVProfServiceE
 14CBaseAppSystemI14IEngineServiceE
 14CBaseAppSystemI14IGameUIServiceE
 14CBaseAppSystemI14IKeyValueCacheE
@@ -1179,6 +1182,7 @@ $tI
 15CTier0AppSystemI13IInputServiceLx0EE
 15CTier0AppSystemI13ISoundServiceLx0EE
 15CTier0AppSystemI13IStatsServiceLx0EE
+15CTier0AppSystemI13IVProfServiceLx0EE
 15CTier0AppSystemI14IEngineServiceLx0EE
 15CTier0AppSystemI14IGameUIServiceLx0EE
 15CTier0AppSystemI14IKeyValueCacheLx0EE
@@ -1207,6 +1211,7 @@ $tI
 15CTier1AppSystemI13IInputServiceLx0EE
 15CTier1AppSystemI13ISoundServiceLx0EE
 15CTier1AppSystemI13IStatsServiceLx0EE
+15CTier1AppSystemI13IVProfServiceLx0EE
 15CTier1AppSystemI14IEngineServiceLx0EE
 15CTier1AppSystemI14IGameUIServiceLx0EE
 15CTier1AppSystemI14IKeyValueCacheLx0EE
@@ -1234,6 +1239,7 @@ $tI
 15CTier2AppSystemI13IInputServiceLx0EE
 15CTier2AppSystemI13ISoundServiceLx0EE
 15CTier2AppSystemI13IStatsServiceLx0EE
+15CTier2AppSystemI13IVProfServiceLx0EE
 15CTier2AppSystemI14IEngineServiceLx0EE
 15CTier2AppSystemI14IGameUIServiceLx0EE
 15CTier2AppSystemI14IKeyValueCacheLx0EE
@@ -1261,6 +1267,7 @@ $tI
 15CTier3AppSystemI13IInputServiceLx0EE
 15CTier3AppSystemI13ISoundServiceLx0EE
 15CTier3AppSystemI13IStatsServiceLx0EE
+15CTier3AppSystemI13IVProfServiceLx0EE
 15CTier3AppSystemI14IEngineServiceLx0EE
 15CTier3AppSystemI14IGameUIServiceLx0EE
 15CTier3AppSystemI14IKeyValueCacheLx0EE
@@ -1285,6 +1292,7 @@ $tI
 15CTier4AppSystemI13IInputServiceLi0EE
 15CTier4AppSystemI13ISoundServiceLi0EE
 15CTier4AppSystemI13IStatsServiceLi0EE
+15CTier4AppSystemI13IVProfServiceLi0EE
 15CTier4AppSystemI14IEngineServiceLi0EE
 15CTier4AppSystemI14IGameUIServiceLi0EE
 15CTier4AppSystemI14IKeyValueCacheLi0EE
@@ -1384,6 +1392,7 @@ $tI
 18CBaseEngineServiceI13IInputServiceE
 18CBaseEngineServiceI13ISoundServiceE
 18CBaseEngineServiceI13IStatsServiceE
+18CBaseEngineServiceI13IVProfServiceE
 18CBaseEngineServiceI14IEngineServiceE
 18CBaseEngineServiceI14IGameUIServiceE
 18CBaseEngineServiceI14IRenderServiceE
@@ -1457,7 +1466,6 @@ $tI
 200
 2000
 200000
-20:13:21
 20CAsyncTrackingConvar
 20CCLCMsg_ClientInfo_t
 20CCLCMsg_CmdKeyValues
@@ -1515,6 +1523,7 @@ $tI
 21IUGCAddonPathResolver
 21IVConCommDataReceived
 21NetMessagePacketStart
+22:34:05
 22C2S_CONNECTION_Message
 22CActivateMainMenuPanel
 22CCLCMsg_CmdKeyValues_t
@@ -1731,7 +1740,6 @@ $tI
 49CNetworkServerSpawnGroup_LoadEntitiesPrerequisite
 49CNetworkServerSpawnGroup_LoadSaveGamePrerequisite
 4C-netspike
-4CLog
 4CPVS
 4IPVS
 5
@@ -4866,7 +4874,6 @@ LINEAR_RGBA16161616
 LINEAR_RGBA8888
 LIVE
 LMb#
-LOGDIR
 LOG_ASSERT
 LOG_CONSOLE
 LOG_DEVELOPER
@@ -5612,7 +5619,7 @@ Note that enum values use C++ scoping rules, meaning that enum values are siblin
 Note: Changes to sv_pure take effect when the next map is loaded.
 Note: should use "addip" instead of "banip".
 Nov
-Nov  5 2020
+Nov 12 2020
 Num Lock
 Num Lock Toggle
 Number of immediate Steam friends: %d (all friends %d)
@@ -5637,7 +5644,6 @@ OUT_OF_RANGE
 Obtained EMS handle %u
 Obtained XMS handle %u
 Oct
-Oct 28 2020
 Ogham
 Ol_Chiki
 Old_Italic
@@ -7240,7 +7246,7 @@ Unable to get DPI information from SDL
 Unable to get engine window monitor index, using default %u
 Unable to load SDL
 Unable to load steam headless module, error %d
-Unable to open logfiles under %sLogging disabled
+Unable to open logfiles at %s, logging disabled
 Unable to open netconsole on port %d
 Unable to open tty(%s) for output
 Unable to query debug status of module "%s"
@@ -7368,8 +7374,7 @@ UsesVGui
 Using 16-bit blend indices
 Using AVI will bring up a dialog for choosing the codec, which may not show if you are running the engine in fullscreen mode!
 UtlMemory_Alloc
-UtlMemory_AllocAtLeast
-UtlMemory_CalcNewAllocationCount2
+UtlMemory_CalcNewAllocationCount
 V
 VApplication001
 VAsyncFileSystem2_001
@@ -8662,7 +8667,6 @@ host_timescale %.2f
 host_timescale_dec
 host_timescale_inc
 host_writeconfig
-hostip
 hostname
 hostname : %sspawn    : %d
 hostport
@@ -8892,7 +8896,6 @@ localize
 localtime
 log:  unknown parameter %s, 'on' and 'off' are valid
 logs
-logs/%s/%04i
 lookbehind assertion is not fixed length
 loop_dump
 loopback:%d
