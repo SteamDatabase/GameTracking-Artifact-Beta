@@ -462,6 +462,7 @@
 #CardEffect_11097_0
 #CardEffect_14003_0
 #CardEffect_14005_0
+#CardEffect_14012_0
 #CardEffect_19001_0
 #CardEffect_19002_0
 #CardEffect_19003_0
@@ -1038,6 +1039,7 @@ $tI
 %s.%s
 %s.ctx
 %s.vmat
+%s.vpcf
 %s/%s
 %s/%s/gameevents_%s.txt
 %s/*.*
@@ -1777,7 +1779,6 @@ $tI
 .foo = value".
 .league
 .placeholder.proto
-.vpcf
 /
 //
 /C
@@ -2087,6 +2088,7 @@ $tI
 13CMemZeroOnNew
 13CMsgAddSocket
 13CMsgMatchData
+13CMsgSDOAssert
 13CMsgSOIDOwner
 13CMsgSortItems
 13CMsgTEBubbles
@@ -2459,6 +2461,7 @@ $tI
 16CActivityDataOps
 16CBaseAchievement
 16CBaseModelEntity
+16CBasePlayerVData
 16CColorCorrection
 16CCourierModifier
 16CDCGGameMovement
@@ -2469,7 +2472,6 @@ $tI
 16CEntityMessagePBILi138E29CEntityMessageRemoveAllDecalsL19NetChannelBufType_t1EE
 16CEntityMessagePBILi139E28CEntityMessagePropagateForceL19NetChannelBufType_t1EE
 16CEntityMessagePBILi141E22CEntityMessageFixAngleL19NetChannelBufType_t1EE
-16CEntityVDataBase
 16CEnvParticleGlow
 16CFilterProximity
 16CFuncIllusionary
@@ -2870,7 +2872,6 @@ $tI
 19CPointClientCommand
 19CPointServerCommand
 19CPointValueRemapper
-19CPrecacheGameSystem
 19CSODCGTourneyInvite
 19CSOEconItemEquipped
 19CSVCMsg_SplitScreen
@@ -2968,6 +2969,7 @@ $tI
 20CMsgGCHUpdateSession
 20CMsgItemAcknowledged
 20CMsgReplicateConVars
+20CMsgSDOAssert_Values
 20CMsgServerWelcomeDCG
 20CMsgSetItemPositions
 20CMsgTEEffectDispatch
@@ -3151,7 +3153,6 @@ $tI
 22CEntityComponentHelper
 22CEntityDebugGameSystem
 22CEntityMessageFixAngle
-22CEntityVDataGameSystem
 22CFuncElectrifiedVolume
 22CGCMsgGetIPASNResponse
 22CGCMsgSQLStatsResponse
@@ -3348,6 +3349,7 @@ $tI
 24CEconTool_ItemRedemption
 24CEntityHealthBarModifier
 24CEntityMessagePlayJingle
+24CEntitySubclassVDataBase
 24CEnvPlayerSurfaceTrigger
 24CGameNetworkStringTables
 24CGameSystemStaticFactoryI10CFogSystemS0_E
@@ -3373,9 +3375,9 @@ $tI
 24CGameSystemStaticFactoryI21CResponseQueueManagerS0_E
 24CGameSystemStaticFactoryI22CClientUIDialogManagerS0_E
 24CGameSystemStaticFactoryI22CDefaultResponseSystem15IResponseSystemE
-24CGameSystemStaticFactoryI22CEntityVDataGameSystemS0_E
 24CGameSystemStaticFactoryI23CCustomGameEventManagerS0_E
 24CGameSystemStaticFactoryI23CLagCompensationManager23ILagCompensationManagerE
+24CGameSystemStaticFactoryI25CEntitySubclassGameSystemS0_E
 24CGameSystemStaticFactoryI26CGameParticleManagerSystemS0_E
 24CGameSystemStaticFactoryI28CCleanupDefaultRelationshipsS0_E
 24CGameSystemStaticFactoryI28CResourcePrecacherGameSystemS0_E
@@ -3468,6 +3470,7 @@ $tI
 25CDCGTourney_PaidEntryItem
 25CDemoStringTables_items_t
 25CDemoStringTables_table_t
+25CEntitySubclassGameSystem
 25CEnvSoundscapeTriggerable
 25CFuncInteractionLayerClip
 25CIconModifier_HeroMinimap
@@ -3872,7 +3875,6 @@ $tI
 30CGameSystemReallocatingFactoryI17CSoundscapeSystemS0_E
 30CGameSystemReallocatingFactoryI18CPhysicsGameSystemS0_E
 30CGameSystemReallocatingFactoryI18CSoundOpGameSystemS0_E
-30CGameSystemReallocatingFactoryI19CPrecacheGameSystemS0_E
 30CGameSystemReallocatingFactoryI19CStepSimulationHookS0_E
 30CGameSystemReallocatingFactoryI20CAnimGraphGameSystemS0_E
 30CGameSystemReallocatingFactoryI20CGameRulesGameSystemS0_E
@@ -6149,6 +6151,7 @@ Assert_ConditionFailed(_AssertCompileTimeConstantStruct_t const&, char const*, .
 Assertion Failed in function %s():%s
 Asset Modifiers
 Asset modifier index %d must be greater than or equal to zero
+AssetBrowse( vmdl )
 AssetBrowserSystem_001
 AssetModifier
 AssetPreviewSystem_001
@@ -6186,7 +6189,7 @@ Attempting to create unknown particle system '%s'
 Attempting to get the Skeletal Input settings from model %s, which doesn't have any.  Please add a Skeletal Input Settings node to the model in ModelDoc
 Attempting to get the movement settings from model %s, for which movement settings have not been set.  Please add a MovementSettings node to the model in ModelDoc
 Attempting to precache model for entity %d [%s] at %.2f %.2f %.2f, but model name is NULL
-Attempting to precache model, but model name is NULL or empty
+Attempting to precache resource, but resource name is NULL or empty
 Attempting to re-establish GC connection.
 Attempts to build a nav ladder on the climbable surface under the cursor.
 Attribute definition "%s" not found when specifying dynamic recipe
@@ -6282,7 +6285,6 @@ BaseCombatCharacter.StopWeaponSounds
 BaseCombatWeapon.WeaponDrop
 BaseCombatWeapon.WeaponMaterialize
 BaseDamageIsValid
-BaseDamageTypes_t
 BaseEntity.EnterWater
 BaseEntity.ExitWater
 BaseExplosionEffect.Sound
@@ -6394,9 +6396,9 @@ Bringer of Conquest
 Bristleback
 Bristleback (P)
 Broadsword
-Bronze Legion
 Bronze Legion Invasion of Roseleaf
 Bronze Legionnaire
+BronzeLegion
 BrushSolidities_e
 Buckshot
 Buff Hero to 15 Armor
@@ -6517,6 +6519,7 @@ CBasePlayer
 CBasePlayer::ChangeTeam( %d ) - invalid team index.
 CBasePlayer::PhysicsSimulate
 CBasePlayer::ProcessUsercmds: too many cmds %i sent for player %s
+CBasePlayerVData
 CBasePlayerWeapon
 CBasePlayerWeapon::Operator_FrameUpdate one or both of the ModelPtrs is NULL w:%s v:%s
 CBaseProp
@@ -6711,10 +6714,10 @@ CEntityMessageRemoveAllDecals_t
 CEntityMessageScreenOverlay_t
 CEntityOutputTemplate
 CEntityScriptFramework
+CEntitySubclassVDataBase
 CEntitySystem
 CEntitySystem::BuildComponentUnserializer '%s'
 CEntitySystem::PrecacheEntity: Classname missing from entity!
-CEntityVDataBase
 CEnvBeam
 CEnvCombinedLightProbeVolume
 CEnvCubemap
@@ -8016,6 +8019,7 @@ Chris Welch
 Christine Choi
 CircleScreenOriented
 Citizen of Quoidge
+CitizenofQuoidge
 Claddish Archivist
 Claim %s(%u) does not have a rewards block
 Claim %s(%u) failed to load criterias
@@ -8069,6 +8073,7 @@ CollisonGroupOverride
 ColorCorrectionName
 ColorCorrectionSystem
 Colorless
+Combat Immune
 Combat Position
 CombatCharVisCache
 CombatPreResolution
@@ -8193,7 +8198,7 @@ Count All: %i
 CountdownTimer
 Counter Magic
 Coup de Grace
-Court of Ristul
+CourtofRistul
 Crash detection sentinel file '%s' file is present!
 Crash report has been pending to submit for %d seconds
 Crash report message acknowledge by GC.
@@ -8369,8 +8374,10 @@ D_NU
 Daarken
 Dagon
 Damage %.0f, energy %.0f (%.2f)
+Damage Immune
 Damage: %d, Mult: %d, Source:
 DamageOptions_t
+DamageTypes_t
 Damagetype
 Dangling
 Daniel Romanovsky
@@ -8391,6 +8398,7 @@ Death Effect
 Death Prophet
 Death Prophet Boss
 Death Pulse
+Death Shield
 Deathmatch
 Debbi the Cunning
 Debug History of Category %d is EMPTY
@@ -8456,6 +8464,7 @@ DeployLeft
 DeployMid
 DeployRight
 Desired commentary mode state.
+DestinationID
 Destroy Immediately
 DestroyDamageInfo
 DestroyEntities
@@ -8643,6 +8652,7 @@ Dynamic - Asleep
 Dynamic - Awake
 Dynamic Attribute Flags: 0x%08x
 Dynamic prop %s: no sequence named:%s
+Dynamic, shadow casting light source.
 DynamicAtr:%s
 DynamicLightThink
 E
@@ -8722,7 +8732,7 @@ ERROR: Max of %i ents allowed for spline beam.
 ERROR: Min of 2 ents required for spline beam.
 ERROR: Navigation Mesh load failed.
 ERROR: No local player!
-ERROR: No vdata file (%s) found.
+ERROR: No subclass vdata file (%s) found.
 ERROR: Resource name "%s" has the incorrect extension "%s" for the specified resource type (expected "%s")!
 ERROR: Schema registration error - class '%s' is not marked as MModuleLocalTypeScope but contains member '%s' with locally-scoped type '%s'
 ERROR: Schema registration error - class '%s' is not marked as MModuleLocalTypeScope but derives from locally-scoped class '%s'
@@ -8897,6 +8907,8 @@ EntityIOConnectionDesc_t
 EntityIOConnection_t
 EntityIOQueuePrioritizedEvent_t
 EntitySkeleton
+EntitySubclassGameSystem
+EntitySubclassID_t
 EntitySystem - Class Tables
 EntitySystem - Entity Networking - finish
 EntitySystem - Entity Networking - start
@@ -8904,8 +8916,6 @@ EntityTemplate
 EntityText
 EntityThink
 EntityUtils
-EntityVDataGameSystem
-EntityVDataID_t
 Entrail Adder
 Entry
 Enum type "
@@ -8919,7 +8929,7 @@ Enums must contain at least one value.
 EnvMicrophone %s specifies a non-existent speaker name: %s
 Erase any previously placed walkable positions.
 Erases current game stats and writes out a blank stats file
-Error loading weapon '%s': %s
+Error loading entity subclass '%s': %s
 Error map!
 Error parsing event '%s'.  %s
 Error parsing keyvalues
@@ -8943,6 +8953,7 @@ Event System loaded %i events from file: %s.
 Event record stored: %s
 EventAdvanceTick_t
 EventAppShutdown_t
+EventAttributes
 EventClientAdvanceTick_t
 EventClientFrameSimulate_t
 EventClientOutput_t
@@ -9128,6 +9139,7 @@ FILTER_AND
 FILTER_OR
 FINAL
 FIRST
+FMod values for pose controller %sTYPE: %iTIME OFFSET: %fRATE: %fAMPLITUDE: %f
 FOV2D
 FRAME_NET_BLOCKING_LOAD_SPAWN_GROUP
 FRAME_NET_POST_PROCESS_NETWORKING
@@ -9374,6 +9386,7 @@ Fire Completion
 Fire Entity's Action Input w/no data
 Fire Entity's Action Input with passed String - you own the memory
 Fire Entity's Action Input with passed Vector - you own the memory
+Fire Strike
 Fire Trigger
 Fire a game event without broadcasting to the client.
 Fire a game event.
@@ -10682,7 +10695,7 @@ Keenfolk Golem
 Keenfolk Musket
 Keenfolk Turret
 Keep this many old copies in history of autosaves and quicksaves.
-Keeper of the Ancients
+KeeperoftheAncients
 Key in map fields cannot be enum types.
 Key in map fields cannot be float/double, bytes or message types.
 KeyValueCache001
@@ -10805,6 +10818,7 @@ LeftHandle
 Legion Commander
 Legion Consul
 Legion Recruiter
+Legion Scouting Party
 Legion Standard Bearer
 Length;
 LerpThink
@@ -11003,6 +11017,7 @@ MOVETYPE_PUSH
 MOVETYPE_STEP
 MOVETYPE_VPHYSICS
 MOVETYPE_WALK
+MPropertyAttributeEditor
 MPropertyAttributeRange
 MPropertyCustomEditor
 MPropertyDescription
@@ -11069,8 +11084,8 @@ Markup groups:
 MarkupManager
 Marrow Rust
 Marrowfell Brawler
-Marrowfell Hunters
 Marrowfell Longspear
+MarrowfellHunters
 Mass: %.2f kg / %.2f lb (%s)
 Master was null or not a master!
 Match reservation was canceled but %llu didn't match the reservation match id %llu or state was invalid: %u
@@ -11204,6 +11219,8 @@ ModelScaleThink
 Modified
 ModifiedTimer
 Modify
+Mogul Khan
+Mogul Khan (P)
 Molotov.Explode
 Moment of Courage
 MomentumType_Friction
@@ -11998,7 +12015,7 @@ P@%.6f
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:234
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/animgraph_gamesystem.cpp:543
 PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/game_saverestore_entities.cpp:105
-PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2068
+PARALLEL_PROCESS _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../../shared/physics_main_shared.cpp:2059
 PARALYZE
 PARENT
 PARTICLE_REPLACE_AMBIENT_EFFECT
@@ -12075,7 +12092,6 @@ PaintSplatPink
 PanoramaTextServices001
 PanoramaUIClient001
 PanoramaUIEngine001
-Parade Veteran
 Parameter to BackUp() can't be negative.
 Params: (entity, query) : tests 'query' against entity's response system and returns the best response found (or null if none found).
 Parent: %s
@@ -12091,7 +12107,6 @@ ParticleIndex_t
 ParticleSystemMgr003
 ParticleSystemQueryGameSystem
 ParticleTracer
-Party
 Pass entity and effect name
 Pass string for the animation to play on this model
 Pass table - Inputs: entity, effect
@@ -12470,7 +12485,7 @@ QuitServer() executing "disconnect"
 QuitServer() executing "quit"
 Quoidgic Hospitality
 Quoidgic Outreach Coordinator
-Quorum of Weeping Rose
+QuorumofWeeping Rose
 R
 RAY TEST: %d hits, %d misses, %.2fms   (%d rays, %d sweeps against %d aggregates)
 RESET_SEQUENCES
@@ -12564,11 +12579,11 @@ ReconnectGameInterface
 Recording duration: %f seconds
 Recv msg %u (%s), %u bytes
 Red
-Red Mist
 Red Mist Grunt
 Red Mist Invasion of Roseleaf
 Red Mist Maul
 Red Mist Pillager
+RedMist
 RedirectOutput
 ReduceOpponentsMana
 Refresher Orb
@@ -12770,6 +12785,7 @@ Rock
 Rod of Atos
 RollPercentage
 Root Boots
+Root class of all server-side entities
 Root entity class
 RopeMaterial
 RopeShader
@@ -12794,9 +12810,9 @@ Rule is disabled.
 Rumusque Blessing
 Rumusque Choir
 Rumusque Consecration Ritual
-Rumusque Faithful
 Rumusque Redeemer
 Rumusque Scythe
+RumusqueFaithful
 Run engine/gameplay test suite (host in server).
 Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 RunScriptFile
@@ -13676,6 +13692,7 @@ Source2Host001
 Source2Server001
 Source2ServerConfig001
 Source2ServerSerializers002
+SourceID
 SourceNode
 SourceTV broadcast delay in seconds
 SourceTV camera is now controlled by %s.
@@ -14106,7 +14123,6 @@ TestFormatE
 TestRaysToBoundaryZone - pass raw %0.2f, pass grid %0.2f, ratio %0.2f
 TestScriptManager
 TestScriptMgr001
-Tests are disabled in retail builds
 Tests box collision detection
 Tests capsule collision detection
 Tests convex hull collision detection
@@ -14135,7 +14151,6 @@ The MOTD file to load.
 The Navigation Mesh was built with an old server dll - reanalyze the mesh!
 The Oath
 The Omexe Arena
-The S.O.L.K.
 The Twisted Path
 The Tyler Estate
 The capsule pogo stick damping ratio [-]
@@ -14159,6 +14174,8 @@ The player entity.
 The server session ID for the new steamworks gamestats.
 The server tries to keep each player's m_nTickBase withing this many msecs of the server absolute tickcount
 The type parameter T in RepeatedFieldRef<T> API doesn't match
+TheSOLK
+TheTylerEstate
 There are no entries in the Place database.
 Thieving Greevil
 Thin Plate
@@ -14334,7 +14351,6 @@ Turns on optimizations for GetMatchingObjects.
 Turns on the absbox for all active physics objects.  0 : un-highlight.
 Turns on turbo physics
 Tusk
-Tutorial Ally 1
 Tutorial Ally 2
 Tutorial Ally 3
 Tutorial Enemy 1
@@ -14725,7 +14741,7 @@ Vector4d
 VectorAligned
 VectorText3D
 VectorToAngles
-Veiled Sisterhood
+VeiledSisterhood
 Velocity: %.3f
 VelocitySampler
 Vendetta
@@ -14752,7 +14768,7 @@ Veteran's Insight
 VguiScreen
 Vhoul Conscript
 Vhoul Martyr
-Vhoul Rebellion
+VhoulRebellion
 Vile Embrace
 Viper
 Virtual item for %i failed to load criteria
@@ -14999,7 +15015,13 @@ ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8fun
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E14_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E15_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E16_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E17_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E18_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E19_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E1_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E20_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E21_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E22_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E2_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E3_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E4_
@@ -15017,7 +15039,13 @@ ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8f
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E14_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E15_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E16_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E17_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E18_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E19_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E1_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E20_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E21_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E22_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E2_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E3_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E4_
@@ -15027,6 +15055,8 @@ ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8f
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E8_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E9_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE_
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
 ZN19CMarkupSearchHelper23AddNavAreasForRefVolumeEPK20CMarkupVolumeWithRefEUlR8CNavAreaE_
 ZN19CMarkupSearchHelper26AddNavAreasForTaggedVolumeEPK19CMarkupVolumeTaggedEUlR8CNavAreaE_
@@ -15220,6 +15250,7 @@ __vsprintf_chk
 _addons
 _attr_
 _builtins
+_c
 _edata
 _end
 _fini
@@ -15288,7 +15319,6 @@ _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../nav_generate.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../player_lagcompensation.cpp
 _vpc_/unity_server_dota_card_game/linuxsteamrt64/../../../soundscape_system.cpp
 `
-`jF
 a
 a protocol
 a trigger_changelevel doesn't have a map
@@ -15865,6 +15895,7 @@ combat 1
 combat 2
 combat 3
 combat<
+combatImmune
 combatPosition
 combo
 command rate %.2f commands per sec vs. ticrate of %.2f at dilation %s
@@ -16456,7 +16487,6 @@ entity_component_error_class_decl_says_contained_but_impl_is_referenced
 entity_component_error_class_decl_says_referenced_but_impl_is_contained
 entity_healthbar_offset
 entity_hurt
-entity_killed
 entity_log_load_unserialize
 entity_model
 entity_scale
@@ -16641,6 +16671,7 @@ fastreload
 faulty context k:v pair in entity io %s
 fc
 fco
+feeble
 fflush
 fieldName
 fieldpathpacker.cpp
@@ -16729,6 +16760,7 @@ firetarget
 firetrigger
 fireworks
 firing in: %.2f sec
+first_loot_list_override
 first_sale_date
 first_valid_class
 first_valid_item_slot
@@ -17015,6 +17047,7 @@ generated_protodcg/linuxsteamrt64/networkbasetypes.pb.cc
 generated_protodcg/linuxsteamrt64/steammessages.pb.cc
 generated_protodcg/linuxsteamrt64/te.pb.cc
 generated_protodcg/linuxsteamrt64/usermessages.pb.cc
+generic_data_type
 ggx_cubemap_blur_accumulation_pass_count
 gibdir
 give
@@ -19088,6 +19121,8 @@ m_flFrequency
 m_flFriction
 m_flGlowBackfaceMult
 m_flGlowProxySize
+m_flGlowStartTime
+m_flGlowTime
 m_flGoal
 m_flGravityScale
 m_flGroundChangeTime
@@ -20071,7 +20106,6 @@ m_nElementType
 m_nEntityId
 m_nEntityIndex
 m_nEntityType
-m_nEntityVDataID
 m_nEnvCubeMapArrayIndex
 m_nExplicitImageLayout
 m_nExplosionType
@@ -20264,6 +20298,7 @@ m_nState
 m_nStepside
 m_nStopType
 m_nStyle
+m_nSubclassID
 m_nSurfaceProp
 m_nSurroundType
 m_nTargetAxis
@@ -20355,7 +20390,6 @@ m_pCurrentCommand
 m_pCurrentKeyFrame
 m_pD3DSemanticName
 m_pEntity
-m_pEntityVData
 m_pEnvMap
 m_pExpresser
 m_pFollowup
@@ -20412,6 +20446,7 @@ m_pSink
 m_pSkeletonInstance
 m_pSpawnScriptFunction
 m_pSpringJoint
+m_pSubclassVData
 m_pSurfaceData
 m_pTarget
 m_pTargetInput
@@ -20506,6 +20541,7 @@ m_sLandmark
 m_sLandmarkName
 m_sMapName
 m_sMaster
+m_sModelName
 m_sName
 m_sNoise
 m_sPath
@@ -20544,7 +20580,6 @@ m_skyboxData.scale
 m_skyboxSlotToken
 m_slaves
 m_slideFriction
-m_sndMovingLoop
 m_soundEntityIndex
 m_soundInfo
 m_soundOrigin
@@ -21058,7 +21093,6 @@ mob
 model.cpp
 modelName
 model_default_preview_sequence_name
-model_folder
 model_inventory
 model_player
 model_player%i
@@ -21753,7 +21787,6 @@ part_name
 particle_combined
 particle_control_point
 particle_create
-particle_folder
 particle_snapshot
 particle_spacing
 particle_test_attach_attachment
@@ -21997,7 +22030,6 @@ posxyz
 posy
 posz
 precacheTest3.vrnmd
-precache_shared.cpp PrecacheMaterial:: path '%s' missing extension!
 precommands
 precomputedboundsmaxs
 precomputedboundsmins
@@ -22158,6 +22190,7 @@ ref_shoot_
 referencename
 refire interval: %.2f sec
 refrigerator
+regeneration
 regional_prices
 registered:
 rejected
@@ -22808,6 +22841,8 @@ std::_Function_base::_Base_manager<IndirectAny::Assign<int>(int&&)::{lambda(void
 std::_Function_base::_Base_manager<IndirectAny::Assign<int>(int&&)::{lambda(void*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IndirectAny::Assign<int>(int&&)::{lambda(void*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<MatchAttributeList const& (*)(AttributeListGeneratorFunctionParam<MatchAttributeList>)>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<NavSearch::TestRayToNavMesh(Vector const&, CNavArea const*, Vector const&, NavHull_t, CNavTraceResult*, CNavTestRayParams*, std::function<bool (CNavArea const&, NavAdj_t const&, Vector const&, Vector const*)>*, bool)::{lambda(CNavArea const&, NavAdj_t const&, Vector const&, Vector const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<NavSearch::TestRayToNavMesh(Vector const&, CNavArea const*, Vector const&, NavHull_t, CNavTraceResult*, CNavTestRayParams*, std::function<bool (CNavArea const&, NavAdj_t const&, Vector const&, Vector const*)>*, bool)::{lambda(CNavArea const&, NavAdj_t const&, Vector const&, Vector const*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#10}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#10}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#11}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#11}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#12}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#12}> const&, std::_Manager_operation)
@@ -22817,7 +22852,13 @@ std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#16}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#16}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#17}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#17}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#18}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#18}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#19}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#19}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#20}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#20}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#21}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#21}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#22}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#22}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#23}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#23}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#24}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#24}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#3}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#4}> const&, std::_Manager_operation)
@@ -22835,7 +22876,13 @@ std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#16}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#16}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#17}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#17}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#18}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#18}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#19}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#19}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#20}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#20}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#21}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#21}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#22}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#22}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#23}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#23}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#24}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#24}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#3}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#4}> const&, std::_Manager_operation)
@@ -23045,6 +23092,8 @@ strtoull
 stunned
 style_index_t
 style_unlock
+subclass_id
+subclass_name
 subscene
 subscription
 subtype mismatch
@@ -23311,6 +23360,7 @@ tower_kills_victory
 tracer_particle
 tradable after date
 trade cooldown until date
+trample
 transitioning
 treasure_chest
 treasure_class_override
@@ -23520,8 +23570,6 @@ variant
 vb phys
 vban
 vcd error, gesture %s of model %s is marked as STUDIO_LOOPING!
-vdata_id
-vdata_name
 vec3_invalid
 vec3_origin
 vecAlternateAngles
@@ -23573,7 +23621,6 @@ vmat
 vmax > 0
 vmax >= base
 vmdl
-vmdl_c
 vmin < 0
 vmin <= 0 - base
 vmt
@@ -23602,7 +23649,6 @@ volume_faceposer
 volumematcheseventramp
 vote_create_failed_t
 vpcf
-vpcf_c
 vphysics2
 vpost
 vprof_scope_entity_gamephys

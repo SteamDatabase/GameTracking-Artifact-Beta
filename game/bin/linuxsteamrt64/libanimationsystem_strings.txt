@@ -337,7 +337,6 @@ $ORIGIN
 16CMoverUpdateNode
 16CParticleAnimTag
 16CStaticPoseCache
-16CUnaryUpdateNode
 16IAnimNodeManager
 16IAnimationHelper
 16IAnimationSystem
@@ -428,6 +427,7 @@ $ORIGIN
 19CHitReactUpdateNode
 19CIKRuleContext_Base
 19CJiggleBoneAnimNode
+19CJumpHelperAnimNode
 19CLeanMatrixAnimNode
 19CLookPitchCondition
 19CMoveSpeedCondition
@@ -480,7 +480,6 @@ $ORIGIN
 20CTwoBoneIKUpdateNode
 20CVectorAnimParameter
 20IAnimManagerInstance
-20IAnimMovementManager
 20IAnimStateTransition
 20IIKControlRigContext
 20IResourceTypeManager
@@ -499,6 +498,7 @@ $ORIGIN
 21CFutureVelocityMetric
 21CIKRuleContext_Ground
 21CJiggleBoneUpdateNode
+21CJumpHelperUpdateNode
 21CLeanMatrixUpdateNode
 21CLookHeadingCondition
 21CMotionMetricInstance
@@ -861,6 +861,7 @@ $ORIGIN
 <INVALID_RBF_TYPE>
 <Invalid Clip>
 <Invalid Control Value>
+<Invalid Parameter>
 <Invalid State>
 <No schemasystem>
 <Unassigned>
@@ -877,7 +878,6 @@ $ORIGIN
 <shim>
 <unable to determine stacktrace>
 <unconnected>
-<unknown>
 <unused>
 =
 ==
@@ -890,7 +890,6 @@ $ORIGIN
 @A
 A
 A master convar that effectively disables the entire footlock node.
-A<Invalid Parameter>
 ACTIVITY WEIGHTS
 ACT_IDLE
 ACT_INVALID
@@ -1061,6 +1060,7 @@ AllocateAndLoad failed for '%s'
 AllocateAndLoad failed for '%s' (%s)
 AllocateResourceFromAsyncResult
 Always use fallback hinge
+Am_vRotation
 Angle Increment
 Angle Traces with Slope
 Angle;
@@ -1454,7 +1454,6 @@ CDirectionalBlendUpdateNode
 CDistanceRemainingMetric
 CDistanceRemainingMetricEvaluator
 CDrawCullingData
-CEntityIndex
 CEnumAnimParameter
 CEnumAnimParameterInstance
 CFacingHeadingCondition
@@ -1520,6 +1519,8 @@ CIntAnimParameter
 CJiggleBoneAnimNode
 CJiggleBoneItem
 CJiggleBoneUpdateNode
+CJumpHelperAnimNode
+CJumpHelperUpdateNode
 CLIENT: Activity %d is %s
 CLeafUpdateNode
 CLeanMatrixAnimNode
@@ -1700,7 +1701,6 @@ CUtlRBTree overflow with %u elements!
 CUtlScratchMemoryPool::AllocAligned(int, int)
 CUtlScratchMemoryPool::CUtlScratchMemoryPool(unsigned int, unsigned int, void*, bool)
 CUtlScratchMemoryPool::~CUtlScratchMemoryPool()
-CUtlString
 CUtlString::Acquire(CBufferString*, bool)
 CUtlString::Append(char const*)
 CUtlString::CUtlString(CBufferString const&)
@@ -1727,8 +1727,6 @@ CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
-CUtlSymbol
-CUtlSymbolLarge
 CUtlSymbolTable::AddString(char const*)
 CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
 CUtlSymbolTable::Find(char const*) const
@@ -1746,6 +1744,7 @@ CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vect
 CVrSkeletalInputSettings
 CWayPointHelperAnimNode
 CWayPointHelperInstanceData
+CWayPointHelperUpdateNode
 CWristBone
 CXXABI_1.3
 Cannot allocate abstract class
@@ -1899,7 +1898,6 @@ DebugTextureInfo001
 Decay Bias
 Decay Duration
 Default Value
-DegreeEuler
 Deprecated
 Detected parallel updates: %p (%i)
 DevMsg
@@ -2073,6 +2071,7 @@ FOOT6
 FOOT7
 FOOT8
 FOOTLOCKSUBVISUALIZATION_IKSolve
+FOOTLOCKSUBVISUALIZATION_ReachabilityAnalysis
 FOOTSOUND_Left
 FOOTSOUND_Right
 FOOTSOUND_UseOverrideSound
@@ -2487,6 +2486,7 @@ JiggleBone:m_resetCount
 JiggleBoneSettingsList_t
 JiggleBoneSettings_t
 JiggleBoneSimSpace
+Jump Helper
 KV3 load transfer failed: %s
 KV3 save transfer failed: %s
 KeyValueCache001
@@ -2742,6 +2742,7 @@ N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI18CTwoBoneIKAnimN
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CFollowPathAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CGroupInputAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CJiggleBoneAnimNodeEE
+N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CJumpHelperAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CLeanMatrixAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CPathHelperAnimNodeEE
 N10Reflection12CTypeFactoryI13CAnimNodeBaseJEE14CFactoryMakerTI19CSpeedScaleAnimNodeEE
@@ -2918,6 +2919,7 @@ N10Reflection6Detail11CClassInfoTI19CFutureFacingMetricEE
 N10Reflection6Detail11CClassInfoTI19CGroupInputAnimNodeEE
 N10Reflection6Detail11CClassInfoTI19CHitReactUpdateNodeEE
 N10Reflection6Detail11CClassInfoTI19CJiggleBoneAnimNodeEE
+N10Reflection6Detail11CClassInfoTI19CJumpHelperAnimNodeEE
 N10Reflection6Detail11CClassInfoTI19CLeanMatrixAnimNodeEE
 N10Reflection6Detail11CClassInfoTI19CLookPitchConditionEE
 N10Reflection6Detail11CClassInfoTI19CMoveSpeedConditionEE
@@ -2953,6 +2955,7 @@ N10Reflection6Detail11CClassInfoTI21CCycleControlAnimNodeEE
 N10Reflection6Detail11CClassInfoTI21CFollowPathUpdateNodeEE
 N10Reflection6Detail11CClassInfoTI21CFutureVelocityMetricEE
 N10Reflection6Detail11CClassInfoTI21CJiggleBoneUpdateNodeEE
+N10Reflection6Detail11CClassInfoTI21CJumpHelperUpdateNodeEE
 N10Reflection6Detail11CClassInfoTI21CLeanMatrixUpdateNodeEE
 N10Reflection6Detail11CClassInfoTI21CLookHeadingConditionEE
 N10Reflection6Detail11CClassInfoTI21CMotionMetricInstanceEE
@@ -3256,7 +3259,6 @@ RESOURCE_TYPE_ANIMATION_GROUP_INTERNAL
 RESOURCE_TYPE_ANIMATION_INTERNAL
 RESOURCE_TYPE_ANIMGRAPH
 RESOURCE_TYPE_SEQUENCE_GROUP_INTERNAL
-RadianEuler
 Ragdoll Tag
 RandomFloat
 RandomInt
@@ -3457,6 +3459,7 @@ Sequence:m_resetCount
 Sequence:m_resetCycleValue
 SequenceData
 SequenceGetName
+SequenceNode
 SerializedEntitiesVersion001
 Server Authoritative
 ServerAuthoritative
@@ -3952,7 +3955,6 @@ float32-quantized
 float64
 floor
 floorf
-fltx4
 followanimation
 force
 force unlocked
@@ -4550,7 +4552,6 @@ m_flMinSpringTension
 m_flMinStepsRemaining
 m_flMinTimeRemaining
 m_flNormalSpringStiffness
-m_flOuterRadius
 m_flPitchLimit
 m_flPosWeight
 m_flPredictionScale
@@ -4648,6 +4649,7 @@ m_hPoseCacheHandle
 m_hPositionParam
 m_hRotationParam
 m_hSequences
+m_hTargetParam
 m_hierarchyArray
 m_hingeAxis
 m_hipBoneName
@@ -4962,6 +4964,7 @@ m_stateWeights
 m_states
 m_strides
 m_stringAttributes
+m_subGraphFilename
 m_subtractInputConnection
 m_szChannelClass
 m_szDescription
@@ -4985,6 +4988,7 @@ m_targetBoneName
 m_targetHandles
 m_targetOrientation
 m_targetParam
+m_targetParamID
 m_targetType
 m_targetValues
 m_targets
@@ -5040,7 +5044,6 @@ m_vMovement
 m_vOffset
 m_vPole
 m_vPos
-m_vRotation
 m_vSplayHingeAxis
 m_vTargetPosition
 m_vTintColor
@@ -5329,6 +5332,8 @@ static const Reflection::ClassID CInputStreamUpdateNode::MyTypeID()
 static const Reflection::ClassID CIntAnimParameter::MyTypeID()
 static const Reflection::ClassID CJiggleBoneAnimNode::MyTypeID()
 static const Reflection::ClassID CJiggleBoneUpdateNode::MyTypeID()
+static const Reflection::ClassID CJumpHelperAnimNode::MyTypeID()
+static const Reflection::ClassID CJumpHelperUpdateNode::MyTypeID()
 static const Reflection::ClassID CLeanMatrixAnimNode::MyTypeID()
 static const Reflection::ClassID CLeanMatrixUpdateNode::MyTypeID()
 static const Reflection::ClassID CLookAtAnimNode::MyTypeID()
