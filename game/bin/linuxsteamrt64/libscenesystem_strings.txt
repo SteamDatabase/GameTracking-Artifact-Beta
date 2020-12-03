@@ -20,8 +20,10 @@
 #%s/%s/+MultiGpu-TransferRenderTarget( To: %dx%d @ x: %d y: %d, From: %dx%d @ x: %d y: %d )
 #%s/%s/+SteamVrCompositor-TransferLeftEye( %dx%d @ (x: %d y: %d) )
 #%s/%s/+SteamVrCompositor-TransferRightEye( %dx%d @ x: %d y: %d) )
+#%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
+#%s/RenderAView/LightSetup
 #%s/SetupLightingForView/SetupLightingForView
 #%s/UpdatePerViewConstantBuffers
 #%s/UpdatePerViewConstantBuffers%d
@@ -90,19 +92,16 @@ $tI
 (unnamed light)
 ) in %s batchlists
 *** Skip layer '%s'
-*Z29InitForFrustum_DebugRendering17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
-*Z33InitForFrustum_DebugRenderingCsgo17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
+*ZL29InitForFrustum_DebugRendering17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
 *ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneView17ESceneObjectFlagsP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
 *ZN12CShadowAtlas34FindOrCreateShadowMapsForBarnLightEP29CDrawShadowMapsForLightParamsP10CSceneView17ESceneObjectFlagsRK11BarnLight_tRK11matrix3x4_tP12CSceneObjectiPKciiiibbbbEUlS3_iE_
 *ZN13CLightBinner222GatherBarnLightsInViewEPK10ISceneView17ESceneObjectFlagsS3_EUlP21CSceneBarnLightObjectE_
 *ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP18CEnvMapSceneObjectE_
 *ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP28CSceneLightProbeVolumeObjectE_
-*ZN14CLightBinnerVr19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
-*ZN14CLightBinnerVr34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
-*ZN16CLightBinnerCsgo19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
-*ZN16CLightBinnerCsgo34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK21FrustumGeometryCSGO_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
+*ZN18CSingleLightBinner19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
+*ZN18CSingleLightBinner34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
 *ZN26CBindlessFastPathPartition21EnsureEnvironmentMapsEvEUlP18CEnvMapSceneObjectE_
-*ZN32CBindlessFastPathSceneObjectDesc35EnsureLightProbeVolumeDescriptorSetEvEUlP28CSceneLightProbeVolumeObjectE_
+*ZN32CBindlessFastPathSceneObjectDesc25UpdateLightProbeVolumeSetEP31LightProbeVolumeDescriptorSet_tP26CBindlessFastPathPartitionEUlP28CSceneLightProbeVolumeObjectE_
 +x east
 +y north
 +z up
@@ -156,7 +155,6 @@ $tI
 1 1 1
 1 = visualize bounds, 2 = visualize sceneobject mesh materials, 3 = required texture size, 4 = bounds group, 5 = LOD
 1.2
-1.5
 1.8
 10CSceneView
 10ConCommand
@@ -174,12 +172,12 @@ $tI
 12
 125 130 135
 128
-12CLightBinner
 12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
 12CSceneObject
 12CSceneSystem
 12CShadowAtlas
 12CThreadEvent
+12ILightBinner
 12ISceneSystem
 13CLightBinner2
 13CNoRefFunctor
@@ -187,17 +185,18 @@ $tI
 14CBaseAppSystemI11ISceneUtilsE
 14CBaseAppSystemI12ISceneSystemE
 14CEmptySequence
-14CLightBinnerVr
 14CTonemapSystem
 14CVolumetricFog
 14ConCommandBase
 14ITonemapSystem
 14IVolumetricFog
+15CLightBinnerCPU
 15CMemberFunctor1IP12CSceneSystemMS0_FvP10CSceneViewES3_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI18CParallelProcessorIP12CSceneObject21CFuncJobItemProcessorIS3_ELi1EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor1IP26CParallelProcessorAbstractI22CParallelLoopProcessorI13CViewDrawList31CLoopMemberFuncJobItemProcessorIS2_12CSceneSystemS4_EEEMS7_FviEi12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor5IP12CSceneSystemMS0_FvSt10shared_ptrI13CViewDrawListEP11CSceneLayerP16CRenderBatchList18EBatchStartFlags_tRK10CUtlVectorIP14CSceneDrawList10CUtlMemoryISC_iEEES4_S6_S8_S9_SF_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CMemberFunctor6IP13CSOAContainerMS0_FviiiiiDv4_fEiiiiiS2_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
+15CMemberFunctor7IP12CSceneSystemMS0_FvSt10shared_ptrI13CViewDrawListEP11CSceneLayerP16CRenderBatchList18EBatchStartFlags_tS2_I10CUtlVectorI20CMeshDrawPrimitive_t10CUtlMemoryISB_iEEEiiES4_S6_S8_S9_SF_ii12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE18CFuncMemPolicyNoneE
 15CTier0AppSystemI11ISceneUtilsLx0EE
 15CTier0AppSystemI12ISceneSystemLx0EE
 15CTier1AppSystemI11ISceneUtilsLx0EE
@@ -208,7 +207,6 @@ $tI
 15CTier3AppSystemI12ISceneSystemLx0EE
 160
 16CDefaultAccessor
-16CLightBinnerCsgo
 16CLightObjectDesc
 16CTonemapRenderer
 16ICommandCallback
@@ -221,10 +219,10 @@ $tI
 18CPlaceholderConVar
 18CRenderingPipeline
 18CSceneSkyBoxObject
+18CSingleLightBinner
 18IModelRenderHelper
 18IRenderingPipeline
 19CDebugLayerRenderer
-19CLightBinnerFactory
 19CScalableAORenderer
 19CSceneMonitorObject
 19CSchemaRegistration
@@ -241,17 +239,15 @@ $tI
 20CFilterLayerRenderer
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
-20CSpotLightObjectDesc
 20ISceneObjectDescBaseI21CSceneBarnLightObjectE
 20ISceneObjectDescBaseI21CSceneDebugTextObjectE
 20ISceneObjectDescBaseI25CSceneLightObjectInternalE
+20ISceneObjectDescBaseI25CSceneShadowFrustumObjectE
 20ISceneObjectDescBaseI28CBindlessFastPathSceneObjectE
 20ISceneObjectDescBaseI28CSceneLightProbeVolumeObjectE
 20ISceneObjectDescBaseI33CAmbientOcclusionProxySceneObjectE
 20ISceneObjectDescBaseIN23CCharacterDecalRenderer26CCharacterDecalSceneObjectEE
 21CAggregateSceneObject
-21CLightBinnerVrFactory
-21CPointLightObjectDesc
 21CResolveLayerRenderer
 21CSceneBarnLightObject
 21CSceneDebugTextObject
@@ -259,34 +255,38 @@ $tI
 21IVConCommDataReceived
 22C6FaceSkyboxObjectDesc
 22CEnvMapLightObjectDesc
+22CLightBinnerCPUFactory
 22CSceneAnimatableObject
 22CSchemaInstallCallback
-22CSpotLightObjectDescVr
 22CVolumetricFogRenderer
 23CCharacterDecalRenderer
 23CFullscreenQuadRenderer
-23CLightBinnerCsgoFactory
 23CMeshBuilderSceneObject
-23CPointLightObjectDescVr
 23CRenderingPipelineAlias
 23CSSAOProceduralRenderer
 23CSceneViewDebugOverlays
+23CSpotLightObjectDescCPU
 23ICharacterDecalRenderer
 23IConCommandBaseAccessor
 23ISceneViewDebugOverlays
 240
-24CSpotLightObjectDescCsgo
+24CPointLightObjectDescCPU
+24CShadowFrustumObjectDesc
 24CVConCommandMessageScene
 24IProceduralLayerRenderer
 25CAggregateSceneObjectDesc
 25CConCommandMemberAccessorI12CSceneSystemE
-25CPointLightObjectDescCsgo
+25CEnvMapLightObjectDescCPU
 25CSceneLightObjectInternal
+25CSceneShadowFrustumObject
+25CSingleLightBinnerFactory
 26CAnimatableSceneObjectDesc
+26CSpotLightObjectDescSingle
 26ICommandCompletionCallback
 27CDirectionalLightObjectDesc
 27CLightProbeVolumeObjectDesc
 27CMeshBuilderSceneObjectDesc
+27CPointLightObjectDescSingle
 27CSchemaUtlVectorManipulatorI10CUtlVectorI10CUtlString10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI12matrix3x4a_t10CUtlMemoryIS1_iEES1_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorI19CSSDSMsg_ViewTarget10CUtlMemoryIS1_iEES1_E
@@ -319,7 +319,6 @@ $tI
 37CAmbientOcclusionProxySceneObjectDesc
 38IMaxSwapChainDimensionsChangedListener
 3C
-4.0
 4096.0f
 40ISceneAnimatableProceduralBoneTransforms
 43CFunctor_SceneSystem_Thread_RenderViewLayer
@@ -329,10 +328,11 @@ $tI
 5
 50CFunctor_SceneSystem_Thread_ProcessProceduralLayer
 6
+6.0
 64
 6ConVar
 7IConVar
-8.0
+80
 8CFunctor
 9.1.15
 9ISequence
@@ -588,6 +588,7 @@ CBaseSceneObjectDesc
 CBindlessFastPathPartition::EnsureEnvironmentMaps() - Number of environment maps exceeds maximum (%d), skipping additional environment maps.
 CBindlessFastPathPartition::EnsureGPUResources - insufficient descriptor set support. CWorldNode::CanUseBindlessDesc() needs to filter before getting here.
 CBindlessFastPathSceneObjectDesc
+CBindlessFastPathSceneObjectDesc::UpdateLightProbeVolumeSet() - Number of environment maps exceeds maximum (%d), skipping additional environment maps.
 CBlitTextureToBackBufferLayer
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
@@ -627,6 +628,7 @@ CDebugTextObjectDesc
 CDirectionalLightObjectDesc
 CDrawCullingData
 CEnvMapLightObjectDesc
+CEnvMapLightObjectDescCPU
 CFingerBone
 CFingerChain
 CFingerSource
@@ -639,12 +641,6 @@ CHitBoxSet
 CHitBoxSetList
 CLightBinner2: Unsupported barn light count %d
 CLightBinner::UpdateBinTexture
-CLightBinnerCsgo: Unsupported CSGONumBakedLights %d
-CLightBinnerCsgo: Unsupported CsgoMaxLights %d
-CLightBinnerCsgo: Unsupported NumBakedLights %d
-CLightBinnerVr: Unsupported NumBakedLights %d
-CLightBinnerVr: Unsupported VrMaxLights %d
-CLightBinnerVr: Unsupported VrNumBakedLights %d
 CLightProbeVolumeObjectDesc
 CMT usage is %.2f percent (%d texels) in %fms
 CMTNormalWrinkle
@@ -659,16 +655,14 @@ CONTENTROOT
 COrientConstraint
 CParentConstraint
 CPointConstraint
-CPointLightObjectDesc
-CPointLightObjectDescCsgo
-CPointLightObjectDescVr
+CPointLightObjectDescCPU
+CPointLightObjectDescSingle
 CProjectedDecalSceneObjectDesc
 CRC32_ProcessBuffer
 CRC64_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
-CSGO
 CSOAContainer::SetAttributeType - ERROR, trying to change type of previously-defined attribute %d!
 CSSDSEndFrameViewInfo
 CSSDSMsg_EndFrame
@@ -697,11 +691,13 @@ CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid other view target 
 CScratchRenderTargetSystem::FindOrCreateRenderTarget: invalid texture handle for "%s"!
 CScratchRenderTargetSystem::GetRenderTargetInfo cannot work until FinishRenderingViews is called!
 CSimpleQuadRenderer
+CSingleLightBinner: Unsupported MaxLights %d
+CSingleLightBinner: Unsupported NumBakedLights %d
 CSparseMatrix::SetDimensions(int, int)
 CSparseMatrix::SetElement(int, int, float)
 CSplitString::Construct(char const*, char const**, int)
-CSpotLightObjectDesc
-CSpotLightObjectDescVr
+CSpotLightObjectDescCPU
+CSpotLightObjectDescSingle
 CStrAutoEncode::Clear()
 CStrAutoEncode::Copy(CStrAutoEncode const&)
 CStrAutoEncode::InitEmpty()
@@ -849,6 +845,7 @@ ConVar(%s) defined with infinite float value (%s)
 ConVarRef %s doesn't point to an existing ConVar
 ConfigurationSystem_001
 ConnectInterfaceSingletons
+ConvertGammaToLinear
 Copy
 CopyRenderTargetOutputsAndViewportFromPreviousLayer
 Coudn't read pixels for texture %s
@@ -856,10 +853,8 @@ Courier New
 CreateBarnLightConstantBuffer
 CreateInterface
 CreatePerViewLightingConstantBuffer
-CreatePerViewLightingConstantBufferCsgo
 CubeMapDebugColors
 Cubic
-CullView
 D15S1
 D16
 D16_SHADOW
@@ -960,9 +955,7 @@ FloatBitMap_t::LoadFromBuffer: Received improper buffer size, skipping!
 FloatBitMap_t::LoadFromBuffer: Unsupported color format, skipping!
 FloatBitMap_t::LoadFromFloatBitmap: Received improper bitmap size, skipping!
 FloatBitMap_t::WriteToBuffer: Received improper buffer size %s (expecting %s), skipping!
-Fog Clipmaps - insufficient shadow atlas space %d units centered on (setpos %d %d %d) - some lighting will be missing from the fog - csgo_show_light_fog_clipmap_cb_cost
 Fog Clipmaps - insufficient shadow atlas space %d units centered on (setpos %d %d %d) - some lighting will be missing from the fog - vr_show_light_fog_clipmap_cb_cost
-Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d %d) - some lighting will be missing from fog - use csgo_show_light_fog_clipmap_cb_cost
 Fog Clipmaps - too many lights (%d - max: %d) %d units centered on (setpos %d %d %d) - some lighting will be missing from fog - use vr_show_light_fog_clipmap_cb_cost
 FogLightView
 FontManager_001
@@ -1355,6 +1348,7 @@ RenderCubeMap frustum %s
 RenderDevice003
 RenderDeviceMgr001
 RenderHardwareConfig002
+RenderLayerDrawListPart
 RenderPrimitiveType_t
 RenderService_001
 RenderSkeletonBone_t
@@ -1388,20 +1382,23 @@ SceneSystem/CMTAtlasHeight
 SceneSystem/CMTAtlasWidth
 SceneSystem/CameraTranslationInProjection
 SceneSystem/CharacterDecals
-SceneSystem/CsgoDefaultShadowTextureHeight
-SceneSystem/CsgoDefaultShadowTextureWidth
-SceneSystem/CsgoLightBinner
-SceneSystem/CsgoLightBinnerCachedShadowMapHeight
-SceneSystem/CsgoLightBinnerCachedShadowMapTileSize
-SceneSystem/CsgoLightBinnerCachedShadowMapWidth
-SceneSystem/CsgoLightBinnerMaxLights
-SceneSystem/CsgoLightBinnerSingleLightFastPath
 SceneSystem/CubemapFog
+SceneSystem/DefaultShadowTextureHeight
+SceneSystem/DefaultShadowTextureWidth
 SceneSystem/DisableShadowFullSort
 SceneSystem/HDRFrameBuffer
 SceneSystem/NoSunLightManager
 SceneSystem/NonTexturedGradientFog
 SceneSystem/PointLightShadowsEnabled
+SceneSystem/SingleLightBinner
+SceneSystem/SingleLightBinnerCachedShadowMapHeight
+SceneSystem/SingleLightBinnerCachedShadowMapTileSize
+SceneSystem/SingleLightBinnerCachedShadowMapWidth
+SceneSystem/SingleLightBinnerMaxLights
+SceneSystem/SingleLightBinnerNumBarnLights
+SceneSystem/SingleLightBinnerRenderStaticGeoToSunLightCSM
+SceneSystem/SingleLightBinnerShadowViewsNeedPerViewLightingConstants
+SceneSystem/SingleLightBinnerSingleLightFastPath
 SceneSystem/SkipLoadingRenderingPipelines
 SceneSystem/SunLightMaxCascadeSize
 SceneSystem/SunLightMaxCascadeSizeTools
@@ -1410,16 +1407,7 @@ SceneSystem/SunLightMaxShadowBufferSizeTools
 SceneSystem/SunLightShadowRenderMode
 SceneSystem/TransformTextureRowCount
 SceneSystem/VolumetricFog
-SceneSystem/VrDefaultShadowTextureHeight
-SceneSystem/VrDefaultShadowTextureWidth
 SceneSystem/VrLightBinner
-SceneSystem/VrLightBinnerCachedShadowMapHeight
-SceneSystem/VrLightBinnerCachedShadowMapTileSize
-SceneSystem/VrLightBinnerCachedShadowMapWidth
-SceneSystem/VrLightBinnerMaxLights
-SceneSystem/VrLightBinnerNumBarnLights
-SceneSystem/VrLightBinnerShadowViewsNeedPerViewLightingConstants
-SceneSystem/VrLightBinnerSingleLightFastPath
 SceneSystem/WellKnownLightCookies
 SceneSystemInit
 SceneSystem_002
@@ -1428,8 +1416,7 @@ SceneViewDebugOverlaysScreenTextFont
 SceneViewId_t
 SceneWorldDump
 Scenesystem render target token too large! Increase MAX_RT_NAME_SIZE in scenesystem/scenesystem.h!
-Scenesystem/CsgoShadowDepthMasks
-Scenesystem/VrShadowDepthMasks
+Scenesystem/ShadowDepthMasks
 SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
@@ -1439,6 +1426,8 @@ Set a float attribute which will be visible to all rendering (Usage: sc_setfloat
 Set an integer attribute which will be visible to all rendering (Usage: sc_setintattr <attrname> <value>)
 SetupConstantBuffer
 SetupLightingForView
+ShadowFrustum
+ShadowFrustumObjectDesc
 ShadowMap "
 Shadowed spot lights in view: %d
 Show
@@ -1446,7 +1435,6 @@ Show cost of lights in fog clipmap constant buffer. yellow = 1 cost, red = 6 cos
 Show light priority values. 1 = normal lights, 2 = cached lights.
 Show lights using the cached shadow atlas solely for transmissive lighting, rather than fog.
 Show the indices of indexed lights
-Show the origin for LOD computation
 SimplePostProcessingLayer
 Simulated
 SkeletonBoneBounds_t
@@ -1476,6 +1464,7 @@ SpotShadowDepth
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
 St16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE
 St19_Sp_make_shared_tag
+St23_Sp_counted_ptr_inplaceI10CUtlVectorI20CMeshDrawPrimitive_t10CUtlMemoryIS1_iEESaIS4_ELN9__gnu_cxx12_Lock_policyE2EE
 St23_Sp_counted_ptr_inplaceI13CViewDrawListSaIS0_ELN9__gnu_cxx12_Lock_policyE2EE
 StatsService_001
 SteamAudio001
@@ -1563,7 +1552,6 @@ Usage is sc_setfloatattr <attrname> <value>
 Usage is sc_setintattr <attrname> <value>
 Usage scope:
 Use multiview instancing for stereo rendering.
-Use to set a single indexed light to black
 UserInfoChangeService_001
 Using 16-bit blend indices
 UtlMemory_Alloc
@@ -1593,7 +1581,6 @@ VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
 VProfService_001
-VR
 VR_001
 VRenderDeviceSetupV001
 VSInputSignature
@@ -1613,6 +1600,7 @@ V_PrettifyMem
 V_PrettifyNum
 V_RemoveDotSlashes
 V_UnqualifiedFileName
+V_acos
 V_acosf
 V_asinf
 V_atan2f
@@ -1623,6 +1611,7 @@ V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
+V_cos
 V_cosf
 V_expf
 V_fmodf
@@ -1636,6 +1625,7 @@ V_pow
 V_powf
 V_qsort
 V_qsort_s
+V_sin
 V_sincosf
 V_sinf
 V_snprintf
@@ -1786,26 +1776,6 @@ color per batch
 colorTarget
 compression
 cos( %s )
-csgo_allow_time_sliced_shadow_map_rendering
-csgo_cubemap_normalization_max
-csgo_cubemap_normalization_roughness_begin
-csgo_directional_lightmaps
-csgo_dither_scale
-csgo_enable_cached_lights
-csgo_enable_lights
-csgo_kill_indexed_light
-csgo_max_lights
-csgo_shadow_map_culling
-csgo_show_indexed_light_indices
-csgo_show_light_fog_clipmap_cb_cost
-csgo_show_light_priority
-csgo_show_lod_origin
-csgo_show_nonfogging_cached_lights
-csgo_single_light_fast_path_sun_cascade_0_texels_per_world
-csgo_single_light_fast_path_sun_cascade_1_texels_per_world
-csgo_single_light_fast_path_sun_cascade_vignette
-csgo_single_light_fast_path_sun_size_cull_threshold
-csgo_unlit_shadow_color
 csm_bias_override_0
 csm_bias_override_1
 csm_bias_override_2
@@ -1860,10 +1830,10 @@ filterinZ
 float
 floatbitmap.cpp
 floatbitmap.cpp(136): Unknown gamma type "%s"!
-floatbitmap.cpp(2604): Error calling TGALoader::GetInfo( %s )
-floatbitmap.cpp(2615): Error loading %s
-floatbitmap.cpp(2638): Error! Unknown file type for %s
-floatbitmap.cpp(2657): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
+floatbitmap.cpp(2605): Error calling TGALoader::GetInfo( %s )
+floatbitmap.cpp(2616): Error loading %s
+floatbitmap.cpp(2639): Error! Unknown file type for %s
+floatbitmap.cpp(2658): Error! Slice %d format %dx%dx%d Attr(%d) != previous slices of %dx%d Attr(%d) for %s
 floatbitmap.cpp(314): Conversion not supported yet!
 floatbitmap.cpp(398): Conversion not supported yet!
 floatbitmap.cpp(952): Unsupported color format "%s", skipping!
@@ -1887,7 +1857,6 @@ g default
 g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
 g_Mathlib_GammaToLinearByteTable
-g_ScrubSystem
 g_VProfCurrentProfile
 g_bUpdateStringTokenDatabase
 g_pMemAlloc
@@ -1906,9 +1875,8 @@ libscenesystem.so
 libstdc++.so.6
 libtier0.so
 lightbinner_2.cpp
-lightbinner_csgo.cpp
+lightbinner_single.cpp
 lightbinner_total_data_%d.vtex
-lightbinner_vr.cpp
 lighting_array_fog_RT1.vtex
 lighting_array_fog_RT2.vtex
 lightmap
@@ -2079,7 +2047,6 @@ m_nStartInstance
 m_nTargetAxis
 m_nType
 m_nUpType
-m_nValue
 m_nVertexCount
 m_nViewId
 m_nWidth
@@ -2276,7 +2243,6 @@ pixelvis_debug
 point0
 point1
 pointLightLayout
-pointLightQuadLayout
 pos2Dtex2D
 position
 postprocess
@@ -2376,6 +2342,7 @@ sc_force_single_display_list_per_layer
 sc_force_translation_in_projection
 sc_keep_all_layers
 sc_layer_batch_threshold
+sc_layer_batch_threshold_fullsort
 sc_list_extradata_allocations
 sc_listworlds
 sc_lod_distance_scale_override
@@ -2425,9 +2392,9 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(3358):
-scenesystem.cpp(5628): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(6848): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(3377):
+scenesystem.cpp(5694): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(6914): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 scenetextureset_%d
@@ -2447,7 +2414,6 @@ shadowcache.cpp
 shadowcolor
 shadowdepth
 sharpStartAngle
-sin
 sin( %s )
 singleplayer
 singletons.cpp
@@ -2464,6 +2430,7 @@ srgbgammatolinear
 ss_added
 std::_Function_base::_Base_manager<void (*)(CSceneObject*)>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_destroy()
+std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()
 std::__exception_ptr::exception_ptr::exception_ptr(std::__exception_ptr::exception_ptr const&)
 std::__exception_ptr::exception_ptr::swap(std::__exception_ptr::exception_ptr&)
 std::__exception_ptr::exception_ptr::~exception_ptr()
@@ -2622,13 +2589,11 @@ vr_directional_lightmaps
 vr_disable_view_override
 vr_enable_cached_lights
 vr_enable_lights
-vr_kill_indexed_light
 vr_max_lights
 vr_shadow_map_culling
 vr_show_indexed_light_indices
 vr_show_light_fog_clipmap_cb_cost
 vr_show_light_priority
-vr_show_lod_origin
 vr_show_nonfogging_cached_lights
 vr_single_light_fast_path_sun_cascade_0_texels_per_world
 vr_single_light_fast_path_sun_cascade_1_texels_per_world

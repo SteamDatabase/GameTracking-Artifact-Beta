@@ -58,9 +58,14 @@ $ORIGIN
 %9.2f
 %9d
 %d
+%d active scrubbers: %s / %s
+%d blobs: %s MiB
 %d frames sampled for %.2f seconds
+%d inactive scrubbers without allocated segments; %s
 %d known strings:
 %d segments in history, total capacity %lld MBytes
+%d segments stored: %s / %s
+%d stale scrubbers: threads aren't calling scrubber frame functions
 %d total counted strings.
 %d.
 %d.%d.%d.%d:%d
@@ -1546,6 +1551,7 @@ CUtlString::SetLength(int)
 CUtlString::Slice(int, int) const
 CUtlString::StripExtension() const
 CUtlString::StripFilename() const
+CUtlString::StripFirstDirectory() const
 CUtlString::StripTrailingSlash()
 CUtlString::Swap(CUtlString&)
 CUtlString::ToLowerFast()
@@ -1652,17 +1658,19 @@ CVScrubSystem::Enable(bool)
 CVScrubSystem::Execute(char const*, char const*, char const*)
 CVScrubSystem::FindBlob(unsigned long long)
 CVScrubSystem::FindRegisteredString(unsigned int)
-CVScrubSystem::FreeSegment(CScrubRecordSegment*)
 CVScrubSystem::GetBlobSize(unsigned long long)
 CVScrubSystem::GetBlobStats(CVScrubSystem::BlobStats_t&) const
 CVScrubSystem::GetCategoryNames(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&)
 CVScrubSystem::GetSnapshot(ScrubSnapshot_t&)
+CVScrubSystem::GetStatus(CBufferString&) const
 CVScrubSystem::RecordCallstack(CVScrubber*)
 CVScrubSystem::RegisterCategory(char const*)
 CVScrubSystem::RegisterString(unsigned int, char const*)
 CVScrubSystem::ReleaseBlob(unsigned long long)
 CVScrubSystem::SaveFile(ScrubSnapshot_t&, char const*)
+CVScrubSystem::SetStackTranslationHelper(CStackTranslationHelper*)
 CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
+CVScrubSystem::VerifyCommand(void*, void*)
 CVScrubSystem::~CVScrubSystem()
 CVariableBitStringBase::AllocInts(int)
 CVariableBitStringBase::FreeInts()
@@ -1792,6 +1800,7 @@ C_OP_SetSingleControlPointPosition
 C_OP_StopAfterCPDuration
 C_OP_TwistAroundAxis
 C_OP_WorldTraceConstraint
+Call Stacks
 Called Resume() on a thread that is not suspended!
 Can't open file (%s) passed to -testscript
 Cannot create Dictionary from provided samples
@@ -2352,6 +2361,7 @@ LoadKV3Text_NoHeader(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char
 Localize_001
 LockGlobalObjectRegistry
 Log Function Help:     log_verbosity <channel specifiers> <verbosity>    log_color <channel specifiers> <hex color>    log_flags <channel specifiers> <+/-flag>All functions are case insensitive.A channel specifier is either:1) tag specifiers: +/-tag1 +/-tag2 ...      // Narrows down to channels with & without given tags.2) channel names: name1 name2 ...           // Lists channels by name.verbosity: off, essential, default,         // Sets how verbose a channel is allowed to be.           detailed, max                     // 'off' turns all spew off                                            // 'essential' turns on vital logs                                            // 'default' turns on most messages                                            // 'detailed' allows for walls of text that are usually useful                                            // 'max' allows everythinghex color: RRGGBBAA                         // A hexadecimal color value in the order RGBA.flag: <+/->DoNotEcho                        // Enable/disable a flag to turn off echoing to the console.      <+/->ConsoleOnly                      // Enable/disable a flag to send text only to the console.e.g.    log_verbosity +console -developer verbose   // Sets minimum spew level of channels with the tag                                            // 'console' but without the tag 'developer' to 'verbose'.    log_color renderdebug bsp FFC08040      // Sets the 'renderdebug' and 'bsp' channels to the RGBA color (64, 128, 192, 255).    log_flags +developer +donotecho         // Turns on the LCF_DO_NOT_ECHO flag for all channels with the 'developer' tag.
+Log Messages
 LoggingSystem_AddTagToChannel
 LoggingSystem_CurrentStateIndex
 LoggingSystem_EnableBackdoorLoggingListeners
@@ -2898,6 +2908,7 @@ RunTSQueueTests
 RunThreadPoolTests
 RunWithAlternateStack
 Running %s...
+Runtime size used in ring buffer is out of sync: %s
 S
 SCHINESE
 SDL_AudioStreamAvailable
@@ -3098,9 +3109,13 @@ SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
 Scope                                                      Calls Calls/Frame  Time+Child    Pct        Time    Pct   Avg/Frame    Avg/Call Avg-NoChild        Peak
 Scrub System is %s
+ScrubSimpleValueSize
+ScrubValueSize
+Scrubber is disabled
 SecureRandomBytes
 SecureRandomDouble
 SecureRandomInt
+Segment runtime size: %s
 SendActionToAssertDialog
 SequenceMarkup
 SequenceMarkupList
@@ -3181,6 +3196,7 @@ StackTools_VerifyLoadedModuleMappings
 Start
 Start a test script running..
 StartLoop
+Started capture %.1f sec agoLast ring buffer trim at %.1f sec ago
 StatsService_001
 Steam
 SteamAudio001
@@ -3405,6 +3421,8 @@ VPROJECT
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
+VProf
+VProf Nodes
 VProf spike "%s" from %f to %f ms
 VProfService_001
 VR_001

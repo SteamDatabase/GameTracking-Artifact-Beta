@@ -269,6 +269,7 @@
 #CardEffect_10630_0
 #CardEffect_10634_0
 #CardEffect_10635_0
+#CardEffect_10637_0
 #CardEffect_10638_0
 #CardEffect_10641_0
 #CardEffect_10650_0
@@ -297,11 +298,10 @@
 #CardEffect_10732_0
 #CardEffect_10733_0
 #CardEffect_10734_0
+#CardEffect_10735_0
 #CardEffect_10736_0
 #CardEffect_10738_0
 #CardEffect_10739_0
-#CardEffect_10740_0
-#CardEffect_10741_0
 #CardEffect_10743_0
 #CardEffect_10744_0
 #CardEffect_10745_0
@@ -460,6 +460,11 @@
 #CardEffect_11095_0
 #CardEffect_11096_0
 #CardEffect_11097_0
+#CardEffect_11099_0
+#CardEffect_11100_0
+#CardEffect_11101_0
+#CardEffect_11103_0
+#CardEffect_11104_0
 #CardEffect_14003_0
 #CardEffect_14005_0
 #CardEffect_14012_0
@@ -505,6 +510,7 @@
 #DCG_ActionHint_CombatPosition_Ally_movetopos_ThisOrAdjacentLane
 #DCG_ActionHint_CombatPosition_Ally_summontopos
 #DCG_ActionHint_CombatPosition_Ally_swapwith
+#DCG_ActionHint_CombatPosition_Enemy
 #DCG_ActionHint_CombatPosition_Enemy_movetopos
 #DCG_ActionHint_CombatPosition_movetopos
 #DCG_ActionHint_CombatPosition_movetopos_AnotherLane
@@ -558,6 +564,7 @@
 #DCG_ActionHint_Unit_Ally_kill
 #DCG_ActionHint_Unit_Ally_modify
 #DCG_ActionHint_Unit_Ally_movetopos
+#DCG_ActionHint_Unit_Ally_return
 #DCG_ActionHint_Unit_Ally_swap
 #DCG_ActionHint_Unit_Ally_swapwith
 #DCG_ActionHint_Unit_AnotherLane
@@ -814,7 +821,7 @@ $tI
 %0.2f
 %02X
 %02i:  %i %s
-%02i:  NULL link
+%02i:  nullptr link
 %04d_%02d_%02d_%02d_%02d_%02d
 %04u%02u%02u
 %04u%02u%02u%02u%02u%02u
@@ -1448,6 +1455,7 @@ $tI
 *ZL17Set1_Raid_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_RendArmor_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL22Set1_VoidTheft_Effect2P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlP11CGameObjectE_
+*ZL23Set1_VhoulElder_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
 *ZL23Set1_Watchtower_Effect0P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E_
 *ZL23Set1_Watchtower_Effect1P13CDotaCardGameP13CCardResolverRK17SpecificObjects_tEUlS0_RK25IAttributeContainerReaderS5_E0_
@@ -1537,6 +1545,9 @@ $tI
 *ZN16CNavBoundaryZone38FindConnectedBoundaryEdgesWithinCircleERK13CPathCostBaseR8CNavAreaRK8Vector2DfR10CUtlVectorI16NavBoundarySeg_t10CUtlMemoryIS9_iEEEUlS4_R20NavIncludeAreaInfo_tE0_
 *ZN16CNavBoundaryZone42FindConnectedBoundaryEdgesWithinDistOfPathERK13CPathCostBaseR8CNavAreaRK6VectoriPK8Vector2DfR10CUtlVectorI16NavBoundarySeg_t10CUtlMemoryISC_iEEEUlS4_P19NavSearchAreaInfo_tE_
 *ZN16CNavBoundaryZone42FindConnectedBoundaryEdgesWithinDistOfPathERK13CPathCostBaseR8CNavAreaRK6VectoriPK8Vector2DfR10CUtlVectorI16NavBoundarySeg_t10CUtlMemoryISC_iEEEUlS4_R20NavIncludeAreaInfo_tE0_
+*ZN17CDCGBaseModeRules15PerformSolutionEP13CDotaCardGameEUlvE0_
+*ZN17CDCGBaseModeRules15PerformSolutionEP13CDotaCardGameEUlvE1_
+*ZN17CDCGBaseModeRules15PerformSolutionEP13CDotaCardGameEUlvE_
 *ZN18CDotaCardGameDraft13OutputActionsEiEUlvE0_
 *ZN18CDotaCardGameDraft13OutputActionsEiEUlvE1_
 *ZN18CDotaCardGameDraft13OutputActionsEiEUlvE2_
@@ -2625,6 +2636,7 @@ $tI
 17CPathCostRecorder
 17CPathParticleRope
 17CPrecacheRegister
+17CRadiusDamageInfo
 17CRenderGameSystem
 17CSODCGServerLobby
 17CSVCMsg_ClassInfo
@@ -2969,7 +2981,6 @@ $tI
 20CMsgGCHUpdateSession
 20CMsgItemAcknowledged
 20CMsgReplicateConVars
-20CMsgSDOAssert_Values
 20CMsgServerWelcomeDCG
 20CMsgSetItemPositions
 20CMsgTEEffectDispatch
@@ -3086,6 +3097,7 @@ $tI
 21CMsgGCToGCPingRequest
 21CMsgInvitationCreated
 21CMsgRequestCrateItems
+21CMsgSDOAssert_Request
 21CMsgSOCacheSubscribed
 21CMsgSOMultipleObjects
 21CMsgSerializedSOCache
@@ -3375,6 +3387,7 @@ $tI
 24CGameSystemStaticFactoryI21CResponseQueueManagerS0_E
 24CGameSystemStaticFactoryI22CClientUIDialogManagerS0_E
 24CGameSystemStaticFactoryI22CDefaultResponseSystem15IResponseSystemE
+24CGameSystemStaticFactoryI22CToolGameSimulationAPIS0_E
 24CGameSystemStaticFactoryI23CCustomGameEventManagerS0_E
 24CGameSystemStaticFactoryI23CLagCompensationManager23ILagCompensationManagerE
 24CGameSystemStaticFactoryI25CEntitySubclassGameSystemS0_E
@@ -3702,6 +3715,7 @@ $tI
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP22CInfoDynamicShadowHint10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP26CScriptUniformRandomStream10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIP8CNavArea10CUtlMemoryIS2_iEES2_E
+27CSchemaUtlVectorManipulatorI10CUtlVectorIPKc10CUtlMemoryIS2_iEES2_E
 27CSchemaUtlVectorManipulatorI10CUtlVectorIb28CNetworkUtlVector_MemoryTypeIbLin1EEEbE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIf28CNetworkUtlVector_MemoryTypeIfLin1EEEfE
 27CSchemaUtlVectorManipulatorI10CUtlVectorIh28CNetworkUtlVector_MemoryTypeIhLin1EEEhE
@@ -5854,10 +5868,13 @@ AE_SV_DUSTTRAIL
 AE_SV_PLAYSOUND
 AE_WPN_PLAYWPNSOUND
 AE_WPN_PRIMARYATTACK
+AE_WPN_SECONDARYATTACK
 AI CONTROL MENU. induce <start|stop|action id>
 AI Difficulty modifier
 AI Sensing: No slot for InsertSound() (Game DLL)
 AI Sensing: No slot for player sound! (DLL)
+AI Wins After 1 Turn
+AI Wins After 2 Turns
 AI tests for upkeep in all lanes
 AIRBOAT
 AIWalkable
@@ -5868,7 +5885,6 @@ APPSYSTEM: In ConnectGameInterfaces(), s_nRegistrationCount is %d!
 APPSYSTEM: In ConnectGameInterfaces(), tried to use different connection modes!
 APPSYSTEM: In ConnectInterfaces(), s_nRegistrationCount is %d!
 APPSYSTEM: In ReconnectGameInterface(), tried to use different connection modes!
-AR2AltFire
 ATTACHED_ENTITY
 ATTACHED_ENTITY_LARGE
 ATTACHED_HAND_SPECIFIED_IN_EVENT
@@ -6078,6 +6094,7 @@ Ancient Tower
 Angle;
 AngleDiff
 AnglesToVector
+Angry Mob
 AnimGraph Controller
 AnimGraph Controller event on actor w/ no AnimGraph..
 AnimGraph Recording saved to %s
@@ -6137,6 +6154,7 @@ Area %d has multiple incoming connections to area %d in direction %d
 Area %d has multiple outgoing connections to area %d in direction %d
 Area %d has one-way connect to area %d but does not appear on the latter's incoming list
 Area or ladder unmarked.
+Arm Damage Multiplier
 Arm the Rebellion
 Artifact
 Artificer's Mail
@@ -6284,7 +6302,6 @@ BaseCombatCharacter.AmmoPickup
 BaseCombatCharacter.StopWeaponSounds
 BaseCombatWeapon.WeaponDrop
 BaseCombatWeapon.WeaponMaterialize
-BaseDamageIsValid
 BaseEntity.EnterWater
 BaseEntity.ExitWater
 BaseExplosionEffect.Sound
@@ -6400,7 +6417,6 @@ Bronze Legion Invasion of Roseleaf
 Bronze Legionnaire
 BronzeLegion
 BrushSolidities_e
-Buckshot
 Buff Hero to 15 Armor
 Buff Hero to 20 attack
 Buff Hero to 30 health
@@ -6714,6 +6730,7 @@ CEntityMessageRemoveAllDecals_t
 CEntityMessageScreenOverlay_t
 CEntityOutputTemplate
 CEntityScriptFramework
+CEntitySubclassGameSystem
 CEntitySubclassVDataBase
 CEntitySystem
 CEntitySystem::BuildComponentUnserializer '%s'
@@ -7520,6 +7537,7 @@ CSimpleSimTimer
 CSkeletonAnimationController
 CSkeletonInstance
 CSkeletonInstance::SetAnimationController can only be called once!
+CSkillDamage
 CSkillFloat
 CSkillInt
 CSkyCamera
@@ -7637,6 +7655,7 @@ CTimerEntity
 CTonemapController2
 CTonemapController2Alias_env_tonemap_controller2
 CTonemapTrigger
+CToolGameSimulationAPI
 CToolGameSimulationAPI::LoadSavegame:  no such save file '%s'
 CTouchExpansionComponent
 CTouchExpansionComponentReferenced
@@ -7790,6 +7809,7 @@ CUtlString::Replace(char, char) const
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::SetLength(int)
+CUtlString::Slice(int, int) const
 CUtlString::StripFilename() const
 CUtlString::StripTrailingSlash()
 CUtlString::ToLowerFast()
@@ -7827,6 +7847,7 @@ CVProfile::AssignNextTimespanId()
 CVProfile::FindOrCreateCounter(char const*, CounterGroup_t)
 CVScrubSystem::RegisterString(unsigned int, char const*)
 CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
+CVScrubSystem::VerifyCommand(void*, void*)
 CVariableBitStringBase::FreeInts()
 CVariableBitStringBase::Resize(int)
 CVariant
@@ -7893,6 +7914,7 @@ Cancel scene playback
 CancelEntityIOEvents
 Cancels all ent_fire created outputs that are currently waiting for their delay to expire.
 Candidate -- index: %d, move: %d, with score: %6.3lf
+Canid Bushwacker
 Cannot allocate abstract class
 Cannot allocate buffer larger than kint32max for
 Cannot call BuildFile on a DescriptorPool that uses a DescriptorDatabase.  You must instead find a way to get your file into the underlying database.
@@ -8009,6 +8031,7 @@ Checks for nodes embedded in displacements (useful for in-development maps)
 Checks to see if the given hScript is a valid entity
 Checks whether the passed entity is touching the trigger.
 Chen
+Chest Damage Multiplier
 Children of Necrophos
 Chops all selected areas into their component 1x1 areas
 Chops all selected areas into their component 1x1 areas and re-merges them together into larger areas
@@ -8090,6 +8113,7 @@ CommandLineInt
 CommandLineInt(name) : returns the command line param as an int.
 CommandLineStr
 CommandLineStr(name) : returns the command line param as a string.
+Commando Pack
 Comment started here.
 CommentaryMode
 Commit the result of QueryBestResponse back to the given entity to play. Call with params (entity, airesponse)
@@ -8374,6 +8398,7 @@ D_NU
 Daarken
 Dagon
 Damage %.0f, energy %.0f (%.2f)
+Damage Dealt (in the case of NPC vs NPC damage, medium skill is used)
 Damage Immune
 Damage: %d, Mult: %d, Source:
 DamageOptions_t
@@ -8712,7 +8737,6 @@ ENT_FIND_METHOD_NEAREST
 ENT_FIND_METHOD_RANDOM
 ERROR
 ERROR phys_convert %s ! Already MOVETYPE_VPHYSICS
-ERROR: Ammo (%s) found no CVar named (%s)
 ERROR: Attempting to give unknown ammo type (%s)
 ERROR: CSource2Server::Connect - 'g_pCVar' is NULL
 ERROR: CSource2Server::Connect - Failed to connect to engine
@@ -8907,7 +8931,6 @@ EntityIOConnectionDesc_t
 EntityIOConnection_t
 EntityIOQueuePrioritizedEvent_t
 EntitySkeleton
-EntitySubclassGameSystem
 EntitySubclassID_t
 EntitySystem - Class Tables
 EntitySystem - Entity Networking - finish
@@ -8935,6 +8958,7 @@ Error parsing event '%s'.  %s
 Error parsing keyvalues
 Error parsing soundscape file %s after %s
 Error parsing text-format
+Error reading kv3 data
 Error reading kv3 data: %s
 Error reading sub-version number.
 Error reporting not implemented.
@@ -9115,7 +9139,6 @@ FIELD_SOUNDNAME
 FIELD_STRING
 FIELD_TICK
 FIELD_TIME
-FIELD_TYPECOUNT
 FIELD_TYPEUNKNOWN
 FIELD_UINT16
 FIELD_UINT32
@@ -9543,6 +9566,7 @@ GameDebugVisualizer
 GameEventSystemServerV001
 GameEvent_RegisterHookupGameSystem
 GameHeader
+GameInit
 GameInit - PreCache - Finish
 GameInit - PreCache - Start
 GameModelInfo001
@@ -9629,7 +9653,6 @@ GetActiveSpawnGroupHandle
 GetAmmoType
 GetAnglesAsVector
 GetAngularVelocity
-GetBaseDamage
 GetBaseVelocity
 GetBoneIndexForHitboxForMesh
 GetBool
@@ -9876,6 +9899,7 @@ HaticsType_None
 Have 20 Creeps In Lane
 Have Entity say string, and teamOnly or not
 Have all opponent's heroes in the fountain
+Head Damage Multiplier
 Header |
 Healing Blade
 Healing Salve
@@ -10022,6 +10046,7 @@ If set, rr_debugresponseconcept will print only responses testing for the specif
 If set, server only simulates entities on even numbered ticks.
 If set, this will override the starting health for ancient (useful for speeding up games for testing)
 If set, this will override the starting health for towers (useful for speeding up games for testing)
+If specified, the damage used to compute physics forces. Otherwise normal damage is used.
 If the GC hasn't sent an idle keep alive from the match maker in this many minutes, the server will restart
 If this scene is currently paused.
 If this scene is currently playing.
@@ -10815,9 +10840,9 @@ Leather Armor
 Leech Seed
 LeftFoot
 LeftHandle
+Leg Damage Multiplier
 Legion Commander
 Legion Consul
-Legion Recruiter
 Legion Scouting Party
 Legion Standard Bearer
 Length;
@@ -10957,6 +10982,7 @@ Lucent Beam
 Lukol-Po
 Luna
 Lycan
+Lying in Bait
 M
 MATCHFRAMEWORK_001
 MAX_PATTACH_TYPES
@@ -11032,7 +11058,6 @@ Magnus
 Main Gauche
 Main level world does not exist?!
 MainThread
-Make props solid to nav generation/editing
 MakeAIPick
 Malchanted Mango
 Malformed count value: %s
@@ -11193,6 +11218,7 @@ Minimum stopping speed when on ground.
 MinimumHitPoints
 Minutes
 Mirana
+Misc
 Missing an event name
 Missing caption for %s
 Missing field: FileDescriptorProto.name.
@@ -11690,7 +11716,6 @@ NPCState3
 NPCType1
 NPCType2
 NPCType3
-NPC_human_grunt
 NULL Ent in GiveNamedItem: %s!
 NULL entity in global entity list!
 NULL output boolean given.
@@ -12097,6 +12122,7 @@ Params: (entity, query) : tests 'query' against entity's response system and ret
 Parent: %s
 Parse error on %s: %s
 ParseFromString failed
+ParseVDataFile
 Parsed crash data (%s), however the version %u doesn't match. Not sending report.
 Parsed crash data: %s
 ParserResponse
@@ -12146,7 +12172,6 @@ PerformanceMode_t
 Permanent
 Permit Responses
 PetLevelup_Rule_t
-Petrify
 Phalangeal Horror
 Phantom Assassin
 Phantom Lancer
@@ -12160,6 +12185,8 @@ PhysEnableEntityCollisions called on entities in two different scene worlds (%s 
 PhysEntityCollisionsAreDisabled called on entities in two different scene worlds (%s - %u vs %s - %u)
 PhysFrictionEffectPrecache_server
 PhysObjectHeader_t
+Phys_motor %s does not have a valid axis helper, and self-destructed!
+Physics Force Damage
 Physics Game System is not initialized
 Physics Prop
 Physics props
@@ -12249,6 +12276,7 @@ Player %i has lost due to excessive inactivity.
 Player %u Deck: %s
 Player %u(%s) game %llu acknowledged board game state, round trip time %f
 Player '%s' ('%s') is off nav at (%0.2f, %0.2f, %0.2f)
+Player Wins After 10 Turns
 Player changed material to %d (was %d)
 Player died %dth time in level [%s]!!!
 Player died, but not in a level!!!
@@ -12368,7 +12396,6 @@ PressedBack
 PressedForward
 PressedMoveLeft
 PressedMoveRight
-Pretty Big Spider
 PrettyFont:%s:%d:%d
 Prevents a userid from being auto-kicked
 Prey on the Weak
@@ -12411,6 +12438,7 @@ ProtoBufHelper::ParseJSON: Ignoring extra JSON key '%s', which is not found in p
 ProtoBufHelper::ParseJSON: Object Begin found on invalid field!
 ProtoBufHelper::ParseJSON: received callback with message field but no message!
 ProtoBufHelper::ParseJSON: received callback with no current message field!
+Protobuf %s(%d): %s
 Protobuf: %s(%d): %s
 Protocol Buffer map usage error:
 Protocol Buffer reflection usage error:  Method      : google::protobuf::Reflection::
@@ -12558,6 +12586,7 @@ Reads a spawn key
 Reaper's Scythe
 Rebel Decoy
 Rebel Rabble Rouser
+Rebel Recruiter
 Receive
 Received %s(%u), game %llu, player %u (%u bytes)
 Received a cancel match reservation for match %llu
@@ -12791,6 +12820,7 @@ RopeMaterial
 RopeShader
 Roseleaf Druid
 Roseleaf Rejuvenator
+Roseleaf Villagers
 Rotate a QAngle by another QAngle.
 Rotate a Vector around a point.
 RotateMove
@@ -13647,6 +13677,7 @@ Sniper
 Software\Valve\%s
 SolidCone
 SolidType_t
+Solution
 Some test string
 Sonic Bubble
 Sorla Khan
@@ -13897,7 +13928,7 @@ Stepan Alekseev
 StichAndRemoveJumpAreas()
 Sticky Greevil
 StitchPath has incorrect ending
-Stone Bulwark
+Stomach Damage Multiplier
 Stone.Huge
 Stone.Large
 Stone.Medium
@@ -14649,6 +14680,7 @@ V_StripTrailingWhitespace
 V_URLDecode
 V_UnicodeRepair(char*, EStringConvertErrorPolicy)
 V_UnqualifiedFileName
+V_acos
 V_acosf
 V_asinf
 V_atan2f
@@ -14659,6 +14691,7 @@ V_atofloat64
 V_atoi
 V_atoi64
 V_atoui64
+V_cos
 V_cosf
 V_expf
 V_fmodf
@@ -14767,6 +14800,7 @@ Vesture of the Tyrant
 Veteran's Insight
 VguiScreen
 Vhoul Conscript
+Vhoul Elder
 Vhoul Martyr
 VhoulRebellion
 Vile Embrace
@@ -14805,7 +14839,6 @@ WARNING: Attempting to set fields on a stopped sound
 WARNING: BackupPlayer trying to back player into a bad position - client %d
 WARNING: BreakFadeEmissive not supported on this entity (%s %s)
 WARNING: Failed to load propdata.txt: %s
-WARNING: Failed to read propdata.txt
 WARNING: Ignoring invalid gameinfo MaxNetworkableEntities %d
 WARNING: Ignoring invalid gameinfo MaxNonNetworkableEntities %d
 WARNING: Too many essential breakpieces in one frame - this may cause performance problems!
@@ -14977,7 +15010,6 @@ WriteToBuffer Message %s is not initialized! Probably missing required fields!
 Writes the selected set to disk for merging into another mesh via nav_merge_mesh.
 X
 XAxis
-XBowBolt
 Y
 Y@
 YAxis
@@ -14994,7 +15026,6 @@ You and your opponent see each other's cards.
 You are #%d in line of %d waiting players.
 You have been waiting for approximately %02d:%02d.
 You must be a server admin to use mp_disable_autokick
-You must now restart to use Grunt-o-matic.
 Your Heroes Rapid Deploy
 YourTurn
 YourTurnAgain
@@ -15356,7 +15387,6 @@ achievement_disable
 achievement_earned
 achievement_event
 achievement_name
-acos
 act_as_wearable
 actionObjNull
 activate_criteria
@@ -15417,7 +15447,6 @@ aimat
 aiplayers=%d
 aiplayers=2;difficulty=Vanilla;enablesignout=0;aimatchsetid=%d
 airliner
-alienbloodsplat
 allangles
 allow_bundles
 allow_count_reset
@@ -15641,6 +15670,7 @@ blockLOS
 blocked_colors
 blocked_rarities
 bloodimpact
+bloodsplat
 blue
 board
 bodyMassScale
@@ -15853,6 +15883,7 @@ classType
 class_token_id
 classname missing from entity!
 cleave
+click
 clientSideAnimCycleReset
 clientSideAnimationChanged
 clientSideChildModel
@@ -16323,6 +16354,7 @@ dota_overhead_on_received_item
 double
 double_shot
 double_shot_npc
+drag
 drag_override
 drawcross
 drawline
@@ -16675,7 +16707,6 @@ feeble
 fflush
 fieldName
 fieldpathpacker.cpp
-fieldtype_t
 file://{images}/card/cardtype_armor.psd
 file://{images}/card/cardtype_consumable.psd
 file://{images}/card/cardtype_creep.psd
@@ -16939,7 +16970,6 @@ func_nav_markup_citadel
 func_physbox
 func_physbox '%s' at (%.2f, %.2f, %.2f) with model '%s' has no physics!
 func_plat*
-func_playerinfected_clip
 func_proprrespawnzone
 func_pushable
 func_rotating
@@ -17168,6 +17198,7 @@ grant_one_of_each_item
 grant_unlock_level
 graphparameter
 green
+grenade
 groundlink_t CUtlMemoryPool
 groundlist
 group
@@ -18168,10 +18199,6 @@ m_OnPhysCannonAnimatePreStarted
 m_OnPhysCannonAnimatePullStarted
 m_OnPhysCannonDetach
 m_OnPhysCannonPullAnimFinished
-m_OnPhysGunDrop
-m_OnPhysGunOnlyPickup
-m_OnPhysGunPickup
-m_OnPhysGunPunt
 m_OnPickup
 m_OnPlay
 m_OnPlayerPickup
@@ -18941,6 +18968,7 @@ m_flAnimTime
 m_flAnimationStartTime
 m_flAnisotropy
 m_flAreaCaptureScoreAccumulator
+m_flArmDamageMultiplier
 m_flAspectRatio
 m_flAttenuation
 m_flAttenuation0
@@ -18955,12 +18983,12 @@ m_flAverageSpeedAcrossFrame
 m_flAvgInterval
 m_flAwakeTime
 m_flBakeLightIndexScale
-m_flBaseDamage
 m_flBindPoseDirectionMS
 m_flBlendDeltaMultiplier
 m_flBlendWeight
 m_flBlockDamage
 m_flBlockedTalkTime
+m_flBoundingRadius
 m_flBreakAfterTimeStartTimeX
 m_flBreakAfterTimeStartTimeY
 m_flBreakAfterTimeStartTimeZ
@@ -18982,6 +19010,7 @@ m_flCachedSequenceCycleRate
 m_flCapPointScoreRate
 m_flCapsuleRadius
 m_flCenterSize
+m_flChestDamageMultiplier
 m_flCloseCaptionDuration
 m_flClothScale
 m_flClusterArea
@@ -19130,6 +19159,7 @@ m_flGroundSpeed
 m_flGustDuration
 m_flHDRColorScale
 m_flHandPoseParams
+m_flHeadDamageMultiplier
 m_flHeight
 m_flHeightOffset
 m_flHudHintMinDisplayTime
@@ -19176,6 +19206,7 @@ m_flLastTime
 m_flLastTimeAcceptedSpeak
 m_flLayerAnimtime
 m_flLayerFadeOuttime
+m_flLegDamageMultiplier
 m_flLerpDuration
 m_flLightFOV
 m_flLightRadiusFilter
@@ -19294,6 +19325,7 @@ m_flOverrideShadowFarZ
 m_flParticleSpacing
 m_flPathingDistanceNormFactor
 m_flPhi
+m_flPhysicsForceDamage
 m_flPickupRadius
 m_flPickupRadiusSqr
 m_flPivotMax
@@ -19398,6 +19430,7 @@ m_flStartWeight
 m_flStartWindSpeed
 m_flStepSize
 m_flStepSoundTime
+m_flStomachDamageMultiplier
 m_flStopTalkTime
 m_flStopTalkTimeWithoutDelay
 m_flStopTime
@@ -19802,7 +19835,6 @@ m_iSoundType
 m_iSpeakerDSPPreset
 m_iStartAttachment
 m_iState
-m_iSubType
 m_iTargetGameMaterial
 m_iTargetVolume
 m_iTeam
@@ -21409,7 +21441,6 @@ nav_smooth_spring_timestep_max
 nav_smooth_spring_timestep_min
 nav_smooth_use_opt
 nav_snap_to_grid
-nav_solid_props
 nav_splice
 nav_split
 nav_split_place_on_ground
@@ -21548,9 +21579,6 @@ noclip OFF
 noclip ON
 noclip_fixup
 nodamageforces
-node_viewer_fly
-node_viewer_human
-node_viewer_large
 nodmgforce
 noheader
 noise_maker
@@ -21843,7 +21871,6 @@ phys_continuous_kinematic_update
 phys_convert
 phys_dump_intersection_controller
 phys_dynamic_scaling
-phys_explode_new
 phys_genericconstraint
 phys_hinge
 phys_hinge_local
@@ -21892,7 +21919,6 @@ phys_wakeup
 physdamagescale
 physgun_interactions
 physgun_notify_children
-physgun_pickup
 physib
 physics_add_test
 physics_debug_entity
@@ -22061,7 +22087,6 @@ profile_ring
 projection_rotation
 projection_size
 promo
-prop_*
 prop_contexts
 prop_data
 prop_debug
@@ -22469,6 +22494,7 @@ scripts/events.json
 scripts/game_modes/game_modes.txt
 scripts/items/items_game.txt
 scripts/items/unencrypted/items_master.txt
+scripts/misc.vdata
 scripts/population.txt
 scripts/propdata.txt
 scripts/soundscapes_
@@ -22620,7 +22646,6 @@ sm_bDisableTouchFuncs
 sm_lastInteraction
 small car
 small_icon
-smg1_grenade
 smoke
 smoothstairs
 snap
@@ -23401,6 +23426,8 @@ tripmine
 true
 true,
 turn on, off, or toggle origin changes on server for entity by index
+turns_survived_victory
+turns_survived_victory_ai
 turnsuntildeployment
 tv_allow_camera_man
 tv_allow_static_shots
@@ -23687,17 +23714,11 @@ wcsncmp
 weapon entry scripts/%s.txt missing or not in scripts/weapons_manifest.txt
 weapon pistol rifle survivor common_male
 weapon_
-weapon_357
 weapon_ar2
 weapon_bugbait
 weapon_collision
-weapon_crossbow
-weapon_crowbar
-weapon_cubemap
 weapon_debug_muzzles
-weapon_frag
 weapon_physcannon
-weapon_pistol
 weapon_rpg
 weapon_shotgun
 weapon_showproficiency

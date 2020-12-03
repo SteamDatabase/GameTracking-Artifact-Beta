@@ -17,8 +17,20 @@ $ORIGIN
 %s$Fence%d
 %s%d
 %s%s%s%sFinal operation count %llu
+%s+--
+%s+-- Schema Class: %s
 %s.%s
+%s: %s
+%s:%s needs base %s:%s to be registered
 %sResource System profile stats unavailable. Compile with RESOURCE_SYSTEM_GATHER_STATS as 1 to gather stats.
+%s|  % 2d: %s [Offset: %d]
+%s|  % 2d: [% 3d] %-12s %s
+%s| AlignOf: %d
+%s| Base Class%s: %d
+%s| Fields:
+%s| Project: '%s' Binary: '%s'
+%s| SizeOf: %d
+%s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 ( def. "%s" )
 ** Forcing all resource loads to fail: "%s"
 *** Bad deletion request: Refcount for %s resource "%s" (%016llX) is greater than zero. (%d)!
@@ -72,8 +84,10 @@ $ORIGIN
 17CVDataTypeManager
 17IVDataTypeManager
 18CPlaceholderConVar
+18ITSHashConstructorI21ResourceBindingBase_tE
 19CSchemaRegistration
 20CPostConnectCallback
+20CResourceConstructor
 20IResourceHandleUtils
 20IResourceSystemUtils
 20IResourceTypeManager
@@ -82,6 +96,7 @@ $ORIGIN
 22CStreamingResourceData
 23CKV3ResourceBlockHelper
 23CKV3ResourceTypeManagerILy418564367478EE
+23CKV3ResourceTypeManagerILy500152235126EE
 23CResourceSystemProfiler
 23IConCommandBaseAccessor
 23IResourceSystemProfiler
@@ -102,15 +117,21 @@ $ORIGIN
 29IRD_RegisterResourceDataUtils
 30IAsyncResourceDataRequestOwner
 32CSchemaRegistration_resourcefile
+34CKV3Transfer_ResourceLoadInterface
 34CSchemaRegistration_resourcesystem
 34CVConResourceProfileCommandHandler
+34IKV3TransferInterface_ResourceLoad
 35CExampleSchemaVData_PolymorphicBase
+36CKV3Transfer_UtlSymbolLargeInterfaceI24CUtlSymbolTableLargeBaseILb0ELm2048E16CThreadNullMutexEE
 36CSchemaRegistration_mathlib_extended
+36IKV3TransferInterface_UtlSymbolLarge
+38CDefaultKV3TransferResourceTypeManagerILy500152235126EE
 39CExampleSchemaVData_PolymorphicDerivedA
 39CExampleSchemaVData_PolymorphicDerivedB
 6ConVar
 7IConVar
 <INVALID>
+<No schemasystem>
 <no deferred ref found>
 <no failure reason set>
 <null>
@@ -196,7 +217,6 @@ CStackTop_Base::~CStackTop_Base()
 CStrongHandle
 CStrongHandleCopyable
 CStrongHandleVoid
-CStrongHandleVolatile
 CTSQueue corruption
 CThread::CThread()
 CThread::Init()
@@ -243,6 +263,7 @@ CUtlMemoryPoolBase::Free(void*)
 CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlReferenceTracker::Release() release counts for group outnumber addref counts for the same group
 CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlString
 CUtlString::Acquire(CBufferString*, bool)
 CUtlString::Append(char const*)
 CUtlString::CUtlString(CBufferString const&)
@@ -250,6 +271,7 @@ CUtlString::Format(char const*, ...)
 CUtlString::FreeMemoryBlock()
 CUtlString::GetForModify()
 CUtlString::Set(char const*)
+CUtlString::SetDirect(char const*, int)
 CUtlString::operator+(char const*) const
 CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
@@ -266,6 +288,12 @@ CVariableBitStringBase::Resize(int)
 CWeakHandle
 CWeakHandleVoid
 CXXABI_1.3
+Cannot allocate abstract class
+Cannot construct abstract class
+Cannot copy abstract class
+Cannot deallocate abstract class
+Cannot deduce for class
+Cannot destruct abstract class
 ChangeCallbackOnChange
 ChangeSize
 CharacterSetBuild
@@ -277,21 +305,24 @@ ConfigurationSystem_001
 ConnectInterfaceSingletons
 Couldn't load KV3 for resource: %s
 CreateInterface
+DELETED
 DISABLED
 DebugTextureInfo001
 DeleteResource
 Deleting empty loading resource
+DestroyResourceManifest
 DotaCardGameClient_001
-Double-save to Member '%s'
 ENABLED
 ERROR: %s resource %016llX is the wrong resource type!
 ERROR: %s resource %016llX requested but not resident. (Missing from from a manifest?)
 ERROR: %s resource '%s' (%016llX) requested is not loaded and may have been deleted.
 ERROR: %s resource '%s' (%016llX) requested is still pending and is not loaded.
+ERROR: Disallowed reentrant call to CResourceSystem::BlockUntilManifestLoaded()
 ERROR: No type manager for resource "%s"!
-ERROR: Reentrant call to CResourceSystem::BlockUntilManifestLoaded() while already in a frame update!
 ERROR: Reentrant call to CResourceSystem::FrameUpdate()!
 ERROR: Resource name "%s" has the incorrect extension "%s" for the specified resource type (expected "%s")!
+ERROR: Schema registration error - class '%s' is not marked as MModuleLocalTypeScope but contains member '%s' with locally-scoped type '%s'
+ERROR: Schema registration error - class '%s' is not marked as MModuleLocalTypeScope but derives from locally-scoped class '%s'
 ERROR: Specified full path %s does not lie under the mod search path!)
 ERROR: Specified path %s could not be made content-relative
 EXPORTSYSTEM_INTERFACE_VERSION_001
@@ -307,7 +338,9 @@ EventSystem001
 FATAL ERROR: %s resource '%s' (%016llX) is the wrong resource type! (This is likely caused by a hash collision between the strings '%s' and '%s')
 FATAL ERROR: unable to register all schema data: %s
 FCVAR_NEVER_AS_STRING
+Failed to allocate an instance of a class
 Failed to load resource "%s" and -exit_on_resource_load_failure was set and it's not in badresources_whitelist.txt
+Failed to transfer KV3 data for resource '%s' - %s
 FileSystem
 Find
 FindLessOrEqual
@@ -343,9 +376,11 @@ HookUpConfigValue
 HostStateMgr001
 IQuickTime001
 Idle (ResourceSystemSleep)
+Illegal deletion of ResourceManifest '%s' which is an incomplete blocking manifest!
 InfoForResourceTypeCAnimData
 InfoForResourceTypeCAnimationGroup
 InfoForResourceTypeCChoreoSceneFileData
+InfoForResourceTypeCDACGameDefsData
 InfoForResourceTypeCDOTAPatchNotesList
 InfoForResourceTypeCDotaItemDefinitionResource
 InfoForResourceTypeCEntityLump
@@ -372,6 +407,8 @@ InfoForResourceTypeIMaterial2
 InfoForResourceTypeIParticleSnapshot
 InfoForResourceTypeIParticleSystemDefinition
 InfoForResourceTypeIVectorGraphic
+InfoForResourceTypeProceduralTestResource_t
+InfoForResourceTypeTestResource_t
 InfoForResourceTypeVSound_t
 InfoForResourceTypeWorld_t
 InputService_001
@@ -410,6 +447,7 @@ LoggingSystem_Log(int, LoggingSeverity_t, LoggingMetaData_t const*, Color, char 
 LoggingSystem_RegisterLoggingChannel
 LoggingSystem_SetChannelVerbosity
 MATCHFRAMEWORK_001
+MClassHasCustomAlignedNewDelete
 MNetworkBitCount
 MNetworkChangeCallback
 MNetworkEncoder
@@ -423,6 +461,7 @@ MODEL_PROCESSING_SCRIPT_INTERFACE_001
 MODEL_PROCESSING_SERVICES_INTERFACE_001
 MPropertyCustomEditor
 MResourceTypeForInfoType
+ManifestTestResource_t
 MapListService_001
 MaterialUtils_001
 MaybeExitBecauseOfResourceLoadFailure
@@ -447,6 +486,7 @@ NetworkService_001
 NetworkSystemUtilsVersion001
 NetworkSystemVersion001
 No DATA block for resource
+Not safe to 'new' this class due to alignment requirements
 OnAsyncProcessResourceData
 PanoramaTextServices001
 PanoramaUIClient001
@@ -471,6 +511,7 @@ QueuedLoaderVersion001
 RESOURCE_MANIFEST_HANDLE_INVALID
 RESOURCE_TYPE_NONE
 RESOURCE_TYPE_RESOURCE_MANIFEST
+RESOURCE_TYPE_TEST
 RESOURCE_TYPE_VDATA
 RKS_DEFAULT
 RKS_DISABLE_GROUP_CLEARING
@@ -488,6 +529,7 @@ RenderHardwareConfig002
 RenderService_001
 RenderSystemSurface001
 RenderUtils_001
+ReportClassError
 Reporting references for leak tracker error: "%s"
 Reporting references for resource "%s":
 Reset tracked time spent in Allocate (see resource_log_allocate_timing)
@@ -531,6 +573,7 @@ Source2GameEntities001
 Source2Host001
 Source2Server001
 Source2ServerSerializers002
+Stack depth limit hit (%d)
 StatsService_001
 SteamAudio001
 TestFormatA
@@ -552,6 +595,7 @@ Tried to double-register resource manager for two resource types! ( "%lld" and "
 Tried to install a NULL resource manager for resource type "%lld"!
 Tried to install a placeholder resource manager for an existing resource type "%lld"!
 Tried to install two resource managers for the same resource type "%lld"!
+Tried to load resource reference '%s' from a value without a resource reference flag.
 Tried to release UGC that hasn't been referenced: %lld
 Unrecognized resource leak tracking parameter: "%s", available configuration aliases:
 UnregisterNamedManifest called, but we are not shutting down!!!
@@ -562,6 +606,7 @@ Usage: resource_repeated_reload <count> <resource_name>
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_CalcNewAllocationCount
+VApplication001
 VAsyncFileSystem2_001
 VAvi001
 VBAllocTracker001
@@ -657,13 +702,13 @@ __pthread_key_create
 __stack_chk_fail
 _base
 _c
-_class
 _edata
 _end
 _fini
 anonymous
 archive
 badresources_whitelist.txt
+baked_data
 binary
 binary_auto
 binary_bc
@@ -676,6 +721,7 @@ configvalue.cpp
 default
 disable_group_clearing
 enable_profiling
+es
 exact
 false
 filesystem_stdio
@@ -698,12 +744,17 @@ libresourcesystem.so
 libstdc++.so.6
 libtier0.so
 loadingresource.cpp
+m_BakedData
+m_Data
+m_child
+m_child2
 m_hResource->m_nLoadingResource != LOADING_RESOURCE_INDEX_INVALID
 m_hResource->m_nStreamingResource != STREAMING_RESOURCE_DATA_INDEX_INVALID
 m_nDerivedA
 m_nDerivedB
 m_nExample1
 m_nExample2
+m_name
 m_vMaxBounds
 m_vMinBounds
 mathlib_extended
@@ -752,6 +803,7 @@ rnd_up
 rs_dump_stats
 rs_dump_stats - Dump resourcesystem stats.
 schemabindings.cpp
+schemaclassinfo.cpp
 schemasystem
 server_can_execute
 set_profile_mode
