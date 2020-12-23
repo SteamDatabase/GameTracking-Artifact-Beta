@@ -23,7 +23,6 @@
 #%s/%s/Resolves
 #%s/%s/UpdatePerViewConstantBuffer%d
 #%s/PrimaryContext frame( %d )
-#%s/RenderAView/LightSetup
 #%s/SetupLightingForView/SetupLightingForView
 #%s/UpdatePerViewConstantBuffers
 #%s/UpdatePerViewConstantBuffers%d
@@ -93,12 +92,10 @@ $tI
 ) in %s batchlists
 *** Skip layer '%s'
 *ZL29InitForFrustum_DebugRendering17ESceneObjectFlagsS_P10CSceneViewEUlP25CSceneLightObjectInternalE_
-*ZN12CShadowAtlas30FindOrCreateShadowMapsForLightEP8Vector4DP29CDrawShadowMapsForLightParamsP10CSceneView17ESceneObjectFlagsP25CSceneLightObjectInternalPK11LightDesc_tPKciiibbbbiEUlS5_iE_
-*ZN12CShadowAtlas34FindOrCreateShadowMapsForBarnLightEP29CDrawShadowMapsForLightParamsP10CSceneView17ESceneObjectFlagsRK11BarnLight_tRK11matrix3x4_tP12CSceneObjectiPKciiiibbbbEUlS3_iE_
 *ZN13CLightBinner222GatherBarnLightsInViewEPK10ISceneView17ESceneObjectFlagsS3_EUlP21CSceneBarnLightObjectE_
 *ZN13CLightBinner225AddEnvironmentMapsForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP18CEnvMapSceneObjectE_
 *ZN13CLightBinner227AddLightProbeVolumesForViewEP10CSceneView17ESceneObjectFlagsS2_EUlP28CSceneLightProbeVolumeObjectE_
-*ZN18CSingleLightBinner19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EES3_P10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
+*ZN18CSingleLightBinner19GatherVisibleLightsER23CUtlVectorFixedGrowableI15ConsiderLight_tLm256EEP10CSceneViewRK8CFrustum17ESceneObjectFlagsS9_EUlP25CSceneLightObjectInternalE_
 *ZN18CSingleLightBinner34AllocateMixedShadowsForLocalLightsEP10CSceneViewRK8CFrustumRK17FrustumGeometry_t17ESceneObjectFlagsS8_iEUlP25CSceneLightObjectInternalE_
 *ZN26CBindlessFastPathPartition21EnsureEnvironmentMapsEvEUlP18CEnvMapSceneObjectE_
 *ZN32CBindlessFastPathSceneObjectDesc25UpdateLightProbeVolumeSetEP31LightProbeVolumeDescriptorSet_tP26CBindlessFastPathPartitionEUlP28CSceneLightProbeVolumeObjectE_
@@ -120,32 +117,32 @@ $tI
 -1.0
 -avx
 -shadowTargetSize
+-shadowTargetSize %d - Adjusting nMaxShadowBufferSize size to %d from %d
 -shadowTargetSize Adjusting shadow target size to %d from %d
--shadowTargetSize psys jba Adjusting nMaxShadowBufferSize size to %d from %d
 -sse2
 -sse3
 -sse4
 -tools
 -y south
 -z down
-../public/ordered_constructor.h
-../public/scenesystem/vertexformat.h
-../public/tier0/tslist.h
-../public/tier0/utl3dallocator.h
-../public/tier0/utlblockmemory.h
-../public/tier0/utlhashdict.h
-../public/tier0/utlleanvector.h
-../public/tier0/utllinkedlist.h
-../public/tier0/utlmultilist.h
-../public/tier0/utlrbtree.h
-../public/tier0/utlsymboltable.h
-../public/tier0/utltshash.h
 .exr
 .jpg
 .png
 .psd
 .tif
 /
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/scenesystem/vertexformat.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utl3dallocator.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlhashdict.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlleanvector.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlmultilist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsymboltable.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utltshash.h
 0.0
 0.1
 0.25
@@ -242,7 +239,6 @@ $tI
 20ISceneObjectDescBaseI21CSceneBarnLightObjectE
 20ISceneObjectDescBaseI21CSceneDebugTextObjectE
 20ISceneObjectDescBaseI25CSceneLightObjectInternalE
-20ISceneObjectDescBaseI25CSceneShadowFrustumObjectE
 20ISceneObjectDescBaseI28CBindlessFastPathSceneObjectE
 20ISceneObjectDescBaseI28CSceneLightProbeVolumeObjectE
 20ISceneObjectDescBaseI33CAmbientOcclusionProxySceneObjectE
@@ -271,14 +267,12 @@ $tI
 23ISceneViewDebugOverlays
 240
 24CPointLightObjectDescCPU
-24CShadowFrustumObjectDesc
 24CVConCommandMessageScene
 24IProceduralLayerRenderer
 25CAggregateSceneObjectDesc
 25CConCommandMemberAccessorI12CSceneSystemE
 25CEnvMapLightObjectDescCPU
 25CSceneLightObjectInternal
-25CSceneShadowFrustumObject
 25CSingleLightBinnerFactory
 26CAnimatableSceneObjectDesc
 26CSpotLightObjectDescSingle
@@ -407,7 +401,6 @@ $tI
 <td>LAYERFLAGS_NEEDS_FULLSORT</td>
 <td>LAYERFLAGS_NEEDS_PER_VIEW_LIGHTING_CONSTANTS</td>
 <td>LAYERFLAGS_NEVER_REMOVE</td>
-<td>LAYERFLAGS_NO_APP_TILING</td>
 <td>LAYERFLAGS_PRESERVE_COLOR_BUFFERS</td>
 <td>LAYERFLAGS_PRESERVE_DEPTH_BUFFER</td>
 <td>LAYERFLAGS_PRESERVE_STENCIL_BUFFER</td>
@@ -568,6 +561,7 @@ BindlessFastPathSceneObject
 BoneChannel
 BreakOnDelete:
 BreakOnDraw:
+C
 CAimConstraint
 CAmbientOcclusionProxySceneObjectDesc
 CAnimBone
@@ -917,7 +911,6 @@ Engine2/RenderingPipeline/ShadowDepthCullFront
 EngineServiceMgr001
 EnsureCapacity
 EnvMap
-EnvmapInfoStoredInExtraShaderData
 Error: View "%s", layer "%s", render target "%s": Attempted to bind the back buffers of two different swap chains in a single layer!
 Error: View "%s", layer "%s", render target "%s": Attempted to resolve a non-MSAA render target to a MSAA texture!
 EventSystem001
@@ -1386,8 +1379,8 @@ SceneSystem/CubemapFog
 SceneSystem/DefaultShadowTextureHeight
 SceneSystem/DefaultShadowTextureWidth
 SceneSystem/DisableShadowFullSort
+SceneSystem/EnvmapInfoStoredInExtraShaderData
 SceneSystem/HDRFrameBuffer
-SceneSystem/NoSunLightManager
 SceneSystem/NonTexturedGradientFog
 SceneSystem/PointLightShadowsEnabled
 SceneSystem/SingleLightBinner
@@ -1398,8 +1391,9 @@ SceneSystem/SingleLightBinnerMaxLights
 SceneSystem/SingleLightBinnerNumBarnLights
 SceneSystem/SingleLightBinnerRenderStaticGeoToSunLightCSM
 SceneSystem/SingleLightBinnerShadowViewsNeedPerViewLightingConstants
-SceneSystem/SingleLightBinnerSingleLightFastPath
 SceneSystem/SkipLoadingRenderingPipelines
+SceneSystem/SunLightManagerCount
+SceneSystem/SunLightManagerCountTools
 SceneSystem/SunLightMaxCascadeSize
 SceneSystem/SunLightMaxCascadeSizeTools
 SceneSystem/SunLightMaxShadowBufferSize
@@ -1426,8 +1420,6 @@ Set a float attribute which will be visible to all rendering (Usage: sc_setfloat
 Set an integer attribute which will be visible to all rendering (Usage: sc_setintattr <attrname> <value>)
 SetupConstantBuffer
 SetupLightingForView
-ShadowFrustum
-ShadowFrustumObjectDesc
 ShadowMap "
 Shadowed spot lights in view: %d
 Show
@@ -1461,6 +1453,7 @@ Source2ServerSerializers002
 Spherical %sStrength %.2fExponent %.2f
 SpotLight
 SpotShadowDepth
+SpotShadowDepth_Atlas%d.vtex
 St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
 St16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE
 St19_Sp_make_shared_tag
@@ -1861,6 +1854,7 @@ g_VProfCurrentProfile
 g_bUpdateStringTokenDatabase
 g_pMemAlloc
 g_pThreadPool
+game
 generic
 idle
 instanceidbuffer
@@ -2208,6 +2202,7 @@ nDispatchZ <= c_nClipmapDimension
 nIndex < m_RenderTargets.Count()
 nTries < 10000000
 need dictionary
+nextafterf
 no
 nomsaa + msaa copies
 nomsaa copy
@@ -2392,9 +2387,9 @@ scenesysDodecahedron
 scenesysPyramid
 scenesystem
 scenesystem.cpp
-scenesystem.cpp(3377):
-scenesystem.cpp(5694): Expecting 1 renderable pass for material "%s" but found %d!
-scenesystem.cpp(6914): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
+scenesystem.cpp(3382):
+scenesystem.cpp(5706): Expecting 1 renderable pass for material "%s" but found %d!
+scenesystem.cpp(6926): Waited 500 ms for jobs to complete. Attempt to drain windows message queue.
 scenesystem.h
 scenesystemdebug
 scenetextureset_%d
@@ -2587,7 +2582,6 @@ vr_cubemap_normalization_max
 vr_cubemap_normalization_roughness_begin
 vr_directional_lightmaps
 vr_disable_view_override
-vr_enable_cached_lights
 vr_enable_lights
 vr_max_lights
 vr_shadow_map_culling

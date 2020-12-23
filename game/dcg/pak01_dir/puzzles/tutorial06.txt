@@ -1,0 +1,77 @@
+"tutorial06"
+{
+	"name"		"tutorial06_title"
+	"description"	"tutorial06_desc"
+	"sections"
+	{
+		"part1"
+		{
+			"board" "tutorial_board06"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"					"RTFACTIegRMLUDdHV0b3JpYWwwMV9wbGF5ZXI_"
+					"allow_user_decks"			"0"
+				}
+				"deck_ai"
+				{
+					"use_deck"					"RTFACTIAwNOdECdHV0b3JpYWwwMV9haQ__"
+					"allow_user_decks"			"0"
+				}
+			
+				"set1"							"1" // needed for the shop to work properly
+
+				"no_shotclock"					"1"
+				"is_puzzle"						"1"
+				"is_tutorial"						"1"
+				"dcg_player_auto_pass_no_actions"		"0"
+				
+				"creeps_first_turn"			"0"
+				"creeps_first_turn_ai"		"0"
+				"creeps_per_turn"				"1"
+				"creeps_per_turn_ai"			"1"
+				"no_vs_intro"					"1"
+				"dcg_ai_deploys_last" 			"1"
+				
+				"dcg_shop_blacklist"			"*"
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"auto"					"load_vmap pve/tutorial01"
+					"> 0.5"					"npehelper #DCG_tutorial06_deploy,0,0,0,n,c,c"
+					"> 3.0"					"npehelper remove"
+					"on_hero_deployed"		"goto goal"
+				}
+				
+				"goal"
+				{
+					"auto"					"npehelper remove"
+					"> 0.2"					"npehelper #DCG_tutorial06_goal,0,0,0,n,c,c"
+					"> 3.9"					"npehelper remove"
+					"> 4.0"					"goto enchantments"
+				}
+
+				"enchantments"
+				{
+					"auto"						"npehelper #DCG_tutorial06_enchantments cardID 14005"
+					"> 0.1"						"lock isPassCoin 1"
+					"> 0.1"						"lock_hand"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto add"
+					">"							"npehelper remove cardID 14005"
+				}
+				
+				"add"
+				{
+					"auto"					"npehelper #DCG_tutorial06_add cardID 14005"
+					"> 2.0"					"unlock_hand"
+					"> 2.0"					"unlock isPassCoin 1"
+					"> 6.0"					"npehelper remove cardID 14005"
+				}
+			}
+		}
+	}
+}

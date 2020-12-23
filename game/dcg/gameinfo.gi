@@ -144,7 +144,7 @@
 
 	SceneSystem
 	{
-		"NoSunLightManager" "1"
+		"SunLightManagerCount" "0"
 		"TransformTextureRowCount" "2048"
 		"CMTAtlasWidth" "512"
 		"CMTAtlasHeight" "512"

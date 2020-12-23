@@ -42,7 +42,6 @@ $tIVScript
 %llx
 %llx:
 %p
-%p: %s
 %s ! %s:%u:%u:%u
 %s %g %g %g %g %g %g %g %g %g
 %s %s
@@ -157,19 +156,19 @@ $tIVScript
 -unittest
 -ut
 -validate
-../public/ordered_constructor.h
-../public/scenesystem/vertexformat.h
-../public/tier0/tslist.h
-../public/tier0/utlblockmemory.h
-../public/tier0/utllinkedlist.h
-../public/tier0/utlrbtree.h
-../public/tier0/utlsortvector.h
 .vmdl
 /%u.rnsave
 /*const char *g_ReflFieldNames[ %d ] ={
 // %d. possible regions:
 // Skipped due to deduction
 // only one region left, because
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/scenesystem/vertexformat.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsortvector.h
 0.0
 0.02
 0.04
@@ -205,16 +204,16 @@ $tIVScript
 16CTwistConstraint
 17COrientConstraint
 17CParentConstraint
-17CResourceStreamVM
 18CBreakLegacyParser
 18CMutableRefCountedI20CMutableRefCountBaseILb1E6CRefMTEE
 18CPlaceholderConVar
 19CBoneConstraintBase
 19CModelConfigElement
+19CResourceStreamBase
 19CSchemaRegistration
 2
 2000
-2020-10-01 21:45:45.749000
+2020-12-16 16:54:02.594000
 20CMutableRefCountBaseILb1E6CRefMTE
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
@@ -223,8 +222,8 @@ $tIVScript
 20IResourceTypeManager
 21CDualHullAgglomerator
 22CSchemaInstallCallback
-23CResourceStreamGrowable
 23IConCommandBaseAccessor
+24CResourceStreamUnaligned
 25IAsyncProcessedDataResult
 25IVPhysicsLegacyKeyHandler
 27CModelConfigElement_Command
@@ -305,6 +304,7 @@ $tIVScript
 31CModelConfigElement_RandomColor
 320000
 32CModelConfigElement_SetBodygroup
+32CResourceStreamUnalignedGrowable
 33CBaseIntrospectedToKV3TypeManager
 33CModelConfigElement_AttachedModel
 34CModelConfigElement_SetRenderColor
@@ -1003,6 +1003,7 @@ CUtlVectorSIMDPaddedVector
 CVPhys2AggregateInstance::OnReallocate( new: 0x%p, old: 0x%p )
 CVPhysXSurfacePropertiesList
 CVScrubSystem::AssignBlob(unsigned long long, CScrubBlobData*)
+CVScrubSystem::BlobExists(unsigned long long)
 CVScrubSystem::FindBlob(unsigned long long)
 CVScrubSystem::RegisterString(unsigned int, char const*)
 CVScrubSystem::ReleaseBlob(unsigned long long)
@@ -1029,13 +1030,17 @@ Cannot create exact hull because of runtime limits
 Cannot deallocate abstract class
 Cannot deduce for class
 Cannot destruct abstract class
+Cannot save Mesh @%p: %s
 Cannot save file %s
 Cannot save file %s, stopping snapshot dumping
+Cannot save hull @%p: %s
 Cannot serialize contact type %d
 Cannot serialize joint type %d
 Cannot serialize shape type %d
 Cannot serialize softbody effect of invalid type %d
 Cannot start streaming to physics debugger: please connect to VConsole2 first
+Cannot unserialize Mesh buffer (%d bytes) : %s
+Cannot unserialize hull buffer (%d bytes) : %s
 Cannot unserialize joint type %d
 Capsule Shape[%d]
 Capsule r=%g, h=%g
@@ -1474,6 +1479,7 @@ JointMotion_t
 Joints: %d
 K
 KV3 load transfer failed: %s
+KV3 save transfer failed: %s
 KeepInBounds
 KelagerBend %d
 KelagerBendCount
@@ -1513,6 +1519,7 @@ LinearLambda2
 LinearLambdas
 LoadKV3(CKeyValues3Context*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadKV3(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
+LoadKV3Object error: %s
 LoadKV3ObjectInPlace error: %s
 LoadKV3Text_NoHeader(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
 LoadPhysicsDebugMaterials
@@ -1842,6 +1849,8 @@ PhysSurfacePropertiesRefl_t
 PhysSurfacePropertiesSoundNamesRefl_t
 PhysSurfacePropertiesSoundNamesRefl_t PhysSurfacePropertiesRefl_t::m_audioSounds
 Physics Debugger: outdated protocol %d (expected %d). Please restart VConsole2.
+Physics Hull Profile
+Physics Mesh Profile
 Physics RnMeshCreate: cannot create degenerate mesh (%d tris)
 Physics doesn't know how to handle Comm request %d (data:%d)
 Physics returned a hit with NULL world: probably bug in tool tracing code. Please tell Sergiy.
@@ -2096,7 +2105,6 @@ RenderUtils_001
 ReportClassError
 ReportEvents
 Reported Hit Point (0,0,0)
-ReserveVirtualMemory
 Resolve
 Resolve Contacts (1)
 Resource Reallocate: Leaking Cloth Data @%p
@@ -2321,6 +2329,7 @@ STATE_TOUCHING
 STATE_UNKNOWN
 Same body
 Satisfy
+SaveKV3(KV3ID_t const&, KV3ID_t const&, KeyValues3 const*, CUtlString*, CUtlBuffer*)
 SaveKV3Text_NoHeader(KeyValues3 const*, CUtlString*, CUtlBuffer*)
 SaveKV3Text_NoHeader(KeyValues3 const*, CUtlString*, CUtlString*)
 SaveKV3Text_ToString(KV3ID_t const&, KeyValues3 const*, CUtlString*, CUtlString*)
@@ -2873,6 +2882,7 @@ bIsSpeculativeEnabled
 bIsSwingLimitEnabled
 bIsTwistLimitEnabled
 bNew
+bOfflineSimQuality
 bOwnHull
 bOwnMesh
 bParallelIslands
@@ -2928,6 +2938,7 @@ bool RnSoftbodyRefl_t::m_bEnableSprings
 bool RnSoftbodyRefl_t::m_bFrozen
 bool RnSoftbodyRefl_t::m_bFrozenInLocalSpace
 bool RnSoftbodyRefl_t::m_bGoalAttractionSimplified
+bool RnSoftbodyRefl_t::m_bOfflineSimQuality
 bool RnSoftbodyRefl_t::m_bSimTransformsOutdated
 bool RnSoftbodyRefl_t::m_bSleepEnabled
 bool RnWorldRefl_t::m_bParallelIslands
@@ -3773,6 +3784,7 @@ m_modelSkeleton
 m_modelSpaceTransforms
 m_morphArray
 m_morphDatas
+m_morphNames
 m_morphRectDatas
 m_morphSet
 m_nAngularMotions
@@ -3832,7 +3844,6 @@ m_nJiggleParent
 m_nLinearMotions
 m_nLookupType
 m_nMeshID
-m_nMorphCount
 m_nMotorMode
 m_nNameHash
 m_nNext
@@ -3889,7 +3900,6 @@ m_nXLeftDst
 m_nYTopDst
 m_name
 m_nameHash
-m_names
 m_objectList
 m_offsets
 m_orientation

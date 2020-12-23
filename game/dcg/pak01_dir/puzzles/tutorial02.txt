@@ -1,0 +1,129 @@
+"tutorial02"
+{
+	"name"		"tutorial02_title"
+	"description"	"tutorial02_desc"
+	"sections"
+	{
+		"part1"
+		{
+			"board" "tutorial_board02"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"					"RTFACTIegRMLUDdHV0b3JpYWwwMV9wbGF5ZXI_"
+					"allow_user_decks"			"0"
+				}
+				"deck_ai"
+				{
+					"use_deck"					"RTFACTIekNMbUDdHV0b3JpYWwwMl9haQ__"
+					"allow_user_decks"			"0"
+				}
+			
+				"set1"							"1" // needed for the shop to work properly
+
+				"no_shotclock"					"1"
+				"is_puzzle"					"1"
+				"is_tutorial"					"1"
+				"dcg_player_auto_pass_no_actions"		"0"
+				"dcg_shop_exists" 			"0" 
+				
+				"creeps_first_turn"			"0"
+				"creeps_first_turn_ai"		"0"
+				"creeps_per_turn"				"1"
+				"creeps_per_turn_ai"			"1"
+				"no_vs_intro"					"1"
+				
+				"dcg_shop_blacklist"			"*"
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"auto"			"load_vmap pve/tutorial01"
+					">"				"hudevent set_gold_hidden true"
+					">"				"hudevent set_mana_hidden true"
+					"> 0.5"			"lock laneID 2 combatPosition 2 ownerID 1"
+					"> 0.5"			"lock laneID 2 combatPosition 4 ownerID 1"
+					"> 3.0"			"goto deploy"
+				}
+				
+				"deploy"
+				{
+					"auto"						"npehelper #DCG_tutorial02_deploy,0,-16,0 cardID 14001"
+					"> 6.0"						"npehelper remove cardID 14001"
+					"on_hero_deployed"			"goto on_deploy"
+				}
+				
+				"on_deploy"
+				{
+					"auto"					"npehelper remove cardID 14001"
+					">"						"goto goal"
+				}
+				
+				"goal"
+				{
+					"auto"					"npehelper #DCG_tutorial05_goal,0,0,0,n,c,c"
+					"> 0.2"					"lock isPassCoin 1"
+					"> 3.9"					"npehelper remove"
+					"> 4.0"					"goto creep"
+				}
+				
+				"creep"
+				{
+					"auto"						"npehelper #DCG_tutorial02_creep isCreep 1 ownerID 1"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto creep_deploy"
+					">"							"npehelper remove"
+				}
+				
+				"creep_deploy"
+				{
+					"auto"						"npehelper #DCG_tutorial02_creep_deploy isCreep 1 ownerID 1"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto block"
+					">"							"npehelper remove"
+				}
+				
+				"block"
+				{
+					"auto"						"npehelper #DCG_tutorial02_block,75,0,0,l,c,c"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto coin"
+					">"							"npehelper remove"
+				}
+				
+				"coin"
+				{
+					"auto"						"npehelper #DCG_tutorial02_coin,770,330,0,n,c,c"
+					"> 2.0"						"unlock isPassCoin 1"
+					"> 5.9"						"npehelper remove"
+					"> 6.0"						"goto wait_for_round_2"
+				}
+				
+				"wait_for_round_2"
+				{
+					"on_round_start_02"			"goto fountain"
+				}
+				
+				"fountain"
+				{
+					"auto"						"npehelper #DCG_tutorial02_fountain cardID 14000"
+					"> 0.1"						"unlock laneID 2 combatPosition 2 ownerID 1"
+					"> 0.1"						"unlock laneID 2 combatPosition 4 ownerID 1"
+					"> 0.1"						"lock isPassCoin 1"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto combat"
+					">"							"npehelper remove cardID 14000"
+				}
+				
+				"combat"
+				{
+					"auto"						"npehelper #DCG_tutorial02_combat,770,330,0,n,c,c"
+					"> 2.0"						"unlock isPassCoin 1"
+					"> 6.0"						"npehelper remove"
+				}
+			}
+		}
+	}
+}//npehelper #DCG_NPE_YourGold,-290,-45,0,d,r,b

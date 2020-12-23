@@ -39,6 +39,7 @@ DCGPlayPage
 	transition-property: background-image;
 	transition-duration: 0.2s;
 	transition-timing-function: ease-in-out;
+	z-index: 5;
 }
 
 #CampaignButton:hover
@@ -217,11 +218,19 @@ DCGPlayPage
 
 .PlayButtonLabels #TutorialText
 {
-	color: #5d86dd;
-	font-size: 24px;
-	letter-spacing: 0px;
-	text-transform: none;
-	text-shadow: none;
+	padding-top: 10px;
+	color: abilityGradient;
+	font-size: 20px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-weight: normal;
+
+	animation-name: ImpishHover;
+	animation-delay: 0.3s;
+	animation-duration: 2.0s;
+	animation-iteration-count: infinite;
+	
+	animation-timing-function: ease-in-out;
 }
 
 Button:disabled
@@ -302,4 +311,54 @@ Button:disabled
 .OpponentInConstructed.OpponentInLiveDraft #Divider
 {
 	visibility: visible;
+}
+
+#TutorialCallToAction
+{
+
+	margin-top: 100px;
+	//Native texture res
+	width: 686px;
+	height: 423px;
+
+	
+	background-image: url("s2r://panorama/images/campaign/imp_and_quote_png.vtex");
+
+	background-size: 75% 75%;
+	background-repeat: no-repeat;
+	background-position: -9% 50%;
+
+
+	animation-name: ImpishHover;
+
+	animation-duration: 2.0s;
+	animation-iteration-count: infinite;
+	
+	animation-timing-function: ease-in-out;
+
+}
+
+@keyframes 'ImpishHover'
+{
+	0%
+	{
+		transform: translateY( -5px );
+	}
+
+	50%
+	{
+		transform: translateY( 5px );
+	}
+
+	100%
+	{
+		transform: translateY( -5px );
+	}
+
+}
+
+.AlreadyTriedTutorial #TutorialText,
+.AlreadyTriedTutorial #TutorialCallToAction
+{
+	visibility: collapse;
 }

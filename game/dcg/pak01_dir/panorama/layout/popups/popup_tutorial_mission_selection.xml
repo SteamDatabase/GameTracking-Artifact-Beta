@@ -1,0 +1,52 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_tutorial_mission_selection.vcss_c" />
+	</styles>
+		
+	<snippets>
+
+		<snippet name="TutorialMissionSnippet">
+			<Panel class="TutorialMission" hittest="true" onmouseover="PlaySoundEffect( DCG_UI.MainMenu_Rollover )">
+				<Panel class="SelectedPinLine"/>
+				<Panel class="MissionContents" >
+					<Panel id="MissionTitleGroup">
+						<Panel id="LockIcon"/>
+						<Label id="MissionName" text="{s:mission_name}" class="MonoFont HighlightableMissionText" html="true"/>
+						
+  
+						<Panel id="CompletedGroup">
+							<Panel id="CompletedIcon">
+								<Panel id="CompletedIconTick"/>
+							</Panel>
+							<Label id="CompletedLabel" text="#DCG_Popup_CampaignTutorialTwoBetaMissionListMissionComplete" class="MonoFont" html="true"/>
+						</Panel>
+						
+					</Panel>
+					<Label id="MissionDesc" text="{s:mission_desc}" class="MonoFont HighlightableMissionText" html="true"/>
+				</Panel>
+				<Panel class="SelectedPinLine Bottom"/>
+				<Panel class="LeftHandSelectedBlock"/>
+			</Panel> 
+		</snippet>
+	
+	</snippets>
+
+	<PopupTutorialMissionSelection class="Hidden" hittest="true" oncancel="UIPopupButtonClicked(DCGShowTutorialLauncher(true))">
+		<Button id="CloseButton" text="#DCG_ResultScreen_Quit_Puzzle" onactivate="UIPopupButtonClicked(DCGShowTutorialLauncher(true))">
+			<Panel id="BackArrow"/>
+		</Button>
+		<Panel id="MainBody">
+			<Label id="CampaignTitleLabel" class="center_align TitleFont" text="#DCG_Popup_CampaignTutorialTwoBetaTitle" html="true"/>
+			<Panel id="TutorialHeaderContainer" >
+				<Label id="MissionListText" class="center_align MonoFont" text="#DCG_Popup_CampaignTutorialTwoBetaMissionList" html="true"/>
+			</Panel> 
+			<Panel id="MissionsList" hittest="true"/>
+			
+		</Panel>
+		<Panel id="BottomContainer" hittest="false">
+				<TextButton id="PlayButton" text="{s:play_or_continue}" onactivate="DCGPlaySelectedTutorialMission()" html="true"/>
+			</Panel>
+	</PopupTutorialMissionSelection>
+</root>

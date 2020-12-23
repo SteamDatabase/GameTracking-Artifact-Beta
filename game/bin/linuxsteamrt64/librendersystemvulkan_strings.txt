@@ -647,17 +647,6 @@ $undefined
 . Found
 . This may be a bug in the validator.
 ..
-../public/ordered_constructor.h
-../public/tier0/memstack.h
-../public/tier0/tslist.h
-../public/tier0/utlblockmemory.h
-../public/tier0/utlfixedmemory.h
-../public/tier0/utlleanvector.h
-../public/tier0/utllinkedlist.h
-../public/tier0/utlrbtree.h
-../public/tier0/utltshash.h
-./inputlayoutbase.h
-./renderresource.h
 .exr
 .ini
 .jpg
@@ -675,6 +664,17 @@ $undefined
 /=
 /P8i
 /data/data/source2_main/src/thirdparty/glslang/External/spirv-tools/source/opt/type_manager.cpp
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/memstack.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlfixedmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlleanvector.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utltshash.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/rendersystem/inputlayoutbase.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/rendersystem/renderresource.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
@@ -1056,6 +1056,7 @@ ATI_DST16
 ATI_DST24
 ATOMIC_UINT
 ATTRIBUTE
+Aboring OnReadBuffer because of GPU memory allocation failure.
 Aboring OnReadPixels because of GPU memory allocation failure.
 AbsISubINTEL
 AbsUSubINTEL
@@ -1354,6 +1355,7 @@ CRenderContextVulkan::ClearUnorderedAccessViewUint could not get CVulkanImage fo
 CRenderContextVulkan::CopyTexture - Trying to copy from a rect that is outside of the src texture
 CRenderContextVulkan::CopyTexture failed to get resource.
 CRenderContextVulkan::EndQuery - Issued on an in-progress query!
+CRenderContextVulkan::ReadBuffer - attempted to read invalid handle.
 CRenderContextVulkan::SemaphoreWaitAtBegin - already set semaphore to wait on, can't set another one.
 CRenderContextVulkan::SetSteamVrCompositorTexture failed because no Vulkan image was found.
 CRenderDeviceBase::FindOrCreateTexture: Trying to load multiple mipmaps into 3d or array texture: %s
@@ -2198,7 +2200,6 @@ Error creating the resolve rotated pixel shader!
 Error creating the resolve rotated vertex shader!
 Error creating the resolve vertex shader!
 Error from SDL_GetCurrentDisplayMode( %d ) = %s
-Error from SDL_GetDisplayMode( %d, %d ) = %s
 Error resolving symbol "%s"
 Error: Result Id is 0
 Error: Type Id is 0
@@ -3167,6 +3168,7 @@ HIGH_PRECISION
 HITATTREXT
 HITATTRNV
 HLSL
+HLSL SM6.0 level subgroup wave ops supported, subgroup size = %d
 HS
 HalfFloat
 HammerMapLoader001
@@ -3864,7 +3866,6 @@ MaxByteOffsetId
 MaxDeviceID
 MaxIterations
 Maximum Control Flow nesting depth exceeded.
-Maximum device access threads: %u
 Maximum resolution for top mip level in streaming textures. -1 = ignored.
 Maximum supported image dimension is %u pixels
 May
@@ -5019,6 +5020,7 @@ S_BINDLESS_RUNTIME
 S_MOBILE
 S_MOLTEN_VK
 S_SHADER_QUALITY
+S_SUBGROUP_WAVE_OPS
 S_SUPPORTS_CLIP_DISTANCE
 S_TOOLS_ENABLED
 S_TRANSFORM_CONSTANT_BUFFER
@@ -9676,6 +9678,7 @@ readFirstInvocation
 readFirstInvocationARB
 readInvocation
 readInvocationARB
+readbuffer_staging_mem
 readdir64
 readlink
 readonly
@@ -10493,15 +10496,15 @@ textureSamples(
 textureSize
 textureSize(
 texturebase.cpp
-texturebase.cpp(1905):Error loading texture: %s
-texturebase.cpp(2842):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2865):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2876):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2887):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2898):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2919):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2930):ResourceHandleToData( %s ) failed! Falling back to error texture!
-texturebase.cpp(2941):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(1902):Error loading texture: %s
+texturebase.cpp(2839):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2862):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2873):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2884):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2895):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2916):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2927):ResourceHandleToData( %s ) failed! Falling back to error texture!
+texturebase.cpp(2938):ResourceHandleToData( %s ) failed! Falling back to error texture!
 tgamma
 that allocate pointers must be in Function or Private
 that is not a scalar or vector
@@ -11400,7 +11403,7 @@ vkInitializePerformanceApiINTEL
 vkInvalidateMappedMemoryRanges
 vkMapMemory
 vkMapMemory( VulkanDevice(), pStagingMemory, 0, nStagingMemSize, 0, &pLockedData )
-vkMapMemory( VulkanDevice(), textureReadback.m_pDeviceMemory, 0, textureReadback.m_nMemorySize, 0, &pLockedData )
+vkMapMemory( VulkanDevice(), readback.m_pDeviceMemory, 0, readback.m_nMemorySize, 0, &pLockedData )
 vkMapMemory( m_pDeviceVulkan, pNewMemoryPool->m_pGPUMemory, 0, pNewMemoryPool->m_nPoolSize, 0, (void**)&pNewMemoryPool->m_pMappedBuffer )
 vkMapMemory( m_pDeviceVulkan, pQuery->m_pQueryPool->m_pResultsMem, nResultOffset, nResultSize, 0, &pMappedBuffer )
 vkMergePipelineCaches

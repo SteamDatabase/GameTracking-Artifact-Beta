@@ -25,6 +25,8 @@
 	transition-timing-function: ease-in-out;
 	//transform: translateY( -50px);
 	flow-children: down;
+
+	overflow: noclip;
 }
 
 
@@ -75,6 +77,7 @@
 
 #MissionButtonsContainer
 {
+	margin-top: 20px;
 	flow-children: right;
 
 	
@@ -119,7 +122,7 @@
 DCGDeckLoader
 {
 	visibility: collapse;
-	pre-transform-scale2d: 0.8;
+	pre-transform-scale2d: 0.6;
 }
 
 #MissionNumLabel 
@@ -172,7 +175,7 @@ TextButton
 	margin-right: 10px;
 	vertical-align: center;
 
-	background-color: #919191FF;
+	background-color: #524a44;
 	box-shadow: #00000088 1px 1px 13px 0px;
 
 	transition-property: box-shadow;
@@ -183,11 +186,23 @@ TextButton
 TextButton Label
 {
 	text-transform: uppercase;
-	color: #BAB8B4;
+	color: gradient( linear, 0% 0%, 0% 100%, from( #a29864 ), to( #dad190 ) );
+	text-shadow: 1px 1px 5px 4.0 #a2986400;
 	font-size: 16px;
 	letter-spacing: 2px;
 	text-align: center;
+	transition-duration: 0.25s;
+	transition-property: text-shadow, color;
+	transition-timing-function: ease-in-out;
+	overflow: clip;
 }
+
+
+TextButton:hover Label
+{
+	text-shadow: 1px 1px 5px 4.0 #a29864dd;
+}
+
 
 PopupEvent .CloseMissionButton
 {
@@ -197,8 +212,62 @@ PopupEvent .CloseMissionButton
 	background-size: 100% 100%;
 }
 
+#OKButton,
+#RetryButton,
+#ContinueButton
+{
+
+	horizontal-align: center;
+	vertical-align: center;
+
+	//margin-right: 50px;
+}
+
+
+#SubmitFeedbackIcon
+{
+    brightness: 0.5;
+    width: 40px;
+    height: 40px;
+   	background-image: url("s2r://panorama/images/dashboard/icon_feedback_png.vtex");
+    background-size: 90% 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    horizontal-align: left;
+    margin-left: 20px;
+    visibility: collapse;
+}
+
+PopupTutorialSummary
+{
+
+	overflow: noclip;
+}
+
+#SubmitFeedbackButton
+{
+	horizontal-align: center;
+	vertical-align: bottom;
+	margin-bottom: 0px;
+	
+}
+
+.MissionFailed #OKButton,
+.HasNextMission #OKButton,
+.IsFinalMission #ContinueButton,
+.MissionFailed #ContinueButton
+{
+	visibility: collapse;
+}
+
+.MissionWon #RetryButton
+{
+	visibility: collapse;
+}
+
 #MissionDescContainer
 {
+	horizontal-align: left;
 	height: fit-children;
 	width: 100%;
 
@@ -216,52 +285,79 @@ PopupEvent .CloseMissionButton
 
 #MissionSummary,
 {
-	margin-left: 60px;
-	margin-right: 60px;
+
+	width: 60%;
 	
-	margin-top: 5px;
+
+	margin-left: 60px;
+
+	
+	margin-top: 20px;
 	margin-bottom: 5px;
 
 
-	height: fit-children;
-	max-height: 70px;
+
 	color: #A09487;
 	font-size: 20px;
 	letter-spacing: normal;
 	overflow: squish scroll;
 
-	line-height: 20px;
+
+	line-height: 30px;
+
+	text-shadow: 0px 0px 4px 3.0 #00000055;
+}
+
+#NextMissionDesc
+{
+	margin-left: 50px;
+	vertical-align: middle;
+	color: #A09487;
+	font-size: 20px;
+
+	text-shadow: 0px 0px 4px 3.0 #00000055;
 }
 
 #MissionBottomContainer
 {
-	
-
-	height: 240px;
+	margin-left: 50%;
+	vertical-align: center;
+	height: 100%;
 	//height: fit-children;
 	width: 100%; 
 
-	
+	//margin-bottom: 50px;
 	
 }
 
 #CenterTheElements
 {
-	vertical-align: center;
-	horizontal-align: center;
-	flow-children: right;
-	width: fit-children;
+	width: 40%;
 	height: 100%;
+	margin-right: 50px;
+	vertical-align: center;
+	horizontal-align: right;
+	flow-children: down;
+	
 }
 
 #BackingBand
 {
 	
 	width: 94.2%; 
-	height: 20%;
+	height: 75px;
 	background-color: gradient( linear, 0% 0%, 100% 100%, from( #000000aa ), to( #00000035 ) );
-	vertical-align: center;
-		horizontal-align: center;
+	vertical-align: bottom;
+	horizontal-align: center;
+	margin-bottom: 80px;
+}
+
+.ClosingPopup #CardCarousel,
+.MissionFailed #CardCarousel,
+.MissionFailed #MissionSummary,
+.MissionFailed #BackingBand
+{
+	visibility: collapse;
 }
 
 
@@ -381,30 +477,37 @@ PopupEvent .CloseMissionButton
 
 #CarouselContainer
 {
-	height: 200px;
-	width: 200px;
-	horizontal-align: center;
-	vertical-align: center;
-	z-index: 5;
+	height: 60%;
+	width: 40%;
+	horizontal-align: right;
+	vertical-align: bottom;
+	margin-bottom: 60px;
+	overflow: noclip;
+	flow-children: down;
 }
 
 .ShowingDialogue #CarouselContainer,
 .IsOutro #CarouselContainer,
 .NoNewCards #CarouselContainer
 {
-	visibility: collapse;
+	visibility: collapse; 
 }
 
 #CardCarousel
 {
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	z-index: 5;
 	overflow: noclip;
+	//vertical-align: center;
+	//horizontal-align: center;
 }
 
 #CardCarouselNav
 {
+	visibility: collapse;
+	width: 80%;
+	height: 10%;
 	vertical-align: bottom;
 	z-index: 6;
 	horizontal-align: center;
@@ -413,9 +516,11 @@ PopupEvent .CloseMissionButton
 
 .NewCardScenePanel
 {
-	height: 480px;
-	width: 310px;
-	pre-transform-scale2d: 0.35;
+	height: 80%;
+	width: 80%;
+	vertical-align: center;
+	horizontal-align: center;
+	opacity: 0;
 }
 
 .NewCardScenePanel.SceneLoaded
@@ -426,7 +531,7 @@ PopupEvent .CloseMissionButton
 	transition-timing-function: ease-in-out;
 	z-index: 3;
 	overflow: noclip;
-	transform: translate3d( 60px, -5px, -50px ) rotateY( -16deg ) scale3d( 0.8, 0.8, 0.8 );
+	transform: translate3d( 60px, -5px, -50px ) rotateY( -16deg ) scale3d( 1, 1, 1 );
 
 
 	//img-shadow: #000000AA 2px 2px 4px 0px;//nope
@@ -434,16 +539,14 @@ PopupEvent .CloseMissionButton
 
 .1NewCard .NewCardScenePanel.SceneLoaded.Focused
 {
-	transform: none;
-	pre-transform-scale2d: 0.45;
-	transform: translate3d( 0px, 0px, 0px );
-	opacity: 0.5;
+	transform: translate3d( 0px, 0px, 0px ) rotateY( -20deg );
+	opacity: 1;
 }
 
 .Focused.NewCardScenePanel.SceneLoaded
 {
 	opacity: 1;
-	transform: translate3d( 0px, -18px, 0px ) rotateY( 0deg );
+	transform: translate3d( 0px, 0px, 0px ) rotateY( 0deg );
 	z-index: 8;
 }
 
@@ -452,6 +555,7 @@ PopupEvent .CloseMissionButton
 {
 	z-index: 5;
 	opacity: 1;
+	transform: translate3d( 60px, -5px, -50px ) rotateY( -16deg ) scale3d( 0.8, 0.8, 0.8 );
 }
 
 .2NewCards .NewCardScenePanel.SceneLoaded.LeftOfFocus1
@@ -468,7 +572,7 @@ PopupEvent .CloseMissionButton
 	transform: translate3d( -225px, 0px, -90px ) rotateY( -16deg ) scale3d( 0.7, 0.7, 0.7 );
 }
 
-.MissionWon #MissionCompleteLabel
+.HasNextMission.MissionWon #MissionCompleteLabel
 {
 	visibility: visible;
 	color: gradient( linear, 0% 0%, 0% 100%, from( #A48B6EFF ), to( #C9C5A5FF) );
@@ -479,6 +583,31 @@ PopupEvent .CloseMissionButton
 	visibility: visible;
 	color: gradient( linear, 0% 0%, 0% 100%, from( #FFa3a2 ), to( #FF0000) );
 }
+
+#TutorialCompleteLabel
+{
+	margin-top: 15px;
+	visibility: collapse;
+	//font-size: 25px; 
+	color: gradient( linear, 0% 0%, 0% 100%, from( #A48B6EFF ), to( #C9C5A5FF) );
+}
+
+.IsFinalMission.MissionWon #TutorialCompleteLabel
+{
+	visibility: visible;
+
+	animation-name: ImpishHover;
+	
+	animation-delay: 0.33s;
+	animation-duration: 2.0s;
+	animation-iteration-count: infinite;
+	
+	animation-timing-function: ease-in-out;
+
+	
+}
+
+
 
 #MissionCompleteContainer, .ShowingDialogue.IsOutro #MissionCompleteContainer
 {
@@ -521,4 +650,61 @@ PopupEvent .CloseMissionButton
 TextButton:hover
 {
 	box-shadow: white 0px 0px 4px 0px;
+}
+
+
+
+#TutorialCompleteImage
+{
+
+	margin-top: 165px;
+	margin-left: 80px;
+	//Native texture res
+	width: 686px;
+	height: 423px;
+
+	
+	background-image: url("s2r://panorama/images/campaign/imp_and_quote_png.vtex");
+
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: -9% 50%;
+
+
+	animation-name: ImpishHover;
+
+	animation-duration: 2.0s;
+
+	animation-iteration-count: infinite;
+	
+	animation-timing-function: ease-in-out;
+
+	
+	visibility: collapse;
+
+}
+
+.IsFinalMission.MissionWon #TutorialCompleteImage
+{
+	visibility: visible;
+}
+
+
+@keyframes 'ImpishHover'
+{
+	0%
+	{
+		transform: translateY( -5px );
+	}
+
+	50%
+	{
+		transform: translateY( 5px );
+	}
+
+	100%
+	{
+		transform: translateY( -5px );
+	}
+
 }

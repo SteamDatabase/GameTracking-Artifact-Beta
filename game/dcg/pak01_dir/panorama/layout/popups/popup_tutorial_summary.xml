@@ -24,7 +24,7 @@
 		</snippet>
 	</snippets>
 		
-	<PopupTutorialSummary class="PopupPanel Hidden" hittest="true" oncancel="UIPopupButtonClicked( DCGCloseTutorialSummary( false ) )">
+	<PopupTutorialSummary class="PopupPanel Hidden" hittest="true" oncancel="UIPopupButtonClicked( DCGExitTutorial() )">
 	 
 
 		
@@ -37,19 +37,20 @@
 			
 				<Panel id="MissionHeader">
 					
-					<Label id="MissionNumLabel" class="TitleFont" text="#DCG_MissionNumberText" />
+					<Label id="MissionNumLabel" class="TitleFont" text="#DCG_MissionNumberText" html="true" />
 					<Panel id="MissionStatusImage" />
 					<Label id="CampaignTitleLabel" class="TitleFont" text="{s:campaign_name}" />
 				 
 					<Panel id="TutorialBanner">
-						<Label id="MissionName" text="{s:mission_name}" />
+						<Label id="MissionName" text="{s:mission_name}" html="true" />
 					</Panel> 
 					
-					
+					 
 				</Panel>
 				<Panel id="MissionCompleteContainer">
-					<Label id="MissionCompleteLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionComplete" />
-					<Label id="MissionFailedLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionFailed" />
+					<Label id="MissionCompleteLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionComplete" html="true"/>
+					<Label id="MissionFailedLabel" class="MissionStatusTitle TitleFont" text="#DCG_Event_MissionFailed" html="true"/>
+					<Label id="TutorialCompleteLabel" class="MissionStatusTitle TitleFont" text="#DCG_TrophyPopup_Congratulations" html="true"/>
 					<Panel id="MissionCompleteBottom">
 						
 				</Panel>
@@ -57,27 +58,36 @@
 			</Panel>
 			
 			<Panel id="MissionDescContainer">
-				<Label id="MissionDesc" text="{s:mission_desc}" />
-				<Label id="MissionSummary" class="MonoFont" text="{s:mission_summary}"/>
-			</Panel>
-			 
-			<Panel id="MissionBottomContainer">
-
-				<Panel id="BackingBand"/> 
-				<Panel id="CenterTheElements">
-					<Panel id="CarouselContainer">
-						<Carousel id="CardCarousel" class="SingleItemCarousel" panels-visible="2" wrap="true" onactivate="DCGNewCardCarouselClicked();"/>
-						<CarouselNav id="CardCarouselNav" class="TransportControls" carouselid="CardCarousel" maxpips="3" disablenav="true" />
-					</Panel>
-					<Label id="NewCardsForMission" text="{s:next_lesson_description}" />
-				</Panel>
+				<Label id="MissionDesc" text="{s:mission_desc}" html="true"/>
+				<Label id="MissionSummary" class="MonoFont" text="{s:mission_summary}" html="true"/>
 				
 				
-		
 			</Panel>
-			<Panel id="MissionButtonsContainer">
-				<TextButton id="ContinueButton" text="#DCG_ResultScreen_Quit_Puzzle" class="MonoFont" onactivate="UIPopupButtonClicked( DCGCloseTutorialSummary( false ) )" />
-			</Panel>
+			
 		</Panel>
+
+		<Panel id="TutorialCompleteImage"/>		
+		<Panel id="BackingBand">
+				<Label id="NextMissionDesc" class="MonoFont" text="{s:next_lesson_description}" html="true"/>
+		</Panel>
+
+		<Panel id="CarouselContainer">
+			<Carousel id="CardCarousel" class="SingleItemCarousel" panels-visible="2" wrap="true" onactivate="DCGNewCardCarouselClicked();"/>
+			<CarouselNav id="CardCarouselNav" class="TransportControls" carouselid="CardCarousel" maxpips="3" disablenav="true" />
+
+			<TextButton id="OKButton" text="#OK" class="MonoFont" onactivate="UIPopupButtonClicked( DCGContinueToNextTutorial( ) )" />
+			<TextButton id="ContinueButton" text="#DCG_ResultScreen_Quit_Puzzle" class="MonoFont" onactivate="UIPopupButtonClicked( DCGContinueToNextTutorial( ) )" />
+			
+		</Panel>
+
+		
+		
+		<TextButton id="RetryButton" text="#DCG_Popup_CampaignTutorialRetry" class="MonoFont" onactivate="UIPopupButtonClicked( DCGReplayCurrentTutorial( ) )" />
+		<Button id="SubmitFeedbackIcon" onmouseover="UIShowTextTooltip( #DCG_UserFeedback_Tooltip )" onmouseout="UIHideTextTooltip()" onactivate="DCGSubmitFeedbackDuringGame( 'Tutorial', -1 );"/>
+
+		<TextButton id="SubmitFeedbackButton" text="#DCG_UserFeedback_Tooltip" class="MonoFont" onmouseover="UIShowTextTooltip( #DCG_UserFeedback_Tooltip )" onmouseout="UIHideTextTooltip()" onactivate="DCGSubmitFeedbackDuringGame( 'Tutorial', -1 );" />
+		 
+				
+			
 	</PopupTutorialSummary>
 </root>

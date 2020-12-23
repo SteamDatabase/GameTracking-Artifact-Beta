@@ -1,0 +1,111 @@
+"tutorial08"
+{
+	"name"		"tutorial08_title"
+	"description"	"tutorial08_desc"
+	"sections"
+	{
+		"part1"
+		{
+			"board" "tutorial_board08"
+			"rules"
+			{
+				"deck_player"
+				{
+					"use_deck"					"RTFACTIegRMLUDdHV0b3JpYWwwMV9wbGF5ZXI_"
+					"allow_user_decks"			"0"
+				}
+				"deck_ai"
+				{
+					"use_deck"					"RTFACTIAwNOdECdHV0b3JpYWwwMV9haQ__"
+					"allow_user_decks"			"0"
+				}
+			
+				"set1"							"1" // needed for the shop to work properly
+
+				"no_shotclock"					"1"
+				"is_puzzle"					"1"
+				"dcg_player_auto_pass_no_actions"		"0"
+				
+				"creeps_first_turn"			"0"
+				"creeps_first_turn_ai"		"0"
+				"creeps_per_turn"				"3"
+				"creeps_per_turn_ai"			"3"
+				"no_vs_intro"					"1"
+				//"dcg_ai_deploys_last" 			"1"
+				
+				"dcg_shop_blacklist"			"*"
+			}
+			"sequences"
+			{
+				"start"
+				{
+					"auto 3.0"				"goto wait_for_round_1"				
+				}
+				
+				"wait_for_round_1"
+				{
+					"on_round_start_01"		"goto goal"
+				}
+				
+				"goal"
+				{
+					"auto"					"npehelper #DCG_tutorial08_goal,0,0,0,n,c,c"
+					"> 0.1"					"lock zoneID Combat cardID 14011"
+					"> 0.1"					"lock_hand"
+					"> 0.1"					"lock isPassCoin 1"
+					"> 4.9"					"npehelper remove"
+					"> 5.0"					"goto ability"
+				}
+				
+				"ability"
+				{
+					"auto"						"npehelper #DCG_tutorial08_ability cardID 14011"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto cooldown"
+					">"							"npehelper remove cardID 14011"
+				}
+				
+				"cooldown"
+				{
+					"auto"						"npehelper #DCG_tutorial08_cooldown cardID 14011"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto click"
+					">"							"npehelper remove cardID 14011"
+				}
+				
+				"click"
+				{
+					"auto"					"npehelper #DCG_tutorial08_click cardID 14011"
+					"> 4.9"					"npehelper remove cardID 14011"
+					"> 4.9"					"unlock zoneID Combat cardID 14011"
+					"> 4.9"					"unlock_hand"
+					"> 4.9"					"unlock isPassCoin 1"
+					"> 5.0"					"goto wait_for_round_2"
+				}
+				
+				"wait_for_round_2"
+				{
+					"on_round_start_02"		"goto enchantment"
+				}
+				
+				"enchantment"
+				{
+					"auto 0.1"					"lock_hand"
+					"> 0.15"					"lock isPassCoin 1"
+					"> 0.2"						"npehelper #DCG_tutorial08_enchantment cardID 14012"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto triggers"
+					">"							"npehelper remove cardID 14012"
+				}
+				
+				"triggers"
+				{
+					"auto"					"npehelper #DCG_tutorial08_triggers cardID 14012"
+					"> 2.0"					"unlock_hand"
+					"> 2.0"					"unlock isPassCoin 1"
+					"> 6.0"					"npehelper remove cardID 14012"
+				}
+			}
+		}
+	}
+}

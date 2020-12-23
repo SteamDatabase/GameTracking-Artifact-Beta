@@ -1,0 +1,52 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/gamestyles.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popups_shared.vcss_c" />
+		<include src="s2r://panorama/styles/popups/popup_hero_demo_summary.vcss_c" />
+	</styles>
+
+	<PopupHeroDemoSummary class="PopupPanel Hidden" hittest="true" oncancel="UIPopupButtonClicked( DCGCloseTutorialSummary( false ) )">
+	 
+		<Panel id="FullMissionContainer">
+			<Panel id="MissionInfoContainer" class="FlowDown">
+			
+				<!-- This text locs point to {s:card_name}-->
+				<Label id="HeroDemoTitle" class="MonoFont" text="#DCG_Hero_Demo_Title" html="true"/>
+
+				<Panel id="MissionCompleteContainer">
+
+					<Panel class="FlowRight FitChildren CenterHorizontal CenterVertical">
+						<Panel id="TickIcons">
+							<Panel id="TickSuccess" class="MissionStatus MissionShowOnVictory"/>
+							<Panel id="TickFail" class="MissionStatus MissionShowOnDefeat"/>
+						</Panel>
+
+						<Panel class="FlowDown">
+							<!-- Straightforward labes -->
+							<Label id="MissionCompleteLabel" class="MissionStatusTitle MonoFont MissionStatus MissionShowOnVictory" text="#DCG_Hero_Demo_Success_Title" html="true"/>
+							<Label id="MissionFailedLabel" class="MissionStatusTitle MonoFont MissionStatus MissionShowOnDefeat" text="#DCG_Hero_Demo_Failed_Title" html="true"/>
+						</Panel>
+					</Panel>
+				</Panel>  
+				<Panel id="MissionSummaryGroup"> 
+					<!-- These text locs point to #DCG_Hero_Demo_$card_name_MissionSuccess / #DCG_Hero_Demo_$card_name_MissionFailure-->
+					<Label id="MissionSuccessSummary" text="#DCG_Hero_Demo_Success_Body" class="MonoFont MissionStatus MissionShowOnVictory" html="true"/>
+					<Label id="MissionFailureSummary" text="#DCG_Hero_Demo_Failed_Body" class="MonoFont MissionStatus MissionShowOnDefeat" html="true"/>
+				</Panel>
+			</Panel> 
+
+			<TextButton id="ShowSolutionbutton" text="#DCG_Hero_Demo_Show_Solution" class="MonoFont" onactivate="UIPopupButtonClicked( DCGShowHeroDemoSolution( ) )" >
+				<Panel id="ShowSolutionIcon"/>
+			</TextButton>
+
+			<Panel id="MissionButtonsContainer">
+				<TextButton id="QuitPuzzle" text="#DCG_Hero_Demo_Quit" class="MonoFont" onactivate="UIPopupButtonClicked( DCGCloseHeroDemoSummary( ) )" />
+				<TextButton id="PlayAgainButton" text="#DCG_Hero_Demo_Play_Again" class="MonoFont" onactivate="UIPopupButtonClicked( DCGReplayHeroDemo( ) )" />
+			</Panel>
+		</Panel>
+
+		<Panel id="ImpGraphicContainer">
+			<Panel id="ImpGraphic"/>
+		</Panel>
+	</PopupHeroDemoSummary>
+</root>

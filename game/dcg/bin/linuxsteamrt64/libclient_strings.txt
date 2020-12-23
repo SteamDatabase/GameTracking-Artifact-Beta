@@ -27,7 +27,6 @@
 !m_boolOpaque
 !m_boolPunchThroughPixels
 !m_boolTransparent
-!m_hCloth2
 !player
 !self
 "
@@ -159,6 +158,8 @@
 #Attrib_TimeLocalization_Hours
 #Attrib_TimeLocalization_Minutes
 #Cancel
+#CardDemoFailure_%u
+#CardDemoSuccess_%u
 #CardEffect_10055_0
 #CardEffect_10076_0
 #CardEffect_10077_0
@@ -377,7 +378,6 @@
 #CardEffect_10822_0
 #CardEffect_10823_0
 #CardEffect_10824_0
-#CardEffect_10825_0
 #CardEffect_10826_0
 #CardEffect_10827_0
 #CardEffect_10838_0
@@ -524,7 +524,6 @@
 #CardEffect_7028_0
 #CardEffect_7031_0
 #CardEffect_7034_0
-#CardEffect_7035_0
 #CardEffect_7036_0
 #CardEffect_7038_0
 #CardEffect_7050_0
@@ -641,6 +640,7 @@
 #DCG_Campaign_PlayAgain
 #DCG_Campaign_PlayNow
 #DCG_CardAttributeValue_Denominator
+#DCG_CardColor_%s
 #DCG_CardEffectDuration_Aura
 #DCG_CardEffectDuration_EndOfNextCombat
 #DCG_CardEffectDuration_EndOfTurn
@@ -664,6 +664,7 @@
 #DCG_CardFaction_%s
 #DCG_CardInfo_Lore_Play
 #DCG_CardInfo_Lore_Stop
+#DCG_CardInfo_MissingCardDemoText
 #DCG_CardInfo_MissingLore
 #DCG_CardText_AbilityCooldown
 #DCG_CardText_AbilityNoCooldown
@@ -1128,7 +1129,6 @@
 #DCG_Glossary_Minion
 #DCG_Glossary_Modify
 #DCG_Glossary_Mulch
-#DCG_Glossary_NoEquipmentRestriction
 #DCG_Glossary_NotTargetable
 #DCG_Glossary_Oathed
 #DCG_Glossary_Passed
@@ -1175,7 +1175,6 @@
 #DCG_Glossary_Tracked
 #DCG_Glossary_Trample
 #DCG_Glossary_Unblocked
-#DCG_Glossary_UniqueEquipmentRestriction
 #DCG_Glossary_Unit
 #DCG_Glossary_Unopposed
 #DCG_Glossary_WeaponItem
@@ -3116,8 +3115,11 @@ $tICollapsed
 %s: %s(%s) '%s' [%d] thinking for %.02f ms!!!
 %s: %s;
 %s: (%d Chars)
+%s: AnimGraph Enum "%s" does not have an option "%s": %s (%d) at %.2f [%d]
 %s: AnimGraph Trying to set parameter: "%s" but does not exist
+%s: AnimGraph Variable is not an Enum: "%s" on %s (%d) at %.2f [%d]
 %s: AnimGraph Variable: "%s" set to "%s" on %s (%d) at %.2f [%d]
+%s: Attempting to set missing AnimGraph Enum Variable: "%s" on %s (%d) at %.2f [%d]
 %s: CSaveRestoreFileSystemPassthrough::WriteFile( %s : %d bytes ) FAILED
 %s: Interp_UpdateRenderTimeType %d/%s defer because entity is becoming predictable
 %s: Out of range control point %d in %s
@@ -3223,7 +3225,6 @@ $tICollapsed
 %u unfinished blocks
 %u,
 %u:%02u:%02u
-%u:%u:%u
 %x %x
 &
 &#9633;
@@ -3563,7 +3564,7 @@ $tICollapsed
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_Popup_PlayPage10StartMatchEvEUlvE2_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_Popup_PlayPage10StartMatchEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CampaignMap17OnDeleteEventDataEvEUlvE_EE
-*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CardPreview13OnTryCardDemoEvEUlvE_EE
+*N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_CardPreview14OnLoadCardDemoE13StrongTypedefIj13CardIDTypeTagLj0EEEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_OnlineMatch16EventNextClickedEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_Popup_Event20StartFindingGameModeEvEUlvE0_EE
 *N5GCSDK17GCClientJobLambdaIZN19CDCG_UI_Popup_Event20StartFindingGameModeEvEUlvE_EE
@@ -3611,6 +3612,7 @@ $tICollapsed
 *N5GCSDK17GCClientJobLambdaIZN30CDCG_UI_Popup_Tutorial_Summary20StartFindingGameModeE13StrongTypedefIj16MissionIDTypeTagLj0EEEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN30CDCG_UI_TourneyPhaseFreeForAll17EventAdvancePhaseEvEUlvE_EE
 *N5GCSDK17GCClientJobLambdaIZN35CDCG_UI_Popup_TourneyShowOpenInvite4InitE13StrongTypedefIy16TourneyIDTypeTagLy0EES2_Iy27TourneyOpenInviteKeyTypeTagLy0EEEUlvE_EE
+*N5GCSDK17GCClientJobLambdaIZN38CDCG_UI_Popup_TutorialMissionSelection29OnPlaySelectedTutorialMissionERKN8panorama9CPanelPtrINS2_8IUIPanelEEEEUlvE_EE
 *N6google8protobuf12_GLOBAL__N_123AggregateErrorCollectorE
 *N6google8protobuf12_GLOBAL__N_123GeneratedMessageFactoryE
 *N6google8protobuf12_GLOBAL__N_123StringBaseTextGeneratorE
@@ -3762,8 +3764,10 @@ $tICollapsed
 *ZN12CDCGCardView30GetImprovementTileAttachEntityEvEUlP20CDCGCardAttachEntityE_
 *ZN12CDCGCardView30OnUpdateAttachEntityVisibilityEbEUlP20CDCGCardAttachEntityE_
 *ZN12CDCGCardView31BHasPassiveAbilitesRuleEntitiesEvEUlP20CDCGCardAttachEntityE_
+*ZN12CDCGCardView32OnEndCastingTargetAttachedEntityE13StrongTypedefIj15ObjectIDTypeTagLj0EEPKS_EUlP28CDCGCompositeStateRuleEntityE_
 *ZN12CDCGCardView33BHasActivatedAbilitesRuleEntitiesEvEUlP20CDCGCardAttachEntityE_
 *ZN12CDCGCardView33GetActivatedAbilitiesRuleEntitiesER10CUtlVectorIP28CDCGRuleEntity_ActiveAbility10CUtlMemoryIS2_iEERS0_IP32CDCGRuleEntity_ItemActiveAbilityS3_IS8_iEEEUlP20CDCGCardAttachEntityE_
+*ZN12CDCGCardView34OnBeginCastingTargetAttachedEntityE13StrongTypedefIj15ObjectIDTypeTagLj0EEPKS_EUlP28CDCGCompositeStateRuleEntityE_
 *ZN12CDCGHandViewC4EP19CDCGView_WorldScenePK5CHandEUlR18ClientStateMachineI13IDCGHandStatePS_ERKS6_E_
 *ZN12CDCGShopView4InitEP19CDCGView_WorldScenePK5CShopEUlvE0_
 *ZN12CDCGShopView4InitEP19CDCGView_WorldScenePK5CShopEUlvE1_
@@ -3781,6 +3785,7 @@ $tICollapsed
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE4_
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE5_
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE6_
+*ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE7_
 *ZN12StateBuilderL16GetCardFunctionsERNS_4CardEEUl10CUtlStringE_
 *ZN12StateBuilderL17GetTowerFunctionsERNS_5TowerEEUl10CUtlStringE0_
 *ZN12StateBuilderL17GetTowerFunctionsERNS_5TowerEEUl10CUtlStringE1_
@@ -3795,6 +3800,7 @@ $tICollapsed
 *ZN12StateBuilderL20GetFountainFunctionsERNS_12FountainUnitEEUl10CUtlStringE3_
 *ZN12StateBuilderL20GetFountainFunctionsERNS_12FountainUnitEEUl10CUtlStringE_
 *ZN12StateBuilderL21GetEquipmentFunctionsERNS_12EquippedItemEEUl10CUtlStringE0_
+*ZN12StateBuilderL21GetEquipmentFunctionsERNS_12EquippedItemEEUl10CUtlStringE1_
 *ZN12StateBuilderL21GetEquipmentFunctionsERNS_12EquippedItemEEUl10CUtlStringE_
 *ZN12StateBuilderL23GetImprovementFunctionsERNS_11ImprovementEEUl10CUtlStringE_
 *ZN13CDCGTowerView10EnterStateE17ETowerDamageStateEUlP21CDCGTowerAttachEntityE_
@@ -4259,44 +4265,11 @@ $tICollapsed
 ../../generated_proto/te.pb.cc
 ../../generated_proto/usermessages.pb.cc
 ../../public/closedcaption/closedcaptions.cpp
-../../public/entity2/entitycomponent.h
-../../public/networksystem/networkquantizedtypes.h
-../../public/ordered_constructor.h
-../../public/scenesystem/vertexformat.h
 ../../public/steam/steammessages_cloud.steamworkssdk.pb.cc
 ../../public/steam/steammessages_helprequest.steamworkssdk.pb.cc
 ../../public/steam/steammessages_oauth.steamworkssdk.pb.cc
 ../../public/steam/steammessages_player.steamworkssdk.pb.cc
 ../../public/steam/steammessages_publishedfile.steamworkssdk.pb.cc
-../../public/tier0/eventdispatcher.h
-../../public/tier0/loggingmetahelpers.h
-../../public/tier0/memstack.h
-../../public/tier0/tslist.h
-../../public/tier0/utlblockmemory.h
-../../public/tier0/utlfixedmemory.h
-../../public/tier0/utlleanvector.h
-../../public/tier0/utllinkedlist.h
-../../public/tier0/utlmultilist.h
-../../public/tier0/utlrbtree.h
-../../public/tier0/utlsignalslot.h
-../../public/tier0/utlsortvector.h
-../../public/tier0/utltshash.h
-../../public/tier2/fieldpath.h
-../public/entity2/concreteentitylist.h
-../public/gcsdk/gcsteamdefines.h
-../public/networksystem/networkfieldscratchdata.h
-../public/panorama/controls/../layout/fillbrush.h
-../public/tier0/threadtools.h
-../public/tier0/utlblockmemory.h
-../public/tier0/utlleanvector.h
-../public/tier0/utllinkedlist.h
-../public/tier0/utlrbtree.h
-../public/tier0/utlsortvector.h
-../public/tier0/utlsymboltable.h
-../public/tier0/utltshash.h
-../public/tier2/fieldpath.h
-../public/tier2/fileutils.h
-./c_baseentity.h
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -4314,6 +4287,7 @@ $tICollapsed
 ./google/protobuf/stubs/stringpiece.h
 ./google/protobuf/unknown_field_set.h
 ./google/protobuf/wire_format_lite_inl.h
+.125
 .@
 .Footstep
 .PLACEHOLDER_VALUE
@@ -4356,6 +4330,32 @@ $tICollapsed
 /actions/move/in/TurnRight
 /boards/
 /high
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/game/client/c_baseentity.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/entity2/concreteentitylist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/entity2/entitycomponent.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/gcsdk/gcsteamdefines.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/networksystem/networkfieldscratchdata.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/networksystem/networkquantizedtypes.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/panorama/controls/../layout/fillbrush.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/scenesystem/vertexformat.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/eventdispatcher.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/loggingmetahelpers.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/memstack.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/threadtools.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlfixedmemory.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlleanvector.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlmultilist.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsignalslot.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsortvector.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsymboltable.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utltshash.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier2/fieldpath.h
+/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier2/fileutils.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.cpp
@@ -4438,6 +4438,7 @@ $tICollapsed
 1 = Animates the pause text so that you can be sure the game isn't just hard locked.
 1 = force setup of refrect / refact pipelines even when using cheap water
 1 to output cl_showanimstate to Msg(). 2 to store in AnimStateClient.log. 3 for both.
+1#
 1'
 1(
 1)
@@ -4654,7 +4655,6 @@ $tICollapsed
 1234
 123457890
 124
-125
 126
 127
 128
@@ -4696,6 +4696,7 @@ $tICollapsed
 12CModelAccessI5CShopE
 12CModelAccessI6CTowerE
 12CModelAccessI9CFountainE
+12CModelAccessI9CItemSlotE
 12CModelAccessI9CPassCoinE
 12CMouthSystem
 12CMsgItemAges
@@ -4955,6 +4956,7 @@ $tICollapsed
 14CEntitySpawnerI15CDCGPathingCardE
 14CEntitySpawnerI15C_BaseAnimatingE
 14CEntitySpawnerI16CDCGDeckCardViewE
+14CEntitySpawnerI16CDCGItemSlotViewE
 14CEntitySpawnerI16CDCGPassCoinViewE
 14CEntitySpawnerI16CDCGStatusEffectE
 14CEntitySpawnerI16C_EntityDissolveE
@@ -5226,6 +5228,7 @@ $tICollapsed
 15C_TriggerCamera
 15C_TriggerVolume
 15CardOwnerChange
+15DoEndDeployment
 15ECameraPosition
 15EDCGCardSubType
 15HandBuyingCards
@@ -5273,6 +5276,7 @@ $tICollapsed
 16CDCGFountainView
 16CDCGGameMovement
 16CDCGHandLikeView
+16CDCGItemSlotView
 16CDCGPassCoinInfo
 16CDCGPassCoinView
 16CDCGPrivateLobby
@@ -5537,6 +5541,7 @@ $tICollapsed
 17C_ViewmodelWeapon
 17CombatPerformance
 17EVideoPlayerEvent
+17FlopEndDeployment
 17FountainStateIdle
 17HandFloppingCards
 17IActionDescriptor
@@ -5624,6 +5629,7 @@ $tICollapsed
 18CEntitySpawnerBaseI15CDCGPathingCardE
 18CEntitySpawnerBaseI15C_BaseAnimatingE
 18CEntitySpawnerBaseI16CDCGDeckCardViewE
+18CEntitySpawnerBaseI16CDCGItemSlotViewE
 18CEntitySpawnerBaseI16CDCGPassCoinViewE
 18CEntitySpawnerBaseI16CDCGStatusEffectE
 18CEntitySpawnerBaseI16C_EntityDissolveE
@@ -5972,6 +5978,7 @@ $tICollapsed
 1d_fx_lane%i_active_left
 1d_fx_lane%i_active_right
 2
+2#
 2(
 2) Blue : %i
 2) Green: %i
@@ -7365,6 +7372,7 @@ $tICollapsed
 2Way_1( %s )
 2_BONE_IK
 3
+3#
 3(
 3*
 3+
@@ -7527,6 +7535,7 @@ $tICollapsed
 31CDCGTooltipCombatPreviewElement
 31CDCG_UI_FriendPickerMultiselect
 31CDCG_UI_PlayerLevelProgressIcon
+31CDCG_UI_Popup_Hero_Demo_Summary
 31CDCG_UI_Tooltip_Ability_Element
 31CDCG_UI_Tooltip_Postgame_Damage
 31CDecalGameSystemDebugVisualizer
@@ -7923,6 +7932,7 @@ $tICollapsed
 36CDCGWinWith4ColorDeckAchievementEval
 36CDCG_HUD_AbilitySummaryElement_Panel
 36CDCG_UI_Popup_Private_Lobby_Settings
+36CDCG_UI_Popup_TutorialBetaTwoWelcome
 36CInlineJob_CMsgGCToClientChatMessage
 36CMsgAMGetUserGameStatsResponse_Stats
 36CMsgClientToGCEventEquipVirtualItems
@@ -8010,6 +8020,7 @@ $tICollapsed
 37ReceivedGameStateServerUpdateResponse
 38CDCGKillHeroInCombatAchievementFactory
 38CDCGPerformance_UnlinkedParticleEffect
+38CDCG_UI_Popup_TutorialMissionSelection
 38CGCSystemMsg_GetPurchaseTrust_Response
 38CGCToGCMsgMasterStartupComplete_GCInfo
 38CGameInstructorSaveRestoreBlockHandler
@@ -8098,6 +8109,7 @@ $tICollapsed
 39FlopPreHeroDeploymentChoicesPerformance
 3C
 4
+4#
 4'
 4(
 4*
@@ -8488,6 +8500,7 @@ $tICollapsed
 4C
 4fff>fff>fff>fff>
 5
+5#
 5(
 5*
 50.0
@@ -8769,6 +8782,7 @@ $tICollapsed
 5IGame
 5ISave
 6
+6#
 6'
 6(
 6*
@@ -8836,6 +8850,7 @@ $tICollapsed
 6ConVar
 6Vector
 7
+7#
 7*
 7.0
 7.5
@@ -8855,6 +8870,7 @@ $tICollapsed
 7INotify
 8
 8 Bit effect
+8#
 8(
 8+
 8000
@@ -8886,6 +8902,7 @@ $tICollapsed
 8Vector2D
 8itemid_t
 9
+9#
 9*
 9+
 9.1.15
@@ -8961,6 +8978,7 @@ $tICollapsed
 9CFunctor2IPFv13CEntityHandle9HSequenceES0_S1_12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEEE
 9CFunctor2IPFv13CEntityHandlefES0_f12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEEE
 9CGameInfo
+9CItemSlot
 9CMsg_Card
 9CP2P_Ping
 9CPassCoin
@@ -8993,6 +9011,7 @@ $tICollapsed
 : Tried to merge from a message with a different type.  to:
 : [
 : failed to parse contents
+:#
 :*
 :1X:
 ::
@@ -9008,6 +9027,7 @@ $tICollapsed
 :context->%p->%s:
 :context->null->UIEngine Global:
 ;
+;#
 ;%s
 ;'
 ;(
@@ -9017,7 +9037,7 @@ $tICollapsed
 ;puzzle_path=%s
 ;section=%s
 ;sv_pausable;sv_cheats
-;{}:layout/panel2dfactory.cpp
+;{}:
 ;{};{}DebugPanelParents
 <
 <%d:%llu>
@@ -9167,6 +9187,8 @@ $tICollapsed
 @C
 @DCGEquipSubSlot_t
 @J
+@O
+@PackOpeningCompleted
 @Y>)F
 @Z@
 @console_max_autocomplete
@@ -11217,7 +11239,6 @@ Actual Render Width
 Actual UI Scale X
 Actual UI Scale Y
 Actual UI Scale Z
-Actually Dota
 Add
 Add a CSS class to a panel after a specified delay.
 Add a CSS class to a panel.
@@ -11340,12 +11361,15 @@ Allows rain in splitscreen
 Allows team members to injure other members of their team
 Alpha for rope antialiasing effect
 Already saw decimal point or exponent; can't have another one.
+AlreadyTriedTutorial
 Altar of the Mad Moon
 Alternate icon definition index %d must be greater than or equal to zero
 AlternateActions
 Ambassador of Quoidge
 Ambient %s:Unknown command %s
 AmbientCubes
+Ammo Type 1
+Ammo Type 2
 Amount of lag used when matching offset to ideal angles in thirdperson view
 Amount to adjust the chase cam's distance on a zoom request
 An RR_Concept couldn't find its string in the symbol table!
@@ -11391,6 +11415,7 @@ AnimationSystemUtils_001
 AnimationSystem_001
 Animgraph Parameters (%d)
 Animgraph debugging entity '%s' (class='%s', index='%d')
+Anna Pavleeva
 AnnihilationLighting
 Anthony Palumbo
 Anti-Mage
@@ -11531,6 +11556,7 @@ Attribute definition %d: Duplicate name "%s"
 Attribute definition %s: Missing required field "name"
 Attribute definition %s: Not a dynamic storage type but has the propagate from bundle flag set which only applies to dynamic attributes
 Attribute definition %s: Unable to find attribute data type '%s'
+Attribute definition %s: Unknown webapi_class '%s'
 Attribute definition index %d must be greater than or equal to zero
 Attribute type not specified in dynamic recipe definition
 Attribute value not specified in dynamic recipe definition
@@ -11540,6 +11566,7 @@ AttributeDesc
 AttributeList* std::__uninitialized_copy<false>::__uninit_copy<AttributeList const*, AttributeList*>(AttributeList const*, AttributeList const*, AttributeList*)
 AttributeList* std::__uninitialized_copy<false>::__uninit_copy<AttributeList*, AttributeList*>(AttributeList*, AttributeList*, AttributeList*)
 AttributeList* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, AttributeList*>(__gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, __gnu_cxx::__normal_iterator<AttributeList const*, std::vector<AttributeList, std::allocator<AttributeList> > >, AttributeList*)
+AttributeList* std::__uninitialized_copy<false>::__uninit_copy<std::move_iterator<AttributeList*>, AttributeList*>(std::move_iterator<AttributeList*>, std::move_iterator<AttributeList*>, AttributeList*)
 AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<Empty_t, AttributeListVariadicSupport<AttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*)
 AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MatchAttributeListNodeContent_t, MatchAttributeListCombineOpVariadicSupport<MatchAttributeList>, TagUnion<AttributeSinglePropertyVariantTypeList> >::AttributeNode*)
 AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode* std::__uninitialized_copy<false>::__uninit_copy<AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*>(AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*, AttributeListBase<MergeAttributeListNodeContent_t, MergeAttributeListCombineOpVariadicSupport<MergeAttributeList>, TagUnion<MergeAttributeSinglePropertyVariantTypeList> >::AttributeNode*)
@@ -11696,6 +11723,7 @@ BaseElement
 BaseEntity.EnterWater
 BaseEntity.ExitWater
 BaseExplosionEffect.Sound
+BaseExplosionTypes_t
 BaseFlexManifest
 BaseHealth
 BaseScenePanel%i
@@ -11832,6 +11860,7 @@ Bracers of Sacrifice
 BracketType
 Brahmi
 Braille
+Bram Sels
 Branches of Iron
 BreakThink
 BreakableModels/*
@@ -11925,7 +11954,6 @@ C* google::protobuf::internal::scoped_ptr<C>::operator->() const [with C = googl
 C-side of entity framework
 C1
 CAD
-CAN
 CANCEL
 CANCELLED
 CAimConstraint
@@ -12141,6 +12169,7 @@ CDCGImprovementInfo
 CDCGInspectCardShadowRegionEntity
 CDCGInspectIndividualCardShadowRegionEntity
 CDCGInventoryManager
+CDCGItemSlotView
 CDCGLaneInfo
 CDCGLaneView
 CDCGLightEnvironment
@@ -13781,7 +13810,6 @@ CardChoices
 CardColor%s
 CardColor1
 CardColor2
-CardColor_%s
 CardColors
 CardCost
 CardCreated
@@ -14185,6 +14213,7 @@ Closing previous connection to %s, hconn=%d, because we have a new one for that 
 Cn
 Co
 CoinContainer
+CoinFXNoMoreActions
 CoinLocal
 CoinOpponent
 ColdLS
@@ -14248,6 +14277,8 @@ CompleteChainCommand
 Completed (Post-Chargeback)
 Completed partial cache for %s from %d parts (%d up to date)
 Completed to %s, %.3f ms elapsed
+CompletedAnyTutorialMission
+CompletedMission
 Component %d for achievement %s found
 Component %d for achievement %s found, but already had that component
 Component %s illegally specified INT_MIN as its priority!
@@ -14473,6 +14504,7 @@ CrossVectors
 Crouching
 Crown of the Undying
 Crystal Maiden
+Crystal Maiden (P)
 Cs
 Cube map failed to read file %s
 CubeMapTexture
@@ -14671,12 +14703,12 @@ DCGCloseCreateGamePopup
 DCGCloseCreateTourneyPopup
 DCGCloseCurrentPopup
 DCGCloseFriendsButtonClicked
+DCGCloseHeroDemoSummary
 DCGCloseLoadDeckPopup
 DCGCloseMissionDialog
 DCGCloseMissionDialog( false )
 DCGClosePostgameStats
 DCGCloseSelectDeckPopup
-DCGCloseTutorialSummary
 DCGClosedCaptioningDropDownChanged
 DCGCoinClicked
 DCGCoinLockStateChanged
@@ -14697,6 +14729,7 @@ DCGContextMenuManager
 DCGContextMenuPlayer
 DCGContextMenuSocial
 DCGContinueToDialogue
+DCGContinueToNextTutorial
 DCGControlsLibrary
 DCGCopyDeckLink
 DCGCopyDeckText
@@ -14756,6 +14789,7 @@ DCGEventVirtualItemUnlocked
 DCGExitInspectModeTakeover
 DCGExitLimintedStage
 DCGExitLiveDraft
+DCGExitTutorial
 DCGExpandMatchHistory
 DCGFWmkuQIKUQsLOF1BQbbeAaEBWBtLJAGLno2JrAF7AT==
 DCGFd82uAIIDKYBQbhdAafdAZC9AYuBZAFBOQGwAYSoAbgBhz==
@@ -14931,6 +14965,7 @@ DCGLiveDraftFlipCard
 DCGLiveDraftInstanceDeleted
 DCGLiveDraftOpponentConceded
 DCGLiveDraftUpdatePage
+DCGLoadCardDemo
 DCGLoadDeckList
 DCGLoadDeckPopupViewDeck
 DCGLoadPlayedCards
@@ -15042,6 +15077,7 @@ DCGPlayPrevClicked
 DCGPlayRankSequence
 DCGPlayRankSequenceComplete
 DCGPlayRewardEventPointsSequence
+DCGPlaySelectedTutorialMission
 DCGPlayTrophySequence
 DCGPlayerLevelProgressIcon
 DCGPlayerProfile
@@ -15105,6 +15141,7 @@ DCGReloadCarouselDecks
 DCGReloadCurrentPage
 DCGRematch
 DCGRemovedTourneyInvite
+DCGReplayCurrentTutorial
 DCGReplayDecompressProgress
 DCGReplayDownloadComplete
 DCGReplayDownloadError
@@ -15112,6 +15149,7 @@ DCGReplayDownloadProgress
 DCGReplayDownloadProgress( %llu, %%2.1f )
 DCGReplayDownloadRequested
 DCGReplayExistence
+DCGReplayHeroDemo
 DCGReplayManager
 DCGResetTraining
 DCGRewardPopupClosed
@@ -15134,6 +15172,7 @@ DCGSelectItem
 DCGSelectLocalPlayerDeck
 DCGSelectPlayerOkClicked
 DCGSelectQuestNode
+DCGSelectTutorialMission
 DCGSetAdvertiseBeaconActive
 DCGSetAudioDefaults
 DCGSetChannelUserIgnored
@@ -15187,6 +15226,7 @@ DCGShowFountainInspectTakeover
 DCGShowGlossaryTextTooltip
 DCGShowGlossaryTextTooltipOnPanel
 DCGShowGraphColumnCardsTooltip
+DCGShowHeroDemoSolution
 DCGShowInspectGoldCostTooltip
 DCGShowInspectIncludedByTooltip
 DCGShowInspectManaTooltip
@@ -15241,6 +15281,8 @@ DCGShowTextForThingCopiedSuccessfully
 DCGShowTextTooltipInXML
 DCGShowTourneyPage
 DCGShowTourneyPickerPage
+DCGShowTutorialLauncher
+DCGShowTutorialMissionSelectionPopup
 DCGShowUnlocalizedTextTooltip
 DCGShowZooPage
 DCGShutOffLastCardGlow
@@ -15272,9 +15314,11 @@ DCGStopEventSoundLoop
 DCGStopHoverSummary
 DCGStopSuppressingPopups
 DCGSubmitChatText
+DCGSubmitFeedbackDuringGame
 DCGSubmitPasteBoard
 DCGSubmitUserFeedback
 DCGSwapPlayersOkClicked
+DCGSwissTiebreaker
 DCGTextTooltip
 DCGToggleBenchList
 DCGToggleChatTargetSounds
@@ -15428,6 +15472,7 @@ DCG_FeaturedEvent_Deck%i_Desc
 DCG_FindDiffs
 DCG_Gauntlet_%s_
 DCG_Gauntlet_Rewards_%d_Wins_%d
+DCG_Hero_Demo_Play_Again
 DCG_Improvement.Generic
 DCG_Improvement.Generic_Loop
 DCG_Inspect.Close
@@ -15480,10 +15525,12 @@ DCG_PhaseAnnouncement_ShoppingStart
 DCG_PhaseAnnouncement_VS
 DCG_PhaseAnnouncement_YourTurn
 DCG_PhaseAnnouncement_YourTurnAgain
+DCG_Popup_CampaignTutorialTwoLaunchButton
 DCG_PreGame.Hero_Roster_Splash_Screen
 DCG_PrivateLobby_TimerOff
 DCG_PrivateLobby_TimerOn
 DCG_Profile_InvalidAccountTitle
+DCG_ResultScreen_Quit_Puzzle
 DCG_Shop.End_Close
 DCG_Shop.End_CoinFlash
 DCG_Shop.Land
@@ -15559,6 +15606,7 @@ DCG_UI.Gauntlets_Rollover_PhantomDraft
 DCG_UI.Gauntlets_Select_ExpertConstructed
 DCG_UI.Gauntlets_Select_KeeperDraft
 DCG_UI.Gauntlets_Select_PhantomDraft
+DCG_UI.MainMenu_Select
 DCG_UI.Rewards_Claim_Rollover
 DCG_UI.Rewards_Claim_Select
 DCG_UI.SocialPlay_Rollover_FriendsList_Challenge
@@ -15918,6 +15966,7 @@ DeleteSelectedDeckConfirmed
 DeleteSelectedDeckConfirmed( %u )
 DeleteVideoPlayer
 Demagicking Maul
+Demo for %s (%d)
 Demolishing Warhammer
 Demonic Archer
 Dendi
@@ -16079,7 +16128,6 @@ DoAllocateEntity pEntity->m_pInstance != NULL %d
 DoIncludeScript
 DoLookAhead invoked depth: %d numMoves: %d
 DoScriptAssert
-DoSetupCloth
 DoUniqueString
 DockBottom
 DockLeft
@@ -16345,6 +16393,23 @@ ETB
 ETX
 EUR
 EXPERIMENTAL: Sets a more-complex brush for the entire border paint area (ignores normal border color).<br><br><b>Examples:</b><pre>border-brush: gradient( linear, 0% 0%, 0% 100%, from( #fbfbfbff ), to( #c0c0c0c0 ) );border-brush: gradient( linear, 0% 0%, 0% 100%, from( #fbfbfbff ), color-stop( 0.3, #ebebebff ), to( #c0c0c0c0 ) );border-brush: gradient( radial, 50% 50%, 0% 0%, 80% 80%, from( #00ff00ff ), to( #0000ffff ) );</pre>
+EXPLOSION_TYPE_COUNT
+EXPLOSION_TYPE_CUSTOM
+EXPLOSION_TYPE_DEFAULT
+EXPLOSION_TYPE_ELECTRICAL
+EXPLOSION_TYPE_EMP
+EXPLOSION_TYPE_EXPLOSIVEBARREL
+EXPLOSION_TYPE_FIREWORKS
+EXPLOSION_TYPE_FLASHBANG
+EXPLOSION_TYPE_GASCAN
+EXPLOSION_TYPE_GASCYLINDER
+EXPLOSION_TYPE_GRENADE
+EXPLOSION_TYPE_ICE
+EXPLOSION_TYPE_MOLOTOV
+EXPLOSION_TYPE_NONE
+EXPLOSION_TYPE_SHRAPNEL
+EXPLOSION_TYPE_SMOKEGRENADE
+EXPLOSION_TYPE_TRIPMINE
 EXPORTSYSTEM_INTERFACE_VERSION_001
 EXRHeader variable is not initialized.
 E_
@@ -16397,9 +16462,12 @@ Effects: %x
 Efficient Killer
 Egyptian_Hieroglyphs
 Eidolon
+Eidolon Placeholder
+Eidolon Placeholder 2
 Eiffel tower
 Elapsed
 Elder Mass
+Electrical
 Electrical.Explode
 Element Style
 Embedded profile length in iCCP chunk is negative
@@ -16531,7 +16599,6 @@ Entity "%s" encountered an error in RunPrivateScript()
 Entity %d: %s became %s on client
 Entity %s [%s]: Invalid keyvalue type for 'parentname' key of skeleton instance!
 Entity '%s'
-Entity Class Name
 Entity Dump
 Entity Health Fraction [0.0, 1.0]
 Entity Hierarchy For %d:
@@ -16566,6 +16633,7 @@ EntityIOConnection_t
 EntityIOQueuePrioritizedEvent_t
 EntitySkeleton
 EntitySubclassID_t
+EntitySubclassUtilsV001
 EntitySystem - Class Tables
 EntitySystem - Entity Networking - finish
 EntitySystem - Entity Networking - start
@@ -16599,7 +16667,7 @@ Equipped onto %s
 Error (%d:%d)
 Error - Requires a CardID or name
 Error - no parameters allowed
-Error loading entity subclass '%s': %s
+Error allocating entity subclass '%s' vdata %s
 Error parsing event '%s'.  %s
 Error parsing keyvalues
 Error parsing text-format
@@ -16680,6 +16748,7 @@ Example trace message
 ExampleTraceMessage
 Exceeded maximum protobuf size of 2GB:
 Exceeded size limit while expanding chunk
+Execute a puzzle action
 Execute a script (internal)
 Execute a vscript file, replacing existing functions with the functions in the run script
 Execute all of this entity's VScripts, replacing existing functions with the functions in the run scripts
@@ -16710,6 +16779,7 @@ ExplodeDamage
 ExplodeRadius
 Explosion.GasCan
 Explosion_global_client
+Explosive Barrel
 ExplosiveBarrel.Explode
 Exponential Decay
 Exporting photogrammetry shots: %dx%d fov=%d
@@ -16904,7 +16974,6 @@ Failed parsing set %s in region file %s
 Failed post load validation of node %u
 Failed to Query Connection State
 Failed to activate script entity %s of type %s: script entity instance is null
-Failed to allocate an instance of class '%s'
 Failed to compute channel layout.
 Failed to convert introspected block: %s
 Failed to create camera of type '%u'
@@ -17016,7 +17085,10 @@ FailedToGetResult
 Faith
 Fakes an achievement.
 False
+False Flag - Bronze Legion
+False Flag - Vhoul Rebellion
 Farvhan the Dreamer
+Farvhan the Dreamer (P)
 FastHexToBuffer() wants non-negative integers, not
 FastRetrigger: %s
 FeEffectName
@@ -17134,6 +17206,7 @@ Find
 Find a key in the VM
 Find and list all entities with classnames or targetnames that contain the specified substring.Format: find_ent <substring>
 Find the delta between two QAngles.
+FindAncestor
 FindAndRemove
 FindChild
 FindChildInLayoutFile
@@ -17180,6 +17253,7 @@ FireEntityIOInputNameOnly
 FireEntityIOInputString
 FireEvent: event '%s' not registered.
 Fires
+Fireworks
 Fireworks.Explode
 First argument to Swap() (of type "
 First argument to SwapFields() (of type "
@@ -17192,6 +17266,7 @@ Fist of the Allseeing One
 FixupResourceName: Illegal full path passed in ("%s")!
 FixupResourceName: Illegal path, missing extension passed in ("%s")!
 Flags :%d
+Flashbang
 Flashbang.Explode
 FlattenedSerializersVersion001
 Flesh of Iron
@@ -17211,6 +17286,7 @@ FloatBitMap_t::LoadFromBuffer: Received improper buffer size, skipping!
 FloatBitMap_t::LoadFromBuffer: Unsupported color format, skipping!
 FloatBitMap_t::LoadFromFloatBitmap: Received improper bitmap size, skipping!
 FloatBitMap_t::WriteToBuffer: Received improper buffer size %s (expecting %s), skipping!
+FlopEndDeploymentPerformance
 FlopPlayerMakingHeroDeploymentDecisionsPerformance
 FlopPostHeroDeploymentChoicesPerformance
 FlopPreHeroDeploymentChoicesPerformance
@@ -17471,7 +17547,9 @@ GamepadInput
 GamepadInserted
 GamepadRemoved
 Games VS AI start with the shot clock enabled.
+Gas Cylinder
 GasCylinder.Explode
+Gascan
 Gaseous Greevil
 Gather the Faithful
 Gathering overrides for %s 0x%p
@@ -17836,6 +17914,7 @@ Has match clock.
 Has the user dismissed the tutorial welcome screen?
 HasAbilities
 HasAction
+HasActions
 HasActiveAbility
 HasActiveConditionalDamageBonus
 HasArmor
@@ -17861,11 +17940,13 @@ HasCreator
 HasDamageType
 HasDeathShield
 HasDeathShieldModifier
+HasDecay
 HasDecayModifier
 HasDeck
 HasDeckCode
 HasDeckErrors
 HasDeckSelection
+HasDemoSummaryText
 HasDescription
 HasDisarmedModifier
 HasEditStage
@@ -17905,6 +17986,8 @@ HasMissedMessages
 HasMultipleGroups
 HasMutations
 HasNegativeArmor
+HasNextMission
+HasNoActions
 HasOpenSpectator
 HasOption
 HasOverdraw
@@ -18064,6 +18147,7 @@ HideDecks
 HideDeploymentSeperators
 HideDistance
 HideEquipmentSlots
+HideGold
 HideHUDCard
 HideHeroButtons
 HideHeroes
@@ -18071,6 +18155,7 @@ HideHistogram
 HideItemCount
 HideItemDisplay
 HideItemSlots
+HideMana
 HideMemberCount
 HidePhaseContainer
 HidePreviewType
@@ -18084,7 +18169,6 @@ HideThroughOpacity
 HideTimeline
 HideToasts
 HideTowerHUDCard
-HideUI
 HideWorldLayerAndDestroyEntities
 Hides this layer
 Hiding
@@ -18231,6 +18315,7 @@ ITEM_FLAG_NOAUTOSWITCHEMPTY
 ITEM_FLAG_NOITEMPICKUP
 ITEM_FLAG_SELECTONEMPTY
 IToolObject
+Ice
 Ice Shard
 Ice Shards
 IceFrog
@@ -18801,6 +18886,11 @@ IsActivatedAbility
 IsActiveAbility
 IsActivePlayer
 IsAdmin
+IsAllegianceBlack
+IsAllegianceBlue
+IsAllegianceColorless
+IsAllegianceGreen
+IsAllegianceRed
 IsAppliedEffect
 IsArmor
 IsAttachedToParent
@@ -18857,6 +18947,7 @@ IsEmpty
 IsEphemeral
 IsEquipment
 IsFacedown
+IsFinalMission
 IsFlop
 IsGauntlet
 IsGreen
@@ -18949,6 +19040,7 @@ IsTier%d
 IsTooltip
 IsTowerCombatPreview
 IsTriggeredAbility
+IsTutorialMission
 IsUnit
 IsUnlimitedCollection
 IsUnplayable
@@ -18963,6 +19055,7 @@ Item %d contains both a team + corporation brand which is illegal!
 Item %s: Armory remap definition "%s" was not found
 Item %s: Store remap definition "%s" was not found
 Item Deck:
+Item Slot
 Item definition %s: "max_ilevel" must be greater than or equal to 0
 Item definition %s: "min_ilevel" must be greater than or equal to 0
 Item definition %s: Contains a non-static attribute '%s' in the 'static_attributes' block!
@@ -18985,7 +19078,6 @@ Item set %s: item definition %u "%s" appears multiple times
 Item set %s: item definition %u "%s" specified in multiple item sets
 ItemAttribNeutral
 ItemDescStrangify
-ItemEquipped
 ItemFlagTypes_t
 ItemNameCraftNumberFormat
 ItemNameUniqueFormat
@@ -19004,6 +19096,7 @@ Item_%s
 ItemsAbilityContainer
 ItemsGameFile
 Izzy
+Izzy Medrano
 J
 J'
 J'Muy the Wise
@@ -19046,6 +19139,7 @@ JoinButtonLabel
 JoiningGamePopup
 Joints: %d (%d)
 Joseph Meehan
+Joseph Weston
 Joy : voiced postalveolar afficate
 Jul
 Julie Baroh
@@ -19261,9 +19355,10 @@ Leather Armor
 Leave a chat channel
 LeaveButton
 LeaveMatchConfirmed
-LeaveMatchConfirmed()
+LeaveMatchConfirmed(false)
 LeaveTourneyButton
 Leaving lane %d, going to zone %s
+Lee Setiawan
 Leech Seed
 LeftArrow
 LeftArrowAvailable
@@ -19654,6 +19749,7 @@ MapValueRef::type MapValueRef is not initialized.
 Mar
 March of the Machines
 Marcus
+Marius Bota
 Mark Winters
 MarkInterpolationLatchFlagsDirty:  C_BaseEntity::IsLatchedPermissible() == false
 MarkSurroundingBoundsDirty
@@ -19860,12 +19956,14 @@ Missing number of charges specified
 Missing sprite material %s
 Missing token %s (from %s)
 Missing value for currency type %s for price point %u
+Mission %d
 Mission %d Claim
 Mission %d Slot
 MissionCompleted
 MissionDialogContainer
 MissionFailed
 MissionWon
+MissionsList
 Mist Coil
 Mist of Avernus
 MixedShadowsChanged
@@ -19877,7 +19975,6 @@ Mode Rules
 ModeDialog%i
 Model %s missing bone and flex counts (%d < %d), init %d
 Model used on the ground or held by an entity
-Model: %s still has cloth setup when a new setup is being requested.
 Model:%s
 ModelConfigHandle_t
 ModelDocUtils001
@@ -19900,6 +19997,7 @@ ModifierDurationUntilOverwriteItem
 ModifierDurationUntilRoundStart
 Mogul Khan
 Mogul Khan (P)
+Molotov
 Molotov.Explode
 Moment of Courage
 MomentumType_Friction
@@ -19908,6 +20006,7 @@ MomentumType_SpringAwayFromSnapValue
 MomentumType_SpringTowardSnapValue
 Mongolian
 Monocolors
+Mood
 Moonglade Fusilier
 Morphling Whelp
 Mortred's Dagger
@@ -20852,6 +20951,7 @@ N8panorama9CUIEvent5I13StrongTypedefIy16TourneyIDTypeTagLy0EES1_Ih19TourneyPhase
 N8panorama9CUIEvent5IjNS_9CPanelPtrINS_8CPanel2DEEEfffEE
 N8panorama9CUIEvent6IPKciiS2_iiEE
 N9C_EnvWind26NetworkVar_m_EnvWindSharedE
+N@
 NAK
 NDebugOverlay::Box
 NDebugOverlay::Line
@@ -21204,6 +21304,7 @@ O*9y
 O+
 OFF
 OK
+OMTemp
 ORIENT
 OSCILLATE_POSE_PARAMETERS
 OUTBUFF_FULL
@@ -21463,7 +21564,7 @@ OutputType_AnimationCycle
 OutputType_RotationX
 OutputType_RotationY
 OutputType_RotationZ
-Outworld Devourer
+Outworld Destroyer
 OverMaxPips
 Overcharged Artificer
 OverdrawCount
@@ -21880,7 +21981,6 @@ PackCardScene
 PackCards
 PackInPosition
 PackIsOpening
-PackOpeningCompleted
 PackPurchaseBox
 Pack_Price
 Packed store %s with refcount > 0.
@@ -22352,6 +22452,7 @@ PopupExplain
 PopupGauntletReward
 PopupGeneric
 PopupGenericTextEntry
+PopupHeroDemoSummary
 PopupInitialClaim
 PopupJoinChatChannel
 PopupLoadDeck
@@ -22384,6 +22485,9 @@ PopupTest
 PopupTickets
 PopupTourneyCreate
 PopupTrophy
+PopupTutorialBetaTwoWelcome
+PopupTutorialMissionIntro
+PopupTutorialMissionSelection
 PopupTutorialSummary
 PopupTutorialWelcome
 PopupUserFeedback
@@ -22773,7 +22877,6 @@ RatchetType_Absolute
 RatchetType_EachEngage
 RavageLighting
 Ravenous Mass
-Raw bytes alloc'd: %s
 RayTracingEnvironment::RefineNode
 RayTracingEnvironment::RefineNodeJob
 Rd
@@ -23859,6 +23962,7 @@ Show Friends and Family Message at game start.
 Show IK trace related details
 Show Immediate
 Show Tutorian welcome message
+Show Welcome message for beta 2 tutorial
 Show a card preview for the specified card ID.
 Show a tooltip summary of the specified deck
 Show a user's profile card. Use pro name determines whether to use their professional team name if applicable.
@@ -24003,6 +24107,7 @@ Skip the VS intro
 SkipBlanks
 SkyStateChanged
 Skywrath Mage
+Skywrath Mage (P)
 Sleeping
 Slider.DisabledTextColor1
 Slider.DisabledTextColor2
@@ -24036,6 +24141,7 @@ Smear boneflags across the model.  Costs computation, but tests to make sure you
 Smeevil Armsmaster
 Smeevil Blacksmith
 SmlDenominator
+Smoke Grenade
 SmokeGrenade.Explode
 Smooth client's view after prediction error over this many seconds
 Smooth curve decreasing slower as it approaches zero
@@ -24051,7 +24157,6 @@ SoftwareKeyboardVisible
 SolidCone
 SolidType_t
 SoloFriend
-Solution
 Solves the current puzzle.
 Some test string
 Sonic Bubble
@@ -24426,7 +24531,6 @@ StyleLink
 StylesDirtied
 SubPanelBgColor
 SubmitLoadPuzzleSelection
-SubphaseEnd
 Subtitle offset distance (forward, in front of player)
 Subtitle vertical offset distance (positive is up)
 Subtitles and Captions
@@ -24692,7 +24796,6 @@ The capsule pogo stick frequency [hz].
 The deck to use for the AI v AI testing
 The directory that replays should be placed into
 The engine will set this to 1 if vprof_vtrace is enabled but VTrace itself was not detected.
-The entity designer class name of the entity to spawn.
 The entity instance is too large for type %s! Make more components referenced!
 The entity to specifically debug
 The first enum value must be zero in proto3.
@@ -24815,6 +24918,7 @@ TimerMode
 TimerSettingIcon
 Tinker
 Tiny
+Tiny (P)
 TitleBarBgColor
 TitleBarDisabledBgColor
 TitleBarDisabledFgColor
@@ -24999,7 +25103,6 @@ Tried to add unknown game system %s!
 Tried to allocate a texture that is too big to fit on an entity panel!
 Tried to calc delta to a src message of a different type.
 Tried to destroy (from script) a networked entity (%d/%s) on the client, the server controls lifespan, ignoring
-Tried to load a polymorphic pointer with no '%s' key
 Tried to merge messages of different types
 Tried to register a non-generated type with the generated type registry.
 Trigger %s triggered - Source %s - Event %s
@@ -25009,6 +25112,7 @@ TriggerOnce: %s
 TriggerStyle
 TriggerTriggered
 Triggers the creation of entities in a manually-completed spawn group
+Tripmine
 Tripmine.Explode
 Troll Soothsayer
 Troll Warlord
@@ -25054,14 +25158,11 @@ Turns on optimizations for GetMatchingObjects.
 Turns on the absbox for all active physics objects.  0 : un-highlight.
 Turns on turbo physics
 Tusk
-Tutorial Ally 2
-Tutorial Ally 3
-Tutorial Enemy 1
-Tutorial Enemy 2
-Tutorial Enemy 3
+Tusk (P)
 TutorialButtonEnabled
 TutorialEvent_t
 TutorialHighlight
+TutorialMissionSnippet
 Tweak this parameter to adjust Free Camera mouse rotation.
 Tweak this parameter to adjust Free Camera movement acceleration.
 Tweak this parameter to adjust Free Camera movement max speed.
@@ -25380,7 +25481,6 @@ Usage: fake_achievement <achievement id> <player id> <times achieved>
 Usage: gauntlet_join <id>
 Usage: gauntlet_queue <id>
 Usage: gauntlet_register_deck <id> <deck code>
-Usage: induce <start|stop|action id>
 Use 5 Consumables
 Use IK on in-place turns.
 Use Raw Input for mouse input.
@@ -25441,6 +25541,7 @@ VBAllocTracker001
 VBaseFileSystem011
 VBik001
 VConComm001
+VDataChoice( scripts/ammo.vdata )
 VDebugService_001
 VENGINE_GAMEUIFUNCS_VERSION005
 VERT_JUSTIFICATION_BOTTOM
@@ -25907,6 +26008,7 @@ Whether to draw chat bubbles int the UI or not
 Whether to invert the Y axis of the joystick for looking.
 Which 'column' to display this weapon in the HUD
 Which 'row' to display this weapon in the HUD
+Which card is this a demo for?
 Which rumble effect to use when fired? (xbox)
 Which stick controls movement (0 is left stick)
 Which version of the store to display.
@@ -26109,6 +26211,8 @@ ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8fun
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E20_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E21_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E22_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E23_
+ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E24_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E2_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E3_
 ZN12StateBuilder16GetUnitFunctionsINS_10CombatUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E4_
@@ -26133,6 +26237,8 @@ ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8f
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E20_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E21_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E22_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E23_
+ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E24_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E2_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E3_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E4_
@@ -26142,9 +26248,24 @@ ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8f
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E8_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E9_
 ZN12StateBuilder16GetUnitFunctionsINS_12FountainUnitEEESt6vectorISt4pairIPKcSt8functionIFv10CUtlStringEEESaISA_EERT_EUlS7_E_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE0_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE1_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE2_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE3_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE4_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE5_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE6_
 ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_10CombatUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE0_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE1_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE2_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE3_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE4_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE5_
+ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE6_
 ZN12StateBuilder20CDCGGameStateBuilder17SetUnitPropertiesINS_12FountainUnitEEEvP13CDotaCardGameP11CGameObjectRKNS_4UnitIT_EEEUlS4_RK25IAttributeContainerReaderRK17SpecificObjects_tE_
 ZN13CDotaCardGame21CreateDuplicateInZoneEP11CGameObject9EGameZonei13StrongTypedefIj15ObjectIDTypeTagLj0EES3_Ij13CardIDTypeTagLj0EEOSt8functionIFvS1_EEEd_UlS1_E_
+ZN17FlopEndDeployment7OnEnterER18ClientStateMachineI15IDCGClientStateP8CDCGViewEEUlP28IDCGPerformanceScriptContextE_
 ZN18AsyncCaptionData_t9AsyncLoadEPKciEUlP18IAsyncReadRequest220AsyncRequestStatus_tE_
 ZN18CNewParticleEffect7RestartEvEUlvE_
 ZN18ClientStateMachineI13IDCGHandStateP12CDCGHandViewE7OnEventI12TimerExpiredEEvRKT_EUlvE_
@@ -26187,6 +26308,7 @@ ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI14CardZoneChangeEEvR
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI14EndCardCastingEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI14EndHeroCastingEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI15CardOwnerChangeEEvRKT_EUlvE_
+ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI15DoEndDeploymentEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI15HoverCardInHandEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI16BeginCardCastingEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI16BeginCombatPhaseEEvRKT_EUlvE_
@@ -26207,7 +26329,6 @@ ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI19CardCastingCancele
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI19CardIsCastingTargetEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI19DoInitialFlopCommitEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI20ReceivedServerUpdateEEvRKT_EUlvE_
-ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI20ShoppingWaitCompleteEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI21BeginInitialFlopPhaseEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI21DoFlopHeroPerformanceEEvRKT_EUlvE_
 ZN18ClientStateMachineI15IDCGClientStateP8CDCGViewE7OnEventI23AutoScrollingHandToCardEEvRKT_EUlvE_
@@ -26285,11 +26406,11 @@ ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18Regis
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI27FinishedUpdatingGameObjects46InitialFlopPlayerMakingHeroDeploymentDecisionsEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate30CardPlayWaitingForPlayerActionEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate31PlayerMakingPurchasingDecisionsEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
-ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate32StoreWaitingForServerStateChangeEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate39FlopPlayerMakingHeroDeploymentDecisionsEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate46InitialFlopPlayerMakingHeroDeploymentDecisionsEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE18RegisterStateEventI29ReceivedGameStateServerUpdate49FlopSyncAfterBothPlayersDeployedHeroesPerformanceEEvMT0_FvRS4_RKT_EEUlSA_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI14BeginFlopPhase19FlopPhaseTransitionEEvvEUlRS4_PKvE_
+ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI15DoEndDeployment17FlopEndDeploymentEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI16BeginCombatPhase21CombatPhaseTransitionEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI16ShoppingComplete32StoreCloseAndGoToFlopPerformanceEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI16ShoppingTimedOut24StoreTimedOutPerformanceEEvvEUlRS4_PKvE_
@@ -26303,7 +26424,6 @@ ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23Regis
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI18ServerWaitComplete27CardPlayShowCardPerformanceEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI19BeginEndOfTurnPhase24EndOfTurnPhaseTransitionEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI19DoInitialFlopCommit31InitialFlopCommittedPerformanceEEvvEUlRS4_PKvE_
-ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI20ShoppingWaitComplete27WaitingForServerStateChangeEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI21BeginInitialFlopPhase26InitialFlopPhaseTransitionEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI21DoFlopHeroPerformance50FlopPlayerMakingHeroDeploymentDecisionsPerformanceEEvvEUlRS4_PKvE_
 ZN18IStateMachineStateI18ClientStateMachineI15IDCGClientStateP8CDCGViewEE23RegisterStateTransitionI21DoFlopHeroPerformance57InitialFlopPlayerMakingHeroDeploymentDecisionsPerformanceEEvvEUlRS4_PKvE_
@@ -26732,6 +26852,7 @@ _end
 _fini
 _flt.vpk
 _internalYield
+_not_pickable
 _octree.dat
 _preMultOffset
 _reflection
@@ -26823,6 +26944,7 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/client_core.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_client_gc_system.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_carddraw.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_cardplay.cpp
+_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_combat.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_endofturn.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_flop.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/dcg_clientstatemachine_pregame.cpp
@@ -26847,6 +26969,7 @@ _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/world_scene/dcg_fo
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/world_scene/dcg_hand_view.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/world_scene/dcg_lane_view.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/world_scene/dcg_pass_coin_view.cpp
+_vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../dcg/world_scene/dcg_target_view_manager.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../econ/tool_items/custom_texture_cache.cpp
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../econ/tool_items/custom_texture_cache.h
 _vpc_/unity_client_dota_card_game/linuxsteamrt64/../../../fx.cpp
@@ -26902,6 +27025,7 @@ ability_name
 ability_prefix
 ability_text
 ability_type
+abilitycharges
 abilitycooldown
 about:blank
 abs( %s )
@@ -27079,7 +27203,6 @@ angular_fog_max_start
 angular_fog_min_end
 angular_fog_min_start
 angular_velocity_cp
-animTimeSerializer
 anim_disable
 anim_noposeparameters
 anim_prefix
@@ -27568,6 +27691,8 @@ card_attribute
 card_attribute [type] [attribute] [value]
 card_color
 card_count
+card_demo_failed_text
+card_demo_success_text
 card_draw_initial
 card_gold_cost_bottom_right
 card_gold_cost_top_left
@@ -28363,7 +28488,7 @@ cycler_flex used on model %s without enough flexes.
 czech
 d
 d(
-d@selected_leaderboard_name
+d@ClosingPopup
 dOg : lower-mid back rounded vowel
 da_DK
 dac_dof_far_blurry
@@ -28475,6 +28600,7 @@ dcg_card_battle_sleeve_entity
 dcg_card_collision_proxy
 dcg_card_combat_arrow_entity
 dcg_card_combat_preview_entity
+dcg_card_demo
 dcg_card_entity_animation_rate_scale
 dcg_card_fade_time
 dcg_card_fake_shadow_region
@@ -28554,6 +28680,7 @@ dcg_dev_debug_attribute_lists
 dcg_disable_imp_timer_events
 dcg_disconnect
 dcg_dismissed_tutorial_welcome
+dcg_dismissed_tutorial_welcome_beta_two
 dcg_draft_ai_delay
 dcg_draft_benchlist_visible
 dcg_draft_pause_ai
@@ -28758,6 +28885,7 @@ dcg_investment_bonus_per_level
 dcg_investment_gold_for_skipping_shopping
 dcg_item_name
 dcg_item_rarity
+dcg_item_slot
 dcg_join_regional_chat_channel
 dcg_keybindings_cloud_disable
 dcg_lane_info
@@ -28841,6 +28969,7 @@ dcg_position_panel_attach
 dcg_print_bonus_progress
 dcg_print_deck_code_contents
 dcg_print_reward_locks
+dcg_puzzle_action
 dcg_queue_draft
 dcg_queue_game_mode_id
 dcg_random_seed
@@ -28907,6 +29036,7 @@ dcg_show_splash_ads
 dcg_show_steam_login
 dcg_show_timer_rope
 dcg_show_tutorial_welcome_message
+dcg_show_tutorial_welcome_message_beta_two
 dcg_siege_hits_always
 dcg_simulate_ai_disconnect
 dcg_simulate_connection_status_change
@@ -28926,9 +29056,14 @@ dcg_stop_timer_rope
 dcg_suppress_aura_source_beams
 dcg_suppress_beams_to_dangerous_targets
 dcg_sync_deployment_buttons
+dcg_target_hand_max_depth
+dcg_target_hand_min_depth
+dcg_target_max_delay_time
 dcg_target_selection_x
 dcg_target_selection_y
 dcg_target_selection_z
+dcg_target_snapback_time
+dcg_target_transition_time
 dcg_test_achievement_toast
 dcg_test_achievements_in_bot_match
 dcg_test_achievements_in_bot_match_starting_progress
@@ -29004,6 +29139,7 @@ decalFadeDuration
 decalScale
 decalScaleVariation
 decalStartFadeTime
+decayAmount
 decaymodifier
 december_update
 deck code
@@ -29807,6 +29943,7 @@ file://{resources}/layout/popups/popup_fullscreen_html.xml
 file://{resources}/layout/popups/popup_gauntlet_reward.xml
 file://{resources}/layout/popups/popup_generic.xml
 file://{resources}/layout/popups/popup_generic_text_entry.xml
+file://{resources}/layout/popups/popup_hero_demo_summary.xml
 file://{resources}/layout/popups/popup_initial_claim.xml
 file://{resources}/layout/popups/popup_intro_movie.xml
 file://{resources}/layout/popups/popup_join_chat_channel.xml
@@ -29848,6 +29985,9 @@ file://{resources}/layout/popups/popup_tourney_set_seedings.xml
 file://{resources}/layout/popups/popup_tourney_show_open_invite.xml
 file://{resources}/layout/popups/popup_tourney_swap_players.xml
 file://{resources}/layout/popups/popup_trophy.xml
+file://{resources}/layout/popups/popup_tutorial_beta_2_welcome.xml
+file://{resources}/layout/popups/popup_tutorial_mission_intro.xml
+file://{resources}/layout/popups/popup_tutorial_mission_selection.xml
 file://{resources}/layout/popups/popup_tutorial_summary.xml
 file://{resources}/layout/popups/popup_tutorial_welcome.xml
 file://{resources}/layout/popups/popup_user_feedback.xml
@@ -30076,7 +30216,6 @@ forceLimit
 force_centerview
 force_display
 force_npc_height
-force_output_description
 forced_item_quality
 forceshortmovement
 forestgreen
@@ -30253,6 +30392,7 @@ gaussian(
 gc inter msg %s, SourceAppID %d, version %hd, job source %llu, job target %llu
 gc msg %s, SteamID %llu
 gc msg %s, SteamID %llu, version %hd, job source %llu, job target %llu
+gcSignoutInProgress
 gc_chat_channel_list_updated
 gc_connected
 gc_mismatched_version
@@ -31290,6 +31430,7 @@ kIntotheFray
 kIonShell
 kIronFogGoldmine
 kIronSharpensIron
+kItemEquipped
 kJasperDaggers
 kJuke
 kJuxtapose
@@ -31581,6 +31722,7 @@ lavenderblush
 lawngreen
 layerSequence%d
 layout-position
+layout/panel2dfactory.cpp
 layout/stylepropertyfactory.cpp
 layout_file
 layoutfailed
@@ -32510,7 +32652,6 @@ m_fLockedPoints
 m_fMatchScore
 m_fMaxRange1
 m_fMaxRange2
-m_fMinAdvanceToRange1
 m_fMinRange1
 m_fMinRange2
 m_fNextEvent
@@ -33223,6 +33364,7 @@ m_iszPrivateVScripts
 m_iszSkyEntity
 m_iszSoundScriptName
 m_iszStackName
+m_iszWeaponParseDataNameOverride
 m_iv_AnimOpHistory
 m_iv_AnimOverlay
 m_iv_AnimOverlay[ %d ]
@@ -33695,7 +33837,6 @@ m_sBoneName
 m_sChainName
 m_sClassName
 m_sComment
-m_sEntityClassName
 m_sGroupName
 m_sLandmark
 m_sLandmarkName
@@ -34032,6 +34173,7 @@ mat_viewportupscale
 matchCardAchievements%d
 matchCardAchievements%u
 matchClock
+matchDurationS
 matchID
 matchList
 matchMode
@@ -34381,6 +34523,7 @@ molotov
 momentumModifier
 momentumType
 month
+mood
 mostrecentphase
 mouse_inverty
 mouse_over_drag_target
@@ -34882,6 +35025,8 @@ panorama/images/card_art/set%02u/hero_icons/*.vtex_c
 panorama/images/card_art/set%02u/mini_icons/*.vtex_c
 panorama/layout/worldui_text_subtitle.vxml
 panorama/localization/dcg_%language%.txt
+panorama/localization/dcg_card_demos_set_00_%language%.txt
+panorama/localization/dcg_card_demos_set_01_%language%.txt
 panorama/localization/dcg_glossary_%language%.txt
 panorama/localization/dcg_lore_set_00_%language%.txt
 panorama/localization/dcg_lore_set_01_%language%.txt
@@ -35461,6 +35606,7 @@ particles/world_effects/world_effects.vpcf
 particles_list
 partners
 pass %u
+passivecharges
 pathNodes
 path_corner
 path_particle_rope
@@ -35574,6 +35720,7 @@ play_hero_1_stat
 play_hero_2_stat
 play_hero_3_stat
 play_movie
+play_or_continue
 play_puzzle
 play_title
 playableCards
@@ -36351,6 +36498,7 @@ scripts/addon_hud_textures
 scripts/cameras.json
 scripts/campaigns/%s
 scripts/campaigns/*
+scripts/card_remap.txt
 scripts/card_sets.txt
 scripts/card_sets_staging.txt
 scripts/chat_regions.txt
@@ -36407,6 +36555,7 @@ select_low
 select_node
 selectedTextBackgroundColor
 selected_account_id
+selected_leaderboard_name
 selected_node
 selected_node_long_desc
 selected_node_name
@@ -36449,8 +36598,10 @@ setCardsTotal
 setIcon
 setName
 set_charges [amount] [card_name]
+set_gold_hidden
 set_id
 set_item_remap
+set_mana_hidden
 set_pack_itemid
 setalphascale
 setang
@@ -36923,6 +37074,7 @@ std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ClientPerformanceComplete>(ClientPerformanceComplete const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ClientPerformanceComplete>(ClientPerformanceComplete const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ClientPlayerHeldRandomItem>(ClientPlayerHeldRandomItem const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ClientPlayerHeldRandomItem>(ClientPlayerHeldRandomItem const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ConCommandReceived>(ConCommandReceived const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ConCommandReceived>(ConCommandReceived const&)::{lambda()#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoEndDeployment>(DoEndDeployment const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoEndDeployment>(DoEndDeployment const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoFlopHeroPerformance>(DoFlopHeroPerformance const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoFlopHeroPerformance>(DoFlopHeroPerformance const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoInitialFlopCommit>(DoInitialFlopCommit const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<DoInitialFlopCommit>(DoInitialFlopCommit const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<EndCardCasting>(EndCardCasting const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<EndCardCasting>(EndCardCasting const&)::{lambda()#1}> const&, std::_Manager_operation)
@@ -36939,7 +37091,6 @@ std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ServerWaitComplete>(ServerWaitComplete const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ServerWaitComplete>(ServerWaitComplete const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingComplete>(ShoppingComplete const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingComplete>(ShoppingComplete const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingTimedOut>(ShoppingTimedOut const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingTimedOut>(ShoppingTimedOut const&)::{lambda()#1}> const&, std::_Manager_operation)
-std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingWaitComplete>(ShoppingWaitComplete const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShoppingWaitComplete>(ShoppingWaitComplete const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShowLocalHandDuringFlop>(ShowLocalHandDuringFlop const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<ShowLocalHandDuringFlop>(ShowLocalHandDuringFlop const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<SortHand>(SortHand const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<SortHand>(SortHand const&)::{lambda()#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<TimerExpired>(TimerExpired const&)::{lambda()#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ClientStateMachine<IDCGClientState, CDCGView*>::OnEvent<TimerExpired>(TimerExpired const&)::{lambda()#1}> const&, std::_Manager_operation)
@@ -37016,6 +37167,7 @@ std::_Function_base::_Base_manager<ContextFreeAttributeListMatchPattern::SelectM
 std::_Function_base::_Base_manager<ContextFreeAttributeListMatchPattern::SelectMatchFunctionInternal<MatchAttributeList>(MatchAttributeList const&)::{lambda(IAttributeContainerReader const&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ContextFreeAttributeListMatchPattern::SelectMatchFunctionInternal<MatchAttributeList>(MatchAttributeList const&)::{lambda(IAttributeContainerReader const&)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<DisableParticles>::_M_manager(std::_Any_data&, std::_Any_data const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<EndOfTurnPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<EndOfTurnPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<FlopEndDeployment::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<FlopEndDeployment::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<FlopPlayerMakingHeroDeploymentDecisionsPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<FlopPlayerMakingHeroDeploymentDecisionsPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<FlopPostHeroDeploymentChoicesPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<FlopPostHeroDeploymentChoicesPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<FlopPreHeroDeploymentChoicesPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<FlopPreHeroDeploymentChoicesPerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
@@ -37028,7 +37180,6 @@ std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGCli
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, FlopSyncAfterBothPlayersDeployedHeroesPerformance>(void (FlopSyncAfterBothPlayersDeployedHeroesPerformance::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, FlopSyncAfterBothPlayersDeployedHeroesPerformance>(void (FlopSyncAfterBothPlayersDeployedHeroesPerformance::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, InitialFlopPlayerMakingHeroDeploymentDecisions>(void (InitialFlopPlayerMakingHeroDeploymentDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, InitialFlopPlayerMakingHeroDeploymentDecisions>(void (InitialFlopPlayerMakingHeroDeploymentDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, PlayerMakingPurchasingDecisions>(void (PlayerMakingPurchasingDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, PlayerMakingPurchasingDecisions>(void (PlayerMakingPurchasingDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
-std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, StoreWaitingForServerStateChange>(void (StoreWaitingForServerStateChange::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedGameStateServerUpdate, StoreWaitingForServerStateChange>(void (StoreWaitingForServerStateChange::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedGameStateServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedServerUpdate, CDCGPerformanceScriptState>(void (CDCGPerformanceScriptState::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedServerUpdate, CDCGPerformanceScriptState>(void (CDCGPerformanceScriptState::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedServerUpdate, PlayerMakingPurchasingDecisions>(void (PlayerMakingPurchasingDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateEvent<ReceivedServerUpdate, PlayerMakingPurchasingDecisions>(void (PlayerMakingPurchasingDecisions::*)(ClientStateMachine<IDCGClientState, CDCGView*>&, ReceivedServerUpdate const&))::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<BeginCardDrawPhase, CardDrawPhaseTransition>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<BeginCardDrawPhase, CardDrawPhaseTransition>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
@@ -37058,6 +37209,7 @@ std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGCli
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ClientPerformanceComplete, StoreTransitionToStrategicViewPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ClientPerformanceComplete, StoreTransitionToStrategicViewPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ClientPerformanceComplete, WaitingForServerStateChange>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ClientPerformanceComplete, WaitingForServerStateChange>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ConCommandReceived, ConCommandPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ConCommandReceived, ConCommandPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoEndDeployment, FlopEndDeployment>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoEndDeployment, FlopEndDeployment>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoFlopHeroPerformance, FlopPlayerMakingHeroDeploymentDecisionsPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoFlopHeroPerformance, FlopPlayerMakingHeroDeploymentDecisionsPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoFlopHeroPerformance, InitialFlopPlayerMakingHeroDeploymentDecisionsPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoFlopHeroPerformance, InitialFlopPlayerMakingHeroDeploymentDecisionsPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoInitialFlopCommit, InitialFlopCommittedPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<DoInitialFlopCommit, InitialFlopCommittedPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
@@ -37067,7 +37219,6 @@ std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGCli
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingComplete, StoreCloseAndGoToFlopPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingComplete, StoreCloseAndGoToFlopPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingTimedOut, FlopEnteredBecauseShoppingTimedOutPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingTimedOut, FlopEnteredBecauseShoppingTimedOutPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingTimedOut, StoreTimedOutPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingTimedOut, StoreTimedOutPerformance>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
-std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingWaitComplete, WaitingForServerStateChange>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGClientState, CDCGView*> >::RegisterStateTransition<ShoppingWaitComplete, WaitingForServerStateChange>()::{lambda(ClientStateMachine<IDCGClientState, CDCGView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<BeginHeroCasting, FountainDeployingHeroes>(void (FountainDeployingHeroes::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, BeginHeroCasting const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<BeginHeroCasting, FountainDeployingHeroes>(void (FountainDeployingHeroes::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, BeginHeroCasting const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<CardIsCastingTarget, FountainStateIdle>(void (FountainStateIdle::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, CardIsCastingTarget const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<CardIsCastingTarget, FountainStateIdle>(void (FountainStateIdle::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, CardIsCastingTarget const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<CardZoneChange, FountainDeployingHeroes>(void (FountainDeployingHeroes::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, CardZoneChange const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<IStateMachineState<ClientStateMachine<IDCGFountainState, CDCGFountainView*> >::RegisterStateEvent<CardZoneChange, FountainDeployingHeroes>(void (FountainDeployingHeroes::*)(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, CardZoneChange const&))::{lambda(ClientStateMachine<IDCGFountainState, CDCGFountainView*>&, void const*)#1}> const&, std::_Manager_operation)
@@ -37146,7 +37297,21 @@ std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitTargeted>(
 std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitUserTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<ScriptObj::TargetsOf<CTraceMsg_UnitUserTargeted>(int, std::function<bool (CConditionalEval const&)> const&)::{default arg#1}::{lambda(CConditionalEval const&)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<SetupPregamePerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<SetupPregamePerformance::OnEnter(ClientStateMachine<IDCGClientState, CDCGView*>&)::{lambda(IDCGPerformanceScriptContext*)#1}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#2}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#3}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#4}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#5}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#5}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#6}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#6}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#7}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#7}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#8}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::CombatUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::CombatUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#8}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#1}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#2}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#3}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#4}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#5}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#5}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#6}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#6}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#7}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#7}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#8}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::CDCGGameStateBuilder::SetUnitProperties<StateBuilder::FountainUnit>(CDotaCardGame*, CGameObject*, StateBuilder::Unit<StateBuilder::FountainUnit> const&)::{lambda(CDotaCardGame*, IAttributeContainerReader const&, SpecificObjects_t const&)#8}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#10}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#10}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#11}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#11}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#12}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#12}> const&, std::_Manager_operation)
@@ -37163,6 +37328,8 @@ std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#22}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#22}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#23}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#23}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#24}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#24}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#25}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#25}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#26}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#26}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#3}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::CombatUnit>(StateBuilder::CombatUnit&)::{lambda(CUtlString)#4}> const&, std::_Manager_operation)
@@ -37187,6 +37354,8 @@ std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#22}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#22}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#23}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#23}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#24}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#24}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#25}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#25}> const&, std::_Manager_operation)
+std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#26}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#26}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#2}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#3}> const&, std::_Manager_operation)
 std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<StateBuilder::GetUnitFunctions<StateBuilder::FountainUnit>(StateBuilder::FountainUnit&)::{lambda(CUtlString)#4}> const&, std::_Manager_operation)
@@ -37875,6 +38044,7 @@ thirdperson_platformer
 thirdperson_screenspace
 this version of PCRE is compiled without UTF support
 this version of PCRE is not compiled with Unicode property support
+thisCardColor
 thisCardName
 thisCardSubType
 thisCardType
@@ -38245,6 +38415,7 @@ unlock_field
 unlock_hand
 unlock_override_quality
 unlock_percentage
+unlock_shop
 unlock_value
 unlocked styles
 unlocked_by
@@ -38732,6 +38903,7 @@ wearable_item_client
 weather_effect
 weather_type
 webapi
+webapi_class
 webvtt-cue end-time must have value greater than start-time
 webvtt-cue-id truncated
 webvtt_alloc
@@ -38869,6 +39041,7 @@ z
 z axis
 z)
 z-index
+zC
 zD
 zE
 zFar
