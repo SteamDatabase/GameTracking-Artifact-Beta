@@ -86,41 +86,30 @@
 					"> 0.1"					"unlock zoneID Fountain cardID 14006"
 					"> 0.1"					"unlock zoneID Fountain cardID 14008"
 					"> 3.9"					"npehelper remove"
-					"> 4.0"					"goto wait_for_first_deploy"
-				}
-				
-				"wait_for_first_deploy"
-				{
-					"on_hero_deployed"		"goto second"
-				}
-				
+					"on_hero_deployed 0.2"	"goto second"
+				}				
+		
 				"second"
 				{
-					"auto"					"npehelper #DCG_tutorial07_second,0,-180,0,n,c,c"
+					"auto"					"npehelper remove"
+					"> 0.1"					"npehelper #DCG_tutorial07_second,0,-180,0,n,c,c"
 					"> 5.9"					"npehelper remove"
-					"> 6.0"					"goto wait_for_second_deploy"
+					"on_hero_deployed 0.2"	"goto third"
 				}
-				
-				"wait_for_second_deploy"
-				{
-					"on_hero_deployed"		"goto third"
-				}
+			
 				
 				"third"
 				{
-					"auto"					"npehelper #DCG_tutorial07_third,0,-180,0,n,c,c"
+					"auto"					"npehelper remove"
+					"> 0.1"					"npehelper #DCG_tutorial07_third,0,-180,0,n,c,c"
 					"> 5.9"					"npehelper remove"
-					"> 6.0"					"goto wait_for_third_deploy"
+					"on_hero_deployed 0.2"	"goto goal"
 				}
 				
-				"wait_for_third_deploy"
-				{
-					"on_hero_deployed"		"goto goal"
-				}
-
 				"goal"
 				{
-					"auto"						"npehelper #DCG_tutorial07_goal,0,0,0,n,c,c"
+					"auto"						"npehelper remove"					
+					"> 0.1"						"npehelper #DCG_tutorial07_goal,0,0,0,n,c,c"
 					"> 0.1"						"lock isPassCoin 1"
 					"> 0.2"						"popup_unstall"
 					"> 2.5"						"lock_hand"

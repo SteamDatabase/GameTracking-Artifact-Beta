@@ -39,7 +39,6 @@ $ORIGIN
 %.0f pct of time accounted for
 %.18g
 %.2f
-%.2fGHz %s
 %0*llx bytes at %0*llx is the largest open user-space VA region%s
 %0*llx bytes of %s at %0*llx%s
 %0*llx: address after highest user-space virtual region
@@ -58,14 +57,7 @@ $ORIGIN
 %9.2f
 %9d
 %d
-%d active scrubbers: %s / %s
-%d blobs: %s MiB
 %d frames sampled for %.2f seconds
-%d inactive scrubbers without allocated segments; %s
-%d known strings:
-%d segments in history, total capacity %lld MBytes
-%d segments stored: %s / %s
-%d stale scrubbers: threads aren't calling scrubber frame functions
 %d total counted strings.
 %d.
 %d.%d.%d.%d:%d
@@ -84,7 +76,6 @@ $ORIGIN
 %lld
 %llu
 %llu,%u,%u,%s
-%llx "%s" activated. %d KB prologue, %d KB commited, %d KB capacity, %d blobs with %d MB
 %ls [wstring, len = %d]
 %p::%p:%d
 %s %c%s
@@ -97,6 +88,7 @@ $ORIGIN
 %s '%s'
 %s (%d) : %s
 %s (%i) : %s
+%s (before "%s")
 %s allocation count overflow
 %s allocation count overflow( %llu > %llu )
 %s bytes used out of %s bytes available (%.2f%%)
@@ -373,8 +365,19 @@ $ORIGIN
 .%c
 ............|
 ../
+../public/ordered_constructor.h
+../public/tier0/globallist.h
+../public/tier0/memstack.h
+../public/tier0/quantizedfloatencoder.h
+../public/tier0/threadtools.h
+../public/tier0/tslist.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlfixedmemory.h
+../public/tier0/utlleanvector.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utlrbtree.h
+../public/tier0/utltshash.h
 .\
-.vscrub
 /
 //
 /content/
@@ -390,18 +393,6 @@ $ORIGIN
 /etc/slackware-release
 /etc/yellowdog-release
 /game/
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/globallist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/memstack.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/quantizedfloatencoder.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/threadtools.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlfixedmemory.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlleanvector.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utltshash.h
 /proc/cpuinfo
 /proc/self/cmdline
 /proc/self/exe
@@ -1502,7 +1493,6 @@ CUtlMemoryPoolBase::Free(void*)
 CUtlMemoryPoolBase::InternalClear(CUtlMemoryPoolBase::CBlob*, CUtlMemoryPoolBase::FreeList_t*)
 CUtlMemoryPoolBase::IsAllocationWithinPool(void*) const
 CUtlMemoryPoolBase::ResetAllocationCounts()
-CUtlMemoryPoolBase::SetErrorReportFunc(void (*)(char const*, ...))
 CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
 CUtlRBTree overflow with %u elements!
 CUtlScratchMemoryPool::AddNewBlock(int)
@@ -1652,29 +1642,6 @@ CVProfile::SumTimes(CVProfNode const*, int, CVProfSummingContext&)
 CVProfile::SumTimes(char const*, int, CVProfSummingContext&)
 CVProfile::Term()
 CVProfile::~CVProfile()
-CVScrubSystem::AssignBlob(unsigned long long, CScrubBlobData*)
-CVScrubSystem::BeginRootFrame(unsigned int)
-CVScrubSystem::BlobExists(unsigned long long)
-CVScrubSystem::CVScrubSystem()
-CVScrubSystem::Clear()
-CVScrubSystem::Enable(bool)
-CVScrubSystem::Execute(char const*, char const*, char const*)
-CVScrubSystem::FindBlob(unsigned long long)
-CVScrubSystem::FindRegisteredString(unsigned int)
-CVScrubSystem::GetBlobSize(unsigned long long)
-CVScrubSystem::GetBlobStats(CVScrubSystem::BlobStats_t&) const
-CVScrubSystem::GetCategoryNames(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&)
-CVScrubSystem::GetSnapshot(ScrubSnapshot_t&)
-CVScrubSystem::GetStatus(CBufferString&) const
-CVScrubSystem::RecordCallstack(CVScrubber*)
-CVScrubSystem::RegisterCategory(char const*)
-CVScrubSystem::RegisterString(unsigned int, char const*)
-CVScrubSystem::ReleaseBlob(unsigned long long)
-CVScrubSystem::SaveFile(ScrubSnapshot_t&, char const*)
-CVScrubSystem::SetStackTranslationHelper(CStackTranslationHelper*)
-CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
-CVScrubSystem::VerifyCommand(void*, void*)
-CVScrubSystem::~CVScrubSystem()
 CVariableBitStringBase::AllocInts(int)
 CVariableBitStringBase::FreeInts()
 CVariableBitStringBase::ReallocInts(int)
@@ -1803,13 +1770,11 @@ C_OP_SetSingleControlPointPosition
 C_OP_StopAfterCPDuration
 C_OP_TwistAroundAxis
 C_OP_WorldTraceConstraint
-Call Stacks
 Called Resume() on a thread that is not suspended!
 Can't open file (%s) passed to -testscript
 Cannot create Dictionary from provided samples
 Cannot flush timstamped event log with no listener!
 Cannot mix and match tag specifiers with channel name specifiers.
-Cannot open file "%s" for writing
 Cannot register same format from/to a KV3 conversion (from '%s' to '%s')
 Cannot register two timestamped event listeners!
 Cannot save KV3 text to a non-text buffer!
@@ -1850,7 +1815,6 @@ ConfigAttachedModel
 ConfigurationSystem_001
 ConnectInterfaceSingletons
 Context should be init first
-Controls the scrub system
 Convar %s has conflicting %s flags (child: %s%s, parent: %s%s, parent wins)
 Convars/CCvar::FindCommandBase
 ConvertKV3Format
@@ -1936,7 +1900,6 @@ EmptyAnim
 Enabling flag '%s' on channel '%s'.
 End of input was reached and '[' was not matched by ']'
 End of input was reached and '{' was not matched by '}'
-Engine Frame MainLoop
 EngineServiceMgr001
 EnsureAddedCapacity
 EnsureCapacity
@@ -1948,7 +1911,6 @@ Error parsing value to set configuration value "%s" to ("%s")!
 Error reading args file
 Error reading configuration defaults file "cfg/configdefaults.linux.vcfg"!
 Error starting testscript '%s'
-Error: %d of %d segments were written, unrecognized threads?
 ErrorIfNotInitted
 EventSystem001
 Event_CreateHandle
@@ -2080,7 +2042,6 @@ GetCPUFrequencyResults
 GetCPUInformation
 GetCStringCharConversion
 GetCurrentKV3FormatVersionForExtension(char const*, bool*)
-GetCurrentThreadScrubber
 GetDefaultMiniDumpHandler
 GetDefaultMiniDumpTypeFlags
 GetDefaultUniformRandomStream
@@ -2191,7 +2152,6 @@ Invalid header
 Invalid member name '%s'
 Invalid number starting with '%s'
 InvalidateUniqueId
-Invariant TSC supported
 InvokeMiniDumpHandler
 IsKV3Data(CUtlBuffer const*, KV3ID_t*)
 IsKV3Data(void const*, int, KV3ID_t*)
@@ -2202,7 +2162,6 @@ IterateCapturedStackAnnotations
 J
 JAPANESE
 JmpToAlternateStack
-Job Thread
 Jobs/Coroutines
 JsonEscape(char const*)
 K
@@ -2364,7 +2323,6 @@ LoadKV3Text_NoHeader(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char
 Localize_001
 LockGlobalObjectRegistry
 Log Function Help:     log_verbosity <channel specifiers> <verbosity>    log_color <channel specifiers> <hex color>    log_flags <channel specifiers> <+/-flag>All functions are case insensitive.A channel specifier is either:1) tag specifiers: +/-tag1 +/-tag2 ...      // Narrows down to channels with & without given tags.2) channel names: name1 name2 ...           // Lists channels by name.verbosity: off, essential, default,         // Sets how verbose a channel is allowed to be.           detailed, max                     // 'off' turns all spew off                                            // 'essential' turns on vital logs                                            // 'default' turns on most messages                                            // 'detailed' allows for walls of text that are usually useful                                            // 'max' allows everythinghex color: RRGGBBAA                         // A hexadecimal color value in the order RGBA.flag: <+/->DoNotEcho                        // Enable/disable a flag to turn off echoing to the console.      <+/->ConsoleOnly                      // Enable/disable a flag to send text only to the console.e.g.    log_verbosity +console -developer verbose   // Sets minimum spew level of channels with the tag                                            // 'console' but without the tag 'developer' to 'verbose'.    log_color renderdebug bsp FFC08040      // Sets the 'renderdebug' and 'bsp' channels to the RGBA color (64, 128, 192, 255).    log_flags +developer +donotecho         // Turns on the LCF_DO_NOT_ECHO flag for all channels with the 'developer' tag.
-Log Messages
 LoggingSystem_AddTagToChannel
 LoggingSystem_CurrentStateIndex
 LoggingSystem_EnableBackdoorLoggingListeners
@@ -2858,7 +2816,6 @@ Qt_GetCustomAllocators
 QueuedLoaderVersion001
 R
 RELEASE
-RUNNING
 RUSSIAN
 RandomFloat
 RandomFloatExp
@@ -2911,7 +2868,6 @@ RunTSQueueTests
 RunThreadPoolTests
 RunWithAlternateStack
 Running %s...
-Runtime size used in ring buffer is out of sync: %s
 S
 SCHINESE
 SDL_AudioStreamAvailable
@@ -3111,12 +3067,11 @@ SchemaSystem_001
 SchemaTestExternal_One_001
 SchemaTestExternal_Two_001
 Scope                                                      Calls Calls/Frame  Time+Child    Pct        Time    Pct   Avg/Frame    Avg/Call Avg-NoChild        Peak
-Scrub System is %s
-Scrubber is disabled
+Scrub system
+Scrubber is not enabled in tier0
 SecureRandomBytes
 SecureRandomDouble
 SecureRandomInt
-Segment runtime size: %s
 SendActionToAssertDialog
 SequenceMarkup
 SequenceMarkupList
@@ -3197,7 +3152,6 @@ StackTools_VerifyLoadedModuleMappings
 Start
 Start a test script running..
 StartLoop
-Started capture %.1f sec agoLast ring buffer trim at %.1f sec ago
 StatsService_001
 Steam
 SteamAudio001
@@ -3381,7 +3335,6 @@ Unsupported text encoding id.
 Usage:  find <string> [<string>...]
 Usage:  findflags <string>
 Usage:  help <cvarname>
-Usage: scrubber [start|stop|status|save <filename>]
 UserInfoChangeService_001
 UtlMemory_Alloc
 UtlMemory_AllocAligned
@@ -3422,8 +3375,6 @@ VPROJECT
 VPhysics2_Handle_Interface_001
 VPhysics2_Interface_001
 VProcessUtils002
-VProf
-VProf Nodes
 VProf spike "%s" from %f to %f ms
 VProfService_001
 VR_001
@@ -4163,7 +4114,6 @@ chdir
 cheat
 cl
 cl_language
-clear
 client
 clientcmd_can_execute
 clock_gettime
@@ -4279,7 +4229,6 @@ g_BitBuf_BitWriteMasks
 g_BitBuf_ExtraMasks
 g_BitStringEndMasks
 g_Mathlib_GammaToLinearByteTable
-g_ScrubSystem
 g_TSPointerListNodes
 g_VProfCurrentProfile
 g_VProfNodeSpikeMinimumMs
@@ -4348,7 +4297,6 @@ ikrig
 img
 int( %d = 0x%X )
 int:transient:1
-invariant TSC unavailable, timing readings unreliable
 invert_orientation
 is_debris
 isspace
@@ -4801,7 +4749,6 @@ resource
 rmdir
 s
 s_dev_urandom_fd >= 0
-save
 scandir64
 sched_setaffinity
 schema
@@ -4853,11 +4800,9 @@ std::string::_Rep::_M_destroy(std::allocator<char> const&)
 std::string::_Rep::_S_empty_rep_storage
 steam://openurl/
 steam://openurl_external/
-stop
 stop_immediately
 stop_instantly
 stop_on_seq_change
-stopped
 strcasecmp
 strerror
 stringpool.cpp
@@ -4881,7 +4826,6 @@ texturescale
 threadsafe
 threadtools.cpp
 tier0
-tier0: file system not initialized
 tier0_strtools.cpp
 timestamped.log
 true

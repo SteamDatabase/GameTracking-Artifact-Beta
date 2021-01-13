@@ -138,7 +138,6 @@
 
 	RenderSystem
 	{
-		"VulkanUseStreamingTextureManager"	"1"
 		"VulkanOnly"				"1"	[ $LINUX || $OSX ] // No OpenGL or D3D9/11 fallback on Linux or OSX, only Vulkan is supported.
 	}
 

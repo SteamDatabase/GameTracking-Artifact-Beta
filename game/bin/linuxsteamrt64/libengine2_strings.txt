@@ -303,7 +303,6 @@ $tI
 %s '%s': invalid path.
 %s * %s
 %s + %s
-%s - %s
 %s - processing %llu(%p)
 %s - requesting %llu (%p)
 %s -- pass %d
@@ -348,8 +347,10 @@ $tI
 %s%04d.tga
 %s%c%s
 %s%i:'%s'
+%s%s - %s
 %s%s%s
 %s%s%s%s
+%s%s::%s - %s
 %s(%d) : %s
 %s*%s
 %s,
@@ -438,6 +439,7 @@ $tI
 %s: execute perftest.cfg
 %s: invalid millisecond count
 %s: nLoadError: %d, RequestModule: %s, RequestInterface: %s, Module: %s, Interface: %s
+%s: no such root class %s
 %s: script is already waiting
 %s:%d
 %s:%s,
@@ -512,6 +514,7 @@ $tI
 (null)
 (nullptr)
 (public %s:%i)
+(root)
 (secure mode enabled, connected to Steam3)
 (secure mode enabled, disconnected from Steam3)
 (unknown)
@@ -830,9 +833,30 @@ $tI
 ...<truncated>...
 ../
 ../../../../..
+../../public/tier0/utllinkedlist.h
+../../public/tier0/utlrbtree.h
+../../public/tier0/utlsortvector.h
 ../_generated_code/engine2/linuxsteamrt64/release/../../../../engine2/gameeventsystem.cpp
 ../common/protobuf_helpers.cpp
 ../public/appframework/materialsystem2app.cpp
+../public/appframework/tier1app.h
+../public/appframework/tier2app.h
+../public/engine2/iprerequisite.h
+../public/entity2/concreteentitylist.h
+../public/networksystem/networkfieldscratchdata.h
+../public/ordered_constructor.h
+../public/scenesystem/scenevisibility.h
+../public/tier0/eventdispatcher.h
+../public/tier0/memstack.h
+../public/tier0/tslist.h
+../public/tier0/utlblockmemory.h
+../public/tier0/utlleanvector.h
+../public/tier0/utllinkedlist.h
+../public/tier0/utlrbtree.h
+../public/tier0/utlsignalslot.h
+../public/tier0/utlsortvector.h
+../public/tier0/utltshash.h
+../public/tier2/fieldpath.h
 ..\
 ..\content
 ..\src\shaders\
@@ -874,24 +898,6 @@ $tI
 /content/
 /dev/null
 /game/
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/appframework/tier1app.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/appframework/tier2app.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/engine2/iprerequisite.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/entity2/concreteentitylist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/networksystem/networkfieldscratchdata.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/ordered_constructor.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/scenesystem/scenevisibility.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/eventdispatcher.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/memstack.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/tslist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlblockmemory.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlleanvector.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utllinkedlist.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlrbtree.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsignalslot.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utlsortvector.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier0/utltshash.h
-/home/buildbot/buildslave/dcg_rel_reboot_linuxsteamrt64/build/src/public/tier2/fieldpath.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/./EtcCodec/EtcBlock4x4Encoding.h
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4.cpp
 /home/timo/source2/main/src/thirdparty/etc2comp/EtcLib/EtcCodec/EtcBlock4x4Encoding.h
@@ -1499,6 +1505,7 @@ $tI
 20ISource2ServerConfig
 20ISource2WorldSession
 20PacketEntitiesFilter
+21:42:03
 21C2S_CONNECT_Message_t
 21CBidirMsg_RelayPacket
 21CCLCMsg_BaselineAck_t
@@ -1525,7 +1532,6 @@ $tI
 21IUGCAddonPathResolver
 21IVConCommDataReceived
 21NetMessagePacketStart
-22:52:57
 22C2S_CONNECTION_Message
 22CActivateMainMenuPanel
 22CCLCMsg_CmdKeyValues_t
@@ -1846,6 +1852,7 @@ $tI
 <unconnected>
 <unknown hash %u>
 <unknown>
+<unspecified>
 <unused>
 =
 = { <proto text format> }". To set fields within it, use syntax like "
@@ -1968,7 +1975,9 @@ Already recording.
 Already saw decimal point or exponent; can't have another one.
 Alt
 Always force all engine & tools to render
+AmmoIndex_t
 Angle;
+AnimEventIndex_t
 AnimGraphEditorUtils001
 AnimVRFinger_t
 AnimVRHand_t
@@ -2220,6 +2229,7 @@ CAttachment
 CBaseClient::ProcessCreateStringTable(%s)-done
 CBaseConstraint
 CBenchmarkService
+CBitVec<
 CBitmapImagePanel
 CBoneConstraintBase
 CBoneConstraintPoseSpaceBone
@@ -2334,6 +2344,7 @@ CEntityIdentity::SetEntityName called, but there is no entity name string table 
 CEntityIndex
 CEntityInstance
 CEntityOutputTemplate
+CEntityOutputTemplate<
 CEntityResourceManifest::AddResourceInternal( %s )
 CEntityResourceManifest::GetEntityLumpForTemplate
 CEntityScriptFramework
@@ -2370,6 +2381,10 @@ CGameResourceService::BuildResourceManifest(start)
 CGameResourceService::DescribeContents:  manifest handle == GAME_RESOURCE_MANIFEST_HANDLE_INVALID
 CGameUIService
 CGameUIService::OnAppShutdown
+CGridStringPrinter::GetLines(CUtlVector<CUtlString, CUtlMemory<CUtlString, int> >&) const
+CGridStringPrinter::NumRows() const
+CGridStringPrinter::SetColumnHeader(int, char const*)
+CGridStringPrinter::SetString(int, int, char const*)
 CHECK failed: !TableEntryIsTree(b) && !TableEntryIsTree(b ^ 1):
 CHECK failed: !aggregate_value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()):
 CHECK failed: !checkpoints_.empty():
@@ -2647,6 +2662,7 @@ CHLTVServer::StartRelay: WriteSendTables overflow.
 CHLTVServer::UpdateHibernationState:  Terminating after relaying game.
 CHLTVServer::UpdateTick
 CHandle
+CHandle<
 CHeapCompactionService
 CHitBox
 CHitBoxSet
@@ -2771,6 +2787,7 @@ CMiniDumpComment::GetEndPointer() const
 CMiniDumpComment::GetStartPointer()
 CMiniDumpComment::PrependComment(char const*)
 CMiniDumpComment::~CMiniDumpComment()
+CModel >
 CMorphConstraint
 CMotionTransform
 CMotionTransform-world
@@ -2801,6 +2818,7 @@ CNetworkGameServer::ActivateServer
 CNetworkGameServerBase::ConnectClient( name='%s', remote='%s' )
 CNetworkGameServerBase::ReplyConnection
 CNetworkGameServerBase::SetServerState (%s -> %s)
+CNetworkOriginQuantizedVector
 CNetworkP2PService
 CNetworkP2PService::InternalBroadcastP2PNetMessage: SerializeAbstract for message %s failed!
 CNetworkP2PService::InternalBroadcastP2PNetMessage: SerializeAbstract for message %s overflowed!
@@ -2824,6 +2842,9 @@ CNetworkStringTableClient::ParseUpdate: message too large (%d bytes).
 CNetworkStringTableContainer::DirectUpdate
 CNetworkStringTableContainer::WriteUpdateMessage
 CNetworkStringTableItem::SetUserData(%s) tried to write userdata of %d bytes, max size is %d
+CNetworkVelocityVector
+CNetworkViewOffsetVector
+CNetworkedQuantizedFloat
 CNonFocusableMenu
 CO-%u
 COLORCORRECTION_VERSION_1
@@ -2854,6 +2875,7 @@ CPlayDemoClientPrerequisite
 CPlayerSlot
 CPointConstraint
 CPostDataUpdateCallList::AddPostDataUpdateCall: overflowed m_PostDataUpdateCalls
+CPostProcessingResource >
 CR)
 CRC'd '%s' .
 CRC32_GetTableEntry
@@ -2923,6 +2945,7 @@ CStrAutoEncode::SetCopy(wchar_t const*, int)
 CStrongHandle
 CTSQueue corruption
 CTelemetryService
+CTextureBase >
 CThread::CThread()
 CThread::Init()
 CThread::IsAlive()
@@ -3074,6 +3097,8 @@ CUtlSymbolTable::SetPageSize(unsigned int)
 CUtlSymbolTable::String(CUtlSymbol) const
 CUtlSymbolTable::~CUtlSymbolTable()
 CUtlVector
+CUtlVector<
+CUtlVectorFixedGrowable<
 CVGuiEngineConsoleUI
 CVGuiInputHandler
 CVGuiTopmostInputHandler
@@ -3100,9 +3125,6 @@ CVProfile::GetNumBudgetGroups()
 CVProfile::GetNumCounters() const
 CVProfile::OutputReport(VProfReportSettings_t const&, char const*, int)
 CVProfile::ResetCounters(CounterGroup_t)
-CVScrubSystem::BeginRootFrame(unsigned int)
-CVScrubSystem::SwapSegment(CVScrubber*, unsigned int)
-CVScrubSystem::VerifyCommand(void*, void*)
 CVariant
 CVariantBase
 CVariantDefaultAllocator
@@ -3116,6 +3138,7 @@ CVirtualMemorySnapshot::~CVirtualMemorySnapshot()
 CVrSkeletalInputSettings
 CWaitForGameServerStartupPrerequisite
 CWaitForInitialSpawnGroupsPrerequisite
+CWeakHandle<
 CWristBone
 CXXABI_1.3
 CXXABI_1.3.3
@@ -3489,6 +3512,7 @@ DXT5_NM
 Data center cluster this server lives in.
 Data size too short
 DataTable_ParseClassInfosFromBuffer: invalid class index (%d).
+Datamap at addr %p
 Deaccel
 DebugDrawObjects
 DebugInfo
@@ -3501,7 +3525,6 @@ DebugShowZPrepassNormals
 DebugTextureInfo001
 DebugVisualizerMgr
 Dec
-Dec 18 2020
 DeclareCurrentThreadIsMainThread
 Decrement the timescale by one step
 Dedicated Server
@@ -3886,7 +3909,6 @@ Expected identifier, got:
 Expected integer or identifier, got:
 Expected integer, got:
 Expected string, got:
-Experimental feature to skip ticks when the client is catching up in low frame rate situations.
 Explicit default values are not allowed in proto3.
 Extension "
 Extension conflicts with extension already in database: extend
@@ -3917,6 +3939,7 @@ FCVAR_CHEAT cvars reverted to defaults (sv_cheats disabled).
 FCVAR_NEVER_AS_STRING
 FCVAR_REPLICATED can't also be FCVAR_PROTECTED (%s)
 FCVAR_REPLICATED not valid on ConCommands (%s)
+FIELD_AMMO_INDEX
 FIELD_ATTACHMENT_HANDLE
 FIELD_BOOLEAN
 FIELD_CHARACTER
@@ -4373,13 +4396,18 @@ HLTV:  SetSignonState( %s )
 HLTVClientState
 HLTV_CopyNewEntity: GetDynamicBaseline(%d) failed.
 HMaterial
+HMaterialStrong
 HModel
+HModelStrong
 HParticleSystemDefinition
 HPostProcessing
+HPostProcessingStrong
 HRenderTexture
+HRenderTextureStrong
 HSCRIPT-light
 HSCRIPT-new
 HSR_GAME_REMOTE_CHANGELEVEL_RECONNECT
+HSequence
 HammerMapLoader001
 Han
 Hangul
@@ -4432,6 +4460,7 @@ ID: %i, "%s" %s, Time %s, %s, In %.1f, Out %.1f.
 IEngineClient::RecordDemoCustomData(): Not recording a demo.
 IHandleEntity
 IMECandidatesMenu
+IMaterial2 >
 INETSUPPORT_001
 INFO
 INTERNAL
@@ -4441,6 +4470,8 @@ IO_ERROR
 IP filter list: %i entries
 IP filter list: %i entry
 IP filter list: empty
+IParticleSnapshot >
+IParticleSystemDefinition >
 IQuickTime001
 Idle (%s)
 If in replay, jumps back to live
@@ -4644,6 +4675,7 @@ JPEG datastream contains no image
 JPEG parameter struct mismatch: library thinks size is %u, caller expects %u
 JPEGMEM
 Jan
+Jan  7 2021
 Javanese
 Jul
 Jumping to random tick %d (%.2f min)
@@ -5039,8 +5071,13 @@ MDefaultString
 MEM_ERROR
 MESH_DRAW_FLAGS_DRAW_LAST
 MESH_DRAW_FLAGS_NONE
+META for '%s'
 MGiI
 MHz
+MIgnoreDataDescValidation
+MIsWorldspaceDirection
+MIsWorldspacePosition
+MIsWorldspaceTransform
 MMX
 MNG features are not allowed in a PNG datastream
 MNetworkBitCount
@@ -5203,6 +5240,7 @@ Mod enables VR by default. You can opt out of VR using the -novr command line ar
 Model %s exceeds maxs (%.1f %.1f %.1f vs. %.1f %.1f %.1f)
 Model %s exceeds mins (%.1f %.1f %.1f vs. %.1f %.1f %.1f)
 Model %s missing bone and flex counts (%d < %d), init %d
+ModelConfigHandle_t
 ModelDocUtils001
 Modifies the LOD scale
 Module "%s" is not debug and will only grow/add loadaddress size for "%s". But will never reduce it
@@ -5822,9 +5860,15 @@ ParseTokenFromCharString
 ParseUpdate
 ParsingCompleted %d bits used, resizing packet buffer from %d to %d bytes
 ParsingStarted %d bits reserved
+ParticleIndex_t
 ParticleSystemMgr003
 PatchVersion
 Path Overflow, must be less than 260 characters.
+Path_AddToTail
+Path_AddToTail failed for read only CFieldPath
+Path_AddToTail failed, depth already == DEFAULT_MAX_PATH_DEPTH(%d)
+Path_PopLast
+Path_PopLast failed for read only CFieldPath
 Path_SetCount
 Path_SetCount failed, depth already == DEFAULT_MAX_PATH_DEPTH(%d)
 Paused: %s
@@ -6875,6 +6919,7 @@ Specifies the number of seconds worth of frames that the tv replay system should
 Specifies which voice codec DLL to use in a game. Set to the name of the DLL without the extension.
 Specify nocodecprompt to use the default raw output.
 Spew all manifest add/updates.
+Spew serializer meta
 Spew serializers
 Spews information about all CUtlLRUCaches
 Spline
@@ -7233,6 +7278,7 @@ UV88
 UVLX8888
 UVWQ8888
 Ugaritic
+Unable to %s, not connected to server
 Unable to Start Game
 Unable to capture %s virtual memory information
 Unable to capture virtual memory information
@@ -7329,6 +7375,7 @@ Upload failed.
 Uploading game stats data.
 UpperEyelid(
 Uptime( %f )Total frames( %llu )
+Usage %s classname
 Usage %s substring
 Usage:   load [save file name]
 Usage:  %s <cluster # |-1>
@@ -7651,6 +7698,7 @@ Windows
 Wireframe
 WireframeDecal
 WireframeReflective
+WorldGroupId_t
 WorldRendererMgr001
 Write
 Write buffered voice attachment data to file.
@@ -7944,6 +7992,7 @@ banid: disabled in dev mode
 banid: disabled on server (sv_banid_enabled = %d)
 banip
 banlist
+base class is not embedded
 baselayer
 basespawngroup.h
 basic_string::_S_construct null not valid
@@ -8140,6 +8189,7 @@ cl_sendtable_cache_filename
 cl_showdemooverlay
 cl_spawngroup_log_filename
 cl_spawngroup_spewresources
+cl_spewmeta
 cl_spewserializers
 cl_team
 cl_timeout
@@ -8231,6 +8281,7 @@ cvar_value
 d
 data error
 data height too large.
+data map missing class name
 data width too large.
 dataWindow
 data_height =
@@ -8340,7 +8391,6 @@ endmovie
 engine
 engine2
 engine2.cpp
-engine_experimental_drop_frame_ticks
 engine_max_resource_system_update_time
 engine_no_focus_sleep
 engine_no_focus_sleep_vconsole_suppress
@@ -8367,6 +8417,7 @@ entitykeyvalues.cpp
 entitysystem.cpp
 ents_shared.h
 enum
+enum type
 erroffset passed as NULL
 exec autoexec.cfg
 exec_async
@@ -8376,6 +8427,7 @@ execing %s
 execute_command_every_frame
 exp( %s )
 extend .$0 {
+external/input
 extra interior spaces removed from keyword
 f
 f %d %d %d
@@ -8645,6 +8697,9 @@ group name must start with a non-digit
 group%d
 grp:%si
 h
+has unknown type '%s'
+has unresolved enum type
+has unresolved type '%s'
 hd=<
 heartbeat
 height,
@@ -8774,6 +8829,7 @@ internal error: overran compiling workspace
 internal error: previously-checked referenced subpattern not found
 internal error: unexpected repeat
 internal error: unknown opcode in find_fixedlength()
+interval_t
 invalid UTF-16 string
 invalid UTF-32 string
 invalid UTF-8 string
@@ -8799,6 +8855,8 @@ iswdigit
 iszString
 itemID
 itemIndex
+item_definition_index_t
+itemid_t
 j
 jiggle bone %u
 joinsession
@@ -9323,13 +9381,20 @@ mesh_calculate_curvature_smooth_weight
 meshsystem
 message
 message of type "
+meta
+method flags
 min( %s, %s )
 min. %f
+min/max
 minimum-height
 minimum-width
+mismatched inputfunc
 mismatched serializer on %s
 missing )
 missing ) after comment
+missing base class
+missing field
+missing function
 missing opening brace after \o
 missing serializer on %s
 missing terminating ] for character class
@@ -9813,11 +9878,13 @@ selectors %d,
 self
 selfDroppable
 send
+sendnode
 sendtables.bin
 sendto
 seq_trans
 sequence < 0, in COM_BlockSequenceCRCByte
 sequential
+ser. field
 serialize
 serializer
 serializing
@@ -10139,6 +10206,7 @@ strtoll
 strtoul
 strtoull
 style
+style_index_t
 sub%dx%d.tga
 subFocus
 submrg%dx%d.tga
@@ -10432,6 +10500,7 @@ uniqueid "%s" not found
 unknown
 unknown POSIX class name
 unknown compression method
+unknown enum size %d
 unknown option bit(s) set
 unknown property name after \P or \p
 unknown zip result code
