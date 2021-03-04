@@ -57,6 +57,7 @@ $tIVScript
 %s / %s
 %s : %s [%d hitboxes]
 %s F=%d V=%d hE=%d
+%s Schema Type: %s
 %s [%d]
 %s [%u valid / %u bones]
 %s a1 :{r=%.1f,a=%.1f}
@@ -173,7 +174,6 @@ $tIVScript
 0.02
 0.04
 0.05
-0.1
 0.5
 0.7f
 0x%08X
@@ -323,7 +323,10 @@ $tIVScript
 ; tris:
 ;"><b>Trigger</b> Touch
 <
+< %d >
 < FLT_EPSILON
+<%s : %u>
+<%s, cat %d>
 </div>
 </li>
 </pre>
@@ -345,10 +348,12 @@ $tIVScript
 <font color="red">Face is connected to itself, cannot dissolve</font>
 <font color="red">Query</font>(
 <font color="red">with</font>-<font color="blue">as</font>:
+<invalid>
 <li> - because <font color="red">Query</font> interacts with %u <font color="blue">shape</font>'s layer%s:
 <li> - because shape interacts with %u <font color="red">Query</font>'s layer%s:
 <no deferred ref found>
 <no failure reason set>
+<noschema
 <null>
 <p> BUG IN ANALYSIS. SEND THIS RVD TO SERGIY </p>
 <p>(CHitBox*)0x%llx</p>
@@ -397,6 +402,7 @@ $tIVScript
 <tr><td>SurfaceProp</td><td>%s</td></tr>
 <ul>
 <unconnected>
+<unknown: %d>
 <unknown>
 =
 > -FLT_EPSILON
@@ -407,7 +413,6 @@ $tIVScript
 @?
 @@
 @@fff?fff?fff?fff?
-@A
 @spawn
 A
 AABB_t
@@ -532,6 +537,7 @@ CAnimRetargetData
 CAnimRetargetElementData
 CAnimSkeleton
 CAnimUser
+CAnimVariant
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
@@ -584,6 +590,7 @@ CDualHullAgglomerator: Degenerate topology, %d faces removed
 CEntIndexPair
 CEntIndexPair RnStartTouchEventRefl_t::m_Entities
 CEntPairTouchTracker
+CEntityIndex
 CFeIndexedJiggleBone
 CFeJiggleBone
 CFeModel
@@ -634,6 +641,7 @@ CMorphConstraint
 CMorphData
 CMorphRectData
 CMorphSetData
+CMotionTransform
 CNameIndex
 COLORCORRECTION_VERSION_1
 CONICAL_JOINT
@@ -670,6 +678,7 @@ CPhysicsBody::SetLinearVelocity
 CPhysicsBody::UpdateShadow
 CPhysicsShadowController::SetMaxSpeed
 CPhysicsShadowController::SetTargetPosition
+CPlayerSlot
 CPointConstraint
 CPool<>
 CPool<> Free Node
@@ -893,6 +902,7 @@ CSoftbodyEffectProperty
 CSoftbodyEffectSkinnedCollider
 CSoftbodyEffectSpeedup
 CSoftbodyEffectWind
+CSplitScreenSlot
 CSplitString::Construct(char const*, char const**, int)
 CStableSymbolTable::GetId(char const*, bool*)
 CStableSymbolTable::Insert(int, char const*)
@@ -910,6 +920,7 @@ CUniformRandomStream::CUniformRandomStream()
 CUniformRandomStream::RandomFloat(float, float)
 CUniformRandomStream::RandomInt(int, int)
 CUniformRandomStream::SetSeed(int)
+CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
 CUtlBinaryBlock::SetLength(int)
 CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
@@ -967,6 +978,8 @@ CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
 CUtlStringToken
 CUtlStringToken RnFrictionNotificationRefl_t::m_MaterialIndex[ 2 ]
+CUtlSymbol
+CUtlSymbolLarge
 CUtlSymbolTable::AddString(char const*)
 CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
 CUtlSymbolTable::Find(char const*) const
@@ -1059,8 +1072,6 @@ CastSphereTriangle
 Casts
 Change global friction factor
 Change global restitution factor
-ChangeCallbackOnChange
-ChangeCallbackOnChangeOrCreate
 ChangeSize
 CharacterSetBuild
 Child1
@@ -1135,6 +1146,7 @@ DebugShapeSerial
 DebugStart( %d );
 DebugTextureInfo001
 Default
+DegreeEuler
 DelayedAttrQueue
 DelayedBuildMassBodies
 DelayedDeleteBodies
@@ -1146,6 +1158,7 @@ DelayedDeleteJointsReady
 DelayedDeleteShapes
 DelayedDeleteShapesReady
 DelayedDeletions
+DemoUpconverterVersion001
 DestroyDebugSceneObject: pSceneObject ( %p ) has already been deleted!
 DestroyThreadPool
 DevMsg
@@ -1389,7 +1402,6 @@ If enabled, surfaces with default material are highlighted in physics debug geom
 Ignore Entity 0x%X
 Inactive
 Inconsistent collision attribute index array of size %d, expected %d (number of shapes)
-InfoForResourceTypeCAnimData
 InfoForResourceTypeCAnimationGroup
 InfoForResourceTypeCModel
 InfoForResourceTypeCPhysAggregateData
@@ -1419,6 +1431,7 @@ IntersectHulls
 IntersectSegmentTriangle
 IntersectSphereHull
 IntersectionDictionaryRefl_t
+Invalid
 Invalid RecordedHitboxState_t
 Invalid access of deferred ConVarRef for '%s'
 Invalid bone and flex counts for model %s, %d meshes but %d counts
@@ -1532,7 +1545,6 @@ LowerTwistLambda
 MASS_PRIORITY_DEFAULT
 MASS_PRIORITY_TRIGGER
 MATCHFRAMEWORK_001
-MClassHasCustomAlignedNewDelete
 MD5Final
 MD5Init
 MD5Update
@@ -1547,14 +1559,7 @@ MESH_DRAW_INPUT_LAYOUT_IS_NOT_MATCHED_TO_MATERIAL
 MESH_TRANSLUCENCY_FULLY_ALPHA_BLENDED
 MESH_TRANSLUCENCY_FULLY_OPAQUE
 MESH_TRANSLUCENCY_PARTIALLY_ALPHA_BLENDED
-MNetworkBitCount
-MNetworkChangeCallback
-MNetworkEncoder
-MNetworkOverride_Invalid
-MNetworkPriority
-MNetworkRemoveAll
-MNetworkSerializer
-MNetworkUserGroup
+MKV3TransferName
 MODEL_BONE_FLEX_INVALID
 MODEL_BONE_FLEX_TX
 MODEL_BONE_FLEX_TY
@@ -1679,26 +1684,13 @@ MoveBuffer
 MoveProxies
 MovementSettings
 Multiply air drag
+Multiply water drag for buoyancy
 Multithreaded test:
 MurmurHash2
 MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
-N24CFieldPathHuffmanEncoder12InternalNodeE
-N24CFieldPathHuffmanEncoder5INodeE
-N24CFieldPathHuffmanEncoder8LeafNodeE
 N33CBaseIntrospectedToKV3TypeManager18AsyncProcessResultE
-NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
-NETWORK_FIELD_CHANGED_NO_VALUE
-NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
-NETWORK_FIELD_CHANGED_TYPE_NONE
-NETWORK_FIELD_CHANGED_WITH_VALUE
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL_SORTLOWER
-NETWORK_FIELD_DEFAULT_PRIORITY
-NETWORK_FIELD_HIGHEST_PRIORITY
-NETWORK_FIELD_LOWEST_PRIORITY
 NO Hit ray from {%g,%g,%g} delta {%g,%g,%g}
 NULL_JOINT
 NWay(
@@ -1755,6 +1747,7 @@ Old
 OldFeEdge_t
 On Touch Found or Lost:
 One of the collision groups is Conditionally Solid - No interaction allowed
+Org(%.3f,%.3f,%.3f) Ang(%.3f,%.3f,%.3f)
 Out of %d unit test hulls, %d failed to build, %d were ultra-thin
 Overlap in reporting by type: %.1f%%, %s unique pointers / %s total = %.1f
 OverrideCollisionGroup
@@ -1928,6 +1921,7 @@ Quaternion RnJointRefl_t::m_qLocalFrame2
 Quaternion RnPrismaticJointRefl_t::m_RelQ0
 Quaternion RnShadowControllerRefl_t::m_qTargetOrientation
 Quaternion RnSphericalJointRefl_t::m_qMotorTargetOrientation
+QuaternionAligned
 Query and shape in hierarchy id=%d
 QueryBounds
 QueuedLoaderVersion001
@@ -2009,6 +2003,7 @@ RN_WORLD_SNOOP_OK
 RN_WORLD_SNOOP_TIMEOUT
 RN_WORLD_SNOOP_UNCHANGED
 ROTATION
+RadianEuler
 RandomFloat
 RandomInt
 RandomSeed
@@ -2396,6 +2391,7 @@ Solved/Report/Solver Contacts
 Solved/Total Bodies
 Solved/Total Joints
 Sort[%d] = %s ticks, %s/op
+SoundGuid_t
 SoundOpSystem001
 SoundOpSystemEdit001
 SoundService_001
@@ -2574,6 +2570,7 @@ VGUI_System010
 VGUI_ivgui008
 VMDLLIB001
 VMaterialSystem2_001
+VMatrix
 VMediaFoundation001
 VP4003
 VPHYSICS_CREATE_AUX_WORLD
@@ -2670,9 +2667,9 @@ V_strlower_fast
 V_strnlen
 V_strtod
 V_strtoi64
-V_strtok
 V_strtoui64
 V_tanf
+V_uuid_t
 V_vsnprintf
 Vector IrrotationalVortexOnGridRefl_t::m_vAxisX
 Vector IrrotationalVortexOnGridRefl_t::m_vAxisY
@@ -2751,6 +2748,7 @@ Vortices
 WARNING: Failed to convert introspected block for file: %s
 WARNING: Invalid resource version (%d): %s
 WARNING: Trying to create a CRenderContextPtr without a valid context.
+WARNING: Unrecognized bone "%s"
 WELD_JOINT
 WORLD_DEBUG_RECORD_DEBUGDRAW
 WORLD_DEBUG_RECORD_HITBOXES
@@ -2788,6 +2786,7 @@ Yaw;
 [%d] (%d)
 [%d] hit %d
 [%d] hitboxes
+[%u]
 [CBroadphaseProxyData]
 [CFeModelOverlay]
 [CRnContact]
@@ -2802,6 +2801,7 @@ Yaw;
 [ISoftbodyEffect]
 [RnBodyPair_t]
 [empty]
+[idx=%d] "%s"
 [in %.2f] VSets(0x%X) -> %.2f @ %.2f
 \"
 \"""
@@ -2848,6 +2848,7 @@ attraction %.2f force %.2f
 audioHardMinVelocity
 audiohardnessfactor
 audioparams
+audioreflectivity
 audioroughnessfactor
 audiosounds
 awake_bodies
@@ -2957,6 +2958,7 @@ ccffcc
 ceilf
 cf
 cg
+char
 char *
 cheat
 cl_jiggle_bone_debug_pitch_constraints
@@ -3221,6 +3223,7 @@ float32 FeModelRefl_t::m_flQuadVelocitySmoothRate
 float32 FeModelRefl_t::m_flRodVelocitySmoothRate
 float32 FeModelRefl_t::m_flWindDrag
 float32 FeModelRefl_t::m_flWindage
+float64
 float[3]
 float[4]
 floor
@@ -3231,8 +3234,6 @@ fraction
 from {%.2f,%.2f,%.2f} delta {%.2f,%.2f,%.2f}
 frozen
 g default
-g_BitBuf_BitWriteMasks
-g_BitBuf_ExtraMasks
 g_bUpdateStringTokenDatabase
 g_pMemAlloc
 g_pThreadPool
@@ -3411,6 +3412,7 @@ m_JiggleBones
 m_KelagerBends
 m_LegacyStretchForce
 m_LinearLimit
+m_LocalAttachmentOffsetName
 m_LocalForce
 m_LocalInertiaInv.c1
 m_LocalInertiaInv.c2
@@ -3513,6 +3515,7 @@ m_bIsNotMatchedToMaterial
 m_bOverrideMassCenter
 m_bSelected
 m_bSleeping
+m_bSpeculativeEnabled
 m_bTopLevel
 m_bTranslationOnly
 m_bUseBlockSolver
@@ -4189,7 +4192,6 @@ never
 node %u
 node %u '%s'
 nodraw
-none
 norm
 not
 notconnected
@@ -4209,6 +4211,7 @@ other
 overlay
 pA
 pab
+panorama
 parent of jiggle bone %u: %s
 parts[%d]={
 pas
@@ -4219,6 +4222,8 @@ pervertexlighting
 phys2_contact_debug_draw_size
 phys2_debug_broadphase
 phys_build_bounds
+phys_build_mass
+phys_buoyancy_drag_multiplier
 phys_debug_draw
 phys_debug_showdefaultmaterial
 phys_drag_multiplier
@@ -4268,11 +4273,11 @@ recorded_raycasts
 relaxed %.1f < %.1f
 remapping vertex %d[w%d] invalid: %d->%d >= %d
 remapping vertex %d[w%d] invalid: %d->? >= %d
+resource
+resource_name
 resourcestream.cpp
 resourcesystem
 return Cast%s();
-rnd_down
-rnd_up
 rnserialize.inl
 rnsnoop.inl
 rod %u %.2f * max %.1f inches, min = %.2f of max;nodes(%u,%u)
@@ -4291,6 +4296,7 @@ scale=%g;
 scale={%g,%g,%g};
 schemabindings.cpp
 schemaclassinfo.cpp
+schematype.cpp
 scrapeRoughThreshold
 scraperough
 scrapesmooth
@@ -4319,6 +4325,7 @@ softbody_fields
 softbody_indices
 softbody_node_names
 solid
+soundevent
 speeds
 sphere
 springConstant
@@ -4549,6 +4556,7 @@ vas
 vb phys
 vehicle_clip
 vn %g %g %g
+void
 vphys2_angular_damping
 vphys2_angular_damping_in_water
 vphys2_artificial_acceleration
@@ -4594,7 +4602,6 @@ with collision enabled
 worldGeometry
 wt
 zD
-zero
 {
 {%.3f,%.3f,%.3f}
 {%.3f,%.3f,%.3f} v=%.3f

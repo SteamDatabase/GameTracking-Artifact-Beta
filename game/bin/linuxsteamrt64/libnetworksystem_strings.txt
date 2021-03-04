@@ -48,13 +48,8 @@
 "%s"
 "%s" = "%s"
 "%s":
-"%s":%.3f
 "%s":%d
-"%s":%f
-"%s":%lld
-"%s":%llu
 "%s":%s
-"%s":%u
 "%s":[
 ") is not compatible with this reflection object (which is for type "
 ") to start from the outermost scope.
@@ -115,8 +110,11 @@ $tI
 %-10s %d %s: %s at offset %d, 0x%p array %s struct %s: index %d array size %d in %s
 %-120s
 %-120s - %s
+%-4d classes
+%-5d %-20s : [%-5d -> %-5d] %-5s bits:  %-32s %-64s : '%s'
 %.*g
 %.*s
+%.18g
 %.1f
 %.3f %% of entities have non-zero metadata entries
 %12.12s %21.21s[%d]
@@ -138,6 +136,7 @@ $tI
 %d %s %u,
 %d (%d peak) fields allocated in mempool
 %d / %s "%s" thinking for %.02f ms!!!
+%d [%s,%s] %s
 %d bits
 %d of %d empty (%.3f %%)
 %d total.
@@ -163,6 +162,7 @@ $tI
 %s - Unrecognized net message name: '%s'
 %s -> %s::%s is marked for networking but is not a CNetworkVar!
 %s : %s = '%s'
+%s Schema Type: %s
 %s SendMessage reliable failed with EResult: %d, bytes written %d
 %s SendMessage unreliable failed with EResult: %d, bytes written %d
 %s allocation count overflow
@@ -171,6 +171,7 @@ $tI
 %s depth %d
 %s encoding as %d bits '
 %s had %d different permutations
+%s has MNetworkBitCount (or other float field tags) but is type cat '%s' (type %s)
 %s%d
 %s%s
 %s%s %s::%s recursively
@@ -182,7 +183,6 @@ $tI
 %s+--
 %s+-- Schema Class: %s
 %s,%s,'%s',%d,%d,%.3f,%d,%.3f,%d,%d,=E%d/K$1,%s,%s
-%s.
 %s.%s
 %s/%d:  AddFieldPathAndOffset (%s) added too large of a bit offset (%u : prev=%u) at element %d
 %s/%d:  AddFieldPathAndOffset (%s) added unexpected offset (%u : prev=%u) at element %d
@@ -265,7 +265,6 @@ $tI
 (
 ( def. "%s" )
 (%d) is > avg (%.2f) with stddev*scale (%.2f * %.2f) and threshold (%.2f)
-(%s)%s
 (%s->%s)
 (%u %u %u %u)
 (.
@@ -317,6 +316,7 @@ $tI
 --- %s[%d]:
 ->
 ->error
+-FLT_MAX
 -avx
 -dti
 -inf
@@ -325,8 +325,10 @@ $tI
 -networkspew
 -networkspewcreate
 -networkspewentity
+-networkspewentity_readfieldlist
 -networkspeweverything
 -networkspewexcludes
+-networkspewfakefields
 -networkvar_validate
 -nodns
 -noip
@@ -354,6 +356,7 @@ $tI
 ../public/tier0/utlsortvector.h
 ../public/tier0/utlsymboltable.h
 ../public/tier0/utltshash.h
+./
 ./google/protobuf/arena.h
 ./google/protobuf/arenastring.h
 ./google/protobuf/descriptor.pb.h
@@ -407,6 +410,7 @@ $tI
 12CRefCounted1I8CFunctor20CRefCountServiceBaseILb1E6CRefMTEE
 12CSVCMsg_Menu
 12CThreadEvent
+13CNetMessagePBILi35E25CCLCMsg_RconServerDetailsL13SignonGroup_t0EL19NetChannelBufType_t1ELb0EE
 13CNetMessagePBILi3E23CNETMsg_SplitScreenUserL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE
 13CNetMessagePBILin1E19NetMessagePacketEndL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE
 13CNetMessagePBILin1E21NetMessagePacketStartL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE
@@ -438,7 +442,6 @@ $tI
 15CTier2AppSystemI19INetworkSystemUtilsLx0EE
 15INetChannelInfo
 15SignedPayload_t
-16
 16CDefaultAccessor
 16CNetworkMessages
 16CSVCMsg_BSPDecal
@@ -520,11 +523,13 @@ $tI
 24CCLCMsg_RespondCvarValue
 24CFlattenedSerializers_FS
 24CSVCMsgList_UserMessages
+25CCLCMsg_RconServerDetails
 25CConCommandMemberAccessorI16CNetworkMessagesE
 25CNETMsg_SpawnGroup_Unload
 25CNETMsg_SplitScreenUser_t
 25CSVCMsg_ClassInfo_class_t
 25CSVCMsg_CreateStringTable
+25CSVCMsg_RconServerDetails
 25CSVCMsg_UpdateStringTable
 26CCLCMsg_SplitPlayerConnect
 26CSVCMsg_Sounds_sounddata_t
@@ -532,6 +537,7 @@ $tI
 26NetMessageConnectionClosed
 26ProtoFlattenedSerializer_t
 27CBidirMsg_RebroadcastSource
+27CCLCMsg_RconServerDetails_t
 27CMsgServerNetworkStats_Port
 27CSVCMsg_FlattenedSerializer
 27CSVCMsg_GameEventList_key_t
@@ -553,6 +559,7 @@ $tI
 32CNETMsg_SpawnGroup_LoadCompleted
 32CNetworkFieldSerializerAllocator
 32CSVCMsg_GameSessionConfiguration
+32IFlattenedSerializerSpewListener
 32INetworkFieldSerializerAllocator
 32NetMessageSplitscreenUserChanged
 33CNETMsg_SpawnGroup_ManifestUpdate
@@ -564,6 +571,7 @@ $tI
 3C
 4
 4.0
+41CFlattenedSerializerReadFieldListListener
 43CSVCMsg_PacketEntities_command_queue_info_t
 48CBidirMsg_RelayPacket_SignedDestinationAddress_t
 4C
@@ -594,12 +602,17 @@ $tI
 ::google::protobuf::MethodOptions_IdempotencyLevel_IsValid(value)
 ;
 <
-<%d>
+< %d >
+<%s : %u>
+<%s, cat %d>
 <>
+<No schemasystem>
+<invalid>
 <no deferred ref found>
 <no failure reason set>
 <null>
 <unconnected>
+<unknown: %d>
 <unknown>
 =
 = { <proto text format> }". To set fields within it, use syntax like "
@@ -611,7 +624,7 @@ $tI
 ?color
 @
 @?
-@@min
+@@default
 A file with this name is already in the pool.
 A protobuf object %s with a repeated field %s was used in a container, this will crash
 A protocol message was rejected because it was too big (more than
@@ -677,6 +690,7 @@ BakedLODBuilderMgr001
 BenchmarkService001
 BetaUniverse
 BinaryProperties_GetValue
+Bitfield
 Boolean default must be true or false.
 Buffer overflow in net channel %s
 BuildDelta
@@ -686,6 +700,7 @@ BuildMergedSerializedEntity:  delta header with corrupt array count [ ent %d ]: 
 BuildMergedSerializedEntity:  ignoring %s, was in previous state only, now outside of valid range for root field %s [array count %d, base index %d]
 BuildMergedSerializedEntity:  problem writing %s:  %d bits [%d to %d] is < 1 bit!
 BuildOutputString:  change %s to %d
+Builtin
 Byte size calculation and serialization were inconsistent.  This may indicate a bug in protocol buffers or it may be caused by concurrent modification of
 C
 C& google::protobuf::internal::scoped_array<C>::operator[](std::ptrdiff_t) const [with C = unsigned int, std::ptrdiff_t = long int]
@@ -697,6 +712,8 @@ C* google::protobuf::internal::scoped_ptr<C>::operator->() const [with C = googl
 C* google::protobuf::internal::scoped_ptr<C>::operator->() const [with C = google::protobuf::Message]
 C* google::protobuf::internal::scoped_ptr<C>::operator->() const [with C = google::protobuf::UnknownFieldSet]
 CANCELLED
+CAnimVariant
+CBufferString::AppendFormat(char const*, ...)
 CBufferString::AppendFormatV(char const*, __va_list_tag*)
 CBufferString::AppendRepeat(char, int, bool)
 CBufferString::Format(char const*, ...)
@@ -727,6 +744,8 @@ CFlattenedSerializer::Decode array index %d out of range %d for field %s::%s [%d
 CFlattenedSerializer::DumpSerializedEntityToConsole
 CFlattenedSerializer::Encode failure for entity %d because buffer of %d bytes overflowed
 CFlattenedSerializer::Encode writeBuf
+CFlattenedSerializer::GetFieldNameProcedural() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
+CFlattenedSerializer::MaybeWriteFlattenedSerializers_R, skipping already wrote stable %s : %d
 CFlattenedSerializer::MergeDeltas fieldDataBuf
 CFlattenedSerializer::MergeDeltas: invalid parameters passed.
 CFlattenedSerializer::MergeDeltas: newBits
@@ -1018,6 +1037,7 @@ CNetworkSystem::InitGameServer: CSteamGameServerAPIContext::Init OK
 CNetworkSystem::SendToNsAddress ISteamNetworkingSockets::SendMessageToConnection %s returned %d when sending %d bytes
 CNetworkSystem::Shutdown()
 CNetworkSystem::ShutdownGameServer
+CNetworkUtlVectorBase
 CNetworkedQuantizedFloat
 COLORCORRECTION_VERSION_1
 CPPTYPE_BOOL
@@ -1083,7 +1103,7 @@ CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
-CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*, MemAllocAttribute_t)
 CUtlMemoryPoolBase::Clear()
 CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
 CUtlMemoryPoolBase::Free(void*)
@@ -1096,16 +1116,19 @@ CUtlString::Format(char const*, ...)
 CUtlString::FormatV(char const*, __va_list_tag*)
 CUtlString::FreeMemoryBlock()
 CUtlString::GetForModify()
+CUtlString::IsEqual_CaseSensitive(char const*) const
 CUtlString::Purge()
 CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::Trim(char const*)
 CUtlString::TrimRight(char const*)
 CUtlString::TrimRight(char)
+CUtlString::operator+(CUtlString const&) const
 CUtlString::operator+(char const*) const
 CUtlString::operator+=(CUtlString const&)
 CUtlString::operator+=(char const*)
 CUtlString::operator==(CUtlString const&) const
+CUtlString::operator[](int) const
 CUtlStringToken
 CUtlSymbol
 CUtlSymbolLarge
@@ -1116,6 +1139,7 @@ CUtlSymbolTable::RemoveAll()
 CUtlSymbolTable::String(CUtlSymbol) const
 CUtlSymbolTable::~CUtlSymbolTable()
 CUtlVector
+CUtlVectorEmbeddedNetworkVar
 CXXABI_1.3
 CalcDelta
 Call set methods to initialize MapKey.
@@ -1190,10 +1214,13 @@ DTI reset
 DTI: wrote client stats into %s.
 DebugCallback
 DebugTextureInfo001
+Declared Class
+Declared Enum
 Decode
 DecodeProceduralField
 Default value for an enum field must be an identifier.
 DegreeEuler
+DemoUpconverterVersion001
 DetermineFieldSerializerGroup
 DevMsg(char const*, ...)
 Direct UDP connect
@@ -1357,6 +1384,7 @@ FindOrCreateGroupId
 FindOrCreateNetMessage
 First argument to Swap() (of type "
 First argument to SwapFields() (of type "
+Fixed Array
 FlattenedSerializersVersion001
 FontManager_001
 For network encoding stats, provide a notes field if field change count is above this many standard deviations for the average field change counts for the serializer.
@@ -1382,6 +1410,7 @@ GameUIService_001
 GatherAllFieldOffsets_R
 GatherAllFieldOffsets_R:  local offset of %s::%s %u is too large (%u max)
 Generated new connection id %X for use with remote system "%s"
+Generic
 GetBitRange
 GetBitRange( %u -> %u ) end is before or same as start
 GetBool
@@ -1447,6 +1476,7 @@ Index out-of-bounds (field is empty).
 Init
 InitFakeField:  Couldn't find schema lookup for '%s' of type '%s'
 InitFakeField:  Parser function returned false for '%s' of type '%s'
+InitFakeField: %-64s type: %-32s encoder: %-32s [%s]
 InitField
 InitGameServer
 InitSteamNetworking
@@ -1520,7 +1550,7 @@ LoggingSystem_RegisterLoggingChannel
 Logic problem? szsrc =
 M
 MATCHFRAMEWORK_001
-MClassHasCustomAlignedNewDelete
+MIsBoxedIntegerType
 MNetworkAlias
 MNetworkArraySerializer
 MNetworkBitCount
@@ -1610,6 +1640,7 @@ MutableRawRepeatedField
 MutableRepeatedMessage
 N13CNetMessagePBILi0E11CNETMsg_NOPL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
 N13CNetMessagePBILi1E18CNETMsg_DisconnectL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
+N13CNetMessagePBILi35E25CCLCMsg_RconServerDetailsL13SignonGroup_t0EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
 N13CNetMessagePBILi3E23CNETMsg_SplitScreenUserL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
 N13CNetMessagePBILin1E19NetMessagePacketEndL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
 N13CNetMessagePBILin1E21NetMessagePacketStartL13SignonGroup_t11EL19NetChannelBufType_t1ELb0EE16CProtobufBindingE
@@ -1855,6 +1886,7 @@ Plat_USTime
 PlusFour
 PlusThree
 PlusTwo
+Pointer
 Pointer to CUtlVector not supported by networking:  %s::%s
 PopAllButOnePlusN
 PopAllButOnePlusNPack3Bits
@@ -1866,6 +1898,7 @@ PopNPlusOne
 PopOnePlusN
 PopOnePlusOne
 PostProcessingSystem_001
+PrecipitationType_t
 Print detailed network statistics for each network connection
 Problem     :
 Problem     : Enum value did not match field type:    Expected  :
@@ -2303,7 +2336,9 @@ ZN26CParallelProcessorAbstractI18CParallelProcessorIN37CBuildNetworkSerializerHi
 [ Net Message Info: %s ]
 [$0]
 [%.3f server clamped to %.3f]
+[%d]/
 [%s]:
+[%u]
 [+%d]
 [+add recip %d]
 [A:%u:%u:%u]
@@ -2412,6 +2447,7 @@ binary_auto
 binary_bc
 binary_lz4
 bit %d - %d (%d bits/%d bytes):
+bitcount=%d,
 bool
 bool google::protobuf::safe_parse_negative_int(const string&, IntType*) [with IntType = int, std::string = std::basic_string<char>]
 bool google::protobuf::safe_parse_negative_int(const string&, IntType*) [with IntType = long int, std::string = std::basic_string<char>]
@@ -2426,9 +2462,11 @@ but not used.
 bytes
 bytes).  To increase the limit (or to disable these warnings), see CodedInputStream::SetTotalBytesLimit() in google/protobuf/io/coded_stream.h.
 bytes.
+c
 can't reach here.
 cb(%s[%d])
 ceil
+char
 char google::protobuf::StringPiece::operator[](google::protobuf::stringpiece_ssize_type) const
 cheat
 classname
@@ -2462,7 +2500,6 @@ databytes
 deactivated
 decode
 decoding FAKE
-default
 deleted
 delta
 delta >= 1u
@@ -2503,10 +2540,12 @@ filesystem
 filesystem_stdio
 fixed32
 fixed64
+flags=%d,
 flattenedserializer.cpp
 flattenedserializers.cpp
 float
 float32
+float64
 floor
 floorf
 fltx4
@@ -2522,7 +2561,6 @@ g_BitBuf_ExtraMasks
 g_bUpdateStringTokenDatabase
 g_pFlattenedSerialized->Decode() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pFlattenedSerialized->Encode() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
-g_pFlattenedSerialized->GetFieldNameProcedural() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pFlattenedSerialized->GetFieldShortNameProcedural() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pFlattenedSerialized->ReadFieldList() called for entity with procedural fields, but no INetworkProceduralDataHelper *pDataHelper passed into to API!!!
 g_pMemAlloc
@@ -2682,6 +2720,7 @@ matrix3x4_t
 matrix3x4a_t
 max
 max. %f
+max=%f,
 memchr
 memcmp
 memcpy
@@ -2690,7 +2729,9 @@ memset
 merged new baseline:
 message
 message of type "
+min
 min. %f
+min=%f,
 n
 nIndex != m_priorityToOrderMap.InvalidIndex()
 nPriority != NETWORK_FIELD_CHANGE_DEFAULT_PRIORITY
@@ -2798,6 +2839,7 @@ output specified is NULL
 p
 package $0;
 packet_status
+panorama
 parse
 parsing
 pending data
@@ -2841,12 +2883,15 @@ render_interpolation_fraction
 repeated
 replicated
 required
+resource
+resource_name
 rnd_down
 rnd_up
 sched_yield
 schemabindings.cpp
 schemaclassinfo.cpp
 schemasystem
+schematype.cpp
 sdr
 sdr %s = %s
 sdr config option not found
@@ -2871,6 +2916,7 @@ sint64
 size too big:
 size_t to int conversion
 skip
+soundevent
 splitpacket
 splits [%d]
 sprintf
@@ -3025,6 +3071,7 @@ typeinfo for std::exception
 typeinfo for std::string
 typeinfo for unsigned char
 typeinfo name for std::string
+uint16
 uint32
 uint64
 uint8
@@ -3049,6 +3096,7 @@ vmax >= base
 vmin < 0
 vmin <= 0 - base
 voice_xsend_debug
+void
 void google::protobuf::FieldDescriptorProto::set_label(google::protobuf::FieldDescriptorProto_Label)
 void google::protobuf::FieldDescriptorProto::set_type(google::protobuf::FieldDescriptorProto_Type)
 void google::protobuf::FieldOptions::set_ctype(google::protobuf::FieldOptions_CType)

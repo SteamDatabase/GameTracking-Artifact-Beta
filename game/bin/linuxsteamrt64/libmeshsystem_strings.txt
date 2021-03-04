@@ -26,6 +26,7 @@ $ORIGIN
 %s + %s
 %s - %s
 %s / %s
+%s Schema Type: %s
 %s%d
 %s+--
 %s+-- Schema Class: %s
@@ -43,7 +44,9 @@ $ORIGIN
 %s| Virtual: %s; Abstract: %s; TrivialConstr: %s; TrivialDestr: %s
 ( def. "%s" )
 (None)
+*
 *ZN24CDecalDrawDataRefCounted7ReleaseEvEUlvE_
+,
 , %s
 , parent:
 -%s
@@ -60,7 +63,6 @@ $ORIGIN
 ../public/tier0/utltshash.h
 ../public/tier2/fileutils.h
 0.0
-0.1
 0x%08X %s,
 1 1 1
 1.0
@@ -116,6 +118,7 @@ $ORIGIN
 18CMutableRefCountedI20CMutableRefCountBaseILb1E6CRefMTEE
 18CPlaceholderConVar
 18CRenderMeshManager
+19CBoneConstraintBase
 19CModelConfigElement
 19CSchemaRegistration
 2
@@ -230,19 +233,25 @@ $ORIGIN
 7IConVar
 8CFunctor
 9ISequence
+<
+< %d >
+<%s : %u>
+<%s, cat %d>
 <INVALID EXPRESSION>
 <INVALID_RBF_TYPE>
 <NO EXPRESSION>
 <No schemasystem>
+<invalid>
 <no deferred ref found>
 <no failure reason set>
+<noschema
 <null>
 <unconnected>
+<unknown: %d>
 <unknown>
 >
 >nL>nL>nL>nLbodygroup_driven_morph_list
 ?
-?root
 @@
 @Aphysaggregatedata.cpp
 @spawn
@@ -300,6 +309,7 @@ Bad data block index for embedded animation data (%d,%d,%d)
 Bad data block index for embedded physics data (%d)
 Bad data block index for mesh (%s: %d)
 Bad data block type for mesh (%s: %d)
+Bad model name: "%s"
 Bad morph block index for mesh (%s: %d)
 Bad morph block type for mesh (%s: %d)
 Bad morph data for mesh (%s)
@@ -324,6 +334,7 @@ CAnimRetargetData
 CAnimRetargetElementData
 CAnimSkeleton
 CAnimUser
+CAnimVariant
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
@@ -367,6 +378,7 @@ CConstraintSlave
 CConstraintTarget
 CCycleBase
 CDrawCullingData
+CEntityIndex
 CFeIndexedJiggleBone
 CFeJiggleBone
 CFeMorphLayer
@@ -407,6 +419,7 @@ CMorphBundleData
 CMorphConstraint
 CMorphData
 CMorphRectData
+CMotionTransform
 COLORCORRECTION_VERSION_1
 CONTENT
 CONTENTROOT
@@ -416,12 +429,14 @@ CPhysSurfaceProperties
 CPhysSurfacePropertiesAudio
 CPhysSurfacePropertiesPhysics
 CPhysSurfacePropertiesSoundNames
+CPlayerSlot
 CPointConstraint
 CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
 CSceneObjectData
+CSplitScreenSlot
 CSplitString::Construct(char const*, char const**, int)
 CStrongHandle
 CTSQueue corruption
@@ -437,6 +452,7 @@ CThreadSpinRWLock::UnlockWrite(char const*, int)
 CTiltTwistConstraint
 CTransform
 CTwistConstraint
+CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
 CUtlBinaryBlock::SetLength(int)
 CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
@@ -461,7 +477,7 @@ CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
 CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
-CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*, MemAllocAttribute_t)
 CUtlMemoryPoolBase::Clear()
 CUtlMemoryPoolBase::Free(void*)
 CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
@@ -474,7 +490,6 @@ CUtlString::CUtlString(CBufferString const&)
 CUtlString::Format(char const*, ...)
 CUtlString::FormatV(char const*, __va_list_tag*)
 CUtlString::FreeMemoryBlock()
-CUtlString::GetForModify()
 CUtlString::IsEqual_CaseSensitive(char const*) const
 CUtlString::IsEqual_FastCaseInsensitive(char const*) const
 CUtlString::Purge()
@@ -482,9 +497,10 @@ CUtlString::Set(char const*)
 CUtlString::SetDirect(char const*, int)
 CUtlString::SetLength(int)
 CUtlString::operator+(char const*) const
-CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
+CUtlSymbol
+CUtlSymbolLarge
 CUtlSymbolTable::AddString(char const*)
 CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
 CUtlSymbolTable::Find(char const*) const
@@ -506,8 +522,6 @@ Cannot copy abstract class
 Cannot deallocate abstract class
 Cannot deduce for class
 Cannot destruct abstract class
-ChangeCallbackOnChange
-ChangeCallbackOnChangeOrCreate
 ChangeSize
 CharacterSetBuild
 Combo(
@@ -526,6 +540,8 @@ CreateInterface
 Cubic
 DebugPrintKV3(KeyValues3 const*)
 DebugTextureInfo001
+DegreeEuler
+DemoUpconverterVersion001
 DevMsg
 DevMsg(char const*, ...)
 Dominate(
@@ -665,7 +681,6 @@ HostStateMgr001
 IQuickTime001
 Identity
 Infinite Joint Weights encountered: Skinning will not work! (At position %.3f %.3f %.3f)
-InfoForResourceTypeCAnimData
 InfoForResourceTypeCAnimationGroup
 InfoForResourceTypeCModel
 InfoForResourceTypeCPhysAggregateData
@@ -733,7 +748,7 @@ Linear
 LoadKV3(CKeyValues3Context*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadKV3(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadKV3(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
-LoadKV3FromKV1Text_Translated(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, KV1ToKV3Translation_t const*, int, char const*)
+LoadKV3FromKV1Text_Translated(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, KV1ToKV3Translation_t const*, int, char const*, bool)
 LoadKV3ObjectInPlace error: %s
 LoadKV3Text_NoHeader(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
 LoadModelSyncNoExtrefs - AllocateResource failed
@@ -751,7 +766,6 @@ LookAtList
 LooksLikeKV3TextData(void const*, int, KV3ID_t*)
 LowerEyelid(
 MATCHFRAMEWORK_001
-MClassHasCustomAlignedNewDelete
 MDefaultString
 MESH_DRAW_FLAGS_CAN_BATCH_WITH_DYNAMIC_SHADER_CONSTANTS
 MESH_DRAW_FLAGS_DRAW_LAST
@@ -764,14 +778,7 @@ MESH_DRAW_INPUT_LAYOUT_IS_NOT_MATCHED_TO_MATERIAL
 MESH_TRANSLUCENCY_FULLY_ALPHA_BLENDED
 MESH_TRANSLUCENCY_FULLY_OPAQUE
 MESH_TRANSLUCENCY_PARTIALLY_ALPHA_BLENDED
-MNetworkBitCount
-MNetworkChangeCallback
-MNetworkEncoder
-MNetworkOverride_Invalid
-MNetworkPriority
-MNetworkRemoveAll
-MNetworkSerializer
-MNetworkUserGroup
+MKV3TransferName
 MOD
 MODEL_BONE_FLEX_INVALID
 MODEL_BONE_FLEX_TX
@@ -787,7 +794,6 @@ MODEL_PROCESSING_SERVICES_INTERFACE_001
 MORPH_BUNDLE_TYPE_COUNT
 MORPH_BUNDLE_TYPE_NONE
 MORPH_BUNDLE_TYPE_NORMAL_WRINKLE
-MORPH_BUNDLE_TYPE_POSITION_SPEED
 MORPH_FLEXCONTROLLER_REMAP_2WAY
 MORPH_FLEXCONTROLLER_REMAP_EYELID
 MORPH_FLEXCONTROLLER_REMAP_NWAY
@@ -815,6 +821,8 @@ Missing resource blocks for mesh (%s: %d)
 Model %s missing bone and flex counts (%d < %d), init %d
 Model %s: Attempted to attach attachment %s to an unknown bone %s!
 Model conversion: %d conversions in %.3fsec (%.3fms each)
+Model has no data: "%s"
+Model not found: "%s"
 ModelBoneFlexComponent_t
 ModelBoneFlexDriverControl_t
 ModelBoneFlexDriver_t
@@ -857,25 +865,11 @@ MurmurHash2LowerCase(char const*, unsigned int)
 MurmurHash64
 N17CModelTypeManager23AsyncProcessDataResultsE
 N18CRenderMeshManager22AsyncProcessDataResultE
-N24CFieldPathHuffmanEncoder12InternalNodeE
-N24CFieldPathHuffmanEncoder5INodeE
-N24CFieldPathHuffmanEncoder8LeafNodeE
 N33CBaseIntrospectedToKV3TypeManager18AsyncProcessResultE
 N37CTypesafeIntrospectedToKV3TypeManagerILy1818520950E15PermModelData_tE26IKV3ResourceAllocatorUtilsE
 N37CTypesafeIntrospectedToKV3TypeManagerILy1818520950E15PermModelData_tE28IKV3ResourceDeallocatorUtilsE
 N37CTypesafeIntrospectedToKV3TypeManagerILy440006569334E13CMorphSetDataE26IKV3ResourceAllocatorUtilsE
 N37CTypesafeIntrospectedToKV3TypeManagerILy440006569334E13CMorphSetDataE28IKV3ResourceDeallocatorUtilsE
-NETWORK_FIELD_CHANGED_ARRAY_WITH_VALUE
-NETWORK_FIELD_CHANGED_NO_VALUE
-NETWORK_FIELD_CHANGED_NO_VALUE_NO_CONTEXT
-NETWORK_FIELD_CHANGED_TYPE_NONE
-NETWORK_FIELD_CHANGED_WITH_VALUE
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL
-NETWORK_FIELD_CHANGES_OFTEN_PRIORITY_TOPOOGICAL_SORTLOWER
-NETWORK_FIELD_DEFAULT_PRIORITY
-NETWORK_FIELD_HIGHEST_PRIORITY
-NETWORK_FIELD_LOWEST_PRIORITY
 NULL RenderMesh with valid handle
 NWay(
 Need valid position and texcoord when creating world space tangent lengths!
@@ -893,6 +887,7 @@ No DATA block for resource '%s'
 Not safe to 'new' this class due to alignment requirements
 ORIENT
 OldFeEdge_t
+Org(%.3f,%.3f,%.3f) Ang(%.3f,%.3f,%.3f)
 P@
 PA
 PARENT
@@ -920,6 +915,7 @@ PermModelInfo_t::FLAG_NAV_GEN_NONE
 PermModelInfo_t::FLAG_NO_ANIM_EVENTS
 PermModelInfo_t::FLAG_NO_FORCED_FADE
 PermModelInfo_t::FLAG_SOURCE1_IMPORT
+PermModelInfo_t::FLAG_TRANSLUCENT
 PermModelInfo_t::FLAG_TRANSLUCENT_TWO_PASS
 PermModelInfo_t::FlagEnum
 PhysFeModelDesc_t
@@ -938,6 +934,7 @@ Plat_SetDenormalsAreZero
 Plat_ShouldCollectMiniDumpsForFatalErrors
 PostProcessingSystem_001
 Print model load-time conversion info
+Prints the bind pose of the specified model. Optionally limits to a particular bone and its parent chain, otherwise prints the entire skeleton.
 ProjectedDecal
 ProjectedDecalSceneObjectDesc
 PropWorldOrigin
@@ -945,12 +942,14 @@ PropertyEditorSystem_001
 Push
 QAngle
 Quaternion
+QuaternionAligned
 QueuedLoaderVersion001
 Quintic
 RESOURCE_TYPE_MODEL
 RESOURCE_TYPE_MORPHSET_INTERNAL
 RESOURCE_TYPE_RENDERMESH_INTERNAL
 ROTATION
+RadianEuler
 RandomFloat
 RandomInt
 RandomSeed
@@ -1011,6 +1010,7 @@ ServerUploadGameStats001
 Simulated
 SkeletonBoneBounds_t
 SlopeTrace
+SoundGuid_t
 SoundOpSystem001
 SoundOpSystemEdit001
 SoundService_001
@@ -1052,6 +1052,7 @@ Trying to concatenate meshes with different numbers of attributes!
 Trying to concatenate meshes with incompatible attribute sets!
 Trying to override the same draw call with two different materials!Only the last override will be set!
 TypeManager
+USAGE: print_model_bind_pose <vmdl_name> [bone_name]
 Unable to read resource file %s!
 Unknown
 Unnormalized joint weights encountered (%f): Skinning may not work! (At position %.3f %.3f %.3f)
@@ -1079,6 +1080,7 @@ VGUI_System010
 VGUI_ivgui008
 VMDLLIB001
 VMaterialSystem2_001
+VMatrix
 VMediaFoundation001
 VMeshError
 VModelError
@@ -1087,6 +1089,7 @@ VPhysXAggregateData_t
 VPhysXAggregateData_t::FLAG_IGNORE_SCALE_OBSOLETE_DO_NOT_USE
 VPhysXAggregateData_t::FLAG_IS_POLYSOUP_GEOMETRY
 VPhysXAggregateData_t::FLAG_LEVEL_COLLISION
+VPhysXAggregateData_t::VPhysXFlagEnum_t
 VPhysXBodyPart_t
 VPhysXBodyPart_t::FLAG_ALWAYS_DYNAMIC_ON_CLIENT
 VPhysXBodyPart_t::FLAG_JOINT
@@ -1161,11 +1164,13 @@ V_strlower_fast
 V_strnlen
 V_strtod
 V_strtoi64
-V_strtok
 V_strtoui64
 V_tanf
+V_uuid_t
 V_vsnprintf
+Vector2D
 Vector4D
+VectorAligned
 VertexColorPos_t
 VertexPaintBlendParams
 VertexPaintBlendParams1
@@ -1175,6 +1180,7 @@ WARNING: Encountered %d total problems with vertex data (first %d shown above)
 WARNING: Failed to convert introspected block for file: %s
 WARNING: Invalid resource version (%d): %s
 WARNING: Trying to create a CRenderContextPtr without a valid context.
+WARNING: Unrecognized bone "%s"
 Warning
 Warning:  %s = '%s' is infinite, clamping value.
 WorldRendererMgr001
@@ -1184,6 +1190,9 @@ ZN37CTypesafeIntrospectedToKV3TypeManagerILy1818520950E15PermModelData_tE24Deall
 ZN37CTypesafeIntrospectedToKV3TypeManagerILy440006569334E13CMorphSetDataE15AllocateAndLoadER23CKV3TransferLoadContextPK21ResourceBindingBase_tP29IRD_RegisterResourceDataUtilsE15CAllocatorUtils
 ZN37CTypesafeIntrospectedToKV3TypeManagerILy440006569334E13CMorphSetDataE24DeallocateDestroyCleanupEPvP25IResourceDeallocatorUtilsE17CDeallocatorUtils
 [%.3f server clamped to %.3f]
+[%u]
+[]
+[idx=%d] "%s"
 _@
 _ITM_deregisterTMCloneTable
 _ITM_registerTMCloneTable
@@ -1219,6 +1228,7 @@ archive
 audioHardMinVelocity
 audiohardnessfactor
 audioparams
+audioreflectivity
 audioroughnessfactor
 audiosounds
 bOwnVBAndIB == m_bOwnVBAndIB && m_pFixedMeshDataOverride
@@ -1235,6 +1245,7 @@ blendweights
 body_groups
 bodygroup_choice
 bodygroup_name
+bool
 break_list
 bulletimpact
 burst
@@ -1245,6 +1256,7 @@ c03
 c04
 cables_list
 ceilf
+char
 cheat
 client
 clientcmd_can_execute
@@ -1302,12 +1314,13 @@ flThetaFactor
 flThetaRelaxed
 flWeight0
 flWorldFriction
+float32
+float64
 floor
 floorf
+fltx4
 formats.cpp
 g default
-g_BitBuf_BitWriteMasks
-g_BitBuf_ExtraMasks
 g_bUpdateStringTokenDatabase
 g_hSkeletonMeshLayout
 g_pMemAlloc
@@ -1405,6 +1418,7 @@ m_JiggleBones
 m_KelagerBends
 m_LegacyStretchForce
 m_LinearLimit
+m_LocalAttachmentOffsetName
 m_LocalForce
 m_LocalRotation
 m_LockToGoal
@@ -1628,7 +1642,6 @@ m_flPitchBounce
 m_flPitchDamping
 m_flPitchFriction
 m_flPitchStiffness
-m_flPosition
 m_flProgression
 m_flQuadVelocitySmoothRate
 m_flRFactor
@@ -2057,7 +2070,6 @@ nVertexMapIndex
 nVertexNode
 nVirtElem
 nWeight
-none
 norm
 notconnected
 notify
@@ -2070,6 +2082,7 @@ operator new[](unsigned long)
 operator new[](unsigned long, std::nothrow_t const&)
 optionallycompressedtangentframe
 overlay
+panorama
 parent of jiggle bone %u: %s
 particles_list
 pervertexlighting
@@ -2079,6 +2092,7 @@ physib
 placementbone
 position
 posxyz
+print_model_bind_pose
 projectedDecal
 ptestbed
 pthread_mutex_destroy
@@ -2093,13 +2107,14 @@ raytrace.cpp
 remapping vertex %d[w%d] invalid: %d->%d >= %d
 remapping vertex %d[w%d] invalid: %d->? >= %d
 rendermeshmgr.cpp
+resource_name
 resourcesystem
-rnd_down
-rnd_up
+root
 runspeed
 s offg cMeshusemtl initialShadingGroup
 schemabindings.cpp
 schemaclassinfo.cpp
+schematype.cpp
 scrapeRoughThreshold
 scraperough
 scrapesmooth
@@ -2111,6 +2126,7 @@ sharpStartAngle
 sin( %s )
 singleplayer
 singletons.cpp
+soundevent
 speeds
 springConstant
 sqrt
@@ -2132,6 +2148,10 @@ text
 tmFrame
 true
 tv
+uint16
+uint32
+uint64
+uint8
 unable to load mesh "%s"
 unknown activity %d on for activity model %s!
 unspecified
@@ -2152,6 +2172,7 @@ vmdlkeys1
 vmdlkeys2
 vmdlkeys3
 vn %g %g %g
+void
 vphysics2
 vtable for __cxxabiv1::__class_type_info
 vtable for __cxxabiv1::__si_class_type_info
@@ -2161,7 +2182,6 @@ w2
 walkspeed
 wt
 zD
-zero
 {
 {}()'
 {}()':

@@ -34,7 +34,9 @@
 				"no_vs_intro"					"1"
 				"dcg_ai_deploys_last" 			"1"
 				
-				"dcg_shop_blacklist"			"*"
+				"dcg_shop_denylist"			"*"
+				"dcg_shop_upgrade_disabled" 	"1"
+				"dcg_shop_invest_disabled"		"1"				
 			}
 			"sequences"
 			{
@@ -66,10 +68,18 @@
 				
 				"add"
 				{
-					"auto"					"npehelper #DCG_tutorial06_add cardID 14005"
-					"> 2.0"					"unlock_hand"
-					"> 2.0"					"unlock isPassCoin 1"
-					"> 6.0"					"npehelper remove cardID 14005"
+					"auto"						"npehelper #DCG_tutorial06_enchantments cardID 14005"
+					"> 0.2"						"popup_unstall"
+					"on_message_dismissed 0.2"	"goto drag"
+					">"							"npehelper remove cardID 14005"
+				}
+				
+				"drag"
+				{
+					"auto"					"npehelper #DCG_tutorial06_drag cardID 14000"
+					"> 1.0"					"unlock_hand"
+					"> 1.0"					"unlock isPassCoin 1"
+					"> 6.0"					"npehelper remove cardID 14000"
 				}
 			}
 		}

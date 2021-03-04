@@ -33,7 +33,6 @@
 
     <Panel class="DCGHUDRoot" hittest="true">
 	    <Panel id="ActivatedAbillitySummaryContainer" hittest="false" class="NoAbilitiesShown" />
-        <Panel class="ArtifactLogoContainer" hittest="false"/>
         <Panel id="Overlay" hittest="false"/>
 		<DCGPhaseAnnouncements id="PhaseAnnouncements" />
 
@@ -89,27 +88,67 @@
           </Panel>
         </Panel>
 
-        <Panel id="PlayerInformation"/>
+		<Panel id="CombatDirection" hittest="false" >
+			<Panel id="Lane1And2Arrow" class="CombatDirectionArrow LeftOfMid" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatLeftToRight, ShopTooltip )" onmouseout="UIHideTextTooltip()"/>
+			<Panel id="Lane2And3Arrow" class="CombatDirectionArrow RightOfMid" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatLeftToRight, ShopTooltip )" onmouseout="UIHideTextTooltip()"/>
+		</Panel>
+
+        <Panel id="PlayerInformation" hittest="false"/>
+        
  		<!-- see hud_shop.xml-->
         <DCGHUDShop id="Shop"/>
  		<!-- shop end-->
 
-        <Panel id="DeployButtonsContainer" class="InitialDeployMid">
-            <Panel id="DeployButtonPanelLane" class="DeployButtonsPanel" onactivate="DCGDeploymentConfirmed()" hittestchildren="false" >
-			    <Panel id="TopGoldBar" class="GoldBars" />
-                <TextButton id="DeployButtonLane" text="#DCG_UI_DeployMid" class="DeployButton" />
-		        <TextButton id="DeploymentButtonLane" class="DeploymentButtonContainer" text="#DCG_UI_ClickToConfirmDeployment" />
-			    <Panel id="BottomGoldBar" class="GoldBars" />
+        <Panel id="DeploymentInfo" hittest="false">
+
+        	<Panel id="LaneLabels" hittest="false">
+
+	        	<Panel id="DeployBannerLeft" class="DeployBanner LeftLane" hittestchildren="false" >
+				 
+	                <Label text="#DCG_UI_DeployLane1"  />
+			
+	            </Panel>
+
+	            <Panel id="DeployBannerMid" class="DeployBanner MiddleLane" hittestchildren="false" >
+				
+	                <Label text="#DCG_UI_DeployLane2" />
+			   	
+	            </Panel>
+
+	            <Panel id="DeployBannerRight" class="DeployBanner RightLane" hittestchildren="false" >
+	            	
+	                <Label text="#DCG_UI_DeployLane3"  />
+	           
+	            </Panel>
+        	</Panel>
+
+			<Panel id="DeployBannerAny" class="DeployBanner AnyLane" hittestchildren="false" >
+	                <Label text="#DCG_UI_DeployLaneAny"  />	
+	        </Panel>
+
+  			<Panel id="DeploymentConfirmationButton" class="ButtonBevel" onactivate="DCGDeploymentConfirmed()" 
+  				onmouseover="UIShowTextTooltip( #DCG_UI_ClickToConfirmDeployment )" onmouseout="UIHideTextTooltip()" hittestchildren="false" >
+		        <Label class="DeploymentButtonContainer" text="#DCG_UI_DoneDeploying" />
             </Panel>
+
+            <Panel id="WaitingForOpponentPanel" class="DeployBanner" hittestchildren="false">
+        		<Label text="#DCG_UI_WaitingForOpponent"/>
+        	</Panel>
         </Panel>
 
-        <Button id="ScrollLeftButton" class="ScrollLaneButton SettingsButton" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatLeftToRight, ShopTooltip )" onmouseout="UIHideTextTooltip()">
+
+
+
+
+<!--
+        <Panel id="ScrollLeftButton" class="ScrollLaneButton SettingsButton" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatLeftToRight, ShopTooltip )" onmouseout="UIHideTextTooltip()">
         	<Panel id="ScrollLeftButtonOverlay"/>
-	      </Button>
+	    </Panel>
 	
-        <Button id="ScrollRightButton" class="ScrollLaneButton SettingsButton" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatRightToLeft, ShopTooltip )" onmouseout="UIHideTextTooltip()">
+        <Panel id="ScrollRightButton" class="ScrollLaneButton SettingsButton" onmouseover="UIShowTextTooltipStyled( #DCG_UI_CombatRightToLeft, ShopTooltip )" onmouseout="UIHideTextTooltip()">
 		      <Panel id="ScrollRightButtonOverlay"/>
-	      </Button>
-	
+	    </Panel>
+	-->
+
 	</Panel>
 </root>

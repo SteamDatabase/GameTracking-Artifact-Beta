@@ -66,13 +66,8 @@
 "%s"
 "%s" = "%s"
 "%s":
-"%s":%.3f
 "%s":%d
-"%s":%f
-"%s":%lld
-"%s":%llu
 "%s":%s
-"%s":%u
 "%s":[
 "'
 "(
@@ -404,7 +399,7 @@ $tI
 **** Panel %s has fill-parent-flow for width, but isn't in a flowing right layout
 **** Unable to localize '#%s' on panel '%s'
 **** Unable to localize '#%s' on panel descendant of '%s'
-***** Parsing error on %s(%u):
+***** Parsing %s on %s(%u):  %s
 *0"Z
 *N6google8protobuf12_GLOBAL__N_123AggregateErrorCollectorE
 *N6google8protobuf12_GLOBAL__N_123GeneratedMessageFactoryE
@@ -609,9 +604,11 @@ $tI
 15CTier2AppSystemI17IPanoramaUIEngineLx0EE
 15CTier3AppSystemI17IPanoramaUIEngineLx0EE
 16CDefaultAccessor
+17CContentSourceMap
 17CPanoramaUIEngine
 17EVideoPlayerEvent
 17IPanoramaUIEngine
+18:08:10
 18CPlaceholderConVar
 18CValidatableThread
 19CDragStartCallbacks
@@ -630,7 +627,6 @@ $tI
 20CPostConnectCallback
 20CRefCountServiceBaseILb1E6CRefMTE
 20IResourceTypeManager
-21:36:10
 22CSchemaInstallCallback
 22IToolsResourceListener
 23IConCommandBaseAccessor
@@ -759,6 +755,7 @@ $tI
 @panorama_2d_translate_no_comp_layer
 @panorama_allow_texture_composition_layer_fast_path
 @panorama_allow_transitions
+@panorama_apply_new_box_shadow_fixup
 @panorama_box_shadow_no_comp_layer
 @panorama_cache_command_list_repaint_threshold
 @panorama_cache_command_list_size_threshold
@@ -768,6 +765,7 @@ $tI
 @panorama_debug_fast_box_shadow
 @panorama_debug_overlay_opacity
 @panorama_debug_ready_for_display
+@panorama_defer_backbuffer_commands
 @panorama_disable_blur
 @panorama_disable_box_shadow
 @panorama_disable_descendant_filtering
@@ -809,6 +807,7 @@ $tI
 @panorama_max_text_shadow_strength
 @panorama_might_scroll_no_comp_layer
 @panorama_min_comp_layer_cache_cost
+@panorama_new_box_shadow
 @panorama_print_cache_status
 @panorama_print_svg_stats
 @panorama_reload_animations
@@ -821,6 +820,7 @@ $tI
 @panorama_steampad_button_repeat_interval_start
 @panorama_style_flag_force_invalidate
 @panorama_suspend_paint
+@panorama_temp_comp_layer_min_dimension
 @panorama_track_render_commands
 @panorama_transform_parents_no_layer_for_perspective
 @panorama_transforms_no_comp_layer
@@ -1318,6 +1318,7 @@ CBufferString::MoveFrom(CBufferString&)
 CBufferString::RemoveAt(int, int)
 CBufferString::RemoveDotSlashes(char)
 CBufferString::RemoveFirstDir(CBufferString*)
+CBufferString::Replace(char const*, char const*, bool)
 CBufferString::SetExtension(char const*)
 CBufferString::SetLength(int, bool, int*)
 CBufferString::SetPtr(char*, int, int, bool, bool)
@@ -1611,7 +1612,6 @@ CLIENT_CERTIFICATE
 CLNT
 CLayoutFile::BLoadFromBuffer
 CLayoutFileXMLParser::BAddPanel
-CLocalization::CheckPanelNeedsLocUpdate
 CLocalization::OnPanelDeleted
 CLocalization::PanelLocEntry_t CUtlMemoryPool
 CLocalization::PchFindLongestStringForToken
@@ -1787,6 +1787,7 @@ CSource2Surface::DrawFancyQuad() GetMode == NULL? Can't Render
 CSource2Surface::DrawFancyQuad() Mode passes != 1? Can't Render
 CSparseMatrix::SetDimensions(int, int)
 CSparseMatrix::SetElement(int, int, float)
+CSplitString::Construct(char const*, char const**, int)
 CSteamGameController::GotWindowFocus
 CSteamGameController::RunFrame
 CStyleFile::BLoadFromBuffer
@@ -1882,6 +1883,7 @@ CUIRenderEngine::EndFrame
 CUIWindowInput::ProcessMouseTrackingResults
 CUIWindowInput::ProcessMouseTrackingResults - Recalculate handles
 CUIWindowInput::SetInputFocus
+CUtlBinaryBlock::SetLength(int)
 CUtlBlockMemory overflow!
 CUtlBuffer::AddNullTermination()
 CUtlBuffer::AssumeMemory(void*, int, int, int)
@@ -1901,6 +1903,7 @@ CUtlBuffer::ParseToken(characterset_t const*, char*, int, bool)
 CUtlBuffer::PeekGet(int, int)
 CUtlBuffer::Printf(char const*, ...)
 CUtlBuffer::Put(void const*, int)
+CUtlBuffer::PutString(char const*)
 CUtlBuffer::SeekGet(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SeekPut(CUtlBuffer::SeekType_t, int)
 CUtlBuffer::SetBigEndian(bool)
@@ -1911,8 +1914,11 @@ CUtlBuffer::Swap(CUtlBuffer&)
 CUtlBuffer::Swap(CUtlMemory<unsigned char, int>&)
 CUtlLinkedList overflow! (exhausted index range)
 CUtlLinkedList overflow! (exhausted memory allocator)
+CUtlMemoryBlockAllocator::AllocCopy(char const*, unsigned int)
+CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
+CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlMemoryPoolBase::Alloc()
-CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*)
+CUtlMemoryPoolBase::CUtlMemoryPoolBase(int, int, int, MemoryPoolGrowType_t, char const*, MemAllocAttribute_t)
 CUtlMemoryPoolBase::ClearDestruct(void (*)(void*))
 CUtlMemoryPoolBase::Free(void*)
 CUtlMemoryPoolBase::~CUtlMemoryPoolBase()
@@ -1999,6 +2005,7 @@ Cessation Of Operation
 Cg*
 ChangeUser
 Char=
+CharacterSetBuild
 CheckChildrenScrolledIntoView
 ClearPanelEvent
 ClearPanelEvents
@@ -2297,6 +2304,7 @@ Define Quantization Table %d  precision %d
 Define Restart Interval %u
 DeleteVideoPlayer
 Deliver async event '%s' (at %.2f, scheduled for %.2f) for '%s' ( 0x%p )
+DemoUpconverterVersion001
 DevMsg(char const*, ...)
 DevWarning(char const*, ...)
 Dg*
@@ -2326,6 +2334,7 @@ Don't support path segment type %d
 Don't yet support elliptical arc rendering
 Don't yet support quadratic bezier rendering
 DotaCardGameClient_001
+Double-save to Member '%s'
 DragCallbacks
 DragDrop
 DragEnd
@@ -2613,6 +2622,7 @@ EnumOptions
 EnumValueOptions
 Enums must contain at least one value.
 Eric Young's PKCS#1 RSA
+Error (problem that prevents task success)
 Error in encoding
 Error loading %s: Addons can only add layouts in the %s subdirectory.
 Error parsing @define
@@ -2716,7 +2726,8 @@ Failed to parse property value
 Failed to parse selector
 Failed to parse style value for %s
 Failed to read attribute.
-Failed to save the following file:%s
+Failed to save unsupported class
+Failed to serialize KV3 block: %s
 Failed to set property value (property=%s)(value=%s)
 False
 FastHexToBuffer() wants non-negative integers, not
@@ -2789,6 +2800,7 @@ FixupResourceName: Illegal full path passed in ("%s")!
 FixupResourceName: Illegal path, missing extension passed in ("%s")!
 FlattenedSerializersVersion001
 FloatBitMap::QuarterSize
+Follow user preference
 FontManager_001
 Forbidden
 Force style invalidation of the entire panel subtree when adding / removing classes.
@@ -2951,6 +2963,7 @@ HashString
 HelpSystem_001
 Hex and octal numbers must be integers.
 Hg*
+Hide unless error/warning occurs
 Hold Instruction Call Issuer
 Hold Instruction Code
 Hold Instruction None
@@ -3042,7 +3055,6 @@ Import
 Import "
 Improper call to JPEG library in state %d
 InMemoryFileUpdate
-InMemoryFilesSaved
 Incomplete compressed datastream in %s chunk
 Inconsistent progression sequence for component %d coefficient %d
 Incorrect IEND chunk length
@@ -3231,7 +3243,6 @@ JSON
 JSONWebAPIResponse
 JSScheduledFunction
 Jan
-Jan  7 2021
 Jg*
 Jul
 Jun
@@ -3311,6 +3322,7 @@ Load certs from files in a directory
 Load file into cache
 LoadAsyncComplete
 LoadFileIntoBuffer
+LoadKV3(CKeyValues3Context*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadLayoutFileAsync
 LoadLayoutFromBase64XMLStringAsync
 LoadLayoutFromXMLStringAsync
@@ -3389,6 +3401,7 @@ MapValueRef::GetUInt32Value
 MapValueRef::GetUInt64Value
 MapValueRef::type MapValueRef is not initialized.
 Mar
+Mar  2 2021
 Mask Algorithm:
 MaterialUtils_001
 Maximum supported image dimension is %u pixels
@@ -3487,6 +3500,7 @@ Multiple Choices
 Multiple extension registrations for type "
 Multiplier for flick velocity off of actual measured velocity
 MurmurHash2
+MurmurHash2LowerCase(char const*, int, unsigned int)
 MurmurHash64
 MutableMessage
 MutableRawRepeatedField
@@ -3681,6 +3695,7 @@ N8panorama17CLoadFromVTexTaskE
 N8panorama17CPanelImageSourceE
 N8panorama17CSource2UITextureE
 N8panorama17CTransformScale3DE
+N8panorama17IContentSourceMapE
 N8panorama18CImageDecodeThreadE
 N8panorama18CJSAsyncWebRequestE
 N8panorama18CLoadFileLocalTaskE
@@ -4077,6 +4092,7 @@ P12IVideoPlayer
 P8
 P9KeyValues
 P:
+P:%s
 P@
 PARSE_BAG
 PARSE_BAGS
@@ -4602,6 +4618,7 @@ RegisterForUnhandledEvent called outside panel context, can't register on a pane
 RegisterKeyBind
 RegisterKeyBind failed, key %s to bind was probably invalid
 RegisterKeyBind requires at least 3 params, panel or input context to bind on (optionally empty string for global bindings), key to bind (can be , delimited list), and binding event name or JS callback function
+RegisterStringToken
 Registered ID
 Release
 ReleaseLast() called on a RepeatedPtrField that is on an arena,
@@ -4872,6 +4889,7 @@ SXNET_get_id_ulong
 SXNetID
 Salt Length: 0x
 Sampling factors too large for interleaved scan
+SaveKV3(KV3ID_t const&, KV3ID_t const&, KeyValues3 const*, CUtlString*, CUtlBuffer*)
 Scan script does not transmit all data
 SceneSystem_002
 SceneUtils_001
@@ -4995,6 +5013,7 @@ Shorthand for setting the top panel border. Specify width, style, and color.  Su
 Shorthand to set border radius for all corners at once.  Border radius rounds off corners of the panel, adjusting the border to smoothly round and also clipping background image/color and contents to the specified elliptical or circular values.  In this shorthand version you may specify a single value for all raddi, or horizontal / vertical separated by the '/' character.  For both horizontal and vertical you may specify 1 to 4 values in pixels or %, they will be taken in order as top-left, top-right, bottom-right, bottom-left radii values.<br><br><b>Examples:</b><pre>// 2 px circular corners on all sidesborder-radius: 2px;// Perfect circular or elliptical panel (circular if box was square)border-radius: 50% / 50%;// 2 px horizontal radii 4px vertical elliptical corners on all sidesborder-radius: 2px / 4px;// All corners fully specified border-radius: 2px 3px 4px 2px / 2px 3px 3px 2px;</pre>
 Should not pass empty string for FindChildInContext()/$()
 Should not reach here.
+Show regardless of user setting
 ShowPanelZoo
 ShowQuitDialog
 ShowTooltip
@@ -5029,6 +5048,7 @@ Source2GameEntities001
 Source2Host001
 Source2Server001
 Source2ServerSerializers002
+SourceByteRangeToDestByteRange
 Specifies a 'wash' color, which means a color that will be blended over the panel and all it's children at composition time, tinting them.  The alpha value of the color determines the intensity of the tinting.<br><br><b>Example:</b><pre>wash-color: #39b0d325;</pre>
 Specifies a clip region within the panel, where contents will be clipped at render time. This clipping has no impact on layout, and is fast and supported for transitions/animations. Radial clip mode takes a center point, start angle and angular width of the revealed sector.<br><br><b>Example:</b><pre>clip: rect( 10%, 90%, 90%, 10% );clip: radial( 50% %50, 0deg, 90deg );</pre>
 Specifies a scale to apply to this panel's layout and all descendants. This scale happens at the layout level ratherthan the bitmap level, so things like text will increase their font size rather than just bitmap scaling. <br><br><b>Examples:</b><pre>ui-scale: 150%; // 150% scaling for X, Y, and Z.ui-scale: 50% 100% 150%; // 50% scaling for X, 100% for Y. 150% for Z.</pre>
@@ -5081,8 +5101,10 @@ Specifies which properties should transition smoothly to new values if a class/p
 Specifies which properties should transition smoothly to new values if a class/pseudo class changes the styles.<br><br><b>Examples:</b><pre>transition: position, transform, background-color;</pre>
 Ss
 Ss=%d, Se=%d, Ah=%d, Al=%d
+St11_Mutex_baseILN9__gnu_cxx12_Lock_policyE2EE
 St16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE
 St8functionIFvvEE
+Stack depth limit hit (%d)
 Stack part of OpenSSL 1.0.2j  26 Sep 2016
 Start Of Frame 0x%02x: width=%u, height=%u, components=%d
 Start Of Scan: %d components
@@ -5134,6 +5156,7 @@ Subject Information Access
 Subject OCSP hash:
 Subject Public Key Info:
 Subject:%c
+Success
 Suite B: cannot sign P-384 with P-256
 Suite B: certificate version invalid
 Suite B: curve not allowed for this LOS
@@ -5340,8 +5363,6 @@ Unable to load layout from string
 Unable to load snippet %s
 Unable to parse SVG '%s': %s
 Unable to read file %s
-Unable to save file
-Unable to save the following file, because it has changed on disk.File:%s
 Unable to traverse to child '%s' in panel '%s'
 Unauthorized
 Undefined namespace prefix '%s'
@@ -5505,10 +5526,12 @@ V_expf
 V_fclose
 V_fmodf
 V_fopenUTF8
+V_fpclassify
 V_fprintf
 V_fputc
 V_fread
 V_fwrite
+V_isnan
 V_isstrlower_fast
 V_isvalidhex
 V_localeconv
@@ -5529,6 +5552,7 @@ V_sscanf
 V_stricmp_fast
 V_stristr_fast(char const*, char const*)
 V_strlower_fast
+V_strnlen
 V_strtod
 V_strtoi64
 V_strtoui64
@@ -5590,6 +5614,7 @@ WTLS curve over a 113 bit binary field
 WTLS curve over a 160 bit prime field
 WTLS curvs over a 224 bit prime field
 Warning
+Warning (problem that doesn't prevent forward progress)
 Warning parsing text-format
 Warning:  %s = '%s' is infinite, clamping value.
 Warning: thumbnail image size does not match data length %u
@@ -5784,11 +5809,13 @@ Zero length tRNS chunk
 [%.3f server clamped to %.3f]
 [%02d:%02d:%02d]
 [%s] %s=%s
+[Default] General information
 [HEX DUMP]:
 [[%s]]
 [default = $0
 [lazy = true] can only be specified for submessage fields.
 [libprotobuf %s %s:%d] %s
+[object@%p]
 [packed = true] can only be specified for repeated primitive fields.
 \
 \"
@@ -6724,6 +6751,7 @@ class, duration, pre-delay
 class, eventToFire
 class, pre-delay
 cleanup method function failed
+clear_group
 clearance
 cleartext track 2
 client finished
@@ -7084,6 +7112,7 @@ digitalSignature
 dimgray
 dimgrey
 dinfo
+dir=%d %d %d, err=%f
 dirName
 directory services (X.500)
 directory services - algorithms
@@ -7295,6 +7324,7 @@ encryptedContentInfo
 encryptedKey
 encryption ctrl failure
 encryption not supported for this key type
+end_group
 engine routines
 english
 enhancedSearchGuide
@@ -7487,6 +7517,7 @@ g
 g*
 g_Mathlib_GammaToLinearByteTable
 g_VProfCurrentProfile
+g_bUpdateStringTokenDatabase
 g_iStylePropertyIndexNextFree < 255
 g_pMemAlloc
 g_pThreadPool
@@ -7613,6 +7644,7 @@ greenyellow
 group
 group2pkparameters failure
 group=
+group_title
 gx=%d, gy=%d, bx=%d, by=%d
 h
 hashAlgorithm
@@ -8449,6 +8481,7 @@ localityName
 localtime
 location
 locator
+loud
 lowercase
 lseek
 m
@@ -9044,6 +9077,7 @@ pem_pkey.c
 permitted
 permitted subtree violation
 permittedSubtrees
+persist_group
 personalSignature
 personalTitle
 perspective
@@ -9155,6 +9189,7 @@ prime256v1
 prime2:
 prime:
 print panorama event types and their documentation
+priority
 priv [ %d ]
 priv:
 priv_key
@@ -9221,6 +9256,7 @@ q>(
 qcStatements
 qualifiers
 qualityLabelledData
+quiet
 r
 r+
 r:
@@ -9293,6 +9329,8 @@ required
 required cipher missing
 required compresssion algorithm missing
 reserved
+resource
+resource_name
 responderId
 response contains no revocation data
 response setup error
@@ -9698,9 +9736,12 @@ socket
 solid
 sound
 sound-out
+soundevent
 source2/renderer/source2surface.cpp
 source2/uienginesource2.cpp
 source2/uirenderdevicesource2.cpp
+source_file
+source_line
 spanish
 spkac
 sprintf
@@ -10061,7 +10102,6 @@ strings::Substitute format string invalid: asked for "$
 strlen
 strlen(objstr) + 23 + 2 * enc->iv_len + 13 <= sizeof buf
 strncasecmp
-strnlen
 stroke-linecap
 stroke-linejoin
 stroke-opacity
@@ -10160,7 +10200,6 @@ time stamp routines
 time syscall error
 timeStamping
 timestampsign
-title
 tls client cert req with anon cipher
 tls illegal exporter label
 tls invalid ecpointformat list
@@ -10662,6 +10701,7 @@ vxml
 vxml_c
 w
 w3(?
+waiting_group
 wap
 wap-wsg
 wap-wsg-idm-ecid-wtls1
@@ -10675,6 +10715,8 @@ wap-wsg-idm-ecid-wtls6
 wap-wsg-idm-ecid-wtls7
 wap-wsg-idm-ecid-wtls8
 wap-wsg-idm-ecid-wtls9
+warn
+warning
 was modified concurrently during serialization.
 wash-color
 wb

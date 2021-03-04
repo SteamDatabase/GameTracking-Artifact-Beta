@@ -8,83 +8,109 @@
 		<snippet name="ManaGem">
 			<Panel class="SingleGemContainer">
 				<Panel class="ManaGem" />
-				<Panel class="ManaGemPulse" />
+				<Panel class="ManaGem ManaGemPulse" />
 			</Panel>
 		</snippet>
 	</snippets>
 	
 	<Panel class="PlayerInfo" hittest="false">
-		<Panel id="PlayerInfoContainer">
-			<Panel id="NameAndBadgeContainer">
-				<DCGAccountBadge id="AccountBadge" onmouseover="DCGPersonaAvatarHovered( true );" onmouseout="DCGPersonaAvatarHovered( false );" />
-				<Panel id="PersonaNameContainer">
-					<Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
-					<Label class="PersonaName" id="AnonymousPlayerName" text="#DCG_Anonymous" html="true"/>
-				</Panel>
-			</Panel>
+		<Panel id="PlayerInfoContainer" hittest="false">
+
+			
+
 			<DCGChaosBadge id="ChaosBadge" class="ChaosBadgeInGame" />
+ 
 			<Panel class="PlayerInfoContents">
-				<Panel class="PlayerInfoContentsBackground"/>
+
 				<Panel class="GameClockContainer">
 					<Image id="GameClockIcon" />
-					<Label id="GameClockCount" class="GameClockCount PlayerInfoNumber MonoFont" text="#DCG_MatchClock" />
+					<Label id="GameClockCount" class="GameClockCount MonoFont" text="#DCG_MatchClock" />
 				</Panel>
+
 				<Panel class="DisconnectedDisplay">
 					<Label id="DisconnectedLabel" text="#DCG_Disconnected"/>
 				</Panel>
-				<Label id="ManaLabel" text="#DCG_HUD_ManaTooltip" />
-				<Label id="GoldLabel" text="#DCG_HUD_GoldTooltip" />
-				<Panel id="CoinContainer" onactivate="DCGCoinClicked()">
-					
-					<Panel id="CoinBackground" />
-					 <DCGScenePanel id="CoinFXNoMoreActions" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
-					<Label id="CoinInitiativeLabel" text="#DCG_Hud_Initiative" hittest="false" />
-					<Label id="CoinAction" text="{s:coin_action}" hittest="false" />
-				</Panel>
-
+				
 				<Panel id="OverdrawCountainer" >
 					<Label id="OverdrawLabel" text="+{d:OverdrawCount}" onmouseover="UIShowTextTooltip( #DCG_HUD_OverdrawTooltip )" onmouseout="UIHideTextTooltip()" />
 				</Panel>
  
 				<Panel id="FountainContainer">
-					<Label id="FountainLabel" text="#DCG_HUD_Fountain" />
 					<Panel id="FountainHeros" />
 				</Panel>
-					<Panel id="PlayerInfoContentsContainer">
+ 
+				<Panel id="ManaContainer">
 
-						<Panel id="ManaContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );">
-							<Label class="ManaAmountLabel TopManaLabel" text="{i:mana_left}" />
-							<Label class="ManaAmountLabel" text="{i:total_mana}" />
+					<DCGScenePanel id="ManaTurnActiveFX" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera_zoomed" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+					<Panel id="ManaSpacer">
+						<Panel class="ManaLabelContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );">
+							<Label class="ManaAmountLabel" text="{i:mana_left}/{i:total_mana}" />
 						</Panel>
-						<Panel id="ManaGemsContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );">
-							<Panel id="ManaGemsTop" />
-							<Panel id="ManaGemsBottom" />
-						</Panel>						
-					<Panel class="GoldContainer" >
-						
-						<Label id="GoldCount" class="GoldCount PlayerInfoNumber MonoFont" text="{i:availableGold}" onmouseover="UIShowTextTooltip( #DCG_HUD_GoldInfo )" onmouseout="UIHideTextTooltip()" />
-						<Image id="SilverIcon"/>					
-						<Label id="SilverCount" class="SilverCount PlayerInfoNumber MonoFont" text="{i:availableSilver}"/>
-<!--						<Label class="PlayerInfoNumber MonoFont" text="#DCG_HUD_GoldPreviewInfo" html="true" /> -->
+						<Panel id="ManaGemsContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );"/>
+
+						<Label class="ManaAmountLabel Invisible" text="{i:mana_left}/{i:total_mana}" />
 					</Panel>
-        
-					<Panel id="ButtonsContainer">
-						<Panel class="CardsInHandContainer" onactivate="SortCardsInHand()" onmouseover="UIShowTextTooltip( #DCG_HUD_HandSort )" onmouseout="UIHideTextTooltip()">
-							<Image id="CardsInHandIcon"/>
-							<Panel class="CardsInHandRadioButtonContainer">
-								<Panel id="SortByTime" class="CardsInHandRadioButton"/>
-								<Panel id="SortByMana" class="CardsInHandRadioButton"/>
-								<Panel id="SortByColor" class="CardsInHandRadioButton"/>
-							</Panel>
-						</Panel>
-						<Button id="SteamChatButton"  onactivate="DCGInGameSteamChat()" onmouseover="UIShowTextTooltip( #DCG_HUD_SteamChat )" onmouseout="UIHideTextTooltip()"/>
-						<Panel class="ShowESCMenuButton" onactivate="DCGToggleESCMenu()" onmouseover="UIShowTextTooltip( #DCG_HUD_Menu )" onmouseout="UIHideTextTooltip()" />
-					</Panel>
-        
 				</Panel>
+
+			 
+
+				<Panel id="RightContainer">
+
+					<Panel id="CoinContainer"  >
+
+
+						<DCGScenePanel id="CoinFXNoMoreActions" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+
+
+						<Panel id="PassBackground" onactivate="DCGCoinClicked()" onmouseover="UIShowTextTooltip( {s:coin_tooltip} )" onmouseout="UIHideTextTooltip()">
+							<!-- <Label id="CoinAction" text="{s:coin_action}" hittest="false" /> -->
+						</Panel>
+
+						<Panel id="InitiativeButtonBackground" onmouseover="UIShowTextTooltip( #DCG_Hud_Initiative )" onmouseout="UIHideTextTooltip()">
+							<Label id="CoinInitiativeLabel" text="&#9634;" hittest="false" /> 
+						</Panel>
+
+
+						
+						
+					</Panel>
+
+					<Panel class="GoldContainer" >
+					
+						<Label id="GoldCount" class="GoldCount MonoFont" text="{i:availableGold}" onmouseover="UIShowTextTooltip( #DCG_HUD_GoldInfo )" onmouseout="UIHideTextTooltip()" />
+						<Panel id="GoldIcon"/>
+					</Panel>
+
+					
+				</Panel>
+
+				<Panel id="ButtonsContainer">
+
+					<Panel class="CardsInHandContainer" onactivate="SortCardsInHand()" onmouseover="UIShowTextTooltip( #DCG_HUD_HandSort )" onmouseout="UIHideTextTooltip()">
+						<Image id="CardsInHandIcon"/>
+						<Panel class="CardsInHandRadioButtonContainer">
+							<Panel id="SortByTime" class="CardsInHandRadioButton"/>
+							<Panel id="SortByMana" class="CardsInHandRadioButton"/>
+							<Panel id="SortByColor" class="CardsInHandRadioButton"/>
+						</Panel>
+					</Panel>
+
+					<Button id="SteamChatButton"  onactivate="DCGInGameSteamChat()" onmouseover="UIShowTextTooltip( #DCG_HUD_SteamChat )" onmouseout="UIHideTextTooltip()"/>
+					<Panel class="ShowESCMenuButton" onactivate="DCGToggleESCMenu()" onmouseover="UIShowTextTooltip( #DCG_HUD_Menu )" onmouseout="UIHideTextTooltip()" />
+
+				</Panel>
+				
+			</Panel>
+
+			<Panel id="NameAndBadgeContainer" hittest="false">
+				<Panel id="PersonaNameContainer"  hittest="false">
+					<Label class="PersonaName" id="PlayerName" text="{g:dcg_persona_or_bot:b:personaAccountID}" html="true"/>
+					<Label class="PersonaName" id="AnonymousPlayerName" text="#DCG_Anonymous" html="true"/>
+				</Panel>
+				<DCGAccountBadge id="AccountBadge" onmouseover="DCGPersonaAvatarHovered( true );" onmouseout="DCGPersonaAvatarHovered( false );" />
+			
 			</Panel>
 
 		</Panel>
 	</Panel>
-
 </root>

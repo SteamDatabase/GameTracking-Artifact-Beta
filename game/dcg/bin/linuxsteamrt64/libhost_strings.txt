@@ -48,13 +48,8 @@
 "%s"
 "%s" = "%s"
 "%s":
-"%s":%.3f
 "%s":%d
-"%s":%f
-"%s":%lld
-"%s":%llu
 "%s":%s
-"%s":%u
 "%s":[
 ") is not compatible with this reflection object (which is for type "
 ") to start from the outermost scope.
@@ -115,6 +110,7 @@ $ORIGIN
 %-120s - %s
 %.*g
 %.*s
+%.18g
 %.1f
 %c
 %d
@@ -131,6 +127,7 @@ $ORIGIN
 %s + %s
 %s - %s
 %s / %s
+%s Schema Type: %s
 %s%d
 %s.%u
 %s:  IGameSystem::LoopActivateAllSystems {
@@ -416,14 +413,20 @@ $ORIGIN
 ::google::protobuf::MethodOptions_IdempotencyLevel_IsValid(value)
 ;
 <
+< %d >
+<%s : %u>
+<%s, cat %d>
 <INVALID EXPRESSION>
 <INVALID_RBF_TYPE>
 <NO EXPRESSION>
 <empty>
+<invalid>
 <no deferred ref found>
 <no failure reason set>
+<noschema
 <null>
 <unconnected>
+<unknown: %d>
 <unknown>
 =
 = { <proto text format> }". To set fields within it, use syntax like "
@@ -514,6 +517,7 @@ CAnimRetargetChainData
 CAnimRetargetData
 CAnimRetargetElementData
 CAnimUser
+CAnimVariant
 CAnimationGroup
 CAssociateResourceBlockLoader::BlockingLoadResourceFileData: Trying to load an illegal resource name %s!
 CAttachment
@@ -554,6 +558,7 @@ CCommand::Tokenize: Encountered command which overflows the tokenizer buffer.. S
 CConstraintSlave
 CConstraintTarget
 CDrawCullingData
+CEntityIndex
 CFingerBone
 CFingerChain
 CFingerSource
@@ -805,6 +810,7 @@ CHitBoxSetList
 CMaterialDrawDescriptor
 CMemAllocSystemInitialize
 CMorphConstraint
+CMotionTransform
 COLORCORRECTION_VERSION_1
 COM_TimestampedLog
 CONTENT
@@ -822,14 +828,15 @@ CPPTYPE_STRING
 CPPTYPE_UINT32
 CPPTYPE_UINT64
 CParentConstraint
+CPlayerSlot
 CPointConstraint
 CRC32_ProcessBuffer
 CRenderBufferBinding
 CRenderMesh
 CRenderSkeleton
 CSceneObjectData
+CSplitScreenSlot
 CSplitString::Construct(char const*, char const**, int)
-CStrongHandle
 CThreadEvent::CThreadEvent(bool)
 CThreadEvent::Set()
 CThreadFastMutex::Lock(char const*, int, unsigned long long, unsigned int) volatile
@@ -839,7 +846,9 @@ CThreadSyncObject::WaitImpl(unsigned int)
 CThreadSyncObject::~CThreadSyncObject()
 CTier2AppSystemDict::LoadStartupManifestGroup
 CTiltTwistConstraint
+CTransform
 CTwistConstraint
+CUtlBinaryBlock
 CUtlBinaryBlock::Set(void const*, int)
 CUtlBinaryBlock::SetLength(int)
 CUtlBinaryBlock::operator=(CUtlBinaryBlock const&)
@@ -866,6 +875,7 @@ CUtlMemoryBlockAllocator::CUtlMemoryBlockAllocator(int, unsigned int)
 CUtlMemoryBlockAllocator::~CUtlMemoryBlockAllocator()
 CUtlRBTree overflow with %u elements!
 CUtlScratchMemoryPool::AllocAligned(int, int)
+CUtlString
 CUtlString::Acquire(CBufferString*, bool)
 CUtlString::Append(char const*)
 CUtlString::CUtlString(CBufferString const&)
@@ -887,13 +897,14 @@ CUtlString::operator+(char const*) const
 CUtlString::operator+=(char const*)
 CUtlString::operator=(CBufferString const&)
 CUtlString::operator==(CUtlString const&) const
+CUtlSymbol
+CUtlSymbolLarge
 CUtlSymbolTable::AddString(char const*)
 CUtlSymbolTable::CUtlSymbolTable(int, int, bool)
 CUtlSymbolTable::Find(char const*) const
 CUtlSymbolTable::RemoveAll()
 CUtlSymbolTable::String(CUtlSymbol) const
 CUtlSymbolTable::~CUtlSymbolTable()
-CUtlVector
 CVertexKDTree::BuildMidpoint(float const*, int, int)
 CVertexKDTree::FindVertsInBox(CUtlVectorFixedGrowable<float const*, 64ul>&, Vector const&, Vector const&, int) const
 CVrSkeletalInputSettings
@@ -938,6 +949,8 @@ DebugPrintKV3(KeyValues3 const*)
 DebugTextureInfo001
 Default value for an enum field must be an identifier.
 Default_Keys
+DegreeEuler
+DemoUpconverterVersion001
 DevMsg(char const*, ...)
 Division or mod by zero: dividend.hi=
 Dominate(
@@ -959,6 +972,7 @@ EconItemToolModel_001
 End-of-file inside block comment.
 EngineLoopState_t
 EngineServiceMgr001
+EntitySubclassClientUtilsV001
 EntitySubclassUtilsV001
 Entry
 Entry %s was not found in surfaceproperties_footsteps.txt
@@ -1177,7 +1191,6 @@ Index must be -1 for non-repeated fields
 Index must be -1 for singular fields.
 Index must be in range of repeated field values.
 Index out-of-bounds (field is empty).
-InfoForResourceTypeCAnimData
 InitAllSystems
 InputService_001
 InputStackSystemVersion001
@@ -1267,7 +1280,7 @@ Linear
 LoadKV3(CKeyValues3Context*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadKV3(KeyValues3*, CUtlString*, CUtlBuffer*, KV3ID_t const&, char const*)
 LoadKV3(KeyValues3*, CUtlString*, char const*, KV3ID_t const&, char const*)
-LoadKV3FromKV1Text_Translated(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, KV1ToKV3Translation_t const*, int, char const*)
+LoadKV3FromKV1Text_Translated(KeyValues3*, CUtlString*, char const*, KV1TextEscapeBehavior_t, KV1ToKV3Translation_t const*, int, char const*, bool)
 LoadKV3ObjectInPlace error: %s
 Localize_001
 LogHandler
@@ -1294,6 +1307,7 @@ MATCHFRAMEWORK_001
 MDefaultString
 MESH_DRAW_FLAGS_DRAW_LAST
 MESH_DRAW_FLAGS_NONE
+MKV3TransferName
 MNetworkBitCount
 MNetworkChangeCallback
 MNetworkEncoder
@@ -1539,6 +1553,7 @@ Option field "
 Option must have a name.
 Option must not use reserved name "uninterpreted_option".
 Options could not be fully parsed using the proto descriptors compiled into this binary. Missing required fields:
+Org(%.3f,%.3f,%.3f) Ang(%.3f,%.3f,%.3f)
 Outdent() without matching Indent().
 P
 P@
@@ -1579,6 +1594,7 @@ Plat_GetThreadIndex
 Plat_HasEnv
 Plat_IgnoreContentAsserts
 Plat_InitializeCOM
+Plat_IsCPUEmulated
 Plat_IsDirectory
 Plat_IsInDebugSession
 Plat_IsInTestMode
@@ -1628,10 +1644,14 @@ Protocol Buffer reflection usage error:  Method      : google::protobuf::Reflect
 Protocol message could not be serialized.
 Protocol message serialized itself in invalid fashion.
 Q
+QAngle
+Quaternion
+QuaternionAligned
 QueuedLoaderVersion001
 Quintic
 RESOURCE_EXHAUSTED
 ROTATION
+RadianEuler
 RandomFloat
 RandomSeed
 Reached an unintended state: CPPTYPE_MESSAGE
@@ -1714,6 +1734,7 @@ Simulated
 SinglePlayerSharedMemory001
 SkeletonBoneBounds_t
 SlopeTrace
+SoundGuid_t
 SoundOpSystem001
 SoundOpSystemEdit001
 SoundService_001
@@ -1831,6 +1852,7 @@ VGUI_ivgui008
 VMDLLIB001
 VMOD
 VMaterialSystem2_001
+VMatrix
 VMediaFoundation001
 VP4003
 VPhysics2_Handle_Interface_001
@@ -1894,6 +1916,7 @@ V_strtoi64
 V_strtok
 V_strtoui64
 V_tanf
+V_uuid_t
 V_vsnprintf
 Value must be "true" or "false" for boolean option "
 Value must be identifier for boolean option "
@@ -1909,6 +1932,9 @@ Value of type "
 Value out of range for int32 option "
 Value out of range for int64 option "
 Value out of range for uint32 option "
+Vector2D
+Vector4D
+VectorAligned
 VertexColorPos_t
 VertexPaintBlendParams
 VertexPaintBlendParams1
@@ -1917,6 +1943,7 @@ VisBuilder_001
 W
 WARNING
 WARNING: Trying to create a CRenderContextPtr without a valid context.
+WARNING: Unrecognized bone "%s"
 WARNING: You are trying to mount an addon (%s) in tools mode that is different from the addon tools mode was launched with (%s).
 Warning
 Warning parsing text-format
@@ -1930,7 +1957,10 @@ Z
 [
 [$0]
 [%.3f server clamped to %.3f]
+[%u]
+[]
 [default = $0
+[idx=%d] "%s"
 [lazy = true] can only be specified for submessage fields.
 [libprotobuf %s %s:%d] %s
 [packed = true] can only be specified for repeated primitive fields.
@@ -2029,6 +2059,7 @@ bytes.
 can't reach here.
 ceil
 ceilf
+char
 char google::protobuf::StringPiece::operator[](google::protobuf::stringpiece_ssize_type) const
 cheat
 client
@@ -2072,8 +2103,11 @@ filesystem_stdio
 fixed32
 fixed64
 float
+float32
+float64
 floor
 floorf
+fltx4
 fopen64
 formats.cpp
 fprintf
@@ -2335,7 +2369,6 @@ m_nElement
 m_nElementIndexArray
 m_nElementMaskArray
 m_nElementType
-m_nEntityIndex
 m_nFingerIndex
 m_nFlags
 m_nGroupId
@@ -2453,6 +2486,8 @@ maps/
 maps/*.*
 materials/error.vmat
 mathlib.cpp
+matrix3x4_t
+matrix3x4a_t
 max( %s, %s )
 max. %f
 maxSpringTension
@@ -2499,6 +2534,7 @@ output specified is NULL
 overlay
 p
 package $0;
+panorama
 parent of jiggle bone %u: %s
 parse
 parsing
@@ -2535,6 +2571,8 @@ remapping vertex %d[w%d] invalid: %d->%d >= %d
 remapping vertex %d[w%d] invalid: %d->? >= %d
 repeated
 required
+resource
+resource_name
 rnd_down
 rnd_up
 runleft
@@ -2543,6 +2581,7 @@ runspeed
 s offg cMeshusemtl initialShadingGroup
 sched_yield
 schemabindings.cpp
+schematype.cpp
 scripts/surfaceproperties_footsteps.txt
 seq_trans
 serialize
@@ -2560,6 +2599,7 @@ sint32
 sint64
 size too big:
 size_t to int conversion
+soundevent
 soundsystem
 source_folder
 speeds
@@ -2723,8 +2763,10 @@ typeinfo name for std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>
 typeinfo name for std::_Sp_make_shared_tag
 typeinfo name for std::string
 typeinfo name for std::thread::_Impl_base
+uint16
 uint32
 uint64
+uint8
 unexpected for field
 uninterpreted_option
 unknown
@@ -2745,6 +2787,7 @@ vmax >= base
 vmin < 0
 vmin <= 0 - base
 vn %g %g %g
+void
 void google::protobuf::FieldDescriptorProto::set_label(google::protobuf::FieldDescriptorProto_Label)
 void google::protobuf::FieldDescriptorProto::set_type(google::protobuf::FieldDescriptorProto_Type)
 void google::protobuf::FieldOptions::set_ctype(google::protobuf::FieldOptions_CType)
