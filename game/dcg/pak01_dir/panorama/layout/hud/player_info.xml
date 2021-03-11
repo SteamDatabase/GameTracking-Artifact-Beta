@@ -39,22 +39,27 @@
 					<Panel id="FountainHeros" />
 				</Panel>
  
-				<Panel id="ManaContainer">
+				
+				<Panel class="GoldContainer" >
+					<Panel id="ManaContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );">
 
-					<DCGScenePanel id="ManaTurnActiveFX" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera_zoomed" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
-					<Panel id="ManaSpacer">
-						<Panel class="ManaLabelContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );">
-							<Label class="ManaAmountLabel" text="{i:mana_left}/{i:total_mana}" />
+						<DCGScenePanel id="ManaTurnActiveFX" map="scenes/endgame/endgame_stats_glows" camera="panorama_camera_zoomed" hittest="false" particleonly="true" require-composition-layer="true" renderdeferred="true" deferredalpha="true" antialias="true" rotateonmousemove="false" rotateonhover="false"/>
+						<Panel id="ManaSpacer">
+							<Panel class="ManaLabelContainer">
+								<Label class="ManaAmountLabel" text="{i:mana_left}/{i:total_mana}" />
+							</Panel>
+							<Panel id="ManaGemsContainer"/>
+
+							
 						</Panel>
-						<Panel id="ManaGemsContainer" onmouseover="DCGManaHovered( true );" onmouseout="DCGManaHovered( false );"/>
 
-						<Label class="ManaAmountLabel Invisible" text="{i:mana_left}/{i:total_mana}" />
 					</Panel>
+					<Label id="GoldCount" class="GoldCount MonoFont" text="{i:availableGold}" onmouseover="UIShowTextTooltip( #DCG_HUD_GoldInfo )" onmouseout="UIHideTextTooltip()" />
+					<Panel id="GoldIcon"/>
 				</Panel>
-
 			 
 
-				<Panel id="RightContainer">
+				<Panel id="RightContainer" hittest="false">
 
 					<Panel id="CoinContainer"  >
 
@@ -75,11 +80,7 @@
 						
 					</Panel>
 
-					<Panel class="GoldContainer" >
-					
-						<Label id="GoldCount" class="GoldCount MonoFont" text="{i:availableGold}" onmouseover="UIShowTextTooltip( #DCG_HUD_GoldInfo )" onmouseout="UIHideTextTooltip()" />
-						<Panel id="GoldIcon"/>
-					</Panel>
+				
 
 					
 				</Panel>
